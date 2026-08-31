@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import {
   Award,
   BookOpen,
@@ -206,9 +206,8 @@ export default function LakshmipatSinghaniaCommandCenter() {
     { id: "t2", text: "Sept 16 Exam: Life Processes Diagrams (Nephron & Heart) + Chlor-Alkali", slot: "10:00 PM – 11:15 PM", done: false },
     { id: "t3", text: "Quick Flashcards: 10 Science & SST Active Recall Cards", slot: "11:15 PM – 11:45 PM", done: false }
   ]);
-
   // High Precision Millisecond Clock (Running at 60fps)
-  const [nowTime, setNowTime] = useState<number>(Date.now());
+  const [nowTime, setNowTime] = useState<number>(0);
   useEffect(() => {
     let animationFrameId: number;
     const update = () => {
@@ -220,21 +219,22 @@ export default function LakshmipatSinghaniaCommandCenter() {
   }, []);
 
   // Countdown calculations
-  const calculatePrecisionCountdown = (targetDateString: string) => {
+  const calculatePrecisionCountdown = useCallback((targetDateString: string) => {
+    if (!nowTime) return { days: 0, hours: 0, mins: 0, secs: 0, ms: 0, isPassed: false };
     const target = new Date(targetDateString + "T09:00:00").getTime();
     const diff = target - nowTime;
     if (diff <= 0) return { days: 0, hours: 0, mins: 0, secs: 0, ms: 0, isPassed: true };
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const mins = Math.floor((diff % (1000 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
     const ms = Math.floor((diff % 1000) / 10);
     return { days, hours, mins, secs, ms, isPassed: false };
-  };
+  }, [nowTime]);
 
   // Dual Live Timers
-  const nextExamCountdown = useMemo(() => calculatePrecisionCountdown("2026-09-14"), [nowTime]);
-  const feb1Countdown = useMemo(() => calculatePrecisionCountdown("2027-02-01"), [nowTime]);
+  const nextExamCountdown = useMemo(() => calculatePrecisionCountdown("2026-09-14"), [calculatePrecisionCountdown]);
+  const feb1Countdown = useMemo(() => calculatePrecisionCountdown("2027-02-01"), [calculatePrecisionCountdown]);
 
   // Selected Test Series Exam Details
   const activeExam = useMemo(() => {
@@ -243,7 +243,7 @@ export default function LakshmipatSinghaniaCommandCenter() {
 
   const activeExamCountdown = useMemo(() => {
     return calculatePrecisionCountdown(activeExam.date);
-  }, [nowTime, activeExam]);
+  }, [calculatePrecisionCountdown, activeExam]);
 
   // Gamified Level & Rank calculation
   const { currentLevel, rankTitle } = useMemo(() => {
@@ -258,7 +258,7 @@ export default function LakshmipatSinghaniaCommandCenter() {
   }, [xp]);
 
   // Sound generator
-  const playSound = () => {
+  const playSound = useCallback(() => {
     if (typeof window === "undefined") return;
     try {
       const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -272,10 +272,10 @@ export default function LakshmipatSinghaniaCommandCenter() {
       osc.start();
       setTimeout(() => osc.stop(), 160);
     } catch {}
-  };
+  }, []);
 
   // Confetti trigger
-  const triggerConfetti = () => {
+  const triggerConfetti = useCallback(() => {
     const colors = ["#d97706", "#2563eb", "#059669", "#dc2626", "#7c3aed", "#ea580c"];
     const particles: ConfettiParticle[] = [];
     for (let i = 0; i < 35; i++) {
@@ -291,7 +291,7 @@ export default function LakshmipatSinghaniaCommandCenter() {
     }
     setConfetti(particles);
     playSound();
-  };
+  }, [playSound]);
 
   useEffect(() => {
     if (confetti.length > 0) {
@@ -308,30 +308,38 @@ export default function LakshmipatSinghaniaCommandCenter() {
 
   // Load from LocalStorage
   useEffect(() => {
-    setMounted(true);
-    const sTopics = localStorage.getItem("op100_lsa_topics_v3");
-    const sTestSeries = localStorage.getItem("op100_lsa_test_series_v3");
-    const sStreak = localStorage.getItem("op100_lsa_streak_v3");
-    const sXp = localStorage.getItem("op100_lsa_xp_v3");
-    const sCoins = localStorage.getItem("op100_lsa_coins_v3");
-    const sTasks = localStorage.getItem("op100_lsa_tasks_v3");
-    const sCustomFC = localStorage.getItem("op100_lsa_custom_fc_v3");
-    const sMasteredFC = localStorage.getItem("op100_lsa_mastered_fc_v3");
-    const sCustomQ = localStorage.getItem("op100_lsa_customq_v3");
-    const sFocus = localStorage.getItem("op100_lsa_focus_v3");
-    const sTheme = localStorage.getItem("op100_lsa_theme_v3");
+    const timer = setTimeout(() => {
+      try {
+        const sTopics = localStorage.getItem("op100_lsa_topics_v3");
+        const sTestSeries = localStorage.getItem("op100_lsa_test_series_v3");
+        const sStreak = localStorage.getItem("op100_lsa_streak_v3");
+        const sXp = localStorage.getItem("op100_lsa_xp_v3");
+        const sCoins = localStorage.getItem("op100_lsa_coins_v3");
+        const sTasks = localStorage.getItem("op100_lsa_tasks_v3");
+        const sCustomFC = localStorage.getItem("op100_lsa_custom_fc_v3");
+        const sMasteredFC = localStorage.getItem("op100_lsa_mastered_fc_v3");
+        const sCustomQ = localStorage.getItem("op100_lsa_customq_v3");
+        const sFocus = localStorage.getItem("op100_lsa_focus_v3");
+        const sTheme = localStorage.getItem("op100_lsa_theme_v3");
 
-    if (sTopics) setCompletedTopicIds(JSON.parse(sTopics));
-    if (sTestSeries) setCompletedTestSeriesTopics(JSON.parse(sTestSeries));
-    if (sStreak) setStreak(parseInt(sStreak));
-    if (sXp) setXp(parseInt(sXp));
-    if (sCoins) setCoins(parseInt(sCoins));
-    if (sTasks) setTodayTasks(JSON.parse(sTasks));
-    if (sCustomFC) setCustomFlashcards(JSON.parse(sCustomFC));
-    if (sMasteredFC) setMasteredFlashcardIds(JSON.parse(sMasteredFC));
-    if (sCustomQ) setCustomQuestions(JSON.parse(sCustomQ));
-    if (sFocus) setTotalFocusMins(parseInt(sFocus));
-    if (sTheme) setTheme(sTheme as any);
+        if (sTopics) setCompletedTopicIds(JSON.parse(sTopics));
+        if (sTestSeries) setCompletedTestSeriesTopics(JSON.parse(sTestSeries));
+        if (sStreak) setStreak(parseInt(sStreak));
+        if (sXp) setXp(parseInt(sXp));
+        if (sCoins) setCoins(parseInt(sCoins));
+        if (sTasks) setTodayTasks(JSON.parse(sTasks));
+        if (sCustomFC) setCustomFlashcards(JSON.parse(sCustomFC));
+        if (sMasteredFC) setMasteredFlashcardIds(JSON.parse(sMasteredFC));
+        if (sCustomQ) setCustomQuestions(JSON.parse(sCustomQ));
+        if (sFocus) setTotalFocusMins(parseInt(sFocus));
+        if (sTheme) setTheme(sTheme as any);
+        setMounted(true);
+      } catch (err) {
+        console.error("Failed to load local storage data:", err);
+      }
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Save to LocalStorage
@@ -374,7 +382,7 @@ export default function LakshmipatSinghaniaCommandCenter() {
     return () => {
       if (pomoTimerRef.current) clearInterval(pomoTimerRef.current);
     };
-  }, [isPomoActive]);
+  }, [isPomoActive, triggerConfetti]);
 
   const formattedPomoTime = useMemo(() => {
     const m = Math.floor(pomoSeconds / 60);
