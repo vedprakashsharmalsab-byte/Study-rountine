@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Outfit, JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
@@ -24,6 +24,19 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "CBSE Class 10 Command Center (2026–2027) — Target 100%",
   description: "Elite practical study command center, NCERT topic tracker, RD Sharma HOTS bank, and PhET 3D virtual science labs for CBSE Class 10.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "CBSE Command",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: "#090d16",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
