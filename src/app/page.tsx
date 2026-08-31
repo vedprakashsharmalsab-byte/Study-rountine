@@ -252,6 +252,10 @@ export default function CBSECommandCenter() {
     return calculatePrecisionCountdown(activeExam.date);
   }, [calculatePrecisionCountdown, activeExam]);
 
+  // Dual Live Timers
+  const nextExamCountdown = useMemo(() => calculatePrecisionCountdown("2026-09-14"), [calculatePrecisionCountdown]);
+  const feb1BoardCountdown = useMemo(() => calculatePrecisionCountdown("2027-02-01"), [calculatePrecisionCountdown]);
+
   // =========================================================================
   // 🌟 MATHEMATICAL, EXPLOIT-PROOF DETERMINISTIC XP ENGINE
   // =========================================================================
@@ -941,6 +945,37 @@ export default function CBSECommandCenter() {
             </div>
           </div>
 
+          {/* HEADER DUAL HIGH-PRECISION COUNTDOWNS (DESKTOP) */}
+          <div className="hidden xl:flex items-center gap-2 shrink-0">
+            {/* TIMER 1: SEPT 14 TEST SERIES */}
+            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs font-mono ${
+              isDark ? "bg-[#111827] border-amber-500/40 text-amber-400" : "bg-amber-50 border-amber-200 text-amber-900 shadow-xs"
+            }`}>
+              <Calendar className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+              <span className="font-bold">Sept 14:</span>
+              <span className="font-semibold">
+                {nextExamCountdown.days}d {nextExamCountdown.hours}h {nextExamCountdown.mins}m {nextExamCountdown.secs}s
+              </span>
+              <span className="text-[10px] text-amber-500/80 font-mono w-5 text-left font-bold">
+                .{nextExamCountdown.ms.toString().padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* TIMER 2: FEB 1 FINAL BOARDS */}
+            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs font-mono ${
+              isDark ? "bg-[#111827] border-blue-500/40 text-blue-400" : "bg-blue-50 border-blue-200 text-blue-900 shadow-xs"
+            }`}>
+              <Clock className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+              <span className="font-bold">Feb 1 Boards:</span>
+              <span className="font-semibold">
+                {feb1BoardCountdown.days}d {feb1BoardCountdown.hours}h {feb1BoardCountdown.mins}m {feb1BoardCountdown.secs}s
+              </span>
+              <span className="text-[10px] text-blue-500/80 font-mono w-5 text-left font-bold">
+                .{feb1BoardCountdown.ms.toString().padStart(2, "0")}
+              </span>
+            </div>
+          </div>
+
           {/* GAMIFIED STATS PILLS */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             
@@ -1022,6 +1057,55 @@ export default function CBSECommandCenter() {
       </header>
 
       {/* =========================================================================
+          LIVE DUAL COUNTDOWN TICKER STRIP (BOARDS & TEST SERIES)
+          ========================================================================= */}
+      <div className={`border-b px-3.5 sm:px-6 py-2 transition-colors ${
+        isDark ? "border-slate-800/80 bg-[#0d1322]/85 text-white" : "border-slate-200 bg-amber-50/50 text-slate-900"
+      }`}>
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs font-mono">
+          
+          {/* TEST SERIES I TICKER */}
+          <div className="flex items-center gap-2">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+            </span>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className={`font-bold ${isDark ? "text-amber-400" : "text-amber-900"}`}>
+                Sept 14 ({activeExam.subject}):
+              </span>
+              <span className="font-semibold">
+                {nextExamCountdown.days}d {nextExamCountdown.hours}h {nextExamCountdown.mins}m {nextExamCountdown.secs}s
+              </span>
+              <span className="text-[10px] text-amber-500 font-bold opacity-85 w-6 text-left">
+                .{nextExamCountdown.ms.toString().padStart(2, "0")}
+              </span>
+            </div>
+          </div>
+
+          {/* FEB 1 FINAL BOARDS TICKER */}
+          <div className="flex items-center gap-2">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className={`font-bold ${isDark ? "text-blue-400" : "text-blue-900"}`}>
+                Feb 1, 2027 Final CBSE Boards:
+              </span>
+              <span className="font-semibold">
+                {feb1BoardCountdown.days}d {feb1BoardCountdown.hours}h {feb1BoardCountdown.mins}m {feb1BoardCountdown.secs}s
+              </span>
+              <span className="text-[10px] text-blue-500 font-bold opacity-85 w-6 text-left">
+                .{feb1BoardCountdown.ms.toString().padStart(2, "0")}
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* =========================================================================
           DESKTOP & TABLET HORIZONTAL TAB NAVIGATION
           ========================================================================= */}
       <nav className={`border-b px-3.5 sm:px-6 py-2 overflow-x-auto no-scrollbar hidden md:flex items-center gap-1.5 transition-colors ${
@@ -1073,60 +1157,101 @@ export default function CBSECommandCenter() {
         {activeTab === "test_series" && (
           <div className="space-y-4 sm:space-y-6 animate-fade-in">
             
-            {/* HERO ACADEMY EXAM BANNER */}
-            <div className={`p-4 sm:p-6 rounded-2xl border transition-all relative overflow-hidden ${
-              isDark ? "bg-[#111827] border-slate-800 shadow-md" : "bg-white border-slate-200 shadow-sm"
-            }`}>
-              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-                <div className="space-y-1.5 max-w-xl">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold border ${
-                      isDark ? "bg-amber-950/50 text-amber-300 border-amber-800/60" : "bg-amber-50 text-amber-900 border-amber-300"
-                    }`}>
-                      LAKSHMIPAT SINGHANIA ACADEMY
-                    </span>
-                    <span className="text-[11px] text-slate-400 font-mono">Class X • Test Series I</span>
-                  </div>
-
-                  <h2 className="text-lg sm:text-2xl font-bold tracking-tight">
-                    Next Exam: <span className="text-amber-500">{activeExam.subject}</span> ({activeExam.displayDate})
-                  </h2>
-
-                  <p className={`text-xs leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                    Faculty: <strong className={isDark ? "text-slate-200" : "text-slate-800"}>{activeExam.teachers}</strong> • Code: {activeExam.code}
-                  </p>
+            {/* HERO DUAL COUNTDOWN CARDS: TEST SERIES I & FEB 1 FINAL BOARDS */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              
+              {/* CARD 1: TEST SERIES I (NEXT EXAM) */}
+              <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                isDark ? "bg-[#111827] border-amber-500/30 shadow-md" : "bg-white border-amber-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold border ${
+                    isDark ? "bg-amber-950/50 text-amber-300 border-amber-800/60" : "bg-amber-50 text-amber-900 border-amber-300"
+                  }`}>
+                    LSA TEST SERIES I (SEPT 14–26)
+                  </span>
+                  <span className="text-[10px] font-mono text-amber-500 font-bold">Exam {activeExam.displayDate}</span>
                 </div>
 
-                {/* RESPONSIVE COUNTDOWN CLOCK CARD */}
-                <div className={`w-full lg:w-auto p-3.5 sm:p-4 rounded-xl border text-center space-y-1.5 ${
-                  isDark ? "bg-[#0b0f19] border-amber-500/30 text-amber-400" : "bg-amber-50/80 border-amber-200 text-amber-950"
-                }`}>
-                  <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-500">Live Time Remaining</p>
-                  
-                  <div className="grid grid-cols-4 gap-1.5 font-mono text-center">
-                    <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#111827]" : "bg-white"} border ${isDark ? "border-slate-800" : "border-amber-200"}`}>
-                      <span className="block text-lg sm:text-xl font-black">{activeExamCountdown.days}</span>
-                      <span className="text-[9px] uppercase opacity-70">Days</span>
-                    </div>
-                    <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#111827]" : "bg-white"} border ${isDark ? "border-slate-800" : "border-amber-200"}`}>
-                      <span className="block text-lg sm:text-xl font-black">{activeExamCountdown.hours}</span>
-                      <span className="text-[9px] uppercase opacity-70">Hours</span>
-                    </div>
-                    <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#111827]" : "bg-white"} border ${isDark ? "border-slate-800" : "border-amber-200"}`}>
-                      <span className="block text-lg sm:text-xl font-black">{activeExamCountdown.mins}</span>
-                      <span className="text-[9px] uppercase opacity-70">Mins</span>
-                    </div>
-                    <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#111827]" : "bg-white"} border ${isDark ? "border-slate-800" : "border-amber-200"}`}>
-                      <span className="block text-lg sm:text-xl font-black text-amber-500">{activeExamCountdown.secs}.{activeExamCountdown.ms.toString().padStart(2, "0")}</span>
-                      <span className="text-[9px] uppercase opacity-70">Secs</span>
-                    </div>
-                  </div>
+                <h3 className="text-base sm:text-lg font-bold tracking-tight mb-1 truncate">
+                  Next: <span className="text-amber-500">{activeExam.subject}</span> ({activeExam.code})
+                </h3>
 
-                  <p className={`text-[10px] font-mono font-semibold pt-1 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                    Series Mastered: {testSeriesPercentage}% ({testSeriesCompleted}/{testSeriesTotal} Topics)
-                  </p>
+                <p className={`text-xs mb-3 truncate ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                  Faculty: <strong>{activeExam.teachers}</strong>
+                </p>
+
+                {/* 4-BLOCK MILLISECOND TIMER */}
+                <div className="grid grid-cols-4 gap-1.5 font-mono text-center">
+                  <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#0b0f19]" : "bg-amber-50/50"} border ${isDark ? "border-slate-800" : "border-amber-200"}`}>
+                    <span className="block text-base sm:text-lg font-black text-amber-400">{activeExamCountdown.days}</span>
+                    <span className="text-[9px] uppercase opacity-70">Days</span>
+                  </div>
+                  <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#0b0f19]" : "bg-amber-50/50"} border ${isDark ? "border-slate-800" : "border-amber-200"}`}>
+                    <span className="block text-base sm:text-lg font-black text-amber-400">{activeExamCountdown.hours}</span>
+                    <span className="text-[9px] uppercase opacity-70">Hours</span>
+                  </div>
+                  <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#0b0f19]" : "bg-amber-50/50"} border ${isDark ? "border-slate-800" : "border-amber-200"}`}>
+                    <span className="block text-base sm:text-lg font-black text-amber-400">{activeExamCountdown.mins}</span>
+                    <span className="text-[9px] uppercase opacity-70">Mins</span>
+                  </div>
+                  <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#0b0f19]" : "bg-amber-50/50"} border ${isDark ? "border-slate-800" : "border-amber-200"}`}>
+                    <span className="block text-base sm:text-lg font-black text-amber-500">{activeExamCountdown.secs}.{activeExamCountdown.ms.toString().padStart(2, "0")}</span>
+                    <span className="text-[9px] uppercase opacity-70">Secs</span>
+                  </div>
                 </div>
+
+                <p className={`text-[10px] font-mono font-semibold pt-2 text-center ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                  Topics Mastered: {testSeriesPercentage}% ({testSeriesCompleted}/{testSeriesTotal})
+                </p>
               </div>
+
+              {/* CARD 2: FEB 1, 2027 FINAL CBSE BOARD EXAMINATIONS */}
+              <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                isDark ? "bg-[#111827] border-blue-500/30 shadow-md" : "bg-white border-blue-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold border ${
+                    isDark ? "bg-blue-950/50 text-blue-300 border-blue-800/60" : "bg-blue-50 text-blue-900 border-blue-300"
+                  }`}>
+                    CBSE CLASS 10 BOARDS (2026–2027)
+                  </span>
+                  <span className="text-[10px] font-mono text-blue-400 font-bold">Target 100% (AIR 1)</span>
+                </div>
+
+                <h3 className="text-base sm:text-lg font-bold tracking-tight mb-1 truncate">
+                  Final Boards: <span className="text-blue-400">Feb 1, 2027</span>
+                </h3>
+
+                <p className={`text-xs mb-3 truncate ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                  Official CBSE Board Examination Commencement
+                </p>
+
+                {/* 4-BLOCK MILLISECOND TIMER */}
+                <div className="grid grid-cols-4 gap-1.5 font-mono text-center">
+                  <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#0b0f19]" : "bg-blue-50/50"} border ${isDark ? "border-slate-800" : "border-blue-200"}`}>
+                    <span className="block text-base sm:text-lg font-black text-blue-400">{feb1BoardCountdown.days}</span>
+                    <span className="text-[9px] uppercase opacity-70">Days</span>
+                  </div>
+                  <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#0b0f19]" : "bg-blue-50/50"} border ${isDark ? "border-slate-800" : "border-blue-200"}`}>
+                    <span className="block text-base sm:text-lg font-black text-blue-400">{feb1BoardCountdown.hours}</span>
+                    <span className="text-[9px] uppercase opacity-70">Hours</span>
+                  </div>
+                  <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#0b0f19]" : "bg-blue-50/50"} border ${isDark ? "border-slate-800" : "border-blue-200"}`}>
+                    <span className="block text-base sm:text-lg font-black text-blue-400">{feb1BoardCountdown.mins}</span>
+                    <span className="text-[9px] uppercase opacity-70">Mins</span>
+                  </div>
+                  <div className={`p-1.5 rounded-lg ${isDark ? "bg-[#0b0f19]" : "bg-blue-50/50"} border ${isDark ? "border-slate-800" : "border-blue-200"}`}>
+                    <span className="block text-base sm:text-lg font-black text-blue-500">{feb1BoardCountdown.secs}.{feb1BoardCountdown.ms.toString().padStart(2, "0")}</span>
+                    <span className="text-[9px] uppercase opacity-70">Secs</span>
+                  </div>
+                </div>
+
+                <p className={`text-[10px] font-mono font-semibold pt-2 text-center ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                  Syllabus Mastered: {overallSyllabusPercentage}% ({completedCount}/{totalTopics} NCERT Sub-Topics)
+                </p>
+              </div>
+
             </div>
 
             {/* TEST SERIES I DATE SHEET TABS */}
