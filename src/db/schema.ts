@@ -25,8 +25,27 @@ export const syllabusProgress = pgTable("syllabus_progress", {
 
 export const chapterMastery = pgTable("chapter_mastery", {
   id: uuid("id").primaryKey().defaultRandom(),
+  systemId: text("system_id").notNull().default("global"),
+  subject: text("subject").notNull().default("Mathematics"),
   chapterId: text("chapter_id").notNull(),
   masteryLevel: integer("mastery_level").notNull().default(1),
+  progress: integer("progress").notNull().default(0),
+  questionsAttempted: integer("questions_attempted").notNull().default(0),
+  totalQuestions: integer("total_questions").notNull().default(0),
+  accuracy: integer("accuracy").notNull().default(0),
+  weakAreas: text("weak_areas"),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const conceptMastery = pgTable("concept_mastery", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  systemId: text("system_id").notNull().default("global"),
+  subject: text("subject").notNull().default("Mathematics"),
+  chapterId: text("chapter_id").notNull(),
+  concept: text("concept").notNull(),
+  questionsAttempted: integer("questions_attempted").notNull().default(0),
+  questionsCorrect: integer("questions_correct").notNull().default(0),
+  accuracy: integer("accuracy").notNull().default(0),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
@@ -41,7 +60,8 @@ export const revisionSchedules = pgTable("revision_schedules", {
 
 export const mistakeLogs = pgTable("mistake_logs", {
   id: text("id").primaryKey(),
-  subject: text("subject").notNull(),
+  systemId: text("system_id").notNull().default("global"),
+subject: text("subject").notNull(),
   chapter: text("chapter").notNull(),
   question: text("question").notNull(),
   wrongAnswer: text("wrong_answer").notNull(),
@@ -56,7 +76,8 @@ export const mistakeLogs = pgTable("mistake_logs", {
 
 export const mockTests = pgTable("mock_tests", {
   id: text("id").primaryKey(),
-  subject: text("subject").notNull(),
+  systemId: text("system_id").notNull().default("global"),
+subject: text("subject").notNull(),
   score: integer("score").notNull(),
   maxScore: integer("max_score").notNull(),
   date: text("date").notNull(),
@@ -66,7 +87,8 @@ export const mockTests = pgTable("mock_tests", {
 
 export const customFormulas = pgTable("custom_formulas", {
   id: text("id").primaryKey(),
-  subject: text("subject").notNull(),
+  systemId: text("system_id").notNull().default("global"),
+subject: text("subject").notNull(),
   topic: text("topic").notNull(),
   formula: text("formula").notNull(),
   description: text("description").notNull(),
@@ -76,7 +98,8 @@ export const customFormulas = pgTable("custom_formulas", {
 
 export const customMnemonics = pgTable("custom_mnemonics", {
   id: text("id").primaryKey(),
-  subject: text("subject").notNull(),
+  systemId: text("system_id").notNull().default("global"),
+subject: text("subject").notNull(),
   title: text("title").notNull(),
   phrase: text("phrase").notNull(),
   explanation: text("explanation").notNull(),
@@ -86,7 +109,8 @@ export const customMnemonics = pgTable("custom_mnemonics", {
 
 export const customFlashcards = pgTable("custom_flashcards", {
   id: text("id").primaryKey(),
-  subject: text("subject").notNull(),
+  systemId: text("system_id").notNull().default("global"),
+subject: text("subject").notNull(),
   chapter: text("chapter").notNull(),
   question: text("question").notNull(),
   answer: text("answer").notNull(),
@@ -96,7 +120,8 @@ export const customFlashcards = pgTable("custom_flashcards", {
 
 export const activeRecalls = pgTable("active_recalls", {
   id: text("id").primaryKey(),
-  subject: text("subject").notNull(),
+  systemId: text("system_id").notNull().default("global"),
+subject: text("subject").notNull(),
   topic: text("topic").notNull(),
   question: text("question").notNull(),
   sampleAnswer: text("sample_answer").notNull(),
@@ -109,7 +134,8 @@ export const activeRecalls = pgTable("active_recalls", {
 
 export const plannerTasks = pgTable("planner_tasks", {
   id: text("id").primaryKey(),
-  slot: text("slot").notNull(),
+  systemId: text("system_id").notNull().default("global"),
+slot: text("slot").notNull(),
   text: text("text").notNull(),
   done: boolean("done").notNull().default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -117,7 +143,8 @@ export const plannerTasks = pgTable("planner_tasks", {
 
 export const studyNotes = pgTable("study_notes", {
   id: text("id").primaryKey(),
-  title: text("title").notNull(),
+  systemId: text("system_id").notNull().default("global"),
+title: text("title").notNull(),
   content: text("content").notNull(),
   color: text("color").notNull(),
   date: text("date").notNull(),

@@ -133,3 +133,83 @@
 .safe-top {
   padding-top: max(0.5rem, env(safe-area-inset-top));
 }
+
+/* Antigravity Floating & Fluid Glassmorphism */
+@keyframes antigravityFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: antigravityFloat 4s ease-in-out infinite;
+}
+
+.glass-card {
+  background: rgba(17, 22, 34, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* KaTeX Color & Display Fixes for Light & Dark Themes */
+.katex {
+  color: inherit !important;
+  font-size: 1.05em;
+  white-space: normal;
+}
+
+/* Fraction vertical spacing to completely eliminate collisions with lines above and below */
+.katex .mfrac {
+  padding: 0.2em 0.05em;
+  vertical-align: -0.45em;
+}
+
+.katex-display {
+  margin: 0.85em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0.25rem;
+  scrollbar-width: thin;
+}
+
+/* Solution Text & Math Protection: Prevent text collisions & ensure proper line heights */
+.math-renderer {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.math-renderer p {
+  line-height: 2 !important;
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+/* Authentic Plain Paper Sheet (No grids, no lines) */
+.plain-paper-sheet {
+  background-color: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 20px 35px -10px rgba(0, 0, 0, 0.07), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  line-height: 1.85;
+  word-break: break-word;
+}
+
+.plain-paper-sheet-dark {
+  background-color: #090e1a;
+  color: #f8fafc;
+  box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  line-height: 1.85;
+  word-break: break-word;
+}
+
+

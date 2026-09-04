@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
+import { eq } from "drizzle-orm";
 import {
   mistakeLogs,
   mockTests,
@@ -13,7 +14,9 @@ import {
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const systemId = url.searchParams.get("systemId") || "global";
   if (!db) {
     return NextResponse.json({
       ok: false,
@@ -33,14 +36,14 @@ export async function GET() {
       tasksData,
       notesData
     ] = await Promise.all([
-      db.select().from(mistakeLogs),
-      db.select().from(mockTests),
-      db.select().from(customFormulas),
-      db.select().from(customMnemonics),
-      db.select().from(customFlashcards),
-      db.select().from(activeRecalls),
-      db.select().from(plannerTasks),
-      db.select().from(studyNotes)
+      db.select().from(mistakeLogs).where(eq(mistakeLogs.systemId, systemId)),
+      db.select().from(mockTests).where(eq(mockTests.systemId, systemId)),
+      db.select().from(customFormulas).where(eq(customFormulas.systemId, systemId)),
+      db.select().from(customMnemonics).where(eq(customMnemonics.systemId, systemId)),
+      db.select().from(customFlashcards).where(eq(customFlashcards.systemId, systemId)),
+      db.select().from(activeRecalls).where(eq(activeRecalls.systemId, systemId)),
+      db.select().from(plannerTasks).where(eq(plannerTasks.systemId, systemId)),
+      db.select().from(studyNotes).where(eq(studyNotes.systemId, systemId))
     ]);
 
     return NextResponse.json({
