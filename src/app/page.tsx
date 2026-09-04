@@ -8,8 +8,10 @@ import MnemonicGallery from "@/components/MnemonicGallery";
 import NotebookSolutionView from "@/components/NotebookSolutionView";
 import ChapterConceptExplainer from "@/components/ChapterConceptExplainer";
 import TheoremsAndExamplesView from "@/components/TheoremsAndExamplesView";
+import ScienceConceptsView from "@/components/ScienceConceptsView";
 
 import {
+  Atom,
   Award,
   BookOpen,
   CheckCircle2,
@@ -434,7 +436,7 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "theorems" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "roadmap">("chapter_dashboard");
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "theorems" | "science_concepts" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "roadmap">("chapter_dashboard");
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false);
@@ -444,8 +446,9 @@ export default function CBSECommandCenter() {
   const [commandSubjectId, setCommandSubjectId] = useState<string>("maths");
   const [commandChapterId, setCommandChapterId] = useState<string>("math_ch6");
   
-  // Progressive Chapter Vault
-  const [activeVaultChapter, setActiveVaultChapter] = useState<number | null>(6); // Default Triangles for now
+  // Progressive Chapter Vault (Supports Math & Science)
+  const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science">("math");
+  const [activeVaultChapter, setActiveVaultChapter] = useState<number | null>(6); // Default Triangles
   const [activeVaultQuestions, setActiveVaultQuestions] = useState<VaultQuestion[]>([]);
   const [isAnalyzingVault, setIsAnalyzingVault] = useState(false);
   const [vaultAnalysisLogs, setVaultAnalysisLogs] = useState<string[]>([]);
@@ -659,13 +662,18 @@ export default function CBSECommandCenter() {
     }
   }, [activeTab]);
 
-  // Instant In-Memory Cache for Chapter Question Banks
-  const chapterCacheRef = useRef<Record<number, VaultQuestion[]>>({});
+  // Instant In-Memory Cache for Chapter Question Banks (Supports Math & Science)
+  const chapterCacheRef = useRef<Record<string, VaultQuestion[]>>({});
 
-  const loadChapterData = async (chapterId: number, isPreload = false) => {
+  const loadChapterData = async (
+    chapterId: number, 
+    isPreload = false, 
+    subject: "math" | "science" = activeVaultSubject
+  ) => {
+    const cacheKey = `${subject}_${chapterId}`;
     // 1. Instant cache hit: 0ms switch
-    if (chapterCacheRef.current[chapterId]) {
-      setActiveVaultQuestions(chapterCacheRef.current[chapterId]);
+    if (chapterCacheRef.current[cacheKey]) {
+      setActiveVaultQuestions(chapterCacheRef.current[cacheKey]);
       setActiveVaultChapter(chapterId);
       return;
     }
@@ -675,15 +683,15 @@ export default function CBSECommandCenter() {
       setActiveVaultChapter(null);
       setVaultAnalysisLogs([
         "Connecting to Syllabus Engine...",
-        `Loading High-Yield Board Questions for Chapter ${chapterId}...`
+        `Loading High-Yield Board Questions for ${subject === "science" ? "Science" : "Maths"} Chapter ${chapterId}...`
       ]);
     }
 
     try {
-      const res = await fetch(`/api/questions?chapter=${chapterId}`);
+      const res = await fetch(`/api/questions?subject=${subject}&chapter=${chapterId}`);
       const data = await res.json();
       const list = data.questions || [];
-      chapterCacheRef.current[chapterId] = list;
+      chapterCacheRef.current[cacheKey] = list;
       if (!isPreload) {
         setActiveVaultQuestions(list);
         setActiveVaultChapter(chapterId);
@@ -697,15 +705,24 @@ export default function CBSECommandCenter() {
     }
   };
 
-  // Initial load Ch 6 immediately & pre-cache all remaining chapters in background for instant switches
+  // Initial load Ch 6 immediately & pre-cache remaining chapters in background for instant switches
   useEffect(() => {
-    loadChapterData(6);
-    // Pre-cache other chapters in background without blocking UI
-    [8, 9, 10, 13, 14].forEach(ch => {
-      fetch(`/api/questions?chapter=${ch}`)
-        .then(r => r.json())
-        .then(d => {
-          if (d.questions) chapterCacheRef.current[ch] = d.questions;
+    loadChapterData(6, false, "math");
+    // Pre-cache Mathematics chapters
+    [8, 9, 10, 13, 14].forEach((ch) => {
+      fetch(`/api/questions?subject=math&chapter=${ch}`)
+        .then((r) => r.json())
+        .then((d) => {
+          if (d.questions) chapterCacheRef.current[`math_${ch}`] = d.questions;
+        })
+        .catch(() => {});
+    });
+    // Pre-cache Science chapters
+    [1, 2, 3, 5, 11, 12, 13].forEach((ch) => {
+      fetch(`/api/questions?subject=science&chapter=${ch}`)
+        .then((r) => r.json())
+        .then((d) => {
+          if (d.questions) chapterCacheRef.current[`science_${ch}`] = d.questions;
         })
         .catch(() => {});
     });
@@ -1523,7 +1540,8 @@ export default function CBSECommandCenter() {
         <div className="max-w-6xl mx-auto flex items-center gap-1.5 w-full min-w-max">
           {[
             { id: "chapter_dashboard", label: "Chapter Command", icon: Target },
-            { id: "theorems", label: "Theorems & Examples", icon: Award },
+            { id: "science_concepts", label: "Science Concepts (NCERT)", icon: Atom },
+            { id: "theorems", label: "Maths Theorems & Ex", icon: Award },
             { id: "questions", label: "Master Question Bank", icon: Zap },
             { id: "mnemonics", label: "Visual Mnemonics (35 Sheets)", icon: Sparkles },
             { id: "flashcards", label: "Flashcards Engine", icon: BookMarked },
@@ -2330,6 +2348,18 @@ export default function CBSECommandCenter() {
           />
         )}
 
+        {/* ===================== TAB: SCIENCE CONCEPTS & NCERT MASTER GUIDE ===================== */}
+        {activeTab === "science_concepts" && (
+          <ScienceConceptsView
+            isDark={isDark}
+            onOpenQuestionBank={() => {
+              setActiveVaultSubject("science");
+              loadChapterData(1, false, "science");
+              setActiveTab("questions");
+            }}
+          />
+        )}
+
         {/* ===================== TAB 4: TRAINING VAULT (PREMIUM) ===================== */}
         {activeTab === "questions" && (
           <div className="space-y-6 animate-fade-in">
@@ -2345,19 +2375,64 @@ export default function CBSECommandCenter() {
                 </p>
               </div>
               
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-wrap items-center gap-3">
+                {/* Subject Selector Toggle */}
+                <div className={`p-1 rounded-2xl border flex items-center gap-1 ${isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"}`}>
+                  <button
+                    onClick={() => {
+                      setActiveVaultSubject("math");
+                      loadChapterData(6, false, "math");
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      activeVaultSubject === "math"
+                        ? "bg-emerald-500 text-slate-950 font-extrabold shadow-sm"
+                        : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    📐 Maths
+                  </button>
+                  <button
+                    onClick={() => {
+                      setActiveVaultSubject("science");
+                      loadChapterData(1, false, "science");
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      activeVaultSubject === "science"
+                        ? "bg-teal-500 text-slate-950 font-extrabold shadow-sm"
+                        : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    🧪 Science (NCERT)
+                  </button>
+                </div>
+
+                {/* Chapter Select Dropdown */}
                 <select 
                   className={`px-4 py-2 rounded-xl text-sm font-bold border outline-none cursor-pointer ${isDark ? "bg-black/40 border-white/10 text-white focus:border-emerald-500" : "bg-white border-slate-200"}`}
-                  onChange={(e) => loadChapterData(parseInt(e.target.value))}
+                  onChange={(e) => loadChapterData(parseInt(e.target.value), false, activeVaultSubject)}
                   value={activeVaultChapter || ""}
                   disabled={isAnalyzingVault}
                 >
-                  <option value="6">Ch 6: Triangles (60 Questions)</option>
-                  <option value="8">Ch 8: Introduction to Trigonometry (60 Questions)</option>
-                  <option value="9">Ch 9: Some Applications of Trig (55 Questions)</option>
-                  <option value="10">Ch 10: Circles (55 Questions)</option>
-                  <option value="13">Ch 13: Statistics (55 Questions)</option>
-                  <option value="14">Ch 14: Probability (55 Questions)</option>
+                  {activeVaultSubject === "math" ? (
+                    <>
+                      <option value="6">Ch 6: Triangles (60 Questions)</option>
+                      <option value="8">Ch 8: Introduction to Trigonometry (60 Questions)</option>
+                      <option value="9">Ch 9: Some Applications of Trig (55 Questions)</option>
+                      <option value="10">Ch 10: Circles (55 Questions)</option>
+                      <option value="13">Ch 13: Statistics (55 Questions)</option>
+                      <option value="14">Ch 14: Probability (55 Questions)</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="1">Ch 1: Chemical Reactions & Equations (35 Questions)</option>
+                      <option value="2">Ch 2: Acids, Bases and Salts (35 Questions)</option>
+                      <option value="3">Ch 3: Metals and Non-Metals (35 Questions)</option>
+                      <option value="5">Ch 5: Life Processes (35 Questions)</option>
+                      <option value="11">Ch 11: Electricity (35 Questions)</option>
+                      <option value="12">Ch 12: Magnetic Effects of Current (30 Questions)</option>
+                      <option value="13">Ch 13: Our Environment (30 Questions)</option>
+                    </>
+                  )}
                 </select>
               </div>
             </div>
@@ -3353,6 +3428,7 @@ export default function CBSECommandCenter() {
 
             <div className="grid grid-cols-2 gap-2 text-xs">
               {[
+                { id: "science_concepts", label: "Science Concepts (NCERT)", icon: Atom },
                 { id: "theorems", label: "Theorems & Examples", icon: Award },
                 { id: "flashcards", label: "Flashcards", icon: BookMarked },
                 { id: "common_mistakes", label: "My Mistakes Log", icon: Flame },
