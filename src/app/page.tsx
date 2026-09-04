@@ -367,6 +367,60 @@ export const LiveCountdown = React.memo(function LiveCountdown({
   );
 });
 
+export const IsolatedConfetti = React.memo(function IsolatedConfetti({ trigger }: { trigger: number }) {
+  const [particles, setParticles] = useState<ConfettiParticle[]>([]);
+
+  useEffect(() => {
+    if (trigger === 0) return;
+    const colors = ["#f59e0b", "#3b82f6", "#10b981", "#ef4444", "#8b5cf6", "#f97316"];
+    const pList: ConfettiParticle[] = [];
+    for (let i = 0; i < 35; i++) {
+      pList.push({
+        id: Math.random() + i,
+        x: Math.random() * 100,
+        y: -10,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: Math.random() * 6 + 4,
+        speedY: Math.random() * 4 + 3,
+        speedX: Math.random() * 4 - 2
+      });
+    }
+    setParticles(pList);
+  }, [trigger]);
+
+  useEffect(() => {
+    if (particles.length === 0) return;
+    const frame = requestAnimationFrame(() => {
+      setParticles((prev) =>
+        prev
+          .map((p) => ({ ...p, y: p.y + p.speedY, x: p.x + p.speedX }))
+          .filter((p) => p.y < 110)
+      );
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [particles]);
+
+  if (particles.length === 0) return null;
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            backgroundColor: p.color,
+            width: `${p.size}px`,
+            height: `${p.size}px`
+          }}
+        />
+      ))}
+    </div>
+  );
+});
+
 export default function CBSECommandCenter() {
 
 
@@ -420,8 +474,8 @@ export default function CBSECommandCenter() {
     concept: ""
   });
 
-  // Confetti & Floating XP Toast
-  const [confetti, setConfetti] = useState<ConfettiParticle[]>([]);
+  // Confetti trigger (incremented to fire IsolatedConfetti) & Floating XP Toast
+  const [confettiTrigger, setConfettiTrigger] = useState(0);
   const [xpToasts, setXpToasts] = useState<XpToast[]>([]);
 
   // Persistent Student Data
@@ -816,22 +870,9 @@ export default function CBSECommandCenter() {
     }
   }, []);
 
-  // Confetti trigger
+  // Confetti trigger — increments counter so IsolatedConfetti handles its own animation loop
   const triggerConfetti = useCallback(() => {
-    const colors = ["#f59e0b", "#3b82f6", "#10b981", "#ef4444", "#8b5cf6", "#f97316"];
-    const particles: ConfettiParticle[] = [];
-    for (let i = 0; i < 35; i++) {
-      particles.push({
-        id: Math.random() + i,
-        x: Math.random() * 100,
-        y: -10,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        size: Math.random() * 6 + 4,
-        speedY: Math.random() * 4 + 3,
-        speedX: Math.random() * 4 - 2
-      });
-    }
-    setConfetti(particles);
+    setConfettiTrigger((n) => n + 1);
   }, []);
 
   // Show floating XP Toast
@@ -842,20 +883,6 @@ export default function CBSECommandCenter() {
       setXpToasts((prev) => prev.filter((t) => t.id !== newToast.id));
     }, 1800);
   }, []);
-
-  // Animate confetti
-  useEffect(() => {
-    if (confetti.length > 0) {
-      const frame = requestAnimationFrame(() => {
-        setConfetti((prev) =>
-          prev
-            .map((p) => ({ ...p, y: p.y + p.speedY, x: p.x + p.speedX }))
-            .filter((p) => p.y < 110)
-        );
-      });
-      return () => cancelAnimationFrame(frame);
-    }
-  }, [confetti]);
 
   // Level up detection
   const isHydratedRef = useRef(false);
@@ -1316,22 +1343,8 @@ export default function CBSECommandCenter() {
         ))}
       </div>
 
-      {/* CONFETTI LAYER */}
-      <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
-        {confetti.map((p) => (
-          <div
-            key={p.id}
-            className="absolute rounded-full"
-            style={{
-              left: `${p.x}%`,
-              top: `${p.y}%`,
-              backgroundColor: p.color,
-              width: `${p.size}px`,
-              height: `${p.size}px`
-            }}
-          />
-        ))}
-      </div>
+      {/* CONFETTI LAYER (Rendered independently so animation frames do not re-render the entire page) */}
+      <IsolatedConfetti trigger={confettiTrigger} />
 
       {/* =========================================================================
           STICKY HEADER WITH LIVE XP / LEVEL BAR & QUICK CONTROLS

@@ -57,7 +57,7 @@ function preprocessMathContent(raw: string): string {
   return processedParts.join('');
 }
 
-export default function PremiumMathRenderer({ content, isDark = true, className = "" }: PremiumMathRendererProps) {
+const PremiumMathRenderer = React.memo(function PremiumMathRenderer({ content, isDark = true, className = "" }: PremiumMathRendererProps) {
   const processedContent = useMemo(() => preprocessMathContent(content), [content]);
 
   return (
@@ -110,4 +110,6 @@ export default function PremiumMathRenderer({ content, isDark = true, className 
       </ReactMarkdown>
     </div>
   );
-}
+});
+
+export default PremiumMathRenderer;

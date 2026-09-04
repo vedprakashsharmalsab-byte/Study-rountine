@@ -7,13 +7,16 @@
     --font-code: var(--font-mono), "JetBrains Mono", Consolas, Monaco, "Courier New", monospace;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: var(--font-sans);
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    overscroll-behavior-y: none;
+    text-rendering: optimizeSpeed;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -150,46 +153,43 @@
 
 /* High-Performance Low-Resource Styling: Locks 60 FPS on 2GB/4GB RAM & 2-Core CPUs */
 .glass-card {
-  background: rgba(17, 22, 34, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: #0f1422;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  contain: layout style;
+  contain: content;
 }
 
 .glass-card-light {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: #ffffff;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  contain: layout style;
+  contain: content;
 }
 
-/* Global backdrop-blur override to prevent GPU/CPU thrashing */
+/* Disable GPU-thrashing backdrop blur on moving/scrolling cards to lock smooth 60 FPS */
 .backdrop-blur-xl,
 .backdrop-blur-2xl,
-.backdrop-blur-3xl {
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
+.backdrop-blur-3xl,
+.backdrop-blur-md {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Only the fixed/sticky header and modal overlays use hardware-accelerated blur */
+header.backdrop-blur-xl,
+.modal-glass {
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
 /* Virtualized offscreen content: only paints cards in view to save RAM & CPU */
 .virtual-card {
   content-visibility: auto;
   contain-intrinsic-size: 0 160px;
+  contain: content;
 }
 
-/* Low-power / Mobile / Reduced Motion: zero backdrop-filter cost */
-@media (prefers-reduced-motion: reduce), (max-width: 768px) {
-  .backdrop-blur-xl,
-  .backdrop-blur-2xl,
-  .backdrop-blur-3xl,
-  .backdrop-blur-md,
-  .glass-card,
-  .glass-card-light {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
+/* Hardware-accelerated smooth scrolling */
+* {
+  -webkit-overflow-scrolling: touch;
 }
 
 
