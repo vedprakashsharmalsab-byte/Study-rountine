@@ -1478,7 +1478,7 @@ export default function CBSECommandCenter() {
       {/* =========================================================================
           LIVE DUAL COUNTDOWN TICKER STRIP (BOARDS & TEST SERIES)
           ========================================================================= */}
-      <div className={`border-b px-3.5 sm:px-6 py-2 transition-colors ${
+      <div className={`countdown-ticker-strip border-b px-3.5 sm:px-6 py-2 transition-colors ${
         isDark ? "border-white/10/80 bg-[#0d1322]/85 text-white" : "border-slate-200 bg-amber-50/50 text-slate-900"
       }`}>
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs font-mono">
@@ -1520,7 +1520,7 @@ export default function CBSECommandCenter() {
       <nav className={`border-b px-3.5 sm:px-6 py-2 overflow-x-auto no-scrollbar hidden md:flex items-center gap-1.5 transition-colors ${
         isDark ? "border-white/10/80 bg-[#0d1322]/70" : "border-slate-200 bg-white/80"
       }`}>
-        <div className="max-w-6xl mx-auto flex items-center gap-1.5 w-full">
+        <div className="max-w-6xl mx-auto flex items-center gap-1.5 w-full min-w-max">
           {[
             { id: "chapter_dashboard", label: "Chapter Command", icon: Target },
             { id: "theorems", label: "Theorems & Examples", icon: Award },
@@ -1562,7 +1562,7 @@ export default function CBSECommandCenter() {
       {/* =========================================================================
           MAIN APPLICATION CONTENT
           ========================================================================= */}
-      <main className="max-w-5xl mx-auto px-3.5 sm:px-6 py-4 sm:py-6 space-y-5 sm:space-y-6">
+      <main className="main-content-area max-w-5xl mx-auto px-3.5 sm:px-6 pt-4 sm:pt-6 space-y-5 sm:space-y-6">
 
         {/* ===================== TAB 0: TEST SERIES I (SEPT 14 - SEPT 26) ===================== */}
         {activeTab === "test_series" && (
@@ -3289,7 +3289,7 @@ export default function CBSECommandCenter() {
       {/* =========================================================================
           MOBILE BOTTOM NAVIGATION DOCK (FIXED AT BOTTOM FOR PHONES)
           ========================================================================= */}
-      <div className={`md:hidden fixed bottom-0 left-0 right-0 z-40 border-t backdrop-blur-2xl px-2 py-1.5 transition-colors ${
+      <div className={`md:hidden fixed bottom-0 left-0 right-0 z-40 border-t backdrop-blur-2xl px-2 pt-1.5 safe-area-bottom transition-colors ${
         isDark ? "border-white/10/90 bg-[#090d16]/95 text-white" : "border-slate-200 bg-white/95 text-slate-900 shadow-lg"
       }`}>
         <div className="grid grid-cols-5 gap-1 items-center max-w-md mx-auto">

@@ -243,4 +243,64 @@ header.backdrop-blur-xl,
   word-break: break-word;
 }
 
+/* =========================================================================
+   PHONE & TABLET ORIENTATION OPTIMIZATIONS
+   ========================================================================= */
+
+/* Prevent horizontal viewport blowouts on mobile screens */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Fast touch response on all mobile touch targets */
+@media (max-width: 1024px) {
+  button, select, a, input {
+    touch-action: manipulation;
+  }
+}
+
+/* Bottom Safe Area Padding for notch & home indicator devices */
+.safe-area-bottom {
+  padding-bottom: calc(0.4rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Main Content Area - guarantees bottom dock never covers content on phones */
+.main-content-area {
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 768px) {
+  .main-content-area {
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+/* Mobile Phone Landscape Orientation (Height <= 520px) */
+@media (max-height: 520px) and (orientation: landscape) {
+  header {
+    padding-top: 0.35rem !important;
+    padding-bottom: 0.35rem !important;
+  }
+  .countdown-ticker-strip {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+  .countdown-ticker-strip .max-w-6xl {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+}
+
+/* Tablet Portrait & Landscape Smooth Momentum Scrolling */
+@media (min-width: 768px) and (max-width: 1280px) {
+  nav {
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-left: 1rem;
+    scroll-padding-right: 1rem;
+  }
+}
+
+
 
