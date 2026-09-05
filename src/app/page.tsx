@@ -10,9 +10,11 @@ import ChapterConceptExplainer from "@/components/ChapterConceptExplainer";
 import TheoremsAndExamplesView from "@/components/TheoremsAndExamplesView";
 import ScienceConceptsView from "@/components/ScienceConceptsView";
 import ScienceActivitiesView from "@/components/ScienceActivitiesView";
+import ConceptsHubView from "@/components/ConceptsHubView";
 
 import {
   Atom,
+  ArrowRight,
   Award,
   Beaker,
   BookOpen,
@@ -606,7 +608,9 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "theorems" | "science_concepts" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "roadmap">("chapter_dashboard");
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "roadmap">("chapter_dashboard");
+  const [conceptsSubject, setConceptsSubject] = useState<"math" | "science">("math");
+  const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(6);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false);
@@ -1727,7 +1731,7 @@ export default function CBSECommandCenter() {
         <div className="max-w-6xl mx-auto flex items-center gap-1.5 w-full min-w-max">
           {[
             { id: "chapter_dashboard", label: "Chapter Command", icon: Target },
-            { id: "science_concepts", label: "Science Concepts (All 13 Ch)", icon: FlaskConical },
+            { id: "concepts", label: "Concepts Hub (All 27 Ch)", icon: BookOpen },
             { id: "activities", label: "NCERT Lab Activities", icon: Beaker },
             { id: "theorems", label: "Maths Theorems & Ex", icon: Award },
             { id: "questions", label: "Master Question Bank", icon: Zap },
@@ -2536,20 +2540,25 @@ export default function CBSECommandCenter() {
           />
         )}
 
-        {/* ===================== TAB: SCIENCE CONCEPTS & BOARD EXAMPLES ===================== */}
-        {activeTab === "science_concepts" && (
-          <ScienceConceptsView
+        {/* ===================== TAB: CONCEPTS HUB (MATH + SCIENCE ALL 27 CHAPTERS) ===================== */}
+        {activeTab === "concepts" && (
+          <ConceptsHubView
             isDark={isDark}
+            initialSubject={conceptsSubject}
+            initialChapterNo={conceptsChapterNo}
             onOpenActivities={(targetChNo) => {
               playSound("click");
               setActiveTab("activities");
             }}
-            onOpenQuestionBank={(targetChNo) => {
+            onOpenTheorems={() => {
               playSound("click");
-              const ch = targetChNo || 1;
-              setActiveVaultSubject("science");
+              setActiveTab("theorems");
+            }}
+            onOpenQuestionBank={(sub, ch) => {
+              playSound("click");
+              setActiveVaultSubject(sub);
               setActiveVaultChapter(ch);
-              loadChapterData(ch, false, "science");
+              loadChapterData(ch, false, sub);
               setActiveTab("questions");
             }}
           />
@@ -3516,82 +3525,126 @@ export default function CBSECommandCenter() {
                 </div>
               </div>
 
-              {/* INTEGRATED CHAPTER CONCEPTS FROM ZERO */}
-              {commandSubjectId === "science" ? (
-                <div className="mt-8 animate-fade-in">
-                  <ScienceConceptsView
-                    isDark={isDark}
-                    activeChapterNo={ncertNum || 1}
-                    activeChapterName={activeChapter.name}
-                    isEmbeddedInCommand={true}
-                    onOpenActivities={(targetChNo) => {
-                      playSound("click");
-                      setActiveTab("activities");
-                    }}
-                    onOpenQuestionBank={(targetChNo) => {
-                      playSound("click");
-                      const ch = targetChNo || ncertNum || 1;
-                      setActiveVaultSubject("science");
-                      setActiveVaultChapter(ch);
-                      loadChapterData(ch, false, "science");
-                      setActiveTab("questions");
-                    }}
-                  />
-                </div>
-              ) : (
-                /* MATHEMATICS: Blueprint & Deep Concept Explainer */
-                <>
-                  <div className={`mt-6 p-4 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
-                    isDark ? "bg-gradient-to-r from-emerald-950/40 via-cyan-950/20 to-transparent border-emerald-500/20" : "bg-emerald-50/70 border-emerald-200"
-                  }`}>
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                        <BookOpen className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h4 className="text-xs font-bold text-emerald-400">Concepts & Blueprint: {activeChapter.name}</h4>
-                        <p className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                          Full curriculum coverage, mandatory board definitions, high-yield patterns, and examiner grading rubric.
-                        </p>
-                      </div>
+              {/* ==================== HERO CONCEPT LAUNCHER CARD ==================== */}
+              <div className={`mt-8 p-6 sm:p-8 rounded-3xl border transition-all relative overflow-hidden ${
+                isDark
+                  ? "bg-gradient-to-br from-[#0c182a] via-[#091322] to-[#0d1c2e] border-teal-500/30 shadow-[0_8px_32px_rgba(20,184,166,0.15)]"
+                  : "bg-gradient-to-br from-teal-50/90 via-white to-blue-50/80 border-teal-200 shadow-lg"
+              }`}>
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                  <div className="space-y-3 max-w-3xl">
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <span className="px-3 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-teal-500 text-slate-950 shadow-sm flex items-center gap-1.5">
+                        <BookOpen className="w-3.5 h-3.5" /> Concept Blueprint Hub
+                      </span>
+                      <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
+                        isDark ? "bg-teal-950/60 text-teal-300 border-teal-500/30" : "bg-teal-100 text-teal-900 border-teal-300"
+                      }`}>
+                        Chapter {ncertNum} • {activeSubject.name}
+                      </span>
                     </div>
-                    <button
-                      onClick={() => {
-                        playSound("click");
-                        setIsConceptExplainerOpen(!isConceptExplainerOpen);
-                      }}
-                      className="px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 transition-all cursor-pointer flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 shrink-0"
-                    >
-                      <Sparkles className="w-3.5 h-3.5" />
-                      <span>{isConceptExplainerOpen ? "Hide Concept Guide" : `Read Ch ${ncertNum} Deep Concept Guide`}</span>
-                    </button>
+
+                    <h3 className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                      Master All Core Concepts, Formulas & Examiner Traps
+                    </h3>
+
+                    <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      Deep dive into official NCERT syllabus theory, intuitive mental analogies, balanced chemical reactions with physical states, mathematical proofs, and step-by-step solved board examples for <strong>{activeChapter.name}</strong>.
+                    </p>
                   </div>
 
-                  {/* Concept Explainer Render */}
-                  {isConceptExplainerOpen && (
-                    <div className="mt-6 animate-fade-in">
-                      <ChapterConceptExplainer
-                        chapterId={ncertNum || 6}
-                        isDark={isDark}
-                        onClose={() => setIsConceptExplainerOpen(false)}
-                        onOpenQuestions={() => {
-                          setIsConceptExplainerOpen(false);
-                          setActiveTab("questions");
-                        }}
-                        onChapterChange={(newChNo) => {
-                          const matched = activeSubject.chapters.find((c) => (c.ncertChapterNo || c.id) === newChNo);
-                          if (matched) {
-                            setCommandChapterId(matched.id);
-                          }
-                        }}
-                      />
-                    </div>
-                  )}
-                </>
-              )}
+                  <button
+                    onClick={() => {
+                      playSound("click");
+                      setConceptsSubject(commandSubjectId === "science" ? "science" : "math");
+                      setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : 6));
+                      setActiveTab("concepts");
+                    }}
+                    className="w-full lg:w-auto px-6 py-4 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2.5 shadow-xl shadow-teal-500/25 hover:scale-[1.02] shrink-0"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>Launch Chapter {ncertNum} Concepts Hub</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
 
+              {/* ==================== OFFICIAL NCERT SUB-TOPIC MATRIX ==================== */}
+              <div className="mt-8 space-y-3">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                  <div>
+                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4" /> Official NCERT Sub-Topics Syllabus
+                    </h4>
+                    <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                      {completedTopicsCount} of {totalTopics} Sub-Topics Mastered • Click checkbox to toggle completion
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {activeChapter.topics.map((topic, idx) => {
+                    const isDone = !!completedTopicIds[topic.id];
+                    return (
+                      <div
+                        key={topic.id}
+                        className={`p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
+                          isDone
+                            ? isDark
+                              ? "bg-emerald-950/20 border-emerald-500/30 shadow-xs"
+                              : "bg-emerald-50/70 border-emerald-200 shadow-xs"
+                            : isDark
+                            ? "bg-[#0c101c] border-white/5 hover:border-white/15"
+                            : "bg-white border-slate-200 hover:border-slate-300"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <button
+                            onClick={() => toggleTopic(topic.id)}
+                            className={`w-6 h-6 rounded-lg flex items-center justify-center transition-all cursor-pointer shrink-0 border ${
+                              isDone
+                                ? "bg-emerald-500 text-slate-950 border-emerald-400 font-bold"
+                                : isDark
+                                ? "bg-white/5 border-white/15 text-transparent hover:border-emerald-400"
+                                : "bg-slate-100 border-slate-300 text-transparent hover:border-emerald-500"
+                            }`}
+                            title={isDone ? "Mark as Incomplete" : "Mark as Mastered"}
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                          </button>
+                          <div className="min-w-0">
+                            <span className="text-[10px] font-mono text-slate-400 block">Sub-Topic #{idx + 1}</span>
+                            <p className={`text-xs font-bold truncate ${isDone ? "text-emerald-400 line-through opacity-80" : isDark ? "text-white" : "text-slate-900"}`}>
+                              {topic.title}
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => {
+                            playSound("click");
+                            setConceptsSubject(commandSubjectId === "science" ? "science" : "math");
+                            setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : 6));
+                            setActiveTab("concepts");
+                          }}
+                          className={`px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer whitespace-nowrap flex items-center gap-1 shrink-0 ${
+                            isDark
+                              ? "bg-white/5 border-white/10 hover:bg-teal-500/20 hover:border-teal-400/40 text-teal-300"
+                              : "bg-slate-50 border-slate-200 hover:bg-teal-50 text-teal-800"
+                          }`}
+                        >
+                          <span>Study</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* ==================== BENTO CARDS: NEXT TARGETS & DUE FOR REVISION ==================== */}
               <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className={`p-4 rounded-2xl border ${isDark ? "bg-red-950/20 border-red-900/30" : "bg-red-50 border-red-200"}`}>
+                <div className={`p-4 sm:p-5 rounded-2xl border ${isDark ? "bg-red-950/20 border-red-900/30" : "bg-red-50 border-red-200"}`}>
                   <h4 className="text-xs font-bold text-red-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                     <Flame className="w-4 h-4"/> Next Target Topics ({uncompletedTopics.length} Remaining)
                   </h4>
@@ -3604,7 +3657,7 @@ export default function CBSECommandCenter() {
                   </div>
                 </div>
 
-                <div className={`p-4 rounded-2xl border ${isDark ? "bg-amber-950/20 border-amber-900/30" : "bg-amber-50 border-amber-200"}`}>
+                <div className={`p-4 sm:p-5 rounded-2xl border ${isDark ? "bg-amber-950/20 border-amber-900/30" : "bg-amber-50 border-amber-200"}`}>
                   <h4 className="text-xs font-bold text-amber-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                     <BookMarked className="w-4 h-4"/> Due for Revision
                   </h4>
@@ -3615,13 +3668,13 @@ export default function CBSECommandCenter() {
                   <div className="mt-3 flex gap-2">
                     <button 
                       onClick={() => { playSound("click"); setActiveTab("flashcards"); }}
-                      className="flex-1 py-1.5 text-xs font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/30 rounded-lg transition-colors cursor-pointer"
+                      className="flex-1 py-2 text-xs font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/30 rounded-xl transition-colors cursor-pointer"
                     >
                       Start Flashcards
                     </button>
                     <button 
                       onClick={() => { playSound("click"); setActiveTab("common_mistakes"); }}
-                      className="flex-1 py-1.5 text-xs font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/30 rounded-lg transition-colors cursor-pointer"
+                      className="flex-1 py-2 text-xs font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/30 rounded-xl transition-colors cursor-pointer"
                     >
                       Review Mistakes
                     </button>
@@ -3629,7 +3682,7 @@ export default function CBSECommandCenter() {
                 </div>
               </div>
 
-              {/* Navigation Grid (All Modules Fully Functional) */}
+              {/* ==================== DIRECT MODULE COMMAND GRID (10 MODULES) ==================== */}
               <div className="mt-8 space-y-2">
                 <span className="text-[11px] font-mono uppercase font-bold text-slate-400 block tracking-wider">
                   Direct Module Command (Click to Navigate Instantly)
@@ -3637,7 +3690,15 @@ export default function CBSECommandCenter() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                   {[
                     { label: 'Master Question Bank', action: () => setActiveTab('questions'), icon: Zap },
-                    { label: 'Science Concepts (13 Ch)', action: () => setActiveTab('science_concepts'), icon: FlaskConical },
+                    { 
+                      label: 'Concepts Hub (27 Ch)', 
+                      action: () => {
+                        setConceptsSubject(commandSubjectId === "science" ? "science" : "math");
+                        setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : 6));
+                        setActiveTab('concepts');
+                      }, 
+                      icon: BookOpen 
+                    },
                     { label: 'NCERT Lab Activities', action: () => setActiveTab('activities'), icon: Beaker },
                     { label: 'Theorems & Proofs (5M)', action: () => setActiveTab('theorems'), icon: Award },
                     { label: 'Visual Mnemonics (49)', action: () => setActiveTab('mnemonics'), icon: Sparkles },
@@ -3790,7 +3851,7 @@ export default function CBSECommandCenter() {
 
             <div className="grid grid-cols-2 gap-2 text-xs">
               {[
-                { id: "science_concepts", label: "Science Concepts (All 13)", icon: FlaskConical },
+                { id: "concepts", label: "Concepts Hub (All 27 Ch)", icon: BookOpen },
                 { id: "activities", label: "NCERT Lab Activities", icon: Beaker },
                 { id: "theorems", label: "Theorems & Examples", icon: Award },
                 { id: "flashcards", label: "Flashcards", icon: BookMarked },
