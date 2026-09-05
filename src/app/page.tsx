@@ -281,6 +281,174 @@ const DEFAULT_MISTAKE_LOGS = [
     reason: "Using cf of the median class makes (N/2 - cf) negative or zero! It MUST be the cumulative frequency of the PRECEDING class.",
     correctAnswer: "cf = Cumulative frequency of the class PRECEDING the median class.\nf = Simple frequency of the median class itself.\nL = Lower limit of the median class.\nh = Class size.",
     concept: "Grouped Data Median: cf is strictly from the preceding class, never the median class itself."
+  },
+  {
+    id: "mst_sci_c1_1",
+    subject: "Science",
+    chapter: "Ch 1: Chemical Reactions and Equations",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-04",
+    question: "What is observed when lead nitrate powder 2Pb(NO₃)₂(s) is heated in a boiling tube? Identify the residue and gases evolved.",
+    wrongAnswer: "Brown solid residue of lead oxide is formed and a colorless oxygen gas is evolved.",
+    reason: "Reversing color of residue and gas! The residue PbO (Lead Monoxide) is YELLOW (cold) or reddish-brown (hot), and the pungent gas evolved is REDDISH-BROWN NITROGEN DIOXIDE (NO₂), along with colorless O₂.",
+    correctAnswer: "2Pb(NO₃)₂(s) —[Heat]⟶ 2PbO(s) [Yellow residue] + 4NO₂(g)↑ [Reddish-brown fumes] + O₂(g)↑ [Colorless].\nKey observations:\n1. Emission of brown fumes of nitrogen dioxide (NO₂).\n2. A yellow solid residue of lead monoxide (PbO) remains in the boiling tube.",
+    concept: "Thermal decomposition of lead nitrate: Brown fumes = NO₂; Yellow residue = PbO."
+  },
+  {
+    id: "mst_sci_c1_2",
+    subject: "Science",
+    chapter: "Ch 1: Chemical Reactions and Equations",
+    priority: "HIGH",
+    dateAdded: "2026-09-04",
+    question: "In the reaction: CuO(s) + H₂(g) —[Heat]⟶ Cu(s) + H₂O(l), identify (a) the substance oxidized, (b) the substance reduced, (c) the oxidizing agent, and (d) the reducing agent.",
+    wrongAnswer: "(a) Cu is oxidized, (b) H₂O is reduced, (c) H₂ is oxidizing agent, (d) CuO is reducing agent.",
+    reason: "Selecting PRODUCTS instead of REACTANTS! Oxidized/reduced substances and oxidizing/reducing agents must ALWAYS be reactants on the left-hand side of the chemical equation.",
+    correctAnswer: "1. Substance oxidized = H₂ (gains oxygen to form H₂O).\n2. Substance reduced = CuO (loses oxygen to form Cu).\n3. Oxidizing agent = CuO (provides oxygen for oxidation).\n4. Reducing agent = H₂ (removes oxygen from CuO).",
+    concept: "Redox agent identification: All four designations (oxidized, reduced, oxidizing agent, reducing agent) are strictly REACTANTS."
+  },
+  {
+    id: "mst_sci_c2_1",
+    subject: "Science",
+    chapter: "Ch 2: Acids, Bases and Salts",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-04",
+    question: "Why is it recommended that acid should be added to water and not water to acid while diluting a concentrated acid?",
+    wrongAnswer: "Because water has a higher boiling point so adding acid first prevents water from evaporating.",
+    reason: "Missing the fundamental thermodynamic cause: dilution of a concentrated acid (especially H₂SO₄) is highly EXOTHERMIC. Adding water to concentrated acid creates localized boiling that splashes hot concentrated acid onto skin/eyes and may break the glass container.",
+    correctAnswer: "1. Dilution of concentrated acid is an extremely exothermic process.\n2. If water is added to concentrated acid, the heat generated suddenly causes localized boiling and may cause the mixture to splash out, causing severe chemical burns.\n3. The glass container may also crack due to excessive local heating.\n4. Hence, concentrated acid must always be added SLOWLY to water with CONSTANT STIRRING.",
+    concept: "Acid Dilution Safety: Always add ACID to WATER slowly with stirring, NEVER water to acid."
+  },
+  {
+    id: "mst_sci_c2_2",
+    subject: "Science",
+    chapter: "Ch 2: Acids, Bases and Salts",
+    priority: "HIGH",
+    dateAdded: "2026-09-04",
+    question: "What is the chemical difference between Baking Soda and Baking Powder? Why is tartaric acid added to baking soda to make baking powder?",
+    wrongAnswer: "Baking soda is Na₂CO₃ and baking powder is NaHCO₃.",
+    reason: "Confusing Washing Soda (Na₂CO₃·10H₂O) with Baking Soda (NaHCO₃), and failing to recognize that baking powder is a MIXTURE of sodium hydrogen carbonate and a mild edible acid (tartaric acid).",
+    correctAnswer: "1. Baking Soda is pure Sodium Hydrogen Carbonate (NaHCO₃).\n2. Baking Powder is a mixture of baking soda (NaHCO₃) and a mild edible acid like tartaric acid.\n3. When heated with water during cake baking: 2NaHCO₃ + H⁺ —> Na⁺ + CO₂↑ + H₂O.\n4. The CO₂ gas causes cake/bread to rise making them soft and spongy.\n5. Tartaric acid neutralizes the basic sodium carbonate (Na₂CO₃) formed, preventing a bitter metallic taste in the cake.",
+    concept: "Baking Powder = NaHCO₃ + Tartaric Acid; Tartaric acid prevents bitter taste of Na₂CO₃."
+  },
+  {
+    id: "mst_sci_c3_1",
+    subject: "Science",
+    chapter: "Ch 3: Metals and Non-Metals",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-04",
+    question: "Why is hydrogen gas NOT evolved when a metal reacts with dilute nitric acid (HNO₃)? Name the two exceptions.",
+    wrongAnswer: "Nitric acid is a weak acid so it doesn't have enough hydrogen ions to form H₂ gas.",
+    reason: "Nitric acid is actually a VERY STRONG acid and a powerful OXIDIZING AGENT! It oxidizes the H₂ gas formed into H₂O and itself gets reduced to nitrogen oxides (N₂O, NO, or NO₂).",
+    correctAnswer: "1. Dilute HNO₃ is a powerful oxidizing agent.\n2. As soon as H₂ gas is produced, HNO₃ oxidizes it into water (H₂O) and is itself reduced to any of the nitrogen oxides (N₂O, NO, NO₂).\n3. EXCEPTIONS: Magnesium (Mg) and Manganese (Mn) react with very dilute (1%) HNO₃ to evolve H₂ gas:\nMg(s) + 2HNO₃(aq) —> Mg(NO₃)₂(aq) + H₂(g)↑\nMn(s) + 2HNO₃(aq) —> Mn(NO₃)₂(aq) + H₂(g)↑",
+    concept: "HNO₃ with metals: Strong oxidizing agent converts H₂ to H₂O; only Mg and Mn evolve H₂ with 1% dilute HNO₃."
+  },
+  {
+    id: "mst_sci_c3_2",
+    subject: "Science",
+    chapter: "Ch 3: Metals and Non-Metals",
+    priority: "HIGH",
+    dateAdded: "2026-09-04",
+    question: "Differentiate between Roasting and Calcination using balanced chemical equations for zinc extraction.",
+    wrongAnswer: "Roasting is heating carbonate ore without air; calcination is heating sulphide ore with air.",
+    reason: "Direct reversal of the two metallurgical processes! Remember mnemonic: C = Calcination = Carbonate ore = Close/limited air; R = Roasting = Sulphide ore = Regular/excess air.",
+    correctAnswer: "1. ROASTING: Heating SULPHIDE ore strongly in the presence of EXCESS air:\n2ZnS(s) [Zinc Blende] + 3O₂(g) —[Heat]⟶ 2ZnO(s) + 2SO₂(g)↑\n2. CALCINATION: Heating CARBONATE ore strongly in LIMITED air (or absence of air):\nZnCO₃(s) [Calamine] —[Heat]⟶ ZnO(s) + CO₂(g)↑",
+    concept: "Metallurgy: Roasting = Sulphide ore in excess air (gives SO₂); Calcination = Carbonate ore in limited air (gives CO₂)."
+  },
+  {
+    id: "mst_sci_c5_1",
+    subject: "Science",
+    chapter: "Ch 5: Life Processes",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-04",
+    question: "Compare the anaerobic respiration occurring in yeast cells with that occurring in human muscle cells during heavy exercise.",
+    wrongAnswer: "Both yeast and human muscles produce ethanol, carbon dioxide, and energy when oxygen is absent.",
+    reason: "Human muscle cells NEVER produce ethanol or carbon dioxide during anaerobic respiration! Producing ethanol in muscles would cause systemic alcohol toxicity. Human muscles produce 3-carbon LACTIC ACID + energy (which causes muscle cramps).",
+    correctAnswer: "1. In Yeast (Fermentation - Absence of O₂):\nGlucose (6C) —[Cytoplasm]⟶ Pyruvate (3C) —[Absence of O₂]⟶ Ethanol (2C) + CO₂ + 2 ATP.\n2. In Human Muscle Cells (Lack of O₂ during vigorous exercise):\nGlucose (6C) —[Cytoplasm]⟶ Pyruvate (3C) —[Lack of O₂]⟶ Lactic Acid (3C) + 2 ATP.\nNote: Accumulation of lactic acid causes muscle cramps; no CO₂ is released in muscle anaerobic pathway.",
+    concept: "Anaerobic Respiration: Yeast = Ethanol + CO₂ + 2 ATP; Human Muscles = Lactic Acid + 2 ATP (NO CO₂)."
+  },
+  {
+    id: "mst_sci_c5_2",
+    subject: "Science",
+    chapter: "Ch 5: Life Processes",
+    priority: "HIGH",
+    dateAdded: "2026-09-04",
+    question: "Explain the two main stages of urine formation in a nephron. Which substances are selectively reabsorbed?",
+    wrongAnswer: "Urine is directly filtered out from blood in the glomerulus and excreted immediately without modification.",
+    reason: "Overlooking the massive volume of initial glomerular filtrate (~180 liters/day) versus actual urine output (1–2 liters/day). Selective reabsorption in the renal tubule is vital to retain water, glucose, and essential ions.",
+    correctAnswer: "1. Ultrafiltration (in Bowman's Capsule & Glomerulus):\nBlood is filtered under high hydrostatic pressure; water, glucose, amino acids, urea, and mineral salts pass into the Bowman's capsule as initial filtrate (~180 L/day). Blood cells and large proteins remain in blood capillaries.\n2. Selective Reabsorption (along the tubular part of nephron):\nAs filtrate flows along the convoluted tubule and Henle's loop, glucose, amino acids, essential salts, and a major portion of water are selectively reabsorbed back into peritubular capillaries.\n3. Remaining fluid containing urea, uric acid, and excess salts forms urine (~1.5 L/day).",
+    concept: "Nephron Physiology: Glomerular ultrafiltration followed by tubular selective reabsorption of glucose, amino acids, and water."
+  },
+  {
+    id: "mst_sci_c11_1",
+    subject: "Science",
+    chapter: "Ch 11: Electricity",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-04",
+    question: "A student plots a V-I graph with V on y-axis and I on x-axis for two wires A and B (slopes θ_A > θ_B). Another student plots I on y-axis and V on x-axis. How do the slopes relate to resistance?",
+    wrongAnswer: "Slope always equals resistance R in any graph.",
+    reason: "Failing to check which variable is on which axis! For V-I graph (V on y, I on x): Slope = ΔV/ΔI = R (greater slope = greater resistance). For I-V graph (I on y, V on x): Slope = ΔI/ΔV = 1/R (greater slope = SMALLER resistance)!",
+    correctAnswer: "1. If V is on y-axis and I on x-axis: Slope = ΔV / ΔI = Resistance (R). Wire with steeper slope has HIGHER resistance.\n2. If I is on y-axis and V on x-axis: Slope = ΔI / ΔV = Conductance = 1 / R. Wire with steeper slope has LOWER resistance.\nBoard Rule: Always examine axis labels before determining which wire has higher resistance.",
+    concept: "Ohm's Law Graph: Slope of V vs I is R; Slope of I vs V is 1/R."
+  },
+  {
+    id: "mst_sci_c11_2",
+    subject: "Science",
+    chapter: "Ch 11: Electricity",
+    priority: "HIGH",
+    dateAdded: "2026-09-04",
+    question: "Three resistors of 6 Ω, 3 Ω, and 2 Ω are connected in parallel. Calculate equivalent resistance.",
+    wrongAnswer: "1/R_p = 1/6 + 1/3 + 1/2 = 1/6 + 2/6 + 3/6 = 6/6 = 1. (Writing R_p = 6 Ω).",
+    reason: "Forgetting to take reciprocal after adding fractions! In this case 6/6 = 1 so the number was 1, but for other numbers (e.g. 5/12), students report 5/12 Ω instead of 12/5 = 2.4 Ω.",
+    correctAnswer: "1/R_p = 1/R₁ + 1/R₂ + 1/R₃ = 1/6 + 1/3 + 1/2\n= (1 + 2 + 3) / 6 = 6 / 6 = 1 Ω⁻¹\n∴ R_p = 1 / 1 = 1.0 Ω.\nNote: Equivalent resistance in parallel is ALWAYS strictly smaller than the smallest individual resistor (1 Ω < 2 Ω).",
+    concept: "Parallel Resistance: Always invert 1/R_p to get R_p; R_p is always less than minimum resistor."
+  },
+  {
+    id: "mst_sci_c12_1",
+    subject: "Science",
+    chapter: "Ch 12: Magnetic Effects of Electric Current",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-04",
+    question: "State Fleming's Left-Hand Rule and specify the exact physical quantity represented by each finger.",
+    wrongAnswer: "Thumb = Current, Forefinger = Force, Center finger = Magnetic Field.",
+    reason: "Scrambling the finger assignments! Remember the FBI mnemonic: F = Thumb (Force/Motion), B = Forefinger (Magnetic Field), I = Center finger (Current).",
+    correctAnswer: "Stretch the thumb, forefinger, and middle finger of the left hand mutually perpendicular to each other:\n1. Forefinger points in the direction of Magnetic Field (B).\n2. Middle finger points in the direction of Electric Current (I).\n3. Thumb points in the direction of mechanical Force or Motion (F) acting on the conductor.",
+    concept: "Fleming's Left-Hand Rule: FBI = Force (Thumb), Field (Forefinger), Current (Center finger)."
+  },
+  {
+    id: "mst_sci_c12_2",
+    subject: "Science",
+    chapter: "Ch 12: Magnetic Effects of Electric Current",
+    priority: "HIGH",
+    dateAdded: "2026-09-04",
+    question: "Describe the pattern of magnetic field lines inside a long current-carrying solenoid. What does this pattern indicate?",
+    wrongAnswer: "The field lines are circular and non-uniform, becoming zero at the exact center of the solenoid.",
+    reason: "Confusing the magnetic field of a straight wire with that of a long solenoid! Inside a solenoid, field lines are straight, parallel, and equidistant.",
+    correctAnswer: "1. The magnetic field lines inside a long solenoid are in the form of parallel straight lines along the axis.\n2. This indicates that the magnetic field is UNIFORM at all points inside the solenoid.\n3. The solenoid behaves exactly like a bar magnet with North and South poles at opposite ends.",
+    concept: "Solenoid Interior: Magnetic field lines are parallel straight lines representing a completely UNIFORM magnetic field."
+  },
+  {
+    id: "mst_sci_c13_1",
+    subject: "Science",
+    chapter: "Ch 13: Our Environment",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-04",
+    question: "If 10,000 Joules of solar energy falls on green leaves of plants in a terrestrial ecosystem, how much energy is transferred to primary consumers (herbivores)?",
+    wrongAnswer: "10% of 10,000 J = 1,000 J.",
+    reason: "Applying the 10% law directly to incident sunlight! Green plants only capture ~1% of solar energy falling on leaves into food energy. The 10% Lindeman's Law only applies from TROPHIC LEVEL to TROPHIC LEVEL (Producers ⟶ Herbivores).",
+    correctAnswer: "1. Solar energy falling on green leaves = 10,000 J.\n2. Energy captured by autotrophs (Producers, 1% of sunlight) = 1% of 10,000 J = 100 J.\n3. Energy transferred to Primary Consumers (Herbivores, 10% law) = 10% of 100 J = 10 J.\nAnswer = 10 Joules (NOT 1,000 J).",
+    concept: "Trophic Energy Transfer: Sunlight to Plant = 1%; Plant to Herbivore to Carnivore = 10% per step."
+  },
+  {
+    id: "mst_sci_c13_2",
+    subject: "Science",
+    chapter: "Ch 13: Our Environment",
+    priority: "HIGH",
+    dateAdded: "2026-09-04",
+    question: "What is Biological Magnification? In a food chain: Water ⟶ Phytoplankton ⟶ Small Fish ⟶ Fish-eating Bird, which organism accumulates the highest pesticide concentration?",
+    wrongAnswer: "Water or phytoplankton because chemicals are sprayed directly into water and ingested first.",
+    reason: "Misunderstanding biological magnification: because pesticides like DDT are non-biodegradable, organisms cannot excrete them. With each higher trophic level, an organism consumes many organisms of the previous level, leading to progressive ACCUMULATION.",
+    correctAnswer: "1. Biological Magnification: The progressive increase in the concentration of non-biodegradable harmful chemicals (e.g. DDT) at each successive trophic level in a food chain.\n2. The highest concentration will be found in the organism at the TOP of the food chain: Fish-eating Bird (Tertiary consumer / Top carnivore).\n3. Phytoplankton has the lowest concentration among living organisms.",
+    concept: "Biological Magnification: Non-biodegradable chemicals increase progressively, reaching maximum at top trophic level."
   }
 ];
 
@@ -459,6 +627,7 @@ export default function CBSECommandCenter() {
 
   // My Mistakes
   const [myMistakes, setMyMistakes] = useState<any[]>(DEFAULT_MISTAKE_LOGS);
+  const [mistakeSubjectFilter, setMistakeSubjectFilter] = useState<"All" | "Mathematics" | "Science">("All");
   const [mistakeChapterFilter, setMistakeChapterFilter] = useState<string>("All");
   const [isLoadingMistakes, setIsLoadingMistakes] = useState(false);
   const [resolvedMistakeIds, setResolvedMistakeIds] = useState<{ [id: string]: boolean }>({});
@@ -559,7 +728,10 @@ export default function CBSECommandCenter() {
         try {
           const parsed = JSON.parse(local);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            setMyMistakes(parsed);
+            const existingIds = new Set(parsed.map((m: any) => m.id));
+            const merged = [...parsed, ...DEFAULT_MISTAKE_LOGS.filter((d) => !existingIds.has(d.id))];
+            setMyMistakes(merged);
+            localStorage.setItem("cbse10_lsa_my_mistakes_v5", JSON.stringify(merged));
             setIsLoadingMistakes(false);
             return;
           }
@@ -963,9 +1135,22 @@ export default function CBSECommandCenter() {
         if (sCustomQ) setCustomQuestions(JSON.parse(sCustomQ));
         if (sFocus) setTotalFocusMins(parseInt(sFocus));
         if (sTheme) setTheme(sTheme as any);
-        if (sMute) setIsSoundMuted(sMute === "true");
-        if (sMistakes) setMyMistakes(JSON.parse(sMistakes));
-        if (sResolvedMistakes) setResolvedMistakeIds(JSON.parse(sResolvedMistakes));
+        if (sMistakes) {
+          try {
+            const parsed = JSON.parse(sMistakes);
+            if (Array.isArray(parsed)) {
+              const existingIds = new Set(parsed.map((m: any) => m.id));
+              const merged = [...parsed, ...DEFAULT_MISTAKE_LOGS.filter((d) => !existingIds.has(d.id))];
+              setMyMistakes(merged);
+            } else {
+              setMyMistakes(DEFAULT_MISTAKE_LOGS);
+            }
+          } catch {
+            setMyMistakes(DEFAULT_MISTAKE_LOGS);
+          }
+        } else {
+          setMyMistakes(DEFAULT_MISTAKE_LOGS);
+        }
         setMounted(true);
       } catch (err) {
         console.error("Failed to load local storage data:", err);
@@ -1540,6 +1725,7 @@ export default function CBSECommandCenter() {
         <div className="max-w-6xl mx-auto flex items-center gap-1.5 w-full min-w-max">
           {[
             { id: "chapter_dashboard", label: "Chapter Command", icon: Target },
+            { id: "science_concepts", label: "Science Concepts (All 13 Ch)", icon: FlaskConical },
             { id: "theorems", label: "Maths Theorems & Ex", icon: Award },
             { id: "questions", label: "Master Question Bank", icon: Zap },
             { id: "mnemonics", label: "Visual Mnemonics (35 Sheets)", icon: Sparkles },
@@ -2347,6 +2533,21 @@ export default function CBSECommandCenter() {
           />
         )}
 
+        {/* ===================== TAB: SCIENCE CONCEPTS & BOARD EXAMPLES ===================== */}
+        {activeTab === "science_concepts" && (
+          <ScienceConceptsView
+            isDark={isDark}
+            onOpenQuestionBank={(targetChNo) => {
+              playSound("click");
+              const ch = targetChNo || 1;
+              setActiveVaultSubject("science");
+              setActiveVaultChapter(ch);
+              loadChapterData(ch, false, "science");
+              setActiveTab("questions");
+            }}
+          />
+        )}
+
         {/* ===================== TAB 4: TRAINING VAULT (PREMIUM) ===================== */}
         {activeTab === "questions" && (
           <div className="space-y-6 animate-fade-in">
@@ -2755,47 +2956,126 @@ export default function CBSECommandCenter() {
               </button>
             </div>
 
-            {/* CHAPTER FILTER PILLS */}
-            <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-              {[
-                "All",
-                "Ch 6: Triangles",
-                "Ch 8: Introduction to Trigonometry",
-                "Ch 9: Some Applications of Trig",
-                "Ch 10: Circles",
-                "Ch 13: Statistics"
-              ].map((chTab) => (
-                <button
-                  key={chTab}
-                  onClick={() => {
-                    playSound("click");
-                    setMistakeChapterFilter(chTab);
-                  }}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer shrink-0 ${
-                    mistakeChapterFilter === chTab
-                      ? isDark
-                        ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md"
-                        : "bg-amber-500 text-slate-950 border-amber-600 font-black shadow-md"
-                      : isDark
-                      ? "bg-black/40 border-white/10 text-slate-400 hover:text-white"
-                      : "bg-white border-slate-200 text-slate-700 hover:text-slate-950 shadow-xs"
-                  }`}
-                >
-                  {chTab}
-                </button>
-              ))}
+            {/* SUBJECT & CHAPTER FILTERS */}
+            <div className="space-y-3">
+              {/* Subject Tabs */}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
+                  Subject:
+                </span>
+                {(() => {
+                  const sciCount = myMistakes.filter((m) => (m.subject || "").toLowerCase().includes("sci")).length;
+                  const mathCount = myMistakes.filter((m) => (m.subject || "").toLowerCase().includes("math")).length;
+                  return [
+                    { id: "All", label: `All Subjects (${myMistakes.length})`, icon: BookOpen },
+                    { id: "Science", label: `🧪 Science (${sciCount} Mistakes Logged)`, icon: FlaskConical },
+                    { id: "Mathematics", label: `📐 Mathematics (${mathCount} Mistakes Logged)`, icon: Zap }
+                  ];
+                })().map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => {
+                      playSound("click");
+                      setMistakeSubjectFilter(s.id as any);
+                      setMistakeChapterFilter("All");
+                    }}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+                      mistakeSubjectFilter === s.id
+                        ? isDark
+                          ? "bg-orange-500 text-slate-950 border-orange-400 font-black shadow-md"
+                          : "bg-orange-600 text-white border-orange-600 font-black shadow-md"
+                        : isDark
+                        ? "bg-black/40 border-white/10 text-slate-400 hover:text-white"
+                        : "bg-white border-slate-200 text-slate-700 hover:text-slate-950 shadow-xs"
+                    }`}
+                  >
+                    <span>{s.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Chapter Pills */}
+              <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                {(mistakeSubjectFilter === "Science"
+                  ? [
+                      "All",
+                      "Ch 1: Chemical Reactions",
+                      "Ch 2: Acids, Bases & Salts",
+                      "Ch 3: Metals & Non-Metals",
+                      "Ch 5: Life Processes",
+                      "Ch 11: Electricity",
+                      "Ch 12: Magnetic Effects",
+                      "Ch 13: Our Environment"
+                    ]
+                  : mistakeSubjectFilter === "Mathematics"
+                  ? [
+                      "All",
+                      "Ch 6: Triangles",
+                      "Ch 8: Introduction to Trigonometry",
+                      "Ch 9: Some Applications of Trig",
+                      "Ch 10: Circles",
+                      "Ch 13: Statistics"
+                    ]
+                  : [
+                      "All",
+                      "Ch 1: Reactions",
+                      "Ch 2: Acids & Salts",
+                      "Ch 3: Metals",
+                      "Ch 5: Life Processes",
+                      "Ch 6: Triangles",
+                      "Ch 8: Trigonometry",
+                      "Ch 10: Circles",
+                      "Ch 11: Electricity",
+                      "Ch 12: Magnetic Effects",
+                      "Ch 13: Environment / Stats"
+                    ]
+                ).map((chTab) => (
+                  <button
+                    key={chTab}
+                    onClick={() => {
+                      playSound("click");
+                      setMistakeChapterFilter(chTab);
+                    }}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer shrink-0 ${
+                      mistakeChapterFilter === chTab
+                        ? isDark
+                          ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md"
+                          : "bg-amber-500 text-slate-950 border-amber-600 font-black shadow-md"
+                        : isDark
+                        ? "bg-black/40 border-white/10 text-slate-400 hover:text-white"
+                        : "bg-white border-slate-200 text-slate-700 hover:text-slate-950 shadow-xs"
+                    }`}
+                  >
+                    {chTab}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {isLoadingMistakes ? (
               <div className={`text-center p-12 ${isDark ? "text-slate-400" : "text-slate-600"}`}>Loading your error log...</div>
             ) : myMistakes.filter((item) => {
+                if (mistakeSubjectFilter !== "All") {
+                  const itemSub = (item.subject || "").toLowerCase();
+                  const targetSub = mistakeSubjectFilter.toLowerCase();
+                  if (targetSub === "science" && !itemSub.includes("sci")) return false;
+                  if (targetSub === "mathematics" && !itemSub.includes("math")) return false;
+                }
                 if (mistakeChapterFilter === "All") return true;
-                if (mistakeChapterFilter === "Ch 6: Triangles") return item.chapter?.includes("6") || item.chapter?.includes("Triangles");
-                if (mistakeChapterFilter === "Ch 8: Introduction to Trigonometry") return item.chapter?.includes("8") || (item.chapter?.includes("Trigonometry") && !item.chapter?.includes("Applications"));
-                if (mistakeChapterFilter === "Ch 9: Some Applications of Trig") return item.chapter?.includes("9") || item.chapter?.includes("Applications");
-                if (mistakeChapterFilter === "Ch 10: Circles") return item.chapter?.includes("10") || item.chapter?.includes("Circles");
-                if (mistakeChapterFilter === "Ch 13: Statistics") return item.chapter?.includes("13") || item.chapter?.includes("Statistics");
-                return item.chapter === mistakeChapterFilter;
+                const chap = (item.chapter || "").toLowerCase();
+                const filter = mistakeChapterFilter.toLowerCase();
+                if (filter.includes("ch 1") || filter.includes("reaction")) return chap.includes("ch 1") || chap.includes("reaction") || chap.includes("chemical") || chap.includes("1");
+                if (filter.includes("ch 2") || filter.includes("acid")) return chap.includes("ch 2") || chap.includes("acid") || chap.includes("2");
+                if (filter.includes("ch 3") || filter.includes("metal")) return chap.includes("ch 3") || chap.includes("metal") || chap.includes("3");
+                if (filter.includes("ch 5") || filter.includes("life")) return chap.includes("ch 5") || chap.includes("life") || chap.includes("5");
+                if (filter.includes("ch 6") || filter.includes("triangle")) return chap.includes("6") || chap.includes("triangle");
+                if (filter.includes("ch 8") || filter.includes("trig")) return chap.includes("8") || (chap.includes("trig") && !chap.includes("app"));
+                if (filter.includes("ch 9") || filter.includes("height")) return chap.includes("9") || chap.includes("app") || chap.includes("height");
+                if (filter.includes("ch 10") || filter.includes("circle")) return chap.includes("10") || chap.includes("circle");
+                if (filter.includes("ch 11") || filter.includes("electric")) return chap.includes("11") || chap.includes("electric");
+                if (filter.includes("ch 12") || filter.includes("magnetic")) return chap.includes("12") || chap.includes("magnetic");
+                if (filter.includes("ch 13") || filter.includes("environment") || filter.includes("stats")) return chap.includes("13") || chap.includes("environment") || chap.includes("stat");
+                return chap.includes(filter);
               }).length === 0 ? (
               <div className={`text-center p-12 border rounded-3xl ${isDark ? "bg-black/20 border-white/5 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"}`}>
                 <Flame className={`w-12 h-12 mx-auto mb-4 ${isDark ? "text-slate-700" : "text-slate-400"}`} />
@@ -2806,13 +3086,27 @@ export default function CBSECommandCenter() {
               <div className="space-y-6">
                 {myMistakes
                   .filter((item) => {
+                    if (mistakeSubjectFilter !== "All") {
+                      const itemSub = (item.subject || "").toLowerCase();
+                      const targetSub = mistakeSubjectFilter.toLowerCase();
+                      if (targetSub === "science" && !itemSub.includes("sci")) return false;
+                      if (targetSub === "mathematics" && !itemSub.includes("math")) return false;
+                    }
                     if (mistakeChapterFilter === "All") return true;
-                    if (mistakeChapterFilter === "Ch 6: Triangles") return item.chapter?.includes("6") || item.chapter?.includes("Triangles");
-                    if (mistakeChapterFilter === "Ch 8: Introduction to Trigonometry") return item.chapter?.includes("8") || (item.chapter?.includes("Trigonometry") && !item.chapter?.includes("Applications"));
-                    if (mistakeChapterFilter === "Ch 9: Some Applications of Trig") return item.chapter?.includes("9") || item.chapter?.includes("Applications");
-                    if (mistakeChapterFilter === "Ch 10: Circles") return item.chapter?.includes("10") || item.chapter?.includes("Circles");
-                    if (mistakeChapterFilter === "Ch 13: Statistics") return item.chapter?.includes("13") || item.chapter?.includes("Statistics");
-                    return item.chapter === mistakeChapterFilter;
+                    const chap = (item.chapter || "").toLowerCase();
+                    const filter = mistakeChapterFilter.toLowerCase();
+                    if (filter.includes("ch 1") || filter.includes("reaction")) return chap.includes("ch 1") || chap.includes("reaction") || chap.includes("chemical") || chap.includes("1");
+                    if (filter.includes("ch 2") || filter.includes("acid")) return chap.includes("ch 2") || chap.includes("acid") || chap.includes("2");
+                    if (filter.includes("ch 3") || filter.includes("metal")) return chap.includes("ch 3") || chap.includes("metal") || chap.includes("3");
+                    if (filter.includes("ch 5") || filter.includes("life")) return chap.includes("ch 5") || chap.includes("life") || chap.includes("5");
+                    if (filter.includes("ch 6") || filter.includes("triangle")) return chap.includes("6") || chap.includes("triangle");
+                    if (filter.includes("ch 8") || filter.includes("trig")) return chap.includes("8") || (chap.includes("trig") && !chap.includes("app"));
+                    if (filter.includes("ch 9") || filter.includes("height")) return chap.includes("9") || chap.includes("app") || chap.includes("height");
+                    if (filter.includes("ch 10") || filter.includes("circle")) return chap.includes("10") || chap.includes("circle");
+                    if (filter.includes("ch 11") || filter.includes("electric")) return chap.includes("11") || chap.includes("electric");
+                    if (filter.includes("ch 12") || filter.includes("magnetic")) return chap.includes("12") || chap.includes("magnetic");
+                    if (filter.includes("ch 13") || filter.includes("environment") || filter.includes("stats")) return chap.includes("13") || chap.includes("environment") || chap.includes("stat");
+                    return chap.includes(filter);
                   })
                   .map((item, idx) => {
                     const isResolved = resolvedMistakeIds[item.id] || false;
@@ -3075,28 +3369,29 @@ export default function CBSECommandCenter() {
             <div className={`p-6 sm:p-8 rounded-3xl border transition-colors ${
               isDark ? "bg-[#121212]/80 backdrop-blur-2xl border-white/10" : "bg-white border-slate-200"
             }`}>
-              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-                <div>
-                  <div className="flex flex-wrap items-center gap-3 mb-1">
-                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white uppercase">
-                      # {activeChapter.name}
+              {/* Row 1: Chapter Header & Dual Selectors */}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 pb-6 border-b border-white/10">
+                <div className="space-y-1">
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white uppercase flex items-center gap-2">
+                      <span className="text-emerald-400">#</span> {activeChapter.name}
                     </h2>
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-950/40 text-emerald-400 border border-emerald-500/30">
+                    <span className="px-3 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-500/30">
                       {activeSubject.name.split(" ")[0]} Command
                     </span>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-400">
-                    {activeSubject.name} • {totalTopics} Official NCERT Sub-Topics
+                    {activeSubject.name} • {totalTopics} Official NCERT Sub-Topics • Target: 100% Board Score
                   </p>
                 </div>
 
                 {/* Dual Subject & Chapter Selectors */}
-                <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-                  <div className="flex items-center gap-1.5">
+                <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0">
+                  <div className="flex items-center gap-2 bg-black/40 px-3 py-2 rounded-xl border border-white/10">
                     <label className="text-[11px] font-mono font-bold text-slate-400 uppercase shrink-0">Subject:</label>
                     <select 
-                      className={`px-3 py-2 rounded-xl text-xs font-bold border outline-none cursor-pointer transition-all ${
-                        isDark ? "bg-black/50 border-white/10 text-white focus:border-emerald-500" : "bg-slate-50 border-slate-200 text-slate-900"
+                      className={`bg-transparent text-xs font-bold border-none outline-none cursor-pointer transition-all ${
+                        isDark ? "text-white" : "text-slate-900"
                       }`}
                       value={commandSubjectId}
                       onChange={(e) => {
@@ -3115,18 +3410,18 @@ export default function CBSECommandCenter() {
                       }}
                     >
                       {CBSE_SUBJECTS.map((s) => (
-                        <option key={s.id} value={s.id}>
+                        <option key={s.id} value={s.id} className="bg-slate-900 text-white">
                           {s.name}
                         </option>
                       ))}
                     </select>
                   </div>
 
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-2 bg-black/40 px-3 py-2 rounded-xl border border-white/10">
                     <label className="text-[11px] font-mono font-bold text-slate-400 uppercase shrink-0">Chapter:</label>
                     <select 
-                      className={`px-3 py-2 rounded-xl text-xs font-bold border outline-none cursor-pointer transition-all max-w-[220px] truncate ${
-                        isDark ? "bg-black/50 border-white/10 text-white focus:border-emerald-500" : "bg-slate-50 border-slate-200 text-slate-900"
+                      className={`bg-transparent text-xs font-bold border-none outline-none cursor-pointer transition-all max-w-[240px] truncate ${
+                        isDark ? "text-white" : "text-slate-900"
                       }`}
                       value={commandChapterId}
                       onChange={(e) => {
@@ -3143,32 +3438,59 @@ export default function CBSECommandCenter() {
                       }}
                     >
                       {activeSubject.chapters.map((ch, idx) => (
-                        <option key={ch.id} value={ch.id}>
+                        <option key={ch.id} value={ch.id} className="bg-slate-900 text-white">
                           {ch.ncertChapterNo ? `Ch ${ch.ncertChapterNo}: ` : `${idx + 1}. `}{ch.name}
                         </option>
                       ))}
                     </select>
                   </div>
                 </div>
-                
-                {/* Stats Grid - 100% Dynamic starting from 0 */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full lg:w-auto">
-                  <div className={`p-3 rounded-xl border ${isDark ? "bg-black/40 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                    <p className="text-[10px] text-slate-400 uppercase font-bold tracking-wider mb-1">Progress</p>
-                    <p className="text-xl font-mono font-black text-emerald-400">{progressPct}%</p>
+              </div>
+
+              {/* Row 2: Dedicated Full-Width Metric Cards (Zero Overlapping) */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mt-6">
+                <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                  isDark ? "bg-black/40 border-emerald-500/20 shadow-sm" : "bg-emerald-50/60 border-emerald-200"
+                }`}>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <p className="text-[11px] text-emerald-400 uppercase font-bold tracking-wider font-mono">Progress</p>
+                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
                   </div>
-                  <div className={`p-3 rounded-xl border ${isDark ? "bg-black/40 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                    <p className="text-[10px] text-slate-400 uppercase font-bold tracking-wider mb-1">Mastery</p>
-                    <p className="text-xl font-mono font-black text-amber-400">{masteryPct}%</p>
+                  <p className="text-2xl sm:text-3xl font-mono font-black text-emerald-400">{progressPct}%</p>
+                  <p className="text-[10px] text-slate-400 font-mono mt-1">{completedTopicsCount} of {totalTopics} Topics Mastered</p>
+                </div>
+
+                <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                  isDark ? "bg-black/40 border-amber-500/20 shadow-sm" : "bg-amber-50/60 border-amber-200"
+                }`}>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <p className="text-[11px] text-amber-400 uppercase font-bold tracking-wider font-mono">Mastery Level</p>
+                    <span className="w-2 h-2 rounded-full bg-amber-400"></span>
                   </div>
-                  <div className={`p-3 rounded-xl border ${isDark ? "bg-black/40 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                    <p className="text-[10px] text-slate-400 uppercase font-bold tracking-wider mb-1">Attempted</p>
-                    <p className="text-xl font-mono font-black text-cyan-400">{attemptedStr}</p>
+                  <p className="text-2xl sm:text-3xl font-mono font-black text-amber-400">{masteryPct}%</p>
+                  <p className="text-[10px] text-slate-400 font-mono mt-1">Board Readiness Index</p>
+                </div>
+
+                <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                  isDark ? "bg-black/40 border-cyan-500/20 shadow-sm" : "bg-cyan-50/60 border-cyan-200"
+                }`}>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <p className="text-[11px] text-cyan-400 uppercase font-bold tracking-wider font-mono">Attempted Qs</p>
+                    <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
                   </div>
-                  <div className={`p-3 rounded-xl border ${isDark ? "bg-black/40 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                    <p className="text-[10px] text-slate-400 uppercase font-bold tracking-wider mb-1">Accuracy</p>
-                    <p className="text-xl font-mono font-black text-blue-400">{accuracyStr}</p>
+                  <p className="text-2xl sm:text-3xl font-mono font-black text-cyan-400">{attemptedStr}</p>
+                  <p className="text-[10px] text-slate-400 font-mono mt-1">Practice Bank Progress</p>
+                </div>
+
+                <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                  isDark ? "bg-black/40 border-blue-500/20 shadow-sm" : "bg-blue-50/60 border-blue-200"
+                }`}>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <p className="text-[11px] text-blue-400 uppercase font-bold tracking-wider font-mono">Accuracy</p>
+                    <span className="w-2 h-2 rounded-full bg-blue-400"></span>
                   </div>
+                  <p className="text-2xl sm:text-3xl font-mono font-black text-blue-400">{accuracyStr}</p>
+                  <p className="text-[10px] text-slate-400 font-mono mt-1">First-Attempt Success Rate</p>
                 </div>
               </div>
 
@@ -3178,6 +3500,7 @@ export default function CBSECommandCenter() {
                   <ScienceConceptsView
                     isDark={isDark}
                     activeChapterNo={ncertNum || 1}
+                    activeChapterName={activeChapter.name}
                     isEmbeddedInCommand={true}
                     onOpenQuestionBank={(targetChNo) => {
                       playSound("click");
@@ -3441,6 +3764,7 @@ export default function CBSECommandCenter() {
 
             <div className="grid grid-cols-2 gap-2 text-xs">
               {[
+                { id: "science_concepts", label: "Science Concepts (All 13)", icon: FlaskConical },
                 { id: "theorems", label: "Theorems & Examples", icon: Award },
                 { id: "flashcards", label: "Flashcards", icon: BookMarked },
                 { id: "common_mistakes", label: "My Mistakes Log", icon: Flame },
@@ -3782,10 +4106,16 @@ export default function CBSECommandCenter() {
                       isDark ? "bg-slate-950 border-white/10 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
                     }`}
                     value={newMistakeForm.subject}
-                    onChange={(e) => setNewMistakeForm({ ...newMistakeForm, subject: e.target.value })}
+                    onChange={(e) => {
+                      const newSub = e.target.value;
+                      const defaultCh = newSub === "Science" 
+                        ? "Ch 1: Chemical Reactions and Equations" 
+                        : "Ch 6: Triangles";
+                      setNewMistakeForm({ ...newMistakeForm, subject: newSub, chapter: defaultCh });
+                    }}
                   >
-                    <option value="Mathematics">Mathematics</option>
-                    <option value="Science">Science</option>
+                    <option value="Science">🧪 Science</option>
+                    <option value="Mathematics">📐 Mathematics</option>
                     <option value="Social Science">Social Science</option>
                     <option value="English">English</option>
                     <option value="Hindi">Hindi</option>
@@ -3801,14 +4131,25 @@ export default function CBSECommandCenter() {
                     value={newMistakeForm.chapter}
                     onChange={(e) => setNewMistakeForm({ ...newMistakeForm, chapter: e.target.value })}
                   >
-                    <option value="Ch 6: Triangles">Ch 6: Triangles</option>
-                    <option value="Ch 8: Introduction to Trigonometry">Ch 8: Trigonometry</option>
-                    <option value="Ch 9: Some Applications of Trig">Ch 9: Heights & Distances</option>
-                    <option value="Ch 10: Circles">Ch 10: Circles</option>
-                    <option value="Ch 13: Statistics">Ch 13: Statistics</option>
-                    <option value="Ch 1: Chemical Reactions">Ch 1: Chemical Reactions</option>
-                    <option value="Ch 9: Light - Reflection & Refraction">Ch 9: Light</option>
-                    <option value="Ch 11: Electricity">Ch 11: Electricity</option>
+                    {newMistakeForm.subject === "Science" ? (
+                      <>
+                        <option value="Ch 1: Chemical Reactions and Equations">Ch 1: Chemical Reactions & Equations</option>
+                        <option value="Ch 2: Acids, Bases and Salts">Ch 2: Acids, Bases and Salts</option>
+                        <option value="Ch 3: Metals and Non-Metals">Ch 3: Metals and Non-Metals</option>
+                        <option value="Ch 5: Life Processes">Ch 5: Life Processes</option>
+                        <option value="Ch 11: Electricity">Ch 11: Electricity</option>
+                        <option value="Ch 12: Magnetic Effects of Electric Current">Ch 12: Magnetic Effects</option>
+                        <option value="Ch 13: Our Environment">Ch 13: Our Environment</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="Ch 6: Triangles">Ch 6: Triangles</option>
+                        <option value="Ch 8: Introduction to Trigonometry">Ch 8: Trigonometry</option>
+                        <option value="Ch 9: Some Applications of Trig">Ch 9: Heights & Distances</option>
+                        <option value="Ch 10: Circles">Ch 10: Circles</option>
+                        <option value="Ch 13: Statistics">Ch 13: Statistics</option>
+                      </>
+                    )}
                   </select>
                 </div>
 
