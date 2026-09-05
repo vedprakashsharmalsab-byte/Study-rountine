@@ -410,7 +410,7 @@ export const MATH_BOARD_SOLVED_EXAMPLES: MathBoardSolvedExample[] = [
   {
     id: "m_ex_12_1",
     chapterNo: 12,
-    level: "5 Marks (Long Answer)",
+    level: "5 Marks (Long Answer / Proof)",
     marks: 5,
     question: "A solid toy is in the form of a hemisphere surmounted by a right circular cone of the same base radius. The height of the cone is 2 cm and the diameter of the base is 4 cm. Determine the volume of the toy (take π = 3.14).",
     markingSchemeSteps: [

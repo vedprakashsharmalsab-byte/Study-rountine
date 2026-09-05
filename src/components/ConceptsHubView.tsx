@@ -319,6 +319,50 @@ export default function ConceptsHubView({
             </button>
           </div>
 
+          {/* Mobile Quick Dropdown & Chapter Navigation Toolbar */}
+          <div className="md:hidden flex items-center gap-2 pt-1">
+            <select
+              aria-label="Select Chapter directly"
+              value={activeSubject === "math" ? activeMathChapterNo : activeScienceChapterNo}
+              onChange={(e) => {
+                const num = parseInt(e.target.value);
+                if (activeSubject === "math") setActiveMathChapterNo(num);
+                else setActiveScienceChapterNo(num);
+              }}
+              className={`flex-1 px-3 py-2.5 rounded-xl text-xs font-bold border outline-none cursor-pointer truncate ${
+                isDark ? "bg-[#0b0f19] border-white/10 text-white" : "bg-white border-slate-200 text-slate-900 shadow-2xs"
+              }`}
+            >
+              {(activeSubject === "math" ? MATH_CHAPTER_LIST : SCIENCE_CHAPTER_LIST).map((ch) => (
+                <option key={ch.no} value={ch.no} className="bg-slate-900 text-white">
+                  Ch {ch.no}: {ch.name} ({ch.weightage})
+                </option>
+              ))}
+            </select>
+
+            <button
+              onClick={handlePrevChapter}
+              className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center shrink-0 ${
+                isDark ? "bg-white/5 border-white/10 text-slate-300" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
+              }`}
+              title="Previous Chapter"
+              aria-label="Previous Chapter"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={handleNextChapter}
+              className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center shrink-0 ${
+                isDark ? "bg-white/5 border-white/10 text-slate-300" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
+              }`}
+              title="Next Chapter"
+              aria-label="Next Chapter"
+            >
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
           {/* Direct Dropdown / Full Responsive Grid (Zero Horizontal Scrolling!) */}
           {(isChapterGridOpen || true) && (
             <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 pt-2 transition-all ${

@@ -143,14 +143,14 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
                 return (
                   <div key={idx} className="relative flex items-start">
                     {/* Margin Column with exact physical border-r */}
-                    <div className={`w-14 sm:w-20 text-right pr-3.5 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-xs select-none pt-1 ${
+                    <div className={`w-11 sm:w-16 md:w-20 text-right pr-2 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-xs select-none pt-1 ${
                       isDark ? "text-red-400" : "text-red-700"
                     }`}>
                       {idx === 0 ? "Ans." : `(${idx + 1})`}
                     </div>
 
                     {/* Step Content */}
-                    <div className="flex-1 pl-4 sm:pl-6 min-w-0">
+                    <div className="flex-1 pl-3 sm:pl-6 min-w-0">
                       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-3">
                         <div className="text-xs sm:text-sm font-medium leading-relaxed tracking-wide min-w-0 flex-1 break-words">
                           <PremiumMathRenderer content={equationText} isDark={isDark} />
@@ -176,14 +176,14 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
               structuredParts.map((part, pIdx) => (
                 <div key={pIdx} className="relative flex items-start">
                   {/* Margin Column */}
-                  <div className={`w-14 sm:w-20 text-right pr-3.5 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-xs select-none pt-1 ${
+                  <div className={`w-11 sm:w-16 md:w-20 text-right pr-2 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-xs select-none pt-1 ${
                     isDark ? "text-red-400" : "text-red-700"
                   }`}>
                     {part.tag}
                   </div>
 
                   {/* Part Content Box */}
-                  <div className="flex-1 pl-4 sm:pl-6 min-w-0">
+                  <div className="flex-1 pl-3 sm:pl-6 min-w-0">
                     <div className={`p-4 rounded-xl border leading-relaxed text-xs sm:text-sm font-medium transition-all ${
                       isDark 
                         ? "bg-white/[0.02] border-white/5 text-slate-100" 
@@ -197,12 +197,12 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
             ) : (
               // CASE 3: Single block answer
               <div className="relative flex items-start">
-                <div className={`w-14 sm:w-20 text-right pr-3.5 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-xs select-none pt-1 ${
+                <div className={`w-11 sm:w-16 md:w-20 text-right pr-2 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-xs select-none pt-1 ${
                   isDark ? "text-red-400" : "text-red-700"
                 }`}>
                   Ans.
                 </div>
-                <div className="flex-1 pl-4 sm:pl-6 text-xs sm:text-sm font-medium leading-relaxed min-w-0">
+                <div className="flex-1 pl-3 sm:pl-6 text-xs sm:text-sm font-medium leading-relaxed min-w-0">
                   <div className={`p-4 rounded-xl border ${
                     isDark ? "bg-white/[0.02] border-white/5" : "bg-white border-slate-200"
                   }`}>
@@ -215,12 +215,12 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
             {/* Authentic Boxed Final Answer on the Paper */}
             {question.answer && !isMultiParagraphTheory && (
               <div className="relative flex items-start pt-2">
-                <div className={`w-14 sm:w-20 text-right pr-3.5 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-base pt-1 ${
+                <div className={`w-11 sm:w-16 md:w-20 text-right pr-2 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-base pt-1 ${
                   isDark ? "text-emerald-400" : "text-emerald-700"
                 }`}>
                   ∴
                 </div>
-                <div className="flex-1 pl-4 sm:pl-6 min-w-0">
+                <div className="flex-1 pl-3 sm:pl-6 min-w-0">
                   <div className={`inline-flex flex-wrap items-center gap-3 px-4 py-2 rounded-xl border-2 font-mono max-w-full overflow-x-auto ${
                     isDark 
                       ? "border-emerald-500 bg-emerald-950/40 text-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.15)]" 
