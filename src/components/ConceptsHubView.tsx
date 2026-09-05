@@ -20,10 +20,14 @@ import {
   GraduationCap,
   Award,
   ArrowRight,
+  ArrowLeft,
   ShieldAlert,
   HelpCircle,
   Layers,
-  Compass
+  Compass,
+  LayoutGrid,
+  Check,
+  Target
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import { MATH_CHAPTER_CONCEPTS, type MathChapterConcept } from "@/data/mathConceptsData";
@@ -32,6 +36,15 @@ import {
   type ScienceConceptTopic,
   type ScienceConceptExample
 } from "@/data/scienceConceptsAndExamples";
+import {
+  MATH_OFFICIAL_BLUEPRINTS,
+  SCIENCE_OFFICIAL_BLUEPRINTS,
+  type ChapterBlueprint
+} from "@/data/cbseOfficialBlueprints";
+import {
+  MATH_BOARD_SOLVED_EXAMPLES,
+  type MathBoardSolvedExample
+} from "@/data/mathSolvedBoardExamples";
 
 interface ConceptsHubViewProps {
   isDark: boolean;
@@ -42,39 +55,39 @@ interface ConceptsHubViewProps {
   onOpenTheorems?: () => void;
 }
 
-// Science Chapter Metadata
+// Science Chapter Metadata with Official CBSE Units
 const SCIENCE_CHAPTER_LIST = [
-  { no: 1, name: "Chemical Reactions and Equations", shortName: "Ch 1: Reactions", discipline: "Chemistry", weightage: "6–8 Marks", icon: FlaskConical },
-  { no: 2, name: "Acids, Bases and Salts", shortName: "Ch 2: Acids & Salts", discipline: "Chemistry", weightage: "6–8 Marks", icon: FlaskConical },
-  { no: 3, name: "Metals and Non-Metals", shortName: "Ch 3: Metals & Non-metals", discipline: "Chemistry", weightage: "7–9 Marks", icon: FlaskConical },
-  { no: 4, name: "Carbon and its Compounds", shortName: "Ch 4: Carbon Compounds", discipline: "Chemistry", weightage: "6–8 Marks", icon: FlaskConical },
-  { no: 5, name: "Life Processes", shortName: "Ch 5: Life Processes", discipline: "Biology", weightage: "8–10 Marks", icon: Dna },
-  { no: 6, name: "Control and Coordination", shortName: "Ch 6: Control & Coord", discipline: "Biology", weightage: "6–7 Marks", icon: Dna },
-  { no: 7, name: "How do Organisms Reproduce?", shortName: "Ch 7: Reproduction", discipline: "Biology", weightage: "6–8 Marks", icon: Dna },
-  { no: 8, name: "Heredity and Evolution", shortName: "Ch 8: Heredity", discipline: "Biology", weightage: "5–7 Marks", icon: Dna },
-  { no: 9, name: "Light — Reflection and Refraction", shortName: "Ch 9: Light Optics", discipline: "Physics", weightage: "9–10 Marks", icon: Zap },
-  { no: 10, name: "The Human Eye and Colourful World", shortName: "Ch 10: Human Eye", discipline: "Physics", weightage: "4–5 Marks", icon: Zap },
-  { no: 11, name: "Electricity", shortName: "Ch 11: Electricity", discipline: "Physics", weightage: "7–8 Marks", icon: Zap },
-  { no: 12, name: "Magnetic Effects of Electric Current", shortName: "Ch 12: Magnetic Effects", discipline: "Physics", weightage: "6–7 Marks", icon: Zap },
-  { no: 13, name: "Our Environment", shortName: "Ch 13: Environment", discipline: "Natural Resources", weightage: "5 Marks", icon: Leaf }
+  { no: 1, name: "Chemical Reactions and Equations", shortName: "Ch 1: Reactions", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "6–8 Marks", icon: FlaskConical },
+  { no: 2, name: "Acids, Bases and Salts", shortName: "Ch 2: Acids & Salts", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "6–8 Marks", icon: FlaskConical },
+  { no: 3, name: "Metals and Non-Metals", shortName: "Ch 3: Metals & Non-metals", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "7–9 Marks", icon: FlaskConical },
+  { no: 4, name: "Carbon and its Compounds", shortName: "Ch 4: Carbon Compounds", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "6–8 Marks", icon: FlaskConical },
+  { no: 5, name: "Life Processes", shortName: "Ch 5: Life Processes", discipline: "Biology", unit: "Unit II: World of Living", weightage: "8–10 Marks", icon: Dna },
+  { no: 6, name: "Control and Coordination", shortName: "Ch 6: Control & Coord", discipline: "Biology", unit: "Unit II: World of Living", weightage: "6–7 Marks", icon: Dna },
+  { no: 7, name: "How do Organisms Reproduce?", shortName: "Ch 7: Reproduction", discipline: "Biology", unit: "Unit II: World of Living", weightage: "6–8 Marks", icon: Dna },
+  { no: 8, name: "Heredity and Evolution", shortName: "Ch 8: Heredity", discipline: "Biology", unit: "Unit II: World of Living", weightage: "5–7 Marks", icon: Dna },
+  { no: 9, name: "Light — Reflection and Refraction", shortName: "Ch 9: Light Optics", discipline: "Physics", unit: "Unit III: Natural Phenomena", weightage: "9–10 Marks", icon: Zap },
+  { no: 10, name: "The Human Eye and Colourful World", shortName: "Ch 10: Human Eye", discipline: "Physics", unit: "Unit III: Natural Phenomena", weightage: "4–5 Marks", icon: Zap },
+  { no: 11, name: "Electricity", shortName: "Ch 11: Electricity", discipline: "Physics", unit: "Unit IV: Effects of Current", weightage: "7–8 Marks", icon: Zap },
+  { no: 12, name: "Magnetic Effects of Electric Current", shortName: "Ch 12: Magnetic Effects", discipline: "Physics", unit: "Unit IV: Effects of Current", weightage: "6–7 Marks", icon: Zap },
+  { no: 13, name: "Our Environment", shortName: "Ch 13: Environment", discipline: "Natural Resources", unit: "Unit V: Natural Resources", weightage: "5 Marks", icon: Leaf }
 ];
 
-// Mathematics Chapter Metadata
+// Mathematics Chapter Metadata with Official CBSE Units
 const MATH_CHAPTER_LIST = [
-  { no: 1, name: "Real Numbers", shortName: "Ch 1: Real Numbers", weightage: "6 Marks" },
-  { no: 2, name: "Polynomials", shortName: "Ch 2: Polynomials", weightage: "4 Marks" },
-  { no: 3, name: "Pair of Linear Equations in Two Variables", shortName: "Ch 3: Linear Equations", weightage: "6 Marks" },
-  { no: 4, name: "Quadratic Equations", shortName: "Ch 4: Quadratic Eq", weightage: "6 Marks" },
-  { no: 5, name: "Arithmetic Progressions", shortName: "Ch 5: AP", weightage: "6 Marks" },
-  { no: 6, name: "Triangles", shortName: "Ch 6: Triangles", weightage: "8–10 Marks" },
-  { no: 7, name: "Coordinate Geometry", shortName: "Ch 7: Coord Geometry", weightage: "6 Marks" },
-  { no: 8, name: "Introduction to Trigonometry", shortName: "Ch 8: Trigonometry", weightage: "8 Marks" },
-  { no: 9, name: "Some Applications of Trigonometry", shortName: "Ch 9: Heights & Distances", weightage: "4–5 Marks" },
-  { no: 10, name: "Circles", shortName: "Ch 10: Circles", weightage: "6 Marks" },
-  { no: 11, name: "Areas Related to Circles", shortName: "Ch 11: Areas Circles", weightage: "4 Marks" },
-  { no: 12, name: "Surface Areas and Volumes", shortName: "Ch 12: Mensuration", weightage: "6 Marks" },
-  { no: 13, name: "Statistics", shortName: "Ch 13: Statistics", weightage: "7 Marks" },
-  { no: 14, name: "Probability", shortName: "Ch 14: Probability", weightage: "4 Marks" }
+  { no: 1, name: "Real Numbers", shortName: "Ch 1: Real Numbers", unit: "Unit I: Number Systems", weightage: "6 Marks" },
+  { no: 2, name: "Polynomials", shortName: "Ch 2: Polynomials", unit: "Unit II: Algebra", weightage: "4 Marks" },
+  { no: 3, name: "Pair of Linear Equations in Two Variables", shortName: "Ch 3: Linear Equations", unit: "Unit II: Algebra", weightage: "6 Marks" },
+  { no: 4, name: "Quadratic Equations", shortName: "Ch 4: Quadratic Eq", unit: "Unit II: Algebra", weightage: "6 Marks" },
+  { no: 5, name: "Arithmetic Progressions", shortName: "Ch 5: AP", unit: "Unit II: Algebra", weightage: "6 Marks" },
+  { no: 6, name: "Triangles", shortName: "Ch 6: Triangles", unit: "Unit IV: Geometry", weightage: "9–10 Marks" },
+  { no: 7, name: "Coordinate Geometry", shortName: "Ch 7: Coord Geometry", unit: "Unit III: Coordinate Geometry", weightage: "6 Marks" },
+  { no: 8, name: "Introduction to Trigonometry", shortName: "Ch 8: Trigonometry", unit: "Unit V: Trigonometry", weightage: "8 Marks" },
+  { no: 9, name: "Some Applications of Trigonometry", shortName: "Ch 9: Heights & Distances", unit: "Unit V: Trigonometry", weightage: "4–5 Marks" },
+  { no: 10, name: "Circles", shortName: "Ch 10: Circles", unit: "Unit IV: Geometry", weightage: "6 Marks" },
+  { no: 11, name: "Areas Related to Circles", shortName: "Ch 11: Areas Circles", unit: "Unit VI: Mensuration", weightage: "4 Marks" },
+  { no: 12, name: "Surface Areas and Volumes", shortName: "Ch 12: Mensuration", unit: "Unit VI: Mensuration", weightage: "6 Marks" },
+  { no: 13, name: "Statistics", shortName: "Ch 13: Statistics", unit: "Unit VII: Statistics & Probability", weightage: "7 Marks" },
+  { no: 14, name: "Probability", shortName: "Ch 14: Probability", unit: "Unit VII: Statistics & Probability", weightage: "4 Marks" }
 ];
 
 export default function ConceptsHubView({
@@ -93,7 +106,7 @@ export default function ConceptsHubView({
     initialSubject === "science" ? initialChapterNo || 1 : 1
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [scienceDisciplineFilter, setScienceDisciplineFilter] = useState<string>("all");
+  const [isChapterGridOpen, setIsChapterGridOpen] = useState<boolean>(false);
 
   // Science expandable topic state
   const [expandedScienceTopicIds, setExpandedScienceTopicIds] = useState<Record<string, boolean>>({
@@ -121,6 +134,16 @@ export default function ConceptsHubView({
     );
   }, [activeMathChapterNo]);
 
+  // Active Math Blueprint
+  const activeMathBlueprint = useMemo(() => {
+    return MATH_OFFICIAL_BLUEPRINTS[activeMathChapterNo] || MATH_OFFICIAL_BLUEPRINTS[6];
+  }, [activeMathChapterNo]);
+
+  // Active Math Solved Examples
+  const activeMathExamples = useMemo(() => {
+    return MATH_BOARD_SOLVED_EXAMPLES.filter((ex) => ex.chapterNo === activeMathChapterNo);
+  }, [activeMathChapterNo]);
+
   // Active Science Topics for Selected Chapter
   const activeScienceTopics = useMemo(() => {
     return SCIENCE_CONCEPTS_AND_EXAMPLES.filter(
@@ -128,7 +151,12 @@ export default function ConceptsHubView({
     );
   }, [activeScienceChapterNo]);
 
-  // Filtered Science Topics (search + discipline)
+  // Active Science Blueprint
+  const activeScienceBlueprint = useMemo(() => {
+    return SCIENCE_OFFICIAL_BLUEPRINTS[activeScienceChapterNo] || SCIENCE_OFFICIAL_BLUEPRINTS[1];
+  }, [activeScienceChapterNo]);
+
+  // Filtered Science Topics (search)
   const filteredScienceTopics = useMemo(() => {
     let list = activeScienceTopics;
     if (searchQuery.trim()) {
@@ -151,6 +179,33 @@ export default function ConceptsHubView({
     );
   }, [activeScienceChapterNo]);
 
+  const currentChapterMeta = activeSubject === "math"
+    ? MATH_CHAPTER_LIST.find((c) => c.no === activeMathChapterNo) || MATH_CHAPTER_LIST[5]
+    : activeScienceMeta;
+
+  // Previous and Next Navigation Handlers
+  const handlePrevChapter = () => {
+    if (activeSubject === "math") {
+      const prev = activeMathChapterNo > 1 ? activeMathChapterNo - 1 : 14;
+      setActiveMathChapterNo(prev);
+    } else {
+      const prev = activeScienceChapterNo > 1 ? activeScienceChapterNo - 1 : 13;
+      setActiveScienceChapterNo(prev);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNextChapter = () => {
+    if (activeSubject === "math") {
+      const next = activeMathChapterNo < 14 ? activeMathChapterNo + 1 : 1;
+      setActiveMathChapterNo(next);
+    } else {
+      const next = activeScienceChapterNo < 13 ? activeScienceChapterNo + 1 : 1;
+      setActiveScienceChapterNo(next);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const toggleScienceTopic = (id: string) => {
     setExpandedScienceTopicIds((prev) => ({ ...prev, [id]: !prev[id] }));
   };
@@ -165,39 +220,42 @@ export default function ConceptsHubView({
   };
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-6 animate-fade-in pb-16">
       {/* =========================================================================
           1. HEADER & SUBJECT SWITCHER BANNER
           ========================================================================= */}
       <div
-        className={`p-6 sm:p-8 rounded-3xl border transition-colors ${
+        className={`p-5 sm:p-8 rounded-3xl border transition-colors ${
           isDark
             ? "bg-[#121212]/80 backdrop-blur-2xl border-white/10 shadow-[0_0_40px_rgba(59,130,246,0.1)]"
             : "bg-white border-slate-200 shadow-xl"
         }`}
       >
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-5">
           <div className="space-y-2">
             <div className="flex items-center gap-2.5">
-              <span className="p-2.5 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md">
+              <span className="p-2 sm:p-2.5 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md">
                 <BookOpen className="w-5 h-5" />
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black tracking-tight bg-gradient-to-r from-blue-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight bg-gradient-to-r from-blue-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
                 CBSE Class 10 Concepts Hub
               </h2>
             </div>
             <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600"} font-medium max-w-2xl`}>
-              Comprehensive NCERT concept explanations, intuitive analogies, balanced reactions, formulas, and examiner grading rubrics across all 27 chapters.
+              Official NCERT syllabus concepts, step-by-step marking schemes, formulas, balanced equations, and CBSE board solved examples for all 27 chapters.
             </p>
           </div>
 
           {/* Subject Switcher */}
-          <div className={`p-1.5 rounded-2xl border flex items-center gap-1.5 ${
+          <div className={`p-1.5 rounded-2xl border flex items-center gap-1.5 w-full sm:w-auto justify-center ${
             isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"
           }`}>
             <button
-              onClick={() => setActiveSubject("math")}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+              onClick={() => {
+                setActiveSubject("math");
+                setIsChapterGridOpen(false);
+              }}
+              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 activeSubject === "math"
                   ? isDark
                     ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md font-black"
@@ -210,8 +268,11 @@ export default function ConceptsHubView({
               <span>📐 Mathematics (14 Ch)</span>
             </button>
             <button
-              onClick={() => setActiveSubject("science")}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+              onClick={() => {
+                setActiveSubject("science");
+                setIsChapterGridOpen(false);
+              }}
+              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 activeSubject === "science"
                   ? isDark
                     ? "bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-md font-black"
@@ -226,74 +287,235 @@ export default function ConceptsHubView({
           </div>
         </div>
 
-        {/* Chapter Selection Ribbon */}
-        <div className="pt-6 mt-6 border-t border-white/10 space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-400 font-mono font-bold uppercase tracking-wider">
-            <span>Select {activeSubject === "math" ? "Mathematics" : "Science"} Chapter:</span>
-            <span>
-              {activeSubject === "math"
-                ? `Chapter ${activeMathChapterNo} of 14`
-                : `Chapter ${activeScienceChapterNo} of 13`}
-            </span>
+        {/* =========================================================================
+            MOBILE-FIRST RESPONSIVE CHAPTER SELECTOR (NO HORIZONTAL SCROLL TRAPS!)
+            ========================================================================= */}
+        <div className="pt-5 mt-5 border-t border-white/10 space-y-3">
+          {/* Quick Chapter Selector Bar */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+                Active Chapter:
+              </span>
+              <span className="px-2.5 py-0.5 rounded-md text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                {activeSubject === "math" ? `Ch ${activeMathChapterNo}: ${currentChapterMeta.name}` : `Ch ${activeScienceChapterNo}: ${currentChapterMeta.name}`}
+              </span>
+            </div>
+
+            {/* Toggle Grid Selector Button */}
+            <button
+              onClick={() => setIsChapterGridOpen(!isChapterGridOpen)}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                isChapterGridOpen
+                  ? "bg-blue-500 text-white border-blue-400 shadow-md"
+                  : isDark
+                  ? "bg-white/5 border-white/10 hover:bg-white/10 text-slate-200"
+                  : "bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-800"
+              }`}
+            >
+              <LayoutGrid className="w-3.5 h-3.5" />
+              <span>{isChapterGridOpen ? "Close Chapter Grid" : `Browse All ${activeSubject === "math" ? "14 Maths" : "13 Science"} Chapters`}</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isChapterGridOpen ? "rotate-180" : ""}`} />
+            </button>
           </div>
 
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-            {activeSubject === "math"
-              ? MATH_CHAPTER_LIST.map((ch) => {
-                  const isSelected = ch.no === activeMathChapterNo;
-                  return (
-                    <button
-                      key={ch.no}
-                      onClick={() => setActiveMathChapterNo(ch.no)}
-                      className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 border flex items-center gap-2 ${
-                        isSelected
-                          ? isDark
-                            ? "bg-blue-500 text-white border-blue-400 font-black shadow-md shadow-blue-500/25"
-                            : "bg-blue-600 text-white border-blue-600 font-black shadow-md"
-                          : isDark
-                          ? "bg-black/30 border-white/5 text-slate-400 hover:text-white hover:border-white/20"
-                          : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-white"
-                      }`}
-                    >
-                      <span>{ch.shortName}</span>
-                      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-md ${
-                        isSelected ? "bg-black/20 text-white" : "bg-white/10 text-slate-400"
-                      }`}>
-                        {ch.weightage.split(" ")[0]}M
-                      </span>
-                    </button>
-                  );
-                })
-              : SCIENCE_CHAPTER_LIST.filter(
-                  (c) => scienceDisciplineFilter === "all" || c.discipline === scienceDisciplineFilter
-                ).map((ch) => {
-                  const isSelected = ch.no === activeScienceChapterNo;
-                  const Icon = ch.icon;
-                  return (
-                    <button
-                      key={ch.no}
-                      onClick={() => setActiveScienceChapterNo(ch.no)}
-                      className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 border flex items-center gap-2 ${
-                        isSelected
-                          ? isDark
-                            ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-md shadow-teal-500/25"
-                            : "bg-teal-600 text-white border-teal-600 font-black shadow-md"
-                          : isDark
-                          ? "bg-black/30 border-white/5 text-slate-400 hover:text-white hover:border-white/20"
-                          : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-white"
-                      }`}
-                    >
-                      <Icon className="w-3.5 h-3.5 opacity-80" />
-                      <span>{ch.shortName}</span>
-                    </button>
-                  );
-                })}
+          {/* Direct Dropdown / Full Responsive Grid (Zero Horizontal Scrolling!) */}
+          {(isChapterGridOpen || true) && (
+            <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 pt-2 transition-all ${
+              !isChapterGridOpen ? "hidden md:grid" : "grid"
+            }`}>
+              {activeSubject === "math"
+                ? MATH_CHAPTER_LIST.map((ch) => {
+                    const isSelected = ch.no === activeMathChapterNo;
+                    return (
+                      <button
+                        key={ch.no}
+                        onClick={() => {
+                          setActiveMathChapterNo(ch.no);
+                          setIsChapterGridOpen(false);
+                        }}
+                        className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer border flex flex-col justify-between gap-1 min-h-[56px] ${
+                          isSelected
+                            ? isDark
+                              ? "bg-gradient-to-br from-blue-600 to-indigo-600 text-white border-blue-400 font-black shadow-lg shadow-blue-500/25 scale-[1.02]"
+                              : "bg-blue-600 text-white border-blue-600 font-black shadow-md scale-[1.02]"
+                            : isDark
+                            ? "bg-[#0b0f19] border-white/5 hover:border-white/20 text-slate-300 hover:text-white"
+                            : "bg-slate-50 border-slate-200 hover:bg-white text-slate-700 hover:border-slate-300"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between w-full">
+                          <span className="font-mono text-[10px] opacity-75">Ch {ch.no}</span>
+                          <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded ${
+                            isSelected ? "bg-black/30 text-white" : "bg-white/10 text-slate-400"
+                          }`}>
+                            {ch.weightage.split(" ")[0]}
+                          </span>
+                        </div>
+                        <span className="text-[11px] leading-snug line-clamp-1">{ch.name}</span>
+                      </button>
+                    );
+                  })
+                : SCIENCE_CHAPTER_LIST.map((ch) => {
+                    const isSelected = ch.no === activeScienceChapterNo;
+                    const Icon = ch.icon;
+                    return (
+                      <button
+                        key={ch.no}
+                        onClick={() => {
+                          setActiveScienceChapterNo(ch.no);
+                          setIsChapterGridOpen(false);
+                        }}
+                        className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer border flex flex-col justify-between gap-1 min-h-[56px] ${
+                          isSelected
+                            ? isDark
+                              ? "bg-gradient-to-br from-teal-500 to-emerald-600 text-slate-950 border-teal-300 font-black shadow-lg shadow-teal-500/25 scale-[1.02]"
+                              : "bg-teal-600 text-white border-teal-600 font-black shadow-md scale-[1.02]"
+                            : isDark
+                            ? "bg-[#0b0f19] border-white/5 hover:border-white/20 text-slate-300 hover:text-white"
+                            : "bg-slate-50 border-slate-200 hover:bg-white text-slate-700 hover:border-slate-300"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between w-full">
+                          <span className="font-mono text-[10px] opacity-75">Ch {ch.no}</span>
+                          <Icon className="w-3.5 h-3.5 opacity-80" />
+                        </div>
+                        <span className="text-[11px] leading-snug line-clamp-1">{ch.name}</span>
+                      </button>
+                    );
+                  })}
+            </div>
+          )}
+
+          {/* Quick Prev / Next Bar on Phone */}
+          <div className="flex items-center justify-between pt-1 border-t border-white/5 text-xs font-bold">
+            <button
+              onClick={handlePrevChapter}
+              className="px-3 py-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Prev Chapter</span>
+            </button>
+            <span className="text-[11px] font-mono text-slate-400">
+              {activeSubject === "math" ? `${activeMathChapterNo} of 14` : `${activeScienceChapterNo} of 13`}
+            </span>
+            <button
+              onClick={handleNextChapter}
+              className="px-3 py-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer"
+            >
+              <span>Next Chapter</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
       </div>
 
       {/* =========================================================================
-          2. MATHEMATICS CHAPTER CONCEPTS VIEW
+          2. OFFICIAL CBSE BOARD BLUEPRINT & MARKING SCHEME CARD (CRITICAL REQUIREMENT)
+          ========================================================================= */}
+      <div
+        className={`p-6 sm:p-7 rounded-3xl border transition-all ${
+          isDark
+            ? "bg-[#0d1424] border-blue-500/30 shadow-[0_4px_25px_rgba(59,130,246,0.1)]"
+            : "bg-blue-50/70 border-blue-200 shadow-sm"
+        }`}
+      >
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 pb-4 border-b border-white/10">
+          <div className="space-y-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="px-3 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1">
+                <Target className="w-3.5 h-3.5" /> Official CBSE Board Blueprint 2026-27
+              </span>
+              <span className="text-xs font-bold text-amber-400">
+                {activeSubject === "math" ? activeMathBlueprint.unitName : activeScienceBlueprint.unitName}
+              </span>
+            </div>
+            <h3 className={`text-lg sm:text-xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+              {activeSubject === "math" ? activeMathChapter.title : activeScienceMeta.name} — Board Weightage: {activeSubject === "math" ? activeMathBlueprint.expectedMarks : activeScienceBlueprint.expectedMarks}
+            </h3>
+          </div>
+
+          <span className={`text-xs font-mono font-bold px-3 py-1.5 rounded-xl border ${
+            isDark ? "bg-black/40 border-white/10 text-emerald-400" : "bg-white border-blue-200 text-emerald-700"
+          }`}>
+            Target: 100/100 Perfect Marking
+          </span>
+        </div>
+
+        {/* Section-Wise Expected Question Pattern */}
+        <div className="pt-4 space-y-3">
+          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
+            CBSE Question Paper Pattern Breakdown for this Chapter:
+          </span>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+            {[
+              { section: "Sec A (1 Mark)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.mcq1M, type: "MCQs / Objective" },
+              { section: "Sec B (2 Marks)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.vsa2M, type: "Very Short (VSA)" },
+              { section: "Sec C (3 Marks)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.sa3M, type: "Short Answer (SA)" },
+              { section: "Sec D (5 Marks)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.la5M, type: "Long Answer (LA)" },
+              { section: "Sec E (4 Marks)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.case4M, type: "Case-Based Study" }
+            ].map((p, idx) => (
+              <div
+                key={idx}
+                className={`p-3 rounded-2xl border text-center ${
+                  isDark ? "bg-black/30 border-white/5" : "bg-white border-blue-100 shadow-2xs"
+                }`}
+              >
+                <span className="text-[10px] font-mono text-slate-400 block">{p.section}</span>
+                <span className="text-base sm:text-lg font-mono font-black text-blue-400 block my-0.5">
+                  {p.count} Question{p.count !== 1 ? "s" : ""}
+                </span>
+                <span className="text-[10px] text-slate-500 block truncate">{p.type}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Step-by-Step Scoring Rubric */}
+        <div className="pt-4 mt-4 border-t border-white/10 space-y-2.5">
+          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1.5">
+            <CheckCircle2 className="w-3.5 h-3.5" /> Official CBSE Step-by-Step Mark Award Rubric:
+          </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+            {(activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).markingSchemeRubric.map((r, i) => (
+              <div
+                key={i}
+                className={`p-3 rounded-xl border flex items-start justify-between gap-3 ${
+                  isDark ? "bg-white/[0.02] border-white/5" : "bg-white border-slate-200"
+                }`}
+              >
+                <div className="space-y-0.5">
+                  <span className={`font-bold block ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                    {r.step}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono block">{r.rubricNote}</span>
+                </div>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30 shrink-0">
+                  +{r.marks}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mandatory Examiner Penalties */}
+        <div className="pt-3 mt-3 border-t border-white/10">
+          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1.5 mb-1.5">
+            <ShieldAlert className="w-3.5 h-3.5" /> Examiner Trap Penalties (Marks Deducted by Board Evaluators):
+          </span>
+          <ul className="space-y-1 text-xs text-rose-300 font-medium">
+            {(activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).examinerPenalties.map((pen, i) => (
+              <li key={i} className="flex items-start gap-1.5">
+                <span className="text-rose-400 font-bold shrink-0">⚠️</span>
+                <span>{pen}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          3. MATHEMATICS CHAPTER CONCEPTS VIEW
           ========================================================================= */}
       {activeSubject === "math" && activeMathChapter && (
         <div className="space-y-6 animate-fade-in">
@@ -314,7 +536,7 @@ export default function ConceptsHubView({
                   <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
                     isDark ? "bg-blue-950/60 text-blue-300 border-blue-500/30" : "bg-blue-100 text-blue-900 border-blue-300"
                   }`}>
-                    Chapter {activeMathChapter.chapterNo} of 14
+                    Chapter {activeMathChapter.chapterNo} of 14 • {activeMathBlueprint.unitName}
                   </span>
                   <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">
                     {activeMathChapter.weightage}
@@ -385,9 +607,9 @@ export default function ConceptsHubView({
             </div>
           </div>
 
-          {/* Sections Breakdown */}
+          {/* Core Sections & Step-by-Step Problem Solving Guides */}
           <div className="space-y-5">
-            {activeMathChapter.sections.map((section, secIdx) => (
+            {activeMathChapter.sections.map((section) => (
               <div
                 key={section.id}
                 className={`p-6 sm:p-7 rounded-3xl border space-y-5 transition-all ${
@@ -507,11 +729,115 @@ export default function ConceptsHubView({
               </div>
             ))}
           </div>
+
+          {/* =========================================================================
+              MATHEMATICS SOLVED BOARD EXAMPLES WITH STEP MARKS BREAKDOWN
+              ========================================================================= */}
+          {activeMathExamples.length > 0 && (
+            <div className="space-y-4 pt-4">
+              <div className="flex items-center justify-between">
+                <h3 className={`text-lg sm:text-xl font-black flex items-center gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
+                  <Sparkles className="w-5 h-5 text-amber-400" />
+                  CBSE Board Solved Model Problems with Official Mark Rubric
+                </h3>
+                <span className="text-xs font-mono font-bold text-slate-400">
+                  {activeMathExamples.length} Model Question{activeMathExamples.length > 1 ? "s" : ""}
+                </span>
+              </div>
+
+              <div className="space-y-4">
+                {activeMathExamples.map((ex) => (
+                  <div
+                    key={ex.id}
+                    className={`p-6 rounded-3xl border space-y-4 transition-all ${
+                      isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"
+                    }`}
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-3 border-white/10">
+                      <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        {ex.level}
+                      </span>
+                      <span className="text-xs font-mono font-bold text-emerald-400">
+                        Total Marks: {ex.marks}
+                      </span>
+                    </div>
+
+                    <h4 className={`text-sm sm:text-base font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
+                      {ex.question}
+                    </h4>
+
+                    {/* Step-by-Step Marking Scheme */}
+                    <div className="space-y-2 pt-1">
+                      <span className="text-[10px] font-mono uppercase font-bold text-emerald-400 block">
+                        Official Step-by-Step Scoring Distribution:
+                      </span>
+                      <div className="space-y-2">
+                        {ex.markingSchemeSteps.map((st) => (
+                          <div
+                            key={st.stepNo}
+                            className={`p-3 rounded-xl border flex items-start justify-between gap-3 text-xs ${
+                              isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"
+                            }`}
+                          >
+                            <div className="flex items-start gap-2.5">
+                              <span className="w-5 h-5 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-[10px] shrink-0">
+                                {st.stepNo}
+                              </span>
+                              <div className={isDark ? "text-slate-300" : "text-slate-700"}>
+                                <PremiumMathRenderer content={st.description} />
+                              </div>
+                            </div>
+                            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
+                              {st.marksAwarded}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Final Answer Box */}
+                    <div className={`p-3.5 rounded-xl border font-bold text-xs flex items-center justify-between ${
+                      isDark ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-300" : "bg-emerald-50 border-emerald-200 text-emerald-900"
+                    }`}>
+                      <span>Final Answer:</span>
+                      <span className="font-mono text-sm px-3 py-1 rounded-lg bg-black/30 border border-emerald-500/30">
+                        {ex.finalAnswer}
+                      </span>
+                    </div>
+
+                    {ex.examinerTrap && (
+                      <p className="text-[11px] text-rose-400 font-mono">
+                        ⚠️ Examiner Caution: {ex.examinerTrap}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Sticky/Bottom Navigation Bar */}
+          <div className="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
+            <button
+              onClick={handlePrevChapter}
+              className="flex-1 py-3 rounded-2xl border border-white/10 hover:border-blue-500/40 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer bg-white/5 hover:bg-white/10"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Previous Chapter</span>
+            </button>
+            <button
+              onClick={handleNextChapter}
+              className="flex-1 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-blue-600/20"
+            >
+              <span>Next Chapter</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       )}
 
       {/* =========================================================================
-          3. SCIENCE CHAPTER CONCEPTS VIEW
+          4. SCIENCE CHAPTER CONCEPTS VIEW
           ========================================================================= */}
       {activeSubject === "science" && (
         <div className="space-y-6 animate-fade-in">
@@ -532,7 +858,7 @@ export default function ConceptsHubView({
                   <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
                     isDark ? "bg-teal-950/60 text-teal-300 border-teal-500/30" : "bg-teal-100 text-teal-900 border-teal-300"
                   }`}>
-                    Chapter {activeScienceMeta.no} of 13 • {activeScienceMeta.discipline}
+                    Chapter {activeScienceMeta.no} of 13 • {activeScienceBlueprint.unitName}
                   </span>
                   <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">
                     Board Weightage: {activeScienceMeta.weightage}
@@ -577,7 +903,7 @@ export default function ConceptsHubView({
             </div>
           </div>
 
-          {/* Search & Discipline Filter Bar */}
+          {/* Search Bar */}
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <div className="relative flex-1 w-full">
               <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -763,6 +1089,24 @@ export default function ConceptsHubView({
                 </div>
               );
             })}
+          </div>
+
+          {/* Sticky/Bottom Navigation Bar */}
+          <div className="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
+            <button
+              onClick={handlePrevChapter}
+              className="flex-1 py-3 rounded-2xl border border-white/10 hover:border-teal-500/40 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer bg-white/5 hover:bg-white/10"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Previous Chapter</span>
+            </button>
+            <button
+              onClick={handleNextChapter}
+              className="flex-1 py-3 rounded-2xl bg-teal-600 hover:bg-teal-500 text-slate-950 font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-teal-600/20"
+            >
+              <span>Next Chapter</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       )}

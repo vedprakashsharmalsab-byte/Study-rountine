@@ -199,37 +199,39 @@ export default function ScienceActivitiesView({
           ))}
         </div>
 
-        {/* Chapter Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+        {/* Chapter Selection Grid (Responsive, No Phone Side Scrolling) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2">
           <button
             onClick={() => setSelectedChapterNo("all")}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 border ${
+            className={`p-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex flex-col justify-between min-h-[48px] ${
               selectedChapterNo === "all"
                 ? isDark
                   ? "bg-cyan-500 text-slate-950 border-cyan-400 font-black shadow-sm"
                   : "bg-cyan-600 text-white border-cyan-600 font-black shadow-sm"
                 : isDark
-                ? "bg-black/30 border-white/5 text-slate-400 hover:text-white"
+                ? "bg-black/30 border-white/5 text-slate-300 hover:text-white"
                 : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
             }`}
           >
-            All Chapters ({filteredActivities.length})
+            <span className="text-[10px] font-mono text-slate-400">All Chapters</span>
+            <span className="truncate">{filteredActivities.length} Activities</span>
           </button>
           {CHAPTER_LIST.filter(c => selectedDiscipline === "all" || c.discipline === selectedDiscipline).map((ch) => (
             <button
               key={ch.no}
               onClick={() => setSelectedChapterNo(ch.no)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 border ${
+              className={`p-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex flex-col justify-between min-h-[48px] text-left ${
                 selectedChapterNo === ch.no
                   ? isDark
                     ? "bg-cyan-500 text-slate-950 border-cyan-400 font-black shadow-sm"
                     : "bg-cyan-600 text-white border-cyan-600 font-black shadow-sm"
                   : isDark
-                  ? "bg-black/30 border-white/5 text-slate-400 hover:text-white"
+                  ? "bg-black/30 border-white/5 text-slate-300 hover:text-white"
                   : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
               }`}
             >
-              {ch.short}
+              <span className="text-[10px] font-mono opacity-75">Ch {ch.no}</span>
+              <span className="truncate text-[11px]">{ch.short.replace(`Ch ${ch.no}: `, '')}</span>
             </button>
           ))}
         </div>

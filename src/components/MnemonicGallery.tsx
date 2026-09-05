@@ -718,32 +718,35 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
         </div>
       </div>
 
-      {/* Chapter Selection Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+      {/* Chapter Selection Grid (No Phone Side Scrolling) */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2">
         {activeChapterList.map((ch) => {
           const isSelected = ch.chapterId === selectedChapterId;
           return (
             <button
               key={ch.chapterId}
               onClick={() => setSelectedChapterId(ch.chapterId)}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
+              className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer flex flex-col justify-between gap-1 border min-h-[56px] ${
                 isSelected
                   ? isDark
                     ? activeSubject === "science"
-                      ? "bg-teal-500 text-slate-950 shadow-md font-extrabold"
-                      : "bg-amber-500 text-slate-950 shadow-md font-extrabold"
-                    : "bg-slate-900 text-white shadow-md font-extrabold"
+                      ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-md scale-[1.02]"
+                      : "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md scale-[1.02]"
+                    : "bg-slate-900 text-white border-slate-900 font-black shadow-md scale-[1.02]"
                   : isDark
-                  ? "bg-[#121212]/70 text-slate-400 hover:text-white border border-white/5 hover:border-white/10"
-                  : "bg-white text-slate-700 hover:text-slate-950 border border-slate-200"
+                  ? "bg-[#121212]/70 text-slate-300 hover:text-white border-white/5 hover:border-white/10"
+                  : "bg-white text-slate-700 hover:text-slate-950 border-slate-200 hover:border-slate-300"
               }`}
             >
-              <span>Ch {ch.chapterId}: {ch.chapterName}</span>
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-md ${
-                isSelected ? "bg-black/20 text-slate-950" : "bg-white/10 text-slate-400"
-              }`}>
-                {ch.images.length}
-              </span>
+              <div className="flex items-center justify-between w-full">
+                <span className="font-mono text-[10px] opacity-75">Ch {ch.chapterId}</span>
+                <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded ${
+                  isSelected ? "bg-black/20 text-slate-950 font-bold" : "bg-white/10 text-slate-400"
+                }`}>
+                  {ch.images.length}
+                </span>
+              </div>
+              <span className="text-[11px] leading-snug line-clamp-1">{ch.chapterName}</span>
             </button>
           );
         })}
