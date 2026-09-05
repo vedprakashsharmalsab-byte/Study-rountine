@@ -338,7 +338,7 @@ export const MATH_CHAPTER_CONCEPTS: MathChapterConcept[] = [
           {
             title: "The BPT Ratio",
             content: "$\\frac{AD}{DB} = \\frac{AE}{EC}$",
-            note: "Extended forms: $\\frac{AB}{AD} = \\frac{AC}{AE}$ and $\\frac{AB}{DB} = \\frac{AC}{EC}$."
+            note: "BPT Corollaries (Extended Forms): $\\frac{AD}{AB} = \\frac{AE}{AC}$ and $\\frac{DB}{AB} = \\frac{EC}{AC}$ (equivalently $\\frac{AB}{AD} = \\frac{AC}{AE}$ and $\\frac{AB}{DB} = \\frac{AC}{EC}$)."
           }
         ],
         stepByStepGuide: [

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import type { VaultQuestion, VaultChapterInfo } from "@/data/vaultQuestions";
@@ -11,6 +12,9 @@ import TheoremsAndExamplesView from "@/components/TheoremsAndExamplesView";
 import ScienceConceptsView from "@/components/ScienceConceptsView";
 import ScienceActivitiesView from "@/components/ScienceActivitiesView";
 import ConceptsHubView from "@/components/ConceptsHubView";
+import ChemistryReactionsView from "@/components/ChemistryReactionsView";
+import ScienceDiagramsView from "@/components/ScienceDiagramsView";
+import CompetitiveHotsView from "@/components/CompetitiveHotsView";
 
 import {
   Atom,
@@ -18,6 +22,7 @@ import {
   Award,
   Beaker,
   BookOpen,
+  Check,
   CheckCircle2,
   ChevronRight,
   ChevronLeft,
@@ -55,6 +60,8 @@ import {
   Share2,
   Calendar,
   AlertCircle,
+  AlertTriangle,
+  LayoutGrid,
 } from "lucide-react";
 
 import {
@@ -635,13 +642,58 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "roadmap">("chapter_dashboard");
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap">("chapter_dashboard");
   const [conceptsSubject, setConceptsSubject] = useState<"math" | "science">("math");
   const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(6);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false);
   const [levelUpModalData, setLevelUpModalData] = useState<{ level: number; title: string; badge: string } | null>(null);
+
+  // Fabulous Compact Taskbar State (Zero Horizontal Scroll)
+  const [navDropdown, setNavDropdown] = useState<"vaults" | "revision" | "planner" | null>(null);
+  const [isAllModulesModalOpen, setIsAllModulesModalOpen] = useState(false);
+  const [allModulesSearch, setAllModulesSearch] = useState("");
+  const navRef = useRef<HTMLElement>(null);
+
+  // Click outside to dismiss nav dropdown
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setNavDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Body scroll lock and ESC key for All Modules Modal
+  useEffect(() => {
+    if (isAllModulesModalOpen) {
+      const orig = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setIsAllModulesModalOpen(false);
+      };
+      window.addEventListener("keydown", onKey);
+      return () => {
+        document.body.style.overflow = orig;
+        window.removeEventListener("keydown", onKey);
+      };
+    }
+  }, [isAllModulesModalOpen]);
+
+  // Global Ctrl+K / Cmd+K shortcut to toggle All Modules Mega-Launcher
+  useEffect(() => {
+    const handleGlobalKey = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsAllModulesModalOpen(prev => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKey);
+    return () => window.removeEventListener("keydown", handleGlobalKey);
+  }, []);
   
   // Multi-Subject Systematic Chapter Command State
   const [commandSubjectId, setCommandSubjectId] = useState<string>("maths");
@@ -866,6 +918,21 @@ export default function CBSECommandCenter() {
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      });
+      setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      }, 50);
+    }
     if (activeTab === "common_mistakes") {
       fetchMistakes();
     }
@@ -1586,33 +1653,51 @@ export default function CBSECommandCenter() {
 
   // One-Click Zero XP Reset (Cleans all storage & restores 0 XP state)
   const handleResetProgress = () => {
-    if (typeof window !== "undefined" && window.confirm("Are you sure you want to reset all progress to 0 XP? All student scores and tasks will return to 0.")) {
-      setCompletedTopicIds({});
-      setCompletedTestSeriesTopics({});
-      setCompletedMapItems({});
-      setStreak(1);
-      setTodayTasks([
-        { id: "t1", text: "Sept 14 Exam: Solve 10 RD Sharma Trigonometry Proofs + BPT Theorem", slot: "8:00 PM – 9:30 PM", done: false },
-        { id: "t2", text: "Sept 16 Exam: Life Processes Diagrams (Nephron & Heart) + Chlor-Alkali", slot: "10:00 PM – 11:15 PM", done: false },
-        { id: "t3", text: "Quick Active Recall: 10 Science & SST Flashcards Deck", slot: "11:15 PM – 11:45 PM", done: false }
-      ]);
-      setCustomFlashcards([]);
-      setMasteredFlashcardIds({});
-      setCustomQuestions([]);
-      setTotalFocusMins(0);
-      setResolvedMistakeIds({});
-      setRevealedQuestionIds({});
-      try {
-        Object.keys(localStorage).forEach((key) => {
-          if (key.startsWith("cbse10_lsa_")) {
-            localStorage.removeItem(key);
-          }
-        });
-        localStorage.setItem("cbse10_lsa_v5_cleared", "true");
-      } catch {}
-      playSound("click");
-      showXpToast(0, "All Progress Reset to 0 XP");
-    }
+    if (typeof window === "undefined") return;
+    setCompletedTopicIds({});
+    setCompletedTestSeriesTopics({});
+    setCompletedMapItems({});
+    setCorrectMcqQuestionIds({});
+    setSelectedMcqOptions({});
+    setStreak(1);
+    setTodayTasks([
+      { id: "t1", text: "Sept 14 Exam: Solve 10 RD Sharma Trigonometry Proofs + BPT Theorem", slot: "8:00 PM – 9:30 PM", done: false },
+      { id: "t2", text: "Sept 16 Exam: Life Processes Diagrams (Nephron & Heart) + Chlor-Alkali", slot: "10:00 PM – 11:15 PM", done: false },
+      { id: "t3", text: "Quick Active Recall: 10 Science & SST Flashcards Deck", slot: "11:15 PM – 11:45 PM", done: false }
+    ]);
+    setCustomFlashcards([]);
+    setMasteredFlashcardIds({});
+    setCustomQuestions([]);
+    setTotalFocusMins(0);
+    setResolvedMistakeIds({});
+    setRevealedQuestionIds({});
+    try {
+      const keysToRemove = [
+        "cbse10_lsa_topics_v5",
+        "cbse10_lsa_test_series_v5",
+        "cbse10_lsa_map_v5",
+        "cbse10_lsa_streak_v5",
+        "cbse10_lsa_tasks_v5",
+        "cbse10_lsa_custom_fc_v5",
+        "cbse10_lsa_mastered_fc_v5",
+        "cbse10_lsa_customq_v5",
+        "cbse10_lsa_focus_v5",
+        "cbse10_lsa_my_mistakes_v5",
+        "cbse10_lsa_resolved_mistakes_v5",
+        "cbse10_lsa_correct_mcqs_v1",
+        "cbse10_lsa_selected_mcqs_v1",
+        "cbse10_lsa_v5_cleared"
+      ];
+      keysToRemove.forEach((k) => localStorage.removeItem(k));
+      Object.keys(localStorage).forEach((key) => {
+        if (key.startsWith("cbse10_lsa_")) {
+          localStorage.removeItem(key);
+        }
+      });
+      localStorage.setItem("cbse10_lsa_v5_cleared", "true");
+    } catch {}
+    playSound("click");
+    showXpToast(0, "All Progress Reset to 0 XP");
   };
 
   if (!mounted) {
@@ -1654,217 +1739,710 @@ export default function CBSECommandCenter() {
       {/* =========================================================================
           STICKY HEADER WITH LIVE XP / LEVEL BAR & QUICK CONTROLS
           ========================================================================= */}
-      <header className={`sticky top-0 z-40 border-b backdrop-blur-xl px-3.5 sm:px-6 py-2.5 transition-colors ${
-        isDark ? "border-white/10/80 bg-[#090d16]/90 text-white" : "border-slate-200/90 bg-white/90 text-slate-900 shadow-xs"
+      {/* =========================================================================
+          LUXURY COMMAND CENTER MASTER STATUS BAR (HIGH-TECH, VIBRANT & RICH)
+          ========================================================================= */}
+      <header className={`sticky top-0 z-40 border-b backdrop-blur-2xl px-3.5 sm:px-6 py-2.5 transition-colors ${
+        isDark
+          ? "border-white/[0.08] bg-gradient-to-r from-[#060913]/95 via-[#0b1222]/95 to-[#060913]/95 text-white shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+          : "border-slate-200/90 bg-white/95 text-slate-900 shadow-xs"
       }`}>
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-2">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
           
-          {/* LOGO & TITLE */}
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-black text-xs sm:text-sm shadow-md shrink-0">
-              100
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <h1 className="text-xs sm:text-sm font-bold tracking-tight truncate">
-                  CBSE Class 10 OS
-                </h1>
-                <span className={`px-1.5 py-0.2 rounded text-[9px] font-mono font-bold border shrink-0 ${
-                  isDark ? "bg-amber-950/50 text-amber-300 border-amber-800/60" : "bg-amber-50 text-amber-900 border-amber-300"
-                }`}>
-                  2026–27
-                </span>
+          {/* LOGO & ACADEMY BRANDING */}
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 rounded-2xl blur-xs opacity-75 group-hover:opacity-100 transition duration-300"></div>
+              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center text-slate-950 font-black text-xs shadow-inner ring-1 ring-white/20">
+                100
               </div>
-              <p className={`text-[10px] sm:text-xs truncate ${isDark ? "text-slate-400" : "text-slate-500"}`}>
-                Lakshmipat Singhania Academy
+            </div>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2">
+                <h1 className="text-sm font-black tracking-tight text-white flex items-center gap-1.5">
+                  CBSE CLASS 10 <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold">2026–27</span>
+                </h1>
+              </div>
+              <p className="text-[10px] text-slate-400 font-medium flex items-center gap-1.5">
+                <span>Lakshmipat Singhania Academy</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span className="text-emerald-400 font-mono text-[9px] font-bold">LIVE HUD</span>
               </p>
             </div>
           </div>
 
-          {/* HEADER DUAL HIGH-PRECISION COUNTDOWNS (DESKTOP) */}
-          <div className="hidden xl:flex items-center gap-2 shrink-0">
-            {/* TIMER 1: SEPT 14 TEST SERIES */}
-            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs font-mono ${
-              isDark ? "bg-[#121212]/80 backdrop-blur-xl border-amber-500/40 text-amber-400" : "bg-amber-50 border-amber-200 text-amber-900 shadow-xs"
-            }`}>
-              <Calendar className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-              <span className="font-bold">Sept 14:</span>
+          {/* CENTER: AEROSPACE TELEMETRY DUAL COUNTDOWN ISLAND */}
+          <div className="hidden lg:flex items-center gap-3 px-4 py-1.5 rounded-full bg-slate-900/80 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)] text-xs font-mono">
+            <button
+              onClick={() => {
+                playSound("click");
+                setActiveTab("test_series");
+                setNavDropdown(null);
+              }}
+              className="flex items-center gap-2 text-slate-200 hover:text-amber-300 transition-colors cursor-pointer group px-2 py-0.5 rounded-full hover:bg-amber-500/10"
+              title="Target: Test Series I (Sept 14) — Click to view plan"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              </span>
+              <span className="text-[11px] font-bold text-amber-400 group-hover:underline">Sept 14 Math:</span>
               <LiveCountdown targetDate="2026-09-14" variant="badge" colorScheme="amber" isDark={isDark} />
-            </div>
-
-            {/* TIMER 2: FEB 1 FINAL BOARDS */}
-            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs font-mono ${
-              isDark ? "bg-[#121212]/80 backdrop-blur-xl border-blue-500/40 text-blue-400" : "bg-blue-50 border-blue-200 text-blue-900 shadow-xs"
-            }`}>
-              <Clock className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-              <span className="font-bold">Feb 1 Boards:</span>
+            </button>
+            <span className="text-white/20 select-none">•</span>
+            <div className="flex items-center gap-2 text-slate-200 px-2 py-0.5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              </span>
+              <span className="text-[11px] font-bold text-cyan-400">Final Boards:</span>
               <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
             </div>
           </div>
 
-          {/* GAMIFIED STATS PILLS */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* RIGHT: GAMIFIED TELEMETRY & CONTROLS */}
+          <div className="flex items-center gap-2 shrink-0">
             
-            {/* LEVEL & XP PROGRESS BAR */}
-            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-[11px] font-mono font-bold ${
-              isDark ? "bg-[#121212]/80 backdrop-blur-xl border-white/10 text-amber-400" : "bg-slate-50 border-slate-200 text-amber-900"
+            {/* LEVEL & XP CAPSULE */}
+            <div className={`flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-xs font-mono font-medium shadow-md ${
+              isDark ? "bg-slate-900/90 border-white/10 text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]" : "bg-slate-100 border-slate-200 text-slate-800"
             }`}>
               <span className="text-xs">{currentLevelInfo.badge}</span>
-              <div className="hidden sm:flex flex-col text-left">
-                <span className="text-[9px] uppercase tracking-wider text-slate-400 leading-none">
-                  Lvl {currentLevelInfo.level}
-                </span>
-                <span className="text-[10px] font-bold leading-tight text-amber-500">
-                  {totalXp} XP
-                </span>
-              </div>
-              <div className="w-10 sm:w-16 h-1.5 rounded-full overflow-hidden bg-slate-700/50 ml-0.5">
+              <span className="font-black text-amber-400">Lvl {currentLevelInfo.level}</span>
+              <span className="text-white/20 select-none">•</span>
+              <span className="font-black text-white">{totalXp} <span className="text-[10px] text-amber-400/80">XP</span></span>
+              
+              {/* Vibrant glowing micro progress bar */}
+              <div className="w-14 sm:w-18 h-1.5 rounded-full overflow-hidden bg-white/10 p-[1px] ml-0.5">
                 <div
-                  className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-300"
+                  className="h-full bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(245,158,11,0.6)]"
                   style={{ width: `${levelProgressPercent}%` }}
                 />
               </div>
             </div>
 
-            {/* STREAK */}
-            <div className={`flex items-center gap-1 px-2 py-1 rounded-xl border text-[11px] font-mono font-bold ${
-              isDark ? "bg-[#121212]/80 backdrop-blur-xl border-white/10 text-orange-400" : "bg-white border-slate-200 text-orange-600 shadow-xs"
+            {/* STREAK PILL */}
+            <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono font-bold shadow-xs ${
+              isDark ? "bg-gradient-to-r from-orange-500/20 to-rose-500/20 border-orange-500/40 text-orange-300 shadow-[0_0_12px_rgba(249,115,22,0.2)]" : "bg-amber-50 border-amber-200 text-amber-900"
             }`}>
-              <Flame className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+              <Flame className="w-3.5 h-3.5 text-orange-400 animate-pulse shrink-0" />
               <span>{streak}d</span>
             </div>
 
-            {/* SOUND MUTE / UNMUTE */}
-            <button
-              onClick={() => {
-                const nextMute = !isSoundMuted;
-                setIsSoundMuted(nextMute);
-                if (!nextMute) playSound("click");
-              }}
-              className={`p-1.5 sm:p-2 rounded-xl border transition-all cursor-pointer ${
-                isDark ? "bg-[#121212]/80 backdrop-blur-xl border-white/10 text-slate-400 hover:text-white" : "bg-white border-slate-200 text-slate-600 hover:text-slate-900 shadow-xs"
-              }`}
-              title={isSoundMuted ? "Unmute Sound" : "Mute Sound"}
-              aria-label="Toggle Sound"
-            >
-              {isSoundMuted ? <VolumeX className="w-3.5 h-3.5 text-rose-400" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
-            </button>
+            {/* QUICK ACTIONS GROUP */}
+            <div className="flex items-center gap-1">
+              {/* SOUND TOGGLE */}
+              <button
+                onClick={() => {
+                  const nextMute = !isSoundMuted;
+                  setIsSoundMuted(nextMute);
+                  if (!nextMute) playSound("click");
+                }}
+                className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
+                  isDark ? "bg-slate-900/80 border-white/10 text-slate-400 hover:text-white hover:bg-slate-800" : "bg-white border-slate-200 text-slate-600 hover:text-slate-900 shadow-xs"
+                }`}
+                title={isSoundMuted ? "Unmute Sound" : "Mute Sound"}
+                aria-label="Toggle Sound"
+              >
+                {isSoundMuted ? <VolumeX className="w-3.5 h-3.5 text-rose-400" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+              </button>
 
-            {/* THEME TOGGLE */}
-            <button
-              onClick={() => {
-                playSound("click");
-                setTheme(isDark ? "light" : "dark");
-              }}
-              className={`p-1.5 sm:p-2 rounded-xl border transition-all cursor-pointer ${
-                isDark ? "bg-[#121212]/80 backdrop-blur-xl border-white/10 text-slate-400 hover:text-white" : "bg-white border-slate-200 text-slate-600 hover:text-slate-900 shadow-xs"
-              }`}
-              title="Toggle Light/Dark Mode"
-              aria-label="Toggle Theme"
-            >
-              {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
-            </button>
+              {/* THEME TOGGLE */}
+              <button
+                onClick={() => {
+                  playSound("click");
+                  setTheme(isDark ? "light" : "dark");
+                }}
+                className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
+                  isDark ? "bg-slate-900/80 border-white/10 text-slate-400 hover:text-white hover:bg-slate-800" : "bg-white border-slate-200 text-slate-600 hover:text-slate-900 shadow-xs"
+                }`}
+                title="Toggle Theme"
+                aria-label="Toggle Theme"
+              >
+                {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
+              </button>
 
-            {/* ZERO XP RESET BUTTON */}
-            <button
-              onClick={handleResetProgress}
-              className={`p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl border transition-all cursor-pointer hidden sm:flex items-center gap-1.5 text-xs font-bold ${
-                isDark ? "bg-rose-950/30 border-rose-800/40 text-rose-300 hover:bg-rose-900/40" : "bg-rose-50 border-rose-200 text-rose-700 hover:bg-rose-100 shadow-xs"
-              }`}
-              title="Reset all progress to 0 XP"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">0 XP Reset</span>
-            </button>
+              {/* ZERO XP RESET BUTTON */}
+              <button
+                onClick={handleResetProgress}
+                className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
+                  isDark ? "bg-slate-900/80 border-white/10 text-slate-500 hover:text-rose-400 hover:bg-rose-500/15 hover:border-rose-500/30" : "bg-white border-slate-200 text-slate-500 hover:text-rose-600 shadow-xs"
+                }`}
+                title="Reset all progress to 0 XP"
+              >
+                <RotateCcw className="w-3.5 h-3.5 shrink-0" />
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
       {/* =========================================================================
-          LIVE DUAL COUNTDOWN TICKER STRIP (BOARDS & TEST SERIES)
+          MOBILE QUICK-DOCK (md:hidden - ZERO HORIZONTAL SCROLL)
           ========================================================================= */}
-      <div className={`countdown-ticker-strip border-b px-3.5 sm:px-6 py-2 transition-colors ${
-        isDark ? "border-white/10/80 bg-[#0d1322]/85 text-white" : "border-slate-200 bg-amber-50/50 text-slate-900"
+      <div className={`border-b px-2.5 py-2 flex md:hidden items-center justify-between gap-1.5 transition-colors relative z-30 ${
+        isDark ? "border-white/[0.08] bg-[#070b14]/95 backdrop-blur-2xl" : "border-slate-200 bg-white/95"
       }`}>
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs font-mono">
-          
-          {/* TEST SERIES I TICKER */}
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-            </span>
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className={`font-bold ${isDark ? "text-amber-400" : "text-amber-900"}`}>
-                Sept 14 ({activeExam.subject}):
-              </span>
-              <LiveCountdown targetDate="2026-09-14" variant="badge" colorScheme="amber" isDark={isDark} />
-            </div>
-          </div>
+        <div className="flex items-center gap-1.5 flex-1 min-w-0">
+          <button
+            onClick={() => { playSound("click"); setActiveTab("chapter_dashboard"); }}
+            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 shrink-0 cursor-pointer ${
+              activeTab === "chapter_dashboard" ? "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/20" : isDark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"
+            }`}
+          >
+            <Target className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>Command</span>
+          </button>
 
-          {/* FEB 1 FINAL BOARDS TICKER */}
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className={`font-bold ${isDark ? "text-blue-400" : "text-blue-900"}`}>
-                Feb 1, 2027 Final CBSE Boards:
-              </span>
-              <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
-            </div>
-          </div>
+          <button
+            onClick={() => { playSound("click"); setActiveTab("concepts"); }}
+            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 shrink-0 cursor-pointer ${
+              activeTab === "concepts" ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20" : isDark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+            <span>Concepts</span>
+          </button>
 
+          <button
+            onClick={() => { playSound("click"); setActiveTab("diagrams"); }}
+            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 shrink-0 cursor-pointer ${
+              activeTab === "diagrams" ? "bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 text-slate-950 shadow-md shadow-cyan-500/20" : isDark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"
+            }`}
+          >
+            <Compass className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <span>Diagrams</span>
+          </button>
+
+          <button
+            onClick={() => { playSound("click"); setActiveTab("hots"); }}
+            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 shrink-0 cursor-pointer ${
+              activeTab === "hots" ? "bg-gradient-to-r from-rose-500 to-orange-500 text-white shadow-md shadow-rose-500/20" : isDark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"
+            }`}
+          >
+            <Flame className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+            <span>HOTS</span>
+          </button>
         </div>
+
+        <button
+          onClick={() => { playSound("click"); setIsAllModulesModalOpen(true); }}
+          className="px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 flex items-center gap-1.5 shrink-0 shadow-md shadow-amber-500/20 cursor-pointer active:scale-95"
+        >
+          <LayoutGrid className="w-3.5 h-3.5 text-slate-950" />
+          <span>All (15)</span>
+        </button>
       </div>
 
       {/* =========================================================================
-          DESKTOP & TABLET HORIZONTAL TAB NAVIGATION
+          DESKTOP & TABLET FABULOUS COMMAND TASKBAR (ZERO OVERLAP, ZERO HORIZONTAL SCROLL)
           ========================================================================= */}
-      <nav className={`border-b px-3.5 sm:px-6 py-2 overflow-x-auto no-scrollbar hidden md:flex items-center gap-1.5 transition-colors ${
-        isDark ? "border-white/10/80 bg-[#0d1322]/70" : "border-slate-200 bg-white/80"
-      }`}>
-        <div className="max-w-6xl mx-auto flex items-center gap-1.5 w-full min-w-max">
-          {[
-            { id: "chapter_dashboard", label: "Chapter Command", icon: Target },
-            { id: "concepts", label: "Concepts Hub (All 27 Ch)", icon: BookOpen },
-            { id: "activities", label: "NCERT Lab Activities", icon: Beaker },
-            { id: "theorems", label: "Maths Theorems & Ex", icon: Award },
-            { id: "questions", label: "Master Question Bank", icon: Zap },
-            { id: "mnemonics", label: "Visual Mnemonics Hub (49 Sheets)", icon: Sparkles },
-            { id: "flashcards", label: "Flashcards Engine", icon: BookMarked },
-            { id: "common_mistakes", label: "My Mistakes Error Log", icon: Flame },
-            { id: "test_series", label: "Test Series I (Sept 14)", icon: Calendar },
-            { id: "today", label: "Daily Focus & Tasks", icon: Clock },
-            { id: "syllabus", label: "NCERT Syllabus", icon: BookOpen },
-            { id: "roadmap", label: "100% Roadmap", icon: Compass }
-          ].map((tab) => {
-            const isActive = activeTab === tab.id;
-            return (
+      <nav
+        ref={navRef}
+        className={`border-b px-3 sm:px-6 py-2.5 hidden md:flex items-center justify-between transition-colors relative z-30 ${
+          isDark
+            ? "border-white/[0.08] bg-gradient-to-r from-[#060913]/98 via-[#0a0f20]/98 to-[#060913]/98 backdrop-blur-2xl shadow-lg"
+            : "border-slate-200 bg-white/95 backdrop-blur-2xl shadow-xs"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 w-full">
+          
+          {/* FLOATING SEGMENTED DOCK: FIXED STABLE LABELS (ZERO OVERLAPPING) */}
+          <div className="flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)] shrink-0">
+            
+            {/* 1. Command Center */}
+            <button
+              onClick={() => {
+                playSound("click");
+                setActiveTab("chapter_dashboard");
+                setNavDropdown(null);
+              }}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                activeTab === "chapter_dashboard"
+                  ? "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-slate-950 font-black shadow-md shadow-amber-500/30 ring-1 ring-amber-300/50"
+                  : isDark
+                  ? "text-slate-300 hover:text-white hover:bg-white/[0.08]"
+                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+              }`}
+            >
+              <Target className={`w-3.5 h-3.5 ${activeTab === "chapter_dashboard" ? "text-slate-950" : "text-amber-400"} shrink-0`} />
+              <span>Command</span>
+            </button>
+
+            {/* 2. Concepts Hub (27 Ch) */}
+            <button
+              onClick={() => {
+                playSound("click");
+                setActiveTab("concepts");
+                setNavDropdown(null);
+              }}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                activeTab === "concepts"
+                  ? "bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-600 text-white font-black shadow-md shadow-indigo-500/30 ring-1 ring-blue-300/50"
+                  : isDark
+                  ? "text-slate-300 hover:text-white hover:bg-white/[0.08]"
+                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+              }`}
+            >
+              <BookOpen className={`w-3.5 h-3.5 ${activeTab === "concepts" ? "text-white" : "text-blue-400"} shrink-0`} />
+              <span>Concepts</span>
+              <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-full shrink-0 ${
+                activeTab === "concepts" ? "bg-white/25 text-white" : "bg-blue-500/20 text-blue-300 border border-blue-500/30"
+              }`}>
+                27
+              </span>
+            </button>
+
+            {/* 3. NCERT Diagrams Vault (29) */}
+            <button
+              onClick={() => {
+                playSound("click");
+                setActiveTab("diagrams");
+                setNavDropdown(null);
+              }}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                activeTab === "diagrams"
+                  ? "bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 text-slate-950 font-black shadow-md shadow-cyan-500/30 ring-1 ring-cyan-300/50"
+                  : isDark
+                  ? "text-slate-300 hover:text-white hover:bg-white/[0.08]"
+                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+              }`}
+            >
+              <Compass className={`w-3.5 h-3.5 ${activeTab === "diagrams" ? "text-slate-950" : "text-cyan-400"} shrink-0`} />
+              <span>Diagrams</span>
+              <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-full shrink-0 ${
+                activeTab === "diagrams" ? "bg-slate-950/20 text-slate-950" : "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+              }`}>
+                29
+              </span>
+            </button>
+
+            {/* 4. Master Question Bank */}
+            <button
+              onClick={() => {
+                playSound("click");
+                setActiveTab("questions");
+                setNavDropdown(null);
+              }}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                activeTab === "questions"
+                  ? "bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500 text-slate-950 font-black shadow-md shadow-emerald-500/30 ring-1 ring-emerald-300/50"
+                  : isDark
+                  ? "text-slate-300 hover:text-white hover:bg-white/[0.08]"
+                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+              }`}
+            >
+              <Zap className={`w-3.5 h-3.5 ${activeTab === "questions" ? "text-slate-950" : "text-emerald-400"} shrink-0`} />
+              <span>Practice</span>
+            </button>
+
+            {/* 5. Competitive HOTS (35) */}
+            <button
+              onClick={() => {
+                playSound("click");
+                setActiveTab("hots");
+                setNavDropdown(null);
+              }}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                activeTab === "hots"
+                  ? "bg-gradient-to-r from-rose-500 via-pink-500 to-orange-500 text-white font-black shadow-md shadow-rose-500/30 ring-1 ring-rose-300/50"
+                  : isDark
+                  ? "text-slate-300 hover:text-white hover:bg-white/[0.08]"
+                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+              }`}
+            >
+              <Flame className={`w-3.5 h-3.5 ${activeTab === "hots" ? "text-white" : "text-rose-400"} shrink-0`} />
+              <span>HOTS</span>
+              <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-full shrink-0 ${
+                activeTab === "hots" ? "bg-white/25 text-white" : "bg-rose-500/20 text-rose-300 border border-rose-500/30"
+              }`}>
+                35
+              </span>
+            </button>
+
+            <div className="h-4 w-px bg-white/15 mx-1 shrink-0" />
+
+            {/* DROPDOWN 1: VAULTS (THEOREMS, REACTIONS, LAB ACTIVITIES) */}
+            <div className="relative shrink-0">
               <button
-                key={tab.id}
-                onClick={() => {
-                  playSound("click");
-                  setActiveTab(tab.id as any);
-                }}
-                className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 ${
-                  isActive
-                    ? isDark
-                      ? "bg-slate-100 text-slate-950 font-bold shadow-sm"
-                      : "bg-slate-900 text-white font-bold shadow-sm"
+                onClick={() => setNavDropdown(navDropdown === "vaults" ? null : "vaults")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 border ${
+                  ["theorems", "reactions", "activities"].includes(activeTab)
+                    ? "bg-amber-500/20 text-amber-300 border-amber-500/50 font-black shadow-[0_0_12px_rgba(245,158,11,0.2)]"
                     : isDark
-                    ? "text-slate-400 hover:text-white hover:bg-slate-800/50"
-                    : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+                    ? "bg-white/[0.02] border-white/5 text-slate-300 hover:bg-white/[0.08] hover:border-white/10"
+                    : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100"
                 }`}
               >
-                <tab.icon className="w-3.5 h-3.5" />
-                <span>{tab.label}</span>
+                <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Vaults</span>
+                {["theorems", "reactions", "activities"].includes(activeTab) && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 animate-pulse shadow-xs" />
+                )}
+                <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform duration-200 shrink-0 ${navDropdown === "vaults" ? "rotate-180" : ""}`} />
               </button>
-            );
-          })}
+
+              {navDropdown === "vaults" && (
+                <div className={`absolute top-full left-0 mt-2 w-72 rounded-2xl border shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150 ${
+                  isDark ? "bg-[#0a0f1d]/95 backdrop-blur-2xl border-white/15 text-white shadow-black/80" : "bg-white border-slate-200 text-slate-900 shadow-xl"
+                }`}>
+                  <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
+                    Official Science & Math Proofs
+                  </div>
+                  {[
+                    { id: "theorems", label: "Theorems & Converses", sub: "25 Formal Geometry Proofs", icon: Award, color: "text-amber-400 bg-amber-500/15" },
+                    { id: "reactions", label: "Chemistry Reactions", sub: "56 Equations with States & Colors", icon: FlaskConical, color: "text-cyan-400 bg-cyan-500/15" },
+                    { id: "activities", label: "NCERT Lab Activities", sub: "Step-by-step practical vivas", icon: Beaker, color: "text-emerald-400 bg-emerald-500/15" }
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        playSound("click");
+                        setActiveTab(item.id as any);
+                        setNavDropdown(null);
+                      }}
+                      className={`w-full p-2.5 rounded-xl text-left flex items-start gap-2.5 transition-all cursor-pointer ${
+                        activeTab === item.id
+                          ? isDark
+                            ? "bg-amber-500/20 text-amber-300 font-bold"
+                            : "bg-amber-50 text-amber-900 font-bold"
+                          : isDark
+                          ? "hover:bg-white/5 text-slate-300 hover:text-white"
+                          : "hover:bg-slate-50 text-slate-700 hover:text-slate-950"
+                      }`}
+                    >
+                      <div className={`p-1.5 rounded-lg shrink-0 mt-0.5 ${item.color}`}>
+                        <item.icon className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-xs font-bold leading-tight">{item.label}</div>
+                        <div className="text-[10px] text-slate-400 leading-tight truncate mt-0.5">{item.sub}</div>
+                      </div>
+                      {activeTab === item.id && (
+                        <Check className="w-4 h-4 text-amber-400 shrink-0 mt-1" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* DROPDOWN 2: MEMORY (MNEMONICS, FLASHCARDS, MISTAKES) */}
+            <div className="relative shrink-0">
+              <button
+                onClick={() => setNavDropdown(navDropdown === "revision" ? null : "revision")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 border ${
+                  ["mnemonics", "flashcards", "common_mistakes"].includes(activeTab)
+                    ? "bg-purple-500/20 text-purple-300 border-purple-500/50 font-black shadow-[0_0_12px_rgba(168,85,247,0.2)]"
+                    : isDark
+                    ? "bg-white/[0.02] border-white/5 text-slate-300 hover:bg-white/[0.08] hover:border-white/10"
+                    : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100"
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                <span>Memory</span>
+                {["mnemonics", "flashcards", "common_mistakes"].includes(activeTab) && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0 animate-pulse shadow-xs" />
+                )}
+                <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform duration-200 shrink-0 ${navDropdown === "revision" ? "rotate-180" : ""}`} />
+              </button>
+
+              {navDropdown === "revision" && (
+                <div className={`absolute top-full left-0 mt-2 w-72 rounded-2xl border shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150 ${
+                  isDark ? "bg-[#0a0f1d]/95 backdrop-blur-2xl border-white/15 text-white shadow-black/80" : "bg-white border-slate-200 text-slate-900 shadow-xl"
+                }`}>
+                  <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
+                    Active Recall & Error Traps
+                  </div>
+                  {[
+                    { id: "mnemonics", label: "Visual Mnemonics Hub", sub: "49 High-Res Memory Sheets", icon: Sparkles, color: "text-purple-400 bg-purple-500/15" },
+                    { id: "flashcards", label: "Flashcards Engine", sub: "Spaced Repetition Active Recall", icon: BookMarked, color: "text-blue-400 bg-blue-500/15" },
+                    { id: "common_mistakes", label: "My Mistakes Error Log", sub: "Common Board Traps & Traps to Avoid", icon: AlertTriangle, color: "text-rose-400 bg-rose-500/15" }
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        playSound("click");
+                        setActiveTab(item.id as any);
+                        setNavDropdown(null);
+                      }}
+                      className={`w-full p-2.5 rounded-xl text-left flex items-start gap-2.5 transition-all cursor-pointer ${
+                        activeTab === item.id
+                          ? isDark
+                            ? "bg-purple-500/20 text-purple-300 font-bold"
+                            : "bg-purple-50 text-purple-900 font-bold"
+                          : isDark
+                          ? "hover:bg-white/5 text-slate-300 hover:text-white"
+                          : "hover:bg-slate-50 text-slate-700 hover:text-slate-950"
+                      }`}
+                    >
+                      <div className={`p-1.5 rounded-lg shrink-0 mt-0.5 ${item.color}`}>
+                        <item.icon className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-xs font-bold leading-tight">{item.label}</div>
+                        <div className="text-[10px] text-slate-400 leading-tight truncate mt-0.5">{item.sub}</div>
+                      </div>
+                      {activeTab === item.id && (
+                        <Check className="w-4 h-4 text-purple-400 shrink-0 mt-1" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* DROPDOWN 3: PLANNER (TEST SERIES, DAILY TASKS, SYLLABUS, ROADMAP) */}
+            <div className="relative shrink-0">
+              <button
+                onClick={() => setNavDropdown(navDropdown === "planner" ? null : "planner")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 border ${
+                  ["test_series", "today", "syllabus", "roadmap"].includes(activeTab)
+                    ? "bg-sky-500/20 text-sky-300 border-sky-500/50 font-black shadow-[0_0_12px_rgba(14,165,233,0.2)]"
+                    : isDark
+                    ? "bg-white/[0.02] border-white/5 text-slate-300 hover:bg-white/[0.08] hover:border-white/10"
+                    : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100"
+                }`}
+              >
+                <Calendar className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                <span>Planner</span>
+                {["test_series", "today", "syllabus", "roadmap"].includes(activeTab) && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 animate-pulse shadow-xs" />
+                )}
+                <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform duration-200 shrink-0 ${navDropdown === "planner" ? "rotate-180" : ""}`} />
+              </button>
+
+              {navDropdown === "planner" && (
+                <div className={`absolute top-full right-0 mt-2 w-72 rounded-2xl border shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150 ${
+                  isDark ? "bg-[#0a0f1d]/95 backdrop-blur-2xl border-white/15 text-white shadow-black/80" : "bg-white border-slate-200 text-slate-900 shadow-xl"
+                }`}>
+                  <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
+                    Exam Strategy & Milestones
+                  </div>
+                  {[
+                    { id: "test_series", label: "Test Series I (Sept 14)", sub: "Target Schedule & Cutoffs", icon: Calendar, color: "text-emerald-400 bg-emerald-500/15" },
+                    { id: "today", label: "Daily Focus & Tasks", sub: "Daily Checklist & Pomodoro Rhythm", icon: Clock, color: "text-amber-400 bg-amber-500/15" },
+                    { id: "syllabus", label: "NCERT Tracker", sub: "Official Rationalized Curriculum", icon: BookOpen, color: "text-teal-400 bg-teal-500/15" },
+                    { id: "roadmap", label: "100% Roadmap", sub: "Class 10 Target Timeline", icon: Compass, color: "text-indigo-400 bg-indigo-500/15" }
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        playSound("click");
+                        setActiveTab(item.id as any);
+                        setNavDropdown(null);
+                      }}
+                      className={`w-full p-2.5 rounded-xl text-left flex items-start gap-2.5 transition-all cursor-pointer ${
+                        activeTab === item.id
+                          ? isDark
+                            ? "bg-sky-500/20 text-sky-300 font-bold"
+                            : "bg-sky-50 text-sky-900 font-bold"
+                          : isDark
+                          ? "hover:bg-white/5 text-slate-300 hover:text-white"
+                          : "hover:bg-slate-50 text-slate-700 hover:text-slate-950"
+                      }`}
+                    >
+                      <div className={`p-1.5 rounded-lg shrink-0 mt-0.5 ${item.color}`}>
+                        <item.icon className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-xs font-bold leading-tight">{item.label}</div>
+                        <div className="text-[10px] text-slate-400 leading-tight truncate mt-0.5">{item.sub}</div>
+                      </div>
+                      {activeTab === item.id && (
+                        <Check className="w-4 h-4 text-sky-400 shrink-0 mt-1" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* RIGHT: ALL 15 MODULES MEGA LAUNCHER (GOLDEN COMMAND PALETTE) */}
+          <div className="flex items-center shrink-0">
+            <button
+              onClick={() => {
+                playSound("click");
+                setIsAllModulesModalOpen(true);
+                setNavDropdown(null);
+              }}
+              className="px-4 py-2 rounded-2xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:brightness-110 active:scale-95 text-slate-950 shadow-[0_4px_20px_rgba(245,158,11,0.35)] transition-all flex items-center gap-2 cursor-pointer border border-amber-300/60 shrink-0"
+              title="Open All Modules Command Palette (Ctrl+K)"
+            >
+              <LayoutGrid className="w-3.5 h-3.5 text-slate-950 shrink-0" />
+              <span className="tracking-tight">All Modules (15)</span>
+              <kbd className="hidden lg:inline-flex items-center text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-950/20 text-slate-950 border border-slate-950/20 font-black ml-0.5">
+                ⌘K
+              </kbd>
+            </button>
+          </div>
         </div>
       </nav>
+
+      {/* =========================================================================
+          ALL 15 MODULES MEGA-LAUNCHER MODAL (VIA PORTAL, NO BLUR)
+          ========================================================================= */}
+      {mounted && isAllModulesModalOpen && createPortal(
+        <div
+          className="fixed inset-0 z-[99999] bg-black/85 flex items-center justify-center p-3 sm:p-6 select-none"
+          onClick={() => setIsAllModulesModalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className={`max-w-4xl w-full max-h-[90vh] flex flex-col rounded-3xl border overflow-hidden shadow-2xl ${
+              isDark ? "bg-[#0b101d] border-white/15 text-white" : "bg-white border-slate-300 text-slate-900"
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* MODAL HEADER */}
+            <div className="p-5 border-b border-white/10 flex items-center justify-between gap-4 shrink-0">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400">
+                    <LayoutGrid className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-lg sm:text-xl font-black">All 15 Command Center Learning Modules</h2>
+                </div>
+                <p className="text-xs text-slate-400">
+                  Instant launchpad to every vault, interactive solver, revision engine, and exam planner.
+                </p>
+              </div>
+
+              <button
+                onClick={() => setIsAllModulesModalOpen(false)}
+                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-400 hover:text-white transition-all cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* MODAL SEARCH BAR */}
+            <div className="px-5 pt-4">
+              <div className="relative">
+                <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="text"
+                  value={allModulesSearch}
+                  onChange={(e) => setAllModulesSearch(e.target.value)}
+                  placeholder="Filter modules (e.g. 'diagrams', 'theorems', 'questions', 'hots', 'flashcards')..."
+                  className={`w-full pl-10 pr-4 py-2.5 rounded-xl text-xs sm:text-sm border transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
+                    isDark ? "bg-black/40 border-white/10 text-white placeholder:text-slate-500" : "bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400"
+                  }`}
+                  autoFocus
+                />
+              </div>
+            </div>
+
+            {/* MODAL BODY (4 ORGANIZED GROUPS) */}
+            <div className="flex-1 overflow-y-auto p-5 space-y-6">
+              {[
+                {
+                  group: "Core Learning & Question Mastery",
+                  items: [
+                    { id: "chapter_dashboard", label: "Chapter Command", sub: "Systematic Syllabus Navigator", icon: Target, color: "text-amber-400 bg-amber-500/15" },
+                    { id: "concepts", label: "Concepts Hub (27 Ch)", sub: "NCERT Official Blueprints & Rubrics", icon: BookOpen, color: "text-blue-400 bg-blue-500/15" },
+                    { id: "questions", label: "Master Question Bank", sub: "1,200+ CBSE Board-Graded Questions", icon: Zap, color: "text-emerald-400 bg-emerald-500/15" },
+                    { id: "hots", label: "Competitive HOTS Vault", sub: "35 Master NTSE / Olympiad Problems", icon: Flame, color: "text-rose-400 bg-rose-500/15" }
+                  ]
+                },
+                {
+                  group: "Official Proofs & Visual Vaults",
+                  items: [
+                    { id: "diagrams", label: "NCERT Visual Diagrams", sub: "29 Cropped Ray & Circuit Diagrams", icon: Compass, color: "text-cyan-400 bg-cyan-500/15" },
+                    { id: "theorems", label: "Theorems & Converses", sub: "25 Formal Geometry Proofs & Corollaries", icon: Award, color: "text-amber-400 bg-amber-500/15" },
+                    { id: "reactions", label: "Chemistry Reactions", sub: "56 Equations with States & Conditions", icon: FlaskConical, color: "text-teal-400 bg-teal-500/15" },
+                    { id: "activities", label: "NCERT Lab Activities", sub: "Step-by-Step Practical Vivas", icon: Beaker, color: "text-indigo-400 bg-indigo-500/15" }
+                  ]
+                },
+                {
+                  group: "Active Recall & Error Elimination",
+                  items: [
+                    { id: "mnemonics", label: "Visual Mnemonics Hub", sub: "49 Infographic Cheat Sheets", icon: Sparkles, color: "text-purple-400 bg-purple-500/15" },
+                    { id: "flashcards", label: "Flashcards Engine", sub: "Spaced Repetition Active Recall", icon: BookMarked, color: "text-blue-400 bg-blue-500/15" },
+                    { id: "common_mistakes", label: "My Mistakes Error Log", sub: "Examiner Pitfalls & Deduction Traps", icon: AlertTriangle, color: "text-rose-400 bg-rose-500/15" }
+                  ]
+                },
+                {
+                  group: "Exam Planning & Progress Tracking",
+                  items: [
+                    { id: "test_series", label: "Test Series I (Sept 14)", sub: "Target Exam Schedules & Cutoffs", icon: Calendar, color: "text-emerald-400 bg-emerald-500/15" },
+                    { id: "today", label: "Daily Focus & Tasks", sub: "Real-Time Productivity Checklist", icon: Clock, color: "text-amber-400 bg-amber-500/15" },
+                    { id: "syllabus", label: "NCERT Master Syllabus", sub: "Class 10 CBSE 2026-27 Tracker", icon: BookOpen, color: "text-teal-400 bg-teal-500/15" },
+                    { id: "roadmap", label: "100% Roadmap", sub: "Milestone-by-Milestone Timeline", icon: Compass, color: "text-cyan-400 bg-cyan-500/15" }
+                  ]
+                }
+              ].map((grp, gIdx) => {
+                const filtered = grp.items.filter(
+                  it => !allModulesSearch.trim() ||
+                    it.label.toLowerCase().includes(allModulesSearch.toLowerCase()) ||
+                    it.sub.toLowerCase().includes(allModulesSearch.toLowerCase())
+                );
+                if (filtered.length === 0) return null;
+
+                return (
+                  <div key={gIdx} className="space-y-3">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
+                      {grp.group}
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {filtered.map((item) => (
+                        <button
+                          key={item.id}
+                          onClick={() => {
+                            playSound("click");
+                            setActiveTab(item.id as any);
+                            setIsAllModulesModalOpen(false);
+                          }}
+                          className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
+                            activeTab === item.id
+                              ? isDark
+                                ? "bg-amber-500/20 border-amber-500 text-amber-300 font-bold shadow-md"
+                                : "bg-amber-50 border-amber-400 text-amber-900 font-bold shadow-sm"
+                              : isDark
+                              ? "bg-white/[0.02] border-white/5 hover:bg-white/[0.06] text-slate-300 hover:text-white"
+                              : "bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-800"
+                          }`}
+                        >
+                          <div className={`p-2 rounded-xl shrink-0 ${item.color}`}>
+                            <item.icon className="w-5 h-5" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-1">
+                              <span className="text-xs sm:text-sm font-bold truncate">{item.label}</span>
+                              {activeTab === item.id && (
+                                <span className="text-[9px] font-mono font-bold px-1.5 py-0.2 rounded bg-amber-500 text-slate-950 shrink-0">
+                                  ACTIVE
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11px] text-slate-400 leading-tight mt-0.5">{item.sub}</p>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* MODAL FOOTER */}
+            <div className="p-4 border-t border-white/10 flex items-center justify-between gap-4 text-xs shrink-0">
+              <span className="text-slate-400 font-mono text-[11px]">
+                Tip: Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 font-mono">ESC</kbd> to close
+              </span>
+              <button
+                onClick={() => setIsAllModulesModalOpen(false)}
+                className="px-5 py-2 rounded-xl font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-all cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
 
       {/* =========================================================================
           MAIN APPLICATION CONTENT
@@ -2637,6 +3215,51 @@ export default function CBSECommandCenter() {
           />
         )}
 
+        {/* ===================== TAB: CHEMISTRY REACTIONS ENCYCLOPEDIA ===================== */}
+        {activeTab === "reactions" && (
+          <ChemistryReactionsView
+            isDark={isDark}
+            onOpenQuestionBank={(targetChNo) => {
+              playSound("click");
+              const ch = targetChNo || 1;
+              setActiveVaultSubject("science");
+              setActiveVaultChapter(ch);
+              loadChapterData(ch, false, "science");
+              setActiveTab("questions");
+            }}
+          />
+        )}
+
+        {/* ===================== TAB: SCIENCE DIAGRAMS & MIXED CIRCUITS ===================== */}
+        {activeTab === "diagrams" && (
+          <ScienceDiagramsView
+            isDark={isDark}
+            onOpenQuestionBank={(targetChNo) => {
+              playSound("click");
+              const ch = targetChNo || 9;
+              setActiveVaultSubject("science");
+              setActiveVaultChapter(ch);
+              loadChapterData(ch, false, "science");
+              setActiveTab("questions");
+            }}
+          />
+        )}
+
+        {/* ===================== TAB: COMPETITIVE & HOTS VAULT ===================== */}
+        {activeTab === "hots" && (
+          <CompetitiveHotsView
+            isDark={isDark}
+            onOpenQuestionBank={(sub, targetChNo) => {
+              playSound("click");
+              const ch = targetChNo || 1;
+              setActiveVaultSubject(sub);
+              setActiveVaultChapter(ch);
+              loadChapterData(ch, false, sub);
+              setActiveTab("questions");
+            }}
+          />
+        )}
+
         {/* ===================== TAB: CONCEPTS HUB (MATH + SCIENCE ALL 27 CHAPTERS) ===================== */}
         {activeTab === "concepts" && (
           <ConceptsHubView
@@ -2650,6 +3273,18 @@ export default function CBSECommandCenter() {
             onOpenTheorems={() => {
               playSound("click");
               setActiveTab("theorems");
+            }}
+            onOpenReactions={(targetChNo) => {
+              playSound("click");
+              setActiveTab("reactions");
+            }}
+            onOpenDiagrams={(targetChNo) => {
+              playSound("click");
+              setActiveTab("diagrams");
+            }}
+            onOpenHots={(sub, targetChNo) => {
+              playSound("click");
+              setActiveTab("hots");
             }}
             onOpenQuestionBank={(sub, ch) => {
               playSound("click");
@@ -2931,6 +3566,25 @@ export default function CBSECommandCenter() {
                       <PremiumMathRenderer content={`### Question\n\n${q.question}`} isDark={isDark} />
                     </div>
 
+                    {/* Visual Circuit / Optics Diagram */}
+                    {(q.diagramSvg || q.diagramImageUrl) && (
+                      <div className={`my-3 p-3 sm:p-4 rounded-2xl border flex flex-col items-center justify-center overflow-x-auto ${
+                        isDark ? "bg-black/30 border-white/10" : "bg-slate-50 border-slate-200 shadow-2xs"
+                      }`}>
+                        {q.diagramImageUrl && (
+                          <img
+                            src={q.diagramImageUrl}
+                            alt="Visual Physics / Circuit Diagram"
+                            className="w-full max-w-lg h-auto rounded-xl shadow-xs border border-white/10 object-contain my-1.5"
+                            loading="lazy"
+                          />
+                        )}
+                        {q.diagramSvg && (
+                          <div className="w-full max-w-xl flex justify-center" dangerouslySetInnerHTML={{ __html: q.diagramSvg }} />
+                        )}
+                      </div>
+                    )}
+
                     {/* MCQ Options Grid — Interactive Tap-to-Evaluate System */}
                     {q.options && q.options.length > 0 && (() => {
                       const correctIdx = resolveCorrectOptionIndex(q);
@@ -3174,102 +3828,7 @@ export default function CBSECommandCenter() {
           </div>
         )}
 
-        {/* ===================== TAB 6: REACTIONS & MAP WORK ===================== */}
-        {activeTab === "reactions" && (
-          <div className="space-y-4 sm:space-y-6 animate-fade-in">
-            <div className={`p-4 sm:p-6 rounded-2xl border space-y-1 transition-colors ${
-              isDark ? "bg-[#121212]/80 backdrop-blur-xl border-white/10" : "bg-white border-slate-200 shadow-sm"
-            }`}>
-              <h2 className="text-base sm:text-xl font-bold">Chemistry Reactions & Mandatory SST Map Work</h2>
-              <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                Color changes, gas emissions, and high-frequency map locations for Class 10 Boards.
-              </p>
-            </div>
 
-            {/* REACTIONS LIST */}
-            <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider font-mono text-amber-500 flex items-center gap-1.5">
-                <FlaskConical className="w-3.5 h-3.5" /> Top Chemistry Reactions (Color Changes & Precipitates)
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                {ESSENTIAL_CHEMISTRY_REACTIONS.map((rxn, idx) => (
-                  <div
-                    key={idx}
-                    className={`p-4 rounded-xl border space-y-2 ${
-                      isDark ? "bg-[#121212]/80 backdrop-blur-xl border-white/10" : "bg-white border-slate-200 shadow-xs"
-                    }`}
-                  >
-                    <div className="flex justify-between items-center text-xs">
-                      <h4 className="font-bold text-xs">{rxn.name}</h4>
-                      <span className="px-1.5 py-0.5 bg-slate-800 text-slate-300 rounded text-[9px] font-mono">{rxn.type}</span>
-                    </div>
-
-                    <div className={`p-2.5 rounded-lg font-mono text-xs font-semibold border overflow-x-auto ${
-                      isDark ? "bg-[#0b0f19] border-white/10 text-amber-300" : "bg-slate-50 border-slate-200 text-slate-900"
-                    }`}>
-                      {rxn.equation}
-                    </div>
-
-                    <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                      <strong className="text-emerald-500 font-semibold">Observation:</strong> {rxn.obs}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* SST MAP WORK CHECKLIST */}
-            <div className="space-y-3 pt-3 border-t border-white/10">
-              <h3 className="text-xs font-bold uppercase tracking-wider font-mono text-amber-500 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5" /> Mandatory SST Map Work Checklist (+15 XP per item)
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                {MANDATORY_MAP_LOCATIONS.map((cat, cIdx) => (
-                  <div
-                    key={cIdx}
-                    className={`p-4 rounded-xl border space-y-2.5 ${
-                      isDark ? "bg-[#121212]/80 backdrop-blur-xl border-white/10" : "bg-white border-slate-200 shadow-xs"
-                    }`}
-                  >
-                    <h4 className="text-xs font-bold uppercase tracking-wider font-mono text-emerald-500">{cat.category}</h4>
-                    <div className="grid grid-cols-1 gap-1.5 text-xs">
-                      {cat.items.map((item, iIdx) => {
-                        const isDone = completedMapItems[item] || false;
-                        return (
-                          <div
-                            key={iIdx}
-                            onClick={() => toggleMapItem(item)}
-                            className={`p-2.5 rounded-lg border flex items-center justify-between gap-2 cursor-pointer transition-all min-h-[40px] ${
-                              isDone
-                                ? isDark
-                                  ? "bg-emerald-950/20 border-emerald-800/40 text-emerald-300"
-                                  : "bg-emerald-50 border-emerald-200 text-emerald-900"
-                                : isDark
-                                ? "bg-[#0b0f19] border-white/10 text-slate-300 hover:border-slate-700"
-                                : "bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300"
-                            }`}
-                          >
-                            <div className="flex items-center gap-2 min-w-0">
-                              {isDone ? (
-                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                              ) : (
-                                <Square className={`w-3.5 h-3.5 shrink-0 ${isDark ? "text-slate-600" : "text-slate-400"}`} />
-                              )}
-                              <span className={`truncate ${isDone ? "line-through opacity-60" : ""}`}>{item}</span>
-                            </div>
-                            <span className="text-[9px] font-mono text-emerald-500 font-bold shrink-0">+15 XP</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* ===================== TAB 7: 100% BOARD ROADMAP ===================== */}
         
@@ -4018,6 +4577,16 @@ export default function CBSECommandCenter() {
                       icon: BookOpen 
                     },
                     { label: 'NCERT Lab Activities', action: () => setActiveTab('activities'), icon: Beaker },
+                    { 
+                      label: 'Circuits & Question Bank', 
+                      action: () => {
+                        setActiveVaultSubject("science");
+                        setActiveVaultChapter(11);
+                        loadChapterData(11, false, "science");
+                        setActiveTab('questions');
+                      }, 
+                      icon: Zap 
+                    },
                     { label: 'Theorems & Proofs (5M)', action: () => setActiveTab('theorems'), icon: Award },
                     { label: 'Visual Mnemonics (49)', action: () => setActiveTab('mnemonics'), icon: Sparkles },
                     { label: 'Flashcards Engine', action: () => setActiveTab('flashcards'), icon: BookMarked },
@@ -4169,9 +4738,12 @@ export default function CBSECommandCenter() {
 
             <div className="grid grid-cols-2 gap-2 text-xs">
               {[
+                { id: "diagrams", label: "NCERT Diagrams Vault (29)", icon: Compass },
                 { id: "test_series", label: "Test Series (Sept 14)", icon: Calendar },
                 { id: "activities", label: "NCERT Lab Activities", icon: Beaker },
-                { id: "theorems", label: "Theorems & Examples", icon: Award },
+                { id: "theorems", label: "Theorems & Converses (25)", icon: Award },
+                { id: "reactions", label: "Chemistry Reactions (56)", icon: FlaskConical },
+                { id: "hots", label: "Competitive HOTS Vault (35)", icon: Flame },
                 { id: "flashcards", label: "Flashcards Engine", icon: BookMarked },
                 { id: "common_mistakes", label: "My Mistakes Log", icon: Flame },
                 { id: "today", label: "Daily Focus & Tasks", icon: Clock },

@@ -5,6 +5,8 @@ import {
   BookOpen,
   FlaskConical,
   Atom,
+  Flame,
+  Compass,
   Zap,
   Dna,
   Leaf,
@@ -24,7 +26,6 @@ import {
   ShieldAlert,
   HelpCircle,
   Layers,
-  Compass,
   LayoutGrid,
   Check,
   Target
@@ -53,6 +54,9 @@ interface ConceptsHubViewProps {
   onOpenQuestionBank?: (subject: "math" | "science", chapterNo: number) => void;
   onOpenActivities?: (chapterNo?: number) => void;
   onOpenTheorems?: () => void;
+  onOpenReactions?: (chapterNo?: number) => void;
+  onOpenDiagrams?: (chapterNo?: number) => void;
+  onOpenHots?: (subject: "math" | "science", chapterNo?: number) => void;
 }
 
 // Science Chapter Metadata with Official CBSE Units
@@ -96,7 +100,10 @@ export default function ConceptsHubView({
   initialChapterNo = 6,
   onOpenQuestionBank,
   onOpenActivities,
-  onOpenTheorems
+  onOpenTheorems,
+  onOpenReactions,
+  onOpenDiagrams,
+  onOpenHots
 }: ConceptsHubViewProps) {
   const [activeSubject, setActiveSubject] = useState<"math" | "science">(initialSubject);
   const [activeMathChapterNo, setActiveMathChapterNo] = useState<number>(
@@ -601,14 +608,24 @@ export default function ConceptsHubView({
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto shrink-0">
-                {onOpenTheorems && activeMathChapter.chapterNo === 6 && (
+              <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto shrink-0">
+                {onOpenTheorems && [1, 4, 5, 6, 7, 8, 10, 11, 13].includes(activeMathChapter.chapterNo) && (
                   <button
                     onClick={onOpenTheorems}
-                    className="px-4 py-2.5 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition-all cursor-pointer flex items-center gap-1.5"
                   >
-                    <Award className="w-4 h-4 text-amber-400" />
-                    <span>5M Theorem Proofs</span>
+                    <Award className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Theorems & Derivations</span>
+                  </button>
+                )}
+
+                {onOpenHots && (
+                  <button
+                    onClick={() => onOpenHots("math", activeMathChapter.chapterNo)}
+                    className="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <Flame className="w-3.5 h-3.5 text-rose-400" />
+                    <span>Competitive HOTS</span>
                   </button>
                 )}
 
@@ -699,7 +716,12 @@ export default function ConceptsHubView({
                             <PremiumMathRenderer content={fp.content} />
                           </div>
                           {fp.note && (
-                            <p className="text-[11px] text-amber-400 font-medium">⚠️ {fp.note}</p>
+                            <div className="text-[11px] text-amber-400 font-medium pt-1 border-t border-teal-500/20 flex items-start gap-1.5">
+                              <span className="shrink-0 mt-0.5">💡</span>
+                              <div className="flex-1">
+                                <PremiumMathRenderer content={fp.note} isDark={isDark} />
+                              </div>
+                            </div>
                           )}
                         </div>
                       ))}
@@ -923,11 +945,31 @@ export default function ConceptsHubView({
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto shrink-0">
+              <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto shrink-0">
+                {onOpenDiagrams && (
+                  <button
+                    onClick={() => onOpenDiagrams(activeScienceMeta.no)}
+                    className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                  >
+                    <Compass className="w-4 h-4 text-purple-400" />
+                    <span>Visual Diagrams Vault (29)</span>
+                  </button>
+                )}
+
+                {onOpenHots && (
+                  <button
+                    onClick={() => onOpenHots("science", activeScienceMeta.no)}
+                    className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <Flame className="w-4 h-4 text-rose-400" />
+                    <span>Competitive HOTS</span>
+                  </button>
+                )}
+
                 {onOpenActivities && (
                   <button
                     onClick={() => onOpenActivities(activeScienceMeta.no)}
-                    className="px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 transition-all cursor-pointer flex items-center gap-1.5"
                   >
                     <FlaskConical className="w-4 h-4 text-cyan-400" />
                     <span>Lab Activities ({activeScienceMeta.no})</span>
@@ -937,10 +979,10 @@ export default function ConceptsHubView({
                 {onOpenQuestionBank && (
                   <button
                     onClick={() => onOpenQuestionBank("science", activeScienceMeta.no)}
-                    className="px-5 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 transition-all cursor-pointer flex items-center gap-2 shadow-lg shadow-teal-500/20"
+                    className="px-4 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 transition-all cursor-pointer flex items-center gap-2 shadow-lg shadow-teal-500/20"
                   >
                     <Sparkles className="w-4 h-4" />
-                    <span>Practice Board Questions</span>
+                    <span>Practice Questions</span>
                   </button>
                 )}
               </div>

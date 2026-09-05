@@ -237,11 +237,14 @@ export default function ChapterConceptExplainer({
                         </div>
                       </div>
                       {item.note && (
-                        <p className={`text-[11px] font-sans italic pt-1 border-t border-current/10 ${
-                          isDark ? "text-slate-400" : "text-slate-600"
+                        <div className={`text-[11px] font-sans pt-1 border-t border-current/10 flex items-start gap-1.5 ${
+                          isDark ? "text-slate-300" : "text-slate-700"
                         }`}>
-                          💡 {item.note}
-                        </p>
+                          <span className="shrink-0 mt-0.5">💡</span>
+                          <div className="flex-1">
+                            <PremiumMathRenderer content={item.note} isDark={isDark} />
+                          </div>
+                        </div>
                       )}
                     </div>
                   ))}

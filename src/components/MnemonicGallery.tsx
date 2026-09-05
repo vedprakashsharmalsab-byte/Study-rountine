@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { 
   Sparkles, 
@@ -647,6 +648,26 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
 
   const totalSheetsCount = activeChapterList.reduce((acc, c) => acc + c.images.length, 0);
 
+  const [mounted, setMounted] = useState<boolean>(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (activeModalImage) {
+      const orig = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setActiveModalImage(null);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = orig;
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+  }, [activeModalImage]);
+
   const handleSubjectChange = (newSubject: "math" | "science") => {
     setActiveSubject(newSubject);
     setSelectedChapterId(newSubject === "science" ? 1 : 6);
@@ -877,10 +898,18 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
         </div>
       </div>
 
-      {/* Lightbox / Zoom Modal */}
-      {activeModalImage && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-6 animate-fade-in">
-          <div className="relative w-full max-w-5xl max-h-[92vh] flex flex-col rounded-3xl border border-white/15 bg-[#0b0f19] overflow-hidden shadow-2xl">
+      {/* Lightbox / Zoom Modal via Portal */}
+      {mounted && activeModalImage && createPortal(
+        <div
+          className="fixed inset-0 bg-black/85 z-[99999] flex items-center justify-center p-3 sm:p-6 select-none"
+          onClick={() => setActiveModalImage(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="relative w-full max-w-5xl max-h-[92vh] flex flex-col rounded-3xl border border-white/15 bg-[#0b0f19] overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b border-white/10 bg-black/40">
               <div>
@@ -921,7 +950,8 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
               />
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

@@ -27,6 +27,8 @@ export interface VaultQuestion {
   formula?: string;         // key formula used
   examinerNote?: string;
   source?: string;          // KVS / NCERT / RD Sharma / Board PYQ
+  diagramSvg?: string;      // Visual SVG circuit or optics diagram
+  diagramImageUrl?: string; // High-res image diagram (/study_material/...)
 }
 
 export interface VaultChapterInfo {

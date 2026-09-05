@@ -1,6 +1,6 @@
 export interface BoardTheoremOrExample {
   id: string;
-  type: "Theorem Proof" | "NCERT Board Example";
+  type: "Theorem Proof" | "NCERT Board Example" | "Mandatory Derivation";
   chapterNo: number;
   chapterName: string;
   title: string;
@@ -662,4 +662,604 @@ export const THEOREMS_AND_EXAMPLES_BANK: BoardTheoremOrExample[] = [
     conclusion: "$x = 9, \\quad y = 15$",
     examinerTrap: "Bracket Sign Trap: cf is (36 + x). You MUST subtract the entire quantity: 50 - (36 + x) = 50 - 36 - x. Forgetting parentheses gives 50 - 36 + x, causing fatal calculation breakdown!"
   }
+,
+
+  {
+  "id": "thm_1_root2_irrational",
+  "type": "Theorem Proof",
+  "chapterNo": 1,
+  "chapterName": "Real Numbers",
+  "title": "Theorem 1.4: Proof of Irrationality of √2",
+  "marks": 3,
+  "boardFrequency": "99% Recurrence (CBSE 2024, 2023, 2021, 2019, 2018)",
+  "ncertReference": "NCERT Class 10, Chapter 1, Theorem 1.4 (Page 12)",
+  "statement": "Prove that $\\sqrt{2}$ is irrational.",
+  "given": "The number $\\sqrt{2}$.",
+  "toProve": "$\\sqrt{2}$ is an irrational number.",
+  "sheetSteps": [
+    {
+      "marginTag": "Assumption",
+      "content": "Let us assume, to the contrary, that $\\sqrt{2}$ is rational.\nTherefore, we can find coprime integers $a$ and $b$ (where $b \neq 0$ and $\\gcd(a, b) = 1$) such that:\n$\\sqrt{2} = \\frac{a}{b}$",
+      "reason": "Proof by contradiction; definition of rational number in lowest terms"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "Cross multiplying: $b\\sqrt{2} = a$.\nSquaring both sides:\n$(b\\sqrt{2})^2 = a^2 \\implies 2b^2 = a^2 \\quad \\dots (1)$",
+      "reason": "Squaring both sides"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "From (1), $2$ divides $a^2$.\nBy Theorem 1.3: If a prime $p$ divides $a^2$, then $p$ divides $a$.\n$\\therefore 2$ divides $a$.",
+      "reason": "Fundamental Theorem of Arithmetic (Theorem 1.3)"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "Since $2$ divides $a$, we can write $a = 2c$ for some integer $c$.\nSubstituting $a = 2c$ into equation (1):\n$2b^2 = (2c)^2 = 4c^2 \\implies b^2 = 2c^2 \\quad \\dots (2)$",
+      "reason": "Substitution of a = 2c into (1)"
+    },
+    {
+      "marginTag": "Step 4",
+      "content": "From (2), $2$ divides $b^2$, which implies $2$ divides $b$ (again by Theorem 1.3).",
+      "reason": "Theorem 1.3 applied to b"
+    },
+    {
+      "marginTag": "Step 5",
+      "content": "From Steps 2 and 4, $a$ and $b$ have at least $2$ as a common factor.\nThis contradicts the fact that $a$ and $b$ are coprime (have no common factor other than 1).",
+      "reason": "Direct contradiction with initial assumption"
+    },
+    {
+      "marginTag": "Step 6",
+      "content": "This contradiction has arisen because of our incorrect assumption that $\\sqrt{2}$ is rational.\nTherefore, $\\sqrt{2}$ is irrational.",
+      "reason": "Proof by Contradiction completed"
+    }
+  ],
+  "conclusion": "$\\sqrt{2} \\text{ is an irrational number.} \\quad \\text{[Hence Proved]}$",
+  "examinerTrap": "Coprime Declaration Trap: If you fail to write 'where a and b are coprime integers (gcd(a, b) = 1)', CBSE marking scheme deducts 1 full mark! Also you must explicitly cite Theorem 1.3 ('p divides a^2 implies p divides a')."
+},
+
+  {
+  "id": "thm_1_root5_irrational",
+  "type": "Theorem Proof",
+  "chapterNo": 1,
+  "chapterName": "Real Numbers",
+  "title": "Theorem: Proof of Irrationality of √5",
+  "marks": 3,
+  "boardFrequency": "96% Recurrence (CBSE 2024, 2022, 2020, 2017)",
+  "ncertReference": "NCERT Class 10, Chapter 1, Exercise 1.2 Q1",
+  "statement": "Prove that $\\sqrt{5}$ is irrational.",
+  "given": "The number $\\sqrt{5}$.",
+  "toProve": "$\\sqrt{5}$ is irrational.",
+  "sheetSteps": [
+    {
+      "marginTag": "Assumption",
+      "content": "Assume to the contrary that $\\sqrt{5}$ is rational.\nLet $\\sqrt{5} = \\frac{a}{b}$, where $a$ and $b$ are coprime integers and $b \neq 0$.",
+      "reason": "Assumption of rationality in reduced form"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "Squaring both sides:\n$5 = \\frac{a^2}{b^2} \\implies a^2 = 5b^2 \\quad \\dots (1)$",
+      "reason": "Rearranging and squaring"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "Since $5$ divides $a^2$, $5$ divides $a$ (since 5 is prime, by Theorem 1.3).",
+      "reason": "Theorem 1.3"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "Let $a = 5c$ for some integer $c$.\nSubstitute in (1): $(5c)^2 = 5b^2 \\implies 25c^2 = 5b^2 \\implies b^2 = 5c^2 \\quad \\dots (2)$",
+      "reason": "Substituting a = 5c"
+    },
+    {
+      "marginTag": "Step 4",
+      "content": "Equation (2) shows that $5$ divides $b^2$, hence $5$ divides $b$.",
+      "reason": "Theorem 1.3"
+    },
+    {
+      "marginTag": "Step 5",
+      "content": "Thus, $5$ is a common factor of both $a$ and $b$. This contradicts the fact that $a$ and $b$ are coprime.",
+      "reason": "Contradiction found"
+    },
+    {
+      "marginTag": "Step 6",
+      "content": "Hence, our assumption was incorrect. $\\sqrt{5}$ is irrational.",
+      "reason": "Conclusion by contradiction"
+    }
+  ],
+  "conclusion": "$\\sqrt{5} \\text{ is irrational.} \\quad \\text{[Hence Proved]}$",
+  "examinerTrap": "Never write 'a/b is a fraction'. Always explicitly write 'a and b are integers, b ≠ 0, and gcd(a, b) = 1'. CBSE answer keys penalize loose wording."
+},
+
+  {
+  "id": "thm_1_composite_irrational",
+  "type": "Theorem Proof",
+  "chapterNo": 1,
+  "chapterName": "Real Numbers",
+  "title": "Theorem: Proof that 3 + 2√5 is Irrational",
+  "marks": 3,
+  "boardFrequency": "97% Recurrence (CBSE 2024, 2023, 2020, 2019)",
+  "ncertReference": "NCERT Class 10, Chapter 1, Exercise 1.2 Q2",
+  "statement": "Prove that $3 + 2\\sqrt{5}$ is irrational, given that $\\sqrt{5}$ is irrational.",
+  "given": "$3 + 2\\sqrt{5}$ where $\\sqrt{5}$ is known to be irrational.",
+  "toProve": "$3 + 2\\sqrt{5}$ is irrational.",
+  "sheetSteps": [
+    {
+      "marginTag": "Assumption",
+      "content": "Let us assume to the contrary that $3 + 2\\sqrt{5}$ is rational.\nThen there exist coprime integers $a$ and $b$ ($b \neq 0$) such that:\n$3 + 2\\sqrt{5} = \\frac{a}{b}$",
+      "reason": "Proof by contradiction"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "Isolating the radical term $\\sqrt{5}$:\n$2\\sqrt{5} = \\frac{a}{b} - 3 = \\frac{a - 3b}{b}$",
+      "reason": "Transposing 3 to RHS"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "Dividing both sides by 2:\n$\\sqrt{5} = \\frac{a - 3b}{2b}$",
+      "reason": "Isolating square root"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "Since $a$ and $b$ are integers, $a - 3b$ and $2b$ are also integers with $2b \neq 0$.\nTherefore, $\\frac{a - 3b}{2b}$ is a rational number.",
+      "reason": "Integers are closed under subtraction and multiplication"
+    },
+    {
+      "marginTag": "Step 4",
+      "content": "This implies that $\\sqrt{5}$ is rational.\nBut this contradicts the known fact that $\\sqrt{5}$ is irrational.",
+      "reason": "RHS is rational, LHS is irrational"
+    },
+    {
+      "marginTag": "Step 5",
+      "content": "This contradiction has arisen because of our incorrect assumption that $3 + 2\\sqrt{5}$ is rational.\nHence, $3 + 2\\sqrt{5}$ is irrational.",
+      "reason": "Contradiction completes proof"
+    }
+  ],
+  "conclusion": "$3 + 2\\sqrt{5} \\text{ is irrational.} \\quad \\text{[Hence Proved]}$",
+  "examinerTrap": "Do NOT attempt to reprove that √5 is irrational unless the question explicitly asks for it! Simply isolate √5 and state: 'Since a and b are integers, (a - 3b)/2b is rational, contradicting that √5 is irrational'."
+},
+
+  {
+  "id": "deriv_quad_formula",
+  "type": "Mandatory Derivation",
+  "chapterNo": 4,
+  "chapterName": "Quadratic Equations",
+  "title": "Derivation of the Quadratic Formula (Completing the Square Method)",
+  "marks": 4,
+  "boardFrequency": "92% Recurrence (CBSE Standard Math Derivation)",
+  "ncertReference": "NCERT Class 10, Chapter 4, Section 4.4 (Page 83)",
+  "statement": "Derive the quadratic formula $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$ for the standard quadratic equation $ax^2 + bx + c = 0$ ($a \neq 0$).",
+  "sheetSteps": [
+    {
+      "marginTag": "Given Eq",
+      "content": "Consider the standard general quadratic equation:\n$ax^2 + bx + c = 0, \\quad \\text{where } a, b, c \\in \\mathbb{R} \\text{ and } a \neq 0$",
+      "reason": "Standard quadratic form"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "Divide the entire equation by the leading coefficient $a$ ($a \neq 0$):\n$x^2 + \\frac{b}{a}x + \\frac{c}{a} = 0$",
+      "reason": "Making coefficient of x^2 equal to 1"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "Transpose the constant term to the right-hand side:\n$x^2 + \\frac{b}{a}x = -\\frac{c}{a}$",
+      "reason": "Transposition of constant term"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "To complete the square on LHS, add $\\left(\\frac{1}{2} \\times \\text{coefficient of } x\\right)^2 = \\left(\\frac{b}{2a}\\right)^2 = \\frac{b^2}{4a^2}$ to both sides:\n$x^2 + 2 \\cdot x \\cdot \\left(\\frac{b}{2a}\\right) + \\left(\\frac{b}{2a}\\right)^2 = \\frac{b^2}{4a^2} - \\frac{c}{a}$",
+      "reason": "Adding (b/2a)^2 to complete square (x + y)^2"
+    },
+    {
+      "marginTag": "Step 4",
+      "content": "The LHS is now a perfect square $\\left(x + \\frac{b}{2a}\\right)^2$.\nTake LCM on the RHS ($4a^2$):\n$\\left(x + \\frac{b}{2a}\\right)^2 = \\frac{b^2 - 4ac}{4a^2}$",
+      "reason": "Algebraic identity (x + y)^2 and LCM 4a^2"
+    },
+    {
+      "marginTag": "Step 5",
+      "content": "Taking square root on both sides (assuming discriminant $b^2 - 4ac \\ge 0$):\n$x + \\frac{b}{2a} = \\pm \\frac{\\sqrt{b^2 - 4ac}}{2a}$",
+      "reason": "Square root property with ±"
+    },
+    {
+      "marginTag": "Step 6",
+      "content": "Transpose $\\frac{b}{2a}$ to RHS:\n$x = -\\frac{b}{2a} \\pm \\frac{\\sqrt{b^2 - 4ac}}{2a} = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$",
+      "reason": "Combining over common denominator 2a"
+    }
+  ],
+  "conclusion": "$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} \\quad \\text{[Quadratic Formula / Shridharacharya's Rule]}$",
+  "examinerTrap": "Denominator Sign Trap: The denominator is strictly 2a, NOT just 2! Also remember to specify that real roots exist only when the discriminant $D = b^2 - 4ac \\ge 0$."
+},
+
+  {
+  "id": "deriv_ap_nth_term",
+  "type": "Mandatory Derivation",
+  "chapterNo": 5,
+  "chapterName": "Arithmetic Progressions",
+  "title": "Derivation of the n-th Term of an AP (an = a + (n - 1)d)",
+  "marks": 3,
+  "boardFrequency": "88% Recurrence (Foundational Proof)",
+  "ncertReference": "NCERT Class 10, Chapter 5, Section 5.3 (Page 100)",
+  "statement": "Derive the formula for the general $n$-th term $a_n$ of an Arithmetic Progression whose first term is $a$ and common difference is $d$.",
+  "sheetSteps": [
+    {
+      "marginTag": "Definition",
+      "content": "Let the Arithmetic Progression be denoted by terms $a_1, a_2, a_3, \\dots, a_n$, where:\nFirst term $= a_1 = a$\nCommon difference $= d$",
+      "reason": "Standard AP notation"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "By the definition of an AP, each subsequent term is obtained by adding common difference $d$ to the preceding term:\n$a_1 = a = a + (1 - 1)d$\n$a_2 = a_1 + d = a + d = a + (2 - 1)d$\n$a_3 = a_2 + d = (a + d) + d = a + 2d = a + (3 - 1)d$\n$a_4 = a_3 + d = (a + 2d) + d = a + 3d = a + (4 - 1)d$",
+      "reason": "Recursive term addition and pattern recognition"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "Observing the general pattern for the $n$-th term:\nThe coefficient of $d$ in the $n$-th term is always one less than the term index $n$, which is $(n - 1)$.",
+      "reason": "Mathematical induction pattern"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "Therefore, the $n$-th term $a_n$ is given by:\n$a_n = a + (n - 1)d$",
+      "reason": "Generalization for arbitrary term n"
+    }
+  ],
+  "conclusion": "$a_n = a + (n - 1)d \\quad \\text{[General Term of an AP]}$",
+  "examinerTrap": "Zero vs One Index: The first term has (1 - 1)d = 0d! Do not write a_n = a + nd. The number of intervals of common difference between term 1 and term n is strictly (n - 1)."
+},
+
+  {
+  "id": "deriv_ap_sum",
+  "type": "Mandatory Derivation",
+  "chapterNo": 5,
+  "chapterName": "Arithmetic Progressions",
+  "title": "Derivation of Sum of First n Terms of an AP (Sn = n/2 [2a + (n - 1)d])",
+  "marks": 4,
+  "boardFrequency": "94% Recurrence (CBSE Standard Exam Derivation)",
+  "ncertReference": "NCERT Class 10, Chapter 5, Section 5.4 (Page 106)",
+  "statement": "Derive the formula for the sum of the first $n$ terms of an AP with first term $a$ and common difference $d$.",
+  "sheetSteps": [
+    {
+      "marginTag": "Setup",
+      "content": "Let $S_n$ denote the sum of first $n$ terms of the AP with first term $a$ and common difference $d$:\n$S_n = a + (a + d) + (a + 2d) + \\dots + [a + (n - 2)d] + [a + (n - 1)d] \\quad \\dots (1)$",
+      "reason": "Writing sum in ascending order"
+    },
+    {
+      "marginTag": "Reverse",
+      "content": "Rewriting the terms in reverse order (descending):\n$S_n = [a + (n - 1)d] + [a + (n - 2)d] + \\dots + (a + d) + a \\quad \\dots (2)$",
+      "reason": "Gauss reverse summation technique"
+    },
+    {
+      "marginTag": "Add",
+      "content": "Adding equations (1) and (2) term-by-term vertically:\n$2S_n = \\{a + [a + (n - 1)d]\\} + \\{(a + d) + [a + (n - 2)d]\\} + \\dots + \\{[a + (n - 1)d] + a\\}$",
+      "reason": "Adding (1) and (2) column by column"
+    },
+    {
+      "marginTag": "Simplify",
+      "content": "Notice that every single pair simplifies to:\n$a + a + (n - 1)d = 2a + (n - 1)d$\nSince there are exactly $n$ such pairs:\n$2S_n = n \\times [2a + (n - 1)d]$",
+      "reason": "Every pair sum is constant across all n terms"
+    },
+    {
+      "marginTag": "Result",
+      "content": "Dividing both sides by 2:\n$S_n = \\frac{n}{2} [2a + (n - 1)d]$",
+      "reason": "Solving for Sn"
+    },
+    {
+      "marginTag": "Alternate",
+      "content": "Alternative form using last term $l = a_n = a + (n - 1)d$:\n$S_n = \\frac{n}{2} [a + a + (n - 1)d] = \\frac{n}{2} [a + l]$",
+      "reason": "Expressing in terms of first and last terms"
+    }
+  ],
+  "conclusion": "$S_n = \\frac{n}{2} [2a + (n - 1)d] = \\frac{n}{2} [a + l] \\quad \\text{[Sum of n Terms of an AP]}$",
+  "examinerTrap": "Forgetting the 2a: Students frequently write n/2 [a + (n - 1)d], dropping the coefficient 2. The formula has 2a because it sums the first term a and the n-th term [a + (n - 1)d]."
+},
+
+  {
+  "id": "thm_6_angle_bisector",
+  "type": "Theorem Proof",
+  "chapterNo": 6,
+  "chapterName": "Triangles",
+  "title": "Theorem: Internal Angle Bisector Theorem (BD/DC = AB/AC)",
+  "marks": 4,
+  "boardFrequency": "90% Recurrence (HOTS & Competitive Board Standard)",
+  "ncertReference": "NCERT Class 10, Chapter 6, Supplementary Extension",
+  "statement": "The internal bisector of an angle of a triangle divides the opposite side internally in the ratio of the sides containing the angle. That is, in △ABC with AD bisecting ∠A, BD/DC = AB/AC.",
+  "given": "A triangle △ABC in which AD is the internal bisector of ∠BAC meeting BC at D.",
+  "toProve": "$\\frac{BD}{DC} = \\frac{AB}{AC}$",
+  "construction": "Draw CE ∥ DA meeting BA produced at E.",
+  "sheetSteps": [
+    {
+      "marginTag": "Given",
+      "content": "In $\\Delta ABC$, $AD$ bisects $\\angle BAC$. Therefore, $\\angle 1 = \\angle 2$, where $\\angle 1 = \\angle BAD$ and $\\angle 2 = \\angle DAC$."
+    },
+    {
+      "marginTag": "Constr.",
+      "content": "Through vertex $C$, draw a line parallel to $DA$ intersecting $BA$ produced at point $E$ ($CE \\parallel DA$)."
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "Since $DA \\parallel CE$ and $AC$ is a transversal:\n$\\angle 2 = \\angle 3$ (alternate interior angles, where $\\angle 3 = \\angle ACE$)",
+      "reason": "Alternate interior angles"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "Since $DA \\parallel CE$ and line $BAE$ is a transversal:\n$\\angle 1 = \\angle 4$ (corresponding angles, where $\\angle 4 = \\angle AEC$)",
+      "reason": "Corresponding angles"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "Since $\\angle 1 = \\angle 2$ (given), it follows that:\n$\\angle 3 = \\angle 4$",
+      "reason": "Since ∠1 = ∠4 and ∠2 = ∠3"
+    },
+    {
+      "marginTag": "Step 4",
+      "content": "In $\\Delta ACE$, since $\\angle 3 = \\angle 4$, the sides opposite to equal angles are equal:\n$AE = AC \\quad \\dots (1)$",
+      "reason": "Sides opposite to equal angles in △ACE"
+    },
+    {
+      "marginTag": "Step 5",
+      "content": "Now in $\\Delta BCE$, since $DA \\parallel CE$, applying Basic Proportionality Theorem (Theorem 6.1):\n$\\frac{BD}{DC} = \\frac{BA}{AE} \\quad \\dots (2)$",
+      "reason": "BPT in △BCE with DA ∥ CE"
+    },
+    {
+      "marginTag": "Step 6",
+      "content": "Substitute $AE = AC$ from (1) into (2):\n$\\frac{BD}{DC} = \\frac{BA}{AC} = \\frac{AB}{AC}$",
+      "reason": "Replacing AE with AC"
+    }
+  ],
+  "conclusion": "$\\frac{BD}{DC} = \\frac{AB}{AC} \\quad \\text{[Hence Proved]}$",
+  "examinerTrap": "Common Misconception: AD does NOT bisect side BC unless △ABC is isosceles (AB = AC)! Never assume BD = DC in the proof."
+},
+
+  {
+  "id": "deriv_coord_distance",
+  "type": "Mandatory Derivation",
+  "chapterNo": 7,
+  "chapterName": "Coordinate Geometry",
+  "title": "Derivation of the Distance Formula (d = √[(x2 - x1)² + (y2 - y1)²])",
+  "marks": 3,
+  "boardFrequency": "85% Recurrence (Foundational Derivation)",
+  "ncertReference": "NCERT Class 10, Chapter 7, Section 7.2 (Page 156)",
+  "statement": "Derive the distance formula for the distance between two points $P(x_1, y_1)$ and $Q(x_2, y_2)$ in the Cartesian plane.",
+  "sheetSteps": [
+    {
+      "marginTag": "Setup",
+      "content": "Let $P(x_1, y_1)$ and $Q(x_2, y_2)$ be two arbitrary points in the Cartesian coordinate plane.",
+      "reason": "Given points"
+    },
+    {
+      "marginTag": "Constr.",
+      "content": "Draw $PR$ and $QS$ perpendicular to the x-axis ($R = (x_1, 0), S = (x_2, 0)$).\nDraw $PT \\perp QS$ meeting $QS$ at $T$.",
+      "reason": "Perpendicular projections"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "Calculate the base and vertical sides of right triangle $\\Delta PTQ$:\n$PT = RS = OS - OR = x_2 - x_1$\n$QT = QS - TS = QS - PR = y_2 - y_1$",
+      "reason": "Lengths of segments parallel to axes"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "In right-angled triangle $\\Delta PTQ$, by Pythagoras Theorem:\n$PQ^2 = PT^2 + QT^2$",
+      "reason": "Pythagoras Theorem in △PTQ"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "Substituting the values of $PT$ and $QT$:\n$PQ^2 = (x_2 - x_1)^2 + (y_2 - y_1)^2$",
+      "reason": "Direct substitution"
+    },
+    {
+      "marginTag": "Step 4",
+      "content": "Taking the positive square root (since distance is non-negative):\n$PQ = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$",
+      "reason": "Distance is always positive"
+    }
+  ],
+  "conclusion": "$d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \\quad \\text{[Distance Formula]}$",
+  "examinerTrap": "Order Independence: Since $(x_2 - x_1)^2 = (x_1 - x_2)^2$, the order does not change the result, but NEVER mix coordinates like (x2 - y1)!"
+},
+
+  {
+  "id": "deriv_coord_section",
+  "type": "Mandatory Derivation",
+  "chapterNo": 7,
+  "chapterName": "Coordinate Geometry",
+  "title": "Derivation of the Section Formula for Internal Division",
+  "marks": 4,
+  "boardFrequency": "95% Recurrence (CBSE Standard Derivation)",
+  "ncertReference": "NCERT Class 10, Chapter 7, Section 7.3 (Page 162)",
+  "statement": "Derive the coordinates of the point $P(x, y)$ which divides the line segment joining $A(x_1, y_1)$ and $B(x_2, y_2)$ internally in the ratio $m_1 : m_2$.",
+  "sheetSteps": [
+    {
+      "marginTag": "Setup",
+      "content": "Let $A(x_1, y_1)$ and $B(x_2, y_2)$ be the given points, and $P(x, y)$ divide $AB$ internally in the ratio $m_1 : m_2$, so that $\\frac{AP}{PB} = \\frac{m_1}{m_2}$.",
+      "reason": "Given configuration"
+    },
+    {
+      "marginTag": "Constr.",
+      "content": "Draw $AL, PM, BN$ perpendicular to the x-axis.\nDraw $AQ \\perp PM$ and $PC \\perp BN$.\nThen $AQ = x - x_1$, $PC = x_2 - x$, $PQ = y - y_1$, and $BC = y_2 - y$.",
+      "reason": "Coordinate projections on axes"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "In right triangles $\\Delta PAQ$ and $\\Delta BPC$:\n$\\angle PQA = \\angle BCP = 90^\\circ$\n$\\angle PAQ = \\angle BPC$ (corresponding angles since $AQ \\parallel PC$)",
+      "reason": "AA similarity condition"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "$\\therefore \\Delta PAQ \\sim \\Delta BPC$ (by AA Similarity Criterion).\nCorresponding sides are in equal ratio:\n$\\frac{AP}{PB} = \\frac{AQ}{PC} = \\frac{PQ}{BC}$",
+      "reason": "Corresponding sides of similar triangles"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "Equating with ratio $\\frac{m_1}{m_2}$ for the x-coordinate:\n$\\frac{m_1}{m_2} = \\frac{x - x_1}{x_2 - x} \\implies m_1(x_2 - x) = m_2(x - x_1)$\n$m_1 x_2 - m_1 x = m_2 x - m_2 x_1 \\implies (m_1 + m_2)x = m_1 x_2 + m_2 x_1$\n$x = \\frac{m_1 x_2 + m_2 x_1}{m_1 + m_2}$",
+      "reason": "Solving for x"
+    },
+    {
+      "marginTag": "Step 4",
+      "content": "Equating for the y-coordinate:\n$\\frac{m_1}{m_2} = \\frac{y - y_1}{y_2 - y} \\implies m_1(y_2 - y) = m_2(y - y_1)$\n$m_1 y_2 - m_1 y = m_2 y - m_2 y_1 \\implies (m_1 + m_2)y = m_1 y_2 + m_2 y_1$\n$y = \\frac{m_1 y_2 + m_2 y_1}{m_1 + m_2}$",
+      "reason": "Solving for y"
+    }
+  ],
+  "conclusion": "$P(x, y) = \\left( \\frac{m_1 x_2 + m_2 x_1}{m_1 + m_2}, \\frac{m_1 y_2 + m_2 y_1}{m_1 + m_2} \\right) \\quad \\text{[Section Formula]}$",
+  "examinerTrap": "Midpoint Corollary: If P is the midpoint, m1 = m2 = 1, giving M = ((x1 + x2)/2, (y1 + y2)/2). Never reverse indices (do not write m1 x1 + m2 x2)!"
+},
+
+  {
+  "id": "deriv_trig_identities",
+  "type": "Mandatory Derivation",
+  "chapterNo": 8,
+  "chapterName": "Introduction to Trigonometry",
+  "title": "Derivation of Fundamental Trigonometric Identity sin²θ + cos²θ = 1",
+  "marks": 3,
+  "boardFrequency": "93% Recurrence (Foundational Identity)",
+  "ncertReference": "NCERT Class 10, Chapter 8, Section 8.4 (Page 190)",
+  "statement": "Prove the fundamental identity $\\sin^2\\theta + \\cos^2\\theta = 1$, and derive from it $1 + \\tan^2\\theta = \\sec^2\\theta$ and $1 + \\cot^2\\theta = \\csc^2\\theta$.",
+  "sheetSteps": [
+    {
+      "marginTag": "Setup",
+      "content": "Consider a right-angled triangle $\\Delta ABC$, right-angled at $B$ with acute angle $\\angle A = \\theta$.\nBy definitions of trigonometric ratios:\n$\\sin\\theta = \\frac{\\text{Opposite}}{\\text{Hypotenuse}} = \\frac{BC}{AC}$\n$\\cos\\theta = \\frac{\\text{Adjacent}}{\\text{Hypotenuse}} = \\frac{AB}{AC}$",
+      "reason": "Definitions of sine and cosine"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "In right triangle $\\Delta ABC$, by Pythagoras Theorem:\n$AB^2 + BC^2 = AC^2 \\quad \\dots (1)$",
+      "reason": "Pythagoras Theorem in △ABC"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "Divide equation (1) by $AC^2$ ($AC \neq 0$):\n$\\frac{AB^2}{AC^2} + \\frac{BC^2}{AC^2} = \\frac{AC^2}{AC^2}\n\\left(\\frac{AB}{AC}\\right)^2 + \\left(\\frac{BC}{AC}\\right)^2 = 1$",
+      "reason": "Dividing by AC^2"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "Substituting $\\cos\\theta = \\frac{AB}{AC}$ and $\\sin\\theta = \\frac{BC}{AC}$:\n$(\\cos\\theta)^2 + (\\sin\\theta)^2 = 1 \\implies \\sin^2\\theta + \\cos^2\\theta = 1$",
+      "reason": "Fundamental Identity 1"
+    },
+    {
+      "marginTag": "Corollary 1",
+      "content": "Dividing $\\sin^2\\theta + \\cos^2\\theta = 1$ by $\\cos^2\\theta$ (for $\\theta \neq 90^\\circ$):\n$\\frac{\\sin^2\\theta}{\\cos^2\\theta} + \\frac{\\cos^2\\theta}{\\cos^2\\theta} = \\frac{1}{\\cos^2\\theta} \\implies \\tan^2\\theta + 1 = \\sec^2\\theta$",
+      "reason": "Identity 2"
+    },
+    {
+      "marginTag": "Corollary 2",
+      "content": "Dividing $\\sin^2\\theta + \\cos^2\\theta = 1$ by $\\sin^2\\theta$ (for $\\theta \neq 0^\\circ$):\n$\\frac{\\sin^2\\theta}{\\sin^2\\theta} + \\frac{\\cos^2\\theta}{\\sin^2\\theta} = \\frac{1}{\\sin^2\\theta} \\implies 1 + \\cot^2\\theta = \\csc^2\\theta$",
+      "reason": "Identity 3"
+    }
+  ],
+  "conclusion": "$\\sin^2\\theta + \\cos^2\\theta = 1, \\quad 1 + \\tan^2\\theta = \\sec^2\\theta, \\quad 1 + \\cot^2\\theta = \\csc^2\\theta$",
+  "examinerTrap": "Domain Restrictions: Note that 1 + tan²θ = sec²θ is defined for 0° ≤ θ < 90°, and 1 + cot²θ = csc²θ is defined for 0° < θ ≤ 90°. Mentioning this earns full marks in standard boards."
+},
+
+  {
+  "id": "thm_10_angle_bisector",
+  "type": "Theorem Proof",
+  "chapterNo": 10,
+  "chapterName": "Circles",
+  "title": "Theorem: Tangents Subtend Equal Angles at Centre & OP Bisects Angle",
+  "marks": 3,
+  "boardFrequency": "93% Recurrence (CBSE 2023, 2020, 2019)",
+  "ncertReference": "NCERT Class 10, Chapter 10, Supplementary Corollaries",
+  "statement": "Prove that the tangents drawn from an external point to a circle: (i) subtend equal angles at the centre, and (ii) are equally inclined to the line segment joining the centre to that point.",
+  "given": "A circle with centre $O$, external point $P$, tangents $PA$ and $PB$ touching the circle at $A$ and $B$. $OP$ is joined.",
+  "toProve": "(i) $\\angle AOP = \\angle BOP$, and (ii) $\\angle APO = \\angle BPO$",
+  "sheetSteps": [
+    {
+      "marginTag": "Given",
+      "content": "A circle with centre $O$, external point $P$, tangents $PA$ and $PB$ touching the circle at $A$ and $B$. $OP$ is joined.",
+      "reason": "Given configuration"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "In right triangles $\\Delta OAP$ and $\\Delta OBP$:\n$OA = OB$ (radii of the same circle)\n$OP = OP$ (common hypotenuse)\n$\\angle OAP = \\angle OBP = 90^\\circ$ (Theorem 10.1: Tangent ⊥ Radius)",
+      "reason": "Comparing triangles"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "$\\therefore \\Delta OAP \\cong \\Delta OBP$ by RHS Congruence Criterion.",
+      "reason": "RHS Congruence"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "By CPCT (Corresponding Parts of Congruent Triangles):\n(i) $\\angle AOP = \\angle BOP$ (tangents subtend equal angles at centre)\n(ii) $\\angle APO = \\angle BPO$ ($OP$ bisects the angle $\\angle APB$ between the tangents)",
+      "reason": "CPCT"
+    }
+  ],
+  "conclusion": "$\\angle AOP = \\angle BOP \\quad \\text{and} \\quad \\angle APO = \\angle BPO \\quad \\text{[Hence Proved]}$",
+  "examinerTrap": "Angle Sum Property Trap: Notice that $\\angle AOB + \\angle APB = 180^\\circ$ (supplementary angles) because $\\angle OAP + \\angle OBP = 90^\\circ + 90^\\circ = 180^\\circ$. Very frequently asked in 1-mark MCQs!"
+},
+
+  {
+  "id": "thm_10_circumscribed_quad",
+  "type": "Theorem Proof",
+  "chapterNo": 10,
+  "chapterName": "Circles",
+  "title": "Theorem: Quadrilateral Circumscribing a Circle (AB + CD = AD + BC)",
+  "marks": 4,
+  "boardFrequency": "98% Recurrence (CBSE 2024, 2023, 2022, 2020, 2019, 2017)",
+  "ncertReference": "NCERT Class 10, Chapter 10, Exercise 10.2 Q8 (Page 214)",
+  "statement": "A quadrilateral ABCD is drawn to circumscribe a circle. Prove that AB + CD = AD + BC.",
+  "given": "Quadrilateral $ABCD$ circumscribing a circle $C(O, r)$ touching the sides $AB, BC, CD, DA$ at points $P, Q, R, S$ respectively.",
+  "toProve": "$AB + CD = AD + BC$",
+  "sheetSteps": [
+    {
+      "marginTag": "Given",
+      "content": "Quadrilateral $ABCD$ circumscribing a circle $C(O, r)$ touching the sides $AB, BC, CD, DA$ at points $P, Q, R, S$ respectively.",
+      "reason": "Given figure"
+    },
+    {
+      "marginTag": "Step 1",
+      "content": "By Theorem 10.2, lengths of tangents drawn from an external point to a circle are equal:\nFrom vertex $A$: $AP = AS \\quad \\dots (1)$\nFrom vertex $B$: $BP = BQ \\quad \\dots (2)$\nFrom vertex $C$: $CR = CQ \\quad \\dots (3)$\nFrom vertex $D$: $DR = DS \\quad \\dots (4)$",
+      "reason": "Theorem 10.2 applied at vertices A, B, C, D"
+    },
+    {
+      "marginTag": "Step 2",
+      "content": "Adding equations (1), (2), (3), and (4) vertically:\n$(AP + BP) + (CR + DR) = (AS + DS) + (BQ + CQ)$",
+      "reason": "Adding all 4 tangent equations"
+    },
+    {
+      "marginTag": "Step 3",
+      "content": "Notice that collinear segment sums give:\n$AP + BP = AB$\n$CR + DR = CD$\n$AS + DS = AD$\n$BQ + CQ = BC$",
+      "reason": "Segment collinear addition"
+    },
+    {
+      "marginTag": "Step 4",
+      "content": "Substituting these sums:\n$AB + CD = AD + BC$",
+      "reason": "Direct substitution"
+    }
+  ],
+  "conclusion": "$AB + CD = AD + BC \\quad \\text{[Hence Proved]}$",
+  "examinerTrap": "Grouping Trap: When writing equations, keep (AP, BP) and (CR, DR) on the SAME side! If you write DR = DS but on the next line write CQ = CR, they will not sum to CD!"
+},
+
+  {
+  "id": "deriv_circle_sector_arc",
+  "type": "Mandatory Derivation",
+  "chapterNo": 11,
+  "chapterName": "Areas Related to Circles",
+  "title": "Derivation of Sector Area and Arc Length Formulas",
+  "marks": 3,
+  "boardFrequency": "90% Recurrence (Core conceptual basis for Mensuration)",
+  "ncertReference": "NCERT Class 10, Chapter 11, Section 11.2",
+  "statement": "Derive the formula for: (i) Area of a sector of angle $\\theta$, and (ii) Length of an arc of a sector of angle $\\theta$ of a circle of radius $r$.",
+  "sheetSteps": [
+    {
+      "marginTag": "Full Circle",
+      "content": "For a complete circular revolution of $360^\\circ$:\nTotal central angle $= 360^\\circ$\nTotal area of circle $= \\pi r^2$\nTotal circumference $= 2\\pi r$",
+      "reason": "Standard circle properties"
+    },
+    {
+      "marginTag": "Unitary Area",
+      "content": "By unitary method, for a central angle of $1^\\circ$, area of sector is $\\frac{\\pi r^2}{360^\\circ}$.\nTherefore, for a sector of central angle $\\theta$:\n$\\text{Area of Sector} = \\frac{\\theta}{360^\\circ} \\times \\pi r^2$",
+      "reason": "Unitary proportion for area"
+    },
+    {
+      "marginTag": "Unitary Arc",
+      "content": "Similarly, for a central angle of $1^\\circ$, length of arc is $\\frac{2\\pi r}{360^\\circ}$.\nTherefore, for an arc subtending central angle $\\theta$:\n$\\text{Length of Arc } l = \\frac{\\theta}{360^\\circ} \\times 2\\pi r$",
+      "reason": "Unitary proportion for arc length"
+    },
+    {
+      "marginTag": "Relation",
+      "content": "Notice the relationship between Area and Arc Length:\n$\\text{Area of Sector} = \\frac{1}{2} \\times \\left(\\frac{\\theta}{360^\\circ} \\times 2\\pi r\\right) \\times r = \\frac{1}{2} l r$",
+      "reason": "Area in terms of arc length l"
+    }
+  ],
+  "conclusion": "$\\text{Area} = \\frac{\\theta}{360^\\circ}\\pi r^2, \\quad l = \\frac{\\theta}{360^\\circ}2\\pi r, \\quad \\text{Area} = \\frac{1}{2}lr$",
+  "examinerTrap": "Perimeter of Sector Trap: The perimeter of a sector is NOT just the arc length! It is Perimeter = l + 2r = (θ/360°)2πr + 2r. Forgetting to add 2r costs 1 mark in board exams!"
+}
 ];

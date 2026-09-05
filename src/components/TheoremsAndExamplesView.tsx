@@ -38,9 +38,15 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
     return THEOREMS_AND_EXAMPLES_BANK.filter(item => {
       // Category filter
       if (activeCategory === "theorems" && item.type !== "Theorem Proof") return false;
+      if (activeCategory === "derivations" && item.type !== "Mandatory Derivation") return false;
+      if (activeCategory === "ch1" && item.chapterNo !== 1) return false;
+      if (activeCategory === "ch4" && item.chapterNo !== 4) return false;
+      if (activeCategory === "ch5" && item.chapterNo !== 5) return false;
       if (activeCategory === "ch6" && item.chapterNo !== 6) return false;
+      if (activeCategory === "ch7" && item.chapterNo !== 7) return false;
       if (activeCategory === "ch8" && item.chapterNo !== 8) return false;
       if (activeCategory === "ch10" && item.chapterNo !== 10) return false;
+      if (activeCategory === "ch11" && item.chapterNo !== 11) return false;
       if (activeCategory === "ch13" && item.chapterNo !== 13) return false;
 
       // Search query filter
@@ -94,7 +100,7 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
         <div className="mt-6 pt-6 border-t border-current/10 grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
             <span className="text-[10px] uppercase font-bold text-emerald-400 block font-mono">Core Proofs</span>
-            <span className="text-lg sm:text-xl font-black">4 Theorems</span>
+            <span className="text-lg sm:text-xl font-black">{THEOREMS_AND_EXAMPLES_BANK.filter(t => t.type === "Theorem Proof").length} Theorems</span>
           </div>
           <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
             <span className="text-[10px] uppercase font-bold text-amber-400 block font-mono">Iconic Examples</span>
@@ -117,10 +123,16 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
           {[
             { id: "all", label: `All (${THEOREMS_AND_EXAMPLES_BANK.length})` },
-            { id: "theorems", label: "⭐ Mandatory Theorems" },
+            { id: "theorems", label: "⭐ Theorems & Converses" },
+            { id: "derivations", label: "📐 Derivations" },
+            { id: "ch1", label: "Ch 1: Real Numbers" },
+            { id: "ch4", label: "Ch 4: Quadratics" },
+            { id: "ch5", label: "Ch 5: AP" },
             { id: "ch6", label: "Ch 6: Triangles" },
+            { id: "ch7", label: "Ch 7: Coordinate" },
             { id: "ch8", label: "Ch 8: Trigonometry" },
             { id: "ch10", label: "Ch 10: Circles" },
+            { id: "ch11", label: "Ch 11: Areas Circles" },
             { id: "ch13", label: "Ch 13: Statistics" }
           ].map(tab => (
             <button
@@ -188,6 +200,8 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
                       <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${
                         item.type === "Theorem Proof"
                           ? isDark ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30" : "bg-emerald-50 text-emerald-800 border-emerald-300 font-bold"
+                          : item.type === "Mandatory Derivation"
+                          ? isDark ? "bg-amber-500/15 text-amber-400 border-amber-500/30" : "bg-amber-50 text-amber-800 border-amber-300 font-bold"
                           : isDark ? "bg-blue-500/15 text-blue-400 border-blue-500/30" : "bg-blue-50 text-blue-800 border-blue-300 font-bold"
                       }`}>
                         {item.type}

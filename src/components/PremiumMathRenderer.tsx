@@ -20,7 +20,12 @@ interface PremiumMathRendererProps {
  */
 function preprocessMathContent(raw: string): string {
   if (!raw || typeof raw !== 'string') return '';
-  const text = raw.trim();
+  // Clean literal "\\n" character strings into real newlines (guarding LaTeX commands like \\neq, \\nu)
+  let text = raw.replace(/\\n(?![a-zA-Z])/g, '\n').trim();
+
+  // In markdown, single newlines don't break lines unless followed by two spaces.
+  // Add two spaces before newlines so multi-line steps and equations preserve their line breaks.
+  text = text.replace(/([^\n])\n([^\n])/g, '$1  \n$2');
 
   // 1. If text is already completely wrapped in $...$ or $$...$$
   if (/^\$\$[\s\S]*\$\$$/.test(text) || (/^\$[^\$]+\$$/.test(text) && !text.slice(1, -1).includes('$'))) {
