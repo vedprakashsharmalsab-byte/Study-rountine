@@ -1540,7 +1540,6 @@ export default function CBSECommandCenter() {
         <div className="max-w-6xl mx-auto flex items-center gap-1.5 w-full min-w-max">
           {[
             { id: "chapter_dashboard", label: "Chapter Command", icon: Target },
-            { id: "science_concepts", label: "Science Concepts (NCERT)", icon: Atom },
             { id: "theorems", label: "Maths Theorems & Ex", icon: Award },
             { id: "questions", label: "Master Question Bank", icon: Zap },
             { id: "mnemonics", label: "Visual Mnemonics (35 Sheets)", icon: Sparkles },
@@ -2348,18 +2347,6 @@ export default function CBSECommandCenter() {
           />
         )}
 
-        {/* ===================== TAB: SCIENCE CONCEPTS & NCERT MASTER GUIDE ===================== */}
-        {activeTab === "science_concepts" && (
-          <ScienceConceptsView
-            isDark={isDark}
-            onOpenQuestionBank={() => {
-              setActiveVaultSubject("science");
-              loadChapterData(1, false, "science");
-              setActiveTab("questions");
-            }}
-          />
-        )}
-
         {/* ===================== TAB 4: TRAINING VAULT (PREMIUM) ===================== */}
         {activeTab === "questions" && (
           <div className="space-y-6 animate-fade-in">
@@ -3119,9 +3106,11 @@ export default function CBSECommandCenter() {
                         const sub = CBSE_SUBJECTS.find((s) => s.id === newSubId);
                         if (sub && sub.chapters.length > 0) {
                           setCommandChapterId(sub.chapters[0].id);
-                          if (sub.chapters[0].ncertChapterNo) {
-                            loadChapterData(sub.chapters[0].ncertChapterNo);
-                          }
+                          const chNo = sub.chapters[0].ncertChapterNo || 1;
+                          const subjectType = newSubId === "science" ? "science" : "math";
+                          setActiveVaultSubject(subjectType);
+                          setActiveVaultChapter(chNo);
+                          loadChapterData(chNo, false, subjectType);
                         }
                       }}
                     >
@@ -3146,7 +3135,10 @@ export default function CBSECommandCenter() {
                         setCommandChapterId(newChId);
                         const ch = activeSubject.chapters.find((c) => c.id === newChId);
                         if (ch?.ncertChapterNo) {
-                          loadChapterData(ch.ncertChapterNo);
+                          const subjectType = commandSubjectId === "science" ? "science" : "math";
+                          setActiveVaultSubject(subjectType);
+                          setActiveVaultChapter(ch.ncertChapterNo);
+                          loadChapterData(ch.ncertChapterNo, false, subjectType);
                         }
                       }}
                     >
@@ -3180,52 +3172,73 @@ export default function CBSECommandCenter() {
                 </div>
               </div>
 
-              {/* Concept Guide Action Bar */}
-              <div className={`mt-6 p-4 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
-                isDark ? "bg-gradient-to-r from-emerald-950/40 via-cyan-950/20 to-transparent border-emerald-500/20" : "bg-emerald-50/70 border-emerald-200"
-              }`}>
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                    <BookOpen className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold text-emerald-400">Concepts & Blueprint: {activeChapter.name}</h4>
-                    <p className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                      Full curriculum coverage, mandatory board definitions, high-yield patterns, and examiner grading rubric.
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => {
-                    playSound("click");
-                    setIsConceptExplainerOpen(!isConceptExplainerOpen);
-                  }}
-                  className="px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 transition-all cursor-pointer flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 shrink-0"
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>{isConceptExplainerOpen ? "Hide Concept Guide" : `Read Ch ${ncertNum} Deep Concept Guide`}</span>
-                </button>
-              </div>
-
-              {/* Concept Explainer Render */}
-              {isConceptExplainerOpen && (
-                <div className="mt-6 animate-fade-in">
-                  <ChapterConceptExplainer
-                    chapterId={ncertNum || 6}
+              {/* INTEGRATED CHAPTER CONCEPTS FROM ZERO */}
+              {commandSubjectId === "science" ? (
+                <div className="mt-8 animate-fade-in">
+                  <ScienceConceptsView
                     isDark={isDark}
-                    onClose={() => setIsConceptExplainerOpen(false)}
-                    onOpenQuestions={() => {
-                      setIsConceptExplainerOpen(false);
+                    activeChapterNo={ncertNum || 1}
+                    isEmbeddedInCommand={true}
+                    onOpenQuestionBank={(targetChNo) => {
+                      playSound("click");
+                      const ch = targetChNo || ncertNum || 1;
+                      setActiveVaultSubject("science");
+                      setActiveVaultChapter(ch);
+                      loadChapterData(ch, false, "science");
                       setActiveTab("questions");
-                    }}
-                    onChapterChange={(newChNo) => {
-                      const matched = activeSubject.chapters.find((c) => (c.ncertChapterNo || c.id) === newChNo);
-                      if (matched) {
-                        setCommandChapterId(matched.id);
-                      }
                     }}
                   />
                 </div>
+              ) : (
+                /* MATHEMATICS: Blueprint & Deep Concept Explainer */
+                <>
+                  <div className={`mt-6 p-4 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
+                    isDark ? "bg-gradient-to-r from-emerald-950/40 via-cyan-950/20 to-transparent border-emerald-500/20" : "bg-emerald-50/70 border-emerald-200"
+                  }`}>
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                        <BookOpen className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-emerald-400">Concepts & Blueprint: {activeChapter.name}</h4>
+                        <p className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                          Full curriculum coverage, mandatory board definitions, high-yield patterns, and examiner grading rubric.
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        playSound("click");
+                        setIsConceptExplainerOpen(!isConceptExplainerOpen);
+                      }}
+                      className="px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 transition-all cursor-pointer flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 shrink-0"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>{isConceptExplainerOpen ? "Hide Concept Guide" : `Read Ch ${ncertNum} Deep Concept Guide`}</span>
+                    </button>
+                  </div>
+
+                  {/* Concept Explainer Render */}
+                  {isConceptExplainerOpen && (
+                    <div className="mt-6 animate-fade-in">
+                      <ChapterConceptExplainer
+                        chapterId={ncertNum || 6}
+                        isDark={isDark}
+                        onClose={() => setIsConceptExplainerOpen(false)}
+                        onOpenQuestions={() => {
+                          setIsConceptExplainerOpen(false);
+                          setActiveTab("questions");
+                        }}
+                        onChapterChange={(newChNo) => {
+                          const matched = activeSubject.chapters.find((c) => (c.ncertChapterNo || c.id) === newChNo);
+                          if (matched) {
+                            setCommandChapterId(matched.id);
+                          }
+                        }}
+                      />
+                    </div>
+                  )}
+                </>
               )}
 
               <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -3428,7 +3441,6 @@ export default function CBSECommandCenter() {
 
             <div className="grid grid-cols-2 gap-2 text-xs">
               {[
-                { id: "science_concepts", label: "Science Concepts (NCERT)", icon: Atom },
                 { id: "theorems", label: "Theorems & Examples", icon: Award },
                 { id: "flashcards", label: "Flashcards", icon: BookMarked },
                 { id: "common_mistakes", label: "My Mistakes Log", icon: Flame },

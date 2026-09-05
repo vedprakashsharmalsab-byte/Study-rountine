@@ -29,12 +29,19 @@ import {
 
 interface ScienceConceptsViewProps {
   isDark: boolean;
-  onOpenQuestionBank?: () => void;
+  onOpenQuestionBank?: (chapterNo?: number) => void;
+  activeChapterNo?: number;
+  isEmbeddedInCommand?: boolean;
 }
 
-export default function ScienceConceptsView({ isDark, onOpenQuestionBank }: ScienceConceptsViewProps) {
+export default function ScienceConceptsView({ 
+  isDark, 
+  onOpenQuestionBank, 
+  activeChapterNo,
+  isEmbeddedInCommand = false 
+}: ScienceConceptsViewProps) {
   const [activeDisciplineFilter, setActiveDisciplineFilter] = useState<string>("all");
-  const [activeChapterFilter, setActiveChapterFilter] = useState<number | "all">("all");
+  const [activeChapterFilter, setActiveChapterFilter] = useState<number | "all">(activeChapterNo || "all");
   const [activeLevelFilter, setActiveLevelFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [expandedTopicIds, setExpandedTopicIds] = useState<Record<string, boolean>>({
@@ -47,6 +54,20 @@ export default function ScienceConceptsView({ isDark, onOpenQuestionBank }: Scie
     ex_c1_1: true,
     ex_c1_2: true
   });
+
+  // Automatically sync and expand when activeChapterNo changes in Chapter Command
+  React.useEffect(() => {
+    if (activeChapterNo !== undefined) {
+      setActiveChapterFilter(activeChapterNo);
+      // Auto-expand all topics for this active chapter so student can learn from zero
+      const chapterTopics = SCIENCE_CONCEPTS_AND_EXAMPLES.filter((t) => t.chapterNo === activeChapterNo);
+      const newExpandedState: Record<string, boolean> = {};
+      chapterTopics.forEach((t) => {
+        newExpandedState[t.id] = true;
+      });
+      setExpandedTopicIds((prev) => ({ ...prev, ...newExpandedState }));
+    }
+  }, [activeChapterNo]);
 
   const toggleTopicExpand = (id: string) => {
     setExpandedTopicIds((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -141,58 +162,108 @@ export default function ScienceConceptsView({ isDark, onOpenQuestionBank }: Scie
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* 1. HERO BANNER */}
-      <div 
-        className={`p-6 sm:p-8 rounded-3xl border transition-all ${
-          isDark 
-            ? "bg-gradient-to-r from-teal-950/40 via-slate-900/80 to-blue-950/30 border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4)]" 
-            : "bg-gradient-to-r from-teal-50 via-white to-blue-50 border-teal-100 shadow-md"
-        }`}
-      >
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-          <div className="space-y-2 max-w-3xl">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <div className="w-9 h-9 rounded-2xl bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-teal-400">
-                <Atom className="w-5 h-5" />
+      {/* 1. HERO BANNER OR CHAPTER COMMAND HEADER */}
+      {isEmbeddedInCommand ? (
+        <div 
+          className={`p-5 sm:p-7 rounded-3xl border transition-all ${
+            isDark 
+              ? "bg-gradient-to-r from-teal-950/40 via-emerald-950/20 to-black/40 border-teal-500/30 shadow-lg" 
+              : "bg-gradient-to-r from-teal-50 via-emerald-50 to-white border-teal-200 shadow-sm"
+          }`}
+        >
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="space-y-1.5">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-500 text-slate-950">
+                  NCERT Master Guide (From Zero)
+                </span>
+                <span className={`text-xs font-mono font-bold ${isDark ? "text-teal-400" : "text-teal-700"}`}>
+                  Ch {activeChapterNo || 1} Deep Blueprint
+                </span>
               </div>
-              <span className="px-3 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-teal-500 text-slate-950">
-                100% NCERT Science Guide
-              </span>
-              <span className="text-xs font-mono text-teal-400 font-bold hidden sm:inline">
-                All 13 Chapters • Zero Omissions
-              </span>
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight">
+                {CHAPTER_LIST.find((c) => c.no === activeChapterNo)?.name || `Chapter ${activeChapterNo}`} — All NCERT Concepts & Leveled Examples
+              </h3>
+              <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                Learn every chemical reaction, physics formula derivation, biological pathway, and examiner trap from ground zero.
+              </p>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
-              Science Concept Master & NCERT Solved Guide
-            </h2>
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <button
+                onClick={toggleExpandAll}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                  isDark ? "bg-white/5 border-white/10 hover:bg-white/10 text-slate-200" : "bg-white border-slate-200 text-slate-700 shadow-xs"
+                }`}
+              >
+                {filteredTopics.every((t) => expandedTopicIds[t.id]) ? "Collapse All Topics" : "Expand All Topics"}
+              </button>
 
-            <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-              Every NCERT topic explained intuitively with zero skipped details. Balanced chemical reactions, biological process flowcharts, physics formula derivations, and 3 to 7 leveled board examples per concept.
-            </p>
-          </div>
-
-          {/* Quick Metrics Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full lg:w-auto text-center shrink-0">
-            <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
-              <span className="text-[10px] uppercase font-bold text-teal-400 block font-mono">Curriculum</span>
-              <span className="text-lg sm:text-xl font-black">13 Chapters</span>
-            </div>
-            <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
-              <span className="text-[10px] uppercase font-bold text-amber-400 block font-mono">Solved Qs</span>
-              <span className="text-lg sm:text-xl font-black">{totalExamplesCount} Solved</span>
-            </div>
-            <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
-              <span className="text-[10px] uppercase font-bold text-blue-400 block font-mono">Exam Target</span>
-              <span className="text-lg sm:text-xl font-black">80/80 Marks</span>
-            </div>
-            <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
-              <span className="text-[10px] uppercase font-bold text-emerald-400 block font-mono">Examiner Traps</span>
-              <span className="text-lg sm:text-xl font-black">Zero Mark Loss</span>
+              {onOpenQuestionBank && (
+                <button
+                  onClick={() => onOpenQuestionBank(typeof activeChapterFilter === "number" ? activeChapterFilter : activeChapterNo)}
+                  className="px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 transition-all cursor-pointer flex items-center gap-1.5 shadow-md shadow-teal-500/20"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>Practice 40+ Questions</span>
+                </button>
+              )}
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div 
+          className={`p-6 sm:p-8 rounded-3xl border transition-all ${
+            isDark 
+              ? "bg-gradient-to-r from-teal-950/40 via-slate-900/80 to-blue-950/30 border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4)]" 
+              : "bg-gradient-to-r from-teal-50 via-white to-blue-50 border-teal-100 shadow-md"
+          }`}
+        >
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+            <div className="space-y-2 max-w-3xl">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <div className="w-9 h-9 rounded-2xl bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-teal-400">
+                  <Atom className="w-5 h-5" />
+                </div>
+                <span className="px-3 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-teal-500 text-slate-950">
+                  100% NCERT Science Guide
+                </span>
+                <span className="text-xs font-mono text-teal-400 font-bold hidden sm:inline">
+                  All 13 Chapters • Zero Omissions
+                </span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+                Science Concept Master & NCERT Solved Guide
+              </h2>
+
+              <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                Every NCERT topic explained intuitively with zero skipped details. Balanced chemical reactions, biological process flowcharts, physics formula derivations, and 3 to 7 leveled board examples per concept.
+              </p>
+            </div>
+
+            {/* Quick Metrics Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full lg:w-auto text-center shrink-0">
+              <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
+                <span className="text-[10px] uppercase font-bold text-teal-400 block font-mono">Curriculum</span>
+                <span className="text-lg sm:text-xl font-black">13 Chapters</span>
+              </div>
+              <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
+                <span className="text-[10px] uppercase font-bold text-amber-400 block font-mono">Solved Qs</span>
+                <span className="text-lg sm:text-xl font-black">{totalExamplesCount} Solved</span>
+              </div>
+              <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
+                <span className="text-[10px] uppercase font-bold text-blue-400 block font-mono">Exam Target</span>
+                <span className="text-lg sm:text-xl font-black">80/80 Marks</span>
+              </div>
+              <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
+                <span className="text-[10px] uppercase font-bold text-emerald-400 block font-mono">Examiner Traps</span>
+                <span className="text-lg sm:text-xl font-black">Zero Mark Loss</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 2. DISCIPLINE & LEVEL FILTER CONTROLS */}
       <div className="space-y-3">
