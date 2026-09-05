@@ -379,15 +379,278 @@ export const MNEMONIC_CHAPTERS: ChapterMnemonicGroup[] = [
   }
 ];
 
+export const SCIENCE_MNEMONIC_CHAPTERS: ChapterMnemonicGroup[] = [
+  {
+    chapterId: 1,
+    chapterName: "Chemical Reactions and Equations",
+    badge: "Board Weightage (6-8 Marks)",
+    keyFormulas: [
+      "Combination: A + B -> AB (Exothermic, e.g. Quicklime CaO + H2O -> Ca(OH)2)",
+      "Thermal Decomposition: 2FeSO4 -> Fe2O3 + SO2 + SO3; 2Pb(NO3)2 -> 2PbO + 4NO2 + O2",
+      "Electrolytic: 2H2O -> 2H2 (Cathode) + O2 (Anode) in 2:1 volume ratio",
+      "Displacement: Fe + CuSO4 -> FeSO4 + Cu (Blue to light green)",
+      "Redox: Oxidation = Gain of O / Loss of H; Reduction = Gain of H / Loss of O"
+    ],
+    images: [
+      {
+        title: "Chemical Reactions & Equations Complete Mindmap",
+        src: "/mnemonics/science/ch1_chemical_reactions.jpeg",
+        description: "Visual roadmap of reaction types, balancing techniques, color transformations, and redox agents."
+      }
+    ]
+  },
+  {
+    chapterId: 2,
+    chapterName: "Acids, Bases and Salts",
+    badge: "Board Weightage (6-8 Marks)",
+    keyFormulas: [
+      "Acid + Metal -> Salt + H2^ (Pop sound); Acid + Carbonate -> Salt + H2O + CO2^ (Lime water milky)",
+      "Neutralization: Acid + Base -> Salt + Water (Exothermic)",
+      "pH Scale: pH = -log[H+]; pH < 7 Acidic, pH = 7 Neutral, pH > 7 Basic",
+      "Bleaching Powder: Ca(OH)2 + Cl2 -> CaOCl2 + H2O",
+      "Baking Soda: NaCl + H2O + CO2 + NH3 -> NH4Cl + NaHCO3",
+      "Plaster of Paris: CaSO4·2H2O -(373K)-> CaSO4·1/2H2O + 1.5 H2O"
+    ],
+    images: [
+      {
+        title: "Acids, Bases & Salts Revision Infographic",
+        src: "/mnemonics/science/ch2_acids_bases_salts.jpeg",
+        description: "Visual indicator color changes, pH chart, industrial salts preparation, and chlor-alkali process."
+      }
+    ]
+  },
+  {
+    chapterId: 3,
+    chapterName: "Metals and Non-Metals",
+    badge: "Board Weightage (7-9 Marks)",
+    keyFormulas: [
+      "Reactivity Series: K > Na > Ca > Mg > Al > Zn > Fe > Pb > [H] > Cu > Hg > Ag > Au",
+      "Amphoteric Oxides: Al2O3 + 6HCl -> 2AlCl3 + 3H2O; Al2O3 + 2NaOH -> 2NaAlO2 + H2O",
+      "Ionic Bond: Transfer of electrons between metal cation and non-metal anion (high m.p., conducts in molten)",
+      "Roasting (Sulfide, excess air): 2ZnS + 3O2 -> 2ZnO + 2SO2",
+      "Calcination (Carbonate, limited air): ZnCO3 -> ZnO + CO2",
+      "Thermite Reaction: Fe2O3 + 2Al -> 2Fe(l) + Al2O3 + Immense Heat"
+    ],
+    images: [
+      {
+        title: "Metals and Non-Metals Master Sheet",
+        src: "/mnemonics/science/ch3_metals_non_metals.jpeg",
+        description: "Metallurgy extraction flowchart, reactivity mnemonic, ionic crystal properties, and corrosion prevention."
+      }
+    ]
+  },
+  {
+    chapterId: 4,
+    chapterName: "Carbon and its Compounds",
+    badge: "Board Weightage (6-8 Marks)",
+    keyFormulas: [
+      "Covalent Bond: Tetravalent carbon forms 4 shared pairs (catenation + small atomic size)",
+      "Homologous Series: Alkanes (CnH2n+2), Alkenes (CnH2n), Alkynes (CnH2n-2)",
+      "Combustion: CnH2n+2 + O2 -> CO2 + H2O + Heat + Light",
+      "Oxidation: CH3CH2OH -(Alk. KMnO4)-> CH3COOH",
+      "Esterification: CH3COOH + C2H5OH -(conc H2SO4)-> CH3COOC2H5 + H2O (Sweet fruity odor)",
+      "Saponification: Ester + NaOH -> Soap (R-COONa) + Glycerol"
+    ],
+    images: [
+      {
+        title: "Carbon and its Compounds Infographic",
+        src: "/mnemonics/science/ch4_carbon_compounds.jpeg",
+        description: "Nomenclature rules, structural isomers, functional groups, and micelle cleansing mechanism."
+      }
+    ]
+  },
+  {
+    chapterId: 5,
+    chapterName: "Life Processes",
+    badge: "Board Weightage (8-10 Marks)",
+    keyFormulas: [
+      "Photosynthesis: 6CO2 + 12H2O -(Light, Chlorophyll)-> C6H12O6 + 6O2 + 6H2O",
+      "Aerobic Respiration: Glucose -> Pyruvate -> 6CO2 + 6H2O + 38 ATP (Mitochondria)",
+      "Anaerobic: Yeast -> Ethanol + CO2 + 2 ATP; Muscle -> Lactic Acid + 2 ATP",
+      "Human Circulation: Double circulation (Pulmonary + Systemic via 4-chambered heart)",
+      "Excretion: Nephron (Glomerulus ultrafiltration -> Tubular reabsorption -> Collecting duct)"
+    ],
+    images: [
+      {
+        title: "Life Processes Comprehensive System Map",
+        src: "/mnemonics/science/ch5_life_processes_detailed.jpeg",
+        description: "Complete visual atlas of human digestive, respiratory, circulatory, and excretory pathways."
+      },
+      {
+        title: "Life Processes Quick Revision Map",
+        src: "/mnemonics/science/ch5_life_processes_map.jpeg",
+        description: "Enzyme breakdown tables (pepsin, trypsin, lipase, amylase) and stomata guard cell mechanism."
+      }
+    ]
+  },
+  {
+    chapterId: 6,
+    chapterName: "Control and Coordination",
+    badge: "Board Weightage (6-7 Marks)",
+    keyFormulas: [
+      "Neuron: Dendrite -> Cyton -> Axon -> Synapse (chemical neurotransmitters carry signal)",
+      "Reflex Arc: Receptor -> Sensory Neuron -> Spinal Cord (Relay) -> Motor Neuron -> Effector",
+      "Plant Hormones: Auxin (growth/phototropism), Gibberellin (stem elongation), Cytokinin (cell division), Abscisic Acid (inhibits growth/wilting)",
+      "Endocrine: Thyroid (Thyroxine - Iodine needed), Pancreas (Insulin - Blood sugar), Adrenal (Adrenaline - Fight/Flight)"
+    ],
+    images: [
+      {
+        title: "Control and Coordination Science Infographic",
+        src: "/mnemonics/science/ch6_control_coordination.jpeg",
+        description: "Human brain divisions (Forebrain, Midbrain, Hindbrain), reflex arc loop, and phytohormone roles."
+      }
+    ]
+  },
+  {
+    chapterId: 7,
+    chapterName: "How do Organisms Reproduce?",
+    badge: "Board Weightage (6-8 Marks)",
+    keyFormulas: [
+      "Asexual Modes: Binary Fission (Amoeba), Budding (Yeast, Hydra), Spore Formation (Rhizopus), Vegetative (Bryophyllum)",
+      "Flower Structure: Stamen (Anther + Filament), Carpel/Pistil (Stigma + Style + Ovary)",
+      "Double Fertilization: Syngamy (Male gamete + Egg -> Zygote 2n) + Triple Fusion (Male gamete + Polar nuclei -> Endosperm 3n)",
+      "Human Male/Female: Testes (Testosterone, sperm), Ovaries (Estrogen/Progesterone, ova), Fallopian tube (fertilization site)"
+    ],
+    images: [
+      {
+        title: "How do Organisms Reproduce? Visual Sheet",
+        src: "/mnemonics/science/ch7_reproduction.jpeg",
+        description: "Reproductive anatomy, flower longitudinal cross-section, pollination types, and contraceptive methods."
+      }
+    ]
+  },
+  {
+    chapterId: 8,
+    chapterName: "Heredity and Evolution",
+    badge: "Board Weightage (5-7 Marks)",
+    keyFormulas: [
+      "Mendel Monohybrid: Phenotypic Ratio = 3:1 (Tall:Dwarf); Genotypic Ratio = 1:2:1 (TT:Tt:tt)",
+      "Mendel Dihybrid: Phenotypic Ratio = 9:3:3:1 (Round-Yellow : Round-Green : Wrinkled-Yellow : Wrinkled-Green)",
+      "Sex Determination in Humans: Female = 44 + XX (homogametic); Male = 44 + XY (heterogametic - father determines sex)"
+    ],
+    images: [
+      {
+        title: "Heredity & Genetics Revision Guide",
+        src: "/mnemonics/science/ch8_heredity.jpeg",
+        description: "Punnett square setups, dominant vs recessive alleles, and human chromosomal karyotypes."
+      }
+    ]
+  },
+  {
+    chapterId: 9,
+    chapterName: "Light — Reflection and Refraction",
+    badge: "Board Weightage (9-10 Marks)",
+    keyFormulas: [
+      "Mirror Formula: 1/f = 1/v + 1/u; Magnification: m = -v/u = h'/h",
+      "Lens Formula: 1/f = 1/v - 1/u; Magnification: m = +v/u = h'/h",
+      "Power of Lens: P = 1 / f(in meters) [Unit: Dioptre, D]; Convex f > 0, Concave f < 0",
+      "Snell's Law: n = sin i / sin r = c / v",
+      "Sign Convention: Distances measured in direction of incident ray are positive (+), opposite are negative (-)"
+    ],
+    images: [
+      {
+        title: "Light Reflection and Refraction Master Chart",
+        src: "/mnemonics/science/ch9_light_optics.jpeg",
+        description: "All 6 concave mirror ray diagrams, convex mirror security view, lens ray tracing, and sign convention rules."
+      }
+    ]
+  },
+  {
+    chapterId: 10,
+    chapterName: "The Human Eye and Colourful World",
+    badge: "Board Weightage (4-5 Marks)",
+    keyFormulas: [
+      "Power of Accommodation: Ciliary muscles adjust crystalline lens focal length (Near point = 25 cm, Far point = infinity)",
+      "Myopia (Short-sightedness): Image forms in front of retina -> Corrected by CONCAVE lens of suitable power",
+      "Hypermetropia (Far-sightedness): Image forms behind retina -> Corrected by CONVEX lens",
+      "Prism Deviation: Angle of Deviation D depends on prism angle A and angle of incidence i",
+      "Scattering (Rayleigh's Law): Intensity I proportional to 1 / lambda^4 (Blue scatters most -> Sky is blue)"
+    ],
+    images: [
+      {
+        title: "Human Eye & Colourful World Infographic",
+        src: "/mnemonics/science/ch10_human_eye.jpeg",
+        description: "Eye defects correction diagrams, prism dispersion VIBGYOR rainbow formation, and atmospheric twinkling."
+      }
+    ]
+  },
+  {
+    chapterId: 11,
+    chapterName: "Electricity",
+    badge: "Board Weightage (7-8 Marks)",
+    keyFormulas: [
+      "Current: I = Q / t; Potential: V = W / Q; Ohm's Law: V = I · R",
+      "Resistance: R = rho · (L / A); Resistivity rho depends only on material & temperature",
+      "Series: R_s = R1 + R2 + R3 (Current same, V divides)",
+      "Parallel: 1/R_p = 1/R1 + 1/R2 + 1/R3 (Voltage same, I divides)",
+      "Joule Heating: H = I^2 · R · t = V · I · t = (V^2 / R) · t",
+      "Electric Power: P = V · I = I^2 · R = V^2 / R; 1 kWh = 3.6 x 10^6 J"
+    ],
+    images: [
+      {
+        title: "Electricity Formula Matrix & Circuit Rules",
+        src: "/mnemonics/science/ch11_electricity.jpeg",
+        description: "Complete electrical formula wheel, resistor combinations, commercial unit calculations, and safety fuses."
+      }
+    ]
+  },
+  {
+    chapterId: 12,
+    chapterName: "Magnetic Effects of Electric Current",
+    badge: "Board Weightage (6-7 Marks)",
+    keyFormulas: [
+      "Right-Hand Thumb Rule: Thumb = Current direction, Curled fingers = Magnetic field lines direction",
+      "Solenoid: Uniform straight parallel field lines inside, behaves like a bar magnet",
+      "Fleming's Left-Hand Rule: Forefinger = Field (B), Center finger = Current (I), Thumb = Force/Motion (F)",
+      "Domestic Electric Circuit: Live wire (Red/Brown, 220V), Neutral wire (Black/Blue, 0V), Earth wire (Green/Yellow, safety against shock)",
+      "Short Circuit: Live and Neutral touch directly -> Resistance drops to near zero, current spikes dangerously"
+    ],
+    images: [
+      {
+        title: "Magnetic Effects of Electric Current Revision Sheet",
+        src: "/mnemonics/science/ch12_magnetic_effects.jpeg",
+        description: "Magnetic field line patterns, electromagnetic induction, Fleming's rules, and domestic circuit layout."
+      }
+    ]
+  },
+  {
+    chapterId: 13,
+    chapterName: "Our Environment",
+    badge: "Board Weightage (5 Marks)",
+    keyFormulas: [
+      "10% Law of Energy Transfer (Lindeman): Only 10% of energy is transferred to next trophic level; 90% lost to metabolism/heat",
+      "Biological Magnification: Progressive accumulation of non-biodegradable chemicals (DDT, pesticides) at highest trophic level",
+      "Ozone Layer Depletion: O2 -(UV)-> O + O; O + O2 -> O3 (CFCs break ozone into oxygen, causing UV penetration)",
+      "Waste Management: Biodegradable (enzymes can break down) vs Non-biodegradable (plastic, glass remain persistent)"
+    ],
+    images: [
+      {
+        title: "Our Environment Science Revision Sheet",
+        src: "/mnemonics/science/ch13_our_environment.jpeg",
+        description: "Trophic pyramids, food chains vs webs, biomagnification levels, and ozone reaction cycle."
+      }
+    ]
+  }
+];
+
 export default function MnemonicGallery({ isDark = true }: { isDark?: boolean }) {
-  const [selectedChapterId, setSelectedChapterId] = useState<number>(6);
+  const [activeSubject, setActiveSubject] = useState<"math" | "science">("science");
+  const [selectedChapterId, setSelectedChapterId] = useState<number>(1);
   const [activeModalImage, setActiveModalImage] = useState<{
     src: string;
     title: string;
     description: string;
   } | null>(null);
 
-  const activeChapter = MNEMONIC_CHAPTERS.find(c => c.chapterId === selectedChapterId) || MNEMONIC_CHAPTERS[0];
+  const activeChapterList = activeSubject === "science" ? SCIENCE_MNEMONIC_CHAPTERS : MNEMONIC_CHAPTERS;
+  const activeChapter = activeChapterList.find(c => c.chapterId === selectedChapterId) || activeChapterList[0];
+
+  const totalSheetsCount = activeChapterList.reduce((acc, c) => acc + c.images.length, 0);
+
+  const handleSubjectChange = (newSubject: "math" | "science") => {
+    setActiveSubject(newSubject);
+    setSelectedChapterId(newSubject === "science" ? 1 : 6);
+  };
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -406,23 +669,58 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
               </h2>
             </div>
             <p className={`text-sm ${isDark ? "text-slate-400" : "text-slate-600"} font-medium max-w-2xl`}>
-              Official high-resolution concept maps, geometric proofs, and formula breakdowns. Click any diagram to view in high-definition full-screen zoom.
+              Official high-resolution concept maps, geometric proofs, and science infographics. Click any diagram to view in high-definition full-screen zoom or download.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold border ${
+            <span className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold border ${
               isDark ? "bg-amber-950/40 text-amber-300 border-amber-800/40" : "bg-amber-50 text-amber-900 border-amber-200"
             }`}>
-              35 Chapter Diagrams
+              {totalSheetsCount} Sheets in {activeSubject === "science" ? "Science" : "Mathematics"}
             </span>
           </div>
+        </div>
+
+        {/* Subject Selector Tabs */}
+        <div className="flex items-center gap-3 pt-5 mt-5 border-t border-white/10">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+            Subject:
+          </span>
+          <button
+            onClick={() => handleSubjectChange("science")}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+              activeSubject === "science"
+                ? isDark
+                  ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-md"
+                  : "bg-teal-600 text-white border-teal-600 font-black shadow-md"
+                : isDark
+                ? "bg-black/30 border-white/5 text-slate-400 hover:text-white"
+                : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+            }`}
+          >
+            <span>🧪 Science (14 Sheets)</span>
+          </button>
+          <button
+            onClick={() => handleSubjectChange("math")}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+              activeSubject === "math"
+                ? isDark
+                  ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md"
+                  : "bg-amber-600 text-white border-amber-600 font-black shadow-md"
+                : isDark
+                ? "bg-black/30 border-white/5 text-slate-400 hover:text-white"
+                : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+            }`}
+          >
+            <span>📐 Mathematics (35 Sheets)</span>
+          </button>
         </div>
       </div>
 
       {/* Chapter Selection Pills */}
       <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-        {MNEMONIC_CHAPTERS.map((ch) => {
+        {activeChapterList.map((ch) => {
           const isSelected = ch.chapterId === selectedChapterId;
           return (
             <button
@@ -431,7 +729,9 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
               className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
                 isSelected
                   ? isDark
-                    ? "bg-amber-500 text-slate-950 shadow-md font-extrabold"
+                    ? activeSubject === "science"
+                      ? "bg-teal-500 text-slate-950 shadow-md font-extrabold"
+                      : "bg-amber-500 text-slate-950 shadow-md font-extrabold"
                     : "bg-slate-900 text-white shadow-md font-extrabold"
                   : isDark
                   ? "bg-[#121212]/70 text-slate-400 hover:text-white border border-white/5 hover:border-white/10"

@@ -133,13 +133,7 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
         </div>
 
         {/* PLAIN PAPER SHEET BODY WITH RED MARGIN */}
-        <div className="relative px-3 sm:px-8 py-6">
-          {/* Continuous Left Vertical Red Margin Line */}
-          <div 
-            className="absolute top-0 bottom-0 left-12 sm:left-20 border-r-2 pointer-events-none"
-            style={{ borderColor: isDark ? "rgba(239, 68, 68, 0.45)" : "rgba(220, 38, 38, 0.75)" }}
-          />
-
+        <div className="relative px-3 sm:px-6 py-6">
           {/* Solution Body with Generous Line Height and Clear Step Separation */}
           <div className="space-y-6 sm:space-y-7">
             {isPureMathDerivation ? (
@@ -147,9 +141,9 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
               rawSteps.map((step, idx) => {
                 const { equationText, reason } = parseStepContent(step);
                 return (
-                  <div key={idx} className="relative flex items-start gap-1">
-                    {/* Margin Column */}
-                    <div className={`w-10 sm:w-16 text-right pr-3 shrink-0 font-mono font-black text-xs select-none pt-1 ${
+                  <div key={idx} className="relative flex items-start">
+                    {/* Margin Column with exact physical border-r */}
+                    <div className={`w-14 sm:w-20 text-right pr-3.5 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-xs select-none pt-1 ${
                       isDark ? "text-red-400" : "text-red-700"
                     }`}>
                       {idx === 0 ? "Ans." : `(${idx + 1})`}
@@ -158,7 +152,7 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
                     {/* Step Content */}
                     <div className="flex-1 pl-4 sm:pl-6 min-w-0">
                       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-3">
-                        <div className="text-xs sm:text-sm font-medium leading-relaxed tracking-wide min-w-0 flex-1">
+                        <div className="text-xs sm:text-sm font-medium leading-relaxed tracking-wide min-w-0 flex-1 break-words">
                           <PremiumMathRenderer content={equationText} isDark={isDark} />
                         </div>
 
@@ -180,9 +174,9 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
             ) : structuredParts && structuredParts.length > 1 ? (
               // CASE 2: Multi-part answer (e.g. Parts (a), (b), (c), (d))
               structuredParts.map((part, pIdx) => (
-                <div key={pIdx} className="relative flex items-start gap-1">
+                <div key={pIdx} className="relative flex items-start">
                   {/* Margin Column */}
-                  <div className={`w-10 sm:w-16 text-right pr-3 shrink-0 font-mono font-black text-xs select-none pt-1 ${
+                  <div className={`w-14 sm:w-20 text-right pr-3.5 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-xs select-none pt-1 ${
                     isDark ? "text-red-400" : "text-red-700"
                   }`}>
                     {part.tag}
@@ -202,13 +196,13 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
               ))
             ) : (
               // CASE 3: Single block answer
-              <div className="relative flex items-start gap-1">
-                <div className={`w-10 sm:w-16 text-right pr-3 shrink-0 font-mono font-black text-xs select-none pt-1 ${
+              <div className="relative flex items-start">
+                <div className={`w-14 sm:w-20 text-right pr-3.5 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-xs select-none pt-1 ${
                   isDark ? "text-red-400" : "text-red-700"
                 }`}>
                   Ans.
                 </div>
-                <div className="flex-1 pl-4 sm:pl-6 text-xs sm:text-sm font-medium leading-relaxed">
+                <div className="flex-1 pl-4 sm:pl-6 text-xs sm:text-sm font-medium leading-relaxed min-w-0">
                   <div className={`p-4 rounded-xl border ${
                     isDark ? "bg-white/[0.02] border-white/5" : "bg-white border-slate-200"
                   }`}>
@@ -220,38 +214,38 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
 
             {/* Authentic Boxed Final Answer on the Paper */}
             {question.answer && !isMultiParagraphTheory && (
-              <div className="relative flex items-start gap-1 pt-2">
-                <div className={`w-10 sm:w-16 text-right pr-3 shrink-0 font-mono font-black text-base pt-1 ${
+              <div className="relative flex items-start pt-2">
+                <div className={`w-14 sm:w-20 text-right pr-3.5 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-base pt-1 ${
                   isDark ? "text-emerald-400" : "text-emerald-700"
                 }`}>
                   ∴
                 </div>
-                <div className="flex-1 pl-4 sm:pl-6">
-                  <div className={`inline-flex flex-wrap items-center gap-3 px-4 py-2 rounded-xl border-2 font-mono ${
+                <div className="flex-1 pl-4 sm:pl-6 min-w-0">
+                  <div className={`inline-flex flex-wrap items-center gap-3 px-4 py-2 rounded-xl border-2 font-mono max-w-full overflow-x-auto ${
                     isDark 
                       ? "border-emerald-500 bg-emerald-950/40 text-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.15)]" 
                       : "border-emerald-700 bg-emerald-50 text-emerald-950 font-bold shadow-xs"
                   }`}>
                     <span className="text-[11px] font-black uppercase tracking-wider">Ans:</span>
-                    <div className="text-xs sm:text-sm font-bold">
+                    <div className="text-xs sm:text-sm font-bold break-words">
                       <PremiumMathRenderer content={question.answer} isDark={isDark} />
                     </div>
-                    <span className="text-[10px] font-mono uppercase opacity-80">(Hence Proved / Final)</span>
+                    <span className="text-[10px] font-mono uppercase opacity-80 shrink-0">(Hence Proved / Final)</span>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* For multi-part theory answers: Clean verification seal instead of duplicating text */}
+            {/* For multi-part theory answers: Clean verification seal */}
             {isMultiParagraphTheory && (
-              <div className="relative flex items-start gap-1 pt-1">
-                <div className={`w-10 sm:w-16 text-right pr-3 shrink-0 font-mono font-black text-base pt-1 ${
+              <div className="relative flex items-start pt-1">
+                <div className={`w-14 sm:w-20 text-right pr-3.5 sm:pr-4 border-r-2 border-red-500/60 shrink-0 font-mono font-black text-base pt-1 ${
                   isDark ? "text-emerald-400" : "text-emerald-700"
                 }`}>
                   ✓
                 </div>
-                <div className="flex-1 pl-4 sm:pl-6">
-                  <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border text-xs font-mono font-bold ${
+                <div className="flex-1 pl-4 sm:pl-6 min-w-0">
+                  <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border text-xs font-mono font-bold max-w-full overflow-x-auto ${
                     isDark 
                       ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-300" 
                       : "bg-emerald-50 border-emerald-300 text-emerald-800"

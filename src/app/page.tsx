@@ -9,10 +9,12 @@ import NotebookSolutionView from "@/components/NotebookSolutionView";
 import ChapterConceptExplainer from "@/components/ChapterConceptExplainer";
 import TheoremsAndExamplesView from "@/components/TheoremsAndExamplesView";
 import ScienceConceptsView from "@/components/ScienceConceptsView";
+import ScienceActivitiesView from "@/components/ScienceActivitiesView";
 
 import {
   Atom,
   Award,
+  Beaker,
   BookOpen,
   CheckCircle2,
   ChevronRight,
@@ -604,7 +606,7 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "theorems" | "science_concepts" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "roadmap">("chapter_dashboard");
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "theorems" | "science_concepts" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "roadmap">("chapter_dashboard");
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false);
@@ -1726,9 +1728,10 @@ export default function CBSECommandCenter() {
           {[
             { id: "chapter_dashboard", label: "Chapter Command", icon: Target },
             { id: "science_concepts", label: "Science Concepts (All 13 Ch)", icon: FlaskConical },
+            { id: "activities", label: "NCERT Lab Activities", icon: Beaker },
             { id: "theorems", label: "Maths Theorems & Ex", icon: Award },
             { id: "questions", label: "Master Question Bank", icon: Zap },
-            { id: "mnemonics", label: "Visual Mnemonics (35 Sheets)", icon: Sparkles },
+            { id: "mnemonics", label: "Visual Mnemonics Hub (49 Sheets)", icon: Sparkles },
             { id: "flashcards", label: "Flashcards Engine", icon: BookMarked },
             { id: "common_mistakes", label: "My Mistakes Error Log", icon: Flame },
             { id: "test_series", label: "Test Series I (Sept 14)", icon: Calendar },
@@ -2536,6 +2539,25 @@ export default function CBSECommandCenter() {
         {/* ===================== TAB: SCIENCE CONCEPTS & BOARD EXAMPLES ===================== */}
         {activeTab === "science_concepts" && (
           <ScienceConceptsView
+            isDark={isDark}
+            onOpenActivities={(targetChNo) => {
+              playSound("click");
+              setActiveTab("activities");
+            }}
+            onOpenQuestionBank={(targetChNo) => {
+              playSound("click");
+              const ch = targetChNo || 1;
+              setActiveVaultSubject("science");
+              setActiveVaultChapter(ch);
+              loadChapterData(ch, false, "science");
+              setActiveTab("questions");
+            }}
+          />
+        )}
+
+        {/* ===================== TAB: NCERT SCIENCE LAB ACTIVITIES ===================== */}
+        {activeTab === "activities" && (
+          <ScienceActivitiesView
             isDark={isDark}
             onOpenQuestionBank={(targetChNo) => {
               playSound("click");
@@ -3502,6 +3524,10 @@ export default function CBSECommandCenter() {
                     activeChapterNo={ncertNum || 1}
                     activeChapterName={activeChapter.name}
                     isEmbeddedInCommand={true}
+                    onOpenActivities={(targetChNo) => {
+                      playSound("click");
+                      setActiveTab("activities");
+                    }}
                     onOpenQuestionBank={(targetChNo) => {
                       playSound("click");
                       const ch = targetChNo || ncertNum || 1;
@@ -3611,14 +3637,14 @@ export default function CBSECommandCenter() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                   {[
                     { label: 'Master Question Bank', action: () => setActiveTab('questions'), icon: Zap },
+                    { label: 'Science Concepts (13 Ch)', action: () => setActiveTab('science_concepts'), icon: FlaskConical },
+                    { label: 'NCERT Lab Activities', action: () => setActiveTab('activities'), icon: Beaker },
                     { label: 'Theorems & Proofs (5M)', action: () => setActiveTab('theorems'), icon: Award },
-                    { label: 'Visual Mnemonics', action: () => setActiveTab('mnemonics'), icon: Sparkles },
+                    { label: 'Visual Mnemonics (49)', action: () => setActiveTab('mnemonics'), icon: Sparkles },
                     { label: 'Flashcards Engine', action: () => setActiveTab('flashcards'), icon: BookMarked },
                     { label: 'My Mistakes Log', action: () => setActiveTab('common_mistakes'), icon: Flame },
                     { label: 'Test Series (Sept 14)', action: () => setActiveTab('test_series'), icon: Calendar },
                     { label: 'Daily Pomodoro Routine', action: () => setActiveTab('today'), icon: Clock },
-                    { label: 'Lab Experiments', action: () => setActiveTab('experiments'), icon: FlaskConical },
-                    { label: 'Color Reactions', action: () => setActiveTab('reactions'), icon: Flame },
                     { label: 'NCERT Full Syllabus', action: () => setActiveTab('syllabus'), icon: Compass }
                   ].map((module, i) => (
                     <button 
@@ -3765,6 +3791,7 @@ export default function CBSECommandCenter() {
             <div className="grid grid-cols-2 gap-2 text-xs">
               {[
                 { id: "science_concepts", label: "Science Concepts (All 13)", icon: FlaskConical },
+                { id: "activities", label: "NCERT Lab Activities", icon: Beaker },
                 { id: "theorems", label: "Theorems & Examples", icon: Award },
                 { id: "flashcards", label: "Flashcards", icon: BookMarked },
                 { id: "common_mistakes", label: "My Mistakes Log", icon: Flame },

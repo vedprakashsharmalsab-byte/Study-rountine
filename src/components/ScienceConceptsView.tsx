@@ -32,6 +32,7 @@ import {
 interface ScienceConceptsViewProps {
   isDark: boolean;
   onOpenQuestionBank?: (chapterNo?: number) => void;
+  onOpenActivities?: (chapterNo?: number) => void;
   activeChapterNo?: number;
   activeChapterName?: string;
   isEmbeddedInCommand?: boolean;
@@ -40,6 +41,7 @@ interface ScienceConceptsViewProps {
 export default function ScienceConceptsView({ 
   isDark, 
   onOpenQuestionBank, 
+  onOpenActivities,
   activeChapterNo, 
   activeChapterName, 
   isEmbeddedInCommand = false 
@@ -360,6 +362,17 @@ export default function ScienceConceptsView({
               >
                 {filteredTopics.every((t) => expandedTopicIds[t.id]) ? "Collapse All Topics" : "Expand All Topics"}
               </button>
+
+              {onOpenActivities && (
+                <button
+                  onClick={() => onOpenActivities(currentChNo)}
+                  className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0"
+                  title="Explore All NCERT Laboratory Activities for this Chapter"
+                >
+                  <FlaskConical className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Lab Activities (Ch {currentChNo})</span>
+                </button>
+              )}
 
               {onOpenQuestionBank && (
                 <button
