@@ -15,6 +15,7 @@ import ConceptsHubView from "@/components/ConceptsHubView";
 import ChemistryReactionsView from "@/components/ChemistryReactionsView";
 import ScienceDiagramsView from "@/components/ScienceDiagramsView";
 import CompetitiveHotsView from "@/components/CompetitiveHotsView";
+import { TimelinesMasterView } from "@/components/TimelinesMasterView";
 
 import {
   Atom,
@@ -62,6 +63,7 @@ import {
   AlertCircle,
   AlertTriangle,
   LayoutGrid,
+  Globe,
 } from "lucide-react";
 
 import {
@@ -460,6 +462,138 @@ const DEFAULT_MISTAKE_LOGS = [
     reason: "Misunderstanding biological magnification: because pesticides like DDT are non-biodegradable, organisms cannot excrete them. With each higher trophic level, an organism consumes many organisms of the previous level, leading to progressive ACCUMULATION.",
     correctAnswer: "1. Biological Magnification: The progressive increase in the concentration of non-biodegradable harmful chemicals (e.g. DDT) at each successive trophic level in a food chain.\n2. The highest concentration will be found in the organism at the TOP of the food chain: Fish-eating Bird (Tertiary consumer / Top carnivore).\n3. Phytoplankton has the lowest concentration among living organisms.",
     concept: "Biological Magnification: Non-biodegradable chemicals increase progressively, reaching maximum at top trophic level."
+  },
+  {
+    id: "mst_sst_eu_1",
+    subject: "Social Science",
+    chapter: "Ch 1: The Rise of Nationalism in Europe",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-05",
+    question: "Which treaty recognized Greece as an independent nation, and which treaty restored the Bourbon dynasty in France?",
+    wrongAnswer: "Treaty of Vienna 1815 recognized Greek independence, and Treaty of Constantinople restored the French monarchy.",
+    reason: "Direct reversal of the two pivotal European treaties! The Treaty of Vienna (1815) restored conservative Bourbon monarchy in France following Napoleon's defeat at Waterloo; the Treaty of Constantinople (1832) recognized Greek sovereignty.",
+    correctAnswer: "1. The Treaty of Constantinople of 1832 recognized Greece as an independent nation.\n2. The Treaty of Vienna of 1815 restored the Bourbon dynasty to power in France.\nExam Rule: Never confuse 1815 Vienna (Monarchy restoration) with 1832 Constantinople (Greek liberation).",
+    concept: "European Treaties: Vienna 1815 = Bourbon restoration; Constantinople 1832 = Greek Independence."
+  },
+  {
+    id: "mst_sst_eu_2",
+    subject: "Social Science",
+    chapter: "Ch 1: The Rise of Nationalism in Europe",
+    priority: "HIGH",
+    dateAdded: "2026-09-05",
+    question: "What was decided regarding Napoleon's German Confederation of 39 states at the Congress of Vienna in 1815?",
+    wrongAnswer: "The German Confederation of 39 states was dismantled and partitioned among Russia, Prussia, and Austria.",
+    reason: "Assuming the conservative powers abolished all Napoleonic creations. NCERT explicitly clarifies that the German Confederation of 39 states set up by Napoleon was intentionally left untouched.",
+    correctAnswer: "1. The German Confederation of 39 states established by Napoleon was LEFT UNTOUCHED at the Congress of Vienna (1815).\n2. Conservative rulers preserved it as a strategic political buffer and economic confederation in Central Europe.",
+    concept: "Vienna Congress 1815: Dismantled French conquests, but left the German Confederation of 39 states intact."
+  },
+  {
+    id: "mst_sst_in_1",
+    subject: "Social Science",
+    chapter: "Ch 2: Nationalism in India",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-05",
+    question: "Give the chronological sequence of April 1919 events: (a) Jallianwala Bagh massacre, (b) Nationwide Rowlatt Hartal, (c) Police firing on peaceful procession in Amritsar.",
+    wrongAnswer: "13 April (Rowlatt Hartal) ⟶ 10 April (Jallianwala Bagh) ⟶ 6 April (Amritsar firing).",
+    reason: "Scrambling the sequence of April 1919 milestones under exam pressure.",
+    correctAnswer: "1. 6 April 1919: Nationwide Rowlatt Hartal launched by Mahatma Gandhi with non-violent protests, fasting, and prayer.\n2. 10 April 1919: Police in Amritsar fired upon a peaceful procession, provoking attacks on banks, post offices, and railway stations (Martial Law was subsequently imposed).\n3. 13 April 1919: Jallianwala Bagh massacre occurred on Baisakhi day when General Dyer blocked all exits and opened fire on an unarmed crowd.",
+    concept: "April 1919 Sequence: 6 April (Hartal) ⟶ 10 April (Police firing & Martial Law) ⟶ 13 April (Jallianwala Bagh)."
+  },
+  {
+    id: "mst_sst_in_2",
+    subject: "Social Science",
+    chapter: "Ch 2: Nationalism in India",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-05",
+    question: "State the distinct reasons and years when (a) Non-Cooperation Movement and (b) Civil Disobedience Movement were called off.",
+    wrongAnswer: "Both movements were suspended due to the Chauri Chaura incident in February 1922.",
+    reason: "Conflating the calling off of two different movements! NCM was withdrawn in 1922 due to violence at Chauri Chaura. CDM was suspended in 1931 (Gandhi-Irwin Pact), relaunched, and finally called off in 1934 due to waning momentum.",
+    correctAnswer: "1. Non-Cooperation Movement was called off in FEBRUARY 1922 due to the violent Chauri Chaura incident in Gorakhpur (UP), where 22 policemen were burnt alive inside a station.\n2. Civil Disobedience Movement was initially suspended in MARCH 1931 under the Gandhi-Irwin Pact, relaunched in 1932, and finally called off in 1934 as the movement lost momentum.",
+    concept: "Movement Withdrawals: NCM = Feb 1922 (Chauri Chaura); CDM = March 1931 (Gandhi-Irwin Pact) & 1934 formal withdrawal."
+  },
+  {
+    id: "mst_sst_in_3",
+    subject: "Social Science",
+    chapter: "Ch 2: Nationalism in India",
+    priority: "HIGH",
+    dateAdded: "2026-09-05",
+    question: "Explain the compromise reached between Mahatma Gandhi and Dr. B.R. Ambedkar in the Poona Pact of September 1932.",
+    wrongAnswer: "Dr. Ambedkar secured separate electorates for Dalits in central and provincial legislative councils.",
+    reason: "Believing the British Communal Award's 'separate electorates' prevailed. Gandhiji fasted unto death specifically to oppose separate electorates because it would divide Hindu society permanently.",
+    correctAnswer: "1. The Poona Pact of September 1932 gave the Depressed Classes (Scheduled Castes) RESERVED SEATS in provincial and central legislative councils.\n2. However, they were to be voted in by the GENERAL ELECTORATE, thereby rejecting the British scheme of Separate Electorates.\n3. This united the national movement while securing political representation for Dalits.",
+    concept: "Poona Pact 1932: Reserved Seats voted by General Electorate (NOT Separate Electorates)."
+  },
+  {
+    id: "mst_sst_civ_1",
+    subject: "Social Science",
+    chapter: "Ch 3: Power Sharing",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-05",
+    question: "State the percentage composition of Dutch and French speakers in Belgium as a whole vs. in the capital city Brussels.",
+    wrongAnswer: "Dutch are 80% in Belgium and 20% in Brussels; French are 59% in Belgium and 40% in Brussels.",
+    reason: "Confusing national ethnic proportions with the capital city! In Belgium nationwide, Dutch are majority (59%) and French are minority (40%). In Brussels, the proportion is REVERSED: French are majority (80%) and Dutch are minority (20%)!",
+    correctAnswer: "1. In Belgium Countrywide: 59% Dutch-speaking (Flemish region), 40% French-speaking (Wallonia region), 1% German-speaking.\n2. In Capital Brussels: 80% French-speaking, 20% Dutch-speaking.\n3. This acute demographic tension necessitated Belgium's unique 4-element constitutional accommodation model.",
+    concept: "Belgium Demographics: Nationwide Dutch majority (59%); Capital Brussels French majority (80%)."
+  },
+  {
+    id: "mst_sst_civ_2",
+    subject: "Social Science",
+    chapter: "Ch 3: Power Sharing",
+    priority: "HIGH",
+    dateAdded: "2026-09-05",
+    question: "Mention the 3 legislative and constitutional majoritarian measures adopted by the Sri Lankan government that alienated Sri Lankan Tamils.",
+    wrongAnswer: "Giving equal status to Tamil and English, and establishing provincial autonomy in Northern and Eastern provinces.",
+    reason: "Writing power-sharing accommodation measures instead of majoritarian dominance! Sri Lanka passed the 1956 Act establishing Sinhala hegemony.",
+    correctAnswer: "1. 1956 Official Language Act: Recognized Sinhala as the sole official language, completely disregarding Tamil.\n2. Preferential Employment & Education Policies: Favored Sinhala applicants for university admissions and government jobs.\n3. State Religion Clause: A new constitution stipulated that the state shall protect and foster Buddhism.",
+    concept: "1956 Sri Lanka Majoritarian Act: Sinhala sole language + preferential jobs + state patronage of Buddhism."
+  },
+  {
+    id: "mst_sst_civ_3",
+    subject: "Social Science",
+    chapter: "Ch 3: Power Sharing",
+    priority: "HIGH",
+    dateAdded: "2026-09-05",
+    question: "Differentiate between Prudential and Moral reasons for power sharing with one CBSE example each.",
+    wrongAnswer: "Prudential reason is based on ethical democratic ideals; Moral reason is based on economic calculations.",
+    reason: "Reversing the definitions! Prudential = pragmatic cost-benefit calculation (prevents civil war/conflict, e.g. Belgium). Moral = the inherent essence of democracy (citizens have a right to be consulted, e.g. Panchayati Raj).",
+    correctAnswer: "1. Prudential Reason: Based on practical calculation of gains and losses. Power sharing reduces the possibility of conflict and political instability between social groups (e.g. Belgian accommodation model).\n2. Moral Reason: Emphasizes that power sharing is valuable in itself as the very spirit of democracy. A legitimate democratic government involves citizens through participation (e.g. India's 73rd/74th Constitutional Amendments on Local Self-Government).",
+    concept: "Power Sharing Rationale: Prudential = Prevents conflict/stability; Moral = Inherent spirit of democracy."
+  },
+  {
+    id: "mst_sst_civ_4",
+    subject: "Social Science",
+    chapter: "Ch 4: Federalism",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-05",
+    question: "Is Hindi the 'National Language' of India under the Constitution? Explain India's constitutional language policy.",
+    wrongAnswer: "Yes, Article 343 declares Hindi as the National Language of India.",
+    reason: "Stating Hindi is the National Language! The Indian Constitution does NOT give the status of 'National Language' to any language. Hindi is identified as the OFFICIAL language, alongside English, with 21 other Scheduled Languages in the Eighth Schedule.",
+    correctAnswer: "1. India has NO National Language under the Constitution.\n2. Hindi is recognized as the OFFICIAL language (spoken by ~44% of Indians as mother tongue).\n3. Besides Hindi, 21 other languages are recognized as Scheduled Languages in the Eighth Schedule of the Constitution (total 22 Scheduled Languages).\n4. Candidates in Central Government examinations can opt to take the exam in any of these 22 languages.\n5. English continues to be used for official administrative purposes alongside Hindi to protect non-Hindi speaking states.",
+    concept: "India Language Policy: Hindi is the Official language, NOT National language; 22 Scheduled Languages in 8th Schedule."
+  },
+  {
+    id: "mst_sst_eco_1",
+    subject: "Social Science",
+    chapter: "Ch 8: Development",
+    priority: "CRITICAL",
+    dateAdded: "2026-09-05",
+    question: "Why is Per Capita Income alone an inadequate indicator of development? How does UNDP's Human Development Index (HDI) overcome this limitation?",
+    wrongAnswer: "Per Capita Income measures health and education, while UNDP only measures national income.",
+    reason: "Confusing World Bank criterion with UNDP criterion! World Bank only measures average per capita income, which hides severe inequality. UNDP measures health, education, and standard of living.",
+    correctAnswer: "1. Limitations of Per Capita Income (World Bank): It is a simple average that completely hides inequalities in wealth distribution. It does not reflect essential indicators like literacy rate, infant mortality rate, life expectancy, or clean environment.\n2. UNDP's HDI Criterion: A holistic composite index combining (a) Health: Life expectancy at birth, (b) Education: Mean and expected years of schooling, and (c) Living Standard: Gross National Income (GNI) per capita in Purchasing Power Parity (PPP$).",
+    concept: "Development Indicators: World Bank uses PCI only (hides disparities); UNDP uses HDI (Health + Education + Income)."
+  },
+  {
+    id: "mst_sst_geo_1",
+    subject: "Social Science",
+    chapter: "Ch 12: Resources and Development",
+    priority: "HIGH",
+    dateAdded: "2026-09-05",
+    question: "Differentiate between Khadar and Bangar alluvial soils based on age, texture, and fertility.",
+    wrongAnswer: "Bangar is new fertile soil found near river banks; Khadar is old infertile soil containing kankar nodules.",
+    reason: "Reversing Khadar and Bangar! Remember mnemonic: Khadar = K = Khad (fertile, new silt); Bangar = B = Budha (old, coarse, kankar pebbles).",
+    correctAnswer: "1. Khadar (New Alluvium): Deposited annually by floods in flood plains; fine texture; contains more fine particles; highly fertile and intensively cultivated.\n2. Bangar (Old Alluvium): Found on older terraces away from flood plains; coarse texture; contains high concentration of calcareous kankar nodules; less fertile compared to Khadar.",
+    concept: "Alluvial Soils: Khadar = New, fine, highly fertile; Bangar = Old, coarse, kankar nodules, less fertile."
   }
 ];
 
@@ -642,8 +776,9 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap">("chapter_dashboard");
-  const [conceptsSubject, setConceptsSubject] = useState<"math" | "science">("math");
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines">("chapter_dashboard");
+  const [timelinesChapterKey, setTimelinesChapterKey] = useState<"ch1_europe" | "ch2_india" | "all">("all");
+  const [conceptsSubject, setConceptsSubject] = useState<"math" | "science" | "sst">("math");
   const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(6);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
@@ -700,7 +835,7 @@ export default function CBSECommandCenter() {
   const [commandChapterId, setCommandChapterId] = useState<string>("math_ch6");
   
   // Progressive Chapter Vault (Supports Math & Science)
-  const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science">("math");
+  const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science" | "sst">("math");
   const [activeVaultChapter, setActiveVaultChapter] = useState<number | null>(6); // Default Triangles
   const [activeVaultQuestions, setActiveVaultQuestions] = useState<VaultQuestion[]>([]);
   const [isAnalyzingVault, setIsAnalyzingVault] = useState(false);
@@ -716,7 +851,7 @@ export default function CBSECommandCenter() {
 
   // My Mistakes
   const [myMistakes, setMyMistakes] = useState<any[]>(DEFAULT_MISTAKE_LOGS);
-  const [mistakeSubjectFilter, setMistakeSubjectFilter] = useState<"All" | "Mathematics" | "Science">("All");
+  const [mistakeSubjectFilter, setMistakeSubjectFilter] = useState<"All" | "Mathematics" | "Science" | "Social Science">("All");
   const [mistakeChapterFilter, setMistakeChapterFilter] = useState<string>("All");
   const [isLoadingMistakes, setIsLoadingMistakes] = useState(false);
   const [resolvedMistakeIds, setResolvedMistakeIds] = useState<{ [id: string]: boolean }>({});
@@ -944,7 +1079,7 @@ export default function CBSECommandCenter() {
   const loadChapterData = async (
     chapterId: number, 
     isPreload = false, 
-    subject: "math" | "science" = activeVaultSubject
+    subject: "math" | "science" | "sst" = activeVaultSubject
   ) => {
     const cacheKey = `${subject}_${chapterId}`;
     // 1. Instant cache hit: 0ms switch
@@ -959,7 +1094,7 @@ export default function CBSECommandCenter() {
       setActiveVaultChapter(null);
       setVaultAnalysisLogs([
         "Connecting to Syllabus Engine...",
-        `Loading High-Yield Board Questions for ${subject === "science" ? "Science" : "Maths"} Chapter ${chapterId}...`
+        `Loading High-Yield Board Questions for ${subject === "science" ? "Science" : subject === "sst" ? "Social Science" : "Maths"} Chapter ${chapterId}...`
       ]);
     }
 
@@ -1759,43 +1894,49 @@ export default function CBSECommandCenter() {
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <h1 className="text-sm font-black tracking-tight text-white flex items-center gap-1.5">
-                  CBSE CLASS 10 <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold">2026–27</span>
+                <h1 className={`text-sm font-black tracking-tight flex items-center gap-1.5 ${isDark ? "text-white" : "text-slate-900"}`}>
+                  CBSE CLASS 10 <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-500 border border-amber-500/40 font-bold">2026–27</span>
                 </h1>
               </div>
-              <p className="text-[10px] text-slate-400 font-medium flex items-center gap-1.5">
+              <p className={`text-[10px] font-medium flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
                 <span>Lakshmipat Singhania Academy</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                <span className="text-emerald-400 font-mono text-[9px] font-bold">LIVE HUD</span>
+                <span className="text-emerald-500 font-mono text-[9px] font-bold">LIVE HUD</span>
               </p>
             </div>
           </div>
 
           {/* CENTER: AEROSPACE TELEMETRY DUAL COUNTDOWN ISLAND */}
-          <div className="hidden lg:flex items-center gap-3 px-4 py-1.5 rounded-full bg-slate-900/80 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)] text-xs font-mono">
+          <div className={`hidden lg:flex items-center gap-3 px-4 py-1.5 rounded-full border text-xs font-mono ${
+            isDark
+              ? "bg-slate-900/80 border-white/10 text-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)]"
+              : "bg-slate-100 border-slate-200 text-slate-800 shadow-xs"
+          }`}>
             <button
               onClick={() => {
                 playSound("click");
                 setActiveTab("test_series");
                 setNavDropdown(null);
               }}
-              className="flex items-center gap-2 text-slate-200 hover:text-amber-300 transition-colors cursor-pointer group px-2 py-0.5 rounded-full hover:bg-amber-500/10"
+              className={`flex items-center gap-2 transition-colors cursor-pointer group px-2 py-0.5 rounded-full ${
+                isDark ? "text-slate-200 hover:text-amber-300 hover:bg-amber-500/10" : "text-slate-700 hover:text-amber-800 hover:bg-amber-100"
+              }`}
               title="Target: Test Series I (Sept 14) — Click to view plan"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
               </span>
-              <span className="text-[11px] font-bold text-amber-400 group-hover:underline">Sept 14 Math:</span>
+              <span className="text-[11px] font-bold text-amber-500 group-hover:underline">Sept 14 Math:</span>
               <LiveCountdown targetDate="2026-09-14" variant="badge" colorScheme="amber" isDark={isDark} />
             </button>
-            <span className="text-white/20 select-none">•</span>
-            <div className="flex items-center gap-2 text-slate-200 px-2 py-0.5">
+            <span className={`${isDark ? "text-white/20" : "text-slate-300"} select-none`}>•</span>
+            <div className={`flex items-center gap-2 px-2 py-0.5 ${isDark ? "text-slate-200" : "text-slate-700"}`}>
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
               </span>
-              <span className="text-[11px] font-bold text-cyan-400">Final Boards:</span>
+              <span className="text-[11px] font-bold text-cyan-500">Final Boards:</span>
               <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
             </div>
           </div>
@@ -1808,9 +1949,9 @@ export default function CBSECommandCenter() {
               isDark ? "bg-slate-900/90 border-white/10 text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]" : "bg-slate-100 border-slate-200 text-slate-800"
             }`}>
               <span className="text-xs">{currentLevelInfo.badge}</span>
-              <span className="font-black text-amber-400">Lvl {currentLevelInfo.level}</span>
-              <span className="text-white/20 select-none">•</span>
-              <span className="font-black text-white">{totalXp} <span className="text-[10px] text-amber-400/80">XP</span></span>
+              <span className="font-black text-amber-500">Lvl {currentLevelInfo.level}</span>
+              <span className={`${isDark ? "text-white/20" : "text-slate-300"} select-none`}>•</span>
+              <span className={`font-black ${isDark ? "text-white" : "text-slate-900"}`}>{totalXp} <span className="text-[10px] text-amber-500 font-bold">XP</span></span>
               
               {/* Vibrant glowing micro progress bar */}
               <div className="w-14 sm:w-18 h-1.5 rounded-full overflow-hidden bg-white/10 p-[1px] ml-0.5">
@@ -1930,7 +2071,7 @@ export default function CBSECommandCenter() {
           className="px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 flex items-center gap-1.5 shrink-0 shadow-md shadow-amber-500/20 cursor-pointer active:scale-95"
         >
           <LayoutGrid className="w-3.5 h-3.5 text-slate-950" />
-          <span>All (15)</span>
+          <span>All (16)</span>
         </button>
       </div>
 
@@ -1969,10 +2110,19 @@ export default function CBSECommandCenter() {
               <span>Command</span>
             </button>
 
-            {/* 2. Concepts Hub (27 Ch) */}
+            {/* 2. Concepts Hub (37 Ch) */}
             <button
               onClick={() => {
                 playSound("click");
+                if (commandSubjectId === "sst") {
+                  setConceptsSubject("sst");
+                  setConceptsChapterNo(1);
+                } else if (commandSubjectId === "science") {
+                  setConceptsSubject("science");
+                  setConceptsChapterNo(1);
+                } else {
+                  setConceptsSubject("math");
+                }
                 setActiveTab("concepts");
                 setNavDropdown(null);
               }}
@@ -1989,7 +2139,7 @@ export default function CBSECommandCenter() {
               <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-full shrink-0 ${
                 activeTab === "concepts" ? "bg-white/25 text-white" : "bg-blue-500/20 text-blue-300 border border-blue-500/30"
               }`}>
-                27
+                37
               </span>
             </button>
 
@@ -2062,12 +2212,12 @@ export default function CBSECommandCenter() {
 
             <div className="h-4 w-px bg-white/15 mx-1 shrink-0" />
 
-            {/* DROPDOWN 1: VAULTS (THEOREMS, REACTIONS, LAB ACTIVITIES) */}
+            {/* DROPDOWN 1: VAULTS (THEOREMS, REACTIONS, LAB ACTIVITIES, TIMELINES) */}
             <div className="relative shrink-0">
               <button
                 onClick={() => setNavDropdown(navDropdown === "vaults" ? null : "vaults")}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 border ${
-                  ["theorems", "reactions", "activities"].includes(activeTab)
+                  ["theorems", "reactions", "activities", "timelines"].includes(activeTab)
                     ? "bg-amber-500/20 text-amber-300 border-amber-500/50 font-black shadow-[0_0_12px_rgba(245,158,11,0.2)]"
                     : isDark
                     ? "bg-white/[0.02] border-white/5 text-slate-300 hover:bg-white/[0.08] hover:border-white/10"
@@ -2076,7 +2226,7 @@ export default function CBSECommandCenter() {
               >
                 <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <span>Vaults</span>
-                {["theorems", "reactions", "activities"].includes(activeTab) && (
+                {["theorems", "reactions", "activities", "timelines"].includes(activeTab) && (
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 animate-pulse shadow-xs" />
                 )}
                 <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform duration-200 shrink-0 ${navDropdown === "vaults" ? "rotate-180" : ""}`} />
@@ -2087,12 +2237,13 @@ export default function CBSECommandCenter() {
                   isDark ? "bg-[#0a0f1d]/95 backdrop-blur-2xl border-white/15 text-white shadow-black/80" : "bg-white border-slate-200 text-slate-900 shadow-xl"
                 }`}>
                   <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
-                    Official Science & Math Proofs
+                    Official Vaults & Proofs
                   </div>
                   {[
                     { id: "theorems", label: "Theorems & Converses", sub: "25 Formal Geometry Proofs", icon: Award, color: "text-amber-400 bg-amber-500/15" },
                     { id: "reactions", label: "Chemistry Reactions", sub: "56 Equations with States & Colors", icon: FlaskConical, color: "text-cyan-400 bg-cyan-500/15" },
-                    { id: "activities", label: "NCERT Lab Activities", sub: "Step-by-step practical vivas", icon: Beaker, color: "text-emerald-400 bg-emerald-500/15" }
+                    { id: "activities", label: "NCERT Lab Activities", sub: "Step-by-step practical vivas", icon: Beaker, color: "text-emerald-400 bg-emerald-500/15" },
+                    { id: "timelines", label: "SST Timelines Master", sub: "56 Milestones, Chronology Game & Flashcards", icon: Calendar, color: "text-amber-400 bg-amber-500/15" }
                   ].map((item) => (
                     <button
                       key={item.id}
@@ -2259,7 +2410,7 @@ export default function CBSECommandCenter() {
             </div>
           </div>
 
-          {/* RIGHT: ALL 15 MODULES MEGA LAUNCHER (GOLDEN COMMAND PALETTE) */}
+          {/* RIGHT: ALL 16 MODULES MEGA LAUNCHER (GOLDEN COMMAND PALETTE) */}
           <div className="flex items-center shrink-0">
             <button
               onClick={() => {
@@ -2271,7 +2422,7 @@ export default function CBSECommandCenter() {
               title="Open All Modules Command Palette (Ctrl+K)"
             >
               <LayoutGrid className="w-3.5 h-3.5 text-slate-950 shrink-0" />
-              <span className="tracking-tight">All Modules (15)</span>
+              <span className="tracking-tight">All Modules (16)</span>
               <kbd className="hidden lg:inline-flex items-center text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-950/20 text-slate-950 border border-slate-950/20 font-black ml-0.5">
                 ⌘K
               </kbd>
@@ -2281,7 +2432,7 @@ export default function CBSECommandCenter() {
       </nav>
 
       {/* =========================================================================
-          ALL 15 MODULES MEGA-LAUNCHER MODAL (VIA PORTAL, NO BLUR)
+          ALL 16 MODULES MEGA-LAUNCHER MODAL (VIA PORTAL, NO BLUR)
           ========================================================================= */}
       {mounted && isAllModulesModalOpen && createPortal(
         <div
@@ -2303,7 +2454,7 @@ export default function CBSECommandCenter() {
                   <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400">
                     <LayoutGrid className="w-5 h-5" />
                   </div>
-                  <h2 className="text-lg sm:text-xl font-black">All 15 Command Center Learning Modules</h2>
+                  <h2 className="text-lg sm:text-xl font-black">All 16 Command Center Learning Modules</h2>
                 </div>
                 <p className="text-xs text-slate-400">
                   Instant launchpad to every vault, interactive solver, revision engine, and exam planner.
@@ -2350,6 +2501,7 @@ export default function CBSECommandCenter() {
                 {
                   group: "Official Proofs & Visual Vaults",
                   items: [
+                    { id: "timelines", label: "SST Timelines Master", sub: "56 Milestones, Chronology Game, Flashcards & Matrix", icon: Calendar, color: "text-amber-400 bg-amber-500/15" },
                     { id: "diagrams", label: "NCERT Visual Diagrams", sub: "29 Cropped Ray & Circuit Diagrams", icon: Compass, color: "text-cyan-400 bg-cyan-500/15" },
                     { id: "theorems", label: "Theorems & Converses", sub: "25 Formal Geometry Proofs & Corollaries", icon: Award, color: "text-amber-400 bg-amber-500/15" },
                     { id: "reactions", label: "Chemistry Reactions", sub: "56 Equations with States & Conditions", icon: FlaskConical, color: "text-teal-400 bg-teal-500/15" },
@@ -2574,6 +2726,46 @@ export default function CBSECommandCenter() {
                 </span>
               </div>
 
+              {/* SPECIAL HERO BANNER FOR SOCIAL SCIENCE (10 CHAPTERS, FULL CONCEPTS & TIMELINES) */}
+              {activeExam.id === "sst" && (
+                <div className={`p-4 sm:p-5 rounded-2xl border transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${
+                  isDark
+                    ? "bg-gradient-to-r from-rose-950/70 via-amber-950/40 to-[#180e22] border-rose-500/30 shadow-lg shadow-rose-500/10"
+                    : "bg-gradient-to-r from-rose-50 via-amber-50 to-orange-50 border-rose-200 shadow-sm"
+                }`}>
+                  <div className="space-y-1 max-w-2xl">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-black uppercase tracking-wider bg-rose-500 text-slate-950 shadow-xs">
+                        ⭐ 100% NCERT MASTER HUB
+                      </span>
+                      <span className="text-xs font-mono font-bold text-amber-400">
+                        10 Chapters • 76 NCERT Topics • 56 Milestone Timelines • 3 Map Modules
+                      </span>
+                    </div>
+                    <h4 className={`text-sm sm:text-base font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      Full NCERT Social Science Concepts & Chronological Timelines
+                    </h4>
+                    <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      Deep line-by-line coverage of Europe & India History timelines, Belgium & Sri Lanka models, 3-tier Federalism, Soil & Resource classifications, Multipurpose dams, Sectors GDP & MGNREGA 2005, and Money & Credit SHGs.
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      playSound("click");
+                      setConceptsSubject("sst");
+                      setConceptsChapterNo(1);
+                      setActiveTab("concepts");
+                    }}
+                    className="w-full md:w-auto px-5 py-3 rounded-xl text-xs font-black bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-rose-500/20 shrink-0"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>Launch SST Concepts & Timelines</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+
               {/* CHAPTERS BREAKDOWN */}
               <div className="space-y-3">
                 {activeExam.chapters.map((ch, chIdx) => (
@@ -2583,14 +2775,34 @@ export default function CBSECommandCenter() {
                       isDark ? "bg-[#0b0f19] border-white/10/90" : "bg-slate-50 border-slate-200"
                     }`}
                   >
-                    <h4 className="text-xs font-bold flex items-center gap-2">
-                      {ch.category && (
-                        <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-slate-800 text-slate-300">
-                          {ch.category}
-                        </span>
+                    <div className="flex items-center justify-between gap-2">
+                      <h4 className="text-xs font-bold flex items-center gap-2">
+                        {ch.category && (
+                          <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-slate-800 text-slate-300">
+                            {ch.category}
+                          </span>
+                        )}
+                        <span>{ch.title}</span>
+                      </h4>
+                      {activeExam.id === "sst" && (
+                        <button
+                          onClick={() => {
+                            playSound("click");
+                            setConceptsSubject("sst");
+                            setConceptsChapterNo(chIdx + 1);
+                            setActiveTab("concepts");
+                          }}
+                          className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all cursor-pointer flex items-center gap-1 shrink-0 ${
+                            isDark
+                              ? "bg-rose-500/10 border-rose-500/30 text-rose-300 hover:bg-rose-500/20"
+                              : "bg-rose-50 border-rose-200 text-rose-800 hover:bg-rose-100"
+                          }`}
+                        >
+                          <span>Full Concepts & Timeline</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </button>
                       )}
-                      <span>{ch.title}</span>
-                    </h4>
+                    </div>
 
                     <div className="space-y-1.5 pt-1">
                       {ch.topics.map((topic, tIdx) => {
@@ -3286,12 +3498,39 @@ export default function CBSECommandCenter() {
               playSound("click");
               setActiveTab("hots");
             }}
+            onOpenTimelines={(targetChNo) => {
+              playSound("click");
+              setTimelinesChapterKey(targetChNo === 1 ? "ch1_europe" : targetChNo === 2 ? "ch2_india" : "all");
+              setActiveTab("timelines");
+            }}
             onOpenQuestionBank={(sub, ch) => {
               playSound("click");
               setActiveVaultSubject(sub);
               setActiveVaultChapter(ch);
               loadChapterData(ch, false, sub);
               setActiveTab("questions");
+            }}
+          />
+        )}
+
+        {/* ===================== TAB: SST TIMELINES MASTER & CHRONOLOGY GAME ===================== */}
+        {activeTab === "timelines" && (
+          <TimelinesMasterView
+            isDark={isDark}
+            initialChapterKey={timelinesChapterKey}
+            onOpenConceptsHub={(chNo) => {
+              playSound("click");
+              setConceptsSubject("sst");
+              setConceptsChapterNo(chNo);
+              setActiveTab("concepts");
+            }}
+            onBackToDashboard={() => {
+              playSound("click");
+              setActiveTab("chapter_dashboard");
+            }}
+            onAddXP={(amt, reason) => {
+              triggerConfetti();
+              showXpToast(amt, reason);
             }}
           />
         )}
@@ -3355,6 +3594,19 @@ export default function CBSECommandCenter() {
                   >
                     🧪 Science (NCERT)
                   </button>
+                  <button
+                    onClick={() => {
+                      setActiveVaultSubject("sst");
+                      loadChapterData(1, false, "sst");
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      activeVaultSubject === "sst"
+                        ? "bg-rose-500 text-slate-950 font-extrabold shadow-sm"
+                        : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    🌍 Social Science (10 Chs)
+                  </button>
                 </div>
 
                 {/* Chapter Select Dropdown */}
@@ -3373,7 +3625,7 @@ export default function CBSECommandCenter() {
                       <option value="13">Ch 13: Statistics (55 Questions)</option>
                       <option value="14">Ch 14: Probability (55 Questions)</option>
                     </>
-                  ) : (
+                  ) : activeVaultSubject === "science" ? (
                     <>
                       <option value="1">Ch 1: Chemical Reactions & Equations (35 Questions)</option>
                       <option value="2">Ch 2: Acids, Bases and Salts (35 Questions)</option>
@@ -3382,6 +3634,19 @@ export default function CBSECommandCenter() {
                       <option value="11">Ch 11: Electricity (35 Questions)</option>
                       <option value="12">Ch 12: Magnetic Effects of Current (30 Questions)</option>
                       <option value="13">Ch 13: Our Environment (30 Questions)</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="1">History Ch 1: The Rise of Nationalism in Europe (6-8 Marks)</option>
+                      <option value="2">History Ch 2: Nationalism in India (7-9 Marks)</option>
+                      <option value="3">Civics Ch 1: Power Sharing (4-5 Marks)</option>
+                      <option value="4">Civics Ch 2: Federalism (4-5 Marks)</option>
+                      <option value="5">Geography Ch 1: Resources and Development (4-5 Marks)</option>
+                      <option value="6">Geography Ch 2: Forest and Wildlife Resources (3-4 Marks)</option>
+                      <option value="7">Geography Ch 3: Water Resources (4-5 Marks)</option>
+                      <option value="8">Economics Ch 1: Development (5-6 Marks)</option>
+                      <option value="9">Economics Ch 2: Sectors of the Indian Economy (7-8 Marks)</option>
+                      <option value="10">Economics Ch 3: Money and Credit (6-7 Marks)</option>
                     </>
                   )}
                 </select>
@@ -3874,8 +4139,10 @@ export default function CBSECommandCenter() {
                 {(() => {
                   const sciCount = myMistakes.filter((m) => (m.subject || "").toLowerCase().includes("sci")).length;
                   const mathCount = myMistakes.filter((m) => (m.subject || "").toLowerCase().includes("math")).length;
+                  const sstCount = myMistakes.filter((m) => (m.subject || "").toLowerCase().includes("soc") || (m.subject || "").toLowerCase().includes("sst")).length;
                   return [
                     { id: "All", label: `All Subjects (${myMistakes.length})`, icon: BookOpen },
+                    { id: "Social Science", label: `🌍 Social Science (${sstCount} Mistakes Logged)`, icon: Globe },
                     { id: "Science", label: `🧪 Science (${sciCount} Mistakes Logged)`, icon: FlaskConical },
                     { id: "Mathematics", label: `📐 Mathematics (${mathCount} Mistakes Logged)`, icon: Zap }
                   ];
@@ -3924,6 +4191,17 @@ export default function CBSECommandCenter() {
                       "Ch 10: Circles",
                       "Ch 13: Statistics"
                     ]
+                  : mistakeSubjectFilter === "Social Science"
+                  ? [
+                      "All",
+                      "History: Nationalism in Europe",
+                      "History: Nationalism in India",
+                      "Civics: Power Sharing",
+                      "Civics: Federalism",
+                      "Civics: Gender, Religion & Caste",
+                      "Geography: Resources & Development",
+                      "Economics: Development"
+                    ]
                   : [
                       "All",
                       "Ch 1: Reactions",
@@ -3935,7 +4213,13 @@ export default function CBSECommandCenter() {
                       "Ch 10: Circles",
                       "Ch 11: Electricity",
                       "Ch 12: Magnetic Effects",
-                      "Ch 13: Environment / Stats"
+                      "Ch 13: Environment / Stats",
+                      "Europe (SST)",
+                      "India (SST)",
+                      "Power Sharing (SST)",
+                      "Federalism (SST)",
+                      "Resources (SST)",
+                      "Development (SST)"
                     ]
                 ).map((chTab) => (
                   <button
@@ -3968,6 +4252,7 @@ export default function CBSECommandCenter() {
                   const targetSub = mistakeSubjectFilter.toLowerCase();
                   if (targetSub === "science" && !itemSub.includes("sci")) return false;
                   if (targetSub === "mathematics" && !itemSub.includes("math")) return false;
+                  if (targetSub === "social science" && !itemSub.includes("soc") && !itemSub.includes("sst")) return false;
                 }
                 if (mistakeChapterFilter === "All") return true;
                 const chap = (item.chapter || "").toLowerCase();
@@ -3983,6 +4268,13 @@ export default function CBSECommandCenter() {
                 if (filter.includes("ch 11") || filter.includes("electric")) return chap.includes("11") || chap.includes("electric");
                 if (filter.includes("ch 12") || filter.includes("magnetic")) return chap.includes("12") || chap.includes("magnetic");
                 if (filter.includes("ch 13") || filter.includes("environment") || filter.includes("stats")) return chap.includes("13") || chap.includes("environment") || chap.includes("stat");
+                if (filter.includes("europe") || filter.includes("vienna") || filter.includes("constantinople")) return chap.includes("europe") || chap.includes("nationalism");
+                if (filter.includes("india") || filter.includes("rowlatt") || filter.includes("jallianwala")) return chap.includes("india");
+                if (filter.includes("power") || filter.includes("belgium") || filter.includes("sri lanka")) return chap.includes("power");
+                if (filter.includes("federal") || filter.includes("language")) return chap.includes("federal");
+                if (filter.includes("gender") || filter.includes("caste") || filter.includes("religion")) return chap.includes("gender");
+                if (filter.includes("resource") || filter.includes("soil")) return chap.includes("resource");
+                if (filter.includes("develop") || filter.includes("pci") || filter.includes("hdi")) return chap.includes("develop");
                 return chap.includes(filter);
               }).length === 0 ? (
               <div className={`text-center p-12 border rounded-3xl ${isDark ? "bg-black/20 border-white/5 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"}`}>
@@ -3999,6 +4291,7 @@ export default function CBSECommandCenter() {
                       const targetSub = mistakeSubjectFilter.toLowerCase();
                       if (targetSub === "science" && !itemSub.includes("sci")) return false;
                       if (targetSub === "mathematics" && !itemSub.includes("math")) return false;
+                      if (targetSub === "social science" && !itemSub.includes("soc") && !itemSub.includes("sst")) return false;
                     }
                     if (mistakeChapterFilter === "All") return true;
                     const chap = (item.chapter || "").toLowerCase();
@@ -4014,6 +4307,13 @@ export default function CBSECommandCenter() {
                     if (filter.includes("ch 11") || filter.includes("electric")) return chap.includes("11") || chap.includes("electric");
                     if (filter.includes("ch 12") || filter.includes("magnetic")) return chap.includes("12") || chap.includes("magnetic");
                     if (filter.includes("ch 13") || filter.includes("environment") || filter.includes("stats")) return chap.includes("13") || chap.includes("environment") || chap.includes("stat");
+                    if (filter.includes("europe") || filter.includes("vienna") || filter.includes("constantinople")) return chap.includes("europe") || chap.includes("nationalism");
+                    if (filter.includes("india") || filter.includes("rowlatt") || filter.includes("jallianwala")) return chap.includes("india");
+                    if (filter.includes("power") || filter.includes("belgium") || filter.includes("sri lanka")) return chap.includes("power");
+                    if (filter.includes("federal") || filter.includes("language")) return chap.includes("federal");
+                    if (filter.includes("gender") || filter.includes("caste") || filter.includes("religion")) return chap.includes("gender");
+                    if (filter.includes("resource") || filter.includes("soil")) return chap.includes("resource");
+                    if (filter.includes("develop") || filter.includes("pci") || filter.includes("hdi")) return chap.includes("develop");
                     return chap.includes(filter);
                   })
                   .map((item, idx) => {
@@ -4430,19 +4730,37 @@ export default function CBSECommandCenter() {
                     </p>
                   </div>
 
-                  <button
-                    onClick={() => {
-                      playSound("click");
-                      setConceptsSubject(commandSubjectId === "science" ? "science" : "math");
-                      setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : 6));
-                      setActiveTab("concepts");
-                    }}
-                    className="w-full lg:w-auto px-6 py-4 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2.5 shadow-xl shadow-teal-500/25 hover:scale-[1.02] shrink-0"
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    <span>Launch Chapter {ncertNum} Concepts Hub</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                  <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
+                    <button
+                      onClick={() => {
+                        playSound("click");
+                        const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
+                        setConceptsSubject(targetSub);
+                        setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : commandSubjectId === "sst" ? 1 : 6));
+                        setActiveTab("concepts");
+                      }}
+                      className="w-full sm:w-auto px-6 py-4 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2.5 shadow-xl shadow-teal-500/25 hover:scale-[1.02] shrink-0"
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      <span>Launch Chapter {ncertNum} Concepts Hub</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+
+                    {commandSubjectId === "sst" && (ncertNum === 1 || ncertNum === 2) && (
+                      <button
+                        onClick={() => {
+                          playSound("click");
+                          setTimelinesChapterKey(ncertNum === 1 ? "ch1_europe" : "ch2_india");
+                          setActiveTab("timelines");
+                        }}
+                        className="w-full sm:w-auto px-5 py-4 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xl shadow-amber-500/25 hover:scale-[1.02] shrink-0"
+                      >
+                        <Calendar className="w-4 h-4" />
+                        <span>📜 Timelines & Chronology Game</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -4500,8 +4818,9 @@ export default function CBSECommandCenter() {
                         <button
                           onClick={() => {
                             playSound("click");
-                            setConceptsSubject(commandSubjectId === "science" ? "science" : "math");
-                            setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : 6));
+                            const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
+                            setConceptsSubject(targetSub);
+                            setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : commandSubjectId === "sst" ? 1 : 6));
                             setActiveTab("concepts");
                           }}
                           className={`px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer whitespace-nowrap flex items-center gap-1 shrink-0 ${
@@ -4568,10 +4887,11 @@ export default function CBSECommandCenter() {
                   {[
                     { label: 'Master Question Bank', action: () => setActiveTab('questions'), icon: Zap },
                     { 
-                      label: 'Concepts Hub (27 Ch)', 
+                      label: 'Concepts Hub (37 Ch)', 
                       action: () => {
-                        setConceptsSubject(commandSubjectId === "science" ? "science" : "math");
-                        setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : 6));
+                        const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
+                        setConceptsSubject(targetSub);
+                        setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : commandSubjectId === "sst" ? 1 : 6));
                         setActiveTab('concepts');
                       }, 
                       icon: BookOpen 
@@ -5088,15 +5408,17 @@ export default function CBSECommandCenter() {
                       const newSub = e.target.value;
                       const defaultCh = newSub === "Science" 
                         ? "Ch 1: Chemical Reactions and Equations" 
+                        : newSub === "Social Science"
+                        ? "History: The Rise of Nationalism in Europe"
                         : "Ch 6: Triangles";
                       setNewMistakeForm({ ...newMistakeForm, subject: newSub, chapter: defaultCh });
                     }}
                   >
                     <option value="Science">🧪 Science</option>
                     <option value="Mathematics">📐 Mathematics</option>
-                    <option value="Social Science">Social Science</option>
-                    <option value="English">English</option>
-                    <option value="Hindi">Hindi</option>
+                    <option value="Social Science">🌍 Social Science</option>
+                    <option value="English">📖 English</option>
+                    <option value="Hindi">🇮🇳 Hindi</option>
                   </select>
                 </div>
 
@@ -5118,6 +5440,16 @@ export default function CBSECommandCenter() {
                         <option value="Ch 11: Electricity">Ch 11: Electricity</option>
                         <option value="Ch 12: Magnetic Effects of Electric Current">Ch 12: Magnetic Effects</option>
                         <option value="Ch 13: Our Environment">Ch 13: Our Environment</option>
+                      </>
+                    ) : newMistakeForm.subject === "Social Science" ? (
+                      <>
+                        <option value="History: The Rise of Nationalism in Europe">History: Rise of Nationalism in Europe</option>
+                        <option value="History: Nationalism in India">History: Nationalism in India</option>
+                        <option value="Civics: Power Sharing">Civics: Power Sharing</option>
+                        <option value="Civics: Federalism">Civics: Federalism</option>
+                        <option value="Civics: Gender, Religion and Caste">Civics: Gender, Religion & Caste</option>
+                        <option value="Geography: Resources and Development">Geography: Resources & Development</option>
+                        <option value="Economics: Development">Economics: Development</option>
                       </>
                     ) : (
                       <>

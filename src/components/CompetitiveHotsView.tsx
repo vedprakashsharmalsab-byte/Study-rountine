@@ -26,56 +26,54 @@ import {
 
 interface CompetitiveHotsViewProps {
   isDark: boolean;
-  onOpenQuestionBank?: (subject: "math" | "science", chapterNo?: number) => void;
+  onOpenQuestionBank?: (subject: "math" | "science" | "sst", chapterNo?: number) => void;
 }
 
 export default function CompetitiveHotsView({
   isDark,
   onOpenQuestionBank
 }: CompetitiveHotsViewProps) {
-  const [selectedSubject, setSelectedSubject] = useState<"all" | "math" | "science">("all");
+  const [selectedSubject, setSelectedSubject] = useState<"all" | "math" | "science" | "sst">("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [revealedClueIds, setRevealedClueIds] = useState<Record<string, boolean>>({});
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({
     hots_sci_circuit_switch: true,
-    hots_math_circle_supplementary: true
+    hots_math_circle_supplementary: true,
+    hots_sst_hist_napoleon_frankfurt: true
   });
 
   const toggleExpand = (id: string) => {
-    setExpandedIds((prev) => ({ ...prev, [id]: !prev[id] }));
+    setExpandedIds(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
   const toggleClue = (id: string) => {
-    setRevealedClueIds((prev) => ({ ...prev, [id]: !prev[id] }));
+    setRevealedClueIds(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
   const filteredQuestions = useMemo(() => {
-    return COMPETITIVE_HOTS_BANK.filter((q) => {
+    return COMPETITIVE_HOTS_BANK.filter(q => {
       if (selectedSubject !== "all" && q.subject !== selectedSubject) return false;
       if (selectedDifficulty !== "all" && q.difficulty !== selectedDifficulty) return false;
       if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase();
-        return (
-          q.title.toLowerCase().includes(query) ||
-          q.chapterName.toLowerCase().includes(query) ||
-          q.questionText.toLowerCase().includes(query) ||
-          q.finalBoxedAnswer.toLowerCase().includes(query) ||
-          q.commonStudentPitfall.toLowerCase().includes(query)
-        );
+        const term = searchQuery.toLowerCase();
+        const matchTitle = q.title.toLowerCase().includes(term);
+        const matchText = q.questionText.toLowerCase().includes(term);
+        const matchChapter = q.chapterName.toLowerCase().includes(term);
+        if (!matchTitle && !matchText && !matchChapter) return false;
       }
       return true;
     });
   }, [selectedSubject, selectedDifficulty, searchQuery]);
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-8 animate-fadeIn max-w-7xl mx-auto pb-16">
       {/* 1. HERO HEADER */}
       <div
-        className={`p-6 sm:p-8 rounded-3xl border transition-all ${
+        className={`p-6 sm:p-8 rounded-3xl border transition-all duration-300 relative overflow-hidden ${
           isDark
-            ? "bg-gradient-to-r from-rose-950/30 via-slate-900/60 to-amber-950/20 border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.37)]"
-            : "bg-gradient-to-r from-rose-50 via-white to-amber-50 border-rose-100 shadow-md"
+            ? "bg-gradient-to-br from-rose-950/40 via-black to-[#0d1527] border-rose-500/20 shadow-2xl shadow-rose-950/20"
+            : "bg-gradient-to-br from-rose-50 via-white to-amber-50/40 border-rose-200/80 shadow-md"
         }`}
       >
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
@@ -96,18 +94,18 @@ export default function CompetitiveHotsView({
               Competitive HOTS & Multi-Concept Case Study Vault
             </h1>
             <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-              The differentiator between a 90% score and a 100% Century. Features non-routine mixed resistor networks with switch states, multi-step unknown chemical reaction chains ($X, Y, Z$), optics lens shifts, moving airplane trigonometry, and olympiad circle geometry proofs.
+              The differentiator between a 90% score and a 100% Century. Features non-routine mixed resistor networks with switch states, multi-step chemical reaction chains, optics lens shifts, moving airplane trigonometry, circle geometry proofs, and deep analytical Social Science case studies (Napoleonic dichotomy, Salt strategy, Poona Pact, Belgian accommodation, and disguised employment).
             </p>
           </div>
 
-          <div className="flex items-center gap-3 w-full lg:w-auto">
-            <div className={`p-4 rounded-2xl border text-center flex-1 sm:flex-none ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
-              <div className="text-2xl font-black text-rose-400">Section D/E</div>
-              <div className="text-[10px] uppercase font-bold text-slate-400">CBSE Standards</div>
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-2.5 sm:gap-3 w-full lg:w-auto shrink-0">
+            <div className={`px-4 py-3 rounded-2xl border text-center flex flex-col justify-center min-w-[125px] overflow-hidden ${isDark ? "bg-black/40 border-white/10 shadow-xs" : "bg-white border-slate-200 shadow-2xs"}`}>
+              <div className="text-lg sm:text-xl font-black text-rose-400 tracking-tight whitespace-nowrap">Section D/E</div>
+              <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider whitespace-nowrap">CBSE Standards</div>
             </div>
-            <div className={`p-4 rounded-2xl border text-center flex-1 sm:flex-none ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
-              <div className="text-2xl font-black text-amber-400">100%</div>
-              <div className="text-[10px] uppercase font-bold text-slate-400">Step Solved</div>
+            <div className={`px-4 py-3 rounded-2xl border text-center flex flex-col justify-center min-w-[110px] overflow-hidden ${isDark ? "bg-black/40 border-white/10 shadow-xs" : "bg-white border-slate-200 shadow-2xs"}`}>
+              <div className="text-lg sm:text-xl font-black text-amber-400 tracking-tight whitespace-nowrap">100%</div>
+              <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider whitespace-nowrap">Step Solved</div>
             </div>
           </div>
         </div>
@@ -120,7 +118,7 @@ export default function CompetitiveHotsView({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search competitive questions (e.g. 'switch', 'aeroplane', 'unknown', 'inradius', 'circle')..."
+              placeholder="Search competitive questions (e.g. 'switch', 'aeroplane', 'unknown', 'salt', 'belgium', 'circle')..."
               className={`w-full pl-10 pr-4 py-2.5 rounded-2xl text-xs sm:text-sm border transition-all focus:outline-none focus:ring-2 focus:ring-rose-500/50 ${
                 isDark ? "bg-black/40 border-white/10 text-white placeholder:text-slate-500" : "bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
               }`}
@@ -128,7 +126,7 @@ export default function CompetitiveHotsView({
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <div className="flex items-center gap-1.5 p-1 rounded-2xl border bg-black/20 border-white/5">
+            <div className="flex items-center gap-1.5 p-1 rounded-2xl border bg-black/20 border-white/5 flex-wrap">
               <button
                 onClick={() => setSelectedSubject("all")}
                 className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
@@ -143,7 +141,7 @@ export default function CompetitiveHotsView({
                   selectedSubject === "math" ? "bg-amber-500 text-slate-950 shadow-sm" : "text-slate-400 hover:text-white"
                 }`}
               >
-                Mathematics HOTS
+                📐 Mathematics HOTS
               </button>
               <button
                 onClick={() => setSelectedSubject("science")}
@@ -151,7 +149,15 @@ export default function CompetitiveHotsView({
                   selectedSubject === "science" ? "bg-cyan-500 text-slate-950 shadow-sm" : "text-slate-400 hover:text-white"
                 }`}
               >
-                Science HOTS
+                🧪 Science HOTS
+              </button>
+              <button
+                onClick={() => setSelectedSubject("sst")}
+                className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                  selectedSubject === "sst" ? "bg-emerald-500 text-slate-950 shadow-sm" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                🌍 Social Science HOTS
               </button>
             </div>
 

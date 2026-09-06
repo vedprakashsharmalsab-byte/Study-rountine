@@ -28,7 +28,21 @@ import {
   Layers,
   LayoutGrid,
   Check,
-  Target
+  Target,
+  Landmark,
+  Flag,
+  Scale,
+  Globe,
+  Trees,
+  Droplets,
+  TrendingUp,
+  Briefcase,
+  Coins,
+  Map,
+  Calendar,
+  Image as ImageIcon,
+  ZoomIn,
+  X
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import { MATH_CHAPTER_CONCEPTS, type MathChapterConcept } from "@/data/mathConceptsData";
@@ -46,17 +60,30 @@ import {
   MATH_BOARD_SOLVED_EXAMPLES,
   type MathBoardSolvedExample
 } from "@/data/mathSolvedBoardExamples";
+import {
+  SST_CHAPTER_LIST,
+  SST_CONCEPTS_AND_EXAMPLES,
+  SST_TIMELINES,
+  SST_MAP_WORK,
+  type SSTConceptTopic,
+  type SSTChapterMeta,
+  type SSTTimelineEvent,
+  type SSTMapWorkChapter
+} from "@/data/sstConceptsData";
+import SmartStudyTopicCard from "@/components/SmartStudyTopicCard";
 
 interface ConceptsHubViewProps {
   isDark: boolean;
-  initialSubject?: "math" | "science";
+  initialSubject?: "math" | "science" | "sst";
   initialChapterNo?: number;
-  onOpenQuestionBank?: (subject: "math" | "science", chapterNo: number) => void;
+  onOpenQuestionBank?: (subject: "math" | "science" | "sst", chapterNo: number) => void;
   onOpenActivities?: (chapterNo?: number) => void;
   onOpenTheorems?: () => void;
   onOpenReactions?: (chapterNo?: number) => void;
   onOpenDiagrams?: (chapterNo?: number) => void;
-  onOpenHots?: (subject: "math" | "science", chapterNo?: number) => void;
+  onOpenHots?: (subject: "math" | "science" | "sst", chapterNo?: number) => void;
+  onOpenMnemonics?: (chapterNo?: number) => void;
+  onOpenTimelines?: (chapterNo?: number) => void;
 }
 
 // Science Chapter Metadata with Official CBSE Units
@@ -103,15 +130,30 @@ export default function ConceptsHubView({
   onOpenTheorems,
   onOpenReactions,
   onOpenDiagrams,
-  onOpenHots
+  onOpenHots,
+  onOpenTimelines
 }: ConceptsHubViewProps) {
-  const [activeSubject, setActiveSubject] = useState<"math" | "science">(initialSubject);
+  const [activeSubject, setActiveSubject] = useState<"math" | "science" | "sst">(initialSubject || "math");
   const [activeMathChapterNo, setActiveMathChapterNo] = useState<number>(
     initialSubject === "math" ? initialChapterNo || 6 : 6
   );
   const [activeScienceChapterNo, setActiveScienceChapterNo] = useState<number>(
     initialSubject === "science" ? initialChapterNo || 1 : 1
   );
+  const [activeSSTChapterNo, setActiveSSTChapterNo] = useState<number>(
+    initialSubject === "sst" ? initialChapterNo || 1 : 1
+  );
+  const [sstDisciplineFilter, setSstDisciplineFilter] = useState<"All" | "History" | "Political Science" | "Geography" | "Economics">("All");
+  const [activeSSTViewTab, setActiveSSTViewTab] = useState<"concepts" | "timeline" | "mapwork" | "mnemonics">("concepts");
+  const [expandedSSTTopicIds, setExpandedSSTTopicIds] = useState<Record<string, boolean>>({
+    sst_his_c1_t1: true,
+    sst_his_c1_t2: true,
+    sst_his_c2_t1: true,
+    sst_pol_c1_t1: true,
+    sst_geo_c1_t1: true,
+    sst_eco_c1_t1: true
+  });
+  const [activeMnemonicModal, setActiveMnemonicModal] = useState<{ src: string; title: string; description: string } | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isChapterGridOpen, setIsChapterGridOpen] = useState<boolean>(false);
 
@@ -129,6 +171,8 @@ export default function ConceptsHubView({
         setActiveMathChapterNo(initialChapterNo);
       } else if (initialSubject === "science" && initialChapterNo) {
         setActiveScienceChapterNo(initialChapterNo);
+      } else if (initialSubject === "sst" && initialChapterNo) {
+        setActiveSSTChapterNo(initialChapterNo);
       }
     }
   }, [initialSubject, initialChapterNo]);
@@ -186,18 +230,67 @@ export default function ConceptsHubView({
     );
   }, [activeScienceChapterNo]);
 
+  // Active SST Chapter Meta & Topics
+  const activeSSTMeta = useMemo(() => {
+    return (
+      SST_CHAPTER_LIST.find((c) => c.no === activeSSTChapterNo) ||
+      SST_CHAPTER_LIST[0]
+    );
+  }, [activeSSTChapterNo]);
+
+  const activeSSTTopics = useMemo(() => {
+    return SST_CONCEPTS_AND_EXAMPLES.filter(
+      (t) => t.chapterNo === activeSSTChapterNo
+    );
+  }, [activeSSTChapterNo]);
+
+  const filteredSSTTopics = useMemo(() => {
+    let list = activeSSTTopics;
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      list = list.filter(
+        (t) =>
+          t.topicTitle.toLowerCase().includes(q) ||
+          t.ncertSummary.toLowerCase().includes(q) ||
+          t.corePrinciples.some((p) => p.toLowerCase().includes(q)) ||
+          t.examples.some((e) => e.question.toLowerCase().includes(q))
+      );
+    }
+    return list;
+  }, [activeSSTTopics, searchQuery]);
+
+  const filteredSSTChapterList = useMemo(() => {
+    if (sstDisciplineFilter === "All") return SST_CHAPTER_LIST;
+    return SST_CHAPTER_LIST.filter((c) => c.discipline === sstDisciplineFilter);
+  }, [sstDisciplineFilter]);
+
+  const activeSSTTimeline = useMemo(() => {
+    if (activeSSTChapterNo === 1) return SST_TIMELINES["ch1_europe"] || [];
+    if (activeSSTChapterNo === 2) return SST_TIMELINES["ch2_india"] || [];
+    return [];
+  }, [activeSSTChapterNo]);
+
+  const activeSSTMapWork = useMemo(() => {
+    return SST_MAP_WORK.find((m) => m.chapterNo === activeSSTChapterNo);
+  }, [activeSSTChapterNo]);
+
   const currentChapterMeta = activeSubject === "math"
     ? MATH_CHAPTER_LIST.find((c) => c.no === activeMathChapterNo) || MATH_CHAPTER_LIST[5]
-    : activeScienceMeta;
+    : activeSubject === "science"
+    ? activeScienceMeta
+    : activeSSTMeta;
 
   // Previous and Next Navigation Handlers
   const handlePrevChapter = () => {
     if (activeSubject === "math") {
       const prev = activeMathChapterNo > 1 ? activeMathChapterNo - 1 : 14;
       setActiveMathChapterNo(prev);
-    } else {
+    } else if (activeSubject === "science") {
       const prev = activeScienceChapterNo > 1 ? activeScienceChapterNo - 1 : 13;
       setActiveScienceChapterNo(prev);
+    } else {
+      const prev = activeSSTChapterNo > 1 ? activeSSTChapterNo - 1 : 10;
+      setActiveSSTChapterNo(prev);
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -206,15 +299,22 @@ export default function ConceptsHubView({
     if (activeSubject === "math") {
       const next = activeMathChapterNo < 14 ? activeMathChapterNo + 1 : 1;
       setActiveMathChapterNo(next);
-    } else {
+    } else if (activeSubject === "science") {
       const next = activeScienceChapterNo < 13 ? activeScienceChapterNo + 1 : 1;
       setActiveScienceChapterNo(next);
+    } else {
+      const next = activeSSTChapterNo < 10 ? activeSSTChapterNo + 1 : 1;
+      setActiveSSTChapterNo(next);
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const toggleScienceTopic = (id: string) => {
     setExpandedScienceTopicIds((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const toggleSSTTopic = (id: string) => {
+    setExpandedSSTTopicIds((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   const toggleAllScienceTopics = () => {
@@ -291,6 +391,23 @@ export default function ConceptsHubView({
             >
               <span>🧪 Science (13 Ch)</span>
             </button>
+            <button
+              onClick={() => {
+                setActiveSubject("sst");
+                setIsChapterGridOpen(false);
+              }}
+              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                activeSubject === "sst"
+                  ? isDark
+                    ? "bg-gradient-to-r from-rose-500 to-amber-500 text-slate-950 shadow-md font-black"
+                    : "bg-rose-600 text-white shadow-md font-black"
+                  : isDark
+                  ? "text-slate-400 hover:text-white"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              <span>🌍 Social Science (10 Chs)</span>
+            </button>
           </div>
         </div>
 
@@ -305,7 +422,7 @@ export default function ConceptsHubView({
                 Active Chapter:
               </span>
               <span className="px-2.5 py-0.5 rounded-md text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                {activeSubject === "math" ? `Ch ${activeMathChapterNo}: ${currentChapterMeta.name}` : `Ch ${activeScienceChapterNo}: ${currentChapterMeta.name}`}
+                {activeSubject === "math" ? `Ch ${activeMathChapterNo}: ${currentChapterMeta.name}` : activeSubject === "science" ? `Ch ${activeScienceChapterNo}: ${currentChapterMeta.name}` : `${currentChapterMeta.shortName} (${'discipline' in currentChapterMeta ? currentChapterMeta.discipline : 'SST'})`}
               </span>
             </div>
 
@@ -321,7 +438,7 @@ export default function ConceptsHubView({
               }`}
             >
               <LayoutGrid className="w-3.5 h-3.5" />
-              <span>{isChapterGridOpen ? "Close Chapter Grid" : `Browse All ${activeSubject === "math" ? "14 Maths" : "13 Science"} Chapters`}</span>
+              <span>{isChapterGridOpen ? "Close Chapter Grid" : `Browse All ${activeSubject === "math" ? "14 Maths" : activeSubject === "science" ? "13 Science" : "10 Test Series 1"} Chapters`}</span>
               <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isChapterGridOpen ? "rotate-180" : ""}`} />
             </button>
           </div>
@@ -330,19 +447,20 @@ export default function ConceptsHubView({
           <div className="md:hidden flex items-center gap-2 pt-1">
             <select
               aria-label="Select Chapter directly"
-              value={activeSubject === "math" ? activeMathChapterNo : activeScienceChapterNo}
+              value={activeSubject === "math" ? activeMathChapterNo : activeSubject === "science" ? activeScienceChapterNo : activeSSTChapterNo}
               onChange={(e) => {
                 const num = parseInt(e.target.value);
                 if (activeSubject === "math") setActiveMathChapterNo(num);
-                else setActiveScienceChapterNo(num);
+                else if (activeSubject === "science") setActiveScienceChapterNo(num);
+                else setActiveSSTChapterNo(num);
               }}
               className={`flex-1 px-3 py-2.5 rounded-xl text-xs font-bold border outline-none cursor-pointer truncate ${
                 isDark ? "bg-[#0b0f19] border-white/10 text-white" : "bg-white border-slate-200 text-slate-900 shadow-2xs"
               }`}
             >
-              {(activeSubject === "math" ? MATH_CHAPTER_LIST : SCIENCE_CHAPTER_LIST).map((ch) => (
+              {(activeSubject === "math" ? MATH_CHAPTER_LIST : activeSubject === "science" ? SCIENCE_CHAPTER_LIST : SST_CHAPTER_LIST).map((ch) => (
                 <option key={ch.no} value={ch.no} className="bg-slate-900 text-white">
-                  Ch {ch.no}: {ch.name} ({ch.weightage})
+                  {ch.shortName} ({ch.weightage})
                 </option>
               ))}
             </select>
@@ -375,7 +493,39 @@ export default function ConceptsHubView({
             <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 pt-2 transition-all ${
               !isChapterGridOpen ? "hidden md:grid" : "grid"
             }`}>
-              {activeSubject === "math"
+              {activeSubject === "sst"
+                ? filteredSSTChapterList.map((ch) => {
+                    const isSelected = ch.no === activeSSTChapterNo;
+                    return (
+                      <button
+                        key={ch.no}
+                        onClick={() => {
+                          setActiveSSTChapterNo(ch.no);
+                          setIsChapterGridOpen(false);
+                        }}
+                        className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer flex flex-col justify-between gap-1 border min-h-[56px] ${
+                          isSelected
+                            ? isDark
+                              ? "bg-rose-500 text-slate-950 border-rose-400 font-black shadow-md scale-[1.02]"
+                              : "bg-rose-600 text-white border-rose-600 font-black shadow-md scale-[1.02]"
+                            : isDark
+                            ? "bg-[#0b0f19] text-slate-300 hover:text-white border-white/5 hover:border-white/10"
+                            : "bg-white text-slate-700 hover:text-slate-950 border-slate-200 hover:border-slate-300"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between w-full">
+                          <span className="font-mono text-[10px] opacity-75">{ch.discipline}</span>
+                          <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded ${
+                            isSelected ? "bg-black/20 text-slate-950 font-bold" : "bg-white/10 text-slate-400"
+                          }`}>
+                            {ch.weightage}
+                          </span>
+                        </div>
+                        <span className="truncate text-xs font-extrabold">{ch.name}</span>
+                      </button>
+                    );
+                  })
+                : activeSubject === "math"
                 ? MATH_CHAPTER_LIST.map((ch) => {
                     const isSelected = ch.no === activeMathChapterNo;
                     return (
@@ -448,7 +598,7 @@ export default function ConceptsHubView({
               <span>Prev Chapter</span>
             </button>
             <span className="text-[11px] font-mono text-slate-400">
-              {activeSubject === "math" ? `${activeMathChapterNo} of 14` : `${activeScienceChapterNo} of 13`}
+              {activeSubject === "math" ? `${activeMathChapterNo} of 14` : activeSubject === "science" ? `${activeScienceChapterNo} of 13` : `${activeSSTChapterNo} of 10`}
             </span>
             <button
               onClick={handleNextChapter}
@@ -1058,29 +1208,85 @@ export default function ConceptsHubView({
                   {/* Expanded Body */}
                   {isExpanded && (
                     <div className="p-5 sm:p-6 pt-0 space-y-5 border-t border-white/10">
-                      {/* NCERT Summary */}
-                      <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"}`}>
-                        <span className="text-[10px] font-mono uppercase font-bold text-teal-400 block mb-1">
-                          NCERT Official Theory Summary
-                        </span>
-                        <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                          {topic.ncertSummary}
+                      {/* 1. TODDLER / REAL-LIFE INTUITION CARD (ELI5) */}
+                      <div
+                        className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                          isDark
+                            ? "bg-gradient-to-r from-teal-500/10 via-cyan-500/5 to-transparent border-teal-500/30"
+                            : "bg-gradient-to-r from-teal-50/70 via-cyan-50/40 to-white border-teal-200"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-black uppercase tracking-wider bg-teal-500 text-slate-950 flex items-center gap-1.5">
+                            <span>👶</span> ELI5 Mental Model (The Real-World Hook)
+                          </span>
+                          <span className="text-[10px] font-mono text-teal-400 font-bold hidden sm:inline">
+                            Zero Jargon • Pure Intuition
+                          </span>
+                        </div>
+                        <p className={`text-xs sm:text-sm font-medium leading-relaxed ${isDark ? "text-teal-100" : "text-teal-950"}`}>
+                          {(() => {
+                            const sentences = topic.ncertSummary.split(". ").filter(Boolean);
+                            const firstBeat = sentences[0];
+                            return `Think of ${topic.topicTitle} like this: ${firstBeat}${firstBeat.endsWith(".") ? "" : "."}`;
+                          })()}
                         </p>
                       </div>
 
-                      {/* Core Principles */}
+                      {/* 2. STEP-BY-STEP SCIENTIFIC MECHANISM (NO BORING WALL OF TEXT) */}
                       <div className="space-y-2">
-                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-teal-400 block">
-                          Core Scientific Principles:
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1.5">
+                          <Sparkles className="w-3.5 h-3.5" /> Step-by-Step Scientific Flow:
                         </span>
-                        <ul className="space-y-1.5 text-xs sm:text-sm">
+                        <div className="grid grid-cols-1 gap-2.5">
+                          {(() => {
+                            const sentences = topic.ncertSummary.split(". ").filter(Boolean);
+                            const mechanismSteps = sentences.slice(1);
+                            const stepsToRender = mechanismSteps.length > 0 ? mechanismSteps : sentences;
+                            const stepIcons = ["💥 The Trigger:", "⚙️ The Mechanism:", "📌 The Final Law:"];
+                            return stepsToRender.map((sentence, sIdx) => (
+                              <div
+                                key={sIdx}
+                                className={`p-3.5 rounded-xl border flex items-start gap-3 transition-all ${
+                                  isDark ? "bg-white/[0.02] border-white/10 hover:border-teal-500/30" : "bg-slate-50 border-slate-200 hover:border-teal-300"
+                                }`}
+                              >
+                                <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-black bg-teal-500/20 text-teal-300 border border-teal-500/30 shrink-0 mt-0.5">
+                                  {stepIcons[sIdx % stepIcons.length] || `Step ${sIdx + 1}:`}
+                                </span>
+                                <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                                  {sentence}{sentence.endsWith(".") ? "" : "."}
+                                </p>
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+
+                      {/* 3. CORE PRINCIPLES (HIGH-YIELD CARDS) */}
+                      <div className="space-y-2.5">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+                          <Target className="w-3.5 h-3.5" /> Core Governing Laws & Principles:
+                        </span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                           {topic.corePrinciples.map((cp, idx) => (
-                            <li key={idx} className="flex items-start gap-2">
-                              <span className="text-teal-400 font-bold shrink-0">•</span>
-                              <span className={isDark ? "text-slate-300" : "text-slate-700"}>{cp}</span>
-                            </li>
+                            <div
+                              key={idx}
+                              className={`p-3.5 rounded-xl border transition-all flex items-start gap-2.5 ${
+                                isDark
+                                  ? "bg-slate-900/50 border-white/10 hover:border-cyan-500/40"
+                                  : "bg-white border-slate-200 hover:border-cyan-400 shadow-xs"
+                              }`}
+                            >
+                              <span className="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono text-[10px] font-black flex items-center justify-center shrink-0 mt-0.5">
+                                {idx + 1}
+                              </span>
+                              <span className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                                {cp}
+                              </span>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
 
                       {/* Key Chemical Reactions / Physics Formulas */}
@@ -1193,6 +1399,479 @@ export default function ConceptsHubView({
               <span>Next Chapter</span>
               <ArrowRight className="w-4 h-4" />
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          5. SOCIAL SCIENCE (SST) CHAPTER CONCEPTS, TIMELINE & MAP WORK VIEW
+          ========================================================================= */}
+      {activeSubject === "sst" && (
+        <div className="space-y-6 animate-fade-in">
+          {/* SST Discipline Filter Bar */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1.5">
+              <Filter className="w-3.5 h-3.5 text-rose-400" /> Filter Discipline:
+            </span>
+            {(["All", "History", "Political Science", "Geography", "Economics"] as const).map((disc) => (
+              <button
+                key={disc}
+                onClick={() => setSstDisciplineFilter(disc)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                  sstDisciplineFilter === disc
+                    ? isDark
+                      ? "bg-rose-500 text-slate-950 border-rose-400 font-black shadow-sm"
+                      : "bg-rose-600 text-white border-rose-600 font-black shadow-sm"
+                    : isDark
+                    ? "bg-white/5 border-white/10 text-slate-400 hover:text-white"
+                    : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100"
+                }`}
+              >
+                {disc === "All" && "🌐 All (10 Chs)"}
+                {disc === "History" && "🏛️ History (2 Chs)"}
+                {disc === "Political Science" && "⚖️ Civics (2 Chs)"}
+                {disc === "Geography" && "🌍 Geography (3 Chs)"}
+                {disc === "Economics" && "📈 Economics (3 Chs)"}
+              </button>
+            ))}
+          </div>
+
+          {/* SST Chapter Hero Banner */}
+          <div
+            className={`p-6 sm:p-8 rounded-3xl border transition-all ${
+              isDark
+                ? "bg-gradient-to-br from-[#1c0d16] via-[#140b12] to-[#120a17] border-rose-500/25 shadow-[0_8px_32px_rgba(244,63,94,0.15)]"
+                : "bg-gradient-to-br from-rose-50/90 via-white to-amber-50/80 border-rose-200 shadow-md"
+            }`}
+          >
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+              <div className="space-y-3 max-w-3xl">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <span className="px-3.5 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-rose-500 text-slate-950 shadow-sm flex items-center gap-1.5">
+                    <GraduationCap className="w-3.5 h-3.5" /> CBSE SST Test Series 1 Master
+                  </span>
+                  <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
+                    isDark ? "bg-rose-950/60 text-rose-300 border-rose-500/30" : "bg-rose-100 text-rose-900 border-rose-300"
+                  }`}>
+                    {activeSSTMeta.discipline} • {activeSSTMeta.unit}
+                  </span>
+                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                    Board Weightage: {activeSSTMeta.weightage}
+                  </span>
+                </div>
+
+                <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${
+                  isDark ? "text-white" : "text-slate-900"
+                }`}>
+                  {activeSSTMeta.name}
+                </h2>
+
+                <p className={`text-sm sm:text-base leading-relaxed ${
+                  isDark ? "text-slate-300" : "text-slate-700 font-medium"
+                }`}>
+                  Comprehensive NCERT explanation with deep concepts, historical timelines, official CBSE map points, and leveled solved board questions.
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto shrink-0">
+                {activeSSTMeta.mnemonicCount > 0 && (
+                  <button
+                    onClick={() => setActiveSSTViewTab("mnemonics")}
+                    className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                  >
+                    <Sparkles className="w-4 h-4 text-amber-400" />
+                    <span>Visual Mnemonics (2 Sheets)</span>
+                  </button>
+                )}
+
+                {onOpenHots && (
+                  <button
+                    onClick={() => onOpenHots("sst", activeSSTMeta.no)}
+                    className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <Flame className="w-4 h-4 text-rose-400" />
+                    <span>Competitive HOTS</span>
+                  </button>
+                )}
+
+                {onOpenQuestionBank && (
+                  <button
+                    onClick={() => onOpenQuestionBank("sst", activeSSTMeta.no)}
+                    className="px-4 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-400 hover:to-amber-400 text-slate-950 transition-all cursor-pointer flex items-center gap-1.5 shadow-lg shadow-rose-500/20"
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>Solve Questions Vault</span>
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* PROMINENT TIMELINE ANNOUNCEMENT BANNER (CRITICAL FOR DISCOVERABILITY) */}
+            {activeSSTMeta.timelineAvailable && (
+              <div 
+                onClick={() => setActiveSSTViewTab("timeline")}
+                className={`mt-5 p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${
+                  activeSSTViewTab === "timeline"
+                    ? "bg-amber-500/20 border-amber-400 shadow-md ring-1 ring-amber-400/50"
+                    : isDark
+                    ? "bg-gradient-to-r from-amber-950/40 via-amber-900/20 to-black/40 border-amber-500/30 hover:border-amber-400/60 shadow-md"
+                    : "bg-gradient-to-r from-amber-50 via-orange-50 to-amber-100/60 border-amber-300 hover:border-amber-400 shadow-xs"
+                }`}
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="p-2.5 sm:p-3 rounded-xl bg-amber-500 text-slate-950 font-black shrink-0 shadow-md">
+                    <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500 text-slate-950">
+                        ⚡ FULL CHRONOLOGICAL TIMELINE AVAILABLE
+                      </span>
+                      <span className="text-xs font-mono font-bold text-amber-400">
+                        {activeSSTTimeline.length} Milestone Events with NCERT Page References
+                      </span>
+                    </div>
+                    <p className={`text-xs sm:text-sm font-bold mt-1 ${isDark ? "text-white" : "text-slate-900"}`}>
+                      {activeSSTChapterNo === 1 
+                        ? "The Rise of Nationalism in Europe (1789 French Revolution to 1914 WW1)" 
+                        : "Nationalism in India (1915 Gandhi's Return to 1947 Independence)"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 w-full sm:w-auto shrink-0 flex-wrap">
+                  {onOpenTimelines && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenTimelines(activeSSTChapterNo);
+                      }}
+                      className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 hover:brightness-110 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-md shrink-0"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>🎮 Play Chronology Game & Flashcards</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveSSTViewTab(activeSSTViewTab === "timeline" ? "concepts" : "timeline");
+                    }}
+                    className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-black bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-md shrink-0"
+                  >
+                    <span>{activeSSTViewTab === "timeline" ? "📘 Switch to Concepts" : `📜 Open Timeline (${activeSSTTimeline.length} Events)`}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* SST View Tabs Navigation */}
+            <div className="flex flex-wrap items-center gap-2 pt-6 mt-6 border-t border-white/10">
+              <button
+                onClick={() => setActiveSSTViewTab("concepts")}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+                  activeSSTViewTab === "concepts"
+                    ? isDark
+                      ? "bg-rose-500 text-slate-950 border-rose-400 font-black shadow-md"
+                      : "bg-rose-600 text-white border-rose-600 font-black shadow-md"
+                    : isDark
+                    ? "bg-white/5 border-white/10 text-slate-400 hover:text-white"
+                    : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>📘 Deep NCERT Concepts ({filteredSSTTopics.length})</span>
+              </button>
+
+              {activeSSTMeta.timelineAvailable && (
+                <button
+                  onClick={() => setActiveSSTViewTab("timeline")}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+                    activeSSTViewTab === "timeline"
+                      ? isDark
+                        ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md"
+                        : "bg-amber-600 text-white border-amber-600 font-black shadow-md"
+                      : isDark
+                      ? "bg-white/5 border-white/10 text-slate-400 hover:text-white"
+                      : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+                  }`}
+                >
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>📜 Chronological Timeline ({activeSSTTimeline.length} Events)</span>
+                </button>
+              )}
+
+              {activeSSTMeta.mapWorkAvailable && activeSSTMapWork && (
+                <button
+                  onClick={() => setActiveSSTViewTab("mapwork")}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+                    activeSSTViewTab === "mapwork"
+                      ? isDark
+                        ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-md"
+                        : "bg-teal-600 text-white border-teal-600 font-black shadow-md"
+                      : isDark
+                      ? "bg-white/5 border-white/10 text-slate-400 hover:text-white"
+                      : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+                  }`}
+                >
+                  <Map className="w-3.5 h-3.5" />
+                  <span>🗺️ CBSE Board Map Work</span>
+                </button>
+              )}
+
+              <button
+                onClick={() => setActiveSSTViewTab("mnemonics")}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+                  activeSSTViewTab === "mnemonics"
+                    ? isDark
+                      ? "bg-purple-500 text-white border-purple-400 font-black shadow-md"
+                      : "bg-purple-600 text-white border-purple-600 font-black shadow-md"
+                    : isDark
+                    ? "bg-white/5 border-white/10 text-slate-400 hover:text-white"
+                    : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                <ImageIcon className="w-3.5 h-3.5" />
+                <span>🖼️ Visual Mnemonics (2 Sheets)</span>
+              </button>
+            </div>
+          </div>
+
+          {/* TAB 1: DEEP NCERT CONCEPTS WITH SMART STUDY VISUAL CARDS */}
+          {activeSSTViewTab === "concepts" && (
+            <div className="space-y-6">
+              {filteredSSTTopics.map((topic, topicIdx) => (
+                <SmartStudyTopicCard
+                  key={topic.id}
+                  topic={topic}
+                  topicIdx={topicIdx}
+                  isDark={isDark}
+                  isExpanded={!!expandedSSTTopicIds[topic.id]}
+                  onToggle={() => toggleSSTTopic(topic.id)}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* TAB 2: CHRONOLOGICAL TIMELINE (HISTORY) */}
+          {activeSSTViewTab === "timeline" && activeSSTTimeline.length > 0 && (
+            <div className={`p-6 sm:p-8 rounded-3xl border ${isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"}`}>
+              {/* SMART STUDY HERO LAUNCHER */}
+              <div className={`p-5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 ${
+                isDark ? "bg-gradient-to-r from-amber-500/15 via-rose-500/10 to-transparent border-amber-500/30" : "bg-gradient-to-r from-amber-50 via-rose-50/50 to-white border-amber-200"
+              }`}>
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500 text-slate-950">
+                      ⚡ Smart Study Suite
+                    </span>
+                    <span className="text-xs font-mono font-bold text-amber-400">
+                      CBSE Exam Ordering Challenges, Flashcards & Quick Matrix
+                    </span>
+                  </div>
+                  <h4 className={`text-base font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                    Interactive Chronology Challenge & Rapid Recall Engine
+                  </h4>
+                  <p className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                    Practice official CBSE board sequence questions with interactive ordering, instant scoring, and active recall flip flashcards.
+                  </p>
+                </div>
+                {onOpenTimelines && (
+                  <button
+                    onClick={() => onOpenTimelines(activeSSTChapterNo)}
+                    className="w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 hover:brightness-110 text-slate-950 shadow-lg shadow-amber-500/30 transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>Launch Dedicated Timelines Master</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+
+              <div className="flex items-center gap-3 mb-6">
+                <Calendar className="w-6 h-6 text-amber-400" />
+                <div>
+                  <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                    Chronological Timeline: {activeSSTMeta.name}
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    Complete milestone events for CBSE Class 10 Board historical sequence questions.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative border-l-2 border-amber-500/30 ml-4 pl-6 space-y-6">
+                {activeSSTTimeline.map((item, idx) => (
+                  <div key={idx} className="relative group">
+                    <span className="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-amber-400 border-4 border-[#0b0f19] shadow-sm" />
+                    <div className={`p-4 rounded-2xl border transition-all ${
+                      isDark ? "bg-white/[0.02] border-white/10 hover:border-amber-500/30" : "bg-slate-50 border-slate-200 hover:border-amber-400 shadow-2xs"
+                    }`}>
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                        <span className="px-3 py-1 rounded-full text-xs font-mono font-black bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                          {item.year}
+                        </span>
+                        {item.ncertReference && (
+                          <span className="text-[10px] font-mono font-bold text-amber-400/90 px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20">
+                            📖 {item.ncertReference}
+                          </span>
+                        )}
+                      </div>
+                      <h4 className={`text-sm sm:text-base font-bold mb-1 ${isDark ? "text-white" : "text-slate-900"}`}>
+                        {item.event}
+                      </h4>
+                      <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        {item.significance}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: CBSE BOARD MAP WORK */}
+          {activeSSTViewTab === "mapwork" && activeSSTMapWork && (
+            <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 ${isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"}`}>
+              <div className="flex items-center gap-3">
+                <Map className="w-6 h-6 text-teal-400" />
+                <div>
+                  <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                    CBSE Board Prescribed Map Work (Test Series 1)
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    Strictly aligned with CBSE SQP 2026-27 Section F (5 Marks Map Question).
+                  </p>
+                </div>
+              </div>
+
+              {activeSSTMapWork.items.map((cat, cIdx) => (
+                <div key={cIdx} className="space-y-3">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-400 block">
+                    {cat.category}
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    {cat.points.map((pt, pIdx) => (
+                      <div
+                        key={pIdx}
+                        className={`p-4 rounded-2xl border space-y-1.5 ${
+                          isDark ? "bg-white/[0.02] border-white/10" : "bg-teal-50/50 border-teal-200 shadow-2xs"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-sm text-teal-300">{pt.label}</span>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">
+                            {pt.river ? pt.river : "Location"}
+                          </span>
+                        </div>
+                        <p className="text-xs font-medium text-amber-300">📍 State / Region: {pt.state}</p>
+                        <p className="text-[11px] text-slate-400 leading-relaxed">{pt.significance}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* TAB 4: VISUAL MNEMONICS */}
+          {activeSSTViewTab === "mnemonics" && (
+            <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 ${isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"}`}>
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <h3 className={`text-xl font-bold flex items-center gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
+                    <Sparkles className="w-5 h-5 text-amber-400" />
+                    Chapter Visual Mnemonics ({activeSSTMeta.name})
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    Hand-crafted visual cheat sheets and revision diagrams. Click any sheet to zoom.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {(activeSSTTopics[0]?.mnemonicImages || []).map((img, iIdx) => (
+                  <div
+                    key={iIdx}
+                    onClick={() => setActiveMnemonicModal(img)}
+                    className={`p-4 rounded-3xl border cursor-pointer group transition-all transform hover:scale-[1.01] ${
+                      isDark ? "bg-white/[0.02] border-white/10 hover:border-amber-500/40" : "bg-slate-50 border-slate-200 hover:border-amber-400 shadow-md"
+                    }`}
+                  >
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-black/40 mb-3">
+                      <img
+                        src={img.src}
+                        alt={img.title}
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-bold text-xs">
+                        <ZoomIn className="w-5 h-5" /> Click to View Full Resolution
+                      </div>
+                    </div>
+                    <h4 className={`font-bold text-sm mb-1 ${isDark ? "text-white" : "text-slate-900"}`}>
+                      {img.title}
+                    </h4>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      {img.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Bottom Sticky Navigation */}
+          <div className="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
+            <button
+              onClick={handlePrevChapter}
+              className="flex-1 py-3 rounded-2xl border border-white/10 hover:border-rose-500/40 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer bg-white/5 hover:bg-white/10"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Previous SST Chapter</span>
+            </button>
+            <button
+              onClick={handleNextChapter}
+              className="flex-1 py-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-rose-600/20"
+            >
+              <span>Next SST Chapter</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Full-screen Mnemonic Modal */}
+      {activeMnemonicModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-fade-in"
+          onClick={() => setActiveMnemonicModal(null)}
+        >
+          <div
+            className="relative max-w-5xl w-full max-h-[90vh] bg-slate-950 rounded-3xl border border-white/20 p-4 flex flex-col items-center overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
+              <div>
+                <h3 className="text-sm sm:text-base font-bold text-white">{activeMnemonicModal.title}</h3>
+                <p className="text-xs text-slate-400">{activeMnemonicModal.description}</p>
+              </div>
+              <button
+                onClick={() => setActiveMnemonicModal(null)}
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="flex-1 w-full overflow-auto flex items-center justify-center p-2">
+              <img
+                src={activeMnemonicModal.src}
+                alt={activeMnemonicModal.title}
+                className="max-w-full max-h-[75vh] object-contain rounded-xl"
+              />
+            </div>
           </div>
         </div>
       )}

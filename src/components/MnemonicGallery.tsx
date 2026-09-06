@@ -634,8 +634,548 @@ export const SCIENCE_MNEMONIC_CHAPTERS: ChapterMnemonicGroup[] = [
   }
 ];
 
+export const SST_MNEMONIC_CHAPTERS: ChapterMnemonicGroup[] = [
+  // --- HISTORY (Chapters 1 to 5) ---
+  {
+    chapterId: 1,
+    chapterName: "The Rise of Nationalism in Europe",
+    badge: "History Ch 1 (6-8 Marks)",
+    keyFormulas: [
+      "1789 French Revolution: La Patrie & Le Citoyen, Tricolour, Uniform Laws, Abolition of internal customs",
+      "1804 Napoleonic Code: Equality before law, property rights, administrative efficiency, end of feudalism",
+      "1815 Congress of Vienna: Hosted by Duke Metternich; restored Bourbons, buffer states, conservative order",
+      "Zollverein 1834: Prussian customs union abolished internal tariffs and slashed currencies from 30+ to 2",
+      "1871 German Unification (Bismarck / Blood & Iron); 1861 Italian Unification (Cavour, Garibaldi, Victor Emmanuel II)"
+    ],
+    images: [
+      {
+        title: "Nationalism in Europe Visual Map & Timeline",
+        src: "/mnemonics/sst/hist_ch1_europe_1.jpeg",
+        description: "Chronological mind-map of French Revolution, Napoleonic Code, 1848 Liberal Revolutions, and German/Italian Unification."
+      },
+      {
+        title: "Europe Allegories, Treaties & Symbols",
+        src: "/mnemonics/sst/hist_ch1_europe_2.jpeg",
+        description: "Marianne & Germania allegories, Zollverein customs union, Treaty of Vienna 1815, and Balkan crisis breakdown."
+      }
+    ]
+  },
+  {
+    chapterId: 2,
+    chapterName: "Nationalism in India",
+    badge: "History Ch 2 (7-9 Marks)",
+    keyFormulas: [
+      "Satyagraha: Champaran 1917 (Indigo), Kheda 1917 (Revenue), Ahmedabad 1918 (Cotton Mill Workers)",
+      "Rowlatt Act 1919 & Jallianwala Bagh (13 April 1919) -> Non-Cooperation Movement (Nagpur Dec 1920 to Feb 1922 Chauri Chaura)",
+      "Differing Strands: Awadh (Baba Ramchandra & Oudh Kisan Sabha), Gudem Hills (Alluri Sitaram Raju), Assam tea plantations",
+      "Civil Disobedience (1930): Dandi Salt March (12 March - 6 April 1930, 240 miles, 78 volunteers)",
+      "Poona Pact Sept 1932: Dr. Ambedkar & Gandhi agreed on reserved seats within joint electorates"
+    ],
+    images: [
+      {
+        title: "Nationalism in India Master Flowchart & Movements",
+        src: "/mnemonics/sst/hist_ch2_india_1.jpeg",
+        description: "Satyagraha principles, Rowlatt Act, Khilafat, Non-Cooperation Movement stages, and Civil Disobedience Salt March."
+      },
+      {
+        title: "Congress Sessions, Peasant Rebellions & Collective Identity",
+        src: "/mnemonics/sst/hist_ch2_india_2.jpeg",
+        description: "Calcutta, Nagpur & Lahore Congress sessions, Awadh Kisan Sabha, Alluri Sitaram Raju, Poona Pact, and Bharat Mata allegory."
+      }
+    ]
+  },
+  {
+    chapterId: 3,
+    chapterName: "The Making of a Global World",
+    badge: "History Ch 3",
+    keyFormulas: [
+      "Pre-Modern Silk Routes: Linked Asia, Europe, and northern Africa; spread silk, pottery, spices, and religion",
+      "Conquest & Disease: Spanish conquest of Americas using Smallpox as deadly biological weapon",
+      "Rinderpest (Cattle Plague) 1890s: Wiped out 90% of African cattle, enabling European colonial subjugation",
+      "Indentured Labour: 19th-century migration of Indian and Chinese workers to Caribbean, Fiji, and Mauritius",
+      "Bretton Woods 1944: Established IMF and World Bank; pegged dollar to gold; post-war economic order"
+    ],
+    images: [
+      {
+        title: "The Making of a Global World Visual Guide (Part 1)",
+        src: "/mnemonics/sst/hist_ch3_global_world_1.jpeg",
+        description: "Silk routes, Colombian exchange, and colonial conquest via disease."
+      },
+      {
+        title: "The Making of a Global World Visual Guide (Part 2)",
+        src: "/mnemonics/sst/hist_ch3_global_world_2.jpeg",
+        description: "19th century trade, indentured migration, Great Depression, and Bretton Woods institutions."
+      }
+    ]
+  },
+  {
+    chapterId: 4,
+    chapterName: "The Age of Industrialisation",
+    badge: "History Ch 4",
+    keyFormulas: [
+      "Proto-Industrialisation: Decentralized production in countryside before factories; controlled by merchants",
+      "Pace of Industrial Change: Cotton and Iron/Steel dominated; steam power adopted slowly; hand labour preferred",
+      "Life of Workers: Seasonality of work, low wages, fear of unemployment (Spinning Jenny attacked by women)",
+      "Industrialisation in Colonies: Decline of Indian weavers due to Manchester machine-made cotton imports",
+      "Early Indian Entrepreneurs: Dwarkanath Tagore, Dinshaw Petit, Jamsetjee Tata, Seth Hukumchand"
+    ],
+    images: [
+      {
+        title: "The Age of Industrialisation Visual Guide (Part 1)",
+        src: "/mnemonics/sst/hist_ch4_industrialisation_1.jpeg",
+        description: "Proto-industrial phase, steam engine, Spinning Jenny, and factory system emergence."
+      },
+      {
+        title: "The Age of Industrialisation Visual Guide (Part 2)",
+        src: "/mnemonics/sst/hist_ch4_industrialisation_2.jpeg",
+        description: "Colonial trade, Indian merchants, Swadeshi industrial shift, and market advertising."
+      }
+    ]
+  },
+  {
+    chapterId: 5,
+    chapterName: "Print Culture and the Modern World",
+    badge: "History Ch 5",
+    keyFormulas: [
+      "Earliest Print: Woodblock printing in China, Japan (Diamond Sutra 868 AD), and Korea",
+      "Gutenberg Press 1448 (Mainz, Germany): Movable metal type; first printed book was the Bible",
+      "Print Revolution: Protestant Reformation (Martin Luther's 95 Theses 1517: 'Print is the ultimate gift of God')",
+      "French Revolution: Print popularized Enlightenment ideas (Voltaire, Rousseau) questioning monarchy and church",
+      "India & Print: Portuguese Jesuits brought press to Goa (1556); James Augustus Hickey's Bengal Gazette (1780)"
+    ],
+    images: [
+      {
+        title: "Print Culture Visual Guide (Part 1)",
+        src: "/mnemonics/sst/hist_ch5_print_culture_1.jpeg",
+        description: "East Asian woodblocks, Gutenberg movable type, and religious reformation."
+      },
+      {
+        title: "Print Culture Visual Guide (Part 2)",
+        src: "/mnemonics/sst/hist_ch5_print_culture_2.jpeg",
+        description: "Reading mania in 19th century Europe, censorship, and India's nationalist press."
+      }
+    ]
+  },
+
+  // --- POLITICAL SCIENCE / CIVICS (Chapters 6 to 10) ---
+  {
+    chapterId: 6,
+    chapterName: "Power Sharing",
+    badge: "Civics Ch 1 (4-5 Marks)",
+    keyFormulas: [
+      "Belgium: 59% Flemish (Dutch), 40% Wallonia (French); Brussels 80% French, 20% Dutch; Accommodation 1970-1993",
+      "Sri Lanka: 74% Sinhala (Buddhist), 18% Tamil (13% native, 5% Indian); 1956 Majoritarian Act -> Civil War",
+      "Prudential Reason: Reduces social conflict, prevents violence, ensures political stability",
+      "Moral Reason: Spirit of democracy; citizens participate and acquire a stake in governance",
+      "Forms: Horizontal (Separation of Powers / Checks & Balances), Vertical (Federalism), Social Groups, Coalitions"
+    ],
+    images: [
+      {
+        title: "Power Sharing Mind Map & Case Studies",
+        src: "/mnemonics/sst/pol_ch1_power_sharing_1.jpeg",
+        description: "Comparative matrix of Belgium Accommodation vs Sri Lanka Majoritarianism, and Prudential vs Moral reasons."
+      },
+      {
+        title: "Forms of Power Sharing & Institutional Checks",
+        src: "/mnemonics/sst/pol_ch1_power_sharing_2.jpeg",
+        description: "Horizontal (separation of powers) vs Vertical (federalism), Community government, and Coalition politics."
+      }
+    ]
+  },
+  {
+    chapterId: 7,
+    chapterName: "Federalism",
+    badge: "Civics Ch 2 (4-5 Marks)",
+    keyFormulas: [
+      "7 Features: 2+ tiers, distinct jurisdiction, constitutional entrenchment, judicial umpire, financial autonomy",
+      "Two Routes: Coming Together (USA, Australia, Switzerland) vs Holding Together (India, Spain, Belgium)",
+      "Three Lists: Union (97+ subjects - Defense, Banking), State (66+ - Police, Agri), Concurrent (47+ - Education)",
+      "Residuary Powers: Exclusive Union jurisdiction over post-constitutional subjects (Cyber law, IT, AI)",
+      "1992 Decentralisation: 73rd/74th Amendments; mandatory elections, SC/ST/OBC quotas, 1/3rd women reservation, SEC"
+    ],
+    images: [
+      {
+        title: "Federalism Core Features & Indian Union Lists",
+        src: "/mnemonics/sst/pol_ch2_federalism_1.jpeg",
+        description: "7 Features of Federalism, Coming Together vs Holding Together, and Union / State / Concurrent lists breakdown."
+      },
+      {
+        title: "Decentralisation & Panchayati Raj 1992 Reforms",
+        src: "/mnemonics/sst/pol_ch2_federalism_2.jpeg",
+        description: "73rd & 74th Amendments, 3-tier Panchayati Raj structure, Gram Sabha, Mayor, and Language Policy."
+      }
+    ]
+  },
+  {
+    chapterId: 8,
+    chapterName: "Gender, Religion and Caste",
+    badge: "Civics Ch 3",
+    keyFormulas: [
+      "Sexual Division of Labour: Women do domestic work inside home; public domain dominated by men",
+      "Feminist Movement: Political, educational, and professional equality; Women's Reservation Act in Parliament",
+      "Secular State: No official state religion in India; freedom of religion; prohibition of religious discrimination",
+      "Communalism: Belief that religion is principal basis of social community; can manifest in violence or majoritarianism",
+      "Caste in Politics vs Politics in Caste: Universal adult franchise broken vote banks; backward classes mobilization"
+    ],
+    images: [
+      {
+        title: "Gender, Religion and Caste Visual Guide (Part 1)",
+        src: "/mnemonics/sst/pol_ch3_gender_religion_1.jpeg",
+        description: "Gender inequalities, feminist demands, and secular constitutional principles."
+      },
+      {
+        title: "Gender, Religion and Caste Visual Guide (Part 2)",
+        src: "/mnemonics/sst/pol_ch3_gender_religion_2.jpeg",
+        description: "Forms of communalism, caste hierarchy erosion, and caste interactions with democratic politics."
+      }
+    ]
+  },
+  {
+    chapterId: 9,
+    chapterName: "Political Parties",
+    badge: "Civics Ch 4",
+    keyFormulas: [
+      "Three Components: Leaders, Active Members, and Followers",
+      "Functions: Contest elections, put forward policies, make laws, form/run government, role of opposition, shape public opinion",
+      "Party Systems: One-party (China), Two-party (USA, UK), Multi-party (India with alliance coalitions)",
+      "National vs State Party: National = 6% votes in Lok Sabha or 4 states + 4 LS seats; State = 6% in State Assembly + 2 seats",
+      "Challenges: Lack of internal democracy, dynastic succession, money & muscle power, lack of meaningful choices"
+    ],
+    images: [
+      {
+        title: "Political Parties Visual Guide (Part 1)",
+        src: "/mnemonics/sst/pol_ch4_political_parties_1.jpeg",
+        description: "Party components, 7 key democratic functions, and criteria for National vs State parties."
+      },
+      {
+        title: "Political Parties Visual Guide (Part 2)",
+        src: "/mnemonics/sst/pol_ch4_political_parties_2.jpeg",
+        description: "4 Major challenges of political parties and constitutional anti-defection reforms."
+      }
+    ]
+  },
+  {
+    chapterId: 10,
+    chapterName: "Outcomes of Democracy",
+    badge: "Civics Ch 5",
+    keyFormulas: [
+      "Democratic Principles: Promotes equality among citizens, enhances individual dignity, improves decision quality",
+      "Accountable, Responsive & Legitimate: Free and fair regular elections, open public debate, Right to Information (RTI)",
+      "Economic Growth vs Democracy: Dictatorships have marginally higher growth historical rate, but democracy ensures equitable distribution",
+      "Reduction of Inequality & Poverty: Democracies ensure political equality (one person one vote), but struggle with wealth gap",
+      "Accommodating Diversity: Democracy must avoid becoming majoritarian; minority interests must be constitutionally protected"
+    ],
+    images: [
+      {
+        title: "Outcomes of Democracy Visual Guide (Part 1)",
+        src: "/mnemonics/sst/pol_ch5_outcomes_democracy_1.jpeg",
+        description: "Accountability, transparency, legitimacy, and economic performance of democracies."
+      },
+      {
+        title: "Outcomes of Democracy Visual Guide (Part 2)",
+        src: "/mnemonics/sst/pol_ch5_outcomes_democracy_2.jpeg",
+        description: "Accommodation of social differences, dignity of women and marginalized castes."
+      }
+    ]
+  },
+
+  // --- GEOGRAPHY (Chapters 11 to 17) ---
+  {
+    chapterId: 11,
+    chapterName: "Resources and Development",
+    badge: "Geography Ch 1 (4-5 Marks)",
+    keyFormulas: [
+      "Resource Triangle: Nature, Technology, and Institutions interdependent via human agency",
+      "Territorial Waters: 12 nautical miles (22.2 km) = National; beyond 200 nm = Exclusive Economic Zone",
+      "Soils: Alluvial (Khadar/Bangar), Black (Basalt lava/cotton), Red-Yellow (Iron diffusion), Laterite (Leaching)",
+      "Land Degradation Causes: Mining (Jharkhand/Odisha), Overgrazing (Gujarat/Rajasthan), Over-irrigation (Punjab/Haryana)",
+      "Soil Conservation: Contour ploughing, Terrace farming, Strip cropping, Shelter belts"
+    ],
+    images: [
+      {
+        title: "Resources Classification & Soil Types of India",
+        src: "/mnemonics/sst/geo_ch1_resources_1.jpeg",
+        description: "Biotic/Abiotic, Potential/Stock/Reserves matrix, and 6 Indian Soils (Alluvial, Black, Red-Yellow, Laterite, Arid, Mountain)."
+      },
+      {
+        title: "Land Degradation & Soil Conservation Techniques",
+        src: "/mnemonics/sst/geo_ch1_resources_2.jpeg",
+        description: "Causes of land degradation by states, Contour ploughing, Terrace farming, Strip cropping, and Shelter belts."
+      }
+    ]
+  },
+  {
+    chapterId: 12,
+    chapterName: "Forest and Wildlife Resources",
+    badge: "Geography Ch 2 (3-4 Marks)",
+    keyFormulas: [
+      "India hosts 8% of world biodiversity (81,000 fauna, 47,000 flora); Asiatic Cheetah extinct since 1952",
+      "IUCN Categories: Normal, Endangered (Rhino, Lion-tailed macaque), Vulnerable (Gangetic dolphin), Endemic (Nicobar pigeon)",
+      "Wildlife Protection Act 1972 & Project Tiger 1973 (Corbett, Sunderbans, Bandhavgarh, Sariska, Periyar)",
+      "Forest Classes: Reserved (>50%, most valuable) + Protected (~33%) = Permanent Forest Estates; Unclassed",
+      "Community Conservation: Chipko (Himalayas), Sariska (mining protest), Alwar Sonchuri (1200 ha), JFM Odisha 1988"
+    ],
+    images: [
+      {
+        title: "IUCN Species Categories & Depletion Drivers",
+        src: "/mnemonics/sst/geo_ch2_forest_wildlife_1.jpeg",
+        description: "Normal, Endangered, Vulnerable, Rare, Endemic, and Extinct species with Indian examples."
+      },
+      {
+        title: "Reserved Forests & Community Conservation",
+        src: "/mnemonics/sst/geo_ch2_forest_wildlife_2.jpeg",
+        description: "Reserved vs Protected vs Unclassed forests, Project Tiger 1973, Chipko movement, and JFM Odisha."
+      }
+    ]
+  },
+  {
+    chapterId: 13,
+    chapterName: "Water Resources",
+    badge: "Geography Ch 3 (4-5 Marks)",
+    keyFormulas: [
+      "Water Scarcity: 96.5% oceans, 2.5% freshwater; caused by over-exploitation, tubewells, industry, pollution",
+      "Multi-Purpose Dams: Nehru called them 'Temples of modern India'; generate 22% of electricity; criticism = sedimentation & displacement",
+      "Traditional Systems: Guls/Kuls (W. Himalayas), Inundation (Bengal), Khadins/Johads (Rajasthan), Tankas / Palar Pani (Bikaner)",
+      "Modern Innovations: Bamboo drip (Meghalaya), Gendathur (Karnataka 200 houses), Tamil Nadu legal compulsion",
+      "Mandatory Dams: Salal (Chenab), Bhakra Nangal (Satluj), Tehri (Bhagirathi), Sardar Sarovar (Narmada), Hirakud (Mahanadi)"
+    ],
+    images: [
+      {
+        title: "Water Scarcity & Multi-Purpose River Projects",
+        src: "/mnemonics/sst/geo_ch3_water_resources_1.jpeg",
+        description: "Causes of water scarcity, Nehru's 'Temples of Modern India', environmental impacts of large dams, and inter-state disputes."
+      },
+      {
+        title: "Traditional Rainwater Harvesting Systems & Dams Map",
+        src: "/mnemonics/sst/geo_ch3_water_resources_2.jpeg",
+        description: "Guls/Kuls, Khadins/Johads, Rooftop Tankas, Bamboo drip irrigation, and 8 Mandatory CBSE Dams."
+      }
+    ]
+  },
+  {
+    chapterId: 14,
+    chapterName: "Agriculture",
+    badge: "Geography Ch 4",
+    keyFormulas: [
+      "Farming Types: Primitive subsistence (Slash and burn / Jhumming), Intensive subsistence, Commercial farming (Plantations)",
+      "Cropping Seasons: Rabi (Sown Oct-Dec, Harvested Apr-Jun - Wheat), Kharif (Sown Jun-Jul, Harvested Sep-Oct - Rice), Zaid (Watermelon)",
+      "Major Crops: Rice (25°C+, 100cm+ rain), Wheat (cool growing season, 50-75cm rain), Millets (Jowar, Bajra, Ragi - coarse grains)",
+      "Cash & Beverage: Sugarcane, Cotton (Black soil, 210 frost-free days), Jute (Golden fiber), Tea (Well-drained acidic soil), Coffee",
+      "Reforms: Green & White Revolutions, Land ceiling, KCC (Kisan Credit Card), PAIS (Personal Accident Insurance Scheme)"
+    ],
+    images: [
+      {
+        title: "Agriculture Cropping Seasons & Food Crops",
+        src: "/mnemonics/sst/geo_ch4_agriculture_1.jpeg",
+        description: "Rabi vs Kharif vs Zaid, Rice, Wheat, Millets, and Pulses cultivation conditions."
+      },
+      {
+        title: "Non-Food Crops, Plantations & Institutional Reforms",
+        src: "/mnemonics/sst/geo_ch4_agriculture_2.jpeg",
+        description: "Sugarcane, Cotton, Jute, Tea, Coffee, Bhoodan-Gramdan, and agrarian technological reforms."
+      }
+    ]
+  },
+  {
+    chapterId: 15,
+    chapterName: "Minerals and Energy Resources",
+    badge: "Geography Ch 5",
+    keyFormulas: [
+      "Occurrence of Minerals: Igneous/Metamorphic (veins and lodes), Sedimentary (beds and layers), Residual mass (Bauxite)",
+      "Ferrous Minerals: Iron Ore (Magnetite 70% Fe, Hematite 50-60% Fe - Kudremukh, Bailadila, Durg-Bastar), Manganese",
+      "Non-Ferrous: Copper (Khetri in Rajasthan, Balaghat in MP), Bauxite (Aluminium ore - Panchpatmali in Odisha)",
+      "Conventional Energy: Coal (Anthracite, Bituminous, Lignite, Peat - Raniganj, Jharia), Petroleum (Mumbai High, Digboi)",
+      "Non-Conventional: Solar (Photovoltaic), Wind (Tamil Nadu Nagarcoil-Madurai), Biogas (Gobar gas), Nuclear, Tidal, Geothermal"
+    ],
+    images: [
+      {
+        title: "Minerals Classification & Metallurgical Belts",
+        src: "/mnemonics/sst/geo_ch5_minerals_energy_1.jpeg",
+        description: "Ferrous vs Non-ferrous, Magnetite vs Hematite, and major mining belts of India."
+      },
+      {
+        title: "Energy Resources: Conventional vs Renewable",
+        src: "/mnemonics/sst/geo_ch5_minerals_energy_2.jpeg",
+        description: "Coal fields, Petroleum refineries, Solar parks, Wind farms, and conservation strategies."
+      }
+    ]
+  },
+  {
+    chapterId: 16,
+    chapterName: "Manufacturing Industries",
+    badge: "Geography Ch 6",
+    keyFormulas: [
+      "Importance of Manufacturing: Backbone of development, modernizes agriculture, reduces unemployment, earns foreign exchange",
+      "Location Factors: Raw material, labor, power, capital, market, and Agglomeration Economies",
+      "Classification: Agro-based (Textiles, Sugar) vs Mineral-based (Iron & Steel, Aluminium smelting, Chemical, Fertilizer)",
+      "Iron & Steel Industry: Basic heavy industry; raw material ratio = Iron ore 4 : Coking coal 2 : Limestone 1; Chhota Nagpur concentration",
+      "Industrial Pollution & Control: Air, Water, Thermal, Noise; 3Rs, electrostatic precipitators, STP wastewater treatment"
+    ],
+    images: [
+      {
+        title: "Manufacturing Industries Overview & Textiles",
+        src: "/mnemonics/sst/geo_ch6_manufacturing_1.jpeg",
+        description: "Industrial location factors, Agglomeration economies, and Cotton / Jute textile hubs."
+      },
+      {
+        title: "Heavy Industries & Environmental Pollution Mitigation",
+        src: "/mnemonics/sst/geo_ch6_manufacturing_2.jpeg",
+        description: "Iron & steel production cycle, chemical fertilizers, IT parks, and wastewater effluent treatment."
+      }
+    ]
+  },
+  {
+    chapterId: 17,
+    chapterName: "Lifelines of National Economy",
+    badge: "Geography Ch 7",
+    keyFormulas: [
+      "Roadways: Golden Quadrilateral (6-lane, NHAI), National Highways, State Highways; Road density highest in Kerala",
+      "Railways: Principal transport mode for freight and passengers; gauge types: Broad (1.676m), Metre (1.000m), Narrow (0.762m)",
+      "Pipelines: Crude oil, petroleum, gas (HVJ Pipeline - Hazira-Vijaipur-Jagdishpur 1,700 km)",
+      "Waterways: Inland National Waterways (NW-1 Ganga Haldia-Allahabad 1620 km; NW-2 Brahmaputra Dhubri-Sadiya)",
+      "Major Sea Ports: Kandla (Deendayal Port), Mumbai (largest natural harbor), Marmagao (iron ore export), Chennai, Kolkata",
+      "International Trade: Balance of Trade = Export Value minus Import Value; Favourable (Exports > Imports)"
+    ],
+    images: [
+      {
+        title: "Transportation Networks: Roads, Rail & Pipelines",
+        src: "/mnemonics/sst/geo_ch7_lifelines_1.jpeg",
+        description: "Golden Quadrilateral, North-South/East-West corridors, railway gauges, and gas pipelines."
+      },
+      {
+        title: "Waterways, Major Seaports & International Trade",
+        src: "/mnemonics/sst/geo_ch7_lifelines_2.jpeg",
+        description: "12 Major seaports, National waterways NW-1 to NW-5, air travel, and balance of trade."
+      }
+    ]
+  },
+
+  // --- ECONOMICS (Chapters 18 to 22) ---
+  {
+    chapterId: 18,
+    chapterName: "Development",
+    badge: "Economics Ch 1 (5-6 Marks)",
+    keyFormulas: [
+      "Different People Different Goals: Conflicting goals (Dams provide power for industrialists but displace tribals)",
+      "Income + Non-Material Goals: Freedom, security, dignity, equal treatment, healthy environment",
+      "World Bank Criterion: Per Capita Income alone (High income = $49,300+; Low income = $2,500 or less; India = low-middle)",
+      "UNDP HDI: Multidimensional = Life Expectancy (Health) + Schooling (Education) + Per Capita Income (PPP US$)",
+      "Kerala vs Haryana: Kerala has lower per capita income, but far superior IMR (~12 vs ~30), literacy (~94%), and PDS"
+    ],
+    images: [
+      {
+        title: "Development Goals, Indicators & HDI Framework",
+        src: "/mnemonics/sst/eco_ch1_development_1.jpeg",
+        description: "Different people different goals, World Bank Per Capita Income vs UNDP HDI, and IMR / Literacy comparisons."
+      },
+      {
+        title: "Public Facilities & Sustainable Development",
+        src: "/mnemonics/sst/eco_ch1_development_2.jpeg",
+        description: "Why money cannot buy everything (PDS, healthcare), groundwater depletion in India, and crude oil exhaustion."
+      }
+    ]
+  },
+  {
+    chapterId: 19,
+    chapterName: "Sectors of the Indian Economy",
+    badge: "Economics Ch 2 (7-8 Marks)",
+    keyFormulas: [
+      "Three Sectors: Primary (Nature), Secondary (Industry/Manufacturing), Tertiary (Services - Transport, IT, Banking)",
+      "GDP: Market value of all FINAL goods and services produced within a country; excludes intermediate goods",
+      "Tertiary Boom: Largest GDP sector (~55%), driven by basic services, agro-industrial links, income rise, and IT",
+      "Disguised Unemployment: Primary sector employs ~45% of workforce for only ~15% GDP; zero marginal productivity",
+      "Organised vs Unorganised: Job security, benefits, PF vs arbitrary hire-and-fire; MGNREGA guarantees 100 days work"
+    ],
+    images: [
+      {
+        title: "Three Economic Sectors & GDP Accounting",
+        src: "/mnemonics/sst/eco_ch2_sectors_1.jpeg",
+        description: "Primary, Secondary, Tertiary interactions, calculating GDP, avoiding double counting (intermediate vs final goods)."
+      },
+      {
+        title: "Employment Creation, Organised vs Unorganised & MGNREGA",
+        src: "/mnemonics/sst/eco_ch2_sectors_2.jpeg",
+        description: "Disguised unemployment in farming, MGNREGA 2005 guarantees, Organised vs Unorganised labor rights, Public vs Private."
+      }
+    ]
+  },
+  {
+    chapterId: 20,
+    chapterName: "Money and Credit",
+    badge: "Economics Ch 3 (6-7 Marks)",
+    keyFormulas: [
+      "Medium of Exchange: Eliminates double coincidence of wants; modern currency authorized by RBI and Central Government",
+      "Demand Deposits & Cheques: Bank deposits withdrawable on demand; cheques settle transactions without cash",
+      "Two Roles: Salim (profitable expansion) vs Swapna (crop failure pushing into debt trap)",
+      "Terms of Credit: Interest Rate, Collateral (asset pledged), Documentation, Mode of Repayment",
+      "Formal vs Informal: Formal (Banks/Cooperatives, supervised by RBI) vs Informal (Moneylenders, 36-60% predatory interest); SHGs"
+    ],
+    images: [
+      {
+        title: "Money Evolution, Modern Currency & Banking Operations",
+        src: "/mnemonics/sst/eco_ch3_money_credit_1.jpeg",
+        description: "Double coincidence of wants, Barter system, Demand deposits, Cheques mechanism, and RBI cash reserves."
+      },
+      {
+        title: "Credit Situations, Terms of Credit & SHGs",
+        src: "/mnemonics/sst/eco_ch3_money_credit_2.jpeg",
+        description: "Salim vs Swapna debt-trap, Collateral documentation, Formal vs Informal loan disparities, and Self Help Groups."
+      }
+    ]
+  },
+  {
+    chapterId: 21,
+    chapterName: "Globalisation and the Indian Economy",
+    badge: "Economics Ch 4",
+    keyFormulas: [
+      "MNCs (Multinational Corporations): Own or control production in more than one nation; set up production where costs are low",
+      "Interlinking Production: Foreign direct investment (FDI), partnerships with local firms, buying local companies (Cargill bought Parakh Foods)",
+      "Foreign Trade Integration: Connects markets across countries, expands consumer choices, levels price differentials",
+      "Factors Enabling Globalisation: Rapid improvement in transportation (containers) and Information & Communication Technology (Internet, telecom)",
+      "Trade Barriers & Liberalisation: New Economic Policy 1991 removed import duties and quotas; WTO promotes free international trade",
+      "Fair Globalisation: Ensuring labour laws are implemented, small producers protected, and benefits shared equitably"
+    ],
+    images: [
+      {
+        title: "Globalisation & MNC Operations Visual Guide (Part 1)",
+        src: "/mnemonics/sst/eco_ch4_globalisation_1.jpeg",
+        description: "MNC production networks, foreign direct investment, and consumer product proliferation."
+      },
+      {
+        title: "Liberalisation, WTO & Fair Globalisation (Part 2)",
+        src: "/mnemonics/sst/eco_ch4_globalisation_2.jpeg",
+        description: "Trade barriers removal, SEZs (Special Economic Zones), flexible labour laws, and fair globalisation."
+      }
+    ]
+  },
+  {
+    chapterId: 22,
+    chapterName: "Consumer Rights",
+    badge: "Economics Ch 5",
+    keyFormulas: [
+      "Consumer Exploitation: Adulteration, false claims, defective goods, under-weight measures, unfair trade practices",
+      "COPRA 1986 (Consumer Protection Act): Enacted 3-tier quasi-judicial machinery (District, State, National Commissions)",
+      "Consumer Rights: Right to Safety, Right to be Informed, Right to Choose, Right to be Heard, Right to Seek Redressal, Right to Consumer Education",
+      "Standardization Marks: ISI (industrial goods), AGMARK (agricultural food produce), Hallmark (gold jewelry), FPO (fruit products)",
+      "National Consumer Day: Celebrated on 24 December in India to commemorate the enactment of COPRA 1986"
+    ],
+    images: [
+      {
+        title: "Consumer Rights & COPRA 1986 Visual Guide (Part 1)",
+        src: "/mnemonics/sst/eco_ch5_consumer_rights_1.jpeg",
+        description: "Historical consumer movement, 6 basic consumer rights, and statutory standardization certification logos."
+      },
+      {
+        title: "Three-Tier Consumer Courts & Redressal (Part 2)",
+        src: "/mnemonics/sst/eco_ch5_consumer_rights_2.jpeg",
+        description: "District Forum, State Commission, National Commission jurisdiction, and filing consumer complaints."
+      }
+    ]
+  }
+];
+
 export default function MnemonicGallery({ isDark = true }: { isDark?: boolean }) {
-  const [activeSubject, setActiveSubject] = useState<"math" | "science">("science");
+  const [activeSubject, setActiveSubject] = useState<"math" | "science" | "sst">("sst");
   const [selectedChapterId, setSelectedChapterId] = useState<number>(1);
   const [activeModalImage, setActiveModalImage] = useState<{
     src: string;
@@ -643,7 +1183,7 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
     description: string;
   } | null>(null);
 
-  const activeChapterList = activeSubject === "science" ? SCIENCE_MNEMONIC_CHAPTERS : MNEMONIC_CHAPTERS;
+  const activeChapterList = activeSubject === "sst" ? SST_MNEMONIC_CHAPTERS : activeSubject === "science" ? SCIENCE_MNEMONIC_CHAPTERS : MNEMONIC_CHAPTERS;
   const activeChapter = activeChapterList.find(c => c.chapterId === selectedChapterId) || activeChapterList[0];
 
   const totalSheetsCount = activeChapterList.reduce((acc, c) => acc + c.images.length, 0);
@@ -668,9 +1208,9 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
     }
   }, [activeModalImage]);
 
-  const handleSubjectChange = (newSubject: "math" | "science") => {
+  const handleSubjectChange = (newSubject: "math" | "science" | "sst") => {
     setActiveSubject(newSubject);
-    setSelectedChapterId(newSubject === "science" ? 1 : 6);
+    setSelectedChapterId(newSubject === "sst" ? 1 : newSubject === "science" ? 1 : 6);
   };
 
   return (
@@ -708,6 +1248,20 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
           <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
             Subject:
           </span>
+          <button
+            onClick={() => handleSubjectChange("sst")}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+              activeSubject === "sst"
+                ? isDark
+                  ? "bg-rose-500 text-slate-950 border-rose-400 font-black shadow-md"
+                  : "bg-rose-600 text-white border-rose-600 font-black shadow-md"
+                : isDark
+                ? "bg-black/30 border-white/5 text-slate-400 hover:text-white"
+                : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+            }`}
+          >
+            <span>🌍 Social Science (44 Sheets)</span>
+          </button>
           <button
             onClick={() => handleSubjectChange("science")}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
@@ -750,7 +1304,9 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
               className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer flex flex-col justify-between gap-1 border min-h-[56px] ${
                 isSelected
                   ? isDark
-                    ? activeSubject === "science"
+                    ? activeSubject === "sst"
+                      ? "bg-rose-500 text-slate-950 border-rose-400 font-black shadow-md scale-[1.02]"
+                      : activeSubject === "science"
                       ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-md scale-[1.02]"
                       : "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md scale-[1.02]"
                     : "bg-slate-900 text-white border-slate-900 font-black shadow-md scale-[1.02]"

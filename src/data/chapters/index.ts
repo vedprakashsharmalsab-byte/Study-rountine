@@ -15,6 +15,21 @@ import { SCI_CH11_QUESTIONS } from "./science/sci_ch11";
 import { SCI_CH12_QUESTIONS } from "./science/sci_ch12";
 import { SCI_CH13_QUESTIONS } from "./science/sci_ch13";
 
+// Social Science (SST) Chapters
+import {
+  SST_CH1_QUESTIONS,
+  SST_CH2_QUESTIONS,
+  SST_CH3_QUESTIONS,
+  SST_CH4_QUESTIONS,
+  SST_CH5_QUESTIONS,
+  SST_CH6_QUESTIONS,
+  SST_CH7_QUESTIONS,
+  SST_CH8_QUESTIONS,
+  SST_CH9_QUESTIONS,
+  SST_CH10_QUESTIONS,
+  getSSTChapterQuestions
+} from "./sst";
+
 export {
   CH6_QUESTIONS,
   CH8_QUESTIONS,
@@ -28,10 +43,25 @@ export {
   SCI_CH5_QUESTIONS,
   SCI_CH11_QUESTIONS,
   SCI_CH12_QUESTIONS,
-  SCI_CH13_QUESTIONS
+  SCI_CH13_QUESTIONS,
+  SST_CH1_QUESTIONS,
+  SST_CH2_QUESTIONS,
+  SST_CH3_QUESTIONS,
+  SST_CH4_QUESTIONS,
+  SST_CH5_QUESTIONS,
+  SST_CH6_QUESTIONS,
+  SST_CH7_QUESTIONS,
+  SST_CH8_QUESTIONS,
+  SST_CH9_QUESTIONS,
+  SST_CH10_QUESTIONS,
+  getSSTChapterQuestions
 };
 
 export function getChapterQuestions(chapterId: number, subject: string = "math"): VaultQuestion[] {
+  if (subject === "sst" || subject === "social_science") {
+    return getSSTChapterQuestions(chapterId);
+  }
+
   if (subject === "science") {
     switch (chapterId) {
       case 1: return SCI_CH1_QUESTIONS;

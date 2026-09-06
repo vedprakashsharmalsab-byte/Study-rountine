@@ -38,6 +38,8 @@ next-env.d.ts
 .neon
 .agents
 my-project
+__pycache__/
+*.pyc
 *.txt
 initial_page.tsx
 original_page.tsx
