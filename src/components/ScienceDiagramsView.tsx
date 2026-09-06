@@ -63,6 +63,7 @@ export default function ScienceDiagramsView({
   // Zoom Modal state
   const [activeZoomAsset, setActiveZoomAsset] = useState<VisualDiagramAsset | null>(null);
   const [zoomScale, setZoomScale] = useState<number>(1);
+  const [imageErrorMap, setImageErrorMap] = useState<Record<string, boolean>>({});
 
   // Lock body scroll and handle ESC key when modal is open
   useEffect(() => {
@@ -316,12 +317,21 @@ export default function ScienceDiagramsView({
                   }}
                   className="relative bg-white border-b border-slate-200 p-3.5 min-h-[220px] max-h-[240px] flex items-center justify-center cursor-pointer group select-none"
                 >
-                  <img
-                    src={diag.imageUrl}
-                    alt={diag.imageAlt}
-                    className="max-h-[190px] w-auto max-w-full object-contain transition-transform duration-200 group-hover:scale-[1.03]"
-                    loading="lazy"
-                  />
+                  {imageErrorMap[diag.id] ? (
+                    <div className="flex flex-col items-center justify-center p-6 text-center space-y-2 text-slate-500 min-h-[180px]">
+                      <Compass className="w-10 h-10 text-cyan-500 opacity-60 animate-pulse" />
+                      <span className="text-xs font-bold text-slate-700">{diag.title}</span>
+                      <span className="text-[10px] text-slate-400 font-mono">Official NCERT Visual Asset</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={diag.imageUrl}
+                      alt={diag.imageAlt}
+                      onError={() => setImageErrorMap((prev) => ({ ...prev, [diag.id]: true }))}
+                      className="max-h-[190px] w-auto max-w-full object-contain transition-transform duration-200 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                  )}
 
                   {/* TOP BADGES */}
                   <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 pointer-events-none">
@@ -802,15 +812,24 @@ export default function ScienceDiagramsView({
             <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
               {/* IMAGE DISPLAY CONTAINER — CLEAN WHITE WELL FOR MAXIMUM CONTRAST */}
               <div className="p-4 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-inner flex items-center justify-center min-h-[320px] max-h-[500px] overflow-auto">
-                <img
-                  src={activeZoomAsset.imageUrl}
-                  alt={activeZoomAsset.imageAlt}
-                  style={{
-                    transform: `scale(${zoomScale})`,
-                    transformOrigin: "center center"
-                  }}
-                  className="max-h-[460px] w-auto max-w-full object-contain select-none transition-transform duration-150"
-                />
+                {imageErrorMap[activeZoomAsset.id] ? (
+                  <div className="flex flex-col items-center justify-center p-8 text-center space-y-3">
+                    <Compass className="w-16 h-16 text-cyan-500 opacity-80" />
+                    <h4 className="text-base font-bold text-slate-800">{activeZoomAsset.title}</h4>
+                    <p className="text-xs text-slate-500 max-w-md">{activeZoomAsset.keyRule}</p>
+                  </div>
+                ) : (
+                  <img
+                    src={activeZoomAsset.imageUrl}
+                    alt={activeZoomAsset.imageAlt}
+                    onError={() => setImageErrorMap((prev) => ({ ...prev, [activeZoomAsset.id]: true }))}
+                    style={{
+                      transform: `scale(${zoomScale})`,
+                      transformOrigin: "center center"
+                    }}
+                    className="max-h-[460px] w-auto max-w-full object-contain select-none transition-transform duration-150"
+                  />
+                )}
               </div>
 
               {/* SPEC SHEET & CBSE CRITERIA */}

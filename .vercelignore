@@ -1,10 +1,8 @@
 # Exclude large training materials vault from Vercel uploads
 training-materials-vault/
 
-# Exclude large binary asset folders from public/
-# (873MB study materials + 127MB mnemonic images = ~1GB saved)
-public/study_material/
-public/mnemonics/
+# Exclude heavy 870MB maths PDF books from Vercel uploads
+public/study_material/maths/
 
 # Exclude local dev artifacts
 .next/

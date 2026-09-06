@@ -48,7 +48,7 @@ skills-lock.json
 # large study materials and PDFs (exceeds GitHub 100MB limit)
 *.pdf
 *.PDF
-public/study_material/
+public/study_material/maths/
 scratch/
 
 .vercel

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { 
@@ -1182,8 +1182,10 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
     title: string;
     description: string;
   } | null>(null);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
-  const activeChapterList = activeSubject === "sst" ? SST_MNEMONIC_CHAPTERS : activeSubject === "science" ? SCIENCE_MNEMONIC_CHAPTERS : MNEMONIC_CHAPTERS;
+  const baseList = activeSubject === "sst" ? SST_MNEMONIC_CHAPTERS : activeSubject === "science" ? SCIENCE_MNEMONIC_CHAPTERS : MNEMONIC_CHAPTERS;
+  const activeChapterList = useMemo(() => [...baseList].sort((a, b) => a.chapterId - b.chapterId), [baseList]);
   const activeChapter = activeChapterList.find(c => c.chapterId === selectedChapterId) || activeChapterList[0];
 
   const totalSheetsCount = activeChapterList.reduce((acc, c) => acc + c.images.length, 0);
@@ -1210,7 +1212,9 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
 
   const handleSubjectChange = (newSubject: "math" | "science" | "sst") => {
     setActiveSubject(newSubject);
-    setSelectedChapterId(newSubject === "sst" ? 1 : newSubject === "science" ? 1 : 6);
+    const targetList = newSubject === "sst" ? SST_MNEMONIC_CHAPTERS : newSubject === "science" ? SCIENCE_MNEMONIC_CHAPTERS : MNEMONIC_CHAPTERS;
+    const sorted = [...targetList].sort((a, b) => a.chapterId - b.chapterId);
+    setSelectedChapterId(sorted[0]?.chapterId || 1);
   };
 
   return (
@@ -1238,7 +1242,7 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
             <span className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold border ${
               isDark ? "bg-amber-950/40 text-amber-300 border-amber-800/40" : "bg-amber-50 text-amber-900 border-amber-200"
             }`}>
-              {totalSheetsCount} Sheets in {activeSubject === "science" ? "Science" : "Mathematics"}
+              {totalSheetsCount} Sheets in {activeSubject === "science" ? "Science" : activeSubject === "sst" ? "Social Science" : "Mathematics"}
             </span>
           </div>
         </div>
@@ -1393,12 +1397,21 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
                 }`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={img.src}
-                  alt={img.title}
-                  className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
+                {failedImages[img.src] ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center space-y-2">
+                    <Sparkles className="w-8 h-8 text-amber-500 opacity-70 animate-pulse" />
+                    <span className="text-xs font-bold text-slate-300 line-clamp-2">{img.title}</span>
+                    <span className="text-[10px] text-amber-400 font-mono">Verified Formula Cheat Sheet</span>
+                  </div>
+                ) : (
+                  <img
+                    src={img.src}
+                    alt={img.title}
+                    onError={() => setFailedImages((prev) => ({ ...prev, [img.src]: true }))}
+                    className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                )}
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                   <span className="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 flex items-center gap-1.5 shadow-lg">
                     <ZoomIn className="w-4 h-4" /> Full View
@@ -1499,11 +1512,20 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
             {/* Modal Image Body */}
             <div className="flex-1 overflow-auto p-2 sm:p-4 bg-black/60 flex items-center justify-center min-h-[50vh]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={activeModalImage.src}
-                alt={activeModalImage.title}
-                className="max-w-full max-h-[78vh] object-contain rounded-xl shadow-2xl"
-              />
+              {failedImages[activeModalImage.src] ? (
+                <div className="flex flex-col items-center justify-center p-8 text-center space-y-3">
+                  <Sparkles className="w-16 h-16 text-amber-400 opacity-80" />
+                  <h4 className="text-base font-bold text-white">{activeModalImage.title}</h4>
+                  <p className="text-xs text-slate-400 max-w-md">{activeModalImage.description}</p>
+                </div>
+              ) : (
+                <img
+                  src={activeModalImage.src}
+                  alt={activeModalImage.title}
+                  onError={() => setFailedImages((prev) => ({ ...prev, [activeModalImage.src]: true }))}
+                  className="max-w-full max-h-[78vh] object-contain rounded-xl shadow-2xl"
+                />
+              )}
             </div>
           </div>
         </div>,
