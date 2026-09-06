@@ -592,17 +592,25 @@ export default function ConceptsHubView({
           <div className="flex items-center justify-between pt-1 border-t border-white/5 text-xs font-bold">
             <button
               onClick={handlePrevChapter}
-              className="px-3 py-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer"
+              className={`px-3 py-1.5 rounded-lg border flex items-center gap-1 cursor-pointer transition-colors ${
+                isDark
+                  ? "border-white/10 text-slate-400 hover:text-white"
+                  : "border-slate-300 text-slate-700 hover:text-slate-950 bg-slate-100 hover:bg-slate-200"
+              }`}
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Prev Chapter</span>
             </button>
-            <span className="text-[11px] font-mono text-slate-400">
+            <span className={`text-[11px] font-mono font-bold ${isDark ? "text-slate-400" : "text-slate-600"}`}>
               {activeSubject === "math" ? `${activeMathChapterNo} of 14` : activeSubject === "science" ? `${activeScienceChapterNo} of 13` : `${activeSSTChapterNo} of 10`}
             </span>
             <button
               onClick={handleNextChapter}
-              className="px-3 py-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer"
+              className={`px-3 py-1.5 rounded-lg border flex items-center gap-1 cursor-pointer transition-colors ${
+                isDark
+                  ? "border-white/10 text-slate-400 hover:text-white"
+                  : "border-slate-300 text-slate-700 hover:text-slate-950 bg-slate-100 hover:bg-slate-200"
+              }`}
             >
               <span>Next Chapter</span>
               <ArrowRight className="w-3.5 h-3.5" />

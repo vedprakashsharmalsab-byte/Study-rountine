@@ -30,7 +30,11 @@ import {
   getSSTChapterQuestions
 } from "./sst";
 
+// English Chapters
+import { getEnglishChapterQuestions } from "./english";
+
 export {
+  getEnglishChapterQuestions,
   CH6_QUESTIONS,
   CH8_QUESTIONS,
   CH9_QUESTIONS,
@@ -73,6 +77,10 @@ export function getChapterQuestions(chapterId: number, subject: string = "math")
       case 13: return SCI_CH13_QUESTIONS;
       default: return SCI_CH1_QUESTIONS;
     }
+  }
+
+  if (subject === "english") {
+    return getEnglishChapterQuestions(chapterId);
   }
 
   // Mathematics default

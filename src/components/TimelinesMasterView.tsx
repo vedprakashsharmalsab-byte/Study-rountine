@@ -533,7 +533,9 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white"
+                className={`absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 ${
+                  isDark ? "hover:text-white" : "hover:text-slate-900"
+                }`}
               >
                 ✕
               </button>
@@ -1621,23 +1623,23 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                       <td className="p-4 font-mono font-black text-amber-400 whitespace-nowrap">
                         {item.year}
                       </td>
-                      <td className="p-4 whitespace-nowrap text-slate-400">
-                        <span className="block font-bold text-slate-300">
+                      <td className={`p-4 whitespace-nowrap ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                        <span className={`block font-bold ${isDark ? "text-slate-300" : "text-slate-900"}`}>
                           {item.chapterKey === "ch1_europe" ? "Ch 1: Europe" : "Ch 2: India"}
                         </span>
                         <span className="text-[10px] opacity-75">{item.era}</span>
                       </td>
                       <td className="p-4">
-                        <span className="font-bold text-sm block mb-1">{item.event}</span>
-                        <p className="text-slate-400 line-clamp-2">{item.significance}</p>
+                        <span className={`font-bold text-sm block mb-1 ${isDark ? "text-white" : "text-slate-900"}`}>{item.event}</span>
+                        <p className={`line-clamp-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}>{item.significance}</p>
                       </td>
-                      <td className="p-4 whitespace-nowrap text-slate-300">
+                      <td className={`p-4 whitespace-nowrap ${isDark ? "text-slate-300" : "text-slate-800 font-medium"}`}>
                         {item.keyPersonalities ? item.keyPersonalities.join(", ") : "—"}
                       </td>
-                      <td className="p-4 text-rose-300 text-[11px] max-w-xs">
+                      <td className={`p-4 text-[11px] max-w-xs ${isDark ? "text-rose-300" : "text-rose-700 font-medium"}`}>
                         {item.boardTrap || "—"}
                       </td>
-                      <td className="p-4 font-mono text-[10px] text-slate-400 whitespace-nowrap">
+                      <td className={`p-4 font-mono text-[10px] whitespace-nowrap ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                         {item.ncertReference}
                       </td>
                     </tr>

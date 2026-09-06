@@ -50,3 +50,5 @@ skills-lock.json
 *.PDF
 public/study_material/
 scratch/
+
+.vercel

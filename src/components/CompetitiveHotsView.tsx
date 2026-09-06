@@ -244,7 +244,7 @@ export default function CompetitiveHotsView({
                     </div>
 
                     {isClueRevealed ? (
-                      <ul className="space-y-1.5 text-xs sm:text-sm text-slate-300 pt-2 border-t border-amber-500/20">
+                      <ul className={`space-y-1.5 text-xs sm:text-sm pt-2 border-t border-amber-500/20 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                         {q.keyConceptClues.map((clue, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <span className="text-amber-400 font-bold">•</span>
@@ -253,7 +253,7 @@ export default function CompetitiveHotsView({
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-xs text-slate-400 italic">
+                      <p className={`text-xs italic ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                         Try solving the problem on your rough paper first! Click "Reveal Clues" if you get stuck.
                       </p>
                     )}
@@ -285,7 +285,7 @@ export default function CompetitiveHotsView({
                             </span>
                           </div>
 
-                          <div className="text-xs sm:text-sm leading-relaxed text-slate-200 py-1">
+                          <div className={`text-xs sm:text-sm leading-relaxed py-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                             <PremiumMathRenderer content={st.working} isDark={isDark} />
                           </div>
 

@@ -1,21 +1,46 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useRef, useCallback, Suspense } from "react";
 import { createPortal } from "react-dom";
+import dynamic from "next/dynamic";
 
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import type { VaultQuestion, VaultChapterInfo } from "@/data/vaultQuestions";
-import MnemonicGallery from "@/components/MnemonicGallery";
-import NotebookSolutionView from "@/components/NotebookSolutionView";
-import ChapterConceptExplainer from "@/components/ChapterConceptExplainer";
-import TheoremsAndExamplesView from "@/components/TheoremsAndExamplesView";
-import ScienceConceptsView from "@/components/ScienceConceptsView";
-import ScienceActivitiesView from "@/components/ScienceActivitiesView";
-import ConceptsHubView from "@/components/ConceptsHubView";
-import ChemistryReactionsView from "@/components/ChemistryReactionsView";
-import ScienceDiagramsView from "@/components/ScienceDiagramsView";
-import CompetitiveHotsView from "@/components/CompetitiveHotsView";
-import { TimelinesMasterView } from "@/components/TimelinesMasterView";
+import { getChapterQuestions } from "@/data/chapters";
+
+// Lazy loading skeleton — shows while heavy component chunks download
+const TabSkeleton = () => (
+  <div className="flex flex-col gap-4 p-6 animate-pulse">
+    <div className="h-8 rounded-xl bg-white/5 w-1/3" />
+    <div className="h-4 rounded-lg bg-white/5 w-2/3" />
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+      {[...Array(4)].map((_, i) => (
+        <div key={i} className="h-32 rounded-2xl bg-white/5" />
+      ))}
+    </div>
+  </div>
+);
+
+// Dynamic (lazy) imports — each component only loads when its tab is first clicked.
+// On a 2-core 4GB device this prevents parsing 1.5MB+ of JS upfront.
+const MnemonicGallery = dynamic(() => import("@/components/MnemonicGallery"), { loading: TabSkeleton, ssr: false });
+const NotebookSolutionView = dynamic(() => import("@/components/NotebookSolutionView"), { loading: TabSkeleton, ssr: false });
+const ChapterConceptExplainer = dynamic(() => import("@/components/ChapterConceptExplainer"), { loading: TabSkeleton, ssr: false });
+const TheoremsAndExamplesView = dynamic(() => import("@/components/TheoremsAndExamplesView"), { loading: TabSkeleton, ssr: false });
+const ScienceConceptsView = dynamic(() => import("@/components/ScienceConceptsView"), { loading: TabSkeleton, ssr: false });
+const ScienceActivitiesView = dynamic(() => import("@/components/ScienceActivitiesView"), { loading: TabSkeleton, ssr: false });
+const ConceptsHubView = dynamic(() => import("@/components/ConceptsHubView"), { loading: TabSkeleton, ssr: false });
+const ChemistryReactionsView = dynamic(() => import("@/components/ChemistryReactionsView"), { loading: TabSkeleton, ssr: false });
+const ScienceDiagramsView = dynamic(() => import("@/components/ScienceDiagramsView"), { loading: TabSkeleton, ssr: false });
+const CompetitiveHotsView = dynamic(() => import("@/components/CompetitiveHotsView"), { loading: TabSkeleton, ssr: false });
+const TimelinesMasterView = dynamic(
+  () => import("@/components/TimelinesMasterView").then(m => ({ default: m.TimelinesMasterView })),
+  { loading: TabSkeleton, ssr: false }
+);
+const EnglishMasterView = dynamic(
+  () => import("@/components/EnglishMasterView").then(m => ({ default: m.EnglishMasterView })),
+  { loading: TabSkeleton, ssr: false }
+);
 
 import {
   Atom,
@@ -29,6 +54,7 @@ import {
   ChevronLeft,
   Clock,
   FileText,
+  Feather,
   ExternalLink,
   Flame,
   Layers,
@@ -78,16 +104,6 @@ import {
   FlashcardItem,
   BoardQuestion
 } from "@/data/cbseData";
-
-interface ConfettiParticle {
-  id: number;
-  x: number;
-  y: number;
-  color: string;
-  size: number;
-  speedY: number;
-  speedX: number;
-}
 
 interface XpToast {
   id: number;
@@ -682,53 +698,43 @@ export const LiveCountdown = React.memo(function LiveCountdown({
   );
 });
 
+// CSS-animation confetti: zero JS per frame, zero React re-renders per frame.
+// Browser GPU handles the animation natively — safe on 2-core 4GB RAM machines.
 export const IsolatedConfetti = React.memo(function IsolatedConfetti({ trigger }: { trigger: number }) {
-  const [particles, setParticles] = useState<ConfettiParticle[]>([]);
+  const [show, setShow] = useState(false);
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
     if (trigger === 0) return;
-    const colors = ["#f59e0b", "#3b82f6", "#10b981", "#ef4444", "#8b5cf6", "#f97316"];
-    const pList: ConfettiParticle[] = [];
-    for (let i = 0; i < 35; i++) {
-      pList.push({
-        id: Math.random() + i,
-        x: Math.random() * 100,
-        y: -10,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        size: Math.random() * 6 + 4,
-        speedY: Math.random() * 4 + 3,
-        speedX: Math.random() * 4 - 2
-      });
-    }
-    setParticles(pList);
+    setKey(k => k + 1);
+    setShow(true);
+    const t = setTimeout(() => setShow(false), 2800);
+    return () => clearTimeout(t);
   }, [trigger]);
 
-  useEffect(() => {
-    if (particles.length === 0) return;
-    const frame = requestAnimationFrame(() => {
-      setParticles((prev) =>
-        prev
-          .map((p) => ({ ...p, y: p.y + p.speedY, x: p.x + p.speedX }))
-          .filter((p) => p.y < 110)
-      );
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [particles]);
+  if (!show) return null;
 
-  if (particles.length === 0) return null;
-
+  const colors = ["#f59e0b", "#3b82f6", "#10b981", "#ef4444", "#8b5cf6", "#f97316"];
   return (
-    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
-      {particles.map((p) => (
+    <div key={key} className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+      <style>{`
+        @keyframes confetti-fall {
+          0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+          100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+      `}</style>
+      {Array.from({ length: 28 }, (_, i) => (
         <div
-          key={p.id}
-          className="absolute rounded-full"
+          key={i}
           style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            backgroundColor: p.color,
-            width: `${p.size}px`,
-            height: `${p.size}px`
+            position: "absolute",
+            left: `${(i * 3.57 + Math.random() * 3) % 100}%`,
+            top: `-${8 + (i % 5) * 4}px`,
+            width: `${5 + (i % 4) * 2}px`,
+            height: `${5 + (i % 4) * 2}px`,
+            borderRadius: i % 3 === 0 ? "50%" : "2px",
+            backgroundColor: colors[i % colors.length],
+            animation: `confetti-fall ${1.8 + (i % 5) * 0.22}s ease-in ${(i % 7) * 0.08}s forwards`,
           }}
         />
       ))}
@@ -776,7 +782,7 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines">("chapter_dashboard");
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english">("chapter_dashboard");
   const [timelinesChapterKey, setTimelinesChapterKey] = useState<"ch1_europe" | "ch2_india" | "all">("all");
   const [conceptsSubject, setConceptsSubject] = useState<"math" | "science" | "sst">("math");
   const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(6);
@@ -834,13 +840,15 @@ export default function CBSECommandCenter() {
   const [commandSubjectId, setCommandSubjectId] = useState<string>("maths");
   const [commandChapterId, setCommandChapterId] = useState<string>("math_ch6");
   
-  // Progressive Chapter Vault (Supports Math & Science)
-  const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science" | "sst">("math");
+  // Progressive Chapter Vault (Supports Math, Science, SST, and English)
+  const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science" | "sst" | "english">("math");
   const [activeVaultChapter, setActiveVaultChapter] = useState<number | null>(6); // Default Triangles
-  const [activeVaultQuestions, setActiveVaultQuestions] = useState<VaultQuestion[]>([]);
+  const [activeVaultQuestions, setActiveVaultQuestions] = useState<VaultQuestion[]>(() => getChapterQuestions(6, "math"));
   const [isAnalyzingVault, setIsAnalyzingVault] = useState(false);
   const [vaultAnalysisLogs, setVaultAnalysisLogs] = useState<string[]>([]);
   const [vaultFilter, setVaultFilter] = useState<"all" | "1" | "2" | "3" | "5" | "case">("all");
+  // Pagination: show only 10 questions at a time to prevent DOM bloat on low-RAM devices
+  const [vaultDisplayCount, setVaultDisplayCount] = useState(10);
 
   // Interactive MCQ Options Tracking & Immediate Evaluation
   const [selectedMcqOptions, setSelectedMcqOptions] = useState<Record<string, number>>({});
@@ -1076,67 +1084,33 @@ export default function CBSECommandCenter() {
   // Instant In-Memory Cache for Chapter Question Banks (Supports Math & Science)
   const chapterCacheRef = useRef<Record<string, VaultQuestion[]>>({});
 
-  const loadChapterData = async (
+  const loadChapterData = (
     chapterId: number, 
     isPreload = false, 
-    subject: "math" | "science" | "sst" = activeVaultSubject
+    subject: "math" | "science" | "sst" | "english" = activeVaultSubject
   ) => {
     const cacheKey = `${subject}_${chapterId}`;
     // 1. Instant cache hit: 0ms switch
     if (chapterCacheRef.current[cacheKey]) {
       setActiveVaultQuestions(chapterCacheRef.current[cacheKey]);
       setActiveVaultChapter(chapterId);
+      if (!isPreload) setVaultDisplayCount(10); // Reset pagination
       return;
     }
 
+    // Direct synchronous retrieval from question banks: 0ms latency, 100% reliable, zero vanishing
+    const list = getChapterQuestions(chapterId, subject) || [];
+    chapterCacheRef.current[cacheKey] = list;
     if (!isPreload) {
-      setIsAnalyzingVault(true);
-      setActiveVaultChapter(null);
-      setVaultAnalysisLogs([
-        "Connecting to Syllabus Engine...",
-        `Loading High-Yield Board Questions for ${subject === "science" ? "Science" : subject === "sst" ? "Social Science" : "Maths"} Chapter ${chapterId}...`
-      ]);
-    }
-
-    try {
-      const res = await fetch(`/api/questions?subject=${subject}&chapter=${chapterId}`);
-      const data = await res.json();
-      const list = data.questions || [];
-      chapterCacheRef.current[cacheKey] = list;
-      if (!isPreload) {
-        setActiveVaultQuestions(list);
-        setActiveVaultChapter(chapterId);
-      }
-    } catch (e) {
-      console.error("Failed to load questions:", e);
-    } finally {
-      if (!isPreload) {
-        setIsAnalyzingVault(false);
-      }
+      setActiveVaultQuestions(list);
+      setActiveVaultChapter(chapterId);
+      setVaultDisplayCount(10); // Reset pagination on chapter switch
     }
   };
 
-  // Initial load Ch 6 immediately & pre-cache remaining chapters in background for instant switches
+  // Initial load Ch 6 immediately & pre-cache remaining chapters
   useEffect(() => {
     loadChapterData(6, false, "math");
-    // Pre-cache Mathematics chapters
-    [8, 9, 10, 13, 14].forEach((ch) => {
-      fetch(`/api/questions?subject=math&chapter=${ch}`)
-        .then((r) => r.json())
-        .then((d) => {
-          if (d.questions) chapterCacheRef.current[`math_${ch}`] = d.questions;
-        })
-        .catch(() => {});
-    });
-    // Pre-cache Science chapters
-    [1, 2, 3, 5, 11, 12, 13].forEach((ch) => {
-      fetch(`/api/questions?subject=science&chapter=${ch}`)
-        .then((r) => r.json())
-        .then((d) => {
-          if (d.questions) chapterCacheRef.current[`science_${ch}`] = d.questions;
-        })
-        .catch(() => {});
-    });
   }, []);
 
   // Interactive MCQ Questions & Live Scoring Stats for Active Vault Chapter
@@ -1346,7 +1320,13 @@ export default function CBSECommandCenter() {
 
     const newEntry = {
       id: `mst_mcq_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-      subject: activeVaultSubject === "math" ? "Mathematics" : "Science",
+      subject: activeVaultSubject === "math" 
+        ? "Mathematics" 
+        : activeVaultSubject === "science" 
+        ? "Science" 
+        : activeVaultSubject === "sst" 
+        ? "Social Science" 
+        : "English",
       chapter: q.chapterName || `Chapter ${q.chapter}`,
       priority: "HIGH",
       dateAdded: new Date().toISOString().split("T")[0],
@@ -1894,14 +1874,14 @@ export default function CBSECommandCenter() {
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <h1 className={`text-sm font-black tracking-tight flex items-center gap-1.5 ${isDark ? "text-white" : "text-slate-900"}`}>
-                  CBSE CLASS 10 <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-500 border border-amber-500/40 font-bold">2026–27</span>
+                <h1 className={`text-sm sm:text-base font-black tracking-tight flex items-center gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
+                  CBSE CLASS 10 <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-500 border border-amber-500/40 font-extrabold">2026–27</span>
                 </h1>
               </div>
-              <p className={`text-[10px] font-medium flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+              <p className={`text-xs font-semibold flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                 <span>Lakshmipat Singhania Academy</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                <span className="text-emerald-500 font-mono text-[9px] font-bold">LIVE HUD</span>
+                <span className="text-emerald-500 font-mono text-xs font-bold">LIVE HUD</span>
               </p>
             </div>
           </div>
@@ -1927,7 +1907,7 @@ export default function CBSECommandCenter() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
               </span>
-              <span className="text-[11px] font-bold text-amber-500 group-hover:underline">Sept 14 Math:</span>
+              <span className="text-xs font-bold text-amber-500 group-hover:underline">Sept 14 Math:</span>
               <LiveCountdown targetDate="2026-09-14" variant="badge" colorScheme="amber" isDark={isDark} />
             </button>
             <span className={`${isDark ? "text-white/20" : "text-slate-300"} select-none`}>•</span>
@@ -1936,7 +1916,7 @@ export default function CBSECommandCenter() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
               </span>
-              <span className="text-[11px] font-bold text-cyan-500">Final Boards:</span>
+              <span className="text-xs font-bold text-cyan-500">Final Boards:</span>
               <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
             </div>
           </div>
@@ -1948,10 +1928,10 @@ export default function CBSECommandCenter() {
             <div className={`flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-xs font-mono font-medium shadow-md ${
               isDark ? "bg-slate-900/90 border-white/10 text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]" : "bg-slate-100 border-slate-200 text-slate-800"
             }`}>
-              <span className="text-xs">{currentLevelInfo.badge}</span>
-              <span className="font-black text-amber-500">Lvl {currentLevelInfo.level}</span>
+              <span className="text-sm">{currentLevelInfo.badge}</span>
+              <span className="font-black text-amber-500 text-xs">Lvl {currentLevelInfo.level}</span>
               <span className={`${isDark ? "text-white/20" : "text-slate-300"} select-none`}>•</span>
-              <span className={`font-black ${isDark ? "text-white" : "text-slate-900"}`}>{totalXp} <span className="text-[10px] text-amber-500 font-bold">XP</span></span>
+              <span className={`font-black text-xs ${isDark ? "text-white" : "text-slate-900"}`}>{totalXp} <span className="text-xs text-amber-500 font-bold">XP</span></span>
               
               {/* Vibrant glowing micro progress bar */}
               <div className="w-14 sm:w-18 h-1.5 rounded-full overflow-hidden bg-white/10 p-[1px] ml-0.5">
@@ -2207,6 +2187,30 @@ export default function CBSECommandCenter() {
                 activeTab === "hots" ? "bg-white/25 text-white" : "bg-rose-500/20 text-rose-300 border border-rose-500/30"
               }`}>
                 35
+              </span>
+            </button>
+
+            {/* 6. English Command (184) */}
+            <button
+              onClick={() => {
+                playSound("click");
+                setActiveTab("english");
+                setNavDropdown(null);
+              }}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                activeTab === "english"
+                  ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-black shadow-md shadow-indigo-500/30 ring-1 ring-indigo-300/50"
+                  : isDark
+                  ? "text-slate-300 hover:text-white hover:bg-white/[0.08]"
+                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+              }`}
+            >
+              <Feather className={`w-3.5 h-3.5 ${activeTab === "english" ? "text-white" : "text-indigo-400"} shrink-0`} />
+              <span>English</span>
+              <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-full shrink-0 ${
+                activeTab === "english" ? "bg-white/25 text-white" : "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30"
+              }`}>
+                184
               </span>
             </button>
 
@@ -3535,6 +3539,18 @@ export default function CBSECommandCenter() {
           />
         )}
 
+        {/* ===================== TAB: ENGLISH MASTER VIEW (CBSE CODE 184) ===================== */}
+        {activeTab === "english" && (
+          <EnglishMasterView
+            isDark={isDark}
+            onJumpToRevision={(title) => {
+              playSound("click");
+              triggerConfetti();
+              showXpToast(25, "English Concept Mastered");
+            }}
+          />
+        )}
+
         {/* ===================== TAB: NCERT SCIENCE LAB ACTIVITIES ===================== */}
         {activeTab === "activities" && (
           <ScienceActivitiesView
@@ -3607,6 +3623,19 @@ export default function CBSECommandCenter() {
                   >
                     🌍 Social Science (10 Chs)
                   </button>
+                  <button
+                    onClick={() => {
+                      setActiveVaultSubject("english");
+                      loadChapterData(1, false, "english");
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      activeVaultSubject === "english"
+                        ? "bg-indigo-500 text-white font-extrabold shadow-sm"
+                        : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    📖 English (184)
+                  </button>
                 </div>
 
                 {/* Chapter Select Dropdown */}
@@ -3635,7 +3664,7 @@ export default function CBSECommandCenter() {
                       <option value="12">Ch 12: Magnetic Effects of Current (30 Questions)</option>
                       <option value="13">Ch 13: Our Environment (30 Questions)</option>
                     </>
-                  ) : (
+                  ) : activeVaultSubject === "sst" ? (
                     <>
                       <option value="1">History Ch 1: The Rise of Nationalism in Europe (6-8 Marks)</option>
                       <option value="2">History Ch 2: Nationalism in India (7-9 Marks)</option>
@@ -3647,6 +3676,45 @@ export default function CBSECommandCenter() {
                       <option value="8">Economics Ch 1: Development (5-6 Marks)</option>
                       <option value="9">Economics Ch 2: Sectors of the Indian Economy (7-8 Marks)</option>
                       <option value="10">Economics Ch 3: Money and Credit (6-7 Marks)</option>
+                    </>
+                  ) : (
+                    <>
+                      <optgroup label="⭐ TEST SERIES 1 (EXAM 26 SEPT) — FOOTPRINTS WITHOUT FEET">
+                        <option value="1">⭐ Ch 1: A Triumph of Surgery (10 Qs + WhatsApp Sheet)</option>
+                        <option value="2">⭐ Ch 2: The Thief's Story (10 Qs + WhatsApp Sheet)</option>
+                        <option value="3">⭐ Ch 3: The Midnight Visitor (10 Qs + WhatsApp Sheet)</option>
+                        <option value="4">⭐ Ch 4: A Question of Trust (10 Qs + WhatsApp Sheet)</option>
+                        <option value="5">⭐ Ch 5: Footprints Without Feet (10 Qs + WhatsApp Sheet)</option>
+                        <option value="6">⭐ Ch 6: The Making of a Scientist (10 Qs + WhatsApp Sheet)</option>
+                        <option value="7">⭐ Ch 7: The Necklace (10 Qs + WhatsApp Sheet)</option>
+                        <option value="8">⭐ Ch 8: Bholi (10 Qs + WhatsApp Sheet)</option>
+                      </optgroup>
+                      <optgroup label="📖 FIRST FLIGHT PROSE & DRAMA (CBSE 2026-27)">
+                        <option value="9">Ch 9: The Book That Saved the Earth (10 Questions)</option>
+                        <option value="10">Ch 10: A Letter to God (10 Questions)</option>
+                        <option value="11">Ch 11: Nelson Mandela: Long Walk to Freedom (10 Questions)</option>
+                        <option value="12">Ch 12: Two Stories About Flying (All Parts - 10 Qs)</option>
+                        <option value="121">&nbsp;&nbsp;↳ Part 1: His First Flight (10 Questions)</option>
+                        <option value="122">&nbsp;&nbsp;↳ Part 2: The Black Aeroplane (10 Questions)</option>
+                        <option value="13">Ch 13: From the Diary of Anne Frank (10 Questions)</option>
+                        <option value="14">Ch 14: Glimpses of India (All 3 Parts - 10 Qs)</option>
+                        <option value="141">&nbsp;&nbsp;↳ Part 1: A Baker from Goa (10 Questions)</option>
+                        <option value="142">&nbsp;&nbsp;↳ Part 2: Coorg / Kodagu (10 Questions)</option>
+                        <option value="143">&nbsp;&nbsp;↳ Part 3: Tea from Assam (10 Questions)</option>
+                        <option value="15">Ch 15: Mijbil the Otter (10 Questions)</option>
+                        <option value="16">Ch 16: Madam Rides the Bus (10 Questions)</option>
+                        <option value="17">Ch 17: The Sermon at Benares (10 Questions)</option>
+                        <option value="18">Ch 18: The Proposal (10 Questions)</option>
+                      </optgroup>
+                      <optgroup label="🎭 FIRST FLIGHT POETRY (CBSE 2026-27)">
+                        <option value="19">Ch 19: All 10 Poems Masterpack (15 Board Extracts & SAQs)</option>
+                      </optgroup>
+                      <optgroup label="⚡ DEDICATED GRAMMAR CLINIC VAULT (90 QUESTIONS)">
+                        <option value="20">⚡ Ch 20: Tenses Mastery & Error Correction (30 Questions)</option>
+                        <option value="21">⚡ Ch 21: Subject-Verb Concord & 16 PPT Drills (30 Questions)</option>
+                        <option value="22">⚡ Ch 22: Modals & Auxiliaries Competency (15 Questions)</option>
+                        <option value="23">⚡ Ch 23: Reported Speech & Dialogue Transformations (15 Questions)</option>
+                      </optgroup>
                     </>
                   )}
                 </select>
@@ -3684,7 +3752,7 @@ export default function CBSECommandCenter() {
                     ].map(f => (
                       <button
                         key={f.id}
-                        onClick={() => setVaultFilter(f.id as any)}
+                        onClick={() => { setVaultFilter(f.id as any); setVaultDisplayCount(10); }}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                           vaultFilter === f.id
                             ? "bg-emerald-500 text-slate-950 shadow-md font-extrabold"
@@ -3781,6 +3849,7 @@ export default function CBSECommandCenter() {
                     if (vaultFilter === "case") return q.type === "Case Study" || q.marks === 4;
                     return true;
                   })
+                  .slice(0, vaultDisplayCount)
                   .map((q) => {
                   const isRevealed = revealedQuestionIds[q.id] ?? false;
                   return (
@@ -4035,6 +4104,39 @@ export default function CBSECommandCenter() {
                   </div>
                 );
               })}
+
+              {/* Load More Button — prevents rendering all 50-100 questions at once */}
+              {(() => {
+                const totalFiltered = activeVaultQuestions.filter(q => {
+                  if (vaultFilter === "all") return true;
+                  if (vaultFilter === "1") return q.marks === 1 || q.type === "MCQ";
+                  if (vaultFilter === "2") return q.marks === 2;
+                  if (vaultFilter === "3") return q.marks === 3;
+                  if (vaultFilter === "5") return q.marks === 5 || q.type === "LA" || q.type === "Proof";
+                  if (vaultFilter === "case") return q.type === "Case Study" || q.marks === 4;
+                  return true;
+                }).length;
+                const hasMore = vaultDisplayCount < totalFiltered;
+                if (!hasMore) return null;
+                return (
+                  <div className="flex flex-col items-center gap-2 pt-4">
+                    <p className={`text-xs font-mono ${isDark ? "text-slate-500" : "text-slate-500"}`}>
+                      Showing {Math.min(vaultDisplayCount, totalFiltered)} of {totalFiltered} questions
+                    </p>
+                    <button
+                      onClick={() => setVaultDisplayCount(c => c + 10)}
+                      className={`px-6 py-3 rounded-2xl text-sm font-bold flex items-center gap-2 cursor-pointer transition-all ${
+                        isDark
+                          ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30"
+                          : "bg-emerald-600 text-white hover:bg-emerald-700 shadow-md"
+                      }`}
+                    >
+                      <ChevronDown className="w-4 h-4" />
+                      Load 10 More Questions
+                    </button>
+                  </div>
+                );
+              })()}
             </div>
             )}
           </div>
@@ -4578,25 +4680,33 @@ export default function CBSECommandCenter() {
               isDark ? "bg-[#121212]/80 backdrop-blur-2xl border-white/10" : "bg-white border-slate-200"
             }`}>
               {/* Row 1: Chapter Header & Dual Selectors */}
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 pb-6 border-b border-white/10">
+              <div className={`flex flex-col md:flex-row justify-between items-start md:items-center gap-5 pb-6 border-b ${
+                isDark ? "border-white/10" : "border-slate-200"
+              }`}>
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-center gap-2.5">
-                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white uppercase flex items-center gap-2">
-                      <span className="text-emerald-400">#</span> {activeChapter.name}
+                    <h2 className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight uppercase flex items-center gap-2 ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}>
+                      <span className="text-emerald-500">#</span> {activeChapter.name}
                     </h2>
                     <span className="px-3 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-500/30">
                       {activeSubject.name.split(" ")[0]} Command
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-400">
+                  <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600 font-medium"}`}>
                     {activeSubject.name} • {totalTopics} Official NCERT Sub-Topics • Target: 100% Board Score
                   </p>
                 </div>
 
                 {/* Dual Subject & Chapter Selectors */}
                 <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0">
-                  <div className="flex items-center gap-2 bg-black/40 px-3 py-2 rounded-xl border border-white/10">
-                    <label className="text-[11px] font-mono font-bold text-slate-400 uppercase shrink-0">Subject:</label>
+                  <div className={`flex items-center gap-2 px-3 py-2 rounded-xl border ${
+                    isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-300"
+                  }`}>
+                    <label className={`text-[11px] font-mono font-bold uppercase shrink-0 ${
+                      isDark ? "text-slate-400" : "text-slate-600"
+                    }`}>Subject:</label>
                     <select 
                       className={`bg-transparent text-xs font-bold border-none outline-none cursor-pointer transition-all ${
                         isDark ? "text-white" : "text-slate-900"
@@ -4610,7 +4720,7 @@ export default function CBSECommandCenter() {
                         if (sub && sub.chapters.length > 0) {
                           setCommandChapterId(sub.chapters[0].id);
                           const chNo = sub.chapters[0].ncertChapterNo || 1;
-                          const subjectType = newSubId === "science" ? "science" : "math";
+                          const subjectType = newSubId === "science" ? "science" : newSubId === "sst" ? "sst" : newSubId === "english" ? "english" : "math";
                           setActiveVaultSubject(subjectType);
                           setActiveVaultChapter(chNo);
                           loadChapterData(chNo, false, subjectType);
@@ -4618,15 +4728,19 @@ export default function CBSECommandCenter() {
                       }}
                     >
                       {CBSE_SUBJECTS.map((s) => (
-                        <option key={s.id} value={s.id} className="bg-slate-900 text-white">
+                        <option key={s.id} value={s.id} className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>
                           {s.name}
                         </option>
                       ))}
                     </select>
                   </div>
 
-                  <div className="flex items-center gap-2 bg-black/40 px-3 py-2 rounded-xl border border-white/10">
-                    <label className="text-[11px] font-mono font-bold text-slate-400 uppercase shrink-0">Chapter:</label>
+                  <div className={`flex items-center gap-2 px-3 py-2 rounded-xl border ${
+                    isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-300"
+                  }`}>
+                    <label className={`text-[11px] font-mono font-bold uppercase shrink-0 ${
+                      isDark ? "text-slate-400" : "text-slate-600"
+                    }`}>Chapter:</label>
                     <select 
                       className={`bg-transparent text-xs font-bold border-none outline-none cursor-pointer transition-all max-w-[240px] truncate ${
                         isDark ? "text-white" : "text-slate-900"
@@ -4638,7 +4752,7 @@ export default function CBSECommandCenter() {
                         setCommandChapterId(newChId);
                         const ch = activeSubject.chapters.find((c) => c.id === newChId);
                         if (ch?.ncertChapterNo) {
-                          const subjectType = commandSubjectId === "science" ? "science" : "math";
+                          const subjectType = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : commandSubjectId === "english" ? "english" : "math";
                           setActiveVaultSubject(subjectType);
                           setActiveVaultChapter(ch.ncertChapterNo);
                           loadChapterData(ch.ncertChapterNo, false, subjectType);
@@ -4857,7 +4971,9 @@ export default function CBSECommandCenter() {
                   <h4 className="text-xs font-bold text-amber-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                     <BookMarked className="w-4 h-4"/> Due for Revision
                   </h4>
-                  <div className="flex justify-between items-center text-sm font-medium text-slate-300">
+                  <div className={`flex justify-between items-center text-sm font-medium ${
+                    isDark ? "text-slate-300" : "text-slate-800"
+                  }`}>
                     <span>{chapterFlashcardsCount} Flashcards Available</span>
                     <span>{chapterMistakesCount} Error Logs Recorded</span>
                   </div>
@@ -5058,6 +5174,8 @@ export default function CBSECommandCenter() {
 
             <div className="grid grid-cols-2 gap-2 text-xs">
               {[
+                { id: "english", label: "English Command (184)", icon: Feather },
+                { id: "timelines", label: "SST Timelines Master", icon: Calendar },
                 { id: "diagrams", label: "NCERT Diagrams Vault (29)", icon: Compass },
                 { id: "test_series", label: "Test Series (Sept 14)", icon: Calendar },
                 { id: "activities", label: "NCERT Lab Activities", icon: Beaker },
