@@ -177,22 +177,23 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "type": "MCQ",
     "question": "The value of cosec²30° − sin²45° − sec²60° is:",
     "options": [
-      "−1",
+      "−1/2",
       "0",
-      "1",
-      "2"
+      "1/2",
+      "1"
     ],
     "correctOption": 0,
-    "answer": "−1",
-    "explanation": "cosec²30° = 4, sin²45° = 1/2, sec²60° = 4. Result = 4 − 1/2 − 4 = −1/2. Hmm, recalculate: 4 − 0.5 − 4 = −0.5. So answer is −1/2.",
-    "examinerNote": "cosec 30° = 2, so cosec²30° = 4; sec 60° = 2, so sec²60° = 4; sin²45° = 1/2.",
+    "answer": "−1/2",
+    "explanation": "cosec 30° = 2 → cosec²30° = 4. sin 45° = 1/√2 → sin²45° = 1/2. sec 60° = 2 → sec²60° = 4. Expression = 4 − (1/2) − 4 = −1/2.",
+    "examinerNote": "cosec 30° = 2 (reciprocal of sin 30° = 1/2), sec 60° = 2 (reciprocal of cos 60° = 1/2). The answer −1/2 is not −1. A very common mistake is misremembering cosec and sec values.",
     "steps": [
-      "Step 1: cosec²30° = 4, sin²45° = 1/2, sec²60° = 4. [Trigonometric Definition/Identity]",
-      "Step 2: Result = 4 − 1/2 − 4 = −1/2. [Algebraic Simplification]",
-      "Step 3: Hmm, recalculate: 4 − 0.5 − 4 = −0.5. [Algebraic Simplification]",
-      "Step 4: So answer is −1/2. [Final Result with Units]"
+      "Step 1: Recall standard values: cosec 30° = 1/sin 30° = 1/(1/2) = 2. So cosec²30° = 4. [Standard Angle Values — Reciprocal Ratios]",
+      "Step 2: sin 45° = 1/√2. So sin²45° = 1/2. [Standard Angle Values]",
+      "Step 3: sec 60° = 1/cos 60° = 1/(1/2) = 2. So sec²60° = 4. [Standard Angle Values — Reciprocal Ratios]",
+      "Step 4: Substitute: cosec²30° − sin²45° − sec²60° = 4 − (1/2) − 4. [Substitution]",
+      "Step 5: Simplify: 4 − 4 − 1/2 = 0 − 1/2 = −1/2. Final Answer = −1/2. [Algebraic Simplification]"
     ],
-    "formula": "sin²θ + cos²θ = 1, tan θ = sin θ / cos θ"
+    "formula": "cosec θ = 1/sin θ, sec θ = 1/cos θ"
   },
   {
     "id": "vq_8_2m_1",
@@ -650,16 +651,17 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 4/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 15/6",
+    "answer": "21/25",
     "steps": [
-      "Step 1: Let opposite side = 4k and adjacent side = 3k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(4k)² + (3k)²] = √[25]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 4/3 → Opposite (P) = 4k, Adjacent (B) = 3k. [Given]",
+      "Step 2: By Pythagoras theorem: H = √(P² + B²) = √(16k² + 9k²) = √(25k²) = 5k. [Pythagoras Theorem]",
+      "Step 3: sin θ = P/H = 4k/5k = 4/5 and cos θ = B/H = 3k/5k = 3/5. [Trigonometric Ratios]",
+      "Step 4: Substitute into expression: sin θ cos θ + cos²θ = (4/5)(3/5) + (3/5)² = 12/25 + 9/25. [Substitution]",
+      "Step 5: Final Answer = 12/25 + 9/25 = 21/25. [Algebraic Simplification]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √(P²+B²), sin θ = P/H, cos θ = B/H",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "The 3-4-5 Pythagorean triple! Always verify: sin²θ + cos²θ = 16/25 + 9/25 = 1 ✓. Write each step with the theorem name for full marks."
   },
   {
     "id": "vq_8_board_34",
@@ -668,70 +670,74 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 5/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 1/11",
+    "answer": "36/41",
     "steps": [
-      "Step 1: Let opposite side = 5k and adjacent side = 4k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(5k)² + (4k)²] = √[41]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 5/4 → P = 5k, B = 4k. [Given]",
+      "Step 2: H = √(25k² + 16k²) = √(41k²) = k√41. [Pythagoras Theorem]",
+      "Step 3: sin θ = 5/√41, cos θ = 4/√41. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (5/√41)(4/√41) + (4/√41)² = 20/41 + 16/41. [Substitution]",
+      "Step 5: Final Answer = 36/41. [Algebraic Simplification]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √(P²+B²), Answer = b(a+b)/(a²+b²) where tan θ = a/b",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "H = √41, not a whole number. Leave as √41 in intermediate steps. Final answer 36/41 is already in simplest form."
   },
   {
     "id": "vq_8_board_35",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 1,
-    "type": "MCQ",
+    "type": "SA",
     "question": "In right △ABC, if tan θ = 1/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 4/16",
+    "answer": "15/13",
     "steps": [
-      "Step 1: Let opposite side = 1k and adjacent side = 5k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(1k)² + (5k)²] = √[26]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 1/5 → P = 1k, B = 5k. [Given]",
+      "Step 2: H = √(1k² + 25k²) = √(26k²) = k√26. [Pythagoras Theorem]",
+      "Step 3: sin θ = 1/√26, cos θ = 5/√26. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (1/√26)(5/√26) + (5/√26)² = 5/26 + 25/26. [Substitution]",
+      "Step 5: Final Answer = 30/26 = 15/13. [Simplified]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √(P²+B²), sin θ = P/H, cos θ = B/H",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "Simplify 30/26 by dividing numerator and denominator by GCF = 2 → 15/13. Always simplify final fractions."
   },
   {
     "id": "vq_8_board_36",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 5,
-    "type": "LA",
-    "question": "In right △ABC, if tan θ = 2/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 7/21",
+    "marks": 2,
+    "type": "SA",
+    "question": "In right △ABC, if tan θ = 2/2 (i.e., tan θ = 1), evaluate (sin θ cos θ + cos² θ).",
+    "answer": "1",
     "steps": [
-      "Step 1: Let opposite side = 2k and adjacent side = 2k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(2k)² + (2k)²] = √[8]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 2/2 = 1 → θ = 45°. P = 2k, B = 2k. [Simplification: tan θ = 1 means equal sides]",
+      "Step 2: H = √(4k² + 4k²) = √(8k²) = 2k√2. [Pythagoras Theorem]",
+      "Step 3: sin 45° = 1/√2, cos 45° = 1/√2. [Standard Angle Values]",
+      "Step 4: sin θ cos θ + cos²θ = (1/√2)(1/√2) + (1/√2)² = 1/2 + 1/2. [Substitution]",
+      "Step 5: Final Answer = 1. Note: This result makes sense because sin²θ + cos²θ = 1 and here expression = sinθcosθ + cos²θ = cosθ(sinθ + cosθ). At 45°, this = (1/√2)(2/√2) = 1. [Verification]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "tan 45° = 1, sin 45° = cos 45° = 1/√2",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Special insight: When tan θ = 1, θ = 45°. The triangle is an isosceles right triangle. Always simplify tan first before computing."
   },
   {
     "id": "vq_8_board_37",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 1,
-    "type": "MCQ",
-    "question": "In right △ABC, if tan θ = 3/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 10/3",
+    "type": "SA",
+    "question": "In right △ABC, if tan θ = 3/3 (i.e., tan θ = 1), evaluate (sin θ cos θ + cos² θ).",
+    "answer": "1",
     "steps": [
-      "Step 1: Let opposite side = 3k and adjacent side = 3k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(3k)² + (3k)²] = √[18]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 3/3 = 1, so θ = 45°. [Simplification]",
+      "Step 2: sin 45° = 1/√2, cos 45° = 1/√2. [Standard Angle Values at 45°]",
+      "Step 3: sin θ cos θ = (1/√2)(1/√2) = 1/2 and cos²θ = (1/√2)² = 1/2. [Substitution]",
+      "Step 4: sin θ cos θ + cos²θ = 1/2 + 1/2 = 1. [Addition]",
+      "Step 5: Final Answer = 1. [Result]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "tan 45° = 1, sin 45° = cos 45° = 1/√2",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "Same as board_36. tan 3/3 = 1 = tan 45°. Answer is always 1 whenever tan θ = 1."
   },
   {
     "id": "vq_8_board_38",
@@ -739,71 +745,74 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Introduction to Trigonometry",
     "marks": 2,
     "type": "SA",
-    "question": "In right △ABC, if tan θ = 4/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 13/8",
+    "question": "In right △ABC, if tan θ = 4/4 (i.e., tan θ = 1), evaluate (sin θ cos θ + cos² θ).",
+    "answer": "1",
     "steps": [
-      "Step 1: Let opposite side = 4k and adjacent side = 4k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(4k)² + (4k)²] = √[32]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 4/4 = 1, so θ = 45°. [Simplification]",
+      "Step 2: sin 45° = 1/√2 and cos 45° = 1/√2. [Standard Angle Values]",
+      "Step 3: sin θ cos θ = (1/√2)(1/√2) = 1/2. [Multiplication]",
+      "Step 4: cos²θ = (1/√2)² = 1/2. [Squaring]",
+      "Step 5: Answer = 1/2 + 1/2 = 1. [Final Answer]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "tan 45° = 1, sin 45° = cos 45° = 1/√2",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "Always simplify the fraction a/a = 1 before computing. tan θ = 1 means θ = 45°."
   },
   {
     "id": "vq_8_board_39",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 3,
+    "marks": 2,
     "type": "SA",
-    "question": "In right △ABC, if tan θ = 5/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 16/13",
+    "question": "In right △ABC, if tan θ = 5/5 (i.e., tan θ = 1), evaluate (sin θ cos θ + cos² θ).",
+    "answer": "1",
     "steps": [
-      "Step 1: Let opposite side = 5k and adjacent side = 5k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(5k)² + (5k)²] = √[50]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 5/5 = 1, so θ = 45°. [Simplification]",
+      "Step 2: sin 45° = 1/√2, cos 45° = 1/√2. [Standard Angle]",
+      "Step 3: sin θ cos θ + cos²θ = (1/√2)(1/√2) + (1/√2)² = 1/2 + 1/2 = 1. [Compute]",
+      "Step 4: Final Answer = 1. [Result]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "tan 45° = 1 → sin 45° = cos 45° = 1/√2",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Pattern insight: Whenever tan θ = n/n = 1, the answer to (sin θ cos θ + cos²θ) = 1 always."
   },
   {
     "id": "vq_8_board_40",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 5,
-    "type": "LA",
+    "marks": 2,
+    "type": "SA",
     "question": "In right △ABC, if tan θ = 1/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 2/18",
+    "answer": "6/5",
     "steps": [
-      "Step 1: Let opposite side = 1k and adjacent side = 2k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(1k)² + (2k)²] = √[5]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 1/2 → P = 1k, B = 2k. [Given]",
+      "Step 2: H = √(1² + 2²)·k = √5·k. [Pythagoras Theorem]",
+      "Step 3: sin θ = 1/√5, cos θ = 2/√5. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (1/√5)(2/√5) + (2/√5)² = 2/5 + 4/5. [Substitution]",
+      "Step 5: Final Answer = 6/5. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √(P²+B²) = √5; Answer = b(a+b)/(a²+b²) = 2(1+2)/(1+4) = 6/5",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Note: 6/5 > 1. This is valid because sinθcosθ + cos²θ = cosθ(sinθ + cosθ), which can exceed 1 unlike sinθ or cosθ individually."
   },
   {
     "id": "vq_8_board_41",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "In right △ABC, if tan θ = 2/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 5/23",
+    "answer": "15/13",
     "steps": [
-      "Step 1: Let opposite side = 2k and adjacent side = 3k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(2k)² + (3k)²] = √[13]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 2/3 → P = 2k, B = 3k. [Given]",
+      "Step 2: H = √(4k² + 9k²) = √(13k²) = k√13. [Pythagoras Theorem]",
+      "Step 3: sin θ = 2/√13, cos θ = 3/√13. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (2/√13)(3/√13) + (3/√13)² = 6/13 + 9/13. [Substitution]",
+      "Step 5: Final Answer = 15/13. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √13; Answer = 3(2+3)/13 = 15/13",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "Quick formula shortcut: if tan θ = a/b, answer = b(a+b)/(a²+b²). Here: 3×5/13 = 15/13."
   },
   {
     "id": "vq_8_board_42",
@@ -812,70 +821,74 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 3/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 8/5",
+    "answer": "28/25",
     "steps": [
-      "Step 1: Let opposite side = 3k and adjacent side = 4k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(3k)² + (4k)²] = √[25]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 3/4 → P = 3k, B = 4k. [Given]",
+      "Step 2: H = √(9k² + 16k²) = √(25k²) = 5k. [Pythagoras Theorem — 3-4-5 triple]",
+      "Step 3: sin θ = 3/5, cos θ = 4/5. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (3/5)(4/5) + (4/5)² = 12/25 + 16/25. [Substitution]",
+      "Step 5: Final Answer = 28/25. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "3-4-5 Pythagorean triple; Answer = 4(3+4)/25 = 28/25",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Compare with board_33 (tan=4/3 → 21/25) and board_42 (tan=3/4 → 28/25). Swapping P and B gives different answers because cos changes!"
   },
   {
     "id": "vq_8_board_43",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "In right △ABC, if tan θ = 4/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 11/10",
+    "answer": "45/41",
     "steps": [
-      "Step 1: Let opposite side = 4k and adjacent side = 5k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(4k)² + (5k)²] = √[41]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 4/5 → P = 4k, B = 5k. [Given]",
+      "Step 2: H = √(16k² + 25k²) = √(41k²) = k√41. [Pythagoras Theorem]",
+      "Step 3: sin θ = 4/√41, cos θ = 5/√41. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (4/√41)(5/√41) + (5/√41)² = 20/41 + 25/41. [Substitution]",
+      "Step 5: Final Answer = 45/41. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √41; Answer = 5(4+5)/41 = 45/41",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "Quick check: 45 > 41, so 45/41 > 1. This is valid for this expression."
   },
   {
     "id": "vq_8_board_44",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 5,
-    "type": "LA",
+    "marks": 3,
+    "type": "SA",
     "question": "In right △ABC, if tan θ = 5/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 14/15",
+    "answer": "14/29",
     "steps": [
-      "Step 1: Let opposite side = 5k and adjacent side = 2k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(5k)² + (2k)²] = √[29]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 5/2 → P = 5k, B = 2k. [Given]",
+      "Step 2: H = √(25k² + 4k²) = √(29k²) = k√29. [Pythagoras Theorem]",
+      "Step 3: sin θ = 5/√29, cos θ = 2/√29. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (5/√29)(2/√29) + (2/√29)² = 10/29 + 4/29. [Substitution]",
+      "Step 5: Final Answer = 14/29. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √29; Answer = 2(5+2)/29 = 14/29",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Note: 14 < 29, so 14/29 < 1. When P > B (large angle), the expression gives a smaller value."
   },
   {
     "id": "vq_8_board_45",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 3,
+    "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 1/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 17/20",
+    "answer": "6/5",
     "steps": [
-      "Step 1: Let opposite side = 1k and adjacent side = 3k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(1k)² + (3k)²] = √[10]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 1/3 → P = 1k, B = 3k. [Given]",
+      "Step 2: H = √(1k² + 9k²) = √(10k²) = k√10. [Pythagoras Theorem]",
+      "Step 3: sin θ = 1/√10, cos θ = 3/√10. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (1/√10)(3/√10) + (3/√10)² = 3/10 + 9/10. [Substitution]",
+      "Step 5: Final Answer = 12/10 = 6/5. [Simplified]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √10; Answer = 3(1+3)/10 = 12/10 = 6/5",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Simplify 12/10 by GCF = 2 → 6/5. Always simplify the final answer."
   },
   {
     "id": "vq_8_board_46",
@@ -883,71 +896,75 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Introduction to Trigonometry",
     "marks": 2,
     "type": "SA",
-    "question": "In right △ABC, if tan θ = 2/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 3/2",
+    "question": "In right △ABC, if tan θ = 2/4 (simplify first!), evaluate (sin θ cos θ + cos² θ).",
+    "answer": "6/5",
     "steps": [
-      "Step 1: Let opposite side = 2k and adjacent side = 4k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(2k)² + (4k)²] = √[20]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: Simplify: tan θ = 2/4 = 1/2. [Simplification — always reduce first!]",
+      "Step 2: P = 1k, B = 2k → H = √(1+4)k = √5·k. [Pythagoras Theorem]",
+      "Step 3: sin θ = 1/√5, cos θ = 2/√5. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (1/√5)(2/√5) + (2/√5)² = 2/5 + 4/5. [Substitution]",
+      "Step 5: Final Answer = 6/5. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "Always simplify tan ratio first. 2/4 = 1/2. Same as board_40.",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "KEY LESSON: tan 2/4 = tan 1/2. Always simplify fractions before computing! Saves time and avoids errors with larger hypotenuse values."
   },
   {
     "id": "vq_8_board_47",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "In right △ABC, if tan θ = 3/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 6/7",
+    "answer": "20/17",
     "steps": [
-      "Step 1: Let opposite side = 3k and adjacent side = 5k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(3k)² + (5k)²] = √[34]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 3/5 → P = 3k, B = 5k. [Given]",
+      "Step 2: H = √(9k² + 25k²) = √(34k²) = k√34. [Pythagoras Theorem]",
+      "Step 3: sin θ = 3/√34, cos θ = 5/√34. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (3/√34)(5/√34) + (5/√34)² = 15/34 + 25/34. [Substitution]",
+      "Step 5: Final Answer = 40/34 = 20/17. [Simplified by ÷2]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √34; Answer = 5(3+5)/34 = 40/34 = 20/17",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "Simplify 40/34 → divide by GCF=2 → 20/17. Never leave unsimplified fractions in board exam answers!"
   },
   {
     "id": "vq_8_board_48",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 5,
-    "type": "LA",
-    "question": "In right △ABC, if tan θ = 4/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 9/12",
+    "marks": 2,
+    "type": "SA",
+    "question": "In right △ABC, if tan θ = 4/2 (simplify first!), evaluate (sin θ cos θ + cos² θ).",
+    "answer": "3/5",
     "steps": [
-      "Step 1: Let opposite side = 4k and adjacent side = 2k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(4k)² + (2k)²] = √[20]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: Simplify: tan θ = 4/2 = 2. So P = 2k, B = 1k. [Simplification]",
+      "Step 2: H = √(4k² + 1k²) = √5·k. [Pythagoras Theorem]",
+      "Step 3: sin θ = 2/√5, cos θ = 1/√5. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (2/√5)(1/√5) + (1/√5)² = 2/5 + 1/5. [Substitution]",
+      "Step 5: Final Answer = 3/5. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "Simplify 4/2 = 2 first. H = √5. Answer = 1(2+1)/5 = 3/5",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "tan θ = 4/2 = 2 means large angle (steeper triangle). Answer 3/5 < 1 because perpendicular dominates."
   },
   {
     "id": "vq_8_board_49",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "In right △ABC, if tan θ = 5/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 12/17",
+    "answer": "12/17",
     "steps": [
-      "Step 1: Let opposite side = 5k and adjacent side = 3k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(5k)² + (3k)²] = √[34]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 5/3 → P = 5k, B = 3k. [Given]",
+      "Step 2: H = √(25k² + 9k²) = √(34k²) = k√34. [Pythagoras Theorem]",
+      "Step 3: sin θ = 5/√34, cos θ = 3/√34. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (5/√34)(3/√34) + (3/√34)² = 15/34 + 9/34. [Substitution]",
+      "Step 5: Final Answer = 24/34 = 12/17. [Simplified by ÷2]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √34; Answer = 3(5+3)/34 = 24/34 = 12/17",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "This answer 12/17 was correct in the original file. Verify: 24÷2 = 12, 34÷2 = 17. ✓"
   },
   {
     "id": "vq_8_board_50",
@@ -956,142 +973,144 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 1/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 15/22",
+    "answer": "20/17",
     "steps": [
-      "Step 1: Let opposite side = 1k and adjacent side = 4k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(1k)² + (4k)²] = √[17]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 1/4 → P = 1k, B = 4k. [Given]",
+      "Step 2: H = √(1k² + 16k²) = √(17k²) = k√17. [Pythagoras Theorem]",
+      "Step 3: sin θ = 1/√17, cos θ = 4/√17. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (1/√17)(4/√17) + (4/√17)² = 4/17 + 16/17. [Substitution]",
+      "Step 5: Final Answer = 20/17. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √17; Answer = 4(1+4)/17 = 20/17",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "20/17 > 1. Consistent with the formula: when B > P (small angle), numerator grows faster than denominator."
   },
   {
     "id": "vq_8_board_51",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 3,
+    "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 2/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 1/4",
+    "answer": "35/29",
     "steps": [
-      "Step 1: Let opposite side = 2k and adjacent side = 5k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(2k)² + (5k)²] = √[29]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 2/5 → P = 2k, B = 5k. [Given]",
+      "Step 2: H = √(4k² + 25k²) = √(29k²) = k√29. [Pythagoras Theorem]",
+      "Step 3: sin θ = 2/√29, cos θ = 5/√29. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (2/√29)(5/√29) + (5/√29)² = 10/29 + 25/29. [Substitution]",
+      "Step 5: Final Answer = 35/29. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √29; Answer = 5(2+5)/29 = 35/29",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "35/29 > 1. Note: 29 is a prime number, so this fraction cannot be simplified further."
   },
   {
     "id": "vq_8_board_52",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 5,
-    "type": "LA",
+    "marks": 2,
+    "type": "SA",
     "question": "In right △ABC, if tan θ = 3/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 4/9",
+    "answer": "10/13",
     "steps": [
-      "Step 1: Let opposite side = 3k and adjacent side = 2k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(3k)² + (2k)²] = √[13]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 3/2 → P = 3k, B = 2k. [Given]",
+      "Step 2: H = √(9k² + 4k²) = √(13k²) = k√13. [Pythagoras Theorem]",
+      "Step 3: sin θ = 3/√13, cos θ = 2/√13. [Trigonometric Ratios]",
+      "Step 4: sin θ cos θ + cos²θ = (3/√13)(2/√13) + (2/√13)² = 6/13 + 4/13. [Substitution]",
+      "Step 5: Final Answer = 10/13. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √13; Answer = 2(3+2)/13 = 10/13",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Compare with board_41 (tan=2/3 → 15/13). Swapping P and B confirms answer changes. tan 3/2 ≠ tan 2/3."
   },
   {
     "id": "vq_8_board_53",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "In right △ABC, if tan θ = 4/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 7/14",
+    "marks": 2,
+    "type": "SA",
+    "question": "In right △ABC, if tan θ = 4/3, evaluate (sin θ cos θ + cos² θ). [Revision question — same as board_33]",
+    "answer": "21/25",
     "steps": [
-      "Step 1: Let opposite side = 4k and adjacent side = 3k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(4k)² + (3k)²] = √[25]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 4/3 → P = 4k, B = 3k (3-4-5 Pythagorean triple!). [Given]",
+      "Step 2: H = 5k. [Pythagoras Theorem — recognise the triple!]",
+      "Step 3: sin θ = 4/5, cos θ = 3/5. [Standard — memorise for 3-4-5 triangle]",
+      "Step 4: sin θ cos θ + cos²θ = (4/5)(3/5) + (3/5)² = 12/25 + 9/25. [Substitution]",
+      "Step 5: Final Answer = 21/25. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "3-4-5 triple: H=5k. Answer = 3(4+3)/25 = 21/25",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "This is a revision of board_33. Memorise: for tan=4/3 (3-4-5 triple), sin=4/5, cos=3/5, answer = 21/25."
   },
   {
     "id": "vq_8_board_54",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 3,
+    "marks": 2,
     "type": "SA",
-    "question": "In right △ABC, if tan θ = 5/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 10/19",
+    "question": "In right △ABC, if tan θ = 5/4, evaluate (sin θ cos θ + cos² θ). [Revision — same as board_34]",
+    "answer": "36/41",
     "steps": [
-      "Step 1: Let opposite side = 5k and adjacent side = 4k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(5k)² + (4k)²] = √[41]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 5/4 → P = 5k, B = 4k. [Given]",
+      "Step 2: H = √(25+16)k = √41·k. [Pythagoras Theorem]",
+      "Step 3: sin θ = 5/√41, cos θ = 4/√41. [Trig Ratios]",
+      "Step 4: Expression = 20/41 + 16/41. [Substitution]",
+      "Step 5: Answer = 36/41. [Addition]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √41; 4(5+4)/41 = 36/41",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Revision of board_34. 36/41 cannot be simplified (GCF = 1)."
   },
   {
     "id": "vq_8_board_55",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "In right △ABC, if tan θ = 1/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 13/24",
+    "marks": 2,
+    "type": "SA",
+    "question": "In right △ABC, if tan θ = 1/5, evaluate (sin θ cos θ + cos² θ). [Revision — same as board_35]",
+    "answer": "15/13",
     "steps": [
-      "Step 1: Let opposite side = 1k and adjacent side = 5k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(1k)² + (5k)²] = √[26]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 1/5 → P = k, B = 5k. H = √26·k. [Setup]",
+      "Step 2: sin θ = 1/√26, cos θ = 5/√26. [Ratios]",
+      "Step 3: Expression = 5/26 + 25/26 = 30/26 = 15/13. [Compute and simplify]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √26; Answer = 5(1+5)/26 = 30/26 = 15/13",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "Revision of board_35. Simplify 30/26 = 15/13 by GCF=2."
   },
   {
     "id": "vq_8_board_56",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 5,
-    "type": "LA",
-    "question": "In right △ABC, if tan θ = 2/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 16/6",
+    "marks": 2,
+    "type": "SA",
+    "question": "In right △ABC, if tan θ = 2/2 (= 1, i.e., θ = 45°), evaluate (sin θ cos θ + cos² θ). [Revision — same as board_36]",
+    "answer": "1",
     "steps": [
-      "Step 1: Let opposite side = 2k and adjacent side = 2k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(2k)² + (2k)²] = √[8]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 2/2 = 1 → θ = 45°. [Simplify first!]",
+      "Step 2: sin 45° = cos 45° = 1/√2. [Standard value]",
+      "Step 3: Expression = (1/√2)(1/√2) + (1/√2)² = 1/2 + 1/2 = 1. [Result]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "tan θ = 1 → θ = 45°; answer always = 1",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Revision of board_36. KEY: When tan θ = any equal ratio (n/n = 1), answer = 1 always."
   },
   {
     "id": "vq_8_board_57",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 3,
+    "marks": 2,
     "type": "SA",
-    "question": "In right △ABC, if tan θ = 3/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 2/11",
+    "question": "In right △ABC, if tan θ = 3/3 (= 1, θ = 45°), evaluate (sin θ cos θ + cos² θ). [Revision — board_37]",
+    "answer": "1",
     "steps": [
-      "Step 1: Let opposite side = 3k and adjacent side = 3k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(3k)² + (3k)²] = √[18]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 3/3 = 1 → θ = 45°. [Simplify]",
+      "Step 2: sin 45° = cos 45° = 1/√2. [Standard value]",
+      "Step 3: Expression = 1/2 + 1/2 = 1. [Result]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "tan n/n = 1 → θ = 45° → answer = 1",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Same pattern. tan 3/3 = tan 4/4 = tan 5/5 = 1 → θ = 45° → answer always 1."
   },
   {
     "id": "vq_8_board_58",
@@ -1099,53 +1118,50 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Introduction to Trigonometry",
     "marks": 2,
     "type": "SA",
-    "question": "In right △ABC, if tan θ = 4/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 5/16",
+    "question": "In right △ABC, if tan θ = 4/4 (= 1, θ = 45°), evaluate (sin θ cos θ + cos² θ). [Revision — board_38]",
+    "answer": "1",
     "steps": [
-      "Step 1: Let opposite side = 4k and adjacent side = 4k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(4k)² + (4k)²] = √[32]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 4/4 = 1 → θ = 45°. [Simplify]",
+      "Step 2: sin 45° = cos 45° = 1/√2. [Standard value]",
+      "Step 3: Expression = 1/2 + 1/2 = 1. [Result]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "tan n/n = 1 → answer = 1 always",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "Memorise this pattern: whenever tan θ reduces to 1, the expression (sinθcosθ + cos²θ) = 1."
   },
   {
     "id": "vq_8_board_59",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "In right △ABC, if tan θ = 5/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 8/21",
+    "marks": 2,
+    "type": "SA",
+    "question": "In right △ABC, if tan θ = 5/5 (= 1, θ = 45°), evaluate (sin θ cos θ + cos² θ). [Revision — board_39]",
+    "answer": "1",
     "steps": [
-      "Step 1: Let opposite side = 5k and adjacent side = 5k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(5k)² + (5k)²] = √[50]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 5/5 = 1 → θ = 45°. [Simplify]",
+      "Step 2: sin 45° = cos 45° = 1/√2. [Standard value]",
+      "Step 3: Expression = 1/2 + 1/2 = 1. [Result]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "tan n/n = 1 → answer = 1",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "examinerNote": "Final reminder: tan 2/2 = tan 3/3 = tan 4/4 = tan 5/5 = 1. Answer = 1 for all of these."
   },
   {
     "id": "vq_8_board_60",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
-    "marks": 5,
-    "type": "LA",
-    "question": "In right △ABC, if tan θ = 1/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "Value = 11/3",
+    "marks": 2,
+    "type": "SA",
+    "question": "In right △ABC, if tan θ = 1/2, evaluate (sin θ cos θ + cos² θ). [Revision — board_40]",
+    "answer": "6/5",
     "steps": [
-      "Step 1: Let opposite side = 1k and adjacent side = 2k. [Given in Problem]",
-      "Step 2: By Pythagoras theorem, Hypotenuse = √[(1k)² + (2k)²] = √[5]k.",
-      "Step 3: Determine sin θ and cos θ ratios and substitute into expression. [Trigonometric Definition/Identity]",
-      "Step 4: Compute simplified fractional value. [Final Result with Units]"
+      "Step 1: tan θ = 1/2 → P = k, B = 2k, H = √5·k. [Setup]",
+      "Step 2: sin θ = 1/√5, cos θ = 2/√5. [Trig Ratios]",
+      "Step 3: Expression = 2/5 + 4/5 = 6/5. [Compute]"
     ],
-    "formula": "Pythagorean theorem & Trig ratios",
+    "formula": "H = √5; Answer = 2(1+2)/5 = 6/5",
     "source": "RD Sharma / CBSE Topper Practice Series",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "examinerNote": "Revision of board_40. For tan = 1/2: H = √5, answer = 6/5. Memorise this as a standard result."
   },
   {
     "id": "vq_8_4m_1",

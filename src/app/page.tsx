@@ -788,7 +788,6 @@ export default function CBSECommandCenter() {
   const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(6);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
-  const [isMobileMoreOpen, setIsMobileMoreOpen] = useState(false);
   const [levelUpModalData, setLevelUpModalData] = useState<{ level: number; title: string; badge: string } | null>(null);
 
   // Fabulous Compact Taskbar State (Zero Horizontal Scroll)
@@ -1857,36 +1856,37 @@ export default function CBSECommandCenter() {
       {/* =========================================================================
           LUXURY COMMAND CENTER MASTER STATUS BAR (HIGH-TECH, VIBRANT & RICH)
           ========================================================================= */}
-      <header className={`sticky top-0 z-40 border-b backdrop-blur-2xl px-3.5 sm:px-6 py-2.5 transition-colors ${
+      <header className={`sticky top-0 z-40 border-b backdrop-blur-2xl px-3 sm:px-6 py-2 sm:py-2.5 transition-colors ${
         isDark
           ? "border-white/[0.08] bg-gradient-to-r from-[#060913]/95 via-[#0b1222]/95 to-[#060913]/95 text-white shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
           : "border-slate-200/90 bg-white/95 text-slate-900 shadow-xs"
       }`}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
           
-          {/* LOGO & ACADEMY BRANDING */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* LOGO & ACADEMY BRANDING (FLUID ADAPTIVE) */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 rounded-2xl blur-xs opacity-75 group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center text-slate-950 font-black text-xs shadow-inner ring-1 ring-white/20">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 rounded-xl sm:rounded-2xl blur-xs opacity-75 group-hover:opacity-100 transition duration-300"></div>
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center text-slate-950 font-black text-xs shadow-inner ring-1 ring-white/20">
                 100
               </div>
             </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <h1 className={`text-sm sm:text-base font-black tracking-tight flex items-center gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
-                  CBSE CLASS 10 <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-500 border border-amber-500/40 font-extrabold">2026–27</span>
+            <div className="flex flex-col min-w-0">
+              <div className="flex items-center gap-1.5">
+                <h1 className={`text-xs sm:text-base font-black tracking-tight flex items-center gap-1.5 truncate ${isDark ? "text-white" : "text-slate-900"}`}>
+                  <span>CBSE 10</span>
+                  <span className="text-[10px] sm:text-xs font-mono px-1.5 py-0.2 sm:py-0.5 rounded-full bg-amber-500/20 text-amber-500 border border-amber-500/40 font-extrabold">26–27</span>
                 </h1>
               </div>
-              <p className={`text-xs font-semibold flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+              <p className={`text-[10px] sm:text-xs font-semibold hidden sm:flex items-center gap-1.5 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                 <span>Lakshmipat Singhania Academy</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                <span className="text-emerald-500 font-mono text-xs font-bold">LIVE HUD</span>
+                <span className="text-emerald-500 font-mono text-[10px] font-bold">LIVE HUD</span>
               </p>
             </div>
           </div>
 
-          {/* CENTER: AEROSPACE TELEMETRY DUAL COUNTDOWN ISLAND */}
+          {/* CENTER: AEROSPACE TELEMETRY DUAL COUNTDOWN ISLAND (DESKTOP & LARGE TABLETS) */}
           <div className={`hidden lg:flex items-center gap-3 px-4 py-1.5 rounded-full border text-xs font-mono ${
             isDark
               ? "bg-slate-900/80 border-white/10 text-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)]"
@@ -1921,20 +1921,20 @@ export default function CBSECommandCenter() {
             </div>
           </div>
 
-          {/* RIGHT: GAMIFIED TELEMETRY & CONTROLS */}
-          <div className="flex items-center gap-2 shrink-0">
+          {/* RIGHT: GAMIFIED TELEMETRY & CONTROLS (AUTO-ADJUSTS FOR SCREEN WIDTH) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             
             {/* LEVEL & XP CAPSULE */}
-            <div className={`flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-xs font-mono font-medium shadow-md ${
+            <div className={`flex items-center gap-1.5 sm:gap-2.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-medium shadow-md ${
               isDark ? "bg-slate-900/90 border-white/10 text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]" : "bg-slate-100 border-slate-200 text-slate-800"
             }`}>
-              <span className="text-sm">{currentLevelInfo.badge}</span>
-              <span className="font-black text-amber-500 text-xs">Lvl {currentLevelInfo.level}</span>
+              <span className="text-xs sm:text-sm">{currentLevelInfo.badge}</span>
+              <span className="font-black text-amber-500">L{currentLevelInfo.level}</span>
               <span className={`${isDark ? "text-white/20" : "text-slate-300"} select-none`}>•</span>
-              <span className={`font-black text-xs ${isDark ? "text-white" : "text-slate-900"}`}>{totalXp} <span className="text-xs text-amber-500 font-bold">XP</span></span>
+              <span className={`font-black ${isDark ? "text-white" : "text-slate-900"}`}>{totalXp} <span className="text-[10px] sm:text-xs text-amber-500 font-bold">XP</span></span>
               
-              {/* Vibrant glowing micro progress bar */}
-              <div className="w-14 sm:w-18 h-1.5 rounded-full overflow-hidden bg-white/10 p-[1px] ml-0.5">
+              {/* Micro progress bar (hidden on small phones to prevent horizontal crowding) */}
+              <div className="hidden sm:block w-14 sm:w-18 h-1.5 rounded-full overflow-hidden bg-white/10 p-[1px] ml-0.5">
                 <div
                   className="h-full bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(245,158,11,0.6)]"
                   style={{ width: `${levelProgressPercent}%` }}
@@ -1943,7 +1943,7 @@ export default function CBSECommandCenter() {
             </div>
 
             {/* STREAK PILL */}
-            <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono font-bold shadow-xs ${
+            <div className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-bold shadow-xs ${
               isDark ? "bg-gradient-to-r from-orange-500/20 to-rose-500/20 border-orange-500/40 text-orange-300 shadow-[0_0_12px_rgba(249,115,22,0.2)]" : "bg-amber-50 border-amber-200 text-amber-900"
             }`}>
               <Flame className="w-3.5 h-3.5 text-orange-400 animate-pulse shrink-0" />
@@ -1959,7 +1959,7 @@ export default function CBSECommandCenter() {
                   setIsSoundMuted(nextMute);
                   if (!nextMute) playSound("click");
                 }}
-                className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
+                className={`p-1.5 rounded-xl border transition-all cursor-pointer min-w-[34px] min-h-[34px] sm:min-w-[36px] sm:min-h-[36px] flex items-center justify-center touch-manipulation ${
                   isDark ? "bg-slate-900/80 border-white/10 text-slate-400 hover:text-white hover:bg-slate-800" : "bg-white border-slate-200 text-slate-600 hover:text-slate-900 shadow-xs"
                 }`}
                 title={isSoundMuted ? "Unmute Sound" : "Mute Sound"}
@@ -1974,7 +1974,7 @@ export default function CBSECommandCenter() {
                   playSound("click");
                   setTheme(isDark ? "light" : "dark");
                 }}
-                className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
+                className={`p-1.5 rounded-xl border transition-all cursor-pointer min-w-[34px] min-h-[34px] sm:min-w-[36px] sm:min-h-[36px] flex items-center justify-center touch-manipulation ${
                   isDark ? "bg-slate-900/80 border-white/10 text-slate-400 hover:text-white hover:bg-slate-800" : "bg-white border-slate-200 text-slate-600 hover:text-slate-900 shadow-xs"
                 }`}
                 title="Toggle Theme"
@@ -1983,15 +1983,19 @@ export default function CBSECommandCenter() {
                 {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
               </button>
 
-              {/* ZERO XP RESET BUTTON */}
+              {/* ALL 18 MODULES TRIGGER (MOBILE QUICK ACCESS) */}
               <button
-                onClick={handleResetProgress}
-                className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
-                  isDark ? "bg-slate-900/80 border-white/10 text-slate-500 hover:text-rose-400 hover:bg-rose-500/15 hover:border-rose-500/30" : "bg-white border-slate-200 text-slate-500 hover:text-rose-600 shadow-xs"
+                onClick={() => {
+                  playSound("click");
+                  setIsAllModulesModalOpen(true);
+                }}
+                className={`p-1.5 rounded-xl border md:hidden transition-all cursor-pointer min-w-[34px] min-h-[34px] flex items-center justify-center touch-manipulation ${
+                  isDark ? "bg-amber-500/15 border-amber-500/40 text-amber-400 hover:bg-amber-500/25" : "bg-amber-50 border-amber-300 text-amber-900 shadow-xs"
                 }`}
-                title="Reset all progress to 0 XP"
+                title="Open All 18 Modules"
+                aria-label="Open All Modules"
               >
-                <RotateCcw className="w-3.5 h-3.5 shrink-0" />
+                <LayoutGrid className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
@@ -1999,60 +2003,51 @@ export default function CBSECommandCenter() {
       </header>
 
       {/* =========================================================================
-          MOBILE QUICK-DOCK (md:hidden - ZERO HORIZONTAL SCROLL)
+          MOBILE HORIZONTAL MODULE SCROLLER (SMOOTH TOUCH SWIPE - ZERO OVERLAP)
           ========================================================================= */}
-      <div className={`border-b px-2.5 py-2 flex md:hidden items-center justify-between gap-1.5 transition-colors relative z-30 ${
+      <div className={`border-b px-2 py-1.5 flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar transition-colors sticky top-[49px] sm:top-[53px] z-30 ${
         isDark ? "border-white/[0.08] bg-[#070b14]/95 backdrop-blur-2xl" : "border-slate-200 bg-white/95"
       }`}>
-        <div className="flex items-center gap-1.5 flex-1 min-w-0">
-          <button
-            onClick={() => { playSound("click"); setActiveTab("chapter_dashboard"); }}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 shrink-0 cursor-pointer ${
-              activeTab === "chapter_dashboard" ? "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/20" : isDark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"
-            }`}
-          >
-            <Target className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span>Command</span>
-          </button>
-
-          <button
-            onClick={() => { playSound("click"); setActiveTab("concepts"); }}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 shrink-0 cursor-pointer ${
-              activeTab === "concepts" ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-500/20" : isDark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"
-            }`}
-          >
-            <BookOpen className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-            <span>Concepts</span>
-          </button>
-
-          <button
-            onClick={() => { playSound("click"); setActiveTab("diagrams"); }}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 shrink-0 cursor-pointer ${
-              activeTab === "diagrams" ? "bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 text-slate-950 shadow-md shadow-cyan-500/20" : isDark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"
-            }`}
-          >
-            <Compass className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-            <span>Diagrams</span>
-          </button>
-
-          <button
-            onClick={() => { playSound("click"); setActiveTab("hots"); }}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 shrink-0 cursor-pointer ${
-              activeTab === "hots" ? "bg-gradient-to-r from-rose-500 to-orange-500 text-white shadow-md shadow-rose-500/20" : isDark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"
-            }`}
-          >
-            <Flame className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-            <span>HOTS</span>
-          </button>
-        </div>
-
-        <button
-          onClick={() => { playSound("click"); setIsAllModulesModalOpen(true); }}
-          className="px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 flex items-center gap-1.5 shrink-0 shadow-md shadow-amber-500/20 cursor-pointer active:scale-95"
-        >
-          <LayoutGrid className="w-3.5 h-3.5 text-slate-950" />
-          <span>All (16)</span>
-        </button>
+        {[
+          { id: "chapter_dashboard", label: "Command", icon: Target },
+          { id: "concepts", label: "Concepts (37)", icon: BookOpen },
+          { id: "questions", label: "Questions", icon: Zap },
+          { id: "diagrams", label: "Diagrams (29)", icon: Compass },
+          { id: "hots", label: "HOTS (35)", icon: Flame },
+          { id: "timelines", label: "Timelines", icon: Calendar },
+          { id: "english", label: "English (184)", icon: BookMarked },
+          { id: "reactions", label: "Reactions (56)", icon: FlaskConical },
+          { id: "theorems", label: "Theorems (25)", icon: Award },
+          { id: "activities", label: "Activities", icon: Beaker },
+          { id: "mnemonics", label: "Mnemonics (49)", icon: Sparkles },
+          { id: "flashcards", label: "Flashcards", icon: BookMarked },
+          { id: "common_mistakes", label: "Mistakes", icon: AlertTriangle },
+          { id: "test_series", label: "Sept 14 Exam", icon: Clock },
+          { id: "today", label: "Daily Focus", icon: Clock },
+          { id: "syllabus", label: "Syllabus", icon: BookOpen },
+          { id: "roadmap", label: "Roadmap", icon: Compass }
+        ].map((item) => {
+          const isActive = activeTab === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => {
+                playSound("click");
+                setActiveTab(item.id as any);
+              }}
+              className={`px-2.5 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 shrink-0 transition-all cursor-pointer min-h-[32px] touch-manipulation ${
+                isActive
+                  ? "bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 font-black shadow-md shadow-amber-500/20"
+                  : isDark
+                  ? "bg-white/5 border border-white/10 text-slate-300 hover:text-white"
+                  : "bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900"
+              }`}
+            >
+              <item.icon className="w-3.5 h-3.5 shrink-0" />
+              <span>{item.label}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* =========================================================================
@@ -2422,11 +2417,11 @@ export default function CBSECommandCenter() {
                 setIsAllModulesModalOpen(true);
                 setNavDropdown(null);
               }}
-              className="px-4 py-2 rounded-2xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:brightness-110 active:scale-95 text-slate-950 shadow-[0_4px_20px_rgba(245,158,11,0.35)] transition-all flex items-center gap-2 cursor-pointer border border-amber-300/60 shrink-0"
+              className="px-4 py-2 rounded-2xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:brightness-110 active:scale-95 text-slate-950 shadow-[0_4px_20px_rgba(245,158,11,0.35)] transition-all flex items-center gap-2 cursor-pointer border border-amber-300/60 shrink-0 touch-manipulation"
               title="Open All Modules Command Palette (Ctrl+K)"
             >
               <LayoutGrid className="w-3.5 h-3.5 text-slate-950 shrink-0" />
-              <span className="tracking-tight">All Modules (16)</span>
+              <span className="tracking-tight">All Modules (18)</span>
               <kbd className="hidden lg:inline-flex items-center text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-950/20 text-slate-950 border border-slate-950/20 font-black ml-0.5">
                 ⌘K
               </kbd>
@@ -2436,11 +2431,11 @@ export default function CBSECommandCenter() {
       </nav>
 
       {/* =========================================================================
-          ALL 16 MODULES MEGA-LAUNCHER MODAL (VIA PORTAL, NO BLUR)
+          ALL 18 MODULES MEGA-LAUNCHER DIRECTORY (VIA PORTAL)
           ========================================================================= */}
       {mounted && isAllModulesModalOpen && createPortal(
         <div
-          className="fixed inset-0 z-[99999] bg-black/85 flex items-center justify-center p-3 sm:p-6 select-none"
+          className="fixed inset-0 z-[99999] bg-black/85 flex items-center justify-center p-3 sm:p-6"
           onClick={() => setIsAllModulesModalOpen(false)}
           role="dialog"
           aria-modal="true"
@@ -2452,37 +2447,37 @@ export default function CBSECommandCenter() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* MODAL HEADER */}
-            <div className="p-5 border-b border-white/10 flex items-center justify-between gap-4 shrink-0">
-              <div className="space-y-1">
+            <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between gap-4 shrink-0">
+              <div className="space-y-0.5 sm:space-y-1">
                 <div className="flex items-center gap-2">
                   <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400">
                     <LayoutGrid className="w-5 h-5" />
                   </div>
-                  <h2 className="text-lg sm:text-xl font-black">All 16 Command Center Learning Modules</h2>
+                  <h2 className="text-base sm:text-xl font-black">All 18 CBSE Learning Modules</h2>
                 </div>
                 <p className="text-xs text-slate-400">
-                  Instant launchpad to every vault, interactive solver, revision engine, and exam planner.
+                  Instant launchpad to every vault, theory hub, revision engine, and exam planner.
                 </p>
               </div>
 
               <button
                 onClick={() => setIsAllModulesModalOpen(false)}
-                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-400 hover:text-white transition-all cursor-pointer"
+                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-400 hover:text-white transition-all cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center touch-manipulation"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* MODAL SEARCH BAR */}
-            <div className="px-5 pt-4">
+            <div className="px-4 sm:px-5 pt-4">
               <div className="relative">
-                <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                 <input
                   type="text"
                   value={allModulesSearch}
                   onChange={(e) => setAllModulesSearch(e.target.value)}
-                  placeholder="Filter modules (e.g. 'diagrams', 'theorems', 'questions', 'hots', 'flashcards')..."
-                  className={`w-full pl-10 pr-4 py-2.5 rounded-xl text-xs sm:text-sm border transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
+                  placeholder="Filter modules (e.g. 'diagrams', 'theorems', 'questions', 'hots', 'flashcards', 'english')..."
+                  className={`w-full pl-10 pr-4 py-2.5 rounded-xl text-xs sm:text-sm border transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/50 min-h-[44px] ${
                     isDark ? "bg-black/40 border-white/10 text-white placeholder:text-slate-500" : "bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400"
                   }`}
                   autoFocus
@@ -2491,15 +2486,16 @@ export default function CBSECommandCenter() {
             </div>
 
             {/* MODAL BODY (4 ORGANIZED GROUPS) */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-6">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-6">
               {[
                 {
                   group: "Core Learning & Question Mastery",
                   items: [
                     { id: "chapter_dashboard", label: "Chapter Command", sub: "Systematic Syllabus Navigator", icon: Target, color: "text-amber-400 bg-amber-500/15" },
-                    { id: "concepts", label: "Concepts Hub (27 Ch)", sub: "NCERT Official Blueprints & Rubrics", icon: BookOpen, color: "text-blue-400 bg-blue-500/15" },
+                    { id: "concepts", label: "Concepts Hub (37 Ch)", sub: "NCERT Official Blueprints & Rubrics", icon: BookOpen, color: "text-blue-400 bg-blue-500/15" },
                     { id: "questions", label: "Master Question Bank", sub: "1,200+ CBSE Board-Graded Questions", icon: Zap, color: "text-emerald-400 bg-emerald-500/15" },
-                    { id: "hots", label: "Competitive HOTS Vault", sub: "35 Master NTSE / Olympiad Problems", icon: Flame, color: "text-rose-400 bg-rose-500/15" }
+                    { id: "hots", label: "Competitive HOTS Vault", sub: "35 Master NTSE / Olympiad Problems", icon: Flame, color: "text-rose-400 bg-rose-500/15" },
+                    { id: "english", label: "English Command Center (184)", sub: "First Flight, Footprints & Grammar Solvers", icon: Feather, color: "text-indigo-400 bg-indigo-500/15" }
                   ]
                 },
                 {
@@ -2551,7 +2547,7 @@ export default function CBSECommandCenter() {
                             setActiveTab(item.id as any);
                             setIsAllModulesModalOpen(false);
                           }}
-                          className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
+                          className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-all cursor-pointer touch-manipulation min-h-[64px] ${
                             activeTab === item.id
                               ? isDark
                                 ? "bg-amber-500/20 border-amber-500 text-amber-300 font-bold shadow-md"
@@ -2583,16 +2579,33 @@ export default function CBSECommandCenter() {
               })}
             </div>
 
-            {/* MODAL FOOTER */}
-            <div className="p-4 border-t border-white/10 flex items-center justify-between gap-4 text-xs shrink-0">
-              <span className="text-slate-400 font-mono text-[11px]">
-                Tip: Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 font-mono">ESC</kbd> to close
-              </span>
+            {/* MODAL FOOTER WITH SAFE ACTIONS */}
+            <div className="p-3 sm:p-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs shrink-0">
+              <div className="flex items-center gap-3">
+                <span className="text-slate-400 font-mono text-[11px] hidden sm:inline">
+                  Tip: Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 font-mono">ESC</kbd> to close
+                </span>
+                <button
+                  onClick={() => {
+                    if (window.confirm("Are you sure you want to reset all progress and XP to zero? This cannot be undone.")) {
+                      setIsAllModulesModalOpen(false);
+                      handleResetProgress();
+                    }
+                  }}
+                  className={`px-3 py-1.5 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-colors cursor-pointer touch-manipulation min-h-[36px] ${
+                    isDark ? "bg-rose-950/40 border-rose-800/50 text-rose-300 hover:bg-rose-900/50" : "bg-rose-50 border-rose-300 text-rose-700 hover:bg-rose-100"
+                  }`}
+                  title="Reset all progress and XP to 0"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Reset Progress (0 XP)</span>
+                </button>
+              </div>
               <button
                 onClick={() => setIsAllModulesModalOpen(false)}
-                className="px-5 py-2 rounded-xl font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-all cursor-pointer"
+                className="px-5 py-2 rounded-xl font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-all cursor-pointer min-h-[40px] touch-manipulation"
               >
-                Close
+                Close Directory
               </button>
             </div>
           </div>
@@ -4699,16 +4712,16 @@ export default function CBSECommandCenter() {
                   </p>
                 </div>
 
-                {/* Dual Subject & Chapter Selectors */}
-                <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0">
-                  <div className={`flex items-center gap-2 px-3 py-2 rounded-xl border ${
+                {/* Dual Subject & Chapter Selectors (Fluid Responsive Grid with 44px Touch Targets) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full md:w-auto shrink-0">
+                  <div className={`flex items-center justify-between gap-2 px-3 py-2 rounded-xl border min-h-[44px] ${
                     isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-300"
                   }`}>
                     <label className={`text-[11px] font-mono font-bold uppercase shrink-0 ${
                       isDark ? "text-slate-400" : "text-slate-600"
                     }`}>Subject:</label>
                     <select 
-                      className={`bg-transparent text-xs font-bold border-none outline-none cursor-pointer transition-all ${
+                      className={`bg-transparent text-xs font-bold border-none outline-none cursor-pointer transition-all flex-1 text-right sm:text-left ${
                         isDark ? "text-white" : "text-slate-900"
                       }`}
                       value={commandSubjectId}
@@ -4735,14 +4748,14 @@ export default function CBSECommandCenter() {
                     </select>
                   </div>
 
-                  <div className={`flex items-center gap-2 px-3 py-2 rounded-xl border ${
+                  <div className={`flex items-center justify-between gap-2 px-3 py-2 rounded-xl border min-h-[44px] ${
                     isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-300"
                   }`}>
                     <label className={`text-[11px] font-mono font-bold uppercase shrink-0 ${
                       isDark ? "text-slate-400" : "text-slate-600"
                     }`}>Chapter:</label>
                     <select 
-                      className={`bg-transparent text-xs font-bold border-none outline-none cursor-pointer transition-all max-w-[240px] truncate ${
+                      className={`bg-transparent text-xs font-bold border-none outline-none cursor-pointer transition-all max-w-[240px] truncate flex-1 text-right sm:text-left ${
                         isDark ? "text-white" : "text-slate-900"
                       }`}
                       value={commandChapterId}
@@ -4770,72 +4783,72 @@ export default function CBSECommandCenter() {
               </div>
 
               {/* Row 2: Dedicated Full-Width Metric Cards (Zero Overlapping) */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mt-6">
-                <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 w-full mt-5 sm:mt-6">
+                <div className={`p-3.5 sm:p-5 rounded-2xl border transition-all ${
                   isDark ? "bg-black/40 border-emerald-500/20 shadow-sm" : "bg-emerald-50/60 border-emerald-200"
                 }`}>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <p className="text-[11px] text-emerald-400 uppercase font-bold tracking-wider font-mono">Progress</p>
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-[10px] sm:text-[11px] text-emerald-400 uppercase font-bold tracking-wider font-mono">Progress</p>
                     <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
                   </div>
-                  <p className="text-2xl sm:text-3xl font-mono font-black text-emerald-400">{progressPct}%</p>
-                  <p className="text-[10px] text-slate-400 font-mono mt-1">{completedTopicsCount} of {totalTopics} Topics Mastered</p>
+                  <p className="text-xl sm:text-3xl font-mono font-black text-emerald-400">{progressPct}%</p>
+                  <p className="text-[9px] sm:text-[10px] text-slate-400 font-mono mt-0.5 sm:mt-1 truncate">{completedTopicsCount} of {totalTopics} Topics</p>
                 </div>
 
-                <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                <div className={`p-3.5 sm:p-5 rounded-2xl border transition-all ${
                   isDark ? "bg-black/40 border-amber-500/20 shadow-sm" : "bg-amber-50/60 border-amber-200"
                 }`}>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <p className="text-[11px] text-amber-400 uppercase font-bold tracking-wider font-mono">Mastery Level</p>
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-[10px] sm:text-[11px] text-amber-400 uppercase font-bold tracking-wider font-mono">Mastery</p>
                     <span className="w-2 h-2 rounded-full bg-amber-400"></span>
                   </div>
-                  <p className="text-2xl sm:text-3xl font-mono font-black text-amber-400">{masteryPct}%</p>
-                  <p className="text-[10px] text-slate-400 font-mono mt-1">Board Readiness Index</p>
+                  <p className="text-xl sm:text-3xl font-mono font-black text-amber-400">{masteryPct}%</p>
+                  <p className="text-[9px] sm:text-[10px] text-slate-400 font-mono mt-0.5 sm:mt-1 truncate">Board Readiness Index</p>
                 </div>
 
-                <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                <div className={`p-3.5 sm:p-5 rounded-2xl border transition-all ${
                   isDark ? "bg-black/40 border-cyan-500/20 shadow-sm" : "bg-cyan-50/60 border-cyan-200"
                 }`}>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <p className="text-[11px] text-cyan-400 uppercase font-bold tracking-wider font-mono">Attempted Qs</p>
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-[10px] sm:text-[11px] text-cyan-400 uppercase font-bold tracking-wider font-mono">Attempted</p>
                     <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
                   </div>
-                  <p className="text-2xl sm:text-3xl font-mono font-black text-cyan-400">{attemptedStr}</p>
-                  <p className="text-[10px] text-slate-400 font-mono mt-1">Practice Bank Progress</p>
+                  <p className="text-xl sm:text-3xl font-mono font-black text-cyan-400">{attemptedStr}</p>
+                  <p className="text-[9px] sm:text-[10px] text-slate-400 font-mono mt-0.5 sm:mt-1 truncate">Practice Bank</p>
                 </div>
 
-                <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                <div className={`p-3.5 sm:p-5 rounded-2xl border transition-all ${
                   isDark ? "bg-black/40 border-blue-500/20 shadow-sm" : "bg-blue-50/60 border-blue-200"
                 }`}>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <p className="text-[11px] text-blue-400 uppercase font-bold tracking-wider font-mono">Accuracy</p>
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-[10px] sm:text-[11px] text-blue-400 uppercase font-bold tracking-wider font-mono">Accuracy</p>
                     <span className="w-2 h-2 rounded-full bg-blue-400"></span>
                   </div>
-                  <p className="text-2xl sm:text-3xl font-mono font-black text-blue-400">{accuracyStr}</p>
-                  <p className="text-[10px] text-slate-400 font-mono mt-1">First-Attempt Success Rate</p>
+                  <p className="text-xl sm:text-3xl font-mono font-black text-blue-400">{accuracyStr}</p>
+                  <p className="text-[9px] sm:text-[10px] text-slate-400 font-mono mt-0.5 sm:mt-1 truncate">Success Rate</p>
                 </div>
               </div>
 
               {/* ==================== HERO CONCEPT LAUNCHER CARD ==================== */}
-              <div className={`mt-8 p-6 sm:p-8 rounded-3xl border transition-all relative overflow-hidden ${
+              <div className={`mt-6 sm:mt-8 p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border transition-all relative overflow-hidden ${
                 isDark
                   ? "bg-gradient-to-br from-[#0c182a] via-[#091322] to-[#0d1c2e] border-teal-500/30 shadow-[0_8px_32px_rgba(20,184,166,0.15)]"
                   : "bg-gradient-to-br from-teal-50/90 via-white to-blue-50/80 border-teal-200 shadow-lg"
               }`}>
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-                  <div className="space-y-3 max-w-3xl">
-                    <div className="flex flex-wrap items-center gap-2.5">
-                      <span className="px-3 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-teal-500 text-slate-950 shadow-sm flex items-center gap-1.5">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 sm:gap-6">
+                  <div className="space-y-2 sm:space-y-3 max-w-3xl">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-black uppercase tracking-wider bg-teal-500 text-slate-950 shadow-sm flex items-center gap-1.5">
                         <BookOpen className="w-3.5 h-3.5" /> Concept Blueprint Hub
                       </span>
-                      <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
+                      <span className={`text-[10px] sm:text-xs font-mono font-bold px-2.5 sm:px-3 py-1 rounded-full border ${
                         isDark ? "bg-teal-950/60 text-teal-300 border-teal-500/30" : "bg-teal-100 text-teal-900 border-teal-300"
                       }`}>
                         Chapter {ncertNum} • {activeSubject.name}
                       </span>
                     </div>
 
-                    <h3 className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                    <h3 className={`text-lg sm:text-2xl lg:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
                       Master All Core Concepts, Formulas & Examiner Traps
                     </h3>
 
@@ -4844,7 +4857,7 @@ export default function CBSECommandCenter() {
                     </p>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full lg:w-auto shrink-0">
                     <button
                       onClick={() => {
                         playSound("click");
@@ -4853,10 +4866,10 @@ export default function CBSECommandCenter() {
                         setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : commandSubjectId === "sst" ? 1 : 6));
                         setActiveTab("concepts");
                       }}
-                      className="w-full sm:w-auto px-6 py-4 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2.5 shadow-xl shadow-teal-500/25 hover:scale-[1.02] shrink-0"
+                      className="w-full sm:w-auto px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xl shadow-teal-500/25 shrink-0 touch-manipulation min-h-[44px]"
                     >
                       <Sparkles className="w-4 h-4" />
-                      <span>Launch Chapter {ncertNum} Concepts Hub</span>
+                      <span>Launch Concepts Hub</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
 
@@ -4867,7 +4880,7 @@ export default function CBSECommandCenter() {
                           setTimelinesChapterKey(ncertNum === 1 ? "ch1_europe" : "ch2_india");
                           setActiveTab("timelines");
                         }}
-                        className="w-full sm:w-auto px-5 py-4 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xl shadow-amber-500/25 hover:scale-[1.02] shrink-0"
+                        className="w-full sm:w-auto px-5 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xl shadow-amber-500/25 shrink-0 touch-manipulation min-h-[44px]"
                       >
                         <Calendar className="w-4 h-4" />
                         <span>📜 Timelines & Chronology Game</span>
@@ -4879,7 +4892,7 @@ export default function CBSECommandCenter() {
               </div>
 
               {/* ==================== OFFICIAL NCERT SUB-TOPIC MATRIX ==================== */}
-              <div className="mt-8 space-y-3">
+              <div className="mt-6 sm:mt-8 space-y-3">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                   <div>
                     <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-2">
@@ -4891,13 +4904,13 @@ export default function CBSECommandCenter() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
                   {activeChapter.topics.map((topic, idx) => {
                     const isDone = !!completedTopicIds[topic.id];
                     return (
                       <div
                         key={topic.id}
-                        className={`p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
+                        className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all flex items-center justify-between gap-2.5 sm:gap-3 ${
                           isDone
                             ? isDark
                               ? "bg-emerald-950/20 border-emerald-500/30 shadow-xs"
@@ -4907,10 +4920,10 @@ export default function CBSECommandCenter() {
                             : "bg-white border-slate-200 hover:border-slate-300"
                         }`}
                       >
-                        <div className="flex items-center gap-3 min-w-0">
+                        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
                           <button
                             onClick={() => toggleTopic(topic.id)}
-                            className={`w-6 h-6 rounded-lg flex items-center justify-center transition-all cursor-pointer shrink-0 border ${
+                            className={`w-7 h-7 sm:w-6 sm:h-6 rounded-lg flex items-center justify-center transition-all cursor-pointer shrink-0 border touch-manipulation min-w-[28px] ${
                               isDone
                                 ? "bg-emerald-500 text-slate-950 border-emerald-400 font-bold"
                                 : isDark
@@ -4919,11 +4932,11 @@ export default function CBSECommandCenter() {
                             }`}
                             title={isDone ? "Mark as Incomplete" : "Mark as Mastered"}
                           >
-                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            <CheckCircle2 className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
                           </button>
-                          <div className="min-w-0">
+                          <div className="min-w-0 flex-1">
                             <span className="text-[10px] font-mono text-slate-400 block">Sub-Topic #{idx + 1}</span>
-                            <p className={`text-xs font-bold truncate ${isDone ? "text-emerald-400 line-through opacity-80" : isDark ? "text-white" : "text-slate-900"}`}>
+                            <p className={`text-xs font-bold leading-tight break-words line-clamp-2 ${isDone ? "text-emerald-400 line-through opacity-80" : isDark ? "text-white" : "text-slate-900"}`}>
                               {topic.title}
                             </p>
                           </div>
@@ -4937,7 +4950,7 @@ export default function CBSECommandCenter() {
                             setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : commandSubjectId === "sst" ? 1 : 6));
                             setActiveTab("concepts");
                           }}
-                          className={`px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer whitespace-nowrap flex items-center gap-1 shrink-0 ${
+                          className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer whitespace-nowrap flex items-center gap-1 shrink-0 touch-manipulation min-h-[36px] ${
                             isDark
                               ? "bg-white/5 border-white/10 hover:bg-teal-500/20 hover:border-teal-400/40 text-teal-300"
                               : "bg-slate-50 border-slate-200 hover:bg-teal-50 text-teal-800"
@@ -5108,35 +5121,34 @@ export default function CBSECommandCenter() {
       </main>
 
       {/* =========================================================================
-          MOBILE BOTTOM NAVIGATION DOCK (FIXED AT BOTTOM FOR PHONES)
+          MOBILE BOTTOM NAVIGATION DOCK (FIXED AT BOTTOM FOR PHONES - FAST TOUCH)
           ========================================================================= */}
       <div className={`md:hidden fixed bottom-0 left-0 right-0 z-40 border-t backdrop-blur-2xl px-2 pt-1.5 safe-area-bottom transition-colors ${
-        isDark ? "border-white/10/90 bg-[#090d16]/95 text-white" : "border-slate-200 bg-white/95 text-slate-900 shadow-lg"
+        isDark ? "border-white/10 bg-[#090d16]/95 text-white shadow-2xl" : "border-slate-200 bg-white/95 text-slate-900 shadow-lg"
       }`}>
         <div className="grid grid-cols-5 gap-1 items-center max-w-md mx-auto">
           {[
             { id: "chapter_dashboard", label: "Command", icon: Target },
             { id: "concepts", label: "Concepts", icon: BookOpen },
-            { id: "questions", label: "Questions", icon: Zap },
-            { id: "mnemonics", label: "Mnemonics", icon: Sparkles },
-            { id: "more", label: "More", icon: Menu }
+            { id: "questions", label: "Practice", icon: Zap },
+            { id: "diagrams", label: "Vaults", icon: Compass },
+            { id: "all_launcher", label: "All (18)", icon: LayoutGrid }
           ].map((item) => {
-            const isMoreTab = item.id === "more";
-            const isActive = isMoreTab ? isMobileMoreOpen : activeTab === item.id;
+            const isAllLauncher = item.id === "all_launcher";
+            const isActive = isAllLauncher ? isAllModulesModalOpen : activeTab === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => {
                   playSound("click");
                   triggerHaptic(10);
-                  if (isMoreTab) {
-                    setIsMobileMoreOpen(!isMobileMoreOpen);
+                  if (isAllLauncher) {
+                    setIsAllModulesModalOpen(true);
                   } else {
-                    setIsMobileMoreOpen(false);
                     setActiveTab(item.id as any);
                   }
                 }}
-                className={`py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 cursor-pointer transition-all min-h-[44px] ${
+                className={`py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 cursor-pointer transition-all min-h-[48px] touch-manipulation ${
                   isActive
                     ? isDark
                       ? "bg-amber-500/15 text-amber-400 font-bold"
@@ -5147,84 +5159,12 @@ export default function CBSECommandCenter() {
                 }`}
               >
                 <item.icon className={`w-4 h-4 ${isActive ? "text-amber-500" : ""}`} />
-                <span className="text-[10px] tracking-tight">{item.label}</span>
+                <span className="text-[10px] tracking-tight font-medium">{item.label}</span>
               </button>
             );
           })}
         </div>
       </div>
-
-      {/* MOBILE "MORE" DRAWER MODAL */}
-      {isMobileMoreOpen && (
-        <div className="md:hidden fixed inset-0 bg-slate-950/80 backdrop-blur-xs z-50 flex items-end justify-center p-3 animate-fade-in">
-          <div className={`border rounded-3xl w-full max-w-sm p-5 space-y-4 shadow-2xl ${
-            isDark ? "bg-[#121212]/80 backdrop-blur-xl border-white/10 text-white" : "bg-white border-slate-200 text-slate-900"
-          }`}>
-            <div className="flex justify-between items-center border-b pb-3 border-white/10">
-              <h3 className="font-bold text-sm flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-500" /> Additional Learning Modules
-              </h3>
-              <button
-                onClick={() => setIsMobileMoreOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              {[
-                { id: "english", label: "English Command (184)", icon: Feather },
-                { id: "timelines", label: "SST Timelines Master", icon: Calendar },
-                { id: "diagrams", label: "NCERT Diagrams Vault (29)", icon: Compass },
-                { id: "test_series", label: "Test Series (Sept 14)", icon: Calendar },
-                { id: "activities", label: "NCERT Lab Activities", icon: Beaker },
-                { id: "theorems", label: "Theorems & Converses (25)", icon: Award },
-                { id: "reactions", label: "Chemistry Reactions (56)", icon: FlaskConical },
-                { id: "hots", label: "Competitive HOTS Vault (35)", icon: Flame },
-                { id: "flashcards", label: "Flashcards Engine", icon: BookMarked },
-                { id: "common_mistakes", label: "My Mistakes Log", icon: Flame },
-                { id: "today", label: "Daily Focus & Tasks", icon: Clock },
-                { id: "syllabus", label: "NCERT Tracker", icon: BookOpen },
-                { id: "roadmap", label: "100% Roadmap", icon: Compass }
-              ].map((m) => (
-                <button
-                  key={m.id}
-                  onClick={() => {
-                    playSound("click");
-                    setActiveTab(m.id as any);
-                    setIsMobileMoreOpen(false);
-                  }}
-                  className={`p-3 rounded-2xl border text-left flex flex-col gap-2 font-bold min-h-[56px] cursor-pointer ${
-                    activeTab === m.id
-                      ? "bg-amber-500 text-slate-950 border-amber-500"
-                      : isDark
-                      ? "bg-[#0b0f19] border-white/10 text-slate-200"
-                      : "bg-slate-50 border-slate-200 text-slate-800"
-                  }`}
-                >
-                  <m.icon className="w-4 h-4" />
-                  <span>{m.label}</span>
-                </button>
-              ))}
-            </div>
-
-            <div className="pt-2 border-t border-white/10 flex gap-2">
-              <button
-                onClick={() => {
-                  setIsMobileMoreOpen(false);
-                  handleResetProgress();
-                }}
-                className={`flex-1 py-2.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer ${
-                  isDark ? "bg-rose-950/40 border-rose-800/50 text-rose-300" : "bg-rose-50 border-rose-300 text-rose-700"
-                }`}
-              >
-                <RotateCcw className="w-3.5 h-3.5" /> Reset (0 XP)
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* =========================================================================
           LEVEL UP CELEBRATION MODAL
@@ -5865,7 +5805,7 @@ export default function CBSECommandCenter() {
 
 
       {/* FOOTER */}
-      <footer className={`border-t py-4 text-center text-xs font-mono px-4 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
+      <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-20 md:mb-0 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
         Lakshmipat Singhania Academy Bissau • CBSE Class 10 Command Center (2026–2027)
       </footer>
     </div>

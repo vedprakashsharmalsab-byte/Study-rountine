@@ -6,6 +6,7 @@ import {
   X, Lightbulb, ArrowRight, BookMarked, Layers, HelpCircle, ShieldAlert
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
+import TrigValuesMasterTable from "@/components/TrigValuesMasterTable";
 import { MATH_CHAPTER_CONCEPTS, type MathChapterConcept } from "@/data/mathConceptsData";
 
 interface ChapterConceptExplainerProps {
@@ -74,13 +75,13 @@ export default function ChapterConceptExplainer({
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500 text-slate-950 shadow-xs">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-500 text-slate-950 shadow-xs">
                 Intuitive Concept Master
               </span>
               <span className={`text-xs font-mono font-bold ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>
                 CBSE Class 10 Math
               </span>
-              <span className={`px-2 py-0.5 rounded text-[10px] font-mono border ${
+              <span className={`px-2 py-0.5 rounded text-xs font-mono border ${
                 isDark ? "bg-white/5 border-white/10 text-slate-300" : "bg-slate-100 border-slate-300 text-slate-700"
               }`}>
                 {activeChapterData.weightage}
@@ -89,7 +90,7 @@ export default function ChapterConceptExplainer({
             <h2 className="text-xl sm:text-2xl font-black tracking-tight mt-1">
               Chapter {activeChapterData.chapterNo}: {activeChapterData.title}
             </h2>
-            <p className={`text-xs mt-1 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+            <p className={`text-xs sm:text-sm mt-1 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
               {activeChapterData.oneLiner}
             </p>
           </div>
@@ -151,8 +152,8 @@ export default function ChapterConceptExplainer({
         <div className={`p-2 rounded-xl shrink-0 mt-0.5 ${isDark ? "bg-amber-500/20 text-amber-400" : "bg-amber-100 text-amber-800"}`}>
           <Lightbulb className="w-4 h-4" />
         </div>
-        <div className="text-xs space-y-1">
-          <h4 className="font-black tracking-wide uppercase text-[11px] flex items-center gap-1.5">
+        <div className="text-xs sm:text-sm space-y-1">
+          <h4 className="font-black tracking-wide uppercase text-xs flex items-center gap-1.5">
             <span>Easy Real-Life Analogy:</span>
             <span className="font-bold underline decoration-amber-500/50">{activeChapterData.analogyTitle}</span>
           </h4>
@@ -164,14 +165,14 @@ export default function ChapterConceptExplainer({
 
       {/* 3. SECTION NAVIGATION PILLS */}
       {activeChapterData.sections.length > 1 && (
-        <div className={`px-6 py-2.5 border-b flex items-center gap-2 overflow-x-auto no-scrollbar ${
+        <div className={`px-6 py-3 border-b flex items-center gap-2 overflow-x-auto no-scrollbar ${
           isDark ? "bg-black/40 border-white/5" : "bg-slate-50 border-slate-200"
         }`}>
           {activeChapterData.sections.map((sec) => (
             <button
               key={sec.id}
               onClick={() => setActiveSectionId(sec.id)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 border ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer shrink-0 border ${
                 activeSectionId === sec.id
                   ? "bg-emerald-500 text-slate-950 border-emerald-400 shadow-xs"
                   : isDark
@@ -190,57 +191,62 @@ export default function ChapterConceptExplainer({
         {currentSection && (
           <div className="space-y-6 animate-fade-in">
             {/* Section Heading Card */}
-            <div className={`p-5 rounded-2xl border ${
+            <div className={`p-6 rounded-2xl border ${
               isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50/70 border-slate-200 shadow-2xs"
             }`}>
-              <div className="flex items-center gap-2 mb-1">
-                <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className={`text-xs font-mono font-bold uppercase tracking-wider ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>
                   Core Concept Blueprint
                 </span>
               </div>
-              <h3 className={`text-lg sm:text-xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
-                {currentSection.heading}
+              <h3 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                <PremiumMathRenderer content={currentSection.heading} isDark={isDark} inline />
               </h3>
               {currentSection.subheading && (
-                <p className={`text-xs font-semibold mt-0.5 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                  {currentSection.subheading}
-                </p>
+                <div className={`text-sm font-semibold mt-1 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                  <PremiumMathRenderer content={currentSection.subheading} isDark={isDark} inline />
+                </div>
               )}
-              <div className={`mt-3 text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-200" : "text-slate-700"}`}>
+              <div className={`mt-4 text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                 <PremiumMathRenderer content={currentSection.explanation} isDark={isDark} />
               </div>
             </div>
 
+            {/* Embedded Interactive 6x5 Trig Table for Chapter 8 */}
+            {currentChapterNo === 8 && (currentSection.id === "table" || currentSection.id === "values") && (
+              <TrigValuesMasterTable isDark={isDark} />
+            )}
+
             {/* Formulas and Key Mathematical Insights */}
             {currentSection.formulasOrKeyPoints && currentSection.formulasOrKeyPoints.length > 0 && (
-              <div className="space-y-3">
-                <h4 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+              <div className="space-y-4">
+                <h4 className={`text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${
                   isDark ? "text-cyan-400" : "text-blue-800"
                 }`}>
-                  <Compass className="w-3.5 h-3.5" />
+                  <Compass className="w-4 h-4" />
                   Key Formulas & Mathematical Relationships
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {currentSection.formulasOrKeyPoints.map((item, idx) => (
                     <div 
                       key={idx}
-                      className={`p-4 rounded-2xl border flex flex-col justify-between space-y-2 ${
+                      className={`p-5 rounded-2xl border flex flex-col justify-between space-y-3 ${
                         isDark ? "bg-black/30 border-white/5" : "bg-white border-slate-200 shadow-2xs"
                       }`}
                     >
                       <div>
-                        <strong className={`text-xs font-bold block mb-1.5 ${isDark ? "text-emerald-400" : "text-emerald-800 font-black"}`}>
-                          {item.title}
+                        <strong className={`text-sm sm:text-base font-bold block mb-2 ${isDark ? "text-emerald-400" : "text-emerald-800 font-black"}`}>
+                          <PremiumMathRenderer content={item.title} isDark={isDark} inline />
                         </strong>
-                        <div className="text-xs font-mono py-1 leading-loose">
+                        <div className="text-sm font-mono py-1 leading-loose">
                           <PremiumMathRenderer content={item.content} isDark={isDark} />
                         </div>
                       </div>
                       {item.note && (
-                        <div className={`text-[11px] font-sans pt-1 border-t border-current/10 flex items-start gap-1.5 ${
+                        <div className={`text-xs sm:text-sm font-sans pt-2 border-t border-current/10 flex items-start gap-2 ${
                           isDark ? "text-slate-300" : "text-slate-700"
                         }`}>
-                          <span className="shrink-0 mt-0.5">💡</span>
+                          <span className="shrink-0 mt-0.5 text-base">💡</span>
                           <div className="flex-1">
                             <PremiumMathRenderer content={item.note} isDark={isDark} />
                           </div>
@@ -254,37 +260,37 @@ export default function ChapterConceptExplainer({
 
             {/* Step-by-Step Problem Solving Framework */}
             {currentSection.stepByStepGuide && currentSection.stepByStepGuide.length > 0 && (
-              <div className="space-y-3">
-                <h4 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+              <div className="space-y-4">
+                <h4 className={`text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${
                   isDark ? "text-amber-400" : "text-amber-800"
                 }`}>
-                  <Sparkles className="w-3.5 h-3.5" />
+                  <Sparkles className="w-4 h-4" />
                   Step-by-Step Master Method (CBSE Step-Marking Guide)
                 </h4>
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                   {currentSection.stepByStepGuide.map((step) => (
                     <div 
                       key={step.stepNo}
-                      className={`p-4 rounded-2xl border flex items-start gap-3.5 ${
+                      className={`p-5 rounded-2xl border flex items-start gap-4 ${
                         isDark ? "bg-black/30 border-white/5" : "bg-white border-slate-200 shadow-2xs"
                       }`}
                     >
-                      <div className={`w-7 h-7 rounded-xl flex items-center justify-center font-mono font-black text-xs shrink-0 mt-0.5 ${
+                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-mono font-black text-xs shrink-0 mt-0.5 ${
                         isDark ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" : "bg-emerald-100 text-emerald-900 font-black"
                       }`}>
                         {step.stepNo}
                       </div>
-                      <div className="flex-1 min-w-0 space-y-1">
-                        <h5 className={`text-xs font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
-                          {step.title}
+                      <div className="flex-1 min-w-0 space-y-1.5">
+                        <h5 className={`text-sm sm:text-base font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                          <PremiumMathRenderer content={step.title} isDark={isDark} inline />
                         </h5>
-                        <div className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                           <PremiumMathRenderer content={step.action} isDark={isDark} />
                         </div>
                         {step.proTip && (
-                          <p className={`text-[11px] font-mono pt-1 ${isDark ? "text-emerald-400" : "text-emerald-700 font-semibold"}`}>
-                            ★ Pro Tip: {step.proTip}
-                          </p>
+                          <div className={`text-xs sm:text-sm font-mono pt-1 ${isDark ? "text-emerald-400" : "text-emerald-700 font-semibold"}`}>
+                            <PremiumMathRenderer content={`★ **Pro Tip:** ${step.proTip}`} isDark={isDark} />
+                          </div>
                         )}
                       </div>
                     </div>
@@ -295,34 +301,34 @@ export default function ChapterConceptExplainer({
 
             {/* Examiner Traps & Silly Mistake Shield */}
             {currentSection.examinerTraps && currentSection.examinerTraps.length > 0 && (
-              <div className="space-y-3">
-                <h4 className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+              <div className="space-y-4">
+                <h4 className={`text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${
                   isDark ? "text-rose-400" : "text-rose-700"
                 }`}>
-                  <ShieldAlert className="w-3.5 h-3.5 text-rose-500" />
+                  <ShieldAlert className="w-4 h-4 text-rose-500" />
                   CBSE Examiner Traps & Silly Mistake Shield
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {currentSection.examinerTraps.map((trap, tIdx) => (
                     <div 
                       key={tIdx}
-                      className={`p-4 rounded-2xl border space-y-2 ${
+                      className={`p-5 rounded-2xl border space-y-3 ${
                         isDark 
                           ? "bg-rose-950/20 border-rose-900/30 text-slate-200" 
                           : "bg-rose-50/70 border-rose-200 text-slate-800 shadow-2xs"
                       }`}
                     >
                       <div className="flex items-center gap-1.5 text-rose-500 text-xs font-black uppercase font-mono tracking-wider">
-                        <Flame className="w-3.5 h-3.5" />
+                        <Flame className="w-4 h-4" />
                         Common Mistake:
                       </div>
-                      <p className="text-xs font-medium leading-relaxed">
+                      <div className="text-sm sm:text-base font-medium leading-relaxed">
                         <PremiumMathRenderer content={trap.trap} isDark={isDark} />
-                      </p>
-                      <div className={`p-2.5 rounded-xl border text-xs leading-relaxed ${
+                      </div>
+                      <div className={`p-3.5 rounded-xl border text-sm sm:text-base leading-relaxed ${
                         isDark ? "bg-black/40 border-emerald-500/20 text-emerald-300" : "bg-emerald-50 border-emerald-200 text-emerald-950 font-medium"
                       }`}>
-                        <strong className="block text-[10px] font-mono uppercase tracking-wider mb-0.5 text-emerald-600 dark:text-emerald-400">
+                        <strong className="block text-xs font-mono uppercase tracking-wider mb-1 text-emerald-600 dark:text-emerald-400">
                           ✓ Correct Examiner-Approved Method:
                         </strong>
                         <PremiumMathRenderer content={trap.correction} isDark={isDark} />

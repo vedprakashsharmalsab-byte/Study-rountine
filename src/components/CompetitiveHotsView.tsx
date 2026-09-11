@@ -129,7 +129,7 @@ export default function CompetitiveHotsView({
             <div className="flex items-center gap-1.5 p-1 rounded-2xl border bg-black/20 border-white/5 flex-wrap">
               <button
                 onClick={() => setSelectedSubject("all")}
-                className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
                   selectedSubject === "all" ? "bg-rose-500 text-white shadow-sm" : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -137,7 +137,7 @@ export default function CompetitiveHotsView({
               </button>
               <button
                 onClick={() => setSelectedSubject("math")}
-                className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
                   selectedSubject === "math" ? "bg-amber-500 text-slate-950 shadow-sm" : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -145,7 +145,7 @@ export default function CompetitiveHotsView({
               </button>
               <button
                 onClick={() => setSelectedSubject("science")}
-                className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
                   selectedSubject === "science" ? "bg-cyan-500 text-slate-950 shadow-sm" : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -153,7 +153,7 @@ export default function CompetitiveHotsView({
               </button>
               <button
                 onClick={() => setSelectedSubject("sst")}
-                className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
                   selectedSubject === "sst" ? "bg-emerald-500 text-slate-950 shadow-sm" : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -186,7 +186,9 @@ export default function CompetitiveHotsView({
               {/* QUESTION HEADER STRIP */}
               <div
                 onClick={() => toggleExpand(q.id)}
-                className="p-5 sm:p-6 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4 select-none"
+                role="button"
+                tabIndex={0}
+                className="p-4 sm:p-6 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 select-none touch-manipulation"
               >
                 <div className="space-y-2 flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -206,7 +208,7 @@ export default function CompetitiveHotsView({
                   </h3>
                 </div>
 
-                <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
+                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 self-end sm:self-center">
                   <span className="px-3 py-1 rounded-xl text-xs font-mono font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">
                     {q.marks} Marks
                   </span>
@@ -237,7 +239,7 @@ export default function CompetitiveHotsView({
                       </span>
                       <button
                         onClick={() => toggleClue(q.id)}
-                        className="text-xs font-bold text-amber-400 flex items-center gap-1 cursor-pointer hover:underline"
+                        className="text-xs font-bold text-amber-400 flex items-center gap-1 cursor-pointer hover:underline touch-manipulation min-h-[32px] px-2 py-1 rounded-lg hover:bg-amber-400/10"
                       >
                         {isClueRevealed ? <><EyeOff className="w-3.5 h-3.5" /> Hide Clues</> : <><Eye className="w-3.5 h-3.5" /> Reveal Clues</>}
                       </button>
@@ -324,7 +326,7 @@ export default function CompetitiveHotsView({
                     <div className="flex justify-end pt-2">
                       <button
                         onClick={() => onOpenQuestionBank(q.subject, q.chapterNo)}
-                        className="px-4 py-2 rounded-xl text-xs font-bold bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition-all flex items-center gap-2 cursor-pointer"
+                        className="px-4 py-2.5 rounded-xl text-xs font-bold bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition-all flex items-center gap-2 cursor-pointer touch-manipulation min-h-[40px]"
                       >
                         Solve Similar Problems in Vault <ArrowRight className="w-3.5 h-3.5" />
                       </button>

@@ -184,6 +184,7 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
             return (
               <div
                 key={item.id}
+                style={{ contentVisibility: "auto", containIntrinsicSize: "250px" }}
                 className={`rounded-3xl border transition-all duration-300 overflow-hidden ${
                   isDark 
                     ? "bg-[#111622]/80 backdrop-blur-xl border-white/[0.07] shadow-lg hover:shadow-emerald-500/5 hover:border-white/15" 
@@ -221,7 +222,7 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
                       </span>
                     </div>
 
-                    <h3 className={`text-base sm:text-lg font-bold tracking-tight ${isDark ? "text-white" : "text-slate-900 font-black"}`}>
+                    <h3 className="text-base sm:text-lg font-bold tracking-tight">
                       {item.title}
                     </h3>
                     <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
@@ -229,14 +230,13 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
+                  <div className="flex items-center gap-3 self-end md:self-center">
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleExpand(item.id);
-                      }}
-                      className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 cursor-pointer transition-all ${
-                        isDark ? "bg-white/5 hover:bg-white/10 text-white border border-white/10" : "bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-200 font-bold"
+                      type="button"
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                        isExpanded
+                          ? isDark ? "bg-white/10 text-white" : "bg-slate-200 text-slate-800"
+                          : isDark ? "bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30" : "bg-emerald-600 text-white shadow-sm hover:bg-emerald-700"
                       }`}
                     >
                       {isExpanded ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
@@ -300,7 +300,7 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
                               </div>
                             )}
                             {item.construction && (
-                              <div className={`p-3 rounded-xl border text-xs leading-relaxed ${
+                              <div className={`p-3 rounded-xl border text-xs leading-relaxed sm:col-span-2 lg:col-span-1 ${
                                 isDark ? "bg-black/30 border-white/5 text-slate-300" : "bg-white border-slate-200 text-slate-800 shadow-2xs"
                               }`}>
                                 <strong className={`text-[10px] font-mono uppercase tracking-wider block mb-1 ${isDark ? "text-amber-400" : "text-amber-700"}`}>Construction:</strong>
@@ -311,33 +311,27 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
                         )}
                       </div>
 
-                      {/* PLAIN PAPER DERIVATION WITH RED MARGIN */}
-                      <div className="relative px-2 sm:px-6 py-6">
-                        {/* Continuous Left Vertical Red Margin Line */}
-                        <div 
-                          className="absolute top-0 bottom-0 left-11 sm:left-16 border-r-2 pointer-events-none"
-                          style={{ borderColor: isDark ? "rgba(239, 68, 68, 0.45)" : "rgba(220, 38, 38, 0.75)" }}
-                        />
-
-                        {/* Generously Spaced Flowing Steps */}
+                      {/* PLAIN PAPER DERIVATION WITH CLEAN RED MARGIN */}
+                      <div className="relative px-2 sm:px-6 py-6 overflow-x-auto">
+                        {/* Generously Spaced Flowing Steps with Integrated Red Margin Line */}
                         <div className="space-y-6 sm:space-y-7">
                           {item.sheetSteps.map((step, sIdx) => {
                             const hasCustomTag = step.marginTag && !step.marginTag.toLowerCase().startsWith("step");
                             return (
-                              <div key={sIdx} className="relative flex items-start gap-1">
-                                {/* Left Margin Indicator: Clean Step Number That Never Overflows */}
-                                <div className={`w-9 sm:w-14 text-right pr-2.5 shrink-0 font-mono font-black text-xs select-none pt-1 ${
-                                  isDark ? "text-red-400" : "text-red-700"
+                              <div key={sIdx} className="relative flex items-start">
+                                {/* Left Margin Column with Red Right Border */}
+                                <div className={`w-11 sm:w-16 text-right pr-3 shrink-0 font-mono font-black text-xs select-none pt-1.5 border-r-2 ${
+                                  isDark ? "text-red-400 border-red-500/40" : "text-red-600 border-red-500/70"
                                 }`}>
                                   {`(${sIdx + 1})`}
                                 </div>
 
-                                {/* Plain Paper Derivation & Reason */}
-                                <div className="flex-1 pl-3 sm:pl-5 min-w-0">
-                                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2.5">
-                                    <div className="text-xs sm:text-sm font-medium leading-loose tracking-wide min-w-0">
+                                {/* Plain Paper Derivation & Reason with generous breathing room */}
+                                <div className="flex-1 pl-4 sm:pl-7 min-w-0">
+                                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                                    <div className="text-sm sm:text-base font-medium leading-relaxed min-w-0 overflow-x-auto py-0.5">
                                       {hasCustomTag && (
-                                        <span className={`inline-flex items-center text-[10px] font-mono font-black uppercase tracking-wider px-2 py-0.5 rounded border mr-2 align-middle ${
+                                        <span className={`inline-flex items-center text-[10px] font-mono font-black uppercase tracking-wider px-2.5 py-0.5 rounded border mr-2.5 align-middle ${
                                           isDark 
                                             ? "bg-amber-500/15 text-amber-300 border-amber-500/30" 
                                             : "bg-amber-100 text-amber-900 border-amber-300 font-bold"
@@ -349,7 +343,7 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
                                     </div>
 
                                     {step.reason && (
-                                      <div className={`text-[11px] font-mono italic opacity-95 shrink-0 self-start lg:self-center px-3 py-1.5 rounded-lg border inline-flex items-center gap-1.5 shadow-2xs ${
+                                      <div className={`text-xs font-mono italic opacity-95 shrink-0 self-start lg:self-center px-3 py-1.5 rounded-lg border inline-flex items-center gap-1.5 shadow-2xs ${
                                         isDark 
                                           ? "bg-amber-500/10 text-amber-300 border-amber-500/20" 
                                           : "bg-amber-50/90 text-amber-950 border-amber-200 font-semibold"
@@ -366,20 +360,20 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
 
                           {/* Final Boxed Result */}
                           {item.conclusion && (
-                            <div className="relative flex items-start gap-1 pt-4">
-                              <div className={`w-9 sm:w-14 text-right pr-2.5 shrink-0 font-mono font-black text-base pt-1 ${
-                                isDark ? "text-emerald-400" : "text-emerald-700"
+                            <div className="relative flex items-start pt-4">
+                              <div className={`w-11 sm:w-16 text-right pr-3 shrink-0 font-mono font-black text-lg pt-0.5 border-r-2 ${
+                                isDark ? "text-emerald-400 border-red-500/40" : "text-emerald-700 border-red-500/70"
                               }`}>
                                 ∴
                               </div>
-                              <div className="flex-1 pl-3 sm:pl-5">
-                                <div className={`inline-flex flex-wrap items-center gap-3 px-4 py-2.5 rounded-lg border-2 font-mono ${
+                              <div className="flex-1 pl-4 sm:pl-7">
+                                <div className={`inline-flex flex-wrap items-center gap-3 px-5 py-3 rounded-xl border-2 font-mono ${
                                   isDark 
                                     ? "border-emerald-500 bg-emerald-950/40 text-emerald-200 shadow-[0_0_15px_rgba(16,185,129,0.15)]" 
                                     : "border-emerald-700 bg-emerald-50 text-emerald-950 font-bold shadow-xs"
                                 }`}>
                                   <span className="text-[11px] font-black uppercase tracking-wider">Conclusion:</span>
-                                  <span className="text-xs sm:text-sm font-bold underline decoration-double decoration-current underline-offset-4">
+                                  <span className="text-sm sm:text-base font-bold underline decoration-double decoration-current underline-offset-4">
                                     <PremiumMathRenderer content={item.conclusion} isDark={isDark} />
                                   </span>
                                 </div>

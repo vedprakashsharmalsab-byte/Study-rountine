@@ -35,7 +35,7 @@ export const THEOREMS_AND_EXAMPLES_BANK: BoardTheoremOrExample[] = [
     ncertReference: "NCERT Class 10, Chapter 6, Theorem 6.1 (Page 124)",
     statement: "If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, the other two sides are divided in the same ratio.",
     given: "A triangle △ABC in which a line parallel to side BC intersects other two sides AB and AC at D and E respectively (DE ∥ BC).",
-    toProve: "$\\frac{AD}{DB} = \\frac{AE}{EC}$",
+    toProve: "$\\dfrac{AD}{DB} = \\dfrac{AE}{EC}$",
     construction: "Join BE and CD, and draw DM ⊥ AC and EN ⊥ AB.",
     sheetSteps: [
       {
@@ -44,7 +44,7 @@ export const THEOREMS_AND_EXAMPLES_BANK: BoardTheoremOrExample[] = [
       },
       {
         marginTag: "To Prove",
-        content: "$\\frac{AD}{DB} = \\frac{AE}{EC}$"
+        content: "$\\dfrac{AD}{DB} = \\dfrac{AE}{EC}$"
       },
       {
         marginTag: "Constr.",
@@ -52,27 +52,27 @@ export const THEOREMS_AND_EXAMPLES_BANK: BoardTheoremOrExample[] = [
       },
       {
         marginTag: "Step 1",
-        content: "$\\text{Area}(\\Delta ADE) = \\frac{1}{2} \\times \\text{base} \\times \\text{height} = \\frac{1}{2} \\times AD \\times EN$",
+        content: "$\\text{Area}(\\Delta ADE) = \\dfrac{1}{2} \\times \\text{base} \\times \\text{height} = \\dfrac{1}{2} \\times AD \\times EN$",
         reason: "Taking AD as base, EN is altitude"
       },
       {
         marginTag: "Step 2",
-        content: "$\\text{Area}(\\Delta BDE) = \\frac{1}{2} \\times DB \\times EN$",
+        content: "$\\text{Area}(\\Delta BDE) = \\dfrac{1}{2} \\times DB \\times EN$",
         reason: "EN is altitude on extended base DB"
       },
       {
         marginTag: "Ratio 1",
-        content: "$\\frac{\\text{Area}(\\Delta ADE)}{\\text{Area}(\\Delta BDE)} = \\frac{\\frac{1}{2} \\times AD \\times EN}{\\frac{1}{2} \\times DB \\times EN} = \\frac{AD}{DB} \\quad \\dots (1)$",
+        content: "$\\dfrac{\\text{Area}(\\Delta ADE)}{\\text{Area}(\\Delta BDE)} = \\dfrac{\\dfrac{1}{2} \\times AD \\times EN}{\\dfrac{1}{2} \\times DB \\times EN} = \\dfrac{AD}{DB} \\quad \\dots (1)$",
         reason: "Dividing Eq (1) by Eq (2)"
       },
       {
         marginTag: "Step 3",
-        content: "Similarly, $\\text{Area}(\\Delta ADE) = \\frac{1}{2} \\times AE \\times DM$ and $\\text{Area}(\\Delta DEC) = \\frac{1}{2} \\times EC \\times DM$",
+        content: "Similarly, $\\text{Area}(\\Delta ADE) = \\dfrac{1}{2} \\times AE \\times DM$ and $\\text{Area}(\\Delta DEC) = \\dfrac{1}{2} \\times EC \\times DM$",
         reason: "Taking AE & EC as bases with altitude DM"
       },
       {
         marginTag: "Ratio 2",
-        content: "$\\frac{\\text{Area}(\\Delta ADE)}{\\text{Area}(\\Delta DEC)} = \\frac{\\frac{1}{2} \\times AE \\times DM}{\\frac{1}{2} \\times EC \\times DM} = \\frac{AE}{EC} \\quad \\dots (2)$",
+        content: "$\\dfrac{\\text{Area}(\\Delta ADE)}{\\text{Area}(\\Delta DEC)} = \\dfrac{\\dfrac{1}{2} \\times AE \\times DM}{\\dfrac{1}{2} \\times EC \\times DM} = \\dfrac{AE}{EC} \\quad \\dots (2)$",
         reason: "Dividing equations"
       },
       {
@@ -87,11 +87,11 @@ export const THEOREMS_AND_EXAMPLES_BANK: BoardTheoremOrExample[] = [
       },
       {
         marginTag: "Equating",
-        content: "From (1), (2), and (3), the left-hand sides are equal: $\\frac{\\text{Area}(\\Delta ADE)}{\\text{Area}(\\Delta BDE)} = \\frac{\\text{Area}(\\Delta ADE)}{\\text{Area}(\\Delta DEC)}$",
+        content: "From (1), (2), and (3), the left-hand sides are equal: $\\dfrac{\\text{Area}(\\Delta ADE)}{\\text{Area}(\\Delta BDE)} = \\dfrac{\\text{Area}(\\Delta ADE)}{\\text{Area}(\\Delta DEC)}$",
         reason: "Numerators identical, denominators equal from (3)"
       }
     ],
-    conclusion: "$\\frac{AD}{DB} = \\frac{AE}{EC} \\quad \\text{[Hence Proved]}$",
+    conclusion: "$\\dfrac{AD}{DB} = \\dfrac{AE}{EC} \\quad \\text{[Hence Proved]}$",
     examinerTrap: "Crucial Examiner Check: 1 Mark is deducted if you forget to state 'EN is perpendicular to AB and acts as altitude for the obtuse triangle △BDE'. Always write the reason for Eq (3) clearly!"
   },
   {

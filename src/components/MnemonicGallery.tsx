@@ -1,18 +1,23 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { 
   Sparkles, 
-  ZoomIn, 
+  ZoomIn,
+  ZoomOut,
   X, 
   ChevronLeft, 
   ChevronRight, 
   Download, 
   BookOpen, 
   CheckCircle2,
-  Maximize2
+  Maximize2,
+  RotateCcw,
+  Layers,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
 
 export interface ChapterMnemonicGroup {
@@ -473,14 +478,24 @@ export const SCIENCE_MNEMONIC_CHAPTERS: ChapterMnemonicGroup[] = [
     ],
     images: [
       {
-        title: "Life Processes Comprehensive System Map",
-        src: "/mnemonics/science/ch5_life_processes_detailed.jpeg",
-        description: "Complete visual atlas of human digestive, respiratory, circulatory, and excretory pathways."
+        title: "Life Processes — Complete System Map [4K HD]",
+        src: "/mnemonics/science/ch5_life_processes_detailed_hd.jpeg",
+        description: "Ultra-sharp 4K atlas: Nutrition (alimentary canal, enzymes), Respiration (aerobic/anaerobic pathways), Circulation (double circulation heart diagram), Excretion (nephron Bowman\u2019s capsule to collecting duct)."
       },
       {
-        title: "Life Processes Quick Revision Map",
+        title: "Life Processes — Quick Revision Flowchart [4K HD]",
+        src: "/mnemonics/science/ch5_life_processes_map_hd.jpeg",
+        description: "Photosynthesis equation & chloroplast diagram, enzyme breakdown table (Amylase, Pepsin, Trypsin, Lipase, Bile Salts), nephron pathway labels, heart facts, and Board Exam warning tips."
+      },
+      {
+        title: "Life Processes — Original Detailed Infographic",
+        src: "/mnemonics/science/ch5_life_processes_detailed.jpeg",
+        description: "Original detailed infographic covering all four life process systems with visual pathways."
+      },
+      {
+        title: "Life Processes — Original System Map",
         src: "/mnemonics/science/ch5_life_processes_map.jpeg",
-        description: "Enzyme breakdown tables (pepsin, trypsin, lipase, amylase) and stomata guard cell mechanism."
+        description: "Original system map with enzyme tables, stomata mechanism, and circulatory overview."
       }
     ]
   },
@@ -1174,6 +1189,41 @@ export const SST_MNEMONIC_CHAPTERS: ChapterMnemonicGroup[] = [
   }
 ];
 
+// Life Processes Key Anatomical Pathways for the drawer
+const LIFE_PROCESSES_KEY_POINTS: Record<string, string[]> = {
+  "/mnemonics/science/ch5_life_processes_detailed_hd.jpeg": [
+    "NUTRITION: Salivary Amylase (Mouth) → Starch → Maltose",
+    "NUTRITION: Pepsin + HCl (Stomach) → Protein → Peptides",
+    "NUTRITION: Trypsin (Pancreas via Small Intestine) → Proteins → Amino acids",
+    "NUTRITION: Lipase (Pancreas) → Fats → Fatty acids + Glycerol",
+    "NUTRITION: Bile (Liver) → Emulsification of fats (NOT digestion)",
+    "RESPIRATION: Aerobic = 38 ATP (Mitochondria); Anaerobic Yeast = 2 ATP (Ethanol+CO₂)",
+    "RESPIRATION: Anaerobic Muscle → Lactic Acid + 2 ATP (causes cramps)",
+    "CIRCULATION: Double Circulation = Pulmonary + Systemic",
+    "CIRCULATION: Right Atrium → Right Ventricle → Pulmonary Artery → Lungs (deoxygenated)",
+    "CIRCULATION: Lungs → Pulmonary Vein → Left Atrium → Left Ventricle → Aorta (oxygenated)",
+    "EXCRETION: Glomerulus = ultrafiltration under high blood pressure",
+    "EXCRETION: PCT = Reabsorption of glucose, amino acids, water",
+    "EXCRETION: Loop of Henle = Concentration (water reabsorption)",
+    "EXCRETION: Collecting Duct → Ureter → Urinary Bladder → Urethra"
+  ],
+  "/mnemonics/science/ch5_life_processes_map_hd.jpeg": [
+    "Photosynthesis: 6CO₂ + 12H₂O → (Light/Chlorophyll) → C₆H₁₂O₆ + 6O₂ + 6H₂O",
+    "Chloroplast: Light Reaction (Grana) → splits water, releases O₂",
+    "Chloroplast: Dark Reaction (Stroma) → CO₂ fixation → glucose",
+    "Stomata: Guard cells OPEN in day (light), CLOSE at night",
+    "Aerobic respiration = 38 ATP (NOT 36 — common CBSE trap!)",
+    "Anaerobic Yeast: Ethanol + CO₂ + 2 ATP",
+    "Anaerobic Muscle: Lactic Acid + 2 ATP",
+    "Enzyme Table: Salivary Amylase | Pepsin | Trypsin | Lipase | Bile Salts",
+    "Bile is NOT an enzyme — it emulsifies fats only",
+    "Nephron: Afferent arteriole → Glomerulus → Bowman's Capsule → PCT → Loop of Henle → DCT → Collecting Duct",
+    "SA Node = Natural Pacemaker of the heart",
+    "Heart rate ≈ 72 beats/min; double circulation in humans",
+    "Renal artery = Oxygenated blood TO kidney; Renal vein = Deoxygenated blood FROM kidney"
+  ]
+};
+
 export default function MnemonicGallery({ isDark = true }: { isDark?: boolean }) {
   const [activeSubject, setActiveSubject] = useState<"math" | "science" | "sst">("sst");
   const [selectedChapterId, setSelectedChapterId] = useState<number>(1);
@@ -1183,6 +1233,13 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
     description: string;
   } | null>(null);
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+  // Deep Zoom state
+  const [modalZoom, setModalZoom] = useState<number>(100);
+  const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [dragStart, setDragStart] = useState<{ x: number; y: number; panX: number; panY: number } | null>(null);
+  const [showKeyPointsDrawer, setShowKeyPointsDrawer] = useState<boolean>(false);
+  const imgContainerRef = useRef<HTMLDivElement>(null);
 
   const baseList = activeSubject === "sst" ? SST_MNEMONIC_CHAPTERS : activeSubject === "science" ? SCIENCE_MNEMONIC_CHAPTERS : MNEMONIC_CHAPTERS;
   const activeChapterList = useMemo(() => [...baseList].sort((a, b) => a.chapterId - b.chapterId), [baseList]);
@@ -1193,6 +1250,57 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
   const [mounted, setMounted] = useState<boolean>(false);
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // Reset zoom/pan when modal changes
+  useEffect(() => {
+    setModalZoom(100);
+    setPanOffset({ x: 0, y: 0 });
+    setShowKeyPointsDrawer(false);
+    setIsDragging(false);
+    setDragStart(null);
+  }, [activeModalImage]);
+
+  const handleZoomIn = useCallback(() => {
+    setModalZoom(prev => {
+      const steps = [100, 150, 200, 300];
+      const idx = steps.findIndex(s => s >= prev);
+      return steps[Math.min(idx + 1, steps.length - 1)];
+    });
+  }, []);
+
+  const handleZoomOut = useCallback(() => {
+    setModalZoom(prev => {
+      const steps = [100, 150, 200, 300];
+      const idx = steps.findIndex(s => s >= prev);
+      const newIdx = Math.max(idx - 1, 0);
+      if (newIdx === 0) setPanOffset({ x: 0, y: 0 });
+      return steps[newIdx];
+    });
+  }, []);
+
+  const handleZoomReset = useCallback(() => {
+    setModalZoom(100);
+    setPanOffset({ x: 0, y: 0 });
+  }, []);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (modalZoom <= 100) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setIsDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY, panX: panOffset.x, panY: panOffset.y });
+  }, [modalZoom, panOffset]);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging || !dragStart) return;
+    const dx = e.clientX - dragStart.x;
+    const dy = e.clientY - dragStart.y;
+    setPanOffset({ x: dragStart.panX + dx, y: dragStart.panY + dy });
+  }, [isDragging, dragStart]);
+
+  const handlePointerUp = useCallback(() => {
+    setIsDragging(false);
+    setDragStart(null);
   }, []);
 
   useEffect(() => {
@@ -1467,51 +1575,115 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
         </div>
       </div>
 
-      {/* Lightbox / Zoom Modal via Portal */}
+      {/* Lightbox / Deep-Zoom Modal via Portal */}
       {mounted && activeModalImage && createPortal(
         <div
-          className="fixed inset-0 bg-black/85 z-[99999] flex items-center justify-center p-3 sm:p-6 select-none"
-          onClick={() => setActiveModalImage(null)}
+          className="fixed inset-0 bg-black/90 z-[99999] flex flex-col select-none"
           role="dialog"
           aria-modal="true"
         >
-          <div
-            className="relative w-full max-w-5xl max-h-[92vh] flex flex-col rounded-3xl border border-white/15 bg-[#0b0f19] overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-black/40">
-              <div>
-                <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-400" />
-                  {activeModalImage.title}
-                </h3>
-                <p className="text-xs text-slate-400 truncate max-w-xl">
-                  {activeModalImage.description}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <a
-                  href={activeModalImage.src}
-                  download
-                  className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-colors"
-                  title="Download Image"
-                >
-                  <Download className="w-4 h-4" />
-                </a>
-                <button
-                  onClick={() => setActiveModalImage(null)}
-                  className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-colors cursor-pointer"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+          {/* Modal Header */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#0b0f19]/95 backdrop-blur-md shrink-0">
+            <div className="min-w-0 flex-1 mr-4">
+              <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2 truncate">
+                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                {activeModalImage.title}
+              </h3>
+              <p className="text-xs text-slate-400 truncate max-w-xl">
+                {activeModalImage.description}
+              </p>
             </div>
 
-            {/* Modal Image Body */}
-            <div className="flex-1 overflow-auto p-2 sm:p-4 bg-black/60 flex items-center justify-center min-h-[50vh]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div className="flex items-center gap-1.5 shrink-0">
+              {/* Key Points Toggle */}
+              {LIFE_PROCESSES_KEY_POINTS[activeModalImage.src] && (
+                <button
+                  onClick={() => setShowKeyPointsDrawer(v => !v)}
+                  className={`px-2.5 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-colors cursor-pointer ${
+                    showKeyPointsDrawer
+                      ? "bg-teal-500 text-slate-950 border-teal-400"
+                      : "bg-white/5 hover:bg-white/10 text-teal-300 border-white/10"
+                  }`}
+                  title="Toggle Key Points Drawer"
+                >
+                  <Layers className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Key Points</span>
+                </button>
+              )}
+              {/* Zoom Controls */}
+              <div className="flex items-center gap-1 px-2 py-1 rounded-xl bg-white/5 border border-white/10">
+                <button
+                  onClick={handleZoomOut}
+                  disabled={modalZoom <= 100}
+                  className="p-1 rounded-lg text-slate-300 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  title="Zoom Out"
+                >
+                  <ZoomOut className="w-4 h-4" />
+                </button>
+                <span className="text-xs font-mono font-bold text-amber-400 min-w-[3rem] text-center">{modalZoom}%</span>
+                <button
+                  onClick={handleZoomIn}
+                  disabled={modalZoom >= 300}
+                  className="p-1 rounded-lg text-slate-300 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  title="Zoom In"
+                >
+                  <ZoomIn className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleZoomReset}
+                  disabled={modalZoom === 100}
+                  className="p-1 rounded-lg text-slate-300 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer ml-0.5"
+                  title="Reset Zoom"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                </button>
+              </div>
+              {/* Zoom preset buttons */}
+              <div className="hidden sm:flex items-center gap-1">
+                {[150, 200, 300].map(z => (
+                  <button
+                    key={z}
+                    onClick={() => { setModalZoom(z); if (z === 100) setPanOffset({ x: 0, y: 0 }); }}
+                    className={`px-2 py-1 rounded-lg text-[11px] font-mono font-bold border transition-colors cursor-pointer ${
+                      modalZoom === z
+                        ? "bg-amber-500 text-slate-950 border-amber-400"
+                        : "bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border-white/10"
+                    }`}
+                  >
+                    {z}%
+                  </button>
+                ))}
+              </div>
+              <a
+                href={activeModalImage.src}
+                download
+                className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-colors"
+                title="Download Image"
+              >
+                <Download className="w-4 h-4" />
+              </a>
+              <button
+                onClick={() => setActiveModalImage(null)}
+                className="p-2 rounded-xl bg-white/5 hover:bg-red-500/20 text-slate-300 hover:text-red-400 border border-white/10 transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Main body: image + optional drawer */}
+          <div className="flex flex-1 min-h-0">
+            {/* Image Viewport */}
+            <div
+              ref={imgContainerRef}
+              className={`flex-1 overflow-hidden flex items-center justify-center bg-black/70 ${
+                modalZoom > 100 ? (isDragging ? "cursor-grabbing" : "cursor-grab") : "cursor-default"
+              }`}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerLeave={handlePointerUp}
+            >
               {failedImages[activeModalImage.src] ? (
                 <div className="flex flex-col items-center justify-center p-8 text-center space-y-3">
                   <Sparkles className="w-16 h-16 text-amber-400 opacity-80" />
@@ -1519,15 +1691,69 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
                   <p className="text-xs text-slate-400 max-w-md">{activeModalImage.description}</p>
                 </div>
               ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   src={activeModalImage.src}
                   alt={activeModalImage.title}
                   onError={() => setFailedImages((prev) => ({ ...prev, [activeModalImage.src]: true }))}
-                  className="max-w-full max-h-[78vh] object-contain rounded-xl shadow-2xl"
+                  draggable={false}
+                  style={{
+                    transform: `translate(${panOffset.x}px, ${panOffset.y}px) scale(${modalZoom / 100})`,
+                    transformOrigin: "center center",
+                    transition: isDragging ? "none" : "transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94)",
+                    imageRendering: "high-quality" as React.CSSProperties["imageRendering"],
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "contain",
+                    userSelect: "none",
+                    WebkitUserSelect: "none",
+                  }}
+                  className="rounded-xl shadow-2xl"
                 />
               )}
             </div>
+
+            {/* Key Anatomical Pathways Drawer */}
+            {showKeyPointsDrawer && LIFE_PROCESSES_KEY_POINTS[activeModalImage.src] && (
+              <div className="w-80 shrink-0 flex flex-col border-l border-white/10 bg-[#0b0f19]/95 overflow-hidden">
+                <div className="px-4 py-3 border-b border-white/10 bg-teal-500/10">
+                  <h4 className="text-sm font-black text-teal-300 flex items-center gap-2">
+                    <Layers className="w-4 h-4" /> Key Anatomical Pathways
+                  </h4>
+                  <p className="text-[11px] text-slate-400 mt-0.5">All labels, enzymes, and board-critical facts</p>
+                </div>
+                <div className="flex-1 overflow-y-auto p-3 space-y-2">
+                  {LIFE_PROCESSES_KEY_POINTS[activeModalImage.src].map((point, i) => {
+                    const [category, ...rest] = point.split(":");
+                    const hasCategory = rest.length > 0;
+                    return (
+                      <div
+                        key={i}
+                        className="flex items-start gap-2 p-2.5 rounded-xl bg-white/5 border border-white/5 text-xs"
+                      >
+                        <span className="text-teal-400 font-black shrink-0 mt-0.5">•</span>
+                        <span>
+                          {hasCategory && (
+                            <span className="font-black text-amber-400 mr-1">{category}:</span>
+                          )}
+                          <span className="text-slate-200 leading-relaxed">{hasCategory ? rest.join(":") : point}</span>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
+
+          {/* Zoom hint bar */}
+          {modalZoom > 100 && (
+            <div className="px-4 py-2 bg-black/70 border-t border-white/5 flex items-center justify-center gap-2 shrink-0">
+              <span className="text-[11px] text-slate-400 font-mono">
+                🖱️ Drag to pan • Scroll zoom buttons to explore • Currently at {modalZoom}%
+              </span>
+            </div>
+          )}
         </div>,
         document.body
       )}

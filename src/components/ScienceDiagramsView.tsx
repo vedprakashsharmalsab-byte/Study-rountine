@@ -311,11 +311,19 @@ export default function ScienceDiagramsView({
               >
                 {/* IMAGE CONTAINER — CLEAN WHITE WELL, ZERO BLUR, CLICK TO INSPECT */}
                 <div
+                  role="button"
+                  tabIndex={0}
                   onClick={() => {
                     setActiveZoomAsset(diag);
                     setZoomScale(1);
                   }}
-                  className="relative bg-white border-b border-slate-200 p-3.5 min-h-[220px] max-h-[240px] flex items-center justify-center cursor-pointer group select-none"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      setActiveZoomAsset(diag);
+                      setZoomScale(1);
+                    }
+                  }}
+                  className="relative bg-white border-b border-slate-200 p-3.5 min-h-[220px] max-h-[240px] flex items-center justify-center cursor-pointer group touch-manipulation"
                 >
                   {imageErrorMap[diag.id] ? (
                     <div className="flex flex-col items-center justify-center p-6 text-center space-y-2 text-slate-500 min-h-[180px]">
@@ -724,7 +732,7 @@ export default function ScienceDiagramsView({
           ========================================================================= */}
       {mounted && activeZoomAsset && createPortal(
         <div
-          className="fixed inset-0 z-[99999] bg-black/85 flex items-center justify-center p-3 sm:p-6 select-none"
+          className="fixed inset-0 z-[99999] bg-black/85 flex items-center justify-center p-2.5 sm:p-6"
           onClick={() => setActiveZoomAsset(null)}
           role="dialog"
           aria-modal="true"
@@ -735,11 +743,11 @@ export default function ScienceDiagramsView({
             }`}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* MODAL HEADER */}
-            <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between gap-4 shrink-0">
-              <div className="space-y-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-cyan-500 text-slate-950">
+            {/* MODAL HEADER (RESPONSIVE STACKING FOR MOBILE) */}
+            <div className="p-3.5 sm:p-5 border-b border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shrink-0">
+              <div className="space-y-1 min-w-0 w-full sm:w-auto">
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                  <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-cyan-500 text-slate-950">
                     Ch {activeZoomAsset.chapterNo}
                   </span>
                   <span className="text-xs font-mono text-cyan-400 font-bold">
@@ -752,16 +760,16 @@ export default function ScienceDiagramsView({
                     {activeZoomAsset.boardFrequency}
                   </span>
                 </div>
-                <h2 className="text-base sm:text-lg font-black truncate">{activeZoomAsset.title}</h2>
+                <h2 className="text-sm sm:text-lg font-black truncate">{activeZoomAsset.title}</h2>
               </div>
 
               {/* ZOOM CONTROLS & ACTIONS */}
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0">
                 {/* ZOOM CONTROLS */}
                 <div className={`flex items-center rounded-xl border p-1 ${isDark ? "bg-black/50 border-white/10" : "bg-slate-100 border-slate-200"}`}>
                   <button
                     onClick={handleZoomOut}
-                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer"
+                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer touch-manipulation min-w-[32px] min-h-[32px] flex items-center justify-center"
                     title="Zoom Out"
                   >
                     <ZoomOut className="w-4 h-4" />
@@ -771,40 +779,42 @@ export default function ScienceDiagramsView({
                   </span>
                   <button
                     onClick={handleZoomIn}
-                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer"
+                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer touch-manipulation min-w-[32px] min-h-[32px] flex items-center justify-center"
                     title="Zoom In"
                   >
                     <ZoomIn className="w-4 h-4" />
                   </button>
                   <button
                     onClick={handleResetZoom}
-                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer ml-1"
+                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer ml-1 touch-manipulation min-w-[32px] min-h-[32px] flex items-center justify-center"
                     title="Reset Zoom (100%)"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
-                {/* OPEN IN NEW TAB */}
-                <a
-                  href={activeZoomAsset.imageUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-bold"
-                  title="Open High-Res Original Image in New Tab"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span className="hidden sm:inline">Raw High-Res</span>
-                </a>
+                <div className="flex items-center gap-1.5">
+                  {/* OPEN IN NEW TAB */}
+                  <a
+                    href={activeZoomAsset.imageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 sm:p-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-bold touch-manipulation min-h-[36px]"
+                    title="Open High-Res Original Image in New Tab"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span className="hidden md:inline">Raw High-Res</span>
+                  </a>
 
-                {/* CLOSE BUTTON */}
-                <button
-                  onClick={() => setActiveZoomAsset(null)}
-                  className="p-2.5 rounded-xl bg-white/10 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 border border-white/10 transition-all cursor-pointer"
-                  title="Close Modal (Esc)"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+                  {/* CLOSE BUTTON */}
+                  <button
+                    onClick={() => setActiveZoomAsset(null)}
+                    className="p-2 sm:p-2.5 rounded-xl bg-white/10 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 border border-white/10 transition-all cursor-pointer touch-manipulation min-w-[36px] min-h-[36px] flex items-center justify-center"
+                    title="Close Modal (Esc)"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </div>
 

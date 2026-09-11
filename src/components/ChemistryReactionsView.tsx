@@ -211,7 +211,7 @@ export default function ChemistryReactionsView({
               <button
                 key={String(f.no)}
                 onClick={() => setSelectedChapter(f.no as any)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all border ${
+                className={`px-3 py-2 rounded-xl text-xs font-bold shrink-0 transition-all border touch-manipulation min-h-[36px] ${
                   selectedChapter === f.no
                     ? "bg-emerald-500 text-slate-950 border-emerald-400 shadow-sm"
                     : isDark
@@ -266,7 +266,9 @@ export default function ChemistryReactionsView({
               {/* TOP STRIP */}
               <div
                 onClick={() => toggleExpand(rx.id)}
-                className="p-5 sm:p-6 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4 select-none"
+                role="button"
+                tabIndex={0}
+                className="p-4 sm:p-6 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 select-none touch-manipulation"
               >
                 <div className="space-y-2 flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -290,7 +292,7 @@ export default function ChemistryReactionsView({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
+                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 self-end sm:self-center">
                   <span className={`px-2.5 py-1 rounded-xl text-[11px] font-bold ${
                     rx.heatTransfer === "Exothermic" ? "bg-rose-500/10 text-rose-400 border border-rose-500/20" :
                     rx.heatTransfer === "Endothermic" ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" :
@@ -305,7 +307,7 @@ export default function ChemistryReactionsView({
                       copyEquation(rx.id, rx.balancedEquation);
                     }}
                     title="Copy LaTeX equation"
-                    className={`p-2 rounded-xl border transition-colors ${
+                    className={`p-2.5 rounded-xl border transition-colors touch-manipulation min-w-[36px] min-h-[36px] flex items-center justify-center cursor-pointer ${
                       isDark ? "bg-white/5 border-white/10 hover:bg-white/10 text-slate-300" : "bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-600"
                     }`}
                   >

@@ -450,7 +450,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                   playSoundEffect("click");
                   setActiveMode(tab.id as ViewMode);
                 }}
-                className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+                className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border touch-manipulation min-h-[44px] ${
                   isActive
                     ? "bg-amber-500 text-slate-950 border-amber-400 shadow-md shadow-amber-500/25 font-black scale-102"
                     : isDark
@@ -503,7 +503,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                   setSelectedChapter(ch.id as any);
                   setSelectedEra("all");
                 }}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border touch-manipulation min-h-[38px] ${
                   selectedChapter === ch.id
                     ? "bg-amber-500/20 border-amber-500 text-amber-400"
                     : isDark
@@ -638,7 +638,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                     <button
                       key={station.id}
                       onClick={() => handleMetroTravel(station.id)}
-                      className={`group relative flex items-center gap-2.5 px-3.5 py-2 rounded-2xl border transition-all cursor-pointer shrink-0 ${
+                      className={`group relative flex items-center gap-2.5 px-3.5 py-2 rounded-2xl border transition-all cursor-pointer shrink-0 touch-manipulation min-h-[44px] ${
                         isActive
                           ? "bg-amber-500 text-slate-950 border-amber-400 font-black scale-105 shadow-md shadow-amber-500/30"
                           : isDone
