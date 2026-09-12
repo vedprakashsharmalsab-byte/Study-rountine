@@ -75,11 +75,11 @@ export const CH7_COORDINATE_GEOM_CONCEPT: MathChapterConcept = {
       label: "3. The Section Formula (The Seesaw Balance)",
       heading: "Dividing a Line Segment in Ratio $m_1 : m_2$",
       subheading: "Internal Division Coordinates + The High-Speed $k : 1$ Method",
-      explanation: "Suppose point $P(x, y)$ sits on the segment connecting $A(x_1, y_1)$ and $B(x_2, y_2)$, dividing the distance in the ratio $m_1 : m_2$ (that is, $\\frac{AP}{PB} = \\frac{m_1}{m_2}$).  \n\n**The Seesaw Weighted Average Principle:**  \nPoint $P$ is pulled towards both ends! The mass $m_1$ on the left multiplies the coordinate of the OPPOSITE point $B$ on the right, and vice versa (Criss-Cross Multiplication):  \n$$\\mathbf{P(x, y) = \\left( \\frac{m_1 x_2 + m_2 x_1}{m_1 + m_2}, \\; \\frac{m_1 y_2 + m_2 y_1}{m_1 + m_2} \\right)}$$  \n\n**The $k : 1$ Shortcut for Finding Unknown Ratios:**  \nWhenever a problem asks: *'In what ratio does the X-axis / Y-axis divide the segment AB?'*, NEVER use two variables $m_1 : m_2$!  \nAlways assume the ratio is **$k : 1$**:  \n$$\\mathbf{P(x, y) = \\left( \\frac{k x_2 + x_1}{k + 1}, \\; \\frac{k y_2 + y_1}{k + 1} \\right)}$$  \n$\\bullet$ If divided by the **X-axis**: set the $y$-coordinate to **0** and solve for $k$!  \n$\\bullet$ If divided by the **Y-axis**: set the $x$-coordinate to **0** and solve for $k$!",
+      explanation: "Suppose point $P(x, y)$ sits on the segment connecting $A(x_1, y_1)$ and $B(x_2, y_2)$, dividing the distance in the ratio $m_1 : m_2$ (that is, $\\dfrac{AP}{PB} = \\dfrac{m_1}{m_2}$).\n\n**The Seesaw Weighted Average Principle:**\nPoint $P$ is pulled towards both ends! The mass $m_1$ on the left multiplies the coordinate of the OPPOSITE point $B$ on the right, and vice versa (Criss-Cross Multiplication):\n$$P(x, y) \\;=\\; \\left( \\dfrac{m_1 x_2 + m_2 x_1}{m_1 + m_2}, \\; \\dfrac{m_1 y_2 + m_2 y_1}{m_1 + m_2} \\right)$$\n\n**The $k : 1$ Shortcut for Finding Unknown Ratios:**\nWhenever a problem asks: *'In what ratio does the X-axis / Y-axis divide the segment AB?'*, NEVER use two variables $m_1 : m_2$!\nAlways assume the ratio is **$k : 1$**:\n$$P(x, y) \\;=\\; \\left( \\dfrac{k x_2 + x_1}{k + 1}, \\; \\dfrac{k y_2 + y_1}{k + 1} \\right)$$\n• If divided by the **X-axis**: set the $y$-coordinate to **0** and solve for $k$!\n• If divided by the **Y-axis**: set the $x$-coordinate to **0** and solve for $k$!",
       formulasOrKeyPoints: [
         {
           title: "Axis Division Summary Formulas",
-          content: "$$\\text{Ratio in which X-axis divides } AB = \\mathbf{-\\frac{y_1}{y_2}} \\qquad (\\text{since } y = 0)$$  \n$$\\text{Ratio in which Y-axis divides } AB = \\mathbf{-\\frac{x_1}{x_2}} \\qquad (\\text{since } x = 0)$$",
+          content: "$$\\text{Ratio in which X-axis divides } AB \\;=\\; -\\dfrac{y_1}{y_2} \\qquad (\\text{since } y = 0)$$\n$$\\text{Ratio in which Y-axis divides } AB \\;=\\; -\\dfrac{x_1}{x_2} \\qquad (\\text{since } x = 0)$$",
           note: "Use this 1-second ratio formula to check your answer in MCQs!"
         }
       ],
@@ -109,11 +109,11 @@ export const CH7_COORDINATE_GEOM_CONCEPT: MathChapterConcept = {
       label: "4. Midpoint Formula & Points of Trisection",
       heading: "The Equal Split ($1:1$) & Slicing into Three Equal Parts",
       subheading: "Midpoints of Diagonals (Parallelogram 4th Vertex Weapon)",
-      explanation: "When $P$ is the exact midpoint of $AB$, the ratio is $1:1$ ($m_1 = m_2 = 1$). The section formula collapses into the simple arithmetic mean:  \n$$\\mathbf{M(x, y) = \\left( \\frac{x_1 + x_2}{2}, \\; \\frac{y_1 + y_2}{2} \\right)}$$  \n\n**Points of Trisection (Dividing into 3 Equal Pieces):**  \nLine segment $AB$ is divided into 3 equal parts by two points $P$ and $Q$:  \n$$\\bullet \\; P \\text{ divides } AB \\text{ in the ratio } \\mathbf{1 : 2}$$  \n$$\\bullet \\; Q \\text{ divides } AB \\text{ in the ratio } \\mathbf{2 : 1} \\quad (\\text{or } Q \\text{ is simply the } \\mathbf{\\text{midpoint of } PB}!)$$  \n\n**The Parallelogram 4th Vertex Weapon:**  \nIn any parallelogram (or rhombus, rectangle, square), **the diagonals bisect each other**!  \n$$\\mathbf{\\text{Midpoint of diagonal } AC = \\text{Midpoint of diagonal } BD}$$  \nEquating their $x$ and $y$ coordinates finds the 4th unknown vertex $D(x, y)$ in under 3 lines!",
+      explanation: "When $P$ is the exact midpoint of $AB$, the ratio is $1:1$ ($m_1 = m_2 = 1$). The section formula collapses into the simple arithmetic mean:\n$$M(x, y) \\;=\\; \\left( \\dfrac{x_1 + x_2}{2}, \\; \\dfrac{y_1 + y_2}{2} \\right)$$\n\n**Points of Trisection (Dividing into 3 Equal Pieces):**\nLine segment $AB$ is divided into 3 equal parts by two points $P$ and $Q$:\n• $P$ divides $AB$ in the ratio **$1 : 2$**\n• $Q$ divides $AB$ in the ratio **$2 : 1$** (or $Q$ is simply the **midpoint of $PB$**!)\n\n**The Parallelogram 4th Vertex Weapon:**\nIn any parallelogram (or rhombus, rectangle, square), **the diagonals bisect each other**!\n$$\\text{Midpoint of diagonal } AC \\;=\\; \\text{Midpoint of diagonal } BD$$\nEquating their $x$ and $y$ coordinates finds the 4th unknown vertex $D(x, y)$ in under 3 lines!",
       formulasOrKeyPoints: [
         {
           title: "Centroid of a Triangle Formula",
-          content: "The centroid $G$ is the concurrency point of the three medians of $\\triangle ABC$. It divides each median in the ratio $2:1$:  \n$$\\mathbf{G(x, y) = \\left( \\frac{x_1 + x_2 + x_3}{3}, \\; \\frac{y_1 + y_2 + y_3}{3} \\right)}$$",
+          content: "The centroid $G$ is the concurrency point of the three medians of $\\triangle ABC$. It divides each median in the ratio $2:1$:\n$$G(x, y) \\;=\\; \\left( \\dfrac{x_1 + x_2 + x_3}{3}, \\; \\dfrac{y_1 + y_2 + y_3}{3} \\right)$$ ",
           note: "Centroid is simply the average of the three vertices!"
         }
       ],
@@ -121,7 +121,7 @@ export const CH7_COORDINATE_GEOM_CONCEPT: MathChapterConcept = {
         {
           stepNo: 1,
           title: "Solve Parallelogram 4th Vertex in 3 Lines",
-          action: "1. Write: 'Since diagonals of a parallelogram bisect each other, Midpoint of $AC$ = Midpoint of $BD$'.  \n2. Set $\\frac{x_A + x_C}{2} = \\frac{x_B + x_D}{2} \\implies x_A + x_C = x_B + x_D \\implies \\mathbf{x_D = x_A + x_C - x_B}$.  \n3. Repeat for $y$: $\\mathbf{y_D = y_A + y_C - y_B}$.",
+          action: "1. Write: 'Since diagonals of a parallelogram bisect each other, Midpoint of $AC$ = Midpoint of $BD$'.\n2. Set $\\dfrac{x_A + x_C}{2} = \\dfrac{x_B + x_D}{2} \\implies x_A + x_C = x_B + x_D \\implies x_D = x_A + x_C - x_B$.\n3. Repeat for $y$: $y_D = y_A + y_C - y_B$.",
           proTip: "This 4th vertex formula avoids solving complex distance equations."
         }
       ],

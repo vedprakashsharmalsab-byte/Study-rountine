@@ -445,56 +445,67 @@ export default function ConceptsHubView({
             </button>
           </div>
 
-          {/* Mobile Quick Dropdown & Chapter Navigation Toolbar */}
-          <div className="md:hidden flex items-center gap-2 pt-1">
-            <select
-              aria-label="Select Chapter directly"
-              value={activeSubject === "math" ? activeMathChapterNo : activeSubject === "science" ? activeScienceChapterNo : activeSSTChapterNo}
-              onChange={(e) => {
-                const num = parseInt(e.target.value);
-                if (activeSubject === "math") setActiveMathChapterNo(num);
-                else if (activeSubject === "science") setActiveScienceChapterNo(num);
-                else setActiveSSTChapterNo(num);
-              }}
-              className={`flex-1 px-3 py-2.5 rounded-xl text-xs font-bold border outline-none cursor-pointer truncate ${
-                isDark ? "bg-[#0b0f19] border-white/10 text-white" : "bg-white border-slate-200 text-slate-900 shadow-2xs"
-              }`}
-            >
-              {(activeSubject === "math" ? MATH_CHAPTER_LIST : activeSubject === "science" ? SCIENCE_CHAPTER_LIST : SST_CHAPTER_LIST).map((ch) => (
-                <option key={ch.no} value={ch.no} className="bg-slate-900 text-white">
-                  {ch.shortName} ({ch.weightage})
-                </option>
-              ))}
-            </select>
+          {/* Universal Chapter Dropdown & Navigation Toolbar (Mobile, Smartphone, Laptop, PC) */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
+            <div className="flex items-center gap-2 flex-1">
+              <label htmlFor="concepts-chapter-select" className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 shrink-0">
+                Chapter:
+              </label>
+              <div className="fabulous-select-wrapper flex-1">
+                <select
+                  id="concepts-chapter-select"
+                  aria-label="Select Chapter directly"
+                  value={activeSubject === "math" ? activeMathChapterNo : activeSubject === "science" ? activeScienceChapterNo : activeSSTChapterNo}
+                  onChange={(e) => {
+                    const num = parseInt(e.target.value);
+                    if (activeSubject === "math") setActiveMathChapterNo(num);
+                    else if (activeSubject === "science") setActiveScienceChapterNo(num);
+                    else setActiveSSTChapterNo(num);
+                  }}
+                  className={`fabulous-select ${
+                    isDark ? "fabulous-select-dark" : "fabulous-select-light"
+                  }`}
+                >
+                  {(activeSubject === "math" ? MATH_CHAPTER_LIST : activeSubject === "science" ? SCIENCE_CHAPTER_LIST : SST_CHAPTER_LIST).map((ch) => (
+                    <option key={ch.no} value={ch.no}>
+                      {ch.shortName} ({ch.weightage})
+                    </option>
+                  ))}
+                </select>
+                <div className="fabulous-select-icon text-zinc-400">
+                  <ChevronDown className="w-4 h-4" />
+                </div>
+              </div>
 
-            <button
-              onClick={handlePrevChapter}
-              className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center shrink-0 ${
-                isDark ? "bg-white/5 border-white/10 text-slate-300" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
-              }`}
-              title="Previous Chapter"
-              aria-label="Previous Chapter"
-            >
-              <ArrowLeft className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={handleNextChapter}
-              className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center shrink-0 ${
-                isDark ? "bg-white/5 border-white/10 text-slate-300" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
-              }`}
-              title="Next Chapter"
-              aria-label="Next Chapter"
-            >
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              {/* Prev / Next Buttons */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={handlePrevChapter}
+                  className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center transition-all cursor-pointer min-h-[42px] min-w-[42px] active:scale-95 ${
+                    isDark ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
+                  }`}
+                  title="Previous Chapter"
+                  aria-label="Previous Chapter"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleNextChapter}
+                  className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center transition-all cursor-pointer min-h-[42px] min-w-[42px] active:scale-95 ${
+                    isDark ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
+                  }`}
+                  title="Next Chapter"
+                  aria-label="Next Chapter"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* Direct Dropdown / Full Responsive Grid (Zero Horizontal Scrolling!) */}
-          {(isChapterGridOpen || true) && (
-            <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 pt-2 transition-all ${
-              !isChapterGridOpen ? "hidden md:grid" : "grid"
-            }`}>
+          {/* Direct Responsive Grid (Zero Horizontal Scrolling, toggled or displayed cleanly) */}
+          {isChapterGridOpen && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 pt-2 transition-all">
               {activeSubject === "sst"
                 ? filteredSSTChapterList.map((ch) => {
                     const isSelected = ch.no === activeSSTChapterNo;
@@ -517,7 +528,7 @@ export default function ConceptsHubView({
                       >
                         <div className="flex items-center justify-between w-full">
                           <span className="font-mono text-[10px] opacity-75">{ch.discipline}</span>
-                          <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded ${
+                          <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded leading-none inline-flex items-center ${
                             isSelected ? "bg-black/20 text-slate-950 font-bold" : "bg-white/10 text-slate-400"
                           }`}>
                             {ch.weightage}
@@ -549,7 +560,7 @@ export default function ConceptsHubView({
                       >
                         <div className="flex items-center justify-between w-full">
                           <span className="font-mono text-[10px] opacity-75">Ch {ch.no}</span>
-                          <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded ${
+                          <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded leading-none inline-flex items-center ${
                             isSelected ? "bg-black/30 text-white" : "bg-white/10 text-slate-400"
                           }`}>
                             {ch.weightage.split(" ")[0]}
@@ -628,83 +639,126 @@ export default function ConceptsHubView({
           ========================================================================= */}
       {activeSubject !== "sst" && (
       <div
-        className={`p-6 sm:p-7 rounded-3xl border transition-all ${
+        className={`p-7 sm:p-9 rounded-3xl border transition-all ${
           isDark
-            ? "bg-[#0d1424] border-blue-500/30 shadow-[0_4px_25px_rgba(59,130,246,0.1)]"
-            : "bg-blue-50/70 border-blue-200 shadow-sm"
+            ? "apple-hero-math border-blue-500/30"
+            : "apple-hero-math-light border-blue-200"
         }`}
       >
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 pb-4 border-b border-white/10">
-          <div className="space-y-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="px-3 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-5 pb-5 border-b border-white/10">
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="px-3.5 py-1 rounded-full text-[11px] font-mono font-black uppercase tracking-wider bg-blue-500 text-white shadow-md shadow-blue-500/25 flex items-center gap-1.5">
                 <Target className="w-3.5 h-3.5" /> Official CBSE Board Blueprint 2026-27
               </span>
-              <span className="text-xs font-bold text-amber-400">
+              <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
+                isDark ? "bg-amber-500/15 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-900 border-amber-300"
+              }`}>
                 {activeSubject === "math" ? activeMathBlueprint.unitName : activeScienceBlueprint.unitName}
               </span>
             </div>
-            <h3 className={`text-lg sm:text-xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+            <h3 className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
               {activeSubject === "math" ? activeMathChapter.title : activeScienceMeta.name} — Board Weightage: {activeSubject === "math" ? activeMathBlueprint.expectedMarks : activeScienceBlueprint.expectedMarks}
             </h3>
           </div>
 
-          <span className={`text-xs font-mono font-bold px-3 py-1.5 rounded-xl border ${
-            isDark ? "bg-black/40 border-white/10 text-emerald-400" : "bg-white border-blue-200 text-emerald-700"
+          <span className={`text-xs font-mono font-black px-4 py-2 rounded-2xl border shadow-xs ${
+            isDark ? "bg-emerald-500/15 border-emerald-500/35 text-emerald-300" : "bg-emerald-100 border-emerald-300 text-emerald-950"
           }`}>
             Target: 100/100 Perfect Marking
           </span>
         </div>
 
         {/* Section-Wise Expected Question Pattern */}
-        <div className="pt-4 space-y-3">
-          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 block">
-            CBSE Question Paper Pattern Breakdown for this Chapter:
-          </span>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
-            {[
-              { section: "Sec A (1 Mark)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.mcq1M, type: "MCQs / Objective" },
-              { section: "Sec B (2 Marks)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.vsa2M, type: "Very Short (VSA)" },
-              { section: "Sec C (3 Marks)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.sa3M, type: "Short Answer (SA)" },
-              { section: "Sec D (5 Marks)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.la5M, type: "Long Answer (LA)" },
-              { section: "Sec E (4 Marks)", count: (activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).questionPattern.case4M, type: "Case-Based Study" }
-            ].map((p, idx) => (
-              <div
-                key={idx}
-                className={`p-3 rounded-2xl border text-center ${
-                  isDark ? "bg-black/30 border-white/5" : "bg-white border-blue-100 shadow-2xs"
-                }`}
-              >
-                <span className="text-[10px] font-mono text-slate-400 block">{p.section}</span>
-                <span className="text-base sm:text-lg font-mono font-black text-blue-400 block my-0.5">
-                  {p.count} Question{p.count !== 1 ? "s" : ""}
+        {(() => {
+          const currentBlueprint = activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint;
+          const pattern = currentBlueprint.questionPattern;
+          const chapterTotalMarks = pattern.mcq1M * 1 + pattern.vsa2M * 2 + pattern.sa3M * 3 + pattern.la5M * 5 + pattern.case4M * 4;
+          const chapterTotalQuestions = pattern.mcq1M + pattern.vsa2M + pattern.sa3M + pattern.la5M + pattern.case4M;
+
+          return (
+            <div className="pt-6 space-y-3.5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <span className="text-xs font-mono font-black uppercase tracking-wider text-slate-400 block">
+                  CBSE Question Paper Pattern Breakdown for this Chapter:
                 </span>
-                <span className="text-[10px] text-slate-500 block truncate">{p.type}</span>
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs font-mono font-black px-3 py-1 rounded-full border ${
+                    isDark ? "bg-blue-500/15 border-blue-500/30 text-blue-300" : "bg-blue-50 border-blue-200 text-blue-800"
+                  }`}>
+                    Total: {chapterTotalMarks} Marks ({chapterTotalQuestions} Q{chapterTotalQuestions !== 1 ? "s" : ""})
+                  </span>
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5">
+                {[
+                  { section: "Sec A", marksEach: 1, count: pattern.mcq1M, type: "MCQs / Objective" },
+                  { section: "Sec B", marksEach: 2, count: pattern.vsa2M, type: "Very Short (VSA)" },
+                  { section: "Sec C", marksEach: 3, count: pattern.sa3M, type: "Short Answer (SA)" },
+                  { section: "Sec D", marksEach: 5, count: pattern.la5M, type: "Long Answer (LA)" },
+                  { section: "Sec E", marksEach: 4, count: pattern.case4M, type: "Case-Based Study" }
+                ].map((p, idx) => {
+                  const isTested = p.count > 0;
+                  const sectionTotalMarks = p.count * p.marksEach;
+                  return (
+                    <div
+                      key={idx}
+                      className={`p-4 rounded-2xl border text-center transition-all ${
+                        isTested
+                          ? isDark
+                            ? "bg-black/50 border-blue-500/30 shadow-md shadow-blue-500/5 hover:scale-[1.03] hover:border-blue-400"
+                            : "bg-white border-blue-200 shadow-sm hover:scale-[1.03] hover:border-blue-400"
+                          : isDark
+                            ? "bg-white/[0.02] border-white/5 opacity-40 grayscale-[40%]"
+                            : "bg-slate-50/70 border-slate-200/60 opacity-50"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-1 mb-1">
+                        <span className="text-[11px] font-mono font-bold text-slate-400">{p.section} ({p.marksEach}M)</span>
+                        {isTested ? (
+                          <span className="text-[10px] font-mono font-extrabold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                            +{sectionTotalMarks}M
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-mono text-slate-500 px-1.5 py-0.5 rounded bg-white/5">
+                            0M
+                          </span>
+                        )}
+                      </div>
+                      <span className={`text-xl sm:text-2xl font-mono font-black block my-1 ${
+                        isTested ? "text-blue-400" : "text-slate-500"
+                      }`}>
+                        {p.count} <span className="text-xs font-normal opacity-80">Q{p.count !== 1 ? "s" : ""}</span>
+                      </span>
+                      <span className="text-[11px] text-slate-400 block truncate font-medium">{p.type}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Step-by-Step Scoring Rubric */}
-        <div className="pt-4 mt-4 border-t border-white/10 space-y-2.5">
-          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5" /> Official CBSE Step-by-Step Mark Award Rubric:
+        <div className="pt-6 mt-6 border-t border-white/10 space-y-3">
+          <span className="text-xs font-mono font-black uppercase tracking-wider text-teal-400 flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4" /> Official CBSE Step-by-Step Mark Award Rubric:
           </span>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
             {(activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).markingSchemeRubric.map((r, i) => (
               <div
                 key={i}
-                className={`p-3 rounded-xl border flex items-start justify-between gap-3 ${
-                  isDark ? "bg-white/[0.02] border-white/5" : "bg-white border-slate-200"
+                className={`p-4 rounded-2xl border flex items-start justify-between gap-3.5 ${
+                  isDark ? "bg-white/[0.025] border-white/8" : "bg-white border-slate-200 shadow-2xs"
                 }`}
               >
-                <div className="space-y-0.5">
-                  <span className={`font-bold block ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                <div className="space-y-1">
+                  <span className={`font-bold block text-sm ${isDark ? "text-slate-100" : "text-slate-800"}`}>
                     {r.step}
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono block">{r.rubricNote}</span>
+                  <span className="text-xs text-slate-400 font-mono block">{r.rubricNote}</span>
                 </div>
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30 shrink-0">
+                <span className="px-2.5 py-1 rounded-xl text-xs font-mono font-black bg-teal-500/20 text-teal-300 border border-teal-500/35 shrink-0">
                   +{r.marks}
                 </span>
               </div>
@@ -713,15 +767,15 @@ export default function ConceptsHubView({
         </div>
 
         {/* Mandatory Examiner Penalties */}
-        <div className="pt-3 mt-3 border-t border-white/10">
-          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1.5 mb-1.5">
-            <ShieldAlert className="w-3.5 h-3.5" /> Examiner Trap Penalties (Marks Deducted by Board Evaluators):
+        <div className="pt-5 mt-5 border-t border-white/10">
+          <span className="text-xs font-mono font-black uppercase tracking-wider text-rose-400 flex items-center gap-2 mb-2">
+            <ShieldAlert className="w-4 h-4" /> Examiner Trap Penalties (Marks Deducted by Board Evaluators):
           </span>
-          <ul className="space-y-1 text-xs text-rose-300 font-medium">
+          <ul className="space-y-2 text-xs sm:text-sm text-rose-300 font-medium">
             {(activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).examinerPenalties.map((pen, i) => (
-              <li key={i} className="flex items-start gap-1.5">
-                <span className="text-rose-400 font-bold shrink-0">⚠️</span>
-                <span>{pen}</span>
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-rose-400 font-bold shrink-0 mt-0.5">⚠️</span>
+                <span className="leading-relaxed">{pen}</span>
               </li>
             ))}
           </ul>
@@ -729,40 +783,42 @@ export default function ConceptsHubView({
       </div>
       )}
 
-      {/* SST: Elegant Study Blueprint Placeholder (no per-chapter blueprint data) */}
+      {/* SST: Elegant Study Blueprint Card */}
       {activeSubject === "sst" && (
-        <div className={`p-6 sm:p-7 rounded-3xl border transition-all ${
+        <div className={`p-7 sm:p-9 rounded-3xl border transition-all ${
           isDark
-            ? "bg-[#120d1a] border-rose-500/25 shadow-[0_4px_25px_rgba(244,63,94,0.08)]"
-            : "bg-rose-50/60 border-rose-200 shadow-sm"
+            ? "apple-insight-card border-rose-500/30"
+            : "apple-insight-card-light border-rose-200"
         }`}>
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div className="space-y-1.5">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="px-3 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-5 pb-5 border-b border-white/10">
+            <div className="space-y-2">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="px-3.5 py-1 rounded-full text-[11px] font-mono font-black uppercase tracking-wider bg-rose-500 text-white shadow-md shadow-rose-500/25 flex items-center gap-1.5">
                   <Target className="w-3.5 h-3.5" /> CBSE Social Science — Chapter Strategy
                 </span>
-                <span className="text-xs font-bold text-amber-400">{'discipline' in activeSSTMeta ? activeSSTMeta.discipline : 'SST'}</span>
+                <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
+                  isDark ? "bg-amber-500/15 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-900 border-amber-300"
+                }`}>{'discipline' in activeSSTMeta ? activeSSTMeta.discipline : 'SST'}</span>
               </div>
-              <h3 className={`text-lg sm:text-xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+              <h3 className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
                 {activeSSTMeta.name} — {activeSSTMeta.weightage}
               </h3>
             </div>
-            <span className={`text-xs font-mono font-bold px-3 py-1.5 rounded-xl border shrink-0 ${
-              isDark ? "bg-black/40 border-white/10 text-emerald-400" : "bg-white border-rose-200 text-emerald-700"
+            <span className={`text-xs font-mono font-black px-4 py-2 rounded-2xl border shrink-0 shadow-xs ${
+              isDark ? "bg-emerald-500/15 border-emerald-500/35 text-emerald-300" : "bg-emerald-100 border-emerald-300 text-emerald-950"
             }`}>
               Target: 100/100 Perfect Marking
             </span>
           </div>
-          <div className="mt-4 pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
             {[
-              { label: "Short Answer (3M)", tip: "Write 3 points in bullet format. Name the event, date, and impact.", color: "text-blue-400 border-blue-500/20 bg-blue-500/10" },
-              { label: "Long Answer (5M)", tip: "Use 5 key points, one heading each. Include examples and maps where applicable.", color: "text-teal-400 border-teal-500/20 bg-teal-500/10" },
-              { label: "Map Work", tip: "Practice blind maps: label capitals, rivers, and movement routes from NCERT.", color: "text-amber-400 border-amber-500/20 bg-amber-500/10" },
+              { label: "Short Answer (3M)", tip: "Write 3 distinct bullet points. Name the event, exact year/date, and its historical or social impact.", color: "text-blue-400 border-blue-500/25 bg-blue-500/10" },
+              { label: "Long Answer (5M)", tip: "Provide 5 structured points, each with a bold sub-heading. Integrate examples, quotes, and cause-and-effect conclusions.", color: "text-teal-400 border-teal-500/25 bg-teal-500/10" },
+              { label: "Map Work & Milestones", tip: "Practice NCERT blind maps: mark industrial centers, national movement epicenters, and major river valley projects.", color: "text-amber-400 border-amber-500/25 bg-amber-500/10" },
             ].map((tip, i) => (
-              <div key={i} className={`p-3 rounded-xl border ${tip.color}`}>
-                <span className="font-bold block mb-0.5">{tip.label}</span>
-                <span className={`leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>{tip.tip}</span>
+              <div key={i} className={`p-4 rounded-2xl border ${tip.color}`}>
+                <span className="font-bold text-sm block mb-1">{tip.label}</span>
+                <span className={`text-xs sm:text-sm leading-relaxed block ${isDark ? "text-slate-300" : "text-slate-700 font-medium"}`}>{tip.tip}</span>
               </div>
             ))}
           </div>
@@ -774,51 +830,50 @@ export default function ConceptsHubView({
           ========================================================================= */}
       {activeSubject === "math" && activeMathChapter && (
         <div className="space-y-6 animate-fade-in">
-          {/* Chapter Hero Banner */}
+          {/* Chapter Hero Banner - Apple Keynote Ultra-Hero */}
           <div
-            className={`p-6 sm:p-8 rounded-3xl border transition-all ${
-              isDark
-                ? "bg-gradient-to-br from-[#0c1524] via-[#09101c] to-[#0c1826] border-blue-500/25 shadow-[0_8px_32px_rgba(59,130,246,0.15)]"
-                : "bg-gradient-to-br from-blue-50/90 via-white to-indigo-50/80 border-blue-200 shadow-md"
+            className={`p-7 sm:p-10 rounded-3xl border transition-all ${
+              isDark ? "apple-hero-math border-blue-500/30" : "apple-hero-math-light border-blue-200"
             }`}
           >
-            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-              <div className="space-y-3 max-w-3xl">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+              <div className="space-y-4 max-w-3xl">
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <span className="px-3.5 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-blue-500 text-white shadow-sm flex items-center gap-1.5">
-                    <GraduationCap className="w-3.5 h-3.5" /> NCERT Mathematics Master
+                  <span className="px-4 py-1.5 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-blue-500 text-white shadow-md shadow-blue-500/30 flex items-center gap-2">
+                    <GraduationCap className="w-4 h-4" /> NCERT Mathematics Master
                   </span>
-                  <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
-                    isDark ? "bg-blue-950/60 text-blue-300 border-blue-500/30" : "bg-blue-100 text-blue-900 border-blue-300"
+                  <span className={`text-xs font-mono font-bold px-3.5 py-1.5 rounded-full border backdrop-blur-md ${
+                    isDark ? "bg-blue-950/70 text-blue-200 border-blue-500/40" : "bg-blue-100/90 text-blue-900 border-blue-300"
                   }`}>
                     Chapter {activeMathChapter.chapterNo} of 14 • {activeMathBlueprint.unitName}
                   </span>
-                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                  <span className="text-xs font-mono font-bold px-3.5 py-1.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-xs flex items-center gap-1.5">
+                    <Target className="w-3.5 h-3.5 text-amber-400" />
                     {activeMathChapter.weightage}
                   </span>
                 </div>
 
-                <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${
+                <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight ${
                   isDark ? "text-white" : "text-slate-900"
                 }`}>
                   {activeMathChapter.title}
                 </h2>
 
-                <p className={`text-sm sm:text-base leading-relaxed ${
-                  isDark ? "text-slate-300" : "text-slate-700 font-medium"
+                <p className={`text-base sm:text-lg leading-relaxed ${
+                  isDark ? "text-slate-300/90" : "text-slate-700 font-medium"
                 }`}>
                   {activeMathChapter.oneLiner}
                 </p>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto shrink-0">
+              <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto shrink-0">
                 {onOpenTheorems && [1, 4, 5, 6, 7, 8, 10, 11, 13].includes(activeMathChapter.chapterNo) && (
                   <button
                     onClick={onOpenTheorems}
-                    className="px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="px-4 py-2.5 rounded-2xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/35 transition-all cursor-pointer flex items-center gap-2 shadow-xs hover:scale-[1.02] active:scale-95"
                   >
-                    <Award className="w-3.5 h-3.5 text-amber-400" />
+                    <Award className="w-4 h-4 text-amber-400" />
                     <span>Theorems & Derivations</span>
                   </button>
                 )}
@@ -826,9 +881,9 @@ export default function ConceptsHubView({
                 {onOpenHots && (
                   <button
                     onClick={() => onOpenHots("math", activeMathChapter.chapterNo)}
-                    className="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="px-4 py-2.5 rounded-2xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/35 transition-all cursor-pointer flex items-center gap-2 shadow-xs hover:scale-[1.02] active:scale-95"
                   >
-                    <Flame className="w-3.5 h-3.5 text-rose-400" />
+                    <Flame className="w-4 h-4 text-rose-400" />
                     <span>Competitive HOTS</span>
                   </button>
                 )}
@@ -836,7 +891,7 @@ export default function ConceptsHubView({
                 {onOpenQuestionBank && (
                   <button
                     onClick={() => onOpenQuestionBank("math", activeMathChapter.chapterNo)}
-                    className="px-5 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white transition-all cursor-pointer flex items-center gap-2 shadow-lg shadow-blue-500/25"
+                    className="px-6 py-3 rounded-2xl text-xs font-black bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 hover:from-blue-400 hover:to-cyan-400 text-white transition-all cursor-pointer flex items-center gap-2.5 shadow-xl shadow-blue-500/30 hover:scale-[1.02] active:scale-95"
                   >
                     <Sparkles className="w-4 h-4" />
                     <span>Practice Board Questions</span>
@@ -846,26 +901,26 @@ export default function ConceptsHubView({
             </div>
           </div>
 
-          {/* Intuitive Real-World Analogy Card */}
+          {/* Intuitive Real-World Analogy Card - Apple Keynote Callout */}
           <div
-            className={`p-6 rounded-3xl border transition-all ${
-              isDark
-                ? "bg-[#111625] border-amber-500/30 shadow-[0_4px_20px_rgba(245,158,11,0.08)]"
-                : "bg-amber-50/70 border-amber-200"
+            className={`p-7 sm:p-9 rounded-3xl border transition-all ${
+              isDark ? "apple-insight-card border-amber-500/30" : "apple-insight-card-light border-amber-300/80"
             }`}
           >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 shrink-0">
-                <Lightbulb className="w-6 h-6" />
+            <div className="flex flex-col sm:flex-row items-start gap-5">
+              <div className="p-3.5 rounded-2xl bg-amber-500/25 text-amber-400 border border-amber-500/40 shadow-inner shrink-0">
+                <Lightbulb className="w-7 h-7" />
               </div>
-              <div className="space-y-1.5 flex-1">
-                <span className="text-[10px] font-mono uppercase font-bold text-amber-400 tracking-wider">
-                  Intuitive Mental Model & Real-World Analogy
-                </span>
-                <h3 className={`text-lg font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+              <div className="space-y-2.5 flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-mono uppercase font-black text-amber-400 tracking-widest px-2.5 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/25">
+                    Keynote Mental Model
+                  </span>
+                </div>
+                <h3 className={`text-xl sm:text-2xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
                   {activeMathChapter.analogyTitle}
                 </h3>
-                <div className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                <div className={`text-sm sm:text-base leading-relaxed font-normal pt-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                   <PremiumMathRenderer content={activeMathChapter.analogyContent} />
                 </div>
               </div>
@@ -873,21 +928,26 @@ export default function ConceptsHubView({
           </div>
 
           {/* Core Sections & Step-by-Step Problem Solving Guides */}
-          <div className="space-y-6">
-            {activeMathChapter.sections.map((section) => (
+          <div className="space-y-8">
+            {activeMathChapter.sections.map((section, sIdx) => (
               <div
                 key={section.id}
                 style={{ contentVisibility: "auto", containIntrinsicSize: "800px" }}
-                className={`p-6 sm:p-8 rounded-3xl border space-y-6 transition-all ${
-                  isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-lg"
+                className={`p-7 sm:p-10 rounded-3xl border space-y-7 transition-all ${
+                  isDark ? "apple-bento-section-dark" : "apple-bento-section-light"
                 }`}
               >
                 {/* Section Header */}
-                <div className="border-b pb-5 border-white/10 space-y-2">
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">
-                    {section.label}
-                  </span>
-                  <h3 className={`text-2xl sm:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                <div className="border-b pb-6 border-white/10 space-y-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-500/15 text-blue-400 border border-blue-500/30">
+                      SECTION {sIdx + 1}
+                    </span>
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+                      {section.label}
+                    </span>
+                  </div>
+                  <h3 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
                     <PremiumMathRenderer content={section.heading} isDark={isDark} inline />
                   </h3>
                   {section.subheading && (
@@ -909,18 +969,18 @@ export default function ConceptsHubView({
 
                 {/* Key Formulas & Golden Relationships */}
                 {section.formulasOrKeyPoints && section.formulasOrKeyPoints.length > 0 && (
-                  <div className="space-y-4 pt-3">
+                  <div className="space-y-4 pt-4">
                     <h4 className="text-sm font-mono font-bold uppercase tracking-wider text-teal-400 flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4" /> Key Formulas & Governing Relations
                     </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       {section.formulasOrKeyPoints.map((fp, i) => {
                         const isWide = Boolean(
                           fp.content && (
                             fp.content.length > 120 ||
                             fp.content.includes("\n") ||
                             fp.content.includes("$$") ||
-                            (fp.content.match(/\\frac/g) || []).length > 1
+                            (fp.content.match(/\\(?:d?frac)/g) || []).length > 1
                           )
                         );
                         return (
@@ -928,35 +988,35 @@ export default function ConceptsHubView({
                             key={i}
                             className={`${
                               isWide ? "col-span-1 md:col-span-2" : "col-span-1"
-                            } rounded-2xl border overflow-hidden transition-all hover:scale-[1.005] ${
+                            } rounded-3xl border overflow-hidden transition-all hover:scale-[1.005] ${
                               isDark
-                                ? "bg-gradient-to-br from-teal-950/40 via-[#0b1420] to-[#091019] border-teal-500/25 shadow-[0_2px_16px_rgba(20,184,166,0.08)] hover:shadow-[0_4px_20px_rgba(20,184,166,0.15)] hover:border-teal-500/40"
+                                ? "bg-gradient-to-br from-teal-950/40 via-[#0b1420] to-[#091019] border-teal-500/25 shadow-[0_4px_24px_rgba(20,184,166,0.1)] hover:shadow-[0_6px_28px_rgba(20,184,166,0.18)] hover:border-teal-500/40"
                                 : "bg-gradient-to-br from-teal-50 via-white to-emerald-50/50 border-teal-200 shadow-sm hover:shadow-md hover:border-teal-300"
                             }`}
                           >
                             {/* Accent top-bar */}
-                            <div className="h-0.5 bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400" />
-                            <div className="p-5 space-y-3">
-                              <div className="flex items-start gap-2.5">
-                                <div className="w-6 h-6 rounded-lg bg-teal-500/20 border border-teal-500/30 flex items-center justify-center shrink-0 mt-0.5">
+                            <div className="h-1 bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400" />
+                            <div className="p-6 sm:p-7 space-y-4">
+                              <div className="flex items-start gap-3">
+                                <div className="w-7 h-7 rounded-xl bg-teal-500/20 border border-teal-500/30 flex items-center justify-center shrink-0 mt-0.5">
                                   <span className="text-xs font-black text-teal-400">{i + 1}</span>
                                 </div>
-                                <div className={`text-sm sm:text-base font-bold leading-snug ${ isDark ? "text-teal-300" : "text-teal-900 font-black" }`}>
+                                <div className={`text-base sm:text-lg font-black leading-snug ${ isDark ? "text-teal-300" : "text-teal-900 font-black" }`}>
                                   <PremiumMathRenderer content={fp.title} isDark={isDark} inline />
                                 </div>
                               </div>
-                              <div className={`text-sm sm:text-base rounded-xl p-3.5 border overflow-x-auto ${
+                              <div className={`text-base sm:text-lg rounded-2xl p-5 border overflow-x-auto ${
                                 isDark
-                                  ? "bg-black/40 border-teal-500/15 text-slate-100"
-                                  : "bg-teal-50/80 border-teal-200 text-slate-900"
+                                  ? "bg-black/50 border-teal-500/20 text-slate-100 shadow-inner"
+                                  : "bg-teal-50/90 border-teal-200 text-slate-900 shadow-inner"
                               }`}>
                                 <PremiumMathRenderer content={fp.content} isDark={isDark} />
                               </div>
                               {fp.note && (
-                                <div className={`text-xs sm:text-sm font-medium pt-2 mt-1 border-t flex items-start gap-2 ${
-                                  isDark ? "border-teal-500/15 text-amber-300" : "border-teal-200 text-amber-800 font-semibold"
+                                <div className={`text-xs sm:text-sm font-medium pt-3 mt-1 border-t flex items-start gap-2.5 ${
+                                  isDark ? "border-teal-500/20 text-amber-300" : "border-teal-200 text-amber-800 font-semibold"
                                 }`}>
-                                  <span className="shrink-0 mt-0.5 text-base">💡</span>
+                                  <span className="shrink-0 text-base">💡</span>
                                   <div className="flex-1">
                                     <PremiumMathRenderer content={fp.note} isDark={isDark} />
                                   </div>
@@ -972,30 +1032,30 @@ export default function ConceptsHubView({
 
                 {/* Step-by-Step Problem Solving Guide */}
                 {section.stepByStepGuide && section.stepByStepGuide.length > 0 && (
-                  <div className="space-y-4 pt-3">
+                  <div className="space-y-4 pt-4">
                     <h4 className="text-sm font-mono font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-2">
                       <Compass className="w-4 h-4" /> Step-by-Step Problem Solving Method
                     </h4>
-                    <div className="space-y-3">
+                    <div className="space-y-3.5">
                       {section.stepByStepGuide.map((st) => (
                         <div
                           key={st.stepNo}
-                          className={`p-4 sm:p-5 rounded-2xl border flex items-start gap-3.5 ${
-                            isDark ? "bg-white/5 border-white/5" : "bg-slate-50 border-slate-200 shadow-xs"
+                          className={`p-5 sm:p-6 rounded-2xl border flex items-start gap-4 ${
+                            isDark ? "bg-white/[0.03] border-white/8" : "bg-slate-50 border-slate-200 shadow-xs"
                           }`}
                         >
-                          <span className="w-7 h-7 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-mono font-black text-xs shrink-0 mt-0.5">
+                          <span className="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 flex items-center justify-center font-mono font-black text-xs shrink-0 mt-0.5">
                             {st.stepNo}
                           </span>
-                          <div className="space-y-1.5 flex-1">
-                            <h5 className="font-bold text-sm sm:text-base text-indigo-300 block">
+                          <div className="space-y-2 flex-1">
+                            <h5 className="font-bold text-base text-indigo-300 block">
                               <PremiumMathRenderer content={st.title} isDark={isDark} inline />
                             </h5>
                             <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                               <PremiumMathRenderer content={st.action} isDark={isDark} />
                             </div>
                             {st.proTip && (
-                              <div className={`text-xs sm:text-sm font-mono pt-1 ${isDark ? "text-emerald-300" : "text-emerald-800 font-semibold"}`}>
+                              <div className={`text-xs sm:text-sm font-mono pt-1.5 ${isDark ? "text-emerald-300" : "text-emerald-800 font-semibold"}`}>
                                 <PremiumMathRenderer content={`💡 **Topper Tip:** ${st.proTip}`} isDark={isDark} />
                               </div>
                             )}
@@ -1008,28 +1068,28 @@ export default function ConceptsHubView({
 
                 {/* CBSE Examiner Traps */}
                 {section.examinerTraps && section.examinerTraps.length > 0 && (
-                  <div className="space-y-4 pt-3">
+                  <div className="space-y-4 pt-4">
                     <h4 className="text-sm font-mono font-bold uppercase tracking-wider text-rose-400 flex items-center gap-2">
                       <ShieldAlert className="w-4 h-4" /> High-Risk Board Pitfalls & Corrections
                     </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       {section.examinerTraps.map((tr, i) => (
                         <div
                           key={i}
-                          className={`rounded-2xl border overflow-hidden transition-all ${
+                          className={`rounded-3xl border overflow-hidden transition-all ${
                             isDark
-                              ? "bg-gradient-to-br from-rose-950/35 via-[#130a0d] to-[#0b0f19] border-rose-800/40 shadow-[0_2px_14px_rgba(239,68,68,0.08)]"
+                              ? "bg-gradient-to-br from-rose-950/40 via-[#130a0d] to-[#0b0f19] border-rose-800/40 shadow-[0_4px_20px_rgba(239,68,68,0.1)]"
                               : "bg-gradient-to-br from-rose-50 via-white to-red-50/30 border-rose-200 shadow-sm"
                           }`}
                         >
                           {/* Bold left accent bar */}
                           <div className="flex">
-                            <div className="w-1.5 bg-gradient-to-b from-rose-400 via-rose-500 to-rose-600 shrink-0" />
-                            <div className="flex-1 p-5 space-y-3.5">
+                            <div className="w-2 bg-gradient-to-b from-rose-400 via-rose-500 to-rose-600 shrink-0" />
+                            <div className="flex-1 p-6 space-y-4">
                               {/* Trap section */}
                               <div className="space-y-2">
                                 <div className="flex items-center gap-2">
-                                  <span className={`text-xs font-mono font-black uppercase tracking-wider px-2.5 py-0.5 rounded-md ${
+                                  <span className={`text-xs font-mono font-black uppercase tracking-wider px-3 py-1 rounded-md ${
                                     isDark ? "bg-rose-500/20 text-rose-300 border border-rose-500/30" : "bg-rose-100 text-rose-800 border border-rose-300"
                                   }`}>❌ Common Trap #{i + 1}</span>
                                 </div>
@@ -1041,7 +1101,7 @@ export default function ConceptsHubView({
                               <div className={`border-t ${ isDark ? "border-rose-800/40" : "border-rose-200" }`} />
                               {/* Correction section */}
                               <div className="space-y-2">
-                                <span className={`text-xs font-mono font-black uppercase tracking-wider px-2.5 py-0.5 rounded-md inline-flex items-center gap-1 ${
+                                <span className={`text-xs font-mono font-black uppercase tracking-wider px-3 py-1 rounded-md inline-flex items-center gap-1.5 ${
                                   isDark ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30" : "bg-emerald-50 text-emerald-800 border border-emerald-300"
                                 }`}>✅ Mandatory Correction</span>
                                 <div className={`text-sm sm:text-base leading-relaxed ${ isDark ? "text-emerald-200" : "text-emerald-950 font-medium" }`}>

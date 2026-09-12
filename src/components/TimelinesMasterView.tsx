@@ -1139,25 +1139,28 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
 
             {/* Challenge Round Dropdown */}
             <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-              <select
-                value={selectedChallengeId}
-                onChange={(e) => {
-                  playSoundEffect("click");
-                  loadChallenge(e.target.value);
-                }}
-                className={`px-3 py-2 text-xs font-bold rounded-xl border focus:outline-hidden cursor-pointer ${
-                  isDark
-                    ? "bg-slate-900 border-white/15 text-white"
-                    : "bg-slate-100 border-slate-300 text-slate-900"
-                }`}
-              >
-                {CHRONOLOGY_CHALLENGES.map((chal) => (
-                  <option key={chal.id} value={chal.id}>
-                    {chal.chapterKey === "ch2_india" ? "🇮🇳 India: " : "🇪🇺 Europe: "}
-                    {chal.title} ({chal.difficulty})
-                  </option>
-                ))}
-              </select>
+              <div className="fabulous-select-wrapper flex-1 sm:flex-initial min-w-[260px]">
+                <select
+                  value={selectedChallengeId}
+                  onChange={(e) => {
+                    playSoundEffect("click");
+                    loadChallenge(e.target.value);
+                  }}
+                  className={`fabulous-select ${
+                    isDark ? "fabulous-select-dark" : "fabulous-select-light"
+                  }`}
+                >
+                  {CHRONOLOGY_CHALLENGES.map((chal) => (
+                    <option key={chal.id} value={chal.id}>
+                      {chal.chapterKey === "ch2_india" ? "🇮🇳 India: " : "🇪🇺 Europe: "}
+                      {chal.title} ({chal.difficulty})
+                    </option>
+                  ))}
+                </select>
+                <div className="fabulous-select-icon text-zinc-400">
+                  <ChevronDown className="w-4 h-4" />
+                </div>
+              </div>
 
               <button
                 onClick={() => {

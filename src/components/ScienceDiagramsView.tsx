@@ -226,7 +226,7 @@ export default function ScienceDiagramsView({
             >
               <FileImage className="w-4 h-4" />
               <span>NCERT Visual Gallery (All 29 Diagrams)</span>
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${viewMode === "gallery" ? "bg-slate-950/20 text-slate-950" : "bg-cyan-500/20 text-cyan-400"}`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${viewMode === "gallery" ? "bg-slate-950/20 text-slate-950" : "bg-cyan-500/20 text-cyan-400"}`}>
                 29
               </span>
             </button>
@@ -288,7 +288,7 @@ export default function ScienceDiagramsView({
                   }`}
                 >
                   <span>{cat.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
                     galleryCategory === cat.id ? "bg-slate-950/20 text-slate-950" : "bg-slate-700/30 text-slate-400"
                   }`}>
                     {cat.count}

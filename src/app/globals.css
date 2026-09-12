@@ -177,28 +177,151 @@
   contain: content;
 }
 
-/* Disable GPU-thrashing backdrop blur on moving/scrolling cards to lock smooth 60 FPS */
-.backdrop-blur-xl,
-.backdrop-blur-2xl,
-.backdrop-blur-3xl,
-.backdrop-blur-md {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+/* High-Performance Hardware-Accelerated Mesh Backgrounds (Zero Scroll Paint Cost) */
+.apple-mesh-bg-dark {
+  background-color: #070913;
+  background-image: 
+    radial-gradient(ellipse 85% 60% at 50% -20%, rgba(37, 99, 235, 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 45% at 85% 15%, rgba(245, 158, 11, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 15% 75%, rgba(16, 185, 129, 0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 85%, rgba(139, 92, 246, 0.14) 0%, transparent 60%);
+  background-repeat: no-repeat;
 }
 
-/* Only the fixed/sticky header and modal overlays use hardware-accelerated blur */
-header,
-nav {
+.apple-mesh-bg-light {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(ellipse 85% 60% at 50% -20%, rgba(59, 130, 246, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 45% at 85% 15%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 15% 75%, rgba(16, 185, 129, 0.07) 0%, transparent 60%);
+  background-repeat: no-repeat;
+}
+
+/* Apple World-Class Surface Tokens - Zero Lag High-Contrast OLED Surfaces */
+.apple-glass {
+  background: rgba(14, 18, 28, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.apple-glass-light {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.06);
+}
+
+.apple-card {
+  background: linear-gradient(145deg, rgba(20, 27, 43, 0.95) 0%, rgba(13, 18, 31, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.apple-card-light {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.apple-card-hover {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+
+.apple-card-hover:hover {
+  transform: translateY(-2px);
+}
+
+.apple-segmented-bar {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.apple-segmented-bar-light {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Apple Surface & Elevated Cards - Zero Lag */
+.apple-surface {
+  background: linear-gradient(145deg, rgba(19, 25, 41, 0.95) 0%, rgba(11, 15, 27, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.apple-surface-light {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 8px 30px -4px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* Fast Neon Accent Tokens */
+.neon-amber {
+  box-shadow: 0 0 20px -2px rgba(245, 158, 11, 0.25);
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+
+.neon-cyan {
+  box-shadow: 0 0 20px -2px rgba(6, 182, 212, 0.25);
+  border-color: rgba(6, 182, 212, 0.4) !important;
+}
+
+.neon-emerald {
+  box-shadow: 0 0 20px -2px rgba(16, 185, 129, 0.25);
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+.neon-rose {
+  box-shadow: 0 0 20px -2px rgba(244, 63, 94, 0.25);
+  border-color: rgba(244, 63, 94, 0.4) !important;
+}
+
+.neon-purple {
+  box-shadow: 0 0 20px -2px rgba(168, 85, 247, 0.25);
+  border-color: rgba(168, 85, 247, 0.4) !important;
+}
+
+/* Apple Interactive Touch Feedback */
+.apple-press {
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
+  touch-action: manipulation;
+}
+
+.apple-press:active {
+  transform: scale(0.97);
+}
+
+/* Apple Form Inputs & Selects */
+.apple-input-dark {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.apple-input-dark:focus {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+  outline: none;
+}
+
+.apple-input-light {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #0f172a;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.apple-input-light:focus {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+  outline: none;
+}
+
+/* Hardware-accelerated header blur (constrained to header only) */
+header {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-header[class*="backdrop-blur"],
-nav[class*="backdrop-blur"],
-.modal-glass {
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  contain: layout style;
 }
 
 /* Virtualized offscreen content: only paints cards in view to save RAM & CPU on desktop */
@@ -308,6 +431,111 @@ summary,
   -webkit-tap-highlight-color: transparent;
 }
 
+/* ==========================================================================
+   FABULOUS APPLE-GRADE DROPDOWN & SELECT SYSTEM
+   Frosted glassmorphism, glowing focus rings, custom chevron, and 44px+ touch
+   ========================================================================== */
+.fabulous-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 1.25rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fabulous-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  width: 100%;
+  min-height: 46px;
+  padding: 0.65rem 2.75rem 0.65rem 1.15rem;
+  border-radius: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.4;
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Mode: Deep Obsidian Glass with Frost Glow */
+.fabulous-select-dark {
+  background: rgba(13, 17, 28, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color-scheme: dark;
+}
+
+.fabulous-select-dark:hover {
+  background: rgba(22, 28, 45, 0.92);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 6px 28px -2px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(56, 189, 248, 0.25);
+}
+
+.fabulous-select-dark:focus {
+  border-color: #38bdf8;
+  background: rgba(18, 24, 38, 0.98);
+  box-shadow: 0 0 0 3.5px rgba(56, 189, 248, 0.3), 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+.fabulous-select-dark option {
+  background-color: #0b0f19;
+  color: #f1f5f9;
+  padding: 10px 14px;
+}
+
+/* Light Mode: Ceramic Glass with Crisp Shadow */
+.fabulous-select-light {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  color: #0f172a;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  color-scheme: light;
+}
+
+.fabulous-select-light:hover {
+  background: #ffffff;
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 6px 24px -2px rgba(37, 99, 235, 0.12), 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+.fabulous-select-light:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3.5px rgba(37, 99, 235, 0.22), 0 8px 26px rgba(0, 0, 0, 0.1);
+}
+
+.fabulous-select-light option {
+  background-color: #ffffff;
+  color: #0f172a;
+  padding: 10px 14px;
+}
+
+.fabulous-select-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fabulous-select-wrapper:focus-within .fabulous-select-icon {
+  transform: translateY(-50%) rotate(180deg);
+  color: #38bdf8;
+}
+
 /* Guarantee minimum 44px touch targets on mobile for primary interactive elements */
 @media (max-width: 768px) {
   .touch-target {
@@ -361,56 +589,60 @@ summary,
 /* Consolidated KaTeX Math Styling & Fraction Legibility */
 .math-renderer .katex {
   font-size: 1.15em;
+  text-rendering: optimizeLegibility;
 }
 
 .math-renderer .katex-display {
-  margin: 0.85em 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0.5em 0;
+  margin: 1.25em 0 !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  padding: 0.75em 1em !important;
   -webkit-overflow-scrolling: touch;
+  border-radius: 1rem;
 }
 
 .math-renderer .katex-display > .katex {
   max-width: 100%;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
-/* Base Fraction Alignment & Padding */
+/* Base Fraction Alignment & Generous "Upon" Spacing */
 .math-renderer .katex .mfrac {
-  vertical-align: -0.2em;
-  margin: 0 0.1em;
+  vertical-align: middle !important;
+  padding: 0 0.25em !important;
+  margin: 0 0.15em !important;
 }
 
-/* Explicit Fraction Line Thickness & Visibility */
+/* Explicit Fraction Line Thickness & Clear Contrast */
 .math-renderer .katex .mfrac .frac-line {
-  border-bottom-width: 0.13em !important;
-  min-height: 1.5px !important;
+  border-bottom-width: 1.75px !important;
+  min-height: 1.75px !important;
   border-bottom-color: currentColor !important;
+  margin: 0.15em 0 !important;
 }
 
 /* Generous vertical clearance for numerator & denominator */
 .math-renderer .katex .mfrac .vlist-t {
-  line-height: 1.45;
-  margin-top: 0.12em;
-  margin-bottom: 0.12em;
+  line-height: 1.55;
+  margin-top: 0.18em;
+  margin-bottom: 0.18em;
 }
 
 /* Compound fractions (nested fractions) breathing room */
 .math-renderer .katex .mfrac .mfrac {
-  margin: 0.2em 0.15em;
-  vertical-align: middle;
+  margin: 0.25em 0.2em !important;
+  vertical-align: middle !important;
 }
 
 .math-renderer .katex .mfrac .mfrac .frac-line {
-  border-bottom-width: 0.11em !important;
+  border-bottom-width: 1.5px !important;
   min-height: 1.5px !important;
 }
 
 .math-renderer span.katex {
-  line-height: 1.4;
+  line-height: 1.45;
   vertical-align: -0.06em;
-  padding: 0 0.12em;
+  padding: 0 0.15em;
 }
 
 .math-renderer-inline p {
@@ -419,5 +651,117 @@ summary,
   padding: 0;
 }
 
+/* =========================================================================
+   ULTRA-PREMIUM APPLE GLASS Bento DESIGN TOKENS
+   ========================================================================= */
+.apple-hero-math {
+  background: radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.18), transparent 45%),
+              radial-gradient(circle at 85% 80%, rgba(99, 102, 241, 0.14), transparent 45%),
+              linear-gradient(135deg, rgba(12, 21, 36, 0.95), rgba(9, 16, 28, 0.98));
+  box-shadow: 0 12px 40px -10px rgba(59, 130, 246, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
 
+.apple-hero-math-light {
+  background: radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.12), transparent 45%),
+              radial-gradient(circle at 85% 80%, rgba(99, 102, 241, 0.08), transparent 45%),
+              linear-gradient(135deg, #ffffff, #f0f7ff);
+  box-shadow: 0 10px 30px -8px rgba(59, 130, 246, 0.18),
+              0 1px 3px rgba(0, 0, 0, 0.05);
+}
 
+.apple-insight-card {
+  background: radial-gradient(circle at 10% 10%, rgba(245, 158, 11, 0.16), transparent 50%),
+              linear-gradient(135deg, #131722, #0d111a);
+  box-shadow: 0 8px 32px -8px rgba(245, 158, 11, 0.15),
+              inset 0 1px 0 rgba(245, 158, 11, 0.2);
+}
+
+.apple-insight-card-light {
+  background: radial-gradient(circle at 10% 10%, rgba(245, 158, 11, 0.1), transparent 50%),
+              linear-gradient(135deg, #fffbeb, #ffffff);
+  box-shadow: 0 8px 24px -6px rgba(245, 158, 11, 0.12),
+              0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.apple-bento-section {
+  position: relative;
+  border-radius: 1.75rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-bento-section-dark {
+  background: linear-gradient(180deg, rgba(16, 22, 36, 0.8) 0%, rgba(11, 15, 25, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36),
+              inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.apple-bento-section-light {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06),
+              0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================================================================
+   CBSE TOPPER PLAIN PAPER ANSWER SHEET STYLING
+   ========================================================================= */
+.plain-paper-sheet {
+  background-color: #fdfdfb;
+  background-image: linear-gradient(rgba(241, 245, 249, 0.4) 1px, transparent 1px);
+  background-size: 100% 2.25rem;
+  border: 1px solid rgba(203, 213, 225, 0.8);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.07), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+}
+
+.plain-paper-sheet-dark {
+  background-color: #0b0f19;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 2.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* =========================================================================
+   TACTILE MICRO-INTERACTIONS & AMBIENT AURA UTILITIES
+   ========================================================================= */
+.btn-tactile {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease, filter 0.15s ease;
+  will-change: transform;
+}
+.btn-tactile:hover {
+  filter: brightness(1.05);
+}
+.btn-tactile:active {
+  transform: scale(0.97);
+}
+
+.aura-amber {
+  box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.2);
+}
+
+.aura-blue {
+  box-shadow: 0 0 35px -5px rgba(59, 130, 246, 0.2);
+}
+
+.aura-emerald {
+  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.2);
+}
+
+.aura-rose {
+  box-shadow: 0 0 35px -5px rgba(244, 63, 94, 0.2);
+}
+
+.apple-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-family: var(--font-code);
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 1;
+}

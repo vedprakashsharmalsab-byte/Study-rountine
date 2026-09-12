@@ -205,8 +205,30 @@ export default function ChemistryReactionsView({
             />
           </div>
 
-          {/* CHAPTER SELECTOR TABS */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+          {/* CHAPTER SELECTOR: MOBILE DROPDOWN + DESKTOP PILLS */}
+          <div className="md:hidden">
+            <div className="fabulous-select-wrapper">
+              <select
+                aria-label="Select Chapter Filter"
+                value={String(selectedChapter)}
+                onChange={(e) => setSelectedChapter(e.target.value === "all" ? "all" : Number(e.target.value))}
+                className={`fabulous-select ${
+                  isDark ? "fabulous-select-dark" : "fabulous-select-light"
+                }`}
+              >
+                {CHAPTER_FILTERS.map((f) => (
+                  <option key={String(f.no)} value={String(f.no)}>
+                    {f.label}
+                  </option>
+                ))}
+              </select>
+              <div className="fabulous-select-icon text-zinc-400">
+                <ChevronDown className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden md:flex items-center gap-2 flex-wrap pb-1">
             {CHAPTER_FILTERS.map((f) => (
               <button
                 key={String(f.no)}
@@ -229,19 +251,24 @@ export default function ChemistryReactionsView({
             <span className="text-xs font-bold text-slate-400 flex items-center gap-1">
               <Filter className="w-3.5 h-3.5" /> Type:
             </span>
-            <select
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all focus:outline-none ${
-                isDark ? "bg-slate-900 border-white/10 text-slate-200" : "bg-white border-slate-200 text-slate-700"
-              }`}
-            >
-              {REACTION_TYPES.map((t) => (
-                <option key={t} value={t}>
-                  {t === "all" ? "All Reaction Types" : t}
-                </option>
-              ))}
-            </select>
+            <div className="fabulous-select-wrapper w-auto min-w-[190px]">
+              <select
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                className={`fabulous-select ${
+                  isDark ? "fabulous-select-dark" : "fabulous-select-light"
+                }`}
+              >
+                {REACTION_TYPES.map((t) => (
+                  <option key={t} value={t}>
+                    {t === "all" ? "All Reaction Types" : t}
+                  </option>
+                ))}
+              </select>
+              <div className="fabulous-select-icon text-zinc-400">
+                <ChevronDown className="w-4 h-4" />
+              </div>
+            </div>
 
             <span className="text-xs font-mono text-slate-400 ml-auto">
               Showing {filteredReactions.length} of {CHEMISTRY_REACTIONS_MASTER.length}

@@ -126,7 +126,30 @@ export default function CompetitiveHotsView({
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <div className="flex items-center gap-1.5 p-1 rounded-2xl border bg-black/20 border-white/5 flex-wrap">
+            {/* Mobile Dropdown */}
+            <div className="md:hidden w-full">
+              <div className="fabulous-select-wrapper">
+                <select
+                  aria-label="Select Subject Filter"
+                  value={selectedSubject}
+                  onChange={(e) => setSelectedSubject(e.target.value as any)}
+                  className={`fabulous-select ${
+                    isDark ? "fabulous-select-dark" : "fabulous-select-light"
+                  }`}
+                >
+                  <option value="all">All Subjects ({COMPETITIVE_HOTS_BANK.length} Problems)</option>
+                  <option value="math">📐 Mathematics HOTS</option>
+                  <option value="science">🧪 Science HOTS</option>
+                  <option value="sst">🌍 Social Science HOTS</option>
+                </select>
+                <div className="fabulous-select-icon text-zinc-400">
+                  <ChevronDown className="w-4 h-4" />
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Wrapped Pills */}
+            <div className="hidden md:flex items-center gap-1.5 p-1 rounded-2xl border bg-black/20 border-white/5 flex-wrap">
               <button
                 onClick={() => setSelectedSubject("all")}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${

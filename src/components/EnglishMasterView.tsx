@@ -9,6 +9,7 @@ import {
   AlertTriangle,
   ChevronRight,
   ChevronLeft,
+  ChevronDown,
   Compass,
   Search,
   Quote,
@@ -567,8 +568,37 @@ export const EnglishMasterView: React.FC<EnglishMasterViewProps> = ({
           </div>
         </div>
 
-        {/* 6 Master Tabs */}
-        <div ref={masterTabsRef} className="mt-2 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 border-b border-white/10 scroll-smooth">
+        {/* 6 Master Tabs: Mobile Dropdown + Desktop Pills */}
+        <div className="md:hidden mt-2">
+          <div className="fabulous-select-wrapper">
+            <select
+              aria-label="Select English Section"
+              value={activeTab}
+              onChange={(e) => setActiveTab(e.target.value as EnglishTab)}
+              className={`fabulous-select ${
+                isDark ? "fabulous-select-dark" : "fabulous-select-light"
+              }`}
+            >
+              {[
+                { id: "literature", label: "📖 Stories & Prose (Footprints & First Flight)" },
+                { id: "poetry", label: "🎭 Poetry Masterclass (Paraphrase & Devices)" },
+                { id: "grammar", label: "⚡ Grammar Clinic (Tenses & Concord Rules)" },
+                { id: "practice", label: "🎯 Question Bank & Practice (130+ Qs)" },
+                { id: "writing", label: "✍️ Writing Lab (Letter & Paragraph 10M)" },
+                { id: "mistakes", label: "❌ Mistake Notebook (Board Traps)" }
+              ].map((tab) => (
+                <option key={tab.id} value={tab.id}>
+                  {tab.label}
+                </option>
+              ))}
+            </select>
+            <div className="fabulous-select-icon text-zinc-400">
+              <ChevronDown className="w-4 h-4" />
+            </div>
+          </div>
+        </div>
+
+        <div ref={masterTabsRef} className="hidden md:flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 border-b border-white/10 scroll-smooth mt-2">
           {[
             { id: "literature", label: "📖 Stories & Prose", badge: "Footprints (TS1) & First Flight" },
             { id: "poetry", label: "🎭 Poetry Masterclass", badge: "Paraphrase & Devices" },
@@ -582,9 +612,9 @@ export const EnglishMasterView: React.FC<EnglishMasterViewProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as EnglishTab)}
-                className={`px-4 py-3 rounded-xl font-bold text-sm sm:text-base whitespace-nowrap transition-all duration-200 flex items-center gap-2 border cursor-pointer ${
+                className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-150 flex items-center gap-2 border cursor-pointer active:scale-95 ${
                   isActive
-                    ? "bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-600/30 scale-[1.02]"
+                    ? "bg-indigo-600 text-white border-indigo-500 shadow-md shadow-indigo-600/30"
                     : isDark
                     ? "bg-slate-800/60 text-slate-300 border-white/10 hover:bg-slate-800 hover:text-white"
                     : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900"
@@ -592,7 +622,7 @@ export const EnglishMasterView: React.FC<EnglishMasterViewProps> = ({
               >
                 <span>{tab.label}</span>
                 <span
-                  className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                  className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                     isActive
                       ? "bg-white/20 text-white"
                       : isDark

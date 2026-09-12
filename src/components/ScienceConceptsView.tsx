@@ -406,18 +406,23 @@ export default function ScienceConceptsView({
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
-          <select
-            value={activeLevelFilter}
-            onChange={(e) => setActiveLevelFilter(e.target.value)}
-            className={`px-4 py-3 rounded-2xl text-xs font-bold border outline-none cursor-pointer flex-1 sm:flex-initial transition-all ${
-              isDark ? "bg-black/40 border-white/10 text-slate-200" : "bg-white border-slate-200 text-slate-800 shadow-sm"
-            }`}
-          >
-            <option value="all">All Solved Examples ({totalExamplesInChapter})</option>
-            <option value="Level 1">Level 1: 1M Foundation</option>
-            <option value="Level 2">Level 2: 2M–3M Board Standard</option>
-            <option value="Level 3">Level 3: 4M–5M Case Study / Master</option>
-          </select>
+          <div className="fabulous-select-wrapper flex-1 sm:flex-initial min-w-[240px]">
+            <select
+              value={activeLevelFilter}
+              onChange={(e) => setActiveLevelFilter(e.target.value)}
+              className={`fabulous-select ${
+                isDark ? "fabulous-select-dark" : "fabulous-select-light"
+              }`}
+            >
+              <option value="all">All Solved Examples ({totalExamplesInChapter})</option>
+              <option value="Level 1">Level 1: 1M Foundation</option>
+              <option value="Level 2">Level 2: 2M–3M Board Standard</option>
+              <option value="Level 3">Level 3: 4M–5M Case Study / Master</option>
+            </select>
+            <div className="fabulous-select-icon text-zinc-400">
+              <ChevronDown className="w-4 h-4" />
+            </div>
+          </div>
         </div>
       </div>
 

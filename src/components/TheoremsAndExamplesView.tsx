@@ -119,8 +119,42 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
 
       {/* 2. FILTER & SEARCH BAR */}
       <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3">
-        {/* Category Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+        {/* Mobile Dropdown (< md): Zero horizontal scroll trap! */}
+        <div className="md:hidden flex items-center gap-2">
+          <div className="fabulous-select-wrapper flex-1">
+            <select
+              aria-label="Filter theorems by category"
+              value={activeCategory}
+              onChange={(e) => setActiveCategory(e.target.value)}
+              className={`fabulous-select ${
+                isDark ? "fabulous-select-dark" : "fabulous-select-light"
+              }`}
+            >
+              {[
+                { id: "all", label: `All Chapters (${THEOREMS_AND_EXAMPLES_BANK.length})` },
+                { id: "theorems", label: "⭐ Theorems & Converses" },
+                { id: "derivations", label: "📐 Derivations" },
+                { id: "ch1", label: "Ch 1: Real Numbers" },
+                { id: "ch4", label: "Ch 4: Quadratics" },
+                { id: "ch5", label: "Ch 5: AP" },
+                { id: "ch6", label: "Ch 6: Triangles" },
+                { id: "ch7", label: "Ch 7: Coordinate" },
+                { id: "ch8", label: "Ch 8: Trigonometry" },
+                { id: "ch10", label: "Ch 10: Circles" },
+                { id: "ch11", label: "Ch 11: Areas Circles" },
+                { id: "ch13", label: "Ch 13: Statistics" }
+              ].map(tab => (
+                <option key={tab.id} value={tab.id}>{tab.label}</option>
+              ))}
+            </select>
+            <div className="fabulous-select-icon text-zinc-400">
+              <ChevronDown className="w-4 h-4" />
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Wrapped Pills (>= md) */}
+        <div className="hidden md:flex items-center gap-1.5 flex-wrap">
           {[
             { id: "all", label: `All (${THEOREMS_AND_EXAMPLES_BANK.length})` },
             { id: "theorems", label: "⭐ Theorems & Converses" },
@@ -307,6 +341,15 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
                                 <PremiumMathRenderer content={item.construction} isDark={isDark} />
                               </div>
                             )}
+                          </div>
+                        )}
+
+                        {/* Authentic Geometric / Theorem Diagram */}
+                        {item.diagramSvg && (
+                          <div className={`mt-4 p-3.5 sm:p-5 rounded-2xl border flex flex-col items-center justify-center overflow-x-auto ${
+                            isDark ? "bg-black/40 border-white/10" : "bg-slate-50/90 border-slate-200 shadow-2xs"
+                          }`}>
+                            <div className="w-full max-w-lg flex justify-center" dangerouslySetInnerHTML={{ __html: item.diagramSvg }} />
                           </div>
                         )}
                       </div>

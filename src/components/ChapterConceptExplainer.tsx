@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import { 
-  BookOpen, CheckCircle2, ChevronRight, Compass, Flame, Sparkles, 
+  BookOpen, CheckCircle2, ChevronRight, ChevronDown, Compass, Flame, Sparkles, 
   X, Lightbulb, ArrowRight, BookMarked, Layers, HelpCircle, ShieldAlert
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
@@ -98,24 +98,22 @@ export default function ChapterConceptExplainer({
 
         {/* Action Controls & Chapter Dropdown */}
         <div className="flex items-center gap-2.5 self-end md:self-auto shrink-0">
-          <div className="relative">
+          <div className="fabulous-select-wrapper min-w-[200px]">
             <select
               value={currentChapterNo}
               onChange={(e) => handleChapterSelect(Number(e.target.value))}
-              className={`text-xs font-bold py-2 pl-3 pr-8 rounded-xl border outline-none cursor-pointer transition-all appearance-none ${
-                isDark 
-                  ? "bg-slate-900 border-white/15 text-white hover:border-emerald-500/50" 
-                  : "bg-white border-slate-300 text-slate-900 hover:border-emerald-600 shadow-2xs"
+              className={`fabulous-select truncate ${
+                isDark ? "fabulous-select-dark" : "fabulous-select-light"
               }`}
             >
               {MATH_CHAPTER_CONCEPTS.map(c => (
-                <option key={c.chapterNo} value={c.chapterNo} className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>
+                <option key={c.chapterNo} value={c.chapterNo}>
                   Ch {c.chapterNo}: {c.title}
                 </option>
               ))}
             </select>
-            <div className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-xs opacity-60">
-              ▼
+            <div className="fabulous-select-icon text-zinc-400">
+              <ChevronDown className="w-4 h-4" />
             </div>
           </div>
 

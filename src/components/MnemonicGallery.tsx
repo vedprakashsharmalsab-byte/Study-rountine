@@ -1429,7 +1429,7 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
             >
               <div className="flex items-center justify-between w-full">
                 <span className="font-mono text-[10px] opacity-75">Ch {ch.chapterId}</span>
-                <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded ${
+                <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded leading-none inline-flex items-center ${
                   isSelected ? "bg-black/20 text-slate-950 font-bold" : "bg-white/10 text-slate-400"
                 }`}>
                   {ch.images.length}

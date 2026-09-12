@@ -29,10 +29,10 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   1: {
     chapterNo: 1,
     chapterName: "Real Numbers",
-    unitName: "Unit I: Number Systems",
+    unitName: "Unit I: Number Systems (6 Marks)",
     unitTotalMarks: 6,
     expectedMarks: "6 Marks",
-    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Theorem statement or formula quote (HCF × LCM = a × b)", marks: "0.5 Mark", rubricNote: "Mandatory formula identification" },
       { step: "Prime factorisation trees / prime powers", marks: "1.0 Mark", rubricNote: "Expressing in prime exponents" },
@@ -47,7 +47,7 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   2: {
     chapterNo: 2,
     chapterName: "Polynomials",
-    unitName: "Unit II: Algebra (Total 20 Marks)",
+    unitName: "Unit II: Algebra (20 Marks)",
     unitTotalMarks: 20,
     expectedMarks: "4 Marks",
     questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
@@ -64,14 +64,14 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   3: {
     chapterNo: 3,
     chapterName: "Pair of Linear Equations in Two Variables",
-    unitName: "Unit II: Algebra (Total 20 Marks)",
+    unitName: "Unit II: Algebra (20 Marks)",
     unitTotalMarks: 20,
-    expectedMarks: "6 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
+    expectedMarks: "4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Ratios comparison (a₁/a₂, b₁/b₂, c₁/c₂)", marks: "1.0 Mark", rubricNote: "Condition for consistency / parallel lines" },
-      { step: "Setting up simultaneous equations from word problem", marks: "1.5 Marks", rubricNote: "Clear 'Let speed = x, time = y' declarations" },
-      { step: "Substitution / Elimination algebraic solving", marks: "1.5 Marks", rubricNote: "Clear steps showing elimination of variable" },
+      { step: "Setting up simultaneous equations from word problem", marks: "1.0 Mark", rubricNote: "Clear 'Let speed = x, time = y' declarations" },
+      { step: "Substitution / Elimination algebraic solving", marks: "1.0 Mark", rubricNote: "Clear steps showing elimination of variable" },
       { step: "Final values with appropriate units (km/h, rupees)", marks: "1.0 Mark", rubricNote: "Enclose final answer in box" }
     ],
     examinerPenalties: [
@@ -82,7 +82,7 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   4: {
     chapterNo: 4,
     chapterName: "Quadratic Equations",
-    unitName: "Unit II: Algebra (Total 20 Marks)",
+    unitName: "Unit II: Algebra (20 Marks)",
     unitTotalMarks: 20,
     expectedMarks: "6 Marks",
     questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 0, la5M: 1, case4M: 0 },
@@ -100,10 +100,10 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   5: {
     chapterNo: 5,
     chapterName: "Arithmetic Progressions",
-    unitName: "Unit II: Algebra (Total 20 Marks)",
+    unitName: "Unit II: Algebra (20 Marks)",
     unitTotalMarks: 20,
     expectedMarks: "6 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 0, la5M: 0, case4M: 1 },
+    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 0, la5M: 0, case4M: 1 },
     markingSchemeRubric: [
       { step: "Identifying first term 'a' and common difference 'd'", marks: "0.5 Mark", rubricNote: "d = a₂ - a₁ (watch negative signs!)" },
       { step: "General term formula: aₙ = a + (n - 1)d", marks: "1.0 Mark", rubricNote: "Formula statement" },
@@ -118,13 +118,13 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   6: {
     chapterNo: 6,
     chapterName: "Triangles",
-    unitName: "Unit IV: Geometry (Total 15 Marks)",
+    unitName: "Unit IV: Geometry (15 Marks)",
     unitTotalMarks: 15,
-    expectedMarks: "9–10 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 1, case4M: 0 },
+    expectedMarks: "9 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 1, case4M: 0 },
     markingSchemeRubric: [
       { step: "Given, To Prove, and Construction labeled with diagram", marks: "1.5 Marks", rubricNote: "Ruler-drawn diagram mandatory" },
-      { step: "Theorem statement and proof justification (e.g. Basic Proportionality Theorem)", marks: "2.0 Marks", rubricNote: "Ratio of areas with common altitude" },
+      { step: "Theorem statement and proof justification (Basic Proportionality Theorem)", marks: "2.0 Marks", rubricNote: "Ratio of areas with common altitude" },
       { step: "Applying similarity criteria (AA, SAS, SSS)", marks: "1.0 Mark", rubricNote: "Must write corresponding vertices in correct order" },
       { step: "Final ratio / length calculation and Q.E.D.", marks: "0.5 Mark", rubricNote: "Final result statement" }
     ],
@@ -136,10 +136,10 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   7: {
     chapterNo: 7,
     chapterName: "Coordinate Geometry",
-    unitName: "Unit III: Coordinate Geometry",
+    unitName: "Unit III: Coordinate Geometry (6 Marks)",
     unitTotalMarks: 6,
     expectedMarks: "6 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
+    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 0, la5M: 0, case4M: 1 },
     markingSchemeRubric: [
       { step: "Distance Formula: √[(x₂ - x₁)² + (y₂ - y₁)²]", marks: "1.0 Mark", rubricNote: "Formula statement" },
       { step: "Section Formula: ((m₁x₂ + m₂x₁)/(m₁+m₂), (m₁y₂ + m₂y₁)/(m₁+m₂))", marks: "1.5 Marks", rubricNote: "Or k : 1 ratio setup" },
@@ -154,10 +154,10 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   8: {
     chapterNo: 8,
     chapterName: "Introduction to Trigonometry",
-    unitName: "Unit V: Trigonometry (Total 12 Marks)",
+    unitName: "Unit V: Trigonometry (12 Marks)",
     unitTotalMarks: 12,
     expectedMarks: "8 Marks",
-    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
+    questionPattern: { mcq1M: 3, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "T-Ratios definition from right triangle (sin θ = P/H, cos θ = B/H)", marks: "1.0 Mark", rubricNote: "Pythagoras Theorem verification" },
       { step: "Standard values table substitution (30°, 45°, 60°)", marks: "1.0 Mark", rubricNote: "Correct table value placement" },
@@ -172,9 +172,9 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   9: {
     chapterNo: 9,
     chapterName: "Some Applications of Trigonometry",
-    unitName: "Unit V: Trigonometry (Total 12 Marks)",
+    unitName: "Unit V: Trigonometry (12 Marks)",
     unitTotalMarks: 12,
-    expectedMarks: "4–5 Marks",
+    expectedMarks: "4 Marks",
     questionPattern: { mcq1M: 0, vsa2M: 0, sa3M: 0, la5M: 0, case4M: 1 },
     markingSchemeRubric: [
       { step: "Correct geometrical diagram with labeled angles of elevation/depression", marks: "1.5 Marks", rubricNote: "Mandatory to get any subsequent marks!" },
@@ -190,7 +190,7 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   10: {
     chapterNo: 10,
     chapterName: "Circles",
-    unitName: "Unit IV: Geometry (Total 15 Marks)",
+    unitName: "Unit IV: Geometry (15 Marks)",
     unitTotalMarks: 15,
     expectedMarks: "6 Marks",
     questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
@@ -208,10 +208,10 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   11: {
     chapterNo: 11,
     chapterName: "Areas Related to Circles",
-    unitName: "Unit VI: Mensuration (Total 10 Marks)",
+    unitName: "Unit VI: Mensuration (10 Marks)",
     unitTotalMarks: 10,
     expectedMarks: "4 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 0, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Formula for Area of Sector = (θ/360°) × πr²", marks: "1.0 Mark", rubricNote: "Write formula with π = 22/7 or 3.14" },
       { step: "Formula for Area of Corresponding Triangle (1/2 r² sin θ)", marks: "1.0 Mark", rubricNote: "Segment calculation" },
@@ -226,7 +226,7 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   12: {
     chapterNo: 12,
     chapterName: "Surface Areas and Volumes",
-    unitName: "Unit VI: Mensuration (Total 10 Marks)",
+    unitName: "Unit VI: Mensuration (10 Marks)",
     unitTotalMarks: 10,
     expectedMarks: "6 Marks",
     questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 0, la5M: 1, case4M: 0 },
@@ -244,10 +244,10 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   13: {
     chapterNo: 13,
     chapterName: "Statistics",
-    unitName: "Unit VII: Statistics & Probability (Total 11 Marks)",
+    unitName: "Unit VII: Statistics & Probability (11 Marks)",
     unitTotalMarks: 11,
     expectedMarks: "7 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 1, case4M: 0 },
+    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 0, la5M: 1, case4M: 0 },
     markingSchemeRubric: [
       { step: "Frequency distribution table with class marks xᵢ = (U+L)/2", marks: "1.5 Marks", rubricNote: "Table accuracy check" },
       { step: "Assumed Mean / Step-Deviation method calculation table", marks: "1.5 Marks", rubricNote: "uᵢ = (xᵢ - a) / h" },
@@ -263,10 +263,10 @@ export const MATH_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
   14: {
     chapterNo: 14,
     chapterName: "Probability",
-    unitName: "Unit VII: Statistics & Probability (Total 11 Marks)",
+    unitName: "Unit VII: Statistics & Probability (11 Marks)",
     unitTotalMarks: 11,
     expectedMarks: "4 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 0, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Sample space definition and count of total outcomes n(S)", marks: "1.0 Mark", rubricNote: "Cards deck (52), two dice (36), coins (2ⁿ)" },
       { step: "Listing favorable outcomes n(E)", marks: "1.0 Mark", rubricNote: "Clear set or count" },
@@ -286,8 +286,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Chemical Reactions and Equations",
     unitName: "Unit I: Chemical Substances - Nature & Behaviour (25 Marks)",
     unitTotalMarks: 25,
-    expectedMarks: "6–8 Marks",
-    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
+    expectedMarks: "6 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Balanced chemical equation with correct formulas", marks: "1.0 Mark", rubricNote: "Mass of reactants = mass of products" },
       { step: "State symbols included (s), (l), (g), (aq)", marks: "0.5 Mark", rubricNote: "Mandatory in CBSE rubric" },
@@ -304,8 +304,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Acids, Bases and Salts",
     unitName: "Unit I: Chemical Substances - Nature & Behaviour (25 Marks)",
     unitTotalMarks: 25,
-    expectedMarks: "6–8 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 1 },
+    expectedMarks: "6 Marks",
+    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 0, la5M: 0, case4M: 1 },
     markingSchemeRubric: [
       { step: "Chemical equation for salt preparation (Chlor-Alkali, POP, Bleaching Powder)", marks: "1.5 Marks", rubricNote: "Conditions such as 373K temperature" },
       { step: "Gas evolution confirmation test (H₂ pop test, CO₂ lime water milky)", marks: "1.0 Mark", rubricNote: "Test explanation" },
@@ -321,8 +321,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Metals and Non-Metals",
     unitName: "Unit I: Chemical Substances - Nature & Behaviour (25 Marks)",
     unitTotalMarks: 25,
-    expectedMarks: "7–9 Marks",
-    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 1, la5M: 1, case4M: 0 },
+    expectedMarks: "7 Marks",
+    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Electron dot diagram showing electron transfer", marks: "1.5 Marks", rubricNote: "Metal cation + Non-metal anion" },
       { step: "Metallurgy equations: Roasting (Sulfide, excess air) vs Calcination (Carbonate, limited air)", marks: "2.0 Marks", rubricNote: "Balanced equations with heat symbol" },
@@ -338,8 +338,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Carbon and its Compounds",
     unitName: "Unit I: Chemical Substances - Nature & Behaviour (25 Marks)",
     unitTotalMarks: 25,
-    expectedMarks: "6–8 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 1, case4M: 0 },
+    expectedMarks: "6 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 0, la5M: 1, case4M: 0 },
     markingSchemeRubric: [
       { step: "Covalent bonding & Versatile nature (Catenation + Tetravalency)", marks: "1.0 Mark", rubricNote: "Cannot gain C⁴⁻ or lose C⁴⁺" },
       { step: "Homologous series general formula & -CH₂- difference", marks: "1.0 Mark", rubricNote: "14 u molecular mass difference" },
@@ -356,8 +356,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Life Processes",
     unitName: "Unit II: World of Living (25 Marks)",
     unitTotalMarks: 25,
-    expectedMarks: "8–10 Marks",
-    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 1, la5M: 1, case4M: 0 },
+    expectedMarks: "9 Marks",
+    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 0, la5M: 1, case4M: 0 },
     markingSchemeRubric: [
       { step: "Nephron / Human Heart labeled diagram", marks: "2.0 Marks", rubricNote: "Arrows showing direction of blood / filtrate flow" },
       { step: "Anaerobic vs Aerobic respiration pathways", marks: "1.5 Marks", rubricNote: "Glucose ⟶ Pyruvate ⟶ Lactic acid / Ethanol + CO₂" },
@@ -373,7 +373,7 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Control and Coordination",
     unitName: "Unit II: World of Living (25 Marks)",
     unitTotalMarks: 25,
-    expectedMarks: "6–7 Marks",
+    expectedMarks: "6 Marks",
     questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Neuron structure with electrical impulse flow: Dendrite ⟶ Cyton ⟶ Axon ⟶ Synapse", marks: "1.5 Marks", rubricNote: "Neurotransmitter chemical release" },
@@ -389,8 +389,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "How do Organisms Reproduce?",
     unitName: "Unit II: World of Living (25 Marks)",
     unitTotalMarks: 25,
-    expectedMarks: "6–8 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 1 },
+    expectedMarks: "6 Marks",
+    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 0, la5M: 0, case4M: 1 },
     markingSchemeRubric: [
       { step: "Flower longitudinal section (Pistil: Stigma, Style, Ovary; Stamen: Anther, Filament)", marks: "2.0 Marks", rubricNote: "Pollination vs fertilization" },
       { step: "Double fertilization explanation (Syngamy + Triple Fusion ⟶ Endosperm)", marks: "1.5 Marks", rubricNote: "Pollen tube growth" },
@@ -405,8 +405,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Heredity and Evolution",
     unitName: "Unit II: World of Living (25 Marks)",
     unitTotalMarks: 25,
-    expectedMarks: "5–7 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
+    expectedMarks: "4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Monohybrid cross Punnett square (TT × tt ⟶ F₁ Tt ⟶ F₂ 3:1 phenotypic, 1:2:1 genotypic)", marks: "2.0 Marks", rubricNote: "Complete Punnett grid" },
       { step: "Sex determination in human beings (XY male creates 50% X and 50% Y gametes)", marks: "1.5 Marks", rubricNote: "Father determines sex of child" },
@@ -421,8 +421,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Light — Reflection and Refraction",
     unitName: "Unit III: Natural Phenomena (12 Marks)",
     unitTotalMarks: 12,
-    expectedMarks: "9–10 Marks",
-    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 1, la5M: 1, case4M: 0 },
+    expectedMarks: "8 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 1, case4M: 0 },
     markingSchemeRubric: [
       { step: "Ray diagram with arrows on incoming and outgoing rays", marks: "2.0 Marks", rubricNote: "Arrows on rays are MANDATORY!" },
       { step: "Mirror formula: 1/f = 1/v + 1/u or Lens formula: 1/f = 1/v - 1/u", marks: "1.0 Mark", rubricNote: "Formula statement" },
@@ -439,8 +439,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "The Human Eye and Colourful World",
     unitName: "Unit III: Natural Phenomena (12 Marks)",
     unitTotalMarks: 12,
-    expectedMarks: "4–5 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
+    expectedMarks: "4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Defects of vision ray diagram (Myopia corrected by Concave lens; Hypermetropia by Convex lens)", marks: "2.0 Marks", rubricNote: "Defective eye vs corrected eye" },
       { step: "Atmospheric refraction: Twinkling of stars & Advanced sunrise / Delayed sunset (2 mins)", marks: "1.5 Marks", rubricNote: "Gradual change in refractive index" },
@@ -455,8 +455,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Electricity",
     unitName: "Unit IV: Effects of Current (13 Marks)",
     unitTotalMarks: 13,
-    expectedMarks: "7–8 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 1, case4M: 0 },
+    expectedMarks: "7 Marks",
+    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Ohm's Law: V = IR statement and V-I graph", marks: "1.0 Mark", rubricNote: "Straight line through origin" },
       { step: "Factors affecting resistance: R = ρL/A", marks: "1.5 Marks", rubricNote: "Length doubled ⟶ R doubled; Area doubled ⟶ R halved" },
@@ -473,8 +473,8 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     chapterName: "Magnetic Effects of Electric Current",
     unitName: "Unit IV: Effects of Current (13 Marks)",
     unitTotalMarks: 13,
-    expectedMarks: "6–7 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 1 },
+    expectedMarks: "6 Marks",
+    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 0, la5M: 0, case4M: 1 },
     markingSchemeRubric: [
       { step: "Right-Hand Thumb Rule for circular magnetic field lines around straight conductor", marks: "1.0 Mark", rubricNote: "Thumb = Current; Fingers = Field" },
       { step: "Solenoid magnetic field pattern (uniform inside, identical to bar magnet outside)", marks: "1.5 Marks", rubricNote: "Soft iron core makes electromagnet" },
@@ -492,7 +492,7 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     unitName: "Unit V: Natural Resources (5 Marks)",
     unitTotalMarks: 5,
     expectedMarks: "5 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
     markingSchemeRubric: [
       { step: "Trophic levels & 10% Law of energy transfer (Lindeman's Law)", marks: "1.5 Marks", rubricNote: "Only 10% energy reaches next level" },
       { step: "Biological Magnification: Progressive accumulation of non-biodegradable pesticides", marks: "1.5 Marks", rubricNote: "Maximum concentration in top carnivore (Human)" },

@@ -50,8 +50,8 @@ function preprocessMathContent(raw: string): string {
     if (token.startsWith('$')) {
       return token;
     }
-    // Auto-wrap bare \frac and \sqrt in non-math blocks
-    let nonMath = token.replace(/(\\frac\{[^{}]+\}\{[^{}]+\})/g, '$$$1$$')
+    // Auto-wrap bare \frac, \dfrac, and \sqrt in non-math blocks
+    let nonMath = token.replace(/(\\(?:d?frac)\{[^{}]+\}\{[^{}]+\})/g, '$$$1$$')
                        .replace(/(\\sqrt(?:\[[0-9]+\])?\{[^{}]+\})/g, '$$$1$$');
     // Preserve markdown newlines only in non-math text
     nonMath = nonMath.replace(/([^\n])\n([^\n])/g, '$1  \n$2');
@@ -108,7 +108,7 @@ const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
             if (inline) {
               return <span className="inline text-inherit" {...props} />;
             }
-            return <p className={`leading-relaxed my-1.5 text-inherit ${isDark ? "text-slate-200" : "text-slate-900"}`} {...props} />;
+            return <p className={`leading-relaxed my-2 text-inherit ${isDark ? "text-slate-200" : "text-slate-900"}`} {...props} />;
           },
           strong: ({ node, ...props }) => (
             <strong className={`font-black ${isDark ? "text-white" : "text-slate-950"}`} {...props} />
@@ -161,16 +161,16 @@ const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
               {...props}
             />
           ),
-          // ── Lists with proper spacing ────────────────────────────────────────
+          // ── Lists with proper spacing & zero block distortion ────────────────
           ul: ({ node, ...props }) => (
-            <ul className="my-2 space-y-1.5 pl-1" {...props} />
+            <ul className="my-3 space-y-2 pl-5 list-disc list-outside" {...props} />
           ),
           ol: ({ node, ...props }) => (
-            <ol className="my-2 space-y-1.5 pl-1 list-decimal list-inside" {...props} />
+            <ol className="my-3 space-y-2 pl-5 list-decimal list-outside" {...props} />
           ),
           li: ({ node, ...props }) => (
             <li
-              className={`flex items-start gap-2 leading-relaxed text-sm ${
+              className={`leading-relaxed text-sm sm:text-base my-1 pl-1 ${
                 isDark ? "text-slate-200" : "text-slate-800"
               }`}
               {...props}
@@ -200,10 +200,10 @@ const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
           div: ({ node, className: divClassName, ...props }) => {
             if (divClassName?.includes('math-display')) {
               return (
-                <div className={`overflow-x-auto py-2.5 my-2.5 flex justify-center items-center min-h-[2.5em] text-inherit ${
+                <div className={`overflow-x-auto py-3.5 my-3.5 sm:my-4 flex justify-center items-center min-h-[3em] text-inherit ${
                   isDark ? "text-slate-100" : "text-slate-900"
                 }`}>
-                  <div className={`${divClassName} max-w-full`} style={{ lineHeight: '1.6', overflowY: 'visible' }} {...props} />
+                  <div className={`${divClassName} max-w-full font-serif text-base sm:text-lg`} style={{ lineHeight: '1.8', overflowY: 'visible' }} {...props} />
                 </div>
               );
             }

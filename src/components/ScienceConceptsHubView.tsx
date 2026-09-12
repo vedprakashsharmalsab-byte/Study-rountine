@@ -236,8 +236,69 @@ export default function ScienceConceptsHubView({
             </div>
           </div>
 
-          {/* Chapter pills */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          {/* Direct Chapter Dropdown + Quick Prev/Next (Zero Horizontal Scrolling!) */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
+            <div className="flex items-center gap-2 flex-1">
+              <label htmlFor="science-chapter-select" className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 shrink-0">
+                Chapter:
+              </label>
+              <div className="fabulous-select-wrapper flex-1">
+                <select
+                  id="science-chapter-select"
+                  aria-label="Select Science Chapter directly"
+                  value={currentChNo}
+                  onChange={(e) => handleSelectChapter(Number(e.target.value))}
+                  className={`fabulous-select ${
+                    isDark ? "fabulous-select-dark" : "fabulous-select-light"
+                  }`}
+                >
+                  {CHAPTER_LIST.filter((c) => disciplineFilter === "all" || c.discipline === disciplineFilter).map((ch) => (
+                    <option key={ch.no} value={ch.no}>
+                      Ch {ch.no}: {ch.name} ({ch.discipline} • {ch.weightage})
+                    </option>
+                  ))}
+                </select>
+                <div className="fabulous-select-icon text-zinc-400">
+                  <ChevronDown className="w-4 h-4" />
+                </div>
+              </div>
+
+              {/* Prev / Next Buttons */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={() => {
+                    const currentIdx = CHAPTER_LIST.findIndex(c => c.no === currentChNo);
+                    const prevCh = currentIdx > 0 ? CHAPTER_LIST[currentIdx - 1].no : CHAPTER_LIST[CHAPTER_LIST.length - 1].no;
+                    handleSelectChapter(prevCh);
+                  }}
+                  className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center transition-all cursor-pointer min-h-[42px] min-w-[42px] active:scale-95 ${
+                    isDark ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
+                  }`}
+                  title="Previous Chapter"
+                  aria-label="Previous Chapter"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => {
+                    const currentIdx = CHAPTER_LIST.findIndex(c => c.no === currentChNo);
+                    const nextCh = currentIdx < CHAPTER_LIST.length - 1 ? CHAPTER_LIST[currentIdx + 1].no : CHAPTER_LIST[0].no;
+                    handleSelectChapter(nextCh);
+                  }}
+                  className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center transition-all cursor-pointer min-h-[42px] min-w-[42px] active:scale-95 ${
+                    isDark ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
+                  }`}
+                  title="Next Chapter"
+                  aria-label="Next Chapter"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Clean Wrapped Chapter Pills (Wraps across lines, ZERO side-scrolling!) */}
+          <div className="flex flex-wrap gap-1.5 pt-1.5">
             {CHAPTER_LIST.filter((c) => disciplineFilter === "all" || c.discipline === disciplineFilter).map((ch) => {
               const isSelected = ch.no === currentChNo;
               const Icon = ch.icon;
@@ -245,9 +306,9 @@ export default function ScienceConceptsHubView({
                 <button
                   key={ch.no}
                   onClick={() => handleSelectChapter(ch.no)}
-                  className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer shrink-0 flex items-center gap-2 border ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 border active:scale-95 ${
                     isSelected
-                      ? "bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 border-teal-300 font-black shadow-lg shadow-teal-500/25 scale-[1.02]"
+                      ? "bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 border-teal-300 font-black shadow-md"
                       : isDark
                       ? "bg-black/30 border-white/5 text-slate-300 hover:text-white hover:border-white/20"
                       : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300"
