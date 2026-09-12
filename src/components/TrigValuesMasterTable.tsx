@@ -195,7 +195,7 @@ export default function TrigValuesMasterTable({ isDark = true }: TrigValuesMaste
           <Sparkles className="w-4 h-4 shrink-0" />
           <div className="flex-1">
             <PremiumMathRenderer
-              content="**The 30-Second Board Exam Trick:** Write numbers $0, 1, 2, 3, 4$ across columns $\\to$ Divide all by $4$ $\\to$ Put a square root over each $\\left(\\sqrt{\\frac{0}{4}}, \\sqrt{\\frac{1}{4}}, \\sqrt{\\frac{2}{4}}, \\sqrt{\\frac{3}{4}}, \\sqrt{\\frac{4}{4}}\\right)$. That yields Sine! Cosine is Sine in reverse."
+              content="**The 30-Second Board Exam Trick:** Write numbers $0, 1, 2, 3, 4$ across columns $\to$ Divide all by $4$ $\to$ Put a square root over each $\left(\sqrt{\frac{0}{4}}, \sqrt{\frac{1}{4}}, \sqrt{\frac{2}{4}}, \sqrt{\frac{3}{4}}, \sqrt{\frac{4}{4}}\right)$. That yields Sine! Cosine is Sine in reverse."
               isDark={isDark}
             />
           </div>
@@ -209,7 +209,7 @@ export default function TrigValuesMasterTable({ isDark = true }: TrigValuesMaste
           <ArrowLeftRight className="w-4 h-4 shrink-0" />
           <div className="flex-1">
             <PremiumMathRenderer
-              content="**The Complementary Swap Principle ($\\theta + \\phi = 90^\\circ$):** When two angles sum to $90^\\circ$, Sine & Cosine swap values ($\\sin 30^\\circ = \\cos 60^\\circ = \\frac{1}{2}$), Tangent & Cotangent swap ($\\tan 30^\\circ = \\cot 60^\\circ = \\frac{1}{\\sqrt{3}}$), and Secant & Cosecant swap ($\\sec 30^\\circ = \\csc 60^\\circ = \\frac{2}{\\sqrt{3}}$)!"
+              content="**The Complementary Swap Principle ($\theta + \phi = 90^\circ$):** When two angles sum to $90^\circ$, Sine & Cosine swap values ($\sin 30^\circ = \cos 60^\circ = \frac{1}{2}$), Tangent & Cotangent swap ($\tan 30^\circ = \cot 60^\circ = \frac{1}{\sqrt{3}}$), and Secant & Cosecant swap ($\sec 30^\circ = \csc 60^\circ = \frac{2}{\sqrt{3}}$)!"
               isDark={isDark}
             />
           </div>
@@ -351,13 +351,13 @@ export default function TrigValuesMasterTable({ isDark = true }: TrigValuesMaste
             <Check className="w-3.5 h-3.5" /> High-Yield Anchors:
           </span>
           <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono text-xs">
-            <PremiumMathRenderer content="$\\sin 30^\\circ = \\cos 60^\\circ = \\frac{1}{2}$" isDark={isDark} inline />
+            <PremiumMathRenderer content="$\sin 30^\circ = \cos 60^\circ = \frac{1}{2}$" isDark={isDark} inline />
           </span>
           <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono text-xs">
-            <PremiumMathRenderer content="$\\sin 45^\\circ = \\cos 45^\\circ = \\frac{1}{\\sqrt{2}}$" isDark={isDark} inline />
+            <PremiumMathRenderer content="$\sin 45^\circ = \cos 45^\circ = \frac{1}{\sqrt{2}}$" isDark={isDark} inline />
           </span>
           <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono text-xs">
-            <PremiumMathRenderer content="$\\tan 45^\\circ = \\cot 45^\\circ = 1$" isDark={isDark} inline />
+            <PremiumMathRenderer content="$\tan 45^\circ = \cot 45^\circ = 1$" isDark={isDark} inline />
           </span>
         </div>
         <div className="text-xs font-mono text-amber-400">

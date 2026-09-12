@@ -27,6 +27,11 @@ function preprocessMathContent(raw: string): string {
   // Clean literal "\n" strings into real newlines
   let text = raw.replace(/\\n(?![a-zA-Z])/g, '\n').trim();
 
+  // Normalize duplicate backslashes immediately attached to LaTeX commands
+  // (e.g. \\sin, \\cos, \\frac, \\sqrt, \\circ, \\theta, \\quad, \\text, \\csc, \\sec, \\cot)
+  // preventing accidental newline breaks inside math expressions from JSX attributes or double JSON serialization.
+  text = text.replace(/\\{2,}([a-zA-Z]+)/g, '\\$1');
+
   // 1. If text is entirely wrapped in $$...$$ or single $...$
   if (/^\$\$[\s\S]*\$\$$/.test(text) || (/^\$[^\$]+\$$/.test(text) && !text.slice(1, -1).includes('$'))) {
     return text;
