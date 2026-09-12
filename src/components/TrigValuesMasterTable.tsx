@@ -145,7 +145,7 @@ export default function TrigValuesMasterTable({ isDark = true }: TrigValuesMaste
             Trigonometric Ratios Master Matrix
           </h3>
           <p className={`text-xs sm:text-sm ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-            Click any column angle to inspect ratios. Notice how complementary angles ($30^\circ \leftrightarrow 60^\circ$, $0^\circ \leftrightarrow 90^\circ$) swap sin/cos, tan/cot, and sec/csc!
+            Click any column angle to inspect ratios. Notice how complementary angles (30° ↔ 60°, 0° ↔ 90°) swap sin/cos, tan/cot, and sec/csc!
           </p>
         </div>
 

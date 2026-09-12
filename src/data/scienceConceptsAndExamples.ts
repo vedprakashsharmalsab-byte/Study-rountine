@@ -752,9 +752,9 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Key Functional Groups in Class 10:\n- Haloalkanes: -Cl (Chloro), -Br (Bromo).\n- Alcohol: -OH (suffix: -ol, e.g. Methanol, Ethanol).\n- Aldehyde: -CHO (suffix: -al, e.g. Methanal, Ethanal).\n- Ketone: >C=O (suffix: -one, e.g. Propanone, minimum 3 carbons).\n- Carboxylic Acid: -COOH (suffix: -oic acid, e.g. Ethanoic acid)."
     ],
     keyReactionsOrFormulas: [
-      { name: "Alkanes General Formula", formula: "C_n H_{2n+2} \quad (n = 1, 2, 3...)", note: "Methane CH₄, Ethane C₂H₆, Propane C₃H₈." },
-      { name: "Alkenes General Formula", formula: "C_n H_{2n} \quad (n = 2, 3...)", note: "Ethene C₂H₄, Propene C₃H₆." },
-      { name: "Alkynes General Formula", formula: "C_n H_{2n-2} \quad (n = 2, 3...)", note: "Ethyne C₂H₂, Propyne C₃H₄." }
+      { name: "Alkanes General Formula", formula: "C_n H_{2n+2} \\quad (n = 1, 2, 3...)", note: "Methane CH₄, Ethane C₂H₆, Propane C₃H₈." },
+      { name: "Alkenes General Formula", formula: "C_n H_{2n} \\quad (n = 2, 3...)", note: "Ethene C₂H₄, Propene C₃H₆." },
+      { name: "Alkynes General Formula", formula: "C_n H_{2n-2} \\quad (n = 2, 3...)", note: "Ethyne C₂H₂, Propyne C₃H₄." }
     ],
     commonMistakesWarning: "The simplest ketone is Propanone (CH₃-CO-CH₃) with 3 carbon atoms. Methanone and Ethanone do not exist because a ketone carbonyl group must be bonded to two carbon atoms!",
     examples: [
@@ -1125,7 +1125,7 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
     ],
     keyReactionsOrFormulas: [
       { name: "Phototropism Auxin Redistribution", formula: "\\text{Light on one side} ⟹ \\text{Auxin migrates to shaded side} ⟹ \\text{Shaded cells elongate faster} ⟹ \\text{Stem bends towards light}", note: "Classic board demonstration question." },
-      { name: "Thyroxin Synthesis", formula: "\\text{Tyrosine} + \\text{Iodine} ⟶ \\text{Thyroxin} \quad [\\text{Deficiency} ⟹ \\text{Swollen neck goitre}]", note: "Iodized table salt prevents goitre." }
+      { name: "Thyroxin Synthesis", formula: "\\text{Tyrosine} + \\text{Iodine} ⟶ \\text{Thyroxin} \\quad [\\text{Deficiency} ⟹ \\text{Swollen neck goitre}]", note: "Iodized table salt prevents goitre." }
     ],
     commonMistakesWarning: "Students state that roots are positively phototropic. Roots are NEGATIVELY phototropic (grow away from light) and POSITIVELY geotropic (grow towards gravity).",
     examples: [
@@ -1253,7 +1253,7 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Post-Fertilization Transformations:\n- Zygote (2n) ⟶ Embryo.\n- Ovule ⟶ Hard resistant Seed coat containing stored food (cotyledons) and embryo.\n- Ovary ⟶ Ripens into the fleshy or dry Fruit.\n- Petals, sepals, stamens, style, and stigma wither and fall off."
     ],
     keyReactionsOrFormulas: [
-      { name: "Post-Fertilization Fates", formula: "\\text{Zygote} ⟶ \\text{Embryo}; \quad \\text{Ovule} ⟶ \\text{Seed}; \quad \\text{Ovary} ⟶ \\text{Fruit}", note: "Guaranteed 1-mark board objective." }
+      { name: "Post-Fertilization Fates", formula: "\\text{Zygote} ⟶ \\text{Embryo}; \\quad \\text{Ovule} ⟶ \\text{Seed}; \\quad \\text{Ovary} ⟶ \\text{Fruit}", note: "Guaranteed 1-mark board objective." }
     ],
     commonMistakesWarning: "Students confuse ovule with ovary. The OVULE becomes the SEED; the OVARY becomes the FRUIT!",
     examples: [
@@ -1381,7 +1381,7 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Law of Independent Assortment: When two pairs of contrasting traits are combined in a hybrid, the segregation of one pair of characters is completely independent of the other pair."
     ],
     keyReactionsOrFormulas: [
-      { name: "Monohybrid F2 Ratios", formula: "\\text{Phenotypic} = 3 : 1; \quad \\text{Genotypic} = 1 : 2 : 1 \; (1\\text{TT} : 2\\text{Tt} : 1\\text{tt})", note: "Shows recessive allele remains unblended." },
+      { name: "Monohybrid F2 Ratios", formula: "\\text{Phenotypic} = 3 : 1; \\quad \\text{Genotypic} = 1 : 2 : 1 \; (1\\text{TT} : 2\\text{Tt} : 1\\text{tt})", note: "Shows recessive allele remains unblended." },
       { name: "Dihybrid F2 Phenotypic Ratio", formula: "9 \\text{ Round Yellow} : 3 \\text{ Round Green} : 3 \\text{ Wrinkled Yellow} : 1 \\text{ Wrinkled Green}", note: "Demonstrates independent assortment." }
     ],
     commonMistakesWarning: "Students confuse phenotypic ratio with genotypic ratio. Phenotypic is physical appearance (3:1); Genotypic is genetic makeup (1:2:1). Specify which ratio you are writing!",
@@ -1510,9 +1510,9 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Convex Mirror Applications: Rear-view mirrors in vehicles because they always form an erect, diminished virtual image and provide a wide field of view."
     ],
     keyReactionsOrFormulas: [
-      { name: "Mirror Formula", formula: "\frac{1}{v} + \\frac{1}{u} = \frac{1}{f}", note: "Use Cartesian signs for u, v, f." },
-      { name: "Magnification of Mirror", formula: "m = \frac{h_i}{h_o} = -\frac{v}{u}", note: "m < 0 means Real & Inverted; m > 0 means Virtual & Erect." },
-      { name: "Focal Length vs Radius", formula: "f = \frac{R}{2}", note: "Valid for spherical mirrors of small aperture." }
+      { name: "Mirror Formula", formula: "\\frac{1}{v} + \\frac{1}{u} = \\frac{1}{f}", note: "Use Cartesian signs for u, v, f." },
+      { name: "Magnification of Mirror", formula: "m = \\frac{h_i}{h_o} = -\\frac{v}{u}", note: "m < 0 means Real & Inverted; m > 0 means Virtual & Erect." },
+      { name: "Focal Length vs Radius", formula: "f = \\frac{R}{2}", note: "Valid for spherical mirrors of small aperture." }
     ],
     commonMistakesWarning: "In mirror magnification, students forget the minus sign: $m = -v/u$. In lens magnification, it is positive: $m = +v/u$. Do not confuse the two!",
     examples: [
@@ -1535,9 +1535,9 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         question: "A convex mirror used for rear-view on an automobile has a radius of curvature of 3.00 m. If a bus is located at 5.00 m from this mirror, find the position, nature, and size of the image.",
         solutionSteps: [
           "Given:\nRadius of curvature $R = +3.00\\text{ m} ⟹$ Focal length $f = R/2 = +1.50\\text{ m}$ (positive for convex).\nObject distance $u = -5.00\\text{ m}$.\nImage distance $v = ?$",
-          "Using Mirror Formula: $\frac{1}{v} + \\frac{1}{u} = \frac{1}{f} ⟹ \frac{1}{v} = \frac{1}{f} - \\frac{1}{u}$.\n$\frac{1}{v} = \frac{1}{1.50} - \\left(\frac{1}{-5.00}\\right) = \frac{1}{1.5} + \frac{1}{5.0} = \frac{10}{15} + \frac{1}{5} = \frac{2}{3} + \frac{1}{5} = \frac{10 + 3}{15} = \frac{13}{15}$.\n$v = +\frac{15}{13} = +1.15\\text{ m}$.",
+          "Using Mirror Formula: $\\frac{1}{v} + \\frac{1}{u} = \\frac{1}{f} ⟹ \\frac{1}{v} = \\frac{1}{f} - \\frac{1}{u}$.\n$\\frac{1}{v} = \\frac{1}{1.50} - \\left(\\frac{1}{-5.00}\\right) = \\frac{1}{1.5} + \\frac{1}{5.0} = \\frac{10}{15} + \\frac{1}{5} = \\frac{2}{3} + \\frac{1}{5} = \\frac{10 + 3}{15} = \\frac{13}{15}$.\n$v = +\\frac{15}{13} = +1.15\\text{ m}$.",
           "Image Position & Nature: The image is formed at a distance of $1.15\\text{ m}$ behind the mirror. Since $v$ is positive, the image is Virtual and Erect.",
-          "Magnification: $m = -\frac{v}{u} = -\frac{+1.15}{-5.00} = +0.23$.\nThe image is virtual, erect, and diminished to $0.23$ times the size of the bus."
+          "Magnification: $m = -\\frac{v}{u} = -\\frac{+1.15}{-5.00} = +0.23$.\nThe image is virtual, erect, and diminished to $0.23$ times the size of the bus."
         ],
         keyTakeaway: "For convex mirror: $v = +1.15\\text{ m}$, Virtual and Erect, $m = +0.23$ (diminished).",
         examinerTrap: "Using negative sign for convex focal length. Convex mirror focal length is ALWAYS POSITIVE."
@@ -1548,8 +1548,8 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         marks: 4,
         question: "A concave mirror produces three times magnified real image of an object placed at 10 cm in front of it.\n(a) Where is the image located?\n(b) What is the focal length of the mirror?\n(c) If the object is moved to 5 cm from the mirror, what will be the nature of the new image? Draw a ray diagram description.",
         solutionSteps: [
-          "Part (a):\nGiven: Object distance $u = -10\\text{ cm}$.\nSince the image is Real, magnification $m$ must be negative: $m = -3$.\nFormula: $m = -\frac{v}{u} ⟹ -3 = -\frac{v}{-10} ⟹ -3 = \frac{v}{10} ⟹ v = -30\\text{ cm}$.\nThe image is located at a distance of $30\\text{ cm}$ in front of the mirror (on the same side as object).",
-          "Part (b):\nUsing Mirror Formula: $\frac{1}{f} = \frac{1}{v} + \\frac{1}{u} = \frac{1}{-30} + \frac{1}{-10} = -\frac{1}{30} - \frac{3}{30} = -\frac{4}{30} = -\frac{2}{15}$.\n$f = -\frac{15}{2} = -7.5\\text{ cm}$. Focal length is $7.5\\text{ cm}$ (concave).",
+          "Part (a):\nGiven: Object distance $u = -10\\text{ cm}$.\nSince the image is Real, magnification $m$ must be negative: $m = -3$.\nFormula: $m = -\\frac{v}{u} ⟹ -3 = -\\frac{v}{-10} ⟹ -3 = \\frac{v}{10} ⟹ v = -30\\text{ cm}$.\nThe image is located at a distance of $30\\text{ cm}$ in front of the mirror (on the same side as object).",
+          "Part (b):\nUsing Mirror Formula: $\\frac{1}{f} = \\frac{1}{v} + \\frac{1}{u} = \\frac{1}{-30} + \\frac{1}{-10} = -\\frac{1}{30} - \\frac{3}{30} = -\\frac{4}{30} = -\\frac{2}{15}$.\n$f = -\\frac{15}{2} = -7.5\\text{ cm}$. Focal length is $7.5\\text{ cm}$ (concave).",
           "Part (c):\nWhen the object is placed at $u' = -5\\text{ cm}$, notice that $|u'| = 5\\text{ cm} < |f| = 7.5\\text{ cm}$. The object is now between the Pole (P) and Focus (F)!\nFor an object between P and F of a concave mirror, the rays diverge after reflection and appear to meet behind the mirror, forming a Virtual, Erect, and Magnified image behind the mirror."
         ],
         keyTakeaway: "Real magnified image means $m = -3, v = -30\\text{ cm}, f = -7.5\\text{ cm}$. Object at $5\\text{ cm} < f$ forms Virtual Erect image.",
@@ -1564,19 +1564,19 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
     discipline: "Physics",
     topicTitle: "Refraction, Snell's Law, Refractive Index, Lenses & Lens Power",
     ncertSection: "NCERT Chapter 9, Sections 9.3 & 9.4 (Pages 171–186)",
-    ncertSummary: "Refraction is the bending of a light ray when passing obliquely from one optical medium to another due to a change in speed. Snell's Law: $\frac{\\sin i}{\\sin r} = \\text{constant} = n_{21}$. Absolute refractive index $n = c/v$. Lenses form images via refraction: Convex (converging) has positive focal length ($f > 0$); Concave (diverging) has negative focal length ($f < 0$). Lens Formula: $1/v - 1/u = 1/f$. Power of lens $P = 1/f(\\text{in meters})$, measured in Dioptres (D).",
+    ncertSummary: "Refraction is the bending of a light ray when passing obliquely from one optical medium to another due to a change in speed. Snell's Law: $\\frac{\\sin i}{\\sin r} = \\text{constant} = n_{21}$. Absolute refractive index $n = c/v$. Lenses form images via refraction: Convex (converging) has positive focal length ($f > 0$); Concave (diverging) has negative focal length ($f < 0$). Lens Formula: $1/v - 1/u = 1/f$. Power of lens $P = 1/f(\\text{in meters})$, measured in Dioptres (D).",
     corePrinciples: [
-      "Laws of Refraction:\n(1) The incident ray, refracted ray, and normal at the point of incidence all lie in the same plane.\n(2) Snell's Law: The ratio of sine of angle of incidence to sine of angle of refraction is constant for light of a given color and media pair: $\frac{\\sin i}{\\sin r} = n_{21} = \frac{n_2}{n_1} = \frac{v_1}{v_2}$.",
+      "Laws of Refraction:\n(1) The incident ray, refracted ray, and normal at the point of incidence all lie in the same plane.\n(2) Snell's Law: The ratio of sine of angle of incidence to sine of angle of refraction is constant for light of a given color and media pair: $\\frac{\\sin i}{\\sin r} = n_{21} = \\frac{n_2}{n_1} = \\frac{v_1}{v_2}$.",
       "Optical Density vs Physical Density: Optical density is the ratio of speed of light; it is NOT mass density. (e.g. Kerosene has lower mass density than water and floats on it, but is optically denser than water and bends light more).",
       "Convex Lens (Converging): Real inverted images for all positions except when object is between optical center $O$ and focus $F_1$ (magnifying glass mode, forms virtual erect magnified image). $f > 0$.",
       "Concave Lens (Diverging): ALWAYS forms a virtual, erect, and diminished image on the same side as object. $f < 0$.",
-      "Power of a Lens: $P = \frac{1}{f(\\text{in meters})}$. SI unit is Dioptre ($1\\text{ D} = 1\\text{ m}^{-1}$). Converging/Convex lens has $+P$; Diverging/Concave lens has $-P$. Combination power $P_{\\text{total}} = P_1 + P_2$."
+      "Power of a Lens: $P = \\frac{1}{f(\\text{in meters})}$. SI unit is Dioptre ($1\\text{ D} = 1\\text{ m}^{-1}$). Converging/Convex lens has $+P$; Diverging/Concave lens has $-P$. Combination power $P_{\\text{total}} = P_1 + P_2$."
     ],
     keyReactionsOrFormulas: [
-      { name: "Snell's Law of Refraction", formula: "\frac{\\sin i}{\\sin r} = \frac{n_2}{n_1} = \frac{v_1}{v_2}", note: "Ray bends towards normal when entering denser medium ($v_2 < v_1$)." },
-      { name: "Lens Formula", formula: "\frac{1}{v} - \\frac{1}{u} = \frac{1}{f}", note: "Notice minus sign before 1/u (unlike mirror formula)." },
-      { name: "Magnification of Lens", formula: "m = \frac{h_i}{h_o} = +\frac{v}{u}", note: "Positive sign for lens magnification." },
-      { name: "Power of a Lens", formula: "P = \frac{1}{f(\\text{m})} = \frac{100}{f(\\text{cm})}", note: "Always convert cm to meters before calculating Dioptres." }
+      { name: "Snell's Law of Refraction", formula: "\\frac{\\sin i}{\\sin r} = \\frac{n_2}{n_1} = \\frac{v_1}{v_2}", note: "Ray bends towards normal when entering denser medium ($v_2 < v_1$)." },
+      { name: "Lens Formula", formula: "\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f}", note: "Notice minus sign before 1/u (unlike mirror formula)." },
+      { name: "Magnification of Lens", formula: "m = \\frac{h_i}{h_o} = +\\frac{v}{u}", note: "Positive sign for lens magnification." },
+      { name: "Power of a Lens", formula: "P = \\frac{1}{f(\\text{m})} = \\frac{100}{f(\\text{cm})}", note: "Always convert cm to meters before calculating Dioptres." }
     ],
     commonMistakesWarning: "Forgetting to convert focal length from centimeters to meters when calculating Power ($P = 1/f$). If $f = +50\\text{ cm}$, $P = 1/0.5 = +2\\text{ D}$, NOT $1/50 = 0.02\\text{ D}$!",
     examples: [
@@ -1587,7 +1587,7 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         question: "Define 1 Dioptre of power of a lens.",
         solutionSteps: [
           "One Dioptre (1 D) is defined as the optical power of a lens whose focal length is exactly one meter ($1\\text{ m}$).",
-          "Formula: $P = \frac{1}{f(\\text{m})} ⟹ 1\\text{ D} = 1\\text{ m}^{-1}$."
+          "Formula: $P = \\frac{1}{f(\\text{m})} ⟹ 1\\text{ D} = 1\\text{ m}^{-1}$."
         ],
         keyTakeaway: "1 Dioptre is the power of a lens with a focal length of 1 meter ($1\\text{ D} = 1\\text{ m}^{-1}$).",
         examinerTrap: "Omitting the unit 'meter'. Writing 'focal length of 1 unit' loses 0.5 mark."
@@ -1599,8 +1599,8 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         question: "A concave lens has focal length of 15 cm. At what distance should the object from the lens be placed so that it forms an image at 10 cm from the lens? Also, find the magnification produced by the lens.",
         solutionSteps: [
           "Given:\nConcave lens has negative focal length: $f = -15\\text{ cm}$.\nConcave lens always forms a virtual image on the same side: $v = -10\\text{ cm}$.\nObject distance $u = ?$",
-          "Using Lens Formula: $\frac{1}{v} - \\frac{1}{u} = \frac{1}{f} ⟹ \\frac{1}{u} = \frac{1}{v} - \frac{1}{f}$.\n$\\frac{1}{u} = \frac{1}{-10} - \\left(\frac{1}{-15}\\right) = -\frac{1}{10} + \frac{1}{15} = \frac{-3 + 2}{30} = -\frac{1}{30}$.\n$u = -30\\text{ cm}$.\nThe object should be placed at a distance of $30\\text{ cm}$ in front of the lens.",
-          "Magnification: $m = +\frac{v}{u} = \frac{-10}{-30} = +\frac{1}{3} = +0.33$.\nThe positive sign confirms the image is Virtual and Erect; value $0.33$ shows it is diminished to one-third size."
+          "Using Lens Formula: $\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f} ⟹ \\frac{1}{u} = \\frac{1}{v} - \\frac{1}{f}$.\n$\\frac{1}{u} = \\frac{1}{-10} - \\left(\\frac{1}{-15}\\right) = -\\frac{1}{10} + \\frac{1}{15} = \\frac{-3 + 2}{30} = -\\frac{1}{30}$.\n$u = -30\\text{ cm}$.\nThe object should be placed at a distance of $30\\text{ cm}$ in front of the lens.",
+          "Magnification: $m = +\\frac{v}{u} = \\frac{-10}{-30} = +\\frac{1}{3} = +0.33$.\nThe positive sign confirms the image is Virtual and Erect; value $0.33$ shows it is diminished to one-third size."
         ],
         keyTakeaway: "Concave lens: $f = -15\\text{ cm}, v = -10\\text{ cm} ⟹ u = -30\\text{ cm}, m = +1/3$.",
         examinerTrap: "Using positive sign for image distance $v$. Concave lenses NEVER form real images; $v$ is always negative!"
@@ -1611,10 +1611,10 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         marks: 4,
         question: "A doctor prescribes a corrective lens of power $-2.5\\text{ D}$ to a student.\n(a) Find the focal length of the lens.\n(b) Is the prescribed lens diverging or converging?\n(c) Which vision defect does the student suffer from?\n(d) If this lens is combined with another lens of power $+4.0\\text{ D}$, what is the focal length and nature of the combination?",
         solutionSteps: [
-          "(a) Focal length: $f = \frac{1}{P} = \frac{1}{-2.5\\text{ D}} = -0.4\\text{ m} = -40\\text{ cm}$.",
+          "(a) Focal length: $f = \\frac{1}{P} = \\frac{1}{-2.5\\text{ D}} = -0.4\\text{ m} = -40\\text{ cm}$.",
           "(b) Lens Nature: Since power and focal length are negative, it is a Diverging lens (Concave lens).",
           "(c) Vision Defect: A concave lens corrects Myopia (near-sightedness / short-sightedness).",
-          "(d) Combination Power:\n$P_{\\text{total}} = P_1 + P_2 = (-2.5\\text{ D}) + (+4.0\\text{ D}) = +1.5\\text{ D}$.\nFocal length of combination: $F = \frac{1}{P_{\\text{total}}} = \frac{1}{+1.5} = +\frac{10}{15}\\text{ m} = +0.67\\text{ m} = +66.7\\text{ cm}$.\nSince the net power is positive ($+1.5\\text{ D}$), the combination behaves as a Converging (Convex) lens."
+          "(d) Combination Power:\n$P_{\\text{total}} = P_1 + P_2 = (-2.5\\text{ D}) + (+4.0\\text{ D}) = +1.5\\text{ D}$.\nFocal length of combination: $F = \\frac{1}{P_{\\text{total}}} = \\frac{1}{+1.5} = +\\frac{10}{15}\\text{ m} = +0.67\\text{ m} = +66.7\\text{ cm}$.\nSince the net power is positive ($+1.5\\text{ D}$), the combination behaves as a Converging (Convex) lens."
         ],
         keyTakeaway: "$P = -2.5\\text{ D} ⟹ f = -40\\text{ cm}$ (Concave / Myopia). Combination $P = -2.5 + 4.0 = +1.5\\text{ D} ⟹ f = +66.7\\text{ cm}$ (Convex).",
         examinerTrap: "Adding focal lengths directly instead of adding powers. You must add powers ($P_1 + P_2$), NEVER $f_1 + f_2$."
@@ -1640,8 +1640,8 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Presbyopia: Old-age far-sightedness caused by weakening of ciliary muscles and diminishing lens flexibility. Corrected by Bifocal lenses (upper part concave for distant vision, lower part convex for reading)."
     ],
     keyReactionsOrFormulas: [
-      { name: "Myopia Correction Condition", formula: "u = -\\infty, \quad v = -\\text{Far Point} ⟹ f = -\\text{Far Point}", note: "Concave lens brings virtual image from infinity to the defective far point." },
-      { name: "Hypermetropia Correction Condition", formula: "u = -25\\text{ cm}, \quad v = -\\text{Near Point} ⟹ \frac{1}{f} = \frac{1}{v} - \\frac{1}{u}", note: "Convex lens shifts image from 25 cm to the defective near point." }
+      { name: "Myopia Correction Condition", formula: "u = -\\infty, \\quad v = -\\text{Far Point} ⟹ f = -\\text{Far Point}", note: "Concave lens brings virtual image from infinity to the defective far point." },
+      { name: "Hypermetropia Correction Condition", formula: "u = -25\\text{ cm}, \\quad v = -\\text{Near Point} ⟹ \\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u}", note: "Convex lens shifts image from 25 cm to the defective near point." }
     ],
     commonMistakesWarning: "In Myopia, the image is formed IN FRONT of the retina (not on it). In Hypermetropia, it is formed BEHIND the retina. Draw the ray diagrams accurately with arrows!",
     examples: [
@@ -1678,8 +1678,8 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         question: "The near point of a hypermetropic person is 75 cm. Calculate the focal length and power of the corrective lens required to read a book comfortably at 25 cm.",
         solutionSteps: [
           "Understanding the problem:\nThe person wants to read a book held at normal reading distance: Object distance $u = -25\\text{ cm}$.\nThe corrective lens must form a virtual image of this book at the person's defective near point: Image distance $v = -75\\text{ cm}$.",
-          "Using Lens Formula: $\frac{1}{f} = \frac{1}{v} - \\frac{1}{u}$.\n$\frac{1}{f} = \frac{1}{-75} - \\left(\frac{1}{-25}\\right) = -\frac{1}{75} + \frac{1}{25} = \frac{-1 + 3}{75} = \frac{+2}{75}$.\nFocal length $f = +\frac{75}{2}\\text{ cm} = +37.5\\text{ cm} = +0.375\\text{ m}$.",
-          "Power Calculation: $P = \frac{1}{f(\\text{m})} = \frac{1}{+0.375} = \frac{1000}{375} = +2.67\\text{ Dioptres}$.",
+          "Using Lens Formula: $\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u}$.\n$\\frac{1}{f} = \\frac{1}{-75} - \\left(\\frac{1}{-25}\\right) = -\\frac{1}{75} + \\frac{1}{25} = \\frac{-1 + 3}{75} = \\frac{+2}{75}$.\nFocal length $f = +\\frac{75}{2}\\text{ cm} = +37.5\\text{ cm} = +0.375\\text{ m}$.",
+          "Power Calculation: $P = \\frac{1}{f(\\text{m})} = \\frac{1}{+0.375} = \\frac{1000}{375} = +2.67\\text{ Dioptres}$.",
           "Conclusion: The person requires a Convex lens of focal length $+37.5\\text{ cm}$ and power $+2.67\\text{ D}$."
         ],
         keyTakeaway: "Hypermetropia: $u = -25\\text{ cm}, v = -75\\text{ cm} ⟹ f = +37.5\\text{ cm}, P = +2.67\\text{ D}$ (Convex).",
@@ -1703,7 +1703,7 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Scattering of Light (Rayleigh Scattering $\\propto 1/\\lambda^4$):\n- Blue Sky: Fine air molecules scatter short wavelength blue light ~16 times more effectively than red light.\n- Red Sun at Sunrise/Sunset: Light travels through maximum thickness of atmosphere; blue light is scattered away, leaving long wavelength red light to reach our eyes.\n- Danger Signals are Red: Red has the longest wavelength and is scattered the least by fog and smoke, remaining visible from large distances."
     ],
     keyReactionsOrFormulas: [
-      { name: "Rayleigh Scattering Law", formula: "I_{\\text{scattered}} \\propto \frac{1}{\\lambda^4}", note: "Scattering intensity is inversely proportional to fourth power of wavelength." },
+      { name: "Rayleigh Scattering Law", formula: "I_{\\text{scattered}} \\propto \\frac{1}{\\lambda^4}", note: "Scattering intensity is inversely proportional to fourth power of wavelength." },
       { name: "Day Length Extension", formula: "\\Delta t = 2\\text{ min (sunrise)} + 2\\text{ min (sunset)} = 4\\text{ minutes}", note: "Caused by atmospheric refraction." }
     ],
     commonMistakesWarning: "Students state that rainbow formation involves 'total internal reflection'. NCERT explicitly specifies 'internal reflection' inside the raindrop (it is not necessarily total internal reflection).",
@@ -1762,14 +1762,14 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
     corePrinciples: [
       "Ohm's Law: $V = IR$, meaning $R = V/I$. The V-I graph for an ohmic conductor is a straight line passing through the origin; its slope gives Resistance ($R$).",
       "Factors affecting Resistance: (1) Directly proportional to length ($R \\propto l$), (2) Inversely proportional to cross-sectional area ($R \\propto 1/A$), (3) Nature of material (Resistivity $\\rho$), (4) Temperature (increases with temperature for pure metals).",
-      "Resistivity formula: $R = \\rho \frac{l}{A} \\implies \\rho = \frac{R \cdot A}{l}$. SI unit of resistivity is $\\Omega \cdot \\text{m}$ (Ohm-meter).",
+      "Resistivity formula: $R = \\rho \\frac{l}{A} \\implies \\rho = \\frac{R \\cdot A}{l}$. SI unit of resistivity is $\\Omega \\cdot \\text{m}$ (Ohm-meter).",
       "Resistivity is an intrinsic material property. It depends ONLY on the material and temperature; it does NOT change when length or thickness of the wire is altered!",
       "Alloys (Nichrome, Manganin, Constantan) have much higher resistivity than pure metals and do not oxidize (burn) at high temperatures, making them ideal for heating element appliances (electric iron, toaster, geyser)."
     ],
     keyReactionsOrFormulas: [
-      { name: "Current Definition", formula: "I = \frac{Q}{t} \quad [1\\text{ A} = 1\\text{ C/s}]", note: "Measured by low-resistance Ammeter connected in series." },
-      { name: "Potential Difference", formula: "V = \frac{W}{Q} \quad [1\\text{ V} = 1\\text{ J/C}]", note: "Measured by high-resistance Voltmeter connected in parallel." },
-      { name: "Resistivity Relation", formula: "R = \\rho \frac{l}{A} = \\rho \frac{l}{\\pi r^2}", note: "If wire is stretched to double length, volume remains constant, so area halves and resistance quadruples (4x)." }
+      { name: "Current Definition", formula: "I = \\frac{Q}{t} \\quad [1\\text{ A} = 1\\text{ C/s}]", note: "Measured by low-resistance Ammeter connected in series." },
+      { name: "Potential Difference", formula: "V = \\frac{W}{Q} \\quad [1\\text{ V} = 1\\text{ J/C}]", note: "Measured by high-resistance Voltmeter connected in parallel." },
+      { name: "Resistivity Relation", formula: "R = \\rho \\frac{l}{A} = \\rho \\frac{l}{\\pi r^2}", note: "If wire is stretched to double length, volume remains constant, so area halves and resistance quadruples (4x)." }
     ],
     commonMistakesWarning: "When a wire is stretched to double its length ($l' = 2l$), its cross-sectional area automatically halves ($A' = A/2$) because volume is conserved! New resistance becomes $R' = \\rho (2l)/(A/2) = 4R$ (four times, NOT twice!).",
     examples: [
@@ -1792,12 +1792,12 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         marks: 3,
         question: "A cylindrical copper wire of resistance R is drawn out so that its length is increased by 100% (i.e. doubled). Calculate the percentage increase in its resistance.",
         solutionSteps: [
-          "Original wire: Length = $l$, Area = $A$. Resistance $R = \\rho \frac{l}{A}$.",
+          "Original wire: Length = $l$, Area = $A$. Resistance $R = \\rho \\frac{l}{A}$.",
           "When length is doubled: New length $l' = 2l$.",
-          "Since mass and density remain constant, Volume remains conserved: $V = A \\times l = A' \\times l' \\implies A' = \frac{A \\times l}{2l} = \frac{A}{2}$.",
-          "New Resistance: $R' = \\rho \frac{l'}{A'} = \\rho \frac{2l}{A/2} = 4 \\left(\\rho \frac{l}{A}\\right) = 4R$.",
+          "Since mass and density remain constant, Volume remains conserved: $V = A \\times l = A' \\times l' \\implies A' = \\frac{A \\times l}{2l} = \\frac{A}{2}$.",
+          "New Resistance: $R' = \\rho \\frac{l'}{A'} = \\rho \\frac{2l}{A/2} = 4 \\left(\\rho \\frac{l}{A}\\right) = 4R$.",
           "Increase in resistance: $\\Delta R = R' - R = 4R - R = 3R$.",
-          "Percentage increase = $\frac{\\Delta R}{R} \\times 100 = \frac{3R}{R} \\times 100 = 300\%$."
+          "Percentage increase = $\\frac{\\Delta R}{R} \\times 100 = \\frac{3R}{R} \\times 100 = 300\%$."
         ],
         keyTakeaway: "Doubling length halves area, making resistance $4R$, which represents a $300\%$ increase.",
         examinerTrap: "Writing percentage increase as 400% instead of 300%. $R'$ is 400% of $R$, but the INCREASE is 300%."
@@ -1806,10 +1806,10 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         id: "ex_c11_3",
         level: "Level 3 (4M-5M Master / Case Study)",
         marks: 4,
-        question: "A copper wire has diameter 0.5 mm and resistivity of $1.6 \\times 10^{-8} \; \\Omega \cdot \\text{m}$.\n(a) What will be the length of this wire to make its resistance $10 \; \\Omega$?\n(b) How much does the resistance change if the diameter is doubled without changing its length?",
+        question: "A copper wire has diameter 0.5 mm and resistivity of $1.6 \\times 10^{-8} \; \\Omega \\cdot \\text{m}$.\n(a) What will be the length of this wire to make its resistance $10 \; \\Omega$?\n(b) How much does the resistance change if the diameter is doubled without changing its length?",
         solutionSteps: [
-          "Part (a):\nDiameter $d = 0.5\\text{ mm} = 0.5 \\times 10^{-3}\\text{ m}$. Radius $r = 0.25 \\times 10^{-3}\\text{ m}$.\nCross-sectional Area $A = \\pi r^2 = 3.14 \\times (0.25 \\times 10^{-3})^2 = 3.14 \\times 0.0625 \\times 10^{-6} = 1.9635 \\times 10^{-7}\\text{ m}^2$.\nGiven $R = 10\;\\Omega$ and $\\rho = 1.6 \\times 10^{-8}\;\\Omega\cdot\\text{m}$.\nFormula: $R = \\rho \frac{l}{A} \\implies l = \frac{R \cdot A}{\\rho}$.\n$l = \frac{10 \\times 1.9635 \\times 10^{-7}}{1.6 \\times 10^{-8}} = \frac{1.9635 \\times 10^{-6}}{1.6 \\times 10^{-8}} = \frac{196.35}{1.6} = 122.7\\text{ meters}$.",
-          "Part (b):\nResistance is inversely proportional to square of diameter: $R = \\rho \frac{l}{\\pi (d/2)^2} = \frac{4\\rho l}{\\pi d^2} \\implies R \\propto \frac{1}{d^2}$.\nIf diameter is doubled ($d' = 2d$):\n$R' = \frac{4\\rho l}{\\pi (2d)^2} = \frac{1}{4} R$.\nThe new resistance becomes one-fourth ($\frac{1}{4}$) of its initial value."
+          "Part (a):\nDiameter $d = 0.5\\text{ mm} = 0.5 \\times 10^{-3}\\text{ m}$. Radius $r = 0.25 \\times 10^{-3}\\text{ m}$.\nCross-sectional Area $A = \\pi r^2 = 3.14 \\times (0.25 \\times 10^{-3})^2 = 3.14 \\times 0.0625 \\times 10^{-6} = 1.9635 \\times 10^{-7}\\text{ m}^2$.\nGiven $R = 10\;\\Omega$ and $\\rho = 1.6 \\times 10^{-8}\;\\Omega\\cdot\\text{m}$.\nFormula: $R = \\rho \\frac{l}{A} \\implies l = \\frac{R \\cdot A}{\\rho}$.\n$l = \\frac{10 \\times 1.9635 \\times 10^{-7}}{1.6 \\times 10^{-8}} = \\frac{1.9635 \\times 10^{-6}}{1.6 \\times 10^{-8}} = \\frac{196.35}{1.6} = 122.7\\text{ meters}$.",
+          "Part (b):\nResistance is inversely proportional to square of diameter: $R = \\rho \\frac{l}{\\pi (d/2)^2} = \\frac{4\\rho l}{\\pi d^2} \\implies R \\propto \\frac{1}{d^2}$.\nIf diameter is doubled ($d' = 2d$):\n$R' = \\frac{4\\rho l}{\\pi (2d)^2} = \\frac{1}{4} R$.\nThe new resistance becomes one-fourth ($\\frac{1}{4}$) of its initial value."
         ],
         keyTakeaway: "Resistance scales inversely with the square of diameter: doubling diameter cuts resistance to 1/4th.",
         examinerTrap: "Forgetting to convert mm to meters ($10^{-3}$) causes an error of $10^6$ in the final answer."
@@ -1828,14 +1828,14 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Series rules: $I$ constant, $V = V_1 + V_2 + V_3$. Equivalent resistance $R_s$ is greater than the greatest individual resistance.",
       "Parallel rules: $V$ constant, $I = I_1 + I_2 + I_3$. Equivalent resistance $R_p$ is less than the smallest individual resistance.",
       "Advantages of Parallel in domestic wiring: (1) Each appliance receives full line voltage (220 V), (2) If one appliance fails or is turned off, others continue operating independently, (3) Each appliance can have its own dedicated switch and fuse, (4) Overall circuit resistance is low, allowing adequate current draw.",
-      "Joule's Heating Effect: $H = I^2Rt = VIt = \frac{V^2}{R}t$.",
-      "Electric Power expressions: $P = VI = I^2R = \frac{V^2}{R}$. SI unit is Watt (W) = 1 J/s.",
+      "Joule's Heating Effect: $H = I^2Rt = VIt = \\frac{V^2}{R}t$.",
+      "Electric Power expressions: $P = VI = I^2R = \\frac{V^2}{R}$. SI unit is Watt (W) = 1 J/s.",
       "Commercial unit of energy: $1\\text{ unit} = 1\\text{ kilowatt-hour (kWh)} = 1000\\text{ W} \\times 3600\\text{ s} = 3.6 \\times 10^6\\text{ Joules}$."
     ],
     keyReactionsOrFormulas: [
       { name: "Series Equivalent Resistance", formula: "R_s = R_1 + R_2 + R_3", note: "Current is identical through each resistor." },
-      { name: "Parallel Equivalent Resistance", formula: "\frac{1}{R_p} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} \quad \\left[\\text{For two: } R_p = \frac{R_1 R_2}{R_1 + R_2}\\right]", note: "Voltage is identical across each branch." },
-      { name: "Commercial Energy Billing", formula: "E(\\text{kWh}) = \frac{P(\\text{W}) \\times t(\\text{hours})}{1000}, \quad \\text{Cost} = E \\times \\text{Rate}", note: "Remember to convert time into hours and power into kilowatts." }
+      { name: "Parallel Equivalent Resistance", formula: "\\frac{1}{R_p} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3} \\quad \\left[\\text{For two: } R_p = \\frac{R_1 R_2}{R_1 + R_2}\\right]", note: "Voltage is identical across each branch." },
+      { name: "Commercial Energy Billing", formula: "E(\\text{kWh}) = \\frac{P(\\text{W}) \\times t(\\text{hours})}{1000}, \\quad \\text{Cost} = E \\times \\text{Rate}", note: "Remember to convert time into hours and power into kilowatts." }
     ],
     commonMistakesWarning: "In power calculations for series circuits where current is constant, use $P = I^2R$. For parallel circuits where voltage is constant, use $P = V^2/R$. Using the wrong formula causes inverted proportionalities.",
     examples: [
@@ -1857,8 +1857,8 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         marks: 3,
         question: "An electric bulb rated 220 V, 100 W is operated on 110 V. Calculate:\n(a) The resistance of the filament.\n(b) The actual power consumed at 110 V.",
         solutionSteps: [
-          "(a) Resistance is an invariant physical property of the filament:\nFormula: $P = \frac{V^2}{R} \\implies R = \frac{V^2}{P}$.\n$R = \frac{(220)^2}{100} = \frac{48400}{100} = 484\;\\Omega$.",
-          "(b) Power consumed when operated at $V' = 110\\text{ V}$:\n$P' = \frac{(V')^2}{R} = \frac{(110)^2}{484} = \frac{12100}{484} = 25\\text{ Watts}$.\nNotice: Halving the voltage reduces power to one-fourth (25 W), because $P \\propto V^2$."
+          "(a) Resistance is an invariant physical property of the filament:\nFormula: $P = \\frac{V^2}{R} \\implies R = \\frac{V^2}{P}$.\n$R = \\frac{(220)^2}{100} = \\frac{48400}{100} = 484\;\\Omega$.",
+          "(b) Power consumed when operated at $V' = 110\\text{ V}$:\n$P' = \\frac{(V')^2}{R} = \\frac{(110)^2}{484} = \\frac{12100}{484} = 25\\text{ Watts}$.\nNotice: Halving the voltage reduces power to one-fourth (25 W), because $P \\propto V^2$."
         ],
         keyTakeaway: "Resistance is calculated from rated specs ($R = V^2/P$); operating at half voltage quarters power ($25\\text{ W}$).",
         examinerTrap: "Assuming power halves to 50 W. Power is proportional to $V^2$, so halving voltage yields $100/4 = 25\\text{ W}$."
@@ -1899,8 +1899,8 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Domestic Wiring: Live wire (Red/Brown, 220 V), Neutral wire (Black/Blue, 0 V), Earth wire (Green/Yellow). Earth wire provides a low-resistance path to ground, protecting users from electric shocks if insulation fails."
     ],
     keyReactionsOrFormulas: [
-      { name: "Magnetic Force on Conductor", formula: "F = B I l \\sin\theta", note: "Force is maximum when conductor is perpendicular (90°) to magnetic field lines." },
-      { name: "Solenoid Field Strength", formula: "B \\propto n \cdot I", note: "Directly proportional to number of turns per unit length (n) and current magnitude (I)." }
+      { name: "Magnetic Force on Conductor", formula: "F = B I l \\sin\\theta", note: "Force is maximum when conductor is perpendicular (90°) to magnetic field lines." },
+      { name: "Solenoid Field Strength", formula: "B \\propto n \\cdot I", note: "Directly proportional to number of turns per unit length (n) and current magnitude (I)." }
     ],
     commonMistakesWarning: "Students confuse Fleming's Left-Hand Rule (used for electric motor / force on conductor) with Right-Hand Rule. Remember: Left hand is for Force on a current conductor!",
     examples: [
@@ -1962,8 +1962,8 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Earthing: The green earth wire connects the metallic casing of high-power appliances (refrigerator, toaster, iron) to a deep copper plate buried in ground. If an appliance's live wire touches its metallic body, current takes the low-resistance path to earth, tripping the fuse and protecting the user from a lethal electric shock."
     ],
     keyReactionsOrFormulas: [
-      { name: "Fuse Rating Equation", formula: "I_{\\text{rated}} = \frac{P}{V} \\implies \\text{Fuse rating chosen just above } I_{\\text{rated}}", note: "For 1 kW, 220 V appliance: I = 1000/220 = 4.54 A ⟹ 5 A fuse used." },
-      { name: "Short Circuit Resistance", formula: "R \\to 0 \\implies I = \frac{V}{R} \\to \\infty \\implies H = I^2Rt \\text{ surges violently}", note: "Causes fires without an operating fuse." }
+      { name: "Fuse Rating Equation", formula: "I_{\\text{rated}} = \\frac{P}{V} \\implies \\text{Fuse rating chosen just above } I_{\\text{rated}}", note: "For 1 kW, 220 V appliance: I = 1000/220 = 4.54 A ⟹ 5 A fuse used." },
+      { name: "Short Circuit Resistance", formula: "R \\to 0 \\implies I = \\frac{V}{R} \\to \\infty \\implies H = I^2Rt \\text{ surges violently}", note: "Causes fires without an operating fuse." }
     ],
     commonMistakesWarning: "An electric fuse must ALWAYS be connected to the LIVE wire. If connected to the neutral wire, the fuse may blow during a fault, but the appliance will still remain at lethal 220 V high potential!",
     examples: [
@@ -1998,7 +1998,7 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         marks: 4,
         question: "An electric oven rated at 2 kW is operated in a domestic circuit of 220 V that has a current rating of 5 A.\n(a) What is the current drawn by the oven?\n(b) What will happen in the circuit? Explain with calculations.\n(c) What corrective measure should be taken to operate this appliance safely?",
         solutionSteps: [
-          "(a) Current calculation:\nGiven Power $P = 2\\text{ kW} = 2000\\text{ W}$.\nVoltage $V = 220\\text{ V}$.\nFormula: $P = VI ⟹ I = \frac{P}{V} = \frac{2000}{220} = 9.09\\text{ Amperes}$.",
+          "(a) Current calculation:\nGiven Power $P = 2\\text{ kW} = 2000\\text{ W}$.\nVoltage $V = 220\\text{ V}$.\nFormula: $P = VI ⟹ I = \\frac{P}{V} = \\frac{2000}{220} = 9.09\\text{ Amperes}$.",
           "(b) What happens:\nThe current drawn by the oven ($9.09\\text{ A}$) substantially exceeds the maximum safe current rating of the circuit fuse ($5\\text{ A}$).\nBecause $I_{\\text{drawn}} > I_{\\text{fuse}}$, excessive Joule's heating will melt the 5 A fuse wire, and the circuit will trip and break immediately to prevent overloading and wire burning.",
           "(c) Corrective Measure:\nHigh-power heating appliances drawing large currents must never be operated on a 5 A light/fan circuit. The electric oven must be connected to a dedicated high-power 15 A domestic power circuit with a properly rated 15 A fuse and heavy-gauge wiring."
         ],
@@ -2050,7 +2050,7 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
         marks: 3,
         question: "If 20,000 J of solar energy falls on green plants in a terrestrial ecosystem, calculate the energy available to the lion in the following food chain: Plants ⟶ Deer ⟶ Lion.",
         solutionSteps: [
-          "Step 1 (Sun to Plants): Terrestrial plants capture only about 1% of the solar energy that strikes their leaves:\n$\\text{Energy captured by Plants} = 1\% \\text{ of } 20,000\\text{ J} = \frac{1}{100} \\times 20,000 = 200\\text{ Joules}$.",
+          "Step 1 (Sun to Plants): Terrestrial plants capture only about 1% of the solar energy that strikes their leaves:\n$\\text{Energy captured by Plants} = 1\% \\text{ of } 20,000\\text{ J} = \\frac{1}{100} \\times 20,000 = 200\\text{ Joules}$.",
           "Step 2 (Plants to Deer): According to Lindeman's 10% Law, 10% of plant energy is transferred to the primary consumer (deer):\n$\\text{Energy available to Deer} = 10\% \\text{ of } 200\\text{ J} = 0.10 \\times 200 = 20\\text{ Joules}$.",
           "Step 3 (Deer to Lion): 10% of deer energy is transferred to secondary consumer (lion):\n$\\text{Energy available to Lion} = 10\% \\text{ of } 20\\text{ J} = 0.10 \\times 20 = 2\\text{ Joules}$.",
           "Final Answer: The lion receives 2 Joules of energy."
@@ -2089,8 +2089,8 @@ export const SCIENCE_CONCEPTS_AND_EXAMPLES: ScienceConceptTopic[] = [
       "Waste Management Best Practices:\n- Segregation at source (green bin for wet biodegradable, blue bin for dry recyclable).\n- Composting and vermicomposting for organic kitchen waste.\n- Biogas plants (anaerobic digestion generates methane fuel and rich manure).\n- Recycling of plastics, glass, and metal scrap."
     ],
     keyReactionsOrFormulas: [
-      { name: "Ozone Photolytic Synthesis", formula: "O_2 \\xrightarrow{\\text{UV}} O + O; \quad O + O_2 ⟶ O_3", note: "Deadly poison at ground level, but shield in stratosphere." },
-      { name: "Catalytic Ozone Destruction", formula: "\\text{CFC} \\xrightarrow{\\text{UV}} \\text{Cl}^\\bullet; \quad \\text{Cl}^\\bullet + O_3 ⟶ \\text{ClO}^\\bullet + O_2", note: "Chlorine acts as a catalyst destroying thousands of O₃ molecules." }
+      { name: "Ozone Photolytic Synthesis", formula: "O_2 \\xrightarrow{\\text{UV}} O + O; \\quad O + O_2 ⟶ O_3", note: "Deadly poison at ground level, but shield in stratosphere." },
+      { name: "Catalytic Ozone Destruction", formula: "\\text{CFC} \\xrightarrow{\\text{UV}} \\text{Cl}^\\bullet; \\quad \\text{Cl}^\\bullet + O_3 ⟶ \\text{ClO}^\\bullet + O_2", note: "Chlorine acts as a catalyst destroying thousands of O₃ molecules." }
     ],
     commonMistakesWarning: "Students confuse Ozone Depletion with Global Warming. Ozone depletion is caused by CFCs and lets in harmful UV rays (causing skin cancer/cataracts). Global warming is caused by greenhouse gases (CO₂, CH₄) trapping infrared heat.",
     examples: [

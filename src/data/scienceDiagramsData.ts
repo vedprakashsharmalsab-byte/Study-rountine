@@ -347,44 +347,44 @@ export const SCIENCE_DIAGRAMS_MASTER: ScienceDiagram[] = [
         {
           stepNo: 1,
           heading: "Step 1: Simplify Parallel Resistors (R2 and R3)",
-          formula: "\frac{1}{R_p} = \frac{1}{R_2} + \frac{1}{R_3} = \frac{1}{6} + \frac{1}{3} = \frac{1 + 2}{6} = \frac{3}{6} = \frac{1}{2}\ \Omega^{-1}",
-          calculation: "Inverting both sides: R_p = \frac{6 \times 3}{6 + 3} = \frac{18}{9} = 2\ \Omega",
-          result: "R_p = 2\ \Omega"
+          formula: "\\frac{1}{R_p} = \\frac{1}{R_2} + \\frac{1}{R_3} = \\frac{1}{6} + \\frac{1}{3} = \\frac{1 + 2}{6} = \\frac{3}{6} = \\frac{1}{2}\\ \\Omega^{-1}",
+          calculation: "Inverting both sides: R_p = \\frac{6 \\times 3}{6 + 3} = \\frac{18}{9} = 2\\ \\Omega",
+          result: "R_p = 2\\ \\Omega"
         },
         {
           stepNo: 2,
           heading: "Step 2: Add Series Resistor R1 to Equivalent Parallel Resistance",
-          formula: "R_{\text{eq}} = R_1 + R_p",
-          calculation: "R_{\text{eq}} = 4\ \Omega + 2\ \Omega = 6\ \Omega",
-          result: "R_{\text{eq}} = 6\ \Omega"
+          formula: "R_{\\text{eq}} = R_1 + R_p",
+          calculation: "R_{\\text{eq}} = 4\\ \\Omega + 2\\ \\Omega = 6\\ \\Omega",
+          result: "R_{\\text{eq}} = 6\\ \\Omega"
         },
         {
           stepNo: 3,
           heading: "Step 3: Calculate Total Circuit Current from Battery",
-          formula: "I = \frac{V}{R_{\text{eq}}}",
-          calculation: "I = \frac{12\text{ V}}{6\ \Omega} = 2.0\text{ A}",
-          result: "I_{\text{total}} = 2\text{ A}"
+          formula: "I = \\frac{V}{R_{\\text{eq}}}",
+          calculation: "I = \\frac{12\\text{ V}}{6\\ \\Omega} = 2.0\\text{ A}",
+          result: "I_{\\text{total}} = 2\\text{ A}"
         },
         {
           stepNo: 4,
           heading: "Step 4: Potential Difference across Resistor R1",
-          formula: "V_1 = I \times R_1",
-          calculation: "V_1 = 2\text{ A} \times 4\ \Omega = 8\text{ V}",
-          result: "V_1 = 8\text{ V}"
+          formula: "V_1 = I \\times R_1",
+          calculation: "V_1 = 2\\text{ A} \\times 4\\ \\Omega = 8\\text{ V}",
+          result: "V_1 = 8\\text{ V}"
         },
         {
           stepNo: 5,
           heading: "Step 5: Potential Difference across Parallel Block (R2 || R3)",
-          formula: "V_p = V_{\text{total}} - V_1 = I \times R_p",
-          calculation: "V_p = 12\text{ V} - 8\text{ V} = 4\text{ V} \quad (\text{or } 2\text{ A} \times 2\ \Omega = 4\text{ V})",
-          result: "V_p = 4\text{ V}"
+          formula: "V_p = V_{\\text{total}} - V_1 = I \\times R_p",
+          calculation: "V_p = 12\\text{ V} - 8\\text{ V} = 4\\text{ V} \\quad (\\text{or } 2\\text{ A} \\times 2\\ \\Omega = 4\\text{ V})",
+          result: "V_p = 4\\text{ V}"
         },
         {
           stepNo: 6,
           heading: "Step 6: Individual Branch Currents through R2 and R3",
-          formula: "I_2 = \frac{V_p}{R_2} \quad \text{and} \quad I_3 = \frac{V_p}{R_3}",
-          calculation: "I_2 = \frac{4\text{ V}}{6\ \Omega} = 0.67\text{ A}, \quad I_3 = \frac{4\text{ V}}{3\ \Omega} = 1.33\text{ A}. \quad (I_2 + I_3 = 0.67 + 1.33 = 2.0\text{ A})",
-          result: "I_2 = 0.67\text{ A}, \quad I_3 = 1.33\text{ A}"
+          formula: "I_2 = \\frac{V_p}{R_2} \\quad \\text{and} \\quad I_3 = \\frac{V_p}{R_3}",
+          calculation: "I_2 = \\frac{4\\text{ V}}{6\\ \\Omega} = 0.67\\text{ A}, \\quad I_3 = \\frac{4\\text{ V}}{3\\ \\Omega} = 1.33\\text{ A}. \\quad (I_2 + I_3 = 0.67 + 1.33 = 2.0\\text{ A})",
+          result: "I_2 = 0.67\\text{ A}, \\quad I_3 = 1.33\\text{ A}"
         }
       ],
       finalCurrent: "2.0 A",
