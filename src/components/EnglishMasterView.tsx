@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import {
   BookOpen,
   Feather,
@@ -168,14 +168,49 @@ export const EnglishMasterView: React.FC<EnglishMasterViewProps> = ({
   isDark,
   onJumpToRevision
 }) => {
-  const [activeTab, setActiveTab] = useState<EnglishTab>("literature");
+  const [activeTab, setActiveTab] = useState<EnglishTab>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_english_tab");
+      if (saved && ["literature", "writing", "grammar"].includes(saved)) {
+        return saved as any;
+      }
+    }
+    return "literature";
+  });
 
   // Literature & Poetry State
-  const [selectedBookFilter, setSelectedBookFilter] = useState<string>("TS1");
+  const [selectedBookFilter, setSelectedBookFilter] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_english_book_filter");
+      if (saved) return saved;
+    }
+    return "TS1";
+  });
   const [literatureSearch, setLiteratureSearch] = useState<string>("");
-  const [selectedChapterId, setSelectedChapterId] = useState<string>("fp-ch1-triumph-of-surgery");
-  const [selectedPoemId, setSelectedPoemId] = useState<string>("poem-dust-of-snow");
+  const [selectedChapterId, setSelectedChapterId] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_english_chapter");
+      if (saved) return saved;
+    }
+    return "fp-ch1-triumph-of-surgery";
+  });
+  const [selectedPoemId, setSelectedPoemId] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_english_poem");
+      if (saved) return saved;
+    }
+    return "poem-dust-of-snow";
+  });
   const [revealedAnswers, setRevealedAnswers] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_english_tab", activeTab);
+      localStorage.setItem("cbse_last_english_book_filter", selectedBookFilter);
+      localStorage.setItem("cbse_last_english_chapter", selectedChapterId);
+      localStorage.setItem("cbse_last_english_poem", selectedPoemId);
+    }
+  }, [activeTab, selectedBookFilter, selectedChapterId, selectedPoemId]);
 
   // Horizontal Scroll Carousel Refs & Handlers
   const proseScrollRef = useRef<HTMLDivElement>(null);

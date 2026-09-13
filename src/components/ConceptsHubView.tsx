@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import {
   BookOpen,
   FlaskConical,
@@ -79,6 +79,8 @@ interface ConceptsHubViewProps {
   isDark: boolean;
   initialSubject?: "math" | "science" | "sst";
   initialChapterNo?: number;
+  onSubjectChange?: (subject: "math" | "science" | "sst") => void;
+  onChapterChange?: (chapterNo: number) => void;
   onOpenQuestionBank?: (subject: "math" | "science" | "sst", chapterNo: number) => void;
   onOpenActivities?: (chapterNo?: number) => void;
   onOpenTheorems?: () => void;
@@ -126,8 +128,10 @@ const MATH_CHAPTER_LIST = [
 
 export default function ConceptsHubView({
   isDark,
-  initialSubject = "math",
-  initialChapterNo = 6,
+  initialSubject,
+  initialChapterNo,
+  onSubjectChange,
+  onChapterChange,
   onOpenQuestionBank,
   onOpenActivities,
   onOpenTheorems,
@@ -136,19 +140,19 @@ export default function ConceptsHubView({
   onOpenHots,
   onOpenTimelines
 }: ConceptsHubViewProps) {
+  // Always inspect localStorage first so refreshed sessions restore the exact last studied subject & chapter
   const [activeSubject, setActiveSubject] = useState<"math" | "science" | "sst">(() => {
-    if (initialSubject) return initialSubject;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_concepts_subject");
       if (saved && ["math", "science", "sst"].includes(saved)) {
         return saved as any;
       }
     }
+    if (initialSubject) return initialSubject;
     return "math";
   });
 
   const [activeMathChapterNo, setActiveMathChapterNo] = useState<number>(() => {
-    if (initialSubject === "math" && initialChapterNo) return initialChapterNo;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_math_chapter");
       if (saved) {
@@ -156,11 +160,11 @@ export default function ConceptsHubView({
         if (!isNaN(p) && p >= 1 && p <= 14) return p;
       }
     }
-    return 1;
+    if (initialSubject === "math" && initialChapterNo) return initialChapterNo;
+    return 1; // Default to Chapter 1: Real Numbers (NEVER hardcoded to Triangles)
   });
 
   const [activeScienceChapterNo, setActiveScienceChapterNo] = useState<number>(() => {
-    if (initialSubject === "science" && initialChapterNo) return initialChapterNo;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_science_chapter");
       if (saved) {
@@ -168,11 +172,11 @@ export default function ConceptsHubView({
         if (!isNaN(p) && p >= 1 && p <= 13) return p;
       }
     }
-    return 1;
+    if (initialSubject === "science" && initialChapterNo) return initialChapterNo;
+    return 1; // Default to Chapter 1: Chemical Reactions
   });
 
   const [activeSSTChapterNo, setActiveSSTChapterNo] = useState<number>(() => {
-    if (initialSubject === "sst" && initialChapterNo) return initialChapterNo;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_sst_chapter");
       if (saved) {
@@ -180,32 +184,44 @@ export default function ConceptsHubView({
         if (!isNaN(p) && p >= 1 && p <= 10) return p;
       }
     }
-    return 1;
+    if (initialSubject === "sst" && initialChapterNo) return initialChapterNo;
+    return 1; // Default to Chapter 1: Nationalism in Europe
   });
 
+  // Track and persist changes to localStorage & notify parent
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("cbse_last_concepts_subject", activeSubject);
     }
-  }, [activeSubject]);
+    onSubjectChange?.(activeSubject);
+  }, [activeSubject, onSubjectChange]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("cbse_last_math_chapter", activeMathChapterNo.toString());
     }
-  }, [activeMathChapterNo]);
+    if (activeSubject === "math") {
+      onChapterChange?.(activeMathChapterNo);
+    }
+  }, [activeMathChapterNo, activeSubject, onChapterChange]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("cbse_last_science_chapter", activeScienceChapterNo.toString());
     }
-  }, [activeScienceChapterNo]);
+    if (activeSubject === "science") {
+      onChapterChange?.(activeScienceChapterNo);
+    }
+  }, [activeScienceChapterNo, activeSubject, onChapterChange]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("cbse_last_sst_chapter", activeSSTChapterNo.toString());
     }
-  }, [activeSSTChapterNo]);
+    if (activeSubject === "sst") {
+      onChapterChange?.(activeSSTChapterNo);
+    }
+  }, [activeSSTChapterNo, activeSubject, onChapterChange]);
   const [sstDisciplineFilter, setSstDisciplineFilter] = useState<"All" | "History" | "Political Science" | "Geography" | "Economics">("All");
   const [activeSSTViewTab, setActiveSSTViewTab] = useState<"concepts" | "timeline" | "mapwork" | "mnemonics">("concepts");
   const [expandedSSTTopicIds, setExpandedSSTTopicIds] = useState<Record<string, boolean>>({
@@ -226,31 +242,38 @@ export default function ConceptsHubView({
     sci_c1_t2: true
   });
 
-  // Sync props if initialSubject or initialChapterNo changes externally
+  // Sync props only when initialSubject or initialChapterNo change externally from explicit navigation
+  const prevSubRef = useRef(initialSubject);
+  const prevChRef = useRef(initialChapterNo);
   useEffect(() => {
-    if (initialSubject) {
+    if (initialSubject && initialSubject !== prevSubRef.current) {
+      prevSubRef.current = initialSubject;
       setActiveSubject(initialSubject);
-      if (initialSubject === "math" && initialChapterNo) {
+    }
+    if (initialChapterNo && initialChapterNo !== prevChRef.current) {
+      prevChRef.current = initialChapterNo;
+      const targetSub = initialSubject || activeSubject;
+      if (targetSub === "math") {
         setActiveMathChapterNo(initialChapterNo);
-      } else if (initialSubject === "science" && initialChapterNo) {
+      } else if (targetSub === "science") {
         setActiveScienceChapterNo(initialChapterNo);
-      } else if (initialSubject === "sst" && initialChapterNo) {
+      } else if (targetSub === "sst") {
         setActiveSSTChapterNo(initialChapterNo);
       }
     }
-  }, [initialSubject, initialChapterNo]);
+  }, [initialSubject, initialChapterNo, activeSubject]);
 
-  // Active Math Chapter Data
+  // Active Math Chapter Data (Defaults to Ch 1 Real Numbers)
   const activeMathChapter = useMemo(() => {
     return (
       MATH_CHAPTER_CONCEPTS.find((c) => c.chapterNo === activeMathChapterNo) ||
-      MATH_CHAPTER_CONCEPTS[5] // Default Ch 6 Triangles
+      MATH_CHAPTER_CONCEPTS[0] // Default Ch 1 Real Numbers (NEVER hardcoded Triangles)
     );
   }, [activeMathChapterNo]);
 
-  // Active Math Blueprint
+  // Active Math Blueprint (Defaults to Ch 1)
   const activeMathBlueprint = useMemo(() => {
-    return MATH_OFFICIAL_BLUEPRINTS[activeMathChapterNo] || MATH_OFFICIAL_BLUEPRINTS[6];
+    return MATH_OFFICIAL_BLUEPRINTS[activeMathChapterNo] || MATH_OFFICIAL_BLUEPRINTS[1];
   }, [activeMathChapterNo]);
 
   // Active Math Solved Examples

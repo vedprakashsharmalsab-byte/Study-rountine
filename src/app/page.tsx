@@ -803,8 +803,40 @@ export default function CBSECommandCenter() {
     }
   }, [activeTab]);
   const [timelinesChapterKey, setTimelinesChapterKey] = useState<"ch1_europe" | "ch2_india" | "all">("all");
-  const [conceptsSubject, setConceptsSubject] = useState<"math" | "science" | "sst">("math");
-  const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(6);
+  const [conceptsSubject, setConceptsSubject] = useState<"math" | "science" | "sst">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_concepts_subject");
+      if (saved && ["math", "science", "sst"].includes(saved)) {
+        return saved as any;
+      }
+    }
+    return "math";
+  });
+
+  const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(() => {
+    if (typeof window !== "undefined") {
+      const sub = localStorage.getItem("cbse_last_concepts_subject") || "math";
+      const saved = localStorage.getItem(`cbse_last_${sub}_chapter`);
+      if (saved) {
+        const p = parseInt(saved);
+        if (!isNaN(p) && p >= 1) return p;
+      }
+      const legacy = localStorage.getItem("cbse_last_concepts_chapter");
+      if (legacy) {
+        const p = parseInt(legacy);
+        if (!isNaN(p) && p >= 1) return p;
+      }
+    }
+    return 1; // Default to Chapter 1 (Real Numbers), NEVER hardcoded Triangles
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_concepts_subject", conceptsSubject);
+      localStorage.setItem(`cbse_last_${conceptsSubject}_chapter`, conceptsChapterNo.toString());
+      localStorage.setItem("cbse_last_concepts_chapter", conceptsChapterNo.toString());
+    }
+  }, [conceptsSubject, conceptsChapterNo]);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [levelUpModalData, setLevelUpModalData] = useState<{ level: number; title: string; badge: string } | null>(null);
@@ -935,14 +967,64 @@ export default function CBSECommandCenter() {
     return () => window.removeEventListener("keydown", handleGlobalKey);
   }, []);
   
-  // Multi-Subject Systematic Chapter Command State
-  const [commandSubjectId, setCommandSubjectId] = useState<string>("maths");
-  const [commandChapterId, setCommandChapterId] = useState<string>("math_ch6");
+  // Multi-Subject Systematic Chapter Command State with LocalStorage Persistence
+  const [commandSubjectId, setCommandSubjectId] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_command_subject");
+      if (saved) return saved;
+    }
+    return "maths";
+  });
+  const [commandChapterId, setCommandChapterId] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_command_chapter");
+      if (saved) return saved;
+    }
+    return "math_ch1"; // Default to Real Numbers, NEVER Triangles!
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_command_subject", commandSubjectId);
+    }
+  }, [commandSubjectId]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_command_chapter", commandChapterId);
+    }
+  }, [commandChapterId]);
   
-  // Progressive Chapter Vault (Supports Math, Science, SST, and English)
-  const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science" | "sst" | "english" | "hindi">("math");
-  const [activeVaultChapter, setActiveVaultChapter] = useState<number | null>(6); // Default Triangles
-  const [activeVaultQuestions, setActiveVaultQuestions] = useState<VaultQuestion[]>(() => getChapterQuestions(6, "math"));
+  // Progressive Chapter Vault (Supports Math, Science, SST, English, and Hindi)
+  const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science" | "sst" | "english" | "hindi">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_vault_subject");
+      if (saved && ["math", "science", "sst", "english", "hindi"].includes(saved)) {
+        return saved as any;
+      }
+    }
+    return "math";
+  });
+  const [activeVaultChapter, setActiveVaultChapter] = useState<number | null>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_vault_chapter");
+      if (saved) {
+        const p = parseInt(saved);
+        if (!isNaN(p) && p >= 1) return p;
+      }
+    }
+    return 6; // Vault math default
+  });
+  const [activeVaultQuestions, setActiveVaultQuestions] = useState<VaultQuestion[]>(() => {
+    if (typeof window !== "undefined") {
+      const savedSub = (localStorage.getItem("cbse_last_vault_subject") as any) || "math";
+      const savedCh = parseInt(localStorage.getItem("cbse_last_vault_chapter") || (savedSub === "math" ? "6" : "1"));
+      if (!isNaN(savedCh) && savedCh >= 1) {
+        return getChapterQuestions(savedCh, savedSub);
+      }
+    }
+    return getChapterQuestions(6, "math");
+  });
   const [isAnalyzingVault, setIsAnalyzingVault] = useState(false);
   const [vaultAnalysisLogs, setVaultAnalysisLogs] = useState<string[]>([]);
   const [vaultFilter, setVaultFilter] = useState<"all" | "1" | "2" | "3" | "5" | "case">("all");
@@ -1193,7 +1275,14 @@ export default function CBSECommandCenter() {
     if (chapterCacheRef.current[cacheKey]) {
       setActiveVaultQuestions(chapterCacheRef.current[cacheKey]);
       setActiveVaultChapter(chapterId);
-      if (!isPreload) setVaultDisplayCount(10); // Reset pagination
+      if (!isPreload) {
+        setVaultDisplayCount(10); // Reset pagination
+        if (typeof window !== "undefined") {
+          localStorage.setItem("cbse_last_vault_subject", subject);
+          localStorage.setItem("cbse_last_vault_chapter", chapterId.toString());
+          localStorage.setItem(`cbse_last_vault_${subject}_chapter`, chapterId.toString());
+        }
+      }
       return;
     }
 
@@ -1204,12 +1293,25 @@ export default function CBSECommandCenter() {
       setActiveVaultQuestions(list);
       setActiveVaultChapter(chapterId);
       setVaultDisplayCount(10); // Reset pagination on chapter switch
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cbse_last_vault_subject", subject);
+        localStorage.setItem("cbse_last_vault_chapter", chapterId.toString());
+        localStorage.setItem(`cbse_last_vault_${subject}_chapter`, chapterId.toString());
+      }
     }
   };
 
-  // Initial load Ch 6 immediately & pre-cache remaining chapters
+  // Initial load restored last chapter immediately & pre-cache remaining chapters
   useEffect(() => {
-    loadChapterData(6, false, "math");
+    if (typeof window !== "undefined") {
+      const savedSub = (localStorage.getItem("cbse_last_vault_subject") as any) || "math";
+      const fallbackCh = savedSub === "math" ? "6" : "1";
+      const savedCh = parseInt(localStorage.getItem("cbse_last_vault_chapter") || fallbackCh);
+      const targetCh = (!isNaN(savedCh) && savedCh >= 1) ? savedCh : (savedSub === "math" ? 6 : 1);
+      loadChapterData(targetCh, false, savedSub);
+    } else {
+      loadChapterData(6, false, "math");
+    }
   }, []);
 
   // Interactive MCQ Questions & Live Scoring Stats for Active Vault Chapter
@@ -3451,6 +3553,19 @@ export default function CBSECommandCenter() {
             isDark={isDark}
             initialSubject={conceptsSubject}
             initialChapterNo={conceptsChapterNo}
+            onSubjectChange={(sub) => {
+              setConceptsSubject(sub);
+              if (typeof window !== "undefined") {
+                localStorage.setItem("cbse_last_concepts_subject", sub);
+              }
+            }}
+            onChapterChange={(ch) => {
+              setConceptsChapterNo(ch);
+              if (typeof window !== "undefined") {
+                localStorage.setItem(`cbse_last_${conceptsSubject}_chapter`, ch.toString());
+                localStorage.setItem("cbse_last_concepts_chapter", ch.toString());
+              }
+            }}
             onOpenActivities={(targetChNo) => {
               playSound("click");
               setActiveTab("activities");
@@ -3586,7 +3701,8 @@ export default function CBSECommandCenter() {
                     onClick={() => {
                       playSound("click");
                       setActiveVaultSubject("math");
-                      loadChapterData(6, false, "math");
+                      const lastMath = parseInt(localStorage.getItem("cbse_last_vault_math_chapter") || "6");
+                      loadChapterData(isNaN(lastMath) ? 6 : lastMath, false, "math");
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "math"
@@ -3602,7 +3718,8 @@ export default function CBSECommandCenter() {
                     onClick={() => {
                       playSound("click");
                       setActiveVaultSubject("science");
-                      loadChapterData(1, false, "science");
+                      const lastSci = parseInt(localStorage.getItem("cbse_last_vault_science_chapter") || "1");
+                      loadChapterData(isNaN(lastSci) ? 1 : lastSci, false, "science");
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "science"
@@ -3618,7 +3735,8 @@ export default function CBSECommandCenter() {
                     onClick={() => {
                       playSound("click");
                       setActiveVaultSubject("sst");
-                      loadChapterData(1, false, "sst");
+                      const lastSst = parseInt(localStorage.getItem("cbse_last_vault_sst_chapter") || "1");
+                      loadChapterData(isNaN(lastSst) ? 1 : lastSst, false, "sst");
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "sst"
@@ -3634,7 +3752,8 @@ export default function CBSECommandCenter() {
                     onClick={() => {
                       playSound("click");
                       setActiveVaultSubject("english");
-                      loadChapterData(1, false, "english");
+                      const lastEng = parseInt(localStorage.getItem("cbse_last_vault_english_chapter") || "1");
+                      loadChapterData(isNaN(lastEng) ? 1 : lastEng, false, "english");
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "english"
@@ -3650,7 +3769,8 @@ export default function CBSECommandCenter() {
                     onClick={() => {
                       playSound("click");
                       setActiveVaultSubject("hindi");
-                      loadChapterData(1, false, "hindi");
+                      const lastHin = parseInt(localStorage.getItem("cbse_last_vault_hindi_chapter") || "1");
+                      loadChapterData(isNaN(lastHin) ? 1 : lastHin, false, "hindi");
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "hindi"
@@ -5010,7 +5130,7 @@ export default function CBSECommandCenter() {
                         playSound("click");
                         const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
                         setConceptsSubject(targetSub);
-                        setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : commandSubjectId === "sst" ? 1 : 6));
+                        setConceptsChapterNo(ncertNum || 1);
                         setActiveTab("concepts");
                       }}
                       className="w-full sm:w-auto px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xl shadow-teal-500/25 shrink-0 touch-manipulation min-h-[44px]"
@@ -5094,7 +5214,7 @@ export default function CBSECommandCenter() {
                             playSound("click");
                             const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
                             setConceptsSubject(targetSub);
-                            setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : commandSubjectId === "sst" ? 1 : 6));
+                            setConceptsChapterNo(ncertNum || 1);
                             setActiveTab("concepts");
                           }}
                           className={`px-3 py-2 rounded-xl text-[11px] font-bold border transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 shrink-0 touch-manipulation min-h-[38px] active:scale-95 ${
@@ -5177,7 +5297,7 @@ export default function CBSECommandCenter() {
                       action: () => {
                         const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
                         setConceptsSubject(targetSub);
-                        setConceptsChapterNo(ncertNum || (commandSubjectId === "science" ? 1 : commandSubjectId === "sst" ? 1 : 6));
+                        setConceptsChapterNo(ncertNum || 1);
                         setActiveTab('concepts');
                       }, 
                       icon: BookOpen 
