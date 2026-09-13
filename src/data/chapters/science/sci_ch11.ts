@@ -60,7 +60,7 @@ export const SCI_CH11_QUESTIONS: VaultQuestion[] = [
     explanation: "Both statements are true. 1 kWh is indeed $1000\\text{ W} \\times 3600\\text{ s} = 3.6 \\times 10^6\\text{ J}$. However, the reason kWh was adopted commercially is because the SI unit Joule is too small for practical billing, not simply because it equals $3.6 \\times 10^6\\text{ J}$.",
     formula: "1\\text{ kWh} = 3.6 \\times 10^6\\text{ J}",
     examinerNote: "Conceptual trap: R is a true mathematical conversion, but not the causal explanation for A.",
-    source: "KVS Support Material 2025-26"
+    source: "KVS Support Material 2026-27"
   },
   {
     id: "sci_c11_q4",

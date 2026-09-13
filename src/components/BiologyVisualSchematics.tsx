@@ -541,8 +541,7 @@ export default function BiologyVisualSchematic({
 
       // =====================================================================
       // 3. EXCRETORY SYSTEM & DETAILED NEPHRON MICROSTRUCTURE
-      // =====================================================================
-      case "bio_nephron_excretory":
+      case "bio_excretion_nephron":
         return (
           <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
@@ -1215,1040 +1214,479 @@ export default function BiologyVisualSchematic({
 
       // =====================================================================
       // 6. HUMAN BRAIN — SAGITTAL MEDIAN SECTION
-      // =====================================================================
-      case "bio_brain":
+      case "bio_human_brain":
         return (
           <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="brBg" cx="50%" cy="40%" r="65%">
-                <stop offset="0%" stopColor={isDark ? "#12091c" : "#faf5ff"} />
-                <stop offset="100%" stopColor={isDark ? "#06030a" : "#f3e8ff"} />
+              <radialGradient id="brBg" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stopColor={isDark ? "#171717" : "#fafafa"} />
+                <stop offset="100%" stopColor={isDark ? "#0a0a0a" : "#e5e5e5"} />
               </radialGradient>
-              <linearGradient id="cortexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f472b6" />
-                <stop offset="50%" stopColor="#e879f9" />
-                <stop offset="100%" stopColor="#c084fc" />
+              <linearGradient id="cerebrumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fca5a5" />
+                <stop offset="100%" stopColor="#ef4444" />
               </linearGradient>
-              <filter id="brDrop" x="-10%" y="-10%" width="125%" height="125%">
-                <feDropShadow dx="0" dy="12" stdDeviation="16" floodColor="#000" floodOpacity="0.45" />
-              </filter>
+              <linearGradient id="cerebellumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#93c5fd" />
+                <stop offset="100%" stopColor="#3b82f6" />
+              </linearGradient>
+              <linearGradient id="medullaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fde047" />
+                <stop offset="100%" stopColor="#eab308" />
+              </linearGradient>
             </defs>
+            <rect width="1000" height="650" fill="url(#brBg)" rx="16" />
+            
+            <g transform="translate(500, 300)">
+              {/* Cerebrum (Forebrain) */}
+              <path d="M -150,50 C -250,50 -250,-150 -100,-200 C 0,-230 150,-200 200,-100 C 230,0 200,100 100,100 C 50,100 0,70 -50,70 C -100,70 -100,50 -150,50 Z" fill="url(#cerebrumGrad)" stroke="#991b1b" strokeWidth="4" strokeLinejoin="round" />
+              
+              {/* Sulci and Gyri Details */}
+              <path d="M -150,-100 C -100,-50 -50,-120 0,-80 C 50,-40 100,-100 150,-50" fill="none" stroke="#7f1d1d" strokeWidth="2" opacity="0.6" />
+              <path d="M -100,-160 C -50,-110 0,-180 50,-120 C 100,-70 120,-140 170,-80" fill="none" stroke="#7f1d1d" strokeWidth="2" opacity="0.6" />
+              <path d="M -200,-20 C -150,10 -100,-40 -50,0 C 0,30 50,-20 100,20" fill="none" stroke="#7f1d1d" strokeWidth="2" opacity="0.6" />
 
-            <rect width="1000" height="650" rx="20" fill="url(#brBg)" />
-            {[...Array(13)].map((_, i) => <line key={"bvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
-            {[...Array(9)].map((_, i) => <line key={"bhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
+              {/* Corpus Callosum */}
+              <path d="M -50,30 C -20,0 30,0 60,30 C 30,50 -20,50 -50,30 Z" fill="#f1f5f9" stroke="#94a3b8" strokeWidth="3" />
 
-            {/* Title */}
-            <g transform="translate(40, 25)">
-              <rect width="420" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
-              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
-                HUMAN BRAIN — SAGITTAL MEDIAN SECTION
-              </text>
-              <rect x="350" y="9" width="58" height="24" rx="6" fill="#a855f7" fillOpacity="0.2" />
-              <text x="379" y="25" fill="#c084fc" fontSize="10" fontWeight="800" textAnchor="middle">
-                CBSE 5M
-              </text>
+              {/* Thalamus / Hypothalamus */}
+              <ellipse cx="5" cy="55" rx="25" ry="15" fill="#f472b6" stroke="#be185d" strokeWidth="2" />
+              <circle cx="20" cy="80" r="10" fill="#a78bfa" stroke="#6d28d9" strokeWidth="2" /> {/* Pituitary */}
+
+              {/* Midbrain & Pons */}
+              <path d="M -10,70 L 20,70 L 25,120 L -15,120 Z" fill="#fb923c" stroke="#c2410c" strokeWidth="2" />
+              <path d="M -15,120 C -40,140 -40,160 -10,180 L 25,180 L 25,120 Z" fill="#34d399" stroke="#047857" strokeWidth="2" /> {/* Pons */}
+
+              {/* Medulla Oblongata */}
+              <path d="M -10,180 C -20,220 -20,250 -10,300 L 20,300 L 25,180 Z" fill="url(#medullaGrad)" stroke="#a16207" strokeWidth="3" />
+
+              {/* Cerebellum (Hindbrain) */}
+              <path d="M 25,120 C 150,100 200,200 100,250 C 50,270 20,250 25,180 Z" fill="url(#cerebellumGrad)" stroke="#1e3a8a" strokeWidth="4" />
+              {/* Arbor Vitae (Tree of Life in Cerebellum) */}
+              <path d="M 40,180 L 80,180 M 60,180 L 70,140 M 60,180 L 100,220 M 70,160 L 90,140" fill="none" stroke="#bfdbfe" strokeWidth="2" />
             </g>
 
-            {/* Skull Cranium Outline & Meninges */}
-            <path
-              d="M 230 430 
-                 C 190 320 200 160 350 90 
-                 C 480 30 650 50 740 140 
-                 C 820 220 830 380 770 450"
-              fill="none"
-              stroke="#94a3b8"
-              strokeWidth="16"
-              strokeLinecap="round"
-            />
-            {/* Meninges 3 protective membranes (Dura, Arachnoid, Pia mater with CSF) */}
-            <path
-              d="M 240 420 C 205 320 215 170 355 105 C 480 48 640 68 725 150 C 800 225 810 370 755 440"
-              fill="none"
-              stroke="#38bdf8"
-              strokeWidth="4"
-            />
+            {/* Labels */}
+            <g fontSize="16" fontFamily="Arial, sans-serif" fontWeight="bold">
+              {/* Left Side (Forebrain) */}
+              <text x="15" y="100" fill={textPrimary}>Cerebrum</text>
+              <line x1="100" y1="95" x2="350" y2="150" stroke={textPrimary} strokeDasharray="4" />
 
-            {/* FOREBRAIN: CEREBRAL CORTEX (Extensive Gyri & Sulci Foldings for Cognition) */}
-            <g filter="url(#brDrop)">
-              <path
-                d="M 260 410 
-                   C 220 330 230 180 370 120 
-                   C 490 70 630 85 710 160 
-                   C 775 220 780 340 730 400 
-                   C 660 380 600 370 540 330 
-                   C 460 330 380 370 300 400 Z"
-                fill="url(#cortexGrad)"
-                stroke="#9333ea"
-                strokeWidth="3.5"
-              />
-              {/* Detailed Anatomical Gyri / Sulci Convolution Curves */}
-              <path d="M 330 190 Q 380 150 430 190 Q 480 140 540 180" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
-              <path d="M 370 230 Q 420 190 470 240 Q 520 200 580 240" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
-              <path d="M 410 280 Q 460 250 510 280 Q 560 250 630 280" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
-              <path d="M 580 150 Q 640 190 680 250" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
-              <path d="M 280 280 Q 330 260 370 310" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
+              <text x="15" y="250" fill={textPrimary}>Corpus Callosum</text>
+              <line x1="160" y1="245" x2="450" y2="330" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="15" y="320" fill={textPrimary}>Hypothalamus</text>
+              <line x1="130" y1="315" x2="500" y2="355" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="15" y="390" fill={textPrimary}>Pituitary Gland</text>
+              <line x1="135" y1="385" x2="520" y2="380" stroke={textPrimary} strokeDasharray="4" />
+
+              {/* Right Side (Hindbrain/Midbrain) */}
+              <text x="825" y="440" fill={textPrimary}>Pons</text>
+              <line x1="815" y1="435" x2="490" y2="450" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="825" y="500" fill={textPrimary}>Medulla Oblongata</text>
+              <line x1="815" y1="495" x2="500" y2="520" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="825" y="550" fill={textPrimary}>Spinal Cord</text>
+              <line x1="815" y1="545" x2="510" y2="580" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="825" y="350" fill={textPrimary}>Cerebellum (Posture & Balance)</text>
+              <line x1="815" y1="345" x2="630" y2="470" stroke={textPrimary} strokeDasharray="4" />
             </g>
-
-            {/* Corpus Callosum (Iconic C-shaped thick white matter band bridging hemispheres) */}
-            <path
-              d="M 380 300 
-                 C 380 230 580 210 610 290 
-                 C 590 260 430 270 410 315 Z"
-              fill="#ffffff"
-              stroke="#cbd5e1"
-              strokeWidth="2"
-              filter="url(#brDrop)"
-            />
-
-            {/* Thalamus (Egg-shaped sensory relay station) */}
-            <ellipse cx="500" cy="315" rx="26" ry="18" fill="#fbbf24" stroke="#d97706" strokeWidth="2" />
-
-            {/* Hypothalamus (Controls temperature, hunger, thirst, endocrine master) */}
-            <path d="M 470 330 L 510 330 L 495 365 Z" fill="#f59e0b" stroke="#b45309" strokeWidth="2" />
-
-            {/* Pituitary Gland (Master endocrine gland suspended by infundibulum stalk) */}
-            <ellipse cx="485" cy="385" rx="10" ry="12" fill="#ef4444" stroke="#b91c1c" strokeWidth="2" />
-            <line x1="490" y1="365" x2="485" y2="375" stroke="#ef4444" strokeWidth="3" />
-
-            {/* MIDBRAIN */}
-            <circle cx="545" cy="350" r="16" fill="#38bdf8" stroke="#0284c7" strokeWidth="2" />
-
-            {/* HINDBRAIN: PONS (Bulge with transverse conduction tracts) */}
-            <path
-              d="M 515 375 
-                 C 490 395 490 440 520 455 
-                 L 555 440 L 545 375 Z"
-              fill="#34d399"
-              stroke="#059669"
-              strokeWidth="2.5"
-            />
-
-            {/* HINDBRAIN: MEDULLA OBLONGATA (Controls involuntary: heartbeat, breathing, vomiting, BP) */}
-            <path
-              d="M 520 455 
-                 C 510 490 515 530 525 570 
-                 L 555 570 L 555 440 Z"
-              fill="#10b981"
-              stroke="#047857"
-              strokeWidth="2.5"
-            />
-
-            {/* SPINAL CORD continuation downwards */}
-            <path d="M 525 570 L 525 630 M 555 570 L 555 630" stroke="#64748b" strokeWidth="4" />
-
-            {/* HINDBRAIN: CEREBELLUM with ARBOR VITAE (Tree of Life branching pattern) */}
-            <g filter="url(#brDrop)">
-              <path
-                d="M 570 375 
-                   C 660 360 740 400 730 480 
-                   C 720 540 640 550 570 510 
-                   C 550 460 555 410 570 375 Z"
-                fill="#fdba74"
-                stroke="#ea580c"
-                strokeWidth="3.5"
-              />
-              {/* Arbor Vitae White Matter Tree Branching */}
-              <g stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" fill="none">
-                <path d="M 575 445 Q 630 440 680 430" />
-                <path d="M 620 442 Q 640 405 670 390" />
-                <path d="M 640 435 Q 665 470 700 480" />
-                <path d="M 600 444 Q 610 480 635 505" />
-              </g>
-            </g>
-
-            {/* Brain Major Division Bracket Cards (CBSE Official Syllabus) */}
-            {/* Forebrain */}
-            <g transform="translate(40, 110)">
-              <rect width="170" height="95" rx="8" fill={labelBg} stroke="#a855f7" strokeWidth="1.5" />
-              <text x="85" y="20" fill="#a855f7" fontSize="12" fontWeight="800" textAnchor="middle">I. FOREBRAIN</text>
-              <text x="12" y="38" fill={textPrimary} fontSize="10">• Cerebrum (Cortex)</text>
-              <text x="12" y="52" fill={textMuted} fontSize="9">  Thinking, Memory, Will</text>
-              <text x="12" y="68" fill={textPrimary} fontSize="10">• Sensory Integration</text>
-              <text x="12" y="84" fill={textMuted} fontSize="9">  Hearing, Smell, Vision</text>
-            </g>
-
-            {/* Midbrain */}
-            <g transform="translate(40, 225)">
-              <rect width="170" height="75" rx="8" fill={labelBg} stroke="#0284c7" strokeWidth="1.5" />
-              <text x="85" y="20" fill="#0284c7" fontSize="12" fontWeight="800" textAnchor="middle">II. MIDBRAIN</text>
-              <text x="12" y="38" fill={textPrimary} fontSize="10">• Visual & Auditory</text>
-              <text x="12" y="52" fill={textMuted} fontSize="9">  reflex centres</text>
-              <text x="12" y="66" fill={textPrimary} fontSize="10">• Pupil dilation reflexes</text>
-            </g>
-
-            {/* Hindbrain */}
-            <g transform="translate(40, 320)">
-              <rect width="170" height="135" rx="8" fill={labelBg} stroke="#059669" strokeWidth="1.5" />
-              <text x="85" y="20" fill="#059669" fontSize="12" fontWeight="800" textAnchor="middle">III. HINDBRAIN</text>
-              <text x="12" y="38" fill={textPrimary} fontSize="10">• Cerebellum:</text>
-              <text x="20" y="52" fill={textMuted} fontSize="9">Posture, balance, precision</text>
-              <text x="12" y="68" fill={textPrimary} fontSize="10">• Pons:</text>
-              <text x="20" y="82" fill={textMuted} fontSize="9">Pneumotaxic resp regulation</text>
-              <text x="12" y="98" fill={textPrimary} fontSize="10">• Medulla Oblongata:</text>
-              <text x="20" y="112" fill={textMuted} fontSize="9">Involuntary BP, salivation</text>
-              <text x="20" y="124" fill={textMuted} fontSize="9">swallowing, vomiting</text>
-            </g>
-
-            {/* Anatomical Labels with Leader Lines */}
-            <line x1="500" y1="85" x2="500" y2="45" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="500" y="40" fill="#a855f7" fontSize="12" fontWeight="800" textAnchor="middle">Cerebrum (Forebrain)</text>
-
-            <line x1="430" y1="270" x2="310" y2="270" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="300" y="274" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="end">Corpus Callosum</text>
-
-            <line x1="500" y1="315" x2="680" y2="280" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="685" y="284" fill="#d97706" fontSize="11" fontWeight="700">Thalamus</text>
-
-            <line x1="495" y1="350" x2="680" y2="320" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="685" y="324" fill="#b45309" fontSize="11" fontWeight="700">Hypothalamus</text>
-
-            <line x1="485" y1="390" x2="310" y2="390" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="300" y="394" fill="#ef4444" fontSize="11" fontWeight="800" textAnchor="end">Pituitary Gland</text>
-
-            <line x1="510" y1="420" x2="310" y2="440" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="300" y="444" fill="#059669" fontSize="11" fontWeight="700" textAnchor="end">Pons (Hindbrain)</text>
-
-            <line x1="535" y1="500" x2="310" y2="500" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="300" y="504" fill="#047857" fontSize="11" fontWeight="800" textAnchor="end">Medulla Oblongata</text>
-
-            <line x1="680" y1="460" x2="820" y2="460" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <g transform="translate(825, 445)">
-              <rect width="155" height="42" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
-              <text x="77" y="18" fill="#ea580c" fontSize="11" fontWeight="800" textAnchor="middle">Cerebellum</text>
-              <text x="77" y="32" fill={textMuted} fontSize="9" textAnchor="middle">(Posture & Balance)</text>
-            </g>
-
-            <line x1="540" y1="600" x2="680" y2="600" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="685" y="604" fill={textPrimary} fontSize="11" fontWeight="700">Spinal Cord</text>
-
-            <line x1="760" y1="200" x2="850" y2="200" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="855" y="204" fill={textPrimary} fontSize="11" fontWeight="700">Cranium (Bony Skull)</text>
           </svg>
         );
 
       // =====================================================================
       // 7. LEAF CROSS SECTION (T.S.) & STOMATAL APPARATUS
-      // =====================================================================
-      case "bio_leaf_stomata":
+      case "bio_pollen_germination":
         return (
           <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="lfBg" cx="50%" cy="40%" r="65%">
-                <stop offset="0%" stopColor={isDark ? "#06150c" : "#f0fdf4"} />
-                <stop offset="100%" stopColor={isDark ? "#030805" : "#dcfce7"} />
+              <radialGradient id="pgBg" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stopColor={isDark ? "#0f172a" : "#f8fafc"} />
+                <stop offset="100%" stopColor={isDark ? "#020617" : "#e2e8f0"} />
               </radialGradient>
-              <linearGradient id="palisadeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#4ade80" />
-                <stop offset="60%" stopColor="#22c55e" />
-                <stop offset="100%" stopColor="#15803d" />
+              <linearGradient id="styleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#86efac" />
+                <stop offset="50%" stopColor="#4ade80" />
+                <stop offset="100%" stopColor="#22c55e" />
               </linearGradient>
-              <filter id="lfDrop" x="-10%" y="-10%" width="125%" height="125%">
-                <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#000" floodOpacity="0.4" />
-              </filter>
+              <radialGradient id="ovaryGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#bbf7d0" />
+                <stop offset="100%" stopColor="#16a34a" />
+              </radialGradient>
+              <radialGradient id="pollenGrad" cx="40%" cy="40%" r="50%">
+                <stop offset="0%" stopColor="#fef08a" />
+                <stop offset="100%" stopColor="#eab308" />
+              </radialGradient>
             </defs>
-
-            <rect width="1000" height="650" rx="20" fill="url(#lfBg)" />
-            {[...Array(13)].map((_, i) => <line key={"lvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
-            {[...Array(9)].map((_, i) => <line key={"lhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
-
-            {/* Title */}
-            <g transform="translate(40, 25)">
-              <rect width="450" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
-              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
-                TRANSVERSE SECTION OF LEAF & STOMATA
-              </text>
-              <rect x="380" y="9" width="58" height="24" rx="6" fill="#22c55e" fillOpacity="0.2" />
-              <text x="409" y="25" fill="#22c55e" fontSize="10" fontWeight="800" textAnchor="middle">
-                CBSE 5M
-              </text>
+            <rect width="1000" height="650" fill="url(#pgBg)" rx="16" />
+            
+            {/* Grid for scaling */}
+            <g opacity="0.1" stroke={gridStroke} strokeWidth="1">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <line key={`v${i}`} x1={i * 50} y1="0" x2={i * 50} y2="650" />
+              ))}
+              {Array.from({ length: 13 }).map((_, i) => (
+                <line key={`h${i}`} x1="0" y1={i * 50} x2="1000" y2={i * 50} />
+              ))}
             </g>
 
-            {/* LEFT HALF: T.S. OF LEAF ANATOMY */}
-            <g transform="translate(50, 80)">
-              <text x="0" y="0" fill="#15803d" fontSize="12" fontWeight="800">
-                PART A: CROSS SECTION OF DICOT LEAF (T.S.)
-              </text>
+            {/* Central Pistil Structure */}
+            <g transform="translate(500, 350)">
+              {/* Ovary */}
+              <ellipse cx="0" cy="150" rx="90" ry="110" fill="url(#ovaryGrad)" stroke="#14532d" strokeWidth="3" />
+              {/* Style */}
+              <path d="M -30,-150 L -25,50 C -25,90 -80,100 -90,150 C -90,200 -50,260 0,260 C 50,260 90,200 90,150 C 80,100 25,90 25,50 L 30,-150 Z" fill="url(#styleGrad)" stroke="#14532d" strokeWidth="3" />
+              {/* Stigma */}
+              <path d="M -50,-150 C -70,-170 -60,-200 -20,-190 C 0,-210 20,-190 50,-190 C 70,-170 50,-150 30,-150 Z" fill="#4ade80" stroke="#14532d" strokeWidth="3" />
+              
+              {/* Pollen Grains */}
+              <circle cx="-30" cy="-195" r="12" fill="url(#pollenGrad)" stroke="#ca8a04" strokeWidth="2" />
+              <circle cx="10" cy="-205" r="12" fill="url(#pollenGrad)" stroke="#ca8a04" strokeWidth="2" />
+              <circle cx="45" cy="-190" r="12" fill="url(#pollenGrad)" stroke="#ca8a04" strokeWidth="2" />
 
-              {/* 1. Waxy Hydrophobic Cuticle (Top sheen) */}
-              <rect x="0" y="20" width="460" height="10" rx="4" fill="#67e8f9" opacity="0.8" />
+              {/* Pollen Tube */}
+              <path d="M 10,-193 C 10,-50 -10,0 -10,80 C -10,120 40,140 40,170 C 40,190 20,210 0,210 C -20,210 -40,190 -40,170" fill="none" stroke="#eab308" strokeWidth="6" strokeLinecap="round" />
+              
+              {/* Male Gametes in Tube */}
+              <circle cx="-35" cy="170" r="4" fill="#ef4444" />
+              <circle cx="-25" cy="180" r="4" fill="#ef4444" />
 
-              {/* 2. Upper Epidermis (Single layer of barrel-shaped parenchymatous cells, no chloroplasts) */}
-              {[...Array(11)].map((_, i) => (
-                <rect
-                  key={"uepid"+i}
-                  x={i * 42}
-                  y="30"
-                  width="40"
-                  height="30"
-                  rx="6"
-                  fill="#bbf7d0"
-                  stroke="#16a34a"
-                  strokeWidth="2"
-                />
-              ))}
-
-              {/* 3. Palisade Mesophyll (Vertically elongated, densely packed with chlorophyll discs) */}
-              {[...Array(11)].map((_, i) => (
-                <g key={"pal"+i} transform={`translate(${i * 42}, 62)`}>
-                  <rect width="40" height="110" rx="6" fill="url(#palisadeGrad)" stroke="#166534" strokeWidth="2" />
-                  {/* Chloroplast Organelles */}
-                  <circle cx="12" cy="20" r="4" fill="#14532d" />
-                  <circle cx="28" cy="30" r="4" fill="#14532d" />
-                  <circle cx="15" cy="55" r="4" fill="#14532d" />
-                  <circle cx="28" cy="75" r="4" fill="#14532d" />
-                  <circle cx="15" cy="95" r="4" fill="#14532d" />
-                </g>
-              ))}
-
-              {/* 4. Spongy Mesophyll (Loosely arranged with large air cavities for gas exchange) */}
-              <g transform="translate(0, 175)">
-                {/* Air cavities background */}
-                <rect width="460" height="125" rx="8" fill={isDark ? "#064e3b" : "#f0fdf4"} opacity="0.5" />
-                {/* Loosely arranged oval cells */}
-                <circle cx="40" cy="30" r="22" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-                <circle cx="100" cy="45" r="20" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-                <circle cx="45" cy="85" r="24" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-                <circle cx="120" cy="100" r="20" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-                <circle cx="360" cy="35" r="22" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-                <circle cx="420" cy="45" r="20" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-                <circle cx="370" cy="90" r="22" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-                <circle cx="430" cy="100" r="20" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-
-                {/* VASCULAR BUNDLE (Midrib Vein in Center) */}
-                <ellipse cx="230" cy="65" rx="65" ry="55" fill="#fef08a" stroke="#ca8a04" strokeWidth="2.5" />
-                {/* Bundle Sheath Cells ring */}
-                <text x="230" y="28" fill="#ca8a04" fontSize="9.5" fontWeight="800" textAnchor="middle">Bundle Sheath</text>
-                {/* Xylem Vessels (Thick-walled red, water transport) */}
-                <circle cx="215" cy="55" r="14" fill="#fee2e2" stroke="#dc2626" strokeWidth="3" />
-                <circle cx="245" cy="55" r="14" fill="#fee2e2" stroke="#dc2626" strokeWidth="3" />
-                <text x="230" y="58" fill="#dc2626" fontSize="9" fontWeight="800" textAnchor="middle">Xylem</text>
-                {/* Phloem Sieve Tubes (Green, sugar translocation) */}
-                <circle cx="215" cy="85" r="10" fill="#dcfce7" stroke="#16a34a" strokeWidth="2.5" />
-                <circle cx="245" cy="85" r="10" fill="#dcfce7" stroke="#16a34a" strokeWidth="2.5" />
-                <text x="230" y="88" fill="#16a34a" fontSize="8.5" fontWeight="800" textAnchor="middle">Phloem</text>
-
-                {/* Respiratory Substomatal Cavity */}
-                <path d="M 270 125 C 270 95 320 95 320 125 Z" fill="#38bdf8" opacity="0.3" />
-                <text x="295" y="115" fill="#0284c7" fontSize="8.5" fontWeight="700" textAnchor="middle">Air Cavity</text>
-              </g>
-
-              {/* 5. Lower Epidermis with Stomatal Pore Opening */}
-              <g transform="translate(0, 302)">
-                {[...Array(6)].map((_, i) => (
-                  <rect
-                    key={"lepid"+i}
-                    x={i * 42}
-                    y="0"
-                    width="40"
-                    height="30"
-                    rx="6"
-                    fill="#bbf7d0"
-                    stroke="#16a34a"
-                    strokeWidth="2"
-                  />
-                ))}
-                {/* Stoma opening gap flanked by Guard Cells */}
-                <ellipse cx="270" cy="15" rx="10" ry="14" fill="#4ade80" stroke="#15803d" strokeWidth="2" />
-                <ellipse cx="295" cy="15" rx="10" ry="14" fill="#4ade80" stroke="#15803d" strokeWidth="2" />
-
-                {[...Array(4)].map((_, i) => (
-                  <rect
-                    key={"lepid2"+i}
-                    x={315 + i * 40}
-                    y="0"
-                    width="38"
-                    height="30"
-                    rx="6"
-                    fill="#bbf7d0"
-                    stroke="#16a34a"
-                    strokeWidth="2"
-                  />
-                ))}
-                {/* Lower Waxy Cuticle */}
-                <rect x="0" y="30" width="460" height="8" rx="3" fill="#67e8f9" opacity="0.8" />
-              </g>
-
-              {/* Labels for Leaf Section */}
-              <text x="470" y="28" fill="#06b6d4" fontSize="10.5" fontWeight="700">Waxy Cuticle</text>
-              <text x="470" y="48" fill="#16a34a" fontSize="10.5" fontWeight="700">Upper Epidermis</text>
-              <text x="470" y="115" fill="#15803d" fontSize="10.5" fontWeight="800">Palisade Mesophyll</text>
-              <text x="470" y="210" fill="#16a34a" fontSize="10.5" fontWeight="700">Spongy Mesophyll</text>
-              <text x="470" y="260" fill="#ca8a04" fontSize="10.5" fontWeight="800">Vascular Bundle (Vein)</text>
-              <text x="470" y="318" fill="#15803d" fontSize="10.5" fontWeight="700">Lower Epidermis + Stoma</text>
+              {/* Embryo Sac */}
+              <ellipse cx="0" cy="160" rx="50" ry="70" fill="#f0fdf4" stroke="#22c55e" strokeWidth="2" strokeDasharray="5,5" />
+              {/* Egg Cell */}
+              <circle cx="0" cy="210" r="12" fill="#60a5fa" />
+              {/* Synergids */}
+              <circle cx="-20" cy="215" r="10" fill="#93c5fd" />
+              <circle cx="20" cy="215" r="10" fill="#93c5fd" />
+              {/* Polar Nuclei */}
+              <circle cx="-8" cy="150" r="8" fill="#a78bfa" />
+              <circle cx="8" cy="150" r="8" fill="#a78bfa" />
+              {/* Antipodals */}
+              <circle cx="0" cy="100" r="9" fill="#f472b6" />
+              <circle cx="-20" cy="105" r="9" fill="#f472b6" />
+              <circle cx="20" cy="105" r="9" fill="#f472b6" />
             </g>
 
-            {/* RIGHT HALF: HIGH-MAGNIFICATION OPEN VS CLOSED STOMATA */}
-            <g transform="translate(560, 80)">
-              <rect width="400" height="520" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#lfDrop)" />
-              <text x="200" y="30" fill="#15803d" fontSize="13" fontWeight="800" textAnchor="middle">
-                PART B: STOMATAL MECHANISM (TURGOR PRESSURE)
-              </text>
+            {/* Labels - Rigidly Aligned */}
+            <g fontSize="16" fontFamily="Arial, sans-serif" fontWeight="bold">
+              {/* Left Side */}
+              <text x="15" y="150" fill={textPrimary}>Pollen Grain</text>
+              <line x1="120" y1="145" x2="470" y2="155" stroke={textPrimary} strokeDasharray="4" />
+              
+              <text x="15" y="210" fill={textPrimary}>Stigma (Receptive Surface)</text>
+              <line x1="230" y1="205" x2="450" y2="170" stroke={textPrimary} strokeDasharray="4" />
 
-              {/* 1. OPEN STOMA (High Turgor, Guard cells swell, pore opens) */}
-              <g transform="translate(40, 60)">
-                <rect width="320" height="195" rx="12" fill={isDark ? "#064e3b" : "#f0fdf4"} stroke="#22c55e" strokeWidth="1.5" />
-                <text x="160" y="24" fill="#15803d" fontSize="11.5" fontWeight="800" textAnchor="middle">
-                  1. OPEN STOMA (Water Influx ➔ Turgid)
-                </text>
+              <text x="15" y="300" fill={textPrimary}>Pollen Tube</text>
+              <line x1="110" y1="295" x2="480" y2="400" stroke={textPrimary} strokeDasharray="4" />
 
-                {/* Left Kidney-shaped Guard Cell (Swollen) */}
-                <path
-                  d="M 125 50 
-                     C 85 65 75 145 125 160 
-                     C 105 135 105 75 125 50 Z"
-                  fill="#86efac"
-                  stroke="#15803d"
-                  strokeWidth="3"
-                />
-                {/* Thick Inelastic Inner Wall */}
-                <path d="M 125 50 C 105 75 105 135 125 160" stroke="#14532d" strokeWidth="6" fill="none" strokeLinecap="round"/>
+              <text x="15" y="400" fill={textPrimary}>Style</text>
+              <line x1="60" y1="395" x2="460" y2="350" stroke={textPrimary} strokeDasharray="4" />
 
-                {/* Right Kidney-shaped Guard Cell (Swollen) */}
-                <path
-                  d="M 195 50 
-                     C 235 65 245 145 195 160 
-                     C 215 135 215 75 195 50 Z"
-                  fill="#86efac"
-                  stroke="#15803d"
-                  strokeWidth="3"
-                />
-                {/* Thick Inelastic Inner Wall */}
-                <path d="M 195 50 C 215 75 215 135 195 160" stroke="#14532d" strokeWidth="6" fill="none" strokeLinecap="round"/>
+              <text x="15" y="550" fill={textPrimary}>Male Gametes</text>
+              <line x1="130" y1="545" x2="465" y2="520" stroke={textPrimary} strokeDasharray="4" />
 
-                {/* Wide Open Stomatal Aperture / Pore */}
-                <ellipse cx="160" cy="105" rx="20" ry="38" fill="#0f172a" />
-                <text x="160" y="110" fill="#38bdf8" fontSize="10" fontWeight="900" textAnchor="middle">PORE</text>
+              {/* Right Side */}
+              <text x="825" y="430" fill={textPrimary}>Ovary</text>
+              <line x1="815" y1="425" x2="580" y2="480" stroke={textPrimary} strokeDasharray="4" />
 
-                {/* Organelles in Guard Cells: Nucleus & Chloroplasts */}
-                <circle cx="95" cy="105" r="7" fill="#1e3a8a" stroke="#fff" strokeWidth="1.5" />
-                <circle cx="225" cy="105" r="7" fill="#1e3a8a" stroke="#fff" strokeWidth="1.5" />
-                <circle cx="90" cy="75" r="4" fill="#15803d" />
-                <circle cx="90" cy="135" r="4" fill="#15803d" />
-                <circle cx="230" cy="75" r="4" fill="#15803d" />
-                <circle cx="230" cy="135" r="4" fill="#15803d" />
+              <text x="825" y="500" fill={textPrimary}>Polar Nuclei (2n)</text>
+              <line x1="815" y1="495" x2="515" y2="500" stroke={textPrimary} strokeDasharray="4" />
 
-                <text x="160" y="182" fill="#15803d" fontSize="10" fontWeight="700" textAnchor="middle">
-                  K⁺ & H₂O Enter ➔ Swelling bows outer thin walls outwards
-                </text>
-              </g>
-
-              {/* 2. CLOSED STOMA (Flaccid Guard cells, pore closes to prevent water loss) */}
-              <g transform="translate(40, 275)">
-                <rect width="320" height="195" rx="12" fill={isDark ? "#1e1b4b" : "#fef2f2"} stroke="#f87171" strokeWidth="1.5" />
-                <text x="160" y="24" fill="#dc2626" fontSize="11.5" fontWeight="800" textAnchor="middle">
-                  2. CLOSED STOMA (Water Efflux ➔ Flaccid)
-                </text>
-
-                {/* Left Guard Cell (Straightened / collapsed) */}
-                <path
-                  d="M 145 50 
-                     C 115 65 115 145 145 160 
-                     L 156 160 L 156 50 Z"
-                  fill="#fca5a5"
-                  stroke="#b91c1c"
-                  strokeWidth="3"
-                />
-                {/* Right Guard Cell (Straightened / collapsed) */}
-                <path
-                  d="M 175 50 
-                     C 205 65 205 145 175 160 
-                     L 164 160 L 164 50 Z"
-                  fill="#fca5a5"
-                  stroke="#b91c1c"
-                  strokeWidth="3"
-                />
-
-                {/* Closed Slit (Tightly abutting inner thick walls) */}
-                <line x1="160" y1="52" x2="160" y2="158" stroke="#7f1d1d" strokeWidth="4" />
-                <text x="160" y="108" fill="#7f1d1d" fontSize="9" fontWeight="900" textAnchor="middle">CLOSED</text>
-
-                {/* Organelles */}
-                <circle cx="130" cy="105" r="6" fill="#1e3a8a" />
-                <circle cx="190" cy="105" r="6" fill="#1e3a8a" />
-
-                <text x="160" y="182" fill="#dc2626" fontSize="10" fontWeight="700" textAnchor="middle">
-                  H₂O Loss ➔ Guard cells shrink & inner walls touch
-                </text>
-              </g>
-
-              <text x="200" y="495" fill={textMuted} fontSize="9.5" fontWeight="600" textAnchor="middle">
-                Crucial CBSE Concept: Guard cell turgidity regulates opening/closing
-              </text>
+              <text x="825" y="560" fill={textPrimary}>Egg Cell (Female Gamete)</text>
+              <line x1="815" y1="555" x2="515" y2="560" stroke={textPrimary} strokeDasharray="4" />
             </g>
           </svg>
         );
 
       // =====================================================================
       // 8. LONGITUDINAL SECTION OF FLOWER (L.S.)
-      // =====================================================================
-      case "bio_flower_ls":
+      case "bio_flower_anatomy":
         return (
           <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="flBg" cx="50%" cy="45%" r="65%">
-                <stop offset="0%" stopColor={isDark ? "#190814" : "#fdf4ff"} />
-                <stop offset="100%" stopColor={isDark ? "#060305" : "#fae8ff"} />
+              <radialGradient id="fBg" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stopColor={isDark ? "#1e1b4b" : "#e0e7ff"} />
+                <stop offset="100%" stopColor={isDark ? "#0f172a" : "#c7d2fe"} />
               </radialGradient>
-              <linearGradient id="petalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="petalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stopColor="#f472b6" />
-                <stop offset="40%" stopColor="#ec4899" />
-                <stop offset="100%" stopColor="#be185d" />
+                <stop offset="100%" stopColor="#db2777" />
               </linearGradient>
-              <filter id="flDrop" x="-10%" y="-10%" width="125%" height="125%">
-                <feDropShadow dx="0" dy="12" stdDeviation="15" floodColor="#000" floodOpacity="0.45" />
-              </filter>
+              <linearGradient id="sepalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#4ade80" />
+                <stop offset="100%" stopColor="#16a34a" />
+              </linearGradient>
             </defs>
+            <rect width="1000" height="650" fill="url(#fBg)" rx="16" />
+            
+            <g transform="translate(500, 350)">
+              {/* Receptacle & Pedicel */}
+              <path d="M -40,150 L 40,150 L 20,280 L -20,280 Z" fill="url(#sepalGrad)" stroke="#14532d" strokeWidth="3" />
+              <ellipse cx="0" cy="150" rx="50" ry="20" fill="#22c55e" stroke="#14532d" strokeWidth="3" />
 
-            <rect width="1000" height="650" rx="20" fill="url(#flBg)" />
-            {[...Array(13)].map((_, i) => <line key={"fvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
-            {[...Array(9)].map((_, i) => <line key={"fhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
+              {/* Sepals */}
+              <path d="M -50,150 C -100,100 -120,50 -150,0 C -120,50 -80,100 -20,160 Z" fill="url(#sepalGrad)" stroke="#14532d" strokeWidth="2" />
+              <path d="M 50,150 C 100,100 120,50 150,0 C 120,50 80,100 20,160 Z" fill="url(#sepalGrad)" stroke="#14532d" strokeWidth="2" />
 
-            {/* Title */}
-            <g transform="translate(40, 25)">
-              <rect width="420" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
-              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
-                LONGITUDINAL SECTION OF A FLOWER (L.S.)
-              </text>
-              <rect x="350" y="9" width="58" height="24" rx="6" fill="#ec4899" fillOpacity="0.2" />
-              <text x="379" y="25" fill="#ec4899" fontSize="10" fontWeight="800" textAnchor="middle">
-                CBSE 5M
-              </text>
+              {/* Petals */}
+              <path d="M -30,130 C -250,50 -200,-150 -100,-200 C -50,-100 -20,0 0,130 Z" fill="url(#petalGrad)" stroke="#9d174d" strokeWidth="2" opacity="0.9" />
+              <path d="M 30,130 C 250,50 200,-150 100,-200 C 50,-100 20,0 0,130 Z" fill="url(#petalGrad)" stroke="#9d174d" strokeWidth="2" opacity="0.9" />
+              <path d="M -10,130 C -100,-50 -50,-250 0,-250 C 50,-250 100,-50 10,130 Z" fill="url(#petalGrad)" stroke="#9d174d" strokeWidth="2" opacity="0.8" />
+
+              {/* Stamen (Filament & Anther) */}
+              <path d="M -20,130 C -50,50 -80,-50 -100,-100" fill="none" stroke="#fcd34d" strokeWidth="4" />
+              <ellipse cx="-100" cy="-100" rx="15" ry="10" fill="#f59e0b" stroke="#b45309" strokeWidth="2" />
+              <ellipse cx="-105" cy="-110" rx="15" ry="10" fill="#fbbf24" stroke="#b45309" strokeWidth="2" />
+
+              <path d="M 20,130 C 50,50 80,-50 100,-100" fill="none" stroke="#fcd34d" strokeWidth="4" />
+              <ellipse cx="100" cy="-100" rx="15" ry="10" fill="#f59e0b" stroke="#b45309" strokeWidth="2" />
+              <ellipse cx="105" cy="-110" rx="15" ry="10" fill="#fbbf24" stroke="#b45309" strokeWidth="2" />
+
+              {/* Pistil (Ovary, Style, Stigma) */}
+              <ellipse cx="0" cy="90" rx="40" ry="50" fill="#bbf7d0" stroke="#16a34a" strokeWidth="3" />
+              <path d="M -15,40 C -15,-50 -10,-100 0,-120 C 10,-100 15,-50 15,40 Z" fill="#86efac" stroke="#16a34a" strokeWidth="3" />
+              <ellipse cx="0" cy="-125" rx="20" ry="10" fill="#4ade80" stroke="#16a34a" strokeWidth="3" />
+              <ellipse cx="-10" cy="-130" rx="15" ry="8" fill="#4ade80" stroke="#16a34a" strokeWidth="3" />
+              <ellipse cx="10" cy="-130" rx="15" ry="8" fill="#4ade80" stroke="#16a34a" strokeWidth="3" />
+
+              {/* Ovules inside Ovary */}
+              <circle cx="-15" cy="80" r="8" fill="#f0fdf4" stroke="#22c55e" strokeWidth="1" />
+              <circle cx="15" cy="80" r="8" fill="#f0fdf4" stroke="#22c55e" strokeWidth="1" />
+              <circle cx="-15" cy="110" r="8" fill="#f0fdf4" stroke="#22c55e" strokeWidth="1" />
+              <circle cx="15" cy="110" r="8" fill="#f0fdf4" stroke="#22c55e" strokeWidth="1" />
             </g>
 
-            {/* Flower Stem / Pedicel & Receptacle (Thalamus) */}
-            <path d="M 500 500 L 500 630" stroke="#15803d" strokeWidth="22" strokeLinecap="round" />
-            <path
-              d="M 440 500 
-                 C 440 450 560 450 560 500 Z"
-              fill="#22c55e"
-              stroke="#166534"
-              strokeWidth="3.5"
-            />
-            <text x="500" y="525" fill="#ffffff" fontSize="11" fontWeight="800" textAnchor="middle">Thalamus / Receptacle</text>
-            <text x="500" y="615" fill="#ffffff" fontSize="11" fontWeight="800" textAnchor="middle">Pedicel</text>
+            {/* Labels */}
+            <g fontSize="16" fontFamily="Arial, sans-serif" fontWeight="bold">
+              {/* Left Side (Stamen) */}
+              <text x="15" y="200" fill={textPrimary}>Anther (Produces Pollen)</text>
+              <line x1="210" y1="195" x2="390" y2="240" stroke={textPrimary} strokeDasharray="4" />
 
-            {/* Sepals (Calyx - Green protective outer whorl) */}
-            <path d="M 450 490 C 360 490 320 440 300 420 C 330 460 410 500 450 500 Z" fill="#16a34a" stroke="#14532d" strokeWidth="2.5" />
-            <path d="M 550 490 C 640 490 680 440 700 420 C 670 460 590 500 550 500 Z" fill="#16a34a" stroke="#14532d" strokeWidth="2.5" />
+              <text x="15" y="320" fill={textPrimary}>Filament</text>
+              <line x1="90" y1="315" x2="410" y2="350" stroke={textPrimary} strokeDasharray="4" />
 
-            {/* Petals (Corolla - Large colorful velvety whorl attracting pollinators) */}
-            <g filter="url(#flDrop)">
-              {/* Left Wing Petal */}
-              <path
-                d="M 450 470 
-                   C 300 470 180 350 200 180 
-                   C 260 160 380 280 440 380 Z"
-                fill="url(#petalGrad)"
-                stroke="#be185d"
-                strokeWidth="3"
-                opacity="0.95"
-              />
-              {/* Right Wing Petal */}
-              <path
-                d="M 550 470 
-                   C 700 470 820 350 800 180 
-                   C 740 160 620 280 560 380 Z"
-                fill="url(#petalGrad)"
-                stroke="#be185d"
-                strokeWidth="3"
-                opacity="0.95"
-              />
-              {/* Rear Central Petal */}
-              <path
-                d="M 420 350 
-                   C 360 150 640 150 580 350 Z"
-                fill="url(#petalGrad)"
-                stroke="#9d174d"
-                strokeWidth="3"
-                opacity="0.75"
-              />
+              <text x="15" y="450" fill={textPrimary}>Petal (Corolla)</text>
+              <line x1="125" y1="445" x2="380" y2="450" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="15" y="580" fill={textPrimary}>Sepal (Calyx)</text>
+              <line x1="120" y1="575" x2="430" y2="450" stroke={textPrimary} strokeDasharray="4" />
+
+              {/* Right Side (Pistil/Carpel) */}
+              <text x="825" y="190" fill={textPrimary}>Stigma (Receptive)</text>
+              <line x1="815" y1="185" x2="520" y2="220" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="825" y="290" fill={textPrimary}>Style (Tube)</text>
+              <line x1="815" y1="285" x2="515" y2="300" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="825" y="420" fill={textPrimary}>Ovary (Contains Ovules)</text>
+              <line x1="815" y1="415" x2="540" y2="440" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="825" y="530" fill={textPrimary}>Receptacle</text>
+              <line x1="815" y1="525" x2="550" y2="500" stroke={textPrimary} strokeDasharray="4" />
             </g>
-
-            {/* STAMEN (Male Reproductive Unit = Filament + Anther) */}
-            {/* Left Stamen */}
-            <path d="M 460 450 Q 360 320 370 180" fill="none" stroke="#fde047" strokeWidth="6" strokeLinecap="round" />
-            {/* Bilobed Anther bursting with yellow pollen */}
-            <g transform="translate(355, 150)">
-              <ellipse cx="10" cy="18" rx="10" ry="16" fill="#eab308" stroke="#a16207" strokeWidth="2" />
-              <ellipse cx="24" cy="18" rx="10" ry="16" fill="#eab308" stroke="#a16207" strokeWidth="2" />
-              {/* Pollen Grains */}
-              <circle cx="10" cy="12" r="2.5" fill="#fef08a" />
-              <circle cx="12" cy="22" r="2.5" fill="#fef08a" />
-              <circle cx="22" cy="15" r="2.5" fill="#fef08a" />
-              <circle cx="24" cy="25" r="2.5" fill="#fef08a" />
-            </g>
-
-            {/* Right Stamen */}
-            <path d="M 540 450 Q 640 320 630 180" fill="none" stroke="#fde047" strokeWidth="6" strokeLinecap="round" />
-            {/* Bilobed Anther */}
-            <g transform="translate(615, 150)">
-              <ellipse cx="10" cy="18" rx="10" ry="16" fill="#eab308" stroke="#a16207" strokeWidth="2" />
-              <ellipse cx="24" cy="18" rx="10" ry="16" fill="#eab308" stroke="#a16207" strokeWidth="2" />
-              <circle cx="10" cy="12" r="2.5" fill="#fef08a" />
-              <circle cx="22" cy="15" r="2.5" fill="#fef08a" />
-            </g>
-
-            {/* PISTIL / CARPEL (Female Reproductive Unit = Stigma + Style + Ovary) */}
-            {/* Ovary (Swollen basal chamber containing ovules) */}
-            <path
-              d="M 445 460 
-                 C 430 380 480 340 485 270 
-                 L 515 270 
-                 C 520 340 570 380 555 460 Z"
-              fill="#86efac"
-              stroke="#15803d"
-              strokeWidth="4"
-              filter="url(#flDrop)"
-            />
-
-            {/* Anatropous Ovule inside Ovary chamber */}
-            <g transform="translate(470, 360)">
-              <ellipse cx="30" cy="35" rx="26" ry="32" fill="#fef08a" stroke="#ca8a04" strokeWidth="2.5" />
-              {/* Embryo Sac (Female Gametophyte) with 7 Cells & 8 Nuclei */}
-              <ellipse cx="30" cy="35" rx="16" ry="20" fill="#ffffff" stroke="#eab308" strokeWidth="2" />
-              {/* 3 Antipodal Cells at chalazal end */}
-              <circle cx="22" cy="23" r="3" fill="#ef4444" />
-              <circle cx="30" cy="20" r="3" fill="#ef4444" />
-              <circle cx="38" cy="23" r="3" fill="#ef4444" />
-              {/* 2 Central Polar Nuclei */}
-              <circle cx="28" cy="35" r="2.5" fill="#3b82f6" />
-              <circle cx="33" cy="35" r="2.5" fill="#3b82f6" />
-              {/* Egg Apparatus: 1 Female Gamete (Egg Cell) + 2 Synergids */}
-              <circle cx="30" cy="48" r="4.5" fill="#10b981" stroke="#047857" strokeWidth="1.5" />
-              <circle cx="22" cy="46" r="2.5" fill="#64748b" />
-              <circle cx="38" cy="46" r="2.5" fill="#64748b" />
-            </g>
-
-            {/* Slender Style */}
-            <rect x="490" y="140" width="20" height="130" fill="#86efac" stroke="#15803d" strokeWidth="3" />
-
-            {/* Sticky Papillate Stigma (Receives pollen grain during pollination) */}
-            <ellipse cx="500" cy="135" rx="24" ry="12" fill="#22c55e" stroke="#14532d" strokeWidth="3" />
-            {/* Pollen grain germinating with Pollen Tube growing down style */}
-            <circle cx="495" cy="128" r="4" fill="#eab308" stroke="#ca8a04" strokeWidth="1.5" />
-            <path d="M 495 132 L 498 360" stroke="#f59e0b" strokeWidth="3" strokeDasharray="4,2" fill="none" />
-
-            {/* Whorl Summary Cards & Labels */}
-            {/* Male Whorl Card */}
-            <g transform="translate(40, 100)">
-              <rect width="180" height="90" rx="10" fill={labelBg} stroke="#eab308" strokeWidth="1.5" />
-              <text x="90" y="22" fill="#ca8a04" fontSize="12" fontWeight="800" textAnchor="middle">
-                STAMEN (MALE WHORL)
-              </text>
-              <text x="12" y="42" fill={textPrimary} fontSize="10.5">• Anther: Produces Pollen</text>
-              <text x="12" y="58" fill={textPrimary} fontSize="10.5">• Filament: Slender Stalk</text>
-              <text x="12" y="74" fill={textMuted} fontSize="9">Pollen = Male Gametes</text>
-            </g>
-
-            {/* Female Whorl Card */}
-            <g transform="translate(780, 100)">
-              <rect width="180" height="135" rx="10" fill={labelBg} stroke="#16a34a" strokeWidth="1.5" />
-              <text x="90" y="22" fill="#15803d" fontSize="12" fontWeight="800" textAnchor="middle">
-                CARPEL / PISTIL (FEMALE)
-              </text>
-              <text x="12" y="42" fill={textPrimary} fontSize="10.5">• Stigma: Sticky landing</text>
-              <text x="12" y="58" fill={textPrimary} fontSize="10.5">• Style: Elongated tube</text>
-              <text x="12" y="74" fill={textPrimary} fontSize="10.5">• Ovary: Swollen base</text>
-              <text x="12" y="90" fill={textAccent} fontSize="10">• Ovule ➔ Becomes Seed</text>
-              <text x="12" y="106" fill="#ec4899" fontSize="10">• Ovary ➔ Becomes Fruit</text>
-              <text x="12" y="122" fill={textMuted} fontSize="8.5">Egg cell inside embryo sac</text>
-            </g>
-
-            {/* Direct Leader Lines */}
-            <line x1="365" y1="165" x2="230" y2="165" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="220" y="169" fill="#ca8a04" fontSize="11" fontWeight="800" textAnchor="end">Anther</text>
-
-            <line x1="365" y1="260" x2="230" y2="260" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="220" y="264" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="end">Filament</text>
-
-            <line x1="500" y1="130" x2="770" y2="130" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="760" y="134" fill="#15803d" fontSize="11" fontWeight="800" textAnchor="end">Stigma</text>
-
-            <line x1="510" y1="200" x2="770" y2="200" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="760" y="204" fill="#15803d" fontSize="11" fontWeight="800" textAnchor="end">Style</text>
-
-            <line x1="550" y1="400" x2="770" y2="330" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="775" y="334" fill="#15803d" fontSize="11" fontWeight="800">Ovary Wall</text>
-
-            <line x1="500" y1="400" x2="770" y2="380" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="775" y="384" fill="#ca8a04" fontSize="11" fontWeight="800">Ovule with Egg Cell</text>
-
-            <line x1="220" y1="280" x2="100" y2="280" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="95" y="284" fill="#ec4899" fontSize="11" fontWeight="800" textAnchor="end">Petal (Corolla)</text>
-
-            <line x1="320" y1="450" x2="200" y2="450" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="195" y="454" fill="#16a34a" fontSize="11" fontWeight="800" textAnchor="end">Sepal (Calyx)</text>
           </svg>
         );
 
       // =====================================================================
       // 9. HUMAN FEMALE REPRODUCTIVE SYSTEM
-      // =====================================================================
-      case "bio_female_reproduction":
+      case "bio_human_reproduction":
         return (
           <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="frBg" cx="50%" cy="40%" r="65%">
-                <stop offset="0%" stopColor={isDark ? "#170a12" : "#fdf2f8"} />
-                <stop offset="100%" stopColor={isDark ? "#060305" : "#fce7f3"} />
+              <radialGradient id="repBg" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stopColor={isDark ? "#171717" : "#fafafa"} />
+                <stop offset="100%" stopColor={isDark ? "#0a0a0a" : "#e5e5e5"} />
               </radialGradient>
-              <linearGradient id="utGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#f43f5e" />
-                <stop offset="50%" stopColor="#e11d48" />
-                <stop offset="100%" stopColor="#be123c" />
+              <linearGradient id="uterusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fca5a5" />
+                <stop offset="100%" stopColor="#ef4444" />
               </linearGradient>
-              <linearGradient id="endometriumGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#fda4af" />
-                <stop offset="100%" stopColor="#f43f5e" />
-              </linearGradient>
-              <filter id="frDrop" x="-10%" y="-10%" width="125%" height="125%">
-                <feDropShadow dx="0" dy="12" stdDeviation="15" floodColor="#000" floodOpacity="0.4" />
-              </filter>
             </defs>
+            <rect width="1000" height="650" fill="url(#repBg)" rx="16" />
+            
+            {/* Split View Line */}
+            <line x1="500" y1="50" x2="500" y2="600" stroke={textPrimary} strokeWidth="2" strokeDasharray="10,10" opacity="0.3" />
+            <text x="250" y="80" fill={textPrimary} fontSize="20" fontWeight="bold" textAnchor="middle">Male Reproductive System</text>
+            <text x="750" y="80" fill={textPrimary} fontSize="20" fontWeight="bold" textAnchor="middle">Female Reproductive System</text>
 
-            <rect width="1000" height="650" rx="20" fill="url(#frBg)" />
-            {[...Array(13)].map((_, i) => <line key={"frvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
-            {[...Array(9)].map((_, i) => <line key={"frhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
-
-            {/* Title */}
-            <g transform="translate(40, 25)">
-              <rect width="440" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
-              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
-                HUMAN FEMALE REPRODUCTIVE SYSTEM
-              </text>
-              <rect x="370" y="9" width="58" height="24" rx="6" fill="#f43f5e" fillOpacity="0.2" />
-              <text x="399" y="25" fill="#f43f5e" fontSize="10" fontWeight="800" textAnchor="middle">
-                CBSE 5M
-              </text>
+            {/* Left Side: Male System */}
+            <g transform="translate(250, 350)">
+              {/* Bladder */}
+              <ellipse cx="0" cy="-100" rx="40" ry="30" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+              {/* Urethra & Penis */}
+              <path d="M -10,-70 L -10,100 C -10,120 10,120 10,100 L 10,-70 Z" fill="#fca5a5" stroke="#dc2626" strokeWidth="2" />
+              <path d="M -20,30 L -20,100 C -20,130 20,130 20,100 L 20,30 Z" fill="none" stroke="#ef4444" strokeWidth="2" />
+              {/* Testis & Scrotum */}
+              <ellipse cx="-40" cy="120" rx="20" ry="25" fill="#93c5fd" stroke="#2563eb" strokeWidth="2" />
+              <path d="M -65,110 C -70,160 -10,160 -15,110" fill="none" stroke="#94a3b8" strokeWidth="3" />
+              {/* Epididymis & Vas Deferens */}
+              <path d="M -40,95 C -20,95 -20,50 -20,0 C -20,-50 -60,-80 -60,-120 C -60,-140 0,-140 0,-100" fill="none" stroke="#3b82f6" strokeWidth="3" />
+              {/* Prostate & Seminal Vesicle */}
+              <ellipse cx="0" cy="-60" rx="15" ry="10" fill="#a78bfa" stroke="#6d28d9" strokeWidth="2" />
+              <ellipse cx="20" cy="-80" rx="10" ry="15" fill="#f9a8d4" stroke="#db2777" strokeWidth="2" />
             </g>
 
-            {/* Fallopian Tubes (Oviducts: Isthmus, Ampulla, Infundibulum with Fimbriae) */}
-            {/* Left Fallopian Tube */}
-            <path
-              d="M 440 230 
-                 C 380 140 260 140 220 200 
-                 C 200 230 205 260 215 280"
-              fill="none"
-              stroke="#fda4af"
-              strokeWidth="20"
-              strokeLinecap="round"
-            />
-            {/* Left Fimbriae (Finger-like projections sweeping ovum) */}
-            <g stroke="#f43f5e" strokeWidth="4" strokeLinecap="round" fill="none">
-              <path d="M 215 280 L 195 295" />
-              <path d="M 220 280 L 210 305" />
-              <path d="M 225 280 L 230 305" />
-              <path d="M 230 275 L 245 295" />
+            {/* Right Side: Female System */}
+            <g transform="translate(750, 320)">
+              {/* Uterus */}
+              <path d="M -60,-50 C -40,-120 40,-120 60,-50 C 40,0 20,50 15,100 L -15,100 C -20,50 -40,0 -60,-50 Z" fill="url(#uterusGrad)" stroke="#991b1b" strokeWidth="3" />
+              {/* Endometrium lining */}
+              <path d="M -45,-45 C -30,-100 30,-100 45,-45 C 30,-5 10,40 5,90 L -5,90 C -10,40 -30,-5 -45,-45 Z" fill="#fecaca" />
+              
+              {/* Fallopian Tubes (Oviducts) */}
+              <path d="M -60,-70 C -120,-80 -140,-40 -120,0" fill="none" stroke="#ef4444" strokeWidth="8" strokeLinecap="round" />
+              <path d="M 60,-70 C 120,-80 140,-40 120,0" fill="none" stroke="#ef4444" strokeWidth="8" strokeLinecap="round" />
+              {/* Fimbriae */}
+              <path d="M -120,0 C -130,20 -110,20 -110,10" fill="none" stroke="#ef4444" strokeWidth="3" />
+              <path d="M 120,0 C 130,20 110,20 110,10" fill="none" stroke="#ef4444" strokeWidth="3" />
+
+              {/* Ovaries */}
+              <ellipse cx="-130" cy="30" rx="15" ry="20" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
+              <ellipse cx="130" cy="30" rx="15" ry="20" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
+
+              {/* Cervix & Vagina */}
+              <path d="M -15,100 L -25,180 L 25,180 L 15,100 Z" fill="#fbcfe8" stroke="#be185d" strokeWidth="2" />
+              <line x1="-15" y1="100" x2="15" y2="100" stroke="#991b1b" strokeWidth="4" /> {/* Cervix */}
             </g>
 
-            {/* Right Fallopian Tube */}
-            <path
-              d="M 560 230 
-                 C 620 140 740 140 780 200 
-                 C 800 230 795 260 785 280"
-              fill="none"
-              stroke="#fda4af"
-              strokeWidth="20"
-              strokeLinecap="round"
-            />
-            {/* Right Fimbriae */}
-            <g stroke="#f43f5e" strokeWidth="4" strokeLinecap="round" fill="none">
-              <path d="M 785 280 L 805 295" />
-              <path d="M 780 280 L 790 305" />
-              <path d="M 775 280 L 770 305" />
-              <path d="M 770 275 L 755 295" />
+            {/* Labels - Male */}
+            <g fontSize="14" fontFamily="Arial, sans-serif" fontWeight="bold">
+              <text x="10" y="240" fill={textPrimary}>Vas Deferens</text>
+              <line x1="110" y1="235" x2="200" y2="245" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="10" y="300" fill={textPrimary}>Prostate Gland</text>
+              <line x1="120" y1="295" x2="250" y2="295" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="10" y="380" fill={textPrimary}>Urethra</text>
+              <line x1="70" y1="375" x2="250" y2="375" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="10" y="470" fill={textPrimary}>Testis (Sperm Production)</text>
+              <line x1="195" y1="465" x2="210" y2="470" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="10" y="520" fill={textPrimary}>Scrotum</text>
+              <line x1="70" y1="515" x2="190" y2="480" stroke={textPrimary} strokeDasharray="4" />
+
+              {/* Labels - Female */}
+              <text x="815" y="250" fill={textPrimary}>Fallopian Tube (Oviduct)</text>
+              <line x1="805" y1="245" x2="650" y2="250" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="815" y="360" fill={textPrimary}>Ovary (Egg Production)</text>
+              <line x1="805" y1="355" x2="630" y2="350" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="815" y="440" fill={textPrimary}>Uterus (Womb)</text>
+              <line x1="805" y1="435" x2="770" y2="350" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="815" y="520" fill={textPrimary}>Cervix</text>
+              <line x1="805" y1="515" x2="760" y2="420" stroke={textPrimary} strokeDasharray="4" />
+
+              <text x="815" y="570" fill={textPrimary}>Vagina</text>
+              <line x1="805" y1="565" x2="760" y2="480" stroke={textPrimary} strokeDasharray="4" />
             </g>
-
-            {/* OVARIES (Paired primary female sex organs producing estrogen & ova) */}
-            {/* Left Ovary */}
-            <g filter="url(#frDrop)">
-              <ellipse cx="225" cy="330" rx="35" ry="24" fill="#fb7185" stroke="#be123c" strokeWidth="3" />
-              {/* Developing Follicles inside Left Ovary */}
-              <circle cx="210" cy="325" r="5" fill="#fef08a" stroke="#ca8a04" />
-              <circle cx="230" cy="320" r="7" fill="#fef08a" stroke="#ca8a04" />
-              <circle cx="240" cy="340" r="9" fill="#fef08a" stroke="#ca8a04" />
-              {/* Ovarian Ligament anchoring to Uterus */}
-              <path d="M 260 330 Q 380 340 440 320" stroke="#f472b6" strokeWidth="5" fill="none" strokeDasharray="4,2"/>
-            </g>
-
-            {/* Right Ovary */}
-            <g filter="url(#frDrop)">
-              <ellipse cx="775" cy="330" rx="35" ry="24" fill="#fb7185" stroke="#be123c" strokeWidth="3" />
-              <circle cx="790" cy="325" r="5" fill="#fef08a" stroke="#ca8a04" />
-              <circle cx="770" cy="320" r="7" fill="#fef08a" stroke="#ca8a04" />
-              <circle cx="760" cy="340" r="9" fill="#fef08a" stroke="#ca8a04" />
-              <path d="M 740 330 Q 620 340 560 320" stroke="#f472b6" strokeWidth="5" fill="none" strokeDasharray="4,2"/>
-            </g>
-
-            {/* UTERUS (Womb: Inverted pear-shaped thick muscular organ) */}
-            <g filter="url(#frDrop)">
-              {/* Outer Muscular Myometrium */}
-              <path
-                d="M 370 240 
-                   C 370 170 630 170 630 240 
-                   C 630 360 550 430 540 480 
-                   L 460 480 
-                   C 450 430 370 360 370 240 Z"
-                fill="url(#utGrad)"
-                stroke="#9f1239"
-                strokeWidth="4"
-              />
-
-              {/* Endometrium (Vascular glandular inner lining for embryo implantation) */}
-              <path
-                d="M 410 245 
-                   C 440 225 560 225 590 245 
-                   C 570 340 525 390 520 440 
-                   L 480 440 
-                   C 475 390 430 340 410 245 Z"
-                fill="url(#endometriumGrad)"
-                stroke="#fda4af"
-                strokeWidth="2.5"
-              />
-              {/* Uterine Cavity space */}
-              <polygon points="450,250 550,250 500,380" fill="#fff1f2" opacity="0.6" />
-            </g>
-
-            {/* CERVIX (Narrow neck of uterus with cervical canal) */}
-            <rect x="460" y="480" width="80" height="45" rx="6" fill="#be123c" stroke="#881337" strokeWidth="3" />
-            <line x1="500" y1="480" x2="500" y2="525" stroke="#ffe4e6" strokeWidth="6" />
-
-            {/* VAGINA (Birth canal & copulatory passage) */}
-            <rect x="465" y="525" width="70" height="85" rx="8" fill="#fda4af" stroke="#f43f5e" strokeWidth="3" />
-            {/* Vaginal rugae folds */}
-            <line x1="475" y1="545" x2="525" y2="545" stroke="#e11d48" strokeWidth="2.5" />
-            <line x1="475" y1="565" x2="525" y2="565" stroke="#e11d48" strokeWidth="2.5" />
-            <line x1="475" y1="585" x2="525" y2="585" stroke="#e11d48" strokeWidth="2.5" />
-
-            {/* Site of Fertilization Indicator: Ampulla */}
-            <circle cx="270" cy="150" r="10" fill="#facc15" stroke="#ffffff" strokeWidth="2" filter="url(#frDrop)" />
-            <text x="270" y="130" fill="#facc15" fontSize="11" fontWeight="800" textAnchor="middle">
-              ★ SITE OF FERTILIZATION (Ampulla)
-            </text>
-
-            {/* Site of Implantation Indicator */}
-            <circle cx="500" cy="270" r="8" fill="#10b981" stroke="#ffffff" strokeWidth="2" />
-            <text x="500" y="300" fill="#10b981" fontSize="11" fontWeight="800" textAnchor="middle">
-              ★ SITE OF IMPLANTATION (Endometrium)
-            </text>
-
-            {/* Labels & Details */}
-            {/* Fallopian Tube */}
-            <line x1="720" y1="150" x2="840" y2="150" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <g transform="translate(845, 135)">
-              <rect width="145" height="40" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
-              <text x="72" y="18" fill={textAccent} fontSize="11" fontWeight="800" textAnchor="middle">Oviduct / Fallopian Tube</text>
-              <text x="72" y="32" fill={textMuted} fontSize="9" textAnchor="middle">(Fertilization Site)</text>
-            </g>
-
-            {/* Ovary */}
-            <line x1="775" y1="355" x2="840" y2="355" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <g transform="translate(845, 340)">
-              <rect width="145" height="40" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
-              <text x="72" y="18" fill="#f43f5e" fontSize="11" fontWeight="800" textAnchor="middle">Ovary (Paired)</text>
-              <text x="72" y="32" fill={textMuted} fontSize="9" textAnchor="middle">(Produces Ovum & Estrogen)</text>
-            </g>
-
-            {/* Uterus */}
-            <line x1="400" y1="220" x2="160" y2="220" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <g transform="translate(15, 205)">
-              <rect width="140" height="40" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
-              <text x="70" y="18" fill={textPrimary} fontSize="11" fontWeight="800" textAnchor="middle">Uterus (Womb)</text>
-              <text x="70" y="32" fill={textMuted} fontSize="9" textAnchor="middle">Embryo Development</text>
-            </g>
-
-            {/* Cervix */}
-            <line x1="460" y1="500" x2="310" y2="500" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="300" y="504" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="end">Cervix</text>
-
-            {/* Vagina */}
-            <line x1="535" y1="565" x2="680" y2="565" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="685" y="569" fill={textPrimary} fontSize="11" fontWeight="700">Vagina (Birth Canal)</text>
           </svg>
         );
 
       // =====================================================================
       // 10. MENDELIAN MONOHYBRID & DIHYBRID INHERITANCE CROSSES
-      // =====================================================================
-      case "bio_mendel_cross":
+      case "bio_mendel_crosses":
         return (
           <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="mnBg" cx="50%" cy="40%" r="65%">
+              <linearGradient id="mBg" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor={isDark ? "#0f172a" : "#f8fafc"} />
-                <stop offset="100%" stopColor={isDark ? "#020617" : "#e2e8f0"} />
-              </radialGradient>
-              <filter id="mnDrop" x="-10%" y="-10%" width="125%" height="125%">
-                <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#000" floodOpacity="0.4" />
-              </filter>
+                <stop offset="100%" stopColor={isDark ? "#1e293b" : "#e2e8f0"} />
+              </linearGradient>
             </defs>
+            <rect width="1000" height="650" fill="url(#mBg)" rx="16" />
 
-            <rect width="1000" height="650" rx="20" fill="url(#mnBg)" />
-            {[...Array(13)].map((_, i) => <line key={"mvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
-            {[...Array(9)].map((_, i) => <line key={"mhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
+            <text x="500" y="50" fill={textPrimary} fontSize="24" fontWeight="bold" textAnchor="middle">Mendelian Dihybrid Cross (F2 Generation)</text>
+            <text x="500" y="80" fill={textMuted} fontSize="16" textAnchor="middle">Parents: RRYY (Round Yellow) × rryy (Wrinkled Green) → F1: RrYy</text>
 
-            {/* Title */}
-            <g transform="translate(40, 25)">
-              <rect width="460" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
-              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
-                MENDEL'S DIHYBRID CROSS & INHERITANCE RATIOS
-              </text>
-              <rect x="390" y="9" width="58" height="24" rx="6" fill="#6366f1" fillOpacity="0.2" />
-              <text x="419" y="25" fill="#818cf8" fontSize="10" fontWeight="800" textAnchor="middle">
-                CBSE 5M
-              </text>
+            <g transform="translate(250, 150)">
+              {/* Punnett Square Grid */}
+              <rect x="0" y="0" width="500" height="400" fill="none" stroke={textPrimary} strokeWidth="4" />
+              <line x1="125" y1="0" x2="125" y2="400" stroke={textPrimary} strokeWidth="2" />
+              <line x1="250" y1="0" x2="250" y2="400" stroke={textPrimary} strokeWidth="2" />
+              <line x1="375" y1="0" x2="375" y2="400" stroke={textPrimary} strokeWidth="2" />
+              <line x1="0" y1="100" x2="500" y2="100" stroke={textPrimary} strokeWidth="2" />
+              <line x1="0" y1="200" x2="500" y2="200" stroke={textPrimary} strokeWidth="2" />
+              <line x1="0" y1="300" x2="500" y2="300" stroke={textPrimary} strokeWidth="2" />
+
+              {/* Top Gametes */}
+              <text x="62.5" y="-20" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">RY</text>
+              <text x="187.5" y="-20" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">Ry</text>
+              <text x="312.5" y="-20" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">rY</text>
+              <text x="437.5" y="-20" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">ry</text>
+
+              {/* Side Gametes */}
+              <text x="-30" y="55" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">RY</text>
+              <text x="-30" y="155" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">Ry</text>
+              <text x="-30" y="255" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">rY</text>
+              <text x="-30" y="355" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">ry</text>
+
+              {/* Fill the boxes with genotypes and corresponding circles */}
+              {/* Row 1 */}
+              <text x="62.5" y="45" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RRYY</text>
+              <circle cx="62.5" cy="70" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+              
+              <text x="187.5" y="45" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RRYy</text>
+              <circle cx="187.5" cy="70" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+              
+              <text x="312.5" y="45" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYY</text>
+              <circle cx="312.5" cy="70" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+              
+              <text x="437.5" y="45" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYy</text>
+              <circle cx="437.5" cy="70" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+
+              {/* Row 2 */}
+              <text x="62.5" y="145" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RRYy</text>
+              <circle cx="62.5" cy="170" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+              
+              <text x="187.5" y="145" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RRyy</text>
+              <circle cx="187.5" cy="170" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" strokeDasharray="3,3" /> {/* Wrinkled */}
+              
+              <text x="312.5" y="145" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYy</text>
+              <circle cx="312.5" cy="170" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+              
+              <text x="437.5" y="145" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">Rryy</text>
+              <circle cx="437.5" cy="170" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" strokeDasharray="3,3" />
+
+              {/* Row 3 */}
+              <text x="62.5" y="245" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYY</text>
+              <circle cx="62.5" cy="270" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+              
+              <text x="187.5" y="245" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYy</text>
+              <circle cx="187.5" cy="270" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+              
+              <text x="312.5" y="245" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">rrYY</text>
+              <circle cx="312.5" cy="270" r="15" fill="#86efac" stroke="#16a34a" strokeWidth="2" /> {/* Green */}
+              
+              <text x="437.5" y="245" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">rrYy</text>
+              <circle cx="437.5" cy="270" r="15" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+
+              {/* Row 4 */}
+              <text x="62.5" y="345" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYy</text>
+              <circle cx="62.5" cy="370" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
+              
+              <text x="187.5" y="345" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">Rryy</text>
+              <circle cx="187.5" cy="370" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" strokeDasharray="3,3" />
+              
+              <text x="312.5" y="345" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">rrYy</text>
+              <circle cx="312.5" cy="370" r="15" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+              
+              <text x="437.5" y="345" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">rryy</text>
+              <circle cx="437.5" cy="370" r="15" fill="#86efac" stroke="#16a34a" strokeWidth="2" strokeDasharray="3,3" />
             </g>
 
-            {/* LEFT HALF: PARENTS (P1), GAMETES & F1 GENERATION */}
-            <g transform="translate(40, 80)">
-              <rect width="360" height="520" rx="14" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#mnDrop)" />
-              <text x="180" y="30" fill="#4f46e5" fontSize="12" fontWeight="800" textAnchor="middle">
-                CROSS: ROUND YELLOW × WRINKLED GREEN
-              </text>
-
-              {/* Parents Generation (P) */}
-              <g transform="translate(20, 50)">
-                <text x="0" y="20" fill={textPrimary} fontSize="11" fontWeight="800">Parents (P Generation):</text>
-
-                {/* Round Yellow (RRYY) */}
-                <circle cx="70" cy="65" r="24" fill="#facc15" stroke="#ca8a04" strokeWidth="2.5" />
-                <text x="70" y="70" fill="#713f12" fontSize="12" fontWeight="900" textAnchor="middle">RRYY</text>
-                <text x="70" y="105" fill={textPrimary} fontSize="10" fontWeight="700" textAnchor="middle">Round Yellow</text>
-
-                <text x="160" y="70" fill="#ef4444" fontSize="16" fontWeight="900" textAnchor="middle">×</text>
-
-                {/* Wrinkled Green (rryy) */}
-                <circle cx="250" cy="65" r="22" fill="#86efac" stroke="#16a34a" strokeWidth="2.5" strokeDasharray="5,3" />
-                <text x="250" y="70" fill="#14532d" fontSize="12" fontWeight="900" textAnchor="middle">rryy</text>
-                <text x="250" y="105" fill={textPrimary} fontSize="10" fontWeight="700" textAnchor="middle">Wrinkled Green</text>
-              </g>
-
-              {/* Gametes Produced */}
-              <g transform="translate(20, 180)">
-                <text x="0" y="15" fill={textPrimary} fontSize="11" fontWeight="800">Gametes Formed:</text>
-                <circle cx="70" cy="45" r="16" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
-                <text x="70" y="50" fill="#713f12" fontSize="11" fontWeight="800" textAnchor="middle">RY</text>
-
-                <text x="160" y="50" fill="#ef4444" fontSize="16" fontWeight="900" textAnchor="middle">×</text>
-
-                <circle cx="250" cy="45" r="16" fill="#bbf7d0" stroke="#16a34a" strokeWidth="2" />
-                <text x="250" y="50" fill="#14532d" fontSize="11" fontWeight="800" textAnchor="middle">ry</text>
-              </g>
-
-              {/* F1 Generation Result */}
-              <g transform="translate(20, 275)">
-                <rect width="320" height="95" rx="10" fill={isDark ? "#1e1b4b" : "#e0e7ff"} stroke="#6366f1" strokeWidth="1.5" />
-                <text x="160" y="24" fill="#4338ca" fontSize="11.5" fontWeight="800" textAnchor="middle">
-                  F1 GENERATION (ALL HETEROZYGOUS)
-                </text>
-                <circle cx="80" cy="60" r="22" fill="#facc15" stroke="#ca8a04" strokeWidth="2.5" />
-                <text x="80" y="65" fill="#713f12" fontSize="11" fontWeight="900" textAnchor="middle">RrYy</text>
-                <text x="120" y="56" fill={textPrimary} fontSize="12" fontWeight="800">100% Round Yellow</text>
-                <text x="120" y="74" fill={textMuted} fontSize="10">Law of Dominance proved</text>
-              </g>
-
-              {/* Self-Pollination (F1 × F1) */}
-              <g transform="translate(20, 390)">
-                <text x="160" y="20" fill="#10b981" fontSize="11" fontWeight="800" textAnchor="middle">
-                  Selfing: RrYy × RrYy
-                </text>
-                <text x="160" y="40" fill={textPrimary} fontSize="10" textAnchor="middle">
-                  Produces 4 types of Gametes each:
-                </text>
-                <g transform="translate(45, 55)">
-                  {["RY", "Ry", "rY", "ry"].map((gmt, idx) => (
-                    <g key={"gmt"+idx} transform={`translate(${idx * 60}, 0)`}>
-                      <circle cx="20" cy="20" r="16" fill="#f1f5f9" stroke="#6366f1" strokeWidth="2" />
-                      <text x="20" y="24" fill="#312e81" fontSize="11" fontWeight="800" textAnchor="middle">{gmt}</text>
-                    </g>
-                  ))}
-                </g>
-              </g>
-            </g>
-
-            {/* RIGHT HALF: F2 PUNNETT SQUARE (4×4 GRID = 16 COMBINATIONS) */}
-            <g transform="translate(420, 80)">
-              <rect width="540" height="520" rx="14" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#mnDrop)" />
-              <text x="270" y="30" fill="#4338ca" fontSize="13" fontWeight="800" textAnchor="middle">
-                F2 GENERATION — 4×4 PUNNETT CHECKERBOARD
-              </text>
-
-              {/* Punnett Grid Table */}
-              <g transform="translate(40, 50)">
-                {/* Headers Column & Row: RY, Ry, rY, ry */}
-                {["RY", "Ry", "rY", "ry"].map((g, idx) => (
-                  <g key={"hdr"+idx}>
-                    {/* Top Row Header */}
-                    <rect x={70 + idx * 85} y="0" width="80" height="32" rx="6" fill="#c7d2fe" stroke="#6366f1" strokeWidth="1.5" />
-                    <text x={110 + idx * 85} y="21" fill="#312e81" fontSize="11" fontWeight="900" textAnchor="middle">{g}</text>
-
-                    {/* Left Column Header */}
-                    <rect x="0" y={40 + idx * 68} width="60" height="60" rx="6" fill="#c7d2fe" stroke="#6366f1" strokeWidth="1.5" />
-                    <text x="30" y={76 + idx * 68} fill="#312e81" fontSize="11" fontWeight="900" textAnchor="middle">{g}</text>
-                  </g>
-                ))}
-
-                {/* 16 Punnett Grid Cells */}
-                {[
-                  // Row 0: RY
-                  { geno: "RRYY", pheno: "RY", bg: "#fef08a" },
-                  { geno: "RRYy", pheno: "RY", bg: "#fef08a" },
-                  { geno: "RrYY", pheno: "RY", bg: "#fef08a" },
-                  { geno: "RrYy", pheno: "RY", bg: "#fef08a" },
-                  // Row 1: Ry
-                  { geno: "RRYy", pheno: "RY", bg: "#fef08a" },
-                  { geno: "RRyy", pheno: "RG", bg: "#bbf7d0" },
-                  { geno: "RrYy", pheno: "RY", bg: "#fef08a" },
-                  { geno: "Rryy", pheno: "RG", bg: "#bbf7d0" },
-                  // Row 2: rY
-                  { geno: "RrYY", pheno: "RY", bg: "#fef08a" },
-                  { geno: "RrYy", pheno: "RY", bg: "#fef08a" },
-                  { geno: "rrYY", pheno: "WY", bg: "#fed7aa" },
-                  { geno: "rrYy", pheno: "WY", bg: "#fed7aa" },
-                  // Row 3: ry
-                  { geno: "RrYy", pheno: "RY", bg: "#fef08a" },
-                  { geno: "Rryy", pheno: "RG", bg: "#bbf7d0" },
-                  { geno: "rrYy", pheno: "WY", bg: "#fed7aa" },
-                  { geno: "rryy", pheno: "WG", bg: "#dcfce7" },
-                ].map((cell, idx) => {
-                  const col = idx % 4;
-                  const row = Math.floor(idx / 4);
-                  return (
-                    <g key={"pcell"+idx} transform={`translate(${70 + col * 85}, ${40 + row * 68})`}>
-                      <rect width="80" height="60" rx="8" fill={cell.bg} stroke="#94a3b8" strokeWidth="1.2" />
-                      <text x="40" y="26" fill="#0f172a" fontSize="11" fontWeight="900" textAnchor="middle">{cell.geno}</text>
-                      <circle cx="40" cy="44" r="8" fill={cell.pheno === "RY" ? "#eab308" : cell.pheno === "RG" ? "#22c55e" : cell.pheno === "WY" ? "#f97316" : "#15803d"} />
-                    </g>
-                  );
-                })}
-              </g>
-
-              {/* F2 Phenotypic Ratio Summary Bar */}
-              <g transform="translate(40, 395)">
-                <rect width="460" height="95" rx="10" fill={isDark ? "#1e293b" : "#f1f5f9"} stroke="#cbd5e1" strokeWidth="1.5" />
-                <text x="230" y="24" fill="#0284c7" fontSize="12" fontWeight="800" textAnchor="middle">
-                  F2 PHENOTYPIC RATIO = 9 : 3 : 3 : 1
-                </text>
-
-                <g transform="translate(15, 38)">
-                  <rect x="0" y="0" width="100" height="42" rx="6" fill="#fef08a" />
-                  <text x="50" y="18" fill="#713f12" fontSize="10" fontWeight="900" textAnchor="middle">9 Round Yellow</text>
-                  <text x="50" y="32" fill="#713f12" fontSize="9" textAnchor="middle">(R_Y_)</text>
-
-                  <rect x="110" y="0" width="100" height="42" rx="6" fill="#bbf7d0" />
-                  <text x="160" y="18" fill="#14532d" fontSize="10" fontWeight="900" textAnchor="middle">3 Round Green</text>
-                  <text x="160" y="32" fill="#14532d" fontSize="9" textAnchor="middle">(R_yy)</text>
-
-                  <rect x="220" y="0" width="105" height="42" rx="6" fill="#fed7aa" />
-                  <text x="272" y="18" fill="#7c2d12" fontSize="10" fontWeight="900" textAnchor="middle">3 Wrinkled Yellow</text>
-                  <text x="272" y="32" fill="#7c2d12" fontSize="9" textAnchor="middle">(rrY_)</text>
-
-                  <rect x="335" y="0" width="100" height="42" rx="6" fill="#dcfce7" />
-                  <text x="385" y="18" fill="#14532d" fontSize="10" fontWeight="900" textAnchor="middle">1 Wrinkled Green</text>
-                  <text x="385" y="32" fill="#14532d" fontSize="9" textAnchor="middle">(rryy)</text>
-                </g>
-              </g>
+            {/* Results Legend */}
+            <g transform="translate(100, 600)" fontSize="18" fontWeight="bold" fill={textPrimary}>
+              <text x="0" y="0">Phenotypic Ratio: 9 : 3 : 3 : 1</text>
+              <text x="350" y="0" fill="#ca8a04">Round Yellow (9)</text>
+              <text x="550" y="0" fill="#a16207">Wrinkled Yellow (3)</text>
+              <text x="750" y="-10" fill="#16a34a">Round Green (3)</text>
+              <text x="750" y="15" fill="#14532d">Wrinkled Green (1)</text>
             </g>
           </svg>
         );

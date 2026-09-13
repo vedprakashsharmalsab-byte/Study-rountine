@@ -346,7 +346,7 @@ export default function ChapterConceptExplainer({
       }`}>
         <div className="flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-          <span>Complete NCERT & CBSE Rationalized Syllabus 2024-2025</span>
+          <span>Complete NCERT & CBSE Rationalized Syllabus 2026-2027</span>
         </div>
         <div className="text-[11px] opacity-80">
           Tip: Master the concept first, then solve 10 questions to achieve automatic memory recall!

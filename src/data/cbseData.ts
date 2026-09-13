@@ -5283,7 +5283,27 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   {
     id: "vq_8_2m_4", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 2, type: "SA",
     question: "Prove that: (sin θ − 2 sin³θ) / (2 cos³θ − cos θ) = tan θ.",
-    answer: "LHS = sin θ(1 − 2sin²θ) / cos θ(2cos²θ − 1). Note 1−2sin²θ = cos2θ and 2cos²θ−1 = cos2θ. So LHS = (sinθ × cos2θ)/(cosθ × cos2θ) = sinθ/cosθ = tanθ = RHS. ∎",
+    answer: `CBSE Topper Answer Sheet
+Section B (2M Short Answer)
+Governing Formula: sin²θ + cos²θ = 1
+Full Score: 2 / 2 Marks
+
+Step 1: Factor out sin θ from the numerator and cos θ from the denominator.
+LHS = (sin θ - 2 sin³θ) / (2 cos³θ - cos θ)
+LHS = [sin θ (1 - 2 sin²θ)] / [cos θ (2 cos²θ - 1)]
+
+Step 2: Use the identity sin²θ + cos²θ = 1.
+∵ Trigonometric Identity: 1 = sin²θ + cos²θ
+LHS = [sin θ (sin²θ + cos²θ - 2 sin²θ)] / [cos θ (2 cos²θ - (sin²θ + cos²θ))]
+LHS = [sin θ (cos²θ - sin²θ)] / [cos θ (cos²θ - sin²θ)]
+
+Step 3: Cancel common terms and simplify.
+∵ Algebraic Cancellation: (cos²θ - sin²θ) cancels out
+LHS = sin θ / cos θ
+∵ Trigonometric Definition: tan θ = sin θ / cos θ
+LHS = tan θ = RHS. ∎
+
+(Hence Proved)`,
     explanation: "Factor numerator as sinθ(1−2sin²θ) and denominator as cosθ(2cos²θ−1). The expressions in brackets are both equal to cos2θ and cancel."
   },
   {
@@ -5295,7 +5315,30 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   {
     id: "vq_8_2m_6", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 2, type: "SA",
     question: "If cos A + cos²A = 1, prove that sin²A + sin⁴A = 1.",
-    answer: "cos A = 1 − cos²A = sin²A. So sin²A + sin⁴A = cos A + cos²A = 1. ∎",
+    answer: `CBSE Topper Answer Sheet
+Section B (2M Short Answer)
+Governing Formula: sin²A + cos²A = 1
+Full Score: 2 / 2 Marks
+
+Step 1: Isolate cos A from the given equation.
+Given: cos A + cos²A = 1
+cos A = 1 - cos²A
+
+Step 2: Express in terms of sin.
+∵ Trigonometric Identity: 1 - cos²A = sin²A
+∴ cos A = sin²A
+
+Step 3: Substitute into the required expression.
+We need to prove: sin²A + sin⁴A = 1
+Substitute sin²A = cos A into the expression:
+sin²A + (sin²A)² = cos A + (cos A)²
+= cos A + cos²A
+
+Step 4: Conclude using the given equation.
+∵ Given: cos A + cos²A = 1
+∴ sin²A + sin⁴A = 1. ∎
+
+(Hence Proved)`,
     explanation: "The key substitution: from the given condition, cos A = 1 − cos²A = sin²A. Replace cos A with sin²A in the LHS to get the given condition."
   },
 
@@ -5303,26 +5346,139 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   {
     id: "vq_8_3m_1", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 3, type: "SA",
     question: "Prove that: √((1 + sin A)/(1 − sin A)) = sec A + tan A.",
-    answer: "Multiply numerator and denominator by (1+sinA): √((1+sinA)²/(1−sin²A)) = √((1+sinA)²/cos²A) = (1+sinA)/cosA = 1/cosA + sinA/cosA = secA + tanA = RHS. ∎",
+    answer: `CBSE Topper Answer Sheet
+Section C (3M Short Answer)
+Governing Formula: sin²A + cos²A = 1
+Full Score: 3 / 3 Marks
+
+Step 1: Rationalize the denominator inside the square root.
+LHS = √[ (1 + sin A) / (1 - sin A) ]
+Multiply numerator and denominator by (1 + sin A):
+LHS = √[ (1 + sin A)(1 + sin A) / (1 - sin A)(1 + sin A) ]
+
+Step 2: Simplify using algebraic identities.
+∵ Algebraic Identity: (a - b)(a + b) = a² - b²
+LHS = √[ (1 + sin A)² / (1 - sin²A) ]
+
+Step 3: Convert the denominator using Trig identities.
+∵ Trigonometric Identity: 1 - sin²A = cos²A
+LHS = √[ (1 + sin A)² / cos²A ]
+
+Step 4: Take the square root and split the fraction.
+LHS = (1 + sin A) / cos A
+LHS = 1/cos A + sin A/cos A
+
+Step 5: Convert to final form.
+∵ Trigonometric Definitions: 1/cos A = sec A, sin A/cos A = tan A
+LHS = sec A + tan A = RHS. ∎
+
+(Hence Proved)`,
     explanation: "Rationalize by multiplying by (1+sinA)/(1+sinA). Denominator becomes 1−sin²A = cos²A. Take square root to get (1+sinA)/cosA.",
     examinerNote: "Must NOT take √(1−sinA) = 1−√sinA (not valid!). Only apply to the expression 1−sin²A = cos²A."
   },
   {
     id: "vq_8_3m_2", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 3, type: "SA",
     question: "Prove: (sin θ − cos θ + 1)/(sin θ + cos θ − 1) = 1/(sec θ − tan θ).",
-    answer: "Divide num and denom by cosθ: (tanθ + secθ − 1)/(tanθ − secθ + 1). Replace 1 in numerator with sec²θ−tan²θ = (secθ−tanθ)(secθ+tanθ). Factor: (secθ+tanθ)[1−(secθ−tanθ)] / (tanθ−secθ+1). Denominator = −(secθ−tanθ−1). Result simplifies to (secθ+tanθ)/(secθ×secθ−tan²θ) after careful cancellation = 1/(secθ−tanθ). ∎",
+    answer: `CBSE Topper Answer Sheet
+Section C (3M Short Answer)
+Governing Formula: sec²θ - tan²θ = 1
+Full Score: 3 / 3 Marks
+
+Step 1: Divide numerator and denominator by cos θ.
+LHS = (sin θ - cos θ + 1) / (sin θ + cos θ - 1)
+LHS = (tan θ - 1 + sec θ) / (tan θ + 1 - sec θ)
+LHS = (tan θ + sec θ - 1) / (tan θ - sec θ + 1)
+
+Step 2: Replace 1 in the numerator with sec²θ - tan²θ.
+∵ Trigonometric Identity: sec²θ - tan²θ = 1
+LHS = [ (sec θ + tan θ) - (sec²θ - tan²θ) ] / (tan θ - sec θ + 1)
+
+Step 3: Factorize the substituted term.
+∵ Algebraic Identity: a² - b² = (a - b)(a + b)
+LHS = [ (sec θ + tan θ) - (sec θ - tan θ)(sec θ + tan θ) ] / (tan θ - sec θ + 1)
+
+Step 4: Factor out (sec θ + tan θ).
+LHS = (sec θ + tan θ) [ 1 - (sec θ - tan θ) ] / (tan θ - sec θ + 1)
+LHS = (sec θ + tan θ) (1 - sec θ + tan θ) / (tan θ - sec θ + 1)
+
+Step 5: Cancel common terms and transform to RHS.
+The term (1 - sec θ + tan θ) cancels out perfectly.
+LHS = sec θ + tan θ
+Multiply and divide by (sec θ - tan θ):
+LHS = (sec θ + tan θ)(sec θ - tan θ) / (sec θ - tan θ)
+LHS = (sec²θ - tan²θ) / (sec θ - tan θ)
+∵ Trigonometric Identity: sec²θ - tan²θ = 1
+LHS = 1 / (sec θ - tan θ) = RHS. ∎
+
+(Hence Proved)`,
     explanation: "Divide everything by cosθ to get tan and sec terms. Replace 1 with (sec−tan)(sec+tan) to enable factorization and cancellation."
   },
   {
     id: "vq_8_3m_3", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 3, type: "SA",
     question: "Prove: (tan A + sec A − 1)/(tan A − sec A + 1) = (1 + sin A)/cos A.",
-    answer: "Numerator = tanA + secA − 1. Denominator = tanA − secA + 1. Replace 1 with sec²A−tan²A = (secA+tanA)(secA−tanA). Numerator: (secA+tanA) − (sec²A−tan²A) = (secA+tanA)(1−secA+tanA). Denominator: tanA − secA + 1. So ratio = (secA+tanA)(1−secA+tanA)/(1−secA+tanA) = secA + tanA = 1/cosA + sinA/cosA = (1+sinA)/cosA. ∎",
+    answer: `CBSE Topper Answer Sheet
+Section C (3M Short Answer)
+Governing Formula: sec²A - tan²A = 1
+Full Score: 3 / 3 Marks
+
+Step 1: Replace 1 in the numerator with sec²A - tan²A.
+LHS = (tan A + sec A - 1) / (tan A - sec A + 1)
+∵ Trigonometric Identity: sec²A - tan²A = 1
+LHS = [ (tan A + sec A) - (sec²A - tan²A) ] / (tan A - sec A + 1)
+
+Step 2: Factorize the substituted term.
+∵ Algebraic Identity: a² - b² = (a - b)(a + b)
+LHS = [ (sec A + tan A) - (sec A - tan A)(sec A + tan A) ] / (tan A - sec A + 1)
+
+Step 3: Factor out (sec A + tan A).
+LHS = (sec A + tan A) [ 1 - (sec A - tan A) ] / (tan A - sec A + 1)
+LHS = (sec A + tan A) (1 - sec A + tan A) / (tan A - sec A + 1)
+
+Step 4: Cancel common terms.
+The term (1 - sec A + tan A) cancels out.
+LHS = sec A + tan A
+
+Step 5: Convert to sine and cosine.
+∵ Trigonometric Definitions: sec A = 1/cos A, tan A = sin A/cos A
+LHS = 1/cos A + sin A/cos A
+LHS = (1 + sin A) / cos A = RHS. ∎
+
+(Hence Proved)`,
     explanation: "Factor 1 as (sec+tan)(sec−tan) in both numerator and denominator, then cancel the common factor."
   },
   {
     id: "vq_8_3m_4", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 3, type: "SA",
     question: "If sin A + cos A = p and sec A + cosec A = q, show that q(p²−1) = 2p.",
-    answer: "q(p²−1) = (secA+cscA)((sinA+cosA)²−1) = (1/cosA+1/sinA)((sin²A+cos²A+2sinAcosA)−1) = ((sinA+cosA)/sinAcosA)(2sinAcosA) = 2(sinA+cosA) = 2p. ∎",
+    answer: `CBSE Topper Answer Sheet
+Section C (3M Short Answer)
+Governing Formula: sin²A + cos²A = 1
+Full Score: 3 / 3 Marks
+
+Step 1: Expand the LHS expression q(p² - 1).
+Given: p = sin A + cos A, q = sec A + cosec A
+q(p² - 1) = (sec A + cosec A) [ (sin A + cos A)² - 1 ]
+
+Step 2: Convert q to sine and cosine.
+∵ Trigonometric Definitions: sec A = 1/cos A, cosec A = 1/sin A
+q = 1/cos A + 1/sin A = (sin A + cos A) / (sin A cos A)
+
+Step 3: Expand the square inside the bracket.
+∵ Algebraic Identity: (a + b)² = a² + b² + 2ab
+(sin A + cos A)² = sin²A + cos²A + 2 sin A cos A
+∵ Trigonometric Identity: sin²A + cos²A = 1
+(sin A + cos A)² = 1 + 2 sin A cos A
+
+Step 4: Substitute back into the expression.
+q(p² - 1) = [ (sin A + cos A) / (sin A cos A) ] * [ (1 + 2 sin A cos A) - 1 ]
+q(p² - 1) = [ (sin A + cos A) / (sin A cos A) ] * [ 2 sin A cos A ]
+
+Step 5: Cancel common terms.
+∵ Algebraic Cancellation: (sin A cos A) cancels out.
+q(p² - 1) = 2 (sin A + cos A)
+Since p = sin A + cos A,
+∴ q(p² - 1) = 2p. ∎
+
+(Hence Proved)`,
     explanation: "Replace secA+cscA = (sinA+cosA)/(sinAcosA). Replace p²−1 = (sinA+cosA)²−1 = 2sinAcosA. Multiply and simplify."
   },
   {
@@ -5337,19 +5493,101 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   {
     id: "vq_8_5m_1", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 5, type: "Proof",
     question: "Prove that: (sin A + cosec A)² + (cos A + sec A)² = 7 + tan²A + cot²A.",
-    answer: "LHS = sin²A + 2sinA·cscA + csc²A + cos²A + 2cosA·secA + sec²A = (sin²A+cos²A) + 2 + 2 + csc²A + sec²A = 1 + 4 + (1+cot²A) + (1+tan²A) = 7 + tan²A + cot²A = RHS. ∎",
+    answer: `CBSE Topper Answer Sheet
+Section D (5M Long Answer)
+Governing Formula: sin²A + cos²A = 1, 1 + tan²A = sec²A, 1 + cot²A = cosec²A
+Full Score: 5 / 5 Marks
+
+Step 1: Expand the squares on the LHS.
+LHS = (sin A + cosec A)² + (cos A + sec A)²
+∵ Algebraic Identity: (a + b)² = a² + b² + 2ab
+LHS = (sin²A + cosec²A + 2 sin A cosec A) + (cos²A + sec²A + 2 cos A sec A)
+
+Step 2: Apply inverse trigonometric properties.
+∵ Trigonometric Definition: sin A * cosec A = 1 and cos A * sec A = 1
+LHS = (sin²A + cosec²A + 2(1)) + (cos²A + sec²A + 2(1))
+LHS = sin²A + cos²A + cosec²A + sec²A + 4
+
+Step 3: Use the primary Pythagorean identity.
+∵ Trigonometric Identity: sin²A + cos²A = 1
+LHS = 1 + cosec²A + sec²A + 4
+LHS = 5 + cosec²A + sec²A
+
+Step 4: Convert cosec and sec into cot and tan.
+∵ Trigonometric Identities: cosec²A = 1 + cot²A and sec²A = 1 + tan²A
+LHS = 5 + (1 + cot²A) + (1 + tan²A)
+
+Step 5: Simplify to arrive at the final result.
+LHS = 5 + 1 + 1 + tan²A + cot²A
+LHS = 7 + tan²A + cot²A = RHS. ∎
+
+(Hence Proved)`,
     explanation: "Expand the squares. Use sin·csc = 1 and cos·sec = 1. Group sin²+cos²=1 and apply identities csc²=1+cot² and sec²=1+tan²."
   },
   {
     id: "vq_8_5m_2", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 5, type: "Proof",
     question: "Prove: (cot A − cos A)/(cot A + cos A) = (cosec A − 1)/(cosec A + 1).",
-    answer: "LHS = (cosA/sinA − cosA)/(cosA/sinA + cosA) = cosA(1/sinA − 1)/cosA(1/sinA + 1) = (cscA − 1)/(cscA + 1) = RHS. ∎",
+    answer: `CBSE Topper Answer Sheet
+Section D (5M Long Answer)
+Governing Formula: cot A = cos A / sin A
+Full Score: 5 / 5 Marks
+
+Step 1: Convert cot A into sine and cosine.
+LHS = (cot A - cos A) / (cot A + cos A)
+∵ Trigonometric Definition: cot A = cos A / sin A
+LHS = [ (cos A / sin A) - cos A ] / [ (cos A / sin A) + cos A ]
+
+Step 2: Factor out cos A from both numerator and denominator.
+LHS = cos A [ (1 / sin A) - 1 ] / cos A [ (1 / sin A) + 1 ]
+
+Step 3: Cancel cos A.
+∵ Algebraic Cancellation: cos A cancels out.
+LHS = [ (1 / sin A) - 1 ] / [ (1 / sin A) + 1 ]
+
+Step 4: Convert 1/sin A to cosec A.
+∵ Trigonometric Definition: 1 / sin A = cosec A
+LHS = (cosec A - 1) / (cosec A + 1) = RHS. ∎
+
+(Hence Proved)`,
     explanation: "Factor cosA from numerator and denominator. Replace cotA = cosA/sinA. 1/sinA = cscA. The cosA cancels perfectly."
   },
   {
     id: "vq_8_5m_3", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 5, type: "LA",
     question: "If tan θ + sin θ = m and tan θ − sin θ = n, prove that m² − n² = 4√(mn).",
-    answer: "m²−n² = (m+n)(m−n) = (2tanθ)(2sinθ) = 4tanθsinθ. Now mn = (tanθ+sinθ)(tanθ−sinθ) = tan²θ−sin²θ = sin²θ/cos²θ − sin²θ = sin²θ(1−cos²θ)/cos²θ = sin²θ·sin²θ/cos²θ = (sinθtanθ)². So √(mn) = sinθtanθ. Hence 4√(mn) = 4sinθtanθ = m²−n². ∎",
+    answer: `CBSE Topper Answer Sheet
+Section D (5M Long Answer)
+Governing Formula: sin²θ + cos²θ = 1, tan θ = sin θ / cos θ
+Full Score: 5 / 5 Marks
+
+Step 1: Expand the expression for m² − n².
+Given: m = tan θ + sin θ, n = tan θ - sin θ
+m² − n² = (tan θ + sin θ)² − (tan θ − sin θ)²
+∵ Algebraic Identity: (a+b)² - (a-b)² = 4ab
+m² − n² = 4 tan θ sin θ  --- (Equation 1)
+
+Step 2: Simplify the product mn.
+mn = (tan θ + sin θ)(tan θ − sin θ)
+∵ Algebraic Identity: (a+b)(a-b) = a² - b²
+mn = tan²θ − sin²θ
+
+Step 3: Convert to Sine and Cosine.
+∵ Trigonometric Definition: tan θ = sin θ / cos θ
+mn = (sin²θ / cos²θ) − sin²θ
+Factor out sin²θ:
+mn = sin²θ (1/cos²θ − 1) = sin²θ (1 - cos²θ) / cos²θ
+
+Step 4: Apply Pythagorean Identity.
+∵ Trigonometric Identity: 1 - cos²θ = sin²θ
+mn = (sin²θ · sin²θ) / cos²θ = (sin θ tan θ)²
+
+Step 5: Take the square root and equate.
+√(mn) = sin θ tan θ
+Multiply by 4:
+4√(mn) = 4 tan θ sin θ
+From Equation 1, we know m² − n² = 4 tan θ sin θ.
+∴ m² − n² = 4√(mn). ∎
+
+(Hence Proved)`,
     explanation: "Key: m²−n² = 4tanθsinθ and mn = sin²θtan²θ, so √(mn) = sinθtanθ. These equate."
   },
 

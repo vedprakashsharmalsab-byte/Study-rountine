@@ -100,7 +100,7 @@ export const SCI_CH1_QUESTIONS: VaultQuestion[] = [
     explanation: "Thermal decomposition of CaCO₃ requires continuous absorption of heat energy (1000°C), making it endothermic. Respiration, quicklime dissolution, and methane combustion are all exothermic.",
     formula: "CaCO₃(s) —[Heat]⟶ CaO(s) + CO₂(g)",
     examinerNote: "Respiration is exothermic because glucose oxidation releases ATP energy.",
-    source: "KVS Support Material 2025-26"
+    source: "KVS Support Material 2026-27"
   },
 
   // 2-MARK SHORT ANSWER QUESTIONS

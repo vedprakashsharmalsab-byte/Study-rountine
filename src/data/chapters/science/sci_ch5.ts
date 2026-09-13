@@ -78,7 +78,7 @@ export const SCI_CH5_QUESTIONS: VaultQuestion[] = [
     answer: "Option (a) is correct.",
     explanation: "The functional evolutionary purpose of villi is to maximize the absorptive surface area, and they are richly supplied with blood capillaries and lacteals to facilitate rapid nutrient diffusion into the bloodstream.",
     examinerNote: "Both statements are true and Reason provides the exact physiological purpose of the assertion.",
-    source: "KVS Support Material 2025-26"
+    source: "KVS Support Material 2026-27"
   },
 
   // 2-MARK SHORT ANSWER QUESTIONS

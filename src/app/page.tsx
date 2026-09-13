@@ -4179,7 +4179,7 @@ export default function CBSECommandCenter() {
                                     {isThisCorrect ? "✓" : isThisWrong ? "✗" : String.fromCharCode(65 + optIdx)}
                                   </span>
                                   <div className="flex-1 min-w-0">
-                                    <span className="leading-relaxed block break-words">{opt}</span>
+                                    <div className="leading-relaxed block break-words w-full overflow-hidden"><PremiumMathRenderer content={opt} isDark={isDark} /></div>
                                     {isThisSelected && (
                                       <span className={`inline-flex items-center gap-1 text-[10px] font-mono mt-1 font-bold ${
                                         isAnswerCorrect ? "text-emerald-400" : "text-rose-400"

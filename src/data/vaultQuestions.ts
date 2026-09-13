@@ -2,7 +2,7 @@
 // CBSE Class 10 Mathematics — Comprehensive Question Bank
 // Test Series 1: 6 Chapters × 100+ Questions = 600+ Total
 // All questions sourced from:
-//   KVS Student Support Material 2025-26
+//   KVS Student Support Material 2026-27
 //   CBSE CFPQ 2026-27
 //   Chapter PDFs (Ch 6, 8, 9)
 //   NCERT + RD Sharma + RS Aggarwal Board Level
@@ -6578,7 +6578,7 @@ At the same time, a tower casts a shadow 30 m long. Find the height of the tower
 // ===== CHAPTER 6: TRIANGLES (100 questions) =====
 
 // --- 1 MARK MCQ (25 questions) ---
-{id:"t6_1_01",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2025-26",
+{id:"t6_1_01",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2026-27",
 question:"In △ABC and △PQR, if AB/QR = BC/PR = CA/PQ, then which is correct?",
 options:["△PQR ~ △CAB","△PQR ~ △ABC","△CBA ~ △PQR","△BCA ~ △PQR"],
 correctOption:0,
@@ -6587,7 +6587,7 @@ steps:["Match corresponding vertices by common sides:","Vertex B is common to AB
 formula:"Match common vertices between paired side ratios: PQR ↔ CAB",
 examinerNote:"Always write similarity statement in VERTEX ORDER matching corresponding sides."},
 
-{id:"t6_1_02",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2025-26",
+{id:"t6_1_02",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2026-27",
 question:"Which of the following is NOT a similarity criterion for triangles?",
 options:["AA","SAS","AAA","RHS"],
 correctOption:3,
@@ -6595,7 +6595,7 @@ answer:"RHS",
 steps:["AA (Angle-Angle) → Valid similarity criterion","SAS (Side-Angle-Side, with proportional sides) → Valid similarity","AAA (three angles equal) → Same as AA since 3rd angle is automatic → Valid","RHS is a CONGRUENCE criterion, not similarity → NOT a similarity criterion"],
 formula:"3 similarity criteria: AA, SSS (proportional), SAS (proportional sides with equal angle)"},
 
-{id:"t6_1_03",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2025-26",
+{id:"t6_1_03",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2026-27",
 question:"In △ABC, DE ∥ BC. If AD = 5.6 cm, DB = 4 cm, AE = 7 cm, find EC.",
 options:["2.8 cm","5 cm","4.8 cm","12 cm"],
 correctOption:1,
@@ -6603,7 +6603,7 @@ answer:"EC = 5 cm",
 steps:["By BPT: AD/DB = AE/EC","5.6/4 = 7/EC","EC = (7 × 4)/5.6 = 28/5.6 = 5 cm","∴ AC = AE + EC = 7 + 5 = 12 cm"],
 formula:"AD/DB = AE/EC (BPT)"},
 
-{id:"t6_1_04",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2025-26",
+{id:"t6_1_04",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2026-27",
 question:"The perimeters of two similar triangles are 25 cm and 15 cm. One side of the first triangle is 10 cm. The corresponding side of the second triangle is:",
 options:["4 cm","6 cm","8 cm","10 cm"],
 correctOption:1,
@@ -6611,7 +6611,7 @@ answer:"6 cm",
 steps:["Perimeter ratio = corresponding side ratio (for similar triangles)","25/15 = 10/x","x = 150/25 = 6 cm"],
 formula:"Perimeter ratio = Side ratio"},
 
-{id:"t6_1_05",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2025-26",
+{id:"t6_1_05",chapter:6,chapterName:"Triangles",marks:1,type:"MCQ",source:"KVS 2026-27",
 question:"In trapezium ABCD (AB ∥ CD), diagonals intersect at O with AO/CO = BO/DO = 1/2. Then CD =",
 options:["3 cm","4 cm","5 cm","6 cm (if AB = 3 cm)"],
 correctOption:3,

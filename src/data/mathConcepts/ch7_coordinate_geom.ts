@@ -17,7 +17,7 @@ export const CH7_COORDINATE_GEOM_CONCEPT: MathChapterConcept = {
       formulasOrKeyPoints: [
         {
           title: "Sign Rules by Quadrant",
-          content: "$$\\begin{array}{|c|c|c|} \\hline \\textbf{Quadrant} & \\textbf{Signs } (x, y) & \\textbf{Location} \\\\ \\hline \\text{I} & (+, +) & \\text{Top Right} \\\\ \\hline \\text{II} & (-, +) & \\text{Top Left} \\\\ \\hline \\text{III} & (-, -) & \\text{Bottom Left} \\\\ \\hline \\text{IV} & (+, -) & \\text{Bottom Right} \\\\ \\hline \\end{array}$$",
+          content: "$$\\begin{array}{|c|c|c|} \\hline \\textbf{Quadrant} & \\textbf{Signs } (x, y) & \\textbf{Location} \\\\\\\\ \\hline \\text{I} & (+, +) & \\text{Top Right} \\\\\\\\ \\hline \\text{II} & (-, +) & \\text{Top Left} \\\\\\\\ \\hline \\text{III} & (-, -) & \\text{Bottom Left} \\\\\\\\ \\hline \\text{IV} & (+, -) & \\text{Bottom Right} \\\\\\\\ \\hline \\end{array}$$",
           note: "Distance from Y-axis is |x|; Distance from X-axis is |y|. Distance is always positive!"
         }
       ],
@@ -141,7 +141,7 @@ export const CH7_COORDINATE_GEOM_CONCEPT: MathChapterConcept = {
       formulasOrKeyPoints: [
         {
           title: "The Quadrilateral Master Decision Matrix",
-          content: "$$\\begin{array}{|c|c|c|} \\hline \\textbf{Figure} & \\textbf{Side Condition} & \\textbf{Diagonal Condition} \\\\ \\hline \\text{Parallelogram} & \\text{Opposite sides equal} & \\text{Diagonals UNEQUAL} \\\\ \\hline \\text{Rectangle} & \\text{Opposite sides equal} & \\mathbf{\\text{Diagonals EQUAL}} \\\\ \\hline \\text{Rhombus} & \\text{All 4 sides equal} & \\text{Diagonals UNEQUAL} \\\\ \\hline \\text{Square} & \\text{All 4 sides equal} & \\mathbf{\\text{Diagonals EQUAL}} \\\\ \\hline \\end{array}$$",
+          content: "$$\\begin{array}{|c|c|c|} \\hline \\textbf{Figure} & \\textbf{Side Condition} & \\textbf{Diagonal Condition} \\\\\\\\ \\hline \\text{Parallelogram} & \\text{Opposite sides equal} & \\text{Diagonals UNEQUAL} \\\\\\\\ \\hline \\text{Rectangle} & \\text{Opposite sides equal} & \\mathbf{\\text{Diagonals EQUAL}} \\\\\\\\ \\hline \\text{Rhombus} & \\text{All 4 sides equal} & \\text{Diagonals UNEQUAL} \\\\\\\\ \\hline \\text{Square} & \\text{All 4 sides equal} & \\mathbf{\\text{Diagonals EQUAL}} \\\\\\\\ \\hline \\end{array}$$",
           note: "Always calculate the diagonals! Never conclude 'Square' or 'Rectangle' without checking diagonals."
         }
       ],

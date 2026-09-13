@@ -57,7 +57,7 @@ export const SCI_CH13_QUESTIONS: VaultQuestion[] = [
     answer: "Option (a) is correct.",
     explanation: "Because humans occupy the apex (topmost) position in diverse food chains, non-biodegradable pesticides (like DDT) bioaccumulate to the highest concentration in human tissues through biological magnification.",
     examinerNote: "Classic assertion-reason question on biomagnification.",
-    source: "KVS Support Material 2025-26"
+    source: "KVS Support Material 2026-27"
   },
 
   // 2-MARK SHORT ANSWER QUESTIONS

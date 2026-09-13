@@ -170,7 +170,7 @@ export default function ScienceActivitiesView({
               <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
                 isDark ? "bg-cyan-950/60 text-cyan-300 border-cyan-500/30" : "bg-cyan-100 text-cyan-900 border-cyan-300"
               }`}>
-                20-Year CBSE Practical-Based Questions (PBQs) & High-Resolution Schematics
+                2026-2027 CBSE Practical-Based Questions (PBQs) & High-Resolution Schematics
               </span>
             </div>
 
@@ -720,11 +720,11 @@ export default function ScienceActivitiesView({
                         </div>
                       </div>
 
-                      {/* 20-Year CBSE Practical-Based Questions (PBQs) */}
+                      {/* 2026-2027 CBSE Practical-Based Questions (PBQs) */}
                       {act.boardQuestions && act.boardQuestions.length > 0 && (
                         <div className="space-y-3 pt-2">
                           <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
-                            <Award className="w-4 h-4 text-cyan-400" /> CBSE 20-Year Practical-Based Questions (PBQs) & Model Answers:
+                            <Award className="w-4 h-4 text-cyan-400" /> CBSE 2026-2027 Practical-Based Questions (PBQs) & Model Answers:
                           </span>
                           <div className="space-y-3">
                             {act.boardQuestions.map((q, qIdx) => (

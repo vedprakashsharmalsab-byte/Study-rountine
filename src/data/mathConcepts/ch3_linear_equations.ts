@@ -17,7 +17,7 @@ export const CH3_LINEAR_EQUATIONS_CONCEPT: MathChapterConcept = {
       formulasOrKeyPoints: [
         {
           title: "Standard Form Warning",
-          content: "$$\\begin{aligned} L_1 &: a_1x + b_1y + c_1 = 0 \\\\ L_2 &: a_2x + b_2y + c_2 = 0 \\end{aligned}$$",
+          content: "$$\\begin{aligned} L_1 &: a_1x + b_1y + c_1 = 0 \\\\\\\\ L_2 &: a_2x + b_2y + c_2 = 0 \\end{aligned}$$",
           note: "Always move both constants $c_1$ and $c_2$ to the LHS (or both to the RHS) before comparing coefficients!"
         }
       ],

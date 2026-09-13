@@ -167,7 +167,7 @@ export const SCI_CH2_QUESTIONS: VaultQuestion[] = [
     ],
     explanation: "Both compounds are derivatives of calcium and widely tested in board exams.",
     examinerNote: "1.5 marks for Bleaching powder; 1.5 marks for Plaster of Paris.",
-    source: "KVS Support Material 2025-26"
+    source: "KVS Support Material 2026-27"
   },
 
   // 5-MARK LONG ANSWER & CASE STUDIES

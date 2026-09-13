@@ -111,7 +111,7 @@ export const CH4_QUADRATICS_CONCEPT: MathChapterConcept = {
       formulasOrKeyPoints: [
         {
           title: "The Nature of Roots Master Chart",
-          content: "$$\\begin{array}{|c|c|c|} \\hline \\textbf{Value of } D = b^2 - 4ac & \\textbf{Nature of Roots} & \\textbf{Graph Behavior} \\\\ \\hline D > 0 & \\text{Two distinct real roots} & \\text{Cuts X-axis at 2 points} \\\\ \\hline D = 0 & \\text{Two equal real roots} & \\text{Touches X-axis at 1 point} \\\\ \\hline D < 0 & \\text{No real roots} & \\text{Floats completely off X-axis} \\\\ \\hline \\end{array}$$",
+          content: "$$\\begin{array}{|c|c|c|} \\hline \\textbf{Value of } D = b^2 - 4ac & \\textbf{Nature of Roots} & \\textbf{Graph Behavior} \\\\\\\\ \\hline D > 0 & \\text{Two distinct real roots} & \\text{Cuts X-axis at 2 points} \\\\\\\\ \\hline D = 0 & \\text{Two equal real roots} & \\text{Touches X-axis at 1 point} \\\\\\\\ \\hline D < 0 & \\text{No real roots} & \\text{Floats completely off X-axis} \\\\\\\\ \\hline \\end{array}$$",
           note: "If question states 'has real roots' (without saying distinct or equal), use condition: D ≥ 0!"
         },
         {

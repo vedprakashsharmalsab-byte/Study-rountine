@@ -17,7 +17,7 @@ export const CH13_STATISTICS_CONCEPT: MathChapterConcept = {
       formulasOrKeyPoints: [
         {
           title: "Continuous Check Warning",
-          content: "Always check the upper limit of class 1 and lower limit of class 2:  \n$$\\text{Class 1: } [10, 20] \\qquad \\text{Class 2: } [20, 30] \\implies \\textbf{Continuous! (Proceed directly)} \\\\ \\text{Class 1: } [10, 19] \\qquad \\text{Class 2: } [20, 29] \\implies \\textbf{Discontinuous! (Apply } \\pm 0.5 \\textbf{ adjustment)}$$",
+          content: "Always check the upper limit of class 1 and lower limit of class 2:  \n$$\\text{Class 1: } [10, 20] \\qquad \\text{Class 2: } [20, 30] \\implies \\textbf{Continuous! (Proceed directly)} \\\\\\\\ \\text{Class 1: } [10, 19] \\qquad \\text{Class 2: } [20, 29] \\implies \\textbf{Discontinuous! (Apply } \\pm 0.5 \\textbf{ adjustment)}$$",
           note: "Failing to convert discontinuous intervals shifts the lower limit l, losing 2 marks in Median/Mode."
         }
       ],
