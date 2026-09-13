@@ -37,24 +37,24 @@ import {
   NCERT_PHYSICS_DIAGRAMS_VAULT,
   SCIENCE_MASTER_PHOTO_SHEETS,
   NCERT_BIOLOGY_DIAGRAMS_VAULT,
-  NCERT_ACTIVITIES_DIAGRAMS_VAULT,
   type ScienceDiagram,
   type VisualDiagramAsset,
   type MasterPhotoSheet,
   type DiagramCategory,
-  type BiologyDiagramItem,
-  type LabActivityDiagramItem
+  type BiologyDiagramItem
 } from "@/data/scienceDiagramsData";
 
 interface ScienceDiagramsViewProps {
   isDark: boolean;
   onOpenQuestionBank?: (chapterNo?: number) => void;
+  onOpenActivities?: () => void;
   defaultChapterNo?: number;
 }
 
 export default function ScienceDiagramsView({
   isDark,
   onOpenQuestionBank,
+  onOpenActivities,
   defaultChapterNo
 }: ScienceDiagramsViewProps) {
   // Client-side mount flag for createPortal
@@ -64,15 +64,26 @@ export default function ScienceDiagramsView({
   }, []);
 
   // View mode: 'gallery' (29 visual diagrams), 'sheets' (15 master photo sheets), or 'interactive' (12 solvers)
-  const [viewMode, setViewMode] = useState<"gallery" | "biology" | "activities" | "sheets" | "interactive">("gallery");
+  const [viewMode, setViewMode] = useState<"gallery" | "biology" | "sheets" | "interactive">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_diagram_mode");
+      if (saved && ["gallery", "biology", "sheets", "interactive"].includes(saved)) {
+        return saved as any;
+      }
+    }
+    return "gallery";
+  });
+
+  const handleSetViewMode = (mode: "gallery" | "biology" | "sheets" | "interactive") => {
+    setViewMode(mode);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_diagram_mode", mode);
+    }
+  };
 
   // Biology filters
   const [bioCategory, setBioCategory] = useState<string>("all");
   const [bioSearch, setBioSearch] = useState<string>("");
-
-  // Lab Activities filters
-  const [activitySubject, setActivitySubject] = useState<string>("all");
-  const [activitySearch, setActivitySearch] = useState<string>("");
 
   // Gallery filters
   const [galleryCategory, setGalleryCategory] = useState<string>("all");
@@ -167,22 +178,6 @@ export default function ScienceDiagramsView({
     });
   }, [bioCategory, bioSearch]);
 
-  const filteredActivities = useMemo(() => {
-    return NCERT_ACTIVITIES_DIAGRAMS_VAULT.filter((act) => {
-      if (activitySubject !== "all" && act.subject !== activitySubject) return false;
-      if (activitySearch.trim()) {
-        const q = activitySearch.toLowerCase();
-        return (
-          act.title.toLowerCase().includes(q) ||
-          act.activityNo.toLowerCase().includes(q) ||
-          act.chapterName.toLowerCase().includes(q) ||
-          act.keyObservation.toLowerCase().includes(q) ||
-          act.chemicalOrBioPrinciple.toLowerCase().includes(q)
-        );
-      }
-      return true;
-    });
-  }, [activitySubject, activitySearch]);
 
   const SHEET_CATEGORIES = [
     { id: "all", label: "All 15 Master Sheets", count: 15 },
@@ -316,11 +311,11 @@ export default function ScienceDiagramsView({
           </div>
         </div>
 
-        {/* VIEW MODE TOGGLE SWITCH — Comprehensive Science Vault */}
+        {/* VIEW MODE TOGGLE SWITCH — Focused Visual Diagrams Vault */}
         <div className="mt-6 pt-6 border-t border-current/10 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
           <div className={`p-1.5 rounded-2xl border inline-flex items-center gap-1.5 flex-wrap ${isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"}`}>
             <button
-              onClick={() => setViewMode("gallery")}
+              onClick={() => handleSetViewMode("gallery")}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 viewMode === "gallery"
                   ? "bg-cyan-500 text-slate-950 font-black shadow-md"
@@ -330,11 +325,11 @@ export default function ScienceDiagramsView({
               }`}
             >
               <FileImage className="w-4 h-4" />
-              <span>⚛️ Physics (29)</span>
+              <span>⚛️ Physics Optics & Circuits (29)</span>
             </button>
 
             <button
-              onClick={() => setViewMode("biology")}
+              onClick={() => handleSetViewMode("biology")}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 viewMode === "biology"
                   ? "bg-emerald-500 text-slate-950 font-black shadow-md"
@@ -348,21 +343,7 @@ export default function ScienceDiagramsView({
             </button>
 
             <button
-              onClick={() => setViewMode("activities")}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
-                viewMode === "activities"
-                  ? "bg-amber-500 text-slate-950 font-black shadow-md"
-                  : isDark
-                  ? "text-slate-400 hover:text-white"
-                  : "text-slate-600 hover:text-slate-950"
-              }`}
-            >
-              <FlaskConical className="w-4 h-4" />
-              <span>🧪 NCERT Lab Activities (16)</span>
-            </button>
-
-            <button
-              onClick={() => setViewMode("sheets")}
+              onClick={() => handleSetViewMode("sheets")}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 viewMode === "sheets"
                   ? "bg-purple-500 text-slate-950 font-black shadow-md"
@@ -372,11 +353,11 @@ export default function ScienceDiagramsView({
               }`}
             >
               <FileImage className="w-4 h-4" />
-              <span>📸 15 Master Sheets</span>
+              <span>📸 15 Master Study Sheets</span>
             </button>
 
             <button
-              onClick={() => setViewMode("interactive")}
+              onClick={() => handleSetViewMode("interactive")}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 viewMode === "interactive"
                   ? "bg-cyan-500 text-slate-950 font-black shadow-md"
@@ -390,17 +371,27 @@ export default function ScienceDiagramsView({
             </button>
           </div>
 
-          <span className="text-xs text-slate-400 font-mono">
-            {viewMode === "gallery"
-              ? `Displaying ${filteredGalleryDiagrams.length} of 29 Physics diagrams`
-              : viewMode === "biology"
-              ? `Displaying ${filteredBiologyDiagrams.length} of 10 Biology Master diagrams`
-              : viewMode === "activities"
-              ? `Displaying ${filteredActivities.length} of 16 NCERT Lab setups`
-              : viewMode === "sheets"
-              ? `Displaying ${filteredSheets.length} of 15 authentic master sheets`
-              : `Displaying ${filteredInteractiveDiagrams.length} interactive case studies`}
-          </span>
+          <div className="flex items-center gap-3">
+            {onOpenActivities && (
+              <button
+                onClick={onOpenActivities}
+                className="px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 dark:text-amber-400 border border-amber-500/30 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+              >
+                <FlaskConical className="w-4 h-4" />
+                <span>🧪 Open NCERT Lab Activities Hub →</span>
+              </button>
+            )}
+
+            <span className="text-xs text-slate-400 font-mono hidden sm:inline">
+              {viewMode === "gallery"
+                ? `Displaying ${filteredGalleryDiagrams.length} of 29 Physics diagrams`
+                : viewMode === "biology"
+                ? `Displaying ${filteredBiologyDiagrams.length} of 10 Biology Master diagrams`
+                : viewMode === "sheets"
+                ? `Displaying ${filteredSheets.length} of 15 authentic master sheets`
+                : `Displaying ${filteredInteractiveDiagrams.length} interactive case studies`}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -598,6 +589,190 @@ export default function ScienceDiagramsView({
                         <span>📸 View Provided Source Photo Sheet</span>
                       </button>
                     )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          VIEW MODE: BIOLOGY ANATOMY & GENETICS MASTER VAULT (10 DIAGRAMS)
+          ========================================================================= */}
+      {viewMode === "biology" && (
+        <div className="space-y-6">
+          {/* SEARCH & CATEGORY FILTER */}
+          <div className="space-y-4">
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <input
+                type="text"
+                value={bioSearch}
+                onChange={(e) => setBioSearch(e.target.value)}
+                placeholder="Search Biology diagrams (e.g., 'alimentary canal', 'heart', 'nephron', 'reflex arc', 'brain', 'flower', 'mendel')..."
+                className={`w-full pl-10 pr-4 py-2.5 rounded-2xl text-xs sm:text-sm border transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/50 ${
+                  isDark ? "bg-black/40 border-white/10 text-white placeholder:text-slate-500" : "bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                }`}
+              />
+            </div>
+
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+              {BIO_CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setBioCategory(cat.id)}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all border flex items-center gap-1.5 cursor-pointer ${
+                    bioCategory === cat.id
+                      ? "bg-emerald-500 text-slate-950 border-emerald-400 shadow-sm font-black"
+                      : isDark
+                      ? "bg-white/[0.03] text-slate-300 border-white/[0.08] hover:bg-white/[0.07]"
+                      : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+                  }`}
+                >
+                  <span>{cat.label}</span>
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
+                    bioCategory === cat.id ? "bg-slate-950/20 text-slate-950" : "bg-slate-700/30 text-slate-400"
+                  }`}>
+                    {cat.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* BIOLOGY DIAGRAMS GRID */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {filteredBiologyDiagrams.map((diag) => (
+              <div
+                key={diag.id}
+                className={`rounded-3xl border overflow-hidden flex flex-col transition-all duration-200 hover:shadow-xl ${
+                  isDark
+                    ? "bg-[#0b0f19] border-white/10 hover:border-emerald-500/40"
+                    : "bg-white border-slate-200 hover:border-emerald-400 shadow-sm"
+                }`}
+              >
+                {/* CARD HEADER */}
+                <div className="p-5 border-b border-current/10 flex items-start justify-between gap-3 bg-emerald-500/5">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-slate-900 text-emerald-400 border border-emerald-500/20">
+                        Ch {diag.chapterNo}: {diag.chapterName}
+                      </span>
+                      <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-emerald-500 text-slate-950">
+                        {diag.boardMarks} Marks
+                      </span>
+                      <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-800/50">
+                        {diag.boardFrequency}
+                      </span>
+                    </div>
+                    <h3 className="font-bold text-lg sm:text-xl text-slate-900 dark:text-white leading-snug pt-1">
+                      {diag.title}
+                    </h3>
+                    <p className="text-xs text-slate-400 font-mono">
+                      {diag.ncertFigureRef}
+                    </p>
+                  </div>
+
+                  {onOpenQuestionBank && (
+                    <button
+                      onClick={() => onOpenQuestionBank(diag.chapterNo)}
+                      className="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all flex items-center gap-1.5 shrink-0"
+                    >
+                      <Zap className="w-3.5 h-3.5" />
+                      <span>Practice</span>
+                    </button>
+                  )}
+                </div>
+
+                {/* CARD BODY */}
+                <div className="p-5 space-y-5 flex-1 flex flex-col justify-between">
+                  {/* Working Mechanism */}
+                  <div className="space-y-1.5">
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                      <Activity className="w-3.5 h-3.5" />
+                      Biological Mechanism & Physiological Function
+                    </span>
+                    <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      {diag.workingMechanism}
+                    </p>
+                  </div>
+
+                  {/* Essential Labels Table */}
+                  <div className="space-y-2">
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400 flex items-center gap-1">
+                      <Dna className="w-3.5 h-3.5 text-emerald-500" />
+                      Must-Know Labels & Functions ({diag.essentialLabels.length})
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {diag.essentialLabels.map((lbl, lidx) => (
+                        <div
+                          key={lidx}
+                          className={`p-2.5 rounded-xl border text-xs ${
+                            isDark ? "bg-black/30 border-white/5" : "bg-slate-50 border-slate-200"
+                          }`}
+                        >
+                          <div className="font-bold text-emerald-600 dark:text-emerald-400 mb-0.5">
+                            {lbl.name}
+                          </div>
+                          <div className={`text-[11px] leading-snug ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                            {lbl.function}
+                          </div>
+                          {lbl.examTrap && (
+                            <div className="mt-1 pt-1 border-t border-current/10 text-[10px] text-amber-500 font-medium">
+                              ⚠️ {lbl.examTrap}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Step-by-Step Board Drawing Guide */}
+                  <div className={`p-3.5 rounded-2xl border ${
+                    isDark ? "bg-slate-900/60 border-white/5 text-slate-300" : "bg-emerald-50/50 border-emerald-200 text-slate-800"
+                  }`}>
+                    <div className="text-[10px] uppercase font-bold text-emerald-600 dark:text-emerald-400 mb-1.5 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      How to Draw in Exam (Step-by-Step):
+                    </div>
+                    <ul className="space-y-1 text-xs">
+                      {diag.drawingSteps.map((step, sidx) => (
+                        <li key={sidx} className="flex items-start gap-1.5">
+                          <span className="text-emerald-500 font-bold">•</span>
+                          <span>{step}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* CBSE Marking Scheme & Common Mistakes */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div className={`p-3 rounded-xl border ${
+                      isDark ? "bg-emerald-950/20 border-emerald-900/30 text-emerald-300" : "bg-emerald-50 border-emerald-200 text-emerald-900"
+                    }`}>
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 mb-1 flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" /> Marking Breakdown
+                      </div>
+                      <ul className="space-y-0.5 text-[11px]">
+                        {diag.markingScheme.map((m, midx) => (
+                          <li key={midx}>✓ {m}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className={`p-3 rounded-xl border ${
+                      isDark ? "bg-rose-950/20 border-rose-900/30 text-rose-300" : "bg-rose-50 border-rose-200 text-rose-900"
+                    }`}>
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-rose-600 mb-1 flex items-center gap-1">
+                        <AlertTriangle className="w-3 h-3" /> Common Traps
+                      </div>
+                      <ul className="space-y-0.5 text-[11px]">
+                        {diag.commonMistakes.map((c, cidx) => (
+                          <li key={cidx}>✗ {c}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

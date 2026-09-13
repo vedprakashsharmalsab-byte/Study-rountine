@@ -786,7 +786,22 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi">("chapter_dashboard");
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_active_tab");
+      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi"];
+      if (saved && validTabs.includes(saved)) {
+        return saved as any;
+      }
+    }
+    return "chapter_dashboard";
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && activeTab) {
+      localStorage.setItem("cbse_last_active_tab", activeTab);
+    }
+  }, [activeTab]);
   const [timelinesChapterKey, setTimelinesChapterKey] = useState<"ch1_europe" | "ch2_india" | "all">("all");
   const [conceptsSubject, setConceptsSubject] = useState<"math" | "science" | "sst">("math");
   const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(6);
@@ -842,7 +857,7 @@ export default function CBSECommandCenter() {
       icon: BookOpen,
       defaultTab: "concepts",
       items: [
-        { id: "concepts", label: "NCERT Blueprints", icon: BookOpen, count: "37 Ch" },
+        { id: "concepts", label: "Chapter Concepts & Theory", icon: BookOpen, count: "37 Ch" },
         { id: "diagrams", label: "Science Diagrams & Sheets", icon: Compass, count: "29 Diag + 15 Sheets" },
         { id: "english", label: "English Master", icon: Feather, count: "184 Ch" },
         { id: "hindi", label: "Hindi Master", icon: BookOpen, count: "Code 085" },
@@ -2318,7 +2333,7 @@ export default function CBSECommandCenter() {
                   group: "Core Learning & Question Mastery",
                   items: [
                     { id: "chapter_dashboard", label: "Chapter Command", sub: "Systematic Syllabus Navigator", icon: Target, color: "text-amber-400 bg-amber-500/15" },
-                    { id: "concepts", label: "Concepts Hub (37 Ch)", sub: "NCERT Official Blueprints & Rubrics", icon: BookOpen, color: "text-blue-400 bg-blue-500/15" },
+                    { id: "concepts", label: "Chapter Concepts & Theory (37 Ch)", sub: "NCERT Theory, Chapter Concepts & Rubrics", icon: BookOpen, color: "text-blue-400 bg-blue-500/15" },
                     { id: "questions", label: "Master Question Bank", sub: "1,200+ CBSE Board-Graded Questions", icon: Zap, color: "text-emerald-400 bg-emerald-500/15" },
                     { id: "hots", label: "Competitive HOTS Vault", sub: "35 Master NTSE / Olympiad Problems", icon: Flame, color: "text-rose-400 bg-rose-500/15" },
                     { id: "english", label: "English Command Center (184)", sub: "First Flight, Footprints & Grammar Solvers", icon: Feather, color: "text-indigo-400 bg-indigo-500/15" },
@@ -3400,6 +3415,10 @@ export default function CBSECommandCenter() {
         {activeTab === "diagrams" && (
           <ScienceDiagramsView
             isDark={isDark}
+            onOpenActivities={() => {
+              playSound("click");
+              setActiveTab("activities");
+            }}
             onOpenQuestionBank={(targetChNo) => {
               playSound("click");
               const ch = targetChNo || 9;
@@ -4967,7 +4986,7 @@ export default function CBSECommandCenter() {
                   <div className="space-y-2 sm:space-y-3 max-w-3xl">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-black uppercase tracking-wider bg-teal-500 text-slate-950 shadow-sm inline-flex items-center gap-1.5 leading-none">
-                        <BookOpen className="w-3.5 h-3.5 shrink-0" /> Concept Blueprint Hub
+                        <BookOpen className="w-3.5 h-3.5 shrink-0" /> Chapter Concepts & Theory
                       </span>
                       <span className={`text-[10px] sm:text-xs font-mono font-bold px-2.5 sm:px-3 py-1 rounded-full border leading-none inline-flex items-center ${
                         isDark ? "bg-teal-950/60 text-teal-300 border-teal-500/30" : "bg-teal-100 text-teal-900 border-teal-300"

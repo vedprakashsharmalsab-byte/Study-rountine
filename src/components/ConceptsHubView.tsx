@@ -136,16 +136,76 @@ export default function ConceptsHubView({
   onOpenHots,
   onOpenTimelines
 }: ConceptsHubViewProps) {
-  const [activeSubject, setActiveSubject] = useState<"math" | "science" | "sst">(initialSubject || "math");
-  const [activeMathChapterNo, setActiveMathChapterNo] = useState<number>(
-    initialSubject === "math" ? initialChapterNo || 6 : 6
-  );
-  const [activeScienceChapterNo, setActiveScienceChapterNo] = useState<number>(
-    initialSubject === "science" ? initialChapterNo || 1 : 1
-  );
-  const [activeSSTChapterNo, setActiveSSTChapterNo] = useState<number>(
-    initialSubject === "sst" ? initialChapterNo || 1 : 1
-  );
+  const [activeSubject, setActiveSubject] = useState<"math" | "science" | "sst">(() => {
+    if (initialSubject) return initialSubject;
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_concepts_subject");
+      if (saved && ["math", "science", "sst"].includes(saved)) {
+        return saved as any;
+      }
+    }
+    return "math";
+  });
+
+  const [activeMathChapterNo, setActiveMathChapterNo] = useState<number>(() => {
+    if (initialSubject === "math" && initialChapterNo) return initialChapterNo;
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_math_chapter");
+      if (saved) {
+        const p = parseInt(saved);
+        if (!isNaN(p) && p >= 1 && p <= 14) return p;
+      }
+    }
+    return 1;
+  });
+
+  const [activeScienceChapterNo, setActiveScienceChapterNo] = useState<number>(() => {
+    if (initialSubject === "science" && initialChapterNo) return initialChapterNo;
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_science_chapter");
+      if (saved) {
+        const p = parseInt(saved);
+        if (!isNaN(p) && p >= 1 && p <= 13) return p;
+      }
+    }
+    return 1;
+  });
+
+  const [activeSSTChapterNo, setActiveSSTChapterNo] = useState<number>(() => {
+    if (initialSubject === "sst" && initialChapterNo) return initialChapterNo;
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("cbse_last_sst_chapter");
+      if (saved) {
+        const p = parseInt(saved);
+        if (!isNaN(p) && p >= 1 && p <= 10) return p;
+      }
+    }
+    return 1;
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_concepts_subject", activeSubject);
+    }
+  }, [activeSubject]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_math_chapter", activeMathChapterNo.toString());
+    }
+  }, [activeMathChapterNo]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_science_chapter", activeScienceChapterNo.toString());
+    }
+  }, [activeScienceChapterNo]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_sst_chapter", activeSSTChapterNo.toString());
+    }
+  }, [activeSSTChapterNo]);
   const [sstDisciplineFilter, setSstDisciplineFilter] = useState<"All" | "History" | "Political Science" | "Geography" | "Economics">("All");
   const [activeSSTViewTab, setActiveSSTViewTab] = useState<"concepts" | "timeline" | "mapwork" | "mnemonics">("concepts");
   const [expandedSSTTopicIds, setExpandedSSTTopicIds] = useState<Record<string, boolean>>({
