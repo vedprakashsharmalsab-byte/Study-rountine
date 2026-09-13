@@ -41,6 +41,10 @@ const EnglishMasterView = dynamic(
   () => import("@/components/EnglishMasterView").then(m => ({ default: m.EnglishMasterView })),
   { loading: TabSkeleton, ssr: false }
 );
+const HindiMasterView = dynamic(
+  () => import("@/components/HindiMasterView"),
+  { loading: TabSkeleton, ssr: false }
+);
 
 import {
   Atom,
@@ -782,7 +786,7 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english">("chapter_dashboard");
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi">("chapter_dashboard");
   const [timelinesChapterKey, setTimelinesChapterKey] = useState<"ch1_europe" | "ch2_india" | "all">("all");
   const [conceptsSubject, setConceptsSubject] = useState<"math" | "science" | "sst">("math");
   const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(6);
@@ -795,7 +799,7 @@ export default function CBSECommandCenter() {
 
   const activeCategory: MasterCategory = useMemo(() => {
     if (["chapter_dashboard", "today", "test_series", "syllabus", "roadmap"].includes(activeTab)) return "command";
-    if (["concepts", "english", "timelines", "theorems", "reactions", "activities", "experiments"].includes(activeTab)) return "concepts";
+    if (["concepts", "english", "hindi", "timelines", "theorems", "reactions", "activities", "experiments"].includes(activeTab)) return "concepts";
     if (["questions", "hots"].includes(activeTab)) return "practice";
     if (["diagrams", "mnemonics", "flashcards", "common_mistakes"].includes(activeTab)) return "tools";
     return "command";
@@ -840,6 +844,7 @@ export default function CBSECommandCenter() {
       items: [
         { id: "concepts", label: "NCERT Blueprints", icon: BookOpen, count: "37 Ch" },
         { id: "english", label: "English Master", icon: Feather, count: "184 Ch" },
+        { id: "hindi", label: "Hindi Master", icon: BookOpen, count: "Code 085" },
         { id: "timelines", label: "SST Timelines", icon: Calendar, count: "56 Dates" },
         { id: "theorems", label: "Theorems & Proofs", icon: Award, count: "25 Proofs" },
         { id: "reactions", label: "Chemistry Reactions", icon: FlaskConical, count: "56 Eq" },
@@ -2313,7 +2318,8 @@ export default function CBSECommandCenter() {
                     { id: "concepts", label: "Concepts Hub (37 Ch)", sub: "NCERT Official Blueprints & Rubrics", icon: BookOpen, color: "text-blue-400 bg-blue-500/15" },
                     { id: "questions", label: "Master Question Bank", sub: "1,200+ CBSE Board-Graded Questions", icon: Zap, color: "text-emerald-400 bg-emerald-500/15" },
                     { id: "hots", label: "Competitive HOTS Vault", sub: "35 Master NTSE / Olympiad Problems", icon: Flame, color: "text-rose-400 bg-rose-500/15" },
-                    { id: "english", label: "English Command Center (184)", sub: "First Flight, Footprints & Grammar Solvers", icon: Feather, color: "text-indigo-400 bg-indigo-500/15" }
+                    { id: "english", label: "English Command Center (184)", sub: "First Flight, Footprints & Grammar Solvers", icon: Feather, color: "text-indigo-400 bg-indigo-500/15" },
+                    { id: "hindi", label: "Hindi Command Center (085)", sub: "Sparsh, Sanchayan, Vyakaran & Writing Studio", icon: BookOpen, color: "text-rose-400 bg-rose-500/15" }
                   ]
                 },
                 {
@@ -3488,6 +3494,18 @@ export default function CBSECommandCenter() {
               playSound("click");
               triggerConfetti();
               showXpToast(25, "English Concept Mastered");
+            }}
+          />
+        )}
+
+        {/* ===================== TAB: HINDI MASTER VIEW (CBSE CODE 085) ===================== */}
+        {activeTab === "hindi" && (
+          <HindiMasterView
+            isDark={isDark}
+            onJumpToRevision={(title) => {
+              playSound("click");
+              triggerConfetti();
+              showXpToast(25, "Hindi Concept Mastered");
             }}
           />
         )}
