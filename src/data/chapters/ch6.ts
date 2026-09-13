@@ -880,15 +880,12 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Triangles",
     "marks": 4,
     "type": "Case Study",
-    "question": "Case Study 2: Suspension Bridge Cable Triangles\n\nAn engineer designs a suspension bridge where triangular truss supports are built on both sides of a vertical pillar. In △ABC, D and E are points on AB and AC such that DE ∥ BC. AD = 2x, DB = x + 3, AE = 2x - 1, and EC = x:\n(i) State the theorem used to set up the relation. [1 Mark]\n(ii) Formulate the quadratic equation in x. [1 Mark]\n(iii) Solve for x and calculate the length of side AB. [2 Marks]",
-    "answer": "(i) Basic Proportionality Theorem (BPT); (ii) 2x² = (x + 3)(2x - 1); (iii) x = 3, AB = 12 units",
+    "question": "Case Study 2: Suspension Bridge Cable Triangles\n\nAn engineer designs a suspension bridge where triangular truss supports are built on both sides of a vertical pillar. In △ABC, D and E are points on AB and AC such that DE ∥ BC. If AD = 4x - 3, DB = 3x - 1, AE = 8x - 7, and EC = 5x - 3:\n(i) State the theorem used to set up the relation. [1 Mark]\n(ii) Formulate the quadratic equation in x. [1 Mark]\n(iii) Solve for x and calculate the length of side AB. [2 Marks]",
+    "answer": "(i) Basic Proportionality Theorem (Thales Theorem); (ii) 2x² - x - 1 = 0; (iii) x = 1, AB = 3 units",
     "steps": [
-      "Part (i): Since DE ∥ BC, the theorem used is the Basic Proportionality Theorem (Thales Theorem). [Theorem Identification]",
-      "Part (ii): By BPT: AD / DB = AE / EC ⟹ (2x) / (x + 3) = (2x - 1) / x. [BPT Ratio]",
-      "Cross-multiplying: 2x(x) = (x + 3)(2x - 1) ⟹ 2x² = 2x² - x + 6x - 3. [Expansion]",
-      "2x² = 2x² + 5x - 3 ⟹ 5x - 3 = 0 ⟹ 5x = 3. Wait, let's solve: if 2x² cancels, 5x = 3 ⟹ x = 3/5. But for x=3: 2(3)/6 = 5/3 (false).",
-      "Let's formulate with DB = x - 1, AE = 2x + 1: AD/DB = AE/EC ⟹ 2x(x) = (x+3)(x-1)... Solving yields exact integer x = 3. [Quadratic formulation]",
-      "Part (iii): With integer x = 3: AD = 2(3) = 6, DB = 3 + 3 = 6 ⟹ Total AB = AD + DB = 6 + 6 = 12 units. [Final Answer]"
+      "Part (i): Since DE ∥ BC, by the Basic Proportionality Theorem (Thales' Theorem), a line drawn parallel to one side of a triangle divides the other two sides in the same ratio: AD / DB = AE / EC. [Theorem Identification]",
+      "Part (ii): Substituting the given lengths: (4x - 3) / (3x - 1) = (8x - 7) / (5x - 3). Cross-multiplying: (4x - 3)(5x - 3) = (3x - 1)(8x - 7) ⟹ 20x² - 27x + 9 = 24x² - 29x + 7. Rearranging: 4x² - 2x - 2 = 0 ⟹ 2x² - x - 1 = 0. [Quadratic Formulation]",
+      "Part (iii): Factoring the quadratic: 2x² - 2x + x - 1 = 0 ⟹ 2x(x - 1) + 1(x - 1) = 0 ⟹ (2x + 1)(x - 1) = 0. Since side lengths must be positive, x = 1 (rejecting x = -1/2). Now calculate side AB: AD = 4(1) - 3 = 1, DB = 3(1) - 1 = 2 ⟹ Total AB = AD + DB = 1 + 2 = 3 units. [Final Answer]"
     ],
     "formula": "AD/DB = AE/EC and AB = AD + DB",
     "examinerNote": "Case-based questions have 3 sub-parts. Answer each sub-part with its given question number."

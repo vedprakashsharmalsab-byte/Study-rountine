@@ -46,6 +46,7 @@ import {
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import TrigValuesMasterTable from "@/components/TrigValuesMasterTable";
+import { MathDiagramFigure } from "@/components/MathDiagramFigure";
 import ScienceConceptsHubView from "@/components/ScienceConceptsHubView";
 import { MATH_CHAPTER_CONCEPTS, type MathChapterConcept } from "@/data/mathConceptsData";
 import {
@@ -961,6 +962,88 @@ export default function ConceptsHubView({
                 <div className={`text-base sm:text-lg leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                   <PremiumMathRenderer content={section.explanation} isDark={isDark} />
                 </div>
+
+                {/* Embedded High-Yield CBSE Math Vector Figures */}
+                {activeMathChapter.chapterNo === 6 && (section.id === "bpt_theorem" || section.id === "converse_bpt") && (
+                  <MathDiagramFigure
+                    figureType="math_triangles_bpt"
+                    title="Theorem 6.1: Basic Proportionality Theorem (Thales)"
+                    caption="Line DE ∥ BC divides sides AB and AC in the equal ratio AD/DB = AE/EC"
+                    isDark={isDark}
+                  />
+                )}
+                {activeMathChapter.chapterNo === 6 && (section.id === "similarity_criteria" || section.id === "similarity_basics") && (
+                  <MathDiagramFigure
+                    figureType="math_triangles_similarity"
+                    title="Criteria for Similarity of Triangles (AAA / SSS / SAS)"
+                    caption="Corresponding angles are equal and corresponding sides are proportional"
+                    isDark={isDark}
+                  />
+                )}
+                {activeMathChapter.chapterNo === 7 && (section.id === "distance_formula" || section.id === "section_formula") && (
+                  <MathDiagramFigure
+                    figureType="math_coord_distance_section"
+                    title="Coordinate Geometry: Distance & Section Formula"
+                    caption="Cartesian distance right triangle and internal division point P(x, y)"
+                    isDark={isDark}
+                  />
+                )}
+                {activeMathChapter.chapterNo === 8 && (section.id === "ratios" || section.id === "punta_bata") && (
+                  <MathDiagramFigure
+                    figureType="math_trig_right_triangle"
+                    title="Trigonometric Ratios in a Right-Angled Triangle"
+                    caption="Defining sin, cos, tan, cosec, sec, cot with respect to acute angle θ"
+                    isDark={isDark}
+                  />
+                )}
+                {activeMathChapter.chapterNo === 9 && (section.id === "angles_elevation_depression") && (
+                  <MathDiagramFigure
+                    figureType="math_heights_elevation_depression"
+                    title="Line of Sight: Angles of Elevation and Depression"
+                    caption="Horizontal observer line of sight and alternate interior angle equality (α = β)"
+                    isDark={isDark}
+                  />
+                )}
+                {activeMathChapter.chapterNo === 9 && (section.id === "two_triangles_blueprints" || section.id === "speed_shortcuts") && (
+                  <MathDiagramFigure
+                    figureType="math_heights_two_observers"
+                    title="Heights & Distances: Two Points on Same Side of Tower"
+                    caption="Deriving distance between observers CD = h(cot 30° − cot 60°) = 2h/√3"
+                    isDark={isDark}
+                  />
+                )}
+                {activeMathChapter.chapterNo === 10 && (section.id === "theorem_10_1" || section.id === "tangent_basics") && (
+                  <MathDiagramFigure
+                    figureType="math_circles_tangent_radius"
+                    title="Theorem 10.1: Tangent is Perpendicular to Radius"
+                    caption="The tangent XY at point of contact P is perpendicular to radius OP (OP ⊥ XY)"
+                    isDark={isDark}
+                  />
+                )}
+                {activeMathChapter.chapterNo === 10 && (section.id === "theorem_10_2" || section.id === "hard_ncert_circles") && (
+                  <MathDiagramFigure
+                    figureType="math_circles_external_tangents"
+                    title="Theorem 10.2: Tangents from an External Point are Equal"
+                    caption="Congruence of right triangles △OAP ≅ △OBP yields PA = PB and ∠AOB + ∠APB = 180°"
+                    isDark={isDark}
+                  />
+                )}
+                {activeMathChapter.chapterNo === 11 && (section.id === "sector_arc_formulas" || section.id === "segment_formulas") && (
+                  <MathDiagramFigure
+                    figureType="math_areas_sector_segment"
+                    title="Geometry of Sectors & Minor Segments of a Circle"
+                    caption="Arc length l = (θ/360)2πr, Sector area = (θ/360)πr², Segment = Sector − △OAB"
+                    isDark={isDark}
+                  />
+                )}
+                {activeMathChapter.chapterNo === 12 && (section.id === "solids_catalog" || section.id === "combined_solids_rule") && (
+                  <MathDiagramFigure
+                    figureType="math_solids_combinations"
+                    title="3D Combinations of Solids: Surface Area & Volume"
+                    caption="Interactive visual catalog: Toy (Cone + Hemisphere), Medicine Capsule, and Circus Tent"
+                    isDark={isDark}
+                  />
+                )}
 
                 {/* Dedicated Interactive 6x5 Trigonometric Values Table for Chapter 8 */}
                 {activeMathChapter.chapterNo === 8 && (section.id === "table" || section.id === "values") && (

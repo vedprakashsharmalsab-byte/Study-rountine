@@ -190,17 +190,17 @@ export const CH13_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Statistics",
     "marks": 2,
     "type": "SA",
-    "question": "The mode of a grouped distribution is 24.5. The modal class is 20−30 with f₀ = 8, f₂ = 7, h = 10. Find f₁.",
-    "answer": "f₁ = 12",
+    "question": "The mode of a grouped distribution is 24. The modal class is 20−30 with f₀ = 8, f₂ = 7, h = 10. Find the modal class frequency f₁.",
+    "answer": "f₁ = 10",
     "steps": [
-      "Step 1: 24.5 = 20 + [(f₁−8)/(2f₁−8−7)]×10 → 4.5/10 = (f₁−8)/(2f₁−15) → 9f₁−7.5×15/10..",
-      "Step 2: Solving: 4.5(2f₁−15) = 10(f₁−8) → 9f₁−67.5 = 10f₁−80 → f₁ = 12.5 [Algebraic Simplification]",
-      "Step 3: Hmm: 4.5 = 10(f₁−8)/(2f₁−15) → 4.5(2f₁−15) = 10(f₁−8) → 9f₁−67.5 = 10f₁−80 → f₁ = 12.5 [Algebraic Simplification]",
-      "Step 4: Rounding: f₁ = 12 (integer frequency). [Final Result with Units]"
+      "Step 1: Modal class formula: Mode = l + [ (f₁ − f₀) / (2f₁ − f₀ − f₂) ] × h. [Mode Formula]",
+      "Step 2: Substitute given values: l = 20, Mode = 24, f₀ = 8, f₂ = 7, h = 10: 24 = 20 + [ (f₁ − 8) / (2f₁ − 8 − 7) ] × 10. [Substitution]",
+      "Step 3: Simplify: 4 = [ (f₁ − 8) / (2f₁ − 15) ] × 10 ⟹ 4(2f₁ − 15) = 10(f₁ − 8) ⟹ 8f₁ − 60 = 10f₁ − 80. [Algebraic Simplification]",
+      "Step 4: 2f₁ = 20 ⟹ f₁ = 10. [Final Result]"
     ],
     "examinerNote": "Work backwards through the Mode formula to find the missing frequency.",
     "source": "CBSE Board / KVS Support / RD Sharma",
-    "formula": "Mode = 3 Median - 2 Mean"
+    "formula": "Mode = l + [ (f₁ − f₀) / (2f₁ − f₀ − f₂) ] × h"
   },
   {
     "id": "vq_13_2m_3",
@@ -208,14 +208,15 @@ export const CH13_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Statistics",
     "marks": 2,
     "type": "SA",
-    "question": "If the mean of the following data is 18.75, find the value of p: 10, 15, p, 35, 20, 25.",
-    "answer": "p = 8",
+    "question": "If the mean of the following observations is 20, find the value of p: 10, 15, p, 35, 20, 25.",
+    "answer": "p = 15",
     "steps": [
-      "Step 1: Mean = (10+15+p+35+20+25)/6 = 18.75 → 105+p = 112.5 → p = 7.5 [Using Empirical Formula: Mode = 3 Median - 2 Mean]",
-      "Step 2: Actually: 6×18.75 = 112.5 → 105+p = 112.5 → p = 7.5. [Final Result with Units]"
+      "Step 1: Formula for arithmetic mean: Mean = (Sum of observations) / (Total number of observations) = Σx / n. [Mean Formula]",
+      "Step 2: Substitute values: 20 = (10 + 15 + p + 35 + 20 + 25) / 6 ⟹ 20 = (105 + p) / 6. [Substitution]",
+      "Step 3: Cross-multiply: 120 = 105 + p ⟹ p = 120 − 105 = 15. [Final Result]"
     ],
     "source": "CBSE Board / KVS Support / RD Sharma",
-    "formula": "Mode = 3 Median - 2 Mean",
+    "formula": "Mean = Σx / n",
     "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
   },
   {
@@ -341,22 +342,19 @@ export const CH13_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Statistics",
     "marks": 5,
     "type": "LA",
-    "question": "The median of the following grouped data is 28.5. Find the missing frequencies x and y: Class: 0−5, 5−10, 10−15, 15−20, 20−25, 25−30, 30−35. Freq: 2, 5, x, 14, y, 16, 4. N = 60.",
-    "answer": "x = 8, y = 11",
+    "question": "The median of the following grouped frequency distribution is 28.5. Find the values of x and y, if the total frequency is 60:\n\nClass Interval: 0−10 | 10−20 | 20−30 | 30−40 | 40−50 | 50−60\nFrequency: 5 | x | 20 | 15 | y | 5",
+    "answer": "x = 8, y = 7",
     "steps": [
-      "Step 1: cf: 2, 7, 7+x, 21+x, 21+x+y, 37+x+y, 41+x+y [Given in Problem]",
-      "Step 2: Total = 41+x+y = 60 → x+y = 19 ...(1) [Algebraic Simplification]",
-      "Step 3: Median = 28.5 → median class is 25−30 (since 28.5 is in this range). cf_prev = 21+x. 28.5 = 25+[(30−(21+x))/16]×5 → 3.5 = (9−x)/16×5 → 3.5×16/5 = 9−x → 11.2 = 9−x → x = −2.2",
-      "Step 4: Hmm, something is off [Algebraic Simplification]",
-      "Step 5: Rechecking with class interval (0-10, 10-20... standard groups) [Trigonometric Definition/Identity]",
-      "Step 6: Let me use: 0-10:2, 10-20:5, 20-30:x, 30-40:14, 40-50:y, 50-60:4 [Algebraic Simplification]",
-      "Step 7: N=60 seems different [Algebraic Simplification]",
-      "Step 8: Using the standard board question: Median=28.5, classes 0-10(5), 10-20(x), 20-30(20), 30-40(15), 40-50(y), 50-60(5), N=60. x+y=15 [Trigonometric Definition/Identity]",
-      "Step 9: Median class 20-30: 28.5=20+[(30-(5+x))/20]×10 → 8.5=(25-x)/2 → 17=25-x → x=8. y=15-8=7."
+      "Step 1: Construct cumulative frequency table: 0−10 (cf=5), 10−20 (cf=5+x), 20−30 (cf=25+x), 30−40 (cf=40+x), 40−50 (cf=40+x+y), 50−60 (cf=45+x+y). [Cumulative Frequency Table]",
+      "Step 2: Total frequency condition: 45 + x + y = 60 ⟹ x + y = 15 ...(Equation 1). [Frequency Sum]",
+      "Step 3: Identify Median Class: Since given median is 28.5, it lies in the interval 20−30. Lower limit l = 20, class size h = 10, median class frequency f = 20, preceding cumulative frequency cf = 5 + x, and N/2 = 60 / 2 = 30. [Median Class Parameters]",
+      "Step 4: Apply formula: Median = l + [ (N/2 − cf) / f ] × h ⟹ 28.5 = 20 + [ (30 − (5 + x)) / 20 ] × 10. [Median Formula]",
+      "Step 5: Solve for x: 8.5 = (25 − x) / 2 ⟹ 17 = 25 − x ⟹ x = 8. [Linear Solving]",
+      "Step 6: Substitute x = 8 into Equation 1: 8 + y = 15 ⟹ y = 7. Final Answer: x = 8 and y = 7. [Final Result]"
     ],
     "examinerNote": "Identify median class from the given numerical median (28.5 or whatever is given), NOT from N/2 when frequencies are unknown.",
     "source": "CBSE Board / KVS Support / RD Sharma",
-    "formula": "Mode = 3 Median - 2 Mean"
+    "formula": "Median = l + [ (N/2 − cf) / f ] × h"
   },
   {
     "id": "vq_13_5m_2",

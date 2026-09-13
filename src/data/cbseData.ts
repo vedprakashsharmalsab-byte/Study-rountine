@@ -3911,10 +3911,10 @@ export const CASE_STUDY_SIMULATIONS: CaseStudySimulation[] = [
       {
         id: "cs_s1_q2",
         questionText: "Calculate the Mode of the students' weight (round to 2 decimal places):",
-        options: ["44.21 kg", "43.64 kg", "45.00 kg", "42.85 kg"],
-        correctOptionIndex: 1,
-        correctTextAnswer: "43.64 kg",
-        explanation: "l = 40, h = 5, f₁ = 15, f₀ = 7, f₂ = 14. Mode = l + ((f₁ - f₀)/(2f₁ - f₀ - f₂)) × h = 40 + ((15 - 7)/(30 - 7 - 14)) × 5 = 40 + (8/9) × 5 = 40 + 40/9 = 40 + 4.44 = 44.44... wait: 2(15) - 7 - 14 = 30 - 21 = 9. 40 + 4.44 = 44.44 kg.",
+        options: ["44.44 kg", "43.64 kg", "45.00 kg", "42.85 kg"],
+        correctOptionIndex: 0,
+        correctTextAnswer: "44.44 kg",
+        explanation: "l = 40, h = 5, f₁ = 15, f₀ = 7, f₂ = 14. Mode = l + ((f₁ - f₀)/(2f₁ - f₀ - f₂)) × h = 40 + ((15 - 7)/(30 - 7 - 14)) × 5 = 40 + (8/9) × 5 = 40 + 40/9 = 40 + 4.44 = 44.44 kg.",
         marks: 1
       },
       {
@@ -4700,7 +4700,7 @@ export const TEST_SERIES_1_MNEMONICS: MnemonicCard[] = [
         questionType: "Section B — 2-Mark Standard Problem",
         marks: 2,
         totalMarks: 2,
-        questionText: "Find the mode of grouped data where modal class is 20-30, l = 20, f₁ = 12, f₀ = 8, f₂ = 7, and h = 10.",
+        questionText: "Find the mode of grouped data where modal class is 20-30, l = 20, f₁ = 10, f₀ = 8, f₂ = 7, and h = 10.",
         examinerTrapAlert: "Confusing f₀ (preceding frequency) and f₂ (succeeding frequency) in the denominator. Mixing them alters the mode value.",
         steps: [
           { stepDescription: "Stating Mode formula: Mode = l + ((f₁ - f₀)/(2f₁ - f₀ - f₂)) × h", fractionalMarks: "+0.5 Mark" },
@@ -5183,7 +5183,7 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   {
     id: "vq_6_5m_3", chapter: 6, chapterName: "Triangles", marks: 5, type: "LA",
     question: "O is any point inside rectangle ABCD. Prove that OA² + OC² = OB² + OD².",
-    answer: "Draw OP ⊥ AB (P on AB) and OQ ⊥ BC (Q on BC). Then OA² = AP² + OP², OB² = BQ² + OQ², OC² = CQ² + OQ² (since OQ is perp to BC and BQ || DC → DQ = BC − BQ), wait — draw perpendiculars to both pairs of sides. Actually: Let OM ⊥ AB (M on AB), ON ⊥ BC. OA² + OC² = (AM² + OM²) + (CN² + ON²). OB² + OD² = (BM² + OM²) + (DN² + ON²). Since ABCD is rectangle: AM + BM = AB = DC = DN + CN → AM − BM = DN − CN. Expanding: AM² + CN² = BM² + DN² ✓. Hence OA² + OC² = OB² + OD².",
+    answer: "Through O, draw a line PQ parallel to BC so that P lies on AB and Q lies on CD. Then PQ ⊥ AB and PQ ⊥ CD (since ABCD is a rectangle). In right △APO: OA² = AP² + OP². In right △OQC: OC² = OQ² + CQ². Adding: OA² + OC² = AP² + OP² + OQ² + CQ². In right △OPB: OB² = BP² + OP², and in right △OQD: OD² = OQ² + DQ². Adding: OB² + OD² = BP² + OP² + OQ² + DQ². Since AP = DQ and CQ = BP (from rectangles APQD and PBCQ): OB² + OD² = CQ² + OP² + OQ² + AP² = OA² + OC². Hence OA² + OC² = OB² + OD². ∎",
     explanation: "Drop perpendiculars from O to each side. Use opposite side lengths of the rectangle are equal to match squared terms."
   },
 
@@ -5196,9 +5196,9 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
     id: "vq_8_1m_1", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 1, type: "MCQ",
     question: "The value of (sin 30° + cos 60°) × (sin 60° + cos 30°) is:",
     options: ["1", "√3/2", "(√3+1)/2", "√3"],
-    correctOption: 0,
-    answer: "1",
-    explanation: "(1/2 + 1/2)(√3/2 + √3/2) = 1 × √3 ≠ 1. Wait: sin30°+cos60° = 1/2+1/2=1; sin60°+cos30° = √3/2+√3/2 = √3. Product = √3. Let me recheck: Actually the answer is √3. But let's recalculate carefully: (sin30°+cos60°)(sin60°+cos30°) = (1/2+1/2)(√3/2+√3/2) = 1·√3 = √3.",
+    correctOption:  3,
+    answer: "√3",
+    explanation: "Substitute standard values: sin 30° = 1/2, cos 60° = 1/2, sin 60° = √3/2, cos 30° = √3/2. Therefore, (sin 30° + cos 60°) × (sin 60° + cos 30°) = (1/2 + 1/2) × (√3/2 + √3/2) = 1 × √3 = √3.",
     examinerNote: "Standard angle calculation: sin30°=cos60°=1/2; sin60°=cos30°=√3/2."
   },
   {
@@ -5252,10 +5252,10 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   {
     id: "vq_8_1m_8", chapter: 8, chapterName: "Introduction to Trigonometry", marks: 1, type: "MCQ",
     question: "The value of cosec²30° − sin²45° − sec²60° is:",
-    options: ["−1", "0", "1", "2"],
+    options: ["−1/2", "0", "1/2", "1"],
     correctOption: 0,
-    answer: "−1",
-    explanation: "cosec²30° = 4, sin²45° = 1/2, sec²60° = 4. Result = 4 − 1/2 − 4 = −1/2. Hmm, recalculate: 4 − 0.5 − 4 = −0.5. So answer is −1/2.",
+    answer: "−1/2",
+    explanation: "Substitute standard values: cosec 30° = 2 ⟹ cosec²30° = 4; sin 45° = 1/√2 ⟹ sin²45° = 1/2; sec 60° = 2 ⟹ sec²60° = 4. Result = 4 − 1/2 − 4 = −1/2.",
     examinerNote: "cosec 30° = 2, so cosec²30° = 4; sec 60° = 2, so sec²60° = 4; sin²45° = 1/2."
   },
 
@@ -5466,10 +5466,10 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   },
   {
     id: "vq_9_3m_4", chapter: 9, chapterName: "Some Applications of Trigonometry", marks: 3, type: "SA",
-    question: "A straight highway leads to the foot of a tower. A man standing at the top sees a car approaching the foot. He observes the angle of depression changes from 30° to 60°. Show that 3/4 of the original distance is covered between the two observations.",
-    answer: "Let tower height = h. At 30°: d₁ = h/tan30° = h√3. At 60°: d₂ = h/tan60° = h/√3. Distance covered = d₁ − d₂ = h√3 − h/√3 = 2h/√3. Fraction = (2h/√3)/(h√3) = 2/3. Hmm — 3/4 needs verification. Actually covered/original = (h√3 − h/√3)/(h√3) = (3h−h)/(3h) × 1 = 2h/(√3·h√3) = 2/3. So 2/3 of distance is covered, not 3/4.",
+    question: "A straight highway leads to the foot of a tower. A man standing at the top sees a car approaching the foot. He observes the angle of depression changes from 30° to 60°. Show that 2/3 of the original distance to the tower is covered between the two observations.",
+    answer: "Let tower height be h. At 30° depression: d₁ = h / tan 30° = h√3. At 60° depression: d₂ = h / tan 60° = h / √3. Distance covered = d₁ − d₂ = h√3 − h/√3 = (2h)/√3. Fraction of original distance covered = (d₁ − d₂) / d₁ = ((2h)/√3) / (h√3) = 2/3. Hence proved. ∎",
     explanation: "d₁ = h√3 (at 30°), d₂ = h/√3 (at 60°). Fraction covered = (d₁−d₂)/d₁ = (h√3 − h/√3)/(h√3) = 1 − 1/3 = 2/3.",
-    examinerNote: "The correct answer is 2/3, not 3/4. Set up the two tan equations carefully before computing the ratio."
+    examinerNote: "Set up the two tangent equations: tan 30° = h/d₁ and tan 60° = h/d₂. Then compute (d₁ − d₂)/d₁ = 2/3."
   },
   {
     id: "vq_9_3m_5", chapter: 9, chapterName: "Some Applications of Trigonometry", marks: 3, type: "SA",
@@ -5616,8 +5616,8 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   },
   {
     id: "vq_10_3m_4", chapter: 10, chapterName: "Circles", marks: 3, type: "SA",
-    question: "If PA and PB are tangents from external point P and C is any point on the circle, prove that ∠APB + ∠ACB = 180°.",
-    answer: "Wait, this is actually: ∠APC is not part of ACB directly. Using the central angle: ∠AOB + ∠APB = 180°. The inscribed angle ∠ACB = (1/2) reflex ∠AOB if C is on minor arc, or = (1/2)∠AOB if on major arc. For major arc: ∠ACB = (1/2)∠AOB. Then ∠APB = 180° − ∠AOB. But this only proves ∠APB + 2∠ACB = 180°... Actually: For C on major arc, ∠ACB = (1/2)∠AOB. ∠APB = 180° − ∠AOB. So ∠APB + 2∠ACB = 180°. The statement as given is when C is on minor arc: reflex ∠AOB = 360° − ∠AOB. ∠ACB = (1/2)(360°−∠AOB) = 180° − ∠AOB/2. Then ∠APB = 180° − ∠AOB. So ∠APB + ∠ACB = 180° − ∠AOB + 180° − ∠AOB/2 ≠ 180°. Better to clarify: the standard result is ∠AOB + ∠APB = 180°.",
+    question: "Prove that the angle between the two tangents drawn from an external point to a circle is supplementary to the angle subtended by the line-segment joining the points of contact at the centre (∠APB + ∠AOB = 180°).",
+    answer: "Given: Circle with centre O, tangents PA and PB from external point P touching at A and B. Since tangent ⊥ radius: ∠OAP = 90° and ∠OBP = 90°. In quadrilateral OAPB, sum of interior angles = 360°: ∠APB + ∠OAP + ∠AOB + ∠OBP = 360° ⟹ ∠APB + 90° + ∠AOB + 90° = 360° ⟹ ∠APB + ∠AOB = 180°. ∎",
     explanation: "Standard result: In quadrilateral OAPB, ∠OAP = ∠OBP = 90°. Sum of angles = 360° → ∠AOB + ∠APB = 180°.",
     examinerNote: "For the standard 3M proof, prove ∠AOB + ∠APB = 180° using angle sum of quadrilateral OAPB."
   },
@@ -5740,16 +5740,16 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   },
   {
     id: "vq_13_2m_2", chapter: 13, chapterName: "Statistics", marks: 2, type: "SA",
-    question: "The mode of a grouped distribution is 24.5. The modal class is 20−30 with f₀ = 8, f₂ = 7, h = 10. Find f₁.",
-    answer: "f₁ = 12",
-    explanation: "24.5 = 20 + [(f₁−8)/(2f₁−8−7)]×10 → 4.5/10 = (f₁−8)/(2f₁−15) → 9f₁−7.5×15/10... Solving: 4.5(2f₁−15) = 10(f₁−8) → 9f₁−67.5 = 10f₁−80 → f₁ = 12.5. Hmm: 4.5 = 10(f₁−8)/(2f₁−15) → 4.5(2f₁−15) = 10(f₁−8) → 9f₁−67.5 = 10f₁−80 → f₁ = 12.5. Rounding: f₁ = 12 (integer frequency).",
+    question: "The mode of a grouped distribution is 24. The modal class is 20−30 with f₀ = 8, f₂ = 7, h = 10. Find f₁.",
+    answer: "f₁ = 10",
+    explanation: "Mode = l + [(f₁ − f₀) / (2f₁ − f₀ − f₂)] × h. Substituting values: 24 = 20 + [(f₁ − 8) / (2f₁ − 8 − 7)] × 10 ⟹ 4 = [(f₁ − 8) / (2f₁ − 15)] × 10 ⟹ 4(2f₁ − 15) = 10(f₁ − 8) ⟹ 8f₁ − 60 = 10f₁ − 80 ⟹ 2f₁ = 20 ⟹ f₁ = 10.",
     examinerNote: "Work backwards through the Mode formula to find the missing frequency."
   },
   {
     id: "vq_13_2m_3", chapter: 13, chapterName: "Statistics", marks: 2, type: "SA",
-    question: "If the mean of the following data is 18.75, find the value of p: 10, 15, p, 35, 20, 25.",
-    answer: "p = 8",
-    explanation: "Mean = (10+15+p+35+20+25)/6 = 18.75 → 105+p = 112.5 → p = 7.5. Actually: 6×18.75 = 112.5 → 105+p = 112.5 → p = 7.5."
+    question: "If the mean of the following data is 20, find the value of p: 10, 15, p, 35, 20, 25.",
+    answer: "p = 15",
+    explanation: "Mean = (10 + 15 + p + 35 + 20 + 25) / 6 = 20 ⟹ (105 + p) / 6 = 20 ⟹ 105 + p = 120 ⟹ p = 120 − 105 = 15."
   },
   {
     id: "vq_13_2m_4", chapter: 13, chapterName: "Statistics", marks: 2, type: "SA",
@@ -5802,9 +5802,9 @@ export const VAULT_QUESTION_BANK: VaultQuestion[] = [
   // --- 5 Mark Long Answer ---
   {
     id: "vq_13_5m_1", chapter: 13, chapterName: "Statistics", marks: 5, type: "LA",
-    question: "The median of the following grouped data is 28.5. Find the missing frequencies x and y: Class: 0−5, 5−10, 10−15, 15−20, 20−25, 25−30, 30−35. Freq: 2, 5, x, 14, y, 16, 4. N = 60.",
-    answer: "x = 8, y = 11",
-    explanation: "cf: 2, 7, 7+x, 21+x, 21+x+y, 37+x+y, 41+x+y. Total = 41+x+y = 60 → x+y = 19 ...(1). Median = 28.5 → median class is 25−30 (since 28.5 is in this range). cf_prev = 21+x. 28.5 = 25+[(30−(21+x))/16]×5 → 3.5 = (9−x)/16×5 → 3.5×16/5 = 9−x → 11.2 = 9−x → x = −2.2. Hmm, something is off. Rechecking with class interval (0-10, 10-20... standard groups). Let me use: 0-10:2, 10-20:5, 20-30:x, 30-40:14, 40-50:y, 50-60:4. N=60 seems different. Using the standard board question: Median=28.5, classes 0-10(5), 10-20(x), 20-30(20), 30-40(15), 40-50(y), 50-60(5), N=60. x+y=15. Median class 20-30: 28.5=20+[(30-(5+x))/20]×10 → 8.5=(25-x)/2 → 17=25-x → x=8. y=15-8=7.",
+    question: "The median of the following grouped frequency distribution is 28.5. Find the values of x and y, if the total frequency is 60: Class: 0−10(5), 10−20(x), 20−30(20), 30−40(15), 40−50(y), 50−60(5).",
+    answer: "x = 8, y = 7",
+    explanation: "Sum of frequencies: 45 + x + y = 60 ⟹ x + y = 15. Median = 28.5 lies in 20−30. Median = l + [(N/2 − cf)/f] × h ⟹ 28.5 = 20 + [(30 − (5 + x))/20] × 10 ⟹ 8.5 = (25 − x)/2 ⟹ 17 = 25 − x ⟹ x = 8. Then y = 15 − 8 = 7.",
     examinerNote: "Identify median class from the given numerical median (28.5 or whatever is given), NOT from N/2 when frequencies are unknown."
   },
   {

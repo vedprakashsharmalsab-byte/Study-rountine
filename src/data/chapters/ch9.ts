@@ -283,13 +283,15 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Some Applications of Trigonometry",
     "marks": 3,
     "type": "SA",
-    "question": "A straight highway leads to the foot of a tower. A man standing at the top sees a car approaching the foot. He observes the angle of depression changes from 30° to 60°. Show that 3/4 of the original distance is covered between the two observations.",
-    "answer": "Let tower height = h. At 30°: d₁ = h/tan30° = h√3. At 60°: d₂ = h/tan60° = h/√3. Distance covered = d₁ − d₂ = h√3 − h/√3 = 2h/√3. Fraction = (2h/√3)/(h√3) = 2/3. Hmm — 3/4 needs verification. Actually covered/original = (h√3 − h/√3)/(h√3) = (3h−h)/(3h) × 1 = 2h/(√3·h√3) = 2/3. So 2/3 of distance is covered, not 3/4.",
+    "question": "A straight highway leads to the foot of a tower. A man standing at the top sees a car approaching the foot. He observes the angle of depression changes from 30° to 60°. Show that 2/3 of the original distance to the tower is covered between the two observations.",
+    "answer": "Fraction covered = 2/3",
     "steps": [
-      "Step 1: d₁ = h√3 (at 30°), d₂ = h/√3 (at 60°) [Given in Problem]",
-      "Step 2: Fraction covered = (d₁−d₂)/d₁ = (h√3 − h/√3)/(h√3) = 1 − 1/3 = 2/3. [Final Result with Units]"
+      "Step 1: Let the height of the tower be h. At 30° angle of depression: horizontal distance d₁ = h / tan 30° = h / (1/√3) = h√3. [Trigonometric Ratio]",
+      "Step 2: At 60° angle of depression: horizontal distance d₂ = h / tan 60° = h / √3. [Trigonometric Ratio]",
+      "Step 3: Distance covered between the two observations = d₁ − d₂ = h√3 − h/√3 = (3h − h)/√3 = 2h/√3. [Distance Subtraction]",
+      "Step 4: Fraction of initial distance covered = (d₁ − d₂) / d₁ = (2h/√3) / (h√3) = 2/3. Hence proved. [Final Result]"
     ],
-    "examinerNote": "The correct answer is 2/3, not 3/4. Set up the two tan equations carefully before computing the ratio.",
+    "examinerNote": "Set up the two tangent equations carefully before computing the ratio.",
     "source": "CBSE Board / KVS Support / RD Sharma",
     "formula": "tan θ = Opposite / Adjacent"
   },

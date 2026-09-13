@@ -25,6 +25,21 @@ import {
   Flame,
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
+import {
+  SCIENCE_DIAGRAMS_MASTER,
+  NCERT_PHYSICS_DIAGRAMS_VAULT,
+  type VisualDiagramAsset,
+  type ScienceDiagram,
+} from "@/data/scienceDiagramsData";
+import {
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Maximize2,
+  X,
+  ExternalLink,
+  Image as ImageIcon,
+} from "lucide-react";
 import { SCIENCE_CHAPTER_CONCEPTS, getScienceChapter, type ScienceChapterConcept } from "@/data/scienceConcepts";
 
 interface ScienceConceptsHubViewProps {
@@ -101,6 +116,121 @@ function getDisciplineIcon(discipline: string) {
   }
 }
 
+
+function getSectionDiagramAssets(chapterNo: number, sectionId: string, heading: string): VisualDiagramAsset[] {
+  const h = heading.toLowerCase();
+  const s = sectionId.toLowerCase();
+
+  if (chapterNo === 9) {
+    if (s.includes("mirror") || h.includes("mirror") || h.includes("reflection")) {
+      return NCERT_PHYSICS_DIAGRAMS_VAULT.filter((d) => d.category === "Spherical Mirrors");
+    }
+    if (s.includes("glass") || s.includes("slab") || h.includes("glass") || h.includes("slab") || (s.includes("refraction") && !s.includes("lens"))) {
+      return NCERT_PHYSICS_DIAGRAMS_VAULT.filter((d) => d.id === "diag_asset_glass_slab_refraction");
+    }
+    if (s.includes("lens") || h.includes("lens")) {
+      return NCERT_PHYSICS_DIAGRAMS_VAULT.filter((d) => d.category === "Lenses & Refraction");
+    }
+  }
+
+  if (chapterNo === 10) {
+    if (s.includes("eye") || s.includes("defect") || h.includes("eye") || h.includes("defect") || h.includes("myopia")) {
+      return NCERT_PHYSICS_DIAGRAMS_VAULT.filter(
+        (d) =>
+          d.id === "diag_asset_anatomy_human_eye" ||
+          d.id === "diag_asset_myopia_correction" ||
+          d.id === "diag_asset_hypermetropia_correction"
+      );
+    }
+    if (s.includes("prism") || s.includes("dispersion") || h.includes("prism") || h.includes("dispersion")) {
+      return NCERT_PHYSICS_DIAGRAMS_VAULT.filter(
+        (d) =>
+          d.id === "diag_asset_prism_refraction" ||
+          d.id === "diag_asset_prism_dispersion" ||
+          d.id === "diag_asset_spectrum_recombination"
+      );
+    }
+    if (s.includes("rainbow") || s.includes("atmospheric") || h.includes("rainbow") || h.includes("atmospheric")) {
+      return NCERT_PHYSICS_DIAGRAMS_VAULT.filter(
+        (d) =>
+          d.id === "diag_asset_rainbow_atmospheric" ||
+          d.id === "diag_asset_atmospheric_refraction"
+      );
+    }
+  }
+
+  if (chapterNo === 11) {
+    if (s.includes("ohm") || h.includes("ohm")) {
+      return NCERT_PHYSICS_DIAGRAMS_VAULT.filter((d) => d.id === "diag_asset_ohms_law_circuit");
+    }
+    if (
+      s.includes("resistor") ||
+      s.includes("series") ||
+      s.includes("parallel") ||
+      h.includes("resistor") ||
+      h.includes("series") ||
+      h.includes("parallel")
+    ) {
+      return NCERT_PHYSICS_DIAGRAMS_VAULT.filter(
+        (d) =>
+          d.id === "diag_asset_resistors_in_series" ||
+          d.id === "diag_asset_resistors_in_parallel"
+      );
+    }
+  }
+
+  if (chapterNo === 12) {
+    if (s.includes("domestic") || s.includes("circuit") || h.includes("domestic") || h.includes("circuit")) {
+      return NCERT_PHYSICS_DIAGRAMS_VAULT.filter((d) => d.id === "diag_asset_domestic_electric_circuit");
+    }
+  }
+
+  return [];
+}
+
+function getSectionMasterDiagram(chapterNo: number, sectionId: string, heading: string): ScienceDiagram | undefined {
+  const h = heading.toLowerCase();
+  const s = sectionId.toLowerCase();
+
+  if (chapterNo === 5) {
+    if (s.includes("digest") || s.includes("nutrit") || h.includes("digest") || h.includes("nutrit") || h.includes("alimentary")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_digestive_system");
+    }
+    if (s.includes("circulat") || s.includes("heart") || s.includes("transport") || h.includes("circulat") || h.includes("heart") || h.includes("transport")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_heart_circulation");
+    }
+    if (s.includes("excret") || s.includes("nephron") || h.includes("excret") || h.includes("nephron") || h.includes("kidney")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_excretion_nephron");
+    }
+  }
+
+  if (chapterNo === 6) {
+    if (s.includes("neuron") || s.includes("reflex") || s.includes("nerve") || h.includes("neuron") || h.includes("reflex") || h.includes("nervous")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_neuron_reflex_arc");
+    }
+  }
+
+  if (chapterNo === 7) {
+    if (s.includes("flower") || s.includes("plant") || s.includes("pollin") || h.includes("flower") || h.includes("plant") || h.includes("pollin")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_flower_pollen");
+    }
+  }
+
+  if (chapterNo === 8) {
+    if (s.includes("mendel") || s.includes("monohybrid") || s.includes("dihybrid") || h.includes("mendel") || h.includes("cross")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_mendel_crosses");
+    }
+  }
+
+  if (chapterNo === 12) {
+    if (s.includes("solenoid") || s.includes("field") || h.includes("solenoid") || h.includes("magnetic field")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_magnetism_solenoid_domestic");
+    }
+  }
+
+  return undefined;
+}
+
 export default function ScienceConceptsHubView({
   isDark,
   activeChapterNo,
@@ -114,6 +244,9 @@ export default function ScienceConceptsHubView({
   const [selectedChapterNo, setSelectedChapterNo] = useState<number>(activeChapterNo || 1);
   const [disciplineFilter, setDisciplineFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [activeZoomAsset, setActiveZoomAsset] = useState<VisualDiagramAsset | null>(null);
+  const [zoomScale, setZoomScale] = useState<number>(1);
+  const [activeBioPin, setActiveBioPin] = useState<string | null>(null);
   const [expandedSectionIds, setExpandedSectionIds] = useState<Record<string, boolean>>({});
 
   const currentChNo = isEmbeddedInCommand && activeChapterNo !== undefined ? activeChapterNo : selectedChapterNo;
@@ -582,7 +715,191 @@ export default function ScienceConceptsHubView({
                       </div>
                     </div>
 
-                    {/* Key Formulas / Points */}
+                    
+                    {/* Embedded Official NCERT Visual Figures for this Topic */}
+                    {(() => {
+                      const visualAssets = getSectionDiagramAssets(currentChNo, section.id, section.heading);
+                      const bioDiagram = getSectionMasterDiagram(currentChNo, section.id, section.heading);
+
+                      if (visualAssets.length === 0 && !bioDiagram) return null;
+
+                      return (
+                        <div className={`p-5 sm:p-6 rounded-3xl border space-y-5 ${
+                          isDark ? "bg-[#0b101d] border-cyan-500/20 shadow-lg shadow-cyan-950/20" : "bg-white border-cyan-200 shadow-md shadow-cyan-100/50"
+                        }`}>
+                          <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-cyan-500/20">
+                            <div className="flex items-center gap-2">
+                              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
+                              <h4 className="text-sm sm:text-base font-black tracking-tight text-cyan-400 flex items-center gap-2">
+                                <ImageIcon className="w-4 h-4" /> Official NCERT Visual Diagrams & Schematics
+                              </h4>
+                            </div>
+                            <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                              {visualAssets.length > 0 ? `${visualAssets.length} Board Figures` : "Interactive Schematic"}
+                            </span>
+                          </div>
+
+                          {/* Render Visual NCERT Assets Grid (Optics, Eye, Circuits) */}
+                          {visualAssets.length > 0 && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              {visualAssets.map((asset) => (
+                                <div
+                                  key={asset.id}
+                                  className={`rounded-2xl border overflow-hidden transition-all duration-200 flex flex-col ${
+                                    isDark ? "bg-black/50 border-white/10 hover:border-cyan-400/50" : "bg-slate-50 border-slate-200 hover:border-cyan-400 shadow-xs"
+                                  }`}
+                                >
+                                  {/* White container for image clarity */}
+                                  <div
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => {
+                                      setActiveZoomAsset(asset);
+                                      setZoomScale(1);
+                                    }}
+                                    onKeyDown={(e) => {
+                                      if (e.key === "Enter" || e.key === " ") {
+                                        setActiveZoomAsset(asset);
+                                        setZoomScale(1);
+                                      }
+                                    }}
+                                    className="relative bg-white border-b border-slate-200 p-3 h-44 flex items-center justify-center cursor-pointer group"
+                                  >
+                                    <img
+                                      src={asset.imageUrl}
+                                      alt={asset.imageAlt}
+                                      className="max-h-full max-w-full object-contain transition-transform duration-200 group-hover:scale-105"
+                                      loading="lazy"
+                                    />
+                                    <div className="absolute top-2 left-2 flex items-center gap-1.5">
+                                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-950 text-cyan-300">
+                                        {asset.ncertFigureRef}
+                                      </span>
+                                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500 text-slate-950">
+                                        {asset.boardMarks} Marks
+                                      </span>
+                                    </div>
+                                    <div className="absolute bottom-2 right-2 px-2 py-1 rounded-lg bg-black/70 text-white text-[10px] font-bold flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                                      <ZoomIn className="w-3 h-3 text-cyan-300" />
+                                      <span>Click to Enlarge</span>
+                                    </div>
+                                  </div>
+
+                                  {/* Meta & Exam Tips */}
+                                  <div className="p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+                                    <div>
+                                      <h5 className={`text-xs font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                                        {asset.title}
+                                      </h5>
+                                      {asset.objectPosition && (
+                                        <div className="mt-1.5 grid grid-cols-2 gap-1 text-[11px] font-mono">
+                                          <div className={`p-1.5 rounded ${isDark ? "bg-white/5 text-slate-300" : "bg-white text-slate-700"}`}>
+                                            <span className="text-cyan-400 font-bold">Obj:</span> {asset.objectPosition}
+                                          </div>
+                                          <div className={`p-1.5 rounded ${isDark ? "bg-white/5 text-slate-300" : "bg-white text-slate-700"}`}>
+                                            <span className="text-emerald-400 font-bold">Img:</span> {asset.imagePosition}
+                                          </div>
+                                        </div>
+                                      )}
+                                      {asset.natureOfImage && (
+                                        <div className="mt-1 text-[10px] font-mono text-amber-400">
+                                          ✦ Nature: <strong>{asset.natureOfImage}</strong>
+                                        </div>
+                                      )}
+                                    </div>
+
+                                    {(asset.examinerAlert || asset.markingTip) && (
+                                      <div className={`mt-2 p-2 rounded-xl text-[11px] leading-relaxed border ${
+                                        isDark ? "bg-amber-500/10 border-amber-500/20 text-amber-200" : "bg-amber-50 border-amber-200 text-amber-900"
+                                      }`}>
+                                        <span className="font-bold text-amber-400">💡 Exam Tip:</span> {asset.examinerAlert || asset.markingTip}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Render Biological / Physical Master Schematic */}
+                          {bioDiagram && (
+                            <div className={`p-4 sm:p-5 rounded-2xl border space-y-4 ${
+                              isDark ? "bg-black/40 border-white/10" : "bg-slate-50 border-slate-200"
+                            }`}>
+                              <div className="flex flex-wrap items-center justify-between gap-2">
+                                <div>
+                                  <h5 className={`text-sm font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                                    {bioDiagram.title}
+                                  </h5>
+                                  <p className="text-[11px] text-slate-400 font-mono">
+                                    {bioDiagram.ncertFigureRef} • {bioDiagram.boardFrequency}
+                                  </p>
+                                </div>
+                                {onOpenDiagrams && (
+                                  <button
+                                    onClick={() => onOpenDiagrams(currentChNo)}
+                                    className="px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 flex items-center gap-1.5 transition-all"
+                                  >
+                                    <ExternalLink className="w-3.5 h-3.5" />
+                                    <span>Interactive Ray / Lab View</span>
+                                  </button>
+                                )}
+                              </div>
+
+                              <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                                {bioDiagram.description}
+                              </p>
+
+                              {/* Interactive Anatomical Labels */}
+                              {bioDiagram.labels && bioDiagram.labels.length > 0 && (
+                                <div className="space-y-2 pt-2 border-t border-white/5">
+                                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-teal-400">
+                                    Click any component to inspect board marking significance:
+                                  </span>
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {bioDiagram.labels.map((lbl) => (
+                                      <button
+                                        key={lbl.id}
+                                        onClick={() => setActiveBioPin(activeBioPin === lbl.id ? null : lbl.id)}
+                                        className={`px-2.5 py-1 rounded-lg text-xs font-mono font-semibold transition-all border ${
+                                          activeBioPin === lbl.id
+                                            ? "bg-teal-500 text-slate-950 border-teal-400 shadow-sm"
+                                            : isDark
+                                            ? "bg-white/5 text-slate-300 border-white/10 hover:bg-white/10"
+                                            : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                                        }`}
+                                      >
+                                        {lbl.name}
+                                      </button>
+                                    ))}
+                                  </div>
+
+                                  {activeBioPin && (() => {
+                                    const pin = bioDiagram.labels.find((l) => l.id === activeBioPin);
+                                    if (!pin) return null;
+                                    return (
+                                      <div className={`mt-2 p-3 rounded-xl border text-xs leading-relaxed animate-in fade-in slide-in-from-top-1 ${
+                                        isDark ? "bg-teal-950/40 border-teal-500/30 text-teal-100" : "bg-teal-50 border-teal-200 text-teal-900"
+                                      }`}>
+                                        <div className="font-bold text-teal-300 font-mono text-[11px] uppercase mb-1">
+                                          📍 {pin.name} — Anatomical Function
+                                        </div>
+                                        <p>{pin.description}</p>
+                                        <div className="mt-1.5 pt-1.5 border-t border-teal-500/20 text-[11px] text-amber-300">
+                                          <strong>Board Exam Key:</strong> {pin.boardSignificance}
+                                        </div>
+                                      </div>
+                                    );
+                                  })()}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
+
+{/* Key Formulas / Points */}
                     {section.formulasOrKeyPoints && section.formulasOrKeyPoints.length > 0 && (
                       <div className="space-y-3">
                         <h4 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
@@ -719,6 +1036,121 @@ export default function ScienceConceptsHubView({
           </button>
         ) : <div className="hidden sm:block" />}
       </div>
+
+      {/* =========================================================================
+          FULL-SCREEN HIGH-RESOLUTION DIAGRAM ZOOM & INSPECTION MODAL
+          ========================================================================= */}
+      {activeZoomAsset && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+          <div
+            className={`w-full max-w-4xl max-h-[90vh] rounded-3xl border overflow-hidden flex flex-col shadow-2xl ${
+              isDark ? "bg-[#0b0f19] border-white/20 text-white" : "bg-white border-slate-300 text-slate-900"
+            }`}
+          >
+            {/* Modal Header */}
+            <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between bg-slate-900/80">
+              <div className="flex items-center gap-3">
+                <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-cyan-500 text-slate-950">
+                  {activeZoomAsset.ncertFigureRef}
+                </span>
+                <div>
+                  <h3 className="text-base sm:text-lg font-black text-white">{activeZoomAsset.title}</h3>
+                  <p className="text-xs text-slate-400 font-mono">
+                    Ch {activeZoomAsset.chapterNo} • {activeZoomAsset.category} • {activeZoomAsset.boardMarks} Marks ({activeZoomAsset.boardFrequency})
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setZoomScale((s) => Math.max(0.6, s - 0.2))}
+                  className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer"
+                  title="Zoom Out"
+                >
+                  <ZoomOut className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setZoomScale(1)}
+                  className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer"
+                  title="Reset Zoom"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setZoomScale((s) => Math.min(2.5, s + 0.2))}
+                  className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer"
+                  title="Zoom In"
+                >
+                  <ZoomIn className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setActiveZoomAsset(null)}
+                  className="p-2 rounded-xl bg-red-500/20 hover:bg-red-500 text-white transition-all cursor-pointer ml-2"
+                  title="Close"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+              {/* White viewing well */}
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 flex items-center justify-center min-h-[300px] overflow-hidden">
+                <img
+                  src={activeZoomAsset.imageUrl}
+                  alt={activeZoomAsset.imageAlt}
+                  style={{ transform: `scale(${zoomScale})` }}
+                  className="max-h-[380px] w-auto max-w-full object-contain transition-transform duration-150 select-none"
+                />
+              </div>
+
+              {/* Ray Tracing & Exam Properties */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {activeZoomAsset.objectPosition && (
+                  <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                    <span className="text-[11px] font-mono uppercase font-bold text-cyan-400 block mb-1">Object Position</span>
+                    <span className="text-sm font-semibold">{activeZoomAsset.objectPosition}</span>
+                  </div>
+                )}
+                {activeZoomAsset.imagePosition && (
+                  <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                    <span className="text-[11px] font-mono uppercase font-bold text-emerald-400 block mb-1">Image Position</span>
+                    <span className="text-sm font-semibold">{activeZoomAsset.imagePosition}</span>
+                  </div>
+                )}
+                {activeZoomAsset.natureOfImage && (
+                  <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                    <span className="text-[11px] font-mono uppercase font-bold text-amber-400 block mb-1">Nature & Size</span>
+                    <span className="text-sm font-semibold">{activeZoomAsset.natureOfImage}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Key Ray Rule & Examiner Tip */}
+              {activeZoomAsset.keyRule && (
+                <div className={`p-4 rounded-2xl border ${isDark ? "bg-cyan-950/20 border-cyan-500/30 text-cyan-100" : "bg-cyan-50 border-cyan-200 text-cyan-900"}`}>
+                  <h4 className="text-xs font-mono uppercase font-black tracking-wider text-cyan-400 mb-1">
+                    ✦ Mandatory Ray Tracing Rule
+                  </h4>
+                  <p className="text-xs sm:text-sm leading-relaxed">{activeZoomAsset.keyRule}</p>
+                </div>
+              )}
+
+              {(activeZoomAsset.examinerAlert || activeZoomAsset.markingTip) && (
+                <div className={`p-4 rounded-2xl border ${isDark ? "bg-amber-950/20 border-amber-500/30 text-amber-100" : "bg-amber-50 border-amber-200 text-amber-900"}`}>
+                  <h4 className="text-xs font-mono uppercase font-black tracking-wider text-amber-400 mb-1">
+                    💡 CBSE Examiner Evaluation Key & Marks Breakdown
+                  </h4>
+                  <p className="text-xs sm:text-sm leading-relaxed">
+                    {activeZoomAsset.examinerAlert} {activeZoomAsset.markingTip ? `— ${activeZoomAsset.markingTip}` : ""}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

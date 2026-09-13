@@ -16,7 +16,7 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     ],
     "correctOption": 3,
     "answer": "√3",
-    "explanation": "(1/2 + 1/2)(√3/2 + √3/2) = 1 × √3 ≠ 1. Wait: sin30°+cos60° = 1/2+1/2=1; sin60°+cos30° = √3/2+√3/2 = √3. Product = √3. Let me recheck: Actually the answer is √3. But let's recalculate carefully: (sin30°+cos60°)(sin60°+cos30°) = (1/2+1/2)(√3/2+√3/2) = 1·√3 = √3.",
+    "explanation": "Substitute standard values: sin 30° = 1/2, cos 60° = 1/2, sin 60° = √3/2, cos 30° = √3/2. Therefore, (sin 30° + cos 60°) × (sin 60° + cos 30°) = (1/2 + 1/2) × (√3/2 + √3/2) = 1 × √3 = √3.",
     "examinerNote": "Be careful not to confuse sin 30° with sin 60°. Always substitute each term separately before multiplying.",
     "steps": [
       "Step 1: State standard trigonometric values: sin 30° = 1/2, cos 60° = 1/2, sin 60° = √3/2, cos 30° = √3/2. [Standard Angle Values]",

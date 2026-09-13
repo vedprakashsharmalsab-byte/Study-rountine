@@ -290,15 +290,34 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A quadrilateral ABCD is drawn to circumscribe a circle. Prove that AB + CD = AD + BC.",
-    "answer": "Let circle touch AB at P, BC at Q, CD at R, DA at S. From A: AP = AS (equal tangents). From B: BP = BQ. From C: CQ = CR. From D: DR = DS. Adding: (AP+BP) + (CR+DR) = (AS+DS) + (BQ+CQ) → AB + CD = AD + BC. ∎",
+    "answer": "AB + CD = AD + BC (proved via Theorem 10.2: tangents from external point are equal)",
     "steps": [
-      "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
-      "Step 2: Write all four pairs of equal tangents from each vertex, then add the LHS sides and RHS sides separately. [Trigonometric Definition/Identity]",
-      "Step 3: Final statement: Let circle touch AB at P, BC at Q, CD at R, DA at S. From A: AP = AS (equal tangents). From B: BP = BQ. From C: CQ = CR. From D: DR = DS. Adding: (AP+BP) + (CR+DR) = (AS+DS) + (BQ+CQ) → AB + CD = AD + BC. ∎ [Trigonometric Definition/Identity]"
+      "Step 1: Let the circle touch sides AB, BC, CD, DA at points P, Q, R, S respectively [Given in Problem]",
+      "Step 2: By Theorem 10.2, tangents from external points are equal: AP = AS ... (1), BP = BQ ... (2), CR = CQ ... (3), DR = DS ... (4) [Theorem 10.2: Tangents from External Point]",
+      "Step 3: Adding all four equations: (AP + BP) + (CR + DR) = (AS + DS) + (BQ + CQ) [Algebraic Simplification]",
+      "Step 4: Combining adjacent segments: AB + CD = AD + BC   ∎ [Final Result with Units]"
     ],
+    "examinerNote": "Ensure you write AP+BP on LHS and AS+BQ on RHS so they pair up correctly into sides.",
     "source": "CBSE Board / KVS Support / RD Sharma",
-    "formula": "Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)",
-    "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
+    "formula": "Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)"
+  },
+  {
+    "id": "vq_10_3m_3",
+    "chapter": 10,
+    "chapterName": "Circles",
+    "marks": 3,
+    "type": "SA",
+    "question": "Prove that the parallelogram circumscribing a circle is a rhombus.",
+    "answer": "ABCD is a rhombus",
+    "steps": [
+      "Step 1: For any quadrilateral circumscribing a circle: AB + CD = AD + BC (from tangent properties) [Geometric Property/Theorem]",
+      "Step 2: Since ABCD is a parallelogram, opposite sides are equal: AB = CD and AD = BC [Parallelogram Property]",
+      "Step 3: Substitute CD = AB and AD = BC: AB + AB = BC + BC ⟹ 2AB = 2BC ⟹ AB = BC [Algebraic Simplification]",
+      "Step 4: Since adjacent sides AB = BC in parallelogram ABCD, all four sides are equal: AB = BC = CD = DA. Therefore ABCD is a rhombus   ∎ [Final Result with Units]"
+    ],
+    "examinerNote": "First quote AB + CD = AD + BC, then apply parallelogram properties to conclude all sides equal.",
+    "source": "CBSE Board / KVS Support / RD Sharma",
+    "formula": "Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)"
   },
   {
     "id": "vq_10_3m_4",
@@ -306,13 +325,16 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Circles",
     "marks": 3,
     "type": "SA",
-    "question": "If PA and PB are tangents from external point P and C is any point on the circle, prove that ∠APB + ∠ACB = 180°.",
-    "answer": "Wait, this is actually: ∠APC is not part of ACB directly. Using the central angle: ∠AOB + ∠APB = 180°. The inscribed angle ∠ACB = (1/2) reflex ∠AOB if C is on minor arc, or = (1/2)∠AOB if on major arc. For major arc: ∠ACB = (1/2)∠AOB. Then ∠APB = 180° − ∠AOB. But this only proves ∠APB + 2∠ACB = 180°... Actually: For C on major arc, ∠ACB = (1/2)∠AOB. ∠APB = 180° − ∠AOB. So ∠APB + 2∠ACB = 180°. The statement as given is when C is on minor arc: reflex ∠AOB = 360° − ∠AOB. ∠ACB = (1/2)(360°−∠AOB) = 180° − ∠AOB/2. Then ∠APB = 180° − ∠AOB. So ∠APB + ∠ACB = 180° − ∠AOB + 180° − ∠AOB/2 ≠ 180°. Better to clarify: the standard result is ∠AOB + ∠APB = 180°.",
+    "question": "Prove that the angle between the two tangents drawn from an external point to a circle is supplementary to the angle subtended by the line-segment joining the points of contact at the centre (∠APB + ∠AOB = 180°).",
+    "answer": "∠APB + ∠AOB = 180° (Supplementary)",
     "steps": [
-      "Step 1: Standard result: In quadrilateral OAPB, ∠OAP = ∠OBP = 90° [Trigonometric Definition/Identity]",
-      "Step 2: Sum of angles = 360° → ∠AOB + ∠APB = 180°. [Final Result with Units]"
+      "Step 1: Let PA and PB be two tangents drawn from external point P to circle with centre O. Radii are OA and OB [Given in Problem]",
+      "Step 2: By Theorem 10.1, radius is perpendicular to tangent at point of contact: ∠OAP = 90° and ∠OBP = 90° [Theorem 10.1: Radius ⊥ Tangent]",
+      "Step 3: In quadrilateral OAPB, the sum of all interior angles is 360°: ∠OAP + ∠APB + ∠OBP + ∠AOB = 360° [Angle Sum Property of Quadrilateral]",
+      "Step 4: Substitute the right angles: 90° + ∠APB + 90° + ∠AOB = 360° ⟹ ∠APB + ∠AOB + 180° = 360° [Algebraic Simplification]",
+      "Step 5: ∠APB + ∠AOB = 360° − 180° = 180°. Hence proved that ∠APB and ∠AOB are supplementary   ∎ [Final Result with Units]"
     ],
-    "examinerNote": "For the standard 3M proof, prove ∠AOB + ∠APB = 180° using angle sum of quadrilateral OAPB.",
+    "examinerNote": "Quote Theorem 10.1 clearly for ∠OAP = ∠OBP = 90°. Then apply quadrilateral angle sum.",
     "source": "CBSE Board / KVS Support / RD Sharma",
     "formula": "Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)"
   },
