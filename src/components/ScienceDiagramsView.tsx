@@ -31,8 +31,10 @@ import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import {
   SCIENCE_DIAGRAMS_MASTER,
   NCERT_PHYSICS_DIAGRAMS_VAULT,
+  SCIENCE_MASTER_PHOTO_SHEETS,
   type ScienceDiagram,
   type VisualDiagramAsset,
+  type MasterPhotoSheet,
   type DiagramCategory
 } from "@/data/scienceDiagramsData";
 
@@ -53,27 +55,33 @@ export default function ScienceDiagramsView({
     setMounted(true);
   }, []);
 
-  // View mode: 'gallery' (all 29 visual assets) or 'interactive' (ray tracers & step-by-step solvers)
-  const [viewMode, setViewMode] = useState<"gallery" | "interactive">("gallery");
+  // View mode: 'gallery' (29 visual diagrams), 'sheets' (15 master photo sheets), or 'interactive' (12 solvers)
+  const [viewMode, setViewMode] = useState<"gallery" | "sheets" | "interactive">("gallery");
 
   // Gallery filters
   const [galleryCategory, setGalleryCategory] = useState<string>("all");
   const [gallerySearch, setGallerySearch] = useState<string>("");
 
+  // Master Sheets filters
+  const [sheetCategory, setSheetCategory] = useState<string>("all");
+  const [sheetSearch, setSheetSearch] = useState<string>("");
+
   // Zoom Modal state
   const [activeZoomAsset, setActiveZoomAsset] = useState<VisualDiagramAsset | null>(null);
+  const [activeZoomSheet, setActiveZoomSheet] = useState<MasterPhotoSheet | null>(null);
   const [zoomScale, setZoomScale] = useState<number>(1);
   const [imageErrorMap, setImageErrorMap] = useState<Record<string, boolean>>({});
 
   // Lock body scroll and handle ESC key when modal is open
   useEffect(() => {
-    if (activeZoomAsset) {
+    if (activeZoomAsset || activeZoomSheet) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
           setActiveZoomAsset(null);
+          setActiveZoomSheet(null);
         }
       };
 
@@ -83,7 +91,7 @@ export default function ScienceDiagramsView({
         window.removeEventListener("keydown", handleKeyDown);
       };
     }
-  }, [activeZoomAsset]);
+  }, [activeZoomAsset, activeZoomSheet]);
 
   // Interactive View state
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -110,6 +118,30 @@ export default function ScienceDiagramsView({
     { id: "Human Eye & Dispersion", label: "Human Eye & Dispersion", count: 7 },
     { id: "Circuits & Magnetism", label: "Circuits & Magnetism", count: 5 }
   ];
+
+  const SHEET_CATEGORIES = [
+    { id: "all", label: "All 15 Master Sheets", count: 15 },
+    { id: "Spherical Mirrors", label: "Spherical Mirrors", count: 5 },
+    { id: "Lenses & Refraction", label: "Lenses & Refraction", count: 4 },
+    { id: "Human Eye & Dispersion", label: "Human Eye & Dispersion", count: 3 },
+    { id: "Circuits & Electricity", label: "Circuits & Electricity", count: 3 }
+  ];
+
+  const filteredSheets = useMemo(() => {
+    return SCIENCE_MASTER_PHOTO_SHEETS.filter((sheet) => {
+      if (sheetCategory !== "all" && sheet.category !== sheetCategory) return false;
+      if (sheetSearch.trim()) {
+        const q = sheetSearch.toLowerCase();
+        return (
+          sheet.title.toLowerCase().includes(q) ||
+          sheet.chapterName.toLowerCase().includes(q) ||
+          sheet.description.toLowerCase().includes(q) ||
+          sheet.containedDiagrams.some(d => d.toLowerCase().includes(q))
+        );
+      }
+      return true;
+    });
+  }, [sheetCategory, sheetSearch]);
 
   const filteredGalleryDiagrams = useMemo(() => {
     return NCERT_PHYSICS_DIAGRAMS_VAULT.filter((diag) => {
@@ -205,6 +237,10 @@ export default function ScienceDiagramsView({
               <div className="text-[10px] uppercase font-bold text-slate-400">Visual Diagrams</div>
             </div>
             <div className={`p-4 rounded-2xl border text-center flex-1 sm:flex-none ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
+              <div className="text-2xl font-black text-purple-400">15</div>
+              <div className="text-[10px] uppercase font-bold text-slate-400">Master Sheets</div>
+            </div>
+            <div className={`p-4 rounded-2xl border text-center flex-1 sm:flex-none ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
               <div className="text-2xl font-black text-emerald-400">100%</div>
               <div className="text-[10px] uppercase font-bold text-slate-400">CBSE Criteria</div>
             </div>
@@ -213,7 +249,7 @@ export default function ScienceDiagramsView({
 
         {/* VIEW MODE TOGGLE SWITCH */}
         <div className="mt-6 pt-6 border-t border-current/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-          <div className={`p-1 rounded-2xl border inline-flex items-center gap-1 ${isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"}`}>
+          <div className={`p-1 rounded-2xl border inline-flex items-center gap-1 flex-wrap ${isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"}`}>
             <button
               onClick={() => setViewMode("gallery")}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
@@ -225,9 +261,26 @@ export default function ScienceDiagramsView({
               }`}
             >
               <FileImage className="w-4 h-4" />
-              <span>NCERT Visual Gallery (All 29 Diagrams)</span>
+              <span>NCERT Visual Gallery</span>
               <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${viewMode === "gallery" ? "bg-slate-950/20 text-slate-950" : "bg-cyan-500/20 text-cyan-400"}`}>
                 29
+              </span>
+            </button>
+
+            <button
+              onClick={() => setViewMode("sheets")}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                viewMode === "sheets"
+                  ? "bg-purple-500 text-slate-950 font-black shadow-md"
+                  : isDark
+                  ? "text-slate-400 hover:text-white"
+                  : "text-slate-600 hover:text-slate-950"
+              }`}
+            >
+              <FileImage className="w-4 h-4" />
+              <span>📸 15 Master Study Sheets</span>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${viewMode === "sheets" ? "bg-slate-950/20 text-slate-950" : "bg-purple-500/20 text-purple-400"}`}>
+                15
               </span>
             </button>
 
@@ -242,13 +295,18 @@ export default function ScienceDiagramsView({
               }`}
             >
               <Zap className="w-4 h-4" />
-              <span>Interactive Ray Tracers & Solvers (12)</span>
+              <span>Interactive Solvers</span>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${viewMode === "interactive" ? "bg-slate-950/20 text-slate-950" : "bg-cyan-500/20 text-cyan-400"}`}>
+                12
+              </span>
             </button>
           </div>
 
           <span className="text-xs text-slate-400 font-mono">
             {viewMode === "gallery"
               ? `Displaying ${filteredGalleryDiagrams.length} of 29 cropped NCERT images`
+              : viewMode === "sheets"
+              ? `Displaying ${filteredSheets.length} of 15 authentic master sheets`
               : `Displaying ${filteredInteractiveDiagrams.length} interactive case studies`}
           </span>
         </div>
@@ -418,16 +476,205 @@ export default function ScienceDiagramsView({
                     </div>
                   </div>
 
-                  {/* BOTTOM ACTION BUTTON */}
-                  <button
-                    onClick={() => {
-                      setActiveZoomAsset(diag);
+                  {/* BOTTOM ACTION BUTTONS */}
+                  <div className="space-y-1.5 mt-2">
+                    <button
+                      onClick={() => {
+                        setActiveZoomAsset(diag);
+                        setZoomScale(1);
+                      }}
+                      className="w-full py-2.5 rounded-xl text-xs font-bold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" /> Enlarge & Inspect Rubric
+                    </button>
+                    {diag.masterSheetUrl && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const matchedSheet = SCIENCE_MASTER_PHOTO_SHEETS.find(s => s.sheetUrl === diag.masterSheetUrl);
+                          if (matchedSheet) {
+                            setActiveZoomSheet(matchedSheet);
+                            setZoomScale(1);
+                          } else {
+                            window.open(diag.masterSheetUrl, "_blank");
+                          }
+                        }}
+                        className="w-full py-2 rounded-xl text-xs font-semibold bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <FileImage className="w-3.5 h-3.5 text-purple-400" />
+                        <span>📸 View Provided Source Photo Sheet</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          VIEW MODE: 15 AUTHENTIC MASTER STUDY SHEETS (HIGH-RES PHOTO SHEETS)
+          ========================================================================= */}
+      {viewMode === "sheets" && (
+        <div className="space-y-6">
+          {/* SEARCH & CATEGORY FILTER */}
+          <div className="space-y-4">
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <input
+                type="text"
+                value={sheetSearch}
+                onChange={(e) => setSheetSearch(e.target.value)}
+                placeholder="Search master sheets (e.g., 'concave mirror', 'vision defects', 'resistors', 'domestic circuit')..."
+                className={`w-full pl-10 pr-4 py-2.5 rounded-2xl text-xs sm:text-sm border transition-all focus:outline-none focus:ring-2 focus:ring-purple-500/50 ${
+                  isDark ? "bg-black/40 border-white/10 text-white placeholder:text-slate-500" : "bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                }`}
+              />
+            </div>
+
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+              {SHEET_CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setSheetCategory(cat.id)}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all border flex items-center gap-1.5 cursor-pointer ${
+                    sheetCategory === cat.id
+                      ? "bg-purple-500 text-slate-950 border-purple-400 shadow-sm"
+                      : isDark
+                      ? "bg-white/[0.03] text-slate-300 border-white/[0.08] hover:bg-white/[0.07]"
+                      : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+                  }`}
+                >
+                  <span>{cat.label}</span>
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
+                    sheetCategory === cat.id ? "bg-slate-950/20 text-slate-950" : "bg-slate-700/30 text-slate-400"
+                  }`}>
+                    {cat.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 15 MASTER SHEETS GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredSheets.map((sheet) => (
+              <div
+                key={sheet.id}
+                className={`rounded-3xl border overflow-hidden flex flex-col transition-all duration-200 hover:shadow-2xl ${
+                  isDark
+                    ? "bg-[#0b0f19] border-white/10 hover:border-purple-500/40"
+                    : "bg-white border-slate-200 hover:border-purple-400"
+                }`}
+              >
+                {/* WIDESCREEN IMAGE CONTAINER */}
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => {
+                    setActiveZoomSheet(sheet);
+                    setZoomScale(1);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      setActiveZoomSheet(sheet);
                       setZoomScale(1);
-                    }}
-                    className="w-full py-2.5 rounded-xl text-xs font-bold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-2"
-                  >
-                    <Maximize2 className="w-3.5 h-3.5" /> Enlarge & Inspect Rubric
-                  </button>
+                    }
+                  }}
+                  className="relative bg-slate-950 border-b border-slate-200/20 p-2 min-h-[240px] max-h-[280px] flex items-center justify-center cursor-pointer group touch-manipulation overflow-hidden"
+                >
+                  <img
+                    src={sheet.sheetUrl}
+                    alt={sheet.title}
+                    className="max-h-[260px] w-auto max-w-full object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+
+                  {/* TOP BADGES */}
+                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 pointer-events-none">
+                    <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-slate-900/90 text-purple-300 border border-purple-500/30 shadow-xs">
+                      Ch {sheet.chapterNo}
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-purple-600 text-white shadow-xs">
+                      {sheet.category}
+                    </span>
+                  </div>
+
+                  <div className="absolute top-2.5 right-2.5 pointer-events-none">
+                    <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-slate-900/80 text-cyan-300 border border-cyan-500/30">
+                      Authentic Vault Photo
+                    </span>
+                  </div>
+
+                  {/* BOTTOM TAP HINT BAR */}
+                  <div className="absolute bottom-2 inset-x-3 flex items-center justify-center pointer-events-none">
+                    <span className="px-3.5 py-1 rounded-full text-[10px] font-bold bg-slate-950/90 text-white flex items-center gap-1.5 shadow-md border border-white/10 group-hover:bg-purple-600 transition-colors">
+                      <Maximize2 className="w-3.5 h-3.5 text-purple-300 group-hover:text-white" /> Click to Deep-Zoom (Up to 300%)
+                    </span>
+                  </div>
+                </div>
+
+                {/* SHEET CARD BODY */}
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-2 text-xs font-mono text-slate-400">
+                      <span>{sheet.chapterName}</span>
+                    </div>
+
+                    <h3 className="font-bold text-base sm:text-lg leading-snug">
+                      {sheet.title}
+                    </h3>
+
+                    <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                      {sheet.description}
+                    </p>
+
+                    {/* CONTAINED DIAGRAMS TAGS */}
+                    <div className="pt-1">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1.5 font-mono">
+                        Topics & Figures on this Sheet:
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {sheet.containedDiagrams.map((diagName, idx) => (
+                          <span
+                            key={idx}
+                            className={`text-[11px] font-semibold px-2.5 py-1 rounded-lg border ${
+                              isDark ? "bg-purple-950/30 border-purple-500/30 text-purple-300" : "bg-purple-50 border-purple-200 text-purple-800"
+                            }`}
+                          >
+                            ✓ {diagName}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ACTION BUTTONS */}
+                  <div className="flex items-center gap-2 pt-2">
+                    <button
+                      onClick={() => {
+                        setActiveZoomSheet(sheet);
+                        setZoomScale(1);
+                      }}
+                      className="flex-1 py-2.5 rounded-xl text-xs font-bold bg-purple-500 text-slate-950 hover:bg-purple-400 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" /> Fullscreen Deep Zoom
+                    </button>
+                    <a
+                      href={sheet.sheetUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`p-2.5 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                        isDark ? "bg-white/5 hover:bg-white/10 border-white/10 text-slate-300" : "bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700"
+                      }`}
+                      title="Open Raw 1376x768 Original Image in New Tab"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span className="hidden sm:inline">Raw HD</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -880,6 +1127,144 @@ export default function ScienceDiagramsView({
               <button
                 onClick={() => setActiveZoomAsset(null)}
                 className="px-6 py-2 rounded-xl font-bold bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-all cursor-pointer shadow-md"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* =====================================================================
+          FULLSCREEN ZOOM MODAL FOR AUTHENTIC MASTER STUDY SHEETS
+          ===================================================================== */}
+      {mounted && activeZoomSheet && createPortal(
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 animate-in fade-in duration-200"
+          onClick={() => setActiveZoomSheet(null)}
+        >
+          <div
+            className={`w-full max-w-6xl max-h-[96vh] rounded-3xl border flex flex-col overflow-hidden shadow-2xl transition-all ${
+              isDark ? "bg-[#0b0f19] border-purple-500/30 text-white" : "bg-white border-slate-200 text-slate-900"
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* MODAL HEADER */}
+            <div className="p-4 sm:p-6 border-b border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shrink-0">
+              <div className="space-y-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-purple-600 text-white">
+                    Ch {activeZoomSheet.chapterNo}
+                  </span>
+                  <span className="text-xs font-mono text-purple-400 font-bold">
+                    {activeZoomSheet.chapterName}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono bg-cyan-500/20 text-cyan-300 font-bold">
+                    {activeZoomSheet.category}
+                  </span>
+                </div>
+                <h2 className="text-sm sm:text-lg font-black truncate">{activeZoomSheet.title}</h2>
+              </div>
+
+              {/* ZOOM CONTROLS & ACTIONS */}
+              <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0">
+                <div className={`flex items-center rounded-xl border p-1 ${isDark ? "bg-black/50 border-white/10" : "bg-slate-100 border-slate-200"}`}>
+                  <button
+                    onClick={handleZoomOut}
+                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer touch-manipulation min-w-[32px] min-h-[32px] flex items-center justify-center"
+                    title="Zoom Out"
+                  >
+                    <ZoomOut className="w-4 h-4" />
+                  </button>
+                  <span className="text-xs font-mono px-2 font-bold text-purple-400">
+                    {Math.round(zoomScale * 100)}%
+                  </span>
+                  <button
+                    onClick={handleZoomIn}
+                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer touch-manipulation min-w-[32px] min-h-[32px] flex items-center justify-center"
+                    title="Zoom In"
+                  >
+                    <ZoomIn className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={handleResetZoom}
+                    className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer ml-1 touch-manipulation min-w-[32px] min-h-[32px] flex items-center justify-center"
+                    title="Reset Zoom (100%)"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <a
+                    href={activeZoomSheet.sheetUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 sm:p-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-bold touch-manipulation min-h-[36px]"
+                    title="Open Original High-Resolution Sheet in New Tab"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span className="hidden md:inline">Raw High-Res</span>
+                  </a>
+
+                  <button
+                    onClick={() => setActiveZoomSheet(null)}
+                    className="p-2 sm:p-2.5 rounded-xl bg-white/10 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 border border-white/10 transition-all cursor-pointer touch-manipulation min-w-[36px] min-h-[36px] flex items-center justify-center"
+                    title="Close Modal (Esc)"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* MODAL BODY (HIGH CONTRAST CANVAS + SHEET DETAILS) */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
+              {/* IMAGE CANVAS */}
+              <div className="p-3 sm:p-4 rounded-2xl bg-black border border-slate-800 shadow-inner flex items-center justify-center min-h-[340px] max-h-[560px] overflow-auto">
+                <img
+                  src={activeZoomSheet.sheetUrl}
+                  alt={activeZoomSheet.title}
+                  style={{
+                    transform: `scale(${zoomScale})`,
+                    transformOrigin: "center center"
+                  }}
+                  className="max-h-[520px] w-auto max-w-full object-contain select-none transition-transform duration-150 shadow-2xl"
+                />
+              </div>
+
+              {/* SHEET DESCRIPTION & CONTAINED TOPICS */}
+              <div className={`p-4 rounded-2xl border space-y-3 ${isDark ? "bg-purple-950/20 border-purple-500/20" : "bg-purple-50 border-purple-200"}`}>
+                <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-200" : "text-slate-700"}`}>
+                  {activeZoomSheet.description}
+                </p>
+
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1.5 font-mono">
+                    Key Topics Detailed on this Study Sheet:
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {activeZoomSheet.containedDiagrams.map((d, i) => (
+                      <span key={i} className="px-3 py-1 rounded-lg text-xs font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        ✓ {d}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* MODAL FOOTER */}
+            <div className="p-4 border-t border-white/10 flex items-center justify-between gap-4 text-xs shrink-0">
+              <span className="text-slate-400 font-mono text-[11px]">
+                Tip: Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 font-mono">ESC</kbd> or click outside to exit
+              </span>
+              <button
+                onClick={() => setActiveZoomSheet(null)}
+                className="px-6 py-2 rounded-xl font-bold bg-purple-500 text-slate-950 hover:bg-purple-400 transition-all cursor-pointer shadow-md"
               >
                 Done
               </button>

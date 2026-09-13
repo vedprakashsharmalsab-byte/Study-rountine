@@ -799,9 +799,9 @@ export default function CBSECommandCenter() {
 
   const activeCategory: MasterCategory = useMemo(() => {
     if (["chapter_dashboard", "today", "test_series", "syllabus", "roadmap"].includes(activeTab)) return "command";
-    if (["concepts", "english", "hindi", "timelines", "theorems", "reactions", "activities", "experiments"].includes(activeTab)) return "concepts";
+    if (["concepts", "english", "hindi", "timelines", "theorems", "reactions", "activities", "experiments", "diagrams"].includes(activeTab)) return "concepts";
     if (["questions", "hots"].includes(activeTab)) return "practice";
-    if (["diagrams", "mnemonics", "flashcards", "common_mistakes"].includes(activeTab)) return "tools";
+    if (["mnemonics", "flashcards", "common_mistakes"].includes(activeTab)) return "tools";
     return "command";
   }, [activeTab]);
 
@@ -843,6 +843,7 @@ export default function CBSECommandCenter() {
       defaultTab: "concepts",
       items: [
         { id: "concepts", label: "NCERT Blueprints", icon: BookOpen, count: "37 Ch" },
+        { id: "diagrams", label: "Science Diagrams & Sheets", icon: Compass, count: "29 Diag + 15 Sheets" },
         { id: "english", label: "English Master", icon: Feather, count: "184 Ch" },
         { id: "hindi", label: "Hindi Master", icon: BookOpen, count: "Code 085" },
         { id: "timelines", label: "SST Timelines", icon: Calendar, count: "56 Dates" },
@@ -924,7 +925,7 @@ export default function CBSECommandCenter() {
   const [commandChapterId, setCommandChapterId] = useState<string>("math_ch6");
   
   // Progressive Chapter Vault (Supports Math, Science, SST, and English)
-  const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science" | "sst" | "english">("math");
+  const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science" | "sst" | "english" | "hindi">("math");
   const [activeVaultChapter, setActiveVaultChapter] = useState<number | null>(6); // Default Triangles
   const [activeVaultQuestions, setActiveVaultQuestions] = useState<VaultQuestion[]>(() => getChapterQuestions(6, "math"));
   const [isAnalyzingVault, setIsAnalyzingVault] = useState(false);
@@ -1170,7 +1171,7 @@ export default function CBSECommandCenter() {
   const loadChapterData = (
     chapterId: number, 
     isPreload = false, 
-    subject: "math" | "science" | "sst" | "english" = activeVaultSubject
+    subject: "math" | "science" | "sst" | "english" | "hindi" = activeVaultSubject
   ) => {
     const cacheKey = `${subject}_${chapterId}`;
     // 1. Instant cache hit: 0ms switch
@@ -1409,7 +1410,9 @@ export default function CBSECommandCenter() {
         ? "Science" 
         : activeVaultSubject === "sst" 
         ? "Social Science" 
-        : "English",
+        : activeVaultSubject === "english"
+        ? "English"
+        : "Hindi",
       chapter: q.chapterName || `Chapter ${q.chapter}`,
       priority: "HIGH",
       dateAdded: new Date().toISOString().split("T")[0],
@@ -3502,6 +3505,14 @@ export default function CBSECommandCenter() {
         {activeTab === "hindi" && (
           <HindiMasterView
             isDark={isDark}
+            onOpenQuestionBank={(chNo) => {
+              playSound("click");
+              const ch = chNo || 1;
+              setActiveVaultSubject("hindi");
+              setActiveVaultChapter(ch);
+              loadChapterData(ch, false, "hindi");
+              setActiveTab("questions");
+            }}
             onJumpToRevision={(title) => {
               playSound("click");
               triggerConfetti();
@@ -3616,6 +3627,22 @@ export default function CBSECommandCenter() {
                   >
                     📖 English (184)
                   </button>
+                  <button
+                    onClick={() => {
+                      playSound("click");
+                      setActiveVaultSubject("hindi");
+                      loadChapterData(1, false, "hindi");
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
+                      activeVaultSubject === "hindi"
+                        ? isDark
+                          ? "bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30 shadow-xs"
+                          : "bg-amber-100 text-amber-950 font-bold shadow-xs border border-amber-300"
+                        : isDark ? "text-zinc-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    🇮🇳 Hindi (085)
+                  </button>
                 </div>
 
                 {/* Chapter Select Dropdown */}
@@ -3663,7 +3690,7 @@ export default function CBSECommandCenter() {
                         <option value="9">Economics Ch 2: Sectors of the Indian Economy (7-8 Marks)</option>
                         <option value="10">Economics Ch 3: Money and Credit (6-7 Marks)</option>
                       </>
-                    ) : (
+                    ) : activeVaultSubject === "english" ? (
                       <>
                         <optgroup label="⭐ TEST SERIES 1 (EXAM 26 SEPT) — FOOTPRINTS WITHOUT FEET">
                           <option value="1">⭐ Ch 1: A Triumph of Surgery (10 Qs + WhatsApp Sheet)</option>
@@ -3700,6 +3727,38 @@ export default function CBSECommandCenter() {
                           <option value="21">⚡ Ch 21: Subject-Verb Concord & 16 PPT Drills (30 Questions)</option>
                           <option value="22">⚡ Ch 22: Modals & Auxiliaries Competency (15 Questions)</option>
                           <option value="23">⚡ Ch 23: Reported Speech & Dialogue Transformations (15 Questions)</option>
+                        </optgroup>
+                      </>
+                    ) : (
+                      <>
+                        <optgroup label="📖 SPARSH PROSE (स्पर्श - गद्य खंड)">
+                          <option value="1">Ch 1: बड़े भाई साहब (Bade Bhai Sahab - प्रेमचंद)</option>
+                          <option value="2">Ch 2: डायरी का एक पन्ना (Diary Ka Ek Panna)</option>
+                          <option value="3">Ch 3: तताँरा-वामीरो कथा (Tatara Vamiro)</option>
+                          <option value="4">Ch 4: तीसरी कसम के शिल्पकार शैलेंद्र</option>
+                          <option value="5">Ch 5: अब कहाँ दूसरे के दुख से दुखी होने वाले</option>
+                          <option value="6">Ch 6: पतझड़ में टूटी पत्तियाँ (झेन की देन)</option>
+                          <option value="7">Ch 7: कारतूस (Kartoos - हबीब तनवीर)</option>
+                        </optgroup>
+                        <optgroup label="🪶 SPARSH POETRY (स्पर्श - काव्य खंड)">
+                          <option value="8">Ch 8: साखी (कबीरदास - Sakhi)</option>
+                          <option value="9">Ch 9: पद (मीराबाई - Pad)</option>
+                          <option value="10">Ch 10: मनुष्यता (मैथिलीशरण गुप्त)</option>
+                          <option value="11">Ch 11: पर्वत प्रदेश में पावस (सुमित्रानंदन पंत)</option>
+                          <option value="12">Ch 12: तोप (वीरेन डंगवाल - Top)</option>
+                          <option value="13">Ch 13: कर चले हम फ़िदा (कैफ़ी आज़मी)</option>
+                          <option value="14">Ch 14: आत्मत्राण (रवींद्रनाथ ठाकुर)</option>
+                        </optgroup>
+                        <optgroup label="📚 SANCHAYAN (संचयन - पूरक पुस्तक)">
+                          <option value="15">Ch 15: हरिहर काका (Harihar Kaka - मिथिलेश्वर)</option>
+                          <option value="16">Ch 16: सपनों के-से दिन (Sapno Ke Se Din)</option>
+                          <option value="17">Ch 17: टोपी शुक्ला (Topi Shukla - राही मासूम रज़ा)</option>
+                        </optgroup>
+                        <optgroup label="✍️ GRAMMAR HUB (व्याकरण - 16 अंक)">
+                          <option value="18">Ch 18: पदबंध (Padbandh - 5 भेदों का अभ्यास)</option>
+                          <option value="19">Ch 19: रचना के आधार पर वाक्य रूपांतरण</option>
+                          <option value="20">Ch 20: समास (Samas - समस्त पद व विग्रह)</option>
+                          <option value="21">Ch 21: मुहावरे (Muhavare - अर्थ व सटीक प्रयोग)</option>
                         </optgroup>
                       </>
                     )}

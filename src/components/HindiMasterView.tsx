@@ -50,11 +50,12 @@ import {
 interface HindiMasterViewProps {
   isDark: boolean;
   onJumpToRevision?: (title: string) => void;
+  onOpenQuestionBank?: (chapterNo: number) => void;
 }
 
 type HindiMainTab = "sparsh_prose" | "sparsh_poetry" | "sanchayan" | "grammar" | "writing" | "spelling_traps";
 
-export default function HindiMasterView({ isDark, onJumpToRevision }: HindiMasterViewProps) {
+export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuestionBank }: HindiMasterViewProps) {
   // Main Tab State
   const [activeTab, setActiveTab] = useState<HindiMainTab>("sparsh_prose");
 
@@ -141,6 +142,31 @@ export default function HindiMasterView({ isDark, onJumpToRevision }: HindiMaste
     }
   };
 
+  // Helper to map active literature or grammar topic to Question Bank chapter number (1 to 21)
+  const getVaultChapterNo = (): number => {
+    if (activeTab === "sparsh_prose") {
+      const match = currentChapter.id.match(/hin_sp_p(\d+)/);
+      return match ? parseInt(match[1]) : 1;
+    }
+    if (activeTab === "sparsh_poetry") {
+      const match = currentChapter.id.match(/hin_sp_k(\d+)/);
+      return match ? parseInt(match[1]) + 7 : 8;
+    }
+    if (activeTab === "sanchayan") {
+      const match = currentChapter.id.match(/hin_san_(\d+)/);
+      return match ? parseInt(match[1]) + 14 : 15;
+    }
+    if (activeTab === "grammar") {
+      if (selectedGrammarId === "padbandh") return 18;
+      if (selectedGrammarId === "vakya") return 19;
+      if (selectedGrammarId === "samas") return 20;
+      if (selectedGrammarId === "muhavare") return 21;
+      return 18;
+    }
+    return 1;
+  };
+
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? "bg-slate-950 text-slate-100" : "bg-gradient-to-br from-amber-50/50 via-rose-50/30 to-orange-50/40 text-slate-800"}`}>
       {/* Top Banner & Header */}
@@ -182,81 +208,96 @@ export default function HindiMasterView({ isDark, onJumpToRevision }: HindiMaste
           </div>
         </div>
 
-        {/* Navigation Tabs Bar */}
-        <div className="max-w-7xl mx-auto mt-4 flex items-center gap-1 sm:gap-2 overflow-x-auto scrollbar-none border-t pt-3 border-dashed border-amber-500/20">
+        {/* Navigation Tabs Bar — Bilingual English Headers with Devanagari Subtitles */}
+        <div className="max-w-7xl mx-auto mt-4 flex items-center gap-2 overflow-x-auto scrollbar-none border-t pt-3 border-dashed border-amber-500/20">
           <button
             onClick={() => handleTabChange("sparsh_prose")}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer touch-manipulation ${
               activeTab === "sparsh_prose"
-                ? "bg-rose-500 text-white shadow-md shadow-rose-500/25"
-                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
+                ? "bg-rose-600 text-white shadow-md shadow-rose-600/25 ring-1 ring-white/20"
+                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-700 hover:bg-amber-100/50"
             }`}
           >
-            <BookOpen className="w-4 h-4" />
-            <span>स्पर्श (गद्य खंड)</span>
-            <span className="text-xs px-1.5 py-0.2 rounded-md bg-white/20">7 पाठ</span>
+            <BookOpen className="w-4 h-4 text-rose-300" />
+            <div className="text-left leading-tight">
+              <div className="font-bold">Sparsh Prose</div>
+              <div className="text-[10px] opacity-80 font-normal">स्पर्श (गद्य खंड) • 7 Ch</div>
+            </div>
           </button>
 
           <button
             onClick={() => handleTabChange("sparsh_poetry")}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer touch-manipulation ${
               activeTab === "sparsh_poetry"
-                ? "bg-amber-500 text-white shadow-md shadow-amber-500/25"
-                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
+                ? "bg-amber-600 text-white shadow-md shadow-amber-600/25 ring-1 ring-white/20"
+                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-700 hover:bg-amber-100/50"
             }`}
           >
-            <Feather className="w-4 h-4" />
-            <span>स्पर्श (काव्य खंड)</span>
-            <span className="text-xs px-1.5 py-0.2 rounded-md bg-white/20">7 कविताएँ</span>
+            <Feather className="w-4 h-4 text-amber-300" />
+            <div className="text-left leading-tight">
+              <div className="font-bold">Sparsh Poetry</div>
+              <div className="text-[10px] opacity-80 font-normal">स्पर्श (काव्य खंड) • 7 Poems</div>
+            </div>
           </button>
 
           <button
             onClick={() => handleTabChange("sanchayan")}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer touch-manipulation ${
               activeTab === "sanchayan"
-                ? "bg-orange-500 text-white shadow-md shadow-orange-500/25"
-                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
+                ? "bg-orange-600 text-white shadow-md shadow-orange-600/25 ring-1 ring-white/20"
+                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-700 hover:bg-amber-100/50"
             }`}
           >
-            <Layers className="w-4 h-4" />
-            <span>संचयन (पूरक पुस्तक)</span>
-            <span className="text-xs px-1.5 py-0.2 rounded-md bg-white/20">3 पाठ</span>
+            <Layers className="w-4 h-4 text-orange-300" />
+            <div className="text-left leading-tight">
+              <div className="font-bold">Sanchayan</div>
+              <div className="text-[10px] opacity-80 font-normal">संचयन (पूरक) • 3 Ch</div>
+            </div>
           </button>
 
           <button
             onClick={() => handleTabChange("grammar")}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer touch-manipulation ${
               activeTab === "grammar"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/25"
-                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
+                ? "bg-purple-600 text-white shadow-md shadow-purple-600/25 ring-1 ring-white/20"
+                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-700 hover:bg-amber-100/50"
             }`}
           >
-            <Zap className="w-4 h-4" />
-            <span>व्याकरण मास्टर (16M)</span>
+            <Zap className="w-4 h-4 text-purple-300" />
+            <div className="text-left leading-tight">
+              <div className="font-bold">Grammar Hub</div>
+              <div className="text-[10px] opacity-80 font-normal">व्याकरण मास्टर • 16 Marks</div>
+            </div>
           </button>
 
           <button
             onClick={() => handleTabChange("writing")}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer touch-manipulation ${
               activeTab === "writing"
-                ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/25"
-                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
+                ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/25 ring-1 ring-white/20"
+                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-700 hover:bg-amber-100/50"
             }`}
           >
-            <PenTool className="w-4 h-4" />
-            <span>लेखन कौशल (22M)</span>
+            <PenTool className="w-4 h-4 text-emerald-300" />
+            <div className="text-left leading-tight">
+              <div className="font-bold">Writing Studio</div>
+              <div className="text-[10px] opacity-80 font-normal">रचनात्मक लेखन • 22 Marks</div>
+            </div>
           </button>
 
           <button
             onClick={() => handleTabChange("spelling_traps")}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer touch-manipulation ${
               activeTab === "spelling_traps"
-                ? "bg-red-600 text-white shadow-md shadow-red-600/25"
-                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
+                ? "bg-red-600 text-white shadow-md shadow-red-600/25 ring-1 ring-white/20"
+                : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-700 hover:bg-amber-100/50"
             }`}
           >
-            <ShieldAlert className="w-4 h-4" />
-            <span>वर्तनी व अशुद्धि निवारक</span>
+            <ShieldAlert className="w-4 h-4 text-red-300" />
+            <div className="text-left leading-tight">
+              <div className="font-bold">Spelling Traps</div>
+              <div className="text-[10px] opacity-80 font-normal">वर्तनी व अशुद्धि निवारक</div>
+            </div>
           </button>
         </div>
       </div>
@@ -337,11 +378,11 @@ export default function HindiMasterView({ isDark, onJumpToRevision }: HindiMaste
               <div className={`p-6 rounded-2xl border ${
                 isDark ? "bg-slate-900/80 border-slate-800" : "bg-white border-amber-200/70 shadow-sm"
               }`}>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-4 border-amber-500/20">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-4 border-amber-500/20">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 border border-rose-500/20">
-                        {currentChapter.genre}
+                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-600 border border-rose-500/20">
+                        {currentChapter.book === "sparsh_prose" ? "Sparsh Prose" : currentChapter.book === "sparsh_poetry" ? "Sparsh Poetry" : "Sanchayan"} • {currentChapter.genre}
                       </span>
                       <span className={`text-xs ${isDark ? "text-slate-400" : "text-slate-500"}`}>
                         रचयिता / लेखक: <strong className={isDark ? "text-slate-200" : "text-slate-700"}>{currentChapter.author}</strong>
@@ -351,83 +392,80 @@ export default function HindiMasterView({ isDark, onJumpToRevision }: HindiMaste
                       {currentChapter.title}
                     </h2>
                   </div>
+
+                  {onOpenQuestionBank && (
+                    <button
+                      onClick={() => onOpenQuestionBank(getVaultChapterNo())}
+                      className="px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 via-rose-500 to-orange-500 text-white shadow-md hover:from-amber-600 hover:to-orange-600 transition-all flex items-center gap-2 cursor-pointer touch-manipulation active:scale-95 shrink-0"
+                    >
+                      <Zap className="w-4 h-4" />
+                      <span>Practice in Question Bank (अध्याय अभ्यास)</span>
+                    </button>
+                  )}
                 </div>
 
                 <p className="mt-3 text-sm sm:text-base italic text-amber-700 dark:text-amber-300 font-medium">
                   "{currentChapter.tagline}"
                 </p>
 
-                {/* Sub-tab Navigation */}
+                {/* Sub-tab Navigation — Bilingual */}
                 <div className="flex items-center gap-2 mt-5 border-t pt-4 border-slate-200/60 dark:border-slate-800 overflow-x-auto scrollbar-none text-xs sm:text-sm">
                   <button
                     onClick={() => setActiveLitSubTab("summary")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
                       activeLitSubTab === "summary"
-                        ? "bg-rose-500 text-white shadow-sm"
+                        ? "bg-rose-500 text-white shadow-sm font-bold"
                         : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    📖 सारांश व प्रतिपाद्य
+                    📖 Summary (पाठ-सार)
                   </button>
 
                   {currentChapter.stanzas && currentChapter.stanzas.length > 0 && (
                     <button
                       onClick={() => setActiveLitSubTab("stanzas")}
-                      className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+                      className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
                         activeLitSubTab === "stanzas"
-                          ? "bg-amber-500 text-white shadow-sm"
+                          ? "bg-amber-500 text-white shadow-sm font-bold"
                           : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                       }`}
                     >
-                      📜 पद्यांश, भावार्थ व शिल्प-सौंदर्य
-                    </button>
-                  )}
-
-                  {currentChapter.characters && currentChapter.characters.length > 0 && (
-                    <button
-                      onClick={() => setActiveLitSubTab("summary")}
-                      className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
-                        activeLitSubTab === "summary"
-                          ? "bg-rose-500 text-white shadow-sm"
-                          : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
-                      }`}
-                    >
-                      👥 चरित्र-चित्रण
+                      📜 Stanzas & Meaning (काव्यांश व भावार्थ)
                     </button>
                   )}
 
                   <button
                     onClick={() => setActiveLitSubTab("vocab")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
                       activeLitSubTab === "vocab"
-                        ? "bg-rose-500 text-white shadow-sm"
+                        ? "bg-rose-500 text-white shadow-sm font-bold"
                         : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    🔤 शब्दार्थ ({currentChapter.wordMeanings.length})
+                    🔤 Vocabulary (शब्दार्थ - {currentChapter.wordMeanings.length})
                   </button>
 
                   <button
                     onClick={() => setActiveLitSubTab("boardqa")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
                       activeLitSubTab === "boardqa"
-                        ? "bg-rose-500 text-white shadow-sm"
+                        ? "bg-rose-500 text-white shadow-sm font-bold"
                         : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    🎯 बोर्ड प्रश्नोत्तर ({currentChapter.boardQAs.length})
+                    🎯 Board Q&A (परीक्षा प्रश्नोत्तर - {currentChapter.boardQAs.length})
                   </button>
 
                   {currentChapter.rtcMcqs && (
                     <button
                       onClick={() => setActiveLitSubTab("rtc")}
-                      className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+                      className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
                         activeLitSubTab === "rtc"
-                          ? "bg-rose-500 text-white shadow-sm"
+                          ? "bg-rose-500 text-white shadow-sm font-bold"
                           : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                       }`}
                     >
-                      📝 गद्यांश/पद्यांश बहुविकल्पीय
+                      📝 RTC Practice (पठित गद्यांश MCQs)
                     </button>
                   )}
                 </div>

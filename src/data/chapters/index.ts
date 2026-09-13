@@ -33,8 +33,12 @@ import {
 // English Chapters
 import { getEnglishChapterQuestions } from "./english";
 
+// Hindi Chapters (Course B - Code 085)
+import { getHindiChapterQuestions } from "./hindi";
+
 export {
   getEnglishChapterQuestions,
+  getHindiChapterQuestions,
   CH6_QUESTIONS,
   CH8_QUESTIONS,
   CH9_QUESTIONS,
@@ -81,6 +85,10 @@ export function getChapterQuestions(chapterId: number, subject: string = "math")
 
   if (subject === "english") {
     return getEnglishChapterQuestions(chapterId);
+  }
+
+  if (subject === "hindi") {
+    return getHindiChapterQuestions(chapterId);
   }
 
   // Mathematics default

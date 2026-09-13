@@ -613,6 +613,7 @@ export const SCIENCE_DIAGRAMS_MASTER: ScienceDiagram[] = [
 
 export interface VisualDiagramAsset {
   id: string;
+  masterSheetUrl?: string;
   title: string;
   category: "Spherical Mirrors" | "Lenses & Refraction" | "Human Eye & Dispersion" | "Circuits & Magnetism";
   chapterNo: number;
@@ -642,6 +643,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 3,
     boardFrequency: "98% Recurrence",
     imageUrl: "/study_material/science/diagrams/concave_mirror_at_infinity.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Concave_mirror_physics_diagram_s_202609051440.jpeg",
     imageAlt: "Ray diagram for concave mirror when object is at infinity",
     objectPosition: "At Infinity",
     imagePosition: "At Principal Focus (F)",
@@ -660,6 +662,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 3,
     boardFrequency: "97% Recurrence",
     imageUrl: "/study_material/science/diagrams/concave_mirror_beyond_c.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Concave_mirror_physics_diagram_s_202609051440.jpeg",
     imageAlt: "Ray diagram for concave mirror when object is beyond C",
     objectPosition: "Beyond C",
     imagePosition: "Between Focus F and Centre of Curvature C",
@@ -677,7 +680,8 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     ncertFigureRef: "NCERT Class 10 Fig 9.7(c)",
     boardMarks: 3,
     boardFrequency: "99% Recurrence",
-    imageUrl: "/study_material/science/diagrams/concave_mirror_at_c.png",
+    imageUrl: "/study_material/science/diagrams/concave_mirror_at_c.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Drawing_concave_mirror_ray_diagrams_202609051442.jpeg",
     imageAlt: "Ray diagram for concave mirror when object is at C",
     objectPosition: "At Centre of Curvature (C)",
     imagePosition: "At Centre of Curvature (C)",
@@ -696,6 +700,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 3,
     boardFrequency: "96% Recurrence",
     imageUrl: "/study_material/science/diagrams/concave_mirror_between_c_and_f.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Drawing_concave_mirror_ray_diagrams_202609051442.jpeg",
     imageAlt: "Ray diagram for concave mirror when object is between C and F",
     objectPosition: "Between C and F",
     imagePosition: "Beyond C",
@@ -714,6 +719,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 3,
     boardFrequency: "98% Recurrence",
     imageUrl: "/study_material/science/diagrams/concave_mirror_at_f.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Creating_concave_mirror_physics_202609051441.jpeg",
     imageAlt: "Ray diagram for concave mirror when object is at F",
     objectPosition: "At Principal Focus (F)",
     imagePosition: "At Infinity",
@@ -732,6 +738,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 5,
     boardFrequency: "100% Recurrence (Most tested mirror diagram on CBSE boards)",
     imageUrl: "/study_material/science/diagrams/concave_mirror_between_p_and_f.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Creating_concave_mirror_physics_202609051441.jpeg",
     imageAlt: "Ray diagram for concave mirror when object is between P and F",
     objectPosition: "Between Pole (P) and Focus (F)",
     imagePosition: "Behind the Mirror",
@@ -750,6 +757,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 3,
     boardFrequency: "95% Recurrence",
     imageUrl: "/study_material/science/diagrams/convex_mirror_at_infinity.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Convex_mirror_ray_diagrams_202609051442.jpeg",
     imageAlt: "Ray diagram for convex mirror when object is at infinity",
     objectPosition: "At Infinity",
     imagePosition: "At Focus F behind mirror",
@@ -767,7 +775,8 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     ncertFigureRef: "NCERT Class 10 Fig 9.8(b)",
     boardMarks: 5,
     boardFrequency: "99% Recurrence",
-    imageUrl: "/study_material/science/diagrams/convex_mirror_between_inf_and_pole.png",
+    imageUrl: "/study_material/science/diagrams/convex_mirror_between_inf_and_pole.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Convex_mirror_ray_diagrams_202609051442.jpeg",
     imageAlt: "Ray diagram for convex mirror when object is between infinity and pole",
     objectPosition: "Between Infinity and Pole",
     imagePosition: "Between Pole P and Focus F behind mirror",
@@ -803,6 +812,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 3,
     boardFrequency: "95% Recurrence",
     imageUrl: "/study_material/science/diagrams/convex_lens_at_infinity.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Convex_lens_optics_diagram_sheet_202609051445.jpeg",
     imageAlt: "Ray diagram for convex lens with object at infinity",
     objectPosition: "At Infinity",
     imagePosition: "At Focus F2",
@@ -821,6 +831,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 3,
     boardFrequency: "97% Recurrence",
     imageUrl: "/study_material/science/diagrams/convex_lens_beyond_2f1.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Convex_lens_optics_diagram_sheet_202609051445.jpeg",
     imageAlt: "Ray diagram for convex lens with object beyond 2F1",
     objectPosition: "Beyond 2F1",
     imagePosition: "Between F2 and 2F2",
@@ -839,6 +850,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 3,
     boardFrequency: "99% Recurrence",
     imageUrl: "/study_material/science/diagrams/convex_lens_at_2f1.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Creating_convex_lens_ray_diagrams_202609051445.jpeg",
     imageAlt: "Ray diagram for convex lens with object at 2F1",
     objectPosition: "At 2F1",
     imagePosition: "At 2F2",
@@ -857,6 +869,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 3,
     boardFrequency: "96% Recurrence",
     imageUrl: "/study_material/science/diagrams/convex_lens_between_f1_and_2f1.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Creating_convex_lens_ray_diagrams_202609051445.jpeg",
     imageAlt: "Ray diagram for convex lens with object between F1 and 2F1",
     objectPosition: "Between F1 and 2F1",
     imagePosition: "Beyond 2F2",
@@ -892,7 +905,8 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     ncertFigureRef: "NCERT Class 10 Fig 9.16(f)",
     boardMarks: 5,
     boardFrequency: "100% Recurrence (Most tested lens diagram on CBSE boards)",
-    imageUrl: "/study_material/science/diagrams/convex_lens_between_o_and_f1.png",
+    imageUrl: "/study_material/science/diagrams/convex_lens_between_o_and_f1.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Creating_convex_lens_ray_diagrams_202609051445.jpeg",
     imageAlt: "Ray diagram for convex lens with object between O and F1",
     objectPosition: "Between Optical Centre O and Focus F1",
     imagePosition: "On the same side as object (behind object)",
@@ -949,6 +963,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 5,
     boardFrequency: "98% Recurrence",
     imageUrl: "/study_material/science/diagrams/anatomy_of_human_eye.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Concave_lens_and_eye_anatomy_202609051450.jpeg",
     imageAlt: "Sectional diagram of human eye anatomy",
     keyRule: "Cornea, Iris, Pupil, Crystalline Lens, Ciliary Muscles, Retina, Optic Nerve.",
     examinerAlert: "Cornea provides most refraction. Ciliary muscles alter lens curvature (power of accommodation).",
@@ -964,6 +979,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 5,
     boardFrequency: "100% Recurrence (CBSE 2024, 2023, 2022, 2020)",
     imageUrl: "/study_material/science/diagrams/myopia_defects_and_correction.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/CBSE_physics_diagram_vision_defects_202609051451.jpeg",
     imageAlt: "Myopia defects and correction ray diagrams",
     keyRule: "Causes: (i) Excessive lens curvature, (ii) Eyeball elongation. Image forms in front of retina.",
     examinerAlert: "Correction requires CONCAVE lens of focal length equal to far point distance (P = -1/f).",
@@ -979,6 +995,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 5,
     boardFrequency: "99% Recurrence",
     imageUrl: "/study_material/science/diagrams/hypermetropia_defects_and_correction.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/CBSE_physics_diagram_vision_defects_202609051451.jpeg",
     imageAlt: "Hypermetropia defects and correction ray diagrams",
     keyRule: "Causes: (i) Focal length too long, (ii) Eyeball too small. Image forms behind retina.",
     examinerAlert: "Correction requires CONVEX lens to provide additional convergence.",
@@ -1008,7 +1025,8 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     ncertFigureRef: "NCERT Class 10 Fig 10.5",
     boardMarks: 3,
     boardFrequency: "98% Recurrence",
-    imageUrl: "/study_material/science/diagrams/prism_dispersion.png",
+    imageUrl: "/study_material/science/diagrams/prism_dispersion.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Creating_physics_diagram_sheet_202609051451.jpeg",
     imageAlt: "Dispersion of white light by prism into VIBGYOR spectrum",
     keyRule: "White light splits into seven constituent colours. Red has longest wavelength, bends least. Violet bends most.",
     examinerAlert: "RED is strictly on TOP, VIOLET is strictly at BOTTOM. Reversing order loses full marks!",
@@ -1071,6 +1089,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 5,
     boardFrequency: "100% Recurrence (Board Theory + Practical Exam)",
     imageUrl: "/study_material/science/diagrams/ohms_law_circuit.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/CBSE_Physics_diagram_sheet_202609051452.jpeg",
     imageAlt: "Circuit diagram for verifying Ohm's Law",
     keyRule: "Ammeter in SERIES with resistor (low resistance); Voltmeter in PARALLEL across resistor (high resistance); Rheostat in series.",
     examinerAlert: "Ensure positive (+) terminal of battery connects to positive (+) terminals of ammeter and voltmeter.",
@@ -1086,6 +1105,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 5,
     boardFrequency: "98% Recurrence",
     imageUrl: "/study_material/science/diagrams/resistors_in_series.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Resistors_series_parallel_circui_202609051452.jpeg",
     imageAlt: "Circuit diagram for three resistors connected in series",
     keyRule: "Current I is identical through every resistor. Total V = V1 + V2 + V3. Equivalent Resistance Rs = R1 + R2 + R3.",
     examinerAlert: "Draw separate voltmeters across each resistor and one ammeter in series.",
@@ -1101,6 +1121,7 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 5,
     boardFrequency: "98% Recurrence",
     imageUrl: "/study_material/science/diagrams/resistors_in_parallel.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Resistors_series_parallel_circui_202609051452.jpeg",
     imageAlt: "Circuit diagram for three resistors connected in parallel",
     keyRule: "Potential difference V is identical across each branch. Total I = I1 + I2 + I3. 1/Rp = 1/R1 + 1/R2 + 1/R3.",
     examinerAlert: "Rp is always LESS than the smallest individual resistance in parallel combination.",
@@ -1116,9 +1137,180 @@ export const NCERT_PHYSICS_DIAGRAMS_VAULT: VisualDiagramAsset[] = [
     boardMarks: 5,
     boardFrequency: "99% Recurrence",
     imageUrl: "/study_material/science/diagrams/domestic_electric_circuit.jpeg",
+    masterSheetUrl: "/study_material/science/master_sheets/Create_domestic_electric_circuit_202609051452.jpeg",
     imageAlt: "Schematic diagram of one of the common domestic circuits",
     keyRule: "Live wire (Red/Brown, 220 V), Neutral wire (Black/Blue, 0 V), Earth wire (Green/Yellow). Electricity meter, main fuse, distribution box, appliances in parallel.",
     examinerAlert: "Switches and fuses MUST always be connected in the LIVE wire, never in the neutral wire.",
     markingTip: "Earth wire provides low-resistance leakage path to ground, preventing fatal electric shocks."
   }
 ];
+
+// =========================================================================
+// 15 AUTHENTIC MASTER STUDY SHEETS (HIGH-RES ORIGINAL VAULT MATERIALS)
+// Direct photo sheets provided for Class 10 Board Revision
+// =========================================================================
+
+export interface MasterPhotoSheet {
+  id: string;
+  title: string;
+  category: "Spherical Mirrors" | "Lenses & Refraction" | "Human Eye & Dispersion" | "Circuits & Electricity";
+  chapterNo: number;
+  chapterName: string;
+  sheetUrl: string;
+  description: string;
+  containedDiagrams: string[];
+}
+
+export const SCIENCE_MASTER_PHOTO_SHEETS: MasterPhotoSheet[] = [
+  {
+    id: "sheet_concave_mirror_1",
+    title: "Concave Mirror Master Sheet I (Infinity & Beyond C)",
+    category: "Spherical Mirrors",
+    chapterNo: 9,
+    chapterName: "Light — Reflection and Refraction",
+    sheetUrl: "/study_material/science/master_sheets/Concave_mirror_physics_diagram_s_202609051440.jpeg",
+    description: "Complete dual-panel ray diagrams for Concave Mirror: Object at infinity converging at F, and Object beyond C with image between F and C.",
+    containedDiagrams: ["Object at Infinity", "Object Beyond C"]
+  },
+  {
+    id: "sheet_concave_mirror_2",
+    title: "Concave Mirror Master Sheet II (At Focus F & Between P and F)",
+    category: "Spherical Mirrors",
+    chapterNo: 9,
+    chapterName: "Light — Reflection and Refraction",
+    sheetUrl: "/study_material/science/master_sheets/Creating_concave_mirror_physics_202609051441.jpeg",
+    description: "Full ray construction for Object at Focus F (image at infinity) and Case 6 virtual erect magnified image behind mirror (shaving/dentist mirror).",
+    containedDiagrams: ["Object at Focus F", "Object Between P and F (Dentist Mirror)"]
+  },
+  {
+    id: "sheet_concave_mirror_3",
+    title: "Concave Mirror Master Sheet III (At C & Between C and F)",
+    category: "Spherical Mirrors",
+    chapterNo: 9,
+    chapterName: "Light — Reflection and Refraction",
+    sheetUrl: "/study_material/science/master_sheets/Drawing_concave_mirror_ray_diagrams_202609051442.jpeg",
+    description: "Crucial benchmark case: Object at C (m = -1, same size, inverted) and Object between C and F (real, magnified image beyond C).",
+    containedDiagrams: ["Object at C (m = -1)", "Object Between C and F"]
+  },
+  {
+    id: "sheet_convex_mirror",
+    title: "Convex Mirror Ray Diagrams Master Sheet (Rear-View Optics)",
+    category: "Spherical Mirrors",
+    chapterNo: 9,
+    chapterName: "Light — Reflection and Refraction",
+    sheetUrl: "/study_material/science/master_sheets/Convex_mirror_ray_diagrams_202609051442.jpeg",
+    description: "Both standard convex mirror cases: Object at infinity forming point image at focus, and Object between infinity and pole forming diminished virtual image.",
+    containedDiagrams: ["Object at Infinity", "Object Between Infinity and Pole (Rear-view Mirror)"]
+  },
+  {
+    id: "sheet_convex_lens_1",
+    title: "Convex Lens Master Sheet I (Infinity & Beyond 2F1)",
+    category: "Lenses & Refraction",
+    chapterNo: 9,
+    chapterName: "Light — Reflection and Refraction",
+    sheetUrl: "/study_material/science/master_sheets/Convex_lens_optics_diagram_sheet_202609051445.jpeg",
+    description: "High-resolution ray diagrams for convex lens refraction: Object at infinity focusing at 2F2, and Object beyond 2F1 forming diminished image between F2 and 2F2.",
+    containedDiagrams: ["Object at Infinity", "Object Beyond 2F1"]
+  },
+  {
+    id: "sheet_convex_lens_2",
+    title: "Convex Lens Master Sheet II (At 2F1, Between F1-2F1, & Magnifier)",
+    category: "Lenses & Refraction",
+    chapterNo: 9,
+    chapterName: "Light — Reflection and Refraction",
+    sheetUrl: "/study_material/science/master_sheets/Creating_convex_lens_ray_diagrams_202609051445.jpeg",
+    description: "Essential cases: Object at 2F1 (m = -1), Object between F1 and 2F1 (projector), and Case 6 Object between Optical Centre O and F1 (Magnifying Glass).",
+    containedDiagrams: ["Object at 2F1", "Object Between F1 and 2F1", "Magnifying Glass (Virtual & Erect)"]
+  },
+  {
+    id: "sheet_concave_lens_eye",
+    title: "Concave Lens & Eye Anatomy Master Sheet",
+    category: "Lenses & Refraction",
+    chapterNo: 10,
+    chapterName: "The Human Eye and Colourful World",
+    sheetUrl: "/study_material/science/master_sheets/Concave_lens_and_eye_anatomy_202609051450.jpeg",
+    description: "Concave diverging lens ray optics combined with detailed cross-sectional anatomy of the Human Eye (Cornea, Iris, Pupil, Ciliary muscles, Retina, Optic nerve).",
+    containedDiagrams: ["Concave Lens Ray Divergence", "Anatomy of Human Eye"]
+  },
+  {
+    id: "sheet_vision_defects",
+    title: "Vision Defects & Corrections Master Sheet (Myopia & Hypermetropia)",
+    category: "Human Eye & Dispersion",
+    chapterNo: 10,
+    chapterName: "The Human Eye and Colourful World",
+    sheetUrl: "/study_material/science/master_sheets/CBSE_physics_diagram_vision_defects_202609051451.jpeg",
+    description: "Compulsory 5-mark board diagram: Normal eye, Myopic eye (front of retina) + Concave correction; Hypermetropic eye (behind retina) + Convex correction.",
+    containedDiagrams: ["Myopia (Defective + Corrected)", "Hypermetropia (Defective + Corrected)"]
+  },
+  {
+    id: "sheet_prism_refraction",
+    title: "Triangular Glass Prism & Spectrum Master Sheet",
+    category: "Human Eye & Dispersion",
+    chapterNo: 10,
+    chapterName: "The Human Eye and Colourful World",
+    sheetUrl: "/study_material/science/master_sheets/Create_CBSE_Physics_diagram_sheet_202609051451.jpeg",
+    description: "Refraction through triangular prism showing Angle of Incidence (i), Emergence (e), and Deviation (D), alongside Newton's inverted prism recombination.",
+    containedDiagrams: ["Prism Angle of Deviation (D)", "Newton's Recombination of White Light"]
+  },
+  {
+    id: "sheet_atmospheric_refraction",
+    title: "Atmospheric Optics & Dispersion Master Sheet",
+    category: "Human Eye & Dispersion",
+    chapterNo: 10,
+    chapterName: "The Human Eye and Colourful World",
+    sheetUrl: "/study_material/science/master_sheets/Creating_physics_diagram_sheet_202609051451.jpeg",
+    description: "Atmospheric refraction (apparent star position, delayed sunset & early sunrise) and internal reflection inside a raindrop forming a Rainbow.",
+    containedDiagrams: ["Rainbow Formation (Dispersion + TIR)", "Atmospheric Refraction & Twinkling"]
+  },
+  {
+    id: "sheet_ohms_law",
+    title: "Ohm's Law Experimental Circuit & V-I Graph Master Sheet",
+    category: "Circuits & Electricity",
+    chapterNo: 11,
+    chapterName: "Electricity",
+    sheetUrl: "/study_material/science/master_sheets/CBSE_Physics_diagram_sheet_202609051452.jpeg",
+    description: "Official NCERT circuit diagram for Ohm's Law verification: Ammeter in series, Voltmeter in parallel across Nichrome wire, Rheostat, and linear V-I slope.",
+    containedDiagrams: ["Ohm's Law Verification Circuit", "Linear V-I Characteristic Graph"]
+  },
+  {
+    id: "sheet_resistors_combination",
+    title: "Resistors in Series & Parallel Master Sheet",
+    category: "Circuits & Electricity",
+    chapterNo: 11,
+    chapterName: "Electricity",
+    sheetUrl: "/study_material/science/master_sheets/Resistors_series_parallel_circui_202609051452.jpeg",
+    description: "Side-by-side comparative circuit layouts: Series combination (Rs = R1+R2+R3, same current I) vs Parallel combination (1/Rp = 1/R1+1/R2+1/R3, same voltage V).",
+    containedDiagrams: ["Series Resistors Circuit", "Parallel Resistors Circuit"]
+  },
+  {
+    id: "sheet_domestic_circuit",
+    title: "Domestic Electric Wiring Circuit Master Sheet",
+    category: "Circuits & Electricity",
+    chapterNo: 12,
+    chapterName: "Magnetic Effects of Electric Current",
+    sheetUrl: "/study_material/science/master_sheets/Create_domestic_electric_circuit_202609051452.jpeg",
+    description: "Standard domestic 220V AC wiring showing Live Wire (red), Neutral Wire (black), Earth Wire (green), Electricity Meter, Main Fuse, and parallel appliance branches.",
+    containedDiagrams: ["Domestic Electric Circuit (Live, Neutral, Earth)"]
+  },
+  {
+    id: "sheet_physics_ray_diagrams_overview",
+    title: "Convex & Concave Lens Ray Tracing Overview Master Sheet",
+    category: "Lenses & Refraction",
+    chapterNo: 9,
+    chapterName: "Light — Reflection and Refraction",
+    sheetUrl: "/study_material/science/master_sheets/Create_physics_ray_diagrams_sheet_202609051445.jpeg",
+    description: "Comprehensive multi-panel ray tracing study sheet detailing focal points, principal axis rules, and image formation for spherical lenses.",
+    containedDiagrams: ["Convex Lens Ray Rules", "Image Formation at F and 2F", "Diverging Lens Ray Behavior"]
+  },
+  {
+    id: "sheet_optics_educational_reference",
+    title: "Optics & Sign Convention Study Sheet",
+    category: "Spherical Mirrors",
+    chapterNo: 9,
+    chapterName: "Light — Reflection and Refraction",
+    sheetUrl: "/study_material/science/master_sheets/Physics_educational_diagram_shee_202609051445.jpeg",
+    description: "Visual textbook study guide detailing the Cartesian sign convention, focal length polarity (+ for convex, - for concave), and mirror formula verification.",
+    containedDiagrams: ["Cartesian Sign Convention", "Mirror Formula Visual Reference", "Magnification Rules"]
+  }
+];
+

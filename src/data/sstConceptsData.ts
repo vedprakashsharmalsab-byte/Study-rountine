@@ -2442,7 +2442,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 1: Power Sharing Belgium vs Sri Lanka",
-        "src": "/mnemonics/sst/pol_ch1_powersharing_1.jpeg",
+        "src": "/mnemonics/sst/pol_ch1_power_sharing_1.jpeg",
         "description": "Visual diagram of Flemish/Wallonia geography vs Sri Lankan Sinhala/Tamil demographics."
       }
     ],
@@ -2502,7 +2502,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 1: Sri Lanka Majoritarianism",
-        "src": "/mnemonics/sst/pol_ch1_powersharing_1.jpeg",
+        "src": "/mnemonics/sst/pol_ch1_power_sharing_1.jpeg",
         "description": "Visual breakdown of the 1956 Act, Buddhist preference, and Civil War consequences."
       }
     ],
@@ -2558,7 +2558,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 1: Belgian Accommodation Model",
-        "src": "/mnemonics/sst/pol_ch1_powersharing_1.jpeg",
+        "src": "/mnemonics/sst/pol_ch1_power_sharing_1.jpeg",
         "description": "Visual diagram detailing the 4 pillars of the Belgian constitutional settlement."
       }
     ],
@@ -2611,7 +2611,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 2: Prudential vs Moral Reasons",
-        "src": "/mnemonics/sst/pol_ch1_powersharing_2.jpeg",
+        "src": "/mnemonics/sst/pol_ch1_power_sharing_2.jpeg",
         "description": "Visual balance scale contrasting Prudential (stability) vs Moral (spirit of democracy) reasons."
       }
     ],
@@ -2666,7 +2666,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 2: Forms of Power Sharing",
-        "src": "/mnemonics/sst/pol_ch1_powersharing_2.jpeg",
+        "src": "/mnemonics/sst/pol_ch1_power_sharing_2.jpeg",
         "description": "Visual diagram comparing Horizontal, Vertical, Social Group, and Coalition forms of power sharing."
       }
     ],
@@ -3363,7 +3363,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 1: Biodiversity & IUCN Spectrum",
-        "src": "/mnemonics/sst/geo_ch2_forest_1.jpeg",
+        "src": "/mnemonics/sst/geo_ch2_forest_wildlife_1.jpeg",
         "description": "Visual chart comparing Normal, Vulnerable, Endangered, Endemic, and Extinct species."
       }
     ],
@@ -3419,7 +3419,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 1: Forest Depletion Drivers",
-        "src": "/mnemonics/sst/geo_ch2_forest_1.jpeg",
+        "src": "/mnemonics/sst/geo_ch2_forest_wildlife_1.jpeg",
         "description": "Visual diagram of 1951-80 agriculture, Narmada Sagar inundation, and Buxa dolomite mining."
       }
     ],
@@ -3477,7 +3477,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 1: Project Tiger & 1972 Act",
-        "src": "/mnemonics/sst/geo_ch2_forest_1.jpeg",
+        "src": "/mnemonics/sst/geo_ch2_forest_wildlife_1.jpeg",
         "description": "Visual map of Corbett, Sundarbans, Bandhavgarh, Sariska, and Manas tiger reserves."
       }
     ],
@@ -3535,7 +3535,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 2: Forest Classification",
-        "src": "/mnemonics/sst/geo_ch2_forest_2.jpeg",
+        "src": "/mnemonics/sst/geo_ch2_forest_wildlife_2.jpeg",
         "description": "Visual pie chart comparing Reserved (>50%), Protected (1/3rd), and Unclassed forests."
       }
     ],
@@ -3592,7 +3592,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 2: Community Conservation",
-        "src": "/mnemonics/sst/geo_ch2_forest_2.jpeg",
+        "src": "/mnemonics/sst/geo_ch2_forest_wildlife_2.jpeg",
         "description": "Visual diagram of Chipko, Sacred Groves, Bishnois, and JFM 1988."
       }
     ],
@@ -3649,7 +3649,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 1: Water Scarcity & Management",
-        "src": "/mnemonics/sst/geo_ch3_water_1.jpeg",
+        "src": "/mnemonics/sst/geo_ch3_water_resources_1.jpeg",
         "description": "Visual diagram comparing quantitative vs qualitative scarcity, 22% hydel power, and JJM."
       }
     ],
@@ -3705,7 +3705,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 1: Multi-Purpose Dams Pros & Cons",
-        "src": "/mnemonics/sst/geo_ch3_water_1.jpeg",
+        "src": "/mnemonics/sst/geo_ch3_water_resources_1.jpeg",
         "description": "Visual balance scale contrasting Nehru's 'Temples of Modern India' with Narmada Bachao Andolan criticisms."
       }
     ],
@@ -3767,7 +3767,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 2: Traditional Water Harvesting",
-        "src": "/mnemonics/sst/geo_ch3_water_2.jpeg",
+        "src": "/mnemonics/sst/geo_ch3_water_resources_2.jpeg",
         "description": "Visual diagram of Guls/Kuls, Khadins, Rooftop Tankas, and Bamboo Drip irrigation."
       }
     ],
@@ -3824,7 +3824,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 2: Modern Rainwater Harvesting",
-        "src": "/mnemonics/sst/geo_ch3_water_2.jpeg",
+        "src": "/mnemonics/sst/geo_ch3_water_resources_2.jpeg",
         "description": "Visual summary of Tamil Nadu mandatory law, Gendathur 200-house model, and well recharge."
       }
     ],
@@ -3879,7 +3879,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic 2: 8 Major Dams Map Work",
-        "src": "/mnemonics/sst/geo_ch3_water_2.jpeg",
+        "src": "/mnemonics/sst/geo_ch3_water_resources_2.jpeg",
         "description": "Visual map checklist of Salal, Bhakra Nangal, Tehri, Rana Pratap, Sardar Sarovar, Hirakud, Nagarjuna Sagar, Tungabhadra."
       }
     ],
@@ -4373,7 +4373,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: 3-Stage Evolution",
-        "src": "/mnemonics/sst/eco_ch2_sectors_3.jpeg",
+        "src": "/mnemonics/sst/eco_ch2_sectors_1.jpeg",
         "description": "Plough & Ox -> Smokestack Factory -> Modern IT Glass Tower."
       }
     ],
@@ -4423,7 +4423,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: B-A-I-T Drivers",
-        "src": "/mnemonics/sst/eco_ch2_sectors_4.jpeg",
+        "src": "/mnemonics/sst/eco_ch2_sectors_2.jpeg",
         "description": "B: Basic Services, A: Agro-industry Linkage, I: Income Rise Demand, T: Telecom & IT Expansion."
       }
     ],
@@ -4476,7 +4476,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: Laxmi's 5-Member Plot",
-        "src": "/mnemonics/sst/eco_ch2_sectors_5.jpeg",
+        "src": "/mnemonics/sst/eco_ch2_sectors_1.jpeg",
         "description": "5 family members weeding a tiny plot. Removing 2 members leaves harvest size unchanged."
       }
     ],
@@ -4526,7 +4526,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: 100-Day Guarantee",
-        "src": "/mnemonics/sst/eco_ch2_sectors_6.jpeg",
+        "src": "/mnemonics/sst/eco_ch2_sectors_2.jpeg",
         "description": "MGNREGA logo showing 100 days work card, check dam construction, and women workers."
       }
     ],
@@ -4578,7 +4578,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: Kanta vs Kamal Table",
-        "src": "/mnemonics/sst/eco_ch2_sectors_7.jpeg",
+        "src": "/mnemonics/sst/eco_ch2_sectors_1.jpeg",
         "description": "Split visual: Kanta in office with appointment letter vs Kamal in daily grocery store working 14 hours."
       }
     ],
@@ -4628,7 +4628,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: Railways vs TISCO",
-        "src": "/mnemonics/sst/eco_ch2_sectors_8.jpeg",
+        "src": "/mnemonics/sst/eco_ch2_sectors_2.jpeg",
         "description": "Indian Railways engine (Public - Welfare) juxtaposed with TISCO steel plant (Private - Profit)."
       }
     ],
@@ -4678,7 +4678,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: Shoe vs Wheat Dilemma",
-        "src": "/mnemonics/sst/eco_ch3_money_1.jpeg",
+        "src": "/mnemonics/sst/eco_ch3_money_credit_1.jpeg",
         "description": "Shoe maker looking at wheat farmer, who refuses shoes and demands pots."
       }
     ],
@@ -4731,7 +4731,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: Anatomy of a Cheque",
-        "src": "/mnemonics/sst/eco_ch3_money_2.jpeg",
+        "src": "/mnemonics/sst/eco_ch3_money_credit_2.jpeg",
         "description": "Diagram of a bank cheque showing Payee, Account Number, Amount in words/figures, and Signature."
       }
     ],
@@ -4781,7 +4781,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: Bank Balance Scale",
-        "src": "/mnemonics/sst/eco_ch3_money_3.jpeg",
+        "src": "/mnemonics/sst/eco_ch3_money_credit_1.jpeg",
         "description": "Depositor gives Rs 100 (earns 4%), Bank keeps Rs 15 cash, lends Rs 85 to borrower (charges 10%). Profit = 6%."
       }
     ],
@@ -4831,7 +4831,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: Salim vs Swapna Contrast",
-        "src": "/mnemonics/sst/eco_ch3_money_4.jpeg",
+        "src": "/mnemonics/sst/eco_ch3_money_credit_2.jpeg",
         "description": "Salim smiling with profit & shoes delivered vs Swapna weeping while selling land deed to moneylender."
       }
     ],
@@ -4883,7 +4883,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: C-I-D-R Terms",
-        "src": "/mnemonics/sst/eco_ch3_money_5.jpeg",
+        "src": "/mnemonics/sst/eco_ch3_money_credit_1.jpeg",
         "description": "C: Collateral, I: Interest Rate, D: Documentation, R: Repayment Mode."
       }
     ],
@@ -4937,7 +4937,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: Formal vs Informal Compass",
-        "src": "/mnemonics/sst/eco_ch3_money_6.jpeg",
+        "src": "/mnemonics/sst/eco_ch3_money_credit_2.jpeg",
         "description": "Comparison diagram: Bank (RBI eye watching, 8% interest) vs Moneylender (unregulated, 60% interest, ledger)."
       }
     ],
@@ -4989,7 +4989,7 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     "mnemonicImages": [
       {
         "title": "Mnemonic: 4 Steps of SHG",
-        "src": "/mnemonics/sst/eco_ch3_money_7.jpeg",
+        "src": "/mnemonics/sst/eco_ch3_money_credit_1.jpeg",
         "description": "15-20 Women -> Regular Savings -> Internal Loans -> Bank Linkage without Collateral."
       }
     ],
