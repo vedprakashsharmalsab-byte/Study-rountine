@@ -57,6 +57,7 @@ import {
 import {
   MATH_OFFICIAL_BLUEPRINTS,
   SCIENCE_OFFICIAL_BLUEPRINTS,
+  SST_OFFICIAL_BLUEPRINTS,
   type ChapterBlueprint
 } from "@/data/cbseOfficialBlueprints";
 import {
@@ -292,6 +293,18 @@ export default function ConceptsHubView({
   const activeScienceBlueprint = useMemo(() => {
     return SCIENCE_OFFICIAL_BLUEPRINTS[activeScienceChapterNo] || SCIENCE_OFFICIAL_BLUEPRINTS[1];
   }, [activeScienceChapterNo]);
+
+  // Active SST Blueprint (CBSE 2026-2027)
+  const activeSSTBlueprint = useMemo(() => {
+    return SST_OFFICIAL_BLUEPRINTS[activeSSTChapterNo] || SST_OFFICIAL_BLUEPRINTS[1];
+  }, [activeSSTChapterNo]);
+
+  // Unified active blueprint for current subject
+  const activeCurrentBlueprint = useMemo(() => {
+    if (activeSubject === "math") return activeMathBlueprint;
+    if (activeSubject === "science") return activeScienceBlueprint;
+    return activeSSTBlueprint;
+  }, [activeSubject, activeMathBlueprint, activeScienceBlueprint, activeSSTBlueprint]);
 
   // Filtered Science Topics (search)
   const filteredScienceTopics = useMemo(() => {
@@ -718,10 +731,9 @@ export default function ConceptsHubView({
 
       {/* =========================================================================
           2. OFFICIAL CBSE BOARD BLUEPRINT & MARKING SCHEME CARD (CRITICAL REQUIREMENT)
-          Only rendered for Math & Science — SST has no per-chapter blueprint object,
-          rendering it for SST caused an undefined property access crash → stuck skeleton.
+          Fully supported for Mathematics (041), Science (086) & Social Science (087)
+          Standards: CBSE Curriculum & Marking Schemes 2026-2027
           ========================================================================= */}
-      {activeSubject !== "sst" && (
       <div
         className={`p-7 sm:p-9 rounded-3xl border transition-all ${
           isDark
@@ -738,11 +750,11 @@ export default function ConceptsHubView({
               <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
                 isDark ? "bg-amber-500/15 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-900 border-amber-300"
               }`}>
-                {activeSubject === "math" ? activeMathBlueprint.unitName : activeScienceBlueprint.unitName}
+                {activeCurrentBlueprint.unitName}
               </span>
             </div>
             <h3 className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-              {activeSubject === "math" ? activeMathChapter.title : activeScienceMeta.name} — Board Weightage: {activeSubject === "math" ? activeMathBlueprint.expectedMarks : activeScienceBlueprint.expectedMarks}
+              {activeSubject === "math" ? activeMathChapter.title : activeSubject === "science" ? activeScienceMeta.name : activeSSTMeta.name} — Board Weightage: {activeCurrentBlueprint.expectedMarks}
             </h3>
           </div>
 
@@ -755,7 +767,7 @@ export default function ConceptsHubView({
 
         {/* Section-Wise Expected Question Pattern */}
         {(() => {
-          const currentBlueprint = activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint;
+          const currentBlueprint = activeCurrentBlueprint;
           const pattern = currentBlueprint.questionPattern;
           const chapterTotalMarks = pattern.mcq1M * 1 + pattern.vsa2M * 2 + pattern.sa3M * 3 + pattern.la5M * 5 + pattern.case4M * 4;
           const chapterTotalQuestions = pattern.mcq1M + pattern.vsa2M + pattern.sa3M + pattern.la5M + pattern.case4M;
@@ -829,7 +841,7 @@ export default function ConceptsHubView({
             <CheckCircle2 className="w-4 h-4" /> Official CBSE Step-by-Step Mark Award Rubric:
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-            {(activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).markingSchemeRubric.map((r, i) => (
+            {activeCurrentBlueprint.markingSchemeRubric.map((r, i) => (
               <div
                 key={i}
                 className={`p-4 rounded-2xl border flex items-start justify-between gap-3.5 ${
@@ -856,7 +868,7 @@ export default function ConceptsHubView({
             <ShieldAlert className="w-4 h-4" /> Examiner Trap Penalties (Marks Deducted by Board Evaluators):
           </span>
           <ul className="space-y-2 text-xs sm:text-sm text-rose-300 font-medium">
-            {(activeSubject === "math" ? activeMathBlueprint : activeScienceBlueprint).examinerPenalties.map((pen, i) => (
+            {activeCurrentBlueprint.examinerPenalties.map((pen, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="text-rose-400 font-bold shrink-0 mt-0.5">⚠️</span>
                 <span className="leading-relaxed">{pen}</span>
@@ -865,7 +877,6 @@ export default function ConceptsHubView({
           </ul>
         </div>
       </div>
-      )}
 
       {/* SST: Elegant Study Blueprint Card */}
       {activeSubject === "sst" && (

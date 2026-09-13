@@ -504,3 +504,187 @@ export const SCIENCE_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     ]
   }
 };
+
+// =========================================================================
+// CBSE Class 10 Social Science (Code 087) Official Blueprints & Rubrics
+// Standards: CBSE Official Curriculum 2026-2027
+// Theory: 80 Marks | Internal: 20 Marks | Total: 100 Marks
+// 4 Disciplines: History (20M), Geography (20M), Pol Science (20M), Economics (20M)
+// =========================================================================
+
+export const SST_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
+  1: {
+    chapterNo: 1,
+    chapterName: "The Rise of Nationalism in Europe",
+    unitName: "Unit I: India and the Contemporary World - II (History: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "6–8 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 1, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "Frederic Sorrieu's utopian vision (1848 print analysis)", marks: "1.0 Mark", rubricNote: "Democratic and Social Republics" },
+      { step: "French Revolution & Napoleonic Civil Code 1804 (Equality before law, removal of guilds)", marks: "1.5 Marks", rubricNote: "Administrative reforms" },
+      { step: "Unification of Germany (Bismarck, Blood and Iron policy, 1871 Versailles proclamation)", marks: "1.5 Marks", rubricNote: "Three wars over 7 years" },
+      { step: "Unification of Italy (Mazzini, Cavour, Garibaldi Red Shirts, Victor Emmanuel II 1861)", marks: "1.0 Mark", rubricNote: "Key personalities role" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing Mazzini (Young Italy) with Garibaldi (Red Shirts).",
+      "-1.0 Mark in 5M question for writing without chronological headings."
+    ]
+  },
+  2: {
+    chapterNo: 2,
+    chapterName: "Nationalism in India",
+    unitName: "Unit I: India and the Contemporary World - II (History: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "7–9 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 1, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "First World War economic impacts & Satyagraha philosophy (Champaran, Kheda, Ahmedabad)", marks: "1.5 Marks", rubricNote: "Truth and non-violence force" },
+      { step: "Rowlatt Act (1919), Jallianwala Bagh Massacre (13 April 1919) & Khilafat Movement", marks: "1.5 Marks", rubricNote: "General Dyer martial law" },
+      { step: "Non-Cooperation Movement (1920-1922) spread in towns, countryside (Awadh), and tribal forests (Alluri Sitaram Raju)", marks: "1.5 Marks", rubricNote: "Chauri Chaura withdrawal" },
+      { step: "Civil Disobedience Movement (1930 Dandi Salt March) vs NCM distinctions & Poona Pact (Sept 1932)", marks: "1.5 Marks", rubricNote: "Breaking law vs non-cooperation" }
+    ],
+    examinerPenalties: [
+      "-1.0 Mark for confusing dates: Dandi March began 12 March 1930 and reached Dandi 6 April 1930.",
+      "-0.5 Mark for omitting Baba Ramchandra in Oudh Kisan Sabha."
+    ]
+  },
+  3: {
+    chapterNo: 3,
+    chapterName: "Power Sharing",
+    unitName: "Unit III: Democratic Politics - II (Political Science: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "Ethnic composition of Belgium (59% Dutch in Flemish, 40% French in Wallonia, 1% German)", marks: "1.0 Mark", rubricNote: "Capital Brussels 80% French, 20% Dutch" },
+      { step: "Ethnic composition & Majoritarianism in Sri Lanka (74% Sinhala, 18% Tamil; 1956 Act making Sinhala sole language)", marks: "1.5 Marks", rubricNote: "Led to civil war and distrust" },
+      { step: "Belgian Model of Accommodation (Equal Dutch/French ministers, Community government)", marks: "1.5 Marks", rubricNote: "Avoided civic strife" },
+      { step: "Prudential reasons (reduces conflict) vs Moral reasons (spirit of democracy) of power sharing", marks: "1.0 Mark", rubricNote: "Mandatory conceptual distinction" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing Prudential (outcome-based) with Moral reasons."
+    ]
+  },
+  4: {
+    chapterNo: 4,
+    chapterName: "Federalism",
+    unitName: "Unit III: Democratic Politics - II (Political Science: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "Key features of Federalism (Two or more tiers, distinct jurisdictions, constitutionally protected)", marks: "1.5 Marks", rubricNote: "Courts interpret constitution" },
+      { step: "'Coming Together' (USA, Switzerland, Australia) vs 'Holding Together' (India, Spain, Belgium)", marks: "1.5 Marks", rubricNote: "Degree of constituent state power" },
+      { step: "Three-fold distribution of legislative powers (Union List, State List, Concurrent List, Residuary Subjects)", marks: "1.5 Marks", rubricNote: "Examples for each list mandatory" },
+      { step: "Decentralisation in India (73rd & 74th Amendments 1992: mandatory elections, 33% women reservation, State Finance Commission)", marks: "1.0 Mark", rubricNote: "Panchayati Raj third tier" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for writing Police or Agriculture under Union list (they belong strictly to State list)."
+    ]
+  },
+  5: {
+    chapterNo: 5,
+    chapterName: "Resources and Development",
+    unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "Classification of Resources (Origin, Exhaustibility, Ownership, Status of Development)", marks: "1.0 Mark", rubricNote: "Potential vs Stock vs Reserves" },
+      { step: "Sustainable Development & Rio Earth Summit 1992 (Agenda 21)", marks: "1.0 Mark", rubricNote: "Development without damaging ecology" },
+      { step: "Land use pattern in India & Land Degradation causes (Deforestation, Overgrazing, Mining, Over-irrigation)", marks: "1.5 Marks", rubricNote: "State-specific causes: Punjab over-irrigation, MP mining" },
+      { step: "Soil types in India (Alluvial, Black/Regur, Red/Yellow, Laterite, Arid) & Soil Conservation measures", marks: "1.5 Marks", rubricNote: "Contour ploughing, terrace farming, shelter belts" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing Black soil (cotton, Deccan trap) with Laterite soil (leaching, cashew nut)."
+    ]
+  },
+  6: {
+    chapterNo: 6,
+    chapterName: "Forest and Wildlife Resources",
+    unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "3–4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "IUCN species classification (Normal, Endangered, Vulnerable, Rare, Endemic, Extinct)", marks: "1.5 Marks", rubricNote: "Examples: Lion-tailed macaque, Asiatic cheetah" },
+      { step: "Reserved Forests (>50% most valuable) vs Protected Forests (1/3rd) vs Unclassed Forests", marks: "1.5 Marks", rubricNote: "Government management classifications" },
+      { step: "Community conservation models (Sariska Tiger Reserve against mining, Bhairodev Dakav Sonchuri, Chipko Movement, Beej Bachao Andolan, JFM - Joint Forest Management 1988)", marks: "1.5 Marks", rubricNote: "Local village involvement" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for omitting the role of local communities in JFM."
+    ]
+  },
+  7: {
+    chapterNo: 7,
+    chapterName: "Water Resources",
+    unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "Causes of water scarcity (Overexploitation, unequal access, industrial pollution, excessive irrigation)", marks: "1.0 Mark", rubricNote: "Quantitative vs qualitative scarcity" },
+      { step: "Multi-purpose River Valley Projects: Benefits (Hydropower, irrigation, flood control) vs Criticisms (Submergence, displacement, seismicity, siltation)", marks: "1.5 Marks", rubricNote: "Narmada Bachao Andolan" },
+      { step: "Traditional Rainwater Harvesting systems (Kuls/Guls in Western Himalayas, Johads/Khadins in Rajasthan, Tankas, Rooftop harvesting)", marks: "1.5 Marks", rubricNote: "Tamil Nadu mandatory rooftop harvesting law" },
+      { step: "Bamboo drip irrigation system in Meghalaya", marks: "1.0 Mark", rubricNote: "200-year-old eco-friendly system" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for not naming the state (Tamil Nadu) where rooftop rainwater harvesting is legally compulsory."
+    ]
+  },
+  8: {
+    chapterNo: 8,
+    chapterName: "Development",
+    unitName: "Unit IV: Understanding Economic Development (Economics: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "5–6 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "What Development Promises: Different people, different goals; Conflicting developmental goals", marks: "1.0 Mark", rubricNote: "Industrialist dam vs tribal displacement" },
+      { step: "Income vs Other Goals (Freedom, security, respect, non-discrimination)", marks: "1.0 Mark", rubricNote: "Quality of life depends on non-material things" },
+      { step: "National Development & Comparing Countries: Average/Per Capita Income (World Bank Criterion)", marks: "1.5 Marks", rubricNote: "PCI hides gross disparities" },
+      { step: "UNDP Human Development Index (HDI) criteria: Per Capita Income + Life Expectancy at birth + Mean years of schooling", marks: "1.5 Marks", rubricNote: "Kerala vs Haryana comparison" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for saying World Bank uses HDI (World Bank uses ONLY Per Capita Income; UNDP uses HDI)."
+    ]
+  },
+  9: {
+    chapterNo: 9,
+    chapterName: "Sectors of the Indian Economy",
+    unitName: "Unit IV: Understanding Economic Development (Economics: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "7–8 Marks",
+    questionPattern: { mcq1M: 2, vsa2M: 1, sa3M: 0, la5M: 1, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "Primary, Secondary, and Tertiary sectors definition with examples", marks: "1.0 Mark", rubricNote: "Interdependence of sectors" },
+      { step: "Gross Domestic Product (GDP): Value of all FINAL goods and services produced within a country in a year", marks: "1.5 Marks", rubricNote: "Avoid double counting intermediate goods" },
+      { step: "Historical shift in sectors & Rising importance of Tertiary sector in India", marks: "1.5 Marks", rubricNote: "Basic services, ICT boom, higher income elastic demand" },
+      { step: "Disguised Unemployment in Agriculture & MGNREGA 2005 (Right to Work, 100 days guaranteed employment)", marks: "1.5 Marks", rubricNote: "Underemployment phenomenon" },
+      { step: "Organised vs Unorganised sectors; Public vs Private sectors", marks: "1.0 Mark", rubricNote: "Job security, paid leaves, social security" }
+    ],
+    examinerPenalties: [
+      "-1.0 Mark for defining GDP using intermediate goods value instead of FINAL goods value.",
+      "-0.5 Mark for writing MGNREGA provides 150 days (Standard law guarantees 100 days)."
+    ]
+  },
+  10: {
+    chapterNo: 10,
+    chapterName: "Money and Credit",
+    unitName: "Unit IV: Understanding Economic Development (Economics: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "6–7 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 1 },
+    markingSchemeRubric: [
+      { step: "Barter system & Double Coincidence of Wants; Money as medium of exchange", marks: "1.0 Mark", rubricNote: "Eliminates need for coincidence" },
+      { step: "Modern forms of money: Currency notes & Demand Deposits in banks (Cheque mechanism)", marks: "1.5 Marks", rubricNote: "Authorized by Government of India" },
+      { step: "Loan activities of banks & Terms of Credit (Interest rate, Collateral, Documentation, Mode of repayment)", marks: "1.5 Marks", rubricNote: "Collateral is asset pledged as guarantee" },
+      { step: "Formal Sector Loans (Banks, Cooperatives supervised by RBI) vs Informal Sector Loans (Moneylenders, traders with high interest)", marks: "1.5 Marks", rubricNote: "Debt trap danger in informal" },
+      { step: "Self-Help Groups (SHGs) for the poor (15-20 women members, small savings, collateral-free group loans)", marks: "1.5 Marks", rubricNote: "Overcomes lack of collateral" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for omitting the supervisory role of RBI in formal credit (RBI monitors Cash Reserve Ratio and loan targets)."
+    ]
+  }
+};

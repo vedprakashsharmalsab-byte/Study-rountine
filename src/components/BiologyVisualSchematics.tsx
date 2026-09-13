@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ZoomIn, ZoomOut, Maximize2, X, Sparkles, Award } from "lucide-react";
+import { ZoomIn, ZoomOut, Maximize2, X, Sparkles, Award, Eye, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 interface BiologySchematicProps {
   id: string;
@@ -15,1339 +15,2258 @@ export default function BiologyVisualSchematic({
   isDark,
 }: BiologySchematicProps) {
   const [isZoomed, setIsZoomed] = useState(false);
+  const [highlightPart, setHighlightPart] = useState<string | null>(null);
 
-  const labelBg = isDark ? "rgba(8, 12, 28, 0.94)" : "rgba(255,255,255,0.97)";
-  const labelBorder = isDark ? "rgba(56,189,248,0.18)" : "rgba(2,132,199,0.18)";
+  const labelBg = isDark ? "rgba(10, 15, 30, 0.95)" : "rgba(255, 255, 255, 0.98)";
+  const labelBorder = isDark ? "rgba(56, 189, 248, 0.3)" : "rgba(2, 132, 199, 0.25)";
   const textPrimary = isDark ? "#f8fafc" : "#0f172a";
-  const textMuted = isDark ? "#94a3b8" : "#64748b";
-  const gridStroke = isDark ? "rgba(148,163,184,0.06)" : "rgba(0,0,0,0.04)";
+  const textMuted = isDark ? "#94a3b8" : "#475569";
+  const textAccent = isDark ? "#38bdf8" : "#0284c7";
+  const gridStroke = isDark ? "rgba(148, 163, 184, 0.05)" : "rgba(0, 0, 0, 0.03)";
 
   const renderSVG = () => {
     switch (id) {
 
       // =====================================================================
-      // 1. HUMAN HEART — CORONAL SECTION (Highly Detailed)
+      // 1. HUMAN HEART — MEDICAL ATLAS CORONAL LONGITUDINAL SECTION
       // =====================================================================
       case "bio_heart":
       case "bio_heart_double_circulation":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              {/* Gradients */}
-              <radialGradient id="hBgGrad" cx="50%" cy="45%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#1a0a0e" : "#fff0f0"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#fef2f2"} />
+              <radialGradient id="hBgGrad" cx="50%" cy="45%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#18080c" : "#fff1f2"} />
+                <stop offset="100%" stopColor={isDark ? "#06080e" : "#ffe4e6"} />
               </radialGradient>
-              <linearGradient id="hMyo" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#9f1239" />
-                <stop offset="40%" stopColor="#be123c" />
+              <linearGradient id="hMyoWall" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#881337" />
+                <stop offset="30%" stopColor="#be123c" />
+                <stop offset="70%" stopColor="#9f1239" />
                 <stop offset="100%" stopColor="#4c0519" />
               </linearGradient>
-              <linearGradient id="hRA" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#0369a1" stopOpacity="0.55" />
-                <stop offset="100%" stopColor="#1e3a5f" stopOpacity="0.9" />
-              </linearGradient>
-              <linearGradient id="hRV" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#0284c7" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#075985" stopOpacity="0.95" />
-              </linearGradient>
-              <linearGradient id="hLA" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#e11d48" stopOpacity="0.45" />
-                <stop offset="100%" stopColor="#9f1239" stopOpacity="0.85" />
-              </linearGradient>
-              <linearGradient id="hLV" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#9f1239" stopOpacity="0.98" />
-              </linearGradient>
               <linearGradient id="hAorta" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f43f5e" />
-                <stop offset="100%" stopColor="#dc2626" />
+                <stop offset="0%" stopColor="#ef4444" />
+                <stop offset="40%" stopColor="#dc2626" />
+                <stop offset="100%" stopColor="#991b1b" />
               </linearGradient>
-              <linearGradient id="hPulArt" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#38bdf8" />
-                <stop offset="100%" stopColor="#0284c7" />
+              <linearGradient id="hPulmArt" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#0284c7" />
+                <stop offset="50%" stopColor="#0369a1" />
+                <stop offset="100%" stopColor="#0c4a6e" />
               </linearGradient>
-              <filter id="hShadow">
-                <feDropShadow dx="0" dy="6" stdDeviation="10" floodColor="#000" floodOpacity="0.5" />
+              <linearGradient id="hSVC" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#0369a1" />
+                <stop offset="100%" stopColor="#075985" />
+              </linearGradient>
+              <linearGradient id="hDeoxBlood" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0284c7" stopOpacity="0.45" />
+                <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0.8" />
+              </linearGradient>
+              <linearGradient id="hOxBlood" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.45" />
+                <stop offset="100%" stopColor="#991b1b" stopOpacity="0.85" />
+              </linearGradient>
+              <filter id="hOrganDepth" x="-10%" y="-10%" width="130%" height="130%">
+                <feDropShadow dx="0" dy="12" stdDeviation="16" floodColor="#000000" floodOpacity="0.55" />
               </filter>
-              <filter id="hGlow">
-                <feGaussianBlur stdDeviation="4" result="blur" />
+              <filter id="hGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
                 <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
-              <marker id="hArrRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#f43f5e" />
+              <marker id="arrRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#ef4444" />
               </marker>
-              <marker id="hArrBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#38bdf8" />
+              <marker id="arrBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#0284c7" />
               </marker>
             </defs>
 
-            {/* Background */}
-            <rect width="960" height="600" fill="url(#hBgGrad)" rx="18" />
+            {/* Background Canvas */}
+            <rect width="1000" height="650" rx="20" fill="url(#hBgGrad)" />
 
-            {/* Background grid */}
-            {[...Array(12)].map((_,i) => <line key={"hg"+i} x1={80*i} y1="0" x2={80*i} y2="600" stroke={gridStroke} strokeWidth="1"/>)}
-            {[...Array(8)].map((_,i) => <line key={"hgh"+i} x1="0" y1={75*i} x2="960" y2={75*i} stroke={gridStroke} strokeWidth="1"/>)}
+            {/* Subtle Diagnostic Grid */}
+            {[...Array(13)].map((_, i) => (
+              <line key={"hvg" + i} x1={80 * i} y1="0" x2={80 * i} y2="650" stroke={gridStroke} strokeWidth="1" />
+            ))}
+            {[...Array(9)].map((_, i) => (
+              <line key={"hhg" + i} x1="0" y1={75 * i} x2="1000" y2={75 * i} stroke={gridStroke} strokeWidth="1" />
+            ))}
 
-            {/* ── GREAT VESSELS ── */}
+            {/* Header Title Card */}
+            <g transform="translate(40, 30)">
+              <rect width="360" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700" letterSpacing="0.5">
+                HUMAN HEART — SCHEMATIC SECTION
+              </text>
+              <rect x="290" y="9" width="58" height="24" rx="6" fill="#ef4444" fillOpacity="0.2" />
+              <text x="319" y="25" fill="#f87171" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
+            </g>
+
+            {/* ================= GREAT VESSELS LAYER ================= */}
             {/* Superior Vena Cava */}
-            <path d="M 345 30 L 345 175 Q 345 200 368 210" fill="none" stroke="#0369a1" strokeWidth="30" strokeLinecap="round"/>
-            {/* Inferior Vena Cava */}
-            <path d="M 360 450 L 360 350" fill="none" stroke="#0369a1" strokeWidth="28" strokeLinecap="round"/>
-            {/* Pulmonary Trunk */}
-            <path d="M 460 200 Q 455 115 400 88" fill="none" stroke="url(#hPulArt)" strokeWidth="28" strokeLinecap="round"/>
-            <path d="M 400 88 L 310 72" fill="none" stroke="url(#hPulArt)" strokeWidth="20" strokeLinecap="round"/>
-            <path d="M 400 88 L 550 80" fill="none" stroke="url(#hPulArt)" strokeWidth="20" strokeLinecap="round"/>
-            {/* Aortic Arch */}
-            <path d="M 490 195 Q 498 65 450 40 Q 405 30 398 78" fill="none" stroke="url(#hAorta)" strokeWidth="36" strokeLinecap="round"/>
-            {/* Arch Branches (brachiocephalic, common carotid, subclavian) */}
-            <path d="M 432 42 L 422 8" stroke="#f43f5e" strokeWidth="11" strokeLinecap="round"/>
-            <path d="M 452 36 L 452 5" stroke="#f43f5e" strokeWidth="10" strokeLinecap="round"/>
-            <path d="M 472 42 L 484 10" stroke="#f43f5e" strokeWidth="10" strokeLinecap="round"/>
-            {/* Pulmonary Veins (4x, oxygenated = red) */}
-            <path d="M 590 175 L 655 162" stroke="#ef4444" strokeWidth="16" strokeLinecap="round"/>
-            <path d="M 588 200 L 660 195" stroke="#ef4444" strokeWidth="16" strokeLinecap="round"/>
-            <path d="M 335 175 L 278 168" stroke="#ef4444" strokeWidth="14" strokeLinecap="round"/>
-            <path d="M 335 200 L 278 195" stroke="#ef4444" strokeWidth="14" strokeLinecap="round"/>
-            {/* Coronary Arteries */}
-            <path d="M 490 240 Q 540 250 555 310 Q 558 360 530 400" fill="none" stroke="#f43f5e" strokeWidth="5" strokeLinecap="round" opacity="0.7"/>
-            <path d="M 440 240 Q 400 255 390 310 Q 380 370 400 430" fill="none" stroke="#f43f5e" strokeWidth="5" strokeLinecap="round" opacity="0.7"/>
-
-            {/* ── HEART BODY ── */}
             <path
-              d="M 470 120 C 385 115 285 158 278 268 C 272 400 400 505 478 548 C 552 505 668 400 662 268 C 656 158 555 115 470 120 Z"
-              fill="url(#hMyo)" stroke="#e11d48" strokeWidth="5" filter="url(#hShadow)"
+              d="M 360 40 L 360 210 C 360 230 380 250 400 255"
+              fill="none"
+              stroke="url(#hSVC)"
+              strokeWidth="42"
+              strokeLinecap="round"
+            />
+            {/* Inferior Vena Cava */}
+            <path
+              d="M 380 500 L 380 390 C 380 360 395 340 410 330"
+              fill="none"
+              stroke="url(#hSVC)"
+              strokeWidth="38"
+              strokeLinecap="round"
             />
 
-            {/* ── CHAMBERS ── */}
+            {/* Pulmonary Trunk & Left/Right Pulmonary Arteries */}
+            <path
+              d="M 500 240 Q 480 150 420 120"
+              fill="none"
+              stroke="url(#hPulmArt)"
+              strokeWidth="38"
+              strokeLinecap="round"
+            />
+            {/* Right Pulmonary Artery branching under aorta */}
+            <path d="M 420 120 C 360 105 280 110 240 120" fill="none" stroke="url(#hPulmArt)" strokeWidth="26" strokeLinecap="round" />
+            {/* Left Pulmonary Artery branching to left lung */}
+            <path d="M 420 120 C 510 110 610 115 670 125" fill="none" stroke="url(#hPulmArt)" strokeWidth="26" strokeLinecap="round" />
+
+            {/* Aortic Arch & 3 Iconic Branches */}
+            <path
+              d="M 535 240 C 545 130 500 65 440 60 C 385 55 365 110 365 160"
+              fill="none"
+              stroke="url(#hAorta)"
+              strokeWidth="46"
+              strokeLinecap="round"
+            />
+            {/* Brachiocephalic Artery */}
+            <path d="M 410 62 L 395 20" stroke="url(#hAorta)" strokeWidth="15" strokeLinecap="round" />
+            {/* Left Common Carotid Artery */}
+            <path d="M 445 58 L 445 16" stroke="url(#hAorta)" strokeWidth="14" strokeLinecap="round" />
+            {/* Left Subclavian Artery */}
+            <path d="M 478 66 L 495 22" stroke="url(#hAorta)" strokeWidth="14" strokeLinecap="round" />
+
+            {/* Pulmonary Veins (Right & Left Pairs - 4 total carrying Oxygenated Blood) */}
+            <path d="M 660 215 L 590 230" stroke="#ef4444" strokeWidth="22" strokeLinecap="round" />
+            <path d="M 665 245 L 595 255" stroke="#ef4444" strokeWidth="20" strokeLinecap="round" />
+            <path d="M 270 215 L 340 230" stroke="#ef4444" strokeWidth="20" strokeLinecap="round" />
+            <path d="M 265 245 L 335 255" stroke="#ef4444" strokeWidth="20" strokeLinecap="round" />
+
+            {/* ================= THICK MYOCARDIUM HEART BODY ================= */}
+            {/* Outer Muscular Perimeter with Anatomical Apex tilted left */}
+            <path
+              d="M 500 160 
+                 C 370 150 260 210 250 340 
+                 C 240 470 380 585 505 615 
+                 C 635 585 750 470 740 340 
+                 C 730 210 630 150 500 160 Z"
+              fill="url(#hMyoWall)"
+              stroke="#e11d48"
+              strokeWidth="5"
+              filter="url(#hOrganDepth)"
+            />
+
+            {/* Myocardial muscle fiber striations for realism */}
+            <path d="M 275 320 Q 320 400 370 470" stroke="#4c0519" strokeWidth="2" strokeDasharray="6,4" fill="none" opacity="0.6"/>
+            <path d="M 715 320 Q 670 400 620 470" stroke="#4c0519" strokeWidth="2" strokeDasharray="6,4" fill="none" opacity="0.6"/>
+            <path d="M 470 560 Q 500 590 530 560" stroke="#fb7185" strokeWidth="2" fill="none" opacity="0.4"/>
+
+            {/* ================= INTERNAL CHAMBERS ================= */}
+            {/* Right Atrium (Thin-walled, receives deoxygenated blood from vena cava) */}
+            <path
+              d="M 300 250 C 300 200 410 200 425 260 C 430 315 340 340 300 250 Z"
+              fill="url(#hDeoxBlood)"
+              stroke="#0284c7"
+              strokeWidth="3.5"
+            />
+            {/* Right Ventricle (Pumps to lungs via pulmonary trunk) */}
+            <path
+              d="M 330 360 C 340 320 440 320 455 370 C 470 450 400 530 440 550 C 390 550 310 490 330 360 Z"
+              fill="url(#hDeoxBlood)"
+              stroke="#0284c7"
+              strokeWidth="4"
+            />
+
+            {/* Left Atrium (Thin-walled, receives oxygenated blood from 4 pulm veins) */}
+            <path
+              d="M 680 250 C 680 200 570 200 555 260 C 550 315 640 340 680 250 Z"
+              fill="url(#hOxBlood)"
+              stroke="#f43f5e"
+              strokeWidth="3.5"
+            />
+            {/* Left Ventricle (Thickest wall - 3x thicker than RV to pump to entire systemic body) */}
+            <path
+              d="M 650 360 C 640 320 540 320 525 370 C 510 450 560 530 515 575 C 570 555 670 490 650 360 Z"
+              fill="url(#hOxBlood)"
+              stroke="#f43f5e"
+              strokeWidth="6"
+            />
+
+            {/* Thick Muscular Interventricular Septum (Prevents mixing of blood) */}
+            <path
+              d="M 465 290 L 465 580 C 485 580 495 450 495 290 Z"
+              fill="#4c0519"
+              stroke="#f43f5e"
+              strokeWidth="3"
+            />
+
+            {/* ================= VALVES & HEART STRINGS ================= */}
+            {/* Tricuspid Valve (3 Cusps between RA & RV) */}
+            <line x1="345" y1="335" x2="420" y2="350" stroke="#fde047" strokeWidth="6" strokeLinecap="round" />
+            {/* Chordae Tendineae (Fibrous strings) & Papillary Muscles (RV) */}
+            <path d="M 360 345 L 375 420 M 405 350 L 415 420" stroke="#fef08a" strokeWidth="2.5" strokeDasharray="4,2" />
+            <ellipse cx="375" cy="425" rx="7" ry="10" fill="#9f1239" stroke="#f43f5e" strokeWidth="1.5" />
+            <ellipse cx="415" cy="425" rx="7" ry="10" fill="#9f1239" stroke="#f43f5e" strokeWidth="1.5" />
+
+            {/* Bicuspid / Mitral Valve (2 Cusps between LA & LV) */}
+            <line x1="560" y1="350" x2="635" y2="335" stroke="#fde047" strokeWidth="6" strokeLinecap="round" />
+            {/* Chordae Tendineae & Papillary Muscles (LV) */}
+            <path d="M 575 350 L 565 435 M 620 345 L 610 435" stroke="#fef08a" strokeWidth="2.5" strokeDasharray="4,2" />
+            <ellipse cx="565" cy="440" rx="9" ry="14" fill="#9f1239" stroke="#f43f5e" strokeWidth="2" />
+            <ellipse cx="610" cy="440" rx="9" ry="14" fill="#9f1239" stroke="#f43f5e" strokeWidth="2" />
+
+            {/* Pulmonary Semilunar Valve */}
+            <path d="M 470 235 Q 485 220 500 235" fill="none" stroke="#fde047" strokeWidth="5" />
+            {/* Aortic Semilunar Valve */}
+            <path d="M 520 235 Q 535 220 550 235" fill="none" stroke="#fde047" strokeWidth="5" />
+
+            {/* Sinoatrial (SA) Node & Atrioventricular (AV) Node (Pacemaker system) */}
+            <circle cx="335" cy="225" r="9" fill="#eab308" stroke="#fef08a" strokeWidth="2.5" filter="url(#hGlow)" />
+            <text x="335" y="210" fill="#fde047" fontSize="10" fontWeight="900" textAnchor="middle">SA NODE</text>
+            <circle cx="450" cy="320" r="8" fill="#eab308" stroke="#fef08a" strokeWidth="2.5" />
+            <text x="450" y="310" fill="#fde047" fontSize="10" fontWeight="900" textAnchor="middle">AV NODE</text>
+
+            {/* Blood Flow Arrows (Deoxygenated = Blue, Oxygenated = Red) */}
+            <path d="M 360 140 L 360 210" stroke="#0284c7" strokeWidth="3" markerEnd="url(#arrBlue)" fill="none" />
+            <path d="M 380 320 L 390 380" stroke="#0284c7" strokeWidth="3" markerEnd="url(#arrBlue)" fill="none" />
+            <path d="M 430 420 Q 470 330 480 230" stroke="#0284c7" strokeWidth="3" markerEnd="url(#arrBlue)" fill="none" />
+            <path d="M 640 230 L 610 260" stroke="#ef4444" strokeWidth="3" markerEnd="url(#arrRed)" fill="none" />
+            <path d="M 600 320 L 590 380" stroke="#ef4444" strokeWidth="3" markerEnd="url(#arrRed)" fill="none" />
+            <path d="M 550 430 Q 535 320 535 230" stroke="#ef4444" strokeWidth="3" markerEnd="url(#arrRed)" fill="none" />
+
+            {/* ================= ANNOTATION CALLOUT LABELS ================= */}
+            {/* Superior Vena Cava */}
+            <line x1="360" y1="90" x2="160" y2="90" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <circle cx="360" cy="90" r="4" fill="#0284c7" />
+            <g transform="translate(15, 75)">
+              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="20" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Superior Vena Cava</text>
+            </g>
+
+            {/* Aorta */}
+            <line x1="440" y1="40" x2="440" y2="15" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(540, 15)">
+              <rect width="130" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="65" y="20" fill="#ef4444" fontSize="12" fontWeight="800" textAnchor="middle">AORTA (Main Artery)</text>
+            </g>
+            <path d="M 535 30 L 490 30" stroke="#ef4444" strokeWidth="1.5" markerEnd="url(#arrRed)" fill="none" />
+
+            {/* Pulmonary Artery */}
+            <line x1="280" y1="120" x2="160" y2="150" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(15, 135)">
+              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="20" fill="#0284c7" fontSize="11" fontWeight="700" textAnchor="middle">Pulmonary Artery</text>
+            </g>
+
+            {/* Pulmonary Veins */}
+            <line x1="640" y1="230" x2="820" y2="230" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(825, 215)">
+              <rect width="150" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="75" y="20" fill="#ef4444" fontSize="11" fontWeight="700" textAnchor="middle">Pulmonary Veins (4x)</text>
+            </g>
+
             {/* Right Atrium */}
-            <path d="M 315 215 C 315 178 390 178 398 225 C 402 265 340 290 315 215 Z" fill="url(#hRA)" stroke="#0284c7" strokeWidth="3"/>
-            {/* Right Ventricle */}
-            <path d="M 330 305 C 336 278 415 278 428 315 C 442 390 390 458 425 475 C 395 475 325 430 330 305 Z" fill="url(#hRV)" stroke="#0284c7" strokeWidth="3.5"/>
+            <line x1="360" y1="260" x2="160" y2="260" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(15, 245)">
+              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="20" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Right Atrium</text>
+            </g>
+
             {/* Left Atrium */}
-            <path d="M 545 215 C 545 178 475 178 468 225 C 464 265 530 290 545 215 Z" fill="url(#hLA)" stroke="#e11d48" strokeWidth="3"/>
-            {/* Left Ventricle (thickest wall 3x) */}
-            <path d="M 530 305 C 524 278 455 278 445 315 C 432 390 462 460 470 510 C 512 480 545 430 530 305 Z" fill="url(#hLV)" stroke="#e11d48" strokeWidth="5"/>
+            <line x1="620" y1="260" x2="820" y2="280" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(825, 265)">
+              <rect width="150" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="75" y="20" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Left Atrium</text>
+            </g>
+
+            {/* Tricuspid Valve */}
+            <line x1="380" y1="340" x2="160" y2="340" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(15, 325)">
+              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="20" fill="#fde047" fontSize="11" fontWeight="700" textAnchor="middle">Tricuspid Valve</text>
+            </g>
+
+            {/* Bicuspid / Mitral Valve */}
+            <line x1="600" y1="340" x2="820" y2="340" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(825, 325)">
+              <rect width="150" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="75" y="20" fill="#fde047" fontSize="11" fontWeight="700" textAnchor="middle">Bicuspid (Mitral) Valve</text>
+            </g>
+
+            {/* Right Ventricle */}
+            <line x1="370" y1="440" x2="160" y2="440" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(15, 425)">
+              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="20" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Right Ventricle</text>
+            </g>
+
+            {/* Left Ventricle (Thick Myocardium Wall) */}
+            <line x1="620" y1="440" x2="820" y2="420" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(825, 405)">
+              <rect width="150" height="38" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="75" y="18" fill="#ef4444" fontSize="11" fontWeight="700" textAnchor="middle">Left Ventricle</text>
+              <text x="75" y="32" fill={textMuted} fontSize="9" fontWeight="600" textAnchor="middle">(Thick Wall: 3x RV)</text>
+            </g>
+
             {/* Interventricular Septum */}
-            <path d="M 435 240 L 435 520 C 448 520 452 390 452 240 Z" fill="#881337" stroke="#fb7185" strokeWidth="2.5"/>
-
-            {/* ── VALVES ── */}
-            {/* Tricuspid (RA→RV) */}
-            <line x1="348" y1="290" x2="400" y2="302" stroke="#fbbf24" strokeWidth="5" strokeLinecap="round"/>
-            <path d="M 355 295 L 357 340 M 390 300 L 393 340" stroke="#fde68a" strokeWidth="2" strokeDasharray="3,2"/>
-            {/* Pulmonary Semilunar */}
-            <path d="M 448 200 Q 455 185 462 200" fill="none" stroke="#fbbf24" strokeWidth="4"/>
-            {/* Mitral/Bicuspid (LA→LV) */}
-            <line x1="460" y1="302" x2="512" y2="290" stroke="#fbbf24" strokeWidth="5" strokeLinecap="round"/>
-            <path d="M 467 300 L 465 340 M 503 295 L 498 340" stroke="#fde68a" strokeWidth="2" strokeDasharray="3,2"/>
-            {/* Aortic Semilunar */}
-            <path d="M 498 200 Q 505 185 512 200" fill="none" stroke="#fbbf24" strokeWidth="4"/>
-
-            {/* ── SA & AV NODE MARKERS ── */}
-            <circle cx="340" cy="195" r="7" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2" opacity="0.9"/>
-            <text x="300" y="192" fill="#fbbf24" fontSize="8" fontWeight="bold" textAnchor="middle">SA</text>
-            <circle cx="420" cy="290" r="6" fill="#a3e635" stroke="#84cc16" strokeWidth="2" opacity="0.9"/>
-            <text x="380" y="288" fill="#a3e635" fontSize="8" fontWeight="bold" textAnchor="middle">AV</text>
-
-            {/* ── FLOW ARROWS ── */}
-            <path d="M 345 60 L 345 170" stroke="#38bdf8" strokeWidth="3.5" markerEnd="url(#hArrBlue)"/>
-            <path d="M 375 245 L 378 305" stroke="#38bdf8" strokeWidth="3" markerEnd="url(#hArrBlue)"/>
-            <path d="M 450 30 L 440 78" stroke="#ef4444" strokeWidth="3.5" markerEnd="url(#hArrRed)"/>
-            <path d="M 540 185 L 530 250" stroke="#ef4444" strokeWidth="3" markerEnd="url(#hArrRed)"/>
-
-            {/* ── CALLOUT LABELS (left side: blue vessels) ── */}
-            {/* 1. Superior Vena Cava */}
-            <g transform="translate(22, 30)">
-              <rect x="0" y="0" width="188" height="52" rx="10" fill={labelBg} stroke="#0369a1" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#38bdf8" fontSize="12" fontWeight="900">Superior Vena Cava</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Deox blood from upper body → RA</text>
-              <circle cx="188" cy="26" r="4" fill="#38bdf8"/>
-              <line x1="188" y1="26" x2="338" y2="65" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            {/* 2. Pulmonary Artery */}
-            <g transform="translate(18, 102)">
-              <rect x="0" y="0" width="188" height="52" rx="10" fill={labelBg} stroke="#0284c7" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#38bdf8" fontSize="12" fontWeight="900">Pulmonary Artery</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Deox blood → lungs (only artery)</text>
-              <circle cx="188" cy="26" r="4" fill="#38bdf8"/>
-              <line x1="188" y1="26" x2="370" y2="112" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            {/* 3. Right Atrium */}
-            <g transform="translate(22, 195)">
-              <rect x="0" y="0" width="188" height="52" rx="10" fill={labelBg} stroke="#0284c7" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#38bdf8" fontSize="12" fontWeight="900">Right Atrium</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Thin-walled; tricuspid valve below</text>
-              <circle cx="188" cy="26" r="4" fill="#38bdf8"/>
-              <line x1="188" y1="26" x2="318" y2="240" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            {/* 4. Right Ventricle */}
-            <g transform="translate(22, 310)">
-              <rect x="0" y="0" width="188" height="52" rx="10" fill={labelBg} stroke="#0284c7" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#38bdf8" fontSize="12" fontWeight="900">Right Ventricle</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Pumps to pulmonary trunk (low P)</text>
-              <circle cx="188" cy="26" r="4" fill="#38bdf8"/>
-              <line x1="188" y1="26" x2="338" y2="360" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            {/* 5. Inferior Vena Cava */}
-            <g transform="translate(22, 435)">
-              <rect x="0" y="0" width="188" height="52" rx="10" fill={labelBg} stroke="#0284c7" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#38bdf8" fontSize="12" fontWeight="900">Inferior Vena Cava</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Deox blood from lower body → RA</text>
-              <circle cx="188" cy="26" r="4" fill="#38bdf8"/>
-              <line x1="188" y1="26" x2="358" y2="445" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4,3"/>
+            <line x1="480" y1="480" x2="480" y2="610" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(390, 615)">
+              <rect width="220" height="28" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="110" y="19" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">
+                Interventricular Septum (No Mixing)
+              </text>
             </g>
 
-            {/* ── CALLOUT LABELS (right side: red vessels) ── */}
-            {/* 6. Aortic Arch */}
-            <g transform="translate(685, 22)">
-              <rect x="0" y="0" width="200" height="52" rx="10" fill={labelBg} stroke="#ef4444" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#f43f5e" fontSize="12" fontWeight="900">Aorta (Systemic)</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Highest pressure vessel (120 mmHg)</text>
-              <circle cx="0" cy="26" r="4" fill="#f43f5e"/>
-              <line x1="0" y1="26" x2="-205" y2="50" stroke="#f43f5e" strokeWidth="1.5" strokeDasharray="4,3"/>
+            {/* Inferior Vena Cava */}
+            <line x1="380" y1="520" x2="160" y2="520" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(15, 505)">
+              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="20" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Inferior Vena Cava</text>
             </g>
-            {/* 7. Pulmonary Veins */}
-            <g transform="translate(688, 128)">
-              <rect x="0" y="0" width="200" height="52" rx="10" fill={labelBg} stroke="#ef4444" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#f43f5e" fontSize="12" fontWeight="900">Pulmonary Veins (×4)</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Oxygenated blood → LA (exception!)</text>
-              <circle cx="0" cy="26" r="4" fill="#f43f5e"/>
-              <line x1="0" y1="26" x2="-38" y2="178" stroke="#f43f5e" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            {/* 8. Left Atrium */}
-            <g transform="translate(690, 228)">
-              <rect x="0" y="0" width="200" height="52" rx="10" fill={labelBg} stroke="#e11d48" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#f43f5e" fontSize="12" fontWeight="900">Left Atrium</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Bicuspid/Mitral valve; ox. blood</text>
-              <circle cx="0" cy="26" r="4" fill="#f43f5e"/>
-              <line x1="0" y1="26" x2="-148" y2="240" stroke="#f43f5e" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            {/* 9. Left Ventricle */}
-            <g transform="translate(688, 332)">
-              <rect x="0" y="0" width="200" height="62" rx="10" fill={labelBg} stroke="#be123c" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#f43f5e" fontSize="12" fontWeight="900">Left Ventricle (Thick)</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">3× thicker wall — pumps to body</text>
-              <text x="12" y="48" fill="#10b981" fontSize="9" fontWeight="bold">★ CBSE Board Distinction</text>
-              <circle cx="0" cy="31" r="4" fill="#f43f5e"/>
-              <line x1="0" y1="31" x2="-158" y2="380" stroke="#f43f5e" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            {/* 10. Coronary Arteries */}
-            <g transform="translate(688, 440)">
-              <rect x="0" y="0" width="200" height="52" rx="10" fill={labelBg} stroke="#fb7185" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#fb7185" fontSize="12" fontWeight="900">Coronary Arteries</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Supply O₂ to heart muscle itself</text>
-              <circle cx="0" cy="26" r="4" fill="#fb7185"/>
-              <line x1="0" y1="26" x2="-155" y2="370" stroke="#fb7185" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-
-            {/* Septum Label */}
-            <text x="436" y="395" fill="#fb7185" fontSize="9" fontWeight="bold" textAnchor="middle" transform="rotate(-90,436,395)">Muscular Septum</text>
-            <text x="446" y="395" fill={textMuted} fontSize="8" textAnchor="middle" transform="rotate(-90,446,395)">Prevents O₂/CO₂ mix</text>
-
-            {/* ── CBSE KEY FACT BANNER ── */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Double Circulation = Pulmonary Loop (Heart↔Lungs) + Systemic Loop (Heart↔Body)
-            </text>
           </svg>
         );
 
       // =====================================================================
-      // 2. HUMAN RESPIRATORY SYSTEM & ALVEOLAR GAS EXCHANGE
+      // 2. HUMAN RESPIRATORY SYSTEM & ALVEOLAR SACS
       // =====================================================================
       case "bio_respiratory_system":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="rBg" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#0d1424" : "#f0f9ff"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#e0f2fe"} />
+              <radialGradient id="respBg" cx="50%" cy="40%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#0c1729" : "#f0f9ff"} />
+                <stop offset="100%" stopColor={isDark ? "#060913" : "#e0f2fe"} />
               </radialGradient>
-              <linearGradient id="rLung" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f9a8d4" stopOpacity="0.6"/>
-                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.3"/>
+              <linearGradient id="lungPink" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fda4af" />
+                <stop offset="50%" stopColor="#f43f5e" />
+                <stop offset="100%" stopColor="#be123c" />
               </linearGradient>
-              <linearGradient id="rTrachea" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#cbd5e1"/>
-                <stop offset="50%" stopColor="#f8fafc"/>
-                <stop offset="100%" stopColor="#94a3b8"/>
+              <linearGradient id="tracheaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#38bdf8" />
+                <stop offset="50%" stopColor="#bae6fd" />
+                <stop offset="100%" stopColor="#0284c7" />
               </linearGradient>
-              <filter id="rShadow">
-                <feDropShadow dx="0" dy="4" stdDeviation="8" floodOpacity="0.4"/>
+              <linearGradient id="diaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#f59e0b" />
+                <stop offset="100%" stopColor="#b45309" />
+              </linearGradient>
+              <filter id="respDrop" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#000" floodOpacity="0.4" />
               </filter>
-              <radialGradient id="rAlv" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#bbf7d0" stopOpacity="0.9"/>
-                <stop offset="100%" stopColor="#4ade80" stopOpacity="0.4"/>
-              </radialGradient>
             </defs>
-            <rect width="960" height="600" fill="url(#rBg)" rx="18"/>
 
-            {/* ── NASAL CAVITY & PHARYNX ── */}
-            <path d="M 430 28 Q 430 12 480 10 Q 530 12 530 28 L 530 65 Q 530 80 480 82 Q 430 80 430 65 Z" fill={isDark ? "rgba(148,163,184,0.3)" : "rgba(203,213,225,0.6)"} stroke={isDark ? "#94a3b8" : "#64748b"} strokeWidth="2"/>
-            <text x="480" y="50" fill={textMuted} fontSize="10" textAnchor="middle" fontWeight="bold">NASAL CAVITY</text>
-            {/* Pharynx */}
-            <rect x="455" y="82" width="50" height="40" rx="6" fill={isDark ? "rgba(148,163,184,0.25)" : "rgba(203,213,225,0.5)"} stroke={isDark ? "#94a3b8" : "#64748b"} strokeWidth="2"/>
-            <text x="480" y="107" fill={textMuted} fontSize="9" textAnchor="middle">Pharynx</text>
-            {/* Larynx/Voice box */}
-            <path d="M 462 122 L 462 150 L 498 150 L 498 122 Q 498 112 480 110 Q 462 112 462 122 Z" fill={isDark ? "rgba(250,204,21,0.2)" : "rgba(254,243,199,0.8)"} stroke="#fbbf24" strokeWidth="2"/>
-            <text x="480" y="136" fill="#fbbf24" fontSize="9" textAnchor="middle" fontWeight="bold">Larynx</text>
+            <rect width="1000" height="650" rx="20" fill="url(#respBg)" />
 
-            {/* ── TRACHEA with C-rings ── */}
-            <rect x="466" y="150" width="28" height="110" rx="4" fill="url(#rTrachea)" stroke="#94a3b8" strokeWidth="2"/>
-            {[160,172,184,196,208,220,232,244].map((y,i) => (
-              <path key={"tc"+i} d={`M 466 ${y} Q 454 ${y+6} 466 ${y+12}`} fill="none" stroke={isDark ? "#64748b" : "#94a3b8"} strokeWidth="3" strokeLinecap="round"/>
+            {/* Grid */}
+            {[...Array(13)].map((_, i) => <line key={"rvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
+            {[...Array(9)].map((_, i) => <line key={"rhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
+
+            {/* Title */}
+            <g transform="translate(40, 30)">
+              <rect width="390" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+                HUMAN RESPIRATORY SYSTEM & ALVEOLI
+              </text>
+              <rect x="320" y="9" width="58" height="24" rx="6" fill="#38bdf8" fillOpacity="0.2" />
+              <text x="349" y="25" fill="#38bdf8" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
+            </g>
+
+            {/* Torso Silhouette Outline */}
+            <path
+              d="M 330 40 Q 330 90 380 120 L 330 180 Q 220 200 200 350 Q 180 520 250 630 L 750 630 Q 820 520 800 350 Q 780 200 670 180 L 620 120 Q 670 90 670 40"
+              fill="none"
+              stroke={isDark ? "rgba(148, 163, 184, 0.15)" : "rgba(100, 116, 139, 0.12)"}
+              strokeWidth="3"
+            />
+
+            {/* Nasal Cavity & Pharynx / Larynx */}
+            <path d="M 470 30 Q 530 30 525 80 Q 520 120 500 135 L 500 155" fill="none" stroke="#f472b6" strokeWidth="18" strokeLinecap="round" />
+            {/* Thyroid Cartilage (Adam's Apple) */}
+            <polygon points="485,140 515,140 520,165 480,165" fill="#38bdf8" stroke="#0284c7" strokeWidth="2" />
+
+            {/* Trachea (Windpipe) with 10 C-shaped Cartilaginous Rings */}
+            <rect x="488" y="165" width="24" height="110" rx="4" fill="#0369a1" />
+            {[...Array(8)].map((_, i) => (
+              <path
+                key={"cring"+i}
+                d={`M 486 ${175 + i * 12} Q 500 ${180 + i * 12} 514 ${175 + i * 12}`}
+                fill="none"
+                stroke="url(#tracheaGrad)"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
             ))}
-            <text x="438" y="208" fill={textMuted} fontSize="8.5" textAnchor="end">C-shaped</text>
-            <text x="438" y="219" fill={textMuted} fontSize="8.5" textAnchor="end">cartilage</text>
-            <text x="438" y="230" fill={textMuted} fontSize="8.5" textAnchor="end">rings</text>
 
-            {/* ── BRONCHI BIFURCATION ── */}
-            <path d="M 466 260 Q 420 265 352 305" fill="none" stroke="#94a3b8" strokeWidth="16" strokeLinecap="round"/>
-            <path d="M 494 260 Q 540 265 608 305" fill="none" stroke="#94a3b8" strokeWidth="16" strokeLinecap="round"/>
-            {/* Secondary bronchi */}
-            <path d="M 352 305 Q 310 330 290 370" fill="none" stroke="#94a3b8" strokeWidth="10" strokeLinecap="round"/>
-            <path d="M 352 305 Q 345 345 330 385" fill="none" stroke="#94a3b8" strokeWidth="8" strokeLinecap="round"/>
-            <path d="M 608 305 Q 650 330 670 370" fill="none" stroke="#94a3b8" strokeWidth="10" strokeLinecap="round"/>
-            <path d="M 608 305 Q 615 345 630 385" fill="none" stroke="#94a3b8" strokeWidth="8" strokeLinecap="round"/>
-            {/* Bronchioles */}
-            <path d="M 290 370 Q 270 400 260 430" fill="none" stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="5" strokeLinecap="round"/>
-            <path d="M 330 385 Q 320 415 315 445" fill="none" stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="4" strokeLinecap="round"/>
-            <path d="M 670 370 Q 690 400 700 430" fill="none" stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="5" strokeLinecap="round"/>
-            <path d="M 630 385 Q 640 415 645 445" fill="none" stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="4" strokeLinecap="round"/>
+            {/* Bifurcation into Left & Right Primary Bronchi (Carina) */}
+            <path d="M 500 270 Q 460 300 410 330" fill="none" stroke="url(#tracheaGrad)" strokeWidth="16" strokeLinecap="round" />
+            <path d="M 500 270 Q 540 300 590 330" fill="none" stroke="url(#tracheaGrad)" strokeWidth="16" strokeLinecap="round" />
 
-            {/* ── LUNGS (body outlines) ── */}
-            <path d="M 250 300 C 200 290 150 320 145 390 C 140 450 180 520 270 540 C 330 555 385 545 400 520 C 410 500 420 470 415 440 C 405 395 380 350 360 315 C 345 295 290 305 250 300 Z"
-              fill="url(#rLung)" stroke={isDark ? "#f9a8d4" : "#ec4899"} strokeWidth="3" filter="url(#rShadow)" opacity="0.9"/>
-            <path d="M 710 300 C 760 290 810 320 815 390 C 820 450 780 520 690 540 C 630 555 575 545 560 520 C 550 500 540 470 545 440 C 555 395 580 350 600 315 C 615 295 670 305 710 300 Z"
-              fill="url(#rLung)" stroke={isDark ? "#f9a8d4" : "#ec4899"} strokeWidth="3" filter="url(#rShadow)" opacity="0.9"/>
-            {/* Lung lobe lines */}
-            <path d="M 205 350 Q 250 380 270 430" fill="none" stroke="#ec4899" strokeWidth="1.5" strokeDasharray="5,3" opacity="0.6"/>
-            <path d="M 300 310 Q 350 360 375 430" fill="none" stroke="#ec4899" strokeWidth="1.5" strokeDasharray="5,3" opacity="0.6"/>
-            <path d="M 755 350 Q 710 380 690 430" fill="none" stroke="#ec4899" strokeWidth="1.5" strokeDasharray="5,3" opacity="0.6"/>
-            <path d="M 660 310 Q 610 360 585 430" fill="none" stroke="#ec4899" strokeWidth="1.5" strokeDasharray="5,3" opacity="0.6"/>
-
-            {/* ── DIAPHRAGM ── */}
-            <path d="M 150 548 Q 300 530 480 540 Q 660 530 810 548" fill="none" stroke={isDark ? "#64748b" : "#94a3b8"} strokeWidth="8" strokeLinecap="round"/>
-            <text x="480" y="568" fill={textMuted} fontSize="10" textAnchor="middle" fontWeight="bold">Diaphragm (contracts → air in; relaxes → air out)</text>
-
-            {/* ── ALVEOLI INSET BOX ── */}
-            <rect x="340" y="400" width="280" height="145" rx="14" fill={isDark ? "rgba(8,12,28,0.92)" : "rgba(240,249,255,0.97)"} stroke="#10b981" strokeWidth="2"/>
-            <text x="480" y="420" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">Alveolar Gas Exchange (INSET)</text>
-            {/* Alveolar sacs */}
-            {[[380,448],[410,445],[438,450],[466,445],[494,448],[415,475],[445,472],[472,477]].map(([cx,cy],i) =>
-              <circle key={"alv"+i} cx={cx} cy={cy} r="15" fill="url(#rAlv)" stroke="#4ade80" strokeWidth="1.5" opacity="0.9"/>
-            )}
-            {/* Capillary net */}
-            <path d="M 365 460 Q 430 455 500 460 Q 570 455 605 460" fill="none" stroke="#0284c7" strokeWidth="4" strokeLinecap="round" opacity="0.7"/>
-            <path d="M 365 468 Q 430 472 500 468 Q 570 472 605 468" fill="none" stroke="#ef4444" strokeWidth="4" strokeLinecap="round" opacity="0.7"/>
-            {/* Gas arrows */}
-            <text x="395" y="498" fill="#38bdf8" fontSize="9" fontWeight="bold">O₂→</text>
-            <text x="440" y="498" fill="#f87171" fontSize="9" fontWeight="bold">←CO₂</text>
-            <text x="490" y="498" fill="#38bdf8" fontSize="9" fontWeight="bold">O₂→</text>
-            <text x="535" y="498" fill="#f87171" fontSize="9" fontWeight="bold">←CO₂</text>
-            <text x="420" y="518" fill={textMuted} fontSize="8.5" textAnchor="middle">Diffusion across 1-cell-thick wall</text>
-            <text x="545" y="518" fill={textMuted} fontSize="8.5" textAnchor="middle">(Large surface area!)</text>
-
-            {/* ── CALLOUT LABELS ── */}
-            <g transform="translate(16, 22)">
-              <rect x="0" y="0" width="205" height="52" rx="9" fill={labelBg} stroke="#94a3b8" strokeWidth="1.5"/>
-              <text x="12" y="18" fill={textPrimary} fontSize="11" fontWeight="900">Nasal Cavity</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Warms, moistens, filters air</text>
-              <circle cx="205" cy="26" r="3.5" fill="#94a3b8"/>
-              <line x1="205" y1="26" x2="430" y2="50" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(16, 90)">
-              <rect x="0" y="0" width="205" height="52" rx="9" fill={labelBg} stroke="#fbbf24" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#fbbf24" fontSize="11" fontWeight="900">Larynx / Voice Box</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Epiglottis prevents food entry</text>
-              <circle cx="205" cy="26" r="3.5" fill="#fbbf24"/>
-              <line x1="205" y1="26" x2="462" y2="135" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(16, 175)">
-              <rect x="0" y="0" width="205" height="52" rx="9" fill={labelBg} stroke="#38bdf8" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#38bdf8" fontSize="11" fontWeight="900">Trachea</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">C-rings prevent collapse; 12 cm long</text>
-              <circle cx="205" cy="26" r="3.5" fill="#38bdf8"/>
-              <line x1="205" y1="26" x2="466" y2="200" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(736, 175)">
-              <rect x="0" y="0" width="205" height="52" rx="9" fill={labelBg} stroke="#ec4899" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#ec4899" fontSize="11" fontWeight="900">Bronchi &amp; Bronchioles</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Bronchioles lack cartilage rings</text>
-              <circle cx="0" cy="26" r="3.5" fill="#ec4899"/>
-              <line x1="0" y1="26" x2="-118" y2="285" stroke="#ec4899" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(728, 280)">
-              <rect x="0" y="0" width="210" height="52" rx="9" fill={labelBg} stroke="#f9a8d4" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#f9a8d4" fontSize="11" fontWeight="900">Lungs (3+2 lobes)</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9.5">Right = 3 lobes; Left = 2 lobes</text>
-              <circle cx="0" cy="26" r="3.5" fill="#f9a8d4"/>
-              <line x1="0" y1="26" x2="-130" y2="200" stroke="#f9a8d4" strokeWidth="1.5" strokeDasharray="4,3"/>
+            {/* RIGHT LUNG (3 Lobes: Superior, Middle, Inferior) */}
+            <g filter="url(#respDrop)">
+              <path
+                d="M 420 280 
+                   C 360 270 280 320 270 410 
+                   C 260 500 300 550 430 560 
+                   C 460 560 460 480 450 410 
+                   C 440 340 440 290 420 280 Z"
+                fill="url(#lungPink)"
+                stroke="#e11d48"
+                strokeWidth="3.5"
+                opacity="0.95"
+              />
+              {/* Horizontal & Oblique Fissures dividing 3 lobes */}
+              <path d="M 275 390 Q 360 410 445 385" stroke="#881337" strokeWidth="2.5" fill="none" strokeDasharray="5,3" />
+              <path d="M 285 460 Q 370 470 435 480" stroke="#881337" strokeWidth="2.5" fill="none" strokeDasharray="5,3" />
             </g>
 
-            {/* CBSE Banner */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Alveoli = tiny air sacs with 1-cell-thick walls → max surface area for O₂/CO₂ diffusion
-            </text>
+            {/* LEFT LUNG (2 Lobes + Deep Cardiac Notch for Heart) */}
+            <g filter="url(#respDrop)">
+              <path
+                d="M 580 280 
+                   C 640 270 720 320 730 410 
+                   C 740 500 700 550 570 560 
+                   C 545 560 540 510 550 465 
+                   C 525 430 525 380 550 340 
+                   C 560 300 565 290 580 280 Z"
+                fill="url(#lungPink)"
+                stroke="#e11d48"
+                strokeWidth="3.5"
+                opacity="0.95"
+              />
+              {/* Oblique Fissure dividing 2 lobes */}
+              <path d="M 575 350 Q 650 420 725 460" stroke="#881337" strokeWidth="2.5" fill="none" strokeDasharray="5,3" />
+              {/* Cardiac Notch Glow */}
+              <path d="M 550 340 C 520 390 525 435 550 465" stroke="#ef4444" strokeWidth="3" fill="none" strokeDasharray="4,2"/>
+            </g>
+
+            {/* Bronchial Arborization inside lungs (Secondary & Tertiary Bronchioles) */}
+            <path d="M 410 330 Q 350 360 330 400" stroke="#0284c7" strokeWidth="7" fill="none" strokeLinecap="round"/>
+            <path d="M 410 330 Q 390 410 380 470" stroke="#0284c7" strokeWidth="6" fill="none" strokeLinecap="round"/>
+            <path d="M 330 400 L 305 440 M 330 400 L 350 445" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round"/>
+            <path d="M 380 470 L 360 510 M 380 470 L 405 515" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round"/>
+
+            <path d="M 590 330 Q 650 360 670 400" stroke="#0284c7" strokeWidth="7" fill="none" strokeLinecap="round"/>
+            <path d="M 590 330 Q 610 410 620 470" stroke="#0284c7" strokeWidth="6" fill="none" strokeLinecap="round"/>
+            <path d="M 670 400 L 695 440 M 670 400 L 650 445" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round"/>
+
+            {/* Muscular Dome-shaped Diaphragm */}
+            <path
+              d="M 220 595 Q 500 520 780 595"
+              fill="none"
+              stroke="url(#diaGrad)"
+              strokeWidth="16"
+              strokeLinecap="round"
+              filter="url(#respDrop)"
+            />
+            {/* Diaphragm contraction downward arrow */}
+            <path d="M 500 550 L 500 580" stroke="#f59e0b" strokeWidth="4" markerEnd="url(#arrRed)" />
+            <text x="500" y="540" fill="#f59e0b" fontSize="10" fontWeight="800" textAnchor="middle">Flattens on Inhalation</text>
+
+            {/* High-Zoom Microscopic Inset: Alveolar Sac & Capillary Mesh */}
+            <g transform="translate(770, 70)">
+              <rect width="210" height="200" rx="14" fill={labelBg} stroke="#38bdf8" strokeWidth="2" filter="url(#respDrop)" />
+              <text x="105" y="24" fill="#38bdf8" fontSize="11" fontWeight="800" textAnchor="middle">
+                ALVEOLAR SAC (GAS EXCHANGE)
+              </text>
+              {/* Cluster of Alveoli Spheres */}
+              <circle cx="85" cy="80" r="26" fill="#fca5a5" stroke="#e11d48" strokeWidth="2" />
+              <circle cx="125" cy="85" r="24" fill="#fda4af" stroke="#e11d48" strokeWidth="2" />
+              <circle cx="100" cy="115" r="28" fill="#fecdd3" stroke="#e11d48" strokeWidth="2" />
+              <circle cx="140" cy="120" r="22" fill="#fca5a5" stroke="#e11d48" strokeWidth="2" />
+              {/* Capillary Mesh: Blue deox entering, Red ox leaving */}
+              <path d="M 40 70 Q 75 55 100 80 Q 130 110 170 95" stroke="#0284c7" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+              <path d="M 45 130 Q 90 145 115 115 Q 145 90 175 125" stroke="#ef4444" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+              <text x="40" y="165" fill="#0284c7" fontSize="9" fontWeight="700">CO₂ Diffuses In</text>
+              <text x="170" y="165" fill="#ef4444" fontSize="9" fontWeight="700" textAnchor="end">O₂ into Blood</text>
+              <text x="105" y="188" fill={textMuted} fontSize="8" fontWeight="600" textAnchor="middle">Extensive surface area (~80 m²)</text>
+            </g>
+            <line x1="695" y1="440" x2="770" y2="180" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="3,3" />
+
+            {/* Labels */}
+            {/* Pharynx/Larynx */}
+            <line x1="520" y1="150" x2="680" y2="150" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(685, 135)">
+              <rect width="130" height="28" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="65" y="18" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Larynx (Voice Box)</text>
+            </g>
+
+            {/* Trachea with Rings */}
+            <line x1="486" y1="210" x2="160" y2="210" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(15, 195)">
+              <rect width="140" height="40" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="18" fill={textAccent} fontSize="11" fontWeight="700" textAnchor="middle">Trachea (Windpipe)</text>
+              <text x="70" y="32" fill={textMuted} fontSize="9" textAnchor="middle">C-shaped Cartilage Rings</text>
+            </g>
+
+            {/* Bronchi */}
+            <line x1="430" y1="310" x2="160" y2="310" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(15, 295)">
+              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="20" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Bronchi & Bronchioles</text>
+            </g>
+
+            {/* Cardiac Notch */}
+            <line x1="535" y1="410" x2="420" y2="440" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(350, 445)">
+              <rect width="135" height="26" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="67" y="17" fill="#ef4444" fontSize="10" fontWeight="700" textAnchor="middle">Cardiac Notch (Heart space)</text>
+            </g>
+
+            {/* Diaphragm */}
+            <line x1="260" y1="590" x2="160" y2="590" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(15, 575)">
+              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="20" fill="#f59e0b" fontSize="11" fontWeight="700" textAnchor="middle">Muscular Diaphragm</text>
+            </g>
           </svg>
         );
 
       // =====================================================================
-      // 3. NEPHRON — STRUCTURE & URINE FORMATION
+      // 3. EXCRETORY SYSTEM & DETAILED NEPHRON MICROSTRUCTURE
       // =====================================================================
       case "bio_nephron_excretory":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="nBg" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#0d1a14" : "#f0fdf4"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#dcfce7"} />
+              <radialGradient id="exBg" cx="50%" cy="45%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#120a1c" : "#faf5ff"} />
+                <stop offset="100%" stopColor={isDark ? "#060712" : "#f3e8ff"} />
               </radialGradient>
-              <radialGradient id="nGlom" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#fca5a5"/>
-                <stop offset="100%" stopColor="#ef4444" stopOpacity="0.5"/>
-              </radialGradient>
-              <linearGradient id="nTubule" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#a3e635" stopOpacity="0.8"/>
-                <stop offset="100%" stopColor="#4ade80" stopOpacity="0.5"/>
+              <linearGradient id="kidneyMed" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#701a75" />
+                <stop offset="50%" stopColor="#a21caf" />
+                <stop offset="100%" stopColor="#4a044e" />
               </linearGradient>
-              <filter id="nShadow">
-                <feDropShadow dx="0" dy="3" stdDeviation="6" floodOpacity="0.4"/>
+              <linearGradient id="tubuleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#facc15" />
+                <stop offset="50%" stopColor="#eab308" />
+                <stop offset="100%" stopColor="#ca8a04" />
+              </linearGradient>
+              <filter id="exDepth" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#000" floodOpacity="0.45" />
               </filter>
             </defs>
-            <rect width="960" height="600" fill="url(#nBg)" rx="18"/>
 
-            {/* ── KIDNEY OUTLINE (right side silhouette) ── */}
-            <path d="M 750 80 C 820 80 880 150 880 300 C 880 450 820 520 750 520 C 680 520 660 460 660 380 C 660 330 680 290 660 250 C 640 210 680 80 750 80 Z"
-              fill={isDark ? "rgba(239,68,68,0.12)" : "rgba(254,226,226,0.6)"} stroke="#ef4444" strokeWidth="2.5" strokeDasharray="6,3"/>
-            <text x="770" y="310" fill="#ef4444" fontSize="11" fontWeight="bold" textAnchor="middle" opacity="0.5">KIDNEY</text>
-            <text x="770" y="325" fill="#ef4444" fontSize="9" textAnchor="middle" opacity="0.4">cortex / medulla</text>
+            <rect width="1000" height="650" rx="20" fill="url(#exBg)" />
+            {[...Array(13)].map((_, i) => <line key={"evg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
+            {[...Array(9)].map((_, i) => <line key={"ehg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
 
-            {/* ── BOWMAN'S CAPSULE ── */}
-            <circle cx="240" cy="110" r="55" fill={isDark ? "rgba(96,165,250,0.15)" : "rgba(219,234,254,0.7)"} stroke="#3b82f6" strokeWidth="2.5"/>
-            <circle cx="240" cy="110" r="32" fill="url(#nGlom)" filter="url(#nShadow)"/>
-            <text x="240" y="113" fill="white" fontSize="10" fontWeight="bold" textAnchor="middle">Glomerulus</text>
-            <text x="240" y="176" fill="#3b82f6" fontSize="9" fontWeight="bold" textAnchor="middle">Bowman's Capsule</text>
-            {/* Afferent arteriole */}
-            <path d="M 178 78 Q 200 90 210 105" fill="none" stroke="#ef4444" strokeWidth="8" strokeLinecap="round"/>
-            <text x="148" y="72" fill="#ef4444" fontSize="9" fontWeight="bold">Afferent</text>
-            {/* Efferent arteriole */}
-            <path d="M 270 108 Q 295 105 320 115" fill="none" stroke="#f97316" strokeWidth="6" strokeLinecap="round"/>
-            <text x="312" y="104" fill="#f97316" fontSize="9" fontWeight="bold">Efferent</text>
-
-            {/* ── PCT (Proximal Convoluted Tubule) ── */}
-            <path d="M 280 145 Q 340 130 370 155 Q 400 180 360 210 Q 320 240 360 265 Q 400 290 355 320" fill="none" stroke="#4ade80" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round"/>
-            <text x="408" y="200" fill="#4ade80" fontSize="10" fontWeight="bold">PCT</text>
-            <text x="408" y="213" fill={textMuted} fontSize="8.5">Reabsorbs glucose,</text>
-            <text x="408" y="224" fill={textMuted} fontSize="8.5">amino acids, water</text>
-
-            {/* ── LOOP OF HENLE ── */}
-            {/* Descending limb */}
-            <path d="M 355 320 Q 360 380 355 440 Q 352 490 360 510" fill="none" stroke="#38bdf8" strokeWidth="9" strokeLinecap="round"/>
-            {/* Loop bottom */}
-            <path d="M 360 510 Q 400 530 440 510" fill="none" stroke="#0284c7" strokeWidth="11" strokeLinecap="round"/>
-            {/* Ascending limb */}
-            <path d="M 440 510 Q 445 470 440 420 Q 438 370 448 320" fill="none" stroke="#818cf8" strokeWidth="9" strokeLinecap="round"/>
-            <text x="505" y="440" fill="#38bdf8" fontSize="10" fontWeight="bold">Loop of Henle</text>
-            <text x="310" y="425" fill="#38bdf8" fontSize="9">↓ Descending</text>
-            <text x="310" y="438" fill={textMuted} fontSize="8.5">(permeable to H₂O)</text>
-            <text x="452" y="425" fill="#818cf8" fontSize="9">↑ Ascending</text>
-            <text x="452" y="438" fill={textMuted} fontSize="8.5">(impermeable H₂O)</text>
-
-            {/* ── DCT (Distal Convoluted Tubule) ── */}
-            <path d="M 448 320 Q 500 295 530 315 Q 560 340 520 370 Q 480 400 525 420 Q 565 440 540 465" fill="none" stroke="#c084fc" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round"/>
-            <text x="556" y="360" fill="#c084fc" fontSize="10" fontWeight="bold">DCT</text>
-            <text x="556" y="373" fill={textMuted} fontSize="8.5">Secretion of urea,</text>
-            <text x="556" y="384" fill={textMuted} fontSize="8.5">selective reabsorption</text>
-
-            {/* ── COLLECTING DUCT ── */}
-            <path d="M 540 465 Q 600 480 640 500 L 660 510" fill="none" stroke="#fbbf24" strokeWidth="12" strokeLinecap="round"/>
-            <text x="620" y="480" fill="#fbbf24" fontSize="10" fontWeight="bold">Collecting Duct</text>
-            <text x="620" y="493" fill={textMuted} fontSize="8.5">→ Renal Pelvis → Ureter</text>
-
-            {/* ── PERITUBULAR CAPILLARIES ── */}
-            <path d="M 320 200 Q 350 240 330 290 Q 310 340 335 380" fill="none" stroke="#ef4444" strokeWidth="3" strokeDasharray="5,3" opacity="0.7"/>
-            <path d="M 450 350 Q 480 390 465 430" fill="none" stroke="#ef4444" strokeWidth="3" strokeDasharray="5,3" opacity="0.7"/>
-            <text x="302" y="345" fill="#ef4444" fontSize="8.5" textAnchor="end">Peritubular</text>
-            <text x="302" y="358" fill="#ef4444" fontSize="8.5" textAnchor="end">Capillaries</text>
-
-            {/* ── CALLOUT LABELS ── */}
-            <g transform="translate(16, 60)">
-              <rect x="0" y="0" width="155" height="42" rx="8" fill={labelBg} stroke="#3b82f6" strokeWidth="1.5"/>
-              <text x="10" y="16" fill="#3b82f6" fontSize="11" fontWeight="900">Bowman's Capsule</text>
-              <text x="10" y="30" fill={textMuted} fontSize="9">Filtration under pressure</text>
-              <circle cx="155" cy="21" r="3.5" fill="#3b82f6"/>
-              <line x1="155" y1="21" x2="183" y2="95" stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(690, 108)">
-              <rect x="0" y="0" width="210" height="62" rx="8" fill={labelBg} stroke="#4ade80" strokeWidth="1.5"/>
-              <text x="10" y="18" fill="#4ade80" fontSize="11" fontWeight="900">3 Processes:</text>
-              <text x="10" y="32" fill={textMuted} fontSize="9">1. Filtration (Bowman's)</text>
-              <text x="10" y="45" fill={textMuted} fontSize="9">2. Reabsorption (PCT, DCT)</text>
-              <text x="10" y="58" fill={textMuted} fontSize="9">3. Secretion (DCT)</text>
-            </g>
-            <g transform="translate(690, 200)">
-              <rect x="0" y="0" width="210" height="52" rx="8" fill={labelBg} stroke="#fbbf24" strokeWidth="1.5"/>
-              <text x="10" y="18" fill="#fbbf24" fontSize="11" fontWeight="900">Urine Composition</text>
-              <text x="10" y="33" fill={textMuted} fontSize="9">Water, urea, uric acid, salts</text>
-              <text x="10" y="45" fill={textMuted} fontSize="9">No glucose/proteins (if healthy)</text>
+            {/* Header */}
+            <g transform="translate(40, 30)">
+              <rect width="420" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+                HUMAN EXCRETORY SYSTEM & NEPHRON UNIT
+              </text>
+              <rect x="350" y="9" width="58" height="24" rx="6" fill="#a855f7" fillOpacity="0.2" />
+              <text x="379" y="25" fill="#c084fc" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* CBSE Banner */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Glomerulus ultrafiltration → selective reabsorption in tubules → urine concentrates
-            </text>
+            {/* LEFT HALF: MACROSCOPIC HUMAN EXCRETORY SYSTEM */}
+            <g transform="translate(30, 80)">
+              {/* Abdominal Aorta (Red) & Inferior Vena Cava (Blue) */}
+              <path d="M 195 20 L 195 380" stroke="#dc2626" strokeWidth="22" strokeLinecap="round" />
+              <path d="M 160 20 L 160 380" stroke="#0284c7" strokeWidth="24" strokeLinecap="round" />
+
+              {/* Renal Arteries (Red) & Renal Veins (Blue) */}
+              <path d="M 195 140 L 250 140" stroke="#dc2626" strokeWidth="12" strokeLinecap="round" />
+              <path d="M 195 155 L 90 155" stroke="#dc2626" strokeWidth="12" strokeLinecap="round" />
+              <path d="M 160 150 L 245 150" stroke="#0284c7" strokeWidth="14" strokeLinecap="round" />
+              <path d="M 160 165 L 85 165" stroke="#0284c7" strokeWidth="14" strokeLinecap="round" />
+
+              {/* LEFT KIDNEY (Bean shaped, slightly higher than right due to liver) */}
+              <path
+                d="M 60 100 
+                   C 20 120 10 200 60 240 
+                   C 100 240 100 180 80 165 
+                   C 100 150 100 100 60 100 Z"
+                fill="url(#kidneyMed)"
+                stroke="#c084fc"
+                strokeWidth="3.5"
+                filter="url(#exDepth)"
+              />
+              {/* Adrenal Gland on Left Kidney */}
+              <polygon points="45,98 65,80 80,98" fill="#eab308" stroke="#ca8a04" strokeWidth="1.5" />
+
+              {/* RIGHT KIDNEY (Bean shaped, slightly lower) */}
+              <path
+                d="M 280 120 
+                   C 320 140 330 220 280 260 
+                   C 240 260 240 200 260 185 
+                   C 240 170 240 120 280 120 Z"
+                fill="url(#kidneyMed)"
+                stroke="#c084fc"
+                strokeWidth="3.5"
+                filter="url(#exDepth)"
+              />
+              {/* Adrenal Gland on Right Kidney */}
+              <polygon points="265,118 285,100 300,118" fill="#eab308" stroke="#ca8a04" strokeWidth="1.5" />
+
+              {/* URETERS (Slender muscular tubes carrying urine by peristalsis) */}
+              <path d="M 75 190 Q 90 320 155 420" fill="none" stroke="#facc15" strokeWidth="7" strokeLinecap="round" />
+              <path d="M 265 210 Q 250 320 195 420" fill="none" stroke="#facc15" strokeWidth="7" strokeLinecap="round" />
+
+              {/* URINARY BLADDER (Muscular reservoir with detrusor rugae) */}
+              <path
+                d="M 130 420 
+                   C 100 420 110 490 175 510 
+                   C 240 490 250 420 220 420 Z"
+                fill="#d97706"
+                stroke="#fbbf24"
+                strokeWidth="3.5"
+                filter="url(#exDepth)"
+              />
+              {/* Urethra (Excretory tube controlled by sphincters) */}
+              <path d="M 175 510 L 175 545" stroke="#f59e0b" strokeWidth="12" strokeLinecap="round" />
+
+              {/* Labels for Excretory Overview */}
+              <text x="60" y="270" fill={textPrimary} fontSize="11" fontWeight="700">Left Kidney</text>
+              <text x="280" y="285" fill={textPrimary} fontSize="11" fontWeight="700">Right Kidney</text>
+              <text x="55" y="345" fill="#facc15" fontSize="11" fontWeight="700">Ureter</text>
+              <text x="175" y="470" fill="#ffffff" fontSize="11" fontWeight="800" textAnchor="middle">Urinary Bladder</text>
+              <text x="175" y="560" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Urethra</text>
+            </g>
+
+            {/* RIGHT HALF: HIGH-RESOLUTION MICROSCOPIC NEPHRON STRUCTURE */}
+            <g transform="translate(430, 80)">
+              <rect width="530" height="520" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#exDepth)" />
+              <text x="265" y="30" fill="#a855f7" fontSize="13" fontWeight="800" textAnchor="middle" letterSpacing="0.5">
+                NEPHRON — FUNCTIONAL STRUCTURAL FILTRATION UNIT
+              </text>
+
+              {/* Renal Cortex vs Medulla Boundary line */}
+              <line x1="20" y1="230" x2="510" y2="230" stroke="#a855f7" strokeWidth="1.5" strokeDasharray="6,4" opacity="0.6"/>
+              <text x="495" y="222" fill="#c084fc" fontSize="10" fontWeight="700" textAnchor="end">RENAL CORTEX</text>
+              <text x="495" y="245" fill="#a855f7" fontSize="10" fontWeight="700" textAnchor="end">RENAL MEDULLA</text>
+
+              {/* Afferent Arteriole (Wider lumen, high pressure) & Efferent Arteriole (Narrow lumen) */}
+              <path d="M 60 70 Q 90 90 100 120" fill="none" stroke="#ef4444" strokeWidth="8" strokeLinecap="round" />
+              <path d="M 120 120 Q 130 90 160 70" fill="none" stroke="#ef4444" strokeWidth="5" strokeLinecap="round" />
+              <text x="50" y="60" fill="#ef4444" fontSize="10" fontWeight="700">Afferent (Wide)</text>
+              <text x="170" y="60" fill="#ef4444" fontSize="10" fontWeight="700">Efferent (Narrow)</text>
+
+              {/* Glomerulus (Tuft of ultrafiltration capillaries) */}
+              <ellipse cx="110" cy="130" rx="18" ry="16" fill="#991b1b" stroke="#ef4444" strokeWidth="2" />
+              <path d="M 98 122 Q 110 138 122 125" stroke="#fca5a5" strokeWidth="2.5" fill="none" />
+
+              {/* Bowman's Capsule (Double-walled cup surrounding glomerulus) */}
+              <path
+                d="M 80 100 
+                   C 60 130 75 165 110 165 
+                   C 145 165 160 130 140 100 
+                   C 135 115 125 145 110 145 
+                   C 95 145 85 115 80 100 Z"
+                fill="#fde047"
+                stroke="#ca8a04"
+                strokeWidth="2.5"
+              />
+
+              {/* Proximal Convoluted Tubule (PCT) - Dense serpentine coils for selective reabsorption */}
+              <path
+                d="M 110 165 
+                   C 110 200 70 200 70 170 
+                   C 70 140 40 160 40 190 
+                   C 40 230 120 220 120 260"
+                fill="none"
+                stroke="url(#tubuleGrad)"
+                strokeWidth="12"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+
+              {/* Loop of Henle (Hairpin loop dipping deep into Medulla) */}
+              {/* Thin Descending Limb (Water permeable) */}
+              <path d="M 120 260 L 120 440" stroke="#facc15" strokeWidth="7" strokeLinecap="round" />
+              {/* Hairpin Bend */}
+              <path d="M 120 440 Q 150 475 180 440" fill="none" stroke="#facc15" strokeWidth="8" strokeLinecap="round" />
+              {/* Thick Ascending Limb (Impermeable to water, active NaCl transport) */}
+              <path d="M 180 440 L 180 260" stroke="#eab308" strokeWidth="12" strokeLinecap="round" />
+
+              {/* Distal Convoluted Tubule (DCT) */}
+              <path
+                d="M 180 260 
+                   C 180 210 240 220 240 170 
+                   C 240 130 280 140 300 170"
+                fill="none"
+                stroke="url(#tubuleGrad)"
+                strokeWidth="12"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+
+              {/* Collecting Duct (Straight wide duct receiving filtrate from multiple nephrons) */}
+              <path d="M 300 140 L 300 480" stroke="#ca8a04" strokeWidth="18" strokeLinecap="round" />
+              {/* Secondary Nephron Inlet tributaries */}
+              <path d="M 280 160 L 300 170" stroke="#ca8a04" strokeWidth="8" strokeLinecap="round" />
+              <path d="M 320 220 L 300 230" stroke="#ca8a04" strokeWidth="8" strokeLinecap="round" />
+              <path d="M 280 290 L 300 300" stroke="#ca8a04" strokeWidth="8" strokeLinecap="round" />
+
+              {/* Vasa Recta (Capillary network wrapped around Henle's Loop) */}
+              <path d="M 160 70 Q 220 180 200 320 Q 180 430 140 450" stroke="#ef4444" strokeWidth="3" strokeDasharray="5,3" fill="none" opacity="0.7"/>
+
+              {/* Annotations & Step Badges */}
+              <g transform="translate(340, 70)">
+                <rect width="170" height="90" rx="8" fill={isDark ? "#1e1b4b" : "#e0e7ff"} stroke="#818cf8" strokeWidth="1.2" />
+                <text x="85" y="20" fill="#4f46e5" fontSize="11" fontWeight="800" textAnchor="middle">1. ULTRAFILTRATION</text>
+                <text x="12" y="38" fill={textPrimary} fontSize="9.5">• In Glomerulus under</text>
+                <text x="12" y="52" fill={textPrimary} fontSize="9.5">  high hydrostatic pressure</text>
+                <text x="12" y="68" fill={textMuted} fontSize="8.5">• 180 Litres daily filtrate</text>
+                <text x="12" y="82" fill={textMuted} fontSize="8.5">• Proteins/cells retained</text>
+              </g>
+
+              <g transform="translate(340, 180)">
+                <rect width="170" height="90" rx="8" fill={isDark ? "#064e3b" : "#d1fae5"} stroke="#34d399" strokeWidth="1.2" />
+                <text x="85" y="20" fill="#059669" fontSize="11" fontWeight="800" textAnchor="middle">2. REABSORPTION</text>
+                <text x="12" y="38" fill={textPrimary} fontSize="9.5">• In PCT & Henle Loop</text>
+                <text x="12" y="52" fill={textPrimary} fontSize="9.5">• Glucose, Amino Acids,</text>
+                <text x="12" y="66" fill={textPrimary} fontSize="9.5">  Salts & Major Water</text>
+                <text x="12" y="82" fill={textMuted} fontSize="8.5">• Only 1.5 - 2L urine formed</text>
+              </g>
+
+              <g transform="translate(340, 290)">
+                <rect width="170" height="85" rx="8" fill={isDark ? "#78350f" : "#fef3c7"} stroke="#fbbf24" strokeWidth="1.2" />
+                <text x="85" y="20" fill="#d97706" fontSize="11" fontWeight="800" textAnchor="middle">3. TUBULAR SECRETION</text>
+                <text x="12" y="38" fill={textPrimary} fontSize="9.5">• In DCT into filtrate</text>
+                <text x="12" y="52" fill={textPrimary} fontSize="9.5">• K⁺, H⁺, Ammonia</text>
+                <text x="12" y="68" fill={textMuted} fontSize="8.5">• Maintains blood pH 7.4</text>
+              </g>
+
+              {/* Direct Anatomical Labels */}
+              <text x="25" y="115" fill="#fde047" fontSize="11" fontWeight="800">Bowman's Capsule</text>
+              <text x="15" y="225" fill="#eab308" fontSize="11" fontWeight="700">PCT</text>
+              <text x="75" y="380" fill="#facc15" fontSize="11" fontWeight="700">Henle's Loop</text>
+              <text x="225" y="270" fill="#eab308" fontSize="11" fontWeight="700">DCT</text>
+              <text x="300" y="500" fill="#ca8a04" fontSize="11" fontWeight="800" textAnchor="middle">Collecting Duct → Ureter</text>
+            </g>
           </svg>
         );
 
       // =====================================================================
-      // 4. HUMAN ALIMENTARY CANAL (Digestive System)
+      // 4. HUMAN ALIMENTARY CANAL & DIGESTIVE SYSTEM
       // =====================================================================
       case "bio_alimentary_canal":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="alBg" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#1a100a" : "#fff7ed"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#fef3c7"} />
+              <radialGradient id="digBg" cx="50%" cy="40%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#140e0a" : "#fffbeb"} />
+                <stop offset="100%" stopColor={isDark ? "#080604" : "#fef3c7"} />
               </radialGradient>
-              <linearGradient id="alGut" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.8"/>
-                <stop offset="100%" stopColor="#fbbf24" stopOpacity="0.4"/>
+              <linearGradient id="liverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#991b1b" />
+                <stop offset="60%" stopColor="#7f1d1d" />
+                <stop offset="100%" stopColor="#450a0a" />
               </linearGradient>
-              <filter id="alShadow">
-                <feDropShadow dx="0" dy="3" stdDeviation="6" floodOpacity="0.4"/>
+              <linearGradient id="stomachGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fbbf24" />
+                <stop offset="50%" stopColor="#f59e0b" />
+                <stop offset="100%" stopColor="#d97706" />
+              </linearGradient>
+              <linearGradient id="pancreasGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#fed7aa" />
+                <stop offset="100%" stopColor="#f97316" />
+              </linearGradient>
+              <filter id="digDrop" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#000" floodOpacity="0.45" />
               </filter>
             </defs>
-            <rect width="960" height="600" fill="url(#alBg)" rx="18"/>
 
-            {/* ── GI TRACT ── */}
-            {/* Mouth/Oral cavity */}
-            <ellipse cx="480" cy="45" rx="55" ry="28" fill={isDark ? "rgba(251,191,36,0.2)" : "rgba(254,243,199,0.8)"} stroke="#fbbf24" strokeWidth="2.5"/>
-            <text x="480" y="49" fill="#fbbf24" fontSize="11" fontWeight="bold" textAnchor="middle">Mouth (Buccal Cavity)</text>
-            {/* Oesophagus */}
-            <path d="M 452 73 L 452 148" stroke="#f59e0b" strokeWidth="18" strokeLinecap="round"/>
-            <path d="M 508 73 L 508 148" stroke="#fbbf24" strokeWidth="18" strokeLinecap="round"/>
-            <text x="540" y="112" fill="#f59e0b" fontSize="10" fontWeight="bold">Oesophagus</text>
-            <text x="540" y="125" fill={textMuted} fontSize="8.5">(Peristalsis moves food)</text>
-            {/* Stomach */}
-            <path d="M 435 148 Q 380 160 355 210 Q 335 260 370 310 Q 400 345 455 355 Q 510 355 525 300 Q 540 245 520 195 Q 508 155 508 148 Z"
-              fill={isDark ? "rgba(249,115,22,0.3)" : "rgba(254,215,170,0.8)"} stroke="#f97316" strokeWidth="2.5" filter="url(#alShadow)"/>
-            <text x="440" y="250" fill="#f97316" fontSize="12" fontWeight="900" textAnchor="middle">Stomach</text>
-            <text x="440" y="265" fill={textMuted} fontSize="9" textAnchor="middle">HCl + pepsin</text>
-            <text x="440" y="278" fill={textMuted} fontSize="9" textAnchor="middle">pH 1.5–2 (acidic)</text>
-            {/* Small Intestine (duodenum+jejunum+ileum) */}
-            <path d="M 455 355 Q 500 370 520 410 Q 545 450 510 480 Q 475 510 440 490 Q 405 470 380 500 Q 355 530 370 558" fill="none" stroke="#f59e0b" strokeWidth="20" strokeLinecap="round" strokeLinejoin="round"/>
-            <text x="575" y="450" fill="#f59e0b" fontSize="10" fontWeight="bold">Small Intestine</text>
-            <text x="575" y="463" fill={textMuted} fontSize="8.5">(6–7 m; villi for absorption)</text>
-            {/* Large Intestine */}
-            <path d="M 370 558 Q 290 570 255 520 Q 230 470 255 415 Q 280 360 255 305 Q 235 260 275 230" fill="none" stroke="#92400e" strokeWidth="22" strokeLinecap="round"/>
-            <text x="120" y="400" fill="#92400e" fontSize="10" fontWeight="bold">Large Intestine</text>
-            <text x="120" y="413" fill={textMuted} fontSize="8.5">(Water reabsorption)</text>
-            {/* Appendix */}
-            <path d="M 255 230 Q 220 215 210 238" fill="none" stroke="#92400e" strokeWidth="8" strokeLinecap="round"/>
-            <text x="168" y="220" fill={textMuted} fontSize="8.5">Appendix</text>
-            {/* Rectum + Anus */}
-            <path d="M 370 558 Q 425 575 430 585" fill="none" stroke="#78350f" strokeWidth="14" strokeLinecap="round"/>
-            <circle cx="430" cy="585" r="8" fill="#78350f"/>
-            <text x="455" y="590" fill={textMuted} fontSize="9">Anus</text>
+            <rect width="1000" height="650" rx="20" fill="url(#digBg)" />
+            {[...Array(13)].map((_, i) => <line key={"dvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
+            {[...Array(9)].map((_, i) => <line key={"dhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
 
-            {/* ── ACCESSORY ORGANS ── */}
-            {/* Liver */}
-            <path d="M 570 155 Q 680 145 710 200 Q 720 235 690 255 Q 650 270 600 265 Q 560 260 550 230 Q 540 200 570 155 Z"
-              fill={isDark ? "rgba(239,68,68,0.25)" : "rgba(254,202,202,0.7)"} stroke="#ef4444" strokeWidth="2.5" filter="url(#alShadow)"/>
-            <text x="635" y="205" fill="#ef4444" fontSize="12" fontWeight="900" textAnchor="middle">LIVER</text>
-            <text x="635" y="220" fill={textMuted} fontSize="8.5" textAnchor="middle">Bile → emulsifies fats</text>
-            {/* Gall Bladder */}
-            <ellipse cx="680" cy="275" rx="28" ry="18" fill={isDark ? "rgba(16,185,129,0.3)" : "rgba(209,250,229,0.9)"} stroke="#10b981" strokeWidth="2"/>
-            <text x="680" y="279" fill="#10b981" fontSize="9" textAnchor="middle" fontWeight="bold">Gall Bladder</text>
-            {/* Bile duct */}
-            <path d="M 680 293 Q 650 330 530 355" fill="none" stroke="#10b981" strokeWidth="4" strokeDasharray="5,3"/>
-            {/* Pancreas */}
-            <path d="M 560 295 Q 640 285 700 300 Q 720 310 700 325 Q 640 335 560 320 Q 540 310 560 295 Z"
-              fill={isDark ? "rgba(168,85,247,0.2)" : "rgba(243,232,255,0.8)"} stroke="#a855f7" strokeWidth="2.5"/>
-            <text x="630" y="315" fill="#a855f7" fontSize="11" fontWeight="900" textAnchor="middle">PANCREAS</text>
-            <text x="630" y="328" fill={textMuted} fontSize="8.5" textAnchor="middle">Amylase, lipase, trypsin</text>
-            {/* Pancreatic duct */}
-            <path d="M 560 310 Q 540 340 530 355" fill="none" stroke="#a855f7" strokeWidth="3" strokeDasharray="4,3"/>
-
-            {/* Villus inset */}
-            <rect x="686" y="355" width="248" height="175" rx="12" fill={isDark ? "rgba(8,12,28,0.93)" : "rgba(255,251,235,0.97)"} stroke="#f59e0b" strokeWidth="2"/>
-            <text x="810" y="373" fill="#f59e0b" fontSize="11" fontWeight="900" textAnchor="middle">Villus (INSET)</text>
-            {/* Villus shape */}
-            <path d="M 770 510 Q 760 450 770 400 Q 780 380 810 375 Q 840 380 850 400 Q 858 450 850 510 Z"
-              fill={isDark ? "rgba(251,191,36,0.15)" : "rgba(254,243,199,0.8)"} stroke="#fbbf24" strokeWidth="2"/>
-            {/* Blood capillary in villus */}
-            <path d="M 810 400 Q 808 440 812 490" fill="none" stroke="#ef4444" strokeWidth="4" strokeLinecap="round"/>
-            {/* Lacteal */}
-            <path d="M 820 400 Q 820 440 818 490" fill="none" stroke="#f0abfc" strokeWidth="3" strokeLinecap="round"/>
-            <text x="856" y="420" fill="#ef4444" fontSize="8">Capillary</text>
-            <text x="856" y="435" fill="#f0abfc" fontSize="8">Lacteal</text>
-            <text x="856" y="450" fill={textMuted} fontSize="8">(absorbs fat)</text>
-            <text x="856" y="476" fill={textMuted} fontSize="8">Villi increase</text>
-            <text x="856" y="489" fill={textMuted} fontSize="8">surface area</text>
-
-            {/* ── CALLOUT LABELS ── */}
-            <g transform="translate(16, 30)">
-              <rect x="0" y="0" width="210" height="52" rx="8" fill={labelBg} stroke="#fbbf24" strokeWidth="1.5"/>
-              <text x="10" y="18" fill="#fbbf24" fontSize="11" fontWeight="900">Salivary Glands (3 pairs)</text>
-              <text x="10" y="33" fill={textMuted} fontSize="9">Salivary amylase → starch to maltose</text>
-              <circle cx="210" cy="26" r="3.5" fill="#fbbf24"/>
-              <line x1="210" y1="26" x2="424" y2="45" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4,3"/>
+            {/* Title */}
+            <g transform="translate(40, 30)">
+              <rect width="430" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+                HUMAN ALIMENTARY CANAL & DIGESTIVE GLANDS
+              </text>
+              <rect x="360" y="9" width="58" height="24" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+              <text x="389" y="25" fill="#f59e0b" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* CBSE Banner */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Bile emulsifies fat; Pancreatic juice has 3 enzymes; Small intestine = absorption site
-            </text>
+            {/* Profile silhouette & Mouth / Buccal Cavity */}
+            <path
+              d="M 440 40 
+                 C 480 40 510 50 510 80 
+                 C 510 95 480 100 480 110 
+                 C 520 110 530 130 500 145 
+                 C 490 150 480 170 480 200 L 480 290"
+              fill="none"
+              stroke="#fb7185"
+              strokeWidth="16"
+              strokeLinecap="round"
+            />
+            {/* Teeth & Tongue */}
+            <path d="M 475 118 L 495 118" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" />
+            <path d="M 470 130 Q 485 130 492 125" stroke="#f43f5e" strokeWidth="6" strokeLinecap="round" />
+
+            {/* Salivary Glands (Parotid, Submandibular, Sublingual) */}
+            <circle cx="515" cy="95" r="9" fill="#fbbf24" stroke="#d97706" strokeWidth="1.5" />
+            <circle cx="485" cy="140" r="7" fill="#fbbf24" stroke="#d97706" strokeWidth="1.5" />
+
+            {/* Esophagus (Food pipe) with peristaltic waves */}
+            <path d="M 480 170 L 480 290" stroke="#f472b6" strokeWidth="16" strokeLinecap="round" />
+            <path d="M 474 200 Q 486 215 474 230 Q 486 245 474 260" stroke="#be123c" strokeWidth="2.5" fill="none" />
+
+            {/* Diaphragm horizontal line */}
+            <path d="M 330 280 Q 500 270 670 280" stroke="#94a3b8" strokeWidth="3" strokeDasharray="6,4" fill="none" />
+            <text x="320" y="275" fill={textMuted} fontSize="9.5" fontWeight="700">Diaphragm</text>
+
+            {/* LIVER (Massive triangular gland, Largest gland in body ~1.5kg) */}
+            <path
+              d="M 420 295 
+                 C 320 295 300 350 310 400 
+                 C 320 440 430 430 460 380 
+                 C 470 340 460 295 420 295 Z"
+              fill="url(#liverGrad)"
+              stroke="#b91c1c"
+              strokeWidth="3.5"
+              filter="url(#digDrop)"
+            />
+            {/* Gallbladder (Green sac storing Bile juice) */}
+            <ellipse cx="430" cy="380" rx="14" ry="20" fill="#22c55e" stroke="#15803d" strokeWidth="2" filter="url(#digDrop)" />
+            {/* Bile Duct connecting to Duodenum */}
+            <path d="M 430 395 Q 460 410 480 415" stroke="#16a34a" strokeWidth="4" fill="none" strokeLinecap="round" />
+
+            {/* J-SHAPED STOMACH */}
+            <path
+              d="M 480 290 
+                 C 520 290 570 310 570 360 
+                 C 570 410 520 430 470 420 
+                 C 490 390 500 350 475 320 Z"
+              fill="url(#stomachGrad)"
+              stroke="#d97706"
+              strokeWidth="4"
+              filter="url(#digDrop)"
+            />
+            {/* Gastric Rugae inside stomach */}
+            <path d="M 525 330 Q 545 360 520 390" stroke="#b45309" strokeWidth="2.5" fill="none" strokeDasharray="4,2"/>
+            {/* Pyloric Sphincter Valve */}
+            <circle cx="470" cy="420" r="5" fill="#f43f5e" />
+
+            {/* C-SHAPED DUODENUM LOOP */}
+            <path
+              d="M 470 420 
+                 C 440 420 440 465 470 465 
+                 L 510 465"
+              fill="none"
+              stroke="#fed7aa"
+              strokeWidth="16"
+              strokeLinecap="round"
+            />
+
+            {/* PANCREAS (Leaf-like gland nestling in the duodenal C-loop) */}
+            <path
+              d="M 470 430 
+                 C 510 420 570 430 590 445 
+                 C 570 455 510 455 470 445 Z"
+              fill="url(#pancreasGrad)"
+              stroke="#ea580c"
+              strokeWidth="2.5"
+              filter="url(#digDrop)"
+            />
+            {/* Pancreatic duct */}
+            <path d="M 570 440 L 460 440" stroke="#ffffff" strokeWidth="2" strokeDasharray="3,2" fill="none" />
+
+            {/* LARGE INTESTINE (COLON: Ascending, Transverse, Descending) with Haustra */}
+            <path
+              d="M 370 570 L 370 460 Q 370 440 400 440 L 590 440 Q 620 440 620 460 L 620 570 Q 620 600 560 600 L 500 600 L 500 635"
+              fill="none"
+              stroke="#a16207"
+              strokeWidth="24"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {/* Cecum & Vermiform Appendix */}
+            <circle cx="370" cy="575" r="14" fill="#a16207" stroke="#78350f" strokeWidth="2" />
+            <path d="M 370 585 Q 360 615 375 625" stroke="#d97706" strokeWidth="7" fill="none" strokeLinecap="round" />
+
+            {/* SMALL INTESTINE (Highly coiled Ileum ~6-7m long, site of complete digestion) */}
+            <g filter="url(#digDrop)">
+              <path
+                d="M 430 480 Q 480 470 530 480 Q 560 500 520 520 Q 450 510 430 530 Q 420 560 480 560 Q 540 560 560 540 Q 560 570 480 580"
+                fill="none"
+                stroke="#fed7aa"
+                strokeWidth="18"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M 430 480 Q 480 470 530 480 Q 560 500 520 520 Q 450 510 430 530 Q 420 560 480 560 Q 540 560 560 540 Q 560 570 480 580"
+                fill="none"
+                stroke="#f97316"
+                strokeWidth="6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </g>
+
+            {/* Rectum & Anus */}
+            <rect x="490" y="590" width="20" height="35" rx="5" fill="#78350f" stroke="#451a03" strokeWidth="2" />
+            <circle cx="500" cy="635" r="5" fill="#451a03" />
+
+            {/* Right Summary Card: Secretions & Enzymes (Crucial for CBSE 5M) */}
+            <g transform="translate(680, 80)">
+              <rect width="280" height="490" rx="14" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#digDrop)" />
+              <text x="140" y="26" fill="#f59e0b" fontSize="12" fontWeight="800" textAnchor="middle">
+                KEY DIGESTIVE ENZYMES & FUNCTIONS
+              </text>
+
+              {/* 1. Mouth */}
+              <g transform="translate(16, 45)">
+                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">1. Buccal Cavity (Mouth)</text>
+                <text x="10" y="28" fill={textAccent} fontSize="9.5">• Salivary Amylase (Ptyalin)</text>
+                <text x="10" y="42" fill={textMuted} fontSize="9">• Starch ➔ Maltose (pH 6.8)</text>
+              </g>
+
+              {/* 2. Stomach */}
+              <g transform="translate(16, 105)">
+                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">2. Stomach (Gastric Glands)</text>
+                <text x="10" y="28" fill="#ef4444" fontSize="9.5">• Dilute HCl (pH 1.5 - 2.0)</text>
+                <text x="10" y="42" fill={textAccent} fontSize="9.5">• Pepsin: Proteins ➔ Peptones</text>
+                <text x="10" y="56" fill="#10b981" fontSize="9.5">• Mucus: Protects inner lining</text>
+              </g>
+
+              {/* 3. Liver */}
+              <g transform="translate(16, 180)">
+                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">3. Liver (Largest Gland)</text>
+                <text x="10" y="28" fill="#16a34a" fontSize="9.5">• Secretes Bile (No enzymes!)</text>
+                <text x="10" y="42" fill={textMuted} fontSize="9">• Emulsification of large fat globules</text>
+                <text x="10" y="56" fill={textMuted} fontSize="9">• Makes acidic chyme alkaline</text>
+              </g>
+
+              {/* 4. Pancreas */}
+              <g transform="translate(16, 255)">
+                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">4. Pancreas (Dual Gland)</text>
+                <text x="10" y="28" fill={textAccent} fontSize="9.5">• Trypsin: Proteins ➔ Peptides</text>
+                <text x="10" y="42" fill={textAccent} fontSize="9.5">• Pancreatic Amylase: Carbohydrates</text>
+                <text x="10" y="56" fill={textAccent} fontSize="9.5">• Lipase: Emulsified fats ➔ Fatty acids</text>
+              </g>
+
+              {/* 5. Small Intestine */}
+              <g transform="translate(16, 335)">
+                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">5. Small Intestine (Ileum)</text>
+                <text x="10" y="28" fill={textPrimary} fontSize="9.5">• Succus Entericus (Intestinal juice)</text>
+                <text x="10" y="42" fill="#10b981" fontSize="9.5">• Complete Digestion:</text>
+                <text x="20" y="56" fill={textMuted} fontSize="8.5">Carbs ➔ Glucose</text>
+                <text x="20" y="68" fill={textMuted} fontSize="8.5">Proteins ➔ Amino acids</text>
+                <text x="20" y="80" fill={textMuted} fontSize="8.5">Fats ➔ Fatty acids + Glycerol</text>
+                <text x="10" y="96" fill="#f59e0b" fontSize="9.5">• Villi: Maximize absorption area</text>
+              </g>
+
+              {/* 6. Large Intestine */}
+              <g transform="translate(16, 450)">
+                <text x="0" y="14" fill={textPrimary} fontSize="10.5" fontWeight="800">6. Large Intestine: Absorbs Water</text>
+              </g>
+            </g>
+
+            {/* Direct Labels with Leader Lines */}
+            <line x1="515" y1="95" x2="620" y2="95" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="625" y="99" fill={textPrimary} fontSize="11" fontWeight="700">Salivary Gland</text>
+
+            <line x1="480" y1="210" x2="330" y2="210" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="320" y="214" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="end">Esophagus (Peristalsis)</text>
+
+            <line x1="360" y1="360" x2="220" y2="360" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="210" y="364" fill="#ef4444" fontSize="11" fontWeight="800" textAnchor="end">Liver (Bile Production)</text>
+
+            <line x1="430" y1="390" x2="220" y2="400" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="210" y="404" fill="#22c55e" fontSize="11" fontWeight="800" textAnchor="end">Gallbladder (Bile Storage)</text>
+
+            <line x1="530" y1="370" x2="650" y2="370" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="655" y="374" fill="#f59e0b" fontSize="11" fontWeight="800">Stomach (HCl & Pepsin)</text>
+
+            <line x1="520" y1="440" x2="650" y2="420" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="655" y="424" fill="#ea580c" fontSize="11" fontWeight="800">Pancreas (Trypsin/Lipase)</text>
+
+            <line x1="370" y1="500" x2="220" y2="500" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="210" y="504" fill="#a16207" fontSize="11" fontWeight="700" textAnchor="end">Large Intestine (Colon)</text>
+
+            <line x1="480" y1="540" x2="330" y2="540" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="320" y="544" fill="#f97316" fontSize="11" fontWeight="800" textAnchor="end">Small Intestine (Ileum & Villi)</text>
+
+            <line x1="370" y1="615" x2="220" y2="615" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="210" y="619" fill="#78350f" fontSize="11" fontWeight="700" textAnchor="end">Vermiform Appendix</text>
+
+            <line x1="500" y1="635" x2="650" y2="635" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="655" y="639" fill={textPrimary} fontSize="11" fontWeight="700">Anus (Sphincter)</text>
           </svg>
         );
 
       // =====================================================================
-      // 5. NEURON STRUCTURE & REFLEX ARC
+      // 5. HUMAN NEURON & REFLEX ARC PATHWAY
       // =====================================================================
       case "bio_neuron_reflex_arc":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="neuBg" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#0d1422" : "#f0f4ff"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#e0e7ff"} />
+              <radialGradient id="nrBg" cx="50%" cy="40%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#081524" : "#f0fdfa"} />
+                <stop offset="100%" stopColor={isDark ? "#040911" : "#ccfbf1"} />
               </radialGradient>
-              <linearGradient id="neuAxon" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#818cf8"/>
-                <stop offset="100%" stopColor="#6366f1"/>
+              <linearGradient id="myelinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#38bdf8" />
+                <stop offset="50%" stopColor="#0ea5e9" />
+                <stop offset="100%" stopColor="#0369a1" />
               </linearGradient>
-              <linearGradient id="neuMyelin" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#fde68a"/>
-                <stop offset="100%" stopColor="#fbbf24"/>
-              </linearGradient>
-              <filter id="neuShadow">
-                <feDropShadow dx="0" dy="3" stdDeviation="5" floodOpacity="0.4"/>
+              <filter id="nrGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
             </defs>
-            <rect width="960" height="600" fill="url(#neuBg)" rx="18"/>
 
-            {/* ═══════ TOP HALF: NEURON STRUCTURE ═══════ */}
-            <text x="480" y="28" fill={isDark ? "#e0e7ff" : "#312e81"} fontSize="13" fontWeight="900" textAnchor="middle">NEURON STRUCTURE (Myelinated Motor Neuron)</text>
+            <rect width="1000" height="650" rx="20" fill="url(#nrBg)" />
+            {[...Array(13)].map((_, i) => <line key={"nvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
+            {[...Array(9)].map((_, i) => <line key={"nhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
 
-            {/* Dendrites */}
-            {[[-55,-38],[-30,-52],[-12,-60],[8,-60],[28,-52],[52,-38]].map(([dx,dy],i) => (
-              <path key={"nd"+i} d={`M 175 115 Q ${175+dx*0.6} ${115+dy*0.5} ${175+dx} ${115+dy}`} fill="none" stroke="#818cf8" strokeWidth="5" strokeLinecap="round"/>
-            ))}
-            {/* Minor dendrite branches */}
-            {[[-55,-38],[-30,-52],[52,-38]].map(([dx,dy],i) => (
-              <path key={"nd2"+i} d={`M ${175+dx} ${115+dy} Q ${175+dx-12} ${115+dy-12} ${175+dx-6} ${115+dy-22}`} fill="none" stroke="#818cf8" strokeWidth="3" strokeLinecap="round"/>
-            ))}
-            {/* Cell body (soma) */}
-            <circle cx="175" cy="115" r="45" fill={isDark ? "rgba(99,102,241,0.3)" : "rgba(199,210,254,0.7)"} stroke="#6366f1" strokeWidth="3" filter="url(#neuShadow)"/>
-            <circle cx="175" cy="115" r="14" fill={isDark ? "rgba(139,92,246,0.6)" : "rgba(167,139,250,0.5)"} stroke="#7c3aed" strokeWidth="2"/>
-            <text x="175" y="119" fill="#7c3aed" fontSize="8" fontWeight="bold" textAnchor="middle">Nucleus</text>
-            <text x="175" y="170" fill="#6366f1" fontSize="10" fontWeight="bold" textAnchor="middle">Cell Body (Soma)</text>
-            {/* Axon hillock */}
-            <path d="M 218 115 Q 250 115 268 115" fill="none" stroke="#6366f1" strokeWidth="10" strokeLinecap="round"/>
-            {/* Axon (myelinated segments) */}
-            {[268,318,368,418,468,518,568,618,668].map((x,i) => (
-              <rect key={"ms"+i} x={x} y="108" width="40" height="14" rx="6" fill="url(#neuMyelin)" stroke="#f59e0b" strokeWidth="1.5"/>
-            ))}
-            {/* Nodes of Ranvier (gaps) */}
-            {[308,358,408,458,508,558,608,658].map((x,i) => (
-              <rect key={"nr"+i} x={x} y="110" width="10" height="10" rx="2" fill={isDark ? "#1e1b4b" : "#e0e7ff"} stroke="#818cf8" strokeWidth="1.5"/>
-            ))}
-            <path d="M 268 115 L 720 115" stroke="#818cf8" strokeWidth="6" strokeOpacity="0.5"/>
-            {/* Terminal buttons / Synaptic knobs */}
-            {[[720,98],[720,115],[720,132]].map(([x,y],i) => (
-              <path key={"tb"+i} d={`M 720 115 Q ${720+(i-1)*8} ${y} ${730+(i-1)*8} ${y}`} fill="none" stroke="#818cf8" strokeWidth="4" strokeLinecap="round"/>
-            ))}
-            {[[730,92],[730,115],[730,138]].map(([x,y],i) => (
-              <ellipse key={"kb"+i} cx={x} cy={y} rx="14" ry="8" fill={isDark ? "rgba(99,102,241,0.5)" : "rgba(199,210,254,0.8)"} stroke="#6366f1" strokeWidth="2"/>
-            ))}
-            {/* Synapse neurotransmitter dots */}
-            {[[745,92],[748,115],[745,138]].map(([x,y],i) => (
-              <React.Fragment key={"syn"+i}>
-                {[[-3,-3],[3,-3],[0,4]].map(([ox,oy],j) =>
-                  <circle key={j} cx={x+ox} cy={y+oy} r="2" fill="#a5b4fc"/>
-                )}
-              </React.Fragment>
-            ))}
-
-            {/* Neuron Labels */}
-            <g transform="translate(80, 38)">
-              <rect x="0" y="0" width="148" height="42" rx="8" fill={labelBg} stroke="#6366f1" strokeWidth="1.5"/>
-              <text x="10" y="16" fill="#818cf8" fontSize="11" fontWeight="900">Dendrites</text>
-              <text x="10" y="30" fill={textMuted} fontSize="9">Receive impulses → soma</text>
-              <circle cx="148" cy="21" r="3.5" fill="#818cf8"/>
-              <line x1="148" y1="21" x2="155" y2="75" stroke="#818cf8" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(400, 50)">
-              <rect x="0" y="0" width="148" height="42" rx="8" fill={labelBg} stroke="#f59e0b" strokeWidth="1.5"/>
-              <text x="10" y="16" fill="#f59e0b" fontSize="11" fontWeight="900">Myelin Sheath</text>
-              <text x="10" y="30" fill={textMuted} fontSize="9">Schwann cells; insulation</text>
-              <circle cx="0" cy="21" r="3.5" fill="#f59e0b"/>
-              <line x1="0" y1="21" x2="-48" y2="108" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(554, 50)">
-              <rect x="0" y="0" width="148" height="42" rx="8" fill={labelBg} stroke="#818cf8" strokeWidth="1.5"/>
-              <text x="10" y="16" fill="#818cf8" fontSize="11" fontWeight="900">Node of Ranvier</text>
-              <text x="10" y="30" fill={textMuted} fontSize="9">Gap; saltatory conduction</text>
-              <circle cx="0" cy="21" r="3.5" fill="#818cf8"/>
-              <line x1="0" y1="21" x2="-86" y2="110" stroke="#818cf8" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(716, 50)">
-              <rect x="0" y="0" width="180" height="42" rx="8" fill={labelBg} stroke="#6366f1" strokeWidth="1.5"/>
-              <text x="10" y="16" fill="#6366f1" fontSize="11" fontWeight="900">Synaptic Knobs</text>
-              <text x="10" y="30" fill={textMuted} fontSize="9">Release neurotransmitters</text>
-              <circle cx="0" cy="21" r="3.5" fill="#6366f1"/>
-              <line x1="0" y1="21" x2="-24" y2="108" stroke="#6366f1" strokeWidth="1.5" strokeDasharray="4,3"/>
+            {/* Title */}
+            <g transform="translate(40, 25)">
+              <rect width="450" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+                STRUCTURE OF NEURON & SPINAL REFLEX ARC
+              </text>
+              <rect x="380" y="9" width="58" height="24" rx="6" fill="#14b8a6" fillOpacity="0.2" />
+              <text x="409" y="25" fill="#14b8a6" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* ═══════ BOTTOM HALF: REFLEX ARC ═══════ */}
-            <line x1="30" y1="200" x2="930" y2="200" stroke={isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"} strokeWidth="1.5" strokeDasharray="8,4"/>
-            <text x="480" y="228" fill={isDark ? "#e0e7ff" : "#312e81"} fontSize="13" fontWeight="900" textAnchor="middle">REFLEX ARC (Spinal Cord Pathway)</text>
+            {/* TOP HALF: HIGH-RESOLUTION MULTIPOLAR NEURON */}
+            <g transform="translate(60, 80)">
+              <text x="0" y="0" fill="#0284c7" fontSize="12" fontWeight="800">PART A: MICROSCOPIC NEURON (NERVE CELL)</text>
 
-            {/* Stimulus (pin) */}
-            <circle cx="80" cy="420" r="22" fill={isDark ? "rgba(239,68,68,0.2)" : "rgba(254,226,226,0.8)"} stroke="#ef4444" strokeWidth="2.5"/>
-            <text x="80" y="416" fill="#ef4444" fontSize="9" fontWeight="bold" textAnchor="middle">STIMULUS</text>
-            <text x="80" y="430" fill="#ef4444" fontSize="9" textAnchor="middle">(pin/heat)</text>
+              {/* Dendrites radiating from Soma */}
+              <g stroke="#0ea5e9" strokeWidth="3" strokeLinecap="round" fill="none">
+                <path d="M 80 80 Q 40 40 10 20 M 40 40 L 25 60 M 20 30 L 0 45" />
+                <path d="M 80 110 Q 30 110 0 105 M 35 110 L 15 130" />
+                <path d="M 80 140 Q 30 170 10 200 M 40 160 L 20 180" />
+                <path d="M 120 75 Q 110 30 105 0 M 115 40 L 135 20" />
+                <path d="M 120 155 Q 110 190 105 220 M 115 180 L 135 205" />
+              </g>
 
-            {/* Receptor */}
-            <ellipse cx="170" cy="430" rx="30" ry="18" fill={isDark ? "rgba(251,191,36,0.2)" : "rgba(254,243,199,0.7)"} stroke="#fbbf24" strokeWidth="2"/>
-            <text x="170" y="428" fill="#fbbf24" fontSize="9" fontWeight="bold" textAnchor="middle">Receptor</text>
-            <text x="170" y="441" fill={textMuted} fontSize="8" textAnchor="middle">(skin)</text>
+              {/* Soma (Cell body / Perikaryon) with Nissl Granules */}
+              <polygon
+                points="80,90 130,70 160,110 130,150 80,135 65,110"
+                fill="#38bdf8"
+                stroke="#0284c7"
+                strokeWidth="3"
+              />
+              {/* Nucleus & Nucleolus */}
+              <circle cx="115" cy="115" r="18" fill="#1e3a8a" stroke="#ffffff" strokeWidth="2" />
+              <circle cx="115" cy="115" r="7" fill="#60a5fa" />
+              {/* Nissl Granules */}
+              <circle cx="95" cy="100" r="2" fill="#1e3a8a" />
+              <circle cx="105" cy="135" r="2" fill="#1e3a8a" />
+              <circle cx="135" cy="100" r="2" fill="#1e3a8a" />
+              <circle cx="140" cy="130" r="2" fill="#1e3a8a" />
 
-            {/* Sensory neuron (afferent) */}
-            <path d="M 200 430 Q 280 420 330 380" fill="none" stroke="#3b82f6" strokeWidth="6" strokeLinecap="round" markerEnd="url(#hArrBlue)" opacity="0.9"/>
-            <text x="258" y="415" fill="#3b82f6" fontSize="9" fontWeight="bold">Sensory Neuron</text>
-            <text x="258" y="428" fill={textMuted} fontSize="8">(afferent)</text>
+              {/* Axon Hillock & Long Axon Cylinder */}
+              <path d="M 160 115 L 750 115" stroke="#f59e0b" strokeWidth="8" strokeLinecap="round" />
 
-            {/* Spinal cord cross-section */}
-            <ellipse cx="480" cy="330" rx="75" ry="60" fill={isDark ? "rgba(99,102,241,0.15)" : "rgba(224,231,255,0.7)"} stroke="#6366f1" strokeWidth="3" filter="url(#neuShadow)"/>
-            <ellipse cx="480" cy="330" rx="38" ry="30" fill={isDark ? "rgba(99,102,241,0.3)" : "rgba(199,210,254,0.6)"} stroke="#6366f1" strokeWidth="2"/>
-            <text x="480" y="328" fill="#6366f1" fontSize="10" fontWeight="900" textAnchor="middle">Spinal</text>
-            <text x="480" y="342" fill="#6366f1" fontSize="9" textAnchor="middle">Cord (CNS)</text>
-            {/* Synapse in spinal cord */}
-            <circle cx="455" cy="325" r="8" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2"/>
-            <text x="455" y="300" fill="#fbbf24" fontSize="8" textAnchor="middle">Synapse</text>
+              {/* 5 Myelin Sheath Schwann Cell Cylinders separated by Nodes of Ranvier */}
+              {[...Array(5)].map((_, i) => (
+                <g key={"myelin"+i} transform={`translate(${190 + i * 105}, 95)`}>
+                  <rect width="85" height="40" rx="10" fill="url(#myelinGrad)" stroke="#0369a1" strokeWidth="2" />
+                  <circle cx="42" cy="14" r="4" fill="#f8fafc" />
+                  <text x="42" y="32" fill="#ffffff" fontSize="8" fontWeight="700" textAnchor="middle">Schwann</text>
+                </g>
+              ))}
 
-            {/* Motor neuron (efferent) */}
-            <path d="M 630 340 Q 720 360 790 410" fill="none" stroke="#10b981" strokeWidth="6" strokeLinecap="round" markerEnd="url(#hArrRed)" opacity="0.9"/>
-            <text x="700" y="368" fill="#10b981" fontSize="9" fontWeight="bold">Motor Neuron</text>
-            <text x="700" y="381" fill={textMuted} fontSize="8">(efferent)</text>
+              {/* Nodes of Ranvier (Gaps between myelin sheaths allowing Saltatory Conduction) */}
+              {[...Array(4)].map((_, i) => (
+                <g key={"node"+i} transform={`translate(${275 + i * 105}, 115)`}>
+                  <circle cx="10" cy="0" r="5" fill="#ef4444" filter="url(#nrGlow)" />
+                </g>
+              ))}
 
-            {/* Effector (muscle) */}
-            <path d="M 800 410 Q 840 395 870 415 Q 890 435 850 450 Q 820 460 800 440 Q 788 425 800 410 Z"
-              fill={isDark ? "rgba(239,68,68,0.3)" : "rgba(254,202,202,0.7)"} stroke="#ef4444" strokeWidth="2"/>
-            <text x="840" y="428" fill="#ef4444" fontSize="9" fontWeight="bold" textAnchor="middle">Effector</text>
-            <text x="840" y="441" fill={textMuted} fontSize="8" textAnchor="middle">(muscle)</text>
+              {/* Axon Terminal Arborization & Synaptic Knobs / Boutons */}
+              <g stroke="#f59e0b" strokeWidth="3" strokeLinecap="round" fill="none">
+                <path d="M 750 115 Q 790 80 830 65" />
+                <path d="M 750 115 Q 790 115 840 115" />
+                <path d="M 750 115 Q 790 150 830 165" />
+              </g>
+              <circle cx="830" cy="65" r="7" fill="#ef4444" stroke="#fef08a" strokeWidth="2" />
+              <circle cx="840" cy="115" r="7" fill="#ef4444" stroke="#fef08a" strokeWidth="2" />
+              <circle cx="830" cy="165" r="7" fill="#ef4444" stroke="#fef08a" strokeWidth="2" />
 
-            {/* Response arrow */}
-            <path d="M 840 455 Q 790 490 700 510 Q 600 520 480 510 Q 360 498 270 490" fill="none" stroke="#10b981" strokeWidth="3" strokeDasharray="6,3" markerEnd="url(#hArrRed)"/>
-            <text x="570" y="540" fill="#10b981" fontSize="10" fontWeight="bold" textAnchor="middle">RESPONSE (withdraw hand) — bypasses brain</text>
+              {/* Direction of Nerve Impulse Arrow */}
+              <path d="M 230 60 L 670 60" stroke="#10b981" strokeWidth="3.5" markerEnd="url(#arrRed)" fill="none" />
+              <text x="450" y="50" fill="#10b981" fontSize="11" fontWeight="800" textAnchor="middle">
+                DIRECTION OF NERVE IMPULSE (ELECTROCHEMICAL: Dendrite ➔ Cell Body ➔ Axon)
+              </text>
 
-            {/* Path labels */}
-            <path d="M 80 448 L 80 475 L 166 475 L 166 448" fill="none" stroke="#fbbf24" strokeWidth="1.5"/>
-            <path d="M 800 448 L 800 475 L 862 475 L 862 448" fill="none" stroke="#ef4444" strokeWidth="1.5"/>
+              {/* Neuron Labels */}
+              <text x="25" y="10" fill={textPrimary} fontSize="11" fontWeight="700">Dendrites (Receive stimulus)</text>
+              <text x="115" y="165" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Cell Body (Cyton)</text>
+              <text x="340" y="160" fill="#0284c7" fontSize="11" fontWeight="800">Myelin Sheath</text>
+              <text x="485" y="160" fill="#ef4444" fontSize="11" fontWeight="800">Node of Ranvier</text>
+              <text x="770" y="195" fill="#f59e0b" fontSize="11" fontWeight="800">Nerve Endings (Synaptic Knobs)</text>
+            </g>
 
-            {/* CBSE Banner */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Reflex arc path = Receptor → Sensory nerve → Spinal cord → Motor nerve → Effector
-            </text>
+            {/* BOTTOM HALF: SPINAL REFLEX ARC PATHWAY */}
+            <g transform="translate(60, 340)">
+              <text x="0" y="0" fill="#059669" fontSize="12" fontWeight="800">PART B: SPINAL REFLEX ARC (INVOLUNTARY INSTANT PATHWAY)</text>
+
+              {/* 1. Receptor: Skin on finger tips meeting a heat stimulus (flame) */}
+              <g transform="translate(10, 40)">
+                {/* Candle Flame Stimulus */}
+                <path d="M 20 180 C 20 140 35 110 35 100 C 35 110 50 140 50 180 Z" fill="#f59e0b" />
+                <path d="M 28 180 C 28 155 35 135 35 130 C 35 135 42 155 42 180 Z" fill="#ef4444" />
+                <rect x="25" y="180" width="20" height="50" fill="#f8fafc" stroke="#cbd5e1" />
+                <text x="35" y="245" fill="#ef4444" fontSize="10" fontWeight="800" textAnchor="middle">STIMULUS (Heat)</text>
+
+                {/* Hand/Finger Skin Receptor */}
+                <path d="M 80 80 Q 50 80 40 100 Q 55 120 80 120 Z" fill="#fed7aa" stroke="#ea580c" strokeWidth="2" />
+                <text x="75" y="70" fill={textPrimary} fontSize="10" fontWeight="700">1. Heat Receptor (Skin)</text>
+              </g>
+
+              {/* 2. Sensory Neuron (Afferent pathway carrying signal to spinal cord) */}
+              <path
+                d="M 90 140 
+                   Q 220 100 450 60 
+                   C 500 50 530 80 570 95"
+                fill="none"
+                stroke="#0ea5e9"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+              {/* Dorsal Root Ganglion (DRG swollen soma) */}
+              <ellipse cx="510" cy="65" rx="10" ry="14" fill="#0284c7" stroke="#38bdf8" strokeWidth="2" />
+              <text x="510" y="45" fill="#0284c7" fontSize="10" fontWeight="800" textAnchor="middle">2. Sensory Neuron (DRG)</text>
+
+              {/* 3. Spinal Cord Cross Section (Butterfly / H-shaped Grey Matter) */}
+              <g transform="translate(560, 30)">
+                <ellipse cx="140" cy="100" rx="120" ry="85" fill={isDark ? "#1e293b" : "#f1f5f9"} stroke="#94a3b8" strokeWidth="2" />
+                {/* Butterfly Grey Matter */}
+                <path
+                  d="M 140 85 
+                     C 120 50 80 40 70 70 
+                     C 60 100 90 110 110 100 
+                     C 90 120 60 140 75 160 
+                     C 90 180 120 150 140 115 
+                     C 160 150 190 180 205 160 
+                     C 220 140 190 120 170 100 
+                     C 190 110 220 100 210 70 
+                     C 200 40 160 50 140 85 Z"
+                  fill="#64748b"
+                  stroke="#334155"
+                  strokeWidth="2"
+                />
+                {/* Central Canal */}
+                <circle cx="140" cy="100" r="5" fill="#0f172a" />
+
+                {/* Relay Neuron (Interneuron in spinal grey matter) */}
+                <path d="M 85 80 L 105 140" stroke="#f59e0b" strokeWidth="4" strokeLinecap="round" />
+                <circle cx="85" cy="80" r="4" fill="#f59e0b" />
+                <circle cx="105" cy="140" r="4" fill="#f59e0b" />
+                <text x="140" y="30" fill="#f59e0b" fontSize="11" fontWeight="800" textAnchor="middle">3. Relay Neuron in Spinal Cord</text>
+                <text x="140" y="195" fill={textMuted} fontSize="9" fontWeight="600" textAnchor="middle">(Signal also sent to Brain later)</text>
+              </g>
+
+              {/* 4. Motor Neuron (Efferent pathway from ventral horn to effector muscle) */}
+              <path
+                d="M 645 170 
+                   C 600 220 400 210 240 200"
+                fill="none"
+                stroke="#ef4444"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+              <text x="440" y="235" fill="#ef4444" fontSize="11" fontWeight="800" textAnchor="middle">
+                4. Motor Neuron (Efferent)
+              </text>
+
+              {/* 5. Effector (Arm Biceps Muscle Contracting) */}
+              <g transform="translate(130, 160)">
+                <ellipse cx="60" cy="40" rx="35" ry="22" fill="#be123c" stroke="#f43f5e" strokeWidth="2.5" />
+                <path d="M 35 40 Q 60 30 85 40" stroke="#ffffff" strokeWidth="2" fill="none" opacity="0.6"/>
+                <text x="60" y="75" fill="#be123c" fontSize="11" fontWeight="800" textAnchor="middle">
+                  5. Effector (Biceps Contracts)
+                </text>
+                <text x="60" y="90" fill="#10b981" fontSize="9.5" fontWeight="800" textAnchor="middle">
+                  ➔ Response: Hand Pulled Away!
+                </text>
+              </g>
+            </g>
           </svg>
         );
 
       // =====================================================================
-      // 6. HUMAN BRAIN — 3 REGIONS (Sagittal Section)
+      // 6. HUMAN BRAIN — SAGITTAL MEDIAN SECTION
       // =====================================================================
       case "bio_brain":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="brBg" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#180d1a" : "#fdf4ff"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#f3e8ff"} />
+              <radialGradient id="brBg" cx="50%" cy="40%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#12091c" : "#faf5ff"} />
+                <stop offset="100%" stopColor={isDark ? "#06030a" : "#f3e8ff"} />
               </radialGradient>
-              <linearGradient id="brCerebrum" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#c084fc" stopOpacity="0.5"/>
-                <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.3"/>
+              <linearGradient id="cortexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f472b6" />
+                <stop offset="50%" stopColor="#e879f9" />
+                <stop offset="100%" stopColor="#c084fc" />
               </linearGradient>
-              <linearGradient id="brCerebellum" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#34d399" stopOpacity="0.5"/>
-                <stop offset="100%" stopColor="#059669" stopOpacity="0.3"/>
-              </linearGradient>
-              <linearGradient id="brMedulla" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.5"/>
-                <stop offset="100%" stopColor="#d97706" stopOpacity="0.3"/>
-              </linearGradient>
-              <filter id="brShadow">
-                <feDropShadow dx="0" dy="4" stdDeviation="8" floodOpacity="0.4"/>
+              <filter id="brDrop" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="12" stdDeviation="16" floodColor="#000" floodOpacity="0.45" />
               </filter>
             </defs>
-            <rect width="960" height="600" fill="url(#brBg)" rx="18"/>
 
-            {/* ── CEREBRUM (largest, convoluted) ── */}
-            <path d="M 180 320 C 175 180 230 80 380 60 C 480 48 590 65 660 120 C 720 165 730 240 720 320 C 718 360 700 390 660 405 Q 600 420 540 415 Q 480 410 430 415 Q 380 420 330 408 Q 265 390 220 360 C 195 345 182 335 180 320 Z"
-              fill="url(#brCerebrum)" stroke="#c084fc" strokeWidth="3" filter="url(#brShadow)"/>
-            {/* Sulci (folds) */}
-            {[
-              "M 220 200 Q 280 170 360 185 Q 420 195 440 220",
-              "M 240 260 Q 310 230 400 248 Q 460 260 490 285",
-              "M 300 310 Q 360 285 450 295 Q 500 302 530 325",
-              "M 420 160 Q 480 140 560 160 Q 610 173 640 200",
-              "M 480 220 Q 540 200 610 220 Q 650 232 670 260",
-              "M 530 290 Q 590 268 650 285 Q 690 296 700 320"
-            ].map((d, i) => (
-              <path key={"brs"+i} d={d} fill="none" stroke={isDark ? "#7c3aed" : "#c084fc"} strokeWidth="2" strokeLinecap="round" opacity="0.7"/>
-            ))}
-            {/* Corpus Callosum */}
-            <path d="M 340 310 Q 440 300 560 310" fill="none" stroke={isDark ? "#e9d5ff" : "#7c3aed"} strokeWidth="6" strokeLinecap="round" opacity="0.6"/>
-            <text x="450" y="295" fill={isDark ? "#e9d5ff" : "#7c3aed"} fontSize="8.5" textAnchor="middle">Corpus Callosum</text>
+            <rect width="1000" height="650" rx="20" fill="url(#brBg)" />
+            {[...Array(13)].map((_, i) => <line key={"bvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
+            {[...Array(9)].map((_, i) => <line key={"bhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
 
-            {/* ── CEREBELLUM ── */}
-            <path d="M 300 405 Q 260 420 240 460 Q 230 500 260 525 Q 310 545 370 530 Q 430 515 440 470 Q 445 435 410 415 Q 380 405 340 408 Q 320 409 300 405 Z"
-              fill="url(#brCerebellum)" stroke="#34d399" strokeWidth="2.5"/>
-            {/* Cerebellum folds */}
-            {["M 255 455 Q 310 440 370 455","M 248 475 Q 305 460 368 476","M 245 498 Q 302 483 366 498"].map((d,i) => (
-              <path key={"brc"+i} d={d} fill="none" stroke={isDark ? "#059669" : "#34d399"} strokeWidth="1.5" opacity="0.7"/>
-            ))}
-
-            {/* ── MEDULLA OBLONGATA + PONS ── */}
-            <path d="M 410 415 Q 420 440 418 480 Q 416 510 420 530 L 455 530 Q 460 510 458 480 Q 456 448 450 415 Z"
-              fill="url(#brMedulla)" stroke="#fbbf24" strokeWidth="2.5"/>
-            {/* Pons (bump on medulla) */}
-            <ellipse cx="434" cy="462" rx="28" ry="16" fill={isDark ? "rgba(251,191,36,0.35)" : "rgba(254,243,199,0.8)"} stroke="#fbbf24" strokeWidth="2"/>
-            <text x="434" y="466" fill="#d97706" fontSize="8.5" fontWeight="bold" textAnchor="middle">Pons</text>
-            {/* Spinal cord continues */}
-            <path d="M 418 530 L 418 580 M 455 530 L 455 580" stroke={isDark ? "#94a3b8" : "#475569"} strokeWidth="6" strokeLinecap="round"/>
-            <text x="436" y="578" fill={textMuted} fontSize="9" textAnchor="middle">Spinal Cord</text>
-
-            {/* ── REGION LABELS (on diagram) ── */}
-            <text x="450" y="195" fill="#c084fc" fontSize="16" fontWeight="900" textAnchor="middle">CEREBRUM</text>
-            <text x="450" y="212" fill="#c084fc" fontSize="9.5" textAnchor="middle">Thinking • Memory • Voluntary Actions • Speech</text>
-            <text x="340" y="475" fill="#34d399" fontSize="12" fontWeight="900" textAnchor="middle">CEREBELLUM</text>
-            <text x="340" y="490" fill="#34d399" fontSize="8.5" textAnchor="middle">Balance • Posture • Coordination</text>
-            <text x="434" y="440" fill="#fbbf24" fontSize="9" fontWeight="900" textAnchor="middle">MEDULLA</text>
-
-            {/* ── CALLOUT LABELS ── */}
-            <g transform="translate(720, 60)">
-              <rect x="0" y="0" width="220" height="72" rx="9" fill={labelBg} stroke="#c084fc" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#c084fc" fontSize="12" fontWeight="900">Cerebrum</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9">• Largest part (85% brain mass)</text>
-              <text x="12" y="45" fill={textMuted} fontSize="9">• 2 hemispheres; 4 lobes each</text>
-              <text x="12" y="58" fill={textMuted} fontSize="9">• Controls intelligence &amp; will</text>
-              <circle cx="0" cy="36" r="4" fill="#c084fc"/>
-              <line x1="0" y1="36" x2="-280" y2="200" stroke="#c084fc" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(720, 160)">
-              <rect x="0" y="0" width="220" height="62" rx="9" fill={labelBg} stroke="#34d399" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#34d399" fontSize="12" fontWeight="900">Cerebellum</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9">• "Little brain"; 2nd largest</text>
-              <text x="12" y="48" fill={textMuted} fontSize="9">• Fine motor control &amp; balance</text>
-              <circle cx="0" cy="31" r="4" fill="#34d399"/>
-              <line x1="0" y1="31" x2="-330" y2="470" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(720, 248)">
-              <rect x="0" y="0" width="220" height="82" rx="9" fill={labelBg} stroke="#fbbf24" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#fbbf24" fontSize="12" fontWeight="900">Medulla Oblongata</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9">• Controls autonomic functions</text>
-              <text x="12" y="47" fill={textMuted} fontSize="9">• Heartbeat, breathing, BP</text>
-              <text x="12" y="62" fill="#ef4444" fontSize="9" fontWeight="bold">★ Damage is FATAL (board trap)</text>
-              <circle cx="0" cy="41" r="4" fill="#fbbf24"/>
-              <line x1="0" y1="41" x2="-300" y2="442" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(720, 358)">
-              <rect x="0" y="0" width="220" height="72" rx="9" fill={labelBg} stroke="#818cf8" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#818cf8" fontSize="12" fontWeight="900">Forebrain Lobes</text>
-              <text x="12" y="33" fill={textMuted} fontSize="9">• Frontal: decision, personality</text>
-              <text x="12" y="48" fill={textMuted} fontSize="9">• Parietal: touch, temperature</text>
-              <text x="12" y="62" fill={textMuted} fontSize="9">• Temporal: hearing; Occipital: vision</text>
+            {/* Title */}
+            <g transform="translate(40, 25)">
+              <rect width="420" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+                HUMAN BRAIN — SAGITTAL MEDIAN SECTION
+              </text>
+              <rect x="350" y="9" width="58" height="24" rx="6" fill="#a855f7" fillOpacity="0.2" />
+              <text x="379" y="25" fill="#c084fc" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* CBSE Banner */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Cerebrum = voluntary; Cerebellum = balance; Medulla = involuntary (heartbeat, breathing)
-            </text>
+            {/* Skull Cranium Outline & Meninges */}
+            <path
+              d="M 230 430 
+                 C 190 320 200 160 350 90 
+                 C 480 30 650 50 740 140 
+                 C 820 220 830 380 770 450"
+              fill="none"
+              stroke="#94a3b8"
+              strokeWidth="16"
+              strokeLinecap="round"
+            />
+            {/* Meninges 3 protective membranes (Dura, Arachnoid, Pia mater with CSF) */}
+            <path
+              d="M 240 420 C 205 320 215 170 355 105 C 480 48 640 68 725 150 C 800 225 810 370 755 440"
+              fill="none"
+              stroke="#38bdf8"
+              strokeWidth="4"
+            />
+
+            {/* FOREBRAIN: CEREBRAL CORTEX (Extensive Gyri & Sulci Foldings for Cognition) */}
+            <g filter="url(#brDrop)">
+              <path
+                d="M 260 410 
+                   C 220 330 230 180 370 120 
+                   C 490 70 630 85 710 160 
+                   C 775 220 780 340 730 400 
+                   C 660 380 600 370 540 330 
+                   C 460 330 380 370 300 400 Z"
+                fill="url(#cortexGrad)"
+                stroke="#9333ea"
+                strokeWidth="3.5"
+              />
+              {/* Detailed Anatomical Gyri / Sulci Convolution Curves */}
+              <path d="M 330 190 Q 380 150 430 190 Q 480 140 540 180" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
+              <path d="M 370 230 Q 420 190 470 240 Q 520 200 580 240" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
+              <path d="M 410 280 Q 460 250 510 280 Q 560 250 630 280" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
+              <path d="M 580 150 Q 640 190 680 250" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
+              <path d="M 280 280 Q 330 260 370 310" stroke="#7e22ce" strokeWidth="2.5" fill="none"/>
+            </g>
+
+            {/* Corpus Callosum (Iconic C-shaped thick white matter band bridging hemispheres) */}
+            <path
+              d="M 380 300 
+                 C 380 230 580 210 610 290 
+                 C 590 260 430 270 410 315 Z"
+              fill="#ffffff"
+              stroke="#cbd5e1"
+              strokeWidth="2"
+              filter="url(#brDrop)"
+            />
+
+            {/* Thalamus (Egg-shaped sensory relay station) */}
+            <ellipse cx="500" cy="315" rx="26" ry="18" fill="#fbbf24" stroke="#d97706" strokeWidth="2" />
+
+            {/* Hypothalamus (Controls temperature, hunger, thirst, endocrine master) */}
+            <path d="M 470 330 L 510 330 L 495 365 Z" fill="#f59e0b" stroke="#b45309" strokeWidth="2" />
+
+            {/* Pituitary Gland (Master endocrine gland suspended by infundibulum stalk) */}
+            <ellipse cx="485" cy="385" rx="10" ry="12" fill="#ef4444" stroke="#b91c1c" strokeWidth="2" />
+            <line x1="490" y1="365" x2="485" y2="375" stroke="#ef4444" strokeWidth="3" />
+
+            {/* MIDBRAIN */}
+            <circle cx="545" cy="350" r="16" fill="#38bdf8" stroke="#0284c7" strokeWidth="2" />
+
+            {/* HINDBRAIN: PONS (Bulge with transverse conduction tracts) */}
+            <path
+              d="M 515 375 
+                 C 490 395 490 440 520 455 
+                 L 555 440 L 545 375 Z"
+              fill="#34d399"
+              stroke="#059669"
+              strokeWidth="2.5"
+            />
+
+            {/* HINDBRAIN: MEDULLA OBLONGATA (Controls involuntary: heartbeat, breathing, vomiting, BP) */}
+            <path
+              d="M 520 455 
+                 C 510 490 515 530 525 570 
+                 L 555 570 L 555 440 Z"
+              fill="#10b981"
+              stroke="#047857"
+              strokeWidth="2.5"
+            />
+
+            {/* SPINAL CORD continuation downwards */}
+            <path d="M 525 570 L 525 630 M 555 570 L 555 630" stroke="#64748b" strokeWidth="4" />
+
+            {/* HINDBRAIN: CEREBELLUM with ARBOR VITAE (Tree of Life branching pattern) */}
+            <g filter="url(#brDrop)">
+              <path
+                d="M 570 375 
+                   C 660 360 740 400 730 480 
+                   C 720 540 640 550 570 510 
+                   C 550 460 555 410 570 375 Z"
+                fill="#fdba74"
+                stroke="#ea580c"
+                strokeWidth="3.5"
+              />
+              {/* Arbor Vitae White Matter Tree Branching */}
+              <g stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" fill="none">
+                <path d="M 575 445 Q 630 440 680 430" />
+                <path d="M 620 442 Q 640 405 670 390" />
+                <path d="M 640 435 Q 665 470 700 480" />
+                <path d="M 600 444 Q 610 480 635 505" />
+              </g>
+            </g>
+
+            {/* Brain Major Division Bracket Cards (CBSE Official Syllabus) */}
+            {/* Forebrain */}
+            <g transform="translate(40, 110)">
+              <rect width="170" height="95" rx="8" fill={labelBg} stroke="#a855f7" strokeWidth="1.5" />
+              <text x="85" y="20" fill="#a855f7" fontSize="12" fontWeight="800" textAnchor="middle">I. FOREBRAIN</text>
+              <text x="12" y="38" fill={textPrimary} fontSize="10">• Cerebrum (Cortex)</text>
+              <text x="12" y="52" fill={textMuted} fontSize="9">  Thinking, Memory, Will</text>
+              <text x="12" y="68" fill={textPrimary} fontSize="10">• Sensory Integration</text>
+              <text x="12" y="84" fill={textMuted} fontSize="9">  Hearing, Smell, Vision</text>
+            </g>
+
+            {/* Midbrain */}
+            <g transform="translate(40, 225)">
+              <rect width="170" height="75" rx="8" fill={labelBg} stroke="#0284c7" strokeWidth="1.5" />
+              <text x="85" y="20" fill="#0284c7" fontSize="12" fontWeight="800" textAnchor="middle">II. MIDBRAIN</text>
+              <text x="12" y="38" fill={textPrimary} fontSize="10">• Visual & Auditory</text>
+              <text x="12" y="52" fill={textMuted} fontSize="9">  reflex centres</text>
+              <text x="12" y="66" fill={textPrimary} fontSize="10">• Pupil dilation reflexes</text>
+            </g>
+
+            {/* Hindbrain */}
+            <g transform="translate(40, 320)">
+              <rect width="170" height="135" rx="8" fill={labelBg} stroke="#059669" strokeWidth="1.5" />
+              <text x="85" y="20" fill="#059669" fontSize="12" fontWeight="800" textAnchor="middle">III. HINDBRAIN</text>
+              <text x="12" y="38" fill={textPrimary} fontSize="10">• Cerebellum:</text>
+              <text x="20" y="52" fill={textMuted} fontSize="9">Posture, balance, precision</text>
+              <text x="12" y="68" fill={textPrimary} fontSize="10">• Pons:</text>
+              <text x="20" y="82" fill={textMuted} fontSize="9">Pneumotaxic resp regulation</text>
+              <text x="12" y="98" fill={textPrimary} fontSize="10">• Medulla Oblongata:</text>
+              <text x="20" y="112" fill={textMuted} fontSize="9">Involuntary BP, salivation</text>
+              <text x="20" y="124" fill={textMuted} fontSize="9">swallowing, vomiting</text>
+            </g>
+
+            {/* Anatomical Labels with Leader Lines */}
+            <line x1="500" y1="85" x2="500" y2="45" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="500" y="40" fill="#a855f7" fontSize="12" fontWeight="800" textAnchor="middle">Cerebrum (Forebrain)</text>
+
+            <line x1="430" y1="270" x2="310" y2="270" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="300" y="274" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="end">Corpus Callosum</text>
+
+            <line x1="500" y1="315" x2="680" y2="280" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="685" y="284" fill="#d97706" fontSize="11" fontWeight="700">Thalamus</text>
+
+            <line x1="495" y1="350" x2="680" y2="320" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="685" y="324" fill="#b45309" fontSize="11" fontWeight="700">Hypothalamus</text>
+
+            <line x1="485" y1="390" x2="310" y2="390" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="300" y="394" fill="#ef4444" fontSize="11" fontWeight="800" textAnchor="end">Pituitary Gland</text>
+
+            <line x1="510" y1="420" x2="310" y2="440" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="300" y="444" fill="#059669" fontSize="11" fontWeight="700" textAnchor="end">Pons (Hindbrain)</text>
+
+            <line x1="535" y1="500" x2="310" y2="500" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="300" y="504" fill="#047857" fontSize="11" fontWeight="800" textAnchor="end">Medulla Oblongata</text>
+
+            <line x1="680" y1="460" x2="820" y2="460" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(825, 445)">
+              <rect width="155" height="42" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="77" y="18" fill="#ea580c" fontSize="11" fontWeight="800" textAnchor="middle">Cerebellum</text>
+              <text x="77" y="32" fill={textMuted} fontSize="9" textAnchor="middle">(Posture & Balance)</text>
+            </g>
+
+            <line x1="540" y1="600" x2="680" y2="600" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="685" y="604" fill={textPrimary} fontSize="11" fontWeight="700">Spinal Cord</text>
+
+            <line x1="760" y1="200" x2="850" y2="200" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="855" y="204" fill={textPrimary} fontSize="11" fontWeight="700">Cranium (Bony Skull)</text>
           </svg>
         );
 
       // =====================================================================
-      // 7. LEAF CROSS-SECTION & STOMATA MECHANISM
+      // 7. LEAF CROSS SECTION (T.S.) & STOMATAL APPARATUS
       // =====================================================================
       case "bio_leaf_stomata":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="lfBg" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#0a1a0a" : "#f0fdf4"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#dcfce7"} />
+              <radialGradient id="lfBg" cx="50%" cy="40%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#06150c" : "#f0fdf4"} />
+                <stop offset="100%" stopColor={isDark ? "#030805" : "#dcfce7"} />
               </radialGradient>
-              <linearGradient id="lfMeso" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#86efac" stopOpacity="0.7"/>
-                <stop offset="100%" stopColor="#4ade80" stopOpacity="0.3"/>
+              <linearGradient id="palisadeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#4ade80" />
+                <stop offset="60%" stopColor="#22c55e" />
+                <stop offset="100%" stopColor="#15803d" />
               </linearGradient>
-              <filter id="lfShadow">
-                <feDropShadow dx="0" dy="3" stdDeviation="5" floodOpacity="0.3"/>
+              <filter id="lfDrop" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#000" floodOpacity="0.4" />
               </filter>
             </defs>
-            <rect width="960" height="600" fill="url(#lfBg)" rx="18"/>
-            <text x="320" y="28" fill={isDark ? "#4ade80" : "#166534"} fontSize="13" fontWeight="900" textAnchor="middle">LEAF CROSS-SECTION (T.S.)</text>
-            <text x="750" y="28" fill={isDark ? "#4ade80" : "#166534"} fontSize="13" fontWeight="900" textAnchor="middle">STOMATA MECHANISM</text>
 
-            {/* ── LEAF CROSS-SECTION (left half) ── */}
-            {/* Upper Epidermis */}
-            <rect x="40" y="55" width="540" height="30" rx="5" fill={isDark ? "rgba(148,163,184,0.3)" : "rgba(203,213,225,0.6)"} stroke="#94a3b8" strokeWidth="2"/>
-            <text x="320" y="76" fill={textMuted} fontSize="10" textAnchor="middle" fontWeight="bold">Upper Epidermis (waxy cuticle; no chloroplasts)</text>
-            {/* Palisade Mesophyll */}
-            {[60,95,130,165,200,235,270,305,340,375,410,445,480,515].map((x,i) => (
-              <rect key={"pm"+i} x={x} y="85" width="22" height="72" rx="8" fill={isDark ? "rgba(34,197,94,0.5)" : "rgba(187,247,208,0.8)"} stroke="#22c55e" strokeWidth="1.5"/>
-            ))}
-            <text x="320" y="127" fill="#166534" fontSize="10" textAnchor="middle" fontWeight="bold">Palisade Mesophyll (Photosynthesis)</text>
-            {/* Spongy Mesophyll with air spaces */}
-            {[[70,168],[130,172],[195,165],[260,170],[330,168],[400,165],[460,170],[510,165]].map(([x,y],i) => (
-              <ellipse key={"sm"+i} cx={x} cy={y} rx="28" ry="18" fill={isDark ? "rgba(34,197,94,0.25)" : "rgba(187,247,208,0.6)"} stroke="#22c55e" strokeWidth="1.5"/>
-            ))}
-            <text x="320" y="200" fill="#166534" fontSize="10" textAnchor="middle" fontWeight="bold">Spongy Mesophyll (air spaces for gas exchange)</text>
-            {/* Vascular Bundle */}
-            <ellipse cx="320" cy="218" rx="55" ry="18" fill={isDark ? "rgba(251,191,36,0.3)" : "rgba(254,243,199,0.8)"} stroke="#fbbf24" strokeWidth="2"/>
-            <text x="320" y="222" fill="#92400e" fontSize="9" fontWeight="bold" textAnchor="middle">Vascular Bundle (Xylem + Phloem)</text>
-            {/* Lower Epidermis */}
-            <rect x="40" y="232" width="540" height="28" rx="5" fill={isDark ? "rgba(148,163,184,0.25)" : "rgba(203,213,225,0.5)"} stroke="#94a3b8" strokeWidth="2"/>
-            {/* Stomata on lower epidermis */}
-            {[120, 240, 360, 450].map((x,i) => (
-              <React.Fragment key={"sto"+i}>
-                <ellipse cx={x} cy={246} rx="14" ry="5" fill={isDark ? "#0f172a" : "#1e293b"} stroke="#22c55e" strokeWidth="2"/>
-                <ellipse cx={x-14} cy={246} rx="9" ry="7" fill="#22c55e" opacity="0.7"/>
-                <ellipse cx={x+14} cy={246} rx="9" ry="7" fill="#22c55e" opacity="0.7"/>
-              </React.Fragment>
-            ))}
-            <text x="320" y="276" fill="#22c55e" fontSize="10" textAnchor="middle" fontWeight="bold">Lower Epidermis (stomata here; more shade)</text>
+            <rect width="1000" height="650" rx="20" fill="url(#lfBg)" />
+            {[...Array(13)].map((_, i) => <line key={"lvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
+            {[...Array(9)].map((_, i) => <line key={"lhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
 
-            {/* ── STOMATA MECHANISM (right half) ── */}
-            <line x1="600" y1="40" x2="600" y2="580" stroke={isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"} strokeWidth="1.5" strokeDasharray="6,4"/>
-            {/* Open stomata */}
-            <text x="750" y="65" fill="#4ade80" fontSize="11" fontWeight="900" textAnchor="middle">OPEN (Day / High Water)</text>
-            <ellipse cx="750" cy="145" rx="18" ry="60" fill={isDark ? "#0f172a" : "#1e293b"} stroke="#22c55e" strokeWidth="2"/>
-            <ellipse cx="718" cy="145" rx="18" ry="40" fill="#4ade80" stroke="#22c55e" strokeWidth="2.5"/>
-            <ellipse cx="782" cy="145" rx="18" ry="40" fill="#4ade80" stroke="#22c55e" strokeWidth="2.5"/>
-            <text x="718" y="148" fill="white" fontSize="7" textAnchor="middle" fontWeight="bold">Guard</text>
-            <text x="718" y="158" fill="white" fontSize="7" textAnchor="middle" fontWeight="bold">Cell</text>
-            <text x="750" y="200" fill={textMuted} fontSize="9" textAnchor="middle">Turgid guard cells</text>
-            <text x="750" y="213" fill={textMuted} fontSize="9" textAnchor="middle">→ pore opens</text>
-            {/* Chloroplasts inside guard cells */}
-            {[[710,130],[710,145],[710,160],[780,130],[780,145],[780,160]].map(([x,y],i) => (
-              <ellipse key={"gc"+i} cx={x} cy={y} rx="6" ry="4" fill="#4ade80" opacity="0.8"/>
-            ))}
-
-            {/* Closed stomata */}
-            <text x="750" y="260" fill="#f87171" fontSize="11" fontWeight="900" textAnchor="middle">CLOSED (Night / Low Water)</text>
-            <ellipse cx="750" cy="360" rx="12" ry="55" fill={isDark ? "#0f172a" : "#1e293b"} stroke="#94a3b8" strokeWidth="2"/>
-            <ellipse cx="728" cy="360" rx="12" ry="35" fill="#94a3b8" stroke="#64748b" strokeWidth="2.5"/>
-            <ellipse cx="772" cy="360" rx="12" ry="35" fill="#94a3b8" stroke="#64748b" strokeWidth="2.5"/>
-            <text x="750" y="410" fill={textMuted} fontSize="9" textAnchor="middle">Flaccid guard cells</text>
-            <text x="750" y="423" fill={textMuted} fontSize="9" textAnchor="middle">→ pore closes</text>
-
-            {/* Mechanism explanation */}
-            <rect x="620" y="450" width="310" height="98" rx="10" fill={labelBg} stroke="#4ade80" strokeWidth="1.5"/>
-            <text x="775" y="468" fill="#4ade80" fontSize="10.5" fontWeight="900" textAnchor="middle">Stomatal Opening Mechanism</text>
-            <text x="635" y="484" fill={textMuted} fontSize="9">1. Sunlight → K⁺ enters guard cells</text>
-            <text x="635" y="498" fill={textMuted} fontSize="9">2. Water enters by osmosis → cell turgid</text>
-            <text x="635" y="512" fill={textMuted} fontSize="9">3. Thick inner wall bends outward → pore opens</text>
-            <text x="635" y="526" fill={textMuted} fontSize="9">4. Night: K⁺ leaves → cell flaccid → pore closes</text>
-            <text x="635" y="540" fill={textMuted} fontSize="9">Guard cells only leaf cells with chloroplasts!</text>
-
-            {/* Callouts for cross-section */}
-            <g transform="translate(580, 90)">
-              <rect x="0" y="0" width="0" height="0" fill="none"/>
-            </g>
-            <g transform="translate(14, 100)">
-              <rect x="0" y="0" width="20" height="52" rx="3" fill="#22c55e" opacity="0.6"/>
+            {/* Title */}
+            <g transform="translate(40, 25)">
+              <rect width="450" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+                TRANSVERSE SECTION OF LEAF & STOMATA
+              </text>
+              <rect x="380" y="9" width="58" height="24" rx="6" fill="#22c55e" fillOpacity="0.2" />
+              <text x="409" y="25" fill="#22c55e" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* CBSE Banner */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Guard cells only cells with chloroplasts in epidermis; stomata mainly on lower leaf surface
-            </text>
+            {/* LEFT HALF: T.S. OF LEAF ANATOMY */}
+            <g transform="translate(50, 80)">
+              <text x="0" y="0" fill="#15803d" fontSize="12" fontWeight="800">
+                PART A: CROSS SECTION OF DICOT LEAF (T.S.)
+              </text>
+
+              {/* 1. Waxy Hydrophobic Cuticle (Top sheen) */}
+              <rect x="0" y="20" width="460" height="10" rx="4" fill="#67e8f9" opacity="0.8" />
+
+              {/* 2. Upper Epidermis (Single layer of barrel-shaped parenchymatous cells, no chloroplasts) */}
+              {[...Array(11)].map((_, i) => (
+                <rect
+                  key={"uepid"+i}
+                  x={i * 42}
+                  y="30"
+                  width="40"
+                  height="30"
+                  rx="6"
+                  fill="#bbf7d0"
+                  stroke="#16a34a"
+                  strokeWidth="2"
+                />
+              ))}
+
+              {/* 3. Palisade Mesophyll (Vertically elongated, densely packed with chlorophyll discs) */}
+              {[...Array(11)].map((_, i) => (
+                <g key={"pal"+i} transform={`translate(${i * 42}, 62)`}>
+                  <rect width="40" height="110" rx="6" fill="url(#palisadeGrad)" stroke="#166534" strokeWidth="2" />
+                  {/* Chloroplast Organelles */}
+                  <circle cx="12" cy="20" r="4" fill="#14532d" />
+                  <circle cx="28" cy="30" r="4" fill="#14532d" />
+                  <circle cx="15" cy="55" r="4" fill="#14532d" />
+                  <circle cx="28" cy="75" r="4" fill="#14532d" />
+                  <circle cx="15" cy="95" r="4" fill="#14532d" />
+                </g>
+              ))}
+
+              {/* 4. Spongy Mesophyll (Loosely arranged with large air cavities for gas exchange) */}
+              <g transform="translate(0, 175)">
+                {/* Air cavities background */}
+                <rect width="460" height="125" rx="8" fill={isDark ? "#064e3b" : "#f0fdf4"} opacity="0.5" />
+                {/* Loosely arranged oval cells */}
+                <circle cx="40" cy="30" r="22" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+                <circle cx="100" cy="45" r="20" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+                <circle cx="45" cy="85" r="24" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+                <circle cx="120" cy="100" r="20" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+                <circle cx="360" cy="35" r="22" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+                <circle cx="420" cy="45" r="20" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+                <circle cx="370" cy="90" r="22" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+                <circle cx="430" cy="100" r="20" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+
+                {/* VASCULAR BUNDLE (Midrib Vein in Center) */}
+                <ellipse cx="230" cy="65" rx="65" ry="55" fill="#fef08a" stroke="#ca8a04" strokeWidth="2.5" />
+                {/* Bundle Sheath Cells ring */}
+                <text x="230" y="28" fill="#ca8a04" fontSize="9.5" fontWeight="800" textAnchor="middle">Bundle Sheath</text>
+                {/* Xylem Vessels (Thick-walled red, water transport) */}
+                <circle cx="215" cy="55" r="14" fill="#fee2e2" stroke="#dc2626" strokeWidth="3" />
+                <circle cx="245" cy="55" r="14" fill="#fee2e2" stroke="#dc2626" strokeWidth="3" />
+                <text x="230" y="58" fill="#dc2626" fontSize="9" fontWeight="800" textAnchor="middle">Xylem</text>
+                {/* Phloem Sieve Tubes (Green, sugar translocation) */}
+                <circle cx="215" cy="85" r="10" fill="#dcfce7" stroke="#16a34a" strokeWidth="2.5" />
+                <circle cx="245" cy="85" r="10" fill="#dcfce7" stroke="#16a34a" strokeWidth="2.5" />
+                <text x="230" y="88" fill="#16a34a" fontSize="8.5" fontWeight="800" textAnchor="middle">Phloem</text>
+
+                {/* Respiratory Substomatal Cavity */}
+                <path d="M 270 125 C 270 95 320 95 320 125 Z" fill="#38bdf8" opacity="0.3" />
+                <text x="295" y="115" fill="#0284c7" fontSize="8.5" fontWeight="700" textAnchor="middle">Air Cavity</text>
+              </g>
+
+              {/* 5. Lower Epidermis with Stomatal Pore Opening */}
+              <g transform="translate(0, 302)">
+                {[...Array(6)].map((_, i) => (
+                  <rect
+                    key={"lepid"+i}
+                    x={i * 42}
+                    y="0"
+                    width="40"
+                    height="30"
+                    rx="6"
+                    fill="#bbf7d0"
+                    stroke="#16a34a"
+                    strokeWidth="2"
+                  />
+                ))}
+                {/* Stoma opening gap flanked by Guard Cells */}
+                <ellipse cx="270" cy="15" rx="10" ry="14" fill="#4ade80" stroke="#15803d" strokeWidth="2" />
+                <ellipse cx="295" cy="15" rx="10" ry="14" fill="#4ade80" stroke="#15803d" strokeWidth="2" />
+
+                {[...Array(4)].map((_, i) => (
+                  <rect
+                    key={"lepid2"+i}
+                    x={315 + i * 40}
+                    y="0"
+                    width="38"
+                    height="30"
+                    rx="6"
+                    fill="#bbf7d0"
+                    stroke="#16a34a"
+                    strokeWidth="2"
+                  />
+                ))}
+                {/* Lower Waxy Cuticle */}
+                <rect x="0" y="30" width="460" height="8" rx="3" fill="#67e8f9" opacity="0.8" />
+              </g>
+
+              {/* Labels for Leaf Section */}
+              <text x="470" y="28" fill="#06b6d4" fontSize="10.5" fontWeight="700">Waxy Cuticle</text>
+              <text x="470" y="48" fill="#16a34a" fontSize="10.5" fontWeight="700">Upper Epidermis</text>
+              <text x="470" y="115" fill="#15803d" fontSize="10.5" fontWeight="800">Palisade Mesophyll</text>
+              <text x="470" y="210" fill="#16a34a" fontSize="10.5" fontWeight="700">Spongy Mesophyll</text>
+              <text x="470" y="260" fill="#ca8a04" fontSize="10.5" fontWeight="800">Vascular Bundle (Vein)</text>
+              <text x="470" y="318" fill="#15803d" fontSize="10.5" fontWeight="700">Lower Epidermis + Stoma</text>
+            </g>
+
+            {/* RIGHT HALF: HIGH-MAGNIFICATION OPEN VS CLOSED STOMATA */}
+            <g transform="translate(560, 80)">
+              <rect width="400" height="520" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#lfDrop)" />
+              <text x="200" y="30" fill="#15803d" fontSize="13" fontWeight="800" textAnchor="middle">
+                PART B: STOMATAL MECHANISM (TURGOR PRESSURE)
+              </text>
+
+              {/* 1. OPEN STOMA (High Turgor, Guard cells swell, pore opens) */}
+              <g transform="translate(40, 60)">
+                <rect width="320" height="195" rx="12" fill={isDark ? "#064e3b" : "#f0fdf4"} stroke="#22c55e" strokeWidth="1.5" />
+                <text x="160" y="24" fill="#15803d" fontSize="11.5" fontWeight="800" textAnchor="middle">
+                  1. OPEN STOMA (Water Influx ➔ Turgid)
+                </text>
+
+                {/* Left Kidney-shaped Guard Cell (Swollen) */}
+                <path
+                  d="M 125 50 
+                     C 85 65 75 145 125 160 
+                     C 105 135 105 75 125 50 Z"
+                  fill="#86efac"
+                  stroke="#15803d"
+                  strokeWidth="3"
+                />
+                {/* Thick Inelastic Inner Wall */}
+                <path d="M 125 50 C 105 75 105 135 125 160" stroke="#14532d" strokeWidth="6" fill="none" strokeLinecap="round"/>
+
+                {/* Right Kidney-shaped Guard Cell (Swollen) */}
+                <path
+                  d="M 195 50 
+                     C 235 65 245 145 195 160 
+                     C 215 135 215 75 195 50 Z"
+                  fill="#86efac"
+                  stroke="#15803d"
+                  strokeWidth="3"
+                />
+                {/* Thick Inelastic Inner Wall */}
+                <path d="M 195 50 C 215 75 215 135 195 160" stroke="#14532d" strokeWidth="6" fill="none" strokeLinecap="round"/>
+
+                {/* Wide Open Stomatal Aperture / Pore */}
+                <ellipse cx="160" cy="105" rx="20" ry="38" fill="#0f172a" />
+                <text x="160" y="110" fill="#38bdf8" fontSize="10" fontWeight="900" textAnchor="middle">PORE</text>
+
+                {/* Organelles in Guard Cells: Nucleus & Chloroplasts */}
+                <circle cx="95" cy="105" r="7" fill="#1e3a8a" stroke="#fff" strokeWidth="1.5" />
+                <circle cx="225" cy="105" r="7" fill="#1e3a8a" stroke="#fff" strokeWidth="1.5" />
+                <circle cx="90" cy="75" r="4" fill="#15803d" />
+                <circle cx="90" cy="135" r="4" fill="#15803d" />
+                <circle cx="230" cy="75" r="4" fill="#15803d" />
+                <circle cx="230" cy="135" r="4" fill="#15803d" />
+
+                <text x="160" y="182" fill="#15803d" fontSize="10" fontWeight="700" textAnchor="middle">
+                  K⁺ & H₂O Enter ➔ Swelling bows outer thin walls outwards
+                </text>
+              </g>
+
+              {/* 2. CLOSED STOMA (Flaccid Guard cells, pore closes to prevent water loss) */}
+              <g transform="translate(40, 275)">
+                <rect width="320" height="195" rx="12" fill={isDark ? "#1e1b4b" : "#fef2f2"} stroke="#f87171" strokeWidth="1.5" />
+                <text x="160" y="24" fill="#dc2626" fontSize="11.5" fontWeight="800" textAnchor="middle">
+                  2. CLOSED STOMA (Water Efflux ➔ Flaccid)
+                </text>
+
+                {/* Left Guard Cell (Straightened / collapsed) */}
+                <path
+                  d="M 145 50 
+                     C 115 65 115 145 145 160 
+                     L 156 160 L 156 50 Z"
+                  fill="#fca5a5"
+                  stroke="#b91c1c"
+                  strokeWidth="3"
+                />
+                {/* Right Guard Cell (Straightened / collapsed) */}
+                <path
+                  d="M 175 50 
+                     C 205 65 205 145 175 160 
+                     L 164 160 L 164 50 Z"
+                  fill="#fca5a5"
+                  stroke="#b91c1c"
+                  strokeWidth="3"
+                />
+
+                {/* Closed Slit (Tightly abutting inner thick walls) */}
+                <line x1="160" y1="52" x2="160" y2="158" stroke="#7f1d1d" strokeWidth="4" />
+                <text x="160" y="108" fill="#7f1d1d" fontSize="9" fontWeight="900" textAnchor="middle">CLOSED</text>
+
+                {/* Organelles */}
+                <circle cx="130" cy="105" r="6" fill="#1e3a8a" />
+                <circle cx="190" cy="105" r="6" fill="#1e3a8a" />
+
+                <text x="160" y="182" fill="#dc2626" fontSize="10" fontWeight="700" textAnchor="middle">
+                  H₂O Loss ➔ Guard cells shrink & inner walls touch
+                </text>
+              </g>
+
+              <text x="200" y="495" fill={textMuted} fontSize="9.5" fontWeight="600" textAnchor="middle">
+                Crucial CBSE Concept: Guard cell turgidity regulates opening/closing
+              </text>
+            </g>
           </svg>
         );
 
       // =====================================================================
-      // 8. FLOWER LONGITUDINAL SECTION
+      // 8. LONGITUDINAL SECTION OF FLOWER (L.S.)
       // =====================================================================
       case "bio_flower_ls":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="flBg" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#1a0a12" : "#fff1f5"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#ffe4e6"} />
+              <radialGradient id="flBg" cx="50%" cy="45%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#190814" : "#fdf4ff"} />
+                <stop offset="100%" stopColor={isDark ? "#060305" : "#fae8ff"} />
               </radialGradient>
-              <linearGradient id="flPetal" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f9a8d4" stopOpacity="0.8"/>
-                <stop offset="100%" stopColor="#f472b6" stopOpacity="0.4"/>
+              <linearGradient id="petalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f472b6" />
+                <stop offset="40%" stopColor="#ec4899" />
+                <stop offset="100%" stopColor="#be185d" />
               </linearGradient>
-              <filter id="flShadow">
-                <feDropShadow dx="0" dy="4" stdDeviation="7" floodOpacity="0.35"/>
+              <filter id="flDrop" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="12" stdDeviation="15" floodColor="#000" floodOpacity="0.45" />
               </filter>
             </defs>
-            <rect width="960" height="600" fill="url(#flBg)" rx="18"/>
 
-            {/* ── PEDUNCLE (stalk) ── */}
-            <rect x="420" y="530" width="40" height="50" rx="6" fill={isDark ? "#1a3a1a" : "#86efac"} stroke="#22c55e" strokeWidth="2"/>
-            <text x="480" y="562" fill="#22c55e" fontSize="9.5" fontWeight="bold">Peduncle</text>
-            {/* Receptacle */}
-            <path d="M 395 530 Q 440 520 480 520 Q 520 520 565 530 L 550 548 Q 480 555 410 548 Z" fill={isDark ? "#14532d" : "#bbf7d0"} stroke="#22c55e" strokeWidth="2"/>
-            <text x="480" y="545" fill="#166534" fontSize="9" textAnchor="middle" fontWeight="bold">Receptacle</text>
+            <rect width="1000" height="650" rx="20" fill="url(#flBg)" />
+            {[...Array(13)].map((_, i) => <line key={"fvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
+            {[...Array(9)].map((_, i) => <line key={"fhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
 
-            {/* ── SEPALS ── */}
-            <path d="M 390 520 Q 350 480 360 440 Q 370 415 405 410" fill="url(#flPetal)" stroke="#86efac" strokeWidth="2.5" opacity="0.7"/>
-            <path d="M 565 520 Q 610 480 600 440 Q 590 415 555 410" fill="url(#flPetal)" stroke="#86efac" strokeWidth="2.5" opacity="0.7"/>
-            <text x="330" y="470" fill="#22c55e" fontSize="10" fontWeight="bold">Sepal (calyx)</text>
-
-            {/* ── PETALS ── */}
-            <path d="M 400 415 Q 330 340 340 265 Q 350 210 400 190 Q 440 175 450 215 Q 460 260 440 310 Q 425 350 415 400" fill="url(#flPetal)" stroke="#f472b6" strokeWidth="2.5"/>
-            <path d="M 560 415 Q 630 340 620 265 Q 610 210 560 190 Q 520 175 510 215 Q 500 260 520 310 Q 535 350 545 400" fill="url(#flPetal)" stroke="#f472b6" strokeWidth="2.5"/>
-            <text x="295" y="295" fill="#f472b6" fontSize="10" fontWeight="bold">Petal (corolla)</text>
-            <text x="295" y="308" fill={textMuted} fontSize="8.5">Attract pollinators</text>
-
-            {/* ── STAMEN (Anther + Filament) ── */}
-            {[-55,-22,10,43].map((off,i) => (
-              <React.Fragment key={"stm"+i}>
-                <line x1={480+off} y1="410" x2={480+off} y2="290" stroke="#fbbf24" strokeWidth="4" strokeLinecap="round"/>
-                <ellipse cx={480+off} cy="280" rx="12" ry="18" fill={isDark ? "rgba(251,191,36,0.7)" : "rgba(254,243,199,0.9)"} stroke="#f59e0b" strokeWidth="2.5"/>
-                {/* Pollen grains */}
-                {[[-6,0],[6,0],[0,-7]].map(([ox,oy],j) => (
-                  <circle key={j} cx={480+off+ox} cy={280+oy} r="3" fill="#f59e0b" opacity="0.8"/>
-                ))}
-              </React.Fragment>
-            ))}
-            <text x="640" y="285" fill="#f59e0b" fontSize="10" fontWeight="bold">Anther</text>
-            <text x="640" y="298" fill={textMuted} fontSize="8.5">(pollen sacs)</text>
-            <text x="640" y="360" fill="#f59e0b" fontSize="10" fontWeight="bold">Filament</text>
-            <text x="640" y="373" fill={textMuted} fontSize="8.5">(Stamen)</text>
-
-            {/* ── PISTIL (Stigma + Style + Ovary) ── */}
-            {/* Stigma (sticky top) */}
-            <ellipse cx="480" cy="215" rx="22" ry="12" fill={isDark ? "rgba(167,139,250,0.6)" : "rgba(221,214,254,0.9)"} stroke="#7c3aed" strokeWidth="2.5"/>
-            <text x="480" y="219" fill="#7c3aed" fontSize="9" fontWeight="bold" textAnchor="middle">Stigma</text>
-            {/* Style */}
-            <line x1="480" y1="227" x2="480" y2="360" stroke="#a855f7" strokeWidth="8" strokeLinecap="round"/>
-            <text x="500" y="300" fill="#a855f7" fontSize="10" fontWeight="bold">Style</text>
-            {/* Ovary */}
-            <ellipse cx="480" cy="385" rx="65" ry="38" fill={isDark ? "rgba(168,85,247,0.2)" : "rgba(243,232,255,0.8)"} stroke="#a855f7" strokeWidth="2.5" filter="url(#flShadow)"/>
-            <text x="480" y="385" fill="#7c3aed" fontSize="11" fontWeight="900" textAnchor="middle">Ovary</text>
-            {/* Ovules */}
-            {[[-24,8],[0,5],[24,8],[0,-10]].map(([ox,oy],i) => (
-              <ellipse key={"ov"+i} cx={480+ox} cy={385+oy} rx="10" ry="7" fill={isDark ? "rgba(168,85,247,0.5)" : "rgba(216,180,254,0.8)"} stroke="#a855f7" strokeWidth="1.5"/>
-            ))}
-            <text x="480" y="400" fill={textMuted} fontSize="8" textAnchor="middle">(ovules → seeds)</text>
-            <text x="640" y="388" fill="#a855f7" fontSize="10" fontWeight="bold">Ovary</text>
-            <text x="640" y="401" fill={textMuted} fontSize="8.5">(matures → fruit)</text>
-            <text x="640" y="220" fill="#7c3aed" fontSize="10" fontWeight="bold">Stigma</text>
-            <text x="640" y="233" fill={textMuted} fontSize="8.5">(sticky; pollen lands)</text>
-
-            {/* Pollen tube */}
-            <path d="M 480 227 Q 481 285 480 365" fill="none" stroke="#fbbf24" strokeWidth="2" strokeDasharray="4,2" opacity="0.7"/>
-            <text x="505" y="325" fill="#fbbf24" fontSize="8.5">Pollen tube</text>
-
-            {/* Callout labels left side */}
-            <g transform="translate(16, 400)">
-              <rect x="0" y="0" width="210" height="62" rx="8" fill={labelBg} stroke="#a855f7" strokeWidth="1.5"/>
-              <text x="10" y="18" fill="#a855f7" fontSize="11" fontWeight="900">Pistil (Female)</text>
-              <text x="10" y="32" fill={textMuted} fontSize="9">Stigma + Style + Ovary</text>
-              <text x="10" y="46" fill={textMuted} fontSize="9">Stigma + Style + Ovary = Pistil (carpel)</text>
-            </g>
-            <g transform="translate(16, 330)">
-              <rect x="0" y="0" width="210" height="52" rx="8" fill={labelBg} stroke="#f59e0b" strokeWidth="1.5"/>
-              <text x="10" y="18" fill="#f59e0b" fontSize="11" fontWeight="900">Stamen (Male)</text>
-              <text x="10" y="33" fill={textMuted} fontSize="9">Anther (pollen) + Filament</text>
-              <circle cx="210" cy="26" r="3.5" fill="#f59e0b"/>
-              <line x1="210" y1="26" x2="244" y2="340" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="4,3"/>
+            {/* Title */}
+            <g transform="translate(40, 25)">
+              <rect width="420" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+                LONGITUDINAL SECTION OF A FLOWER (L.S.)
+              </text>
+              <rect x="350" y="9" width="58" height="24" rx="6" fill="#ec4899" fillOpacity="0.2" />
+              <text x="379" y="25" fill="#ec4899" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* CBSE Banner */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Stamen=male; Pistil=female; Ovary→fruit; Ovule→seed; Stigma receives pollen
-            </text>
+            {/* Flower Stem / Pedicel & Receptacle (Thalamus) */}
+            <path d="M 500 500 L 500 630" stroke="#15803d" strokeWidth="22" strokeLinecap="round" />
+            <path
+              d="M 440 500 
+                 C 440 450 560 450 560 500 Z"
+              fill="#22c55e"
+              stroke="#166534"
+              strokeWidth="3.5"
+            />
+            <text x="500" y="525" fill="#ffffff" fontSize="11" fontWeight="800" textAnchor="middle">Thalamus / Receptacle</text>
+            <text x="500" y="615" fill="#ffffff" fontSize="11" fontWeight="800" textAnchor="middle">Pedicel</text>
+
+            {/* Sepals (Calyx - Green protective outer whorl) */}
+            <path d="M 450 490 C 360 490 320 440 300 420 C 330 460 410 500 450 500 Z" fill="#16a34a" stroke="#14532d" strokeWidth="2.5" />
+            <path d="M 550 490 C 640 490 680 440 700 420 C 670 460 590 500 550 500 Z" fill="#16a34a" stroke="#14532d" strokeWidth="2.5" />
+
+            {/* Petals (Corolla - Large colorful velvety whorl attracting pollinators) */}
+            <g filter="url(#flDrop)">
+              {/* Left Wing Petal */}
+              <path
+                d="M 450 470 
+                   C 300 470 180 350 200 180 
+                   C 260 160 380 280 440 380 Z"
+                fill="url(#petalGrad)"
+                stroke="#be185d"
+                strokeWidth="3"
+                opacity="0.95"
+              />
+              {/* Right Wing Petal */}
+              <path
+                d="M 550 470 
+                   C 700 470 820 350 800 180 
+                   C 740 160 620 280 560 380 Z"
+                fill="url(#petalGrad)"
+                stroke="#be185d"
+                strokeWidth="3"
+                opacity="0.95"
+              />
+              {/* Rear Central Petal */}
+              <path
+                d="M 420 350 
+                   C 360 150 640 150 580 350 Z"
+                fill="url(#petalGrad)"
+                stroke="#9d174d"
+                strokeWidth="3"
+                opacity="0.75"
+              />
+            </g>
+
+            {/* STAMEN (Male Reproductive Unit = Filament + Anther) */}
+            {/* Left Stamen */}
+            <path d="M 460 450 Q 360 320 370 180" fill="none" stroke="#fde047" strokeWidth="6" strokeLinecap="round" />
+            {/* Bilobed Anther bursting with yellow pollen */}
+            <g transform="translate(355, 150)">
+              <ellipse cx="10" cy="18" rx="10" ry="16" fill="#eab308" stroke="#a16207" strokeWidth="2" />
+              <ellipse cx="24" cy="18" rx="10" ry="16" fill="#eab308" stroke="#a16207" strokeWidth="2" />
+              {/* Pollen Grains */}
+              <circle cx="10" cy="12" r="2.5" fill="#fef08a" />
+              <circle cx="12" cy="22" r="2.5" fill="#fef08a" />
+              <circle cx="22" cy="15" r="2.5" fill="#fef08a" />
+              <circle cx="24" cy="25" r="2.5" fill="#fef08a" />
+            </g>
+
+            {/* Right Stamen */}
+            <path d="M 540 450 Q 640 320 630 180" fill="none" stroke="#fde047" strokeWidth="6" strokeLinecap="round" />
+            {/* Bilobed Anther */}
+            <g transform="translate(615, 150)">
+              <ellipse cx="10" cy="18" rx="10" ry="16" fill="#eab308" stroke="#a16207" strokeWidth="2" />
+              <ellipse cx="24" cy="18" rx="10" ry="16" fill="#eab308" stroke="#a16207" strokeWidth="2" />
+              <circle cx="10" cy="12" r="2.5" fill="#fef08a" />
+              <circle cx="22" cy="15" r="2.5" fill="#fef08a" />
+            </g>
+
+            {/* PISTIL / CARPEL (Female Reproductive Unit = Stigma + Style + Ovary) */}
+            {/* Ovary (Swollen basal chamber containing ovules) */}
+            <path
+              d="M 445 460 
+                 C 430 380 480 340 485 270 
+                 L 515 270 
+                 C 520 340 570 380 555 460 Z"
+              fill="#86efac"
+              stroke="#15803d"
+              strokeWidth="4"
+              filter="url(#flDrop)"
+            />
+
+            {/* Anatropous Ovule inside Ovary chamber */}
+            <g transform="translate(470, 360)">
+              <ellipse cx="30" cy="35" rx="26" ry="32" fill="#fef08a" stroke="#ca8a04" strokeWidth="2.5" />
+              {/* Embryo Sac (Female Gametophyte) with 7 Cells & 8 Nuclei */}
+              <ellipse cx="30" cy="35" rx="16" ry="20" fill="#ffffff" stroke="#eab308" strokeWidth="2" />
+              {/* 3 Antipodal Cells at chalazal end */}
+              <circle cx="22" cy="23" r="3" fill="#ef4444" />
+              <circle cx="30" cy="20" r="3" fill="#ef4444" />
+              <circle cx="38" cy="23" r="3" fill="#ef4444" />
+              {/* 2 Central Polar Nuclei */}
+              <circle cx="28" cy="35" r="2.5" fill="#3b82f6" />
+              <circle cx="33" cy="35" r="2.5" fill="#3b82f6" />
+              {/* Egg Apparatus: 1 Female Gamete (Egg Cell) + 2 Synergids */}
+              <circle cx="30" cy="48" r="4.5" fill="#10b981" stroke="#047857" strokeWidth="1.5" />
+              <circle cx="22" cy="46" r="2.5" fill="#64748b" />
+              <circle cx="38" cy="46" r="2.5" fill="#64748b" />
+            </g>
+
+            {/* Slender Style */}
+            <rect x="490" y="140" width="20" height="130" fill="#86efac" stroke="#15803d" strokeWidth="3" />
+
+            {/* Sticky Papillate Stigma (Receives pollen grain during pollination) */}
+            <ellipse cx="500" cy="135" rx="24" ry="12" fill="#22c55e" stroke="#14532d" strokeWidth="3" />
+            {/* Pollen grain germinating with Pollen Tube growing down style */}
+            <circle cx="495" cy="128" r="4" fill="#eab308" stroke="#ca8a04" strokeWidth="1.5" />
+            <path d="M 495 132 L 498 360" stroke="#f59e0b" strokeWidth="3" strokeDasharray="4,2" fill="none" />
+
+            {/* Whorl Summary Cards & Labels */}
+            {/* Male Whorl Card */}
+            <g transform="translate(40, 100)">
+              <rect width="180" height="90" rx="10" fill={labelBg} stroke="#eab308" strokeWidth="1.5" />
+              <text x="90" y="22" fill="#ca8a04" fontSize="12" fontWeight="800" textAnchor="middle">
+                STAMEN (MALE WHORL)
+              </text>
+              <text x="12" y="42" fill={textPrimary} fontSize="10.5">• Anther: Produces Pollen</text>
+              <text x="12" y="58" fill={textPrimary} fontSize="10.5">• Filament: Slender Stalk</text>
+              <text x="12" y="74" fill={textMuted} fontSize="9">Pollen = Male Gametes</text>
+            </g>
+
+            {/* Female Whorl Card */}
+            <g transform="translate(780, 100)">
+              <rect width="180" height="135" rx="10" fill={labelBg} stroke="#16a34a" strokeWidth="1.5" />
+              <text x="90" y="22" fill="#15803d" fontSize="12" fontWeight="800" textAnchor="middle">
+                CARPEL / PISTIL (FEMALE)
+              </text>
+              <text x="12" y="42" fill={textPrimary} fontSize="10.5">• Stigma: Sticky landing</text>
+              <text x="12" y="58" fill={textPrimary} fontSize="10.5">• Style: Elongated tube</text>
+              <text x="12" y="74" fill={textPrimary} fontSize="10.5">• Ovary: Swollen base</text>
+              <text x="12" y="90" fill={textAccent} fontSize="10">• Ovule ➔ Becomes Seed</text>
+              <text x="12" y="106" fill="#ec4899" fontSize="10">• Ovary ➔ Becomes Fruit</text>
+              <text x="12" y="122" fill={textMuted} fontSize="8.5">Egg cell inside embryo sac</text>
+            </g>
+
+            {/* Direct Leader Lines */}
+            <line x1="365" y1="165" x2="230" y2="165" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="220" y="169" fill="#ca8a04" fontSize="11" fontWeight="800" textAnchor="end">Anther</text>
+
+            <line x1="365" y1="260" x2="230" y2="260" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="220" y="264" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="end">Filament</text>
+
+            <line x1="500" y1="130" x2="770" y2="130" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="760" y="134" fill="#15803d" fontSize="11" fontWeight="800" textAnchor="end">Stigma</text>
+
+            <line x1="510" y1="200" x2="770" y2="200" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="760" y="204" fill="#15803d" fontSize="11" fontWeight="800" textAnchor="end">Style</text>
+
+            <line x1="550" y1="400" x2="770" y2="330" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="775" y="334" fill="#15803d" fontSize="11" fontWeight="800">Ovary Wall</text>
+
+            <line x1="500" y1="400" x2="770" y2="380" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="775" y="384" fill="#ca8a04" fontSize="11" fontWeight="800">Ovule with Egg Cell</text>
+
+            <line x1="220" y1="280" x2="100" y2="280" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="95" y="284" fill="#ec4899" fontSize="11" fontWeight="800" textAnchor="end">Petal (Corolla)</text>
+
+            <line x1="320" y1="450" x2="200" y2="450" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="195" y="454" fill="#16a34a" fontSize="11" fontWeight="800" textAnchor="end">Sepal (Calyx)</text>
           </svg>
         );
 
       // =====================================================================
-      // 9. FEMALE REPRODUCTIVE SYSTEM
+      // 9. HUMAN FEMALE REPRODUCTIVE SYSTEM
       // =====================================================================
       case "bio_female_reproduction":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="frepBg" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#1a0a12" : "#fff1f5"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#ffe4e6"} />
+              <radialGradient id="frBg" cx="50%" cy="40%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#170a12" : "#fdf2f8"} />
+                <stop offset="100%" stopColor={isDark ? "#060305" : "#fce7f3"} />
               </radialGradient>
-              <linearGradient id="frepUterus" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fca5a5" stopOpacity="0.7"/>
-                <stop offset="100%" stopColor="#ef4444" stopOpacity="0.3"/>
+              <linearGradient id="utGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#f43f5e" />
+                <stop offset="50%" stopColor="#e11d48" />
+                <stop offset="100%" stopColor="#be123c" />
               </linearGradient>
-              <filter id="frepShadow">
-                <feDropShadow dx="0" dy="4" stdDeviation="7" floodOpacity="0.35"/>
+              <linearGradient id="endometriumGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#fda4af" />
+                <stop offset="100%" stopColor="#f43f5e" />
+              </linearGradient>
+              <filter id="frDrop" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="12" stdDeviation="15" floodColor="#000" floodOpacity="0.4" />
               </filter>
             </defs>
-            <rect width="960" height="600" fill="url(#frepBg)" rx="18"/>
 
-            {/* ── UTERUS (pear-shaped) ── */}
-            <path d="M 390 280 Q 350 265 330 300 Q 315 335 330 370 Q 355 415 390 435 Q 430 455 480 455 Q 530 455 570 435 Q 605 415 630 370 Q 645 335 630 300 Q 610 265 570 280 Q 540 268 480 265 Q 420 268 390 280 Z"
-              fill="url(#frepUterus)" stroke="#ef4444" strokeWidth="3" filter="url(#frepShadow)"/>
-            {/* Endometrium layer */}
-            <path d="M 405 295 Q 370 285 355 315 Q 342 345 355 378 Q 375 415 410 430 Q 445 444 480 444 Q 515 444 550 430 Q 578 415 600 378 Q 614 345 604 315 Q 590 285 555 295 Q 525 282 480 280 Q 435 282 405 295 Z"
-              fill={isDark ? "rgba(239,68,68,0.3)" : "rgba(254,202,202,0.5)"} stroke="#ef4444" strokeWidth="1.5" strokeDasharray="4,2"/>
-            <text x="480" y="370" fill="#ef4444" fontSize="13" fontWeight="900" textAnchor="middle">Uterus</text>
-            <text x="480" y="385" fill={textMuted} fontSize="9.5" textAnchor="middle">(womb; site of implantation)</text>
-            <text x="480" y="310" fill="#ef4444" fontSize="8.5" textAnchor="middle">Endometrium</text>
-            <text x="380" y="360" fill={textMuted} fontSize="8.5" textAnchor="end">Myometrium</text>
-            <text x="380" y="373" fill={textMuted} fontSize="8.5" textAnchor="end">(smooth muscle)</text>
+            <rect width="1000" height="650" rx="20" fill="url(#frBg)" />
+            {[...Array(13)].map((_, i) => <line key={"frvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
+            {[...Array(9)].map((_, i) => <line key={"frhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
 
-            {/* ── FALLOPIAN TUBES ── */}
-            <path d="M 350 288 Q 290 265 240 240 Q 200 222 170 245" fill="none" stroke="#f97316" strokeWidth="10" strokeLinecap="round"/>
-            <path d="M 610 288 Q 670 265 720 240 Q 760 222 790 245" fill="none" stroke="#f97316" strokeWidth="10" strokeLinecap="round"/>
-            {/* Fimbriae */}
-            {[[-8,-5],[0,-8],[8,-5],[14,-2],[-14,-2]].map(([ox,oy],i) => (
-              <path key={"fimL"+i} d={`M ${170+ox} ${245+oy} Q ${165+ox} ${258+oy} ${170+ox} ${270+oy}`} fill="none" stroke="#f97316" strokeWidth="4" strokeLinecap="round"/>
-            ))}
-            {[[-8,-5],[0,-8],[8,-5],[14,-2],[-14,-2]].map(([ox,oy],i) => (
-              <path key={"fimR"+i} d={`M ${790+ox} ${245+oy} Q ${795+ox} ${258+oy} ${790+ox} ${270+oy}`} fill="none" stroke="#f97316" strokeWidth="4" strokeLinecap="round"/>
-            ))}
-            <text x="135" y="240" fill="#f97316" fontSize="9.5" fontWeight="bold" textAnchor="end">Fallopian</text>
-            <text x="135" y="253" fill="#f97316" fontSize="9.5" textAnchor="end">Tube (Oviduct)</text>
-            <text x="135" y="275" fill={textMuted} fontSize="8.5" textAnchor="end">Fimbriae</text>
-            <text x="835" y="240" fill="#f97316" fontSize="9.5" fontWeight="bold">Fallopian</text>
-            <text x="835" y="253" fill="#f97316" fontSize="9.5">Tube</text>
-            {/* Fertilization label */}
-            <text x="275" y="252" fill="#fbbf24" fontSize="8" fontWeight="bold">← Fertilization</text>
-            <text x="275" y="264" fill={textMuted} fontSize="8">   occurs here</text>
-
-            {/* ── OVARIES ── */}
-            <ellipse cx="158" cy="295" rx="45" ry="32" fill={isDark ? "rgba(168,85,247,0.3)" : "rgba(243,232,255,0.8)"} stroke="#a855f7" strokeWidth="2.5" filter="url(#frepShadow)"/>
-            <ellipse cx="802" cy="295" rx="45" ry="32" fill={isDark ? "rgba(168,85,247,0.3)" : "rgba(243,232,255,0.8)"} stroke="#a855f7" strokeWidth="2.5" filter="url(#frepShadow)"/>
-            {/* Follicles on left ovary */}
-            {[[-18,-10],[-5,-18],[12,-12],[-8,5],[10,8]].map(([ox,oy],i) => (
-              <circle key={"fol"+i} cx={158+ox} cy={295+oy} r={5+i%2} fill={isDark ? "rgba(168,85,247,0.6)" : "rgba(216,180,254,0.9)"} stroke="#a855f7" strokeWidth="1.5"/>
-            ))}
-            {/* Mature follicle with ovum */}
-            <circle cx="153" cy="290" r="10" fill="#a855f7" opacity="0.5" stroke="#7c3aed" strokeWidth="2"/>
-            <circle cx="153" cy="290" r="4" fill="#f9a8d4"/>
-            <text x="100" y="340" fill="#a855f7" fontSize="10" fontWeight="bold" textAnchor="middle">Ovary</text>
-            <text x="100" y="354" fill={textMuted} fontSize="8" textAnchor="middle">(produces eggs</text>
-            <text x="100" y="366" fill={textMuted} fontSize="8" textAnchor="middle">+ estrogen)</text>
-            <text x="860" y="340" fill="#a855f7" fontSize="10" fontWeight="bold" textAnchor="middle">Ovary</text>
-
-            {/* ── CERVIX & VAGINA ── */}
-            <path d="M 455 455 Q 455 490 455 515" stroke={isDark ? "#94a3b8" : "#64748b"} strokeWidth="16" strokeLinecap="round" fill="none"/>
-            <path d="M 505 455 Q 505 490 505 515" stroke={isDark ? "#94a3b8" : "#64748b"} strokeWidth="16" strokeLinecap="round" fill="none"/>
-            <text x="480" y="500" fill={textMuted} fontSize="9.5" textAnchor="middle" fontWeight="bold">Cervix + Vagina</text>
-
-            {/* ── CALLOUT LABELS ── */}
-            <g transform="translate(630, 98)">
-              <rect x="0" y="0" width="215" height="72" rx="9" fill={labelBg} stroke="#ef4444" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#ef4444" fontSize="12" fontWeight="900">Uterus</text>
-              <text x="12" y="32" fill={textMuted} fontSize="9">• Thick muscular wall (myometrium)</text>
-              <text x="12" y="45" fill={textMuted} fontSize="9">• Inner lining = endometrium</text>
-              <text x="12" y="58" fill={textMuted} fontSize="9">• Endometrium sheds = menstruation</text>
-              <circle cx="0" cy="36" r="4" fill="#ef4444"/>
-              <line x1="0" y1="36" x2="-60" y2="360" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(630, 198)">
-              <rect x="0" y="0" width="215" height="62" rx="9" fill={labelBg} stroke="#f97316" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#f97316" fontSize="12" fontWeight="900">Fallopian Tube</text>
-              <text x="12" y="32" fill={textMuted} fontSize="9">• Fertilization occurs here</text>
-              <text x="12" y="46" fill={textMuted} fontSize="9">• Cilia move ovum toward uterus</text>
-              <circle cx="0" cy="31" r="4" fill="#f97316"/>
-              <line x1="0" y1="31" x2="-228" y2="255" stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3"/>
-            </g>
-            <g transform="translate(630, 288)">
-              <rect x="0" y="0" width="215" height="72" rx="9" fill={labelBg} stroke="#a855f7" strokeWidth="1.5"/>
-              <text x="12" y="18" fill="#a855f7" fontSize="12" fontWeight="900">Ovary</text>
-              <text x="12" y="32" fill={textMuted} fontSize="9">• Produces eggs (ova) monthly</text>
-              <text x="12" y="46" fill={textMuted} fontSize="9">• Secretes estrogen &amp; progesterone</text>
-              <text x="12" y="60" fill={textMuted} fontSize="9">• Graafian follicle ruptures at ovulation</text>
-              <circle cx="0" cy="36" r="4" fill="#a855f7"/>
-              <line x1="0" y1="36" x2="-173" y2="296" stroke="#a855f7" strokeWidth="1.5" strokeDasharray="4,3"/>
+            {/* Title */}
+            <g transform="translate(40, 25)">
+              <rect width="440" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+                HUMAN FEMALE REPRODUCTIVE SYSTEM
+              </text>
+              <rect x="370" y="9" width="58" height="24" rx="6" fill="#f43f5e" fillOpacity="0.2" />
+              <text x="399" y="25" fill="#f43f5e" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* CBSE Banner */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Fertilization in fallopian tube; implantation in uterus; ovary releases mature egg at ovulation
+            {/* Fallopian Tubes (Oviducts: Isthmus, Ampulla, Infundibulum with Fimbriae) */}
+            {/* Left Fallopian Tube */}
+            <path
+              d="M 440 230 
+                 C 380 140 260 140 220 200 
+                 C 200 230 205 260 215 280"
+              fill="none"
+              stroke="#fda4af"
+              strokeWidth="20"
+              strokeLinecap="round"
+            />
+            {/* Left Fimbriae (Finger-like projections sweeping ovum) */}
+            <g stroke="#f43f5e" strokeWidth="4" strokeLinecap="round" fill="none">
+              <path d="M 215 280 L 195 295" />
+              <path d="M 220 280 L 210 305" />
+              <path d="M 225 280 L 230 305" />
+              <path d="M 230 275 L 245 295" />
+            </g>
+
+            {/* Right Fallopian Tube */}
+            <path
+              d="M 560 230 
+                 C 620 140 740 140 780 200 
+                 C 800 230 795 260 785 280"
+              fill="none"
+              stroke="#fda4af"
+              strokeWidth="20"
+              strokeLinecap="round"
+            />
+            {/* Right Fimbriae */}
+            <g stroke="#f43f5e" strokeWidth="4" strokeLinecap="round" fill="none">
+              <path d="M 785 280 L 805 295" />
+              <path d="M 780 280 L 790 305" />
+              <path d="M 775 280 L 770 305" />
+              <path d="M 770 275 L 755 295" />
+            </g>
+
+            {/* OVARIES (Paired primary female sex organs producing estrogen & ova) */}
+            {/* Left Ovary */}
+            <g filter="url(#frDrop)">
+              <ellipse cx="225" cy="330" rx="35" ry="24" fill="#fb7185" stroke="#be123c" strokeWidth="3" />
+              {/* Developing Follicles inside Left Ovary */}
+              <circle cx="210" cy="325" r="5" fill="#fef08a" stroke="#ca8a04" />
+              <circle cx="230" cy="320" r="7" fill="#fef08a" stroke="#ca8a04" />
+              <circle cx="240" cy="340" r="9" fill="#fef08a" stroke="#ca8a04" />
+              {/* Ovarian Ligament anchoring to Uterus */}
+              <path d="M 260 330 Q 380 340 440 320" stroke="#f472b6" strokeWidth="5" fill="none" strokeDasharray="4,2"/>
+            </g>
+
+            {/* Right Ovary */}
+            <g filter="url(#frDrop)">
+              <ellipse cx="775" cy="330" rx="35" ry="24" fill="#fb7185" stroke="#be123c" strokeWidth="3" />
+              <circle cx="790" cy="325" r="5" fill="#fef08a" stroke="#ca8a04" />
+              <circle cx="770" cy="320" r="7" fill="#fef08a" stroke="#ca8a04" />
+              <circle cx="760" cy="340" r="9" fill="#fef08a" stroke="#ca8a04" />
+              <path d="M 740 330 Q 620 340 560 320" stroke="#f472b6" strokeWidth="5" fill="none" strokeDasharray="4,2"/>
+            </g>
+
+            {/* UTERUS (Womb: Inverted pear-shaped thick muscular organ) */}
+            <g filter="url(#frDrop)">
+              {/* Outer Muscular Myometrium */}
+              <path
+                d="M 370 240 
+                   C 370 170 630 170 630 240 
+                   C 630 360 550 430 540 480 
+                   L 460 480 
+                   C 450 430 370 360 370 240 Z"
+                fill="url(#utGrad)"
+                stroke="#9f1239"
+                strokeWidth="4"
+              />
+
+              {/* Endometrium (Vascular glandular inner lining for embryo implantation) */}
+              <path
+                d="M 410 245 
+                   C 440 225 560 225 590 245 
+                   C 570 340 525 390 520 440 
+                   L 480 440 
+                   C 475 390 430 340 410 245 Z"
+                fill="url(#endometriumGrad)"
+                stroke="#fda4af"
+                strokeWidth="2.5"
+              />
+              {/* Uterine Cavity space */}
+              <polygon points="450,250 550,250 500,380" fill="#fff1f2" opacity="0.6" />
+            </g>
+
+            {/* CERVIX (Narrow neck of uterus with cervical canal) */}
+            <rect x="460" y="480" width="80" height="45" rx="6" fill="#be123c" stroke="#881337" strokeWidth="3" />
+            <line x1="500" y1="480" x2="500" y2="525" stroke="#ffe4e6" strokeWidth="6" />
+
+            {/* VAGINA (Birth canal & copulatory passage) */}
+            <rect x="465" y="525" width="70" height="85" rx="8" fill="#fda4af" stroke="#f43f5e" strokeWidth="3" />
+            {/* Vaginal rugae folds */}
+            <line x1="475" y1="545" x2="525" y2="545" stroke="#e11d48" strokeWidth="2.5" />
+            <line x1="475" y1="565" x2="525" y2="565" stroke="#e11d48" strokeWidth="2.5" />
+            <line x1="475" y1="585" x2="525" y2="585" stroke="#e11d48" strokeWidth="2.5" />
+
+            {/* Site of Fertilization Indicator: Ampulla */}
+            <circle cx="270" cy="150" r="10" fill="#facc15" stroke="#ffffff" strokeWidth="2" filter="url(#frDrop)" />
+            <text x="270" y="130" fill="#facc15" fontSize="11" fontWeight="800" textAnchor="middle">
+              ★ SITE OF FERTILIZATION (Ampulla)
             </text>
+
+            {/* Site of Implantation Indicator */}
+            <circle cx="500" cy="270" r="8" fill="#10b981" stroke="#ffffff" strokeWidth="2" />
+            <text x="500" y="300" fill="#10b981" fontSize="11" fontWeight="800" textAnchor="middle">
+              ★ SITE OF IMPLANTATION (Endometrium)
+            </text>
+
+            {/* Labels & Details */}
+            {/* Fallopian Tube */}
+            <line x1="720" y1="150" x2="840" y2="150" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(845, 135)">
+              <rect width="145" height="40" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="72" y="18" fill={textAccent} fontSize="11" fontWeight="800" textAnchor="middle">Oviduct / Fallopian Tube</text>
+              <text x="72" y="32" fill={textMuted} fontSize="9" textAnchor="middle">(Fertilization Site)</text>
+            </g>
+
+            {/* Ovary */}
+            <line x1="775" y1="355" x2="840" y2="355" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(845, 340)">
+              <rect width="145" height="40" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="72" y="18" fill="#f43f5e" fontSize="11" fontWeight="800" textAnchor="middle">Ovary (Paired)</text>
+              <text x="72" y="32" fill={textMuted} fontSize="9" textAnchor="middle">(Produces Ovum & Estrogen)</text>
+            </g>
+
+            {/* Uterus */}
+            <line x1="400" y1="220" x2="160" y2="220" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <g transform="translate(15, 205)">
+              <rect width="140" height="40" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+              <text x="70" y="18" fill={textPrimary} fontSize="11" fontWeight="800" textAnchor="middle">Uterus (Womb)</text>
+              <text x="70" y="32" fill={textMuted} fontSize="9" textAnchor="middle">Embryo Development</text>
+            </g>
+
+            {/* Cervix */}
+            <line x1="460" y1="500" x2="310" y2="500" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="300" y="504" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="end">Cervix</text>
+
+            {/* Vagina */}
+            <line x1="535" y1="565" x2="680" y2="565" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+            <text x="685" y="569" fill={textPrimary} fontSize="11" fontWeight="700">Vagina (Birth Canal)</text>
           </svg>
         );
 
       // =====================================================================
-      // 10. MENDEL'S GENETICS — MONOHYBRID & DIHYBRID CROSSES
+      // 10. MENDELIAN MONOHYBRID & DIHYBRID INHERITANCE CROSSES
       // =====================================================================
       case "bio_mendel_cross":
         return (
-          <svg viewBox="0 0 960 600" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="menBg" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor={isDark ? "#0d1422" : "#eff6ff"} />
-                <stop offset="100%" stopColor={isDark ? "#07090f" : "#dbeafe"} />
+              <radialGradient id="mnBg" cx="50%" cy="40%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#0f172a" : "#f8fafc"} />
+                <stop offset="100%" stopColor={isDark ? "#020617" : "#e2e8f0"} />
               </radialGradient>
+              <filter id="mnDrop" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#000" floodOpacity="0.4" />
+              </filter>
             </defs>
-            <rect width="960" height="600" fill="url(#menBg)" rx="18"/>
 
-            {/* ── LEFT: MONOHYBRID CROSS ── */}
-            <text x="240" y="28" fill={isDark ? "#93c5fd" : "#1d4ed8"} fontSize="14" fontWeight="900" textAnchor="middle">MONOHYBRID CROSS (Tall × Short)</text>
+            <rect width="1000" height="650" rx="20" fill="url(#mnBg)" />
+            {[...Array(13)].map((_, i) => <line key={"mvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
+            {[...Array(9)].map((_, i) => <line key={"mhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
 
-            {/* P generation */}
-            <text x="80" y="65" fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="12" fontWeight="bold">P (Parent):</text>
-            {/* Tall plant TT */}
-            <rect x="100" y="72" width="80" height="40" rx="8" fill={isDark ? "rgba(34,197,94,0.2)" : "rgba(220,252,231,0.9)"} stroke="#22c55e" strokeWidth="2"/>
-            <text x="140" y="92" fill="#16a34a" fontSize="13" fontWeight="900" textAnchor="middle">TT</text>
-            <text x="140" y="106" fill={textMuted} fontSize="9" textAnchor="middle">Tall (pure)</text>
-            <text x="195" y="97" fill={isDark ? "#94a3b8" : "#64748b"} fontSize="16" textAnchor="middle">×</text>
-            {/* Short plant tt */}
-            <rect x="210" y="72" width="80" height="40" rx="8" fill={isDark ? "rgba(239,68,68,0.2)" : "rgba(254,226,226,0.9)"} stroke="#ef4444" strokeWidth="2"/>
-            <text x="250" y="92" fill="#dc2626" fontSize="13" fontWeight="900" textAnchor="middle">tt</text>
-            <text x="250" y="106" fill={textMuted} fontSize="9" textAnchor="middle">Short (pure)</text>
+            {/* Title */}
+            <g transform="translate(40, 25)">
+              <rect width="460" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+                MENDEL'S DIHYBRID CROSS & INHERITANCE RATIOS
+              </text>
+              <rect x="390" y="9" width="58" height="24" rx="6" fill="#6366f1" fillOpacity="0.2" />
+              <text x="419" y="25" fill="#818cf8" fontSize="10" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
+            </g>
 
-            {/* Arrow */}
-            <line x1="200" y1="118" x2="200" y2="145" stroke={isDark ? "#94a3b8" : "#64748b"} strokeWidth="2" markerEnd="url(#hArrBlue)"/>
-            <text x="210" y="140" fill={textMuted} fontSize="8.5">Cross</text>
+            {/* LEFT HALF: PARENTS (P1), GAMETES & F1 GENERATION */}
+            <g transform="translate(40, 80)">
+              <rect width="360" height="520" rx="14" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#mnDrop)" />
+              <text x="180" y="30" fill="#4f46e5" fontSize="12" fontWeight="800" textAnchor="middle">
+                CROSS: ROUND YELLOW × WRINKLED GREEN
+              </text>
 
-            {/* F1 generation */}
-            <text x="80" y="168" fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="12" fontWeight="bold">F₁:</text>
-            <rect x="155" y="152" width="90" height="40" rx="8" fill={isDark ? "rgba(34,197,94,0.15)" : "rgba(220,252,231,0.7)"} stroke="#22c55e" strokeWidth="2"/>
-            <text x="200" y="172" fill="#16a34a" fontSize="13" fontWeight="900" textAnchor="middle">Tt</text>
-            <text x="200" y="186" fill="#16a34a" fontSize="9" textAnchor="middle" fontWeight="bold">All Tall (hybrid)</text>
+              {/* Parents Generation (P) */}
+              <g transform="translate(20, 50)">
+                <text x="0" y="20" fill={textPrimary} fontSize="11" fontWeight="800">Parents (P Generation):</text>
 
-            {/* Arrow + self-pollination */}
-            <line x1="200" y1="198" x2="200" y2="225" stroke={isDark ? "#94a3b8" : "#64748b"} strokeWidth="2" markerEnd="url(#hArrBlue)"/>
-            <text x="214" y="218" fill={textMuted} fontSize="8">Self-pollinate</text>
+                {/* Round Yellow (RRYY) */}
+                <circle cx="70" cy="65" r="24" fill="#facc15" stroke="#ca8a04" strokeWidth="2.5" />
+                <text x="70" y="70" fill="#713f12" fontSize="12" fontWeight="900" textAnchor="middle">RRYY</text>
+                <text x="70" y="105" fill={textPrimary} fontSize="10" fontWeight="700" textAnchor="middle">Round Yellow</text>
 
-            {/* F2 — Punnett square 2×2 */}
-            <text x="80" y="248" fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="12" fontWeight="bold">F₂ Punnett:</text>
-            {/* Grid */}
-            <rect x="95" y="252" width="44" height="44" rx="4" fill={isDark ? "rgba(34,197,94,0.2)" : "rgba(220,252,231,0.8)"} stroke="#22c55e" strokeWidth="1.5"/>
-            <text x="117" y="274" fill="#16a34a" fontSize="12" fontWeight="900" textAnchor="middle">TT</text>
-            <rect x="140" y="252" width="44" height="44" rx="4" fill={isDark ? "rgba(34,197,94,0.2)" : "rgba(220,252,231,0.8)"} stroke="#22c55e" strokeWidth="1.5"/>
-            <text x="162" y="274" fill="#16a34a" fontSize="12" fontWeight="900" textAnchor="middle">Tt</text>
-            <rect x="185" y="252" width="44" height="44" rx="4" fill={isDark ? "rgba(34,197,94,0.2)" : "rgba(220,252,231,0.8)"} stroke="#22c55e" strokeWidth="1.5"/>
-            <text x="207" y="274" fill="#16a34a" fontSize="12" fontWeight="900" textAnchor="middle">Tt</text>
-            <rect x="230" y="252" width="44" height="44" rx="4" fill={isDark ? "rgba(239,68,68,0.2)" : "rgba(254,226,226,0.8)"} stroke="#ef4444" strokeWidth="1.5"/>
-            <text x="252" y="274" fill="#dc2626" fontSize="12" fontWeight="900" textAnchor="middle">tt</text>
-            {/* Column headers */}
-            <text x="117" y="250" fill="#16a34a" fontSize="9" fontWeight="bold" textAnchor="middle">T</text>
-            <text x="162" y="250" fill="#16a34a" fontSize="9" fontWeight="bold" textAnchor="middle">t</text>
-            <text x="207" y="250" fill="#16a34a" fontSize="9" fontWeight="bold" textAnchor="middle">T</text>
-            <text x="252" y="250" fill="#dc2626" fontSize="9" fontWeight="bold" textAnchor="middle">t</text>
-            {/* Ratio */}
-            <text x="170" y="318" fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="11" fontWeight="900" textAnchor="middle">Genotype: 1 TT : 2 Tt : 1 tt</text>
-            <text x="170" y="333" fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="11" fontWeight="900" textAnchor="middle">Phenotype: 3 Tall : 1 Short</text>
-            <rect x="75" y="338" width="270" height="26" rx="6" fill={isDark ? "rgba(251,191,36,0.15)" : "rgba(254,243,199,0.8)"} stroke="#fbbf24" strokeWidth="1.5"/>
-            <text x="210" y="355" fill="#d97706" fontSize="11" fontWeight="900" textAnchor="middle">★ 3:1 Phenotypic Ratio</text>
+                <text x="160" y="70" fill="#ef4444" fontSize="16" fontWeight="900" textAnchor="middle">×</text>
 
-            {/* ── RIGHT: DIHYBRID CROSS ── */}
-            <line x1="490" y1="35" x2="490" y2="565" stroke={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"} strokeWidth="2" strokeDasharray="6,4"/>
-            <text x="730" y="28" fill={isDark ? "#a5b4fc" : "#4f46e5"} fontSize="14" fontWeight="900" textAnchor="middle">DIHYBRID CROSS (Round Yellow × Wrinkled Green)</text>
+                {/* Wrinkled Green (rryy) */}
+                <circle cx="250" cy="65" r="22" fill="#86efac" stroke="#16a34a" strokeWidth="2.5" strokeDasharray="5,3" />
+                <text x="250" y="70" fill="#14532d" fontSize="12" fontWeight="900" textAnchor="middle">rryy</text>
+                <text x="250" y="105" fill={textPrimary} fontSize="10" fontWeight="700" textAnchor="middle">Wrinkled Green</text>
+              </g>
 
-            {/* P generation */}
-            <text x="510" y="65" fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="12" fontWeight="bold">P:</text>
-            <rect x="525" y="72" width="110" height="40" rx="8" fill={isDark ? "rgba(251,191,36,0.2)" : "rgba(254,243,199,0.9)"} stroke="#fbbf24" strokeWidth="2"/>
-            <text x="580" y="92" fill="#d97706" fontSize="11" fontWeight="900" textAnchor="middle">RRYY</text>
-            <text x="580" y="106" fill={textMuted} fontSize="8.5" textAnchor="middle">Round Yellow</text>
-            <text x="645" y="97" fill={isDark ? "#94a3b8" : "#64748b"} fontSize="16" textAnchor="middle">×</text>
-            <rect x="655" y="72" width="110" height="40" rx="8" fill={isDark ? "rgba(34,197,94,0.15)" : "rgba(220,252,231,0.8)"} stroke="#22c55e" strokeWidth="2"/>
-            <text x="710" y="92" fill="#166534" fontSize="11" fontWeight="900" textAnchor="middle">rryy</text>
-            <text x="710" y="106" fill={textMuted} fontSize="8.5" textAnchor="middle">Wrinkled Green</text>
+              {/* Gametes Produced */}
+              <g transform="translate(20, 180)">
+                <text x="0" y="15" fill={textPrimary} fontSize="11" fontWeight="800">Gametes Formed:</text>
+                <circle cx="70" cy="45" r="16" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
+                <text x="70" y="50" fill="#713f12" fontSize="11" fontWeight="800" textAnchor="middle">RY</text>
 
-            {/* F1 */}
-            <text x="510" y="165" fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="12" fontWeight="bold">F₁:</text>
-            <rect x="595" y="148" width="110" height="40" rx="8" fill={isDark ? "rgba(251,191,36,0.15)" : "rgba(254,243,199,0.7)"} stroke="#fbbf24" strokeWidth="2"/>
-            <text x="650" y="168" fill="#d97706" fontSize="11" fontWeight="900" textAnchor="middle">RrYy</text>
-            <text x="650" y="182" fill="#d97706" fontSize="9" textAnchor="middle">All Round Yellow (hybrid)</text>
+                <text x="160" y="50" fill="#ef4444" fontSize="16" fontWeight="900" textAnchor="middle">×</text>
 
-            {/* F2 Punnett 4×4 */}
-            <text x="510" y="215" fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="12" fontWeight="bold">F₂ (4×4 Punnett Square):</text>
-            {/* Gametes */}
-            {["RY","Ry","rY","ry"].map((g,i) => (
-              <text key={"gh"+i} x={552+i*85} y="232" fill="#6366f1" fontSize="9" fontWeight="bold" textAnchor="middle">{g}</text>
-            ))}
-            {["RY","Ry","rY","ry"].map((g,i) => (
-              <text key={"gv"+i} x="523" y={253+i*57} fill="#6366f1" fontSize="9" fontWeight="bold" textAnchor="middle">{g}</text>
-            ))}
-            {/* 4×4 grid cells */}
-            {[
-              ["RRYY","RRYy","RrYY","RrYy"],
-              ["RRYy","RRyy","RrYy","Rryy"],
-              ["RrYY","RrYy","rrYY","rrYy"],
-              ["RrYy","Rryy","rrYy","rryy"]
-            ].map((row, ri) =>
-              row.map((cell, ci) => {
-                const isRndYel = cell.includes("R") && !cell.startsWith("rr") && cell.includes("Y") && !cell.endsWith("yy");
-                const isRndGrn = cell.includes("R") && !cell.startsWith("rr") && !cell.includes("Y") || (cell.match(/^R/) && cell.endsWith("yy"));
-                const isWrkYel = !cell.includes("R") && cell.includes("Y");
-                const isWrkGrn = !cell.includes("R") && !cell.includes("Y");
-                let fillColor = isWrkGrn
-                  ? (isDark ? "rgba(100,116,139,0.3)" : "rgba(203,213,225,0.7)")
-                  : isWrkYel
-                  ? (isDark ? "rgba(251,191,36,0.2)" : "rgba(254,243,199,0.7)")
-                  : isRndGrn
-                  ? (isDark ? "rgba(34,197,94,0.2)" : "rgba(220,252,231,0.7)")
-                  : (isDark ? "rgba(251,191,36,0.3)" : "rgba(254,243,199,0.9)");
-                let borderColor = isWrkGrn ? "#64748b" : isWrkYel ? "#fbbf24" : isRndGrn ? "#22c55e" : "#fbbf24";
-                return (
-                  <g key={`f2${ri}${ci}`}>
-                    <rect x={534+ci*85} y={237+ri*57} width="80" height="52" rx="4" fill={fillColor} stroke={borderColor} strokeWidth="1.5"/>
-                    <text x={574+ci*85} y={260+ri*57} fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="9" fontWeight="bold" textAnchor="middle">{cell}</text>
+                <circle cx="250" cy="45" r="16" fill="#bbf7d0" stroke="#16a34a" strokeWidth="2" />
+                <text x="250" y="50" fill="#14532d" fontSize="11" fontWeight="800" textAnchor="middle">ry</text>
+              </g>
+
+              {/* F1 Generation Result */}
+              <g transform="translate(20, 275)">
+                <rect width="320" height="95" rx="10" fill={isDark ? "#1e1b4b" : "#e0e7ff"} stroke="#6366f1" strokeWidth="1.5" />
+                <text x="160" y="24" fill="#4338ca" fontSize="11.5" fontWeight="800" textAnchor="middle">
+                  F1 GENERATION (ALL HETEROZYGOUS)
+                </text>
+                <circle cx="80" cy="60" r="22" fill="#facc15" stroke="#ca8a04" strokeWidth="2.5" />
+                <text x="80" y="65" fill="#713f12" fontSize="11" fontWeight="900" textAnchor="middle">RrYy</text>
+                <text x="120" y="56" fill={textPrimary} fontSize="12" fontWeight="800">100% Round Yellow</text>
+                <text x="120" y="74" fill={textMuted} fontSize="10">Law of Dominance proved</text>
+              </g>
+
+              {/* Self-Pollination (F1 × F1) */}
+              <g transform="translate(20, 390)">
+                <text x="160" y="20" fill="#10b981" fontSize="11" fontWeight="800" textAnchor="middle">
+                  Selfing: RrYy × RrYy
+                </text>
+                <text x="160" y="40" fill={textPrimary} fontSize="10" textAnchor="middle">
+                  Produces 4 types of Gametes each:
+                </text>
+                <g transform="translate(45, 55)">
+                  {["RY", "Ry", "rY", "ry"].map((gmt, idx) => (
+                    <g key={"gmt"+idx} transform={`translate(${idx * 60}, 0)`}>
+                      <circle cx="20" cy="20" r="16" fill="#f1f5f9" stroke="#6366f1" strokeWidth="2" />
+                      <text x="20" y="24" fill="#312e81" fontSize="11" fontWeight="800" textAnchor="middle">{gmt}</text>
+                    </g>
+                  ))}
+                </g>
+              </g>
+            </g>
+
+            {/* RIGHT HALF: F2 PUNNETT SQUARE (4×4 GRID = 16 COMBINATIONS) */}
+            <g transform="translate(420, 80)">
+              <rect width="540" height="520" rx="14" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#mnDrop)" />
+              <text x="270" y="30" fill="#4338ca" fontSize="13" fontWeight="800" textAnchor="middle">
+                F2 GENERATION — 4×4 PUNNETT CHECKERBOARD
+              </text>
+
+              {/* Punnett Grid Table */}
+              <g transform="translate(40, 50)">
+                {/* Headers Column & Row: RY, Ry, rY, ry */}
+                {["RY", "Ry", "rY", "ry"].map((g, idx) => (
+                  <g key={"hdr"+idx}>
+                    {/* Top Row Header */}
+                    <rect x={70 + idx * 85} y="0" width="80" height="32" rx="6" fill="#c7d2fe" stroke="#6366f1" strokeWidth="1.5" />
+                    <text x={110 + idx * 85} y="21" fill="#312e81" fontSize="11" fontWeight="900" textAnchor="middle">{g}</text>
+
+                    {/* Left Column Header */}
+                    <rect x="0" y={40 + idx * 68} width="60" height="60" rx="6" fill="#c7d2fe" stroke="#6366f1" strokeWidth="1.5" />
+                    <text x="30" y={76 + idx * 68} fill="#312e81" fontSize="11" fontWeight="900" textAnchor="middle">{g}</text>
                   </g>
-                );
-              })
-            )}
-            {/* Ratio box */}
-            <rect x="510" y="475" width="430" height="70" rx="10" fill={isDark ? "rgba(99,102,241,0.15)" : "rgba(224,231,255,0.8)"} stroke="#6366f1" strokeWidth="2"/>
-            <text x="725" y="493" fill="#6366f1" fontSize="12" fontWeight="900" textAnchor="middle">F₂ Dihybrid Phenotypic Ratio</text>
-            <text x="725" y="511" fill={isDark ? "#e2e8f0" : "#1e293b"} fontSize="11" fontWeight="bold" textAnchor="middle">9 Round Yellow : 3 Round Green : 3 Wrinkled Yellow : 1 Wrinkled Green</text>
-            <rect x="622" y="520" width="206" height="20" rx="5" fill={isDark ? "rgba(251,191,36,0.2)" : "rgba(254,243,199,0.9)"} stroke="#fbbf24" strokeWidth="1.5"/>
-            <text x="725" y="534" fill="#d97706" fontSize="11" fontWeight="900" textAnchor="middle">★ 9:3:3:1 Ratio</text>
+                ))}
 
-            {/* Laws box */}
-            <rect x="510" y="385" width="430" height="82" rx="10" fill={labelBg} stroke="#818cf8" strokeWidth="1.5"/>
-            <text x="725" y="403" fill="#818cf8" fontSize="11" fontWeight="900" textAnchor="middle">Mendel's Laws of Inheritance</text>
-            <text x="520" y="420" fill={textMuted} fontSize="9">1. Law of Dominance: T (tall) dominant over t (short)</text>
-            <text x="520" y="435" fill={textMuted} fontSize="9">2. Law of Segregation: Allele pairs separate during gamete formation</text>
-            <text x="520" y="450" fill={textMuted} fontSize="9">3. Law of Independent Assortment: 2 traits assort independently (dihybrid)</text>
-            <text x="520" y="465" fill="#ef4444" fontSize="9" fontWeight="bold">★ Round (R) &amp; Yellow (Y) are dominant; Wrinkled (r) &amp; Green (y) recessive</text>
+                {/* 16 Punnett Grid Cells */}
+                {[
+                  // Row 0: RY
+                  { geno: "RRYY", pheno: "RY", bg: "#fef08a" },
+                  { geno: "RRYy", pheno: "RY", bg: "#fef08a" },
+                  { geno: "RrYY", pheno: "RY", bg: "#fef08a" },
+                  { geno: "RrYy", pheno: "RY", bg: "#fef08a" },
+                  // Row 1: Ry
+                  { geno: "RRYy", pheno: "RY", bg: "#fef08a" },
+                  { geno: "RRyy", pheno: "RG", bg: "#bbf7d0" },
+                  { geno: "RrYy", pheno: "RY", bg: "#fef08a" },
+                  { geno: "Rryy", pheno: "RG", bg: "#bbf7d0" },
+                  // Row 2: rY
+                  { geno: "RrYY", pheno: "RY", bg: "#fef08a" },
+                  { geno: "RrYy", pheno: "RY", bg: "#fef08a" },
+                  { geno: "rrYY", pheno: "WY", bg: "#fed7aa" },
+                  { geno: "rrYy", pheno: "WY", bg: "#fed7aa" },
+                  // Row 3: ry
+                  { geno: "RrYy", pheno: "RY", bg: "#fef08a" },
+                  { geno: "Rryy", pheno: "RG", bg: "#bbf7d0" },
+                  { geno: "rrYy", pheno: "WY", bg: "#fed7aa" },
+                  { geno: "rryy", pheno: "WG", bg: "#dcfce7" },
+                ].map((cell, idx) => {
+                  const col = idx % 4;
+                  const row = Math.floor(idx / 4);
+                  return (
+                    <g key={"pcell"+idx} transform={`translate(${70 + col * 85}, ${40 + row * 68})`}>
+                      <rect width="80" height="60" rx="8" fill={cell.bg} stroke="#94a3b8" strokeWidth="1.2" />
+                      <text x="40" y="26" fill="#0f172a" fontSize="11" fontWeight="900" textAnchor="middle">{cell.geno}</text>
+                      <circle cx="40" cy="44" r="8" fill={cell.pheno === "RY" ? "#eab308" : cell.pheno === "RG" ? "#22c55e" : cell.pheno === "WY" ? "#f97316" : "#15803d"} />
+                    </g>
+                  );
+                })}
+              </g>
 
-            {/* CBSE Banner */}
-            <rect x="120" y="560" width="720" height="30" rx="15" fill={isDark ? "rgba(16,185,129,0.12)" : "rgba(16,185,129,0.15)"} stroke="#10b981" strokeWidth="1.5"/>
-            <text x="480" y="579" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
-              ⭐ CBSE KEY: Monohybrid = 3:1 ratio; Dihybrid = 9:3:3:1 ratio; TT=homozygous, Tt=heterozygous
-            </text>
+              {/* F2 Phenotypic Ratio Summary Bar */}
+              <g transform="translate(40, 395)">
+                <rect width="460" height="95" rx="10" fill={isDark ? "#1e293b" : "#f1f5f9"} stroke="#cbd5e1" strokeWidth="1.5" />
+                <text x="230" y="24" fill="#0284c7" fontSize="12" fontWeight="800" textAnchor="middle">
+                  F2 PHENOTYPIC RATIO = 9 : 3 : 3 : 1
+                </text>
+
+                <g transform="translate(15, 38)">
+                  <rect x="0" y="0" width="100" height="42" rx="6" fill="#fef08a" />
+                  <text x="50" y="18" fill="#713f12" fontSize="10" fontWeight="900" textAnchor="middle">9 Round Yellow</text>
+                  <text x="50" y="32" fill="#713f12" fontSize="9" textAnchor="middle">(R_Y_)</text>
+
+                  <rect x="110" y="0" width="100" height="42" rx="6" fill="#bbf7d0" />
+                  <text x="160" y="18" fill="#14532d" fontSize="10" fontWeight="900" textAnchor="middle">3 Round Green</text>
+                  <text x="160" y="32" fill="#14532d" fontSize="9" textAnchor="middle">(R_yy)</text>
+
+                  <rect x="220" y="0" width="105" height="42" rx="6" fill="#fed7aa" />
+                  <text x="272" y="18" fill="#7c2d12" fontSize="10" fontWeight="900" textAnchor="middle">3 Wrinkled Yellow</text>
+                  <text x="272" y="32" fill="#7c2d12" fontSize="9" textAnchor="middle">(rrY_)</text>
+
+                  <rect x="335" y="0" width="100" height="42" rx="6" fill="#dcfce7" />
+                  <text x="385" y="18" fill="#14532d" fontSize="10" fontWeight="900" textAnchor="middle">1 Wrinkled Green</text>
+                  <text x="385" y="32" fill="#14532d" fontSize="9" textAnchor="middle">(rryy)</text>
+                </g>
+              </g>
+            </g>
           </svg>
         );
 
       default:
         return (
-          <svg viewBox="0 0 960 300" className="w-full h-auto select-none">
-            <rect width="960" height="300" fill={isDark ? "#07090f" : "#f8fafc"} rx="14"/>
-            <text x="480" y="145" fill={isDark ? "#334155" : "#cbd5e1"} fontSize="16" textAnchor="middle" fontWeight="bold">
-              Diagram: {title || id}
-            </text>
-            <text x="480" y="168" fill={isDark ? "#1e293b" : "#e2e8f0"} fontSize="11" textAnchor="middle">Select a biology diagram from the sidebar</text>
-          </svg>
+          <div className="p-8 text-center text-slate-400">
+            Diagram identifier not found.
+          </div>
         );
     }
   };
 
   return (
-    <div className={`w-full rounded-2xl overflow-hidden border ${
-      isDark ? "bg-[#07090f] border-emerald-500/15" : "bg-emerald-50/20 border-emerald-200/60"
-    }`}>
-      {renderSVG()}
+    <div className="w-full relative">
+      <div className="relative rounded-2xl overflow-hidden border border-slate-700/40 bg-slate-900/60 shadow-2xl">
+        {renderSVG()}
+      </div>
     </div>
   );
 }
