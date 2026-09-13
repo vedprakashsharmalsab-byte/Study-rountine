@@ -152,7 +152,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "Two concentric circles are of radii 5 cm and 3 cm. Find the length of the chord of the larger circle that touches the smaller circle.",
-    "answer": "8 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 2 / 2 Marks
+
+Step 1: Let chord AB touch smaller circle at P [Given in Problem]
+Step 2: OP ⊥ AB (tangent property) and OP = 3 cm [Trigonometric Definition/Identity]
+Step 3: OA = 5 cm [Algebraic Simplification]
+Step 4: AP² = OA² − OP² = 25 − 9 = 16 → AP = 4 cm [Algebraic Simplification]
+Step 5: AB = 2AP = 8 cm. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let chord AB touch smaller circle at P [Given in Problem]",
       "Step 2: OP ⊥ AB (tangent property) and OP = 3 cm [Trigonometric Definition/Identity]",
@@ -171,7 +181,14 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "PA and PB are tangents to a circle from external point P such that PA = 4 cm and ∠APB = 60°. Find the length of the chord AB.",
-    "answer": "4 cm (equilateral △APB)",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 2 / 2 Marks
+
+Step 1: PA = PB (equal tangents) = 4 cm. ∠APB = 60° [Trigonometric Definition/Identity]
+Step 2: So △APB is isosceles with vertex angle 60° → it is equilateral → AB = PA = 4 cm. [Final Result with Units]
+`,
     "steps": [
       "Step 1: PA = PB (equal tangents) = 4 cm. ∠APB = 60° [Trigonometric Definition/Identity]",
       "Step 2: So △APB is isosceles with vertex angle 60° → it is equilateral → AB = PA = 4 cm. [Final Result with Units]"
@@ -187,7 +204,14 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From external point P, the length of the tangent to a circle is 24 cm and the distance of P from centre O is 25 cm. Find the radius.",
-    "answer": "7 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 2 / 2 Marks
+
+Step 1: OT ⊥ PT (Theorem 10.1) [Given in Problem]
+Step 2: OT² = OP² − PT² = 625 − 576 = 49 → OT = 7 cm. [Final Result with Units]
+`,
     "steps": [
       "Step 1: OT ⊥ PT (Theorem 10.1) [Given in Problem]",
       "Step 2: OT² = OP² − PT² = 625 − 576 = 49 → OT = 7 cm. [Final Result with Units]"
@@ -203,7 +227,15 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "If the angle between two tangents drawn from external point to a circle of radius r and centre O is 60°, find the length of each tangent.",
-    "answer": "r√3",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 2 / 2 Marks
+
+Step 1: State given values and applicable theorem/formula. [Given in Problem]
+Step 2: ∠APB = 60° → ∠APO = 30°. tan30° = OA/PA = r/PA → 1/√3 = r/PA → PA = r√3. [Trigonometric Definition/Identity]
+Step 3: Final statement: r√3 [Final Result with Units]
+`,
     "steps": [
       "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
       "Step 2: ∠APB = 60° → ∠APO = 30°. tan30° = OA/PA = r/PA → 1/√3 = r/PA → PA = r√3. [Trigonometric Definition/Identity]",
@@ -221,7 +253,14 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "type": "SA",
     "question": "In figure, PQ is a chord of a circle and PT is a tangent at P such that ∠QPT = 60°. Find ∠PRQ (where R is on the major arc).",
     "diagramSvg": "<svg viewBox=\"0 0 460 270\" xmlns=\"http://www.w3.org/2000/svg\" class=\"w-full max-w-md h-auto select-none\"><defs><linearGradient id=\"circ10_q221\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#8b5cf6\" stop-opacity=\"0.12\"/><stop offset=\"100%\" stop-color=\"#3b82f6\" stop-opacity=\"0.04\"/></linearGradient></defs><circle cx=\"230\" cy=\"115\" r=\"80\" fill=\"url(#circ10_q221)\" stroke=\"#a855f7\" stroke-width=\"2.5\"/><circle cx=\"230\" cy=\"115\" r=\"4\" fill=\"#f59e0b\"/><text x=\"244\" y=\"119\" fill=\"#f59e0b\" font-size=\"13\" font-weight=\"bold\" font-family=\"sans-serif\">O</text><line x1=\"60\" y1=\"195\" x2=\"400\" y2=\"195\" stroke=\"#10b981\" stroke-width=\"2.8\"/><line x1=\"230\" y1=\"195\" x2=\"150\" y2=\"75\" stroke=\"#38bdf8\" stroke-width=\"2.5\"/><line x1=\"230\" y1=\"195\" x2=\"305\" y2=\"55\" stroke=\"#fbbf24\" stroke-width=\"2\"/><line x1=\"150\" y1=\"75\" x2=\"305\" y2=\"55\" stroke=\"#fbbf24\" stroke-width=\"2\"/><path d=\"M 265 195 A 35 35 0 0 0 200 150\" fill=\"none\" stroke=\"#10b981\" stroke-width=\"2.2\"/><text x=\"262\" y=\"175\" fill=\"#10b981\" font-size=\"12\" font-weight=\"bold\" font-family=\"sans-serif\">60°</text><path d=\"M 285 70 A 25 25 0 0 1 292 82\" fill=\"none\" stroke=\"#f43f5e\" stroke-width=\"2.2\"/><text x=\"320\" y=\"72\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\" font-family=\"sans-serif\">∠PRQ = ?</text><circle cx=\"230\" cy=\"195\" r=\"5\" fill=\"#10b981\"/><text x=\"230\" y=\"218\" fill=\"#10b981\" font-size=\"15\" font-weight=\"bold\" font-family=\"sans-serif\" text-anchor=\"middle\">P</text><circle cx=\"150\" cy=\"75\" r=\"5\" fill=\"#38bdf8\"/><text x=\"136\" y=\"72\" fill=\"#38bdf8\" font-size=\"15\" font-weight=\"bold\" font-family=\"sans-serif\">Q</text><circle cx=\"305\" cy=\"55\" r=\"5\" fill=\"#fbbf24\"/><text x=\"322\" y=\"50\" fill=\"#fbbf24\" font-size=\"15\" font-weight=\"bold\" font-family=\"sans-serif\">R</text><circle cx=\"370\" cy=\"195\" r=\"4.5\" fill=\"#10b981\"/><text x=\"370\" y=\"218\" fill=\"#10b981\" font-size=\"15\" font-weight=\"bold\" font-family=\"sans-serif\" text-anchor=\"middle\">T</text><text x=\"230\" y=\"255\" fill=\"#94a3b8\" font-size=\"11\" font-family=\"sans-serif\" text-anchor=\"middle\">Tangent PT at P with Chord PQ (∠QPT = 60°)</text></svg>",
-    "answer": "∠PRQ = 120°",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 2 / 2 Marks
+
+Step 1: Tangent-chord angle = inscribed angle in alternate segment → ∠QPT = ∠QBP = 60° (alternate segment) [Trigonometric Definition/Identity]
+Step 2: Opposite angles of cyclic quadrilateral sum to 180° → ∠PRQ = 180° − 60° = 120°. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Tangent-chord angle = inscribed angle in alternate segment → ∠QPT = ∠QBP = 60° (alternate segment) [Trigonometric Definition/Identity]",
       "Step 2: Opposite angles of cyclic quadrilateral sum to 180° → ∠PRQ = 180° − 60° = 120°. [Final Result with Units]"
@@ -237,7 +276,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, a circle is inscribed touching BC at D, CA at E, and AB at F. If AB = 14 cm, BC = 12 cm, CA = 10 cm, find AD.",
-    "answer": "AD = 6 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 2 / 2 Marks
+
+Step 1: AF = AE = x, BF = BD = y, CD = CE = z. x+y = 14, y+z = 12, z+x = 10 [Given in Problem]
+Step 2: Adding: 2(x+y+z) = 36 → x+y+z = 18. z = 4, y = 8, x = 6 [Algebraic Simplification]
+Step 3: AE = x = 6 cm [Algebraic Simplification]
+Step 4: Since AF = AE = AD... wait, D is on BC: AD is not the tangent length [Trigonometric Definition/Identity]
+Step 5: AE = AF = x = 6 cm. [Final Result with Units]
+`,
     "steps": [
       "Step 1: AF = AE = x, BF = BD = y, CD = CE = z. x+y = 14, y+z = 12, z+x = 10 [Given in Problem]",
       "Step 2: Adding: 2(x+y+z) = 36 → x+y+z = 18. z = 4, y = 8, x = 6 [Algebraic Simplification]",
@@ -256,7 +305,16 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "Proof",
     "question": "Prove that in two concentric circles, the chord of the larger circle that is tangent to the smaller circle is bisected at the point of contact.",
-    "answer": "Given: Two concentric circles C₁, C₂ (radii R, r). Chord AB of C₁ is tangent to C₂ at P. To Prove: AP = PB. Construction: Join OP. Since AB is tangent to C₂ at P, OP ⊥ AB (Theorem 10.1). AB is a chord of C₁ and OP ⊥ AB. By perpendicular from centre bisects chord theorem: AP = PB. ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M Proof)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 3 / 3 Marks
+
+Step 1: State given values and applicable theorem/formula. [Given in Problem]
+Step 2: Two theorems work together: (1) Radius ⊥ tangent at point of contact, (2) Perpendicular from centre to chord bisects it. [Trigonometric Definition/Identity]
+Step 3: Final statement: Given: Two concentric circles C₁, C₂ (radii R, r). Chord AB of C₁ is tangent to C₂ at P. To Prove: AP = PB. Construction: Join OP. Since AB is tangent to C₂ at P, OP ⊥ AB (Theorem 10.1). AB is a chord of C₁ and OP ⊥ AB. By perpendicular from centre bisects chord theorem: AP = PB. ∎ [Trigonometric Definition/Identity]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
       "Step 2: Two theorems work together: (1) Radius ⊥ tangent at point of contact, (2) Perpendicular from centre to chord bisects it. [Trigonometric Definition/Identity]",
@@ -273,7 +331,16 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "Proof",
     "question": "Prove that the tangent at any point of a circle is perpendicular to the radius through the point of contact.",
-    "answer": "Given: Circle with centre O; tangent XY at point P. Suppose OP is NOT perpendicular to XY. Let OQ be perpendicular to XY. Then Q is another point on XY and OQ < OP. But Q is outside the circle (tangent touches at only one point). If OQ < OP (radius), Q would be inside the circle — contradiction! Hence no such Q exists, and OP ⊥ XY. ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M Proof)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 3 / 3 Marks
+
+Step 1: State given values and applicable theorem/formula. [Given in Problem]
+Step 2: Proof by contradiction: assume the radius is not perpendicular, derive a contradiction using the definition of tangent (one point of contact). [Trigonometric Definition/Identity]
+Step 3: Final statement: Given: Circle with centre O; tangent XY at point P. Suppose OP is NOT perpendicular to XY. Let OQ be perpendicular to XY. Then Q is another point on XY and OQ < OP. But Q is outside the circle (tangent touches at only one point). If OQ < OP (radius), Q would be inside the circle — contradiction! Hence no such Q exists, and OP ⊥ XY. ∎ [Trigonometric Definition/Identity]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
       "Step 2: Proof by contradiction: assume the radius is not perpendicular, derive a contradiction using the definition of tangent (one point of contact). [Trigonometric Definition/Identity]",
@@ -290,7 +357,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A quadrilateral ABCD is drawn to circumscribe a circle. Prove that AB + CD = AD + BC.",
-    "answer": "AB + CD = AD + BC (proved via Theorem 10.2: tangents from external point are equal)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 3 / 3 Marks
+
+Step 1: Let the circle touch sides AB, BC, CD, DA at points P, Q, R, S respectively [Given in Problem]
+Step 2: By Theorem 10.2, tangents from external points are equal: AP = AS ... (1), BP = BQ ... (2), CR = CQ ... (3), DR = DS ... (4) [Theorem 10.2: Tangents from External Point]
+Step 3: Adding all four equations: (AP + BP) + (CR + DR) = (AS + DS) + (BQ + CQ) [Algebraic Simplification]
+Step 4: Combining adjacent segments: AB + CD = AD + BC   ∎ [Final Result with Units]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: Let the circle touch sides AB, BC, CD, DA at points P, Q, R, S respectively [Given in Problem]",
       "Step 2: By Theorem 10.2, tangents from external points are equal: AP = AS ... (1), BP = BQ ... (2), CR = CQ ... (3), DR = DS ... (4) [Theorem 10.2: Tangents from External Point]",
@@ -308,7 +385,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Prove that the parallelogram circumscribing a circle is a rhombus.",
-    "answer": "ABCD is a rhombus",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 3 / 3 Marks
+
+Step 1: For any quadrilateral circumscribing a circle: AB + CD = AD + BC (from tangent properties) [Geometric Property/Theorem]
+Step 2: Since ABCD is a parallelogram, opposite sides are equal: AB = CD and AD = BC [Parallelogram Property]
+Step 3: Substitute CD = AB and AD = BC: AB + AB = BC + BC ⟹ 2AB = 2BC ⟹ AB = BC [Algebraic Simplification]
+Step 4: Since adjacent sides AB = BC in parallelogram ABCD, all four sides are equal: AB = BC = CD = DA. Therefore ABCD is a rhombus   ∎ [Final Result with Units]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: For any quadrilateral circumscribing a circle: AB + CD = AD + BC (from tangent properties) [Geometric Property/Theorem]",
       "Step 2: Since ABCD is a parallelogram, opposite sides are equal: AB = CD and AD = BC [Parallelogram Property]",
@@ -326,7 +413,18 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Prove that the angle between the two tangents drawn from an external point to a circle is supplementary to the angle subtended by the line-segment joining the points of contact at the centre (∠APB + ∠AOB = 180°).",
-    "answer": "∠APB + ∠AOB = 180° (Supplementary)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 3 / 3 Marks
+
+Step 1: Let PA and PB be two tangents drawn from external point P to circle with centre O. Radii are OA and OB [Given in Problem]
+Step 2: By Theorem 10.1, radius is perpendicular to tangent at point of contact: ∠OAP = 90° and ∠OBP = 90° [Theorem 10.1: Radius ⊥ Tangent]
+Step 3: In quadrilateral OAPB, the sum of all interior angles is 360°: ∠OAP + ∠APB + ∠OBP + ∠AOB = 360° [Angle Sum Property of Quadrilateral]
+Step 4: Substitute the right angles: 90° + ∠APB + 90° + ∠AOB = 360° ⟹ ∠APB + ∠AOB + 180° = 360° [Algebraic Simplification]
+Step 5: ∠APB + ∠AOB = 360° − 180° = 180°. Hence proved that ∠APB and ∠AOB are supplementary   ∎ [Final Result with Units]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: Let PA and PB be two tangents drawn from external point P to circle with centre O. Radii are OA and OB [Given in Problem]",
       "Step 2: By Theorem 10.1, radius is perpendicular to tangent at point of contact: ∠OAP = 90° and ∠OBP = 90° [Theorem 10.1: Radius ⊥ Tangent]",
@@ -345,7 +443,16 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point P outside a circle with centre O, PA and PB are tangents. Prove that OP is the perpendicular bisector of AB.",
-    "answer": "△OAP and △OBP are congruent by RHS (OA=OB, OP=OP, ∠OAP=∠OBP=90°). So ∠AOP=∠BOP → OP bisects ∠AOB. In △OAM and △OBM: OA=OB, OM=OM, ∠AOM=∠BOM → △OAM ≅ △OBM → AM=BM and ∠OMA=∠OMB=90°. Hence OP ⊥ AB and bisects AB. ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 3 / 3 Marks
+
+Step 1: State given values and applicable theorem/formula. [Given in Problem]
+Step 2: Use RHS to prove △OAP ≅ △OBP, then the perpendicular from the apex of the isosceles triangle bisects the base. [Algebraic Simplification]
+Step 3: Final statement: △OAP and △OBP are congruent by RHS (OA=OB, OP=OP, ∠OAP=∠OBP=90°). So ∠AOP=∠BOP → OP bisects ∠AOB. In △OAM and △OBM: OA=OB, OM=OM, ∠AOM=∠BOM → △OAM ≅ △OBM → AM=BM and ∠OMA=∠OMB=90°. Hence OP ⊥ AB and bisects AB. ∎ [Final Result with Units]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
       "Step 2: Use RHS to prove △OAP ≅ △OBP, then the perpendicular from the apex of the isosceles triangle bisects the base. [Algebraic Simplification]",
@@ -362,7 +469,16 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "Proof",
     "question": "Prove that the lengths of tangents drawn from an external point to a circle are equal.",
-    "answer": "Given: Circle (centre O), external point P, tangents PQ and PR touching at Q and R. To Prove: PQ = PR. Construction: Join OP, OQ, OR. Proof: In △OQP and △ORP: (1) ∠OQP = ∠ORP = 90° (radius ⊥ tangent). (2) OP = OP (common hypotenuse). (3) OQ = OR (radii of same circle). By RHS: △OQP ≅ △ORP. ∴ PQ = PR (CPCT). Also ∠OPQ = ∠OPR and ∠POQ = ∠POR. ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M Proof)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 5 / 5 Marks
+
+Step 1: State given values and applicable theorem/formula. [Given in Problem]
+Step 2: Marks: Diagram (1M) + Given/To Prove/Construction (1M) + ∠OQP=∠ORP=90° reason (1M) + RHS congruency with 3 conditions (1.5M) + CPCT conclusion (0.5M). [Algebraic Simplification]
+Step 3: Final statement: Given: Circle (centre O), external point P, tangents PQ and PR touching at Q and R. To Prove: PQ = PR. Construction: Join OP, OQ, OR. Proof: In △OQP and △ORP: (1) ∠OQP = ∠ORP = 90° (radius ⊥ tangent). (2) OP = OP (common hypotenuse). (3) OQ = OR (radii of same circle). By RHS: △OQP ≅ △ORP. ∴ PQ = PR (CPCT). Also ∠OPQ = ∠OPR and ∠POQ = ∠POR. ∎ [Trigonometric Definition/Identity]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
       "Step 2: Marks: Diagram (1M) + Given/To Prove/Construction (1M) + ∠OQP=∠ORP=90° reason (1M) + RHS congruency with 3 conditions (1.5M) + CPCT conclusion (0.5M). [Algebraic Simplification]",
@@ -379,7 +495,14 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "ABC is a right triangle right angled at B. A circle is inscribed in it. If the two legs are a and b and hypotenuse is c, show that the radius r = (a + b − c)/2.",
-    "answer": "Let circle touch BC at P, CA at Q, AB at R. BP = BR = r (tangent lengths). AQ = AR = s₁, CP = CQ = s₂. BC = a → r + s₂ = a. AB = b → r + s₁ = b. AC = c → s₁ + s₂ = c. From first two: s₁ + s₂ = a + b − 2r = c → 2r = a + b − c → r = (a+b−c)/2. ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 5 / 5 Marks
+
+Step 1: Write three tangent-length equations for the three sides [Trigonometric Definition/Identity]
+Step 2: Then use the perimeter relationships to solve for r. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Write three tangent-length equations for the three sides [Trigonometric Definition/Identity]",
       "Step 2: Then use the perimeter relationships to solve for r. [Final Result with Units]"
@@ -395,7 +518,16 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "Two tangents TP and TQ are drawn to a circle with centre O from an external point T. Prove that ∠PTQ = 2∠OPQ.",
-    "answer": "TP = TQ (equal tangents) → △TPQ is isosceles → ∠TPQ = ∠TQP = x. ∠PTQ = 180° − 2x. Also OP ⊥ TP → ∠OPT = 90° → ∠OPQ = 90° − x. So 2∠OPQ = 2(90°−x) = 180°−2x = ∠PTQ. ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
+Full Score: 5 / 5 Marks
+
+Step 1: State given values and applicable theorem/formula. [Given in Problem]
+Step 2: Use isosceles triangle property (TP=TQ) and the right angle at the tangent-radius intersection. [Trigonometric Definition/Identity]
+Step 3: Final statement: TP = TQ (equal tangents) → △TPQ is isosceles → ∠TPQ = ∠TQP = x. ∠PTQ = 180° − 2x. Also OP ⊥ TP → ∠OPT = 90° → ∠OPQ = 90° − x. So 2∠OPQ = 2(90°−x) = 180°−2x = ∠PTQ. ∎ [Trigonometric Definition/Identity]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
       "Step 2: Use isosceles triangle property (TP=TQ) and the right angle at the tangent-radius intersection. [Trigonometric Definition/Identity]",
@@ -412,7 +544,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 5 cm meets a line through the centre O at a point Q so that OQ = 9 cm. Find the length PQ.",
-    "answer": "Length PQ = √56 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 5 cm and OQ = 9 cm: 9² = 5² + PQ² ⟹ 81 = 25 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 81 - 25 = 56 ⟹ PQ = √56 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √56 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -430,7 +572,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 6 cm meets a line through the centre O at a point Q so that OQ = 11 cm. Find the length PQ.",
-    "answer": "Length PQ = √85 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 3 / 3 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 6 cm and OQ = 11 cm: 11² = 6² + PQ² ⟹ 121 = 36 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 121 - 36 = 85 ⟹ PQ = √85 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √85 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -448,7 +600,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 7 cm meets a line through the centre O at a point Q so that OQ = 13 cm. Find the length PQ.",
-    "answer": "Length PQ = √120 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 7 cm and OQ = 13 cm: 13² = 7² + PQ² ⟹ 169 = 49 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 169 - 49 = 120 ⟹ PQ = √120 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √120 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -466,7 +628,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "A tangent PQ at a point P of a circle of radius 8 cm meets a line through the centre O at a point Q so that OQ = 12 cm. Find the length PQ.",
-    "answer": "Length PQ = √80 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 5 / 5 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 8 cm and OQ = 12 cm: 12² = 8² + PQ² ⟹ 144 = 64 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 144 - 64 = 80 ⟹ PQ = √80 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √80 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -484,7 +656,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 9 cm meets a line through the centre O at a point Q so that OQ = 14 cm. Find the length PQ.",
-    "answer": "Length PQ = √115 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 9 cm and OQ = 14 cm: 14² = 9² + PQ² ⟹ 196 = 81 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 196 - 81 = 115 ⟹ PQ = √115 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √115 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -502,7 +684,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 10 cm meets a line through the centre O at a point Q so that OQ = 16 cm. Find the length PQ.",
-    "answer": "Length PQ = √156 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 3 / 3 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 10 cm and OQ = 16 cm: 16² = 10² + PQ² ⟹ 256 = 100 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 256 - 100 = 156 ⟹ PQ = √156 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √156 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -520,7 +712,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 11 cm meets a line through the centre O at a point Q so that OQ = 15 cm. Find the length PQ.",
-    "answer": "Length PQ = √104 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 11 cm and OQ = 15 cm: 15² = 11² + PQ² ⟹ 225 = 121 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 225 - 121 = 104 ⟹ PQ = √104 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √104 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -538,7 +740,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "A tangent PQ at a point P of a circle of radius 5 cm meets a line through the centre O at a point Q so that OQ = 10 cm. Find the length PQ.",
-    "answer": "Length PQ = √75 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 5 / 5 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 5 cm and OQ = 10 cm: 10² = 5² + PQ² ⟹ 100 = 25 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 100 - 25 = 75 ⟹ PQ = √75 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √75 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -556,7 +768,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 6 cm meets a line through the centre O at a point Q so that OQ = 12 cm. Find the length PQ.",
-    "answer": "Length PQ = √108 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 6 cm and OQ = 12 cm: 12² = 6² + PQ² ⟹ 144 = 36 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 144 - 36 = 108 ⟹ PQ = √108 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √108 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -574,7 +796,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 7 cm meets a line through the centre O at a point Q so that OQ = 11 cm. Find the length PQ.",
-    "answer": "Length PQ = √72 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 3 / 3 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 7 cm and OQ = 11 cm: 11² = 7² + PQ² ⟹ 121 = 49 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 121 - 49 = 72 ⟹ PQ = √72 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √72 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -592,7 +824,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 8 cm meets a line through the centre O at a point Q so that OQ = 13 cm. Find the length PQ.",
-    "answer": "Length PQ = √105 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 8 cm and OQ = 13 cm: 13² = 8² + PQ² ⟹ 169 = 64 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 169 - 64 = 105 ⟹ PQ = √105 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √105 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -610,7 +852,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "A tangent PQ at a point P of a circle of radius 9 cm meets a line through the centre O at a point Q so that OQ = 15 cm. Find the length PQ.",
-    "answer": "Length PQ = √144 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 5 / 5 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 9 cm and OQ = 15 cm: 15² = 9² + PQ² ⟹ 225 = 81 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 225 - 81 = 144 ⟹ PQ = √144 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √144 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -628,7 +880,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 10 cm meets a line through the centre O at a point Q so that OQ = 14 cm. Find the length PQ.",
-    "answer": "Length PQ = √96 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 10 cm and OQ = 14 cm: 14² = 10² + PQ² ⟹ 196 = 100 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 196 - 100 = 96 ⟹ PQ = √96 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √96 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -646,7 +908,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 11 cm meets a line through the centre O at a point Q so that OQ = 16 cm. Find the length PQ.",
-    "answer": "Length PQ = √135 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 3 / 3 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 11 cm and OQ = 16 cm: 16² = 11² + PQ² ⟹ 256 = 121 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 256 - 121 = 135 ⟹ PQ = √135 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √135 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -664,7 +936,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 5 cm meets a line through the centre O at a point Q so that OQ = 11 cm. Find the length PQ.",
-    "answer": "Length PQ = √96 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 5 cm and OQ = 11 cm: 11² = 5² + PQ² ⟹ 121 = 25 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 121 - 25 = 96 ⟹ PQ = √96 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √96 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -682,7 +964,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "A tangent PQ at a point P of a circle of radius 6 cm meets a line through the centre O at a point Q so that OQ = 10 cm. Find the length PQ.",
-    "answer": "Length PQ = √64 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 5 / 5 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 6 cm and OQ = 10 cm: 10² = 6² + PQ² ⟹ 100 = 36 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 100 - 36 = 64 ⟹ PQ = √64 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √64 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -700,7 +992,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 7 cm meets a line through the centre O at a point Q so that OQ = 12 cm. Find the length PQ.",
-    "answer": "Length PQ = √95 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 7 cm and OQ = 12 cm: 12² = 7² + PQ² ⟹ 144 = 49 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 144 - 49 = 95 ⟹ PQ = √95 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √95 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -718,7 +1020,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 8 cm meets a line through the centre O at a point Q so that OQ = 14 cm. Find the length PQ.",
-    "answer": "Length PQ = √132 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 3 / 3 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 8 cm and OQ = 14 cm: 14² = 8² + PQ² ⟹ 196 = 64 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 196 - 64 = 132 ⟹ PQ = √132 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √132 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -736,7 +1048,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 9 cm meets a line through the centre O at a point Q so that OQ = 13 cm. Find the length PQ.",
-    "answer": "Length PQ = √88 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 9 cm and OQ = 13 cm: 13² = 9² + PQ² ⟹ 169 = 81 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 169 - 81 = 88 ⟹ PQ = √88 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √88 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -754,7 +1076,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "A tangent PQ at a point P of a circle of radius 10 cm meets a line through the centre O at a point Q so that OQ = 15 cm. Find the length PQ.",
-    "answer": "Length PQ = √125 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 5 / 5 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 10 cm and OQ = 15 cm: 15² = 10² + PQ² ⟹ 225 = 100 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 225 - 100 = 125 ⟹ PQ = √125 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √125 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -772,7 +1104,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 11 cm meets a line through the centre O at a point Q so that OQ = 17 cm. Find the length PQ.",
-    "answer": "Length PQ = √168 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 11 cm and OQ = 17 cm: 17² = 11² + PQ² ⟹ 289 = 121 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 289 - 121 = 168 ⟹ PQ = √168 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √168 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -790,7 +1132,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 5 cm meets a line through the centre O at a point Q so that OQ = 9 cm. Find the length PQ.",
-    "answer": "Length PQ = √56 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 3 / 3 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 5 cm and OQ = 9 cm: 9² = 5² + PQ² ⟹ 81 = 25 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 81 - 25 = 56 ⟹ PQ = √56 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √56 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -808,7 +1160,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 6 cm meets a line through the centre O at a point Q so that OQ = 11 cm. Find the length PQ.",
-    "answer": "Length PQ = √85 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 6 cm and OQ = 11 cm: 11² = 6² + PQ² ⟹ 121 = 36 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 121 - 36 = 85 ⟹ PQ = √85 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √85 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -826,7 +1188,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "A tangent PQ at a point P of a circle of radius 7 cm meets a line through the centre O at a point Q so that OQ = 13 cm. Find the length PQ.",
-    "answer": "Length PQ = √120 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 5 / 5 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 7 cm and OQ = 13 cm: 13² = 7² + PQ² ⟹ 169 = 49 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 169 - 49 = 120 ⟹ PQ = √120 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √120 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -844,7 +1216,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 8 cm meets a line through the centre O at a point Q so that OQ = 12 cm. Find the length PQ.",
-    "answer": "Length PQ = √80 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 8 cm and OQ = 12 cm: 12² = 8² + PQ² ⟹ 144 = 64 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 144 - 64 = 80 ⟹ PQ = √80 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √80 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -862,7 +1244,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 9 cm meets a line through the centre O at a point Q so that OQ = 14 cm. Find the length PQ.",
-    "answer": "Length PQ = √115 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 3 / 3 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 9 cm and OQ = 14 cm: 14² = 9² + PQ² ⟹ 196 = 81 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 196 - 81 = 115 ⟹ PQ = √115 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √115 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -880,7 +1272,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 10 cm meets a line through the centre O at a point Q so that OQ = 16 cm. Find the length PQ.",
-    "answer": "Length PQ = √156 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 10 cm and OQ = 16 cm: 16² = 10² + PQ² ⟹ 256 = 100 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 256 - 100 = 156 ⟹ PQ = √156 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √156 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -898,7 +1300,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "A tangent PQ at a point P of a circle of radius 11 cm meets a line through the centre O at a point Q so that OQ = 15 cm. Find the length PQ.",
-    "answer": "Length PQ = √104 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 5 / 5 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 11 cm and OQ = 15 cm: 15² = 11² + PQ² ⟹ 225 = 121 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 225 - 121 = 104 ⟹ PQ = √104 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √104 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -916,7 +1328,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 5 cm meets a line through the centre O at a point Q so that OQ = 10 cm. Find the length PQ.",
-    "answer": "Length PQ = √75 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 5 cm and OQ = 10 cm: 10² = 5² + PQ² ⟹ 100 = 25 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 100 - 25 = 75 ⟹ PQ = √75 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √75 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -934,7 +1356,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 6 cm meets a line through the centre O at a point Q so that OQ = 12 cm. Find the length PQ.",
-    "answer": "Length PQ = √108 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 3 / 3 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 6 cm and OQ = 12 cm: 12² = 6² + PQ² ⟹ 144 = 36 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 144 - 36 = 108 ⟹ PQ = √108 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √108 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -952,7 +1384,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 7 cm meets a line through the centre O at a point Q so that OQ = 11 cm. Find the length PQ.",
-    "answer": "Length PQ = √72 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 7 cm and OQ = 11 cm: 11² = 7² + PQ² ⟹ 121 = 49 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 121 - 49 = 72 ⟹ PQ = √72 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √72 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -970,7 +1412,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "A tangent PQ at a point P of a circle of radius 8 cm meets a line through the centre O at a point Q so that OQ = 13 cm. Find the length PQ.",
-    "answer": "Length PQ = √105 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 5 / 5 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 8 cm and OQ = 13 cm: 13² = 8² + PQ² ⟹ 169 = 64 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 169 - 64 = 105 ⟹ PQ = √105 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √105 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -988,7 +1440,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 9 cm meets a line through the centre O at a point Q so that OQ = 15 cm. Find the length PQ.",
-    "answer": "Length PQ = √144 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 9 cm and OQ = 15 cm: 15² = 9² + PQ² ⟹ 225 = 81 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 225 - 81 = 144 ⟹ PQ = √144 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √144 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -1006,7 +1468,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 10 cm meets a line through the centre O at a point Q so that OQ = 14 cm. Find the length PQ.",
-    "answer": "Length PQ = √96 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 3 / 3 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 10 cm and OQ = 14 cm: 14² = 10² + PQ² ⟹ 196 = 100 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 196 - 100 = 96 ⟹ PQ = √96 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √96 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -1024,7 +1496,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A tangent PQ at a point P of a circle of radius 11 cm meets a line through the centre O at a point Q so that OQ = 16 cm. Find the length PQ.",
-    "answer": "Length PQ = √135 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Theorem 10.1 (Radius ⊥ Tangent) & OQ² = OP² + PQ²
+Full Score: 2 / 2 Marks
+
+Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]
+Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]
+Step 3: Substitute OP = 11 cm and OQ = 16 cm: 16² = 11² + PQ² ⟹ 256 = 121 + PQ². [Algebraic Simplification]
+Step 4: PQ² = 256 - 121 = 135 ⟹ PQ = √135 cm. [Algebraic Simplification]
+Step 5: Length of tangent PQ is √135 cm. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: By Theorem 10.1, the tangent at any point of a circle is perpendicular to the radius through the point of contact. ∴ OP ⊥ PQ, so ∠OPQ = 90°. [Trigonometric Definition/Identity]",
       "Step 2: In right △OPQ, by Pythagoras Theorem: OQ² = OP² + PQ². [By Pythagoras Theorem]",
@@ -1042,7 +1524,17 @@ export const CH10_QUESTIONS: VaultQuestion[] = [
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study: Circular Roundabout & Tangential Pedestrian Crossings\n\nA circular traffic roundabout of radius 6 cm is surrounded by a quadrilateral park ABCD such that all four sides of the park touch the circle at points P, Q, R, S:\n(i) State Theorem 10.2 concerning lengths of tangents. [1 Mark]\n(ii) Prove that AB + CD = AD + BC. [2 Marks]\n(iii) If ABCD is a parallelogram circumscribing the circle, prove that it is a rhombus. [1 Mark]",
-    "answer": "(i) Tangents from external point are equal in length; (ii) AB + CD = AD + BC proven; (iii) ABCD is a rhombus",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: Theorem 10.2 (AP = AS, BP = BQ, CR = CQ, DR = DS)
+Full Score: 4 / 4 Marks
+
+Part (i): Theorem 10.2: The lengths of tangents drawn from an external point to a circle are equal. [Theorem statement]
+Part (ii): Tangents from A: AP = AS ... (1). Tangents from B: BP = BQ ... (2). Tangents from C: CR = CQ ... (3). Tangents from D: DR = DS ... (4).
+Adding (1)+(2)+(3)+(4): (AP + BP) + (CR + DR) = (AS + DS) + (BQ + CQ) ⟹ AB + CD = AD + BC. [Hence Proved Part ii]
+Part (iii): If ABCD is a parallelogram, AB = CD and AD = BC. ∴ AB + AB = AD + AD ⟹ 2AB = 2AD ⟹ AB = AD. Since adjacent sides are equal in a parallelogram, ABCD is a rhombus. [Hence Proved Part iii]
+
+(Hence Proved)`,
     "steps": [
       "Part (i): Theorem 10.2: The lengths of tangents drawn from an external point to a circle are equal. [Theorem statement]",
       "Part (ii): Tangents from A: AP = AS ... (1). Tangents from B: BP = BQ ... (2). Tangents from C: CR = CQ ... (3). Tangents from D: DR = DS ... (4).",

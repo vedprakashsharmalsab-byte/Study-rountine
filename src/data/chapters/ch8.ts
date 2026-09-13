@@ -202,7 +202,15 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "Evaluate: (sin 47°/cos 43°) + (cos 43°/sin 47°) − 2 cos 45°.",
-    "answer": "2 − √2",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: sin²θ + cos²θ = 1, tan θ = sin θ / cos θ
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: cos 43° = sin(90°−43°) = sin 47°. [Trigonometric Definition/Identity]
+Step 2: Step 2: So each fraction = sin47°/sin47° = 1. [Trigonometric Definition/Identity]
+Step 3: Step 3: Expression = 1 + 1 − 2×(1/√2) = 2 − √2. [Final Result with Units]
+`,
     "explanation": "cos 43° = sin(90°−43°) = sin 47°. So each fraction = sin47°/sin47° = 1. Expression = 1 + 1 − 2×(1/√2) = 2 − √2.",
     "examinerNote": "Key step: Recognizing that cos 43° = sin 47° using complementary angle identity.",
     "steps": [
@@ -219,7 +227,15 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "If tan θ + cot θ = 4, find tan²θ + cot²θ.",
-    "answer": "14",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: sin²θ + cos²θ = 1, tan θ = sin θ / cos θ
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: Identify given parameters and target variable. [Given: If tan θ + cot θ = 4, find tan²θ + cot²θ....]
+Step 2: Step 2: Apply the governing formula/theorem. (tan θ + cot θ)² = tan²θ + cot²θ + 2 tan θ cot θ → 16 = tan²θ + cot²θ + 2(1) → tan²θ + cot²θ = 14. [Trigonometric Definition/Identity]
+Step 3: Step 3: Calculate the final value: 14. [Boxed Result]
+`,
     "explanation": "(tan θ + cot θ)² = tan²θ + cot²θ + 2 tan θ cot θ → 16 = tan²θ + cot²θ + 2(1) → tan²θ + cot²θ = 14.",
     "examinerNote": "Product tan θ × cot θ = 1 always. This simplifies the calculation.",
     "steps": [
@@ -236,7 +252,15 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC right-angled at B, sin A = 5/13. Find the values of cos A and tan A.",
-    "answer": "cos A = 12/13, tan A = 5/12",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: sin²θ + cos²θ = 1, tan θ = sin θ / cos θ
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: sin A = 5/13 → P = 5, H = 13, B = √(169−25) = 12. [Trigonometric Definition/Identity]
+Step 2: Step 2: cos A = B/H = 12/13. [Trigonometric Definition/Identity]
+Step 3: Step 3: tan A = P/B = 5/12. [Trigonometric Definition/Identity]
+`,
     "explanation": "sin A = 5/13 → P = 5, H = 13, B = √(169−25) = 12. cos A = B/H = 12/13. tan A = P/B = 5/12.",
     "steps": [
       "Step 1: sin A = 5/13 → P = 5, H = 13, B = √(169−25) = 12. [Trigonometric Definition/Identity]",
@@ -255,21 +279,21 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "question": "Prove that: (sin θ − 2 sin³θ) / (2 cos³θ − cos θ) = tan θ.",
     "answer": `CBSE Topper Answer Sheet
 Section B (2M Short Answer)
-Governing Formula: \sin^2\theta + \cos^2\theta = 1
+Governing Formula: \\sin^2\\theta + \\cos^2\\theta = 1
 Full Score: 2 / 2 Marks
 
-Step 1: Factor out \sin\theta from the numerator and \cos\theta from the denominator.
-LHS = (\sin\theta - 2\sin^3\theta) / (2\cos^3\theta - \cos\theta)
-LHS = [\sin\theta (1 - 2\sin^2\theta)] / [\cos\theta (2\cos^2\theta - 1)]
+Step 1: Factor out \\sin\\theta from the numerator and \\cos\\theta from the denominator.
+LHS = (\\sin\\theta - 2\\sin^3\\theta) / (2\\cos^3\\theta - \\cos\\theta)
+LHS = [\\sin\\theta (1 - 2\\sin^2\\theta)] / [\\cos\\theta (2\\cos^2\\theta - 1)]
 
-Step 2: Use the identity \sin^2\theta + \cos^2\theta = 1.
-LHS = [\sin\theta (\sin^2\theta + \cos^2\theta - 2\sin^2\theta)] / [\cos\theta (2\cos^2\theta - (\sin^2\theta + \cos^2\theta))]
-LHS = [\sin\theta (\cos^2\theta - \sin^2\theta)] / [\cos\theta (\cos^2\theta - \sin^2\theta)]
+Step 2: Use the identity \\sin^2\\theta + \\cos^2\\theta = 1.
+LHS = [\\sin\\theta (\\sin^2\\theta + \\cos^2\\theta - 2\\sin^2\\theta)] / [\\cos\\theta (2\\cos^2\\theta - (\\sin^2\\theta + \\cos^2\\theta))]
+LHS = [\\sin\\theta (\\cos^2\\theta - \\sin^2\\theta)] / [\\cos\\theta (\\cos^2\\theta - \\sin^2\\theta)]
 
 Step 3: Cancel common terms and simplify.
-The term (\cos^2\theta - \sin^2\theta) cancels out.
-LHS = \sin\theta / \cos\theta
-LHS = \tan\theta = RHS. ∎
+The term (\\cos^2\\theta - \\sin^2\\theta) cancels out.
+LHS = \\sin\\theta / \\cos\\theta
+LHS = \\tan\\theta = RHS. ∎
 
 (Hence Proved)`,
     "explanation": "Factor numerator as sinθ(1−2sin²θ) and denominator as cosθ(2cos²θ−1). The expressions in brackets are both equal to cos2θ and cancel.",
@@ -287,7 +311,15 @@ LHS = \tan\theta = RHS. ∎
     "marks": 2,
     "type": "SA",
     "question": "Find the value of: 2 tan²45° + cos²30° − sin²60°.",
-    "answer": "2",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: sin²θ + cos²θ = 1, tan θ = sin θ / cos θ
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: Identify given parameters and target variable. [Given: Find the value of: 2 tan²45° + cos²30° − sin²...]
+Step 2: Step 2: Apply the governing formula/theorem. 2×(1)² + (√3/2)² − (√3/2)² = 2 + 3/4 − 3/4 = 2. [Algebraic Simplification]
+Step 3: Step 3: Calculate the final value: 2. [Boxed Result]
+`,
     "explanation": "2×(1)² + (√3/2)² − (√3/2)² = 2 + 3/4 − 3/4 = 2.",
     "steps": [
       "Step 1: Identify given parameters and target variable. [Given: Find the value of: 2 tan²45° + cos²30° − sin²...]",
@@ -304,7 +336,14 @@ LHS = \tan\theta = RHS. ∎
     "marks": 2,
     "type": "SA",
     "question": "If cos A + cos²A = 1, prove that sin²A + sin⁴A = 1.",
-    "answer": "cos A = 1 − cos²A = sin²A. So sin²A + sin⁴A = cos A + cos²A = 1. ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: sin²θ + cos²θ = 1, tan θ = sin θ / cos θ
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: The key substitution: from the given condition, cos A = 1 − cos²A = sin²A. [Trigonometric Definition/Identity]
+Step 2: Step 2: Replace cos A with sin²A in the LHS to get the given condition. [Trigonometric Definition/Identity]
+`,
     "explanation": "The key substitution: from the given condition, cos A = 1 − cos²A = sin²A. Replace cos A with sin²A in the LHS to get the given condition.",
     "steps": [
       "Step 1: The key substitution: from the given condition, cos A = 1 − cos²A = sin²A. [Trigonometric Definition/Identity]",
@@ -320,7 +359,16 @@ LHS = \tan\theta = RHS. ∎
     "marks": 3,
     "type": "SA",
     "question": "Prove that: √((1 + sin A)/(1 − sin A)) = sec A + tan A.",
-    "answer": "Multiply numerator and denominator by (1+sinA): √((1+sinA)²/(1−sin²A)) = √((1+sinA)²/cos²A) = (1+sinA)/cosA = 1/cosA + sinA/cosA = secA + tanA = RHS. ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: sin²θ + cos²θ = 1, tan θ = sin θ / cos θ
+Full Score: 3 / 3 Marks
+
+Step 1: Step 1: Rationalize by multiplying by (1+sinA)/(1+sinA). [Trigonometric Definition/Identity]
+Step 2: Step 2: Denominator becomes 1−sin²A = cos²A. [Trigonometric Definition/Identity]
+Step 3: Step 3: Take square root to get (1+sinA)/cosA. [Trigonometric Definition/Identity]
+
+(Hence Proved)`,
     "explanation": "Rationalize by multiplying by (1+sinA)/(1+sinA). Denominator becomes 1−sin²A = cos²A. Take square root to get (1+sinA)/cosA.",
     "examinerNote": "Must NOT take √(1−sinA) = 1−√sinA (not valid!). Only apply to the expression 1−sin²A = cos²A.",
     "steps": [
@@ -339,31 +387,31 @@ LHS = \tan\theta = RHS. ∎
     "question": "Prove: (sin θ − cos θ + 1)/(sin θ + cos θ − 1) = 1/(sec θ − tan θ).",
     "answer": `CBSE Topper Answer Sheet
 Section C (3M Short Answer)
-Governing Formula: \sec^2\theta - \tan^2\theta = 1
+Governing Formula: \\sec^2\\theta - \\tan^2\\theta = 1
 Full Score: 3 / 3 Marks
 
-Step 1: Divide numerator and denominator by \cos\theta.
-LHS = (\sin\theta - \cos\theta + 1) / (\sin\theta + \cos\theta - 1)
-LHS = (\tan\theta - 1 + \sec\theta) / (\tan\theta + 1 - \sec\theta)
-LHS = (\tan\theta + \sec\theta - 1) / (\tan\theta - \sec\theta + 1)
+Step 1: Divide numerator and denominator by \\cos\\theta.
+LHS = (\\sin\\theta - \\cos\\theta + 1) / (\\sin\\theta + \\cos\\theta - 1)
+LHS = (\\tan\\theta - 1 + \\sec\\theta) / (\\tan\\theta + 1 - \\sec\\theta)
+LHS = (\\tan\\theta + \\sec\\theta - 1) / (\\tan\\theta - \\sec\\theta + 1)
 
-Step 2: Replace 1 in the numerator with \sec^2\theta - \tan^2\theta.
-LHS = [ (\sec\theta + \tan\theta) - (\sec^2\theta - \tan^2\theta) ] / (\tan\theta - \sec\theta + 1)
+Step 2: Replace 1 in the numerator with \\sec^2\\theta - \\tan^2\\theta.
+LHS = [ (\\sec\\theta + \\tan\\theta) - (\\sec^2\\theta - \\tan^2\\theta) ] / (\\tan\\theta - \\sec\\theta + 1)
 
 Step 3: Factorize the substituted term.
-LHS = [ (\sec\theta + \tan\theta) - (\sec\theta - \tan\theta)(\sec\theta + \tan\theta) ] / (\tan\theta - \sec\theta + 1)
+LHS = [ (\\sec\\theta + \\tan\\theta) - (\\sec\\theta - \\tan\\theta)(\\sec\\theta + \\tan\\theta) ] / (\\tan\\theta - \\sec\\theta + 1)
 
-Step 4: Factor out (\sec\theta + \tan\theta).
-LHS = (\sec\theta + \tan\theta) [ 1 - (\sec\theta - \tan\theta) ] / (\tan\theta - \sec\theta + 1)
-LHS = (\sec\theta + \tan\theta) (1 - \sec\theta + \tan\theta) / (\tan\theta - \sec\theta + 1)
+Step 4: Factor out (\\sec\\theta + \\tan\\theta).
+LHS = (\\sec\\theta + \\tan\\theta) [ 1 - (\\sec\\theta - \\tan\\theta) ] / (\\tan\\theta - \\sec\\theta + 1)
+LHS = (\\sec\\theta + \\tan\\theta) (1 - \\sec\\theta + \\tan\\theta) / (\\tan\\theta - \\sec\\theta + 1)
 
 Step 5: Cancel common terms and transform to RHS.
-The term (1 - \sec\theta + \tan\theta) cancels out perfectly.
-LHS = \sec\theta + \tan\theta
-Multiply and divide by (\sec\theta - \tan\theta):
-LHS = (\sec\theta + \tan\theta)(\sec\theta - \tan\theta) / (\sec\theta - \tan\theta)
-LHS = (\sec^2\theta - \tan^2\theta) / (\sec\theta - \tan\theta)
-LHS = 1 / (\sec\theta - \tan\theta) = RHS. ∎
+The term (1 - \\sec\\theta + \\tan\\theta) cancels out perfectly.
+LHS = \\sec\\theta + \\tan\\theta
+Multiply and divide by (\\sec\\theta - \\tan\\theta):
+LHS = (\\sec\\theta + \\tan\\theta)(\\sec\\theta - \\tan\\theta) / (\\sec\\theta - \\tan\\theta)
+LHS = (\\sec^2\\theta - \\tan^2\\theta) / (\\sec\\theta - \\tan\\theta)
+LHS = 1 / (\\sec\\theta - \\tan\\theta) = RHS. ∎
 
 (Hence Proved)`,
     "explanation": "Divide everything by cosθ to get tan and sec terms. Replace 1 with (sec−tan)(sec+tan) to enable factorization and cancellation.",
@@ -383,27 +431,27 @@ LHS = 1 / (\sec\theta - \tan\theta) = RHS. ∎
     "question": "Prove: (tan A + sec A − 1)/(tan A − sec A + 1) = (1 + sin A)/cos A.",
     "answer": `CBSE Topper Answer Sheet
 Section C (3M Short Answer)
-Governing Formula: \sec^2 A - \tan^2 A = 1
+Governing Formula: \\sec^2 A - \\tan^2 A = 1
 Full Score: 3 / 3 Marks
 
-Step 1: Replace 1 in the numerator with \sec^2 A - \tan^2 A.
-LHS = (\tan A + \sec A - 1) / (\tan A - \sec A + 1)
-LHS = [ (\tan A + \sec A) - (\sec^2 A - \tan^2 A) ] / (\tan A - \sec A + 1)
+Step 1: Replace 1 in the numerator with \\sec^2 A - \\tan^2 A.
+LHS = (\\tan A + \\sec A - 1) / (\\tan A - \\sec A + 1)
+LHS = [ (\\tan A + \\sec A) - (\\sec^2 A - \\tan^2 A) ] / (\\tan A - \\sec A + 1)
 
 Step 2: Factorize the substituted term.
-LHS = [ (\sec A + \tan A) - (\sec A - \tan A)(\sec A + \tan A) ] / (\tan A - \sec A + 1)
+LHS = [ (\\sec A + \\tan A) - (\\sec A - \\tan A)(\\sec A + \\tan A) ] / (\\tan A - \\sec A + 1)
 
-Step 3: Factor out (\sec A + \tan A).
-LHS = (\sec A + \tan A) [ 1 - (\sec A - \tan A) ] / (\tan A - \sec A + 1)
-LHS = (\sec A + \tan A) (1 - \sec A + \tan A) / (\tan A - \sec A + 1)
+Step 3: Factor out (\\sec A + \\tan A).
+LHS = (\\sec A + \\tan A) [ 1 - (\\sec A - \\tan A) ] / (\\tan A - \\sec A + 1)
+LHS = (\\sec A + \\tan A) (1 - \\sec A + \\tan A) / (\\tan A - \\sec A + 1)
 
 Step 4: Cancel common terms.
-The term (1 - \sec A + \tan A) cancels out.
-LHS = \sec A + \tan A
+The term (1 - \\sec A + \\tan A) cancels out.
+LHS = \\sec A + \\tan A
 
 Step 5: Convert to sine and cosine.
-LHS = 1/\cos A + \sin A/\cos A
-LHS = (1 + \sin A) / \cos A = RHS. ∎
+LHS = 1/\\cos A + \\sin A/\\cos A
+LHS = (1 + \\sin A) / \\cos A = RHS. ∎
 
 (Hence Proved)`,
     "explanation": "Factor 1 as (sec+tan)(sec−tan) in both numerator and denominator, then cancel the common factor.",
@@ -424,28 +472,28 @@ LHS = (1 + \sin A) / \cos A = RHS. ∎
     "question": "If sin A + cos A = p and sec A + cosec A = q, show that q(p²−1) = 2p.",
     "answer": `CBSE Topper Answer Sheet
 Section C (3M Short Answer)
-Governing Formula: \sin^2 A + \cos^2 A = 1
+Governing Formula: \\sin^2 A + \\cos^2 A = 1
 Full Score: 3 / 3 Marks
 
 Step 1: Expand the LHS expression q(p^2 - 1).
-Given: p = \sin A + \cos A, q = \sec A + \text{cosec} A
-q(p^2 - 1) = (\sec A + \text{cosec} A) [ (\sin A + \cos A)^2 - 1 ]
+Given: p = \\sin A + \\cos A, q = \\sec A + \\text{cosec} A
+q(p^2 - 1) = (\\sec A + \\text{cosec} A) [ (\\sin A + \\cos A)^2 - 1 ]
 
 Step 2: Convert q to sine and cosine.
-q = 1/\cos A + 1/\sin A = (\sin A + \cos A) / (\sin A \cos A)
+q = 1/\\cos A + 1/\\sin A = (\\sin A + \\cos A) / (\\sin A \\cos A)
 
 Step 3: Expand the square inside the bracket.
-(\sin A + \cos A)^2 = \sin^2 A + \cos^2 A + 2\sin A\cos A
-(\sin A + \cos A)^2 = 1 + 2\sin A\cos A
+(\\sin A + \\cos A)^2 = \\sin^2 A + \\cos^2 A + 2\\sin A\\cos A
+(\\sin A + \\cos A)^2 = 1 + 2\\sin A\\cos A
 
 Step 4: Substitute back into the expression.
-q(p^2 - 1) = [ (\sin A + \cos A) / (\sin A \cos A) ] \times [ (1 + 2\sin A\cos A) - 1 ]
-q(p^2 - 1) = [ (\sin A + \cos A) / (\sin A \cos A) ] \times [ 2\sin A\cos A ]
+q(p^2 - 1) = [ (\\sin A + \\cos A) / (\\sin A \\cos A) ] \times [ (1 + 2\\sin A\\cos A) - 1 ]
+q(p^2 - 1) = [ (\\sin A + \\cos A) / (\\sin A \\cos A) ] \times [ 2\\sin A\\cos A ]
 
 Step 5: Cancel common terms.
-The (\sin A \cos A) cancels out.
-q(p^2 - 1) = 2(\sin A + \cos A)
-Since p = \sin A + \cos A,
+The (\\sin A \\cos A) cancels out.
+q(p^2 - 1) = 2(\\sin A + \\cos A)
+Since p = \\sin A + \\cos A,
 q(p^2 - 1) = 2p. ∎
 
 (Hence Proved)`,
@@ -465,7 +513,17 @@ q(p^2 - 1) = 2p. ∎
     "marks": 3,
     "type": "SA",
     "question": "Evaluate: [sin²63° + sin²27°] / [cos²17° + cos²73°] + sin 27° cos 63° + cos 27° sin 63°.",
-    "answer": "2",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: sin²θ + cos²θ = 1, tan θ = sin θ / cos θ
+Full Score: 3 / 3 Marks
+
+Step 1: Step 1: Part 1: sin²63° + sin²27° = sin²63° + cos²63° = 1 (since sin27° = cos63°). [Trigonometric Definition/Identity]
+Step 2: Step 2: cos²17° + cos²73° = cos²17° + sin²17° = 1. [Trigonometric Definition/Identity]
+Step 3: Step 3: So Part 1 = 1/1 = 1. [Algebraic Simplification]
+Step 4: Step 4: Part 2: sin27°cos63° + cos27°sin63° = sin(27°+63°) = sin90° = 1. [Trigonometric Definition/Identity]
+Step 5: Step 5: Total = 1 + 1 = 2. [Final Result with Units]
+`,
     "explanation": "Part 1: sin²63° + sin²27° = sin²63° + cos²63° = 1 (since sin27° = cos63°). cos²17° + cos²73° = cos²17° + sin²17° = 1. So Part 1 = 1/1 = 1. Part 2: sin27°cos63° + cos27°sin63° = sin(27°+63°) = sin90° = 1. Total = 1 + 1 = 2.",
     "examinerNote": "Use sin(90°−θ) = cosθ and sin(A+B) formula. This is a favourite board question.",
     "steps": [
@@ -486,30 +544,30 @@ q(p^2 - 1) = 2p. ∎
     "question": "Prove that: (sin A + cosec A)² + (cos A + sec A)² = 7 + tan²A + cot²A.",
     "answer": `CBSE Topper Answer Sheet
 Section D (5M Long Answer)
-Governing Formula: \sin^2 A + \cos^2 A = 1, 1 + \tan^2 A = \sec^2 A, 1 + \cot^2 A = \text{cosec}^2 A
+Governing Formula: \\sin^2 A + \\cos^2 A = 1, 1 + \\tan^2 A = \\sec^2 A, 1 + \\cot^2 A = \\text{cosec}^2 A
 Full Score: 5 / 5 Marks
 
 Step 1: Expand the squares on the LHS.
-LHS = (\sin A + \text{cosec} A)^2 + (\cos A + \sec A)^2
-LHS = (\sin^2 A + \text{cosec}^2 A + 2\sin A \text{cosec} A) + (\cos^2 A + \sec^2 A + 2\cos A \sec A)
+LHS = (\\sin A + \\text{cosec} A)^2 + (\\cos A + \\sec A)^2
+LHS = (\\sin^2 A + \\text{cosec}^2 A + 2\\sin A \\text{cosec} A) + (\\cos^2 A + \\sec^2 A + 2\\cos A \\sec A)
 
 Step 2: Apply inverse trigonometric properties.
-\sin A \times \text{cosec} A = 1 and \cos A \times \sec A = 1
-LHS = (\sin^2 A + \text{cosec}^2 A + 2(1)) + (\cos^2 A + \sec^2 A + 2(1))
-LHS = \sin^2 A + \cos^2 A + \text{cosec}^2 A + \sec^2 A + 4
+\\sin A \times \\text{cosec} A = 1 and \\cos A \times \\sec A = 1
+LHS = (\\sin^2 A + \\text{cosec}^2 A + 2(1)) + (\\cos^2 A + \\sec^2 A + 2(1))
+LHS = \\sin^2 A + \\cos^2 A + \\text{cosec}^2 A + \\sec^2 A + 4
 
 Step 3: Use the primary Pythagorean identity.
-\sin^2 A + \cos^2 A = 1
-LHS = 1 + \text{cosec}^2 A + \sec^2 A + 4
-LHS = 5 + \text{cosec}^2 A + \sec^2 A
+\\sin^2 A + \\cos^2 A = 1
+LHS = 1 + \\text{cosec}^2 A + \\sec^2 A + 4
+LHS = 5 + \\text{cosec}^2 A + \\sec^2 A
 
-Step 4: Convert \text{cosec} and \sec into \cot and \tan.
-\text{cosec}^2 A = 1 + \cot^2 A and \sec^2 A = 1 + \tan^2 A
-LHS = 5 + (1 + \cot^2 A) + (1 + \tan^2 A)
+Step 4: Convert \\text{cosec} and \\sec into \\cot and \\tan.
+\\text{cosec}^2 A = 1 + \\cot^2 A and \\sec^2 A = 1 + \\tan^2 A
+LHS = 5 + (1 + \\cot^2 A) + (1 + \\tan^2 A)
 
 Step 5: Simplify to arrive at the final result.
-LHS = 5 + 1 + 1 + \tan^2 A + \cot^2 A
-LHS = 7 + \tan^2 A + \cot^2 A = RHS. ∎
+LHS = 5 + 1 + 1 + \\tan^2 A + \\cot^2 A
+LHS = 7 + \\tan^2 A + \\cot^2 A = RHS. ∎
 
 (Hence Proved)`,
     "explanation": "Expand the squares. Use sin·csc = 1 and cos·sec = 1. Group sin²+cos²=1 and apply identities csc²=1+cot² and sec²=1+tan².",
@@ -530,21 +588,21 @@ LHS = 7 + \tan^2 A + \cot^2 A = RHS. ∎
     "question": "Prove: (cot A − cos A)/(cot A + cos A) = (cosec A − 1)/(cosec A + 1).",
     "answer": `CBSE Topper Answer Sheet
 Section D (5M Long Answer)
-Governing Formula: \cot A = \cos A / \sin A
+Governing Formula: \\cot A = \\cos A / \\sin A
 Full Score: 5 / 5 Marks
 
-Step 1: Convert \cot A into sine and cosine.
-LHS = (\cot A - \cos A) / (\cot A + \cos A)
-LHS = [ (\cos A / \sin A) - \cos A ] / [ (\cos A / \sin A) + \cos A ]
+Step 1: Convert \\cot A into sine and cosine.
+LHS = (\\cot A - \\cos A) / (\\cot A + \\cos A)
+LHS = [ (\\cos A / \\sin A) - \\cos A ] / [ (\\cos A / \\sin A) + \\cos A ]
 
-Step 2: Factor out \cos A from both numerator and denominator.
-LHS = \cos A [ (1 / \sin A) - 1 ] / \cos A [ (1 / \sin A) + 1 ]
+Step 2: Factor out \\cos A from both numerator and denominator.
+LHS = \\cos A [ (1 / \\sin A) - 1 ] / \\cos A [ (1 / \\sin A) + 1 ]
 
-Step 3: Cancel \cos A.
-LHS = [ (1 / \sin A) - 1 ] / [ (1 / \sin A) + 1 ]
+Step 3: Cancel \\cos A.
+LHS = [ (1 / \\sin A) - 1 ] / [ (1 / \\sin A) + 1 ]
 
-Step 4: Convert 1/\sin A to \text{cosec} A.
-LHS = (\text{cosec} A - 1) / (\text{cosec} A + 1) = RHS. ∎
+Step 4: Convert 1/\\sin A to \\text{cosec} A.
+LHS = (\\text{cosec} A - 1) / (\\text{cosec} A + 1) = RHS. ∎
 
 (Hence Proved)`,
     "explanation": "Factor cosA from numerator and denominator. Replace cotA = cosA/sinA. 1/sinA = cscA. The cosA cancels perfectly.",
@@ -565,34 +623,12 @@ LHS = (\text{cosec} A - 1) / (\text{cosec} A + 1) = RHS. ∎
     "type": "LA",
     "question": "If tan θ + sin θ = m and tan θ − sin θ = n, prove that m² − n² = 4√(mn).",
     "answer": `CBSE Topper Answer Sheet
-Section D (5M Long Answer)
-Governing Formula: \sin^2\theta + \cos^2\theta = 1, \tan\theta = \sin\theta / \cos\theta
+Section D (5M LA)
+Governing Formula: sin²θ + cos²θ = 1, tan θ = sin θ / cos θ
 Full Score: 5 / 5 Marks
 
-Step 1: Expand the expression for m^2 - n^2.
-Given: m = \tan\theta + \sin\theta, n = \tan\theta - \sin\theta
-m^2 - n^2 = (\tan\theta + \sin\theta)^2 - (\tan\theta - \sin\theta)^2
-m^2 - n^2 = 4 \tan\theta \sin\theta  --- (Equation 1)
-
-Step 2: Simplify the product mn.
-mn = (\tan\theta + \sin\theta)(\tan\theta - \sin\theta)
-mn = \tan^2\theta - \sin^2\theta
-
-Step 3: Convert to Sine and Cosine.
-mn = (\sin^2\theta / \cos^2\theta) - \sin^2\theta
-Factor out \sin^2\theta:
-mn = \sin^2\theta (1/\cos^2\theta - 1) = \sin^2\theta (1 - \cos^2\theta) / \cos^2\theta
-
-Step 4: Apply Pythagorean Identity.
-1 - \cos^2\theta = \sin^2\theta
-mn = (\sin^2\theta \times \sin^2\theta) / \cos^2\theta = (\sin\theta \tan\theta)^2
-
-Step 5: Take the square root and equate.
-\sqrt{mn} = \sin\theta \tan\theta
-Multiply by 4:
-4\sqrt{mn} = 4 \tan\theta \sin\theta
-From Equation 1, we know m^2 - n^2 = 4 \tan\theta \sin\theta.
-Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
+Step 1: Step 1: Key: m²−n² = 4tanθsinθ and mn = sin²θtan²θ, so √(mn) = sinθtanθ. [Trigonometric Definition/Identity]
+Step 2: Step 2: These equate. [Final Result with Units]
 
 (Hence Proved)`,
     "explanation": "Key: m²−n² = 4tanθsinθ and mn = sin²θtan²θ, so √(mn) = sinθtanθ. These equate.",
@@ -685,7 +721,16 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, right-angled at B, AB = 5 cm and ∠ACB = 30°. Determine the lengths of sides BC and AC.",
-    "answer": "BC = 5√3 cm, AC = 10 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan C = Opp/Adj, sin C = Opp/Hyp
+Full Score: 2 / 2 Marks
+
+Step 1: In right △ABC, ∠B = 90°, ∠C = 30°, AB = 5 cm. [Given in Problem]
+Step 2: To find BC (adjacent to ∠C): tan 30° = AB / BC ⟹ 1/√3 = 5 / BC ⟹ BC = 5√3 cm. [Trigonometric Definition/Identity]
+Step 3: To find AC (hypotenuse): sin 30° = AB / AC ⟹ 1/2 = 5 / AC ⟹ AC = 10 cm. [Trigonometric Definition/Identity]
+Step 4: Concluding Statement: Length of BC = 5√3 cm and AC = 10 cm. [Final Result with Units]
+`,
     "steps": [
       "Step 1: In right △ABC, ∠B = 90°, ∠C = 30°, AB = 5 cm. [Given in Problem]",
       "Step 2: To find BC (adjacent to ∠C): tan 30° = AB / BC ⟹ 1/√3 = 5 / BC ⟹ BC = 5√3 cm. [Trigonometric Definition/Identity]",
@@ -703,7 +748,16 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "Evaluate: (2 tan² 45° + cos² 30° - sin² 60°)",
-    "answer": "2",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan 45° = 1, cos 30° = sin 60° = √3/2
+Full Score: 2 / 2 Marks
+
+Step 1: State standard angle values: tan 45° = 1, cos 30° = √3/2, sin 60° = √3/2. [Trigonometric Definition/Identity]
+Step 2: Substitute values: 2(1)² + (√3/2)² - (√3/2)². [Algebraic Simplification]
+Step 3: The terms (√3/2)² and -(√3/2)² cancel each other out. [Algebraic Simplification]
+Step 4: 2(1) + 0 = 2. Final Answer = 2. [Final Result with Units]
+`,
     "steps": [
       "Step 1: State standard angle values: tan 45° = 1, cos 30° = √3/2, sin 60° = √3/2. [Trigonometric Definition/Identity]",
       "Step 2: Substitute values: 2(1)² + (√3/2)² - (√3/2)². [Algebraic Simplification]",
@@ -721,7 +775,18 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 3,
     "type": "SA",
     "question": "Prove the identity: (sin θ - 2 sin³ θ) / (2 cos³ θ - cos θ) = tan θ",
-    "answer": "LHS = RHS = tan θ",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: sin² θ = 1 - cos² θ, tan θ = sin θ / cos θ
+Full Score: 3 / 3 Marks
+
+Step 1: Take LHS: (sin θ - 2 sin³ θ) / (2 cos³ θ - cos θ). [Trigonometric Definition/Identity]
+Step 2: Factor out sin θ from numerator and cos θ from denominator: [sin θ (1 - 2 sin² θ)] / [cos θ (2 cos² θ - 1)].
+Step 3: Express sin² θ in terms of cos² θ using sin² θ = 1 - cos² θ: Numerator bracket = 1 - 2(1 - cos² θ) = 1 - 2 + 2 cos² θ = 2 cos² θ - 1. [Trigonometric Definition/Identity]
+Step 4: Numerator bracket matches denominator bracket (2 cos² θ - 1). Cancelling common factor: (sin θ / cos θ) × 1 = tan θ. [Trigonometric Definition/Identity]
+Step 5: LHS = RHS. Hence Proved. [Final Result with Units]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: Take LHS: (sin θ - 2 sin³ θ) / (2 cos³ θ - cos θ). [Trigonometric Definition/Identity]",
       "Step 2: Factor out sin θ from numerator and cos θ from denominator: [sin θ (1 - 2 sin² θ)] / [cos θ (2 cos² θ - 1)].",
@@ -740,7 +805,19 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 3,
     "type": "SA",
     "question": "Prove that: √[(1 + sin A) / (1 - sin A)] = sec A + tan A",
-    "answer": "LHS = RHS = sec A + tan A",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: 1 - sin² A = cos² A, 1/cos A = sec A, sin A/cos A = tan A
+Full Score: 3 / 3 Marks
+
+Step 1: Take LHS = √[(1 + sin A) / (1 - sin A)].
+Step 2: Rationalize numerator and denominator inside radical by multiplying by (1 + sin A): √[((1 + sin A)(1 + sin A)) / ((1 - sin A)(1 + sin A))].
+Step 3: Under the square root, numerator becomes (1 + sin A)² and denominator becomes (1 - sin² A) = cos² A. [Trigonometric Definition/Identity]
+Step 4: Taking square root of numerator and denominator: (1 + sin A) / cos A. [Trigonometric Definition/Identity]
+Step 5: Split the fraction: (1 / cos A) + (sin A / cos A) = sec A + tan A. [Trigonometric Definition/Identity]
+Step 6: LHS = RHS = sec A + tan A. Hence Proved. [Trigonometric Definition/Identity]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: Take LHS = √[(1 + sin A) / (1 - sin A)].",
       "Step 2: Rationalize numerator and denominator inside radical by multiplying by (1 + sin A): √[((1 + sin A)(1 + sin A)) / ((1 - sin A)(1 + sin A))].",
@@ -760,7 +837,20 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 5,
     "type": "LA",
     "question": "Prove that: (sin A + csc A)² + (cos A + sec A)² = 7 + tan² A + cot² A",
-    "answer": "LHS = RHS = 7 + tan² A + cot² A",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: sin² A + cos² A = 1, csc² A = 1 + cot² A, sec² A = 1 + tan² A
+Full Score: 5 / 5 Marks
+
+Step 1: Take LHS = (sin A + csc A)² + (cos A + sec A)². [Trigonometric Definition/Identity]
+Step 2: Expand using (a + b)² = a² + 2ab + b²: (sin² A + 2 sin A csc A + csc² A) + (cos² A + 2 cos A sec A + sec² A). [Trigonometric Definition/Identity]
+Step 3: Since sin A · csc A = 1 and cos A · sec A = 1, middle terms become 2(1) + 2(1) = 4. [Trigonometric Definition/Identity]
+Step 4: Regroup: (sin² A + cos² A) + 4 + csc² A + sec² A. [Trigonometric Definition/Identity]
+Step 5: Substitute fundamental identity sin² A + cos² A = 1: 1 + 4 + csc² A + sec² A = 5 + csc² A + sec² A. [Trigonometric Definition/Identity]
+Step 6: Use Pythagorean identities csc² A = 1 + cot² A and sec² A = 1 + tan² A: 5 + (1 + cot² A) + (1 + tan² A) = 7 + tan² A + cot² A. [By Pythagoras Theorem]
+Step 7: LHS = RHS. Hence Proved. [Final Result with Units]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: Take LHS = (sin A + csc A)² + (cos A + sec A)². [Trigonometric Definition/Identity]",
       "Step 2: Expand using (a + b)² = a² + 2ab + b²: (sin² A + 2 sin A csc A + csc² A) + (cos² A + 2 cos A sec A + sec² A). [Trigonometric Definition/Identity]",
@@ -781,7 +871,19 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 5,
     "type": "LA",
     "question": "If sec θ + tan θ = p, prove that (p² - 1) / (p² + 1) = sin θ.",
-    "answer": "LHS = RHS = sin θ",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: sec θ = 1/cos θ, tan θ = sin θ/cos θ, 1 - cos² θ = sin² θ
+Full Score: 5 / 5 Marks
+
+Step 1: Given p = sec θ + tan θ = (1/cos θ) + (sin θ/cos θ) = (1 + sin θ) / cos θ. [Trigonometric Definition/Identity]
+Step 2: Calculate p² - 1: [(1 + sin θ)² / cos² θ] - 1 = [(1 + 2 sin θ + sin² θ) - cos² θ] / cos² θ.
+Step 3: Replace (sin² θ - cos² θ) or 1 - cos² θ = sin² θ: (sin² θ + 2 sin θ + sin² θ) / cos² θ = (2 sin² θ + 2 sin θ) / cos² θ = 2 sin θ (sin θ + 1) / cos² θ. [Trigonometric Definition/Identity]
+Step 4: Calculate p² + 1: [(1 + sin θ)² / cos² θ] + 1 = [(1 + 2 sin θ + sin² θ) + cos² θ] / cos² θ = (1 + 2 sin θ + 1) / cos² θ = 2(1 + sin θ) / cos² θ.
+Step 5: Compute ratio (p² - 1) / (p² + 1): [2 sin θ (1 + sin θ) / cos² θ] / [2 (1 + sin θ) / cos² θ] = sin θ.
+Step 6: LHS = RHS = sin θ. Hence Proved. [Trigonometric Definition/Identity]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: Given p = sec θ + tan θ = (1/cos θ) + (sin θ/cos θ) = (1 + sin θ) / cos θ. [Trigonometric Definition/Identity]",
       "Step 2: Calculate p² - 1: [(1 + sin θ)² / cos² θ] - 1 = [(1 + 2 sin θ + sin² θ) - cos² θ] / cos² θ.",
@@ -801,7 +903,20 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 5,
     "type": "LA",
     "question": "Prove that: (cos A - sin A + 1) / (cos A + sin A - 1) = csc A + cot A using identity csc² A = 1 + cot² A.",
-    "answer": "LHS = RHS = csc A + cot A",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: csc² A - cot² A = 1 ⟹ 1 = (csc A - cot A)(csc A + cot A)
+Full Score: 5 / 5 Marks
+
+Step 1: Take LHS = (cos A - sin A + 1) / (cos A + sin A - 1). [Trigonometric Definition/Identity]
+Step 2: Divide numerator and denominator by sin A: [(cos A/sin A) - (sin A/sin A) + (1/sin A)] / [(cos A/sin A) + (sin A/sin A) - (1/sin A)] = (cot A - 1 + csc A) / (cot A + 1 - csc A).
+Step 3: Rearrange numerator: [(cot A + csc A) - 1] / [cot A - csc A + 1].
+Step 4: In numerator, substitute 1 = csc² A - cot² A = (csc A - cot A)(csc A + cot A): [(cot A + csc A) - (csc A - cot A)(csc A + cot A)] / [cot A - csc A + 1].
+Step 5: Factor out (csc A + cot A): (csc A + cot A) [1 - (csc A - cot A)] / [cot A - csc A + 1] = (csc A + cot A) [1 - csc A + cot A] / [cot A - csc A + 1].
+Step 6: The bracket [1 - csc A + cot A] matches denominator [cot A - csc A + 1]. Cancelling: csc A + cot A.
+Step 7: LHS = RHS = csc A + cot A. Hence Proved. [Final Result with Units]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: Take LHS = (cos A - sin A + 1) / (cos A + sin A - 1). [Trigonometric Definition/Identity]",
       "Step 2: Divide numerator and denominator by sin A: [(cos A/sin A) - (sin A/sin A) + (1/sin A)] / [(cos A/sin A) + (sin A/sin A) - (1/sin A)] = (cot A - 1 + csc A) / (cot A + 1 - csc A).",
@@ -822,7 +937,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 3,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 4/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "21/25",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: H = √(P²+B²), sin θ = P/H, cos θ = B/H
+Full Score: 3 / 3 Marks
+
+Step 1: tan θ = 4/3 → Opposite (P) = 4k, Adjacent (B) = 3k. [Given]
+Step 2: By Pythagoras theorem: H = √(P² + B²) = √(16k² + 9k²) = √(25k²) = 5k. [Pythagoras Theorem]
+Step 3: sin θ = P/H = 4k/5k = 4/5 and cos θ = B/H = 3k/5k = 3/5. [Trigonometric Ratios]
+Step 4: Substitute into expression: sin θ cos θ + cos²θ = (4/5)(3/5) + (3/5)² = 12/25 + 9/25. [Substitution]
+Step 5: Final Answer = 12/25 + 9/25 = 21/25. [Algebraic Simplification]
+`,
     "steps": [
       "Step 1: tan θ = 4/3 → Opposite (P) = 4k, Adjacent (B) = 3k. [Given]",
       "Step 2: By Pythagoras theorem: H = √(P² + B²) = √(16k² + 9k²) = √(25k²) = 5k. [Pythagoras Theorem]",
@@ -841,7 +966,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 5/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "36/41",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √(P²+B²), Answer = b(a+b)/(a²+b²) where tan θ = a/b
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 5/4 → P = 5k, B = 4k. [Given]
+Step 2: H = √(25k² + 16k²) = √(41k²) = k√41. [Pythagoras Theorem]
+Step 3: sin θ = 5/√41, cos θ = 4/√41. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (5/√41)(4/√41) + (4/√41)² = 20/41 + 16/41. [Substitution]
+Step 5: Final Answer = 36/41. [Algebraic Simplification]
+`,
     "steps": [
       "Step 1: tan θ = 5/4 → P = 5k, B = 4k. [Given]",
       "Step 2: H = √(25k² + 16k²) = √(41k²) = k√41. [Pythagoras Theorem]",
@@ -879,7 +1014,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 2/2 (i.e., tan θ = 1), evaluate (sin θ cos θ + cos² θ).",
-    "answer": "1",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan 45° = 1, sin 45° = cos 45° = 1/√2
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 2/2 = 1 → θ = 45°. P = 2k, B = 2k. [Simplification: tan θ = 1 means equal sides]
+Step 2: H = √(4k² + 4k²) = √(8k²) = 2k√2. [Pythagoras Theorem]
+Step 3: sin 45° = 1/√2, cos 45° = 1/√2. [Standard Angle Values]
+Step 4: sin θ cos θ + cos²θ = (1/√2)(1/√2) + (1/√2)² = 1/2 + 1/2. [Substitution]
+Step 5: Final Answer = 1. Note: This result makes sense because sin²θ + cos²θ = 1 and here expression = sinθcosθ + cos²θ = cosθ(sinθ + cosθ). At 45°, this = (1/√2)(2/√2) = 1. [Verification]
+`,
     "steps": [
       "Step 1: tan θ = 2/2 = 1 → θ = 45°. P = 2k, B = 2k. [Simplification: tan θ = 1 means equal sides]",
       "Step 2: H = √(4k² + 4k²) = √(8k²) = 2k√2. [Pythagoras Theorem]",
@@ -917,7 +1062,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 4/4 (i.e., tan θ = 1), evaluate (sin θ cos θ + cos² θ).",
-    "answer": "1",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan 45° = 1, sin 45° = cos 45° = 1/√2
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 4/4 = 1, so θ = 45°. [Simplification]
+Step 2: sin 45° = 1/√2 and cos 45° = 1/√2. [Standard Angle Values]
+Step 3: sin θ cos θ = (1/√2)(1/√2) = 1/2. [Multiplication]
+Step 4: cos²θ = (1/√2)² = 1/2. [Squaring]
+Step 5: Answer = 1/2 + 1/2 = 1. [Final Answer]
+`,
     "steps": [
       "Step 1: tan θ = 4/4 = 1, so θ = 45°. [Simplification]",
       "Step 2: sin 45° = 1/√2 and cos 45° = 1/√2. [Standard Angle Values]",
@@ -936,7 +1091,16 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 5/5 (i.e., tan θ = 1), evaluate (sin θ cos θ + cos² θ).",
-    "answer": "1",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan 45° = 1 → sin 45° = cos 45° = 1/√2
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 5/5 = 1, so θ = 45°. [Simplification]
+Step 2: sin 45° = 1/√2, cos 45° = 1/√2. [Standard Angle]
+Step 3: sin θ cos θ + cos²θ = (1/√2)(1/√2) + (1/√2)² = 1/2 + 1/2 = 1. [Compute]
+Step 4: Final Answer = 1. [Result]
+`,
     "steps": [
       "Step 1: tan θ = 5/5 = 1, so θ = 45°. [Simplification]",
       "Step 2: sin 45° = 1/√2, cos 45° = 1/√2. [Standard Angle]",
@@ -954,7 +1118,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 1/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "6/5",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √(P²+B²) = √5; Answer = b(a+b)/(a²+b²) = 2(1+2)/(1+4) = 6/5
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 1/2 → P = 1k, B = 2k. [Given]
+Step 2: H = √(1² + 2²)·k = √5·k. [Pythagoras Theorem]
+Step 3: sin θ = 1/√5, cos θ = 2/√5. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (1/√5)(2/√5) + (2/√5)² = 2/5 + 4/5. [Substitution]
+Step 5: Final Answer = 6/5. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 1/2 → P = 1k, B = 2k. [Given]",
       "Step 2: H = √(1² + 2²)·k = √5·k. [Pythagoras Theorem]",
@@ -973,7 +1147,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 2/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "15/13",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √13; Answer = 3(2+3)/13 = 15/13
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 2/3 → P = 2k, B = 3k. [Given]
+Step 2: H = √(4k² + 9k²) = √(13k²) = k√13. [Pythagoras Theorem]
+Step 3: sin θ = 2/√13, cos θ = 3/√13. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (2/√13)(3/√13) + (3/√13)² = 6/13 + 9/13. [Substitution]
+Step 5: Final Answer = 15/13. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 2/3 → P = 2k, B = 3k. [Given]",
       "Step 2: H = √(4k² + 9k²) = √(13k²) = k√13. [Pythagoras Theorem]",
@@ -992,7 +1176,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 3,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 3/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "28/25",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: 3-4-5 Pythagorean triple; Answer = 4(3+4)/25 = 28/25
+Full Score: 3 / 3 Marks
+
+Step 1: tan θ = 3/4 → P = 3k, B = 4k. [Given]
+Step 2: H = √(9k² + 16k²) = √(25k²) = 5k. [Pythagoras Theorem — 3-4-5 triple]
+Step 3: sin θ = 3/5, cos θ = 4/5. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (3/5)(4/5) + (4/5)² = 12/25 + 16/25. [Substitution]
+Step 5: Final Answer = 28/25. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 3/4 → P = 3k, B = 4k. [Given]",
       "Step 2: H = √(9k² + 16k²) = √(25k²) = 5k. [Pythagoras Theorem — 3-4-5 triple]",
@@ -1011,7 +1205,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 4/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "45/41",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √41; Answer = 5(4+5)/41 = 45/41
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 4/5 → P = 4k, B = 5k. [Given]
+Step 2: H = √(16k² + 25k²) = √(41k²) = k√41. [Pythagoras Theorem]
+Step 3: sin θ = 4/√41, cos θ = 5/√41. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (4/√41)(5/√41) + (5/√41)² = 20/41 + 25/41. [Substitution]
+Step 5: Final Answer = 45/41. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 4/5 → P = 4k, B = 5k. [Given]",
       "Step 2: H = √(16k² + 25k²) = √(41k²) = k√41. [Pythagoras Theorem]",
@@ -1030,7 +1234,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 3,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 5/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "14/29",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: H = √29; Answer = 2(5+2)/29 = 14/29
+Full Score: 3 / 3 Marks
+
+Step 1: tan θ = 5/2 → P = 5k, B = 2k. [Given]
+Step 2: H = √(25k² + 4k²) = √(29k²) = k√29. [Pythagoras Theorem]
+Step 3: sin θ = 5/√29, cos θ = 2/√29. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (5/√29)(2/√29) + (2/√29)² = 10/29 + 4/29. [Substitution]
+Step 5: Final Answer = 14/29. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 5/2 → P = 5k, B = 2k. [Given]",
       "Step 2: H = √(25k² + 4k²) = √(29k²) = k√29. [Pythagoras Theorem]",
@@ -1049,7 +1263,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 1/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "6/5",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √10; Answer = 3(1+3)/10 = 12/10 = 6/5
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 1/3 → P = 1k, B = 3k. [Given]
+Step 2: H = √(1k² + 9k²) = √(10k²) = k√10. [Pythagoras Theorem]
+Step 3: sin θ = 1/√10, cos θ = 3/√10. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (1/√10)(3/√10) + (3/√10)² = 3/10 + 9/10. [Substitution]
+Step 5: Final Answer = 12/10 = 6/5. [Simplified]
+`,
     "steps": [
       "Step 1: tan θ = 1/3 → P = 1k, B = 3k. [Given]",
       "Step 2: H = √(1k² + 9k²) = √(10k²) = k√10. [Pythagoras Theorem]",
@@ -1068,7 +1292,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 2/4 (simplify first!), evaluate (sin θ cos θ + cos² θ).",
-    "answer": "6/5",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Always simplify tan ratio first. 2/4 = 1/2. Same as board_40.
+Full Score: 2 / 2 Marks
+
+Step 1: Simplify: tan θ = 2/4 = 1/2. [Simplification — always reduce first!]
+Step 2: P = 1k, B = 2k → H = √(1+4)k = √5·k. [Pythagoras Theorem]
+Step 3: sin θ = 1/√5, cos θ = 2/√5. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (1/√5)(2/√5) + (2/√5)² = 2/5 + 4/5. [Substitution]
+Step 5: Final Answer = 6/5. [Addition]
+`,
     "steps": [
       "Step 1: Simplify: tan θ = 2/4 = 1/2. [Simplification — always reduce first!]",
       "Step 2: P = 1k, B = 2k → H = √(1+4)k = √5·k. [Pythagoras Theorem]",
@@ -1087,7 +1321,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 3/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "20/17",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √34; Answer = 5(3+5)/34 = 40/34 = 20/17
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 3/5 → P = 3k, B = 5k. [Given]
+Step 2: H = √(9k² + 25k²) = √(34k²) = k√34. [Pythagoras Theorem]
+Step 3: sin θ = 3/√34, cos θ = 5/√34. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (3/√34)(5/√34) + (5/√34)² = 15/34 + 25/34. [Substitution]
+Step 5: Final Answer = 40/34 = 20/17. [Simplified by ÷2]
+`,
     "steps": [
       "Step 1: tan θ = 3/5 → P = 3k, B = 5k. [Given]",
       "Step 2: H = √(9k² + 25k²) = √(34k²) = k√34. [Pythagoras Theorem]",
@@ -1106,7 +1350,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 4/2 (simplify first!), evaluate (sin θ cos θ + cos² θ).",
-    "answer": "3/5",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: Simplify 4/2 = 2 first. H = √5. Answer = 1(2+1)/5 = 3/5
+Full Score: 2 / 2 Marks
+
+Step 1: Simplify: tan θ = 4/2 = 2. So P = 2k, B = 1k. [Simplification]
+Step 2: H = √(4k² + 1k²) = √5·k. [Pythagoras Theorem]
+Step 3: sin θ = 2/√5, cos θ = 1/√5. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (2/√5)(1/√5) + (1/√5)² = 2/5 + 1/5. [Substitution]
+Step 5: Final Answer = 3/5. [Addition]
+`,
     "steps": [
       "Step 1: Simplify: tan θ = 4/2 = 2. So P = 2k, B = 1k. [Simplification]",
       "Step 2: H = √(4k² + 1k²) = √5·k. [Pythagoras Theorem]",
@@ -1125,7 +1379,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 5/3, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "12/17",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √34; Answer = 3(5+3)/34 = 24/34 = 12/17
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 5/3 → P = 5k, B = 3k. [Given]
+Step 2: H = √(25k² + 9k²) = √(34k²) = k√34. [Pythagoras Theorem]
+Step 3: sin θ = 5/√34, cos θ = 3/√34. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (5/√34)(3/√34) + (3/√34)² = 15/34 + 9/34. [Substitution]
+Step 5: Final Answer = 24/34 = 12/17. [Simplified by ÷2]
+`,
     "steps": [
       "Step 1: tan θ = 5/3 → P = 5k, B = 3k. [Given]",
       "Step 2: H = √(25k² + 9k²) = √(34k²) = k√34. [Pythagoras Theorem]",
@@ -1144,7 +1408,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 1/4, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "20/17",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √17; Answer = 4(1+4)/17 = 20/17
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 1/4 → P = 1k, B = 4k. [Given]
+Step 2: H = √(1k² + 16k²) = √(17k²) = k√17. [Pythagoras Theorem]
+Step 3: sin θ = 1/√17, cos θ = 4/√17. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (1/√17)(4/√17) + (4/√17)² = 4/17 + 16/17. [Substitution]
+Step 5: Final Answer = 20/17. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 1/4 → P = 1k, B = 4k. [Given]",
       "Step 2: H = √(1k² + 16k²) = √(17k²) = k√17. [Pythagoras Theorem]",
@@ -1163,7 +1437,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 2/5, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "35/29",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √29; Answer = 5(2+5)/29 = 35/29
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 2/5 → P = 2k, B = 5k. [Given]
+Step 2: H = √(4k² + 25k²) = √(29k²) = k√29. [Pythagoras Theorem]
+Step 3: sin θ = 2/√29, cos θ = 5/√29. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (2/√29)(5/√29) + (5/√29)² = 10/29 + 25/29. [Substitution]
+Step 5: Final Answer = 35/29. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 2/5 → P = 2k, B = 5k. [Given]",
       "Step 2: H = √(4k² + 25k²) = √(29k²) = k√29. [Pythagoras Theorem]",
@@ -1182,7 +1466,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 3/2, evaluate (sin θ cos θ + cos² θ).",
-    "answer": "10/13",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √13; Answer = 2(3+2)/13 = 10/13
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 3/2 → P = 3k, B = 2k. [Given]
+Step 2: H = √(9k² + 4k²) = √(13k²) = k√13. [Pythagoras Theorem]
+Step 3: sin θ = 3/√13, cos θ = 2/√13. [Trigonometric Ratios]
+Step 4: sin θ cos θ + cos²θ = (3/√13)(2/√13) + (2/√13)² = 6/13 + 4/13. [Substitution]
+Step 5: Final Answer = 10/13. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 3/2 → P = 3k, B = 2k. [Given]",
       "Step 2: H = √(9k² + 4k²) = √(13k²) = k√13. [Pythagoras Theorem]",
@@ -1201,7 +1495,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 4/3, evaluate (sin θ cos θ + cos² θ). [Revision question — same as board_33]",
-    "answer": "21/25",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: 3-4-5 triple: H=5k. Answer = 3(4+3)/25 = 21/25
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 4/3 → P = 4k, B = 3k (3-4-5 Pythagorean triple!). [Given]
+Step 2: H = 5k. [Pythagoras Theorem — recognise the triple!]
+Step 3: sin θ = 4/5, cos θ = 3/5. [Standard — memorise for 3-4-5 triangle]
+Step 4: sin θ cos θ + cos²θ = (4/5)(3/5) + (3/5)² = 12/25 + 9/25. [Substitution]
+Step 5: Final Answer = 21/25. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 4/3 → P = 4k, B = 3k (3-4-5 Pythagorean triple!). [Given]",
       "Step 2: H = 5k. [Pythagoras Theorem — recognise the triple!]",
@@ -1220,7 +1524,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 5/4, evaluate (sin θ cos θ + cos² θ). [Revision — same as board_34]",
-    "answer": "36/41",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √41; 4(5+4)/41 = 36/41
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 5/4 → P = 5k, B = 4k. [Given]
+Step 2: H = √(25+16)k = √41·k. [Pythagoras Theorem]
+Step 3: sin θ = 5/√41, cos θ = 4/√41. [Trig Ratios]
+Step 4: Expression = 20/41 + 16/41. [Substitution]
+Step 5: Answer = 36/41. [Addition]
+`,
     "steps": [
       "Step 1: tan θ = 5/4 → P = 5k, B = 4k. [Given]",
       "Step 2: H = √(25+16)k = √41·k. [Pythagoras Theorem]",
@@ -1239,7 +1553,15 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 1/5, evaluate (sin θ cos θ + cos² θ). [Revision — same as board_35]",
-    "answer": "15/13",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √26; Answer = 5(1+5)/26 = 30/26 = 15/13
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 1/5 → P = k, B = 5k. H = √26·k. [Setup]
+Step 2: sin θ = 1/√26, cos θ = 5/√26. [Ratios]
+Step 3: Expression = 5/26 + 25/26 = 30/26 = 15/13. [Compute and simplify]
+`,
     "steps": [
       "Step 1: tan θ = 1/5 → P = k, B = 5k. H = √26·k. [Setup]",
       "Step 2: sin θ = 1/√26, cos θ = 5/√26. [Ratios]",
@@ -1256,7 +1578,15 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 2/2 (= 1, i.e., θ = 45°), evaluate (sin θ cos θ + cos² θ). [Revision — same as board_36]",
-    "answer": "1",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = 1 → θ = 45°; answer always = 1
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 2/2 = 1 → θ = 45°. [Simplify first!]
+Step 2: sin 45° = cos 45° = 1/√2. [Standard value]
+Step 3: Expression = (1/√2)(1/√2) + (1/√2)² = 1/2 + 1/2 = 1. [Result]
+`,
     "steps": [
       "Step 1: tan θ = 2/2 = 1 → θ = 45°. [Simplify first!]",
       "Step 2: sin 45° = cos 45° = 1/√2. [Standard value]",
@@ -1273,7 +1603,15 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 3/3 (= 1, θ = 45°), evaluate (sin θ cos θ + cos² θ). [Revision — board_37]",
-    "answer": "1",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan n/n = 1 → θ = 45° → answer = 1
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 3/3 = 1 → θ = 45°. [Simplify]
+Step 2: sin 45° = cos 45° = 1/√2. [Standard value]
+Step 3: Expression = 1/2 + 1/2 = 1. [Result]
+`,
     "steps": [
       "Step 1: tan θ = 3/3 = 1 → θ = 45°. [Simplify]",
       "Step 2: sin 45° = cos 45° = 1/√2. [Standard value]",
@@ -1290,7 +1628,15 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 4/4 (= 1, θ = 45°), evaluate (sin θ cos θ + cos² θ). [Revision — board_38]",
-    "answer": "1",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan n/n = 1 → answer = 1 always
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 4/4 = 1 → θ = 45°. [Simplify]
+Step 2: sin 45° = cos 45° = 1/√2. [Standard value]
+Step 3: Expression = 1/2 + 1/2 = 1. [Result]
+`,
     "steps": [
       "Step 1: tan θ = 4/4 = 1 → θ = 45°. [Simplify]",
       "Step 2: sin 45° = cos 45° = 1/√2. [Standard value]",
@@ -1307,7 +1653,15 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 5/5 (= 1, θ = 45°), evaluate (sin θ cos θ + cos² θ). [Revision — board_39]",
-    "answer": "1",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan n/n = 1 → answer = 1
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 5/5 = 1 → θ = 45°. [Simplify]
+Step 2: sin 45° = cos 45° = 1/√2. [Standard value]
+Step 3: Expression = 1/2 + 1/2 = 1. [Result]
+`,
     "steps": [
       "Step 1: tan θ = 5/5 = 1 → θ = 45°. [Simplify]",
       "Step 2: sin 45° = cos 45° = 1/√2. [Standard value]",
@@ -1324,7 +1678,15 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 2,
     "type": "SA",
     "question": "In right △ABC, if tan θ = 1/2, evaluate (sin θ cos θ + cos² θ). [Revision — board_40]",
-    "answer": "6/5",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: H = √5; Answer = 2(1+2)/5 = 6/5
+Full Score: 2 / 2 Marks
+
+Step 1: tan θ = 1/2 → P = k, B = 2k, H = √5·k. [Setup]
+Step 2: sin θ = 1/√5, cos θ = 2/√5. [Trig Ratios]
+Step 3: Expression = 2/5 + 4/5 = 6/5. [Compute]
+`,
     "steps": [
       "Step 1: tan θ = 1/2 → P = k, B = 2k, H = √5·k. [Setup]",
       "Step 2: sin θ = 1/√5, cos θ = 2/√5. [Trig Ratios]",
@@ -1341,7 +1703,18 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study: Sundial & Solar Panel Orientation\n\nAn eco-friendly school building installs solar panels on a slanted roof right-angled at its base. The inclination angle θ with the horizontal is such that 3 tan θ = 4:\n(i) Find the values of sin θ and cos θ. [2 Marks]\n(ii) Evaluate the expression (1 - sin θ cos θ) / (sin² θ + cos² θ). [1 Mark]\n(iii) What is the value of (sec² θ - tan² θ)? [1 Mark]",
-    "answer": "(i) sin θ = 4/5, cos θ = 3/5; (ii) 13/25; (iii) 1",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: tan θ = P/B, sin²θ + cos²θ = 1, sec²θ - tan²θ = 1
+Full Score: 4 / 4 Marks
+
+Part (i): Given 3 tan θ = 4 ⟹ tan θ = 4/3. In right triangle, Perpendicular P = 4k, Base B = 3k.
+Hypotenuse H = √(P² + B²) = √(16k² + 9k²) = √(25k²) = 5k. [Pythagoras Theorem]
+∴ sin θ = P/H = 4/5, and cos θ = B/H = 3/5. [Trig ratios: Part i]
+Part (ii): Numerator = 1 - (4/5)(3/5) = 1 - 12/25 = 13/25. Denominator = sin²θ + cos²θ = 1. [Fundamental Identity]
+Value = (13/25) / 1 = 13/25. [Part ii]
+Part (iii): By Pythagorean identity, sec² θ - tan² θ = 1 for all angles. [Part iii]
+`,
     "steps": [
       "Part (i): Given 3 tan θ = 4 ⟹ tan θ = 4/3. In right triangle, Perpendicular P = 4k, Base B = 3k.",
       "Hypotenuse H = √(P² + B²) = √(16k² + 9k²) = √(25k²) = 5k. [Pythagoras Theorem]",
@@ -1360,7 +1733,17 @@ Therefore, m^2 - n^2 = 4\sqrt{mn}. ∎
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study: Architectural Archway Ramp Design\n\nA ramp is constructed for wheelchair access with an angle of elevation A. Given that (sec A - tan A) = 1/3:\n(i) Determine the value of (sec A + tan A). [1.5 Marks]\n(ii) Find the individual values of sec A and tan A. [1.5 Marks]\n(iii) Calculate sin A. [1 Mark]",
-    "answer": "(i) sec A + tan A = 3; (ii) sec A = 5/3, tan A = 4/3; (iii) sin A = 4/5",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: sec² A - tan² A = 1 and sin A = tan A / sec A
+Full Score: 4 / 4 Marks
+
+Step 1: Part (i): We know sec² A - tan² A = 1 ⟹ (sec A - tan A)(sec A + tan A) = 1. [Algebraic identity]
+Step 2: Substitute (sec A - tan A) = 1/3: (1/3)(sec A + tan A) = 1 ⟹ sec A + tan A = 3. [Part i]
+Step 3: Part (ii): Adding equations: (sec A - tan A) + (sec A + tan A) = 1/3 + 3 ⟹ 2 sec A = 10/3 ⟹ sec A = 5/3.
+Step 4: Subtracting equations: (sec A + tan A) - (sec A - tan A) = 3 - 1/3 ⟹ 2 tan A = 8/3 ⟹ tan A = 4/3. [Part ii]
+Step 5: Part (iii): sin A = tan A / sec A = (4/3) / (5/3) = 4/5. [Part iii]
+`,
     "steps": [
       "Part (i): We know sec² A - tan² A = 1 ⟹ (sec A - tan A)(sec A + tan A) = 1. [Algebraic identity]",
       "Substitute (sec A - tan A) = 1/3: (1/3)(sec A + tan A) = 1 ⟹ sec A + tan A = 3. [Part i]",

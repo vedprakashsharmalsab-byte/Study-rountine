@@ -290,7 +290,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 2 cm, DB = 4 cm, and AE = 3 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 6.00 cm, AC = 9.00 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 2 / 4 = 3 / EC [Substitution]
+Step 4: EC = (4 × 3) / 2 = 6.00 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 3 + 6.00 = 9.00 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -308,7 +318,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 3 cm, DB = 5 cm, and AE = 4 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 6.67 cm, AC = 10.67 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 3 / 5 = 4 / EC [Substitution]
+Step 4: EC = (5 × 4) / 3 = 6.67 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 4 + 6.67 = 10.67 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -326,7 +346,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 4 cm, DB = 6 cm, and AE = 5 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 7.50 cm, AC = 12.50 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 4 / 6 = 5 / EC [Substitution]
+Step 4: EC = (6 × 5) / 4 = 7.50 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 5 + 7.50 = 12.50 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -344,7 +374,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 5 cm, DB = 7 cm, and AE = 6 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 8.40 cm, AC = 14.40 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 5 / 7 = 6 / EC [Substitution]
+Step 4: EC = (7 × 6) / 5 = 8.40 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 6 + 8.40 = 14.40 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -362,7 +402,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 6 cm, DB = 8 cm, and AE = 7 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 9.33 cm, AC = 16.33 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 6 / 8 = 7 / EC [Substitution]
+Step 4: EC = (8 × 7) / 6 = 9.33 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 7 + 9.33 = 16.33 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -380,7 +430,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 7 cm, DB = 9 cm, and AE = 8 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 10.29 cm, AC = 18.29 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 7 / 9 = 8 / EC [Substitution]
+Step 4: EC = (9 × 8) / 7 = 10.29 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 8 + 10.29 = 18.29 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -398,7 +458,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 8 cm, DB = 10 cm, and AE = 9 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 11.25 cm, AC = 20.25 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 8 / 10 = 9 / EC [Substitution]
+Step 4: EC = (10 × 9) / 8 = 11.25 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 9 + 11.25 = 20.25 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -416,7 +486,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 9 cm, DB = 11 cm, and AE = 10 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 12.22 cm, AC = 22.22 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 9 / 11 = 10 / EC [Substitution]
+Step 4: EC = (11 × 10) / 9 = 12.22 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 10 + 12.22 = 22.22 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -434,7 +514,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 10 cm, DB = 12 cm, and AE = 11 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 13.20 cm, AC = 24.20 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 10 / 12 = 11 / EC [Substitution]
+Step 4: EC = (12 × 11) / 10 = 13.20 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 11 + 13.20 = 24.20 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -452,7 +542,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 11 cm, DB = 13 cm, and AE = 12 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 14.18 cm, AC = 26.18 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 11 / 13 = 12 / EC [Substitution]
+Step 4: EC = (13 × 12) / 11 = 14.18 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 12 + 14.18 = 26.18 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -470,7 +570,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 12 cm, DB = 14 cm, and AE = 13 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 15.17 cm, AC = 28.17 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 12 / 14 = 13 / EC [Substitution]
+Step 4: EC = (14 × 13) / 12 = 15.17 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 13 + 15.17 = 28.17 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -488,7 +598,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 13 cm, DB = 15 cm, and AE = 14 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 16.15 cm, AC = 30.15 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 13 / 15 = 14 / EC [Substitution]
+Step 4: EC = (15 × 14) / 13 = 16.15 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 14 + 16.15 = 30.15 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -506,7 +626,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 14 cm, DB = 16 cm, and AE = 15 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 17.14 cm, AC = 32.14 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 14 / 16 = 15 / EC [Substitution]
+Step 4: EC = (16 × 15) / 14 = 17.14 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 15 + 17.14 = 32.14 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -524,7 +654,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 15 cm, DB = 17 cm, and AE = 16 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 18.13 cm, AC = 34.13 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 15 / 17 = 16 / EC [Substitution]
+Step 4: EC = (17 × 16) / 15 = 18.13 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 16 + 18.13 = 34.13 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -542,7 +682,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "In △ABC, DE ∥ BC. If AD = 16 cm, DB = 18 cm, and AE = 17 cm, determine the length of EC and hence find AC.",
-    "answer": "EC = 19.13 cm, AC = 36.13 cm",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: AD/DB = AE/EC (BPT)
+Full Score: 2 / 2 Marks
+
+Step 1: In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]
+Step 2: By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]
+Step 3: Substitute given lengths: 16 / 18 = 17 / EC [Substitution]
+Step 4: EC = (18 × 17) / 16 = 19.13 cm [Cross multiplying]
+Step 5: Total length AC = AE + EC = 17 + 19.13 = 36.13 cm [Final Result with Units]
+`,
     "steps": [
       "In △ABC, line DE is parallel to side BC. [Given: DE ∥ BC]",
       "By Basic Proportionality Theorem: AD / DB = AE / EC [BPT Theorem 6.1]",
@@ -560,7 +710,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 1)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -580,7 +743,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 2)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -600,7 +776,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 3)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -620,7 +809,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 4)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -640,7 +842,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 5)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -660,7 +875,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 6)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -680,7 +908,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 7)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -700,7 +941,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 8)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -720,7 +974,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 9)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -740,7 +1007,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 10)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -760,7 +1040,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 11)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -780,7 +1073,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 12)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -800,7 +1106,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 13)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -820,7 +1139,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 14)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -840,7 +1172,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "Diagonals of a trapezium ABCD with AB ∥ DC intersect each other at the point O. Show that AO / BO = CO / DO. (Problem Variant 15)",
-    "answer": "AO / BO = CO / DO (Hence Proved)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: Basic Proportionality Theorem applied via parallel construction
+Full Score: 3 / 3 Marks
+
+Step 1: Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]
+Step 2: To Prove: AO / BO = CO / DO. [To Prove]
+Step 3: Construction: Through point O, draw line OE ∥ AB meeting AD at E. Since AB ∥ DC, OE ∥ DC also. [Construction]
+Step 4: In △ADC, OE ∥ DC. By Basic Proportionality Theorem: AE / ED = AO / OC ... (Equation 1) [By BPT in △ADC]
+Step 5: In △DAB, OE ∥ AB. By Basic Proportionality Theorem: ED / AE = DO / OB ⟹ AE / ED = BO / DO ... (Equation 2) [By BPT in △DAB]
+Step 6: From (1) and (2): AO / OC = BO / DO. [Equating equations]
+Step 7: Rearranging terms: AO / BO = CO / DO. [Hence Proved]
+
+(Hence Proved)`,
     "steps": [
       "Given: ABCD is a trapezium with AB ∥ DC. Diagonals AC and BD intersect at O. [Given]",
       "To Prove: AO / BO = CO / DO. [To Prove]",
@@ -860,7 +1205,20 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study 1: Street Light & Moving Pedestrian\n\nA girl of height 90 cm is walking away from the base of a lamp-post at a speed of 1.2 m/s. If the lamp is 3.6 m above the ground:\n(i) Find the distance walked by the girl in 4 seconds. [1 Mark]\n(ii) Find the length of her shadow after 4 seconds using triangle similarity. [2 Marks]\n(iii) State the similarity criterion used to compare the triangles. [1 Mark]",
-    "answer": "(i) Distance = 4.8 m; (ii) Shadow length = 1.6 m; (iii) AA Similarity Criterion",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: △ABE ∼ △CDE (AA Similarity) ⟹ AB/CD = BE/DE
+Full Score: 4 / 4 Marks
+
+Step 1: Part (i): Speed of girl = 1.2 m/s, time = 4 s. Distance BD = Speed × Time = 1.2 × 4 = 4.8 m. [Distance Formula: d = v × t]
+Step 2: Part (ii): Let AB be lamp-post (3.6 m = 360 cm), CD be girl (90 cm = 0.9 m). Let DE be shadow length = x metres. [Let x = shadow length]
+Step 3: In △ABE and △CDE: ∠B = ∠D = 90° (vertical to ground), and ∠E = ∠E (common angle). [Angles equal]
+Step 4: ∴ △ABE ∼ △CDE [By AA Similarity Criterion]
+Step 5: Corresponding sides ratio: AB / CD = BE / DE ⟹ 3.6 / 0.9 = (4.8 + x) / x [Proportional sides]
+Step 6: 4 = (4.8 + x) / x ⟹ 4x = 4.8 + x ⟹ 3x = 4.8 ⟹ x = 1.6 m. [Solving linear equation]
+Step 7: Part (iii): The similarity criterion used is the AA (Angle-Angle) Similarity Criterion. [Criterion Statement]
+Step 8: Final Answer: (i) 4.8 m, (ii) 1.6 m, (iii) AA Criterion. [Boxed Result]
+`,
     "steps": [
       "Part (i): Speed of girl = 1.2 m/s, time = 4 s. Distance BD = Speed × Time = 1.2 × 4 = 4.8 m. [Distance Formula: d = v × t]",
       "Part (ii): Let AB be lamp-post (3.6 m = 360 cm), CD be girl (90 cm = 0.9 m). Let DE be shadow length = x metres. [Let x = shadow length]",
@@ -881,7 +1239,15 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study 2: Suspension Bridge Cable Triangles\n\nAn engineer designs a suspension bridge where triangular truss supports are built on both sides of a vertical pillar. In △ABC, D and E are points on AB and AC such that DE ∥ BC. If AD = 4x - 3, DB = 3x - 1, AE = 8x - 7, and EC = 5x - 3:\n(i) State the theorem used to set up the relation. [1 Mark]\n(ii) Formulate the quadratic equation in x. [1 Mark]\n(iii) Solve for x and calculate the length of side AB. [2 Marks]",
-    "answer": "(i) Basic Proportionality Theorem (Thales Theorem); (ii) 2x² - x - 1 = 0; (iii) x = 1, AB = 3 units",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: AD/DB = AE/EC and AB = AD + DB
+Full Score: 4 / 4 Marks
+
+Step 1: Part (i): Since DE ∥ BC, by the Basic Proportionality Theorem (Thales' Theorem), a line drawn parallel to one side of a triangle divides the other two sides in the same ratio: AD / DB = AE / EC. [Theorem Identification]
+Step 2: Part (ii): Substituting the given lengths: (4x - 3) / (3x - 1) = (8x - 7) / (5x - 3). Cross-multiplying: (4x - 3)(5x - 3) = (3x - 1)(8x - 7) ⟹ 20x² - 27x + 9 = 24x² - 29x + 7. Rearranging: 4x² - 2x - 2 = 0 ⟹ 2x² - x - 1 = 0. [Quadratic Formulation]
+Step 3: Part (iii): Factoring the quadratic: 2x² - 2x + x - 1 = 0 ⟹ 2x(x - 1) + 1(x - 1) = 0 ⟹ (2x + 1)(x - 1) = 0. Since side lengths must be positive, x = 1 (rejecting x = -1/2). Now calculate side AB: AD = 4(1) - 3 = 1, DB = 3(1) - 1 = 2 ⟹ Total AB = AD + DB = 1 + 2 = 3 units. [Final Answer]
+`,
     "steps": [
       "Part (i): Since DE ∥ BC, by the Basic Proportionality Theorem (Thales' Theorem), a line drawn parallel to one side of a triangle divides the other two sides in the same ratio: AD / DB = AE / EC. [Theorem Identification]",
       "Part (ii): Substituting the given lengths: (4x - 3) / (3x - 1) = (8x - 7) / (5x - 3). Cross-multiplying: (4x - 3)(5x - 3) = (3x - 1)(8x - 7) ⟹ 20x² - 27x + 9 = 24x² - 29x + 7. Rearranging: 4x² - 2x - 2 = 0 ⟹ 2x² - x - 1 = 0. [Quadratic Formulation]",
@@ -897,7 +1263,19 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study 3: Aerial Drone Surveying Triangular Fields\n\nA drone maps two adjacent triangular farm plots △ABC and △AMP. Both plots share vertex A and are right-angled at B and M respectively.\n(i) Prove that △ABC ∼ △AMP. [2 Marks]\n(ii) If CA = 10 m, PA = 8 m, and BC = 6 m, find the length of boundary MP. [2 Marks]",
-    "answer": "(i) △ABC ∼ △AMP (AA Criterion); (ii) MP = 4.8 m",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: △ABC ∼ △AMP ⟹ BC/MP = CA/PA
+Full Score: 4 / 4 Marks
+
+Step 1: Part (i): In △ABC and △AMP: ∠ABC = ∠AMP = 90° [Given right angles]. ∠BAC = ∠MAP [Common angle ∠A].
+Step 2: Therefore, △ABC ∼ △AMP [By AA Similarity Criterion]. [Hence Proved Part i]
+Step 3: Part (ii): Since △ABC ∼ △AMP, corresponding sides are proportional: BC / MP = CA / PA. [Similar triangle property]
+Step 4: Substitute given lengths: 6 / MP = 10 / 8. [Substitution]
+Step 5: 10 × MP = 6 × 8 = 48 ⟹ MP = 48 / 10 = 4.8 m. [Calculation]
+Step 6: Final Answer: MP = 4.8 m. [Boxed Result]
+
+(Hence Proved)`,
     "steps": [
       "Part (i): In △ABC and △AMP: ∠ABC = ∠AMP = 90° [Given right angles]. ∠BAC = ∠MAP [Common angle ∠A].",
       "Therefore, △ABC ∼ △AMP [By AA Similarity Criterion]. [Hence Proved Part i]",
@@ -916,7 +1294,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study 4: Shadow of Tree & Flagpole at Same Instant\n\nAt a particular time of day, the sun's rays strike the ground at a uniform angle. A 6 m high vertical pole casts a shadow of 4 m on the ground, and at the same time, a nearby school building tower casts a shadow of 28 m:\n(i) Explain why the triangles formed by the objects and their shadows are similar. [1 Mark]\n(ii) Find the height of the school building tower. [2 Marks]\n(iii) What would be the shadow of a 1.5 m tall student at that instant? [1 Mark]",
-    "answer": "(i) Sun's angular elevation is identical, forming right triangles similar by AA; (ii) Tower height = 42 m; (iii) Student shadow = 1.0 m",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: Height / Shadow = Constant (at same instant of sun elevation)
+Full Score: 4 / 4 Marks
+
+Step 1: Part (i): Both the pole and tower stand vertically (90° with ground). The sun's angle of elevation is identical for both at the same instant. By AA Similarity, the triangles are similar. [AA Criterion]
+Step 2: Part (ii): Let H be height of tower. Height of Pole / Shadow of Pole = Height of Tower / Shadow of Tower. [Proportionality]
+Step 3: 6 / 4 = H / 28 ⟹ 1.5 = H / 28 ⟹ H = 28 × 1.5 = 42 m. [Calculation]
+Step 4: Part (iii): For student of height h = 1.5 m with shadow s: 6 / 4 = 1.5 / s ⟹ 1.5 / s = 1.5 ⟹ s = 1.0 m. [Calculation]
+Step 5: Final Answer: Tower height = 42 m, Student shadow = 1.0 m. [Boxed Result]
+`,
     "steps": [
       "Part (i): Both the pole and tower stand vertically (90° with ground). The sun's angle of elevation is identical for both at the same instant. By AA Similarity, the triangles are similar. [AA Criterion]",
       "Part (ii): Let H be height of tower. Height of Pole / Shadow of Pole = Height of Tower / Shadow of Tower. [Proportionality]",
@@ -934,7 +1322,19 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study 5: Triangular Roofing Truss Construction\n\nIn an architectural roof truss △PQR, a horizontal tie-beam ST is installed parallel to QR, intersecting PQ at S and PR at T. Given that PS = 3.5 cm, SQ = 4.5 cm, and PT = 7 cm:\n(i) Find the length of TR. [1.5 Marks]\n(ii) If QR = 16 cm, find the length of the tie-beam ST using similarity. [2 Marks]\n(iii) State the ratio of perimeters of △PST to △PQR. [0.5 Mark]",
-    "answer": "(i) TR = 9.0 cm; (ii) ST = 7.0 cm; (iii) Ratio = 7 : 16",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: PS/SQ = PT/TR and ST/QR = PS/PQ
+Full Score: 4 / 4 Marks
+
+Step 1: Part (i): In △PQR, ST ∥ QR. By BPT: PS / SQ = PT / TR ⟹ 3.5 / 4.5 = 7 / TR. [BPT Formula]
+Step 2: 7 / 9 = 7 / TR ⟹ TR = 9.0 cm. [Calculation]
+Step 3: Part (ii): In △PST and △PQR: ∠P = ∠P (common), ∠PST = ∠PQR (corresponding angles as ST ∥ QR).
+Step 4: ∴ △PST ∼ △PQR [By AA Similarity]
+Step 5: ST / QR = PS / PQ. Note PQ = PS + SQ = 3.5 + 4.5 = 8.0 cm. [Total side length]
+Step 6: ST / 16 = 3.5 / 8.0 ⟹ ST = 16 × (3.5 / 8) = 2 × 3.5 = 7.0 cm. [Calculation]
+Step 7: Part (iii): Perimeter ratio of similar triangles equals side ratio = PS / PQ = 3.5 / 8 = 7 / 16. [Ratio = 7:16]
+`,
     "steps": [
       "Part (i): In △PQR, ST ∥ QR. By BPT: PS / SQ = PT / TR ⟹ 3.5 / 4.5 = 7 / TR. [BPT Formula]",
       "7 / 9 = 7 / TR ⟹ TR = 9.0 cm. [Calculation]",
@@ -954,7 +1354,16 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study 6: Optical Reflection in Triangular Mirror System\n\nA laser beam in an optical experiment travels along a triangular path. In △ABC, line XY is drawn parallel to BC cutting AB at X and AC at Y such that AX = 1/3 AB. If perimeter of △AXY is 18 cm:\n(i) Show that △AXY ∼ △ABC. [1 Mark]\n(ii) Find the scale factor of △ABC with respect to △AXY. [1 Mark]\n(iii) Calculate the perimeter of △ABC and find ratio AY : YC. [2 Marks]",
-    "answer": "(i) △AXY ∼ △ABC by AA; (ii) Scale factor = 3; (iii) Perimeter = 54 cm, AY : YC = 1 : 2",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: XY ∥ BC ⟹ △AXY ∼ △ABC and Perimeter ratio = Side ratio
+Full Score: 4 / 4 Marks
+
+Step 1: Part (i): In △AXY and △ABC: XY ∥ BC ⟹ ∠AXY = ∠B and ∠AYX = ∠C (corresponding angles). ∴ △AXY ∼ △ABC [AA Similarity].
+Step 2: Part (ii): Scale factor = AB / AX. Given AX = (1/3) AB ⟹ AB / AX = 3. [Scale Factor = 3]
+Step 3: Part (iii): Perimeter(△ABC) = Scale Factor × Perimeter(△AXY) = 3 × 18 = 54 cm. [Perimeter Calculation]
+Step 4: Since AX / AB = 1/3, we have AX / XB = 1/2. By BPT: AY / YC = AX / XB = 1/2. ∴ Ratio AY : YC = 1 : 2. [Final Ratio]
+`,
     "steps": [
       "Part (i): In △AXY and △ABC: XY ∥ BC ⟹ ∠AXY = ∠B and ∠AYX = ∠C (corresponding angles). ∴ △AXY ∼ △ABC [AA Similarity].",
       "Part (ii): Scale factor = AB / AX. Given AX = (1/3) AB ⟹ AB / AX = 3. [Scale Factor = 3]",
@@ -971,7 +1380,24 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "State and Prove the Basic Proportionality Theorem (Thales Theorem).",
-    "answer": "AD/DB = AE/EC (Basic Proportionality Theorem Proven)",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area of Triangle = 1/2 × base × height
+Full Score: 5 / 5 Marks
+
+Step 1: Statement: If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, the other two sides are divided in the same ratio. [Theorem Statement: 1 Mark]
+Step 2: Given: In △ABC, a line DE parallel to side BC intersects AB at D and AC at E. [Given: 0.5 Mark]
+Step 3: To Prove: AD / DB = AE / EC. [To Prove: 0.5 Mark]
+Step 4: Construction: Join BE and CD. Draw DM ⊥ AC and EN ⊥ AB. [Construction: 1 Mark]
+Step 5: Proof: Area of △ADE = (1/2) × Base × Height = (1/2) × AD × EN. [Area formula]
+Step 6: Area of △BDE = (1/2) × DB × EN. [Same altitude EN]
+Step 7: ∴ Area(△ADE) / Area(△BDE) = [(1/2) × AD × EN] / [(1/2) × DB × EN] = AD / DB ... (Equation 1) [Ratio 1]
+Step 8: Similarly, Area(△ADE) = (1/2) × AE × DM, and Area(△DEC) = (1/2) × EC × DM.
+Step 9: ∴ Area(△ADE) / Area(△DEC) = [(1/2) × AE × DM] / [(1/2) × EC × DM] = AE / EC ... (Equation 2) [Ratio 2]
+Step 10: Note that △BDE and △DEC are on the same base DE and between the same parallels DE and BC. ∴ Area(△BDE) = Area(△DEC) ... (Equation 3) [Triangles on same base]
+Step 11: From (1), (2), and (3): AD / DB = AE / EC. [Hence Proved: 5 Marks]
+
+(Hence Proved)`,
     "steps": [
       "Statement: If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, the other two sides are divided in the same ratio. [Theorem Statement: 1 Mark]",
       "Given: In △ABC, a line DE parallel to side BC intersects AB at D and AC at E. [Given: 0.5 Mark]",
@@ -995,7 +1421,17 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "Prove that if one angle of a triangle is equal to one angle of the other triangle and the sides including these angles are proportional, then the two triangles are similar (SAS Similarity Criterion).",
-    "answer": "△ABC ∼ △DEF (SAS Similarity Criterion Proven)",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: SAS Congruence + Converse of BPT ⟹ SAS Similarity
+Full Score: 5 / 5 Marks
+
+Step 1: Statement: If one angle of a triangle is equal to one angle of another triangle and the sides including these angles are proportional, then the triangles are similar. [Statement]
+Step 2: Given: Two triangles △ABC and △DEF such that ∠A = ∠D and AB / DE = AC / DF (< 1). [Given]
+Step 3: To Prove: △ABC ∼ △DEF. [To Prove]
+Step 4: Construction: Cut DP = AB on DE and DQ = AC on DF. Join PQ. [Construction]
+
+(Hence Proved)`,
     "steps": [
       "Statement: If one angle of a triangle is equal to one angle of another triangle and the sides including these angles are proportional, then the triangles are similar. [Statement]",
       "Given: Two triangles △ABC and △DEF such that ∠A = ∠D and AB / DE = AC / DF (< 1). [Given]",
@@ -1017,7 +1453,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 3)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",
@@ -1037,7 +1479,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 4)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",
@@ -1057,7 +1505,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 5)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",
@@ -1077,7 +1531,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 6)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",
@@ -1097,7 +1557,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 7)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",
@@ -1117,7 +1583,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 8)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",
@@ -1137,7 +1609,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 9)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",
@@ -1157,7 +1635,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 10)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",
@@ -1177,7 +1661,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 11)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",
@@ -1197,7 +1687,13 @@ export const CH6_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "In △ABC, line segment XY is parallel to AC and divides the triangle into two parts of equal area. Find the ratio AX / AB. (HOTS Proof Variant 12)",
-    "answer": "AX / AB = (2 - √2) / 2 = 1 - 1/√2",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: Area ratio = (Side ratio)² and AX/AB = 1 - BX/AB
+Full Score: 5 / 5 Marks
+
+Step 1: Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]
+`,
     "steps": [
       "Given: XY ∥ AC in △ABC. Area(△BXY) = Area(trapezium XAC Y) = (1/2) Area(△ABC). [Given: Equal Area]",
       "In △BXY and △BAC: ∠B = ∠B [Common angle], ∠BXY = ∠A [Corresponding angles as XY ∥ AC].",

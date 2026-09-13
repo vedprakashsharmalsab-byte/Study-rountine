@@ -151,7 +151,15 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A 1.5 m tall person stands 28.5 m away from a chimney. The angle of elevation of the top from the person's eyes is 45°. Find the height of the chimney.",
-    "answer": "30 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: Let AE = eye-level height = h [Given in Problem]
+Step 2: Step 2: In △ADE: tan45° = AE/DE → 1 = AE/28.5 → AE = 28.5 m [Trigonometric Definition/Identity]
+Step 3: Step 3: Total height = AE + observer height = 28.5 + 1.5 = 30 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AE = eye-level height = h [Given in Problem]",
       "Step 2: In △ADE: tan45° = AE/DE → 1 = AE/28.5 → AE = 28.5 m [Trigonometric Definition/Identity]",
@@ -168,7 +176,14 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "The angle of elevation of the top of a tower from a point on the ground 40 m away is 30°. Find the height of the tower.",
-    "answer": "40/√3 = 40√3/3 ≈ 23.1 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: tan30° = h/40 → 1/√3 = h/40 → h = 40/√3 = 40√3/3 m [Trigonometric Definition/Identity]
+Step 2: Step 2: Always rationalize: 40/√3 × √3/√3 = 40√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: tan30° = h/40 → 1/√3 = h/40 → h = 40/√3 = 40√3/3 m [Trigonometric Definition/Identity]",
       "Step 2: Always rationalize: 40/√3 × √3/√3 = 40√3/3 m. [Final Result with Units]"
@@ -184,7 +199,15 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "Two poles of height 6 m and 11 m stand vertically on a plane ground. If the distance between their feet is 12 m, find the distance between their tops.",
-    "answer": "13 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: Vertical difference = 11 − 6 = 5 m [Given in Problem]
+Step 2: Step 2: Horizontal distance = 12 m [Trigonometric Definition/Identity]
+Step 3: Step 3: Distance between tops = √(5² + 12²) = √(25+144) = √169 = 13 m. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: Vertical difference = 11 − 6 = 5 m [Given in Problem]",
       "Step 2: Horizontal distance = 12 m [Trigonometric Definition/Identity]",
@@ -201,7 +224,14 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "A string of length 12 m makes an angle of 30° with the vertical. Find the height at which the kite is flying.",
-    "answer": "6√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: The string makes 30° with vertical, so 60° with horizontal [Given in Problem]
+Step 2: Step 2: Height = string × cos30° (angle from vertical) = 12 × (√3/2) = 6√3 m. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: The string makes 30° with vertical, so 60° with horizontal [Given in Problem]",
       "Step 2: Height = string × cos30° (angle from vertical) = 12 × (√3/2) = 6√3 m. [Trigonometric Definition/Identity]"
@@ -217,7 +247,15 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "The angle of elevation of the top of a tower from two points P and Q at distances of a and b (a > b) from the base, on the same side, are complementary. Prove that the height = √(ab).",
-    "answer": "Let angles be θ and 90°−θ. tan θ = h/a and tan(90°−θ) = cot θ = h/b. Multiplying: tan θ × cot θ = h²/(ab) → 1 = h²/(ab) → h = √(ab). ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Step 1: Complementary angles: if one is θ, the other is 90°−θ [Given in Problem]
+Step 2: Step 2: The product of tan equations gives h²= ab. [Trigonometric Definition/Identity]
+
+(Hence Proved)`,
     "steps": [
       "Step 1: Complementary angles: if one is θ, the other is 90°−θ [Given in Problem]",
       "Step 2: The product of tan equations gives h²= ab. [Trigonometric Definition/Identity]"
@@ -233,7 +271,15 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 60 m away from the base of a tree, the angle of elevation of the top of the tree is 30°. Find the height of the tree.",
-    "answer": "h = 60 × tan30° = 60/√3 = 20√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Step 1: State given values and applicable theorem/formula. [Given in Problem]
+Step 2: Step 2: Right triangle formed with base = 60 m, angle = 30°. tan30° = h/60 → h = 60 × (1/√3) = 60√3/3 = 20√3 ≈ 34.64 m. [Trigonometric Definition/Identity]
+Step 3: Step 3: Final statement: h = 60 × tan30° = 60/√3 = 20√3 m [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
       "Step 2: Right triangle formed with base = 60 m, angle = 30°. tan30° = h/60 → h = 60 × (1/√3) = 60√3/3 = 20√3 ≈ 34.64 m. [Trigonometric Definition/Identity]",
@@ -250,7 +296,15 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A kite is flying at a height of 60 m above the ground and the string makes 60° with the ground. Find the length of the string and horizontal distance of the kite from the person.",
-    "answer": "String = 40√3 m; horizontal distance = 20√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Step 1: State given values and applicable theorem/formula. [Given in Problem]
+Step 2: Step 2: sin60° = 60/string → √3/2 = 60/l → l = 120/√3 = 40√3 m. cos60° = base/string → 1/2 = base/(40√3) → base = 20√3 m. [Trigonometric Definition/Identity]
+Step 3: Step 3: Final statement: String = 40√3 m; horizontal distance = 20√3 m [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
       "Step 2: sin60° = 60/string → √3/2 = 60/l → l = 120/√3 = 40√3 m. cos60° = base/string → 1/2 = base/(40√3) → base = 20√3 m. [Trigonometric Definition/Identity]",
@@ -267,7 +321,15 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point P on the ground the angle of elevation of the top of a 10 m tall building is 30°. A flag is hoisted at the top of the building and the angle of elevation of the top of the flag staff from P is 45°. Find the length of the flag staff.",
-    "answer": "Flagstaff = 10(√3 − 1) m",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Step 1: State given values and applicable theorem/formula. [Given in Problem]
+Step 2: Step 2: From P: tan30° = 10/d → d = 10√3. tan45° = (10+f)/d → 1 = (10+f)/(10√3) → 10+f = 10√3 → f = 10√3 − 10 = 10(√3−1) ≈ 7.32 m. [Trigonometric Definition/Identity]
+Step 3: Step 3: Final statement: Flagstaff = 10(√3 − 1) m [Final Result with Units]
+`,
     "steps": [
       "Step 1: State given values and applicable theorem/formula. [Given in Problem]",
       "Step 2: From P: tan30° = 10/d → d = 10√3. tan45° = (10+f)/d → 1 = (10+f)/(10√3) → 10+f = 10√3 → f = 10√3 − 10 = 10(√3−1) ≈ 7.32 m. [Trigonometric Definition/Identity]",
@@ -284,7 +346,16 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "A straight highway leads to the foot of a tower. A man standing at the top sees a car approaching the foot. He observes the angle of depression changes from 30° to 60°. Show that 2/3 of the original distance to the tower is covered between the two observations.",
-    "answer": "Fraction covered = 2/3",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Step 1: Let the height of the tower be h. At 30° angle of depression: horizontal distance d₁ = h / tan 30° = h / (1/√3) = h√3. [Trigonometric Ratio]
+Step 2: Step 2: At 60° angle of depression: horizontal distance d₂ = h / tan 60° = h / √3. [Trigonometric Ratio]
+Step 3: Step 3: Distance covered between the two observations = d₁ − d₂ = h√3 − h/√3 = (3h − h)/√3 = 2h/√3. [Distance Subtraction]
+Step 4: Step 4: Fraction of initial distance covered = (d₁ − d₂) / d₁ = (2h/√3) / (h√3) = 2/3. Hence proved. [Final Result]
+`,
     "steps": [
       "Step 1: Let the height of the tower be h. At 30° angle of depression: horizontal distance d₁ = h / tan 30° = h / (1/√3) = h√3. [Trigonometric Ratio]",
       "Step 2: At 60° angle of depression: horizontal distance d₂ = h / tan 60° = h / √3. [Trigonometric Ratio]",
@@ -302,7 +373,14 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "The shadow of a tower standing on level ground is found to be 40 m longer when the sun's altitude is 30° than when it is 60°. Find the height of the tower.",
-    "answer": "h = 20√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Step 1: At 60°: tan60° = h/d₁ → d₁ = h/√3 [Trigonometric Definition/Identity]
+Step 2: Step 2: At 30°: tan30° = h/d₂ → d₂ = h√3. d₂ − d₁ = h√3 − h/√3 = 40 → 2h/√3 = 40 → h = 20√3 m. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: At 60°: tan60° = h/d₁ → d₁ = h/√3 [Trigonometric Definition/Identity]",
       "Step 2: At 30°: tan30° = h/d₂ → d₂ = h√3. d₂ − d₁ = h√3 − h/√3 = 40 → 2h/√3 = 40 → h = 20√3 m. [Trigonometric Definition/Identity]"
@@ -318,7 +396,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From the top of a 7 m high building, the angle of elevation of the top of a cable tower is 60° and the angle of depression of its foot is 45°. Determine the height of the tower.",
-    "answer": "Height = 7(√3 + 1) m ≈ 19.12 m",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Step 1: Let building AB = 7 m, tower CD [Given in Problem]
+Step 2: Step 2: Horizontal distance BE = x [Trigonometric Definition/Identity]
+Step 3: Step 3: From depression angle: tan45° = AB/BE → x = 7 m [Trigonometric Definition/Identity]
+Step 4: Step 4: From elevation angle: tan60° = CE/BE → CE = 7√3 m [Trigonometric Definition/Identity]
+Step 5: Step 5: Total tower = CE + ED = 7√3 + 7 = 7(√3+1) m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let building AB = 7 m, tower CD [Given in Problem]",
       "Step 2: Horizontal distance BE = x [Trigonometric Definition/Identity]",
@@ -337,7 +425,14 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "Proof",
     "question": "If the angle of elevation of a cloud from a point h metres above a lake is α and the angle of depression of its reflection is β, prove H = h(tanβ + tanα)/(tanβ − tanα).",
-    "answer": "Let cloud height above water = x, horizontal distance = y. From observer: tanα = (x−h)/y → y = (x−h)/tanα. tanβ = (x+h)/y → y = (x+h)/tanβ. Equating: (x−h)/tanα = (x+h)/tanβ → x(tanβ−tanα) = h(tanβ+tanα) → x = h(tanβ+tanα)/(tanβ−tanα). ∎",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M Proof)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Step 1: The reflection is as far below the water surface as the cloud is above it [Given in Problem]
+Step 2: Step 2: Draw two right triangles sharing the same horizontal distance y. [Trigonometric Definition/Identity]
+`,
     "steps": [
       "Step 1: The reflection is as far below the water surface as the cloud is above it [Given in Problem]",
       "Step 2: Draw two right triangles sharing the same horizontal distance y. [Trigonometric Definition/Identity]"
@@ -353,7 +448,15 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "Two ships are sailing in the sea on either side of a lighthouse. Angles of depression of the ships from the top of the lighthouse are 30° and 45° respectively. If the height of the lighthouse is 100 m, find the distance between the two ships.",
-    "answer": "Distance = 100(√3 + 1) m ≈ 273.2 m",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Step 1: Ship 1 (30°): d₁ = 100/tan30° = 100√3 m [Trigonometric Definition/Identity]
+Step 2: Step 2: Ship 2 (45°): d₂ = 100/tan45° = 100 m [Trigonometric Definition/Identity]
+Step 3: Step 3: Ships on opposite sides → total = 100√3 + 100 = 100(√3+1) m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Ship 1 (30°): d₁ = 100/tan30° = 100√3 m [Trigonometric Definition/Identity]",
       "Step 2: Ship 2 (45°): d₂ = 100/tan45° = 100 m [Trigonometric Definition/Identity]",
@@ -370,7 +473,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 120 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 69.28 m (120√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 120 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 120. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 120 ⟹ h = 120/√3 = 120√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 120√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 120 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -388,7 +501,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 125 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 125√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 125 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 125. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 125 ⟹ h = 125√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 125√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 125 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -406,7 +529,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 130 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 75.06 m (130√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 130 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 130. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 130 ⟹ h = 130/√3 = 130√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 130√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 130 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -424,7 +557,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 135 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 135√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 135 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 135. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 135 ⟹ h = 135√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 135√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 135 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -442,7 +585,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 140 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 80.83 m (140√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 140 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 140. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 140 ⟹ h = 140/√3 = 140√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 140√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 140 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -460,7 +613,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 145 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 145√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 145 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 145. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 145 ⟹ h = 145√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 145√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 145 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -478,7 +641,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 150 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 86.60 m (150√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 150 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 150. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 150 ⟹ h = 150/√3 = 150√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 150√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 150 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -496,7 +669,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 155 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 155√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 155 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 155. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 155 ⟹ h = 155√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 155√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 155 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -514,7 +697,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 160 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 92.38 m (160√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 160 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 160. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 160 ⟹ h = 160/√3 = 160√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 160√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 160 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -532,7 +725,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 165 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 165√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 165 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 165. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 165 ⟹ h = 165√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 165√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 165 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -550,7 +753,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 170 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 98.15 m (170√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 170 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 170. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 170 ⟹ h = 170/√3 = 170√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 170√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 170 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -568,7 +781,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 175 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 175√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 175 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 175. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 175 ⟹ h = 175√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 175√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 175 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -586,7 +809,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 180 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 103.92 m (180√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 180 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 180. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 180 ⟹ h = 180/√3 = 180√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 180√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 180 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -604,7 +837,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 185 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 185√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 185 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 185. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 185 ⟹ h = 185√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 185√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 185 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -622,7 +865,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 190 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 109.70 m (190√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 190 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 190. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 190 ⟹ h = 190/√3 = 190√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 190√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 190 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -640,7 +893,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 195 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 195√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 195 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 195. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 195 ⟹ h = 195√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 195√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 195 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -658,7 +921,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 200 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 115.47 m (200√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 200 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 200. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 200 ⟹ h = 200/√3 = 200√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 200√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 200 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -676,7 +949,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 205 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 205√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 205 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 205. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 205 ⟹ h = 205√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 205√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 205 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -694,7 +977,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 210 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 121.24 m (210√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 210 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 210. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 210 ⟹ h = 210/√3 = 210√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 210√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 210 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -712,7 +1005,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 215 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 215√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 215 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 215. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 215 ⟹ h = 215√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 215√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 215 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -730,7 +1033,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 220 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 127.02 m (220√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 220 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 220. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 220 ⟹ h = 220/√3 = 220√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 220√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 220 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -748,7 +1061,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 225 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 225√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 225 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 225. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 225 ⟹ h = 225√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 225√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 225 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -766,7 +1089,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 230 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 132.79 m (230√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 230 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 230. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 230 ⟹ h = 230/√3 = 230√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 230√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 230 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -784,7 +1117,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 235 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 235√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 235 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 235. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 235 ⟹ h = 235√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 235√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 235 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -802,7 +1145,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 240 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 138.56 m (240√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 240 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 240. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 240 ⟹ h = 240/√3 = 240√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 240√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 240 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -820,7 +1173,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 245 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 245√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 245 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 245. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 245 ⟹ h = 245√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 245√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 245 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -838,7 +1201,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 250 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 144.34 m (250√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 250 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 250. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 250 ⟹ h = 250/√3 = 250√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 250√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 250 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -856,7 +1229,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 255 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 255√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 255 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 255. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 255 ⟹ h = 255√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 255√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 255 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -874,7 +1257,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 260 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 150.11 m (260√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 260 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 260. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 260 ⟹ h = 260/√3 = 260√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 260√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 260 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -892,7 +1285,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 265 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 265√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 265 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 265. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 265 ⟹ h = 265√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 265√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 265 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -910,7 +1313,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 270 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 155.88 m (270√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 270 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 270. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 270 ⟹ h = 270/√3 = 270√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 270√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 270 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -928,7 +1341,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 275 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 275√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 275 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 275. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 275 ⟹ h = 275√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 275√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 275 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -946,7 +1369,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 3,
     "type": "SA",
     "question": "From a point on the ground 280 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 161.66 m (280√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section C (3M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 3 / 3 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 280 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 280. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 280 ⟹ h = 280/√3 = 280√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 280√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 280 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -964,7 +1397,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 285 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 285√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 285 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 285. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 285 ⟹ h = 285√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 285√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 285 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -982,7 +1425,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 5,
     "type": "LA",
     "question": "From a point on the ground 290 m away from the foot of a vertical tower, the angle of elevation of the top is 30°. Find the height of the tower.",
-    "answer": "Height = 167.43 m (290√3/3 m)",
+    "answer": `CBSE Topper Answer Sheet
+Section D (5M LA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 5 / 5 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 290 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]
+Step 3: tan 30° = AB / BC ⟹ tan 30° = h / 290. [Trigonometric Definition/Identity]
+Step 4: 1/√3 = h / 290 ⟹ h = 290/√3 = 290√3/3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 290√3/3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 290 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 30°. [Algebraic Simplification]",
@@ -1000,7 +1453,17 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 2,
     "type": "SA",
     "question": "From a point on the ground 295 m away from the foot of a vertical tower, the angle of elevation of the top is 60°. Find the height of the tower.",
-    "answer": "Height = 295√3 m",
+    "answer": `CBSE Topper Answer Sheet
+Section B (2M SA)
+Governing Formula: tan θ = Opposite / Adjacent
+Full Score: 2 / 2 Marks
+
+Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 295 m. [Given in Problem]
+Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]
+Step 3: tan 60° = AB / BC ⟹ tan 60° = h / 295. [Trigonometric Definition/Identity]
+Step 4: √3 = h / 295 ⟹ h = 295√3 m. [Algebraic Simplification]
+Step 5: Concluding Statement: The height of the tower is 295√3 m. [Final Result with Units]
+`,
     "steps": [
       "Step 1: Let AB be the vertical tower of height h and C be the point on ground with BC = 295 m. [Given in Problem]",
       "Step 2: In right △ABC, ∠B = 90° and ∠ACB = 60°. [Algebraic Simplification]",
@@ -1018,7 +1481,18 @@ export const CH9_QUESTIONS: VaultQuestion[] = [
     "marks": 4,
     "type": "Case Study",
     "question": "Case Study: Air Traffic Control Tower & Approaching Airplane\n\nAn air traffic controller at an airport observes an approaching airplane. At an initial instant, the angle of elevation of the airplane from the radar station on the ground is 60°. After a flight of 30 seconds at a constant altitude of 3000√3 metres, the angle of elevation reduces to 30°:\n(i) Draw a schematic diagram showing the positions of the plane. [1 Mark]\n(ii) Find the horizontal distance travelled by the plane in 30 seconds. [2 Marks]\n(iii) Calculate the speed of the airplane in km/h. [1 Mark]",
-    "answer": "(i) Diagram with two right triangles at height 3000√3 m; (ii) Distance = 6000 m; (iii) Speed = 720 km/h",
+    "answer": `CBSE Topper Answer Sheet
+Section E (Case Study) (4M Case Study)
+Governing Formula: tan θ = Opp/Adj and Speed (km/h) = Speed (m/s) × 18/5
+Full Score: 4 / 4 Marks
+
+Step 1: Part (i): Let A and B be positions of plane with height h = 3000√3 m. Station is at O. ∠AOC = 60° and ∠BOD = 30°.
+Step 2: Part (ii): In right △OCA: tan 60° = AC / OC ⟹ √3 = 3000√3 / OC ⟹ OC = 3000 m. [First distance]
+Step 3: In right △ODB: tan 30° = BD / OD ⟹ 1/√3 = 3000√3 / OD ⟹ OD = 3000√3 × √3 = 9000 m. [Second distance]
+Step 4: Distance travelled CD = OD - OC = 9000 - 3000 = 6000 m. [Distance = 6000 m]
+Step 5: Part (iii): Speed = Distance / Time = 6000 m / 30 s = 200 m/s.
+Step 6: Speed in km/h = 200 × (18/5) = 40 × 18 = 720 km/h. [Final Speed = 720 km/h]
+`,
     "steps": [
       "Part (i): Let A and B be positions of plane with height h = 3000√3 m. Station is at O. ∠AOC = 60° and ∠BOD = 30°.",
       "Part (ii): In right △OCA: tan 60° = AC / OC ⟹ √3 = 3000√3 / OC ⟹ OC = 3000 m. [First distance]",

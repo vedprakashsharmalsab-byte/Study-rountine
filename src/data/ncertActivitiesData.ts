@@ -1469,7 +1469,7 @@ export const NCERT_SCIENCE_ACTIVITIES: NCERTActivity[] = [
     chemicalEquationsOrFormulas: [
       {
         name: "Double Displacement & Precipitation",
-        equation: "\text{Na}_2\text{SO}_4(aq) + \text{BaCl}_2(aq) \to \text{BaSO}_4(s)\downarrow + 2\text{NaCl}(aq)",
+        equation: "\\text{Na}_2\\text{SO}_4(aq) + \\text{BaCl}_2(aq) \to \\text{BaSO}_4(s)\downarrow + 2\\text{NaCl}(aq)",
         note: "Exchange of ions (Ba²⁺ and SO₄²⁻) forms the insoluble white precipitate of BaSO₄."
       }
     ],
