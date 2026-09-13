@@ -25,17 +25,25 @@ import {
   X,
   FileImage,
   Flame,
-  ExternalLink
+  ExternalLink,
+  FlaskConical,
+  Heart,
+  Brain,
+  Activity
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import {
   SCIENCE_DIAGRAMS_MASTER,
   NCERT_PHYSICS_DIAGRAMS_VAULT,
   SCIENCE_MASTER_PHOTO_SHEETS,
+  NCERT_BIOLOGY_DIAGRAMS_VAULT,
+  NCERT_ACTIVITIES_DIAGRAMS_VAULT,
   type ScienceDiagram,
   type VisualDiagramAsset,
   type MasterPhotoSheet,
-  type DiagramCategory
+  type DiagramCategory,
+  type BiologyDiagramItem,
+  type LabActivityDiagramItem
 } from "@/data/scienceDiagramsData";
 
 interface ScienceDiagramsViewProps {
@@ -56,7 +64,15 @@ export default function ScienceDiagramsView({
   }, []);
 
   // View mode: 'gallery' (29 visual diagrams), 'sheets' (15 master photo sheets), or 'interactive' (12 solvers)
-  const [viewMode, setViewMode] = useState<"gallery" | "sheets" | "interactive">("gallery");
+  const [viewMode, setViewMode] = useState<"gallery" | "biology" | "activities" | "sheets" | "interactive">("gallery");
+
+  // Biology filters
+  const [bioCategory, setBioCategory] = useState<string>("all");
+  const [bioSearch, setBioSearch] = useState<string>("");
+
+  // Lab Activities filters
+  const [activitySubject, setActivitySubject] = useState<string>("all");
+  const [activitySearch, setActivitySearch] = useState<string>("");
 
   // Gallery filters
   const [galleryCategory, setGalleryCategory] = useState<string>("all");
@@ -118,6 +134,55 @@ export default function ScienceDiagramsView({
     { id: "Human Eye & Dispersion", label: "Human Eye & Dispersion", count: 7 },
     { id: "Circuits & Magnetism", label: "Circuits & Magnetism", count: 5 }
   ];
+
+  const BIO_CATEGORIES = [
+    { id: "all", label: "All 10 Biology Diagrams", count: 10 },
+    { id: "Digestive & Nutrition", label: "Digestive System", count: 1 },
+    { id: "Respiration & Circulation", label: "Respiration & Heart", count: 2 },
+    { id: "Excretion & Nephron", label: "Excretion & Nephron", count: 1 },
+    { id: "Nervous & Control", label: "Neuron, Brain & Reflex", count: 2 },
+    { id: "Reproduction & Flowers", label: "Flowers & Reproduction", count: 3 },
+    { id: "Genetics & Heredity", label: "Mendel Crosses", count: 1 }
+  ];
+
+  const ACTIVITY_CATEGORIES = [
+    { id: "all", label: "All 16 Lab Activities", count: 16 },
+    { id: "Chemistry", label: "Chemistry Experiments", count: 12 },
+    { id: "Biology", label: "Biology Experiments", count: 4 }
+  ];
+
+  const filteredBiologyDiagrams = useMemo(() => {
+    return NCERT_BIOLOGY_DIAGRAMS_VAULT.filter((diag) => {
+      if (bioCategory !== "all" && diag.category !== bioCategory) return false;
+      if (bioSearch.trim()) {
+        const q = bioSearch.toLowerCase();
+        return (
+          diag.title.toLowerCase().includes(q) ||
+          diag.chapterName.toLowerCase().includes(q) ||
+          diag.workingMechanism.toLowerCase().includes(q) ||
+          diag.essentialLabels.some(l => l.name.toLowerCase().includes(q))
+        );
+      }
+      return true;
+    });
+  }, [bioCategory, bioSearch]);
+
+  const filteredActivities = useMemo(() => {
+    return NCERT_ACTIVITIES_DIAGRAMS_VAULT.filter((act) => {
+      if (activitySubject !== "all" && act.subject !== activitySubject) return false;
+      if (activitySearch.trim()) {
+        const q = activitySearch.toLowerCase();
+        return (
+          act.title.toLowerCase().includes(q) ||
+          act.activityNo.toLowerCase().includes(q) ||
+          act.chapterName.toLowerCase().includes(q) ||
+          act.keyObservation.toLowerCase().includes(q) ||
+          act.chemicalOrBioPrinciple.toLowerCase().includes(q)
+        );
+      }
+      return true;
+    });
+  }, [activitySubject, activitySearch]);
 
   const SHEET_CATEGORIES = [
     { id: "all", label: "All 15 Master Sheets", count: 15 },
@@ -231,28 +296,32 @@ export default function ScienceDiagramsView({
             </p>
           </div>
 
-          <div className="flex items-center gap-3 w-full lg:w-auto">
-            <div className={`p-4 rounded-2xl border text-center flex-1 sm:flex-none ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
-              <div className="text-2xl font-black text-cyan-400">29</div>
-              <div className="text-[10px] uppercase font-bold text-slate-400">Visual Diagrams</div>
+          <div className="flex items-center gap-2.5 w-full lg:w-auto flex-wrap">
+            <div className={`p-3 rounded-2xl border text-center flex-1 sm:flex-none min-w-[80px] ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
+              <div className="text-xl font-black text-cyan-400">29</div>
+              <div className="text-[9px] uppercase font-bold text-slate-400">Physics</div>
             </div>
-            <div className={`p-4 rounded-2xl border text-center flex-1 sm:flex-none ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
-              <div className="text-2xl font-black text-purple-400">15</div>
-              <div className="text-[10px] uppercase font-bold text-slate-400">Master Sheets</div>
+            <div className={`p-3 rounded-2xl border text-center flex-1 sm:flex-none min-w-[80px] ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
+              <div className="text-xl font-black text-emerald-400">10</div>
+              <div className="text-[9px] uppercase font-bold text-slate-400">Biology</div>
             </div>
-            <div className={`p-4 rounded-2xl border text-center flex-1 sm:flex-none ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
-              <div className="text-2xl font-black text-emerald-400">100%</div>
-              <div className="text-[10px] uppercase font-bold text-slate-400">CBSE Criteria</div>
+            <div className={`p-3 rounded-2xl border text-center flex-1 sm:flex-none min-w-[80px] ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
+              <div className="text-xl font-black text-amber-400">16</div>
+              <div className="text-[9px] uppercase font-bold text-slate-400">Activities</div>
+            </div>
+            <div className={`p-3 rounded-2xl border text-center flex-1 sm:flex-none min-w-[80px] ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
+              <div className="text-xl font-black text-purple-400">15</div>
+              <div className="text-[9px] uppercase font-bold text-slate-400">Sheets</div>
             </div>
           </div>
         </div>
 
-        {/* VIEW MODE TOGGLE SWITCH */}
-        <div className="mt-6 pt-6 border-t border-current/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-          <div className={`p-1 rounded-2xl border inline-flex items-center gap-1 flex-wrap ${isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"}`}>
+        {/* VIEW MODE TOGGLE SWITCH — Comprehensive Science Vault */}
+        <div className="mt-6 pt-6 border-t border-current/10 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+          <div className={`p-1.5 rounded-2xl border inline-flex items-center gap-1.5 flex-wrap ${isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"}`}>
             <button
               onClick={() => setViewMode("gallery")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 viewMode === "gallery"
                   ? "bg-cyan-500 text-slate-950 font-black shadow-md"
                   : isDark
@@ -261,15 +330,40 @@ export default function ScienceDiagramsView({
               }`}
             >
               <FileImage className="w-4 h-4" />
-              <span>NCERT Visual Gallery</span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${viewMode === "gallery" ? "bg-slate-950/20 text-slate-950" : "bg-cyan-500/20 text-cyan-400"}`}>
-                29
-              </span>
+              <span>⚛️ Physics (29)</span>
+            </button>
+
+            <button
+              onClick={() => setViewMode("biology")}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                viewMode === "biology"
+                  ? "bg-emerald-500 text-slate-950 font-black shadow-md"
+                  : isDark
+                  ? "text-slate-400 hover:text-white"
+                  : "text-slate-600 hover:text-slate-950"
+              }`}
+            >
+              <Dna className="w-4 h-4" />
+              <span>🧬 Biology Anatomy & Genetics (10)</span>
+            </button>
+
+            <button
+              onClick={() => setViewMode("activities")}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                viewMode === "activities"
+                  ? "bg-amber-500 text-slate-950 font-black shadow-md"
+                  : isDark
+                  ? "text-slate-400 hover:text-white"
+                  : "text-slate-600 hover:text-slate-950"
+              }`}
+            >
+              <FlaskConical className="w-4 h-4" />
+              <span>🧪 NCERT Lab Activities (16)</span>
             </button>
 
             <button
               onClick={() => setViewMode("sheets")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 viewMode === "sheets"
                   ? "bg-purple-500 text-slate-950 font-black shadow-md"
                   : isDark
@@ -278,15 +372,12 @@ export default function ScienceDiagramsView({
               }`}
             >
               <FileImage className="w-4 h-4" />
-              <span>📸 15 Master Study Sheets</span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${viewMode === "sheets" ? "bg-slate-950/20 text-slate-950" : "bg-purple-500/20 text-purple-400"}`}>
-                15
-              </span>
+              <span>📸 15 Master Sheets</span>
             </button>
 
             <button
               onClick={() => setViewMode("interactive")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 viewMode === "interactive"
                   ? "bg-cyan-500 text-slate-950 font-black shadow-md"
                   : isDark
@@ -295,16 +386,17 @@ export default function ScienceDiagramsView({
               }`}
             >
               <Zap className="w-4 h-4" />
-              <span>Interactive Solvers</span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${viewMode === "interactive" ? "bg-slate-950/20 text-slate-950" : "bg-cyan-500/20 text-cyan-400"}`}>
-                12
-              </span>
+              <span>🔬 Interactive Solvers (12)</span>
             </button>
           </div>
 
           <span className="text-xs text-slate-400 font-mono">
             {viewMode === "gallery"
-              ? `Displaying ${filteredGalleryDiagrams.length} of 29 cropped NCERT images`
+              ? `Displaying ${filteredGalleryDiagrams.length} of 29 Physics diagrams`
+              : viewMode === "biology"
+              ? `Displaying ${filteredBiologyDiagrams.length} of 10 Biology Master diagrams`
+              : viewMode === "activities"
+              ? `Displaying ${filteredActivities.length} of 16 NCERT Lab setups`
               : viewMode === "sheets"
               ? `Displaying ${filteredSheets.length} of 15 authentic master sheets`
               : `Displaying ${filteredInteractiveDiagrams.length} interactive case studies`}

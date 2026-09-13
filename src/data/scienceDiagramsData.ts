@@ -1314,3 +1314,866 @@ export const SCIENCE_MASTER_PHOTO_SHEETS: MasterPhotoSheet[] = [
   }
 ];
 
+
+
+// =========================================================================
+// 100% COMPREHENSIVE NCERT BIOLOGY DIAGRAMS VAULT (10 HIGH-YIELD MASTER DIAGRAMS)
+// Strictly Aligned with CBSE Board 2026-27 Examination Specifications (Code 086)
+// =========================================================================
+
+export interface BiologyDiagramItem {
+  id: string;
+  title: string;
+  category: "Digestive & Nutrition" | "Respiration & Circulation" | "Excretion & Nephron" | "Nervous & Control" | "Reproduction & Flowers" | "Genetics & Heredity";
+  chapterNo: number;
+  chapterName: string;
+  ncertFigureRef: string;
+  boardMarks: number;
+  boardFrequency: string;
+  essentialLabels: { name: string; function: string; examTrap?: string }[];
+  workingMechanism: string;
+  drawingSteps: string[];
+  markingScheme: string[];
+  commonMistakes: string[];
+}
+
+export const NCERT_BIOLOGY_DIAGRAMS_VAULT: BiologyDiagramItem[] = [
+  {
+    id: "bio_alimentary_canal",
+    title: "Human Alimentary Canal (Human Digestive System)",
+    category: "Digestive & Nutrition",
+    chapterNo: 5,
+    chapterName: "Life Processes",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 5.6 (Page 86)",
+    boardMarks: 5,
+    boardFrequency: "98% Board Frequency (CBSE 2024, 2023, 2020, 2019, 2018)",
+    essentialLabels: [
+      { name: "Mouth / Buccal Cavity", function: "Ingestion of food; teeth masticate, salivary amylase breaks starch into maltose.", examTrap: "Do not forget Salivary Glands." },
+      { name: "Oesophagus (Food Pipe)", function: "Transports food bolus to stomach via rhythmic contraction waves (peristalsis).", examTrap: "No digestion occurs in oesophagus." },
+      { name: "Stomach", function: "Secretes gastric juice containing HCl (acidic pH 1.8), Pepsin (digests proteins), and Mucus (protects lining).", examTrap: "Sphincter muscles regulate food exit to duodenum." },
+      { name: "Liver & Gall Bladder", function: "Liver secretes bile; gall bladder stores and concentrates bile. Bile salts emulsify large fat globules into smaller droplets.", examTrap: "Bile contains NO digestive enzymes, only bile salts & pigments." },
+      { name: "Pancreas", function: "Secretes pancreatic juice containing Trypsin (proteins), Lipase (emulsified fats), and Amylase (carbohydrates).", examTrap: "Pancreas operates under alkaline pH created by bile." },
+      { name: "Small Intestine", function: "Site of complete digestion of carbs, fats, and proteins. Finger-like villi maximize surface area for nutrient absorption into capillaries.", examTrap: "Longest part of alimentary canal (approx. 6m), coiled in abdomen." },
+      { name: "Large Intestine & Anus", function: "Absorbs water from unabsorbed food residue; rectum stores faeces; anal sphincter regulates egestion.", examTrap: "Anal sphincter failure causes uncontrolled defecation." }
+    ],
+    workingMechanism: "Food is chewed and mixed with saliva (ptyalin/amylase). Swallowed through peristalsis into stomach where HCl kills microbes and activates pepsinogen to pepsin. Chyme enters duodenum where bile from liver neutralizes acid and emulsifies fats. Pancreatic trypsin and lipase digest proteins and fats. Intestinal enzymes complete digestion into glucose, amino acids, and fatty acids/glycerol. Villi absorb nutrients into blood and lymph (lacteals).",
+    drawingSteps: [
+      "1. Draw J-shaped stomach on left side below diaphragm.",
+      "2. Add triangular liver on upper right with small gall bladder sac below it.",
+      "3. Sketch leaf-shaped pancreas in the C-loop of duodenum.",
+      "4. Draw tightly coiled small intestine in center enclosed by frame of large intestine (colon).",
+      "5. Terminate with rectum and anal opening at bottom; add clear label pointers with ruler."
+    ],
+    markingScheme: [
+      "Correct anatomical layout & organ proportions (+2 Marks)",
+      "Accurate labeling of Stomach, Liver, Pancreas, Small & Large Intestines (+2 Marks)",
+      "Directional arrows or brief functional note (+1 Mark)"
+    ],
+    commonMistakes: [
+      "Drawing liver on left side instead of right side of human body.",
+      "Connecting bile duct directly to stomach instead of duodenum (small intestine).",
+      "Confusing bile production (Liver) with bile storage (Gall Bladder)."
+    ]
+  },
+  {
+    id: "bio_respiratory_system",
+    title: "Human Respiratory System",
+    category: "Respiration & Circulation",
+    chapterNo: 5,
+    chapterName: "Life Processes",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 5.9 (Page 90)",
+    boardMarks: 5,
+    boardFrequency: "92% Board Frequency (CBSE 2024, 2022 Term 2, 2020, 2017)",
+    essentialLabels: [
+      { name: "Nostrils & Nasal Passage", function: "Air intake; fine hairs and mucus filter dust and warm the incoming air." },
+      { name: "Pharynx & Larynx", function: "Common passage for air & food; larynx (voice box) houses vocal cords; epiglottis prevents food choking." },
+      { name: "Trachea (Windpipe)", function: "Passes air to bronchi; supported by C-shaped cartilaginous rings.", examTrap: "Rings of cartilage prevent collapse of trachea when air is absent." },
+      { name: "Bronchi & Bronchioles", function: "Trachea bifurcates into left and right primary bronchi, subdividing into tree-like network of bronchioles." },
+      { name: "Alveoli (Alveolar Sacs)", function: "Balloon-like structures with monolayer thin walls and extensive capillary network for diffusion of O2 and CO2.", examTrap: "Extensive surface area (approx. 80 m²) maximizes gas exchange." },
+      { name: "Diaphragm & Rib Cage", function: "Muscular floor of thoracic cavity; contracts and flattens during inhalation, relaxing dome-shaped during exhalation." }
+    ],
+    workingMechanism: "Inhalation: Diaphragm flattens and rib cage lifts outward, increasing chest cavity volume, reducing pressure so air rushes into lungs. Exhalation: Diaphragm relaxes upward into dome shape, ribs descend, reducing volume and forcing air out. In alveoli, O2 diffuses across thin alveolar-capillary membrane into blood binding to haemoglobin, while CO2 in blood plasma diffuses out into alveolar air.",
+    drawingSteps: [
+      "1. Draw trachea with parallel lines and visible C-shaped rings of cartilage.",
+      "2. Fork trachea into two bronchi entering left and right lung lobes.",
+      "3. Draw lung contours (left lung slightly smaller with cardiac notch).",
+      "4. Branch bronchioles like trees ending in grape-like alveolar clusters.",
+      "5. Draw curved diaphragm base at bottom of lungs."
+    ],
+    markingScheme: [
+      "Trachea with rings of cartilage and branching bronchi (+1.5 Marks)",
+      "Lobes of lungs with alveolar sac magnification (+1.5 Marks)",
+      "Diaphragm and correct labeling of 4 key organs (+2 Marks)"
+    ],
+    commonMistakes: [
+      "Omitting C-shaped rings of cartilage on trachea.",
+      "Drawing lungs as empty balloons without internal bronchiole branching.",
+      "Drawing diaphragm flat during exhalation (it must be dome-shaped)."
+    ]
+  },
+  {
+    id: "bio_heart_double_circulation",
+    title: "Sectional View of Human Heart & Schematic Double Circulation",
+    category: "Respiration & Circulation",
+    chapterNo: 5,
+    chapterName: "Life Processes",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 5.10 & 5.11 (Page 91-93)",
+    boardMarks: 5,
+    boardFrequency: "99% Board Frequency (CBSE 2024, 2023, 2022, 2020, 2019, 2018)",
+    essentialLabels: [
+      { name: "Right Atrium", function: "Receives deoxygenated blood from upper and lower body tissues via Vena Cava.", examTrap: "Thinner muscular wall than ventricles." },
+      { name: "Right Ventricle", function: "Pumps deoxygenated blood to lungs via Pulmonary Artery.", examTrap: "Pumps to nearby lungs, so wall is thinner than left ventricle." },
+      { name: "Left Atrium", function: "Receives oxygenated blood returning from lungs via Pulmonary Veins." },
+      { name: "Left Ventricle", function: "Pumps oxygenated blood to the entire body at high hydrostatic pressure via the Systemic Aorta.", examTrap: "Has the thickest muscular wall in the entire heart." },
+      { name: "Interventricular Septum", function: "Complete muscular dividing wall preventing mixing of oxygen-rich and carbon dioxide-rich blood.", examTrap: "Allows high energy efficiency needed for warm-blooded birds & mammals." },
+      { name: "Atrioventricular Valves (Tricuspid & Bicuspid)", function: "Flaps that ensure unidirectional blood flow from atria to ventricles and prevent backflow during systole." },
+      { name: "Pulmonary Artery & Aorta", function: "Pulmonary artery carries deoxygenated blood; Aorta carries oxygenated blood under highest systemic pressure." }
+    ],
+    workingMechanism: "Double Circulation: Blood passes through the heart TWICE during each complete cycle. 1. Pulmonary Circulation: Deoxygenated blood from Right Ventricle → Pulmonary Artery → Lungs (oxygenated) → Pulmonary Vein → Left Atrium. 2. Systemic Circulation: Oxygenated blood from Left Ventricle → Aorta → Body Organs → Vena Cava (deoxygenated) → Right Atrium. Complete separation ensures maximum oxygen delivery to meet high metabolic demands.",
+    drawingSteps: [
+      "1. Draw outer muscular contour with a pointed apex tilted to the left.",
+      "2. Draw central dividing septum separating right and left halves.",
+      "3. Divide each side into upper atrium and lower ventricle with one-way cuspid valves.",
+      "4. Draw emerging vessels: Pulmonary Artery from RV crossing behind Aorta from LV.",
+      "5. Show Vena Cava entering RA and 4 Pulmonary Veins entering LA; use directional blood flow arrows."
+    ],
+    markingScheme: [
+      "Clear 4-chambered separation with interventricular septum (+2 Marks)",
+      "Thick left ventricular wall correctly distinguished from right (+1 Mark)",
+      "Accurate labeling of 4 chambers + Aorta + Vena Cava + Valves (+2 Marks)"
+    ],
+    commonMistakes: [
+      "Reversing left and right: In anatomical diagrams, the viewer's LEFT is the heart's RIGHT.",
+      "Drawing pulmonary artery with oxygenated blood (it carries DEOXYGENATED blood).",
+      "Making ventricle walls thin like atria (ventricles must have thick muscular walls)."
+    ]
+  },
+  {
+    id: "bio_excretion_nephron",
+    title: "Excretory System in Human Beings & Structure of a Nephron",
+    category: "Excretion & Nephron",
+    chapterNo: 5,
+    chapterName: "Life Processes",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 5.13 & 5.14 (Page 96-97)",
+    boardMarks: 5,
+    boardFrequency: "97% Board Frequency (CBSE 2024, 2023, 2020, 2019, 2018)",
+    essentialLabels: [
+      { name: "Kidneys (Left & Right)", function: "Bean-shaped retroperitoneal organs; filter urea, uric acid, and excess salts from blood." },
+      { name: "Renal Artery & Renal Vein", function: "Renal artery brings oxygenated blood containing nitrogenous wastes; Renal vein carries cleaned blood away." },
+      { name: "Ureters", function: "Muscular tubes carrying urine drops from kidneys to urinary bladder via peristalsis." },
+      { name: "Urinary Bladder & Urethra", function: "Muscular reservoir under nervous control for storing urine; urethra expels urine out." },
+      { name: "Glomerulus & Bowman's Capsule (Nephron)", function: "Tuft of blood capillaries enclosed by cup-shaped capsule; site of high-pressure Ultrafiltration.", examTrap: "Proteins and blood cells do NOT pass into filtrate." },
+      { name: "Tubular Part & Loop of Henle", function: "Selective reabsorption of useful substances: glucose, amino acids, salts, and major portion of water." },
+      { name: "Collecting Duct", function: "Gathers concentrated urine from multiple nephrons and drains into renal pelvis and ureter." }
+    ],
+    workingMechanism: "1. Ultrafiltration: Glomerular capillary pressure forces water, glucose, urea, uric acid, and mineral ions across podocyte slits into Bowman's capsule creating primary filtrate (180 L/day). 2. Selective Reabsorption: As filtrate traverses convoluted tubules and Henle's loop, all glucose, amino acids, and water (depending on body hydration and ADH) are actively reabsorbed into peritubular capillaries. 3. Tubular Secretion: Excess K+, H+, and creatinine are secreted into filtrate forming final hypertonic urine (1-2 L/day).",
+    drawingSteps: [
+      "Excretory System: 1. Draw two bean-shaped kidneys (left kidney slightly higher than right). 2. Draw Renal Artery (red) and Vena Cava (blue). 3. Connect ureters from kidney hilum to pear-shaped bladder. 4. Add urethra opening.",
+      "Nephron: 1. Draw cup-shaped Bowman's capsule with glomerulus knot inside. 2. Draw zigzag proximal convoluted tubule (PCT). 3. Extend hairpin Loop of Henle down and up. 4. Draw distal convoluted tubule (DCT) joining vertical Collecting Duct."
+    ],
+    markingScheme: [
+      "Kidney pair with renal vessels and ureters to bladder (+2 Marks)",
+      "Nephron structure: Bowman's capsule + Glomerulus + Convoluted tubules (+2 Marks)",
+      "Urine flow arrows and correct terminology (+1 Mark)"
+    ],
+    commonMistakes: [
+      "Drawing kidneys at same level: Left kidney is positioned slightly higher than right due to liver on right.",
+      "Showing proteins in glomerular filtrate: Healthy glomerulus never filters blood cells or large plasma proteins.",
+      "Labeling collecting duct as ureter."
+    ]
+  },
+  {
+    id: "bio_neuron_reflex_arc",
+    title: "Structure of a Neuron & Reflex Arc Pathway",
+    category: "Nervous & Control",
+    chapterNo: 6,
+    chapterName: "Control and Coordination",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 6.1 & 6.2 (Page 101-102)",
+    boardMarks: 4,
+    boardFrequency: "95% Board Frequency (CBSE 2024, 2023, 2022, 2019, 2018)",
+    essentialLabels: [
+      { name: "Dendrites", function: "Branch-like projections acquiring external chemical/electrical stimuli from receptors." },
+      { name: "Cyton / Cell Body", function: "Contains nucleus and cytoplasm; converts stimulus into electrical nerve impulse." },
+      { name: "Axon", function: "Long cylindrical fiber conducting electrical impulse away from cyton to nerve ending.", examTrap: "May be insulated with myelin sheath." },
+      { name: "Nerve Ending / Axon Terminal", function: "Terminal buttons where electrical impulse triggers release of neurotransmitter chemicals across synapse." },
+      { name: "Synapse", function: "Microscopic physical gap between axon terminal of one neuron and dendrite of next neuron.", examTrap: "Conduction across synapse is purely CHEMICAL and UNIDIRECTIONAL." },
+      { name: "Reflex Arc Pathway", function: "Receptor (skin) → Sensory Neuron → Spinal Cord (Relay Neuron) → Motor Neuron → Effector (arm muscle).", examTrap: "Brain is informed afterwards; response is instantaneous at spinal cord level." }
+    ],
+    workingMechanism: "Stimulus detected by receptors generates chemical activity in dendrite tip, initiating electrical action potential through cyton and axon. At axon terminus, electrical pulse triggers vesicle release of neurotransmitters (e.g., acetylcholine) into synaptic cleft. Chemical diffuses across gap to bind receptors on next dendrite, generating fresh electrical impulse. In reflex arc, sensory neuron synapses directly with relay interneuron in spinal cord grey matter, activating motor neuron to cause rapid muscle contraction without brain processing delay.",
+    drawingSteps: [
+      "Neuron: 1. Draw star-shaped cell body with prominent central nucleus. 2. Radiate tree-like dendrites from periphery. 3. Extend single long cylindrical axon with sausage-like myelin sheaths. 4. Finish with branching nerve endings.",
+      "Reflex Arc: 1. Draw cross-section of spinal cord (H-shaped butterfly grey matter). 2. Draw sensory neuron from skin receptor through dorsal root ganglion into dorsal horn. 3. Connect relay neuron. 4. Draw motor neuron exiting ventral horn to biceps muscle."
+    ],
+    markingScheme: [
+      "Neuron structural layout with Dendrite, Cyton, Axon, Nerve Ending (+2 Marks)",
+      "Reflex arc sequence arrows: Receptor → Sensory → Spinal Cord/Relay → Motor → Effector (+2 Marks)"
+    ],
+    commonMistakes: [
+      "Reversing direction of nerve impulse: Impulse travels ONLY from dendrite to axon terminal, never reverse.",
+      "Claiming reflex actions are processed by cerebrum before action: Reflex arc loops in spinal cord first.",
+      "Omitting synapse gap between two neurons."
+    ]
+  },
+  {
+    id: "bio_human_brain",
+    title: "Human Brain & Central Nervous System Regions",
+    category: "Nervous & Control",
+    chapterNo: 6,
+    chapterName: "Control and Coordination",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 6.3 (Page 103)",
+    boardMarks: 4,
+    boardFrequency: "88% Board Frequency (CBSE 2024, 2020, 2017)",
+    essentialLabels: [
+      { name: "Forebrain (Cerebrum)", function: "Largest region; center of conscious thought, memory, reasoning, voluntary muscle control, and sensory perception (sight, hearing, smell).", examTrap: "Sensory and motor association areas reside here." },
+      { name: "Cranium & Meninges", function: "Bony skull (cranium) and three protective fluid-filled membranes (meninges) cushioning brain against mechanical shocks." },
+      { name: "Midbrain", function: "Coordinates involuntary visual and auditory reflex actions, such as pupil constriction and head turning." },
+      { name: "Hindbrain — Cerebellum", function: "Coordinates precision of voluntary movements, motor learning, and maintains posture, body equilibrium, and balance.", examTrap: "Walking in straight line, riding bicycle, picking pencil = Cerebellum." },
+      { name: "Hindbrain — Pons", function: "Relays signals between cortex and cerebellum; assists in regulation of breathing rhythm." },
+      { name: "Hindbrain — Medulla Oblongata", function: "Controls critical autonomic involuntary reflexes: heartbeat, blood pressure, peristalsis, salivation, swallowing, vomiting, coughing." }
+    ],
+    workingMechanism: "The brain processes sensory inputs from afferent nerves and coordinates voluntary and involuntary homeostatic responses. Cerebrum integrates sensory cues with stored memories for decision making. Cerebellum fine-tunes motor commands from cerebrum to achieve smooth motor balance. Medulla controls life-sustaining visceral functions autonomously.",
+    drawingSteps: [
+      "1. Draw outer protective cranium dome.",
+      "2. Sketch highly convoluted folds (gyri and sulci) of cerebrum occupying upper 70% of brain.",
+      "3. Draw C-shaped corpus callosum arch beneath cerebrum.",
+      "4. Add cauliflower-like cerebellum at rear lower skull.",
+      "5. Sketch brainstem in front of cerebellum: upper swelling = Pons, lower cylinder = Medulla merging into spinal cord."
+    ],
+    markingScheme: [
+      "Three distinct regions: Forebrain, Midbrain, Hindbrain (+1.5 Marks)",
+      "Correct placement of Cerebrum, Cerebellum, Medulla, and Cranium (+2 Marks)",
+      "Neat labeling and fluid protection indication (+0.5 Mark)"
+    ],
+    commonMistakes: [
+      "Confusing Cerebrum (thinking, voluntary) with Cerebellum (balance, motor coordination).",
+      "Assigning blood pressure control to cerebrum (it is regulated by Medulla).",
+      "Drawing brainstem without distinct Pons and Medulla sections."
+    ]
+  },
+  {
+    id: "bio_flower_anatomy",
+    title: "Longitudinal Section (LS) of a Flower",
+    category: "Reproduction & Flowers",
+    chapterNo: 7,
+    chapterName: "How do Organisms Reproduce?",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 7.7 (Page 121)",
+    boardMarks: 4,
+    boardFrequency: "96% Board Frequency (CBSE 2024, 2023, 2020, 2019, 2018)",
+    essentialLabels: [
+      { name: "Sepals (Calyx)", function: "Green leaf-like outermost whorl protecting inner floral whorls during bud stage." },
+      { name: "Petals (Corolla)", function: "Brightly colored, scented whorl attracting insect pollinators." },
+      { name: "Stamen (Male Reproductive Organ)", function: "Comprises Filament (stalk) and Anther (bilobed sac producing yellow microspores/pollen grains).", examTrap: "Stamen = Anther + Filament." },
+      { name: "Carpel / Pistil (Female Reproductive Organ)", function: "Comprises Stigma (sticky landing pad for pollen), Style (elongated neck), and Ovary (swollen basal chamber).", examTrap: "Carpel = Stigma + Style + Ovary." },
+      { name: "Ovary & Ovules", function: "Ovary contains ovules housing the female germ-cell (egg). After fertilization, ovary develops into Fruit and ovules into Seeds.", examTrap: "Ovary becomes Fruit; Ovule becomes Seed." }
+    ],
+    workingMechanism: "Pistil/carpel is centrally positioned, surrounded by ring of stamens, then petals, and outermost sepals. Flowers can be bisexual (mustard, Hibiscus with both stamens and carpel) or unisexual (papaya, watermelon with either stamens or carpel). Pollen transferred from anther to stigma via pollination germinates a pollen tube for fertilization.",
+    drawingSteps: [
+      "1. Draw basal pedicel and swollen receptacle (thalamus).",
+      "2. Draw central flask-shaped pistil: swollen ovary at base, slender style neck, lobed sticky stigma at top.",
+      "3. Place circular ovules inside ovary cavity.",
+      "4. Draw stamens arching outward on both sides: long filaments topped with bilobed anthers.",
+      "5. Surround with showy curved petals and basal green sepals."
+    ],
+    markingScheme: [
+      "Flask-shaped pistil with internal ovule chamber (+1.5 Marks)",
+      "Stamens with distinct filament and anther lobes (+1 Mark)",
+      "Complete labeling of 4 whorls: Sepal, Petal, Stamen, Carpel (+1.5 Marks)"
+    ],
+    commonMistakes: [
+      "Labeling ovule as seed before fertilization: It is an OVULE until fertilization occurs.",
+      "Drawing anther without bilobed morphology.",
+      "Confusing male part (Stamen) with female part (Carpel/Pistil)."
+    ]
+  },
+  {
+    id: "bio_pollen_germination",
+    title: "Germination of Pollen on Stigma & Double Fertilization",
+    category: "Reproduction & Flowers",
+    chapterNo: 7,
+    chapterName: "How do Organisms Reproduce?",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 7.8 (Page 122)",
+    boardMarks: 4,
+    boardFrequency: "94% Board Frequency (CBSE 2024, 2023, 2022, 2018)",
+    essentialLabels: [
+      { name: "Pollen Grain", function: "Haploid microspore carrying two male gametes landed on receptive stigma surface." },
+      { name: "Stigma", function: "Secretes sugary nutrient solution stimulating pollen tube growth." },
+      { name: "Pollen Tube", function: "Elongated chemotropic tube burrowing through style tissues toward ovarian cavity.", examTrap: "Grows in response to chemicals in style (chemotropism)." },
+      { name: "Male Germ Cells (Gametes)", function: "Two haploid male sperm nuclei moving down the pollen tube." },
+      { name: "Ovary", function: "Swollen base sheltering ovule and embryo sac." },
+      { name: "Female Germ Cell (Egg Cell)", function: "Haploid egg inside embryo sac fusing with first male gamete to form diploid zygote (Syngamy)." }
+    ],
+    workingMechanism: "Pollination deposits compatible pollen onto sticky stigma. Sugars on stigma trigger pollen grain germination, sending a single pollen tube down the style toward the ovary guided by chemotropic gradient. Pollen tube penetrates ovule through micropyle pore, discharging two male gametes into embryo sac. One male gamete fuses with egg cell (Syngamy → 2n Zygote), while the second fuses with two polar nuclei (Triple Fusion → 3n Endosperm). This is known as Double Fertilization.",
+    drawingSteps: [
+      "1. Draw upper flat lobed stigma with 2-3 round pollen grains resting on it.",
+      "2. Draw one pollen grain protruding a continuous long tube down the center of style.",
+      "3. Show two small dot-like male gamete nuclei inside the tube.",
+      "4. Draw swollen ovary at base enclosing ovule with central egg cell.",
+      "5. Show pollen tube tip entering ovule opening (micropyle)."
+    ],
+    markingScheme: [
+      "Continuous pollen tube traversing style into ovule (+2 Marks)",
+      "Male gametes and female germ-cell labeled (+1 Mark)",
+      "Accurate labeling of Pollen, Stigma, Style, Ovary, Ovule (+1 Mark)"
+    ],
+    commonMistakes: [
+      "Drawing pollen tube stopping inside style without reaching ovule.",
+      "Drawing multiple pollen tubes entering the same ovule (only one tube enters).",
+      "Forgetting to show male gametes inside the pollen tube."
+    ]
+  },
+  {
+    id: "bio_human_reproduction",
+    title: "Human Male & Female Reproductive Systems",
+    category: "Reproduction & Flowers",
+    chapterNo: 7,
+    chapterName: "How do Organisms Reproduce?",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 7.10 & 7.11 (Page 124-126)",
+    boardMarks: 5,
+    boardFrequency: "97% Board Frequency (CBSE 2024, 2023, 2020, 2019, 2018)",
+    essentialLabels: [
+      { name: "Testes & Scrotum (Male)", function: "Testes produce sperms and testosterone; scrotum hangs outside abdominal cavity to maintain 2-2.5°C lower temperature essential for spermatogenesis.", examTrap: "Scrotum thermoregulation is a frequent 1-mark question." },
+      { name: "Vas Deferens & Urethra (Male)", function: "Vas deferens transports sperms from testes to common urethra; passes through prostate and seminal vesicles." },
+      { name: "Seminal Vesicles & Prostate Gland (Male)", function: "Add alkaline lubricating fluid containing fructose to nourish sperms and aid mobility, forming semen." },
+      { name: "Ovaries (Female)", function: "Produce female gamete (one egg per month alternately) and female hormones: estrogen and progesterone." },
+      { name: "Oviduct / Fallopian Tube (Female)", function: "Ciliated tubes transporting egg from ovary to uterus; SITE OF FERTILIZATION.", examTrap: "Fertilization happens in Fallopian tube, NOT uterus." },
+      { name: "Uterus & Cervix (Female)", function: "Pear-shaped muscular womb where fertilized blastocyst implants; placenta nourishes embryo; cervix connects to vagina." }
+    ],
+    workingMechanism: "Male: Sperms produced in seminiferous tubules pass via vas deferens, receive seminal/prostatic secretions, and are ejaculated through urethra. Female: Ovary releases mature ovum into Fallopian tube (ovulation). If copulation occurs, sperms travel up uterus into Fallopian tube where one sperm fertilizes ovum forming zygote. Zygote undergoes cleavages into blastocyst, implanting into vascular uterine endometrium. Placenta provides glucose, O2, and waste removal between mother and fetus.",
+    drawingSteps: [
+      "Female: 1. Draw central inverted pear-shaped muscular uterus with thick lining. 2. Extend two horn-like Fallopian tubes laterally with fringed fimbriae tips. 3. Draw oval ovaries near fimbriae. 4. Terminate lower uterus in narrow cervix and tubular vagina.",
+      "Male: 1. Draw oval testis suspended in scrotum. 2. Loop vas deferens up around urinary bladder. 3. Add seminal vesicles and prostate at base of bladder. 4. Continue through penis as urethra."
+    ],
+    markingScheme: [
+      "Accurate symmetry and organ layout (+2 Marks)",
+      "Site of fertilization (Fallopian tube) and sperm formation (Testis) marked (+1.5 Marks)",
+      "Correct labeling of 5 key components (+1.5 Marks)"
+    ],
+    commonMistakes: [
+      "Labeling uterus as site of fertilization (Fertilization occurs in Fallopian Tube/Oviduct).",
+      "Omitting scrotum and placing testes fully inside abdominal cavity.",
+      "Confusing ureter (urinary system) with vas deferens (reproductive system)."
+    ]
+  },
+  {
+    id: "bio_mendel_crosses",
+    title: "Mendel's Monohybrid & Dihybrid Genetic Crosses",
+    category: "Genetics & Heredity",
+    chapterNo: 8,
+    chapterName: "Heredity",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 8.2, 8.3 & 8.4 (Page 130-133)",
+    boardMarks: 5,
+    boardFrequency: "98% Board Frequency (CBSE 2024, 2023, 2022, 2020, 2019, 2018)",
+    essentialLabels: [
+      { name: "Parental Generation (P)", function: "Pure-breeding homozygous parents: TT (Tall) × tt (Dwarf); or RRYY (Round Yellow) × rryy (Wrinkled Green)." },
+      { name: "F1 Generation (First Filial)", function: "All heterozygous offspring exhibiting DOMINANT trait: Tt (100% Tall); or RrYy (100% Round Yellow).", examTrap: "Recessive allele remains present but masked in F1." },
+      { name: "F2 Punnett Square (Monohybrid)", function: "Self-pollination of F1 (Tt × Tt) produces Genotypes: 1 TT : 2 Tt : 1 tt (1:2:1) and Phenotypes: 3 Tall : 1 Dwarf (3:1).", examTrap: "Phenotypic ratio = 3:1; Genotypic ratio = 1:2:1." },
+      { name: "F2 Punnett Square (Dihybrid)", function: "Self-pollination of F1 (RrYy × RrYy) yields 16 combinations with 4 distinct phenotypes: 9 Round Yellow : 3 Round Green : 3 Wrinkled Yellow : 1 Wrinkled Green (9:3:3:1).", examTrap: "Proves Mendel's Law of Independent Assortment." }
+    ],
+    workingMechanism: "1. Law of Segregation: Alleles for each gene segregate during gamete formation so each gamete carries only one allele. 2. Law of Dominance: In heterozygous state (Tt), dominant allele 'T' expresses while recessive allele 't' is masked. 3. Law of Independent Assortment: In dihybrid cross, inheritance of seed shape (R/r) is completely independent of inheritance of seed color (Y/y), giving rise to new recombinant phenotypes (Round Green & Wrinkled Yellow) in F2 generation.",
+    drawingSteps: [
+      "Monohybrid: 1. Write Parents: TT × tt. 2. Gametes: T and t. 3. F1: Tt (Tall). 4. Selfing: Tt × Tt. 5. Draw 2×2 Punnett square showing TT, Tt, Tt, tt.",
+      "Dihybrid: 1. Write Parents: RRYY × rryy. 2. F1: RrYy. 3. Selfing gametes: RY, Ry, rY, ry. 4. Construct 4×4 (16-box) Punnett checkerboard and tally 9:3:3:1 phenotypes."
+    ],
+    markingScheme: [
+      "Correct representation of Parental and F1 alleles (+1.5 Marks)",
+      "Punnett square with accurate genotypic combinations (+2 Marks)",
+      "Explicit statement of Phenotypic & Genotypic ratios (+1.5 Marks)"
+    ],
+    commonMistakes: [
+      "Mixing up Phenotypic ratio (3:1) and Genotypic ratio (1:2:1).",
+      "Incorrect gamete combinations in dihybrid cross (must be RY, Ry, rY, ry).",
+      "Using different letters for same character (e.g., using 'D' for dwarf instead of 't')."
+    ]
+  }
+];
+
+// =========================================================================
+// 100% COMPREHENSIVE NCERT LAB ACTIVITIES & EXPERIMENTS VAULT (16 CORE SETUPS)
+// Covers all practical-based questions, apparatus setups, observations, and reactions
+// =========================================================================
+
+export interface LabActivityDiagramItem {
+  id: string;
+  activityNo: string;
+  title: string;
+  chapterNo: number;
+  chapterName: string;
+  subject: "Chemistry" | "Biology" | "Physics";
+  apparatusSetup: string;
+  procedureSummary: string;
+  chemicalOrBioPrinciple: string;
+  keyObservation: string;
+  chemicalEquation?: string;
+  inferenceAndConclusion: string;
+  frequentBoardQuestions: { question: string; answer: string }[];
+  examinerTraps: string[];
+  marksAllotted: number;
+}
+
+export const NCERT_ACTIVITIES_DIAGRAMS_VAULT: LabActivityDiagramItem[] = [
+  {
+    id: "act_1_1_magnesium_ribbon",
+    activityNo: "Activity 1.1",
+    title: "Burning of Magnesium Ribbon in Air",
+    chapterNo: 1,
+    chapterName: "Chemical Reactions and Equations",
+    subject: "Chemistry",
+    apparatusSetup: "Pair of tongs, Bunsen burner / spirit lamp, Watch glass, Sandpaper, Magnesium ribbon (3-4 cm long).",
+    procedureSummary: "Clean a piece of magnesium ribbon by rubbing with sandpaper. Hold it with tongs and ignite it using a burner. Collect the white ash on a watch glass.",
+    chemicalOrBioPrinciple: "Combination reaction and Exothermic Oxidation: Magnesium metal reacts vigorously with atmospheric oxygen to form magnesium oxide.",
+    keyObservation: "Magnesium ribbon burns with a dazzling, brilliant white flame and changes into a white powder (ash).",
+    chemicalEquation: "2Mg(s) + O₂(g) → 2MgO(s) + Heat + Light",
+    inferenceAndConclusion: "A chemical reaction occurred as indicated by change in state, emission of intense light/heat, and formation of a new basic metal oxide (MgO).",
+    frequentBoardQuestions: [
+      {
+        question: "Why should a magnesium ribbon be cleaned with sandpaper before burning in air?",
+        answer: "Magnesium reacts slowly with air to form a protective layer of basic magnesium carbonate/oxide [MgCO₃·Mg(OH)₂] on its surface. Cleaning removes this unreactive layer so pure magnesium can come into direct contact with oxygen and ignite smoothly."
+      },
+      {
+        question: "What is the nature of the white ash formed? Test with litmus.",
+        answer: "When white MgO powder is dissolved in water, it forms Magnesium Hydroxide: MgO + H₂O → Mg(OH)₂. It turns red litmus blue, proving it is a basic oxide."
+      }
+    ],
+    examinerTraps: [
+      "Do NOT look directly at the dazzling white flame without sunglasses/eye protection.",
+      "Writing MgO as acidic: All electropositive metal oxides are basic in nature."
+    ],
+    marksAllotted: 3
+  },
+  {
+    id: "act_1_2_lead_nitrate_ki",
+    activityNo: "Activity 1.2",
+    title: "Precipitation Reaction: Lead Nitrate + Potassium Iodide",
+    chapterNo: 1,
+    chapterName: "Chemical Reactions and Equations",
+    subject: "Chemistry",
+    apparatusSetup: "Two clean test tubes, Dropper, Aqueous Lead(II) Nitrate solution [Pb(NO₃)₂], Aqueous Potassium Iodide solution [KI].",
+    procedureSummary: "Take about 2 mL of colorless lead nitrate solution in a test tube. Add a few drops of colorless potassium iodide solution and shake gently.",
+    chemicalOrBioPrinciple: "Double Displacement and Precipitation Reaction: Mutual exchange of ions between reactants produces an insoluble solid precipitate.",
+    keyObservation: "Instantaneous formation of a bright yellow precipitate of Lead(II) Iodide (PbI₂).",
+    chemicalEquation: "Pb(NO₃)₂(aq) + 2KI(aq) → PbI₂(s)↓ (Bright Yellow Precipitate) + 2KNO₃(aq)",
+    inferenceAndConclusion: "Exchange of cations and anions leads to insoluble PbI₂ precipitating out of solution.",
+    frequentBoardQuestions: [
+      {
+        question: "Name the compound that precipitates out and state its color.",
+        answer: "Lead(II) Iodide (PbI₂); it forms an insoluble bright yellow precipitate."
+      },
+      {
+        question: "Identify the type of reaction taking place.",
+        answer: "Double Displacement Reaction and Precipitation Reaction."
+      }
+    ],
+    examinerTraps: [
+      "Writing formula as PbI instead of PbI₂ (Lead has +2 valency here).",
+      "Forgetting the downward precipitate arrow (↓) in chemical equation."
+    ],
+    marksAllotted: 3
+  },
+  {
+    id: "act_1_3_zinc_acid_hydrogen",
+    activityNo: "Activity 1.3",
+    title: "Action of Dilute Acid on Zinc Granules & Hydrogen Pop Test",
+    chapterNo: 1,
+    chapterName: "Chemical Reactions and Equations",
+    subject: "Chemistry",
+    apparatusSetup: "Conical flask / test tube, Single-bore cork, Delivery tube, Soap water trough, Candle/splinter, Zinc granules, Dilute H₂SO₄ or HCl.",
+    procedureSummary: "Place granulated zinc in conical flask, pour dilute sulphuric acid. Pass the liberated gas through soap solution and bring a burning candle near the bubbles.",
+    chemicalOrBioPrinciple: "Single Displacement Reaction: Highly reactive zinc displaces hydrogen from dilute acid, releasing H₂ gas exothermically.",
+    keyObservation: "Brisk effervescence of gas bubbles; conical flask becomes hot to touch; soap bubbles rise and burn with a characteristic 'POP' sound.",
+    chemicalEquation: "Zn(s) + H₂SO₄(aq) → ZnSO₄(aq) + H₂(g)↑ + Heat",
+    inferenceAndConclusion: "Metals above hydrogen in reactivity series displace H⁺ ions from acids releasing flammable hydrogen gas.",
+    frequentBoardQuestions: [
+      {
+        question: "Why does the temperature of the conical flask rise?",
+        answer: "The displacement reaction of zinc with acid is exothermic, releasing thermal energy into surroundings."
+      },
+      {
+        question: "How do you confirm the gas evolved is Hydrogen?",
+        answer: "Bring a burning candle near the gas-filled soap bubble; it extinguishes the flame with a distinct 'POP' sound."
+      }
+    ],
+    examinerTraps: [
+      "Using concentrated HNO₃: Nitric acid is a strong oxidizing agent that oxidizes H₂ to water instead of liberating gas.",
+      "Omitting the soap water setup in practical drawing."
+    ],
+    marksAllotted: 3
+  },
+  {
+    id: "act_1_5_ferrous_sulphate_decomposition",
+    activityNo: "Activity 1.5",
+    title: "Thermal Decomposition of Ferrous Sulphate Crystals",
+    chapterNo: 1,
+    chapterName: "Chemical Reactions and Equations",
+    subject: "Chemistry",
+    apparatusSetup: "Dry boiling test tube, Test tube holder, Bunsen burner, Ferrous Sulphate crystals (FeSO₄·7H₂O), Moist litmus paper.",
+    procedureSummary: "Place 2g of light-green ferrous sulphate crystals in a dry boiling tube. Heat over burner flame while wafting evolved gas gently towards nose.",
+    chemicalOrBioPrinciple: "Thermal Decomposition Reaction: A single substance breaks down upon heating into three simpler compounds.",
+    keyObservation: "Green crystals first lose water of crystallization turning white (anhydrous FeSO₄), then decompose into reddish-brown solid (Fe₂O₃) with suffocating smell of burning sulphur.",
+    chemicalEquation: "1. FeSO₄·7H₂O(s) --Heat--> FeSO₄(s) + 7H₂O(g)\n2. 2FeSO₄(s) --Heat--> Fe₂O₃(s) (Reddish-brown) + SO₂(g)↑ + SO₃(g)↑",
+    inferenceAndConclusion: "FeSO₄ undergoes endothermic thermal decomposition releasing acidic, suffocating SO₂ and SO₃ gases.",
+    frequentBoardQuestions: [
+      {
+        question: "What color change is observed during heating?",
+        answer: "Initial green color of crystals turns white (loss of 7H₂O), and on further strong heating turns into reddish-brown ferric oxide (Fe₂O₃)."
+      },
+      {
+        question: "What is the characteristic smell of the emitted gas?",
+        answer: "The smell of burning sulphur due to sulfur dioxide (SO₂) and sulfur trioxide (SO₃) fumes."
+      }
+    ],
+    examinerTraps: [
+      "Never point the mouth of boiling tube at yourself or classmates.",
+      "Writing FeO instead of Fe₂O₃ (Iron oxidizes to Ferric state, +3)."
+    ],
+    marksAllotted: 3
+  },
+  {
+    id: "act_1_6_lead_nitrate_decomposition",
+    activityNo: "Activity 1.6",
+    title: "Thermal Decomposition of Lead Nitrate with Brown NO₂ Fumes",
+    chapterNo: 1,
+    chapterName: "Chemical Reactions and Equations",
+    subject: "Chemistry",
+    apparatusSetup: "Hard glass boiling tube, Test tube holder, Bunsen burner, White Lead Nitrate powder [Pb(NO₃)₂], Glowing splinter.",
+    procedureSummary: "Take 2g of dry white lead nitrate powder in a boiling tube. Hold with tongs and heat strongly over burner.",
+    chemicalOrBioPrinciple: "Thermal Decomposition Reaction: Strong heating decomposes lead nitrate into a metal oxide and two gases.",
+    keyObservation: "Crackling sound (decrepitation); evolution of pungent, suffocating reddish-brown fumes of Nitrogen Dioxide (NO₂); yellow residue of Lead Monoxide (PbO) remains in tube.",
+    chemicalEquation: "2Pb(NO₃)₂(s) --Heat--> 2PbO(s) (Yellow when cold) + 4NO₂(g)↑ (Brown Fumes) + O₂(g)↑",
+    inferenceAndConclusion: "Lead nitrate decomposes into solid Lead(II) oxide, brown Nitrogen dioxide gas, and Oxygen gas.",
+    frequentBoardQuestions: [
+      {
+        question: "Identify the brown fumes evolved in this reaction.",
+        answer: "Nitrogen Dioxide gas (NO₂)."
+      },
+      {
+        question: "How do you test for the presence of the other gas evolved (Oxygen)?",
+        answer: "Introduce a glowing splinter into the mouth of the test tube; it rekindles/bursts into flame, confirming Oxygen gas (O₂)."
+      }
+    ],
+    examinerTraps: [
+      "Confusing NO₂ (brown) with N₂O (colorless laughing gas) or NO.",
+      "PbO is reddish-brown when hot, but turns lemon-yellow upon cooling."
+    ],
+    marksAllotted: 3
+  },
+  {
+    id: "act_1_7_electrolysis_of_water",
+    activityNo: "Activity 1.7",
+    title: "Electrolysis of Water (2:1 Stoichiometric Volume Ratio)",
+    chapterNo: 1,
+    chapterName: "Chemical Reactions and Equations",
+    subject: "Chemistry",
+    apparatusSetup: "Plastic mug with two holes, Rubber stoppers, Carbon/graphite electrodes, 6V DC battery, Switch, Two graduated test tubes, Dilute H₂SO₄ (electrolyte).",
+    procedureSummary: "Fit carbon electrodes into mug base, fill mug with water and add a few drops of dil H₂SO₄. Invert water-filled test tubes over electrodes and connect 6V battery.",
+    chemicalOrBioPrinciple: "Electrolytic Decomposition Reaction: Direct electrical current decomposes liquid water into hydrogen and oxygen gases.",
+    keyObservation: "Gas bubbles evolve at both electrodes. The volume of gas collected at CATHODE (-ve) is exactly DOUBLE the volume collected at ANODE (+ve).",
+    chemicalEquation: "2H₂O(l) --Electric Current--> 2H₂(g)↑ (Cathode, 2 volumes) + O₂(g)↑ (Anode, 1 volume)",
+    inferenceAndConclusion: "Water is composed of hydrogen and oxygen atoms in a 2:1 ratio by volume (H₂O).",
+    frequentBoardQuestions: [
+      {
+        question: "Why is the volume of gas collected over one electrode double that of the other?",
+        answer: "Water consists of 2 parts Hydrogen and 1 part Oxygen by volume (formula H₂O). During electrolysis, 2 moles of H₂ are produced at the cathode for every 1 mole of O₂ at the anode."
+      },
+      {
+        question: "Why are a few drops of dilute sulphuric acid added to pure water?",
+        answer: "Pure distilled water is a poor conductor of electricity (very low ionization). Adding dil H₂SO₄ provides free H⁺ and SO₄²⁻ ions, making water a good electrical conductor."
+      }
+    ],
+    examinerTraps: [
+      "CRITICAL BOARD TRAP: Hydrogen evolves at CATHODE (-), Oxygen evolves at ANODE (+). Mnemonic: 'PANIC' (Positive Anode, Negative Is Cathode); H⁺ cations move to negative cathode.",
+      "Using AC current instead of DC: AC current would produce an explosive mixture of H₂ and O₂ at both electrodes."
+    ],
+    marksAllotted: 5
+  },
+  {
+    id: "act_1_8_photolysis_silver_chloride",
+    activityNo: "Activity 1.8",
+    title: "Photochemical Decomposition (Photolysis) of Silver Chloride",
+    chapterNo: 1,
+    chapterName: "Chemical Reactions and Equations",
+    subject: "Chemistry",
+    apparatusSetup: "China dish / watch glass, White Silver Chloride (AgCl) powder, Direct sunlight.",
+    procedureSummary: "Take 2g of white silver chloride in a china dish. Place the dish near a window exposed to direct sunlight for a few hours.",
+    chemicalOrBioPrinciple: "Photochemical Decomposition (Photolysis): Sunlight photons break down Ag-Cl ionic bonds into metallic silver and chlorine gas.",
+    keyObservation: "White silver chloride powder gradually turns into a dull grey solid; greenish-yellow chlorine gas escapes.",
+    chemicalEquation: "2AgCl(s) (White) --Sunlight--> 2Ag(s) (Grey) + Cl₂(g)↑",
+    inferenceAndConclusion: "Light energy causes decomposition of silver halides; utilized historically in black and white photography.",
+    frequentBoardQuestions: [
+      {
+        question: "Why is silver chloride kept in dark-colored / amber bottles in laboratories?",
+        answer: "Silver chloride undergoes rapid photochemical decomposition in presence of light to form grey silver metal. Amber bottles block light penetration, preventing unwanted decomposition."
+      },
+      {
+        question: "Write an analogous reaction used in black and white photography.",
+        answer: "2AgBr(s) (Pale Yellow) --Sunlight--> 2Ag(s) (Grey) + Br₂(g) (Brown fumes)."
+      }
+    ],
+    examinerTraps: [
+      "Writing 'Silver turns black': Correct observation is GREY silver metal.",
+      "Forgetting to write 'Sunlight' above the reaction arrow."
+    ],
+    marksAllotted: 3
+  },
+  {
+    id: "act_1_9_iron_nails_copper_sulphate",
+    activityNo: "Activity 1.9",
+    title: "Displacement Reaction: Iron Nails in Copper Sulphate Solution",
+    chapterNo: 1,
+    chapterName: "Chemical Reactions and Equations",
+    subject: "Chemistry",
+    apparatusSetup: "Two test tubes, Thread, Stand, Clean iron nails (rubbed with sandpaper), Blue Copper Sulphate solution (CuSO₄·5H₂O).",
+    procedureSummary: "Immerse two cleaned iron nails into 10 mL blue copper sulphate solution in test tube A for 20 minutes. Keep test tube B with CuSO₄ and one nail aside for comparison.",
+    chemicalOrBioPrinciple: "Single Displacement Reaction: Iron is more reactive than copper (higher in activity series) and displaces Cu²⁺ ions from solution.",
+    keyObservation: "The deep blue color of copper sulphate solution fades and turns into pale light green (formation of FeSO₄); iron nails become coated with a reddish-brown deposit of copper metal.",
+    chemicalEquation: "Fe(s) + CuSO₄(aq) (Blue) → FeSO₄(aq) (Light Green) + Cu(s) (Reddish-brown deposit on nail)",
+    inferenceAndConclusion: "More reactive iron displaces less reactive copper from its aqueous salt solution.",
+    frequentBoardQuestions: [
+      {
+        question: "Why does the blue color of copper sulphate solution change to light green?",
+        answer: "Iron displaces Cu²⁺ ions forming ferrous sulphate [FeSO₄] in solution, whose Fe²⁺ ions are light green in color."
+      },
+      {
+        question: "What would happen if a copper wire is placed in a ferrous sulphate solution?",
+        answer: "No reaction occurs because copper is less reactive than iron and cannot displace iron from FeSO₄."
+      }
+    ],
+    examinerTraps: [
+      "Do not describe the deposit as 'rust'. It is pure metallic COPPER (reddish-brown).",
+      "Calling FeSO₄ dark green: It is PALE LIGHT GREEN."
+    ],
+    marksAllotted: 3
+  },
+  {
+    id: "act_2_5_metal_carbonate_acid_limewater",
+    activityNo: "Activity 2.5",
+    title: "Action of Acids on Metal Carbonates & Lime Water Test",
+    chapterNo: 2,
+    chapterName: "Acids, Bases and Salts",
+    subject: "Chemistry",
+    apparatusSetup: "Two test tubes A and B, Thistle funnel, Delivery tube with cork, Sodium Carbonate (Na₂CO₃), Dilute HCl, Freshly prepared Lime water [Ca(OH)₂].",
+    procedureSummary: "Take 0.5g Na₂CO₃ in tube A, add 2 mL dilute HCl via thistle funnel. Pass the liberated gas through 2 mL lime water in tube B.",
+    chemicalOrBioPrinciple: "Acid-carbonate neutralization liberating carbon dioxide gas; precipitation and subsequent dissolution of calcium carbonate.",
+    keyObservation: "Brisk effervescence in tube A. When gas passes into tube B, clear lime water turns milky white. On passing EXCESS CO₂, milkiness disappears and solution becomes clear again.",
+    chemicalEquation: "1. Na₂CO₃(s) + 2HCl(aq) → 2NaCl(aq) + H₂O(l) + CO₂(g)↑\n2. Ca(OH)₂(aq) + CO₂(g) → CaCO₃(s)↓ (Milky White) + H₂O(l)\n3. CaCO₃(s) + H₂O(l) + CO₂(g) (Excess) → Ca(HCO₃)₂(aq) (Soluble / Clear)",
+    inferenceAndConclusion: "Carbonates react with acids to liberate CO₂. Lime water turning milky and then clearing on excess CO₂ is the definitive test for CO₂.",
+    frequentBoardQuestions: [
+      {
+        question: "Why does lime water turn milky when CO₂ gas is passed through it?",
+        answer: "CO₂ reacts with calcium hydroxide to form an insoluble white precipitate of Calcium Carbonate (CaCO₃)."
+      },
+      {
+        question: "Why does the milkiness disappear on passing excess CO₂?",
+        answer: "Excess CO₂ converts insoluble CaCO₃ into water-soluble Calcium Hydrogen Carbonate [Ca(HCO₃)₂], making the solution clear."
+      }
+    ],
+    examinerTraps: [
+      "Thistle funnel must dip BELOW the acid level in tube A, otherwise CO₂ escapes through funnel.",
+      "Lime water must be FRESHLY prepared; stale lime water already absorbs atmospheric CO₂."
+    ],
+    marksAllotted: 4
+  },
+  {
+    id: "act_2_8_acid_conductivity_glucose",
+    activityNo: "Activity 2.8",
+    title: "Electrical Conductivity of Acid Solutions vs Glucose / Alcohol",
+    chapterNo: 2,
+    chapterName: "Acids, Bases and Salts",
+    subject: "Chemistry",
+    apparatusSetup: "Beaker (100 mL), Cork with two iron nails, 6V battery, Bulb, Switch, Connecting wires, Solutions of Dil HCl, Dil H₂SO₄, Glucose, and Ethyl Alcohol.",
+    procedureSummary: "Fix two iron nails on cork placed in beaker. Connect nails to 6V battery and bulb via switch. Pour dil HCl, switch on. Repeat separately with glucose and alcohol solutions.",
+    chemicalOrBioPrinciple: "Electrolytic Conduction: Electric current is carried through solutions by mobile ions. Acids ionize into H⁺(aq) cations, whereas organic covalent compounds do not ionize.",
+    keyObservation: "The bulb GLOWS brightly with Dil HCl and Dil H₂SO₄ solutions. The bulb DOES NOT GLOW with Glucose (C₆H₁₂O₆) or Alcohol (C₂H₅OH) solutions.",
+    chemicalEquation: "HCl(aq) → H⁺(aq) + Cl⁻(aq)  [or H₃O⁺ + Cl⁻]\nGlucose & Alcohol: Do not dissociate into ions in water.",
+    inferenceAndConclusion: "All acids contain replaceable hydrogen and ionize to form H⁺(aq) ions which conduct electricity. Compounds like glucose contain hydrogen but are not acidic because they do not furnish free ions.",
+    frequentBoardQuestions: [
+      {
+        question: "Why do HCl and HNO₃ show acidic characters in aqueous solutions while glucose and alcohol do not?",
+        answer: "HCl and HNO₃ ionize in water to produce free hydronium ions [H₃O⁺] responsible for acidic properties and conduction. Glucose and alcohol are covalent molecules that do not ionize in water."
+      },
+      {
+        question: "Does distilled water conduct electricity? What about rainwater?",
+        answer: "Pure distilled water does not conduct electricity because it contains virtually no free ions. Rainwater contains dissolved acidic gases (CO₂, SO₂) forming carbonic and sulphurous acids which furnish ions to conduct electricity."
+      }
+    ],
+    examinerTraps: [
+      "Using dry HCl gas without water: Dry HCl does NOT conduct electricity or turn dry litmus paper red.",
+      "H⁺ ions cannot exist alone; they exist as hydrated Hydronium ions (H₃O⁺)."
+    ],
+    marksAllotted: 3
+  },
+  {
+    id: "act_2_15_water_of_crystallization",
+    activityNo: "Activity 2.15",
+    title: "Water of Crystallization in Copper Sulphate Crystals",
+    chapterNo: 2,
+    chapterName: "Acids, Bases and Salts",
+    subject: "Chemistry",
+    apparatusSetup: "Dry boiling tube, Test tube holder, Bunsen burner, Blue Copper Sulphate crystals (CuSO₄·5H₂O), Dropper, Distilled water.",
+    procedureSummary: "Heat a few crystals of blue hydrated copper sulphate in a dry boiling tube. Observe water droplets on tube walls and color change of salt. Add 2-3 drops of water to the white residue.",
+    chemicalOrBioPrinciple: "Reversible dehydration of hydrated salt: Heating drives off chemically bound water of crystallization, altering crystal lattice geometry and color.",
+    keyObservation: "Bright blue crystals turn into anhydrous white powder; tiny water droplets condense on the cooler upper inside walls of the tube. Adding 2-3 drops of water restores the bright blue color.",
+    chemicalEquation: "CuSO₄·5H₂O(s) (Blue Hydrated) <===Heat / +H₂O===> CuSO₄(s) (White Anhydrous) + 5H₂O(l)",
+    inferenceAndConclusion: "Water of crystallization is the fixed number of water molecules chemically bound in one formula unit of a salt, providing characteristic color and crystalline shape.",
+    frequentBoardQuestions: [
+      {
+        question: "What is water of crystallization? Give two examples other than copper sulphate.",
+        answer: "It is the fixed number of water molecules present in one formula unit of a salt. Examples: Washing Soda [Na₂CO₃·10H₂O] (10 water molecules) and Gypsum [CaSO₄·2H₂O] (2 water molecules)."
+      },
+      {
+        question: "What happens when gypsum is heated at 373 K (100°C)?",
+        answer: "It loses 1.5 water molecules to form Plaster of Paris (POP): CaSO₄·2H₂O --373K--> CaSO₄·½H₂O + 1½H₂O."
+      }
+    ],
+    examinerTraps: [
+      "Saying crystals are 'wet': Water of crystallization is chemically bonded inside the crystal lattice, not surface wetness.",
+      "Overheating gypsum above 373K: Forms dead burnt plaster (anhydrous CaSO₄) which loses setting property."
+    ],
+    marksAllotted: 3
+  },
+  {
+    id: "act_3_14_conditions_for_rusting",
+    activityNo: "Activity 3.14",
+    title: "Investigating Conditions for Rusting / Corrosion of Iron (3 Test Tubes)",
+    chapterNo: 3,
+    chapterName: "Metals and Non-metals",
+    subject: "Chemistry",
+    apparatusSetup: "Three test tubes labeled A, B, C; Clean shining iron nails; Distilled water; Boiled distilled water; Anhydrous Calcium Chloride (CaCl₂); Olive/mineral oil; Rubber stoppers.",
+    procedureSummary: "Tube A: Nails half-submerged in tap water (exposed to Air + Water). Tube B: Nails in boiled water covered with oil layer (Water only, No Air). Tube C: Nails with anhydrous CaCl₂ (Dry Air only, No Water). Stopper and leave for 3 days.",
+    chemicalOrBioPrinciple: "Electrochemical Corrosion: Rusting of iron is an oxidation process requiring BOTH atmospheric oxygen and moisture simultaneously.",
+    keyObservation: "Tube A: Iron nails are heavily rusted with reddish-brown flaky deposit. Tube B: Nails DO NOT rust. Tube C: Nails DO NOT rust (remain shiny).",
+    chemicalEquation: "4Fe(s) + 3O₂(g) + 2xH₂O(l) → 2Fe₂O₃·xH₂O(s) (Hydrated Iron(III) Oxide / Rust)",
+    inferenceAndConclusion: "BOTH air (oxygen) and water (moisture) are simultaneously essential for rusting of iron.",
+    frequentBoardQuestions: [
+      {
+        question: "Why was boiled distilled water used in Test Tube B, and why was oil layered on top?",
+        answer: "Boiling expels all dissolved air/oxygen from the water. The layer of oil prevents atmospheric oxygen from redissolving into the water."
+      },
+      {
+        question: "What is the function of anhydrous calcium chloride in Test Tube C?",
+        answer: "Anhydrous CaCl₂ is a powerful desiccating (drying) agent that absorbs all atmospheric moisture, creating completely dry air."
+      }
+    ],
+    examinerTraps: [
+      "Claiming water alone or air alone causes rust: Neither causes rust independently.",
+      "Rust formula: Fe₂O₃·xH₂O (must include variable 'xH₂O' for water of hydration)."
+    ],
+    marksAllotted: 4
+  },
+  {
+    id: "act_6_1_chlorophyll_photosynthesis",
+    activityNo: "Activity 6.1",
+    title: "Chlorophyll is Essential for Photosynthesis (Variegated Leaf Test)",
+    chapterNo: 5,
+    chapterName: "Life Processes",
+    subject: "Biology",
+    apparatusSetup: "Potted variegated plant (Croton / Money plant), Beaker, Water bath, Boiling tube, Alcohol / methylated spirit, Iodine solution, White tile.",
+    procedureSummary: "Destarch plant in dark for 3 days. Expose to sun for 6 hours. Pluck leaf, trace green and non-green areas on tracing paper. Boil leaf in water, then in alcohol water-bath until decolorized. Rinse in water and dip in dilute iodine.",
+    chemicalOrBioPrinciple: "Starch synthesis in autotrophic nutrition: Chlorophyll pigments absorb light energy to drive photolysis and fix CO₂ into glucose stored as starch.",
+    keyObservation: "ONLY the originally green areas containing chlorophyll turn BLUE-BLACK with iodine. The white / non-green portions turn pale brown/yellow.",
+    chemicalEquation: "6CO₂ + 12H₂O --Chlorophyll + Sunlight--> C₆H₁₂O₆ (Stored as Starch) + 6O₂ + 6H₂O",
+    inferenceAndConclusion: "Starch is formed only in regions with chlorophyll; hence chlorophyll is essential for photosynthesis.",
+    frequentBoardQuestions: [
+      {
+        question: "Why is the plant kept in a dark room for 3 days before the experiment?",
+        answer: "To destarch the plant: In darkness, photosynthesis stops and the plant consumes all previously stored starch from its leaves for respiration."
+      },
+      {
+        question: "Why is the leaf boiled in alcohol, and why must this be done in a water bath?",
+        answer: "Alcohol dissolves and extracts green chlorophyll pigment to decolorize the leaf so blue-black color with iodine can be observed clearly. Alcohol is highly flammable, so it must be heated indirectly in a water bath to prevent fire hazards."
+      }
+    ],
+    examinerTraps: [
+      "Never heat alcohol directly over flame: It catches fire instantly.",
+      "Forgetting to destarch the plant invalidates the entire experiment."
+    ],
+    marksAllotted: 4
+  },
+  {
+    id: "act_6_2_co2_essential_photosynthesis",
+    activityNo: "Activity 6.2",
+    title: "Carbon Dioxide is Essential for Photosynthesis (KOH Bell Jar Setup)",
+    chapterNo: 5,
+    chapterName: "Life Processes",
+    subject: "Biology",
+    apparatusSetup: "Two healthy destarched potted plants A and B, Two glass bell jars, Vaseline, Watch glass with Potassium Hydroxide (KOH) pellets, Iodine test apparatus.",
+    procedureSummary: "Destarch both plants for 3 days. Place each on a glass plate. Place watch glass with KOH next to Plant A. Cover both with bell jars, seal bases with Vaseline to make airtight. Keep in sunlight for 2-3 hours. Test leaves for starch.",
+    chemicalOrBioPrinciple: "Carbon fixation requirement: CO₂ is the raw material providing carbon atoms for glucose synthesis.",
+    keyObservation: "Leaf from Plant B (without KOH) turns BLUE-BLACK with iodine (starch present). Leaf from Plant A (with KOH) DOES NOT turn blue-black (starch absent).",
+    chemicalEquation: "KOH + CO₂ → K₂CO₃ + H₂O (KOH absorbs carbon dioxide from bell jar A)",
+    inferenceAndConclusion: "Plant A could not synthesize starch due to absence of CO₂; hence carbon dioxide is essential for photosynthesis.",
+    frequentBoardQuestions: [
+      {
+        question: "What is the role of Potassium Hydroxide (KOH) in this experiment?",
+        answer: "KOH chemically absorbs all carbon dioxide gas inside the sealed bell jar of Plant A, creating a CO₂-free environment."
+      },
+      {
+        question: "Why is Vaseline applied around the base of the bell jars?",
+        answer: "To create an airtight seal and prevent outside atmospheric CO₂ from leaking into the bell jars."
+      }
+    ],
+    examinerTraps: [
+      "Confusing KOH role: KOH absorbs CO₂, it does NOT release oxygen.",
+      "Forgetting to keep plant B as control: Scientific experiments require a comparative control setup."
+    ],
+    marksAllotted: 4
+  },
+  {
+    id: "act_6_4_co2_respiration_seeds",
+    activityNo: "Activity 6.4",
+    title: "Carbon Dioxide Produced During Respiration (Germinating Seeds)",
+    chapterNo: 5,
+    chapterName: "Life Processes",
+    subject: "Biology",
+    apparatusSetup: "Conical flask, Airtight cork with delivery tube, Small test tube with KOH solution, Germinating gram/bean seeds, Beaker with colored water.",
+    procedureSummary: "Place moist germinating seeds in conical flask. Suspend a small test tube containing KOH solution inside. Seal flask with bent delivery tube whose other end dips into colored water beaker. Mark water level and observe after 2 hours.",
+    chemicalOrBioPrinciple: "Aerobic Cellular Respiration: Living cells break down glucose using oxygen, releasing carbon dioxide, water, and ATP energy.",
+    keyObservation: "The level of water rises in the bent delivery tube.",
+    chemicalEquation: "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 38 ATP\nKOH absorbs CO₂: 2KOH + CO₂ → K₂CO₃ + H₂O",
+    inferenceAndConclusion: "Germinating seeds take in O₂ and release CO₂ during respiration. KOH absorbs this CO₂, creating a partial vacuum inside the flask. Atmospheric pressure then pushes water up the delivery tube.",
+    frequentBoardQuestions: [
+      {
+        question: "Why does the water level rise in the delivery tube?",
+        answer: "Respirating seeds consume O₂ and release CO₂. The released CO₂ is absorbed by KOH, creating a partial vacuum (low pressure) inside the flask. Higher external atmospheric pressure forces water up the tube."
+      },
+      {
+        question: "Why are germinating seeds used instead of boiled / dry seeds?",
+        answer: "Germinating seeds have actively dividing cells with high metabolic and respiration rates. Boiled seeds are dead and do not respire; dry dormant seeds respire too slowly to produce measurable gas changes."
+      }
+    ],
+    examinerTraps: [
+      "Claiming water level rises because seeds absorb water: Water rises due to pressure drop caused by KOH absorbing CO₂.",
+      "Failing to make the flask airtight."
+    ],
+    marksAllotted: 4
+  },
+  {
+    id: "act_6_5_yeast_fermentation",
+    activityNo: "Activity 6.5",
+    title: "Anaerobic Fermentation of Glucose by Yeast Producing CO₂ & Ethanol",
+    chapterNo: 5,
+    chapterName: "Life Processes",
+    subject: "Biology",
+    apparatusSetup: "Test tube, Single-bore cork with delivery tube, Baker's yeast, Sugar / glucose solution, Fresh lime water [Ca(OH)₂] in receiver tube, Layer of liquid paraffin/oil.",
+    procedureSummary: "Dissolve yeast in warm glucose solution in test tube. Pour a layer of liquid paraffin over mixture to exclude atmospheric air. Fit cork with bent tube dipping into lime water. Keep in warm place.",
+    chemicalOrBioPrinciple: "Anaerobic Respiration (Fermentation): In absence of oxygen, unicellular yeast converts glucose into ethyl alcohol, carbon dioxide, and small amount of ATP (2 ATP).",
+    keyObservation: "Frothing and bubbling in yeast tube; smell of alcohol; clear lime water in receiver tube turns milky white.",
+    chemicalEquation: "C₆H₁₂O₆ (Glucose) --Yeast (Zymase)--> 2C₂H₅OH (Ethanol) + 2CO₂(g)↑ + 2 ATP",
+    inferenceAndConclusion: "Yeast respires anaerobically in absence of oxygen, producing ethanol and carbon dioxide gas.",
+    frequentBoardQuestions: [
+      {
+        question: "What is the purpose of adding liquid paraffin over the glucose-yeast mixture?",
+        answer: "Liquid paraffin forms an impermeable layer on top of the liquid, cutting off contact with atmospheric oxygen to ensure strictly anaerobic conditions."
+      },
+      {
+        question: "Compare ATP yield between aerobic respiration and yeast fermentation.",
+        answer: "Aerobic respiration yields approx. 38 ATP molecules per glucose molecule (complete oxidation), whereas anaerobic fermentation yields only 2 ATP molecules per glucose molecule."
+      }
+    ],
+    examinerTraps: [
+      "Using boiling water: Boiling water kills yeast enzymes (zymase denatures above 50°C).",
+      "Confusing plant/yeast fermentation (produces Ethanol + CO₂) with human muscle anaerobic respiration (produces Lactic Acid only, NO CO₂)."
+    ],
+    marksAllotted: 3
+  }
+];
+

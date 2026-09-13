@@ -62,7 +62,7 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
   // Literature selection state
   const [selectedChapterId, setSelectedChapterId] = useState<string>("hin_sp_p1");
   const [litSearchQuery, setLitSearchQuery] = useState<string>("");
-  const [activeLitSubTab, setActiveLitSubTab] = useState<"summary" | "stanzas" | "vocab" | "boardqa" | "rtc">("summary");
+  const [activeLitSubTab, setActiveLitSubTab] = useState<"deep_explanation" | "pyq_trends" | "characters_dialogues" | "stanzas" | "vocab" | "boardqa">("deep_explanation");
 
   // Grammar selection state
   const [selectedGrammarId, setSelectedGrammarId] = useState<string>("padbandh");
@@ -132,13 +132,13 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
     setActiveTab(tab);
     if (tab === "sparsh_prose") {
       setSelectedChapterId("hin_sp_p1");
-      setActiveLitSubTab("summary");
+      setActiveLitSubTab("deep_explanation");
     } else if (tab === "sparsh_poetry") {
       setSelectedChapterId("hin_sp_k1");
-      setActiveLitSubTab("summary");
+      setActiveLitSubTab("deep_explanation");
     } else if (tab === "sanchayan") {
       setSelectedChapterId("hin_san_1");
-      setActiveLitSubTab("summary");
+      setActiveLitSubTab("deep_explanation");
     }
   };
 
@@ -408,136 +408,297 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                   "{currentChapter.tagline}"
                 </p>
 
-                {/* Sub-tab Navigation — Bilingual */}
+                {/* Sub-tab Navigation — Enhanced High Readability Navigation */}
                 <div className="flex items-center gap-2 mt-5 border-t pt-4 border-slate-200/60 dark:border-slate-800 overflow-x-auto scrollbar-none text-xs sm:text-sm">
                   <button
-                    onClick={() => setActiveLitSubTab("summary")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
-                      activeLitSubTab === "summary"
-                        ? "bg-rose-500 text-white shadow-sm font-bold"
-                        : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                    onClick={() => setActiveLitSubTab("deep_explanation")}
+                    className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                      activeLitSubTab === "deep_explanation"
+                        ? "bg-gradient-to-r from-rose-600 to-amber-600 text-white shadow-md shadow-rose-600/20 font-bold ring-1 ring-white/20"
+                        : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
                     }`}
                   >
-                    📖 Summary (पाठ-सार)
+                    <BookOpen className="w-4 h-4" />
+                    <span>📖 विस्तृत पाठ व्याख्या (Deep Analysis)</span>
                   </button>
+
+                  <button
+                    onClick={() => setActiveLitSubTab("pyq_trends")}
+                    className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                      activeLitSubTab === "pyq_trends"
+                        ? "bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-md shadow-amber-600/20 font-bold ring-1 ring-white/20"
+                        : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
+                    }`}
+                  >
+                    <Award className="w-4 h-4" />
+                    <span>🎯 बोर्ड PYQ बैंक 2018–2025 ({currentChapter.pyqTrends?.length || 0})</span>
+                  </button>
+
+                  {((currentChapter.characters && currentChapter.characters.length > 0) || (currentChapter.keyDialogues && currentChapter.keyDialogues.length > 0)) && (
+                    <button
+                      onClick={() => setActiveLitSubTab("characters_dialogues")}
+                      className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                        activeLitSubTab === "characters_dialogues"
+                          ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md shadow-purple-600/20 font-bold ring-1 ring-white/20"
+                          : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
+                      }`}
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      <span>👥 पात्र व संवाद (Characters & Dialogues)</span>
+                    </button>
+                  )}
 
                   {currentChapter.stanzas && currentChapter.stanzas.length > 0 && (
                     <button
                       onClick={() => setActiveLitSubTab("stanzas")}
-                      className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap ${
                         activeLitSubTab === "stanzas"
-                          ? "bg-amber-500 text-white shadow-sm font-bold"
-                          : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                          ? "bg-amber-600 text-white shadow-md shadow-amber-600/25 font-bold ring-1 ring-white/20"
+                          : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
                       }`}
                     >
-                      📜 Stanzas & Meaning (काव्यांश व भावार्थ)
+                      <Feather className="w-4 h-4" />
+                      <span>📜 काव्यांश व भावार्थ ({currentChapter.stanzas.length})</span>
                     </button>
                   )}
 
                   <button
                     onClick={() => setActiveLitSubTab("vocab")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                    className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap ${
                       activeLitSubTab === "vocab"
-                        ? "bg-rose-500 text-white shadow-sm font-bold"
-                        : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                        ? "bg-rose-600 text-white shadow-md shadow-rose-600/25 font-bold ring-1 ring-white/20"
+                        : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
                     }`}
                   >
-                    🔤 Vocabulary (शब्दार्थ - {currentChapter.wordMeanings.length})
+                    <Sparkles className="w-4 h-4" />
+                    <span>🔤 शब्दार्थ ({currentChapter.wordMeanings.length})</span>
                   </button>
 
                   <button
                     onClick={() => setActiveLitSubTab("boardqa")}
-                    className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                    className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-semibold transition-all cursor-pointer whitespace-nowrap ${
                       activeLitSubTab === "boardqa"
-                        ? "bg-rose-500 text-white shadow-sm font-bold"
-                        : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                        ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/25 font-bold ring-1 ring-white/20"
+                        : isDark ? "text-slate-300 hover:bg-slate-800/60" : "text-slate-600 hover:bg-amber-100/50"
                     }`}
                   >
-                    🎯 Board Q&A (परीक्षा प्रश्नोत्तर - {currentChapter.boardQAs.length})
+                    <FileText className="w-4 h-4" />
+                    <span>📝 बोर्ड प्रश्नोत्तर व RTC ({currentChapter.boardQAs.length})</span>
                   </button>
-
-                  {currentChapter.rtcMcqs && (
-                    <button
-                      onClick={() => setActiveLitSubTab("rtc")}
-                      className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
-                        activeLitSubTab === "rtc"
-                          ? "bg-rose-500 text-white shadow-sm font-bold"
-                          : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
-                      }`}
-                    >
-                      📝 RTC Practice (पठित गद्यांश MCQs)
-                    </button>
-                  )}
                 </div>
               </div>
 
-              {/* Sub-tab 1: Summary & Central Message */}
-              {activeLitSubTab === "summary" && (
-                <div className="space-y-4">
-                  {/* Detailed Summary */}
-                  <div className={`p-6 rounded-2xl border ${
-                    isDark ? "bg-slate-900/60 border-slate-800" : "bg-white border-amber-100 shadow-sm"
-                  }`}>
-                    <h4 className="text-lg font-bold flex items-center gap-2 text-rose-600 dark:text-rose-400 mb-3">
-                      <BookOpen className="w-5 h-5" />
-                      विस्तृत पाठ सारांश (Comprehensive Chapter Summary)
-                    </h4>
-                    <p className={`text-base leading-relaxed text-justify ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                      {currentChapter.summary}
-                    </p>
-                  </div>
-
-                  {/* Central Message Box */}
-                  <div className={`p-5 rounded-2xl border border-amber-500/30 bg-gradient-to-br ${
-                    isDark ? "from-amber-950/20 to-slate-900/60" : "from-amber-50/80 to-rose-50/40"
-                  }`}>
-                    <h4 className="text-sm font-bold flex items-center gap-2 text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-2">
+              {/* ===================================================================== */}
+              {/* Sub-tab 1: Deep Explanation & Scene Breakdown (गहन व्याख्या) */}
+              {/* ===================================================================== */}
+              {activeLitSubTab === "deep_explanation" && (
+                <div className="space-y-6">
+                  {/* Central Moral & Philosophy Banner */}
+                  <div className={`p-5 sm:p-6 rounded-2xl border border-amber-500/30 bg-gradient-to-br ${
+                    isDark ? "from-amber-950/30 via-slate-900/80 to-slate-900/60" : "from-amber-50 via-rose-50/40 to-orange-50/50"
+                  } shadow-sm`}>
+                    <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-bold uppercase text-xs tracking-wider mb-2">
                       <Sparkles className="w-4 h-4" />
-                      पाठ का केंद्रीय भाव एवं संदेश (Core Theme & Moral)
-                    </h4>
-                    <p className={`text-sm leading-relaxed font-medium ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                      <span>पाठ का केंद्रीय भाव, जीवन-मूल्य एवं मुख्य संदेश (Core Message & Philosophy)</span>
+                    </div>
+                    <p className={`text-base sm:text-lg leading-relaxed font-medium ${isDark ? "text-amber-100" : "text-amber-950"}`}>
                       {currentChapter.centralMessage}
                     </p>
                   </div>
 
-                  {/* Characters Grid (if any) */}
+                  {/* Comprehensive Chapter Summary */}
+                  <div className={`p-6 sm:p-7 rounded-2xl border ${
+                    isDark ? "bg-slate-900/70 border-slate-800" : "bg-white border-amber-200/80 shadow-sm"
+                  }`}>
+                    <h4 className="text-xl font-bold flex items-center gap-2.5 text-rose-600 dark:text-rose-400 mb-4 pb-2 border-b border-amber-500/20">
+                      <BookOpen className="w-5 h-5" />
+                      <span>विस्तृत पाठ सारांश (Comprehensive Chapter Narrative)</span>
+                    </h4>
+                    <p className={`text-base sm:text-lg leading-loose text-justify ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                      {currentChapter.summary}
+                    </p>
+                  </div>
+
+                  {/* Deep Scene-by-Scene Breakdown (गहन घटनाक्रम व दृश्य-वार व्याख्या) */}
+                  {currentChapter.deepSceneBreakdown && currentChapter.deepSceneBreakdown.length > 0 && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-xl font-bold flex items-center gap-2.5 text-amber-600 dark:text-amber-400">
+                          <Flame className="w-5 h-5 text-amber-500" />
+                          <span>गहन घटनाक्रम एवं दृश्य-वार विश्लेषण (Scene-by-Scene Deep Analysis)</span>
+                        </h4>
+                        <span className="text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 border border-amber-500/20 font-semibold">
+                          {currentChapter.deepSceneBreakdown.length} मुख्य दृश्य / भाग
+                        </span>
+                      </div>
+
+                      {currentChapter.deepSceneBreakdown.map((sec, sidx) => (
+                        <div
+                          key={sidx}
+                          className={`p-6 rounded-2xl border transition-all ${
+                            isDark ? "bg-slate-900/60 border-slate-800 hover:border-slate-700" : "bg-white border-slate-200 hover:border-amber-300 shadow-sm"
+                          }`}
+                        >
+                          {/* Scene Title Header */}
+                          <div className="flex items-center gap-2.5 mb-3">
+                            <span className="w-7 h-7 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold text-sm border border-rose-500/20 shrink-0">
+                              {sidx + 1}
+                            </span>
+                            <h5 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                              {sec.sceneTitle}
+                            </h5>
+                          </div>
+
+                          {/* Narrative Description */}
+                          <p className={`text-base sm:text-lg leading-relaxed text-justify mb-4 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                            {sec.narrativeText}
+                          </p>
+
+                          {/* Key Pedagogical & Exam Insights */}
+                          {sec.keyInsights && sec.keyInsights.length > 0 && (
+                            <div className={`p-4 rounded-xl border ${
+                              isDark ? "bg-amber-950/20 border-amber-900/30 text-amber-200" : "bg-amber-50/70 border-amber-200/80 text-amber-900"
+                            }`}>
+                              <div className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-2 flex items-center gap-1.5">
+                                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                                <span>बोर्ड परीक्षा हेतु मुख्य मर्म व अंतर्दृष्टि (Key Exam & Thematic Insights):</span>
+                              </div>
+                              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                {sec.keyInsights.map((insight, iidx) => (
+                                  <li key={iidx} className="text-sm flex items-start gap-2">
+                                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                                    <span>{insight}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* ===================================================================== */}
+              {/* Sub-tab 2: Board PYQ Trends & Marking Scheme (बोर्ड PYQ बैंक 2018–2025) */}
+              {/* ===================================================================== */}
+              {activeLitSubTab === "pyq_trends" && (
+                <div className="space-y-5">
+                  <div className={`p-5 rounded-2xl border ${
+                    isDark ? "bg-slate-900/80 border-slate-800" : "bg-white border-amber-200/80 shadow-sm"
+                  }`}>
+                    <div className="flex items-center justify-between gap-2 border-b pb-3 border-amber-500/20">
+                      <div>
+                        <h4 className="text-xl font-bold flex items-center gap-2 text-rose-600 dark:text-rose-400">
+                          <Award className="w-5 h-5" />
+                          <span>CBSE बोर्ड परीक्षा 2018–2025 विगत वर्ष प्रश्न (PYQs) एवं अंकन योजना</span>
+                        </h4>
+                        <p className={`text-xs sm:text-sm mt-1 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                          वास्तविक बोर्ड परीक्षाओं में पूछे गए प्रश्न, परीक्षक की आधिकारिक मार्किंग स्कीम तथा अंक-दायी कीवर्ड्स
+                        </p>
+                      </div>
+                      <span className="text-xs font-bold px-3 py-1 rounded-full bg-rose-500/10 text-rose-600 border border-rose-500/20 shrink-0">
+                        {currentChapter.pyqTrends?.length || 0} PYQs
+                      </span>
+                    </div>
+
+                    <div className="space-y-4 mt-5">
+                      {currentChapter.pyqTrends && currentChapter.pyqTrends.length > 0 ? (
+                        currentChapter.pyqTrends.map((pyq, pidx) => (
+                          <div
+                            key={pidx}
+                            className={`p-5 sm:p-6 rounded-2xl border ${
+                              isDark ? "bg-slate-900/50 border-slate-800" : "bg-slate-50/70 border-slate-200/90 shadow-sm"
+                            }`}
+                          >
+                            <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-3 border-slate-200 dark:border-slate-800">
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-rose-600 text-white shadow-sm">
+                                  {pyq.year}
+                                </span>
+                                <span className="text-xs font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                                  {pyq.marks} अंक
+                                </span>
+                              </div>
+                              <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${
+                                isDark ? "bg-slate-800 text-slate-300" : "bg-white text-slate-700 border border-slate-200"
+                              }`}>
+                                अवधारणा: {pyq.coreConcept}
+                              </span>
+                            </div>
+
+                            <h5 className="text-base sm:text-lg font-bold mt-3 text-slate-900 dark:text-white leading-relaxed">
+                              प्र. {pyq.question}
+                            </h5>
+
+                            {/* Examiner Rubric */}
+                            <div className={`mt-4 p-4 rounded-xl border ${
+                              isDark ? "bg-emerald-950/20 border-emerald-900/30 text-emerald-200" : "bg-emerald-50/80 border-emerald-200 text-emerald-900"
+                            }`}>
+                              <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 mb-1.5 flex items-center gap-1.5">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                                <span>परीक्षक अंकन योजना (Examiner Marking Scheme & Rubric):</span>
+                              </div>
+                              <p className="text-sm sm:text-base leading-relaxed font-medium">
+                                {pyq.examinerRubric}
+                              </p>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-sm text-slate-400 italic text-center py-6">
+                          इस अध्याय के लिए PYQs शीघ्र अद्यतन किए जा रहे हैं।
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* ===================================================================== */}
+              {/* Sub-tab 3: Characters & Key Dialogues (पात्र व प्रमुख संवाद) */}
+              {/* ===================================================================== */}
+              {activeLitSubTab === "characters_dialogues" && (
+                <div className="space-y-6">
+                  {/* Characters Grid */}
                   {currentChapter.characters && currentChapter.characters.length > 0 && (
-                    <div className="space-y-3">
-                      <h4 className="text-lg font-bold flex items-center gap-2 text-rose-600 dark:text-rose-400">
+                    <div className="space-y-4">
+                      <h4 className="text-xl font-bold flex items-center gap-2 text-rose-600 dark:text-rose-400">
                         <UsersIcon className="w-5 h-5" />
-                        प्रमुख पात्र एवं चरित्र-चित्रण (Key Characters & Character Sketches)
+                        <span>प्रमुख पात्र एवं चरित्र-चित्रण (Key Characters & Character Sketches)</span>
                       </h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {currentChapter.characters.map((char, idx) => (
                           <div
                             key={idx}
-                            className={`p-4 rounded-xl border ${
-                              isDark ? "bg-slate-900/50 border-slate-800" : "bg-white border-slate-200 shadow-sm"
+                            className={`p-5 rounded-2xl border ${
+                              isDark ? "bg-slate-900/60 border-slate-800" : "bg-white border-slate-200 shadow-sm"
                             }`}
                           >
                             <div className="flex items-center justify-between">
-                              <h5 className="font-bold text-base text-amber-600 dark:text-amber-400">{char.name}</h5>
-                              <span className={`text-xs px-2 py-0.5 rounded-full ${
+                              <h5 className="font-bold text-lg text-amber-600 dark:text-amber-400">{char.name}</h5>
+                              <span className={`text-xs px-2.5 py-0.5 rounded-full font-medium ${
                                 isDark ? "bg-slate-800 text-slate-300" : "bg-slate-100 text-slate-600"
                               }`}>
                                 {char.role}
                               </span>
                             </div>
 
-                            <div className="flex flex-wrap gap-1.5 mt-2">
+                            <div className="flex flex-wrap gap-1.5 mt-2.5">
                               {char.traits.map((t, tidx) => (
-                                <span key={tidx} className="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+                                <span key={tidx} className="text-xs px-2 py-0.5 rounded-md bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 font-medium">
                                   {t}
                                 </span>
                               ))}
                             </div>
 
-                            <p className={`text-xs mt-2.5 leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                            <p className={`text-sm sm:text-base mt-3 leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                               {char.description}
                             </p>
 
                             {char.keyDialogue && (
-                              <div className={`mt-3 p-2 rounded-lg border-l-2 border-rose-500 text-xs italic ${
+                              <div className={`mt-3 p-3 rounded-xl border-l-4 border-rose-500 text-xs sm:text-sm italic font-serif ${
                                 isDark ? "bg-slate-800/60 text-rose-300" : "bg-rose-50 text-rose-900"
                               }`}>
                                 "{char.keyDialogue}"
@@ -548,27 +709,82 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                       </div>
                     </div>
                   )}
+
+                  {/* Key Dialogues / Quotations Breakdown */}
+                  {currentChapter.keyDialogues && currentChapter.keyDialogues.length > 0 && (
+                    <div className="space-y-4">
+                      <h4 className="text-xl font-bold flex items-center gap-2 text-amber-600 dark:text-amber-400">
+                        <MessageSquare className="w-5 h-5" />
+                        <span>प्रमुख कथन, संवाद व बोर्ड संदर्भ (Key Dialogues & Board RTC Context)</span>
+                      </h4>
+                      <div className="space-y-4">
+                        {currentChapter.keyDialogues.map((dial, didx) => (
+                          <div
+                            key={didx}
+                            className={`p-5 sm:p-6 rounded-2xl border ${
+                              isDark ? "bg-slate-900/60 border-slate-800" : "bg-white border-amber-200/80 shadow-sm"
+                            }`}
+                          >
+                            <div className={`p-4 rounded-xl border-l-4 border-amber-500 mb-3.5 text-base sm:text-lg font-serif italic leading-relaxed ${
+                              isDark ? "bg-amber-950/20 text-amber-200 border-amber-800/30" : "bg-amber-50/70 text-amber-950 border-amber-200"
+                            }`}>
+                              "{dial.dialogue}"
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm mb-3">
+                              <div className={`p-2.5 rounded-lg border ${isDark ? "bg-slate-800/50 border-slate-700" : "bg-slate-50 border-slate-200"}`}>
+                                <strong className="text-rose-600 dark:text-rose-400">वक्ता (Speaker):</strong> {dial.speaker}
+                              </div>
+                              <div className={`p-2.5 rounded-lg border ${isDark ? "bg-slate-800/50 border-slate-700" : "bg-slate-50 border-slate-200"}`}>
+                                <strong className="text-amber-600 dark:text-amber-400">श्रोता (Listener):</strong> {dial.listener}
+                              </div>
+                            </div>
+
+                            <div className="space-y-2 text-xs sm:text-sm">
+                              <div>
+                                <strong className={isDark ? "text-slate-300" : "text-slate-700"}>प्रसंग / संदर्भ (Context): </strong>
+                                <span className={isDark ? "text-slate-400" : "text-slate-600"}>{dial.context}</span>
+                              </div>
+                              <div className={`p-3 rounded-xl border ${
+                                isDark ? "bg-rose-950/20 border-rose-900/30 text-rose-300" : "bg-rose-50 border-rose-200 text-rose-900"
+                              }`}>
+                                <div className="text-xs font-bold uppercase tracking-wider text-rose-600 mb-1 flex items-center gap-1.5">
+                                  <Lightbulb className="w-3.5 h-3.5" />
+                                  <span>बोर्ड परीक्षा में महत्व (Board Exam Significance):</span>
+                                </div>
+                                <p className="text-xs sm:text-sm leading-relaxed">
+                                  {dial.boardSignificance}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
-              {/* Sub-tab 2: Stanzas (Poetry) */}
+              {/* ===================================================================== */}
+              {/* Sub-tab 4: Stanzas (Poetry) */}
+              {/* ===================================================================== */}
               {activeLitSubTab === "stanzas" && currentChapter.stanzas && (
-                <div className="space-y-4">
+                <div className="space-y-5">
                   {currentChapter.stanzas.map((st) => (
                     <div
                       key={st.stanzaNumber}
-                      className={`p-5 rounded-2xl border ${
+                      className={`p-6 rounded-2xl border ${
                         isDark ? "bg-slate-900/60 border-slate-800" : "bg-white border-amber-200/80 shadow-sm"
                       }`}
                     >
                       <div className="flex items-center justify-between border-b pb-2.5 border-amber-500/20">
-                        <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                        <span className="text-xs font-bold px-3 py-1 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
                           पद्यांश / साखी / काव्यांश संख्या {st.stanzaNumber}
                         </span>
                       </div>
 
                       {/* Original Stanza Lines */}
-                      <div className={`my-4 p-4 rounded-xl border text-center font-serif text-base sm:text-lg leading-loose tracking-wide ${
+                      <div className={`my-4 p-5 rounded-xl border text-center font-serif text-base sm:text-xl leading-loose tracking-wide ${
                         isDark ? "bg-amber-950/20 border-amber-800/40 text-amber-200" : "bg-amber-50/70 border-amber-200 text-amber-950"
                       }`}>
                         {st.originalLines.map((line, lidx) => (
@@ -577,11 +793,11 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                       </div>
 
                       {/* Bhavarth */}
-                      <div className="space-y-2 mt-3">
+                      <div className="space-y-2 mt-4">
                         <h5 className="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">
                           सरल हिंदी भावार्थ (Explanation)
                         </h5>
-                        <p className={`text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        <p className={`text-base sm:text-lg leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                           {st.bhavarth}
                         </p>
                       </div>
@@ -592,11 +808,11 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                           <h5 className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 mb-2">
                             काव्यगत विशेषताएँ एवं शिल्प सौंदर्य (Alankar & Poetic Devices)
                           </h5>
-                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {st.vishesh.map((v, vidx) => (
-                              <li key={vidx} className="text-xs flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
+                              <li key={vidx} className="text-xs sm:text-sm flex items-center gap-2 text-slate-600 dark:text-slate-300">
                                 <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                                {v}
+                                <span>{v}</span>
                               </li>
                             ))}
                           </ul>
@@ -607,138 +823,145 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                 </div>
               )}
 
-              {/* Sub-tab 3: Vocabulary */}
+              {/* ===================================================================== */}
+              {/* Sub-tab 5: Vocabulary */}
+              {/* ===================================================================== */}
               {activeLitSubTab === "vocab" && (
                 <div className={`p-6 rounded-2xl border ${
                   isDark ? "bg-slate-900/60 border-slate-800" : "bg-white border-amber-100 shadow-sm"
                 }`}>
-                  <h4 className="text-lg font-bold text-rose-600 dark:text-rose-400 mb-4 flex items-center gap-2">
+                  <h4 className="text-xl font-bold text-rose-600 dark:text-rose-400 mb-4 flex items-center gap-2 pb-2 border-b border-rose-500/20">
                     <Feather className="w-5 h-5" />
-                    कठिन शब्दार्थ एवं संदर्भ (NCERT Vocabulary & Meanings)
+                    <span>कठिन शब्दार्थ एवं संदर्भ (NCERT Vocabulary & Meanings - {currentChapter.wordMeanings.length})</span>
                   </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     {currentChapter.wordMeanings.map((wm, widx) => (
                       <div
                         key={widx}
-                        className={`p-3 rounded-xl border flex items-start justify-between gap-3 ${
-                          isDark ? "bg-slate-900/40 border-slate-800" : "bg-amber-50/30 border-amber-100"
+                        className={`p-3.5 rounded-xl border flex items-start justify-between gap-3 ${
+                          isDark ? "bg-slate-900/40 border-slate-800" : "bg-amber-50/30 border-amber-200/70"
                         }`}
                       >
-                        <span className="font-bold text-sm text-amber-600 dark:text-amber-400">{wm.word}</span>
-                        <span className={`text-xs text-right ${isDark ? "text-slate-300" : "text-slate-600"}`}>{wm.meaning}</span>
+                        <span className="font-bold text-base text-amber-600 dark:text-amber-400">{wm.word}</span>
+                        <span className={`text-sm text-right ${isDark ? "text-slate-200" : "text-slate-700"}`}>{wm.meaning}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Sub-tab 4: Board QA */}
+              {/* ===================================================================== */}
+              {/* Sub-tab 6: Board Q&A & RTC */}
+              {/* ===================================================================== */}
               {activeLitSubTab === "boardqa" && (
-                <div className="space-y-4">
-                  {currentChapter.boardQAs.map((qa, qidx) => (
-                    <div
-                      key={qa.id}
-                      className={`p-5 rounded-2xl border ${
-                        isDark ? "bg-slate-900/60 border-slate-800" : "bg-white border-amber-200/80 shadow-sm"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between gap-2 border-b pb-2.5 border-amber-500/20">
-                        <span className="text-xs font-bold px-2 py-0.5 rounded bg-rose-500/10 text-rose-600 border border-rose-500/20">
-                          प्रश्न {qidx + 1} • {qa.marks} अंक ({qa.wordLimit})
-                        </span>
-                        <span className="text-xs text-amber-600 dark:text-amber-400 font-medium">
-                          CBSE संभावित प्रश्न
-                        </span>
-                      </div>
+                <div className="space-y-6">
+                  {/* Board QAs */}
+                  <div className="space-y-4">
+                    {currentChapter.boardQAs.map((qa, qidx) => (
+                      <div
+                        key={qa.id}
+                        className={`p-6 rounded-2xl border ${
+                          isDark ? "bg-slate-900/60 border-slate-800" : "bg-white border-amber-200/80 shadow-sm"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-2 border-b pb-2.5 border-amber-500/20">
+                          <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-rose-500/10 text-rose-600 border border-rose-500/20">
+                            प्रश्न {qidx + 1} • {qa.marks} अंक ({qa.wordLimit})
+                          </span>
+                          <span className="text-xs text-amber-600 dark:text-amber-400 font-medium">
+                            CBSE संभावित प्रश्न
+                          </span>
+                        </div>
 
-                      <h4 className="text-base font-bold mt-3 text-slate-900 dark:text-white">
-                        {qa.question}
+                        <h4 className="text-lg font-bold mt-3 text-slate-900 dark:text-white leading-relaxed">
+                          {qa.question}
+                        </h4>
+
+                        <div className="mt-3 space-y-2">
+                          <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                            आदर्श उत्तर (Model Board Answer):
+                          </div>
+                          <p className={`text-base leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                            {qa.modelAnswer}
+                          </p>
+                        </div>
+
+                        {/* Key Points */}
+                        <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-slate-800">
+                          <div className="text-xs font-bold text-amber-600 dark:text-amber-400 mb-1.5">
+                            मुख्य अंक-दायी बिंदु (Key Marking Points):
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {qa.keyPoints.map((kp, kidx) => (
+                              <span key={kidx} className="text-xs px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 font-medium">
+                                ✓ {kp}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Examiner Tip */}
+                        <div className={`mt-3.5 p-3 rounded-xl border text-xs sm:text-sm flex items-start gap-2.5 ${
+                          isDark ? "bg-rose-950/20 border-rose-900/40 text-rose-300" : "bg-rose-50 border-rose-200 text-rose-800"
+                        }`}>
+                          <Lightbulb className="w-4 h-4 shrink-0 mt-0.5 text-rose-500" />
+                          <div>
+                            <strong>परीक्षक की गुप्त टिप (Examiner Secret Tip):</strong> {qa.examinerTip}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* RTC MCQs if available */}
+                  {currentChapter.rtcMcqs && (
+                    <div className={`p-6 sm:p-7 rounded-2xl border ${
+                      isDark ? "bg-slate-900/60 border-slate-800" : "bg-white border-amber-100 shadow-sm"
+                    }`}>
+                      <h4 className="text-xl font-bold text-rose-600 dark:text-rose-400 mb-3 flex items-center gap-2 pb-2 border-b border-rose-500/20">
+                        <FileText className="w-5 h-5" />
+                        <span>पठित गद्यांश / काव्यांश पर आधारित बहुविकल्पीय प्रश्न (RTC MCQs)</span>
                       </h4>
 
-                      <div className="mt-3 space-y-2">
-                        <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                          आदर्श उत्तर (Model Board Answer):
-                        </div>
-                        <p className={`text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                          {qa.modelAnswer}
-                        </p>
-                      </div>
-
-                      {/* Key Points */}
-                      <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-slate-800">
-                        <div className="text-xs font-bold text-amber-600 dark:text-amber-400 mb-1.5">
-                          मुख्य अंक-दायी बिंदु (Key Marking Points):
-                        </div>
-                        <div className="flex flex-wrap gap-1.5">
-                          {qa.keyPoints.map((kp, kidx) => (
-                            <span key={kidx} className="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20">
-                              ✓ {kp}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Examiner Tip */}
-                      <div className={`mt-3 p-2.5 rounded-xl border text-xs flex items-start gap-2 ${
-                        isDark ? "bg-rose-950/20 border-rose-900/40 text-rose-300" : "bg-rose-50 border-rose-200 text-rose-800"
+                      <div className={`p-5 rounded-xl border mb-6 text-base leading-relaxed font-serif ${
+                        isDark ? "bg-slate-800/40 border-slate-700 text-slate-200" : "bg-amber-50/60 border-amber-200 text-slate-800"
                       }`}>
-                        <Lightbulb className="w-4 h-4 shrink-0 mt-0.5 text-rose-500" />
-                        <div>
-                          <strong>परीक्षक की टिप (Examiner's Secret):</strong> {qa.examinerTip}
-                        </div>
+                        <span className="text-xs font-bold uppercase tracking-wider block text-amber-600 mb-1.5">गद्यांश / काव्यांश:</span>
+                        "{currentChapter.rtcMcqs.passage}"
+                      </div>
+
+                      <div className="space-y-6">
+                        {currentChapter.rtcMcqs.questions.map((q, qidx) => (
+                          <div key={qidx} className="border-b pb-4 last:border-0 border-slate-200 dark:border-slate-800">
+                            <p className="font-semibold text-base mb-3 text-slate-900 dark:text-white">
+                              प्र. {qidx + 1}. {q.question}
+                            </p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              {q.options.map((opt, oidx) => {
+                                const isCorrect = oidx === q.correctOption;
+                                return (
+                                  <div
+                                    key={oidx}
+                                    className={`p-3 rounded-xl border text-sm flex items-center justify-between ${
+                                      isCorrect
+                                        ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-600 dark:text-emerald-400 font-semibold"
+                                        : isDark ? "bg-slate-800/40 border-slate-800 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"
+                                    }`}
+                                  >
+                                    <span>({String.fromCharCode(65 + oidx)}) {opt}</span>
+                                    {isCorrect && <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2 italic">
+                              व्याख्या: {q.explanation}
+                            </p>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Sub-tab 5: RTC MCQs */}
-              {activeLitSubTab === "rtc" && currentChapter.rtcMcqs && (
-                <div className={`p-6 rounded-2xl border ${
-                  isDark ? "bg-slate-900/60 border-slate-800" : "bg-white border-amber-100 shadow-sm"
-                }`}>
-                  <h4 className="text-lg font-bold text-rose-600 dark:text-rose-400 mb-3 flex items-center gap-2">
-                    <FileText className="w-5 h-5" />
-                    पठित गद्यांश / काव्यांश पर आधारित बहुविकल्पीय प्रश्न
-                  </h4>
-
-                  <div className={`p-4 rounded-xl border mb-6 text-sm leading-relaxed font-serif ${
-                    isDark ? "bg-slate-800/40 border-slate-700 text-slate-200" : "bg-amber-50/60 border-amber-200 text-slate-800"
-                  }`}>
-                    <span className="text-xs font-bold uppercase tracking-wider block text-amber-600 mb-1">गद्यांश / काव्यांश:</span>
-                    "{currentChapter.rtcMcqs.passage}"
-                  </div>
-
-                  <div className="space-y-6">
-                    {currentChapter.rtcMcqs.questions.map((q, qidx) => (
-                      <div key={qidx} className="border-b pb-4 last:border-0 border-slate-200 dark:border-slate-800">
-                        <p className="font-semibold text-sm mb-3 text-slate-900 dark:text-white">
-                          प्र. {qidx + 1}. {q.question}
-                        </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          {q.options.map((opt, oidx) => {
-                            const isCorrect = oidx === q.correctOption;
-                            return (
-                              <div
-                                key={oidx}
-                                className={`p-2.5 rounded-lg border text-xs flex items-center justify-between ${
-                                  isCorrect
-                                    ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-600 dark:text-emerald-400 font-semibold"
-                                    : isDark ? "bg-slate-800/40 border-slate-800 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"
-                                }`}
-                              >
-                                <span>({String.fromCharCode(65 + oidx)}) {opt}</span>
-                                {isCorrect && <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />}
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 italic">
-                          व्याख्या: {q.explanation}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                  )}
                 </div>
               )}
             </div>
