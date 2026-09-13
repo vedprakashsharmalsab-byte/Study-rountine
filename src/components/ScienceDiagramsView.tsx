@@ -32,6 +32,7 @@ import {
   Activity
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
+import BiologyVisualSchematic from "@/components/BiologyVisualSchematics";
 import {
   SCIENCE_DIAGRAMS_MASTER,
   NCERT_PHYSICS_DIAGRAMS_VAULT,
@@ -683,6 +684,15 @@ export default function ScienceDiagramsView({
                       <span>Practice</span>
                     </button>
                   )}
+                </div>
+
+                {/* 1. VISUAL ANATOMICAL & GENETIC DIAGRAM SCHEMATIC */}
+                <div className="p-4 sm:p-5 border-b border-current/10 bg-emerald-500/[0.02]">
+                  <BiologyVisualSchematic
+                    id={diag.id}
+                    title={diag.title}
+                    isDark={isDark}
+                  />
                 </div>
 
                 {/* CARD BODY */}
