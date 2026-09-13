@@ -198,6 +198,7 @@ function preprocessMathContent(raw: string): string {
       const words = out.replace(/\\[a-zA-Z]+(\{[^}]*\})?/g, '').trim().split(/\s+/).filter(w => /^[a-zA-Z]{4,}$/.test(w));
       if (words.length <= 2) {
          let stripped = out.replace(/\$/g, '');
+         stripped = stripped.replace(/^(Prove:|Prove that|Show that:|Show that|Evaluate:|Evaluate|Find:|Find|Solve:|Solve|Simplify:|Simplify|Calculate:|Calculate|Determine:|Determine)\s+/i, '\\text{$1} ');
          return `$${stripped}$`;
       }
     }
