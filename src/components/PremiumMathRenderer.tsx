@@ -29,39 +29,10 @@ const MATH_INDICATORS = /[\$\\\{\}\^_\=\+\-\*\/]/;
 function convertPlainMathToLatex(text: string): string {
     let result = text;
 
-    const symbolMap: Record<string, string> = {
-        'theta': '\\theta',
-        'pi': '\\pi',
-        'alpha': '\\alpha',
-        'beta': '\\beta',
-        'gamma': '\\gamma',
-        '!=': '\\neq',
-        '<=': '\\leq',
-        '>=': '\\geq',
-        '+-': '\\pm'
-    };
-
-    for (const [key, val] of Object.entries(symbolMap)) {
-        if (key.match(/^[a-z]+$/i)) {
-            const regex = new RegExp(`\\b${key}\\b`, 'gi');
-            result = result.replace(regex, val);
-        } else {
-            result = result.split(key).join(val);
-        }
-    }
-
-    result = result.replace(/\b(sin|cos|tan|cosec|sec|cot)\b(\^2|\^3)?/gi, (match, func, power) => {
-        return `\\${func.toLowerCase()}${power || ''}`;
-    });
-
-    result = result.replace(/sqrt\(([^()]+)\)/gi, '\\sqrt{$1}');
-    
-    // Convert existing degree symbol to latex BEFORE adding new ones
+    // Convert degrees
     result = result.replace(/°/g, '^\\circ');
 
-    // Add degree symbol to numbers after trig functions
-    result = result.replace(/(\\[a-z]+\^?[0-9]*\s+)([0-9]+)\b(?!\^\\circ)/g, '$1$2^\\circ');
-
+    // Fractions
     function extractOperandLeft(str: string, index: number): { text: string, start: number } {
         let start = index - 1;
         while (start >= 0 && str[start] === ' ') start--;
@@ -78,9 +49,8 @@ function convertPlainMathToLatex(text: string): string {
             return { text: str.substring(i + 1, start + 1), start: i + 1 };
         } else {
             let i = start;
-            while (i >= 0 && !/[\s\+\-\=\(\)]/.test(str[i])) i--;
+            while (i >= 0 && !/[\s\+\-\=\(\)\,:]/.test(str[i])) i--;
             let wordStart = i + 1;
-            
             let j = i;
             while (j >= 0 && str[j] === ' ') j--;
             if (j >= 0 && /[a-zA-Z0-9\\]/.test(str[j])) {
@@ -97,6 +67,18 @@ function convertPlainMathToLatex(text: string): string {
         let end = index + 1;
         while (end < str.length && str[end] === ' ') end++;
         if (end >= str.length) return { text: "", end: str.length };
+
+        if (str.substring(end).startsWith('sqrt(')) {
+            let i = end + 4; 
+            let brackets = 1;
+            i++;
+            while (i < str.length && brackets > 0) {
+                if (str[i] === '(') brackets++;
+                if (str[i] === ')') brackets--;
+                i++;
+            }
+            return { text: str.substring(end, i), end: i };
+        }
 
         if (str[end] === '(') {
             let brackets = 1;
@@ -115,13 +97,12 @@ function convertPlainMathToLatex(text: string): string {
                 while (i < str.length && /[0-9a-zA-Z\^\{\}\\]/.test(str[i])) i++;
                 return { text: str.substring(end, i), end: i };
             }
-            while (i < str.length && !/[\s\+\-\=\(\)]/.test(str[i])) i++;
+            while (i < str.length && !/[\s\+\-\=\(\)\,:]/.test(str[i])) i++;
             return { text: str.substring(end, i), end: i };
         }
     }
 
     let out = result;
-    // Ensure we don't process URLs (like http://)
     let slashIdx = out.indexOf('/');
     while (slashIdx !== -1) {
         if (slashIdx > 0 && out[slashIdx - 1] === ':') {
@@ -141,61 +122,91 @@ function convertPlainMathToLatex(text: string): string {
         if (num.startsWith('(') && num.endsWith(')')) num = num.slice(1, -1);
         
         let den = right.text.trim();
-        if (den.startsWith('(') && den.endsWith(')')) den = den.slice(1, -1);
+        let isSqrt = false;
+        if (den.startsWith('sqrt(') && den.endsWith(')')) {
+            den = den.substring(5, den.length - 1);
+            isSqrt = true;
+        } else if (den.startsWith('(') && den.endsWith(')')) {
+            den = den.slice(1, -1);
+        }
+        if (isSqrt) den = `\\sqrt{${den}}`;
 
-        const frac = `\\frac{${num}}{${den}}`;
+        const frac = `$\\displaystyle \\frac{${num}}{${den}}$`;
         out = out.substring(0, left.start) + frac + out.substring(right.end);
         
         slashIdx = out.indexOf('/', left.start + frac.length);
     }
     
-    // To ensure equations like 2x+5=15 or x^2+5x=0 are caught, we explicitly wrap standalone equations 
-    // if they contain '=', '+', '-', '^' and aren't already wrapped.
-    // However, PremiumMathRenderer already auto-wraps blocks entirely made of math.
+    // sqrt
+    out = out.replace(/(?:\\)?\bsqrt\(([^()]+)\)/gi, '$\\sqrt{$1}$');
+
+    // Trig
+    out = out.replace(/(?:\\)?\b(sin|cos|tan|cosec|sec|cot)\b(\^2|\^3)?\s*([A-Za-z0-9]+(\^\\circ)?)/gi, (match, func, power, angle) => {
+        let ang = angle;
+        if (/^[0-9]+$/.test(ang)) ang = `${ang}^\\circ`;
+        return `$\\${func.toLowerCase()}${power || ''} ${ang}$`;
+    });
+
+    // Greek letters and operators
+    const symbolMap: Record<string, string> = {
+        'theta': '$\\theta$',
+        'pi': '$\\pi$',
+        'alpha': '$\\alpha$',
+        'beta': '$\\beta$',
+        'gamma': '$\\gamma$',
+        '!=': '$\\neq$',
+        '<=': '$\\leq$',
+        '>=': '$\\geq$',
+        '+-': '$\\pm$'
+    };
+    for (const [key, val] of Object.entries(symbolMap)) {
+        if (key.match(/^[a-z]+$/i)) {
+            const regex = new RegExp(`(?:\\\\)?\\b${key}\\b`, 'gi');
+            out = out.replace(regex, val);
+        } else {
+            out = out.split(key).join(val);
+        }
+    }
     
+    // Clean up overlapping $ 
+    out = out.replace(/\$([^\$]+)\$\s*\$([^\$]+)\$/g, '$$$1 $2$$');
+    out = out.replace(/\$\s*\$/g, ' ');
+
     return out;
 }
 
 function preprocessMathContent(raw: string): string {
   if (!raw || typeof raw !== 'string') return '';
   
-  // Clean literal "\n" strings into real newlines
   let text = raw.replace(/\\n(?![a-zA-Z])/g, '\n').trim();
-
-  // Normalize duplicate backslashes immediately attached to LaTeX commands
-  // (e.g. \\sin, \\cos, \\frac, \\sqrt, \\circ, \\theta, \\quad, \\text, \\csc, \\sec, \\cot)
-  // preventing accidental newline breaks inside math expressions from JSX attributes or double JSON serialization.
   text = text.replace(/\\{2,}([a-zA-Z]+)/g, '\\$1');
 
-  // 1. If text is entirely wrapped in $$...$$ or single $...$
   if (/^\$\$[\s\S]*\$\$$/.test(text) || (/^\$[^\$]+\$$/.test(text) && !text.slice(1, -1).includes('$'))) {
     return text;
   }
 
-  // 2. If text contains no $ at all, check if it's a naked LaTeX formula
-  if (!text.includes('$')) {
-    const hasMathCommands = /\\[a-zA-Z]+/.test(text);
-    if (hasMathCommands) {
-      const words = text.replace(/\\[a-zA-Z]+(\{[^}]*\})?/g, '').trim().split(/\s+/).filter(w => /^[a-zA-Z]{4,}$/.test(w));
-      if (words.length <= 2) {
-        return `$${text}$`;
-      }
-    }
-  }
-
-  // 3. For mixed text, split by math delimiters ($$...$$ or $...$)
   const tokens = text.split(/(\$\$[\s\S]*?\$\$|\$[^\$]+?\$)/g);
   const processedTokens = tokens.map(token => {
-    // If it's a math block, preserve it as-is
     if (token.startsWith('$')) {
       return token;
     }
-    // Auto-wrap bare \frac, \dfrac, and \sqrt in non-math blocks
-    let nonMath = convertPlainMathToLatex(token).replace(/(\\(?:d?frac)\{[^{}]+\}\{[^{}]+\})/g, '$$$1$$')
-                       .replace(/(\\sqrt(?:\[[0-9]+\])?\{[^{}]+\})/g, '$$$1$$');
-    // Preserve markdown newlines only in non-math text
-    nonMath = nonMath.replace(/([^\n])\n([^\n])/g, '$1  \n$2');
-    return nonMath;
+    
+    let out = convertPlainMathToLatex(token);
+
+    const hasMathCommands = /\\[a-zA-Z]+/.test(out);
+    if (hasMathCommands) {
+      const words = out.replace(/\\[a-zA-Z]+(\{[^}]*\})?/g, '').trim().split(/\s+/).filter(w => /^[a-zA-Z]{4,}$/.test(w));
+      if (words.length <= 2) {
+         let stripped = out.replace(/\$/g, '');
+         return `$${stripped}$`;
+      }
+    }
+
+    out = out.replace(/(?<!\$)((\\(?:d?frac)\{[^{}]+\}\{[^{}]+\}))(?!\$)/g, '$$$1$$');
+    out = out.replace(/(?<!\$)(\\sqrt(?:\[[0-9]+\])?\{[^{}]+\})(?!\$)/g, '$$$1$$');
+    
+    out = out.replace(/([^\n])\n([^\n])/g, '$1  \n$2');
+    return out;
   });
 
   return processedTokens.join('');
