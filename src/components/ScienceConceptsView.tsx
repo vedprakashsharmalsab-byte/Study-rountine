@@ -722,7 +722,9 @@ export default function ScienceConceptsView({
         {prevChapter ? (
           <button
             onClick={() => handleSelectChapter(prevChapter.no)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold border border-white/10 hover:border-teal-400/40 text-slate-300 hover:text-white transition-all cursor-pointer w-full sm:w-auto justify-center"
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer w-full sm:w-auto justify-center ${
+              isDark ? "border-white/10 hover:border-teal-400/40 text-slate-300 hover:text-white" : "border-slate-200 hover:border-teal-400 text-slate-700 bg-slate-50 hover:bg-slate-100"
+            }`}
           >
             <ArrowLeft className="w-4 h-4 text-teal-400" />
             <span>Previous: Ch {prevChapter.no} ({prevChapter.shortName})</span>
@@ -744,7 +746,9 @@ export default function ScienceConceptsView({
         {nextChapter ? (
           <button
             onClick={() => handleSelectChapter(nextChapter.no)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold border border-white/10 hover:border-teal-400/40 text-slate-300 hover:text-white transition-all cursor-pointer w-full sm:w-auto justify-center"
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer w-full sm:w-auto justify-center ${
+              isDark ? "border-white/10 hover:border-teal-400/40 text-slate-300 hover:text-white" : "border-slate-200 hover:border-teal-400 text-slate-700 bg-slate-50 hover:bg-slate-100"
+            }`}
           >
             <span>Next: Ch {nextChapter.no} ({nextChapter.shortName})</span>
             <ArrowRight className="w-4 h-4 text-teal-400" />

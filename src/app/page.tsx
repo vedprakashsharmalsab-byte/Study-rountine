@@ -2219,20 +2219,18 @@ export default function CBSECommandCenter() {
                   key={cat.id}
                   onClick={() => {
                     playSound("click");
-                    if (activeCategory !== cat.id) {
-                      if (cat.id === "concepts") {
-                        if (commandSubjectId === "sst") {
-                          setConceptsSubject("sst");
-                          setConceptsChapterNo(1);
-                        } else if (commandSubjectId === "science") {
-                          setConceptsSubject("science");
-                          setConceptsChapterNo(1);
-                        } else {
-                          setConceptsSubject("math");
-                        }
+                    if (cat.id === "concepts") {
+                      if (commandSubjectId === "sst") {
+                        setConceptsSubject("sst");
+                        setConceptsChapterNo(1);
+                      } else if (commandSubjectId === "science") {
+                        setConceptsSubject("science");
+                        setConceptsChapterNo(1);
+                      } else {
+                        setConceptsSubject("math");
                       }
-                      setActiveTab(cat.defaultTab as any);
                     }
+                    setActiveTab(cat.defaultTab as any);
                   }}
                   className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-[0.98] ${
                     isCatActive
@@ -2613,7 +2611,7 @@ export default function CBSECommandCenter() {
                     <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>Curriculum Mastery Grip</span>
                     <span className="text-amber-400 font-black">{testSeriesPercentage}% ({testSeriesCompleted}/{testSeriesTotal} Topics)</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-black/40 overflow-hidden border border-white/5">
+                  <div className={`w-full h-2 rounded-full overflow-hidden border ${isDark ? "bg-black/40 border-white/5" : "bg-slate-200 border-slate-300"}`}>
                     <div 
                       className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]"
                       style={{ width: `${testSeriesPercentage}%` }}
@@ -2665,7 +2663,7 @@ export default function CBSECommandCenter() {
                     <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>All-Subject Syllabus Grip</span>
                     <span className="text-cyan-400 font-black">{overallSyllabusPercentage}% ({completedCount}/{totalTopics} NCERT Sub-Topics)</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-black/40 overflow-hidden border border-white/5">
+                  <div className={`w-full h-2 rounded-full overflow-hidden border ${isDark ? "bg-black/40 border-white/5" : "bg-slate-200 border-slate-300"}`}>
                     <div 
                       className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-500 shadow-[0_0_10px_rgba(6,182,212,0.5)]"
                       style={{ width: `${overallSyllabusPercentage}%` }}
@@ -2719,7 +2717,7 @@ export default function CBSECommandCenter() {
                 ? "bg-gradient-to-b from-[#101626] to-[#0a0d18] border-white/10 shadow-xl" 
                 : "bg-white border-slate-200 shadow-md"
             }`}>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-4 border-white/[0.08]">
+              <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-4 ${isDark ? "border-white/[0.08]" : "border-slate-200"}`}>
                 <div>
                   <h3 className={`text-base sm:text-lg font-black flex items-center gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
                     <BookOpen className="w-4 h-4 text-amber-500 shrink-0" />
@@ -2857,7 +2855,7 @@ export default function CBSECommandCenter() {
               </div>
 
               {/* SAMPLE TEST SERIES QUESTIONS FOR THIS EXAM */}
-              <div className="pt-4 border-t border-white/[0.08] space-y-3.5">
+              <div className={`pt-4 border-t space-y-3.5 ${isDark ? "border-white/[0.08]" : "border-slate-200"}`}>
                 <h4 className="text-xs font-bold uppercase tracking-wider font-mono text-amber-500 flex items-center gap-1.5">
                   <Zap className="w-3.5 h-3.5" /> High-Probability Board Sample Questions
                 </h4>
@@ -3911,13 +3909,13 @@ export default function CBSECommandCenter() {
 
             {isAnalyzingVault && (
               <div className={`p-8 rounded-3xl border space-y-4 ${isDark ? "bg-black/40 border-white/5" : "bg-slate-50 border-slate-200"}`}>
-                <div className="flex items-center gap-3 text-emerald-400 mb-6">
-                  <div className="w-5 h-5 rounded-full border-2 border-emerald-500 border-t-transparent animate-spin" />
+                <div className={`flex items-center gap-3 mb-6 ${isDark ? "text-emerald-400" : "text-emerald-600"}`}>
+                  <div className={`w-5 h-5 rounded-full border-2 border-t-transparent animate-spin ${isDark ? "border-emerald-500" : "border-emerald-600"}`} />
                   <span className="font-bold tracking-wider uppercase text-sm">Deep PDF Analysis Engine Running...</span>
                 </div>
                 <div className="space-y-2 font-mono text-xs sm:text-sm">
                   {vaultAnalysisLogs.map((log, i) => (
-                    <div key={i} className={`${log.startsWith("✓") ? "text-emerald-400" : log.startsWith("❌") ? "text-red-400" : isDark ? "text-slate-400" : "text-slate-500"} animate-fade-in`}>
+                    <div key={i} className={`${log.startsWith("✓") ? (isDark ? "text-emerald-400" : "text-emerald-600") : log.startsWith("❌") ? (isDark ? "text-red-400" : "text-red-600") : (isDark ? "text-slate-400" : "text-slate-500")} animate-fade-in`}>
                       {log}
                     </div>
                   ))}
@@ -3971,13 +3969,17 @@ export default function CBSECommandCenter() {
                       : "bg-gradient-to-r from-emerald-50/90 via-white to-teal-50/90 border-emerald-200 shadow-sm"
                   }`}>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center font-black text-sm shrink-0">
-                        <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                      <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-black text-sm shrink-0 border ${
+                        isDark ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" : "bg-emerald-100 text-emerald-700 border-emerald-300"
+                      }`}>
+                        <CheckCircle2 className="w-5 h-5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-sm font-bold tracking-tight">Interactive MCQ Self-Test Engine</h3>
-                          <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-black bg-emerald-500 text-slate-950">
+                          <h3 className={`text-sm font-bold tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>Interactive MCQ Self-Test Engine</h3>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-black ${
+                            isDark ? "bg-emerald-500 text-slate-950" : "bg-emerald-600 text-white"
+                          }`}>
                             Tap to Check
                           </span>
                         </div>
@@ -3991,15 +3993,21 @@ export default function CBSECommandCenter() {
                       <div className={`px-3 py-1.5 rounded-xl border text-xs font-mono font-bold flex items-center gap-1.5 ${
                         isDark ? "bg-black/40 border-white/10 text-slate-300" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
                       }`}>
-                        <span className="text-slate-400">Attempted:</span>
-                        <span className="text-emerald-400">{mcqProgressStats.attempted}/{mcqProgressStats.total}</span>
+                        <span className={isDark ? "text-slate-400" : "text-slate-500"}>Attempted:</span>
+                        <span className={isDark ? "text-emerald-400" : "text-emerald-600"}>{mcqProgressStats.attempted}/{mcqProgressStats.total}</span>
                       </div>
 
                       <div className={`px-3 py-1.5 rounded-xl border text-xs font-mono font-bold flex items-center gap-1.5 ${
                         isDark ? "bg-black/40 border-white/10 text-slate-300" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
                       }`}>
-                        <span className="text-slate-400">Accuracy:</span>
-                        <span className={mcqProgressStats.accuracy >= 80 ? "text-emerald-400 font-black" : mcqProgressStats.accuracy >= 50 ? "text-amber-400 font-black" : "text-slate-300"}>
+                        <span className={isDark ? "text-slate-400" : "text-slate-500"}>Accuracy:</span>
+                        <span className={
+                          mcqProgressStats.accuracy >= 80 
+                            ? (isDark ? "text-emerald-400 font-black" : "text-emerald-600 font-black") 
+                            : mcqProgressStats.accuracy >= 50 
+                            ? (isDark ? "text-amber-400 font-black" : "text-amber-600 font-black") 
+                            : (isDark ? "text-slate-400" : "text-slate-500")
+                        }>
                           {mcqProgressStats.accuracy}%
                         </span>
                       </div>
@@ -4007,7 +4015,7 @@ export default function CBSECommandCenter() {
                       <div className={`px-3 py-1.5 rounded-xl border text-xs font-mono font-bold flex items-center gap-1.5 ${
                         isDark ? "bg-emerald-950/40 border-emerald-500/30 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-800 shadow-2xs"
                       }`}>
-                        <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                        <Sparkles className={`w-3.5 h-3.5 ${isDark ? "text-amber-400" : "text-amber-500"}`} />
                         <span>+{mcqProgressStats.correct * 10} XP</span>
                       </div>
 
@@ -4182,13 +4190,17 @@ export default function CBSECommandCenter() {
                                     <div className="leading-relaxed block break-words w-full overflow-hidden"><PremiumMathRenderer content={opt} isDark={isDark} /></div>
                                     {isThisSelected && (
                                       <span className={`inline-flex items-center gap-1 text-[10px] font-mono mt-1 font-bold ${
-                                        isAnswerCorrect ? "text-emerald-400" : "text-rose-400"
+                                        isAnswerCorrect 
+                                          ? (isDark ? "text-emerald-400" : "text-emerald-700") 
+                                          : (isDark ? "text-rose-400" : "text-rose-700")
                                       }`}>
                                         {isAnswerCorrect ? "✓ Your Selection (Correct!)" : "✗ Your Selection (Incorrect)"}
                                       </span>
                                     )}
                                     {!isThisSelected && isThisCorrect && hasAnswered && (
-                                      <span className="inline-flex items-center gap-1 text-[10px] font-mono mt-1 font-bold text-emerald-400">
+                                      <span className={`inline-flex items-center gap-1 text-[10px] font-mono mt-1 font-bold ${
+                                        isDark ? "text-emerald-400" : "text-emerald-700"
+                                      }`}>
                                         ✓ Official CBSE Correct Answer
                                       </span>
                                     )}
@@ -4211,9 +4223,9 @@ export default function CBSECommandCenter() {
                             }`}>
                               <div className="flex items-center gap-2.5 min-w-0">
                                 {isAnswerCorrect ? (
-                                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                                  <CheckCircle2 className={`w-5 h-5 shrink-0 ${isDark ? "text-emerald-400" : "text-emerald-600"}`} />
                                 ) : (
-                                  <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                                  <AlertCircle className={`w-5 h-5 shrink-0 ${isDark ? "text-rose-400" : "text-rose-600"}`} />
                                 )}
                                 <div className="text-xs">
                                   <p className="font-bold">
@@ -4240,7 +4252,7 @@ export default function CBSECommandCenter() {
                                         : "bg-white border-rose-300 text-rose-800 hover:bg-rose-100 shadow-2xs"
                                     }`}
                                   >
-                                    <Flame className="w-3.5 h-3.5 text-rose-500" />
+                                    <Flame className={`w-3.5 h-3.5 ${isDark ? "text-rose-500" : "text-rose-600"}`} />
                                     <span>Log to Mistakes</span>
                                   </button>
                                 )}
@@ -4667,7 +4679,9 @@ export default function CBSECommandCenter() {
                           </span>
                           
                           {isResolved && (
-                            <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 font-mono">
+                            <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase border flex items-center gap-1.5 font-mono ${
+                              isDark ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30" : "bg-emerald-50 text-emerald-700 border-emerald-200"
+                            }`}>
                               <CheckCircle2 className="w-3.5 h-3.5" /> Resolved
                             </span>
                           )}
@@ -6106,20 +6120,18 @@ export default function CBSECommandCenter() {
                 key={cat.id}
                 onClick={() => {
                   playSound("click");
-                  if (activeCategory !== cat.id) {
-                    if (cat.id === "concepts") {
-                      if (commandSubjectId === "sst") {
-                        setConceptsSubject("sst");
-                        setConceptsChapterNo(1);
-                      } else if (commandSubjectId === "science") {
-                        setConceptsSubject("science");
-                        setConceptsChapterNo(1);
-                      } else {
-                        setConceptsSubject("math");
-                      }
+                  if (cat.id === "concepts") {
+                    if (commandSubjectId === "sst") {
+                      setConceptsSubject("sst");
+                      setConceptsChapterNo(1);
+                    } else if (commandSubjectId === "science") {
+                      setConceptsSubject("science");
+                      setConceptsChapterNo(1);
+                    } else {
+                      setConceptsSubject("math");
                     }
-                    setActiveTab(cat.defaultTab as any);
                   }
+                  setActiveTab(cat.defaultTab as any);
                 }}
                 className={`flex-1 py-1.5 flex flex-col items-center justify-center gap-0.5 rounded-2xl transition-all cursor-pointer touch-manipulation active:scale-95 ${
                   isCatActive
