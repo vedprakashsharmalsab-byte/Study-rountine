@@ -786,10 +786,10 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi">(() => {
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams">(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_active_tab");
-      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi"];
+      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams"];
       if (saved && validTabs.includes(saved)) {
         return saved as any;
       }
