@@ -694,8 +694,8 @@ export const MathDiagramFigure: React.FC<MathDiagramFigureProps> = ({
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
             <div>
-              {title && <h4 className={`text-sm font-semibold ${textColor}`}>{title}</h4>}
-              {caption && <p className={`text-xs ${textMuted}`}>{caption}</p>}
+              {title && <h4 className={`text-sm font-semibold ${isDark ? "text-slate-100" : "text-slate-800"}`}>{title}</h4>}
+              {caption && <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-500"}`}>{caption}</p>}
             </div>
           </div>
           <span className="text-[10px] uppercase tracking-wider font-mono px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20 font-semibold">

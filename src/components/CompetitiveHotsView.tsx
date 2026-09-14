@@ -90,7 +90,7 @@ export default function CompetitiveHotsView({
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
+            <h1 className={`text-2xl sm:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
               Competitive HOTS & Multi-Concept Case Study Vault
             </h1>
             <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
@@ -226,7 +226,7 @@ export default function CompetitiveHotsView({
                     </span>
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-black tracking-tight flex items-center gap-2">
+                  <h3 className={`text-lg sm:text-xl font-black tracking-tight flex items-center gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
                     {q.title}
                   </h3>
                 </div>

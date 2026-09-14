@@ -848,7 +848,7 @@ export default function CBSECommandCenter() {
     if (["chapter_dashboard", "today", "test_series", "syllabus", "roadmap"].includes(activeTab)) return "command";
     if (["concepts", "english", "hindi", "timelines", "theorems", "reactions", "activities", "experiments", "diagrams"].includes(activeTab)) return "concepts";
     if (["questions", "hots"].includes(activeTab)) return "practice";
-    if (["mnemonics", "flashcards", "common_mistakes"].includes(activeTab)) return "tools";
+    if (["mnemonics", "flashcards", "common_mistakes", "tools_diagrams"].includes(activeTab)) return "tools";
     return "command";
   }, [activeTab]);
 
@@ -913,9 +913,9 @@ export default function CBSECommandCenter() {
       id: "tools",
       label: "Tools & Memory",
       icon: Sparkles,
-      defaultTab: "diagrams",
+      defaultTab: "mnemonics",
       items: [
-        { id: "diagrams", label: "NCERT Diagrams", icon: Compass, count: "29 HD" },
+        { id: "tools_diagrams", label: "NCERT Diagrams", icon: Compass, count: "29 HD" },
         { id: "mnemonics", label: "Visual Mnemonics", icon: Sparkles, count: "49 Maps" },
         { id: "flashcards", label: "Flashcards Deck", icon: BookMarked },
         { id: "common_mistakes", label: "My Mistakes", icon: AlertTriangle },
@@ -3514,7 +3514,7 @@ export default function CBSECommandCenter() {
         )}
 
         {/* ===================== TAB: SCIENCE DIAGRAMS & MIXED CIRCUITS ===================== */}
-        {activeTab === "diagrams" && (
+        {(activeTab === "diagrams" || activeTab === "tools_diagrams") && (
           <ScienceDiagramsView
             isDark={isDark}
             onOpenActivities={() => {

@@ -1387,14 +1387,18 @@ export default function ConceptsHubView({
           <div className="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
             <button
               onClick={handlePrevChapter}
-              className="flex-1 py-3 rounded-2xl border border-white/10 hover:border-blue-500/40 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer bg-white/5 hover:bg-white/10"
+              className={`flex-1 py-3 rounded-2xl border text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                isDark ? "border-white/10 hover:border-blue-500/40 bg-white/5 hover:bg-white/10 text-white" : "border-slate-200 hover:border-blue-400 bg-slate-50 hover:bg-slate-100 text-slate-700"
+              }`}
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Previous Chapter</span>
             </button>
             <button
               onClick={handleNextChapter}
-              className="flex-1 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-blue-600/20"
+              className={`flex-1 py-3 rounded-2xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg ${
+                isDark ? "bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/20" : "bg-blue-500 hover:bg-blue-600 text-white shadow-blue-500/30"
+              }`}
             >
               <span>Next Chapter</span>
               <ArrowRight className="w-4 h-4" />
@@ -1842,14 +1846,18 @@ export default function ConceptsHubView({
           <div className="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
             <button
               onClick={handlePrevChapter}
-              className="flex-1 py-3 rounded-2xl border border-white/10 hover:border-rose-500/40 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer bg-white/5 hover:bg-white/10"
+              className={`flex-1 py-3 rounded-2xl border text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                isDark ? "border-white/10 hover:border-rose-500/40 bg-white/5 hover:bg-white/10 text-white" : "border-slate-200 hover:border-rose-400 bg-slate-50 hover:bg-slate-100 text-slate-700"
+              }`}
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Previous SST Chapter</span>
             </button>
             <button
               onClick={handleNextChapter}
-              className="flex-1 py-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-rose-600/20"
+              className={`flex-1 py-3 rounded-2xl text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg ${
+                isDark ? "bg-rose-600 hover:bg-rose-500 text-white shadow-rose-600/20" : "bg-rose-500 hover:bg-rose-600 text-white shadow-rose-500/30"
+              }`}
             >
               <span>Next SST Chapter</span>
               <ArrowRight className="w-4 h-4" />
