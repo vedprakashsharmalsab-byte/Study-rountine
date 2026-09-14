@@ -248,6 +248,13 @@ export default function CompetitiveHotsView({
                   isDark ? "bg-black/40 border-white/5 text-slate-200" : "bg-slate-50 border-slate-200 text-slate-800"
                 }`}>
                   <PremiumMathRenderer content={q.questionText} isDark={isDark} />
+                  
+                  {q.diagramSvg && (
+                    <div 
+                      className={`mt-4 p-4 flex justify-center rounded-xl border ${isDark ? "bg-black/20 border-white/10" : "bg-white border-slate-200"}`} 
+                      dangerouslySetInnerHTML={{ __html: q.diagramSvg }} 
+                    />
+                  )}
                 </div>
               </div>
 
