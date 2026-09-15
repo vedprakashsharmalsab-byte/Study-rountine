@@ -74,34 +74,34 @@ function getDisciplineColors(discipline: string, isDark: boolean) {
   switch (discipline) {
     case "Chemistry":
       return {
-        badge: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+        badge: isDark ? "bg-amber-500/15 text-amber-400 border-amber-500/30" : "bg-amber-100 text-amber-900 border-amber-300",
         accent: isDark ? "border-amber-500/30" : "border-amber-300",
         glow: "shadow-amber-500/10",
-        icon: "text-amber-400",
+        icon: isDark ? "text-amber-400" : "text-amber-700",
         tag: isDark ? "bg-amber-950/40 text-amber-300 border-amber-800/40" : "bg-amber-50 text-amber-800 border-amber-200",
       };
     case "Biology":
       return {
-        badge: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+        badge: isDark ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30" : "bg-emerald-100 text-emerald-900 border-emerald-300",
         accent: isDark ? "border-emerald-500/30" : "border-emerald-300",
         glow: "shadow-emerald-500/10",
-        icon: "text-emerald-400",
+        icon: isDark ? "text-emerald-400" : "text-emerald-700",
         tag: isDark ? "bg-emerald-950/40 text-emerald-300 border-emerald-800/40" : "bg-emerald-50 text-emerald-800 border-emerald-200",
       };
     case "Physics":
       return {
-        badge: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+        badge: isDark ? "bg-blue-500/15 text-blue-400 border-blue-500/30" : "bg-blue-100 text-blue-900 border-blue-300",
         accent: isDark ? "border-blue-500/30" : "border-blue-300",
         glow: "shadow-blue-500/10",
-        icon: "text-blue-400",
+        icon: isDark ? "text-blue-400" : "text-blue-700",
         tag: isDark ? "bg-blue-950/40 text-blue-300 border-blue-800/40" : "bg-blue-50 text-blue-800 border-blue-200",
       };
     default:
       return {
-        badge: "bg-teal-500/15 text-teal-400 border-teal-500/30",
+        badge: isDark ? "bg-teal-500/15 text-teal-400 border-teal-500/30" : "bg-teal-100 text-teal-900 border-teal-300",
         accent: isDark ? "border-teal-500/30" : "border-teal-300",
         glow: "shadow-teal-500/10",
-        icon: "text-teal-400",
+        icon: isDark ? "text-teal-400" : "text-teal-700",
         tag: isDark ? "bg-teal-950/40 text-teal-300 border-teal-800/40" : "bg-teal-50 text-teal-800 border-teal-200",
       };
   }

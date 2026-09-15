@@ -137,7 +137,7 @@ export const CH14_PROBABILITY_CONCEPT: MathChapterConcept = {
         {
           stepNo: 1,
           title: "Decode 'At Least' vs 'At Most'",
-          action: "$\"\\text{At least } k\" \\implies \\ge k$ (Minimum $k$, can be more).  \n$\"\\text{At most } k\" \\implies \\le k$ (Maximum $k$, can be less down to 0!).",
+          action: "\"At least $k$\" $\\implies \\ge k$ (Minimum $k$, can be more).  \n\"At most $k$\" $\\implies \\le k$ (Maximum $k$, can be less down to 0!).",
           proTip: "Zero count is included in 'at most' (e.g. 0 heads is counted in 'at most 2 heads')!"
         }
       ],

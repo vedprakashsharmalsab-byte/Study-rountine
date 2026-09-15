@@ -215,9 +215,21 @@ $$\\text{Zn(s) + H}_2\\text{SO}_4\\text{(dil)} \\to \\text{ZnSO}_4\\text{(aq) + 
 $$\\text{Fe(s) + CuSO}_4\\text{(aq)} \\to \\text{FeSO}_4\\text{(aq) + Cu(s)}$$
 Iron (more reactive) displaces Copper (less reactive). The blue solution fades and reddish copper deposits on iron nail.
 
-**AMPHOTERIC METALS (react with BOTH acids AND bases):**
-$$\\text{Al + 2NaOH + 2H}_2\\text{O} \\to 2\\text{NaAlO}_2 + 3\\text{H}_2\\uparrow$$ (Aluminium)
-$$\\text{Zn + 2NaOH} \\to \\text{Na}_2\\text{ZnO}_2 + \\text{H}_2\\uparrow$$ (Zinc)`,
+**AMPHOTERIC OXIDES (Metal oxides reacting with BOTH acids and bases to form salt and water):**
+- **Aluminium Oxide ($\\text{Al}_2\\text{O}_3$):**
+  - With Acid (acting as basic oxide):
+    $$\\text{Al}_2\\text{O}_3\\text{(s)} + 6\\text{HCl(aq)} \\to 2\\text{AlCl}_3\\text{(aq)} + 3\\text{H}_2\\text{O(l)}$$
+  - With Base (acting as acidic oxide):
+    $$\\text{Al}_2\\text{O}_3\\text{(s)} + 2\\text{NaOH(aq)} \\xrightarrow{\\Delta} 2\\text{NaAlO}_2\\text{(aq)} + \\text{H}_2\\text{O(l)}$$ *(Sodium aluminate)*
+- **Zinc Oxide ($\\text{ZnO}$):**
+  - With Acid:
+    $$\\text{ZnO(s)} + 2\\text{HCl(aq)} \\to \\text{ZnCl}_2\\text{(aq)} + \\text{H}_2\\text{O(l)}$$
+  - With Base:
+    $$\\text{ZnO(s)} + 2\\text{NaOH(aq)} \\xrightarrow{\\Delta} \\text{Na}_2\\text{ZnO}_2\\text{(aq)} + \\text{H}_2\\text{O(l)}$$ *(Sodium zincate)*
+
+**AMPHOTERIC METALS (react with BOTH acids AND bases to liberate H₂ gas):**
+$$2\\text{Al(s)} + 2\\text{NaOH(aq)} + 2\\text{H}_2\\text{O(l)} \\xrightarrow{\\Delta} 2\\text{NaAlO}_2\\text{(aq)} + 3\\text{H}_2\\text{(g)}\\uparrow$$
+$$\\text{Zn(s)} + 2\\text{NaOH(aq)} \\xrightarrow{\\Delta} \\text{Na}_2\\text{ZnO}_2\\text{(aq)} + \\text{H}_2\\text{(g)}\\uparrow$$`,
       formulasOrKeyPoints: [
         {
           title: "The Activity Series (Reactivity Series) — MUST MEMORISE",
@@ -325,27 +337,33 @@ Remove gangue from ore. Methods:
 - **Magnetic separation** (for magnetic ores like Fe₃O₄)
 - **Chemical leaching** (dissolve ore in chemical reagent — Bauxite/Al ore leached with NaOH)
 
-**Step 2 — Extraction (Based on Reactivity):**
-| Reactivity Group | Method | Example |
-|-----------------|--------|---------|
-| HIGH (K, Na, Ca, Mg, Al) | Electrolytic reduction | Al from Al₂O₃ (electrolysis) |
-| MEDIUM (Zn, Fe, Pb, Cu) | Reduction with carbon/coke | Fe from Fe₂O₃ (blast furnace) |
-| LOW (Ag, Au) | Physical methods (no chemical treatment) | Au panned from river sand |
+**Step 2 — Converting Concentrated Ore into Metal Oxide:**
+It is much easier to reduce a metal oxide to metal than a sulphide or carbonate ore.
+- **Roasting (for Sulphide Ores):** Strongly heating the ore in the **EXCESS** presence of air:
+  $$2\\text{ZnS(s) [Zinc Blende]} + 3\\text{O}_2\\text{(g)} \\xrightarrow{\\Delta} 2\\text{ZnO(s)} + 2\\text{SO}_2\\text{(g)}\\uparrow$$
+  $$2\\text{HgS(s) [Cinnabar]} + 3\\text{O}_2\\text{(g)} \\xrightarrow{\\Delta} 2\\text{HgO(s)} + 2\\text{SO}_2\\text{(g)}\\uparrow$$
+  $$2\\text{HgO(s)} \\xrightarrow{\\Delta} 2\\text{Hg(l)} + \\text{O}_2\\text{(g)}$$
+- **Calcination (for Carbonate Ores):** Strongly heating the ore in the **LIMITED or ABSENCE** of air:
+  $$\\text{ZnCO}_3\\text{(s) [Calamine]} \\xrightarrow{\\Delta} \\text{ZnO(s)} + \\text{CO}_2\\text{(g)}\\uparrow$$
 
-**Reduction with Carbon (Coke) — Blast Furnace:**
-$$\\text{Fe}_2\\text{O}_3\\text{(s) + 3CO(g)} \\to 2\\text{Fe(l) + 3CO}_2\\text{(g)}$$
-(At 1600°C in blast furnace)
+**Step 3 — Reduction of Metal Oxide to Metal:**
+- **Reduction with Carbon (Coke):**
+  $$\\text{ZnO(s)} + \\text{C(s)} \\xrightarrow{\\Delta} \\text{Zn(s)} + \\text{CO(g)}\\uparrow$$
+- **Blast Furnace Reduction for Iron:**
+  $$\\text{Fe}_2\\text{O}_3\\text{(s)} + 3\\text{CO(g)} \\xrightarrow{\\Delta} 2\\text{Fe(l)} + 3\\text{CO}_2\\text{(g)}\\uparrow$$
+- **Thermite Reaction (Aluminothermy for welding railway tracks):**
+  $$\\text{Fe}_2\\text{O}_3\\text{(s)} + 2\\text{Al(s)} \\xrightarrow{\\text{Ignition}} 2\\text{Fe(l)} + \\text{Al}_2\\text{O}_3\\text{(s)} + \\text{Heat (3000^\\circ\\text{C})}$$
+  The enormous heat melts the iron metal, which flows into and welds the cracked rails.
+- **Electrolytic Reduction (for high-reactivity metals K, Na, Ca, Mg, Al):**
+  These metals have higher affinity for oxygen than carbon does, so carbon cannot reduce them!
+  $$2\\text{Al}_2\\text{O}_3\\text{(l)} \\xrightarrow{\\text{Electrolysis}} 4\\text{Al(l) [Cathode]} + 3\\text{O}_2\\text{(g) [Anode]}$$
+  (Molten cryolite $\\text{Na}_3\\text{AlF}_6$ is added to lower the melting point of alumina from 2045°C to ~1000°C and increase conductivity).
 
-**Electrolytic Reduction (for highly reactive metals like Al):**
-$$\\text{Al}_2\\text{O}_3 \\xrightarrow{\\text{Electrolysis}} 2\\text{Al + }\\dfrac{3}{2}\\text{O}_2$$
-(Cryolite Na₃AlF₆ is added to lower the melting point of Al₂O₃ from 2045°C to ~1000°C!)
-
-**Step 3 — Refining (Purification):**
-- **Electrolytic refining:** Most widely used. Impure metal = anode (+), thin pure metal = cathode (−), copper sulphate solution = electrolyte. Pure Cu deposits on cathode.
-
-**Step 4 — Thermite Reaction (Aluminothermy — joining railway tracks):**
-$$\\text{Fe}_2\\text{O}_3 + 2\\text{Al} \\to \\text{Al}_2\\text{O}_3 + 2\\text{Fe} + \\text{Heat (3000°C!)}$$
-Aluminium reduces iron oxide — the molten iron welds the railway track joints!`,
+**Step 4 — Electrolytic Refining (Purification):**
+- **Anode (+):** Impure copper rod: $\\text{Cu(s)} \\to \\text{Cu}^{2+}\\text{(aq)} + 2e^-$
+- **Cathode (−):** Pure copper strip: $\\text{Cu}^{2+}\\text{(aq)} + 2e^- \\to \\text{Cu(s)}$ (pure copper deposits)
+- **Electrolyte:** Acidified copper sulphate ($\\text{CuSO}_4$) solution.
+- **Anode mud:** Insoluble noble impurities (Ag, Au, Pt) settle at the bottom below the anode.`,
       formulasOrKeyPoints: [
         {
           title: "Corrosion Prevention Methods",
@@ -365,9 +383,27 @@ Iron + O₂ + H₂O → Fe₂O₃·xH₂O (Rust, reddish-brown)
 
 **Galvanisation:** Zinc coat on iron works even if scratched — Zn is more reactive and gets oxidised first (sacrificial anode), protecting the iron underneath.`,
           note: "Galvanisation protects iron even when the zinc layer is scratched. Tin plating does NOT protect if scratched — the exposed iron rusts even faster because tin is less reactive and acts as cathode, making iron the anode!"
+        },
+        {
+          title: "CBSE Board Master Guide: Commercial Alloys",
+          content: `An **alloy** is a homogeneous mixture of two or more metals, or a metal and a non-metal.
+
+| Alloy | Constituent Elements | Key Property | Common Applications |
+|-------|----------------------|--------------|---------------------|
+| **Brass** | Copper + Zinc (Cu + Zn) | Malleable, corrosion resistant | Musical instruments, decorative hardware |
+| **Bronze** | Copper + Tin (Cu + Sn) | Tough, low friction, resonant | Medals, statues, bells, coins |
+| **Solder** | Lead + Tin (Pb + Sn) | Exceptionally low melting point | Welding and joining electrical wires |
+| **Stainless Steel** | Iron + Nickel + Chromium + Carbon (Fe+Ni+Cr+C) | Extremely hard, zero rusting | Surgical instruments, cookware, cutlery |
+| **Amalgam** | Liquid Mercury + Other metal (Hg + Ag/Sn) | Malleable paste that hardens | Dental fillings |
+| **22-Karat Gold** | 22 parts Gold + 2 parts Copper or Silver | Rigid, hard (24K pure gold is too soft) | Making durable jewelry |`,
+          note: "CBSE Board Examiner Mnemonic: 'BroNZ' contains 'Z' in sound, so it does NOT have Zinc — Bronze is Cu + Sn. 'BraSS' has two 'S's and pairs with Zinc (Cu + Zn)."
         }
       ],
       examinerTraps: [
+        {
+          trap: "Confusing Roasting with Calcination in chemical extraction equations.",
+          correction: "Mnemonic: Calcination starts with 'C' for Carbonate ores, requiring limited/no air and releasing CO₂. Roasting is for Sulphide ores, requiring excess air (O₂) and releasing SO₂ gas."
+        },
         {
           trap: "Thinking gold and silver are found as ores that need chemical extraction.",
           correction: "Gold and silver are so unreactive that they occur in FREE STATE (native state) in nature. They don't need chemical reduction — just physical separation (panning, crushing). Only moderately and highly reactive metals need chemical extraction from ores."

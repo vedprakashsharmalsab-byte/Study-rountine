@@ -453,7 +453,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       {
         "stepNo": 3,
         "stepHeading": "Amphoteric Nature of Aluminium Oxide",
-        "working": "1. Basic nature (Reaction with acid):\\n$\\text{Al}_2\\text{O}_3(s) + 6\\text{HCl}(aq) \\to 2\\text{AlCl}_3(aq) + 3\\text{H}_2\\text{O}(l) \\quad [\\text{Salt + Water}]\\n2. Acidic nature (Reaction with base):\\n$\\text{Al}_2\\text{O}_3(s) + 2\\text{NaOH}(aq) \\to 2\\text{NaAlO}_2(aq) + \\text{H}_2\\text{O}(l) \\quad [\\text{Sodium aluminate}]$",
+        "working": "1. Basic nature (Reaction with acid):\\n$\\text{Al}_2\\text{O}_3(s) + 6\\text{HCl}(aq) \\to 2\\text{AlCl}_3(aq) + 3\\text{H}_2\\text{O}(l) \\quad [\\text{Salt + Water}]$\\n2. Acidic nature (Reaction with base):\\n$\\text{Al}_2\\text{O}_3(s) + 2\\text{NaOH}(aq) \\to 2\\text{NaAlO}_2(aq) + \\text{H}_2\\text{O}(l) \\quad [\\text{Sodium aluminate}]$",
         "marksAwarded": "1.5 Marks",
         "examinerCheck": "Formula of Sodium Aluminate: NaAlO2."
       }

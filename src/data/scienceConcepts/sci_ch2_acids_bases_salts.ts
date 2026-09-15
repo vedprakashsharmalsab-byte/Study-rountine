@@ -195,39 +195,44 @@ $$\\text{pH} = -\\log[\\text{H}^+]$$
       subheading: "Salt Families + Common Salt + Washing Soda + Baking Soda + Bleaching Powder + Plaster of Paris",
       explanation: `A **salt** is formed when an acid reacts with a base (neutralisation). Salts are **ionic compounds** — they can be acidic, basic, or neutral depending on the parent acid and base.
 
-**Salt Families:**
-| Parent Acid | Parent Base | Salt Family | Example |
-|------------|-------------|-------------|---------|
-| HCl (strong) | NaOH (strong) | Neutral (pH 7) | NaCl |
-| H₂SO₄ (strong) | Na₂CO₃ (weak) | Basic (pH > 7) | Na₂SO₄ |
-| HCl (strong) | NH₄OH (weak) | Acidic (pH < 7) | NH₄Cl |
-| CH₃COOH (weak) | NaOH (strong) | Basic (pH > 7) | CH₃COONa |
+**Salt Families & Nature of Salts:**
+| Parent Acid | Parent Base | Nature of Salt | pH Range | Representative Example |
+|------------|-------------|----------------|----------|------------------------|
+| Strong Acid (HCl, H₂SO₄) | Strong Base (NaOH, KOH) | Neutral | pH = 7 | NaCl, Na₂SO₄, KNO₃ |
+| Strong Acid (HCl, H₂SO₄) | Weak Base (NH₄OH, Cu(OH)₂) | Acidic | pH < 7 | NH₄Cl, CuSO₄ |
+| Weak Acid (CH₃COOH, H₂CO₃) | Strong Base (NaOH, KOH) | Basic | pH > 7 | CH₃COONa, Na₂CO₃, NaHCO₃ |
+| Weak Acid (CH₃COOH) | Weak Base (NH₄OH) | Almost Neutral | pH ≈ 7 | CH₃COONH₄ |
 
 **THE BIG 5 IMPORTANT COMPOUNDS FROM SODIUM CHLORIDE (NaCl):**
 
-**1. Common Salt (NaCl):** Mined from sea water or rock salt mines. Used in food preservation, making soap, glass, paper.
+**1. Common Salt (NaCl):** Mined from sea water or rock salt mines (brown due to impurities). Used in everyday cooking, food preservation, and as raw material for making NaOH, NaHCO₃, Na₂CO₃, and CaOCl₂.
 
 **2. Sodium Hydroxide / Caustic Soda (NaOH):**
-$$2\\text{NaCl(aq)} + 2\\text{H}_2\\text{O(l)} \\xrightarrow{\\text{Electricity}} 2\\text{NaOH(aq)} + \\text{Cl}_2\\text{(g)}\\uparrow + \\text{H}_2\\text{(g)}\\uparrow$$
-This is the **Chlor-alkali process** — co-products are Cl₂ (bleaching agent, PVC) and H₂ (fuel, margarine).
+$$2\\text{NaCl(aq)} + 2\\text{H}_2\\text{O(l)} \\xrightarrow{\\text{Electricity}} 2\\text{NaOH(aq)} + \\text{Cl}_2\\text{(g)}\\uparrow [\\text{Anode}] + \\text{H}_2\\text{(g)}\\uparrow [\\text{Cathode}]$$
+This is the **Chlor-alkali process** — co-products are Cl₂ (bleaching agent, PVC, disinfectant) and H₂ (clean fuel, margarine, NH₃ for fertilisers), while NaOH solution forms near the cathode (used in soap, paper, degreasing).
 
 **3. Baking Soda / Sodium Hydrogen Carbonate (NaHCO₃):**
-$$\\text{NaCl + H}_2\\text{O + CO}_2 + \\text{NH}_3 \\to \\text{NaHCO}_3\\downarrow + \\text{NH}_4\\text{Cl}$$
-Uses: Baking (releases CO₂ to leaven dough), antacid, fire extinguishers (dry powder type), soda-acid extinguishers.
+$$\\text{NaCl} + \\text{H}_2\\text{O} + \\text{CO}_2 + \\text{NH}_3 \\to \\text{NaHCO}_3\\downarrow + \\text{NH}_4\\text{Cl}$$
+Prepared by Solvay process. It is a mild, non-corrosive basic salt.
+*Uses:* Baking powder (mixed with mild edible acid like tartaric acid to prevent bitterness), antacid (neutralises stomach acidity), soda-acid fire extinguishers.
 
-**4. Washing Soda / Sodium Carbonate (Na₂CO₃ · 10H₂O):**
-$$2\\text{NaHCO}_3 \\xrightarrow{\\Delta} \\text{Na}_2\\text{CO}_3 + \\text{H}_2\\text{O + CO}_2\\uparrow$$
-Uses: Glass and soap manufacturing, water softening (removes Ca²⁺ and Mg²⁺ ions), paper industry.
+**4. Washing Soda / Sodium Carbonate Decahydrate (Na₂CO₃ · 10H₂O):**
+*Step 1 (Thermal Decomposition of Baking Soda):*
+$$2\\text{NaHCO}_3\\text{(s)} \\xrightarrow{\\Delta} \\text{Na}_2\\text{CO}_3\\text{(s)} + \\text{H}_2\\text{O(g)} + \\text{CO}_2\\text{(g)}\\uparrow$$
+*Step 2 (Recrystallisation from Water):*
+$$\\text{Na}_2\\text{CO}_3\\text{(s)} + 10\\text{H}_2\\text{O(l)} \\to \\text{Na}_2\\text{CO}_3 \\cdot 10\\text{H}_2\\text{O(s)}$$
+*Uses:* Removing permanent hardness of water, glass, soap, and paper manufacturing, domestic cleaning agent.
 
 **5. Bleaching Powder (CaOCl₂):** 
-$$\\text{Ca(OH)}_2 + \\text{Cl}_2 \\to \\text{CaOCl}_2 + \\text{H}_2\\text{O}$$
-Uses: Disinfection of drinking water and swimming pools, bleaching cotton/linen, oxidising agent.
+Prepared by the action of chlorine gas on **dry slaked lime**:
+$$\\text{Ca(OH)}_2\\text{(s)} + \\text{Cl}_2\\text{(g)} \\to \\text{CaOCl}_2\\text{(s)} + \\text{H}_2\\text{O(l)}$$
+*Uses:* Disinfecting drinking water (kills germs), bleaching cotton and linen in textile industry, oxidising agent in chemical synthesis.
 
 **6. Plaster of Paris (CaSO₄ · ½H₂O):**
-$$\\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O} \\xrightarrow{373\\text{K}} \\text{CaSO}_4 \\cdot \\tfrac{1}{2}\\text{H}_2\\text{O} + \\tfrac{3}{2}\\text{H}_2\\text{O}$$
-$$\\underbrace{\\text{(Gypsum)}}_\\text{} \\xrightarrow{\\text{Heat}} \\underbrace{\\text{Plaster of Paris}}_\\text{}$$
-Uses: Making casts for fractured bones, chalk pieces, statues, fire-proof materials.
-*Setting reaction:* $\\text{CaSO}_4 \\cdot \\tfrac{1}{2}\\text{H}_2\\text{O} + \\tfrac{3}{2}\\text{H}_2\\text{O} \\to \\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O}$ (hardens in 15–30 min!)`,
+$$\\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O(s)} \\xrightarrow{373\\text{ K } (100^\\circ\\text{C})} \\text{CaSO}_4 \\cdot \\tfrac{1}{2}\\text{H}_2\\text{O(s)} + 1\\tfrac{1}{2}\\text{H}_2\\text{O(g)}$$
+$$\\underbrace{\\text{Gypsum}}_\\text{} \\xrightarrow{373\\text{ K}} \\underbrace{\\text{Plaster of Paris}}_\\text{}$$
+*Uses:* Making casts for supporting fractured bones, dental casts, decorative ceilings, statues, fire-proofing.
+*Setting reaction:* $\\text{CaSO}_4 \\cdot \\tfrac{1}{2}\\text{H}_2\\text{O} + 1\\tfrac{1}{2}\\text{H}_2\\text{O} \\to \\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O}$ (re-hydrates into a hard solid mass in 15–30 min!)`,
       formulasOrKeyPoints: [
         {
           title: "Water of Crystallisation",
@@ -235,15 +240,15 @@ Uses: Making casts for fractured bones, chalk pieces, statues, fire-proof materi
 
 | Salt | Formula | Water Molecules | Common Name |
 |------|---------|-----------------|-------------|
-| Blue vitriol | CuSO₄ · 5H₂O | 5 | Copper sulphate |
-| Green vitriol | FeSO₄ · 7H₂O | 7 | Ferrous sulphate |
-| White vitriol | ZnSO₄ · 7H₂O | 7 | Zinc sulphate |
-| Washing soda | Na₂CO₃ · 10H₂O | 10 | Sodium carbonate |
-| Gypsum | CaSO₄ · 2H₂O | 2 | Calcium sulphate |
+| Blue vitriol | CuSO₄ · 5H₂O | 5 | Copper sulphate pentahydrate |
+| Green vitriol | FeSO₄ · 7H₂O | 7 | Ferrous sulphate heptahydrate |
+| White vitriol | ZnSO₄ · 7H₂O | 7 | Zinc sulphate heptahydrate |
+| Washing soda | Na₂CO₃ · 10H₂O | 10 | Sodium carbonate decahydrate |
+| Gypsum | CaSO₄ · 2H₂O | 2 | Calcium sulphate dihydrate |
 | Plaster of Paris | CaSO₄ · ½H₂O | ½ | Calcium sulphate hemihydrate |
 
 When CuSO₄ · 5H₂O is heated, it loses water and becomes **anhydrous CuSO₄** (white powder). Add water back → it turns blue again!`,
-          note: "The Plaster of Paris formula with ½ H₂O (hemihydrate) confuses students. Remember: 1 formula unit of CaSO₄ shares ONE water molecule between TWO formula units. That's why it's written as CaSO₄ · ½H₂O."
+          note: "The Plaster of Paris formula with ½ H₂O (hemihydrate) confuses students. Remember: 1 formula unit of CaSO₄ shares ONE water molecule between TWO formula units [2CaSO₄ · H₂O]. That's why it is written as CaSO₄ · ½H₂O."
         }
       ],
       stepByStepGuide: [
@@ -256,18 +261,22 @@ When CuSO₄ · 5H₂O is heated, it loses water and becomes **anhydrous CuSO₄
         {
           stepNo: 2,
           title: "Determine salt pH without testing",
-          action: "Check parent acid and base strength. Strong acid + Strong base = Neutral (pH≈7). Strong acid + Weak base = Acidic. Weak acid + Strong base = Basic.",
+          action: "Check parent acid and base strength. Strong acid + Strong base = Neutral (pH≈7). Strong acid + Weak base = Acidic (pH<7). Weak acid + Strong base = Basic (pH>7).",
           proTip: "NH₄Cl is acidic (strong HCl + weak NH₄OH). Na₂CO₃ is basic (strong NaOH + weak H₂CO₃). This logic appears in 1M MCQs."
         }
       ],
       examinerTraps: [
         {
           trap: "Confusing Baking Soda (NaHCO₃) with Washing Soda (Na₂CO₃·10H₂O).",
-          correction: "Baking Soda = NaHCO₃ (sodium hydrogen carbonate / sodium bicarbonate) — used in cooking and as antacid. Washing Soda = Na₂CO₃·10H₂O (sodium carbonate decahydrate) — used in cleaning. They are chemically different compounds with different uses."
+          correction: "Baking Soda = NaHCO₃ (sodium hydrogen carbonate / sodium bicarbonate) — used in cooking and as antacid. Washing Soda = Na₂CO₃·10H₂O (sodium carbonate decahydrate) — used in cleaning and water softening. They are chemically different compounds with different uses."
+        },
+        {
+          trap: "Heating gypsum above 373 K (100°C) during Plaster of Paris preparation.",
+          correction: "If gypsum is heated above 373 K (100°C), it loses ALL its water of crystallisation and forms ANHYDROUS calcium sulphate (CaSO₄), also known as 'Dead Burnt Plaster'. Dead burnt plaster loses the property of setting with water!"
         },
         {
           trap: "Writing Plaster of Paris as CaSO₄ · H₂O (1 full water) instead of CaSO₄ · ½H₂O.",
-          correction: "Plaster of Paris is calcium sulphate HEMI-hydrate: CaSO₄ · ½H₂O. Gypsum is the dihydrate: CaSO₄ · 2H₂O. Heating gypsum at 100°C (373 K) gives Plaster of Paris."
+          correction: "Plaster of Paris is calcium sulphate HEMI-hydrate: CaSO₄ · ½H₂O. Gypsum is the dihydrate: CaSO₄ · 2H₂O. Heating gypsum at exactly 373 K gives Plaster of Paris."
         }
       ]
     }
