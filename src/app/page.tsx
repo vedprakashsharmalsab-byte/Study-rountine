@@ -3675,28 +3675,48 @@ export default function CBSECommandCenter() {
         {/* ===================== TAB 4: TRAINING VAULT (PREMIUM) ===================== */}
         {activeTab === "questions" && (
           <div className="space-y-6 animate-fade-in">
-            <div className={`p-6 sm:p-8 rounded-3xl border flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 transition-colors ${
+            <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 transition-colors ${
               isDark ? "apple-surface" : "apple-surface-light"
             }`}>
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wide border ${
-                    isDark ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" : "bg-emerald-100 text-emerald-900 border-emerald-300"
-                  }`}>
-                    1,200+ CBSE Questions
-                  </span>
+              {/* TOP ROW: TITLE & DESCRIPTIVE BADGES */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2.5 rounded-2xl border shrink-0 ${
+                      isDark ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30" : "bg-emerald-100 text-emerald-700 border-emerald-300"
+                    }`}>
+                      <Target className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wide border ${
+                          isDark ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" : "bg-emerald-100 text-emerald-900 border-emerald-300"
+                        }`}>
+                          1,200+ CBSE Questions
+                        </span>
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold border ${
+                          isDark ? "bg-white/5 text-zinc-300 border-white/10" : "bg-slate-100 text-slate-700 border-slate-300"
+                        }`}>
+                          {activeVaultSubject === "math" ? "📐 Class 10 Math" : activeVaultSubject === "science" ? "🧪 Class 10 Science" : activeVaultSubject === "sst" ? "🌍 Class 10 SST" : activeVaultSubject === "english" ? "📖 English (184)" : "🇮🇳 Hindi (085)"}
+                        </span>
+                      </div>
+                      <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                        Master Training Vault
+                      </h2>
+                    </div>
+                  </div>
+                  <p className={`text-xs sm:text-sm ${isDark ? "text-zinc-400" : "text-slate-600"} max-w-2xl leading-relaxed`}>
+                    Board-level questions with step-by-step mathematical reasoning, marking schemes, and interactive evaluation.
+                  </p>
                 </div>
-                <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-                  Master Training Vault
-                </h2>
-                <p className={`text-xs sm:text-sm ${isDark ? "text-zinc-400" : "text-slate-500"} max-w-lg`}>
-                  Board-level questions with step-by-step mathematical reasoning, marking schemes, and interactive evaluation.
-                </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0">
-                {/* Subject Selector Toggle (Apple Segmented Bar - Responsive Grid on Mobile) */}
-                <div className={`p-1 rounded-2xl border grid grid-cols-2 sm:flex items-center gap-1 ${
+              {/* CONTROLS ROW: SUBJECT SELECTOR & CHAPTER DROPDOWN */}
+              <div className={`pt-4 border-t flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-4 ${
+                isDark ? "border-white/10" : "border-slate-200"
+              }`}>
+                {/* Subject Selector Toggle (Apple Segmented Bar) */}
+                <div className={`p-1 rounded-2xl border flex flex-wrap items-center gap-1 ${
                   isDark ? "bg-white/[0.04] border-white/[0.08]" : "bg-black/[0.03] border-black/[0.06]"
                 }`}>
                   <button
@@ -3930,7 +3950,9 @@ export default function CBSECommandCenter() {
             {!isAnalyzingVault && activeVaultChapter !== null && (
               <div className="space-y-6">
                 {/* Format Filter Bar (Apple Pills) */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-1 border-b border-white/[0.08] pb-4">
+                <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-1 border-b pb-4 ${
+                  isDark ? "border-white/[0.08]" : "border-slate-200"
+                }`}>
                   <div className="flex flex-wrap items-center gap-2">
                     {[
                       { id: "all", label: `All (${activeVaultQuestions.length})` },
