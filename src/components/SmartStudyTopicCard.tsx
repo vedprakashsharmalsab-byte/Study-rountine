@@ -534,10 +534,14 @@ export default function SmartStudyTopicCard({
                         className="p-4 cursor-pointer flex items-center justify-between gap-3"
                       >
                         <div className="flex flex-wrap items-center gap-2 flex-1">
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold border ${
+                            isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" : "bg-emerald-100 text-emerald-800 border-emerald-300"
+                          }`}>
                             {ex.level}
                           </span>
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/15 text-amber-400 border border-amber-500/25">
+                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold border ${
+                            isDark ? "bg-amber-500/15 text-amber-400 border-amber-500/25" : "bg-amber-100 text-amber-900 border-amber-300"
+                          }`}>
                             {ex.marks} Mark{ex.marks > 1 ? "s" : ""} • {ex.type}
                           </span>
                           <h5 className={`text-xs sm:text-sm font-bold w-full mt-1 ${isDark ? "text-white" : "text-slate-900"}`}>
@@ -548,7 +552,7 @@ export default function SmartStudyTopicCard({
                       </div>
 
                       {isExOpen && (
-                        <div className="px-4 pb-4 pt-2 space-y-3 border-t border-white/10">
+                        <div className={`px-4 pb-4 pt-2 space-y-3 border-t ${isDark ? "border-white/10" : "border-slate-200"}`}>
                           {ex.options && (
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 my-2">
                               {ex.options.map((opt, optIdx) => (
@@ -567,7 +571,7 @@ export default function SmartStudyTopicCard({
                           )}
 
                           <div className="space-y-1.5">
-                            <span className="text-[10px] font-mono uppercase font-bold text-emerald-400 block">
+                            <span className={`text-[10px] font-mono uppercase font-bold block ${isDark ? "text-emerald-400" : "text-emerald-600"}`}>
                               Topper Answer Sheet / Official Marking Rubric:
                             </span>
                             {ex.solutionPoints.map((pt, pIdx) => (
@@ -579,8 +583,10 @@ export default function SmartStudyTopicCard({
                           </div>
 
                           {ex.examinerTrap && (
-                            <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/30 text-xs space-y-1">
-                              <span className="font-bold text-rose-400 flex items-center gap-1.5">
+                            <div className={`p-3 rounded-xl border text-xs space-y-1 ${
+                              isDark ? "bg-rose-950/20 border-rose-500/30" : "bg-rose-50 border-rose-200"
+                            }`}>
+                              <span className={`font-bold flex items-center gap-1.5 ${isDark ? "text-rose-400" : "text-rose-600"}`}>
                                 <AlertTriangle className="w-3.5 h-3.5" /> Examiner Trap:
                               </span>
                               <p className={isDark ? "text-rose-200/90" : "text-rose-900"}>{ex.examinerTrap}</p>
@@ -588,8 +594,10 @@ export default function SmartStudyTopicCard({
                           )}
 
                           {ex.keyTakeaway && (
-                            <div className="p-3 rounded-xl bg-blue-950/20 border border-blue-500/30 text-xs">
-                              <span className="font-bold text-blue-400">💡 Key Board Takeaway: </span>
+                            <div className={`p-3 rounded-xl border text-xs ${
+                              isDark ? "bg-blue-950/20 border-blue-500/30" : "bg-blue-50 border-blue-200"
+                            }`}>
+                              <span className={`font-bold ${isDark ? "text-blue-400" : "text-blue-600"}`}>💡 Key Board Takeaway: </span>
                               <span className={isDark ? "text-slate-300" : "text-slate-700"}>{ex.keyTakeaway}</span>
                             </div>
                           )}

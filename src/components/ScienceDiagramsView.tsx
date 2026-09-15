@@ -555,10 +555,10 @@ export default function ScienceDiagramsView({
 
                     {diag.natureOfImage && (
                       <div className="pt-0.5">
-                        <span className={`text-[11px] font-bold px-2 py-0.5 rounded-md ${
+                        <span className={`text-[11px] font-bold px-2 py-0.5 rounded-md border ${
                           diag.natureOfImage.includes("Virtual")
-                            ? "bg-purple-500/15 text-purple-300 border border-purple-500/20"
-                            : "bg-amber-500/15 text-amber-300 border border-amber-500/20"
+                            ? isDark ? "bg-purple-500/15 text-purple-300 border-purple-500/20" : "bg-purple-100 text-purple-800 border-purple-300"
+                            : isDark ? "bg-amber-500/15 text-amber-300 border-amber-500/20" : "bg-amber-100 text-amber-800 border-amber-300"
                         }`}>
                           ★ {diag.natureOfImage}
                         </span>
@@ -587,7 +587,9 @@ export default function ScienceDiagramsView({
                         setActiveZoomAsset(diag);
                         setZoomScale(1);
                       }}
-                      className="w-full py-2.5 rounded-xl text-xs font-bold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                      className={`w-full py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
+                        isDark ? "bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border-cyan-500/30" : "bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border-cyan-300"
+                      }`}
                     >
                       <Maximize2 className="w-3.5 h-3.5" /> Enlarge & Inspect Rubric
                     </button>

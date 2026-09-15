@@ -3403,14 +3403,18 @@ export default function CBSECommandCenter() {
                   </div>
 
                   <div className="space-y-3.5 py-6 max-w-2xl">
-                    <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest font-mono bg-amber-500/15 text-amber-400 border border-amber-500/25">
+                    <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest font-mono border ${
+                      isDark ? "bg-amber-500/15 text-amber-400 border-amber-500/25" : "bg-amber-100 text-amber-800 border-amber-300"
+                    }`}>
                       {isFlashcardFlipped ? "Verified Answer & Model Scheme" : "Question Statement (Tap to Flip)"}
                     </span>
                     <h3 className="text-base sm:text-xl font-bold leading-relaxed whitespace-pre-line">
                       {isFlashcardFlipped ? currentCard.backAnswer : currentCard.frontQuestion}
                     </h3>
                     {isFlashcardFlipped && currentCard.hintOrFormula && (
-                      <div className="inline-block px-3 py-1.5 rounded-xl text-xs font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 font-semibold mt-2">
+                      <div className={`inline-block px-3 py-1.5 rounded-xl text-xs font-mono font-semibold mt-2 border ${
+                        isDark ? "text-amber-400 bg-amber-500/10 border-amber-500/20" : "text-amber-900 bg-amber-50 border-amber-200"
+                      }`}>
                         Key Rule: {currentCard.hintOrFormula}
                       </div>
                     )}

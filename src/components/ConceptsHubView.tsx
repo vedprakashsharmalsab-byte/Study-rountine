@@ -255,8 +255,10 @@ export default function ConceptsHubView({
       prevChRef.current = initialChapterNo;
       const targetSub = initialSubject || activeSubject;
       if (targetSub === "math") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveMathChapterNo(initialChapterNo);
       } else if (targetSub === "science") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveScienceChapterNo(initialChapterNo);
       } else if (targetSub === "sst") {
         setActiveSSTChapterNo(initialChapterNo);
@@ -768,31 +770,38 @@ export default function ConceptsHubView({
         {/* Section-Wise Expected Question Pattern */}
         {(() => {
           const currentBlueprint = activeCurrentBlueprint;
-          const pattern = currentBlueprint.questionPattern;
-          const chapterTotalMarks = pattern.mcq1M * 1 + pattern.vsa2M * 2 + pattern.sa3M * 3 + pattern.la5M * 5 + pattern.case4M * 4;
-          const chapterTotalQuestions = pattern.mcq1M + pattern.vsa2M + pattern.sa3M + pattern.la5M + pattern.case4M;
+          const pattern = currentBlueprint.questionPattern as any; // Allow for mapSkill
+          const mapSkillMarks = pattern.mapSkill ? pattern.mapSkill * 1 : 0;
+          const chapterTotalMarks = pattern.mcq1M * 1 + pattern.vsa2M * 2 + pattern.sa3M * 3 + pattern.la5M * 5 + pattern.case4M * 4 + mapSkillMarks;
+          const chapterTotalQuestions = pattern.mcq1M + pattern.vsa2M + pattern.sa3M + pattern.la5M + pattern.case4M + (pattern.mapSkill ? pattern.mapSkill : 0);
 
           return (
             <div className="pt-6 space-y-3.5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <span className="text-xs font-mono font-black uppercase tracking-wider text-slate-400 block">
-                  CBSE Question Paper Pattern Breakdown for this Chapter:
+                  CBSE Question Paper Pattern Breakdown (Pool) vs Weightage:
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className={`text-xs font-mono font-black px-3 py-1 rounded-full border ${
+                  <span className={`text-[10px] font-mono font-black px-3 py-1 rounded-full border shadow-sm ${
+                    isDark ? "bg-amber-500/15 border-amber-500/40 text-amber-300" : "bg-amber-100 border-amber-300 text-amber-900"
+                  }`}>
+                    Weightage: {currentBlueprint.expectedMarks}
+                  </span>
+                  <span className={`text-[10px] font-mono font-black px-3 py-1 rounded-full border ${
                     isDark ? "bg-blue-500/15 border-blue-500/30 text-blue-300" : "bg-blue-50 border-blue-200 text-blue-800"
                   }`}>
-                    Total: {chapterTotalMarks} Marks ({chapterTotalQuestions} Q{chapterTotalQuestions !== 1 ? "s" : ""})
+                    Pool: {chapterTotalMarks} Marks ({chapterTotalQuestions} Qs)
                   </span>
                 </div>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3.5">
                 {[
                   { section: "Sec A", marksEach: 1, count: pattern.mcq1M, type: "MCQs / Objective" },
                   { section: "Sec B", marksEach: 2, count: pattern.vsa2M, type: "Very Short (VSA)" },
                   { section: "Sec C", marksEach: 3, count: pattern.sa3M, type: "Short Answer (SA)" },
                   { section: "Sec D", marksEach: 5, count: pattern.la5M, type: "Long Answer (LA)" },
-                  { section: "Sec E", marksEach: 4, count: pattern.case4M, type: "Case-Based Study" }
+                  { section: "Sec E", marksEach: 4, count: pattern.case4M, type: "Case-Based Study" },
+                  ...(pattern.mapSkill ? [{ section: "Sec F", marksEach: 1, count: pattern.mapSkill, type: "Map Pointing" }] : [])
                 ].map((p, idx) => {
                   const isTested = p.count > 0;
                   const sectionTotalMarks = p.count * p.marksEach;

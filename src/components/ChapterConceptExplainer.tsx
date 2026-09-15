@@ -30,6 +30,7 @@ export default function ChapterConceptExplainer({
   // Sync if chapterId prop changes
   React.useEffect(() => {
     if (chapterId && chapterId >= 1 && chapterId <= 14) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCurrentChapterNo(chapterId);
     }
   }, [chapterId]);

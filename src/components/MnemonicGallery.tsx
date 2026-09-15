@@ -1334,10 +1334,14 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="space-y-2">
             <div className="flex items-center gap-2.5">
-              <span className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <span className={`p-2 rounded-xl border ${
+                isDark ? "bg-amber-500/10 text-amber-400 border-amber-500/20" : "bg-amber-100 text-amber-700 border-amber-300"
+              }`}>
                 <Sparkles className="w-6 h-6" />
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+              <h2 className={`text-2xl sm:text-3xl font-extrabold bg-clip-text text-transparent ${
+                isDark ? "bg-gradient-to-r from-amber-400 to-orange-400" : "bg-gradient-to-r from-amber-600 to-orange-600"
+              }`}>
                 Visual Mnemonics & Formula Cheat Sheets
               </h2>
             </div>
@@ -1421,7 +1425,11 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
                       : activeSubject === "science"
                       ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-md scale-[1.02]"
                       : "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md scale-[1.02]"
-                    : "bg-slate-900 text-white border-slate-900 font-black shadow-md scale-[1.02]"
+                    : activeSubject === "sst"
+                      ? "bg-rose-600 text-white border-rose-600 font-black shadow-md scale-[1.02]"
+                      : activeSubject === "science"
+                      ? "bg-teal-600 text-white border-teal-600 font-black shadow-md scale-[1.02]"
+                      : "bg-amber-600 text-white border-amber-600 font-black shadow-md scale-[1.02]"
                   : isDark
                   ? "bg-[#121212]/70 text-slate-300 hover:text-white border-white/5 hover:border-white/10"
                   : "bg-white text-slate-700 hover:text-slate-950 border-slate-200 hover:border-slate-300"

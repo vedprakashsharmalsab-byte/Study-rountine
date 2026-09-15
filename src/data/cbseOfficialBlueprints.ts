@@ -16,6 +16,7 @@ export interface ChapterBlueprint {
     sa3M: number;  // Section C: 3 Marks questions
     la5M: number;  // Section D: 5 Marks questions
     case4M: number; // Section E: 4 Marks Case Study
+    mapSkill?: number; // Section F: Map Pointing items
   };
   markingSchemeRubric: {
     step: string;
@@ -537,7 +538,7 @@ export const SST_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     unitName: "Unit I: India and the Contemporary World - II (History: 20 Marks)",
     unitTotalMarks: 20,
     expectedMarks: "7–9 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 1, case4M: 0 },
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 1, case4M: 0, mapSkill: 2 },
     markingSchemeRubric: [
       { step: "First World War economic impacts & Satyagraha philosophy (Champaran, Kheda, Ahmedabad)", marks: "1.5 Marks", rubricNote: "Truth and non-violence force" },
       { step: "Rowlatt Act (1919), Jallianwala Bagh Massacre (13 April 1919) & Khilafat Movement", marks: "1.5 Marks", rubricNote: "General Dyer martial law" },
@@ -589,7 +590,7 @@ export const SST_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
     unitTotalMarks: 20,
     expectedMarks: "4–5 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0, mapSkill: 1 },
     markingSchemeRubric: [
       { step: "Classification of Resources (Origin, Exhaustibility, Ownership, Status of Development)", marks: "1.0 Mark", rubricNote: "Potential vs Stock vs Reserves" },
       { step: "Sustainable Development & Rio Earth Summit 1992 (Agenda 21)", marks: "1.0 Mark", rubricNote: "Development without damaging ecology" },
@@ -606,7 +607,7 @@ export const SST_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
     unitTotalMarks: 20,
     expectedMarks: "3–4 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 0, case4M: 0 },
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 0, case4M: 0, mapSkill: 1 },
     markingSchemeRubric: [
       { step: "IUCN species classification (Normal, Endangered, Vulnerable, Rare, Endemic, Extinct)", marks: "1.5 Marks", rubricNote: "Examples: Lion-tailed macaque, Asiatic cheetah" },
       { step: "Reserved Forests (>50% most valuable) vs Protected Forests (1/3rd) vs Unclassed Forests", marks: "1.5 Marks", rubricNote: "Government management classifications" },
@@ -622,7 +623,7 @@ export const SST_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
     unitTotalMarks: 20,
     expectedMarks: "4–5 Marks",
-    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0, mapSkill: 1 },
     markingSchemeRubric: [
       { step: "Causes of water scarcity (Overexploitation, unequal access, industrial pollution, excessive irrigation)", marks: "1.0 Mark", rubricNote: "Quantitative vs qualitative scarcity" },
       { step: "Multi-purpose River Valley Projects: Benefits (Hydropower, irrigation, flood control) vs Criticisms (Submergence, displacement, seismicity, siltation)", marks: "1.5 Marks", rubricNote: "Narmada Bachao Andolan" },

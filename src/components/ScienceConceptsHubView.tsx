@@ -253,6 +253,7 @@ export default function ScienceConceptsHubView({
 
   useEffect(() => {
     if (activeChapterNo !== undefined) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedChapterNo(activeChapterNo);
     }
   }, [activeChapterNo]);
@@ -271,6 +272,7 @@ export default function ScienceConceptsHubView({
     currentChapter.sections.forEach((s, idx) => {
       init[s.id] = idx < 2; // first 2 expanded by default
     });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setExpandedSectionIds(init);
   }, [currentChNo, currentChapter]);
 
@@ -310,7 +312,7 @@ export default function ScienceConceptsHubView({
   const nextChapter = CHAPTER_LIST.find((c) => c.no === currentChNo + 1);
 
   const colors = getDisciplineColors(currentMeta.discipline, isDark);
-  const DisciplineIcon = getDisciplineIcon(currentMeta.discipline);
+  const disciplineIcon = getDisciplineIcon(currentMeta.discipline);
 
   if (!currentChapter) {
     return (
@@ -466,7 +468,7 @@ export default function ScienceConceptsHubView({
           <div className="space-y-3 max-w-3xl">
             <div className="flex flex-wrap items-center gap-2.5">
               <span className={`px-3.5 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider flex items-center gap-1.5 ${colors.badge} border`}>
-                <DisciplineIcon className="w-3.5 h-3.5" />
+                {React.createElement(disciplineIcon, { className: "w-3.5 h-3.5" })}
                 {currentMeta.discipline}
               </span>
               <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${colors.tag}`}>
