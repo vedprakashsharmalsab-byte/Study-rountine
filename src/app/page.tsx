@@ -106,7 +106,8 @@ import {
   BOARD_LEVEL_QUESTIONS,
   INTERACTIVE_SIMULATIONS,
   FlashcardItem,
-  BoardQuestion
+  BoardQuestion,
+  TestSeriesExam
 } from "@/data/cbseData";
 
 interface XpToast {
@@ -632,6 +633,20 @@ function getPrecisionCountdown(targetDateString: string) {
   return { days, hours, mins, secs, isPassed: false };
 }
 
+export function getUpcomingTestSeriesExam(
+  exams: TestSeriesExam[] = TEST_SERIES_I_SCHEDULE,
+  now: number = Date.now()
+): TestSeriesExam | null {
+  for (const exam of exams) {
+    // Each exam concludes at 12:30 PM on exam day
+    const examEndTime = new Date(exam.date + "T12:30:00").getTime();
+    if (examEndTime > now) {
+      return exam;
+    }
+  }
+  return null; // All test series exams have completed
+}
+
 export const LiveCountdown = React.memo(function LiveCountdown({
   targetDate,
   variant = "badge",
@@ -652,6 +667,33 @@ export const LiveCountdown = React.memo(function LiveCountdown({
     }, intervalMs);
     return () => clearInterval(timer);
   }, [targetDate, variant]);
+
+  if (cd.isPassed) {
+    if (variant === "short") {
+      return (
+        <span className="text-[10px] font-mono font-bold text-emerald-400 opacity-90">
+          Done ✓
+        </span>
+      );
+    }
+    if (variant === "badge") {
+      return null;
+    }
+    // card-grid passed state
+    return (
+      <div className={`p-4 rounded-2xl border text-center transition-all ${
+        isDark ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-800"
+      }`}>
+        <div className="text-sm sm:text-base font-black tracking-tight flex items-center justify-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <span>Paper Concluded</span>
+        </div>
+        <p className="text-[11px] font-mono opacity-80 mt-0.5">
+          Exam finished — focus now shifted to the next paper!
+        </p>
+      </div>
+    );
+  }
 
   if (variant === "short") {
     return (
@@ -699,6 +741,52 @@ export const LiveCountdown = React.memo(function LiveCountdown({
         <span className="text-[10px] uppercase font-bold tracking-wider opacity-75">Secs</span>
       </div>
     </div>
+  );
+});
+
+// Dynamic Top Header Countdown: automatically transitions to next exam when previous ends, and vanishes when test series concludes
+export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
+  isDark
+}: {
+  isDark: boolean;
+}) {
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    const timer = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const upcomingExam = useMemo(() => getUpcomingTestSeriesExam(TEST_SERIES_I_SCHEDULE, now), [now]);
+
+  const examLabel = useMemo(() => {
+    if (!upcomingExam) return null;
+    const parts = upcomingExam.date.split("-");
+    const monthNames = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    const month = monthNames[parseInt(parts[1], 10)] || parts[1];
+    const day = parseInt(parts[2], 10);
+    const shortSub = upcomingExam.subject.split(" ")[0];
+    return `${month} ${day} ${shortSub}`;
+  }, [upcomingExam]);
+
+  return (
+    <>
+      {upcomingExam && examLabel && (
+        <>
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+          </span>
+          <span className="font-bold text-amber-400 group-hover:underline inline-flex items-center leading-none">
+            {examLabel}:
+          </span>
+          <LiveCountdown targetDate={upcomingExam.date} variant="badge" colorScheme="amber" isDark={isDark} />
+          <span className={`${isDark ? "text-white/30" : "text-slate-300"} select-none inline-flex items-center leading-none`}>•</span>
+        </>
+      )}
+      <span className="font-bold text-cyan-400 inline-flex items-center leading-none">Boards:</span>
+      <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
+    </>
   );
 });
 
@@ -1073,7 +1161,10 @@ export default function CBSECommandCenter() {
   const [totalFocusMins, setTotalFocusMins] = useState(0);
 
   // Selected states
-  const [selectedExamId, setSelectedExamId] = useState<string>("exam_maths");
+  const [selectedExamId, setSelectedExamId] = useState<string>(() => {
+    const upcoming = getUpcomingTestSeriesExam(TEST_SERIES_I_SCHEDULE);
+    return upcoming ? upcoming.id : TEST_SERIES_I_SCHEDULE[0].id;
+  });
   const [selectedSubjectId, setSelectedSubjectId] = useState<string>("maths");
   const [expandedChapterIds, setExpandedChapterIds] = useState<{ [chapterId: string]: boolean }>({
     math_ch1: true,
@@ -2108,15 +2199,7 @@ export default function CBSECommandCenter() {
               }`}
               title="Click to view Test Series schedule"
             >
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-              </span>
-              <span className="font-bold text-amber-400 group-hover:underline inline-flex items-center leading-none">Sept 14 Math:</span>
-              <LiveCountdown targetDate="2026-09-14" variant="badge" colorScheme="amber" isDark={isDark} />
-              <span className={`${isDark ? "text-white/30" : "text-slate-300"} select-none inline-flex items-center leading-none`}>•</span>
-              <span className="font-bold text-cyan-400 inline-flex items-center leading-none">Boards:</span>
-              <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
+              <HeaderExamCountdown isDark={isDark} />
             </button>
           </div>
 
@@ -2585,13 +2668,17 @@ export default function CBSECommandCenter() {
                     ⚡ LSA TEST SERIES I (SEPT 14–26)
                   </span>
                   <span className="text-xs font-mono text-amber-400 font-black flex items-center gap-1.5 leading-none">
-                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0"></span>
+                    {new Date(activeExam.date + "T12:30:00").getTime() < Date.now() ? (
+                      <span className="text-emerald-400 font-bold">✓</span>
+                    ) : (
+                      <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0"></span>
+                    )}
                     <span>Exam {activeExam.displayDate}</span>
                   </span>
                 </div>
 
                 <h3 className={`text-xl sm:text-2xl font-black tracking-tight mb-1 relative z-10 flex flex-wrap items-baseline gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
-                  <span>Next:</span>
+                  <span>{new Date(activeExam.date + "T12:30:00").getTime() < Date.now() ? "Concluded Paper:" : "Next Upcoming Paper:"}</span>
                   <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">{activeExam.subject}</span>
                   <span className="text-xs font-mono font-normal opacity-70">({activeExam.code})</span>
                 </h3>
