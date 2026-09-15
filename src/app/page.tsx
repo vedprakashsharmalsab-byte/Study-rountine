@@ -4106,19 +4106,21 @@ export default function CBSECommandCenter() {
 
                     {/* Visual Geometry / Circuit / Optics Diagram */}
                     {(q.diagramSvg || q.diagramImageUrl) && (
-                      <div className={`my-4 p-4 sm:p-5 rounded-2xl border flex flex-col items-center justify-center overflow-x-auto ${
-                        isDark ? "bg-black/40 border-white/10" : "bg-slate-50/90 border-slate-200 shadow-2xs"
+                      <div className={`my-4 p-4 sm:p-5 rounded-2xl border flex flex-col items-center justify-center overflow-x-auto transition-colors ${
+                        isDark ? "bg-black/40 border-white/10" : "bg-slate-50 border-slate-200/60 shadow-sm"
                       }`}>
                         {q.diagramImageUrl && (
                           <img
                             src={q.diagramImageUrl}
                             alt="Visual Physics / Circuit Diagram"
-                            className="w-full max-w-lg h-auto rounded-xl shadow-xs border border-white/10 object-contain my-1.5"
+                            className={`w-full max-w-lg h-auto rounded-xl shadow-sm border object-contain my-1.5 transition-colors ${
+                              isDark ? "border-white/10" : "border-slate-200"
+                            }`}
                             loading="lazy"
                           />
                         )}
                         {q.diagramSvg && (
-                          <div className="w-full max-w-xl flex justify-center" dangerouslySetInnerHTML={{ __html: q.diagramSvg }} />
+                          <div className={`w-full max-w-xl flex justify-center ${!isDark ? "opacity-90 contrast-125" : ""}`} dangerouslySetInnerHTML={{ __html: q.diagramSvg }} />
                         )}
                       </div>
                     )}
@@ -4356,7 +4358,7 @@ export default function CBSECommandCenter() {
             }`}>
               <div className="flex items-center gap-2">
                 <FlaskConical className="w-4 h-4 text-amber-500" />
-                <h2 className="text-base sm:text-xl font-bold">Virtual 3D Science Labs & Math Visualizers</h2>
+                <h2 className={`text-base sm:text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>Virtual 3D Science Labs & Math Visualizers</h2>
               </div>
               <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                 Interactive physics, chemistry, and trigonometry labs (PhET Colorado & GeoGebra 3D).
@@ -4381,7 +4383,7 @@ export default function CBSECommandCenter() {
                       <span className="font-semibold text-xs text-slate-400">{sim.subject} • {sim.topic}</span>
                     </div>
 
-                    <h3 className="text-sm font-bold">{sim.title}</h3>
+                    <h3 className={`text-sm font-bold ${isDark ? "text-white" : "text-slate-900"}`}>{sim.title}</h3>
                     <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                       {sim.description}
                     </p>

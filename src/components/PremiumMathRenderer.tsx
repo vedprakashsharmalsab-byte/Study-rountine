@@ -277,7 +277,9 @@ const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
           ),
           // ── Beautiful styled tables ──────────────────────────────────────────
           table: ({ node, ...props }) => (
-            <div className="overflow-x-auto my-4 rounded-2xl border border-white/10 shadow-lg">
+            <div className={`overflow-x-auto my-4 rounded-2xl border shadow-lg ${
+              isDark ? "border-white/10" : "border-slate-200/80"
+            }`}>
               <table className="w-full text-xs sm:text-sm border-collapse" {...props} />
             </div>
           ),
