@@ -16,6 +16,8 @@ export default function BiologyVisualSchematic({
 }: BiologySchematicProps) {
   const [isZoomed, setIsZoomed] = useState(false);
   const [highlightPart, setHighlightPart] = useState<string | null>(null);
+  const [reproView, setReproView] = useState<"female" | "male">("female");
+  const [mendelView, setMendelView] = useState<"monohybrid" | "dihybrid" | "sex_det">("monohybrid");
 
   const labelBg = isDark ? "rgba(10, 15, 30, 0.95)" : "rgba(255, 255, 255, 0.98)";
   const labelBorder = isDark ? "rgba(56, 189, 248, 0.3)" : "rgba(2, 132, 199, 0.25)";
@@ -1218,81 +1220,334 @@ export default function BiologyVisualSchematic({
         return (
           <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="brBg" cx="50%" cy="50%" r="70%">
-                <stop offset="0%" stopColor={isDark ? "#171717" : "#fafafa"} />
-                <stop offset="100%" stopColor={isDark ? "#0a0a0a" : "#e5e5e5"} />
+              <radialGradient id="brBg" cx="50%" cy="45%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#0f172a" : "#f8fafc"} />
+                <stop offset="100%" stopColor={isDark ? "#050810" : "#e2e8f0"} />
               </radialGradient>
+              {/* Forebrain - Cerebrum */}
               <linearGradient id="cerebrumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fca5a5" />
-                <stop offset="100%" stopColor="#ef4444" />
+                <stop offset="0%" stopColor="#f43f5e" />
+                <stop offset="40%" stopColor="#e11d48" />
+                <stop offset="80%" stopColor="#be123c" />
+                <stop offset="100%" stopColor="#881337" />
               </linearGradient>
+              {/* Hindbrain - Cerebellum */}
               <linearGradient id="cerebellumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#93c5fd" />
-                <stop offset="100%" stopColor="#3b82f6" />
+                <stop offset="0%" stopColor="#38bdf8" />
+                <stop offset="50%" stopColor="#0284c7" />
+                <stop offset="100%" stopColor="#0369a1" />
               </linearGradient>
+              {/* Brainstem & Medulla */}
               <linearGradient id="medullaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fde047" />
-                <stop offset="100%" stopColor="#eab308" />
+                <stop offset="0%" stopColor="#fbbf24" />
+                <stop offset="60%" stopColor="#d97706" />
+                <stop offset="100%" stopColor="#b45309" />
               </linearGradient>
+              {/* Cranium / Skull Bone */}
+              <linearGradient id="craniumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#94a3b8" />
+                <stop offset="50%" stopColor="#64748b" />
+                <stop offset="100%" stopColor="#475569" />
+              </linearGradient>
+              <filter id="brDrop" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="8" stdDeviation="12" floodColor="#000" floodOpacity="0.45" />
+              </filter>
             </defs>
-            <rect width="1000" height="650" fill="url(#brBg)" rx="16" />
-            
-            <g transform="translate(500, 300)">
-              {/* Cerebrum (Forebrain) */}
-              <path d="M -150,50 C -250,50 -250,-150 -100,-200 C 0,-230 150,-200 200,-100 C 230,0 200,100 100,100 C 50,100 0,70 -50,70 C -100,70 -100,50 -150,50 Z" fill="url(#cerebrumGrad)" stroke="#991b1b" strokeWidth="4" strokeLinejoin="round" />
-              
-              {/* Sulci and Gyri Details */}
-              <path d="M -150,-100 C -100,-50 -50,-120 0,-80 C 50,-40 100,-100 150,-50" fill="none" stroke="#7f1d1d" strokeWidth="2" opacity="0.6" />
-              <path d="M -100,-160 C -50,-110 0,-180 50,-120 C 100,-70 120,-140 170,-80" fill="none" stroke="#7f1d1d" strokeWidth="2" opacity="0.6" />
-              <path d="M -200,-20 C -150,10 -100,-40 -50,0 C 0,30 50,-20 100,20" fill="none" stroke="#7f1d1d" strokeWidth="2" opacity="0.6" />
 
-              {/* Corpus Callosum */}
-              <path d="M -50,30 C -20,0 30,0 60,30 C 30,50 -20,50 -50,30 Z" fill="#f1f5f9" stroke="#94a3b8" strokeWidth="3" />
+            <rect width="1000" height="650" rx="20" fill="url(#brBg)" />
+            {/* Subtle Diagnostic Grid */}
+            {[...Array(13)].map((_, i) => (
+              <line key={"bvg" + i} x1={80 * i} y1="0" x2={80 * i} y2="650" stroke={gridStroke} strokeWidth="1" />
+            ))}
+            {[...Array(9)].map((_, i) => (
+              <line key={"bhg" + i} x1="0" y1={75 * i} x2="1000" y2={75 * i} stroke={gridStroke} strokeWidth="1" />
+            ))}
 
-              {/* Thalamus / Hypothalamus */}
-              <ellipse cx="5" cy="55" rx="25" ry="15" fill="#f472b6" stroke="#be185d" strokeWidth="2" />
-              <circle cx="20" cy="80" r="10" fill="#a78bfa" stroke="#6d28d9" strokeWidth="2" /> {/* Pituitary */}
-
-              {/* Midbrain & Pons */}
-              <path d="M -10,70 L 20,70 L 25,120 L -15,120 Z" fill="#fb923c" stroke="#c2410c" strokeWidth="2" />
-              <path d="M -15,120 C -40,140 -40,160 -10,180 L 25,180 L 25,120 Z" fill="#34d399" stroke="#047857" strokeWidth="2" /> {/* Pons */}
-
-              {/* Medulla Oblongata */}
-              <path d="M -10,180 C -20,220 -20,250 -10,300 L 20,300 L 25,180 Z" fill="url(#medullaGrad)" stroke="#a16207" strokeWidth="3" />
-
-              {/* Cerebellum (Hindbrain) */}
-              <path d="M 25,120 C 150,100 200,200 100,250 C 50,270 20,250 25,180 Z" fill="url(#cerebellumGrad)" stroke="#1e3a8a" strokeWidth="4" />
-              {/* Arbor Vitae (Tree of Life in Cerebellum) */}
-              <path d="M 40,180 L 80,180 M 60,180 L 70,140 M 60,180 L 100,220 M 70,160 L 90,140" fill="none" stroke="#bfdbfe" strokeWidth="2" />
+            {/* Header Title Card */}
+            <g transform="translate(40, 24)">
+              <rect width="480" height="46" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="18" y="28" fill={textPrimary} fontSize="14" fontWeight="800" letterSpacing="0.4">
+                HUMAN BRAIN — SAGITTAL MEDIAN SECTION
+              </text>
+              <rect x="400" y="10" width="68" height="26" rx="6" fill="#f43f5e" fillOpacity="0.2" />
+              <text x="434" y="27" fill="#fb7185" fontSize="11" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* Labels */}
-            <g fontSize="16" fontFamily="Arial, sans-serif" fontWeight="bold">
-              {/* Left Side (Forebrain) */}
-              <text x="15" y="100" fill={textPrimary}>Cerebrum</text>
-              <line x1="100" y1="95" x2="350" y2="150" stroke={textPrimary} strokeDasharray="4" />
+            {/* 3 Major Regions Functional Badge */}
+            <g transform="translate(540, 26)">
+              <rect width="420" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <circle cx="20" cy="21" r="6" fill="#f43f5e" />
+              <text x="32" y="25" fill={textPrimary} fontSize="10" fontWeight="700">Forebrain (Thinking)</text>
+              <circle cx="160" cy="21" r="6" fill="#fb923c" />
+              <text x="172" y="25" fill={textPrimary} fontSize="10" fontWeight="700">Midbrain (Reflexes)</text>
+              <circle cx="295" cy="21" r="6" fill="#38bdf8" />
+              <text x="307" y="25" fill={textPrimary} fontSize="10" fontWeight="700">Hindbrain (Balance/BP)</text>
+            </g>
 
-              <text x="15" y="250" fill={textPrimary}>Corpus Callosum</text>
-              <line x1="160" y1="245" x2="450" y2="330" stroke={textPrimary} strokeDasharray="4" />
+            {/* MAIN BRAIN STRUCTURE GROUP */}
+            <g transform="translate(490, 315)">
+              {/* 1. CRANIUM (BONY SKULL) OUTER CASING */}
+              <path
+                d="M -230,120 
+                   C -270,-30 -240,-160 -130,-220 
+                   C -20,-270 140,-260 220,-170 
+                   C 280,-100 270,40 220,130 
+                   C 180,180 130,220 70,230"
+                fill="none"
+                stroke="url(#craniumGrad)"
+                strokeWidth="14"
+                strokeLinecap="round"
+                opacity="0.85"
+              />
 
-              <text x="15" y="320" fill={textPrimary}>Hypothalamus</text>
-              <line x1="130" y1="315" x2="500" y2="355" stroke={textPrimary} strokeDasharray="4" />
+              {/* 2. MENINGES & CSF SPACE (Hydraulic Shock Absorber) */}
+              <path
+                d="M -220,110 
+                   C -255,-30 -228,-150 -124,-208 
+                   C -18,-256 132,-246 208,-160 
+                   C 264,-94 254,36 208,120 
+                   C 170,170 120,210 65,220"
+                fill="none"
+                stroke="#38bdf8"
+                strokeWidth="4"
+                strokeDasharray="6,4"
+                opacity="0.6"
+              />
 
-              <text x="15" y="390" fill={textPrimary}>Pituitary Gland</text>
-              <line x1="135" y1="385" x2="520" y2="380" stroke={textPrimary} strokeDasharray="4" />
+              {/* 3. CEREBRUM (FOREBRAIN - Massive folded cortex) */}
+              <path
+                d="M -180,70 
+                   C -240,60 -240,-110 -110,-170 
+                   C -10,-210 130,-190 180,-100 
+                   C 220,-20 190,70 100,80 
+                   C 50,85 0,60 -40,60 
+                   C -80,60 -120,75 -180,70 Z"
+                fill="url(#cerebrumGrad)"
+                stroke="#9f1239"
+                strokeWidth="4"
+                strokeLinejoin="round"
+                filter="url(#brDrop)"
+              />
 
-              {/* Right Side (Hindbrain/Midbrain) */}
-              <text x="825" y="440" fill={textPrimary}>Pons</text>
-              <line x1="815" y1="435" x2="490" y2="450" stroke={textPrimary} strokeDasharray="4" />
+              {/* Gyri & Sulci (Cortical Convolutions for Surface Area) */}
+              <g fill="none" stroke="#ffe4e6" strokeWidth="2.5" opacity="0.45" strokeLinecap="round">
+                <path d="M -170,-30 C -120,10 -100,-70 -30,-40 C 30,-20 70,-80 120,-30" />
+                <path d="M -130,-90 C -80,-50 -40,-130 20,-80 C 70,-40 100,-110 150,-60" />
+                <path d="M -90,-140 C -40,-100 10,-160 60,-110 C 110,-70 140,-130 170,-90" />
+                <path d="M -190,20 C -140,50 -90,0 -40,30 C 10,60 60,10 110,40" />
+                <path d="M -60,-175 C 0,-150 50,-185 100,-150" />
+                <path d="M -145,-125 C -105,-155 -70,-115 -30,-145" />
+              </g>
 
-              <text x="825" y="500" fill={textPrimary}>Medulla Oblongata</text>
-              <line x1="815" y1="495" x2="500" y2="520" stroke={textPrimary} strokeDasharray="4" />
+              {/* 4. CORPUS CALLOSUM (White matter bridge connecting hemispheres) */}
+              <path
+                d="M -90,15 
+                   C -50,-35 40,-35 85,15 
+                   C 60,35 -20,35 -90,15 Z"
+                fill="#f8fafc"
+                stroke="#cbd5e1"
+                strokeWidth="3"
+                filter="url(#brDrop)"
+              />
+              <path d="M -70,12 Q 0,-18 65,12" fill="none" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="3,2" />
 
-              <text x="825" y="550" fill={textPrimary}>Spinal Cord</text>
-              <line x1="815" y1="545" x2="510" y2="580" stroke={textPrimary} strokeDasharray="4" />
+              {/* 5. THALAMUS (Relay Switchboard) */}
+              <ellipse cx="2" cy="40" rx="30" ry="18" fill="#fda4af" stroke="#f43f5e" strokeWidth="2.5" />
+              <text x="2" y="44" fill="#881337" fontSize="9" fontWeight="800" textAnchor="middle">THALAMUS</text>
 
-              <text x="825" y="350" fill={textPrimary}>Cerebellum (Posture & Balance)</text>
-              <line x1="815" y1="345" x2="630" y2="470" stroke={textPrimary} strokeDasharray="4" />
+              {/* 6. HYPOTHALAMUS & PITUITARY GLAND */}
+              <path
+                d="M -15,55 C 5,50 20,55 25,65 C 20,80 -5,80 -15,55 Z"
+                fill="#fb7185"
+                stroke="#e11d48"
+                strokeWidth="2"
+              />
+              {/* Infundibulum stalk */}
+              <path d="M 12,70 L 18,92" stroke="#be123c" strokeWidth="3" strokeLinecap="round" />
+              {/* Pituitary Gland (Hypophysis - Master Gland) */}
+              <ellipse cx="20" cy="98" rx="12" ry="9" fill="#c084fc" stroke="#7e22ce" strokeWidth="2.5" filter="url(#brDrop)" />
+              {/* Sella Turcica (Bony pocket housing pituitary) */}
+              <path d="M 4,96 C 4,114 36,114 36,96" fill="none" stroke="#94a3b8" strokeWidth="2.5" />
+
+              {/* 7. MIDBRAIN (Mesencephalon - Visual/Auditory Reflex) */}
+              <path
+                d="M -8,75 L 36,75 L 42,118 L -12,118 Z"
+                fill="#fb923c"
+                stroke="#c2410c"
+                strokeWidth="2.5"
+              />
+              <text x="14" y="100" fill="#7c2d12" fontSize="8.5" fontWeight="800" textAnchor="middle">MIDBRAIN</text>
+
+              {/* 8. PONS (Pneumotaxic Centre / Relay Bridge) */}
+              <path
+                d="M -12,118 
+                   C -48,138 -48,172 -10,192 
+                   L 44,192 L 42,118 Z"
+                fill="#34d399"
+                stroke="#059669"
+                strokeWidth="3"
+                filter="url(#brDrop)"
+              />
+              <text x="8" y="158" fill="#064e3b" fontSize="9" fontWeight="800" textAnchor="middle">PONS</text>
+
+              {/* 9. MEDULLA OBLONGATA (Autonomic Vital Reflex: BP, Vomiting, Salivation) */}
+              <path
+                d="M -10,192 
+                   C -24,228 -24,265 -12,305 
+                   L 32,305 L 44,192 Z"
+                fill="url(#medullaGrad)"
+                stroke="#92400e"
+                strokeWidth="3"
+                filter="url(#brDrop)"
+              />
+              <text x="12" y="248" fill="#451a03" fontSize="8.5" fontWeight="800" textAnchor="middle">MEDULLA</text>
+
+              {/* 10. SPINAL CORD (Continuous with Medulla) */}
+              <path
+                d="M -12,305 L -10,360 L 30,360 L 32,305 Z"
+                fill="#cbd5e1"
+                stroke="#64748b"
+                strokeWidth="3"
+              />
+              <path d="M 10,305 L 10,360" stroke="#94a3b8" strokeWidth="2" strokeDasharray="4,2" />
+
+              {/* 11. CEREBELLUM (HINDBRAIN - Arbor Vitae Tree of Life) */}
+              <path
+                d="M 44,125 
+                   C 165,100 220,190 120,250 
+                   C 70,270 38,245 44,192 Z"
+                fill="url(#cerebellumGrad)"
+                stroke="#0369a1"
+                strokeWidth="4"
+                filter="url(#brDrop)"
+              />
+              {/* Arbor Vitae (Branching white matter core inside cerebellum) */}
+              <g fill="none" stroke="#f0f9ff" strokeWidth="2.5" strokeLinecap="round">
+                <path d="M 55,185 L 105,185" />
+                <path d="M 80,185 Q 95,150 115,140" />
+                <path d="M 80,185 Q 95,220 115,228" />
+                <path d="M 98,162 L 122,168" />
+                <path d="M 98,205 L 122,202" />
+                <path d="M 105,185 L 130,185" />
+              </g>
+            </g>
+
+            {/* DIRECT LABELS & FUNCTIONAL ANNOTATION CALLOUT CARDS */}
+            {/* LEFT COLUMN CALLOUTS (FOREBRAIN) */}
+            <g>
+              {/* Cerebrum Callout */}
+              <g transform="translate(30, 95)">
+                <rect width="260" height="62" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                <text x="14" y="20" fill="#f43f5e" fontSize="12" fontWeight="800">Cerebrum (Forebrain)</text>
+                <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Main thinking & intelligence centre</text>
+                <text x="14" y="50" fill={textMuted} fontSize="9">• Sensory interpretation, memory & logic</text>
+                <line x1="260" y1="31" x2="350" y2="180" stroke="#f43f5e" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="350" cy="180" r="3.5" fill="#f43f5e" />
+              </g>
+
+              {/* Cranium / Skull Callout */}
+              <g transform="translate(30, 180)">
+                <rect width="260" height="52" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                <text x="14" y="20" fill="#94a3b8" fontSize="12" fontWeight="800">Cranium (Bony Skull)</text>
+                <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Rigid outer protection against impact</text>
+                <line x1="260" y1="26" x2="330" y2="150" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="330" cy="150" r="3.5" fill="#94a3b8" />
+              </g>
+
+              {/* Corpus Callosum Callout */}
+              <g transform="translate(30, 255)">
+                <rect width="260" height="52" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                <text x="14" y="20" fill="#cbd5e1" fontSize="12" fontWeight="800">Corpus Callosum</text>
+                <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Connects Left & Right hemispheres</text>
+                <line x1="260" y1="26" x2="420" y2="320" stroke="#cbd5e1" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="420" cy="320" r="3.5" fill="#cbd5e1" />
+              </g>
+
+              {/* Hypothalamus Callout */}
+              <g transform="translate(30, 330)">
+                <rect width="260" height="64" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                <text x="14" y="20" fill="#fb7185" fontSize="12" fontWeight="800">Hypothalamus</text>
+                <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Centre for hunger, thirst & sleep</text>
+                <text x="14" y="50" fill={textMuted} fontSize="9">• Controls body temperature & Pituitary</text>
+                <line x1="260" y1="32" x2="480" y2="375" stroke="#fb7185" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="480" cy="375" r="3.5" fill="#fb7185" />
+              </g>
+
+              {/* Pituitary Gland Callout */}
+              <g transform="translate(30, 415)">
+                <rect width="260" height="56" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                <text x="14" y="20" fill="#c084fc" fontSize="12" fontWeight="800">Pituitary Gland (Master Gland)</text>
+                <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Secretes Growth Hormone (GH), TSH</text>
+                <line x1="260" y1="28" x2="505" y2="410" stroke="#c084fc" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="505" cy="410" r="3.5" fill="#c084fc" />
+              </g>
+            </g>
+
+            {/* RIGHT COLUMN CALLOUTS (MIDBRAIN & HINDBRAIN) */}
+            <g>
+              {/* Midbrain Callout */}
+              <g transform="translate(710, 100)">
+                <rect width="260" height="60" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                <text x="14" y="20" fill="#fb923c" fontSize="12" fontWeight="800">Midbrain</text>
+                <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Connects forebrain to hindbrain</text>
+                <text x="14" y="50" fill={textMuted} fontSize="9">• Auditory, visual & pupil reflex movements</text>
+                <line x1="0" y1="30" x2="-200" y2="395" stroke="#fb923c" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="-200" cy="395" r="3.5" fill="#fb923c" />
+              </g>
+
+              {/* Cerebellum Callout (HALLMARK CBSE 5M) */}
+              <g transform="translate(710, 185)">
+                <rect width="260" height="78" rx="10" fill={labelBg} stroke="#0284c7" strokeWidth="2" />
+                <text x="14" y="20" fill="#38bdf8" fontSize="12" fontWeight="800">Cerebellum (Hindbrain)</text>
+                <text x="14" y="36" fill="#f8fafc" fontSize="9.5" fontWeight="700">★ CBSE Hallmark Function:</text>
+                <text x="14" y="50" fill={textPrimary} fontSize="9">• Maintains posture, balance & equilibrium</text>
+                <text x="14" y="64" fill={textMuted} fontSize="9">• Precision of voluntary motor acts (walking)</text>
+                <line x1="0" y1="39" x2="-95" y2="490" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="-95" cy="490" r="3.5" fill="#38bdf8" />
+              </g>
+
+              {/* Pons Callout */}
+              <g transform="translate(710, 285)">
+                <rect width="260" height="54" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                <text x="14" y="20" fill="#34d399" fontSize="12" fontWeight="800">Pons (Hindbrain)</text>
+                <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Relays impulses between brain regions</text>
+                <text x="14" y="48" fill={textMuted} fontSize="9">• Pneumotaxic centre for respiration</text>
+                <line x1="0" y1="27" x2="-225" y2="465" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="-225" cy="465" r="3.5" fill="#34d399" />
+              </g>
+
+              {/* Medulla Oblongata Callout */}
+              <g transform="translate(710, 360)">
+                <rect width="260" height="78" rx="10" fill={labelBg} stroke="#d97706" strokeWidth="1.5" />
+                <text x="14" y="20" fill="#fbbf24" fontSize="12" fontWeight="800">Medulla Oblongata</text>
+                <text x="14" y="36" fill="#f8fafc" fontSize="9.5" fontWeight="700">★ Vital Autonomic Centre:</text>
+                <text x="14" y="50" fill={textPrimary} fontSize="9">• Involuntary actions: BP, salivation</text>
+                <text x="14" y="64" fill={textMuted} fontSize="9">• Vomiting, swallowing & coughing reflexes</text>
+                <line x1="0" y1="39" x2="-210" y2="550" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="-210" cy="550" r="3.5" fill="#fbbf24" />
+              </g>
+
+              {/* Spinal Cord Callout */}
+              <g transform="translate(710, 460)">
+                <rect width="260" height="52" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                <text x="14" y="20" fill="#cbd5e1" fontSize="12" fontWeight="800">Spinal Cord</text>
+                <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Continuation of medulla, controls reflexes</text>
+                <line x1="0" y1="26" x2="-215" y2="640" stroke="#cbd5e1" strokeWidth="1.5" strokeDasharray="4,3" />
+                <circle cx="-215" cy="640" r="3.5" fill="#cbd5e1" />
+              </g>
+            </g>
+
+            {/* BOTTOM EXAMINER TRAP / HIGH YIELD NOTE */}
+            <g transform="translate(40, 570)">
+              <rect width="640" height="56" rx="12" fill={isDark ? "rgba(225, 29, 72, 0.12)" : "#fff1f2"} stroke="#e11d48" strokeWidth="1.5" />
+              <text x="18" y="24" fill="#fb7185" fontSize="11" fontWeight="800">
+                ⚠️ CBSE EXAMINER CRITICAL NOTE — INVOLUNTARY VS VOLUNTARY REGULATION:
+              </text>
+              <text x="18" y="42" fill={isDark ? "#fecdd3" : "#9f1239"} fontSize="10" fontWeight="600">
+                Cerebellum controls accuracy & balance of VOLUNTARY acts (walking in a line). Medulla controls VITAL INVOLUNTARY acts (salivation, vomiting, BP).
+              </text>
             </g>
           </svg>
         );
@@ -1492,202 +1747,1106 @@ export default function BiologyVisualSchematic({
 
       // =====================================================================
       // 9. HUMAN FEMALE REPRODUCTIVE SYSTEM
+      // =====================================================================
+      // 9. HUMAN REPRODUCTIVE SYSTEM (FEMALE & MALE INTERACTIVE VIEWS)
+      // =====================================================================
       case "bio_human_reproduction":
         return (
           <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
-              <radialGradient id="repBg" cx="50%" cy="50%" r="70%">
-                <stop offset="0%" stopColor={isDark ? "#171717" : "#fafafa"} />
-                <stop offset="100%" stopColor={isDark ? "#0a0a0a" : "#e5e5e5"} />
+              <radialGradient id="repBg" cx="50%" cy="45%" r="65%">
+                <stop offset="0%" stopColor={isDark ? "#140a12" : "#fdf4ff"} />
+                <stop offset="100%" stopColor={isDark ? "#060307" : "#fae8ff"} />
               </radialGradient>
-              <linearGradient id="uterusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fca5a5" />
-                <stop offset="100%" stopColor="#ef4444" />
+              {/* Uterus Muscular Wall Gradient */}
+              <linearGradient id="uterusWallGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f43f5e" />
+                <stop offset="50%" stopColor="#be123c" />
+                <stop offset="100%" stopColor="#881337" />
               </linearGradient>
+              {/* Endometrium Vascular Lining */}
+              <linearGradient id="endoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#fda4af" />
+                <stop offset="100%" stopColor="#f43f5e" />
+              </linearGradient>
+              {/* Ovary Gradient */}
+              <linearGradient id="ovaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fef08a" />
+                <stop offset="70%" stopColor="#f59e0b" />
+                <stop offset="100%" stopColor="#d97706" />
+              </linearGradient>
+              {/* Male Testis Gradient */}
+              <linearGradient id="testisGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#93c5fd" />
+                <stop offset="60%" stopColor="#3b82f6" />
+                <stop offset="100%" stopColor="#1d4ed8" />
+              </linearGradient>
+              <filter id="repDrop" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="8" stdDeviation="10" floodColor="#000" floodOpacity="0.45" />
+              </filter>
             </defs>
-            <rect width="1000" height="650" fill="url(#repBg)" rx="16" />
-            
-            {/* Split View Line */}
-            <line x1="500" y1="50" x2="500" y2="600" stroke={textPrimary} strokeWidth="2" strokeDasharray="10,10" opacity="0.3" />
-            <text x="250" y="80" fill={textPrimary} fontSize="20" fontWeight="bold" textAnchor="middle">Male Reproductive System</text>
-            <text x="750" y="80" fill={textPrimary} fontSize="20" fontWeight="bold" textAnchor="middle">Female Reproductive System</text>
 
-            {/* Left Side: Male System */}
-            <g transform="translate(250, 350)">
-              {/* Bladder */}
-              <ellipse cx="0" cy="-100" rx="40" ry="30" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-              {/* Urethra & Penis */}
-              <path d="M -10,-70 L -10,100 C -10,120 10,120 10,100 L 10,-70 Z" fill="#fca5a5" stroke="#dc2626" strokeWidth="2" />
-              <path d="M -20,30 L -20,100 C -20,130 20,130 20,100 L 20,30 Z" fill="none" stroke="#ef4444" strokeWidth="2" />
-              {/* Testis & Scrotum */}
-              <ellipse cx="-40" cy="120" rx="20" ry="25" fill="#93c5fd" stroke="#2563eb" strokeWidth="2" />
-              <path d="M -65,110 C -70,160 -10,160 -15,110" fill="none" stroke="#94a3b8" strokeWidth="3" />
-              {/* Epididymis & Vas Deferens */}
-              <path d="M -40,95 C -20,95 -20,50 -20,0 C -20,-50 -60,-80 -60,-120 C -60,-140 0,-140 0,-100" fill="none" stroke="#3b82f6" strokeWidth="3" />
-              {/* Prostate & Seminal Vesicle */}
-              <ellipse cx="0" cy="-60" rx="15" ry="10" fill="#a78bfa" stroke="#6d28d9" strokeWidth="2" />
-              <ellipse cx="20" cy="-80" rx="10" ry="15" fill="#f9a8d4" stroke="#db2777" strokeWidth="2" />
+            <rect width="1000" height="650" rx="20" fill="url(#repBg)" />
+            {/* Grid */}
+            {[...Array(13)].map((_, i) => (
+              <line key={"rvg" + i} x1={80 * i} y1="0" x2={80 * i} y2="650" stroke={gridStroke} strokeWidth="1" />
+            ))}
+            {[...Array(9)].map((_, i) => (
+              <line key={"rhg" + i} x1="0" y1={75 * i} x2="1000" y2={75 * i} stroke={gridStroke} strokeWidth="1" />
+            ))}
+
+            {/* Header Title Card */}
+            <g transform="translate(40, 24)">
+              <rect width="470" height="46" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="18" y="28" fill={textPrimary} fontSize="13.5" fontWeight="800" letterSpacing="0.4">
+                {reproView === "female"
+                  ? "FEMALE REPRODUCTIVE SYSTEM — CORONAL SECTION"
+                  : "MALE REPRODUCTIVE SYSTEM — SAGITTAL VIEW"}
+              </text>
+              <rect x="390" y="10" width="68" height="26" rx="6" fill="#ec4899" fillOpacity="0.2" />
+              <text x="424" y="27" fill="#f472b6" fontSize="11" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* Right Side: Female System */}
-            <g transform="translate(750, 320)">
-              {/* Uterus */}
-              <path d="M -60,-50 C -40,-120 40,-120 60,-50 C 40,0 20,50 15,100 L -15,100 C -20,50 -40,0 -60,-50 Z" fill="url(#uterusGrad)" stroke="#991b1b" strokeWidth="3" />
-              {/* Endometrium lining */}
-              <path d="M -45,-45 C -30,-100 30,-100 45,-45 C 30,-5 10,40 5,90 L -5,90 C -10,40 -30,-5 -45,-45 Z" fill="#fecaca" />
-              
-              {/* Fallopian Tubes (Oviducts) */}
-              <path d="M -60,-70 C -120,-80 -140,-40 -120,0" fill="none" stroke="#ef4444" strokeWidth="8" strokeLinecap="round" />
-              <path d="M 60,-70 C 120,-80 140,-40 120,0" fill="none" stroke="#ef4444" strokeWidth="8" strokeLinecap="round" />
-              {/* Fimbriae */}
-              <path d="M -120,0 C -130,20 -110,20 -110,10" fill="none" stroke="#ef4444" strokeWidth="3" />
-              <path d="M 120,0 C 130,20 110,20 110,10" fill="none" stroke="#ef4444" strokeWidth="3" />
+            {/* Interactive View Switcher Tabs inside SVG */}
+            <g transform="translate(530, 24)">
+              <g
+                onClick={() => setReproView("female")}
+                className="cursor-pointer"
+              >
+                <rect
+                  width="210"
+                  height="46"
+                  rx="12"
+                  fill={reproView === "female" ? "#ec4899" : labelBg}
+                  stroke={reproView === "female" ? "#f472b6" : labelBorder}
+                  strokeWidth="1.5"
+                />
+                <text
+                  x="105"
+                  y="28"
+                  fill={reproView === "female" ? "#ffffff" : textPrimary}
+                  fontSize="12"
+                  fontWeight="800"
+                  textAnchor="middle"
+                >
+                  ♀ Female (NCERT Fig 7.11)
+                </text>
+              </g>
 
-              {/* Ovaries */}
-              <ellipse cx="-130" cy="30" rx="15" ry="20" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
-              <ellipse cx="130" cy="30" rx="15" ry="20" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
-
-              {/* Cervix & Vagina */}
-              <path d="M -15,100 L -25,180 L 25,180 L 15,100 Z" fill="#fbcfe8" stroke="#be185d" strokeWidth="2" />
-              <line x1="-15" y1="100" x2="15" y2="100" stroke="#991b1b" strokeWidth="4" /> {/* Cervix */}
+              <g
+                transform="translate(220, 0)"
+                onClick={() => setReproView("male")}
+                className="cursor-pointer"
+              >
+                <rect
+                  width="210"
+                  height="46"
+                  rx="12"
+                  fill={reproView === "male" ? "#3b82f6" : labelBg}
+                  stroke={reproView === "male" ? "#60a5fa" : labelBorder}
+                  strokeWidth="1.5"
+                />
+                <text
+                  x="105"
+                  y="28"
+                  fill={reproView === "male" ? "#ffffff" : textPrimary}
+                  fontSize="12"
+                  fontWeight="800"
+                  textAnchor="middle"
+                >
+                  ♂ Male (NCERT Fig 7.10)
+                </text>
+              </g>
             </g>
 
-            {/* Labels - Male */}
-            <g fontSize="14" fontFamily="Arial, sans-serif" fontWeight="bold">
-              <text x="10" y="240" fill={textPrimary}>Vas Deferens</text>
-              <line x1="110" y1="235" x2="200" y2="245" stroke={textPrimary} strokeDasharray="4" />
+            {/* ========================================================= */}
+            {/* VIEW A: FEMALE REPRODUCTIVE SYSTEM                       */}
+            {/* ========================================================= */}
+            {reproView === "female" ? (
+              <g>
+                {/* Central Organ Group */}
+                <g transform="translate(500, 310)">
+                  {/* Outer Broad Ligament & Pelvic Wall Shade */}
+                  <path
+                    d="M -240,-20 Q -150,70 -60,110 L 60,110 Q 150,70 240,-20"
+                    fill="none"
+                    stroke="#fda4af"
+                    strokeWidth="32"
+                    strokeLinecap="round"
+                    opacity="0.25"
+                  />
 
-              <text x="10" y="300" fill={textPrimary}>Prostate Gland</text>
-              <line x1="120" y1="295" x2="250" y2="295" stroke={textPrimary} strokeDasharray="4" />
+                  {/* Fallopian Tubes (Oviducts) - Left & Right */}
+                  {/* Left Oviduct Arch */}
+                  <path
+                    d="M -45,-50 
+                       C -90,-110 -200,-95 -230,-25 
+                       C -245,10 -220,40 -205,30"
+                    fill="none"
+                    stroke="#f43f5e"
+                    strokeWidth="14"
+                    strokeLinecap="round"
+                    filter="url(#repDrop)"
+                  />
+                  {/* Left Fimbriae (Finger-like projections catching ovum) */}
+                  <g stroke="#e11d48" strokeWidth="3" strokeLinecap="round">
+                    <path d="M -205,30 Q -200,60 -210,75" />
+                    <path d="M -205,30 Q -215,60 -225,70" />
+                    <path d="M -205,30 Q -230,50 -240,55" />
+                    <path d="M -205,30 Q -190,55 -195,72" />
+                  </g>
 
-              <text x="10" y="380" fill={textPrimary}>Urethra</text>
-              <line x1="70" y1="375" x2="250" y2="375" stroke={textPrimary} strokeDasharray="4" />
+                  {/* Right Oviduct Arch */}
+                  <path
+                    d="M 45,-50 
+                       C 90,-110 200,-95 230,-25 
+                       C 245,10 220,40 205,30"
+                    fill="none"
+                    stroke="#f43f5e"
+                    strokeWidth="14"
+                    strokeLinecap="round"
+                    filter="url(#repDrop)"
+                  />
+                  {/* Right Fimbriae */}
+                  <g stroke="#e11d48" strokeWidth="3" strokeLinecap="round">
+                    <path d="M 205,30 Q 200,60 210,75" />
+                    <path d="M 205,30 Q 215,60 225,70" />
+                    <path d="M 205,30 Q 230,50 240,55" />
+                    <path d="M 205,30 Q 190,55 195,72" />
+                  </g>
 
-              <text x="10" y="470" fill={textPrimary}>Testis (Sperm Production)</text>
-              <line x1="195" y1="465" x2="210" y2="470" stroke={textPrimary} strokeDasharray="4" />
+                  {/* Ovarian Ligaments anchoring ovaries to uterus */}
+                  <path d="M -50,10 Q -120,40 -170,45" fill="none" stroke="#fbcfe8" strokeWidth="4" />
+                  <path d="M 50,10 Q 120,40 170,45" fill="none" stroke="#fbcfe8" strokeWidth="4" />
 
-              <text x="10" y="520" fill={textPrimary}>Scrotum</text>
-              <line x1="70" y1="515" x2="190" y2="480" stroke={textPrimary} strokeDasharray="4" />
+                  {/* Left Ovary */}
+                  <ellipse cx="-185" cy="55" rx="28" ry="18" fill="url(#ovaryGrad)" stroke="#d97706" strokeWidth="3" filter="url(#repDrop)" />
+                  {/* Maturing Follicles inside Left Ovary */}
+                  <circle cx="-195" cy="52" r="5" fill="#ffffff" opacity="0.8" />
+                  <circle cx="-180" cy="60" r="7" fill="#ffffff" opacity="0.9" />
+                  <circle cx="-172" cy="50" r="4" fill="#ffffff" opacity="0.7" />
+                  {/* Ovulated Egg / Secondary Oocyte escaping toward fimbriae */}
+                  <circle cx="-212" cy="72" r="4.5" fill="#fef08a" stroke="#ca8a04" strokeWidth="1.5" />
 
-              {/* Labels - Female */}
-              <text x="815" y="250" fill={textPrimary}>Fallopian Tube (Oviduct)</text>
-              <line x1="805" y1="245" x2="650" y2="250" stroke={textPrimary} strokeDasharray="4" />
+                  {/* Right Ovary */}
+                  <ellipse cx="185" cy="55" rx="28" ry="18" fill="url(#ovaryGrad)" stroke="#d97706" strokeWidth="3" filter="url(#repDrop)" />
+                  <circle cx="195" cy="52" r="5" fill="#ffffff" opacity="0.8" />
+                  <circle cx="180" cy="60" r="7" fill="#ffffff" opacity="0.9" />
+                  <circle cx="172" cy="50" r="4" fill="#ffffff" opacity="0.7" />
 
-              <text x="815" y="360" fill={textPrimary}>Ovary (Egg Production)</text>
-              <line x1="805" y1="355" x2="630" y2="350" stroke={textPrimary} strokeDasharray="4" />
+                  {/* UTERUS (WOMB) — Thick Myometrium Outer Wall */}
+                  <path
+                    d="M -55,-55 
+                       C -30,-80 30,-80 55,-55 
+                       C 80,-30 85,30 55,90 
+                       C 40,120 30,140 25,180 
+                       L -25,180 
+                       C -30,140 -40,120 -55,90 
+                       C -85,30 -80,-30 -55,-55 Z"
+                    fill="url(#uterusWallGrad)"
+                    stroke="#9f1239"
+                    strokeWidth="4"
+                    filter="url(#repDrop)"
+                  />
 
-              <text x="815" y="440" fill={textPrimary}>Uterus (Womb)</text>
-              <line x1="805" y1="435" x2="770" y2="350" stroke={textPrimary} strokeDasharray="4" />
+                  {/* Uterine Cavity & Endometrium Lining */}
+                  <path
+                    d="M -32,-40 
+                       C -16,-55 16,-55 32,-40 
+                       C 50,-15 50,30 32,75 
+                       C 20,105 15,130 14,175 
+                       L -14,175 
+                       C -15,130 -20,105 -32,75 
+                       C -50,30 -50,-15 -32,-40 Z"
+                    fill="url(#endoGrad)"
+                    stroke="#e11d48"
+                    strokeWidth="2"
+                  />
+                  {/* Endometrium vascular corrugations */}
+                  <path d="M -30,0 Q -15,10 -30,20 Q -15,30 -30,40" fill="none" stroke="#be123c" strokeWidth="1.5" />
+                  <path d="M 30,0 Q 15,10 30,20 Q 15,30 30,40" fill="none" stroke="#be123c" strokeWidth="1.5" />
 
-              <text x="815" y="520" fill={textPrimary}>Cervix</text>
-              <line x1="805" y1="515" x2="760" y2="420" stroke={textPrimary} strokeDasharray="4" />
+                  {/* Cervix & Cervical Canal */}
+                  <rect x="-24" y="180" width="48" height="40" rx="6" fill="#be123c" stroke="#9f1239" strokeWidth="2.5" />
+                  <line x1="0" y1="180" x2="0" y2="220" stroke="#fda4af" strokeWidth="3" strokeDasharray="4,2" />
 
-              <text x="815" y="570" fill={textPrimary}>Vagina</text>
-              <line x1="805" y1="565" x2="760" y2="480" stroke={textPrimary} strokeDasharray="4" />
-            </g>
+                  {/* Vagina (Birth Canal / Copulatory Canal) */}
+                  <path
+                    d="M -22,220 L -30,280 L 30,280 L 22,220 Z"
+                    fill="#f472b6"
+                    stroke="#db2777"
+                    strokeWidth="3"
+                  />
+                  {/* Vaginal Rugae folds */}
+                  <line x1="-16" y1="235" x2="16" y2="235" stroke="#be185d" strokeWidth="1.5" />
+                  <line x1="-20" y1="252" x2="20" y2="252" stroke="#be185d" strokeWidth="1.5" />
+                  <line x1="-24" y1="268" x2="24" y2="268" stroke="#be185d" strokeWidth="1.5" />
+                </g>
+
+                {/* LEFT COLUMN CALLOUTS (OVARY & OVIDUCT) */}
+                <g>
+                  {/* Fallopian Tube Callout */}
+                  <g transform="translate(30, 95)">
+                    <rect width="270" height="74" rx="10" fill={labelBg} stroke="#f43f5e" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#f43f5e" fontSize="12" fontWeight="800">Fallopian Tube (Oviduct)</text>
+                    <text x="14" y="36" fill="#f8fafc" fontSize="9.5" fontWeight="700">★ Primary Board Hallmark:</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9">• Site of Fertilisation (sperm meets egg)</text>
+                    <text x="14" y="64" fill={textMuted} fontSize="9">• Cilia sweep zygote towards uterus</text>
+                    <line x1="270" y1="37" x2="350" y2="240" stroke="#f43f5e" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="350" cy="240" r="3.5" fill="#f43f5e" />
+                  </g>
+
+                  {/* Ovary Callout */}
+                  <g transform="translate(30, 195)">
+                    <rect width="270" height="74" rx="10" fill={labelBg} stroke="#d97706" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#f59e0b" fontSize="12" fontWeight="800">Ovary (Primary Female Organ)</text>
+                    <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Releases 1 mature ovum every ~28 days</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9.5">• Endocrine: Estrogen & Progesterone</text>
+                    <text x="14" y="64" fill={textMuted} fontSize="9">• Thousands of immature eggs present at birth</text>
+                    <line x1="270" y1="37" x2="320" y2="365" stroke="#d97706" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="320" cy="365" r="3.5" fill="#d97706" />
+                  </g>
+
+                  {/* Placenta Inset Info Box */}
+                  <g transform="translate(30, 295)">
+                    <rect width="270" height="92" rx="10" fill={labelBg} stroke="#be123c" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#fb7185" fontSize="12" fontWeight="800">Placenta (Vascular Disc Tissue)</text>
+                    <text x="14" y="36" fill="#f8fafc" fontSize="9.5" fontWeight="700">★ 3-Mark Question Favorite:</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9">• Embedded in uterine wall with chorionic villi</text>
+                    <text x="14" y="64" fill={textPrimary} fontSize="9">• Passes Glucose & O₂ from mother to embryo</text>
+                    <text x="14" y="78" fill={textMuted} fontSize="9">• Removes CO₂ & metabolic wastes from embryo</text>
+                  </g>
+                </g>
+
+                {/* RIGHT COLUMN CALLOUTS (UTERUS, ENDOMETRIUM, CERVIX, VAGINA) */}
+                <g>
+                  {/* Uterus Callout */}
+                  <g transform="translate(700, 95)">
+                    <rect width="270" height="74" rx="10" fill={labelBg} stroke="#e11d48" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#fb7185" fontSize="12" fontWeight="800">Uterus (Womb)</text>
+                    <text x="14" y="36" fill="#f8fafc" fontSize="9.5" fontWeight="700">★ Implantation & Gestation:</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9">• Site where embryo implants in lining</text>
+                    <text x="14" y="64" fill={textMuted} fontSize="9">• Thick muscular wall expands for 9 months</text>
+                    <line x1="0" y1="37" x2="-160" y2="280" stroke="#e11d48" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="-160" cy="280" r="3.5" fill="#e11d48" />
+                  </g>
+
+                  {/* Endometrium Callout */}
+                  <g transform="translate(700, 195)">
+                    <rect width="270" height="74" rx="10" fill={labelBg} stroke="#be185d" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#f472b6" fontSize="12" fontWeight="800">Endometrium (Inner Lining)</text>
+                    <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Rich in blood vessels to nourish embryo</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9.5">• If unfertilised: breaks down & sheds</text>
+                    <text x="14" y="64" fill="#fb7185" fontSize="9">• Menstruation lasts ~3 to 5 days</text>
+                    <line x1="0" y1="37" x2="-175" y2="350" stroke="#be185d" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="-175" cy="350" r="3.5" fill="#be185d" />
+                  </g>
+
+                  {/* Cervix & Vagina Callout */}
+                  <g transform="translate(700, 295)">
+                    <rect width="270" height="76" rx="10" fill={labelBg} stroke="#db2777" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#f472b6" fontSize="12" fontWeight="800">Cervix & Vagina</text>
+                    <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Cervix: narrow neck between uterus & vagina</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9.5">• Vagina: Receives sperms during copulation</text>
+                    <text x="14" y="64" fill={textMuted} fontSize="9">• Jointly forms the Birth Canal at parturition</text>
+                    <line x1="0" y1="38" x2="-180" y2="520" stroke="#db2777" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="-180" cy="520" r="3.5" fill="#db2777" />
+                  </g>
+                </g>
+
+                {/* BOTTOM SUMMARY RIBBON */}
+                <g transform="translate(40, 570)">
+                  <rect width="920" height="56" rx="12" fill={isDark ? "rgba(236, 72, 153, 0.12)" : "#fdf2f8"} stroke="#ec4899" strokeWidth="1.5" />
+                  <text x="18" y="24" fill="#f472b6" fontSize="11" fontWeight="800">
+                    ★ CBSE 5-MARK SEQUENCE — HUMAN FERTILISATION TO BIRTH:
+                  </text>
+                  <text x="18" y="42" fill={isDark ? "#fbcfe8" : "#831843"} fontSize="10" fontWeight="600">
+                    Ovulation (Ovary) ➔ Fertilisation (Fallopian Tube) ➔ Zygote divides into Embryo ➔ Implantation in Endometrium (Uterus) ➔ Placenta exchange ➔ Birth (Vagina).
+                  </text>
+                </g>
+              </g>
+            ) : (
+              /* ========================================================= */
+              /* VIEW B: MALE REPRODUCTIVE SYSTEM                         */
+              /* ========================================================= */
+              <g>
+                {/* Central Organ Group (Sagittal Lateral Section) */}
+                <g transform="translate(500, 310)">
+                  {/* Pelvic Bone & Spine Silhouette Hint */}
+                  <path
+                    d="M -160,-120 C -220,-80 -220,50 -180,120"
+                    fill="none"
+                    stroke="#64748b"
+                    strokeWidth="10"
+                    strokeLinecap="round"
+                    opacity="0.3"
+                  />
+
+                  {/* Urinary Bladder */}
+                  <ellipse cx="-40" cy="-60" rx="60" ry="46" fill="#fde047" stroke="#ca8a04" strokeWidth="3" filter="url(#repDrop)" />
+                  <text x="-40" y="-56" fill="#854d0e" fontSize="10" fontWeight="800" textAnchor="middle">BLADDER</text>
+                  {/* Ureter entering bladder from kidney */}
+                  <path d="M -90,-150 Q -70,-100 -60,-80" fill="none" stroke="#eab308" strokeWidth="5" strokeLinecap="round" />
+
+                  {/* Vas Deferens (Sperm Duct) looping over bladder */}
+                  <path
+                    d="M -95,190 
+                       C -130,130 -160,20 -150,-40 
+                       C -140,-110 -70,-130 0,-110 
+                       C 40,-95 45,-60 40,-20 
+                       L 30,15"
+                    fill="none"
+                    stroke="#38bdf8"
+                    strokeWidth="7"
+                    strokeLinecap="round"
+                    filter="url(#repDrop)"
+                  />
+
+                  {/* Seminal Vesicle (Behind Bladder Neck) */}
+                  <path
+                    d="M 15,-60 C 45,-75 55,-40 35,-25 C 20,-15 15,-40 15,-60 Z"
+                    fill="#f472b6"
+                    stroke="#db2777"
+                    strokeWidth="2.5"
+                    filter="url(#repDrop)"
+                  />
+
+                  {/* Prostate Gland (Surrounds Urethra Base) */}
+                  <ellipse cx="22" cy="0" rx="26" ry="20" fill="#a78bfa" stroke="#7c3aed" strokeWidth="3" filter="url(#repDrop)" />
+                  <text x="22" y="3" fill="#4c1d95" fontSize="8.5" fontWeight="800" textAnchor="middle">PROSTATE</text>
+
+                  {/* Bulbourethral / Cowper's Gland */}
+                  <circle cx="20" cy="30" r="7" fill="#34d399" stroke="#059669" strokeWidth="2" />
+
+                  {/* Scrotal Sac (External pouch) */}
+                  <path
+                    d="M -135,140 
+                       C -150,250 -40,260 -45,170 
+                       C -48,130 -90,135 -135,140 Z"
+                    fill={isDark ? "#1e293b" : "#e2e8f0"}
+                    stroke="#94a3b8"
+                    strokeWidth="3.5"
+                    filter="url(#repDrop)"
+                  />
+
+                  {/* Testis (Located inside Scrotum) */}
+                  <ellipse cx="-90" cy="195" rx="30" ry="22" fill="url(#testisGrad)" stroke="#1d4ed8" strokeWidth="3" filter="url(#repDrop)" />
+                  <text x="-90" y="199" fill="#ffffff" fontSize="9" fontWeight="800" textAnchor="middle">TESTIS</text>
+
+                  {/* Epididymis (C-shaped cap on testis) */}
+                  <path
+                    d="M -115,180 
+                       C -128,160 -80,165 -65,185 
+                       C -60,205 -70,225 -85,215"
+                    fill="none"
+                    stroke="#60a5fa"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                  />
+
+                  {/* Urethra (Common pathway) passing through Penis */}
+                  <path
+                    d="M 22,-20 
+                       L 22,25 
+                       C 22,50 35,65 50,75 
+                       L 110,130"
+                    fill="none"
+                    stroke="#38bdf8"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                  />
+
+                  {/* Penis (External Copulatory Organ) */}
+                  <path
+                    d="M 12,35 
+                       C 15,65 30,85 50,105 
+                       L 105,150 
+                       C 125,165 140,150 135,130 
+                       L 80,75 
+                       C 60,55 50,30 45,15 Z"
+                    fill="#fed7aa"
+                    stroke="#ea580c"
+                    strokeWidth="3.5"
+                    filter="url(#repDrop)"
+                  />
+                  {/* Glans Penis tip */}
+                  <path
+                    d="M 105,150 C 130,170 145,150 135,130 Z"
+                    fill="#fb923c"
+                    stroke="#c2410c"
+                    strokeWidth="2"
+                  />
+                </g>
+
+                {/* LEFT COLUMN CALLOUTS (TESTIS, SCROTUM, VAS DEFERENS) */}
+                <g>
+                  {/* Testis & Scrotum (CRUCIAL CBSE 5M) */}
+                  <g transform="translate(30, 95)">
+                    <rect width="270" height="88" rx="10" fill={labelBg} stroke="#3b82f6" strokeWidth="2" />
+                    <text x="14" y="20" fill="#60a5fa" fontSize="12" fontWeight="800">Testis & Scrotum</text>
+                    <text x="14" y="36" fill="#f8fafc" fontSize="9.5" fontWeight="700">★ CBSE #1 Most Asked Question:</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9">• Located outside abdominal cavity</text>
+                    <text x="14" y="64" fill="#38bdf8" fontSize="9">• Requires 2 to 2.5°C LOWER temp for sperm</text>
+                    <text x="14" y="78" fill={textMuted} fontSize="9">• Secretes Testosterone hormone</text>
+                    <line x1="270" y1="44" x2="380" y2="490" stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="380" cy="490" r="3.5" fill="#3b82f6" />
+                  </g>
+
+                  {/* Epididymis Callout */}
+                  <g transform="translate(30, 205)">
+                    <rect width="270" height="60" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#60a5fa" fontSize="12" fontWeight="800">Epididymis</text>
+                    <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Stores sperms temporarily</text>
+                    <text x="14" y="48" fill={textMuted} fontSize="9">• Site for functional maturation & motility</text>
+                    <line x1="270" y1="30" x2="420" y2="475" stroke="#60a5fa" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="420" cy="475" r="3.5" fill="#60a5fa" />
+                  </g>
+
+                  {/* Vas Deferens Callout */}
+                  <g transform="translate(30, 285)">
+                    <rect width="270" height="74" rx="10" fill={labelBg} stroke="#38bdf8" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#38bdf8" fontSize="12" fontWeight="800">Vas Deferens (Sperm Duct)</text>
+                    <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Transports sperms towards urethra</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9.5">• Loops over the urinary bladder</text>
+                    <text x="14" y="64" fill="#fb7185" fontSize="9">• Cut & tied in Vasectomy (Contraception)</text>
+                    <line x1="270" y1="37" x2="440" y2="210" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="440" cy="210" r="3.5" fill="#38bdf8" />
+                  </g>
+                </g>
+
+                {/* RIGHT COLUMN CALLOUTS (GLANDS & URETHRA) */}
+                <g>
+                  {/* Seminal Vesicles & Prostate Callout */}
+                  <g transform="translate(700, 95)">
+                    <rect width="270" height="88" rx="10" fill={labelBg} stroke="#a78bfa" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#c084fc" fontSize="12" fontWeight="800">Prostate & Seminal Vesicles</text>
+                    <text x="14" y="36" fill="#f8fafc" fontSize="9.5" fontWeight="700">★ Secretion Role in Board Exam:</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9">• Add fluid medium for easier transport</text>
+                    <text x="14" y="64" fill={textPrimary} fontSize="9">• Provide nutrition (fructose) to sperms</text>
+                    <text x="14" y="78" fill={textMuted} fontSize="9">• Fluid + Sperms = Semen</text>
+                    <line x1="0" y1="44" x2="-170" y2="280" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="-170" cy="280" r="3.5" fill="#a78bfa" />
+                  </g>
+
+                  {/* Urethra Callout */}
+                  <g transform="translate(700, 205)">
+                    <rect width="270" height="74" rx="10" fill={labelBg} stroke="#38bdf8" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#38bdf8" fontSize="12" fontWeight="800">Urethra (Common Pathway)</text>
+                    <text x="14" y="36" fill="#f8fafc" fontSize="9.5" fontWeight="700">★ Dual Function in Males:</text>
+                    <text x="14" y="50" fill={textPrimary} fontSize="9">• Common passage for urine AND semen</text>
+                    <text x="14" y="64" fill={textMuted} fontSize="9">• Never transmits both at the same time</text>
+                    <line x1="0" y1="37" x2="-140" y2="390" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="-140" cy="390" r="3.5" fill="#38bdf8" />
+                  </g>
+
+                  {/* Penis Callout */}
+                  <g transform="translate(700, 295)">
+                    <rect width="270" height="60" rx="10" fill={labelBg} stroke="#ea580c" strokeWidth="1.5" />
+                    <text x="14" y="20" fill="#fb923c" fontSize="12" fontWeight="800">Penis (Copulatory Organ)</text>
+                    <text x="14" y="36" fill={textPrimary} fontSize="9.5">• External organ with erectile tissue</text>
+                    <text x="14" y="48" fill={textMuted} fontSize="9">• Delivers sperms into female vagina</text>
+                    <line x1="0" y1="30" x2="-80" y2="440" stroke="#ea580c" strokeWidth="1.5" strokeDasharray="4,3" />
+                    <circle cx="-80" cy="440" r="3.5" fill="#ea580c" />
+                  </g>
+                </g>
+
+                {/* BOTTOM SUMMARY RIBBON */}
+                <g transform="translate(40, 570)">
+                  <rect width="920" height="56" rx="12" fill={isDark ? "rgba(59, 130, 246, 0.12)" : "#eff6ff"} stroke="#3b82f6" strokeWidth="1.5" />
+                  <text x="18" y="24" fill="#60a5fa" fontSize="11" fontWeight="800">
+                    ★ CBSE BOARD ESSENTIAL — SPERM PATHWAY:
+                  </text>
+                  <text x="18" y="42" fill={isDark ? "#bfdbfe" : "#1e3a8a"} fontSize="10" fontWeight="600">
+                    Testis (Production) ➔ Epididymis (Maturation) ➔ Vas Deferens (Transport) ➔ Gland Secretions Added (Semen) ➔ Urethra (Emission).
+                  </text>
+                </g>
+              </g>
+            )}
           </svg>
         );
 
       // =====================================================================
-      // 10. MENDELIAN MONOHYBRID & DIHYBRID INHERITANCE CROSSES
+      // 10. MENDELIAN MONOHYBRID, DIHYBRID & SEX DETERMINATION MASTER
+      // =====================================================================
       case "bio_mendel_crosses":
         return (
           <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
             <defs>
               <linearGradient id="mBg" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor={isDark ? "#0f172a" : "#f8fafc"} />
-                <stop offset="100%" stopColor={isDark ? "#1e293b" : "#e2e8f0"} />
+                <stop offset="100%" stopColor={isDark ? "#020617" : "#e2e8f0"} />
               </linearGradient>
+              {/* Seed Gradients */}
+              <radialGradient id="roundYellowSeed" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stopColor="#fef08a" />
+                <stop offset="60%" stopColor="#eab308" />
+                <stop offset="100%" stopColor="#ca8a04" />
+              </radialGradient>
+              <radialGradient id="roundGreenSeed" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stopColor="#86efac" />
+                <stop offset="60%" stopColor="#22c55e" />
+                <stop offset="100%" stopColor="#15803d" />
+              </radialGradient>
+              <radialGradient id="wrinkledYellowSeed" cx="40%" cy="40%" r="60%">
+                <stop offset="0%" stopColor="#fef9c3" />
+                <stop offset="70%" stopColor="#ca8a04" />
+                <stop offset="100%" stopColor="#854d0e" />
+              </radialGradient>
+              <radialGradient id="wrinkledGreenSeed" cx="40%" cy="40%" r="60%">
+                <stop offset="0%" stopColor="#bbf7d0" />
+                <stop offset="70%" stopColor="#16a34a" />
+                <stop offset="100%" stopColor="#14532d" />
+              </radialGradient>
             </defs>
-            <rect width="1000" height="650" fill="url(#mBg)" rx="16" />
 
-            <text x="500" y="50" fill={textPrimary} fontSize="24" fontWeight="bold" textAnchor="middle">Mendelian Dihybrid Cross (F2 Generation)</text>
-            <text x="500" y="80" fill={textMuted} fontSize="16" textAnchor="middle">Parents: RRYY (Round Yellow) × rryy (Wrinkled Green) → F1: RrYy</text>
+            <rect width="1000" height="650" rx="20" fill="url(#mBg)" />
+            {/* Diagnostic Grid */}
+            {[...Array(13)].map((_, i) => (
+              <line key={"mvg" + i} x1={80 * i} y1="0" x2={80 * i} y2="650" stroke={gridStroke} strokeWidth="1" />
+            ))}
+            {[...Array(9)].map((_, i) => (
+              <line key={"mhg" + i} x1="0" y1={75 * i} x2="1000" y2={75 * i} stroke={gridStroke} strokeWidth="1" />
+            ))}
 
-            <g transform="translate(250, 150)">
-              {/* Punnett Square Grid */}
-              <rect x="0" y="0" width="500" height="400" fill="none" stroke={textPrimary} strokeWidth="4" />
-              <line x1="125" y1="0" x2="125" y2="400" stroke={textPrimary} strokeWidth="2" />
-              <line x1="250" y1="0" x2="250" y2="400" stroke={textPrimary} strokeWidth="2" />
-              <line x1="375" y1="0" x2="375" y2="400" stroke={textPrimary} strokeWidth="2" />
-              <line x1="0" y1="100" x2="500" y2="100" stroke={textPrimary} strokeWidth="2" />
-              <line x1="0" y1="200" x2="500" y2="200" stroke={textPrimary} strokeWidth="2" />
-              <line x1="0" y1="300" x2="500" y2="300" stroke={textPrimary} strokeWidth="2" />
-
-              {/* Top Gametes */}
-              <text x="62.5" y="-20" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">RY</text>
-              <text x="187.5" y="-20" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">Ry</text>
-              <text x="312.5" y="-20" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">rY</text>
-              <text x="437.5" y="-20" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">ry</text>
-
-              {/* Side Gametes */}
-              <text x="-30" y="55" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">RY</text>
-              <text x="-30" y="155" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">Ry</text>
-              <text x="-30" y="255" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">rY</text>
-              <text x="-30" y="355" fill={textAccent} fontSize="20" fontWeight="bold" textAnchor="middle">ry</text>
-
-              {/* Fill the boxes with genotypes and corresponding circles */}
-              {/* Row 1 */}
-              <text x="62.5" y="45" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RRYY</text>
-              <circle cx="62.5" cy="70" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-              
-              <text x="187.5" y="45" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RRYy</text>
-              <circle cx="187.5" cy="70" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-              
-              <text x="312.5" y="45" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYY</text>
-              <circle cx="312.5" cy="70" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-              
-              <text x="437.5" y="45" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYy</text>
-              <circle cx="437.5" cy="70" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-
-              {/* Row 2 */}
-              <text x="62.5" y="145" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RRYy</text>
-              <circle cx="62.5" cy="170" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-              
-              <text x="187.5" y="145" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RRyy</text>
-              <circle cx="187.5" cy="170" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" strokeDasharray="3,3" /> {/* Wrinkled */}
-              
-              <text x="312.5" y="145" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYy</text>
-              <circle cx="312.5" cy="170" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-              
-              <text x="437.5" y="145" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">Rryy</text>
-              <circle cx="437.5" cy="170" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" strokeDasharray="3,3" />
-
-              {/* Row 3 */}
-              <text x="62.5" y="245" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYY</text>
-              <circle cx="62.5" cy="270" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-              
-              <text x="187.5" y="245" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYy</text>
-              <circle cx="187.5" cy="270" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-              
-              <text x="312.5" y="245" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">rrYY</text>
-              <circle cx="312.5" cy="270" r="15" fill="#86efac" stroke="#16a34a" strokeWidth="2" /> {/* Green */}
-              
-              <text x="437.5" y="245" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">rrYy</text>
-              <circle cx="437.5" cy="270" r="15" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-
-              {/* Row 4 */}
-              <text x="62.5" y="345" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">RrYy</text>
-              <circle cx="62.5" cy="370" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" />
-              
-              <text x="187.5" y="345" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">Rryy</text>
-              <circle cx="187.5" cy="370" r="15" fill="#fde047" stroke="#ca8a04" strokeWidth="2" strokeDasharray="3,3" />
-              
-              <text x="312.5" y="345" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">rrYy</text>
-              <circle cx="312.5" cy="370" r="15" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
-              
-              <text x="437.5" y="345" fill={textPrimary} fontSize="18" fontWeight="bold" textAnchor="middle">rryy</text>
-              <circle cx="437.5" cy="370" r="15" fill="#86efac" stroke="#16a34a" strokeWidth="2" strokeDasharray="3,3" />
+            {/* Header Title Card */}
+            <g transform="translate(40, 22)">
+              <rect width="360" height="46" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="18" y="28" fill={textPrimary} fontSize="13.5" fontWeight="800" letterSpacing="0.4">
+                HEREDITY: MENDELIAN GENETICS
+              </text>
+              <rect x="290" y="10" width="58" height="26" rx="6" fill="#10b981" fillOpacity="0.2" />
+              <text x="319" y="27" fill="#34d399" fontSize="11" fontWeight="800" textAnchor="middle">
+                CBSE 5M
+              </text>
             </g>
 
-            {/* Results Legend */}
-            <g transform="translate(100, 600)" fontSize="18" fontWeight="bold" fill={textPrimary}>
-              <text x="0" y="0">Phenotypic Ratio: 9 : 3 : 3 : 1</text>
-              <text x="350" y="0" fill="#ca8a04">Round Yellow (9)</text>
-              <text x="550" y="0" fill="#a16207">Wrinkled Yellow (3)</text>
-              <text x="750" y="-10" fill="#16a34a">Round Green (3)</text>
-              <text x="750" y="15" fill="#14532d">Wrinkled Green (1)</text>
+            {/* 3 Interactive Tabs */}
+            <g transform="translate(420, 22)">
+              {/* Tab 1: Monohybrid */}
+              <g onClick={() => setMendelView("monohybrid")} className="cursor-pointer">
+                <rect
+                  width="170"
+                  height="46"
+                  rx="12"
+                  fill={mendelView === "monohybrid" ? "#10b981" : labelBg}
+                  stroke={mendelView === "monohybrid" ? "#34d399" : labelBorder}
+                  strokeWidth="1.5"
+                />
+                <text
+                  x="85"
+                  y="28"
+                  fill={mendelView === "monohybrid" ? "#ffffff" : textPrimary}
+                  fontSize="11.5"
+                  fontWeight="800"
+                  textAnchor="middle"
+                >
+                  1. Monohybrid (3:1)
+                </text>
+              </g>
+
+              {/* Tab 2: Dihybrid */}
+              <g transform="translate(180, 0)" onClick={() => setMendelView("dihybrid")} className="cursor-pointer">
+                <rect
+                  width="180"
+                  height="46"
+                  rx="12"
+                  fill={mendelView === "dihybrid" ? "#f59e0b" : labelBg}
+                  stroke={mendelView === "dihybrid" ? "#fbbf24" : labelBorder}
+                  strokeWidth="1.5"
+                />
+                <text
+                  x="90"
+                  y="28"
+                  fill={mendelView === "dihybrid" ? "#ffffff" : textPrimary}
+                  fontSize="11.5"
+                  fontWeight="800"
+                  textAnchor="middle"
+                >
+                  2. Dihybrid (9:3:3:1)
+                </text>
+              </g>
+
+              {/* Tab 3: Sex Determination */}
+              <g transform="translate(370, 0)" onClick={() => setMendelView("sex_det")} className="cursor-pointer">
+                <rect
+                  width="170"
+                  height="46"
+                  rx="12"
+                  fill={mendelView === "sex_det" ? "#ec4899" : labelBg}
+                  stroke={mendelView === "sex_det" ? "#f472b6" : labelBorder}
+                  strokeWidth="1.5"
+                />
+                <text
+                  x="85"
+                  y="28"
+                  fill={mendelView === "sex_det" ? "#ffffff" : textPrimary}
+                  fontSize="11.5"
+                  fontWeight="800"
+                  textAnchor="middle"
+                >
+                  3. Sex Determination
+                </text>
+              </g>
             </g>
+
+            {/* ========================================================= */}
+            {/* TAB 1: MONOHYBRID CROSS (TALL × DWARF)                    */}
+            {/* ========================================================= */}
+            {mendelView === "monohybrid" && (
+              <g transform="translate(40, 90)">
+                {/* Left: Cross Flowchart */}
+                <g>
+                  {/* P Generation */}
+                  <g transform="translate(0, 10)">
+                    <rect width="450" height="65" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                    <text x="16" y="24" fill="#38bdf8" fontSize="11" fontWeight="800">PARENTAL (P) GENERATION:</text>
+                    <text x="16" y="48" fill={textPrimary} fontSize="13" fontWeight="800">
+                      Pure Tall Plant <tspan fill="#34d399">(TT)</tspan>  ×  Pure Dwarf Plant <tspan fill="#f87171">(tt)</tspan>
+                    </text>
+                  </g>
+
+                  {/* Gametes Arrow */}
+                  <g transform="translate(0, 95)">
+                    <line x1="120" y1="0" x2="120" y2="25" stroke="#94a3b8" strokeWidth="2" strokeDasharray="3,3" />
+                    <line x1="330" y1="0" x2="330" y2="25" stroke="#94a3b8" strokeWidth="2" strokeDasharray="3,3" />
+                    <circle cx="120" cy="38" r="15" fill="#34d399" />
+                    <text x="120" y="43" fill="#064e3b" fontSize="14" fontWeight="800" textAnchor="middle">T</text>
+                    <circle cx="330" cy="38" r="15" fill="#f87171" />
+                    <text x="330" y="43" fill="#7f1d1d" fontSize="14" fontWeight="800" textAnchor="middle">t</text>
+                  </g>
+
+                  {/* F1 Generation */}
+                  <g transform="translate(0, 170)">
+                    <rect width="450" height="70" rx="12" fill={isDark ? "rgba(16, 185, 129, 0.15)" : "#ecfdf5"} stroke="#10b981" strokeWidth="2" />
+                    <text x="16" y="24" fill="#10b981" fontSize="11" fontWeight="800">FIRST FILIAL (F1) GENERATION:</text>
+                    <text x="16" y="50" fill={textPrimary} fontSize="14" fontWeight="800">
+                      All <tspan fill="#34d399">Tt (Hybrid Tall)</tspan> Plants (100%)
+                    </text>
+                    <text x="300" y="50" fill="#f59e0b" fontSize="11" fontWeight="700">★ Law of Dominance</text>
+                  </g>
+
+                  {/* Selfing F1 */}
+                  <g transform="translate(0, 260)">
+                    <rect width="450" height="45" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                    <text x="16" y="28" fill={textPrimary} fontSize="12" fontWeight="700">
+                      Self-Pollination (F1 × F1):  <tspan fill="#34d399" fontWeight="800">Tt</tspan>  ×  <tspan fill="#34d399" fontWeight="800">Tt</tspan>
+                    </text>
+                  </g>
+
+                  {/* F2 Generation Punnett Square */}
+                  <g transform="translate(70, 325)">
+                    {/* Grid border */}
+                    <rect width="260" height="180" rx="12" fill={labelBg} stroke={textPrimary} strokeWidth="2" />
+                    <line x1="70" y1="0" x2="70" y2="180" stroke={textPrimary} strokeWidth="2" />
+                    <line x1="70" y1="60" x2="260" y2="60" stroke={textPrimary} strokeWidth="2" />
+                    <line x1="165" y1="0" x2="165" y2="180" stroke={textPrimary} strokeWidth="2" />
+                    <line x1="70" y1="120" x2="260" y2="120" stroke={textPrimary} strokeWidth="2" />
+
+                    {/* Header gametes */}
+                    <text x="35" y="35" fill="#94a3b8" fontSize="12" fontWeight="800" textAnchor="middle">♀ \ ♂</text>
+                    <text x="117" y="38" fill="#38bdf8" fontSize="16" fontWeight="800" textAnchor="middle">T</text>
+                    <text x="212" y="38" fill="#f87171" fontSize="16" fontWeight="800" textAnchor="middle">t</text>
+
+                    <text x="35" y="95" fill="#38bdf8" fontSize="16" fontWeight="800" textAnchor="middle">T</text>
+                    <text x="35" y="155" fill="#f87171" fontSize="16" fontWeight="800" textAnchor="middle">t</text>
+
+                    {/* Cell 1: TT */}
+                    <text x="117" y="95" fill="#34d399" fontSize="16" fontWeight="800" textAnchor="middle">TT</text>
+                    <text x="117" y="110" fill={textMuted} fontSize="9" textAnchor="middle">Tall</text>
+
+                    {/* Cell 2: Tt */}
+                    <text x="212" y="95" fill="#34d399" fontSize="16" fontWeight="800" textAnchor="middle">Tt</text>
+                    <text x="212" y="110" fill={textMuted} fontSize="9" textAnchor="middle">Tall</text>
+
+                    {/* Cell 3: Tt */}
+                    <text x="117" y="155" fill="#34d399" fontSize="16" fontWeight="800" textAnchor="middle">Tt</text>
+                    <text x="117" y="170" fill={textMuted} fontSize="9" textAnchor="middle">Tall</text>
+
+                    {/* Cell 4: tt */}
+                    <text x="212" y="155" fill="#f87171" fontSize="16" fontWeight="800" textAnchor="middle">tt</text>
+                    <text x="212" y="170" fill={textMuted} fontSize="9" textAnchor="middle">Dwarf</text>
+                  </g>
+                </g>
+
+                {/* Right: Ratios & Laws Summary Cards */}
+                <g transform="translate(500, 10)">
+                  {/* F2 Ratios Card (Hallmark CBSE) */}
+                  <rect width="420" height="150" rx="14" fill={labelBg} stroke="#10b981" strokeWidth="2" />
+                  <text x="20" y="30" fill="#10b981" fontSize="13" fontWeight="800">
+                    F2 GENERATION RATIOS (MANDATORY FOR FULL MARKS)
+                  </text>
+
+                  {/* Phenotypic Ratio */}
+                  <g transform="translate(20, 50)">
+                    <rect width="380" height="40" rx="8" fill={isDark ? "rgba(16, 185, 129, 0.15)" : "#ecfdf5"} />
+                    <text x="14" y="25" fill={textPrimary} fontSize="12" fontWeight="700">
+                      Phenotypic Ratio:  <tspan fill="#10b981" fontSize="15" fontWeight="900">3 Tall  :  1 Dwarf</tspan>
+                    </text>
+                  </g>
+
+                  {/* Genotypic Ratio */}
+                  <g transform="translate(20, 98)">
+                    <rect width="380" height="40" rx="8" fill={isDark ? "rgba(56, 189, 248, 0.15)" : "#f0f9ff"} />
+                    <text x="14" y="25" fill={textPrimary} fontSize="12" fontWeight="700">
+                      Genotypic Ratio:  <tspan fill="#0284c7" fontSize="15" fontWeight="900">1 TT  :  2 Tt  :  1 tt (1:2:1)</tspan>
+                    </text>
+                  </g>
+
+                  {/* Law of Dominance Box */}
+                  <g transform="translate(0, 170)">
+                    <rect width="420" height="135" rx="14" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                    <text x="20" y="28" fill="#f59e0b" fontSize="12" fontWeight="800">
+                      1. LAW OF DOMINANCE
+                    </text>
+                    <text x="20" y="52" fill={textPrimary} fontSize="10.5" fontWeight="600">
+                      • In a cross between two organisms differing in one trait,
+                    </text>
+                    <text x="20" y="70" fill={textPrimary} fontSize="10.5" fontWeight="600">
+                      only one character expresses itself in F1 (Dominant trait = Tall).
+                    </text>
+                    <text x="20" y="92" fill={textMuted} fontSize="10">
+                      • The trait which remains suppressed/hidden is Recessive (Dwarf).
+                    </text>
+                    <text x="20" y="114" fill="#34d399" fontSize="10" fontWeight="700">
+                      • Dwarf trait reappears unchanged in F2 generation!
+                    </text>
+                  </g>
+
+                  {/* Law of Segregation Box */}
+                  <g transform="translate(0, 325)">
+                    <rect width="420" height="145" rx="14" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                    <text x="20" y="28" fill="#38bdf8" fontSize="12" fontWeight="800">
+                      2. LAW OF SEGREGATION (PURITY OF GAMETES)
+                    </text>
+                    <text x="20" y="52" fill={textPrimary} fontSize="10.5" fontWeight="600">
+                      • During gamete formation, the two alleles of a gene
+                    </text>
+                    <text x="20" y="70" fill={textPrimary} fontSize="10.5" fontWeight="600">
+                      segregate (separate) from each other.
+                    </text>
+                    <text x="20" y="92" fill={textMuted} fontSize="10">
+                      • Each gamete carries only ONE allele with 50% probability.
+                    </text>
+                    <text x="20" y="118" fill="#fbbf24" fontSize="10.5" fontWeight="700">
+                      ★ Why F2 shows dwarf: "t" allele was never lost or blended!
+                    </text>
+                  </g>
+                </g>
+              </g>
+            )}
+
+            {/* ========================================================= */}
+            {/* TAB 2: DIHYBRID CROSS (16-CELL PUNNETT SQUARE)            */}
+            {/* ========================================================= */}
+            {mendelView === "dihybrid" && (
+              <g transform="translate(30, 80)">
+                {/* Left: 16-Cell Punnett Square */}
+                <g transform="translate(30, 10)">
+                  {/* Outer Frame */}
+                  <rect width="440" height="380" rx="14" fill={labelBg} stroke={textPrimary} strokeWidth="2" />
+                  {/* Grid Lines */}
+                  {[1, 2, 3, 4].map((col) => (
+                    <line key={"col" + col} x1={80 + 90 * (col - 1)} y1="0" x2={80 + 90 * (col - 1)} y2="380" stroke={textPrimary} strokeWidth="1.5" />
+                  ))}
+                  {[1, 2, 3, 4].map((row) => (
+                    <line key={"row" + row} x1="0" y1={60 + 80 * (row - 1)} x2="440" y2={60 + 80 * (row - 1)} stroke={textPrimary} strokeWidth="1.5" />
+                  ))}
+
+                  {/* Corner Gametes Title */}
+                  <text x="40" y="38" fill="#94a3b8" fontSize="12" fontWeight="800" textAnchor="middle">♀ \ ♂</text>
+
+                  {/* Top Gametes */}
+                  {["RY", "Ry", "rY", "ry"].map((g, idx) => (
+                    <text key={"tg" + idx} x={125 + 90 * idx} y="38" fill="#f59e0b" fontSize="15" fontWeight="800" textAnchor="middle">
+                      {g}
+                    </text>
+                  ))}
+
+                  {/* Left Gametes */}
+                  {["RY", "Ry", "rY", "ry"].map((g, idx) => (
+                    <text key={"lg" + idx} x="40" y={105 + 80 * idx} fill="#f59e0b" fontSize="15" fontWeight="800" textAnchor="middle">
+                      {g}
+                    </text>
+                  ))}
+
+                  {/* 16 Cells Data: [genotype, phenotypeType, cx, cy] */}
+                  {[
+                    // Row 1
+                    { g: "RRYY", t: "RY", x: 125, y: 100 },
+                    { g: "RRYy", t: "RY", x: 215, y: 100 },
+                    { g: "RrYY", t: "RY", x: 305, y: 100 },
+                    { g: "RrYy", t: "RY", x: 395, y: 100 },
+                    // Row 2
+                    { g: "RRYy", t: "RY", x: 125, y: 180 },
+                    { g: "RRyy", t: "Ry", x: 215, y: 180 },
+                    { g: "RrYy", t: "RY", x: 305, y: 180 },
+                    { g: "Rryy", t: "Ry", x: 395, y: 180 },
+                    // Row 3
+                    { g: "RrYY", t: "RY", x: 125, y: 260 },
+                    { g: "RrYy", t: "RY", x: 215, y: 260 },
+                    { g: "rrYY", t: "rY", x: 305, y: 260 },
+                    { g: "rrYy", t: "rY", x: 395, y: 260 },
+                    // Row 4
+                    { g: "RrYy", t: "RY", x: 125, y: 340 },
+                    { g: "Rryy", t: "Ry", x: 215, y: 340 },
+                    { g: "rrYy", t: "rY", x: 305, y: 340 },
+                    { g: "rryy", t: "ry", x: 395, y: 340 },
+                  ].map((cell, idx) => (
+                    <g key={"cell" + idx}>
+                      {/* Seed Icon representation */}
+                      {cell.t === "RY" && (
+                        <circle cx={cell.x} cy={cell.y - 14} r="13" fill="url(#roundYellowSeed)" stroke="#ca8a04" strokeWidth="1.5" />
+                      )}
+                      {cell.t === "Ry" && (
+                        <circle cx={cell.x} cy={cell.y - 14} r="13" fill="url(#roundGreenSeed)" stroke="#16a34a" strokeWidth="1.5" />
+                      )}
+                      {cell.t === "rY" && (
+                        <path
+                          d={`M ${cell.x-11},${cell.y-24} Q ${cell.x},${cell.y-29} ${cell.x+11},${cell.y-24} Q ${cell.x+15},${cell.y-14} ${cell.x+10},${cell.y-4} Q ${cell.x},${cell.y} ${cell.x-10},${cell.y-4} Z`}
+                          fill="url(#wrinkledYellowSeed)"
+                          stroke="#a16207"
+                          strokeWidth="1.5"
+                        />
+                      )}
+                      {cell.t === "ry" && (
+                        <path
+                          d={`M ${cell.x-11},${cell.y-24} Q ${cell.x},${cell.y-29} ${cell.x+11},${cell.y-24} Q ${cell.x+15},${cell.y-14} ${cell.x+10},${cell.y-4} Q ${cell.x},${cell.y} ${cell.x-10},${cell.y-4} Z`}
+                          fill="url(#wrinkledGreenSeed)"
+                          stroke="#14532d"
+                          strokeWidth="1.5"
+                        />
+                      )}
+                      <text x={cell.x} y={cell.y + 16} fill={textPrimary} fontSize="11" fontWeight="800" textAnchor="middle">
+                        {cell.g}
+                      </text>
+                    </g>
+                  ))}
+                </g>
+
+                {/* Right: Phenotypic Summary & Law */}
+                <g transform="translate(520, 10)">
+                  {/* Phenotypic Ratio 9:3:3:1 Card */}
+                  <rect width="410" height="210" rx="14" fill={labelBg} stroke="#f59e0b" strokeWidth="2" />
+                  <text x="20" y="28" fill="#f59e0b" fontSize="13" fontWeight="800">
+                    DIHYBRID PHENOTYPIC RATIO (9 : 3 : 3 : 1)
+                  </text>
+
+                  {/* Seed Rows */}
+                  <g transform="translate(20, 42)">
+                    {/* 1. Round Yellow */}
+                    <g transform="translate(0, 0)">
+                      <circle cx="15" cy="15" r="12" fill="url(#roundYellowSeed)" stroke="#ca8a04" strokeWidth="1.5" />
+                      <text x="36" y="19" fill={textPrimary} fontSize="11.5" fontWeight="700">
+                        Round Yellow seeds (R_Y_): <tspan fill="#f59e0b" fontWeight="900">9 / 16</tspan>
+                      </text>
+                    </g>
+
+                    {/* 2. Round Green */}
+                    <g transform="translate(0, 38)">
+                      <circle cx="15" cy="15" r="12" fill="url(#roundGreenSeed)" stroke="#16a34a" strokeWidth="1.5" />
+                      <text x="36" y="19" fill={textPrimary} fontSize="11.5" fontWeight="700">
+                        Round Green seeds (R_yy): <tspan fill="#22c55e" fontWeight="900">3 / 16</tspan>
+                      </text>
+                    </g>
+
+                    {/* 3. Wrinkled Yellow */}
+                    <g transform="translate(0, 76)">
+                      <path d="M 5,5 Q 15,0 25,5 Q 28,15 23,25 Q 15,28 7,24 Z" fill="url(#wrinkledYellowSeed)" stroke="#a16207" strokeWidth="1.5" />
+                      <text x="36" y="19" fill={textPrimary} fontSize="11.5" fontWeight="700">
+                        Wrinkled Yellow seeds (rrY_): <tspan fill="#eab308" fontWeight="900">3 / 16</tspan>
+                      </text>
+                    </g>
+
+                    {/* 4. Wrinkled Green */}
+                    <g transform="translate(0, 114)">
+                      <path d="M 5,5 Q 15,0 25,5 Q 28,15 23,25 Q 15,28 7,24 Z" fill="url(#wrinkledGreenSeed)" stroke="#14532d" strokeWidth="1.5" />
+                      <text x="36" y="19" fill={textPrimary} fontSize="11.5" fontWeight="700">
+                        Wrinkled Green seeds (rryy): <tspan fill="#15803d" fontWeight="900">1 / 16</tspan>
+                      </text>
+                    </g>
+                  </g>
+
+                  {/* Law of Independent Assortment Card */}
+                  <g transform="translate(0, 230)">
+                    <rect width="410" height="160" rx="14" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                    <text x="20" y="28" fill="#38bdf8" fontSize="12" fontWeight="800">
+                      LAW OF INDEPENDENT ASSORTMENT
+                    </text>
+                    <text x="20" y="52" fill={textPrimary} fontSize="10" fontWeight="600">
+                      • When two pairs of contrasting traits are combined in a hybrid,
+                    </text>
+                    <text x="20" y="70" fill={textPrimary} fontSize="10" fontWeight="600">
+                      segregation of one pair of characters is INDEPENDENT of the other.
+                    </text>
+                    <text x="20" y="94" fill="#f59e0b" fontSize="10" fontWeight="700">
+                      ★ Evidence: Recombinant phenotypes!
+                    </text>
+                    <text x="20" y="112" fill={textMuted} fontSize="9.5">
+                      Round Green (3) and Wrinkled Yellow (3) are new combinations
+                    </text>
+                    <text x="20" y="128" fill={textMuted} fontSize="9.5">
+                      not present in original parents (RRYY and rryy)!
+                    </text>
+                  </g>
+                </g>
+
+                {/* Bottom Formula Pill */}
+                <g transform="translate(30, 410)">
+                  <rect width="900" height="42" rx="10" fill={isDark ? "rgba(245, 158, 11, 0.12)" : "#fef3c7"} stroke="#f59e0b" strokeWidth="1.5" />
+                  <text x="450" y="26" fill="#f59e0b" fontSize="11" fontWeight="800" textAnchor="middle">
+                    P: RRYY × rryy  ➔  F1: All RrYy (Round Yellow)  ➔  F2: 9 Round Yellow : 3 Round Green : 3 Wrinkled Yellow : 1 Wrinkled Green
+                  </text>
+                </g>
+              </g>
+            )}
+
+            {/* ========================================================= */}
+            {/* TAB 3: SEX DETERMINATION IN HUMAN BEINGS                  */}
+            {/* ========================================================= */}
+            {mendelView === "sex_det" && (
+              <g transform="translate(40, 90)">
+                {/* Left: Cross Flowchart */}
+                <g>
+                  {/* Karyotype Overview */}
+                  <g transform="translate(0, 10)">
+                    <rect width="450" height="60" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                    <text x="16" y="22" fill="#ec4899" fontSize="11" fontWeight="800">HUMAN CHROMOSOME COMPLEMENT (23 PAIRS = 46):</text>
+                    <text x="16" y="44" fill={textPrimary} fontSize="11.5" fontWeight="700">
+                      22 Pairs = Autosomes (Body traits)  •  1 Pair (23rd) = Sex Chromosomes
+                    </text>
+                  </g>
+
+                  {/* Parents Box */}
+                  <g transform="translate(0, 85)">
+                    <rect width="450" height="80" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                    <text x="16" y="24" fill="#38bdf8" fontSize="11" fontWeight="800">PARENTS:</text>
+                    <g transform="translate(50, 42)">
+                      <text x="0" y="16" fill="#38bdf8" fontSize="14" fontWeight="800">FATHER (44 + XY)</text>
+                      <text x="230" y="16" fill="#ec4899" fontSize="14" fontWeight="800">MOTHER (44 + XX)</text>
+                    </g>
+                  </g>
+
+                  {/* Gametes Section */}
+                  <g transform="translate(0, 185)">
+                    <text x="16" y="18" fill="#94a3b8" fontSize="11" fontWeight="800">GAMETES PRODUCED:</text>
+                    {/* Father gametes (50% X, 50% Y) */}
+                    <g transform="translate(50, 30)">
+                      <circle cx="30" cy="18" r="18" fill="#38bdf8" />
+                      <text x="30" y="24" fill="#0c4a6e" fontSize="15" fontWeight="900" textAnchor="middle">X</text>
+                      <text x="30" y="50" fill={textMuted} fontSize="9" textAnchor="middle">50% Sperm</text>
+
+                      <circle cx="110" cy="18" r="18" fill="#38bdf8" />
+                      <text x="110" y="24" fill="#0c4a6e" fontSize="15" fontWeight="900" textAnchor="middle">Y</text>
+                      <text x="110" y="50" fill={textMuted} fontSize="9" textAnchor="middle">50% Sperm</text>
+                    </g>
+
+                    {/* Mother gametes (100% X) */}
+                    <g transform="translate(280, 30)">
+                      <circle cx="30" cy="18" r="18" fill="#ec4899" />
+                      <text x="30" y="24" fill="#831843" fontSize="15" fontWeight="900" textAnchor="middle">X</text>
+                      <text x="30" y="50" fill={textMuted} fontSize="9" textAnchor="middle">100% Eggs</text>
+
+                      <circle cx="110" cy="18" r="18" fill="#ec4899" />
+                      <text x="110" y="24" fill="#831843" fontSize="15" fontWeight="900" textAnchor="middle">X</text>
+                      <text x="110" y="50" fill={textMuted} fontSize="9" textAnchor="middle">100% Eggs</text>
+                    </g>
+                  </g>
+
+                  {/* Fertilisation Cross Paths */}
+                  <g transform="translate(0, 275)">
+                    <rect width="450" height="150" rx="14" fill={isDark ? "rgba(236, 72, 153, 0.08)" : "#fdf2f8"} stroke="#ec4899" strokeWidth="1.5" />
+                    <text x="16" y="24" fill="#ec4899" fontSize="11" fontWeight="800">OFFSPRING POSSIBILITIES (F1 ZYGOTE):</text>
+
+                    {/* 4 Outcome Pills */}
+                    <g transform="translate(20, 42)">
+                      {/* X + X = Female */}
+                      <g transform="translate(0, 0)">
+                        <rect width="190" height="42" rx="8" fill={labelBg} stroke="#ec4899" strokeWidth="1.5" />
+                        <text x="12" y="26" fill="#ec4899" fontSize="13" fontWeight="900">X + X ➔ XX (Girl)</text>
+                      </g>
+
+                      {/* X + X = Female */}
+                      <g transform="translate(210, 0)">
+                        <rect width="190" height="42" rx="8" fill={labelBg} stroke="#ec4899" strokeWidth="1.5" />
+                        <text x="12" y="26" fill="#ec4899" fontSize="13" fontWeight="900">X + X ➔ XX (Girl)</text>
+                      </g>
+
+                      {/* Y + X = Male */}
+                      <g transform="translate(0, 52)">
+                        <rect width="190" height="42" rx="8" fill={labelBg} stroke="#38bdf8" strokeWidth="1.5" />
+                        <text x="12" y="26" fill="#38bdf8" fontSize="13" fontWeight="900">Y + X ➔ XY (Boy)</text>
+                      </g>
+
+                      {/* Y + X = Male */}
+                      <g transform="translate(210, 52)">
+                        <rect width="190" height="42" rx="8" fill={labelBg} stroke="#38bdf8" strokeWidth="1.5" />
+                        <text x="12" y="26" fill="#38bdf8" fontSize="13" fontWeight="900">Y + X ➔ XY (Boy)</text>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+
+                {/* Right: Critical Board Explanation & Examiner Trap */}
+                <g transform="translate(500, 10)">
+                  {/* Probability Card */}
+                  <rect width="420" height="110" rx="14" fill={labelBg} stroke="#10b981" strokeWidth="2" />
+                  <text x="20" y="28" fill="#10b981" fontSize="13" fontWeight="800">
+                    EXACT 50 : 50 PROBABILITY AT EVERY CONCEPTION
+                  </text>
+                  <text x="20" y="52" fill={textPrimary} fontSize="11" fontWeight="700">
+                    • Probability of Female Child (XX) = 50% (1 in 2)
+                  </text>
+                  <text x="20" y="72" fill={textPrimary} fontSize="11" fontWeight="700">
+                    • Probability of Male Child (XY) = 50% (1 in 2)
+                  </text>
+                  <text x="20" y="94" fill={textMuted} fontSize="9.5">
+                    • Sex ratio at birth in human populations remains mathematically 1 : 1.
+                  </text>
+
+                  {/* CRITICAL EXAMINER ALERT (Hallmark CBSE Social & Scientific Question) */}
+                  <g transform="translate(0, 130)">
+                    <rect width="420" height="190" rx="14" fill={isDark ? "rgba(239, 68, 68, 0.15)" : "#fef2f2"} stroke="#ef4444" strokeWidth="2" />
+                    <text x="20" y="28" fill="#ef4444" fontSize="12" fontWeight="800">
+                      ⚠️ CBSE BOARD EXAMINER FAVORITE QUESTION:
+                    </text>
+                    <text x="20" y="48" fill="#f87171" fontSize="10.5" fontWeight="800">
+                      "Why are mothers falsely blamed for delivering girl children?"
+                    </text>
+                    <text x="20" y="72" fill={textPrimary} fontSize="10" fontWeight="600">
+                      1. All human females produce ONLY ONE type of ovum: containing 'X'.
+                    </text>
+                    <text x="20" y="90" fill={textPrimary} fontSize="10" fontWeight="600">
+                      2. Human males are HETEROGAMETIC: producing 50% X and 50% Y sperms.
+                    </text>
+                    <text x="20" y="112" fill={isDark ? "#fecaca" : "#7f1d1d"} fontSize="10" fontWeight="700">
+                      3. If sperm with 'X' fertilises egg ➔ Female child (XX).
+                    </text>
+                    <text x="20" y="130" fill={isDark ? "#fecaca" : "#7f1d1d"} fontSize="10" fontWeight="700">
+                      4. If sperm with 'Y' fertilises egg ➔ Male child (XY).
+                    </text>
+                    <text x="20" y="156" fill="#ef4444" fontSize="11" fontWeight="900">
+                      ★ CONCLUSION: The father's sperm SOLELY determines child sex!
+                    </text>
+                  </g>
+
+                  {/* Summary Box */}
+                  <g transform="translate(0, 340)">
+                    <rect width="420" height="85" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+                    <text x="20" y="26" fill="#38bdf8" fontSize="11.5" fontWeight="800">
+                      ENVIRONMENTAL SEX DETERMINATION CONTRAST:
+                    </text>
+                    <text x="20" y="48" fill={textPrimary} fontSize="9.5">
+                      • In reptiles (turtles, lizards), incubating temperature determines sex.
+                    </text>
+                    <text x="20" y="66" fill={textMuted} fontSize="9.5">
+                      • In snails, individuals can change sex (not genetically determined).
+                    </text>
+                  </g>
+                </g>
+              </g>
+            )}
           </svg>
         );
 
