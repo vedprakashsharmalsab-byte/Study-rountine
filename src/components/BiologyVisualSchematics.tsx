@@ -18,6 +18,9 @@ export default function BiologyVisualSchematic({
   const [highlightPart, setHighlightPart] = useState<string | null>(null);
   const [reproView, setReproView] = useState<"female" | "male">("female");
   const [mendelView, setMendelView] = useState<"monohybrid" | "dihybrid" | "sex_det">("monohybrid");
+  const [digestiveView, setDigestiveView] = useState<"anatomy" | "enzymes" | "rubric">("anatomy");
+  const [respiratoryView, setRespiratoryView] = useState<"anatomy" | "mechanics" | "alveoli">("anatomy");
+  const [respiratoryPhase, setRespiratoryPhase] = useState<"inhalation" | "exhalation">("inhalation");
 
   const labelBg = isDark ? "rgba(10, 15, 30, 0.95)" : "rgba(255, 255, 255, 0.98)";
   const labelBorder = isDark ? "rgba(56, 189, 248, 0.3)" : "rgba(2, 132, 199, 0.25)";
@@ -348,195 +351,966 @@ export default function BiologyVisualSchematic({
       // =====================================================================
       case "bio_respiratory_system":
         return (
-          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1100 720" className="w-full h-auto select-none font-sans">
             <defs>
-              <radialGradient id="respBg" cx="50%" cy="40%" r="65%">
-                <stop offset="0%" stopColor={isDark ? "#0c1729" : "#f0f9ff"} />
-                <stop offset="100%" stopColor={isDark ? "#060913" : "#e0f2fe"} />
+              <radialGradient id="respBgAtlas" cx="50%" cy="40%" r="70%">
+                <stop offset="0%" stopColor={isDark ? "#0d1829" : "#f0f9ff"} />
+                <stop offset="60%" stopColor={isDark ? "#070d18" : "#e0f2fe"} />
+                <stop offset="100%" stopColor={isDark ? "#03060c" : "#dbeafe"} />
               </radialGradient>
-              <linearGradient id="lungPink" x1="0%" y1="0%" x2="100%" y2="100%">
+
+              {/* Lung 3D shading gradients */}
+              <linearGradient id="lungRightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fca5a5" />
+                <stop offset="30%" stopColor="#f43f5e" />
+                <stop offset="70%" stopColor="#be123c" />
+                <stop offset="100%" stopColor="#881337" />
+              </linearGradient>
+              <linearGradient id="lungLeftGrad" x1="100%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stopColor="#fda4af" />
-                <stop offset="50%" stopColor="#f43f5e" />
-                <stop offset="100%" stopColor="#be123c" />
+                <stop offset="35%" stopColor="#f43f5e" />
+                <stop offset="75%" stopColor="#be123c" />
+                <stop offset="100%" stopColor="#881337" />
               </linearGradient>
-              <linearGradient id="tracheaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+
+              {/* Hyaline Cartilage gradient */}
+              <linearGradient id="hyalineRingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#0284c7" />
+                <stop offset="25%" stopColor="#7dd3fc" />
+                <stop offset="60%" stopColor="#bae6fd" />
+                <stop offset="85%" stopColor="#38bdf8" />
+                <stop offset="100%" stopColor="#0369a1" />
+              </linearGradient>
+
+              {/* Diaphragm muscular gradient */}
+              <linearGradient id="diaphragmAtlasGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#fbbf24" />
+                <stop offset="40%" stopColor="#d97706" />
+                <stop offset="80%" stopColor="#b45309" />
+                <stop offset="100%" stopColor="#78350f" />
+              </linearGradient>
+
+              {/* Blood capillary gradients */}
+              <linearGradient id="capDeoxyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#38bdf8" />
-                <stop offset="50%" stopColor="#bae6fd" />
-                <stop offset="100%" stopColor="#0284c7" />
+                <stop offset="50%" stopColor="#0284c7" />
+                <stop offset="100%" stopColor="#1e3a8a" />
               </linearGradient>
-              <linearGradient id="diaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#f59e0b" />
-                <stop offset="100%" stopColor="#b45309" />
+              <linearGradient id="capOxyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f87171" />
+                <stop offset="50%" stopColor="#ef4444" />
+                <stop offset="100%" stopColor="#991b1b" />
               </linearGradient>
-              <filter id="respDrop" x="-10%" y="-10%" width="125%" height="125%">
-                <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#000" floodOpacity="0.4" />
+
+              {/* Soft atlas shadow filter */}
+              <filter id="respAtlasShadow" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="10" stdDeviation="12" floodColor="#000000" floodOpacity={isDark ? "0.6" : "0.2"} />
               </filter>
+              <filter id="glowAir" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+
+              {/* Arrow markers */}
+              <marker id="arrRespCyan" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M 0 1 L 7 4 L 0 7 z" fill="#0284c7" />
+              </marker>
+              <marker id="arrRespRed" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M 0 1 L 7 4 L 0 7 z" fill="#ef4444" />
+              </marker>
+              <marker id="arrRespAmber" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M 0 1 L 7 4 L 0 7 z" fill="#f59e0b" />
+              </marker>
+              <marker id="arrRespWhite" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M 0 1 L 7 4 L 0 7 z" fill="#38bdf8" />
+              </marker>
             </defs>
 
-            <rect width="1000" height="650" rx="20" fill="url(#respBg)" />
+            {/* Background Canvas */}
+            <rect width="1100" height="720" rx="24" fill="url(#respBgAtlas)" stroke={labelBorder} strokeWidth="1.5" />
 
-            {/* Grid */}
-            {[...Array(13)].map((_, i) => <line key={"rvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
-            {[...Array(9)].map((_, i) => <line key={"rhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
+            {/* Micro grid pattern for technical precision */}
+            {[...Array(14)].map((_, i) => (
+              <line key={"rvg" + i} x1={80 * i} y1="0" x2={80 * i} y2="720" stroke={gridStroke} strokeWidth="1" />
+            ))}
+            {[...Array(10)].map((_, i) => (
+              <line key={"rhg" + i} x1="0" y1={75 * i} x2="1100" y2={75 * i} stroke={gridStroke} strokeWidth="1" />
+            ))}
 
-            {/* Title */}
-            <g transform="translate(40, 30)">
-              <rect width="390" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
-              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
+            {/* ================================================================= */}
+            {/* TOP INTERACTIVE CONTROL PANEL & TITLE                            */}
+            {/* ================================================================= */}
+            <g transform="translate(30, 20)">
+              {/* Title Badge */}
+              <rect width="470" height="46" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <circle cx="28" cy="23" r="12" fill="#0284c7" fillOpacity="0.15" />
+              <text x="28" y="27" fill="#0284c7" fontSize="14" fontWeight="900" textAnchor="middle">🫁</text>
+              <text x="50" y="28" fill={textPrimary} fontSize="14" fontWeight="800" letterSpacing="0.3">
                 HUMAN RESPIRATORY SYSTEM & ALVEOLI
               </text>
-              <rect x="320" y="9" width="58" height="24" rx="6" fill="#38bdf8" fillOpacity="0.2" />
-              <text x="349" y="25" fill="#38bdf8" fontSize="10" fontWeight="800" textAnchor="middle">
+              <rect x="385" y="11" width="72" height="24" rx="6" fill="#0284c7" fillOpacity="0.15" stroke="#0284c7" strokeWidth="1" />
+              <text x="421" y="27" fill="#0284c7" fontSize="10.5" fontWeight="800" textAnchor="middle">
                 CBSE 5M
               </text>
             </g>
 
-            {/* Torso Silhouette Outline */}
-            <path
-              d="M 330 40 Q 330 90 380 120 L 330 180 Q 220 200 200 350 Q 180 520 250 630 L 750 630 Q 820 520 800 350 Q 780 200 670 180 L 620 120 Q 670 90 670 40"
-              fill="none"
-              stroke={isDark ? "rgba(148, 163, 184, 0.15)" : "rgba(100, 116, 139, 0.12)"}
-              strokeWidth="3"
-            />
+            {/* Interactive View Switcher Tabs (3 Modes) */}
+            <g transform="translate(520, 20)">
+              <rect width="550" height="46" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
 
-            {/* Nasal Cavity & Pharynx / Larynx */}
-            <path d="M 470 30 Q 530 30 525 80 Q 520 120 500 135 L 500 155" fill="none" stroke="#f472b6" strokeWidth="18" strokeLinecap="round" />
-            {/* Thyroid Cartilage (Adam's Apple) */}
-            <polygon points="485,140 515,140 520,165 480,165" fill="#38bdf8" stroke="#0284c7" strokeWidth="2" />
+              {/* Tab 1: Anatomy */}
+              <g
+                className="cursor-pointer"
+                onClick={() => setRespiratoryView("anatomy")}
+                transform="translate(8, 7)"
+              >
+                <rect
+                  width="160"
+                  height="32"
+                  rx="8"
+                  fill={respiratoryView === "anatomy" ? "#0284c7" : "transparent"}
+                  stroke={respiratoryView === "anatomy" ? "#38bdf8" : "transparent"}
+                  strokeWidth="1"
+                />
+                <text
+                  x="80"
+                  y="20"
+                  fill={respiratoryView === "anatomy" ? "#ffffff" : textMuted}
+                  fontSize="11.5"
+                  fontWeight="700"
+                  textAnchor="middle"
+                >
+                  1. Gross Anatomy
+                </text>
+              </g>
 
-            {/* Trachea (Windpipe) with 10 C-shaped Cartilaginous Rings */}
-            <rect x="488" y="165" width="24" height="110" rx="4" fill="#0369a1" />
-            {[...Array(8)].map((_, i) => (
-              <path
-                key={"cring"+i}
-                d={`M 486 ${175 + i * 12} Q 500 ${180 + i * 12} 514 ${175 + i * 12}`}
-                fill="none"
-                stroke="url(#tracheaGrad)"
-                strokeWidth="4"
-                strokeLinecap="round"
-              />
-            ))}
+              {/* Tab 2: Mechanics */}
+              <g
+                className="cursor-pointer"
+                onClick={() => setRespiratoryView("mechanics")}
+                transform="translate(178, 7)"
+              >
+                <rect
+                  width="180"
+                  height="32"
+                  rx="8"
+                  fill={respiratoryView === "mechanics" ? "#0284c7" : "transparent"}
+                  stroke={respiratoryView === "mechanics" ? "#38bdf8" : "transparent"}
+                  strokeWidth="1"
+                />
+                <text
+                  x="90"
+                  y="20"
+                  fill={respiratoryView === "mechanics" ? "#ffffff" : textMuted}
+                  fontSize="11.5"
+                  fontWeight="700"
+                  textAnchor="middle"
+                >
+                  2. Breathing Mechanics
+                </text>
+              </g>
 
-            {/* Bifurcation into Left & Right Primary Bronchi (Carina) */}
-            <path d="M 500 270 Q 460 300 410 330" fill="none" stroke="url(#tracheaGrad)" strokeWidth="16" strokeLinecap="round" />
-            <path d="M 500 270 Q 540 300 590 330" fill="none" stroke="url(#tracheaGrad)" strokeWidth="16" strokeLinecap="round" />
-
-            {/* RIGHT LUNG (3 Lobes: Superior, Middle, Inferior) */}
-            <g filter="url(#respDrop)">
-              <path
-                d="M 420 280 
-                   C 360 270 280 320 270 410 
-                   C 260 500 300 550 430 560 
-                   C 460 560 460 480 450 410 
-                   C 440 340 440 290 420 280 Z"
-                fill="url(#lungPink)"
-                stroke="#e11d48"
-                strokeWidth="3.5"
-                opacity="0.95"
-              />
-              {/* Horizontal & Oblique Fissures dividing 3 lobes */}
-              <path d="M 275 390 Q 360 410 445 385" stroke="#881337" strokeWidth="2.5" fill="none" strokeDasharray="5,3" />
-              <path d="M 285 460 Q 370 470 435 480" stroke="#881337" strokeWidth="2.5" fill="none" strokeDasharray="5,3" />
+              {/* Tab 3: Alveoli & Rubric */}
+              <g
+                className="cursor-pointer"
+                onClick={() => setRespiratoryView("alveoli")}
+                transform="translate(368, 7)"
+              >
+                <rect
+                  width="172"
+                  height="32"
+                  rx="8"
+                  fill={respiratoryView === "alveoli" ? "#0284c7" : "transparent"}
+                  stroke={respiratoryView === "alveoli" ? "#38bdf8" : "transparent"}
+                  strokeWidth="1"
+                />
+                <text
+                  x="86"
+                  y="20"
+                  fill={respiratoryView === "alveoli" ? "#ffffff" : textMuted}
+                  fontSize="11.5"
+                  fontWeight="700"
+                  textAnchor="middle"
+                >
+                  3. Alveoli & 5M Rubric
+                </text>
+              </g>
             </g>
 
-            {/* LEFT LUNG (2 Lobes + Deep Cardiac Notch for Heart) */}
-            <g filter="url(#respDrop)">
-              <path
-                d="M 580 280 
-                   C 640 270 720 320 730 410 
-                   C 740 500 700 550 570 560 
-                   C 545 560 540 510 550 465 
-                   C 525 430 525 380 550 340 
-                   C 560 300 565 290 580 280 Z"
-                fill="url(#lungPink)"
-                stroke="#e11d48"
-                strokeWidth="3.5"
-                opacity="0.95"
-              />
-              {/* Oblique Fissure dividing 2 lobes */}
-              <path d="M 575 350 Q 650 420 725 460" stroke="#881337" strokeWidth="2.5" fill="none" strokeDasharray="5,3" />
-              {/* Cardiac Notch Glow */}
-              <path d="M 550 340 C 520 390 525 435 550 465" stroke="#ef4444" strokeWidth="3" fill="none" strokeDasharray="4,2"/>
+            {/* Secondary Mechanics Toggle Bar (Inhalation vs Exhalation) */}
+            {respiratoryView === "mechanics" && (
+              <g transform="translate(360, 75)">
+                <rect width="380" height="38" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                <text x="18" y="24" fill={textPrimary} fontSize="11" fontWeight="700">Phase:</text>
+
+                {/* Inhalation Button */}
+                <g
+                  className="cursor-pointer"
+                  onClick={() => setRespiratoryPhase("inhalation")}
+                  transform="translate(70, 5)"
+                >
+                  <rect
+                    width="145"
+                    height="28"
+                    rx="6"
+                    fill={respiratoryPhase === "inhalation" ? "#10b981" : isDark ? "#1e293b" : "#f1f5f9"}
+                    stroke={respiratoryPhase === "inhalation" ? "#34d399" : "transparent"}
+                    strokeWidth="1"
+                  />
+                  <text
+                    x="72"
+                    y="18"
+                    fill={respiratoryPhase === "inhalation" ? "#ffffff" : textMuted}
+                    fontSize="11"
+                    fontWeight="800"
+                    textAnchor="middle"
+                  >
+                    ⬇️ Inhalation (Active)
+                  </text>
+                </g>
+
+                {/* Exhalation Button */}
+                <g
+                  className="cursor-pointer"
+                  onClick={() => setRespiratoryPhase("exhalation")}
+                  transform="translate(225, 5)"
+                >
+                  <rect
+                    width="145"
+                    height="28"
+                    rx="6"
+                    fill={respiratoryPhase === "exhalation" ? "#f59e0b" : isDark ? "#1e293b" : "#f1f5f9"}
+                    stroke={respiratoryPhase === "exhalation" ? "#fbbf24" : "transparent"}
+                    strokeWidth="1"
+                  />
+                  <text
+                    x="72"
+                    y="18"
+                    fill={respiratoryPhase === "exhalation" ? "#ffffff" : textMuted}
+                    fontSize="11"
+                    fontWeight="800"
+                    textAnchor="middle"
+                  >
+                    ⬆️ Exhalation (Passive)
+                  </text>
+                </g>
+              </g>
+            )}
+
+            {/* ================================================================= */}
+            {/* MAIN ANATOMICAL RENDER: RESPIRATORY TRACT & LUNGS               */}
+            {/* ================================================================= */}
+            <g transform="translate(40, 50)">
+
+              {/* 1. Translucent Thoracic Cage Contour & Rib Cut-Ends */}
+              <g opacity={isDark ? "0.22" : "0.15"}>
+                {/* Thorax Silhouette */}
+                <path
+                  d="M 230 40 
+                     C 190 70 160 130 160 210 
+                     C 160 380 140 500 170 580 
+                     L 590 580 
+                     C 620 500 600 380 600 210 
+                     C 600 130 570 70 530 40 Z"
+                  fill="none"
+                  stroke={textPrimary}
+                  strokeWidth="3.5"
+                  strokeDasharray="6,4"
+                />
+
+                {/* Cut Ends of Ribs (Right side: Ribs 3 to 9) */}
+                {[200, 250, 305, 360, 415, 470, 525].map((yPos, idx) => (
+                  <g key={"rib-rt-" + idx}>
+                    <path
+                      d={`M 175 ${yPos} Q 230 ${yPos + 18} 300 ${yPos + 12}`}
+                      fill="none"
+                      stroke={textPrimary}
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                    />
+                    <ellipse cx="175" cy={yPos} rx="7" ry="11" fill={isDark ? "#94a3b8" : "#64748b"} />
+                  </g>
+                ))}
+
+                {/* Cut Ends of Ribs (Left side: Ribs 3 to 9) */}
+                {[200, 250, 305, 360, 415, 470, 525].map((yPos, idx) => (
+                  <g key={"rib-lt-" + idx}>
+                    <path
+                      d={`M 585 ${yPos} Q 530 ${yPos + 18} 460 ${yPos + 12}`}
+                      fill="none"
+                      stroke={textPrimary}
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                    />
+                    <ellipse cx="585" cy={yPos} rx="7" ry="11" fill={isDark ? "#94a3b8" : "#64748b"} />
+                  </g>
+                ))}
+              </g>
+
+              {/* 2. Upper Airway: Nasal Cavity, Pharynx & Larynx */}
+              <g id="upperAirwayGroup">
+                {/* Head / Nasal Silhouette Outline */}
+                <path
+                  d="M 330 20 
+                     C 350 20 375 25 385 40 
+                     C 395 55 385 75 395 90 
+                     C 405 105 415 110 400 125 
+                     C 390 135 380 145 380 165"
+                  fill="none"
+                  stroke={isDark ? "rgba(148, 163, 184, 0.3)" : "rgba(100, 116, 139, 0.3)"}
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+
+                {/* Nasal Cavity with Conchae/Turbinate Air Passages */}
+                <path
+                  d="M 360 45 C 380 45 385 60 375 75 C 385 85 380 100 365 105"
+                  fill="none"
+                  stroke="#38bdf8"
+                  strokeWidth="10"
+                  strokeLinecap="round"
+                  opacity="0.8"
+                />
+                <path
+                  d="M 355 60 Q 375 65 365 78 Q 380 85 360 95"
+                  fill="none"
+                  stroke="#bae6fd"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                />
+
+                {/* Pharynx (Common passage for food & air) */}
+                <path
+                  d="M 368 95 L 368 135"
+                  stroke="#f472b6"
+                  strokeWidth="16"
+                  strokeLinecap="round"
+                />
+
+                {/* Epiglottis Cartilage Flap */}
+                <path
+                  d="M 360 128 C 352 120 354 112 364 112 C 374 112 374 122 368 132"
+                  fill="#facc15"
+                  stroke="#ca8a04"
+                  strokeWidth="2"
+                />
+
+                {/* LARYNX: Thyroid Cartilage (Adam's Apple) & Cricoid Ring */}
+                <g filter="url(#respAtlasShadow)">
+                  {/* Thyroid Cartilage body with prominence */}
+                  <polygon
+                    points="350,140 386,140 392,165 368,175 344,165"
+                    fill="#38bdf8"
+                    stroke="#0284c7"
+                    strokeWidth="2.5"
+                  />
+                  {/* Laryngeal Prominence (Adam's Apple) highlight */}
+                  <line x1="368" y1="142" x2="368" y2="173" stroke="#e0f2fe" strokeWidth="2.5" strokeLinecap="round" />
+                  {/* Cricoid Cartilage (complete signet ring below thyroid cartilage) */}
+                  <rect x="352" y="176" width="32" height="12" rx="3" fill="#0284c7" stroke="#0369a1" strokeWidth="1.5" />
+                </g>
+              </g>
+
+              {/* 3. TRACHEA (Windpipe) with 12 C-shaped Hyaline Cartilaginous Rings */}
+              <g id="tracheaGroup">
+                {/* Deep Tracheal Tube Background (smooth muscle & mucosa) */}
+                <rect x="354" y="190" width="28" height="105" rx="5" fill={isDark ? "#0f172a" : "#cbd5e1"} stroke="#0284c7" strokeWidth="2" />
+
+                {/* C-Shaped Rings (Open posteriorly facing esophagus) */}
+                {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((idx) => {
+                  const ringY = 194 + idx * 11;
+                  return (
+                    <g key={"c-ring-" + idx}>
+                      {/* Hyaline Ring Arch */}
+                      <path
+                        d={`M 352 ${ringY} Q 368 ${ringY + 4} 384 ${ringY}`}
+                        fill="none"
+                        stroke="url(#hyalineRingGrad)"
+                        strokeWidth="5"
+                        strokeLinecap="round"
+                        filter="url(#respAtlasShadow)"
+                      />
+                      {/* Anterior cartilage highlight */}
+                      <circle cx="368" cy={ringY + 2} r="1.5" fill="#ffffff" opacity="0.8" />
+                    </g>
+                  );
+                })}
+
+                {/* Carina (Internal cartilaginous ridge at bifurcation) */}
+                <circle cx="368" cy="298" r="4.5" fill="#facc15" stroke="#ca8a04" strokeWidth="1.5" />
+              </g>
+
+              {/* 4. PRIMARY BRONCHI BIFURCATION (Asymmetric Anatomy) */}
+              <g id="bronchiBifurcation">
+                {/* RIGHT Primary Bronchus: Wider, Shorter (2.5 cm), More Vertical */}
+                <path
+                  d="M 364 298 Q 345 320 315 340"
+                  fill="none"
+                  stroke="url(#hyalineRingGrad)"
+                  strokeWidth="18"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M 364 298 Q 345 320 315 340"
+                  fill="none"
+                  stroke={isDark ? "#0f172a" : "#cbd5e1"}
+                  strokeWidth="10"
+                  strokeLinecap="round"
+                />
+
+                {/* LEFT Primary Bronchus: Narrower, Longer (5.0 cm), More Horizontal */}
+                <path
+                  d="M 372 298 Q 410 325 445 348"
+                  fill="none"
+                  stroke="url(#hyalineRingGrad)"
+                  strokeWidth="14"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M 372 298 Q 410 325 445 348"
+                  fill="none"
+                  stroke={isDark ? "#0f172a" : "#cbd5e1"}
+                  strokeWidth="7"
+                  strokeLinecap="round"
+                />
+              </g>
+
+              {/* 5. RIGHT LUNG (3 Distinct Lobes: Superior, Middle, Inferior) */}
+              <g
+                id="rightLungGroup"
+                filter="url(#respAtlasShadow)"
+                className="cursor-pointer transition-transform hover:opacity-95"
+                onClick={() => setHighlightPart("Right Lung (3 Lobes)")}
+              >
+                {/* Double Pleural Membrane Envelope (Parietal & Visceral Pleura) */}
+                <path
+                  d="M 315 285 
+                     C 270 270 195 305 185 385 
+                     C 175 470 205 540 315 558 
+                     C 345 558 355 500 350 430 
+                     C 345 360 340 300 315 285 Z"
+                  fill="none"
+                  stroke="#38bdf8"
+                  strokeWidth="2"
+                  strokeDasharray="4,3"
+                  opacity="0.75"
+                />
+
+                {/* Main Right Lung Parenchyma */}
+                <path
+                  d="M 315 290 
+                     C 272 278 202 312 192 388 
+                     C 182 468 212 534 315 552 
+                     C 340 552 350 495 345 425 
+                     C 340 358 335 304 315 290 Z"
+                  fill="url(#lungRightGrad)"
+                  stroke="#e11d48"
+                  strokeWidth="3.5"
+                />
+
+                {/* 1. Horizontal Fissure (Separating Superior & Middle Lobes) */}
+                <path
+                  d="M 198 385 Q 265 398 344 380"
+                  fill="none"
+                  stroke="#881337"
+                  strokeWidth="3"
+                  strokeDasharray="5,2"
+                />
+
+                {/* 2. Oblique Fissure (Separating Middle & Inferior Lobes) */}
+                <path
+                  d="M 215 465 Q 275 460 338 480"
+                  fill="none"
+                  stroke="#881337"
+                  strokeWidth="3"
+                  strokeDasharray="5,2"
+                />
+
+                {/* Lobe Text Labels inside Lung */}
+                <text x="265" y="345" fill="#ffffff" fontSize="10.5" fontWeight="800" textAnchor="middle" opacity="0.9">
+                  Superior Lobe
+                </text>
+                <text x="265" y="425" fill="#ffffff" fontSize="10.5" fontWeight="800" textAnchor="middle" opacity="0.9">
+                  Middle Lobe
+                </text>
+                <text x="265" y="505" fill="#ffffff" fontSize="10.5" fontWeight="800" textAnchor="middle" opacity="0.9">
+                  Inferior Lobe
+                </text>
+
+                {/* Secondary & Tertiary Bronchial Arborization (Right Lung) */}
+                <g stroke="url(#hyalineRingGrad)" fill="none" strokeLinecap="round">
+                  {/* Superior lobar bronchus */}
+                  <path d="M 315 340 Q 285 335 255 330" strokeWidth="6" />
+                  <path d="M 255 330 L 235 315 M 255 330 L 240 345" strokeWidth="3" />
+
+                  {/* Middle lobar bronchus */}
+                  <path d="M 315 340 Q 290 395 260 415" strokeWidth="5.5" />
+                  <path d="M 260 415 L 235 425 M 260 415 L 265 440" strokeWidth="3" />
+
+                  {/* Inferior lobar bronchus */}
+                  <path d="M 315 340 Q 300 450 285 490" strokeWidth="5.5" />
+                  <path d="M 285 490 L 260 515 M 285 490 L 305 520" strokeWidth="3" />
+                </g>
+              </g>
+
+              {/* 6. LEFT LUNG (2 Lobes + Authentic Deep CARDIAC NOTCH for Heart) */}
+              <g
+                id="leftLungGroup"
+                filter="url(#respAtlasShadow)"
+                className="cursor-pointer transition-transform hover:opacity-95"
+                onClick={() => setHighlightPart("Left Lung & Cardiac Notch")}
+              >
+                {/* Double Pleural Membrane Envelope */}
+                <path
+                  d="M 430 285 
+                     C 475 270 550 305 560 385 
+                     C 570 470 540 540 430 558 
+                     C 405 558 395 505 408 455 
+                     C 380 420 380 370 405 335 
+                     C 415 300 420 292 430 285 Z"
+                  fill="none"
+                  stroke="#38bdf8"
+                  strokeWidth="2"
+                  strokeDasharray="4,3"
+                  opacity="0.75"
+                />
+
+                {/* Left Lung Parenchyma with realistic Cardiac Notch indent */}
+                <path
+                  d="M 430 290 
+                     C 472 278 542 312 552 388 
+                     C 562 468 532 534 430 552 
+                     C 410 552 400 500 414 455 
+                     C 388 420 388 370 412 338 
+                     C 418 305 422 296 430 290 Z"
+                  fill="url(#lungLeftGrad)"
+                  stroke="#e11d48"
+                  strokeWidth="3.5"
+                />
+
+                {/* Oblique Fissure (Dividing Superior & Inferior Lobes) */}
+                <path
+                  d="M 430 350 Q 490 415 545 450"
+                  fill="none"
+                  stroke="#881337"
+                  strokeWidth="3"
+                  strokeDasharray="5,2"
+                />
+
+                {/* Cardiac Notch Highlight Glow & Heart Outline */}
+                <path
+                  d="M 412 338 C 388 370 388 420 414 455"
+                  fill="none"
+                  stroke="#ef4444"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  filter="url(#glowAir)"
+                />
+
+                {/* Ghost heart contour sitting inside cardiac notch */}
+                <path
+                  d="M 388 355 C 365 375 365 415 395 440 C 405 448 412 452 414 455"
+                  fill="none"
+                  stroke="#ef4444"
+                  strokeWidth="2"
+                  strokeDasharray="3,3"
+                  opacity="0.8"
+                />
+                <text x="360" y="415" fill="#f87171" fontSize="9.5" fontWeight="800" textAnchor="middle">
+                  Apex of Heart
+                </text>
+
+                {/* Lobe Text Labels */}
+                <text x="485" y="355" fill="#ffffff" fontSize="10.5" fontWeight="800" textAnchor="middle" opacity="0.9">
+                  Superior Lobe
+                </text>
+                <text x="480" y="495" fill="#ffffff" fontSize="10.5" fontWeight="800" textAnchor="middle" opacity="0.9">
+                  Inferior Lobe
+                </text>
+                {/* Lingula Label */}
+                <text x="435" y="472" fill="#fed7aa" fontSize="9" fontWeight="700">
+                  Lingula
+                </text>
+
+                {/* Secondary & Tertiary Bronchial Arborization (Left Lung) */}
+                <g stroke="url(#hyalineRingGrad)" fill="none" strokeLinecap="round">
+                  {/* Superior lobar bronchus */}
+                  <path d="M 445 348 Q 475 350 500 365" strokeWidth="6" />
+                  <path d="M 500 365 L 525 350 M 500 365 L 525 380" strokeWidth="3" />
+
+                  {/* Inferior lobar bronchus */}
+                  <path d="M 445 348 Q 465 435 480 480" strokeWidth="5.5" />
+                  <path d="M 480 480 L 460 510 M 480 480 L 505 515" strokeWidth="3" />
+                </g>
+              </g>
+
+              {/* 7. MUSCULAR DIAPHRAGM (With Breathing Phase Mechanics Dynamics) */}
+              <g id="diaphragmGroup" filter="url(#respAtlasShadow)">
+                {/* Diaphragm Body */}
+                {respiratoryPhase === "inhalation" ? (
+                  /* Flattens downward on contraction */
+                  <g>
+                    <path
+                      d="M 150 575 Q 368 565 590 575"
+                      fill="none"
+                      stroke="url(#diaphragmAtlasGrad)"
+                      strokeWidth="20"
+                      strokeLinecap="round"
+                    />
+                    {/* Downward contraction vectors */}
+                    <path d="M 368 535 L 368 560" stroke="#f59e0b" strokeWidth="4" markerEnd="url(#arrRespAmber)" />
+                    <path d="M 270 538 L 270 560" stroke="#f59e0b" strokeWidth="3.5" markerEnd="url(#arrRespAmber)" />
+                    <path d="M 470 538 L 470 560" stroke="#f59e0b" strokeWidth="3.5" markerEnd="url(#arrRespAmber)" />
+
+                    {/* Air entering trachea vectors */}
+                    <path d="M 368 25 L 368 75" stroke="#38bdf8" strokeWidth="5" markerEnd="url(#arrRespWhite)" />
+                    <text x="368" y="15" fill="#38bdf8" fontSize="11" fontWeight="900" textAnchor="middle">
+                      AIR RUSHES IN ⬇️
+                    </text>
+                  </g>
+                ) : (
+                  /* Relaxes and arches high into dome shape */
+                  <g>
+                    <path
+                      d="M 150 580 Q 368 495 590 580"
+                      fill="none"
+                      stroke="url(#diaphragmAtlasGrad)"
+                      strokeWidth="20"
+                      strokeLinecap="round"
+                    />
+                    {/* Upward relaxation vectors */}
+                    <path d="M 368 555 L 368 520" stroke="#f59e0b" strokeWidth="4" markerEnd="url(#arrRespAmber)" />
+                    <path d="M 270 560 L 270 530" stroke="#f59e0b" strokeWidth="3.5" markerEnd="url(#arrRespAmber)" />
+                    <path d="M 470 560 L 470 530" stroke="#f59e0b" strokeWidth="3.5" markerEnd="url(#arrRespAmber)" />
+
+                    {/* Air expelled vector */}
+                    <path d="M 368 75 L 368 25" stroke="#f59e0b" strokeWidth="5" markerEnd="url(#arrRespAmber)" />
+                    <text x="368" y="15" fill="#f59e0b" fontSize="11" fontWeight="900" textAnchor="middle">
+                      AIR EXPELLED ⬆️
+                    </text>
+                  </g>
+                )}
+
+                {/* Central Tendon & Costal attachments */}
+                <circle cx="368" cy={respiratoryPhase === "inhalation" ? 566 : 505} r="5" fill="#fef3c7" />
+              </g>
+
+              {/* 8. Anatomical Leader Lines & Callout Labels (Left & Center) */}
+              <g id="respLabelsGroup">
+                {/* 1. Nasal Cavity & Pharynx */}
+                <line x1="365" y1="50" x2="110" y2="50" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 35)">
+                  <rect width="130" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="20" fill={textAccent} fontSize="11" fontWeight="800" textAnchor="middle">
+                    Nasal Passage
+                  </text>
+                </g>
+
+                {/* 2. Epiglottis */}
+                <line x1="360" y1="120" x2="110" y2="120" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 105)">
+                  <rect width="130" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="20" fill="#facc15" fontSize="11" fontWeight="800" textAnchor="middle">
+                    Epiglottis (Guards Glottis)
+                  </text>
+                </g>
+
+                {/* 3. Larynx */}
+                <line x1="350" y1="155" x2="110" y2="170" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 155)">
+                  <rect width="130" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="20" fill={textPrimary} fontSize="11" fontWeight="800" textAnchor="middle">
+                    Larynx (Voice Box)
+                  </text>
+                </g>
+
+                {/* 4. Trachea with C-Rings */}
+                <line x1="352" y1="230" x2="110" y2="230" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 215)">
+                  <rect width="130" height="42" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="18" fill={textAccent} fontSize="11" fontWeight="800" textAnchor="middle">
+                    Trachea (Windpipe)
+                  </text>
+                  <text x="65" y="32" fill={textMuted} fontSize="9" textAnchor="middle">
+                    C-shaped Hyaline Rings
+                  </text>
+                </g>
+
+                {/* 5. Primary Bronchus & Carina */}
+                <line x1="368" y1="298" x2="110" y2="298" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 283)">
+                  <rect width="130" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="20" fill={textPrimary} fontSize="11" fontWeight="800" textAnchor="middle">
+                    Bronchi & Carina
+                  </text>
+                </g>
+
+                {/* 6. Pleural Membranes */}
+                <line x1="185" y1="385" x2="110" y2="385" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 365)">
+                  <rect width="130" height="42" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="18" fill="#38bdf8" fontSize="10.5" fontWeight="800" textAnchor="middle">
+                    Pleural Membranes
+                  </text>
+                  <text x="65" y="32" fill={textMuted} fontSize="8.5" textAnchor="middle">
+                    Visceral + Parietal + Fluid
+                  </text>
+                </g>
+
+                {/* 7. Cut Ends of Ribs */}
+                <line x1="175" y1="470" x2="110" y2="470" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 455)">
+                  <rect width="130" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="20" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">
+                    Cut Ends of Ribs
+                  </text>
+                </g>
+
+                {/* 8. Diaphragm */}
+                <line x1="200" y1="575" x2="110" y2="575" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 560)">
+                  <rect width="130" height="34" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="22" fill="#f59e0b" fontSize="11" fontWeight="800" textAnchor="middle">
+                    Muscular Diaphragm
+                  </text>
+                </g>
+
+                {/* 9. Cardiac Notch Label (Right side of left lung) */}
+                <line x1="395" y1="410" x2="300" y2="460" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(230, 465)">
+                  <rect width="145" height="30" rx="6" fill={labelBg} stroke="#ef4444" strokeWidth="1.2" />
+                  <text x="72" y="20" fill="#ef4444" fontSize="10.5" fontWeight="800" textAnchor="middle">
+                    Cardiac Notch (Heart space)
+                  </text>
+                </g>
+              </g>
             </g>
 
-            {/* Bronchial Arborization inside lungs (Secondary & Tertiary Bronchioles) */}
-            <path d="M 410 330 Q 350 360 330 400" stroke="#0284c7" strokeWidth="7" fill="none" strokeLinecap="round"/>
-            <path d="M 410 330 Q 390 410 380 470" stroke="#0284c7" strokeWidth="6" fill="none" strokeLinecap="round"/>
-            <path d="M 330 400 L 305 440 M 330 400 L 350 445" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round"/>
-            <path d="M 380 470 L 360 510 M 380 470 L 405 515" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round"/>
+            {/* ================================================================= */}
+            {/* RIGHT PANEL: DYNAMIC CARD DEPENDING ON SELECTED VIEW MODE         */}
+            {/* ================================================================= */}
+            <g transform="translate(710, 80)">
 
-            <path d="M 590 330 Q 650 360 670 400" stroke="#0284c7" strokeWidth="7" fill="none" strokeLinecap="round"/>
-            <path d="M 590 330 Q 610 410 620 470" stroke="#0284c7" strokeWidth="6" fill="none" strokeLinecap="round"/>
-            <path d="M 670 400 L 695 440 M 670 400 L 650 445" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round"/>
+              {/* MODE 1: GROSS ANATOMY SUMMARY & CRITICAL VIVA POINTS */}
+              {respiratoryView === "anatomy" && (
+                <g>
+                  <rect width="360" height="610" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#respAtlasShadow)" />
 
-            {/* Muscular Dome-shaped Diaphragm */}
-            <path
-              d="M 220 595 Q 500 520 780 595"
-              fill="none"
-              stroke="url(#diaGrad)"
-              strokeWidth="16"
-              strokeLinecap="round"
-              filter="url(#respDrop)"
-            />
-            {/* Diaphragm contraction downward arrow */}
-            <path d="M 500 550 L 500 580" stroke="#f59e0b" strokeWidth="4" markerEnd="url(#arrRed)" />
-            <text x="500" y="540" fill="#f59e0b" fontSize="10" fontWeight="800" textAnchor="middle">Flattens on Inhalation</text>
+                  <g transform="translate(20, 24)">
+                    <text x="0" y="0" fill={textAccent} fontSize="13" fontWeight="900" letterSpacing="0.4">
+                      NCERT ANATOMICAL CHECKLIST (5M)
+                    </text>
+                    <text x="0" y="18" fill={textMuted} fontSize="10">
+                      Standard labeling points expected in CBSE Class 10 Board Exams:
+                    </text>
+                  </g>
 
-            {/* High-Zoom Microscopic Inset: Alveolar Sac & Capillary Mesh */}
-            <g transform="translate(770, 70)">
-              <rect width="210" height="200" rx="14" fill={labelBg} stroke="#38bdf8" strokeWidth="2" filter="url(#respDrop)" />
-              <text x="105" y="24" fill="#38bdf8" fontSize="11" fontWeight="800" textAnchor="middle">
-                ALVEOLAR SAC (GAS EXCHANGE)
-              </text>
-              {/* Cluster of Alveoli Spheres */}
-              <circle cx="85" cy="80" r="26" fill="#fca5a5" stroke="#e11d48" strokeWidth="2" />
-              <circle cx="125" cy="85" r="24" fill="#fda4af" stroke="#e11d48" strokeWidth="2" />
-              <circle cx="100" cy="115" r="28" fill="#fecdd3" stroke="#e11d48" strokeWidth="2" />
-              <circle cx="140" cy="120" r="22" fill="#fca5a5" stroke="#e11d48" strokeWidth="2" />
-              {/* Capillary Mesh: Blue deox entering, Red ox leaving */}
-              <path d="M 40 70 Q 75 55 100 80 Q 130 110 170 95" stroke="#0284c7" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-              <path d="M 45 130 Q 90 145 115 115 Q 145 90 175 125" stroke="#ef4444" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-              <text x="40" y="165" fill="#0284c7" fontSize="9" fontWeight="700">CO₂ Diffuses In</text>
-              <text x="170" y="165" fill="#ef4444" fontSize="9" fontWeight="700" textAnchor="end">O₂ into Blood</text>
-              <text x="105" y="188" fill={textMuted} fontSize="8" fontWeight="600" textAnchor="middle">Extensive surface area (~80 m²)</text>
-            </g>
-            <line x1="695" y1="440" x2="770" y2="180" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="3,3" />
+                  {/* Organ items with badges */}
+                  {[
+                    { title: "Nostrils & Nasal Passage", role: "Fine hairs & mucus line passage to filter dust & microbes; moistens/warms air.", color: "#0284c7" },
+                    { title: "Pharynx & Larynx", role: "Pharynx connects to glottis. Epiglottis prevents food entry. Larynx contains vocal cords.", color: "#8b5cf6" },
+                    { title: "Trachea (Windpipe)", role: "Supported by C-shaped cartilaginous rings ensuring airway does not collapse when air pressure falls.", color: "#0284c7" },
+                    { title: "Bronchial Arborization", role: "Trachea divides into Right & Left primary bronchi, branching into bronchioles and alveolar ducts.", color: "#0ea5e9" },
+                    { title: "Right vs Left Lung Lobes", role: "Right lung has 3 lobes (Horizontal & Oblique fissures). Left lung has 2 lobes + Cardiac Notch for heart.", color: "#e11d48" },
+                    { title: "Double Pleural Membrane", role: "Visceral & parietal pleura filled with pleural fluid; reduces friction during thoracic expansion.", color: "#10b981" },
+                    { title: "Alveoli (Respiratory Unit)", role: "Extensive surface area (~80 m²), single-cell thin squamous epithelium surrounded by capillaries.", color: "#f59e0b" },
+                  ].map((item, idx) => (
+                    <g key={"anat-point-" + idx} transform={`translate(20, ${70 + idx * 72})`}>
+                      <circle cx="8" cy="8" r="5" fill={item.color} />
+                      <text x="22" y="12" fill={textPrimary} fontSize="11" fontWeight="800">
+                        {item.title}
+                      </text>
+                      <text x="22" y="28" fill={textMuted} fontSize="9.5" width="310">
+                        {item.role.length > 55 ? item.role.slice(0, 52) + "..." : item.role}
+                      </text>
+                      <text x="22" y="42" fill={textMuted} fontSize="9" opacity="0.85">
+                        {item.role.length > 55 ? item.role.slice(52) : ""}
+                      </text>
+                    </g>
+                  ))}
 
-            {/* Labels */}
-            {/* Pharynx/Larynx */}
-            <line x1="520" y1="150" x2="680" y2="150" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <g transform="translate(685, 135)">
-              <rect width="130" height="28" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
-              <text x="65" y="18" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Larynx (Voice Box)</text>
-            </g>
+                  {/* Golden Board Tip */}
+                  <g transform="translate(18, 550)">
+                    <rect width="324" height="42" rx="8" fill={isDark ? "rgba(2, 132, 199, 0.12)" : "#e0f2fe"} stroke="#0284c7" strokeWidth="1" />
+                    <text x="14" y="18" fill={textAccent} fontSize="10" fontWeight="800">
+                      💡 CBSE EXAMINER TIP:
+                    </text>
+                    <text x="14" y="32" fill={textPrimary} fontSize="9.5">
+                      Always draw Left Lung narrower with Cardiac Notch!
+                    </text>
+                  </g>
+                </g>
+              )}
 
-            {/* Trachea with Rings */}
-            <line x1="486" y1="210" x2="160" y2="210" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <g transform="translate(15, 195)">
-              <rect width="140" height="40" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
-              <text x="70" y="18" fill={textAccent} fontSize="11" fontWeight="700" textAnchor="middle">Trachea (Windpipe)</text>
-              <text x="70" y="32" fill={textMuted} fontSize="9" textAnchor="middle">C-shaped Cartilage Rings</text>
-            </g>
+              {/* MODE 2: BREATHING MECHANICS (INHALATION VS EXHALATION CONTRAST) */}
+              {respiratoryView === "mechanics" && (
+                <g>
+                  <rect width="360" height="610" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#respAtlasShadow)" />
 
-            {/* Bronchi */}
-            <line x1="430" y1="310" x2="160" y2="310" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <g transform="translate(15, 295)">
-              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
-              <text x="70" y="20" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="middle">Bronchi & Bronchioles</text>
-            </g>
+                  <g transform="translate(20, 24)">
+                    <text x="0" y="0" fill="#f59e0b" fontSize="13" fontWeight="900" letterSpacing="0.4">
+                      {respiratoryPhase === "inhalation" ? "MECHANISM OF INHALATION (ACTIVE)" : "MECHANISM OF EXHALATION (PASSIVE)"}
+                    </text>
+                    <text x="0" y="18" fill={textMuted} fontSize="10">
+                      Step-by-step thoracic pressure-volume dynamics:
+                    </text>
+                  </g>
 
-            {/* Cardiac Notch */}
-            <line x1="535" y1="410" x2="420" y2="440" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <g transform="translate(350, 445)">
-              <rect width="135" height="26" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
-              <text x="67" y="17" fill="#ef4444" fontSize="10" fontWeight="700" textAnchor="middle">Cardiac Notch (Heart space)</text>
-            </g>
+                  {/* 4 Step Process Cards */}
+                  {respiratoryPhase === "inhalation" ? (
+                    <g transform="translate(20, 55)">
+                      {[
+                        { step: "1", title: "Diaphragm Contraction", desc: "The muscular diaphragm contracts and FLATTENS downward towards abdominal cavity.", icon: "⬇️", color: "#10b981" },
+                        { step: "2", title: "Rib Cage Elevation", desc: "External intercostal muscles contract, lifting ribs UPWARDS and OUTWARDS.", icon: "↗️", color: "#0284c7" },
+                        { step: "3", title: "Thoracic Volume Increases", desc: "Chest cavity expands in both vertical and antero-posterior diameters, increasing volume.", icon: "📦", color: "#8b5cf6" },
+                        { step: "4", title: "Pressure Drops ➔ Inrush of Air", desc: "Intra-pulmonary air pressure falls below atmospheric pressure; fresh atmospheric air rushes in.", icon: "💨", color: "#38bdf8" },
+                      ].map((card, i) => (
+                        <g key={"inh-step-" + i} transform={`translate(0, ${i * 105})`}>
+                          <rect width="320" height="92" rx="10" fill={isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)"} stroke={card.color} strokeWidth="1.2" />
+                          <circle cx="24" cy="24" r="14" fill={card.color} fillOpacity="0.15" />
+                          <text x="24" y="28" fill={card.color} fontSize="11.5" fontWeight="900" textAnchor="middle">{card.step}</text>
+                          <text x="48" y="24" fill={textPrimary} fontSize="11" fontWeight="800">{card.title}</text>
+                          <text x="48" y="44" fill={textMuted} fontSize="9.5">{card.desc.slice(0, 42)}</text>
+                          <text x="48" y="60" fill={textMuted} fontSize="9.5">{card.desc.slice(42)}</text>
+                        </g>
+                      ))}
 
-            {/* Diaphragm */}
-            <line x1="260" y1="590" x2="160" y2="590" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <g transform="translate(15, 575)">
-              <rect width="140" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
-              <text x="70" y="20" fill="#f59e0b" fontSize="11" fontWeight="700" textAnchor="middle">Muscular Diaphragm</text>
+                      {/* Summary Equation */}
+                      <g transform="translate(0, 435)">
+                        <rect width="320" height="85" rx="10" fill={isDark ? "rgba(16, 185, 129, 0.1)" : "#ecfdf5"} stroke="#10b981" strokeWidth="1.5" />
+                        <text x="16" y="24" fill="#10b981" fontSize="11" fontWeight="900">Boyle's Law Application:</text>
+                        <text x="16" y="44" fill={textPrimary} fontSize="10" fontWeight="700">Volume (V) ↑  ➔  Pressure (P) ↓</text>
+                        <text x="16" y="64" fill={textMuted} fontSize="9.5">Air moves from High pressure (atmosphere) to Low pressure (lungs).</text>
+                      </g>
+                    </g>
+                  ) : (
+                    <g transform="translate(20, 55)">
+                      {[
+                        { step: "1", title: "Diaphragm Relaxation", desc: "The muscular diaphragm relaxes, arching back UPWARD into its resting dome shape.", icon: "⬆️", color: "#f59e0b" },
+                        { step: "2", title: "Rib Cage Depression", desc: "Intercostal muscles relax; ribs and sternum move DOWNWARDS and INWARDS.", icon: "↙️", color: "#ef4444" },
+                        { step: "3", title: "Thoracic Volume Decreases", desc: "Elastic recoil of lungs compresses thoracic cavity, reducing internal volume.", icon: "📦", color: "#8b5cf6" },
+                        { step: "4", title: "Pressure Rises ➔ Expulsion", desc: "Intra-pulmonary air pressure exceeds atmospheric pressure; air is pushed out of lungs.", icon: "💨", color: "#ea580c" },
+                      ].map((card, i) => (
+                        <g key={"exh-step-" + i} transform={`translate(0, ${i * 105})`}>
+                          <rect width="320" height="92" rx="10" fill={isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)"} stroke={card.color} strokeWidth="1.2" />
+                          <circle cx="24" cy="24" r="14" fill={card.color} fillOpacity="0.15" />
+                          <text x="24" y="28" fill={card.color} fontSize="11.5" fontWeight="900" textAnchor="middle">{card.step}</text>
+                          <text x="48" y="24" fill={textPrimary} fontSize="11" fontWeight="800">{card.title}</text>
+                          <text x="48" y="44" fill={textMuted} fontSize="9.5">{card.desc.slice(0, 42)}</text>
+                          <text x="48" y="60" fill={textMuted} fontSize="9.5">{card.desc.slice(42)}</text>
+                        </g>
+                      ))}
+
+                      {/* Summary Equation */}
+                      <g transform="translate(0, 435)">
+                        <rect width="320" height="85" rx="10" fill={isDark ? "rgba(245, 158, 11, 0.1)" : "#fffbeb"} stroke="#f59e0b" strokeWidth="1.5" />
+                        <text x="16" y="24" fill="#f59e0b" fontSize="11" fontWeight="900">Boyle's Law Application:</text>
+                        <text x="16" y="44" fill={textPrimary} fontSize="10" fontWeight="700">Volume (V) ↓  ➔  Pressure (P) ↑</text>
+                        <text x="16" y="64" fill={textMuted} fontSize="9.5">Air moves from High pressure (lungs) to Low pressure (atmosphere).</text>
+                      </g>
+                    </g>
+                  )}
+                </g>
+              )}
+
+              {/* MODE 3: HIGH-ZOOM ALVEOLAR SAC & CAPILLARY MESH (GAS EXCHANGE) */}
+              {respiratoryView === "alveoli" && (
+                <g>
+                  <rect width="360" height="610" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#respAtlasShadow)" />
+
+                  <g transform="translate(20, 24)">
+                    <text x="0" y="0" fill="#0284c7" fontSize="13" fontWeight="900" letterSpacing="0.4">
+                      ALVEOLAR SAC & CAPILLARY GAS EXCHANGE
+                    </text>
+                    <text x="0" y="18" fill={textMuted} fontSize="10">
+                      Microscopic respiratory membrane (~0.2 μm thick)
+                    </text>
+                  </g>
+
+                  {/* Microscopic Alveolar Sac Cluster Diagram */}
+                  <g transform="translate(20, 50)">
+                    <rect width="320" height="240" rx="12" fill={isDark ? "#08101e" : "#f8fafc"} stroke={labelBorder} strokeWidth="1.2" />
+
+                    {/* Terminal Bronchiole Feeding Tube */}
+                    <path d="M 160 10 L 160 45" stroke="#38bdf8" strokeWidth="14" strokeLinecap="round" />
+                    <path d="M 160 10 L 160 45" stroke={isDark ? "#0f172a" : "#e2e8f0"} strokeWidth="8" strokeLinecap="round" />
+                    <text x="160" y="32" fill={textPrimary} fontSize="8.5" fontWeight="800" textAnchor="middle">Bronchiole</text>
+
+                    {/* Cluster of 5 Interconnected Alveolar Spheres */}
+                    <g filter="url(#respAtlasShadow)">
+                      <circle cx="125" cy="85" r="30" fill="#fecdd3" stroke="#f43f5e" strokeWidth="2" />
+                      <circle cx="195" cy="85" r="30" fill="#fda4af" stroke="#f43f5e" strokeWidth="2" />
+                      <circle cx="105" cy="140" r="34" fill="#fca5a5" stroke="#f43f5e" strokeWidth="2" />
+                      <circle cx="215" cy="140" r="34" fill="#fda4af" stroke="#f43f5e" strokeWidth="2" />
+                      <circle cx="160" cy="155" r="38" fill="#fff1f2" stroke="#e11d48" strokeWidth="2.5" />
+                    </g>
+
+                    {/* Intertwining Capillary Mesh: Blue deoxygenated in, Red oxygenated out */}
+                    {/* Pulmonary Arteriole (Blue) entering from left */}
+                    <path
+                      d="M 30 75 Q 80 50 115 80 Q 140 120 100 150 Q 70 170 40 210"
+                      fill="none"
+                      stroke="url(#capDeoxyGrad)"
+                      strokeWidth="5"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="30" cy="75" r="4" fill="#0284c7" />
+                    <text x="32" y="65" fill="#0284c7" fontSize="8.5" fontWeight="800">Pulmonary Arteriole (Deox)</text>
+
+                    {/* Pulmonary Venule (Red) leaving to right */}
+                    <path
+                      d="M 160 155 Q 210 130 235 150 Q 260 170 290 190"
+                      fill="none"
+                      stroke="url(#capOxyGrad)"
+                      strokeWidth="5"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="290" cy="190" r="4" fill="#ef4444" />
+                    <text x="290" y="210" fill="#ef4444" fontSize="8.5" fontWeight="800" textAnchor="end">Pulmonary Venule (Ox)</text>
+
+                    {/* Diffusion Vectors inside central alveolus */}
+                    {/* O2 diffusion into blood */}
+                    <path d="M 155 145 L 135 160" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#arrRespRed)" />
+                    <text x="135" y="140" fill="#ef4444" fontSize="9" fontWeight="900">O₂ ➔ Blood</text>
+
+                    {/* CO2 diffusion into alveolus */}
+                    <path d="M 180 165 L 165 145" stroke="#0284c7" strokeWidth="2.5" markerEnd="url(#arrRespCyan)" />
+                    <text x="185" y="140" fill="#0284c7" fontSize="9" fontWeight="900">CO₂ ➔ Air</text>
+                  </g>
+
+                  {/* CBSE 5-Mark Scoring Rubric Breakdown */}
+                  <g transform="translate(20, 305)">
+                    <text x="0" y="14" fill="#10b981" fontSize="11.5" fontWeight="900">
+                      CBSE 5-MARK BOARD MARKING SCHEME:
+                    </text>
+
+                    {[
+                      { marks: "1.5 M", rule: "Neat diagram: Trachea rings, asymmetric bronchi, 2 lungs + cardiac notch, and diaphragm." },
+                      { marks: "1.0 M", rule: "Role of C-shaped cartilaginous rings: Prevents collapse during low pressure." },
+                      { marks: "1.5 M", rule: "How alveoli maximize gas exchange: ~80 m² surface area, thin 1-cell wall, rich capillary mesh." },
+                      { marks: "1.0 M", rule: "Role of Respiratory Pigment: Hemoglobin has high affinity for O₂ (diffusion alone takes 3 years to reach feet!)." },
+                    ].map((rub, idx) => (
+                      <g key={"rubric-row-" + idx} transform={`translate(0, ${26 + idx * 56})`}>
+                        <rect width="52" height="22" rx="5" fill="#10b981" fillOpacity="0.15" stroke="#10b981" strokeWidth="1" />
+                        <text x="26" y="15" fill="#10b981" fontSize="10" fontWeight="900" textAnchor="middle">{rub.marks}</text>
+                        <text x="62" y="15" fill={textPrimary} fontSize="9.5" fontWeight="700">{rub.rule.slice(0, 42)}</text>
+                        <text x="62" y="30" fill={textMuted} fontSize="9">{rub.rule.slice(42)}</text>
+                      </g>
+                    ))}
+                  </g>
+
+                  {/* Surface Area Callout Box */}
+                  <g transform="translate(20, 545)">
+                    <rect width="320" height="46" rx="8" fill={isDark ? "rgba(245, 158, 11, 0.12)" : "#fffbeb"} stroke="#f59e0b" strokeWidth="1" />
+                    <text x="14" y="18" fill="#f59e0b" fontSize="10.5" fontWeight="900">
+                      🎾 TENNIS COURT SURFACE AREA:
+                    </text>
+                    <text x="14" y="33" fill={textPrimary} fontSize="9.5">
+                      Spread out, human alveoli cover ~80 m² (equivalent to a singles tennis court)!
+                    </text>
+                  </g>
+                </g>
+              )}
             </g>
           </svg>
         );
@@ -766,253 +1540,930 @@ export default function BiologyVisualSchematic({
       // =====================================================================
       case "bio_alimentary_canal":
         return (
-          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
+          <svg viewBox="0 0 1100 720" className="w-full h-auto select-none font-sans">
             <defs>
-              <radialGradient id="digBg" cx="50%" cy="40%" r="65%">
-                <stop offset="0%" stopColor={isDark ? "#140e0a" : "#fffbeb"} />
-                <stop offset="100%" stopColor={isDark ? "#080604" : "#fef3c7"} />
+              <radialGradient id="digAtlasBg" cx="50%" cy="40%" r="70%">
+                <stop offset="0%" stopColor={isDark ? "#160e0a" : "#fffbeb"} />
+                <stop offset="60%" stopColor={isDark ? "#0c0806" : "#fef3c7"} />
+                <stop offset="100%" stopColor={isDark ? "#050302" : "#fde68a"} />
               </radialGradient>
-              <linearGradient id="liverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#991b1b" />
-                <stop offset="60%" stopColor="#7f1d1d" />
+
+              {/* Liver gradient - deep anatomical red-brown with vascular sheen */}
+              <linearGradient id="liverAtlasGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#b91c1c" />
+                <stop offset="30%" stopColor="#991b1b" />
+                <stop offset="70%" stopColor="#7f1d1d" />
                 <stop offset="100%" stopColor="#450a0a" />
               </linearGradient>
-              <linearGradient id="stomachGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fbbf24" />
-                <stop offset="50%" stopColor="#f59e0b" />
-                <stop offset="100%" stopColor="#d97706" />
+
+              {/* Stomach gradient - warm golden muscular tone with gastric shading */}
+              <linearGradient id="stomachAtlasGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fde047" />
+                <stop offset="30%" stopColor="#f59e0b" />
+                <stop offset="70%" stopColor="#d97706" />
+                <stop offset="100%" stopColor="#92400e" />
               </linearGradient>
-              <linearGradient id="pancreasGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+
+              {/* Pancreas gradient - glandular lobulated warm tone */}
+              <linearGradient id="pancreasAtlasGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#fef08a" />
+                <stop offset="50%" stopColor="#fdba74" />
+                <stop offset="100%" stopColor="#ea580c" />
+              </linearGradient>
+
+              {/* Gallbladder gradient - deep bile green */}
+              <linearGradient id="gallAtlasGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#4ade80" />
+                <stop offset="50%" stopColor="#16a34a" />
+                <stop offset="100%" stopColor="#14532d" />
+              </linearGradient>
+
+              {/* Small intestine mucosa gradient */}
+              <linearGradient id="smallIntGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#fed7aa" />
-                <stop offset="100%" stopColor="#f97316" />
+                <stop offset="50%" stopColor="#fb923c" />
+                <stop offset="100%" stopColor="#c2410c" />
               </linearGradient>
-              <filter id="digDrop" x="-10%" y="-10%" width="125%" height="125%">
-                <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#000" floodOpacity="0.45" />
+
+              {/* Large intestine haustra gradient */}
+              <linearGradient id="largeIntGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#d97706" />
+                <stop offset="40%" stopColor="#b45309" />
+                <stop offset="80%" stopColor="#78350f" />
+                <stop offset="100%" stopColor="#451a03" />
+              </linearGradient>
+
+              {/* 3D Depth Shadow */}
+              <filter id="digAtlasShadow" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="0" dy="8" stdDeviation="10" floodColor="#000000" floodOpacity={isDark ? "0.65" : "0.25"} />
               </filter>
+
+              {/* Markers */}
+              <marker id="arrBileGreen" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M 0 1 L 7 4 L 0 7 z" fill="#16a34a" />
+              </marker>
+              <marker id="arrStomachYellow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M 0 1 L 7 4 L 0 7 z" fill="#f59e0b" />
+              </marker>
+              <marker id="arrEnzymeOrange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M 0 1 L 7 4 L 0 7 z" fill="#ea580c" />
+              </marker>
             </defs>
 
-            <rect width="1000" height="650" rx="20" fill="url(#digBg)" />
-            {[...Array(13)].map((_, i) => <line key={"dvg"+i} x1={80*i} y1="0" x2={80*i} y2="650" stroke={gridStroke} strokeWidth="1" />)}
-            {[...Array(9)].map((_, i) => <line key={"dhg"+i} x1="0" y1={75*i} x2="1000" y2={75*i} stroke={gridStroke} strokeWidth="1" />)}
+            {/* Background Canvas */}
+            <rect width="1100" height="720" rx="24" fill="url(#digAtlasBg)" stroke={labelBorder} strokeWidth="1.5" />
 
-            {/* Title */}
-            <g transform="translate(40, 30)">
-              <rect width="430" height="42" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
-              <text x="16" y="26" fill={textPrimary} fontSize="14" fontWeight="700">
-                HUMAN ALIMENTARY CANAL & DIGESTIVE GLANDS
+            {/* Precision Grid */}
+            {[...Array(14)].map((_, i) => (
+              <line key={"dvg" + i} x1={80 * i} y1="0" x2={80 * i} y2="720" stroke={gridStroke} strokeWidth="1" />
+            ))}
+            {[...Array(10)].map((_, i) => (
+              <line key={"dhg" + i} x1="0" y1={75 * i} x2="1100" y2={75 * i} stroke={gridStroke} strokeWidth="1" />
+            ))}
+
+            {/* ================================================================= */}
+            {/* TOP HEADER & INTERACTIVE MODE TABS                                */}
+            {/* ================================================================= */}
+            <g transform="translate(30, 20)">
+              {/* Title Badge */}
+              <rect width="470" height="46" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <circle cx="28" cy="23" r="12" fill="#f59e0b" fillOpacity="0.15" />
+              <text x="28" y="27" fill="#f59e0b" fontSize="14" fontWeight="900" textAnchor="middle">🍽️</text>
+              <text x="50" y="28" fill={textPrimary} fontSize="14" fontWeight="800" letterSpacing="0.3">
+                HUMAN ALIMENTARY CANAL & GLANDS
               </text>
-              <rect x="360" y="9" width="58" height="24" rx="6" fill="#f59e0b" fillOpacity="0.2" />
-              <text x="389" y="25" fill="#f59e0b" fontSize="10" fontWeight="800" textAnchor="middle">
+              <rect x="385" y="11" width="72" height="24" rx="6" fill="#f59e0b" fillOpacity="0.15" stroke="#f59e0b" strokeWidth="1" />
+              <text x="421" y="27" fill="#f59e0b" fontSize="10.5" fontWeight="800" textAnchor="middle">
                 CBSE 5M
               </text>
             </g>
 
-            {/* Profile silhouette & Mouth / Buccal Cavity */}
-            <path
-              d="M 440 40 
-                 C 480 40 510 50 510 80 
-                 C 510 95 480 100 480 110 
-                 C 520 110 530 130 500 145 
-                 C 490 150 480 170 480 200 L 480 290"
-              fill="none"
-              stroke="#fb7185"
-              strokeWidth="16"
-              strokeLinecap="round"
-            />
-            {/* Teeth & Tongue */}
-            <path d="M 475 118 L 495 118" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" />
-            <path d="M 470 130 Q 485 130 492 125" stroke="#f43f5e" strokeWidth="6" strokeLinecap="round" />
+            {/* View Mode Tabs */}
+            <g transform="translate(520, 20)">
+              <rect width="550" height="46" rx="12" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
 
-            {/* Salivary Glands (Parotid, Submandibular, Sublingual) */}
-            <circle cx="515" cy="95" r="9" fill="#fbbf24" stroke="#d97706" strokeWidth="1.5" />
-            <circle cx="485" cy="140" r="7" fill="#fbbf24" stroke="#d97706" strokeWidth="1.5" />
-
-            {/* Esophagus (Food pipe) with peristaltic waves */}
-            <path d="M 480 170 L 480 290" stroke="#f472b6" strokeWidth="16" strokeLinecap="round" />
-            <path d="M 474 200 Q 486 215 474 230 Q 486 245 474 260" stroke="#be123c" strokeWidth="2.5" fill="none" />
-
-            {/* Diaphragm horizontal line */}
-            <path d="M 330 280 Q 500 270 670 280" stroke="#94a3b8" strokeWidth="3" strokeDasharray="6,4" fill="none" />
-            <text x="320" y="275" fill={textMuted} fontSize="9.5" fontWeight="700">Diaphragm</text>
-
-            {/* LIVER (Massive triangular gland, Largest gland in body ~1.5kg) */}
-            <path
-              d="M 420 295 
-                 C 320 295 300 350 310 400 
-                 C 320 440 430 430 460 380 
-                 C 470 340 460 295 420 295 Z"
-              fill="url(#liverGrad)"
-              stroke="#b91c1c"
-              strokeWidth="3.5"
-              filter="url(#digDrop)"
-            />
-            {/* Gallbladder (Green sac storing Bile juice) */}
-            <ellipse cx="430" cy="380" rx="14" ry="20" fill="#22c55e" stroke="#15803d" strokeWidth="2" filter="url(#digDrop)" />
-            {/* Bile Duct connecting to Duodenum */}
-            <path d="M 430 395 Q 460 410 480 415" stroke="#16a34a" strokeWidth="4" fill="none" strokeLinecap="round" />
-
-            {/* J-SHAPED STOMACH */}
-            <path
-              d="M 480 290 
-                 C 520 290 570 310 570 360 
-                 C 570 410 520 430 470 420 
-                 C 490 390 500 350 475 320 Z"
-              fill="url(#stomachGrad)"
-              stroke="#d97706"
-              strokeWidth="4"
-              filter="url(#digDrop)"
-            />
-            {/* Gastric Rugae inside stomach */}
-            <path d="M 525 330 Q 545 360 520 390" stroke="#b45309" strokeWidth="2.5" fill="none" strokeDasharray="4,2"/>
-            {/* Pyloric Sphincter Valve */}
-            <circle cx="470" cy="420" r="5" fill="#f43f5e" />
-
-            {/* C-SHAPED DUODENUM LOOP */}
-            <path
-              d="M 470 420 
-                 C 440 420 440 465 470 465 
-                 L 510 465"
-              fill="none"
-              stroke="#fed7aa"
-              strokeWidth="16"
-              strokeLinecap="round"
-            />
-
-            {/* PANCREAS (Leaf-like gland nestling in the duodenal C-loop) */}
-            <path
-              d="M 470 430 
-                 C 510 420 570 430 590 445 
-                 C 570 455 510 455 470 445 Z"
-              fill="url(#pancreasGrad)"
-              stroke="#ea580c"
-              strokeWidth="2.5"
-              filter="url(#digDrop)"
-            />
-            {/* Pancreatic duct */}
-            <path d="M 570 440 L 460 440" stroke="#ffffff" strokeWidth="2" strokeDasharray="3,2" fill="none" />
-
-            {/* LARGE INTESTINE (COLON: Ascending, Transverse, Descending) with Haustra */}
-            <path
-              d="M 370 570 L 370 460 Q 370 440 400 440 L 590 440 Q 620 440 620 460 L 620 570 Q 620 600 560 600 L 500 600 L 500 635"
-              fill="none"
-              stroke="#a16207"
-              strokeWidth="24"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {/* Cecum & Vermiform Appendix */}
-            <circle cx="370" cy="575" r="14" fill="#a16207" stroke="#78350f" strokeWidth="2" />
-            <path d="M 370 585 Q 360 615 375 625" stroke="#d97706" strokeWidth="7" fill="none" strokeLinecap="round" />
-
-            {/* SMALL INTESTINE (Highly coiled Ileum ~6-7m long, site of complete digestion) */}
-            <g filter="url(#digDrop)">
-              <path
-                d="M 430 480 Q 480 470 530 480 Q 560 500 520 520 Q 450 510 430 530 Q 420 560 480 560 Q 540 560 560 540 Q 560 570 480 580"
-                fill="none"
-                stroke="#fed7aa"
-                strokeWidth="18"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M 430 480 Q 480 470 530 480 Q 560 500 520 520 Q 450 510 430 530 Q 420 560 480 560 Q 540 560 560 540 Q 560 570 480 580"
-                fill="none"
-                stroke="#f97316"
-                strokeWidth="6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </g>
-
-            {/* Rectum & Anus */}
-            <rect x="490" y="590" width="20" height="35" rx="5" fill="#78350f" stroke="#451a03" strokeWidth="2" />
-            <circle cx="500" cy="635" r="5" fill="#451a03" />
-
-            {/* Right Summary Card: Secretions & Enzymes (Crucial for CBSE 5M) */}
-            <g transform="translate(680, 80)">
-              <rect width="280" height="490" rx="14" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#digDrop)" />
-              <text x="140" y="26" fill="#f59e0b" fontSize="12" fontWeight="800" textAnchor="middle">
-                KEY DIGESTIVE ENZYMES & FUNCTIONS
-              </text>
-
-              {/* 1. Mouth */}
-              <g transform="translate(16, 45)">
-                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">1. Buccal Cavity (Mouth)</text>
-                <text x="10" y="28" fill={textAccent} fontSize="9.5">• Salivary Amylase (Ptyalin)</text>
-                <text x="10" y="42" fill={textMuted} fontSize="9">• Starch ➔ Maltose (pH 6.8)</text>
+              {/* Tab 1: Anatomy */}
+              <g
+                className="cursor-pointer"
+                onClick={() => setDigestiveView("anatomy")}
+                transform="translate(8, 7)"
+              >
+                <rect
+                  width="160"
+                  height="32"
+                  rx="8"
+                  fill={digestiveView === "anatomy" ? "#f59e0b" : "transparent"}
+                  stroke={digestiveView === "anatomy" ? "#fbbf24" : "transparent"}
+                  strokeWidth="1"
+                />
+                <text
+                  x="80"
+                  y="20"
+                  fill={digestiveView === "anatomy" ? "#ffffff" : textMuted}
+                  fontSize="11.5"
+                  fontWeight="700"
+                  textAnchor="middle"
+                >
+                  1. Gross Anatomy
+                </text>
               </g>
 
-              {/* 2. Stomach */}
-              <g transform="translate(16, 105)">
-                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">2. Stomach (Gastric Glands)</text>
-                <text x="10" y="28" fill="#ef4444" fontSize="9.5">• Dilute HCl (pH 1.5 - 2.0)</text>
-                <text x="10" y="42" fill={textAccent} fontSize="9.5">• Pepsin: Proteins ➔ Peptones</text>
-                <text x="10" y="56" fill="#10b981" fontSize="9.5">• Mucus: Protects inner lining</text>
+              {/* Tab 2: Enzyme Flow */}
+              <g
+                className="cursor-pointer"
+                onClick={() => setDigestiveView("enzymes")}
+                transform="translate(178, 7)"
+              >
+                <rect
+                  width="180"
+                  height="32"
+                  rx="8"
+                  fill={digestiveView === "enzymes" ? "#f59e0b" : "transparent"}
+                  stroke={digestiveView === "enzymes" ? "#fbbf24" : "transparent"}
+                  strokeWidth="1"
+                />
+                <text
+                  x="90"
+                  y="20"
+                  fill={digestiveView === "enzymes" ? "#ffffff" : textMuted}
+                  fontSize="11.5"
+                  fontWeight="700"
+                  textAnchor="middle"
+                >
+                  2. Enzymes & Secretions
+                </text>
               </g>
 
-              {/* 3. Liver */}
-              <g transform="translate(16, 180)">
-                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">3. Liver (Largest Gland)</text>
-                <text x="10" y="28" fill="#16a34a" fontSize="9.5">• Secretes Bile (No enzymes!)</text>
-                <text x="10" y="42" fill={textMuted} fontSize="9">• Emulsification of large fat globules</text>
-                <text x="10" y="56" fill={textMuted} fontSize="9">• Makes acidic chyme alkaline</text>
-              </g>
-
-              {/* 4. Pancreas */}
-              <g transform="translate(16, 255)">
-                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">4. Pancreas (Dual Gland)</text>
-                <text x="10" y="28" fill={textAccent} fontSize="9.5">• Trypsin: Proteins ➔ Peptides</text>
-                <text x="10" y="42" fill={textAccent} fontSize="9.5">• Pancreatic Amylase: Carbohydrates</text>
-                <text x="10" y="56" fill={textAccent} fontSize="9.5">• Lipase: Emulsified fats ➔ Fatty acids</text>
-              </g>
-
-              {/* 5. Small Intestine */}
-              <g transform="translate(16, 335)">
-                <text x="0" y="14" fill={textPrimary} fontSize="11" fontWeight="800">5. Small Intestine (Ileum)</text>
-                <text x="10" y="28" fill={textPrimary} fontSize="9.5">• Succus Entericus (Intestinal juice)</text>
-                <text x="10" y="42" fill="#10b981" fontSize="9.5">• Complete Digestion:</text>
-                <text x="20" y="56" fill={textMuted} fontSize="8.5">Carbs ➔ Glucose</text>
-                <text x="20" y="68" fill={textMuted} fontSize="8.5">Proteins ➔ Amino acids</text>
-                <text x="20" y="80" fill={textMuted} fontSize="8.5">Fats ➔ Fatty acids + Glycerol</text>
-                <text x="10" y="96" fill="#f59e0b" fontSize="9.5">• Villi: Maximize absorption area</text>
-              </g>
-
-              {/* 6. Large Intestine */}
-              <g transform="translate(16, 450)">
-                <text x="0" y="14" fill={textPrimary} fontSize="10.5" fontWeight="800">6. Large Intestine: Absorbs Water</text>
+              {/* Tab 3: CBSE 5M Rubric & Villi */}
+              <g
+                className="cursor-pointer"
+                onClick={() => setDigestiveView("rubric")}
+                transform="translate(368, 7)"
+              >
+                <rect
+                  width="172"
+                  height="32"
+                  rx="8"
+                  fill={digestiveView === "rubric" ? "#f59e0b" : "transparent"}
+                  stroke={digestiveView === "rubric" ? "#fbbf24" : "transparent"}
+                  strokeWidth="1"
+                />
+                <text
+                  x="86"
+                  y="20"
+                  fill={digestiveView === "rubric" ? "#ffffff" : textMuted}
+                  fontSize="11.5"
+                  fontWeight="700"
+                  textAnchor="middle"
+                >
+                  3. CBSE 5M Rubric & Villi
+                </text>
               </g>
             </g>
 
-            {/* Direct Labels with Leader Lines */}
-            <line x1="515" y1="95" x2="620" y2="95" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="625" y="99" fill={textPrimary} fontSize="11" fontWeight="700">Salivary Gland</text>
+            {/* ================================================================= */}
+            {/* MAIN DIGESTIVE TRACT VECTOR ARTWORK                               */}
+            {/* ================================================================= */}
+            <g transform="translate(40, 50)">
 
-            <line x1="480" y1="210" x2="330" y2="210" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="320" y="214" fill={textPrimary} fontSize="11" fontWeight="700" textAnchor="end">Esophagus (Peristalsis)</text>
+              {/* 1. Profile Head & Oral Cavity Silhouette */}
+              <g id="headProfileGroup">
+                {/* Facial Silhouette Line */}
+                <path
+                  d="M 320 20 
+                     C 350 20 375 25 385 45 
+                     C 395 60 380 75 395 90 
+                     C 405 100 415 105 400 120 
+                     C 388 130 380 140 378 155 
+                     L 378 270"
+                  fill="none"
+                  stroke={isDark ? "rgba(148, 163, 184, 0.25)" : "rgba(100, 116, 139, 0.25)"}
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
 
-            <line x1="360" y1="360" x2="220" y2="360" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="210" y="364" fill="#ef4444" fontSize="11" fontWeight="800" textAnchor="end">Liver (Bile Production)</text>
+                {/* Oral / Buccal Cavity Hollow */}
+                <path
+                  d="M 335 80 C 375 80 385 95 380 115 C 370 125 350 128 340 125 Z"
+                  fill={isDark ? "rgba(244, 63, 94, 0.15)" : "rgba(244, 63, 94, 0.1)"}
+                  stroke="#fb7185"
+                  strokeWidth="2"
+                />
 
-            <line x1="430" y1="390" x2="220" y2="400" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="210" y="404" fill="#22c55e" fontSize="11" fontWeight="800" textAnchor="end">Gallbladder (Bile Storage)</text>
+                {/* Teeth: Upper & Lower arches */}
+                <path d="M 370 95 L 382 95" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" />
+                <path d="M 368 115 L 380 115" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" />
 
-            <line x1="530" y1="370" x2="650" y2="370" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="655" y="374" fill="#f59e0b" fontSize="11" fontWeight="800">Stomach (HCl & Pepsin)</text>
+                {/* Muscular Tongue with taste papillae */}
+                <path
+                  d="M 345 120 Q 365 118 375 110"
+                  fill="none"
+                  stroke="#f43f5e"
+                  strokeWidth="7"
+                  strokeLinecap="round"
+                />
 
-            <line x1="520" y1="440" x2="650" y2="420" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="655" y="424" fill="#ea580c" fontSize="11" fontWeight="800">Pancreas (Trypsin/Lipase)</text>
+                {/* 3 Pairs of Salivary Glands with realistic anatomical positions */}
+                {/* 1. Parotid Gland (Near Ear / Angle of Jaw) */}
+                <g filter="url(#digAtlasShadow)">
+                  <ellipse cx="328" cy="92" rx="11" ry="8" fill="#facc15" stroke="#d97706" strokeWidth="1.8" />
+                  <path d="M 338 92 L 368 94" stroke="#d97706" strokeWidth="1.5" strokeDasharray="2,2" />
+                </g>
 
-            <line x1="370" y1="500" x2="220" y2="500" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="210" y="504" fill="#a16207" fontSize="11" fontWeight="700" textAnchor="end">Large Intestine (Colon)</text>
+                {/* 2. Submandibular Gland (Below lower jaw) */}
+                <ellipse cx="352" cy="135" rx="9" ry="7" fill="#facc15" stroke="#d97706" strokeWidth="1.8" />
 
-            <line x1="480" y1="540" x2="330" y2="540" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="320" y="544" fill="#f97316" fontSize="11" fontWeight="800" textAnchor="end">Small Intestine (Ileum & Villi)</text>
+                {/* 3. Sublingual Gland (Under tongue) */}
+                <ellipse cx="366" cy="123" rx="6" ry="5" fill="#facc15" stroke="#d97706" strokeWidth="1.5" />
 
-            <line x1="370" y1="615" x2="220" y2="615" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="210" y="619" fill="#78350f" fontSize="11" fontWeight="700" textAnchor="end">Vermiform Appendix</text>
+                {/* Pharynx & Epiglottis */}
+                <path d="M 365 125 L 365 155" stroke="#f472b6" strokeWidth="14" strokeLinecap="round" />
+                <path d="M 358 142 C 352 135 354 130 362 130 C 370 130 370 138 365 146" fill="#facc15" stroke="#ca8a04" strokeWidth="1.8" />
+              </g>
 
-            <line x1="500" y1="635" x2="650" y2="635" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
-            <text x="655" y="639" fill={textPrimary} fontSize="11" fontWeight="700">Anus (Sphincter)</text>
+              {/* 2. OESOPHAGUS (Food pipe) with Peristaltic Wave & Bolus */}
+              <g id="oesophagusGroup">
+                {/* Muscular Oesophagus Tube */}
+                <path
+                  d="M 365 155 L 365 275"
+                  fill="none"
+                  stroke="#fb7185"
+                  strokeWidth="14"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M 365 155 L 365 275"
+                  fill="none"
+                  stroke={isDark ? "#1e1b4b" : "#fce7f3"}
+                  strokeWidth="7"
+                  strokeLinecap="round"
+                />
+
+                {/* Peristaltic Muscular Contraction Rings */}
+                <path d="M 358 185 Q 365 192 372 185" stroke="#be123c" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                <path d="M 356 220 Q 365 228 374 220" stroke="#be123c" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+
+                {/* Food Bolus moving downward */}
+                <ellipse cx="365" cy="205" rx="5.5" ry="7.5" fill="#f59e0b" stroke="#b45309" strokeWidth="1.5" />
+                {/* Peristalsis downward motion arrows */}
+                <path d="M 365 195 L 365 215" stroke="#ea580c" strokeWidth="2" markerEnd="url(#arrEnzymeOrange)" />
+              </g>
+
+              {/* 3. DIAPHRAGM MUSCULAR PARTITION */}
+              <g id="diaphragmLine">
+                <path
+                  d="M 180 270 Q 365 255 560 270"
+                  fill="none"
+                  stroke={isDark ? "#475569" : "#94a3b8"}
+                  strokeWidth="3"
+                  strokeDasharray="6,4"
+                />
+                <text x="185" y="262" fill={textMuted} fontSize="9.5" fontWeight="800">
+                  Diaphragm (Pierced by Oesophagus)
+                </text>
+              </g>
+
+              {/* 4. LIVER (HEPAR) — Massive Bilobed Wedge (Right & Left Lobes) */}
+              <g
+                id="liverGroup"
+                filter="url(#digAtlasShadow)"
+                className="cursor-pointer transition-transform hover:opacity-95"
+                onClick={() => setHighlightPart("Liver & Biliary Tree")}
+              >
+                {/* Right Lobe (Massive, occupying right hypochondrium) */}
+                <path
+                  d="M 335 272 
+                     C 240 272 210 320 220 375 
+                     C 230 425 320 420 360 380 
+                     C 375 350 365 275 335 272 Z"
+                  fill="url(#liverAtlasGrad)"
+                  stroke="#991b1b"
+                  strokeWidth="3"
+                />
+
+                {/* Left Lobe (Smaller, overlapping the anterior stomach surface) */}
+                <path
+                  d="M 335 272 
+                     C 365 275 400 282 410 310 
+                     C 405 335 375 350 355 350 
+                     C 345 320 340 290 335 272 Z"
+                  fill="url(#liverAtlasGrad)"
+                  stroke="#991b1b"
+                  strokeWidth="2.5"
+                  opacity="0.95"
+                />
+
+                {/* Falciform Ligament dividing Right & Left Lobes */}
+                <path
+                  d="M 335 272 Q 345 315 352 355"
+                  fill="none"
+                  stroke="#fecaca"
+                  strokeWidth="2"
+                  strokeDasharray="4,2"
+                  opacity="0.8"
+                />
+
+                <text x="275" y="340" fill="#ffffff" fontSize="11" fontWeight="900" textAnchor="middle" opacity="0.95">
+                  LIVER (Right Lobe)
+                </text>
+                <text x="275" y="355" fill="#fecaca" fontSize="8.5" fontWeight="700" textAnchor="middle">
+                  Largest Gland (~1.5 kg)
+                </text>
+              </g>
+
+              {/* 5. GALLBLADDER & BILIARY DUCT TREE */}
+              <g id="gallbladderGroup" filter="url(#digAtlasShadow)">
+                {/* Gallbladder Pear-shaped Sac nestled under liver */}
+                <path
+                  d="M 320 370 
+                     C 310 385 310 410 325 418 
+                     C 340 420 348 400 340 380 Z"
+                  fill="url(#gallAtlasGrad)"
+                  stroke="#15803d"
+                  strokeWidth="2"
+                />
+                <circle cx="328" cy="395" r="3" fill="#86efac" opacity="0.8" />
+
+                {/* Complete Biliary Tree: Right/Left Hepatic + Cystic + Common Bile Duct */}
+                {/* Right & Left Hepatic Ducts */}
+                <path d="M 295 365 Q 320 370 335 375" stroke="#16a34a" strokeWidth="3" fill="none" strokeLinecap="round" />
+                <path d="M 360 360 Q 345 370 335 375" stroke="#16a34a" strokeWidth="3" fill="none" strokeLinecap="round" />
+
+                {/* Cystic Duct from Gallbladder */}
+                <path d="M 330 375 Q 338 385 338 395" stroke="#16a34a" strokeWidth="3" fill="none" strokeLinecap="round" />
+
+                {/* Common Bile Duct descending behind duodenum */}
+                <path
+                  d="M 335 375 Q 345 400 365 425"
+                  stroke="#16a34a"
+                  strokeWidth="4"
+                  fill="none"
+                  strokeLinecap="round"
+                  markerEnd="url(#arrBileGreen)"
+                />
+              </g>
+
+              {/* 6. J-SHAPED STOMACH (Cardia, Fundus, Body, Pylorus, Rugae) */}
+              <g
+                id="stomachGroup"
+                filter="url(#digAtlasShadow)"
+                className="cursor-pointer transition-transform hover:opacity-95"
+                onClick={() => setHighlightPart("J-Shaped Stomach")}
+              >
+                {/* Main J-Shaped Stomach Body */}
+                <path
+                  d="M 365 275 
+                     C 400 270 455 285 470 330 
+                     C 485 375 480 425 435 440 
+                     C 390 450 355 420 355 390 
+                     C 355 370 375 350 380 320 
+                     C 382 295 375 280 365 275 Z"
+                  fill="url(#stomachAtlasGrad)"
+                  stroke="#b45309"
+                  strokeWidth="3.5"
+                />
+
+                {/* Gastric Fundus dome highlight */}
+                <path
+                  d="M 380 278 C 420 275 450 288 460 315"
+                  fill="none"
+                  stroke="#fef08a"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  opacity="0.8"
+                />
+
+                {/* Internal Gastric Rugae (Mucosal Folds for Expansion) */}
+                <g stroke="#92400e" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.75">
+                  <path d="M 430 320 Q 445 350 425 380" strokeDasharray="5,2" />
+                  <path d="M 450 340 Q 460 370 445 400" strokeDasharray="5,2" />
+                  <path d="M 410 350 Q 425 385 405 415" strokeDasharray="5,2" />
+                </g>
+
+                {/* Cardiac Sphincter (at gastro-oesophageal junction) */}
+                <circle cx="366" cy="278" r="4.5" fill="#f43f5e" stroke="#be123c" strokeWidth="1.2" />
+
+                {/* Pyloric Sphincter Valve (at gastroduodenal junction) */}
+                <circle cx="355" cy="390" r="5" fill="#f43f5e" stroke="#be123c" strokeWidth="1.5" />
+
+                {/* Anatomical Regions Text */}
+                <text x="430" y="305" fill="#ffffff" fontSize="9.5" fontWeight="900" textAnchor="middle" opacity="0.95">
+                  Fundus
+                </text>
+                <text x="425" y="360" fill="#ffffff" fontSize="11" fontWeight="900" textAnchor="middle" opacity="0.95">
+                  Stomach (Body)
+                </text>
+                <text x="350" y="380" fill="#78350f" fontSize="8.5" fontWeight="900" textAnchor="end">
+                  Pyloric Sphincter
+                </text>
+              </g>
+
+              {/* 7. C-SHAPED DUODENUM LOOP WRAPPING PANCREAS */}
+              <g id="duodenumGroup">
+                {/* Duodenum C-Loop Tube */}
+                <path
+                  d="M 355 390 
+                     C 320 390 315 450 350 455 
+                     L 410 455"
+                  fill="none"
+                  stroke="#fed7aa"
+                  strokeWidth="18"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M 355 390 
+                     C 320 390 315 450 350 455 
+                     L 410 455"
+                  fill="none"
+                  stroke={isDark ? "#1c1917" : "#ffedd5"}
+                  strokeWidth="9"
+                  strokeLinecap="round"
+                />
+              </g>
+
+              {/* 8. PANCREAS (Lobulated Leaf Gland nestled in Duodenal Loop) */}
+              <g
+                id="pancreasGroup"
+                filter="url(#digAtlasShadow)"
+                className="cursor-pointer transition-transform hover:opacity-95"
+                onClick={() => setHighlightPart("Pancreas & Ducts")}
+              >
+                {/* Pancreatic Head, Body & Tail */}
+                <path
+                  d="M 345 420 
+                     C 365 410 420 415 465 425 
+                     C 475 428 470 440 450 442 
+                     C 400 445 365 440 345 435 Z"
+                  fill="url(#pancreasAtlasGrad)"
+                  stroke="#ea580c"
+                  strokeWidth="2.5"
+                />
+
+                {/* Lobulated texture bumps */}
+                {[365, 390, 415, 440].map((xP, i) => (
+                  <circle key={"panc-lob-" + i} cx={xP} cy={428 + (i % 2) * 5} r="3" fill="#fed7aa" opacity="0.7" />
+                ))}
+
+                {/* Main Pancreatic Duct (Duct of Wirsung) */}
+                <path
+                  d="M 460 430 L 345 425"
+                  stroke="#ffffff"
+                  strokeWidth="2.5"
+                  strokeDasharray="3,2"
+                  fill="none"
+                />
+
+                {/* Hepato-pancreatic Ampulla (Ampulla of Vater) entering Duodenum */}
+                <circle cx="345" cy="425" r="4" fill="#16a34a" stroke="#ffffff" strokeWidth="1.2" />
+                <text x="420" y="437" fill="#7c2d12" fontSize="9" fontWeight="900" textAnchor="middle">
+                  PANCREAS
+                </text>
+              </g>
+
+              {/* 9. LARGE INTESTINE (COLON) with Haustra & Taenia Coli */}
+              <g id="colonGroup" filter="url(#digAtlasShadow)">
+                {/* Haustrated Colon Path: Caecum ➔ Ascending ➔ Transverse ➔ Descending ➔ Sigmoid */}
+                <path
+                  d="M 270 560 
+                     L 270 440 
+                     C 270 420 290 415 320 415 
+                     L 470 415 
+                     C 500 415 520 430 520 450 
+                     L 520 560 
+                     C 520 595 480 605 450 605 
+                     L 395 605 
+                     L 395 640"
+                  fill="none"
+                  stroke="url(#largeIntGrad)"
+                  strokeWidth="26"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                {/* Taenia Coli (Central longitudinal muscular ribbon band) */}
+                <path
+                  d="M 270 560 
+                     L 270 440 
+                     C 270 420 290 415 320 415 
+                     L 470 415 
+                     C 500 415 520 430 520 450 
+                     L 520 560 
+                     C 520 595 480 605 450 605 
+                     L 395 605"
+                  fill="none"
+                  stroke="#fef3c7"
+                  strokeWidth="2.5"
+                  strokeDasharray="6,3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity="0.8"
+                />
+
+                {/* Haustra indentations (Sacculation notches) */}
+                {[460, 490, 520].map((yVal, i) => (
+                  <line key={"h-asc-" + i} x1="257" y1={yVal} x2="283" y2={yVal} stroke="#451a03" strokeWidth="2" />
+                ))}
+                {[340, 380, 420, 450].map((xVal, i) => (
+                  <line key={"h-trans-" + i} x1={xVal} y1="402" x2={xVal} y2="428" stroke="#451a03" strokeWidth="2" />
+                ))}
+                {[460, 490, 520].map((yVal, i) => (
+                  <line key={"h-desc-" + i} x1="507" y1={yVal} x2="533" y2={yVal} stroke="#451a03" strokeWidth="2" />
+                ))}
+
+                {/* Caecum Sac & Ileocaecal Junction */}
+                <circle cx="270" cy="565" r="15" fill="#92400e" stroke="#451a03" strokeWidth="2" />
+
+                {/* VERMIFORM APPENDIX (Vestigial worm-like tube) */}
+                <path
+                  d="M 270 578 
+                     C 260 595 250 615 262 628 
+                     C 268 632 275 625 272 618"
+                  fill="none"
+                  stroke="#d97706"
+                  strokeWidth="6.5"
+                  strokeLinecap="round"
+                />
+              </g>
+
+              {/* 10. SMALL INTESTINE (JEJUNUM & ILEUM: ~6.5m Dense Convolutions) */}
+              <g
+                id="smallIntestineGroup"
+                filter="url(#digAtlasShadow)"
+                className="cursor-pointer transition-transform hover:opacity-95"
+                onClick={() => setHighlightPart("Small Intestine (Ileum & Villi)")}
+              >
+                {/* Multiple overlapping coiled intestinal loops */}
+                {/* Deep background shadow loops */}
+                <path
+                  d="M 330 465 
+                     Q 360 485 390 465 
+                     Q 430 475 460 460 
+                     Q 475 490 440 510 
+                     Q 370 500 340 515 
+                     Q 320 540 370 545 
+                     Q 440 540 465 525 
+                     Q 470 560 420 575 
+                     Q 350 575 320 560 
+                     L 285 565"
+                  fill="none"
+                  stroke="url(#smallIntGrad)"
+                  strokeWidth="20"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                {/* Foreground highlights and plicae folds */}
+                <path
+                  d="M 330 465 
+                     Q 360 485 390 465 
+                     Q 430 475 460 460 
+                     Q 475 490 440 510 
+                     Q 370 500 340 515 
+                     Q 320 540 370 545 
+                     Q 440 540 465 525 
+                     Q 470 560 420 575 
+                     Q 350 575 320 560 
+                     L 285 565"
+                  fill="none"
+                  stroke="#ffedd5"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity="0.8"
+                />
+
+                {/* Coiled loop center label */}
+                <text x="395" y="535" fill="#7c2d12" fontSize="10.5" fontWeight="900" textAnchor="middle">
+                  Small Intestine
+                </text>
+                <text x="395" y="550" fill="#9a3412" fontSize="8.5" fontWeight="700" textAnchor="middle">
+                  (Site of Complete Digestion)
+                </text>
+              </g>
+
+              {/* 11. RECTUM & ANAL SPHINCTER */}
+              <g id="rectumGroup">
+                {/* Rectum Reservoir */}
+                <rect x="382" y="605" width="26" height="35" rx="6" fill="#78350f" stroke="#451a03" strokeWidth="2" />
+                {/* Internal and External Anal Sphincters */}
+                <ellipse cx="395" cy="642" rx="10" ry="5" fill="#451a03" />
+                <circle cx="395" cy="642" r="3.5" fill="#f43f5e" />
+              </g>
+
+              {/* 12. Direct Anatomical Leader Lines & Labels (Left Side) */}
+              <g id="digestiveLabelsGroup">
+                {/* Salivary Glands */}
+                <line x1="328" y1="92" x2="110" y2="92" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 77)">
+                  <rect width="130" height="32" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="20" fill={textAccent} fontSize="11" fontWeight="800" textAnchor="middle">
+                    Salivary Glands
+                  </text>
+                </g>
+
+                {/* Oesophagus & Peristalsis */}
+                <line x1="365" y1="205" x2="110" y2="205" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 185)">
+                  <rect width="130" height="42" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="18" fill={textPrimary} fontSize="11" fontWeight="800" textAnchor="middle">
+                    Oesophagus
+                  </text>
+                  <text x="65" y="32" fill={textMuted} fontSize="9" textAnchor="middle">
+                    Peristaltic Wave Bolus
+                  </text>
+                </g>
+
+                {/* Liver */}
+                <line x1="260" y1="320" x2="110" y2="320" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 305)">
+                  <rect width="130" height="32" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="21" fill="#ef4444" fontSize="11" fontWeight="800" textAnchor="middle">
+                    Liver (Bile Production)
+                  </text>
+                </g>
+
+                {/* Gallbladder */}
+                <line x1="325" y1="400" x2="110" y2="400" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 385)">
+                  <rect width="130" height="32" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="21" fill="#16a34a" fontSize="11" fontWeight="800" textAnchor="middle">
+                    Gallbladder (Stores Bile)
+                  </text>
+                </g>
+
+                {/* Caecum & Appendix */}
+                <line x1="260" y1="615" x2="110" y2="615" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(10, 600)">
+                  <rect width="130" height="42" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="65" y="18" fill="#d97706" fontSize="11" fontWeight="800" textAnchor="middle">
+                    Vermiform Appendix
+                  </text>
+                  <text x="65" y="32" fill={textMuted} fontSize="8.5" textAnchor="middle">
+                    Vestigial Caecal Organ
+                  </text>
+                </g>
+
+                {/* Stomach (Right-Center Callout) */}
+                <line x1="465" y1="350" x2="560" y2="330" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(565, 315)">
+                  <rect width="135" height="32" rx="6" fill={labelBg} stroke="#f59e0b" strokeWidth="1.2" />
+                  <text x="67" y="21" fill="#f59e0b" fontSize="11" fontWeight="800" textAnchor="middle">
+                    Stomach (HCl & Pepsin)
+                  </text>
+                </g>
+
+                {/* Pancreas (Right-Center Callout) */}
+                <line x1="460" y1="430" x2="560" y2="415" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(565, 400)">
+                  <rect width="135" height="32" rx="6" fill={labelBg} stroke="#ea580c" strokeWidth="1.2" />
+                  <text x="67" y="21" fill="#ea580c" fontSize="11" fontWeight="800" textAnchor="middle">
+                    Pancreas (Trypsin/Lipase)
+                  </text>
+                </g>
+
+                {/* Colon (Right-Center Callout) */}
+                <line x1="520" y1="490" x2="560" y2="490" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(565, 475)">
+                  <rect width="135" height="32" rx="6" fill={labelBg} stroke="#b45309" strokeWidth="1.2" />
+                  <text x="67" y="21" fill="#b45309" fontSize="11" fontWeight="800" textAnchor="middle">
+                    Colon (Water Absorption)
+                  </text>
+                </g>
+
+                {/* Anus Sphincter (Bottom Callout) */}
+                <line x1="408" y1="640" x2="560" y2="640" stroke={textMuted} strokeWidth="1.5" strokeDasharray="3,3" />
+                <g transform="translate(565, 625)">
+                  <rect width="135" height="32" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="1.2" />
+                  <text x="67" y="21" fill={textPrimary} fontSize="11" fontWeight="800" textAnchor="middle">
+                    Anus (Sphincter Egestion)
+                  </text>
+                </g>
+              </g>
+            </g>
+
+            {/* ================================================================= */}
+            {/* RIGHT PANEL: DYNAMIC CARD DEPENDING ON SELECTED VIEW MODE         */}
+            {/* ================================================================= */}
+            <g transform="translate(710, 80)">
+
+              {/* MODE 1: GROSS ANATOMY CHECKLIST & ORGANS SUMMARY */}
+              {digestiveView === "anatomy" && (
+                <g>
+                  <rect width="360" height="610" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#digAtlasShadow)" />
+
+                  <g transform="translate(20, 24)">
+                    <text x="0" y="0" fill="#f59e0b" fontSize="13" fontWeight="900" letterSpacing="0.4">
+                      NCERT ALIMENTARY CANAL (FIG 5.6)
+                    </text>
+                    <text x="0" y="18" fill={textMuted} fontSize="10">
+                      Standard CBSE Board anatomical organs & structures:
+                    </text>
+                  </g>
+
+                  {/* Organ list */}
+                  {[
+                    { title: "1. Mouth & Buccal Cavity", role: "Teeth chew food. Tongue mixes with saliva. 3 pairs of salivary glands secrete Ptyalin.", color: "#0284c7" },
+                    { title: "2. Oesophagus (Food Pipe)", role: "No digestive enzyme secreted! Rhythmic muscular contraction (Peristalsis) pushes bolus.", color: "#fb7185" },
+                    { title: "3. J-Shaped Stomach", role: "Stores food for 4-5 hours. Gastric glands secrete Dilute HCl, Pepsinogen, and protective Mucus.", color: "#f59e0b" },
+                    { title: "4. Liver & Gallbladder", role: "Largest gland. Secretes Bile into Gallbladder. Bile emulsifies fats and makes medium alkaline.", color: "#16a34a" },
+                    { title: "5. Pancreas (Dual Gland)", role: "Situated in C-duodenum loop. Secretes Pancreatic Amylase, Trypsin, and Lipase.", color: "#ea580c" },
+                    { title: "6. Small Intestine (Ileum)", role: "Longest part (~6.5m). Complete digestion of carbs, proteins, fats. Covered with microvilli.", color: "#f97316" },
+                    { title: "7. Large Intestine & Anus", role: "Absorbs water and salts. Waste stored in Rectum and egested via Anal Sphincter.", color: "#78350f" },
+                  ].map((item, idx) => (
+                    <g key={"dig-org-" + idx} transform={`translate(20, ${70 + idx * 72})`}>
+                      <circle cx="8" cy="8" r="5" fill={item.color} />
+                      <text x="22" y="12" fill={textPrimary} fontSize="11" fontWeight="800">
+                        {item.title}
+                      </text>
+                      <text x="22" y="28" fill={textMuted} fontSize="9.5" width="310">
+                        {item.role.length > 52 ? item.role.slice(0, 50) + "..." : item.role}
+                      </text>
+                      <text x="22" y="42" fill={textMuted} fontSize="9" opacity="0.85">
+                        {item.role.length > 52 ? item.role.slice(50) : ""}
+                      </text>
+                    </g>
+                  ))}
+
+                  {/* Golden Board Tip */}
+                  <g transform="translate(18, 550)">
+                    <rect width="324" height="42" rx="8" fill={isDark ? "rgba(245, 158, 11, 0.12)" : "#fef3c7"} stroke="#f59e0b" strokeWidth="1" />
+                    <text x="14" y="18" fill="#f59e0b" fontSize="10" fontWeight="800">
+                      💡 BOARD EXAM ESSENTIAL:
+                    </text>
+                    <text x="14" y="32" fill={textPrimary} fontSize="9.5">
+                      Always draw Liver with Gallbladder on the anatomical RIGHT side!
+                    </text>
+                  </g>
+                </g>
+              )}
+
+              {/* MODE 2: ENZYMES & COMPLETE BIOCHEMICAL FLOW */}
+              {digestiveView === "enzymes" && (
+                <g>
+                  <rect width="360" height="610" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#digAtlasShadow)" />
+
+                  <g transform="translate(20, 24)">
+                    <text x="0" y="0" fill="#ea580c" fontSize="13" fontWeight="900" letterSpacing="0.4">
+                      BIOCHEMICAL DIGESTION WORKFLOW
+                    </text>
+                    <text x="0" y="18" fill={textMuted} fontSize="10">
+                      Enzymatic breakdown of Carbohydrates, Proteins & Fats:
+                    </text>
+                  </g>
+
+                  {/* 5 Reaction Stage Cards */}
+                  <g transform="translate(20, 55)">
+                    {[
+                      {
+                        organ: "BUCCAL CAVITY (pH ~6.8)",
+                        enzyme: "Salivary Amylase (Ptyalin)",
+                        equation: "Starch ➔ Maltose (Disaccharide)",
+                        color: "#0284c7",
+                      },
+                      {
+                        organ: "STOMACH (pH ~1.5 - 2.0)",
+                        enzyme: "Pepsin (activated by HCl)",
+                        equation: "Proteins ➔ Peptones + Proteoses",
+                        color: "#ef4444",
+                      },
+                      {
+                        organ: "LIVER BILE (No Enzymes!)",
+                        enzyme: "Bile Salts (Sodium taurocholate)",
+                        equation: "Large Fat Globules ➔ Emulsified Micelles",
+                        color: "#16a34a",
+                      },
+                      {
+                        organ: "PANCREAS (pH ~7.8 - 8.4)",
+                        enzyme: "Trypsin, Amylase, Lipase",
+                        equation: "Proteins➔Peptides, Starch➔Sugar, Fat➔FA",
+                        color: "#ea580c",
+                      },
+                      {
+                        organ: "SMALL INTESTINE (Succus Entericus)",
+                        enzyme: "Intestinal Peptidases & Lipases",
+                        equation: "Carbs➔Glucose, Protein➔AA, Fat➔FA+Glycerol",
+                        color: "#f59e0b",
+                      },
+                    ].map((card, i) => (
+                      <g key={"enz-card-" + i} transform={`translate(0, ${i * 96})`}>
+                        <rect width="320" height="86" rx="10" fill={isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)"} stroke={card.color} strokeWidth="1.2" />
+                        <text x="16" y="20" fill={card.color} fontSize="10" fontWeight="900">{card.organ}</text>
+                        <text x="16" y="38" fill={textPrimary} fontSize="11" fontWeight="800">{card.enzyme}</text>
+                        <rect x="16" y="48" width="288" height="26" rx="5" fill={isDark ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.6)"} />
+                        <text x="24" y="65" fill={card.color} fontSize="9.5" fontWeight="800">{card.equation}</text>
+                      </g>
+                    ))}
+
+                    {/* Summary Note */}
+                    <g transform="translate(0, 485)">
+                      <rect width="320" height="58" rx="8" fill={isDark ? "rgba(16, 185, 129, 0.1)" : "#ecfdf5"} stroke="#10b981" strokeWidth="1" />
+                      <text x="14" y="20" fill="#10b981" fontSize="10.5" fontWeight="900">★ COMPLETE END-PRODUCTS OF DIGESTION:</text>
+                      <text x="14" y="36" fill={textPrimary} fontSize="9.5">• Carbohydrates ➔ Glucose | Proteins ➔ Amino Acids</text>
+                      <text x="14" y="50" fill={textPrimary} fontSize="9.5">• Fats ➔ Fatty Acids + Glycerol (absorbed by lacteals)</text>
+                    </g>
+                  </g>
+                </g>
+              )}
+
+              {/* MODE 3: CBSE 5M RUBRIC & INTESTINAL VILLI STRUCTURE */}
+              {digestiveView === "rubric" && (
+                <g>
+                  <rect width="360" height="610" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" filter="url(#digAtlasShadow)" />
+
+                  <g transform="translate(20, 24)">
+                    <text x="0" y="0" fill="#10b981" fontSize="13" fontWeight="900" letterSpacing="0.4">
+                      CBSE 5M RUBRIC & VILLI ADAPTATIONS
+                    </text>
+                    <text x="0" y="18" fill={textMuted} fontSize="10">
+                      High-magnification intestinal absorption unit:
+                    </text>
+                  </g>
+
+                  {/* Microscopic Villus Graphic */}
+                  <g transform="translate(20, 50)">
+                    <rect width="320" height="235" rx="12" fill={isDark ? "#120a06" : "#fffbeb"} stroke={labelBorder} strokeWidth="1.2" />
+
+                    {/* Intestinal Wall Base */}
+                    <path d="M 20 200 L 300 200" stroke="#b45309" strokeWidth="8" strokeLinecap="round" />
+
+                    {/* 3 Finger-like Villi Projections */}
+                    <path
+                      d="M 60 200 
+                         C 60 80 100 80 100 200 
+                         C 100 80 140 80 140 200 
+                         C 140 80 180 80 180 200"
+                      fill="#fed7aa"
+                      stroke="#f97316"
+                      strokeWidth="3.5"
+                    />
+
+                    {/* Single Central Villus Zoomed Anatomy (Center Villus) */}
+                    {/* Central Lacteal (Lymphatic vessel absorbing fatty acids) */}
+                    <path d="M 120 195 L 120 110" stroke="#facc15" strokeWidth="6" strokeLinecap="round" />
+                    <text x="120" y="105" fill="#ca8a04" fontSize="8" fontWeight="800" textAnchor="middle">Lacteal</text>
+
+                    {/* Capillary Loop (Red arterial, Blue venous) */}
+                    <path d="M 112 195 L 112 120 Q 120 115 128 120 L 128 195" fill="none" stroke="#ef4444" strokeWidth="2.5" />
+                    <path d="M 128 195 L 128 135" stroke="#0284c7" strokeWidth="2.5" />
+
+                    {/* Microvilli Brush Border Hairlines */}
+                    {[...Array(12)].map((_, i) => (
+                      <line
+                        key={"brush-" + i}
+                        x1={102 + i * 3}
+                        y1="82"
+                        x2={102 + i * 3}
+                        y2="76"
+                        stroke="#ea580c"
+                        strokeWidth="1.5"
+                      />
+                    ))}
+                    <text x="120" y="70" fill="#ea580c" fontSize="8" fontWeight="800" textAnchor="middle">Microvilli Brush Border</text>
+
+                    {/* Absorption Labels */}
+                    <text x="200" y="130" fill="#0284c7" fontSize="9" fontWeight="800">➔ Blood Capillaries:</text>
+                    <text x="210" y="145" fill={textPrimary} fontSize="8.5">• Glucose & Amino Acids</text>
+                    <text x="200" y="170" fill="#ca8a04" fontSize="9" fontWeight="800">➔ Central Lacteal:</text>
+                    <text x="210" y="185" fill={textPrimary} fontSize="8.5">• Fatty Acids & Glycerol</text>
+                  </g>
+
+                  {/* CBSE 5-Mark Marking Scheme Breakdown */}
+                  <g transform="translate(20, 295)">
+                    <text x="0" y="14" fill="#10b981" fontSize="11" fontWeight="900">
+                      CBSE OFFICIAL 5-MARK MARKING SCHEME:
+                    </text>
+
+                    {[
+                      { marks: "2.0 M", rule: "Neat, labeled diagram showing Oesophagus, Stomach, Liver, Gallbladder, Pancreas, Small & Large Intestine." },
+                      { marks: "1.0 M", rule: "Functions of Gastric Secretions: Role of HCl (kill germs, acidify), Pepsin (protein digestion), Mucus (wall protection)." },
+                      { marks: "1.0 M", rule: "Role of Bile: Emulsification of fats (no enzymes!) & neutralizing acidic chyme." },
+                      { marks: "1.0 M", rule: "Villi Adaptations: Massive surface area, thin 1-cell epithelium, rich capillary network & lacteals." },
+                    ].map((rub, idx) => (
+                      <g key={"rub-dig-" + idx} transform={`translate(0, ${24 + idx * 56})`}>
+                        <rect width="50" height="20" rx="4" fill="#10b981" fillOpacity="0.15" stroke="#10b981" strokeWidth="1" />
+                        <text x="25" y="14" fill="#10b981" fontSize="9.5" fontWeight="900" textAnchor="middle">{rub.marks}</text>
+                        <text x="58" y="14" fill={textPrimary} fontSize="9" fontWeight="700">{rub.rule.slice(0, 44)}</text>
+                        <text x="58" y="28" fill={textMuted} fontSize="8.5">{rub.rule.slice(44)}</text>
+                      </g>
+                    ))}
+                  </g>
+
+                  {/* Golden Herbivore vs Carnivore Board Trap */}
+                  <g transform="translate(20, 535)">
+                    <rect width="320" height="58" rx="8" fill={isDark ? "rgba(239, 68, 68, 0.12)" : "#fef2f2"} stroke="#ef4444" strokeWidth="1" />
+                    <text x="12" y="18" fill="#ef4444" fontSize="10" fontWeight="900">
+                      ⚠️ FREQUENT CBSE 2M QUESTION:
+                    </text>
+                    <text x="12" y="33" fill={textPrimary} fontSize="9">
+                      "Why do herbivores have longer small intestines than carnivores?"
+                    </text>
+                    <text x="12" y="48" fill={textMuted} fontSize="8.5">
+                      Cellulose digestion takes longer (symbiotic bacteria); meat is easier to digest!
+                    </text>
+                  </g>
+                </g>
+              )}
+            </g>
           </svg>
         );
 
