@@ -141,19 +141,20 @@ export default function ConceptsHubView({
   onOpenHots,
   onOpenTimelines
 }: ConceptsHubViewProps) {
-  // Always inspect localStorage first so refreshed sessions restore the exact last studied subject & chapter
+  // Respect explicit deep-linked props first, fallback to localStorage for session persistence
   const [activeSubject, setActiveSubject] = useState<"math" | "science" | "sst">(() => {
+    if (initialSubject) return initialSubject;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_concepts_subject");
       if (saved && ["math", "science", "sst"].includes(saved)) {
         return saved as any;
       }
     }
-    if (initialSubject) return initialSubject;
     return "math";
   });
 
   const [activeMathChapterNo, setActiveMathChapterNo] = useState<number>(() => {
+    if (initialSubject === "math" && initialChapterNo) return initialChapterNo;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_math_chapter");
       if (saved) {
@@ -161,11 +162,11 @@ export default function ConceptsHubView({
         if (!isNaN(p) && p >= 1 && p <= 14) return p;
       }
     }
-    if (initialSubject === "math" && initialChapterNo) return initialChapterNo;
     return 1; // Default to Chapter 1: Real Numbers (NEVER hardcoded to Triangles)
   });
 
   const [activeScienceChapterNo, setActiveScienceChapterNo] = useState<number>(() => {
+    if (initialSubject === "science" && initialChapterNo) return initialChapterNo;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_science_chapter");
       if (saved) {
@@ -173,11 +174,11 @@ export default function ConceptsHubView({
         if (!isNaN(p) && p >= 1 && p <= 13) return p;
       }
     }
-    if (initialSubject === "science" && initialChapterNo) return initialChapterNo;
     return 1; // Default to Chapter 1: Chemical Reactions
   });
 
   const [activeSSTChapterNo, setActiveSSTChapterNo] = useState<number>(() => {
+    if (initialSubject === "sst" && initialChapterNo) return initialChapterNo;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_sst_chapter");
       if (saved) {
@@ -185,7 +186,6 @@ export default function ConceptsHubView({
         if (!isNaN(p) && p >= 1 && p <= 10) return p;
       }
     }
-    if (initialSubject === "sst" && initialChapterNo) return initialChapterNo;
     return 1; // Default to Chapter 1: Nationalism in Europe
   });
 
@@ -458,10 +458,14 @@ export default function ConceptsHubView({
           <div className={`p-1.5 rounded-2xl border flex items-center gap-1.5 w-full sm:w-auto justify-center ${
             isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"
           }`}>
-            <button
-              onClick={() => {
-                setActiveSubject("math");
-                setIsChapterGridOpen(false);
+            <a
+              href="/?tab=concepts&subject=math&chapter=1"
+              onClick={(e) => {
+                if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+                  e.preventDefault();
+                  setActiveSubject("math");
+                  setIsChapterGridOpen(false);
+                }
               }}
               className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 activeSubject === "math"
@@ -474,11 +478,15 @@ export default function ConceptsHubView({
               }`}
             >
               <span>📐 Mathematics (14 Ch)</span>
-            </button>
-            <button
-              onClick={() => {
-                setActiveSubject("science");
-                setIsChapterGridOpen(false);
+            </a>
+            <a
+              href="/?tab=concepts&subject=science&chapter=1"
+              onClick={(e) => {
+                if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+                  e.preventDefault();
+                  setActiveSubject("science");
+                  setIsChapterGridOpen(false);
+                }
               }}
               className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 activeSubject === "science"
@@ -491,11 +499,15 @@ export default function ConceptsHubView({
               }`}
             >
               <span>🧪 Science (13 Ch)</span>
-            </button>
-            <button
-              onClick={() => {
-                setActiveSubject("sst");
-                setIsChapterGridOpen(false);
+            </a>
+            <a
+              href="/?tab=concepts&subject=sst&chapter=1"
+              onClick={(e) => {
+                if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+                  e.preventDefault();
+                  setActiveSubject("sst");
+                  setIsChapterGridOpen(false);
+                }
               }}
               className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 activeSubject === "sst"
@@ -508,7 +520,7 @@ export default function ConceptsHubView({
               }`}
             >
               <span>🌍 Social Science (10 Chs)</span>
-            </button>
+            </a>
           </div>
         </div>
 
@@ -609,11 +621,15 @@ export default function ConceptsHubView({
                 ? filteredSSTChapterList.map((ch) => {
                     const isSelected = ch.no === activeSSTChapterNo;
                     return (
-                      <button
+                      <a
                         key={ch.no}
-                        onClick={() => {
-                          setActiveSSTChapterNo(ch.no);
-                          setIsChapterGridOpen(false);
+                        href={`/?tab=concepts&subject=sst&chapter=${ch.no}`}
+                        onClick={(e) => {
+                          if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+                            e.preventDefault();
+                            setActiveSSTChapterNo(ch.no);
+                            setIsChapterGridOpen(false);
+                          }
                         }}
                         className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer flex flex-col justify-between gap-1 border min-h-[56px] ${
                           isSelected
@@ -634,18 +650,22 @@ export default function ConceptsHubView({
                           </span>
                         </div>
                         <span className="truncate text-xs font-extrabold">{ch.name}</span>
-                      </button>
+                      </a>
                     );
                   })
                 : activeSubject === "math"
                 ? MATH_CHAPTER_LIST.map((ch) => {
                     const isSelected = ch.no === activeMathChapterNo;
                     return (
-                      <button
+                      <a
                         key={ch.no}
-                        onClick={() => {
-                          setActiveMathChapterNo(ch.no);
-                          setIsChapterGridOpen(false);
+                        href={`/?tab=concepts&subject=math&chapter=${ch.no}`}
+                        onClick={(e) => {
+                          if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+                            e.preventDefault();
+                            setActiveMathChapterNo(ch.no);
+                            setIsChapterGridOpen(false);
+                          }
                         }}
                         className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer border flex flex-col justify-between gap-1 min-h-[56px] ${
                           isSelected
@@ -666,18 +686,22 @@ export default function ConceptsHubView({
                           </span>
                         </div>
                         <span className="text-[11px] leading-snug line-clamp-1">{ch.name}</span>
-                      </button>
+                      </a>
                     );
                   })
                 : SCIENCE_CHAPTER_LIST.map((ch) => {
                     const isSelected = ch.no === activeScienceChapterNo;
                     const Icon = ch.icon;
                     return (
-                      <button
+                      <a
                         key={ch.no}
-                        onClick={() => {
-                          setActiveScienceChapterNo(ch.no);
-                          setIsChapterGridOpen(false);
+                        href={`/?tab=concepts&subject=science&chapter=${ch.no}`}
+                        onClick={(e) => {
+                          if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+                            e.preventDefault();
+                            setActiveScienceChapterNo(ch.no);
+                            setIsChapterGridOpen(false);
+                          }
                         }}
                         className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer border flex flex-col justify-between gap-1 min-h-[56px] ${
                           isSelected
@@ -694,7 +718,7 @@ export default function ConceptsHubView({
                           <Icon className="w-3.5 h-3.5 opacity-80" />
                         </div>
                         <span className="text-[11px] leading-snug line-clamp-1">{ch.name}</span>
-                      </button>
+                      </a>
                     );
                   })}
             </div>

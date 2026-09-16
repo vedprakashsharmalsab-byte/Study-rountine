@@ -874,10 +874,23 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
+  
+  const VALID_TABS = useMemo(() => [
+    "chapter_dashboard", "concepts", "theorems", "activities", "questions",
+    "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
+    "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
+    "timelines", "english", "hindi", "tools_diagrams"
+  ], []);
+
   const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams">(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("cbse_last_active_tab");
+      const params = new URLSearchParams(window.location.search);
+      const urlTab = params.get("tab");
       const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams"];
+      if (urlTab && validTabs.includes(urlTab)) {
+        return urlTab as any;
+      }
+      const saved = localStorage.getItem("cbse_last_active_tab");
       if (saved && validTabs.includes(saved)) {
         return saved as any;
       }
@@ -890,9 +903,16 @@ export default function CBSECommandCenter() {
       localStorage.setItem("cbse_last_active_tab", activeTab);
     }
   }, [activeTab]);
+
   const [timelinesChapterKey, setTimelinesChapterKey] = useState<"ch1_europe" | "ch2_india" | "all">("all");
+  
   const [conceptsSubject, setConceptsSubject] = useState<"math" | "science" | "sst">(() => {
     if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const urlSub = params.get("subject");
+      if (urlSub && ["math", "science", "sst"].includes(urlSub)) {
+        return urlSub as any;
+      }
       const saved = localStorage.getItem("cbse_last_concepts_subject");
       if (saved && ["math", "science", "sst"].includes(saved)) {
         return saved as any;
@@ -903,6 +923,12 @@ export default function CBSECommandCenter() {
 
   const [conceptsChapterNo, setConceptsChapterNo] = useState<number>(() => {
     if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const urlCh = params.get("chapter");
+      if (urlCh) {
+        const p = parseInt(urlCh);
+        if (!isNaN(p) && p >= 1) return p;
+      }
       const sub = localStorage.getItem("cbse_last_concepts_subject") || "math";
       const saved = localStorage.getItem(`cbse_last_${sub}_chapter`);
       if (saved) {
@@ -915,7 +941,7 @@ export default function CBSECommandCenter() {
         if (!isNaN(p) && p >= 1) return p;
       }
     }
-    return 1; // Default to Chapter 1 (Real Numbers), NEVER hardcoded Triangles
+    return 1;
   });
 
   useEffect(() => {
@@ -925,6 +951,8 @@ export default function CBSECommandCenter() {
       localStorage.setItem("cbse_last_concepts_chapter", conceptsChapterNo.toString());
     }
   }, [conceptsSubject, conceptsChapterNo]);
+
+
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [levelUpModalData, setLevelUpModalData] = useState<{ level: number; title: string; badge: string } | null>(null);
@@ -1086,6 +1114,11 @@ export default function CBSECommandCenter() {
   // Progressive Chapter Vault (Supports Math, Science, SST, English, and Hindi)
   const [activeVaultSubject, setActiveVaultSubject] = useState<"math" | "science" | "sst" | "english" | "hindi">(() => {
     if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const urlSub = params.get("subject");
+      if (urlSub && ["math", "science", "sst", "english", "hindi"].includes(urlSub)) {
+        return urlSub as any;
+      }
       const saved = localStorage.getItem("cbse_last_vault_subject");
       if (saved && ["math", "science", "sst", "english", "hindi"].includes(saved)) {
         return saved as any;
@@ -1095,6 +1128,12 @@ export default function CBSECommandCenter() {
   });
   const [activeVaultChapter, setActiveVaultChapter] = useState<number | null>(() => {
     if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const urlCh = params.get("chapter");
+      if (urlCh) {
+        const p = parseInt(urlCh);
+        if (!isNaN(p) && p >= 1) return p;
+      }
       const saved = localStorage.getItem("cbse_last_vault_chapter");
       if (saved) {
         const p = parseInt(saved);
@@ -1105,8 +1144,14 @@ export default function CBSECommandCenter() {
   });
   const [activeVaultQuestions, setActiveVaultQuestions] = useState<VaultQuestion[]>(() => {
     if (typeof window !== "undefined") {
-      const savedSub = (localStorage.getItem("cbse_last_vault_subject") as any) || "math";
-      const savedCh = parseInt(localStorage.getItem("cbse_last_vault_chapter") || (savedSub === "math" ? "6" : "1"));
+      const params = new URLSearchParams(window.location.search);
+      const urlSub = params.get("subject");
+      const urlCh = params.get("chapter");
+      const savedSub = (urlSub && ["math", "science", "sst", "english", "hindi"].includes(urlSub))
+        ? urlSub as any
+        : (localStorage.getItem("cbse_last_vault_subject") as any) || "math";
+      const fallbackCh = savedSub === "math" ? "6" : "1";
+      const savedCh = urlCh ? parseInt(urlCh) : parseInt(localStorage.getItem("cbse_last_vault_chapter") || fallbackCh);
       if (!isNaN(savedCh) && savedCh >= 1) {
         return getChapterQuestions(savedCh, savedSub);
       }
@@ -1392,18 +1437,104 @@ export default function CBSECommandCenter() {
     }
   };
 
-  // Initial load restored last chapter immediately & pre-cache remaining chapters
+  // Initial load: restore chapter from URL or localStorage
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== "undefined") {
-      const savedSub = (localStorage.getItem("cbse_last_vault_subject") as any) || "math";
+      const params = new URLSearchParams(window.location.search);
+      const urlSub = params.get("subject");
+      const urlCh = params.get("chapter");
+      const savedSub = (urlSub && ["math", "science", "sst", "english", "hindi"].includes(urlSub))
+        ? urlSub as any
+        : (localStorage.getItem("cbse_last_vault_subject") as any) || "math";
       const fallbackCh = savedSub === "math" ? "6" : "1";
-      const savedCh = parseInt(localStorage.getItem("cbse_last_vault_chapter") || fallbackCh);
+      const savedCh = urlCh ? parseInt(urlCh) : parseInt(localStorage.getItem("cbse_last_vault_chapter") || fallbackCh);
       const targetCh = (!isNaN(savedCh) && savedCh >= 1) ? savedCh : (savedSub === "math" ? 6 : 1);
       loadChapterData(targetCh, false, savedSub);
+
+      // If URL has no ?tab=, write initial state with replaceState so history entry is well-formed
+      if (!params.get("tab")) {
+        params.set("tab", activeTab);
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.replaceState({ tab: activeTab }, "", newUrl);
+      }
     } else {
       loadChapterData(6, false, "math");
     }
   }, []);
+
+  // PopState Listener: Handles browser Back/Forward (Undo/Redo) buttons natively
+  const isNavigatingViaHistory = useRef(false);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      isNavigatingViaHistory.current = true;
+      const params = new URLSearchParams(window.location.search);
+      const urlTab = params.get("tab");
+      const validTabs = [
+        "chapter_dashboard", "concepts", "theorems", "activities", "questions",
+        "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
+        "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
+        "timelines", "english", "hindi", "tools_diagrams"
+      ];
+
+      if (urlTab && validTabs.includes(urlTab)) {
+        setActiveTab(urlTab as any);
+      } else {
+        setActiveTab("chapter_dashboard");
+      }
+
+      const urlSub = params.get("subject");
+      const urlCh = params.get("chapter");
+      const parsedCh = urlCh ? parseInt(urlCh, 10) : null;
+
+      if (urlSub && ["math", "science", "sst"].includes(urlSub)) {
+        setConceptsSubject(urlSub as any);
+      }
+      if (parsedCh && !isNaN(parsedCh) && parsedCh >= 1) {
+        setConceptsChapterNo(parsedCh);
+      }
+
+      if (urlSub && ["math", "science", "sst", "english", "hindi"].includes(urlSub)) {
+        setActiveVaultSubject(urlSub as any);
+        if (parsedCh && !isNaN(parsedCh) && parsedCh >= 1) {
+          setActiveVaultChapter(parsedCh);
+          loadChapterData(parsedCh, false, urlSub as any);
+        }
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  // Synchronize state changes to URL and browser history (pushState)
+  useEffect(() => {
+    if (typeof window === "undefined" || !mounted) return;
+    if (isNavigatingViaHistory.current) {
+      isNavigatingViaHistory.current = false;
+      return;
+    }
+
+    const currentParams = new URLSearchParams(window.location.search);
+    const nextParams = new URLSearchParams();
+    nextParams.set("tab", activeTab);
+
+    if (activeTab === "concepts") {
+      nextParams.set("subject", conceptsSubject);
+      nextParams.set("chapter", conceptsChapterNo.toString());
+    } else if (activeTab === "questions") {
+      nextParams.set("subject", activeVaultSubject);
+      if (activeVaultChapter) {
+        nextParams.set("chapter", activeVaultChapter.toString());
+      }
+    }
+
+    if (currentParams.toString() !== nextParams.toString()) {
+      const newUrl = `${window.location.pathname}?${nextParams.toString()}`;
+      window.history.pushState({ tab: activeTab }, "", newUrl);
+    }
+  }, [activeTab, conceptsSubject, conceptsChapterNo, activeVaultSubject, activeVaultChapter, mounted]);
 
   // Interactive MCQ Questions & Live Scoring Stats for Active Vault Chapter
   const mcqQuestionsInVault = useMemo(() => {
@@ -1588,6 +1719,51 @@ export default function CBSECommandCenter() {
       } catch {}
     }
   }, []);
+
+  // Generate real URL for tabs & chapters (enables browser middle-click to open in new tab)
+  const getTabHref = useCallback((tabId: string, sub?: string, ch?: number) => {
+    const p = new URLSearchParams();
+    p.set("tab", tabId);
+    if (tabId === "concepts") {
+      p.set("subject", sub || conceptsSubject);
+      p.set("chapter", (ch || conceptsChapterNo).toString());
+    } else if (tabId === "questions") {
+      const s = sub || activeVaultSubject;
+      const c = ch || activeVaultChapter;
+      if (s) p.set("subject", s);
+      if (c) p.set("chapter", c.toString());
+    }
+    return `/?${p.toString()}`;
+  }, [conceptsSubject, conceptsChapterNo, activeVaultSubject, activeVaultChapter]);
+
+  // Handle navigation clicks: left-click navigates in-app, middle-click / Ctrl-click opens in new tab natively
+  const handleNavClick = useCallback((
+    e: React.MouseEvent,
+    tabId: string,
+    opts?: { subject?: any; chapter?: number; customAction?: () => void }
+  ) => {
+    if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+      e.preventDefault();
+      playSound("click");
+      if (opts?.subject) {
+        if (["math", "science", "sst"].includes(opts.subject)) {
+          setConceptsSubject(opts.subject);
+        }
+        if (["math", "science", "sst", "english", "hindi"].includes(opts.subject)) {
+          setActiveVaultSubject(opts.subject);
+          if (opts.chapter) {
+            setActiveVaultChapter(opts.chapter);
+            loadChapterData(opts.chapter, false, opts.subject);
+          }
+        }
+      }
+      if (opts?.chapter) {
+        setConceptsChapterNo(opts.chapter);
+      }
+      if (opts?.customAction) opts.customAction();
+      setActiveTab(tabId as any);
+    }
+  }, [playSound, loadChapterData]);
 
   // Confetti trigger — increments counter so IsolatedConfetti handles its own animation loop
   const triggerConfetti = useCallback(() => {
@@ -2298,22 +2474,25 @@ export default function CBSECommandCenter() {
             {CATEGORY_DEFINITIONS.map((cat) => {
               const isCatActive = activeCategory === cat.id;
               return (
-                <button
+                <a
                   key={cat.id}
-                  onClick={() => {
-                    playSound("click");
-                    if (cat.id === "concepts") {
-                      if (commandSubjectId === "sst") {
-                        setConceptsSubject("sst");
-                        setConceptsChapterNo(1);
-                      } else if (commandSubjectId === "science") {
-                        setConceptsSubject("science");
-                        setConceptsChapterNo(1);
-                      } else {
-                        setConceptsSubject("math");
+                  href={getTabHref(cat.defaultTab)}
+                  onClick={(e) => {
+                    handleNavClick(e, cat.defaultTab, {
+                      customAction: () => {
+                        if (cat.id === "concepts") {
+                          if (commandSubjectId === "sst") {
+                            setConceptsSubject("sst");
+                            setConceptsChapterNo(1);
+                          } else if (commandSubjectId === "science") {
+                            setConceptsSubject("science");
+                            setConceptsChapterNo(1);
+                          } else {
+                            setConceptsSubject("math");
+                          }
+                        }
                       }
-                    }
-                    setActiveTab(cat.defaultTab as any);
+                    });
                   }}
                   className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-[0.98] ${
                     isCatActive
@@ -2340,7 +2519,7 @@ export default function CBSECommandCenter() {
                       {cat.badge}
                     </span>
                   )}
-                </button>
+                </a>
               );
             })}
           </div>
@@ -2408,22 +2587,25 @@ export default function CBSECommandCenter() {
                   {currentCat.items.map((subItem) => {
                     const isSubActive = activeTab === subItem.id;
                     return (
-                      <button
+                      <a
                         key={subItem.id}
-                        onClick={() => {
-                          playSound("click");
-                          if (subItem.id === "concepts") {
-                            if (commandSubjectId === "sst") {
-                              setConceptsSubject("sst");
-                              setConceptsChapterNo(1);
-                            } else if (commandSubjectId === "science") {
-                              setConceptsSubject("science");
-                              setConceptsChapterNo(1);
-                            } else {
-                              setConceptsSubject("math");
+                        href={getTabHref(subItem.id)}
+                        onClick={(e) => {
+                          handleNavClick(e, subItem.id, {
+                            customAction: () => {
+                              if (subItem.id === "concepts") {
+                                if (commandSubjectId === "sst") {
+                                  setConceptsSubject("sst");
+                                  setConceptsChapterNo(1);
+                                } else if (commandSubjectId === "science") {
+                                  setConceptsSubject("science");
+                                  setConceptsChapterNo(1);
+                                } else {
+                                  setConceptsSubject("math");
+                                }
+                              }
                             }
-                          }
-                          setActiveTab(subItem.id as any);
+                          });
                         }}
                         className={`px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shrink-0 transition-all cursor-pointer touch-manipulation min-h-[32px] active:scale-95 ${
                           isSubActive
@@ -2444,7 +2626,7 @@ export default function CBSECommandCenter() {
                             {subItem.count}
                           </span>
                         )}
-                      </button>
+                      </a>
                     );
                   })}
                 </div>
@@ -2565,12 +2747,15 @@ export default function CBSECommandCenter() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {filtered.map((item) => (
-                        <button
+                        <a
                           key={item.id}
-                          onClick={() => {
-                            playSound("click");
-                            setActiveTab(item.id as any);
-                            setIsAllModulesModalOpen(false);
+                          href={getTabHref(item.id)}
+                          onClick={(e) => {
+                            handleNavClick(e, item.id, {
+                              customAction: () => {
+                                setIsAllModulesModalOpen(false);
+                              }
+                            });
                           }}
                           className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-all cursor-pointer touch-manipulation min-h-[64px] ${
                             activeTab === item.id
@@ -2596,7 +2781,7 @@ export default function CBSECommandCenter() {
                             </div>
                             <p className="text-[11px] text-slate-400 leading-tight mt-0.5">{item.sub}</p>
                           </div>
-                        </button>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -2846,19 +3031,24 @@ export default function CBSECommandCenter() {
                     </p>
                   </div>
 
-                  <button
-                    onClick={() => {
-                      playSound("click");
-                      setConceptsSubject("sst");
-                      setConceptsChapterNo(1);
-                      setActiveTab("concepts");
+                  <a
+                    href={getTabHref("concepts", "sst", 1)}
+                    onClick={(e) => {
+                      handleNavClick(e, "concepts", {
+                        subject: "sst",
+                        chapter: 1,
+                        customAction: () => {
+                          setConceptsSubject("sst");
+                          setConceptsChapterNo(1);
+                        }
+                      });
                     }}
                     className="w-full md:w-auto px-5 py-3 rounded-xl text-xs font-black bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-rose-500/20 shrink-0"
                   >
                     <Sparkles className="w-4 h-4" />
                     <span>Launch SST Concepts & Timelines</span>
                     <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </a>
                 </div>
               )}
 
@@ -2885,12 +3075,17 @@ export default function CBSECommandCenter() {
                         <span>{ch.title}</span>
                       </h4>
                       {activeExam.id === "sst" && (
-                        <button
-                          onClick={() => {
-                            playSound("click");
-                            setConceptsSubject("sst");
-                            setConceptsChapterNo(chIdx + 1);
-                            setActiveTab("concepts");
+                        <a
+                          href={getTabHref("concepts", "sst", chIdx + 1)}
+                          onClick={(e) => {
+                            handleNavClick(e, "concepts", {
+                              subject: "sst",
+                              chapter: chIdx + 1,
+                              customAction: () => {
+                                setConceptsSubject("sst");
+                                setConceptsChapterNo(chIdx + 1);
+                              }
+                            });
                           }}
                           className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold border transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation min-h-[36px] active:scale-95 ${
                             isDark
@@ -2900,7 +3095,7 @@ export default function CBSECommandCenter() {
                         >
                           <span>Full Concepts & Timeline</span>
                           <ArrowRight className="w-3.5 h-3.5" />
-                        </button>
+                        </a>
                       )}
                     </div>
 
@@ -3806,12 +4001,18 @@ export default function CBSECommandCenter() {
                 <div className={`p-1 rounded-2xl border flex flex-wrap items-center gap-1 ${
                   isDark ? "bg-white/[0.04] border-white/[0.08]" : "bg-black/[0.03] border-black/[0.06]"
                 }`}>
-                  <button
-                    onClick={() => {
-                      playSound("click");
-                      setActiveVaultSubject("math");
-                      const lastMath = parseInt(localStorage.getItem("cbse_last_vault_math_chapter") || "6");
-                      loadChapterData(isNaN(lastMath) ? 6 : lastMath, false, "math");
+                  <a
+                    href={getTabHref("questions", "math", 6)}
+                    onClick={(e) => {
+                      handleNavClick(e, "questions", {
+                        subject: "math",
+                        chapter: 6,
+                        customAction: () => {
+                          setActiveVaultSubject("math");
+                          const lastMath = parseInt(localStorage.getItem("cbse_last_vault_math_chapter") || "6");
+                          loadChapterData(isNaN(lastMath) ? 6 : lastMath, false, "math");
+                        }
+                      });
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "math"
@@ -3822,13 +4023,19 @@ export default function CBSECommandCenter() {
                     }`}
                   >
                     📐 Maths
-                  </button>
-                  <button
-                    onClick={() => {
-                      playSound("click");
-                      setActiveVaultSubject("science");
-                      const lastSci = parseInt(localStorage.getItem("cbse_last_vault_science_chapter") || "1");
-                      loadChapterData(isNaN(lastSci) ? 1 : lastSci, false, "science");
+                  </a>
+                  <a
+                    href={getTabHref("questions", "science", 1)}
+                    onClick={(e) => {
+                      handleNavClick(e, "questions", {
+                        subject: "science",
+                        chapter: 1,
+                        customAction: () => {
+                          setActiveVaultSubject("science");
+                          const lastSci = parseInt(localStorage.getItem("cbse_last_vault_science_chapter") || "1");
+                          loadChapterData(isNaN(lastSci) ? 1 : lastSci, false, "science");
+                        }
+                      });
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "science"
@@ -3839,13 +4046,19 @@ export default function CBSECommandCenter() {
                     }`}
                   >
                     🧪 Science
-                  </button>
-                  <button
-                    onClick={() => {
-                      playSound("click");
-                      setActiveVaultSubject("sst");
-                      const lastSst = parseInt(localStorage.getItem("cbse_last_vault_sst_chapter") || "1");
-                      loadChapterData(isNaN(lastSst) ? 1 : lastSst, false, "sst");
+                  </a>
+                  <a
+                    href={getTabHref("questions", "sst", 1)}
+                    onClick={(e) => {
+                      handleNavClick(e, "questions", {
+                        subject: "sst",
+                        chapter: 1,
+                        customAction: () => {
+                          setActiveVaultSubject("sst");
+                          const lastSst = parseInt(localStorage.getItem("cbse_last_vault_sst_chapter") || "1");
+                          loadChapterData(isNaN(lastSst) ? 1 : lastSst, false, "sst");
+                        }
+                      });
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "sst"
@@ -3856,13 +4069,19 @@ export default function CBSECommandCenter() {
                     }`}
                   >
                     🌍 SST
-                  </button>
-                  <button
-                    onClick={() => {
-                      playSound("click");
-                      setActiveVaultSubject("english");
-                      const lastEng = parseInt(localStorage.getItem("cbse_last_vault_english_chapter") || "1");
-                      loadChapterData(isNaN(lastEng) ? 1 : lastEng, false, "english");
+                  </a>
+                  <a
+                    href={getTabHref("questions", "english", 1)}
+                    onClick={(e) => {
+                      handleNavClick(e, "questions", {
+                        subject: "english",
+                        chapter: 1,
+                        customAction: () => {
+                          setActiveVaultSubject("english");
+                          const lastEng = parseInt(localStorage.getItem("cbse_last_vault_english_chapter") || "1");
+                          loadChapterData(isNaN(lastEng) ? 1 : lastEng, false, "english");
+                        }
+                      });
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "english"
@@ -3873,13 +4092,19 @@ export default function CBSECommandCenter() {
                     }`}
                   >
                     📖 English (184)
-                  </button>
-                  <button
-                    onClick={() => {
-                      playSound("click");
-                      setActiveVaultSubject("hindi");
-                      const lastHin = parseInt(localStorage.getItem("cbse_last_vault_hindi_chapter") || "1");
-                      loadChapterData(isNaN(lastHin) ? 1 : lastHin, false, "hindi");
+                  </a>
+                  <a
+                    href={getTabHref("questions", "hindi", 1)}
+                    onClick={(e) => {
+                      handleNavClick(e, "questions", {
+                        subject: "hindi",
+                        chapter: 1,
+                        customAction: () => {
+                          setActiveVaultSubject("hindi");
+                          const lastHin = parseInt(localStorage.getItem("cbse_last_vault_hindi_chapter") || "1");
+                          loadChapterData(isNaN(lastHin) ? 1 : lastHin, false, "hindi");
+                        }
+                      });
                     }}
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer touch-manipulation active:scale-95 ${
                       activeVaultSubject === "hindi"
@@ -3890,7 +4115,7 @@ export default function CBSECommandCenter() {
                     }`}
                   >
                     🇮🇳 Hindi (085)
-                  </button>
+                  </a>
                 </div>
 
                 {/* Chapter Select Dropdown */}
@@ -5254,34 +5479,42 @@ export default function CBSECommandCenter() {
                   </div>
 
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full lg:w-auto shrink-0">
-                    <button
-                      onClick={() => {
-                        playSound("click");
+                    <a
+                      href={getTabHref("concepts", commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math", ncertNum || 1)}
+                      onClick={(e) => {
                         const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
-                        setConceptsSubject(targetSub);
-                        setConceptsChapterNo(ncertNum || 1);
-                        setActiveTab("concepts");
+                        handleNavClick(e, "concepts", {
+                          subject: targetSub,
+                          chapter: ncertNum || 1,
+                          customAction: () => {
+                            setConceptsSubject(targetSub);
+                            setConceptsChapterNo(ncertNum || 1);
+                          }
+                        });
                       }}
                       className="w-full sm:w-auto px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xl shadow-teal-500/25 shrink-0 touch-manipulation min-h-[44px]"
                     >
                       <Sparkles className="w-4 h-4" />
                       <span>Launch Concepts Hub</span>
                       <ArrowRight className="w-4 h-4" />
-                    </button>
+                    </a>
 
                     {commandSubjectId === "sst" && (ncertNum === 1 || ncertNum === 2) && (
-                      <button
-                        onClick={() => {
-                          playSound("click");
-                          setTimelinesChapterKey(ncertNum === 1 ? "ch1_europe" : "ch2_india");
-                          setActiveTab("timelines");
+                      <a
+                        href={getTabHref("timelines")}
+                        onClick={(e) => {
+                          handleNavClick(e, "timelines", {
+                            customAction: () => {
+                              setTimelinesChapterKey(ncertNum === 1 ? "ch1_europe" : "ch2_india");
+                            }
+                          });
                         }}
                         className="w-full sm:w-auto px-5 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xl shadow-amber-500/25 shrink-0 touch-manipulation min-h-[44px]"
                       >
                         <Calendar className="w-4 h-4" />
                         <span>📜 Timelines & Chronology Game</span>
                         <ArrowRight className="w-4 h-4" />
-                      </button>
+                      </a>
                     )}
                   </div>
                 </div>
@@ -5338,13 +5571,18 @@ export default function CBSECommandCenter() {
                           </div>
                         </div>
 
-                        <button
-                          onClick={() => {
-                            playSound("click");
+                        <a
+                          href={getTabHref("concepts", commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math", ncertNum || 1)}
+                          onClick={(e) => {
                             const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
-                            setConceptsSubject(targetSub);
-                            setConceptsChapterNo(ncertNum || 1);
-                            setActiveTab("concepts");
+                            handleNavClick(e, "concepts", {
+                              subject: targetSub,
+                              chapter: ncertNum || 1,
+                              customAction: () => {
+                                setConceptsSubject(targetSub);
+                                setConceptsChapterNo(ncertNum || 1);
+                              }
+                            });
                           }}
                           className={`px-3 py-2 rounded-xl text-[11px] font-bold border transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 shrink-0 touch-manipulation min-h-[38px] active:scale-95 ${
                             isDark
@@ -5354,7 +5592,7 @@ export default function CBSECommandCenter() {
                         >
                           <span>Study</span>
                           <ArrowRight className="w-3.5 h-3.5" />
-                        </button>
+                        </a>
                       </div>
                     );
                   })}
@@ -5393,22 +5631,24 @@ export default function CBSECommandCenter() {
                     <span>{chapterMistakesCount} Error Logs Recorded</span>
                   </div>
                   <div className="mt-4 flex gap-2.5">
-                    <button 
-                      onClick={() => { playSound("click"); setActiveTab("flashcards"); }}
+                    <a 
+                      href={getTabHref("flashcards")}
+                      onClick={(e) => handleNavClick(e, "flashcards")}
                       className={`flex-1 py-2.5 text-xs font-bold rounded-2xl border transition-all cursor-pointer min-h-[44px] flex items-center justify-center active:scale-95 ${
                         isDark ? "bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border-amber-500/30" : "bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-200"
                       }`}
                     >
                       Start Flashcards
-                    </button>
-                    <button 
-                      onClick={() => { playSound("click"); setActiveTab("common_mistakes"); }}
+                    </a>
+                    <a 
+                      href={getTabHref("common_mistakes")}
+                      onClick={(e) => handleNavClick(e, "common_mistakes")}
                       className={`flex-1 py-2.5 text-xs font-bold rounded-2xl border transition-all cursor-pointer min-h-[44px] flex items-center justify-center active:scale-95 ${
                         isDark ? "bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border-amber-500/30" : "bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-200"
                       }`}
                     >
                       Review Mistakes
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -5420,41 +5660,47 @@ export default function CBSECommandCenter() {
                 </span>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                   {[
-                    { label: 'Master Question Bank', action: () => setActiveTab('questions'), icon: Zap },
+                    { id: 'questions', label: 'Master Question Bank', icon: Zap },
                     { 
+                      id: 'concepts',
                       label: 'Concepts Hub (37 Ch)', 
                       action: () => {
                         const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
                         setConceptsSubject(targetSub);
                         setConceptsChapterNo(ncertNum || 1);
-                        setActiveTab('concepts');
                       }, 
                       icon: BookOpen 
                     },
-                    { label: 'NCERT Lab Activities', action: () => setActiveTab('activities'), icon: Beaker },
+                    { id: 'activities', label: 'NCERT Lab Activities', icon: Beaker },
                     { 
+                      id: 'questions',
+                      subject: 'science',
+                      chapter: 11,
                       label: 'Circuits & Question Bank', 
                       action: () => {
                         setActiveVaultSubject("science");
                         setActiveVaultChapter(11);
                         loadChapterData(11, false, "science");
-                        setActiveTab('questions');
                       }, 
                       icon: Zap 
                     },
-                    { label: 'Theorems & Proofs (5M)', action: () => setActiveTab('theorems'), icon: Award },
-                    { label: 'Visual Mnemonics (49)', action: () => setActiveTab('mnemonics'), icon: Sparkles },
-                    { label: 'Flashcards Engine', action: () => setActiveTab('flashcards'), icon: BookMarked },
-                    { label: 'My Mistakes Log', action: () => setActiveTab('common_mistakes'), icon: Flame },
-                    { label: 'Test Series (Sept 14)', action: () => setActiveTab('test_series'), icon: Calendar },
-                    { label: 'Daily Pomodoro Routine', action: () => setActiveTab('today'), icon: Clock },
-                    { label: 'NCERT Full Syllabus', action: () => setActiveTab('syllabus'), icon: Compass }
+                    { id: 'theorems', label: 'Theorems & Proofs (5M)', icon: Award },
+                    { id: 'mnemonics', label: 'Visual Mnemonics (49)', icon: Sparkles },
+                    { id: 'flashcards', label: 'Flashcards Engine', icon: BookMarked },
+                    { id: 'common_mistakes', label: 'My Mistakes Log', icon: Flame },
+                    { id: 'test_series', label: 'Test Series (Sept 14)', icon: Calendar },
+                    { id: 'today', label: 'Daily Pomodoro Routine', icon: Clock },
+                    { id: 'syllabus', label: 'NCERT Full Syllabus', icon: Compass }
                   ].map((module, i) => (
-                    <button 
+                    <a 
                       key={i} 
-                      onClick={() => {
-                        playSound("click");
-                        module.action();
+                      href={getTabHref(module.id, (module as any).subject, (module as any).chapter)}
+                      onClick={(e) => {
+                        handleNavClick(e, module.id, {
+                          subject: (module as any).subject,
+                          chapter: (module as any).chapter,
+                          customAction: (module as any).action
+                        });
                       }} 
                       className={`p-3 sm:p-3.5 text-left rounded-2xl border transition-all cursor-pointer flex items-center gap-2.5 min-h-[48px] active:scale-95 ${
                         isDark 
@@ -5464,7 +5710,7 @@ export default function CBSECommandCenter() {
                     >
                       <module.icon className="w-4 h-4 text-emerald-400 shrink-0" />
                       <span className="text-xs font-semibold truncate">{module.label}</span>
-                    </button>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -5526,51 +5772,6 @@ export default function CBSECommandCenter() {
 
       </main>
 
-      {/* =========================================================================
-          MOBILE BOTTOM NAVIGATION DOCK (FIXED AT BOTTOM FOR PHONES - FAST TOUCH)
-          ========================================================================= */}
-      <div className={`md:hidden fixed bottom-0 left-0 right-0 z-40 border-t backdrop-blur-2xl px-2 pt-1.5 safe-area-bottom transition-colors ${
-        isDark ? "border-white/10 bg-[#090d16]/95 text-white shadow-2xl" : "border-slate-200 bg-white/95 text-slate-900 shadow-lg"
-      }`}>
-        <div className="grid grid-cols-5 gap-1 items-center max-w-md mx-auto">
-          {[
-            { id: "chapter_dashboard", label: "Command", icon: Target },
-            { id: "concepts", label: "Concepts", icon: BookOpen },
-            { id: "questions", label: "Practice", icon: Zap },
-            { id: "diagrams", label: "Vaults", icon: Compass },
-            { id: "all_launcher", label: "All (18)", icon: LayoutGrid }
-          ].map((item) => {
-            const isAllLauncher = item.id === "all_launcher";
-            const isActive = isAllLauncher ? isAllModulesModalOpen : activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => {
-                  playSound("click");
-                  triggerHaptic(10);
-                  if (isAllLauncher) {
-                    setIsAllModulesModalOpen(true);
-                  } else {
-                    setActiveTab(item.id as any);
-                  }
-                }}
-                className={`py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 cursor-pointer transition-all min-h-[48px] touch-manipulation ${
-                  isActive
-                    ? isDark
-                      ? "bg-amber-500/15 text-amber-400 font-bold"
-                      : "bg-amber-50 text-amber-900 font-bold"
-                    : isDark
-                    ? "text-slate-400 hover:text-slate-200"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <item.icon className={`w-4 h-4 ${isActive ? "text-amber-500" : ""}`} />
-                <span className="text-[10px] tracking-tight font-medium">{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
 
       {/* =========================================================================
           LEVEL UP CELEBRATION MODAL
@@ -6231,22 +6432,25 @@ export default function CBSECommandCenter() {
           {CATEGORY_DEFINITIONS.map((cat) => {
             const isCatActive = activeCategory === cat.id;
             return (
-              <button
+              <a
                 key={cat.id}
-                onClick={() => {
-                  playSound("click");
-                  if (cat.id === "concepts") {
-                    if (commandSubjectId === "sst") {
-                      setConceptsSubject("sst");
-                      setConceptsChapterNo(1);
-                    } else if (commandSubjectId === "science") {
-                      setConceptsSubject("science");
-                      setConceptsChapterNo(1);
-                    } else {
-                      setConceptsSubject("math");
+                href={getTabHref(cat.defaultTab)}
+                onClick={(e) => {
+                  handleNavClick(e, cat.defaultTab, {
+                    customAction: () => {
+                      if (cat.id === "concepts") {
+                        if (commandSubjectId === "sst") {
+                          setConceptsSubject("sst");
+                          setConceptsChapterNo(1);
+                        } else if (commandSubjectId === "science") {
+                          setConceptsSubject("science");
+                          setConceptsChapterNo(1);
+                        } else {
+                          setConceptsSubject("math");
+                        }
+                      }
                     }
-                  }
-                  setActiveTab(cat.defaultTab as any);
+                  });
                 }}
                 className={`flex-1 py-1.5 flex flex-col items-center justify-center gap-0.5 rounded-2xl transition-all cursor-pointer touch-manipulation active:scale-95 ${
                   isCatActive
@@ -6268,7 +6472,7 @@ export default function CBSECommandCenter() {
                   <cat.icon className="w-5 h-5" />
                 </div>
                 <span className="text-[10px] tracking-tight">{cat.label}</span>
-              </button>
+              </a>
             );
           })}
 
