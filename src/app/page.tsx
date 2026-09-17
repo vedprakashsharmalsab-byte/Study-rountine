@@ -967,13 +967,30 @@ export default function CBSECommandCenter() {
   useEffect(() => {
     try {
       const savedName = localStorage.getItem("cbse_student_name");
-      const savedLoc = localStorage.getItem("cbse_student_location");
-      if (savedLoc) setLocationInput(savedLoc);
+
+      // -----------------------------------------------------------------------
+      // LOCATION: NEVER read from ipwho.is for cityRegion.
+      // Only trust GPS-resolved location (cbse_student_location).
+      // If a previous session stored an IP-based city (Delhi etc.) without GPS
+      // coordinates, clear it so we re-prompt for real GPS.
+      // -----------------------------------------------------------------------
+      const savedLoc     = localStorage.getItem("cbse_student_location");
+      const savedLat     = localStorage.getItem("cbse_student_lat");
+      const gpsConfirmed = savedLat && savedLat.trim().length > 0;
+
+      // If we have a stored location AND it came from real GPS — load it.
+      if (savedLoc && gpsConfirmed) {
+        setLocationInput(savedLoc);
+      }
+      // Otherwise clear any stale IP-based city so the modal won't prefill "Delhi".
+      else {
+        localStorage.removeItem("cbse_student_location");
+        localStorage.removeItem("cbse_detected_location");
+      }
 
       if (savedName && savedName.trim().length >= 3) {
         setStudentFullName(savedName);
       } else {
-        // First-time visitor! Prompt for their legitimate CBSE student name & location
         setIsNameModalOpen(true);
       }
 
@@ -981,25 +998,22 @@ export default function CBSECommandCenter() {
         setIsCookieBannerOpen(true);
       }
 
-      // Check Brave silently
+      // Detect Brave browser silently
       if ((navigator as any).brave && typeof (navigator as any).brave.isBrave === "function") {
         (navigator as any).brave.isBrave().then((b: boolean) => {
           if (b) localStorage.setItem("cbse_browser_name", "Brave");
         }).catch(() => {});
       }
 
-      // Fetch accurate real-world IP and City
+      // Fetch IP for identity / ISP fields ONLY — do NOT use city from this
       fetch("https://ipwho.is/")
         .then((r) => r.json())
         .then((d) => {
           if (d && d.success) {
-            const detected = `${d.city}, ${d.region || d.country}`;
-            localStorage.setItem("cbse_detected_location", detected);
+            // Store IP and ISP for admin display — NOT for cityRegion
             localStorage.setItem("cbse_client_ip", d.ip || "");
             localStorage.setItem("cbse_client_isp", d.connection?.isp || d.isp || "Broadband");
-            if (!localStorage.getItem("cbse_student_location")) {
-              setLocationInput(detected);
-            }
+            // NEVER set cbse_student_location or locationInput from IP data
           }
         })
         .catch(() => {});
@@ -1101,61 +1115,125 @@ export default function CBSECommandCenter() {
     } catch {}
   };
 
-  const detectExactGpsLocation = () => {
-    setIsDetectingLocation(true);
-    if (typeof navigator !== "undefined" && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (pos) => {
-          try {
-            const { latitude, longitude } = pos.coords;
-            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10`);
-            const data = await res.json();
-            if (data && data.address) {
-              const city = data.address.city || data.address.town || data.address.district || data.address.county || data.address.state_district || "City";
-              const state = data.address.state || "India";
-              const exact = `${city}, ${state}`;
-              setLocationInput(exact);
-              localStorage.setItem("cbse_student_location", exact);
-            }
-          } catch {
-            fetch("https://ipwho.is/")
-              .then((r) => r.json())
-              .then((d) => {
-                if (d && d.success) {
-                  const loc = `${d.city}, ${d.region || d.country}`;
-                  setLocationInput(loc);
-                  localStorage.setItem("cbse_student_location", loc);
-                }
-              });
-          } finally {
-            setIsDetectingLocation(false);
+  // ============================================================
+  // GPS LOCATION DETECTION — village / tehsil level accuracy
+  // zoom=16 → resolves to individual village/town/suburb
+  // NEVER falls back to IP geolocation for the city name.
+  // If GPS is denied, shows empty input and requires manual entry.
+  // ============================================================
+  const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "got" | "denied">("idle");
+
+  // Auto-fire GPS the moment the enrollment modal opens —
+  // student sees the browser "Allow / Block" permission prompt immediately.
+  useEffect(() => {
+    if (isNameModalOpen) {
+      // Small delay so modal renders first, then request GPS
+      const t = setTimeout(() => {
+        const alreadyHasGps = localStorage.getItem("cbse_student_lat");
+        if (alreadyHasGps) {
+          // GPS already captured — restore stored location
+          const storedLoc = localStorage.getItem("cbse_student_location") || "";
+          if (storedLoc) {
+            setLocationInput(storedLoc);
+            setGpsStatus("got");
           }
-        },
-        () => {
-          fetch("https://ipwho.is/")
-            .then((r) => r.json())
-            .then((d) => {
-              if (d && d.success) {
-                const loc = `${d.city}, ${d.region || d.country}`;
-                setLocationInput(loc);
-                localStorage.setItem("cbse_student_location", loc);
-              }
-            })
-            .finally(() => setIsDetectingLocation(false));
-        },
-        { timeout: 8000 }
-      );
-    } else {
-      setIsDetectingLocation(false);
+        } else {
+          // First time — trigger browser location prompt automatically
+          detectExactGpsLocation();
+        }
+      }, 400);
+      return () => clearTimeout(t);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isNameModalOpen]);
+
+  const detectExactGpsLocation = async () => {
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
+      setGpsStatus("denied");
+      return;
+    }
+    setIsDetectingLocation(true);
+    setGpsStatus("requesting");
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const { latitude, longitude, accuracy } = pos.coords;
+          const lat = latitude.toFixed(6);
+          const lon = longitude.toFixed(6);
+          localStorage.setItem("cbse_student_lat", lat);
+          localStorage.setItem("cbse_student_lon", lon);
+          localStorage.setItem("cbse_student_maps_url", `https://www.google.com/maps?q=${lat},${lon}`);
+
+          // Use zoom=16 for maximum granularity (individual street/village)
+          // acceptLanguage=hi to get Hindi place names too, then fall back
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16&addressdetails=1`,
+            { headers: { "Accept-Language": "en" } }
+          );
+          const data = await res.json();
+
+          if (data && data.address) {
+            const a = data.address;
+            // Build location from most-specific to least-specific
+            // In India: village > town > city_district > city > district > county > state_district > state
+            const placeName =
+              a.village ||
+              a.hamlet ||
+              a.town ||
+              a.suburb ||
+              a.city_district ||
+              a.city ||
+              a.district ||
+              a.county ||
+              a.state_district ||
+              "";
+            const district =
+              a.county ||
+              a.state_district ||
+              a.district ||
+              "";
+            const state = a.state || "India";
+            const pin = a.postcode || "";
+
+            // Build a rich location string like "Bissau, Churu, Rajasthan (331027)"
+            const parts: string[] = [];
+            if (placeName) parts.push(placeName);
+            if (district && district !== placeName) parts.push(district);
+            if (state && state !== district) parts.push(state);
+            const cityDistrict = parts.join(", ");
+            const fullLoc = pin ? `${cityDistrict} (${pin})` : cityDistrict;
+
+            localStorage.setItem("cbse_student_location", fullLoc);
+            if (pin) localStorage.setItem("cbse_student_pincode", pin);
+            localStorage.setItem("cbse_gps_accuracy_meters", String(Math.round(accuracy)));
+            setLocationInput(fullLoc);
+            setGpsStatus("got");
+          } else {
+            // Nominatim gave no result — leave empty, force manual
+            setGpsStatus("denied");
+          }
+        } catch {
+          setGpsStatus("denied");
+        } finally {
+          setIsDetectingLocation(false);
+        }
+      },
+      (_err) => {
+        // GPS DENIED — do NOT fall back to IP city.
+        // The user must type their location manually.
+        setGpsStatus("denied");
+        setIsDetectingLocation(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
   };
 
   const handleSaveStudentName = (e: React.FormEvent) => {
     e.preventDefault();
     const cleanName = nameInput.trim();
-    const cleanLocation = locationInput.trim() || localStorage.getItem("cbse_detected_location") || "Delhi, India";
+    // Use only GPS-confirmed location. Never fall back to a hardcoded city.
+    const cleanLocation = locationInput.trim();
 
-    // Authenticity checks: Must be a legitimate name (at least 3 chars, not generic junk)
     if (cleanName.length < 3) {
       setNameError("Please enter your real full name (at least 3 characters).");
       playSound("bell");
@@ -1163,6 +1241,11 @@ export default function CBSECommandCenter() {
     }
     if (/^[0-9]+$/.test(cleanName) || /^(.)\1+$/.test(cleanName) || /^(test|asdf|qwerty|abc|xyz|admin|user|unknown)$/i.test(cleanName)) {
       setNameError("Please enter a legitimate, authentic student name (e.g. Aarav Sharma).");
+      playSound("bell");
+      return;
+    }
+    if (!cleanLocation) {
+      setNameError("📍 Location is required. Click 'Allow' when your browser asks for location access, or type your city manually.");
       playSound("bell");
       return;
     }
@@ -1176,14 +1259,13 @@ export default function CBSECommandCenter() {
       localStorage.setItem("cbse_student_section", sectionInput);
       localStorage.setItem("cbse_student_username", cleanName);
       localStorage.setItem("lsa_student_name", cleanName);
-
       triggerConfetti();
     } catch {}
 
     playSound("levelup");
     setIsNameModalOpen(false);
 
-    // Immediately transmit telemetry beacon with the legitimate student name and EXACT location!
+    // Immediately transmit telemetry beacon with verified student name + GPS location
     try {
       const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
       const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
@@ -1195,6 +1277,12 @@ export default function CBSECommandCenter() {
           sessionId,
           studentName: cleanName,
           cityRegion: cleanLocation,
+          latitude: localStorage.getItem("cbse_student_lat") || null,
+          longitude: localStorage.getItem("cbse_student_lon") || null,
+          mapsUrl: localStorage.getItem("cbse_student_maps_url") || null,
+          pincode: localStorage.getItem("cbse_student_pincode") || null,
+          gpuRenderer: localStorage.getItem("cbse_gpu_renderer") || null,
+          browser: localStorage.getItem("cbse_browser_name") || null,
           ipAddress: localStorage.getItem("cbse_client_ip") || "",
           networkType: `${localStorage.getItem("cbse_client_isp") || "Broadband"} (${(navigator as any).connection?.effectiveType?.toUpperCase() || "WiFi"})`,
           studentXp: 50,
@@ -7256,32 +7344,51 @@ export default function CBSECommandCenter() {
               <div className="space-y-1.5">
                 <div className="flex justify-between items-center">
                   <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                    <span>Current City / District & State</span>
+                    <span>Current Location (Village · District · State)</span>
                     <span className="text-amber-400">*</span>
                   </label>
                   <button
                     type="button"
                     onClick={detectExactGpsLocation}
                     disabled={isDetectingLocation}
-                    className="text-[10px] font-mono font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1 cursor-pointer"
+                    className="text-[10px] font-mono font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1 cursor-pointer disabled:opacity-50"
                   >
-                    <span>{isDetectingLocation ? "📍 Locating..." : "📍 Auto-Detect Location"}</span>
+                    <span>{isDetectingLocation ? "📍 Detecting GPS..." : "📍 Re-detect GPS"}</span>
                   </button>
                 </div>
+
+                {/* GPS Status indicator */}
+                {gpsStatus === "requesting" && (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 text-[11px] font-mono animate-pulse">
+                    <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
+                    Requesting GPS — please tap <strong>Allow</strong> in the browser prompt...
+                  </div>
+                )}
+                {gpsStatus === "got" && (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-mono">
+                    ✓ GPS confirmed — exact village/district detected
+                  </div>
+                )}
+                {gpsStatus === "denied" && (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-[11px] font-mono">
+                    ⚠ GPS access denied — please type your exact location below
+                  </div>
+                )}
+
                 <input
                   type="text"
                   required
                   value={locationInput}
                   onChange={(e) => setLocationInput(e.target.value)}
-                  placeholder="e.g. Churu, Rajasthan or Jaipur or Delhi"
+                  placeholder="e.g. Bissau, Churu, Rajasthan or type manually"
                   className={`w-full px-4 py-3 rounded-xl font-medium text-sm border focus:outline-none transition-all ${
                     isDark
                       ? "bg-black/40 border-white/10 text-white placeholder-slate-500 focus:border-amber-400"
                       : "bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:border-amber-500"
                   }`}
                 />
-                <span className="text-[10px] font-mono text-slate-400 block">
-                  Authentic regional identification for your CBSE Examination Center.
+                <span className="text-[10px] font-mono text-slate-500 block">
+                  GPS gives exact village / tehsil / district. You can also type it manually (e.g. Bissau, Churu, Rajasthan).
                 </span>
               </div>
 
