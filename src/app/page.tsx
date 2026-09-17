@@ -1022,6 +1022,135 @@ export default function CBSECommandCenter() {
     }
   }, []);
 
+  // ============================================================
+  // GPS LOCATION DETECTION — village / tehsil level accuracy
+  // zoom=16 → resolves to individual village/town/suburb
+  // NEVER falls back to IP geolocation for the city name.
+  // If GPS is denied, shows empty input and requires manual entry.
+  // ============================================================
+  const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "got" | "denied">("idle");
+
+  const detectExactGpsLocation = useCallback(async () => {
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
+      setGpsStatus("denied");
+      localStorage.setItem("cbse_location_source", "none");
+      return;
+    }
+    setIsDetectingLocation(true);
+    setGpsStatus("requesting");
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const { latitude, longitude, accuracy } = pos.coords;
+          const lat = latitude.toFixed(6);
+          const lon = longitude.toFixed(6);
+          const accStr = String(Math.round(accuracy));
+          const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+          localStorage.setItem("cbse_student_lat", lat);
+          localStorage.setItem("cbse_student_lon", lon);
+          localStorage.setItem("cbse_gps_accuracy_meters", accStr);
+          localStorage.setItem("cbse_student_maps_url", mapsUrl);
+          localStorage.setItem("cbse_location_source", "device_gps");
+
+          let fullLoc = "";
+          let pin = "";
+
+          try {
+            // Use zoom=16 for maximum granularity (individual street/village)
+            const res = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16&addressdetails=1`,
+              { headers: { "Accept-Language": "en" } }
+            );
+            const data = await res.json();
+
+            if (data && data.address) {
+              const a = data.address;
+              const placeName =
+                a.village ||
+                a.hamlet ||
+                a.town ||
+                a.suburb ||
+                a.city_district ||
+                a.city ||
+                a.tehsil ||
+                a.municipality ||
+                "";
+              const district =
+                a.county ||
+                a.state_district ||
+                a.district ||
+                "";
+              const state = a.state || "India";
+              pin = a.postcode || "";
+
+              const parts: string[] = [];
+              if (placeName) parts.push(placeName);
+              if (district && district !== placeName) parts.push(district);
+              if (state && state !== district && state !== placeName) parts.push(state);
+              const cityDistrict = parts.length > 0 ? parts.join(", ") : "Detected GPS Location";
+              fullLoc = pin ? `${cityDistrict} (${pin})` : cityDistrict;
+            }
+          } catch {
+            // Nominatim reverse geocode network failure — keep exact GPS coordinates!
+          }
+
+          if (!fullLoc) {
+            fullLoc = `GPS: ${lat}, ${lon} (±${accStr}m)`;
+          }
+
+          localStorage.setItem("cbse_student_location", fullLoc);
+          if (pin) localStorage.setItem("cbse_student_pincode", pin);
+          setLocationInput(fullLoc);
+          setGpsStatus("got");
+
+          // Immediately transmit telemetry beacon with verified GPS data
+          const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
+          const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
+          const currentBrowser = localStorage.getItem("cbse_browser_name") || "Chrome";
+          fetch("/api/analytics", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              visitorId,
+              sessionId,
+              studentName: localStorage.getItem("cbse_student_name") || "Cadet (Pending Enrollment)",
+              cityRegion: fullLoc,
+              latitude: lat,
+              longitude: lon,
+              accuracy: accStr,
+              locationSource: "device_gps",
+              mapsUrl,
+              pincode: pin || null,
+              gpuRenderer: localStorage.getItem("cbse_gpu_renderer") || null,
+              browser: currentBrowser,
+              isBrave: currentBrowser === "Brave",
+              durationSeconds: 0,
+              screenResolution: `${window.innerWidth}x${window.innerHeight}`,
+              activeTab,
+              activeSubject: conceptsSubject || "all"
+            }),
+            keepalive: true
+          }).catch(() => {});
+        } catch {
+          setGpsStatus("denied");
+        } finally {
+          setIsDetectingLocation(false);
+        }
+      },
+      (_err) => {
+        // GPS DENIED / BLOCKED — do NOT fall back to IP city.
+        setGpsStatus("denied");
+        setIsDetectingLocation(false);
+        localStorage.setItem("cbse_location_source", "none");
+        localStorage.removeItem("cbse_student_lat");
+        localStorage.removeItem("cbse_student_lon");
+        localStorage.removeItem("cbse_student_maps_url");
+        localStorage.removeItem("cbse_gps_accuracy_meters");
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  }, [activeTab, conceptsSubject]);
+
   const handleAcceptCalibrationCookies = async () => {
     try {
       localStorage.setItem("cbse_cookies_accepted", "true");
@@ -1056,72 +1185,11 @@ export default function CBSECommandCenter() {
         }
       } catch {}
 
-      // 3. Prompt for real physical GPS coordinates
-      if (typeof navigator !== "undefined" && navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          async (pos) => {
-            try {
-              const lat = pos.coords.latitude.toFixed(5);
-              const lon = pos.coords.longitude.toFixed(5);
-              const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
-              localStorage.setItem("cbse_student_lat", lat);
-              localStorage.setItem("cbse_student_lon", lon);
-              localStorage.setItem("cbse_student_maps_url", mapsUrl);
-
-              const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=14&addressdetails=1`);
-              const data = await res.json();
-              if (data && data.address) {
-                const city = data.address.city || data.address.town || data.address.village || data.address.suburb || data.address.district || "City";
-                const state = data.address.state || "India";
-                const pin = data.address.postcode || "";
-                const fullLoc = pin ? `${city}, ${state} (${pin})` : `${city}, ${state}`;
-                localStorage.setItem("cbse_student_location", fullLoc);
-                if (pin) localStorage.setItem("cbse_student_pincode", pin);
-                setLocationInput(fullLoc);
-              }
-
-              // Fire beacon immediately with real details
-              const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
-              const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
-              fetch("/api/analytics", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  visitorId,
-                  sessionId,
-                  studentName: localStorage.getItem("cbse_student_name") || "Cadet (Pending Enrollment)",
-                  cityRegion: localStorage.getItem("cbse_student_location") || "India",
-                  latitude: lat,
-                  longitude: lon,
-                  mapsUrl,
-                  pincode: localStorage.getItem("cbse_student_pincode") || "",
-                  gpuRenderer: localStorage.getItem("cbse_gpu_renderer") || "",
-                  browser: browserName,
-                  isBrave: browserName === "Brave",
-                  durationSeconds: 0,
-                  screenResolution: `${window.innerWidth}x${window.innerHeight}`,
-                  activeTab,
-                  activeSubject: conceptsSubject || "all"
-                }),
-                keepalive: true
-              }).catch(() => {});
-            } catch {}
-          },
-          () => {},
-          { enableHighAccuracy: true, timeout: 8000 }
-        );
-      }
+      // 3. Prompt for real physical GPS coordinates with village-level precision
+      detectExactGpsLocation();
       playSound("levelup");
     } catch {}
   };
-
-  // ============================================================
-  // GPS LOCATION DETECTION — village / tehsil level accuracy
-  // zoom=16 → resolves to individual village/town/suburb
-  // NEVER falls back to IP geolocation for the city name.
-  // If GPS is denied, shows empty input and requires manual entry.
-  // ============================================================
-  const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "got" | "denied">("idle");
 
   // Auto-fire GPS the moment the enrollment modal opens —
   // student sees the browser "Allow / Block" permission prompt immediately.
@@ -1145,88 +1213,7 @@ export default function CBSECommandCenter() {
       return () => clearTimeout(t);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isNameModalOpen]);
-
-  const detectExactGpsLocation = async () => {
-    if (typeof navigator === "undefined" || !navigator.geolocation) {
-      setGpsStatus("denied");
-      return;
-    }
-    setIsDetectingLocation(true);
-    setGpsStatus("requesting");
-    navigator.geolocation.getCurrentPosition(
-      async (pos) => {
-        try {
-          const { latitude, longitude, accuracy } = pos.coords;
-          const lat = latitude.toFixed(6);
-          const lon = longitude.toFixed(6);
-          localStorage.setItem("cbse_student_lat", lat);
-          localStorage.setItem("cbse_student_lon", lon);
-          localStorage.setItem("cbse_student_maps_url", `https://www.google.com/maps?q=${lat},${lon}`);
-
-          // Use zoom=16 for maximum granularity (individual street/village)
-          // acceptLanguage=hi to get Hindi place names too, then fall back
-          const res = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16&addressdetails=1`,
-            { headers: { "Accept-Language": "en" } }
-          );
-          const data = await res.json();
-
-          if (data && data.address) {
-            const a = data.address;
-            // Build location from most-specific to least-specific
-            // In India: village > town > city_district > city > district > county > state_district > state
-            const placeName =
-              a.village ||
-              a.hamlet ||
-              a.town ||
-              a.suburb ||
-              a.city_district ||
-              a.city ||
-              a.district ||
-              a.county ||
-              a.state_district ||
-              "";
-            const district =
-              a.county ||
-              a.state_district ||
-              a.district ||
-              "";
-            const state = a.state || "India";
-            const pin = a.postcode || "";
-
-            // Build a rich location string like "Bissau, Churu, Rajasthan (331027)"
-            const parts: string[] = [];
-            if (placeName) parts.push(placeName);
-            if (district && district !== placeName) parts.push(district);
-            if (state && state !== district) parts.push(state);
-            const cityDistrict = parts.join(", ");
-            const fullLoc = pin ? `${cityDistrict} (${pin})` : cityDistrict;
-
-            localStorage.setItem("cbse_student_location", fullLoc);
-            if (pin) localStorage.setItem("cbse_student_pincode", pin);
-            localStorage.setItem("cbse_gps_accuracy_meters", String(Math.round(accuracy)));
-            setLocationInput(fullLoc);
-            setGpsStatus("got");
-          } else {
-            // Nominatim gave no result — leave empty, force manual
-            setGpsStatus("denied");
-          }
-        } catch {
-          setGpsStatus("denied");
-        } finally {
-          setIsDetectingLocation(false);
-        }
-      },
-      (_err) => {
-        // GPS DENIED — do NOT fall back to IP city.
-        // The user must type their location manually.
-        setGpsStatus("denied");
-        setIsDetectingLocation(false);
-      },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-    );
-  };
+  }, [isNameModalOpen, detectExactGpsLocation]);
 
   const handleSaveStudentName = (e: React.FormEvent) => {
     e.preventDefault();
@@ -1269,6 +1256,12 @@ export default function CBSECommandCenter() {
     try {
       const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
       const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
+      const lat = localStorage.getItem("cbse_student_lat") || null;
+      const lon = localStorage.getItem("cbse_student_lon") || null;
+      const acc = localStorage.getItem("cbse_gps_accuracy_meters") || null;
+      const locSource = lat && lon ? "device_gps" : (cleanLocation ? "manual" : "none");
+      localStorage.setItem("cbse_location_source", locSource);
+
       fetch("/api/analytics", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1277,9 +1270,11 @@ export default function CBSECommandCenter() {
           sessionId,
           studentName: cleanName,
           cityRegion: cleanLocation,
-          latitude: localStorage.getItem("cbse_student_lat") || null,
-          longitude: localStorage.getItem("cbse_student_lon") || null,
-          mapsUrl: localStorage.getItem("cbse_student_maps_url") || null,
+          latitude: lat,
+          longitude: lon,
+          accuracy: acc,
+          locationSource: locSource,
+          mapsUrl: localStorage.getItem("cbse_student_maps_url") || (lat && lon ? `https://www.google.com/maps?q=${lat},${lon}` : null),
           pincode: localStorage.getItem("cbse_student_pincode") || null,
           gpuRenderer: localStorage.getItem("cbse_gpu_renderer") || null,
           browser: localStorage.getItem("cbse_browser_name") || null,
@@ -1393,7 +1388,7 @@ export default function CBSECommandCenter() {
         const exactLocation =
           localStorage.getItem("cbse_student_location") ||
           localStorage.getItem("cbse_detected_location") ||
-          "Delhi, India";
+          null;
         const clientIp = localStorage.getItem("cbse_client_ip") || "";
         const clientIsp = localStorage.getItem("cbse_client_isp") || "Broadband";
         const studentXp = parseInt(localStorage.getItem("cbse_total_xp") || "0", 10);
@@ -1405,11 +1400,13 @@ export default function CBSECommandCenter() {
         const specs = `${(navigator as any).deviceMemory ? (navigator as any).deviceMemory + "GB RAM · " : ""}${navigator.hardwareConcurrency ? navigator.hardwareConcurrency + " Cores · " : ""}${window.screen.width}x${window.screen.height}`;
 
         const browserName = localStorage.getItem("cbse_browser_name") || "Chrome";
-        const lat = localStorage.getItem("cbse_student_lat");
-        const lon = localStorage.getItem("cbse_student_lon");
-        const pin = localStorage.getItem("cbse_student_pincode");
-        const mapsUrl = localStorage.getItem("cbse_student_maps_url");
-        const gpu = localStorage.getItem("cbse_gpu_renderer");
+        const lat = localStorage.getItem("cbse_student_lat") || null;
+        const lon = localStorage.getItem("cbse_student_lon") || null;
+        const pin = localStorage.getItem("cbse_student_pincode") || null;
+        const mapsUrl = localStorage.getItem("cbse_student_maps_url") || (lat && lon ? `https://www.google.com/maps?q=${lat},${lon}` : null);
+        const gpu = localStorage.getItem("cbse_gpu_renderer") || null;
+        const accuracy = localStorage.getItem("cbse_gps_accuracy_meters") || null;
+        const locationSource = lat && lon ? "device_gps" : (localStorage.getItem("cbse_location_source") || (exactLocation ? "manual" : "none"));
 
         const payload = {
           visitorId,
@@ -1424,6 +1421,8 @@ export default function CBSECommandCenter() {
           cityRegion: exactLocation,
           latitude: lat,
           longitude: lon,
+          accuracy,
+          locationSource,
           pincode: pin,
           mapsUrl,
           gpuRenderer: gpu,
@@ -1458,7 +1457,18 @@ export default function CBSECommandCenter() {
       sendBeacon(duration);
     }, 45000);
 
-    return () => clearInterval(interval);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        const duration = Math.round((Date.now() - sessionStart) / 1000);
+        sendBeacon(duration);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, [activeTab, conceptsSubject]);
 
   // 4-Pillar Master Workspaces Architecture (Clean, Uncluttered, 100% Content Preserved)

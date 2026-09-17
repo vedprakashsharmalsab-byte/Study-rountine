@@ -171,15 +171,32 @@ export const visitorEvents = pgTable("visitor_events", {
   studentStreak: integer("student_streak").default(1),
   studentLevel: integer("student_level").default(1),
   timezone: text("timezone").default("Asia/Kolkata"),
-  cityRegion: text("city_region").default("India"),
-  latitude: text("latitude"),
-  longitude: text("longitude"),
+  // -------------------------------------------------------------------------
+  // LOCATION — hierarchy of priority:
+  //   1. device_gps   → lat/lon from navigator.geolocation (most accurate)
+  //   2. ip_approximate → city resolved from IP (ISP-level, NOT precise)
+  //   3. manual       → typed by the student themselves
+  //   4. none         → no location at all (GPS denied, no IP match)
+  // cityRegion is populated by reverse-geocoding the coordinates (device_gps)
+  // OR from the student's manual input. NEVER from server-side IP fallback.
+  // -------------------------------------------------------------------------
+  cityRegion: text("city_region"),           // human-readable, may be null
+  latitude: text("latitude"),               // from coords.latitude
+  longitude: text("longitude"),             // from coords.longitude
+  accuracy: text("accuracy"),               // coords.accuracy in metres
+  locationSource: text("location_source").default("none"), // see above
   pincode: text("pincode"),
   mapsUrl: text("maps_url"),
   gpuRenderer: text("gpu_renderer"),
-  networkType: text("network_type").default("Broadband/4G"),
+  networkType: text("network_type").default("Broadband/WiFi"),
   hardwareSpecs: text("hardware_specs"),
   activeChapter: text("active_chapter"),
   language: text("language").default("en-IN"),
+  // -------------------------------------------------------------------------
+  // SESSION TIMING — all UTC, displayed in IST (Asia/Kolkata) on the admin
+  // -------------------------------------------------------------------------
+  visitStartedAt: timestamp("visit_started_at").defaultNow(),
+  lastSeenAt: timestamp("last_seen_at").defaultNow(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+

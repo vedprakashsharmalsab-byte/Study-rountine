@@ -71,6 +71,15 @@ interface StudentSession {
   durationSeconds: number;
   referrer: string;
   createdAt: string;
+  visitStartedAt?: string | null;
+  lastSeenAt?: string | null;
+  cityRegion?: string | null;
+  latitude?: string | null;
+  longitude?: string | null;
+  accuracy?: string | null;
+  locationSource?: string | null;
+  mapsUrl?: string | null;
+  pincode?: string | null;
 }
 
 interface UniqueStudentProfile {
@@ -86,9 +95,11 @@ interface UniqueStudentProfile {
   hardwareSpecs: string;
   networkType: string;
   timezone: string;
-  cityRegion: string;
+  cityRegion: string | null;
   latitude?: string | null;
   longitude?: string | null;
+  accuracy?: string | null;
+  locationSource?: string | null;
   pincode?: string | null;
   mapsUrl?: string | null;
   gpuRenderer?: string | null;
@@ -129,9 +140,16 @@ interface VisitorStats {
   recentEvents: Array<{
     id: string;
     visitorId: string;
+    sessionId?: string;
     studentName: string;
     ipAddress: string;
-    cityRegion?: string;
+    cityRegion?: string | null;
+    latitude?: string | null;
+    longitude?: string | null;
+    accuracy?: string | null;
+    locationSource?: string | null;
+    mapsUrl?: string | null;
+    pincode?: string | null;
     deviceType: string;
     operatingSystem: string;
     browser: string;
@@ -139,6 +157,9 @@ interface VisitorStats {
     activeSubject: string;
     activeChapter?: string;
     durationSeconds: number;
+    networkType?: string;
+    visitStartedAt?: string | null;
+    lastSeenAt?: string | null;
     createdAt: string;
   }>;
 }
@@ -334,6 +355,10 @@ export default function AdminPage() {
       "Browser",
       "Screen",
       "Location",
+      "Location Source",
+      "Latitude",
+      "Longitude",
+      "Accuracy (m)",
       "IP",
       "Network",
       "Subjects Studied",
@@ -351,7 +376,11 @@ export default function AdminPage() {
       s.operatingSystem,
       s.browser,
       `"${s.screenResolution}"`,
-      `"${s.cityRegion}"`,
+      `"${s.cityRegion || "Not provided"}"`,
+      s.locationSource || (s.latitude ? "device_gps" : (s.cityRegion ? "manual" : "none")),
+      s.latitude || "",
+      s.longitude || "",
+      s.accuracy || "",
       `"${s.ipAddress}"`,
       `"${s.networkType}"`,
       `"${s.subjectsStudied.join(", ")}"`,
@@ -438,6 +467,27 @@ export default function AdminPage() {
         const matchBrowser = (s.browser || "").toLowerCase().includes(q);
         const matchPin = (s.pincode || "").toLowerCase().includes(q);
         return matchName || matchId || matchIp || matchCity || matchSubs || matchBrowser || matchPin;
+      }
+      return true;
+    });
+  }, [analytics, visitorFilter, visitorSearch]);
+
+  // Filtered raw visit history events
+  const filteredEvents = useMemo(() => {
+    if (!analytics || !analytics.recentEvents) return [];
+    return analytics.recentEvents.filter((ev) => {
+      if (visitorFilter === "mobile" && ev.deviceType !== "mobile") return false;
+      if (visitorFilter === "desktop" && ev.deviceType !== "desktop") return false;
+      if (visitorSearch.trim()) {
+        const q = visitorSearch.toLowerCase();
+        const matchName = (ev.studentName || "").toLowerCase().includes(q);
+        const matchId = (ev.visitorId || "").toLowerCase().includes(q);
+        const matchIp = (ev.ipAddress || "").toLowerCase().includes(q);
+        const matchCity = (ev.cityRegion || "").toLowerCase().includes(q);
+        const matchSub = (ev.activeSubject || "").toLowerCase().includes(q);
+        const matchCh = (ev.activeChapter || "").toLowerCase().includes(q);
+        const matchSource = (ev.locationSource || "").toLowerCase().includes(q);
+        return matchName || matchId || matchIp || matchCity || matchSub || matchCh || matchSource;
       }
       return true;
     });
@@ -936,22 +986,42 @@ export default function AdminPage() {
                               </div>
 
                               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400 font-mono">
-                                {student.mapsUrl ? (
-                                  <a
-                                    href={student.mapsUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-1 text-teal-400 hover:text-teal-300 underline-offset-2 hover:underline"
-                                  >
-                                    📍 {student.cityRegion}{student.pincode ? ` (${student.pincode})` : ""}
-                                  </a>
+                                {student.locationSource === "device_gps" || (student.latitude && student.longitude) ? (
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                      📍 GPS {student.accuracy ? `±${student.accuracy}m` : "Verified"}
+                                    </span>
+                                    {student.mapsUrl ? (
+                                      <a
+                                        href={student.mapsUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-emerald-300 hover:text-emerald-200 underline underline-offset-2 font-medium"
+                                      >
+                                        {student.cityRegion || `${student.latitude}, ${student.longitude}`}
+                                      </a>
+                                    ) : (
+                                      <span className="text-emerald-300 font-medium">
+                                        {student.cityRegion || `${student.latitude}, ${student.longitude}`}
+                                      </span>
+                                    )}
+                                  </div>
+                                ) : student.locationSource === "manual" || student.cityRegion ? (
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                                      ✍ Manual
+                                    </span>
+                                    <span className="text-amber-200 font-medium">{student.cityRegion}</span>
+                                  </div>
                                 ) : (
-                                  <span>📍 {student.cityRegion}{student.pincode ? ` (${student.pincode})` : ""}</span>
+                                  <span className="text-slate-500 italic flex items-center gap-1">
+                                    <span>❌ Location Denied / Unavailable</span>
+                                  </span>
                                 )}
                                 <span>·</span>
                                 <span>🌐 {student.ipAddress}</span>
                                 <span>·</span>
-                                <span>{student.deviceType === "mobile" ? "📱 Mobile" : "💻 Desktop"} ({student.operatingSystem})</span>
+                                <span>{student.deviceType === "mobile" ? "📱 Mobile" : "💻 Desktop"} ({student.operatingSystem} · {student.browser})</span>
                                 <span>·</span>
                                 <span className="text-teal-400">⚡ {student.studentXp} XP · Streak {student.studentStreak}d</span>
                               </div>
@@ -1039,25 +1109,47 @@ export default function AdminPage() {
                                 <div className="text-[9px] text-slate-400">{student.activeDaysCount} active day{student.activeDaysCount !== 1 ? "s" : ""} · {student.daysSinceFirst}d since first visit</div>
                               </div>
 
-                              {(student.mapsUrl || student.latitude) && (
-                                <div className="col-span-2 sm:col-span-4 p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
-                                  <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
-                                    📍 Exact GPS Location
-                                  </span>
+                              {student.locationSource === "device_gps" || student.latitude || student.cityRegion ? (
+                                <div className="col-span-2 sm:col-span-4 p-3.5 rounded-xl bg-white/[0.03] border border-white/5 space-y-1.5">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-[10px] uppercase text-slate-400 flex items-center gap-1.5 font-bold">
+                                      {student.locationSource === "device_gps" || student.latitude ? (
+                                        <span className="text-emerald-400 flex items-center gap-1">📍 Exact GPS Location (Hardware Device Position)</span>
+                                      ) : (
+                                        <span className="text-amber-400 flex items-center gap-1">✍ Self-Reported Location (GPS was not granted)</span>
+                                      )}
+                                    </span>
+                                    {student.accuracy && (
+                                      <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                        Accuracy: ±{student.accuracy} meters
+                                      </span>
+                                    )}
+                                  </div>
                                   <div className="flex flex-wrap items-center gap-3">
-                                    <span className="font-bold text-white">{student.cityRegion}{student.pincode ? ` — Pincode ${student.pincode}` : ""}</span>
-                                    {student.latitude && <span className="text-slate-400 text-[10px]">Lat {student.latitude}, Lon {student.longitude}</span>}
+                                    <span className="font-bold text-white text-sm">
+                                      {student.cityRegion || "Coordinates recorded"}{student.pincode ? ` — PIN ${student.pincode}` : ""}
+                                    </span>
+                                    {student.latitude && student.longitude && (
+                                      <span className="text-slate-400 text-[10px] font-mono">
+                                        Lat {student.latitude}, Lon {student.longitude}
+                                      </span>
+                                    )}
                                     {student.mapsUrl && (
                                       <a
                                         href={student.mapsUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="px-3 py-1 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 text-[10px] font-bold hover:bg-teal-500/30 transition-colors"
+                                        className="px-3 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold hover:bg-emerald-500/30 transition-colors flex items-center gap-1"
                                       >
-                                        🗺 Open in Google Maps ↗
+                                        <span>🗺 Open in Google Maps</span>
+                                        <span>↗</span>
                                       </a>
                                     )}
                                   </div>
+                                </div>
+                              ) : (
+                                <div className="col-span-2 sm:col-span-4 p-3 rounded-xl bg-white/[0.02] border border-white/5 text-slate-500 text-xs flex items-center gap-2">
+                                  <span>❌ Location Access: Cadet did not permit GPS access and entered no manual location.</span>
                                 </div>
                               )}
                             </div>
@@ -1065,31 +1157,44 @@ export default function AdminPage() {
                             {/* Chronological Visit Session Breakdown */}
                             <div className="space-y-2">
                               <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                                Discrete Study Sessions History ({student.sessions.length})
+                                Discrete Study Sessions History ({student.sessions.length} recorded visits)
                               </div>
 
                               <div className="divide-y divide-white/5 rounded-xl border border-white/5 overflow-hidden bg-black/20">
-                                {student.sessions.map((sess, sessIdx) => (
-                                  <div key={sess.id || sessIdx} className="p-3 flex items-center justify-between gap-3 text-xs font-mono hover:bg-white/[0.02]">
-                                    <div className="flex items-center gap-2.5">
-                                      <span className="w-5 text-center font-bold text-teal-400">#{student.sessions.length - sessIdx}</span>
-                                      <span className="text-slate-300">
-                                        {new Date(sess.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
-                                      </span>
-                                      <span className="px-2 py-0.5 rounded bg-white/5 text-amber-300 font-bold border border-white/10">
-                                        {sess.activeSubject.toUpperCase()} · {sess.activeTab}
-                                      </span>
-                                      {sess.activeChapter && (
-                                        <span className="text-slate-400">({sess.activeChapter})</span>
-                                      )}
-                                    </div>
+                                {student.sessions.map((sess, sessIdx) => {
+                                  const sessDate = new Date(sess.visitStartedAt || sess.createdAt);
+                                  const lastDate = sess.lastSeenAt ? new Date(sess.lastSeenAt) : null;
+                                  return (
+                                    <div key={sess.id || sessIdx} className="p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono hover:bg-white/[0.02]">
+                                      <div className="flex flex-wrap items-center gap-2.5">
+                                        <span className="w-5 text-center font-bold text-teal-400">#{student.sessions.length - sessIdx}</span>
+                                        <span className="text-slate-200 font-bold">
+                                          {sessDate.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })},{" "}
+                                          {sessDate.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                                        </span>
+                                        {lastDate && lastDate.getTime() - sessDate.getTime() > 60000 && (
+                                          <span className="text-[10px] text-slate-500">
+                                            (Active until {lastDate.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })})
+                                          </span>
+                                        )}
+                                        <span className="px-2 py-0.5 rounded bg-white/5 text-amber-300 font-bold border border-white/10">
+                                          {sess.activeSubject.toUpperCase()} · {sess.activeTab}
+                                        </span>
+                                        {sess.activeChapter && (
+                                          <span className="text-slate-400">({sess.activeChapter})</span>
+                                        )}
+                                      </div>
 
-                                    <div className="flex items-center gap-3 text-slate-400">
-                                      <span>⏱️ {sess.durationSeconds > 60 ? `${Math.round(sess.durationSeconds / 60)}m` : `${sess.durationSeconds}s`}</span>
-                                      <span>🔗 {sess.referrer}</span>
+                                      <div className="flex items-center gap-3 text-slate-400 text-[11px]">
+                                        <span>⏱️ {sess.durationSeconds > 60 ? `${Math.round(sess.durationSeconds / 60)}m` : `${sess.durationSeconds}s`}</span>
+                                        <span>🔗 {sess.referrer || "direct"}</span>
+                                        {sess.locationSource === "device_gps" && (
+                                          <span className="text-emerald-400 font-bold text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">📍 GPS</span>
+                                        )}
+                                      </div>
                                     </div>
-                                  </div>
-                                ))}
+                                  );
+                                })}
                               </div>
                             </div>
                           </div>
@@ -1101,55 +1206,160 @@ export default function AdminPage() {
               )}
 
               {/* ============================================================= */}
-              {/* VIEW 2: RAW EVENT LOG STREAM */}
+              {/* VIEW 2: COMPLETE STUDENT VISIT HISTORY STREAM */}
               {/* ============================================================= */}
               {streamViewMode === "events" && (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs font-mono">
-                    <thead>
-                      <tr className={`border-b ${isDark ? "border-white/10 text-slate-400" : "border-slate-200 text-slate-600"}`}>
-                        <th className="py-3 px-3">Time</th>
-                        <th className="py-3 px-3">Student Name</th>
-                        <th className="py-3 px-3">Visitor ID</th>
-                        <th className="py-3 px-3">IP / Location</th>
-                        <th className="py-3 px-3">Device & OS</th>
-                        <th className="py-3 px-3">Active Chapter</th>
-                        <th className="py-3 px-3">Duration</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/5">
-                      {(analytics?.recentEvents || []).map((ev) => (
-                        <tr key={ev.id} className="hover:bg-white/[0.02] transition-colors">
-                          <td className="py-3 px-3 text-slate-400 whitespace-nowrap">
-                            {new Date(ev.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
-                          </td>
-                          <td className="py-3 px-3 font-bold text-white whitespace-nowrap">
-                            {ev.studentName}
-                          </td>
-                          <td className="py-3 px-3 text-teal-400 whitespace-nowrap">
-                            {ev.visitorId.slice(0, 14)}...
-                          </td>
-                          <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
-                            {ev.ipAddress}
-                          </td>
-                          <td className="py-3 px-3 whitespace-nowrap">
-                            <span className="flex items-center gap-1.5">
-                              <span>{ev.deviceType === "mobile" ? "📱" : "💻"}</span>
-                              <span>{ev.operatingSystem}</span>
-                            </span>
-                          </td>
-                          <td className="py-3 px-3 whitespace-nowrap">
-                            <span className="px-2 py-0.5 rounded bg-white/5 text-amber-300 font-bold border border-white/10">
-                              {ev.activeSubject.toUpperCase()} · {ev.activeChapter || ev.activeTab}
-                            </span>
-                          </td>
-                          <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
-                            {ev.durationSeconds > 60 ? `${Math.round(ev.durationSeconds / 60)}m` : `${ev.durationSeconds}s`}
-                          </td>
+                <div className="space-y-4">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs font-mono">
+                      <thead>
+                        <tr className={`border-b ${isDark ? "border-white/10 text-slate-400" : "border-slate-200 text-slate-600"}`}>
+                          <th className="py-3 px-3 whitespace-nowrap">Visit Timestamp (IST)</th>
+                          <th className="py-3 px-3 whitespace-nowrap">Cadet / Student</th>
+                          <th className="py-3 px-3 whitespace-nowrap">Verified Location</th>
+                          <th className="py-3 px-3 whitespace-nowrap">IP & Network</th>
+                          <th className="py-3 px-3 whitespace-nowrap">Device & Browser</th>
+                          <th className="py-3 px-3 whitespace-nowrap">Subject & Topic</th>
+                          <th className="py-3 px-3 whitespace-nowrap">Visit Duration</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {filteredEvents.length === 0 ? (
+                          <tr>
+                            <td colSpan={7} className="py-8 text-center text-slate-500">
+                              No visits found matching your filter criteria.
+                            </td>
+                          </tr>
+                        ) : (
+                          filteredEvents.map((ev) => {
+                            const visitTime = new Date(ev.visitStartedAt || ev.createdAt);
+                            const lastActiveTime = ev.lastSeenAt ? new Date(ev.lastSeenAt) : null;
+                            const hasGps = ev.locationSource === "device_gps" || (ev.latitude && ev.longitude);
+                            const hasManual = ev.locationSource === "manual" || (!hasGps && ev.cityRegion);
+
+                            return (
+                              <tr key={ev.id} className="hover:bg-white/[0.02] transition-colors">
+                                {/* Timestamp IST */}
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <div className="text-white font-bold">
+                                    {visitTime.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
+                                  </div>
+                                  <div className="text-[11px] text-slate-400">
+                                    {visitTime.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} IST
+                                  </div>
+                                  {lastActiveTime && lastActiveTime.getTime() - visitTime.getTime() > 60000 && (
+                                    <div className="text-[9px] text-slate-500">
+                                      until {lastActiveTime.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                                    </div>
+                                  )}
+                                </td>
+
+                                {/* Student Name & Visitor ID */}
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <div className="font-bold text-white">
+                                    {ev.studentName}
+                                  </div>
+                                  <div className="text-[10px] text-teal-400">
+                                    {ev.visitorId.slice(0, 16)}...
+                                  </div>
+                                </td>
+
+                                {/* Verified Location */}
+                                <td className="py-3 px-3">
+                                  {hasGps ? (
+                                    <div className="space-y-0.5 min-w-[200px]">
+                                      <div className="flex items-center gap-1.5">
+                                        <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                          📍 GPS {ev.accuracy ? `±${ev.accuracy}m` : "Verified"}
+                                        </span>
+                                        {ev.mapsUrl && (
+                                          <a
+                                            href={ev.mapsUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-emerald-300 hover:text-emerald-200 text-[10px] font-bold underline"
+                                          >
+                                            Map ↗
+                                          </a>
+                                        )}
+                                      </div>
+                                      <div className="text-emerald-200 font-medium text-xs">
+                                        {ev.cityRegion || `${ev.latitude}, ${ev.longitude}`}{ev.pincode ? ` (${ev.pincode})` : ""}
+                                      </div>
+                                    </div>
+                                  ) : hasManual ? (
+                                    <div className="space-y-0.5 min-w-[160px]">
+                                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                                        ✍ Manual
+                                      </span>
+                                      <div className="text-amber-200 font-medium text-xs">
+                                        {ev.cityRegion}
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <span className="text-slate-500 italic text-xs">
+                                      ❌ Denied / Unavailable
+                                    </span>
+                                  )}
+                                </td>
+
+                                {/* IP Address & Network */}
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <div className="text-slate-200">{ev.ipAddress}</div>
+                                  <div className="text-[10px] text-slate-500">{ev.networkType || "Broadband/WiFi"}</div>
+                                </td>
+
+                                {/* Device & Browser */}
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <div className="flex items-center gap-1.5 text-slate-200">
+                                    <span>{ev.deviceType === "mobile" ? "📱" : "💻"}</span>
+                                    <span>{ev.operatingSystem}</span>
+                                  </div>
+                                  <div className="text-[10px] text-slate-400">{ev.browser}</div>
+                                </td>
+
+                                {/* Active Subject & Chapter */}
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  <span className="px-2 py-0.5 rounded bg-white/5 text-amber-300 font-bold border border-white/10">
+                                    {ev.activeSubject.toUpperCase()}
+                                  </span>
+                                  <div className="text-[10px] text-slate-400 mt-0.5 truncate max-w-[140px]">
+                                    {ev.activeChapter || ev.activeTab}
+                                  </div>
+                                </td>
+
+                                {/* Duration */}
+                                <td className="py-3 px-3 whitespace-nowrap text-slate-200 font-bold">
+                                  ⏱️ {ev.durationSeconds > 60 ? `${Math.round(ev.durationSeconds / 60)}m` : `${ev.durationSeconds}s`}
+                                </td>
+                              </tr>
+                            );
+                          })
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Visit Summary Footer */}
+                  <div className="flex flex-col sm:flex-row justify-between items-center gap-3 pt-3 border-t border-white/5 text-xs text-slate-400 font-mono">
+                    <span>
+                      Showing <strong>{filteredEvents.length}</strong> recorded visits (All-time history)
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => fetchAnalytics()}
+                        className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:text-white text-xs font-bold cursor-pointer"
+                      >
+                        🔄 Refresh Visits
+                      </button>
+                      <button
+                        onClick={handleExportCSV}
+                        className="px-3 py-1.5 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-300 hover:bg-teal-500/30 text-xs font-bold cursor-pointer"
+                      >
+                        📥 Export CSV
+                      </button>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
