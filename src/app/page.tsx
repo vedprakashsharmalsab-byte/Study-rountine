@@ -954,30 +954,101 @@ export default function CBSECommandCenter() {
     }
   }, [conceptsSubject, conceptsChapterNo]);
 
-  // Mandatory First-Time Student Legit Name Onboarding State
+  // Mandatory First-Time Student Legit Name & Exact Location Onboarding State
   const [studentFullName, setStudentFullName] = useState<string>("");
   const [isNameModalOpen, setIsNameModalOpen] = useState<boolean>(false);
   const [nameInput, setNameInput] = useState<string>("");
+  const [locationInput, setLocationInput] = useState<string>("");
   const [sectionInput, setSectionInput] = useState<string>("Class 10-A");
+  const [isDetectingLocation, setIsDetectingLocation] = useState<boolean>(false);
   const [nameError, setNameError] = useState<string>("");
 
   useEffect(() => {
     try {
       const savedName = localStorage.getItem("cbse_student_name");
+      const savedLoc = localStorage.getItem("cbse_student_location");
+      if (savedLoc) setLocationInput(savedLoc);
+
       if (savedName && savedName.trim().length >= 3) {
         setStudentFullName(savedName);
       } else {
-        // First-time visitor! Prompt for their legitimate CBSE student name
+        // First-time visitor! Prompt for their legitimate CBSE student name & location
         setIsNameModalOpen(true);
       }
+
+      // Fetch accurate real-world IP and City
+      fetch("https://ipwho.is/")
+        .then((r) => r.json())
+        .then((d) => {
+          if (d && d.success) {
+            const detected = `${d.city}, ${d.region || d.country}`;
+            localStorage.setItem("cbse_detected_location", detected);
+            localStorage.setItem("cbse_client_ip", d.ip || "");
+            localStorage.setItem("cbse_client_isp", d.connection?.isp || d.isp || "Broadband");
+            if (!localStorage.getItem("cbse_student_location")) {
+              setLocationInput(detected);
+            }
+          }
+        })
+        .catch(() => {});
     } catch {
       setIsNameModalOpen(true);
     }
   }, []);
 
+  const detectExactGpsLocation = () => {
+    setIsDetectingLocation(true);
+    if (typeof navigator !== "undefined" && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          try {
+            const { latitude, longitude } = pos.coords;
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10`);
+            const data = await res.json();
+            if (data && data.address) {
+              const city = data.address.city || data.address.town || data.address.district || data.address.county || data.address.state_district || "City";
+              const state = data.address.state || "India";
+              const exact = `${city}, ${state}`;
+              setLocationInput(exact);
+              localStorage.setItem("cbse_student_location", exact);
+            }
+          } catch {
+            fetch("https://ipwho.is/")
+              .then((r) => r.json())
+              .then((d) => {
+                if (d && d.success) {
+                  const loc = `${d.city}, ${d.region || d.country}`;
+                  setLocationInput(loc);
+                  localStorage.setItem("cbse_student_location", loc);
+                }
+              });
+          } finally {
+            setIsDetectingLocation(false);
+          }
+        },
+        () => {
+          fetch("https://ipwho.is/")
+            .then((r) => r.json())
+            .then((d) => {
+              if (d && d.success) {
+                const loc = `${d.city}, ${d.region || d.country}`;
+                setLocationInput(loc);
+                localStorage.setItem("cbse_student_location", loc);
+              }
+            })
+            .finally(() => setIsDetectingLocation(false));
+        },
+        { timeout: 8000 }
+      );
+    } else {
+      setIsDetectingLocation(false);
+    }
+  };
+
   const handleSaveStudentName = (e: React.FormEvent) => {
     e.preventDefault();
     const cleanName = nameInput.trim();
+    const cleanLocation = locationInput.trim() || localStorage.getItem("cbse_detected_location") || "Delhi, India";
 
     // Authenticity checks: Must be a legitimate name (at least 3 chars, not generic junk)
     if (cleanName.length < 3) {
@@ -996,6 +1067,7 @@ export default function CBSECommandCenter() {
 
     try {
       localStorage.setItem("cbse_student_name", cleanName);
+      localStorage.setItem("cbse_student_location", cleanLocation);
       localStorage.setItem("cbse_student_section", sectionInput);
       localStorage.setItem("cbse_student_username", cleanName);
       localStorage.setItem("lsa_student_name", cleanName);
@@ -1006,7 +1078,7 @@ export default function CBSECommandCenter() {
     playSound("levelup");
     setIsNameModalOpen(false);
 
-    // Immediately transmit telemetry beacon with the legitimate student name!
+    // Immediately transmit telemetry beacon with the legitimate student name and EXACT location!
     try {
       const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
       const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
@@ -1017,6 +1089,9 @@ export default function CBSECommandCenter() {
           visitorId,
           sessionId,
           studentName: cleanName,
+          cityRegion: cleanLocation,
+          ipAddress: localStorage.getItem("cbse_client_ip") || "",
+          networkType: `${localStorage.getItem("cbse_client_isp") || "Broadband"} (${(navigator as any).connection?.effectiveType?.toUpperCase() || "WiFi"})`,
           studentXp: 50,
           studentStreak: 1,
           studentLevel: 1,
@@ -1118,17 +1193,22 @@ export default function CBSECommandCenter() {
     const sendBeacon = (duration = 0) => {
       try {
         const studentName =
+          localStorage.getItem("cbse_student_name") ||
           localStorage.getItem("cbse_student_username") ||
-          localStorage.getItem("lsa_student_name") ||
-          "Student Aspirant";
+          studentFullName ||
+          "Cadet (Pending Enrollment)";
+        const exactLocation =
+          localStorage.getItem("cbse_student_location") ||
+          localStorage.getItem("cbse_detected_location") ||
+          "Delhi, India";
+        const clientIp = localStorage.getItem("cbse_client_ip") || "";
+        const clientIsp = localStorage.getItem("cbse_client_isp") || "Broadband";
         const studentXp = parseInt(localStorage.getItem("cbse_total_xp") || "0", 10);
         const studentStreak = parseInt(localStorage.getItem("cbse_study_streak") || "1", 10);
         const studentLevel = parseInt(localStorage.getItem("cbse_user_level") || "1", 10);
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata";
         const lang = navigator.language || "en-IN";
-        const netType = (navigator as any).connection?.effectiveType
-          ? (navigator as any).connection.effectiveType.toUpperCase()
-          : "Broadband/WiFi";
+        const netType = `${clientIsp} (${(navigator as any).connection?.effectiveType ? (navigator as any).connection.effectiveType.toUpperCase() : "WiFi"})`;
         const specs = `${(navigator as any).deviceMemory ? (navigator as any).deviceMemory + "GB RAM · " : ""}${navigator.hardwareConcurrency ? navigator.hardwareConcurrency + " Cores · " : ""}${window.screen.width}x${window.screen.height}`;
 
         const payload = {
@@ -1141,6 +1221,8 @@ export default function CBSECommandCenter() {
           durationSeconds: duration,
           screenResolution: `${window.innerWidth}x${window.innerHeight}`,
           studentName,
+          cityRegion: exactLocation,
+          ipAddress: clientIp,
           studentXp,
           studentStreak,
           studentLevel,
@@ -7049,6 +7131,38 @@ export default function CBSECommandCenter() {
                 />
                 <span className="text-[10px] font-mono text-slate-400 block">
                   Please enter your real first and last name (e.g. Aarav Sharma).
+                </span>
+              </div>
+
+              <div className="space-y-1.5">
+                <div className="flex justify-between items-center">
+                  <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                    <span>Current City / District & State</span>
+                    <span className="text-amber-400">*</span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={detectExactGpsLocation}
+                    disabled={isDetectingLocation}
+                    className="text-[10px] font-mono font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>{isDetectingLocation ? "📍 Locating..." : "📍 Auto-Detect Location"}</span>
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  required
+                  value={locationInput}
+                  onChange={(e) => setLocationInput(e.target.value)}
+                  placeholder="e.g. Churu, Rajasthan or Jaipur or Delhi"
+                  className={`w-full px-4 py-3 rounded-xl font-medium text-sm border focus:outline-none transition-all ${
+                    isDark
+                      ? "bg-black/40 border-white/10 text-white placeholder-slate-500 focus:border-amber-400"
+                      : "bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:border-amber-500"
+                  }`}
+                />
+                <span className="text-[10px] font-mono text-slate-400 block">
+                  Authentic regional identification for your CBSE Examination Center.
                 </span>
               </div>
 

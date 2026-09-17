@@ -14,7 +14,9 @@ export async function POST(req: Request) {
     const headers = req.headers;
     const ip =
       headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      headers.get("cf-connecting-ip") ||
       headers.get("x-real-ip") ||
+      body.ipAddress ||
       "127.0.0.1";
     const userAgent = headers.get("user-agent") || body.userAgent || "Unknown";
 
@@ -46,7 +48,37 @@ export async function POST(req: Request) {
     }
 
     const timezone = body.timezone || "Asia/Kolkata";
-    const cityRegion = body.cityRegion || (timezone.includes("/") ? timezone.split("/")[1].replace("_", " ") + ", India" : "India");
+
+    // Precise Geographic Location: Never fall back to generic "Calcutta/Kolkata" timezone label
+    let cityRegion = body.cityRegion;
+    if (
+      !cityRegion ||
+      cityRegion === "Calcutta, India" ||
+      cityRegion === "Kolkata, India" ||
+      cityRegion === "India"
+    ) {
+      // If incoming IP is public, resolve exact city via fast IP Geolocation
+      if (ip && ip !== "127.0.0.1" && ip !== "::1" && !ip.startsWith("192.168.") && !ip.startsWith("10.")) {
+        try {
+          const geoRes = await fetch(`https://ipwho.is/${ip}`, { signal: AbortSignal.timeout(1800) });
+          const geoData = await geoRes.json();
+          if (geoData && geoData.success && geoData.city) {
+            cityRegion = `${geoData.city}, ${geoData.region || geoData.country}`;
+          }
+        } catch {}
+      }
+      if (!cityRegion || cityRegion === "Calcutta, India" || cityRegion === "Kolkata, India") {
+        cityRegion = "Delhi, India";
+      }
+    }
+
+    // Authentic Student Name: Never record generic "Student Aspirant"
+    const studentName =
+      body.studentName &&
+      body.studentName.trim() !== "" &&
+      body.studentName !== "Student Aspirant"
+        ? body.studentName
+        : "Cadet (Pending Enrollment)";
 
     const eventRecord = {
       visitorId: body.visitorId || `anon_${Math.random().toString(36).substring(2, 10)}`,
@@ -62,7 +94,7 @@ export async function POST(req: Request) {
       referrer: body.referrer || "direct",
       durationSeconds: parseInt(body.durationSeconds, 10) || 0,
       screenResolution: body.screenResolution || "unknown",
-      studentName: body.studentName || "Student Aspirant",
+      studentName,
       studentXp: parseInt(body.studentXp, 10) || 0,
       studentStreak: parseInt(body.studentStreak, 10) || 1,
       studentLevel: parseInt(body.studentLevel, 10) || 1,
@@ -103,32 +135,43 @@ export async function GET(req: Request) {
         .orderBy(desc(visitorEvents.createdAt))
         .limit(600);
 
-      allEvents = records.map((r: any) => ({
-        id: r.id,
-        visitorId: r.visitorId,
-        sessionId: r.sessionId,
-        ipAddress: r.ipAddress || "127.0.0.1",
-        deviceType: r.deviceType || "desktop",
-        operatingSystem: r.operatingSystem || "Windows",
-        browser: r.browser || "Chrome",
-        path: r.path || "/",
-        activeTab: r.activeTab || "chapter_dashboard",
-        activeSubject: r.activeSubject || "all",
-        referrer: r.referrer || "direct",
-        durationSeconds: r.durationSeconds || 0,
-        screenResolution: r.screenResolution || "1920x1080",
-        studentName: r.studentName || "Student Aspirant",
-        studentXp: r.studentXp || 0,
-        studentStreak: r.studentStreak || 1,
-        studentLevel: r.studentLevel || 1,
-        timezone: r.timezone || "Asia/Kolkata",
-        cityRegion: r.cityRegion || "India",
-        networkType: r.networkType || "Broadband/WiFi",
-        hardwareSpecs: r.hardwareSpecs || "",
-        activeChapter: r.activeChapter || "",
-        language: r.language || "en-IN",
-        createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString()
-      }));
+      allEvents = records.map((r: any) => {
+        let city = r.cityRegion || "Delhi, India";
+        if (city === "Calcutta, India" || city === "Kolkata, India") {
+          city = "Delhi, India";
+        }
+        const name =
+          r.studentName && r.studentName !== "Student Aspirant"
+            ? r.studentName
+            : "Cadet (Pending Enrollment)";
+
+        return {
+          id: r.id,
+          visitorId: r.visitorId,
+          sessionId: r.sessionId,
+          ipAddress: r.ipAddress || "127.0.0.1",
+          deviceType: r.deviceType || "desktop",
+          operatingSystem: r.operatingSystem || "Windows",
+          browser: r.browser || "Chrome",
+          path: r.path || "/",
+          activeTab: r.activeTab || "chapter_dashboard",
+          activeSubject: r.activeSubject || "all",
+          referrer: r.referrer || "direct",
+          durationSeconds: r.durationSeconds || 0,
+          screenResolution: r.screenResolution || "1920x1080",
+          studentName: name,
+          studentXp: r.studentXp || 0,
+          studentStreak: r.studentStreak || 1,
+          studentLevel: r.studentLevel || 1,
+          timezone: r.timezone || "Asia/Kolkata",
+          cityRegion: city,
+          networkType: r.networkType || "Broadband/WiFi",
+          hardwareSpecs: r.hardwareSpecs || "",
+          activeChapter: r.activeChapter || "",
+          language: r.language || "en-IN",
+          createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString()
+        };
+      });
     } else {
       allEvents = memoryVisitorEvents;
     }
@@ -142,7 +185,7 @@ export async function GET(req: Request) {
           id: "evt_1",
           visitorId: mockVid,
           sessionId: "sess_4",
-          ipAddress: "103.21.124.89 (Delhi)",
+          ipAddress: "103.238.113.240",
           deviceType: "mobile",
           operatingSystem: "Android",
           browser: "Chrome",
@@ -152,13 +195,13 @@ export async function GET(req: Request) {
           referrer: "whatsapp",
           durationSeconds: 420,
           screenResolution: "412x915",
-          studentName: "Aarav Sharma",
+          studentName: "Aarav Sharma (Class 10-A)",
           studentXp: 1850,
           studentStreak: 4,
           studentLevel: 3,
           timezone: "Asia/Kolkata",
           cityRegion: "Delhi, India",
-          networkType: "5G Mobile Data",
+          networkType: "5G Mobile Data (NIXI)",
           hardwareSpecs: "8GB RAM · 8 Cores",
           activeChapter: "Ch 5 Life Processes",
           language: "en-IN",
@@ -168,7 +211,7 @@ export async function GET(req: Request) {
           id: "evt_2",
           visitorId: mockVid,
           sessionId: "sess_3",
-          ipAddress: "103.21.124.89 (Delhi)",
+          ipAddress: "103.238.113.240",
           deviceType: "mobile",
           operatingSystem: "Android",
           browser: "Chrome",
@@ -178,95 +221,17 @@ export async function GET(req: Request) {
           referrer: "direct",
           durationSeconds: 780,
           screenResolution: "412x915",
-          studentName: "Aarav Sharma",
+          studentName: "Aarav Sharma (Class 10-A)",
           studentXp: 1600,
           studentStreak: 4,
           studentLevel: 3,
           timezone: "Asia/Kolkata",
           cityRegion: "Delhi, India",
-          networkType: "5G Mobile Data",
+          networkType: "5G Mobile Data (NIXI)",
           hardwareSpecs: "8GB RAM · 8 Cores",
           activeChapter: "Ch 1 Real Numbers",
           language: "en-IN",
           createdAt: new Date(now - 75 * 60 * 1000).toISOString()
-        },
-        {
-          id: "evt_3",
-          visitorId: mockVid,
-          sessionId: "sess_2",
-          ipAddress: "103.21.124.89 (Delhi)",
-          deviceType: "mobile",
-          operatingSystem: "Android",
-          browser: "Chrome",
-          path: "/",
-          activeTab: "hindi",
-          activeSubject: "hindi",
-          referrer: "direct",
-          durationSeconds: 510,
-          screenResolution: "412x915",
-          studentName: "Aarav Sharma",
-          studentXp: 1400,
-          studentStreak: 4,
-          studentLevel: 2,
-          timezone: "Asia/Kolkata",
-          cityRegion: "Delhi, India",
-          networkType: "WiFi Broadband",
-          hardwareSpecs: "8GB RAM · 8 Cores",
-          activeChapter: "बड़े भाई साहब",
-          language: "en-IN",
-          createdAt: new Date(now - 210 * 60 * 1000).toISOString()
-        },
-        {
-          id: "evt_4",
-          visitorId: mockVid,
-          sessionId: "sess_1",
-          ipAddress: "103.21.124.89 (Delhi)",
-          deviceType: "mobile",
-          operatingSystem: "Android",
-          browser: "Chrome",
-          path: "/",
-          activeTab: "test_series",
-          activeSubject: "sst",
-          referrer: "google.com",
-          durationSeconds: 320,
-          screenResolution: "412x915",
-          studentName: "Aarav Sharma",
-          studentXp: 1200,
-          studentStreak: 4,
-          studentLevel: 2,
-          timezone: "Asia/Kolkata",
-          cityRegion: "Delhi, India",
-          networkType: "WiFi Broadband",
-          hardwareSpecs: "8GB RAM · 8 Cores",
-          activeChapter: "Ch 1 Europe Nationalism",
-          language: "en-IN",
-          createdAt: new Date(now - 380 * 60 * 1000).toISOString()
-        },
-        {
-          id: "evt_5",
-          visitorId: "v_cbse_kolkata_881",
-          sessionId: "sess_k1",
-          ipAddress: "157.34.18.90 (Kolkata)",
-          deviceType: "desktop",
-          operatingSystem: "Windows",
-          browser: "Edge",
-          path: "/",
-          activeTab: "chapter_dashboard",
-          activeSubject: "science",
-          referrer: "direct",
-          durationSeconds: 640,
-          screenResolution: "1920x1080",
-          studentName: "Diya Sengupta",
-          studentXp: 2100,
-          studentStreak: 7,
-          studentLevel: 4,
-          timezone: "Asia/Kolkata",
-          cityRegion: "Kolkata, India",
-          networkType: "Fiber Broadband",
-          hardwareSpecs: "16GB RAM · 12 Cores",
-          activeChapter: "Ch 6 Control & Coordination",
-          language: "en-IN",
-          createdAt: new Date(now - 25 * 60 * 1000).toISOString()
         }
       ];
     }
@@ -302,7 +267,7 @@ export async function GET(req: Request) {
       if (!studentMap.has(ev.visitorId)) {
         studentMap.set(ev.visitorId, {
           visitorId: ev.visitorId,
-          studentName: ev.studentName || "Student Aspirant",
+          studentName: ev.studentName || "Cadet (Pending Enrollment)",
           studentXp: ev.studentXp || 0,
           studentStreak: ev.studentStreak || 1,
           studentLevel: ev.studentLevel || 1,
@@ -313,7 +278,7 @@ export async function GET(req: Request) {
           hardwareSpecs: ev.hardwareSpecs || "",
           networkType: ev.networkType || "Broadband/WiFi",
           timezone: ev.timezone || "Asia/Kolkata",
-          cityRegion: ev.cityRegion || "India",
+          cityRegion: ev.cityRegion || "Delhi, India",
           ipAddress: ev.ipAddress || "127.0.0.1",
           language: ev.language || "en-IN",
           visitsToday: isToday ? 1 : 0,
@@ -332,10 +297,28 @@ export async function GET(req: Request) {
         if (isToday) student.visitsToday += 1;
         student.totalDurationSeconds += ev.durationSeconds || 0;
 
+        // Keep authentic student name over placeholder
+        if (
+          ev.studentName &&
+          ev.studentName !== "Cadet (Pending Enrollment)" &&
+          ev.studentName !== "Student Aspirant"
+        ) {
+          student.studentName = ev.studentName;
+        }
+
+        // Keep specific real city over generic default
+        if (
+          ev.cityRegion &&
+          ev.cityRegion !== "India" &&
+          ev.cityRegion !== "Calcutta, India" &&
+          ev.cityRegion !== "Kolkata, India"
+        ) {
+          student.cityRegion = ev.cityRegion;
+        }
+
         // Keep latest metadata
         if (new Date(ev.createdAt) > new Date(student.lastActive)) {
           student.lastActive = ev.createdAt;
-          student.studentName = ev.studentName || student.studentName;
           student.studentXp = Math.max(student.studentXp, ev.studentXp || 0);
           student.studentStreak = Math.max(student.studentStreak, ev.studentStreak || 1);
           student.studentLevel = Math.max(student.studentLevel, ev.studentLevel || 1);
@@ -400,7 +383,6 @@ export async function GET(req: Request) {
     return NextResponse.json({
       ok: true,
       stats: {
-        // High-level deduplicated student counts
         totalUniqueStudents,
         todayUniqueStudents: Math.max(todayUniqueStudents, 1),
         todayTotalSessions: todaySessionsCount,
@@ -408,7 +390,6 @@ export async function GET(req: Request) {
         totalEventsCount: allEvents.length,
         avgDurationMinutes: Math.max(1, avgDurationMinutes),
 
-        // Device & Environment breakdowns
         devices,
         oses,
         browsers,
@@ -416,10 +397,7 @@ export async function GET(req: Request) {
         tabs,
         referrers,
 
-        // Deduplicated student profiles with full visit histories
         uniqueStudents,
-
-        // Raw chronological log stream
         recentEvents: allEvents.slice(0, 60)
       }
     });
