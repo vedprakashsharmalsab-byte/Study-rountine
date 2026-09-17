@@ -689,3 +689,325 @@ export const SST_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     ]
   }
 };
+
+// =========================================================================
+// CBSE Class 10 Hindi Course B (Code 085) Official Blueprints & Rubrics
+// Standards: CBSE Official Curriculum 2026-2027
+// Theory: 80 Marks | Internal: 20 Marks | Total: 100 Marks
+// Khand 'A' (Objective MCQs: 40 Marks) | Khand 'B' (Descriptive Q&A + Writing: 40 Marks)
+// =========================================================================
+
+export const HINDI_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
+  1: {
+    chapterNo: 1,
+    chapterName: "बड़े भाई साहब (प्रेमचंद)",
+    unitName: "स्पर्श भाग-२ (गद्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "दो भाइयों के स्वभावगत अंतर (किताबी रटन बनाम व्यावहारिक बुद्धि)", marks: "1.0 Mark", rubricNote: "स्पष्ट तुलनात्मक बिंदु" },
+      { step: "रावण, शाहेरुम व चक्रवर्ती राजाओं के पतन के ऐतिहासिक उदाहरण", marks: "1.0 Mark", rubricNote: "अहंकार के दुष्परिणाम" },
+      { step: "पतंगबाजी की घटना व बड़े भाई का बड़प्पन एवं कर्तव्य-बोध", marks: "1.0 Mark", rubricNote: "अंतिम मार्मिक संवाद" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for spelling errors in character names (e.g. शाहेरुम, रावण).",
+      "-1.0 Mark if student fails to explain the core message: 'अनुभव किताबी ज्ञान से बड़ा होता है'."
+    ]
+  },
+  2: {
+    chapterNo: 2,
+    chapterName: "डायरी का एक पन्ना (सीताराम सेकसरिया)",
+    unitName: "स्पर्श भाग-२ (गद्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "3–4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "26 जनवरी 1931 कोलकाता का ऐतिहासिक महत्व व प्रथम स्वतंत्रता दिवस का उत्साह", marks: "1.0 Mark", rubricNote: "कोलकाता पर लगे कलंक का परिमार्जन" },
+      { step: "पुलिस कमिश्नर की नोटिस बनाम राष्ट्रीय काउंसिल का खुला आह्वान", marks: "1.0 Mark", rubricNote: "अभूतपूर्व जन-आंदोलन" },
+      { step: "सुभाष चंद्र बोस का नेतृत्व, पुलिसिया लाठीचार्ज व जानकी देवी/मदालसा का योगदान", marks: "1.0 Mark", rubricNote: "महिला सत्याग्रहियों का साहस" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for incorrect date (It is 26 January 1931, not 1930 or 1947).",
+      "-0.5 Mark for omitting the role of women in the Monument march."
+    ]
+  },
+  3: {
+    chapterNo: 3,
+    chapterName: "तँतारा-वामीरो कथा (लीलाधर मंडलोई)",
+    unitName: "स्पर्श भाग-२ (गद्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "तँतारा का परोपकारी चरित्र व उसकी रहस्यमयी लकड़ी की तलवार", marks: "1.0 Mark", rubricNote: "निःस्वार्थ जनसेवा" },
+      { step: "पासा और लपाती गाँव की रूढ़िवादी वैवाहिक परंपरा का विरोध", marks: "1.0 Mark", rubricNote: "युवा पीढ़ी का विद्रोह" },
+      { step: "क्रोध में धरती का दो टुकड़ों में फटना व रूढ़ियों के अंत हेतु आत्मबलिदान", marks: "1.0 Mark", rubricNote: "रूढ़ियाँ जब बंधन बन जाएँ तो टूटना ही श्रेयस्कर है" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing village names (तँतारा पासा गाँव का था, वामीरो लपाती गाँव की थी).",
+      "-0.5 Mark for spelling errors in 'तँतारा' (चंद्रबिंदु अनिवार्य)."
+    ]
+  },
+  4: {
+    chapterNo: 4,
+    chapterName: "तीसरी कसम के शिल्पकार शैलेंद्र (प्रहलाद अग्रवाल)",
+    unitName: "स्पर्श भाग-२ (गद्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "3–4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "शैलेंद्र की संवेदनशीलता व साहित्यिक निष्ठा (मारे गए गुलफाम पर फिल्म निर्माण)", marks: "1.0 Mark", rubricNote: "व्यावसायिक समझौते से इनकार" },
+      { step: "राजकपूर की मित्रता व 'एक रुपया एडवांस' का प्रसंग", marks: "1.0 Mark", rubricNote: "कलाकार के प्रति आदर" },
+      { step: "फिल्म के गीतों का दार्शनिक संदेश ('रातों दसों दिशाओं से कहेंगी अपनी कहानियाँ')", marks: "1.0 Mark", rubricNote: "राष्ट्रपति स्वर्ण पदक उपलब्धि" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for misidentifying the original author of the story (फणीश्वरनाथ 'रेणु')."
+    ]
+  },
+  5: {
+    chapterNo: 5,
+    chapterName: "अब कहाँ दूसरे के दुख से दुखी होने वाले (निदा फाज़ली)",
+    unitName: "स्पर्श भाग-२ (गद्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "प्रकृति की सह-अस्तित्व की भावना व मानवीय स्वार्थ का दुष्परिणाम", marks: "1.0 Mark", rubricNote: "कंक्रीट के जंगल व बेघर होते पक्षी" },
+      { step: "सुलेमान व चींटियों का संवाद एवं हज़रत नूह का जीवन भर का पश्चाताप", marks: "1.0 Mark", rubricNote: "पशु-पक्षियों के प्रति संवेदनशीलता" },
+      { step: "लेखक की माँ द्वारा कबूतर के अंडे टूटने पर दिन भर का रोज़ा रखना", marks: "1.0 Mark", rubricNote: "प्रायश्चित व करुणा का अनुपम उदाहरण" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing Sheikh Ayaz's father (चींटे को घर छोड़ने जाना) with Hazrat Nooh."
+    ]
+  },
+  6: {
+    chapterNo: 6,
+    chapterName: "पतझर में टूटी पत्तियाँ (रवींद्र केलेकर)",
+    unitName: "स्पर्श भाग-२ (गद्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "3–4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "गिन्नी का सोना: शुद्ध आदर्श (शुद्ध सोना) बनाम व्यावहारिकता (ताँबा मिला सोना)", marks: "1.0 Mark", rubricNote: "गाँधी जी का प्रैक्टिकल आइडियलिस्ट होना" },
+      { step: "झेन की देन: जापानी टी-सेरेमनी (चा-नो-यू) की शांत वातावरण संरचना", marks: "1.0 Mark", rubricNote: "शांति व एकाग्रता का अनुभव" },
+      { step: "वर्तमान क्षण में जीने का दर्शन (भूत और भविष्य मिथ्या हैं, वर्तमान ही सत्य है)", marks: "1.0 Mark", rubricNote: "मानसिक तनाव मुक्ति" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for defining Practical Idealism as lowering ideals for profit (Gandhiji never compromised ideals)."
+    ]
+  },
+  7: {
+    chapterNo: 7,
+    chapterName: "कारतूस (हबीब तनवीर)",
+    unitName: "स्पर्श भाग-२ (गद्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "वज़ीर अली का देशप्रेम, अदम्य साहस व अंग्रेजों को भारत से बाहर खदेड़ने का संकल्प", marks: "1.0 Mark", rubricNote: "अवध के तख्त की मुक्ति" },
+      { step: "कर्नल और लेफ्टिनेंट का खेमा एवं बनारस के अंग्रेज वकील की हत्या का औचित्य", marks: "1.0 Mark", rubricNote: "स्वाभिमान का परिचय" },
+      { step: "सवार का अकेले खेमे में आना, कारतूस हासिल करना व कर्नल का स्तब्ध रह जाना", marks: "1.0 Mark", rubricNote: "'वह एक जाँबाज़ सिपाही है'" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing Wazir Ali (patriot) with Saadat Ali (British stooge uncle)."
+    ]
+  },
+  8: {
+    chapterNo: 8,
+    chapterName: "कबीर – साखी",
+    unitName: "स्पर्श भाग-२ (काव्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 2, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "मीठी वाणी का महत्व व 'आपा' (अहंकार) खोने का आध्यात्मिक अर्थ", marks: "1.0 Mark", rubricNote: "औषधि समान प्रभाव" },
+      { step: "कस्तूरी कुंडल दृष्टांत: ईश्वर मंदिर-मस्जिद में नहीं, घट-घट में विद्यमान है", marks: "1.0 Mark", rubricNote: "अंतर्मुखी साधना" },
+      { step: "सधुक्कड़ी भाषा, तत्सम-तद्भव व उपदेशात्मक दोहा छंद शिल्प", marks: "1.0 Mark", rubricNote: "काव्य-सौंदर्य एवं शिल्प" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for spelling errors in 'कस्तूरी', 'भुवंगम'."
+    ]
+  },
+  9: {
+    chapterNo: 9,
+    chapterName: "मीरा – पद",
+    unitName: "स्पर्श भाग-२ (काव्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "3–4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "भक्त-वत्सल भगवान के पौराणिक उद्धार (द्रौपदी, प्रह्लाद, ऐरावत गजराज)", marks: "1.0 Mark", rubricNote: "ईश्वर से अनन्य प्रार्थना" },
+      { step: "चाकर बनने के तीन लाभ: दर्शन, नाम-स्मरण की जागीर व भाव-भक्ति संपत्ति", marks: "1.0 Mark", rubricNote: "दास्य भाव की पराकाष्ठा" },
+      { step: "ब्रज-मिश्रित राजस्थानी भाषा व रूपक/अनुप्रास अलंकार सौंदर्य", marks: "1.0 Mark", rubricNote: "काव्य-शिल्प" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for writing Meera's bhakti was Madhurya only (In this syllabus, dasya-bhakti is highlighted)."
+    ]
+  },
+  10: {
+    chapterNo: 10,
+    chapterName: "मैथिलीशरण गुप्त – मनुष्यता",
+    unitName: "स्पर्श भाग-२ (काव्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "सच्ची मनुष्यता व सुमृत्यु की परिभाषा (परहित में जीवन उत्सर्ग)", marks: "1.0 Mark", rubricNote: "अमरता का वरदान" },
+      { step: "पौराणिक त्याग: दधीचि की अस्थियाँ, शिबि का मांस, कर्ण के कुंडल, रंतिदेव की थाली", marks: "1.0 Mark", rubricNote: "ऐतिहासिक प्रेरक संदर्भ" },
+      { step: "'वही मनुष्य है कि जो मनुष्य के लिए मरे' का सार्वभौमिक संदेश व खड़ी बोली शिल्प", marks: "1.0 Mark", rubricNote: "ओजपूर्ण प्रवाह" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for attributing Dadhichi's sacrifice to flesh instead of bones (अस्थि दान)."
+    ]
+  },
+  11: {
+    chapterNo: 11,
+    chapterName: "सुमित्रानंदन पंत – पर्वत प्रदेश में पावस",
+    unitName: "स्पर्श भाग-२ (काव्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "मेखलाकार पर्वत, सहस्त्र दृग-सुमन व नीचे ताल रूपी दर्पण का मानवीकरण", marks: "1.0 Mark", rubricNote: "छायावादी प्रकृति सौंदर्य" },
+      { step: "झरनों का गौरव गान व साल के वृक्षों की आकाश को छूने की तीव्र आकांक्षा", marks: "1.0 Mark", rubricNote: "उच्चाकांक्षा रूपक" },
+      { step: "अचानक धुंध छाना, बादलों का उड़ना व इंद्र का जादुई खेल (इंद्रजाल)", marks: "1.0 Mark", rubricNote: "नाटकीय वातावरण" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for missing the personification (मानवीकरण अलंकार) identification in 3M question."
+    ]
+  },
+  12: {
+    chapterNo: 12,
+    chapterName: "वीरेन डंगवाल – तोप",
+    unitName: "स्पर्श भाग-२ (काव्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "3–4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "1857 की ऐतिहासिक तोप का कंपनी बाग मुहाने पर धरोहर रूप में संरक्षण", marks: "1.0 Mark", rubricNote: "पुरखों की कुर्बानियों की याद" },
+      { step: "वर्तमान में बच्चों की घुड़सवारी व गौरैयों की गपशप/तोप के मुँह में घुसना", marks: "1.0 Mark", rubricNote: "निर्जीव हो चुका हथियार" },
+      { step: "मूल दार्शनिक संदेश: अत्याचारी क्रूर सत्ता कितनी भी शक्तिशाली हो, उसका अंत निश्चित है", marks: "1.0 Mark", rubricNote: "लोकतांत्रिक विजय" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for misidentifying the bird that enters the cannon (गौरैया / Sparrow)."
+    ]
+  },
+  13: {
+    chapterNo: 13,
+    chapterName: "कैफ़ी आज़मी – कर चले हम फ़िदा",
+    unitName: "स्पर्श भाग-२ (काव्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "सैनिकों का देशवासियों को अंतिम भावुक आह्वान व वतन सुपुर्दगी", marks: "1.0 Mark", rubricNote: "सर्वस्व अर्पण" },
+      { step: "मौत को दुल्हन मानना, सर पर कफ़न बाँधना व बलिदान के काफ़िले तैयार रखना", marks: "1.0 Mark", rubricNote: "देशप्रेम का जज्बा" },
+      { step: "भारत भूमि रूपी सीता के सम्मान की रक्षा हेतु लक्ष्मण रेखा खींचना", marks: "1.0 Mark", rubricNote: "शत्रु रावण का मानमर्दन" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing the historical context (1962 Sino-Indian War, 'Haqeeqat' film song)."
+    ]
+  },
+  14: {
+    chapterNo: 14,
+    chapterName: "रवींद्रनाथ ठाकुर – आत्मत्राण",
+    unitName: "स्पर्श भाग-२ (काव्य खंड: 14 Marks)",
+    unitTotalMarks: 14,
+    expectedMarks: "3–4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "पारंपरिक प्रार्थनाओं से भिन्नता: दुखों से मुक्ति नहीं, संघर्ष का आत्मबल माँगना", marks: "1.0 Mark", rubricNote: "स्वावलंबन व पौरुष" },
+      { step: "संसार द्वारा वंचना मिलने पर भी मन में संशय या ईश्वर पर अविश्वास न आना", marks: "1.0 Mark", rubricNote: "अडिग आस्था" },
+      { step: "सुख और दुख दोनों परिस्थितियों में प्रभु के प्रति नतमस्तक रहने का पावन भाव", marks: "1.0 Mark", rubricNote: "सच्ची भक्ति का स्वरूप" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for writing that poet prays to remove sorrow (He explicitly prays to BEAR the sorrow, not remove it)."
+    ]
+  },
+  15: {
+    chapterNo: 15,
+    chapterName: "संचयन: हरिहर काका (मिथिलेश्वर)",
+    unitName: "संचयन भाग-२ (पूरक पाठ्यपुस्तक: 6 Marks)",
+    unitTotalMarks: 6,
+    expectedMarks: "3 Marks",
+    questionPattern: { mcq1M: 0, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "पारिवारिक स्वार्थ, 15 बीघे जमीन का लालच व भाइयों की संवेदनहीनता", marks: "1.0 Mark", rubricNote: "खून के रिश्तों में लालच" },
+      { step: "ठाकुरबारी के महंत की घिनौनी साजिश व धर्म की आड़ में हिंसा/अपहरण", marks: "1.0 Mark", rubricNote: "धार्मिक पाखंड का पर्दाफाश" },
+      { step: "काका का मौन हो जाना व समाज में वृद्धों की उपेक्षा का यथार्थ चित्रण", marks: "1.0 Mark", rubricNote: "मार्मिक निष्कर्ष" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for omitting the exact land measurement (15 बीघे जमीन)."
+    ]
+  },
+  16: {
+    chapterNo: 16,
+    chapterName: "संचयन: सपनों के-से दिन (गुरदयाल सिंह)",
+    unitName: "संचयन भाग-२ (पूरक पाठ्यपुस्तक: 6 Marks)",
+    unitTotalMarks: 6,
+    expectedMarks: "3 Marks",
+    questionPattern: { mcq1M: 0, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "बचपन की निश्छल यादें, स्कूल जाने का डर व पुरानी पुस्तकों की गंध", marks: "1.0 Mark", rubricNote: "बाल-मनोविज्ञान" },
+      { step: "पीटी सर प्रीतम चंद का क्रूर अनुशासन, 'मुर्गा बनाना' व उनका निलंबन", marks: "1.0 Mark", rubricNote: "कठोरता का स्वरूप" },
+      { step: "हेडमास्टर शर्मा जी की करुणा व प्रीतम चंद का तोतों को बादाम खिलाना", marks: "1.0 Mark", rubricNote: "व्यक्तित्व का विरोधाभास" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for spelling errors in Headmaster's name (मदन मोहन शर्मा जी)."
+    ]
+  },
+  17: {
+    chapterNo: 17,
+    chapterName: "संचयन: टोपी शुक्ला (राही मासूम रज़ा)",
+    unitName: "संचयन भाग-२ (पूरक पाठ्यपुस्तक: 6 Marks)",
+    unitTotalMarks: 6,
+    expectedMarks: "3 Marks",
+    questionPattern: { mcq1M: 0, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "टोपी और इफ़्फ़न की सांप्रदायिक सद्भाव से परिपूर्ण निश्छल मित्रता", marks: "1.0 Mark", rubricNote: "जाति-धर्म से परे प्रेम" },
+      { step: "इफ़्फ़न की दादी का मातृत्व, पूरबी बोली का माधुर्य व टोपी का भावात्मक जुड़ाव", marks: "1.0 Mark", rubricNote: "सहानुभूति की तलाश" },
+      { step: "दादी के बाद टोपी का अकेलापन, घर में 'अम्मी' शब्द पर प्रताड़ना व परीक्षा में उपेक्षा", marks: "1.0 Mark", rubricNote: "बालक का मानसिक संघर्ष" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing the real name of Iffan (सैय्यद जरगाम मुर्तज़ा)."
+    ]
+  },
+  18: {
+    chapterNo: 18,
+    chapterName: "व्यावहारिक व्याकरण (16 Marks)",
+    unitName: "खंड 'अ': व्याकरण (16 Marks)",
+    unitTotalMarks: 16,
+    expectedMarks: "16 Marks",
+    questionPattern: { mcq1M: 16, vsa2M: 0, sa3M: 0, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "पदबंध: संज्ञा, सर्वनाम, विशेषण, क्रिया, क्रियाविशेषण पदबंध पहचान (4 अंक)", marks: "4.0 Marks", rubricNote: "5 में से 4 प्रश्न अनिवार्य" },
+      { step: "वाक्य रूपांतरण: सरल, संयुक्त व मिश्र वाक्य का अर्थ-संरक्षित रूपांतरण (4 अंक)", marks: "4.0 Marks", rubricNote: "5 में से 4 प्रश्न अनिवार्य" },
+      { step: "समास: तत्पुरुष, कर्मधारय, द्विगु, द्वंद्व, बहुव्रीहि, अव्ययीभाव विग्रह व पहचान (4 अंक)", marks: "4.0 Marks", rubricNote: "5 में से 4 प्रश्न अनिवार्य" },
+      { step: "मुहावरे: पाठ्यपुस्तक आधारित अर्थ पहचान एवं सटीक वाक्य प्रयोग (4 अंक)", marks: "4.0 Marks", rubricNote: "5 में से 4 प्रश्न अनिवार्य" }
+    ],
+    examinerPenalties: [
+      "-1.0 Mark per wrong MCQ selection in OMR/Answer Sheet."
+    ]
+  },
+  19: {
+    chapterNo: 19,
+    chapterName: "रचनात्मक लेखन (22 Marks)",
+    unitName: "खंड 'ब': रचनात्मक लेखन (22 Marks)",
+    unitTotalMarks: 22,
+    expectedMarks: "22 Marks",
+    questionPattern: { mcq1M: 0, vsa2M: 0, sa3M: 1, la5M: 3, case4M: 1 },
+    markingSchemeRubric: [
+      { step: "अनुच्छेद लेखन (5 अंक): भूमिका 1M + विषय-विस्तार 3M + निष्कर्ष व भाषा 1M (100–120 शब्द)", marks: "5.0 Marks", rubricNote: "संकेत-बिंदुओं पर आधारित" },
+      { step: "औपचारिक पत्र लेखन (5 अंक): प्रारूप 1M + विषय-सामग्री 3M + भाषा-शुद्धता 1M (100 शब्द)", marks: "5.0 Marks", rubricNote: "मानक शिकायती/संपादकीय प्रारूप" },
+      { step: "सूचना लेखन (4 अंक): प्रारूप/बॉक्स 1M + विषय-वस्तु 2M + भाषा 1M (50 शब्द)", marks: "4.0 Marks", rubricNote: "चौकोर बॉक्स अनिवार्य" },
+      { step: "विज्ञापन लेखन (3 अंक): बॉक्स व प्रस्तुति 1M + तुकबंदी/स्लोगन व सामग्री 1.5M + भाषा 0.5M (40 शब्द)", marks: "3.0 Marks", rubricNote: "आकर्षक दृश्य लेआउट" },
+      { step: "ई-मेल / लघुकथा लेखन (5 अंक): प्रारूप/कथानक 1M + सामग्री/संवाद 3M + भाषा/सीख 1M (100 शब्द)", marks: "5.0 Marks", rubricNote: "विकल्प आधारित प्रश्न" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for missing square box in Notice or Advertisement.",
+      "-0.5 Mark for crossing word limit by more than 20% in Paragraph.",
+      "-0.5 Mark for grammatical syntax errors or illegible handwriting."
+    ]
+  }
+};

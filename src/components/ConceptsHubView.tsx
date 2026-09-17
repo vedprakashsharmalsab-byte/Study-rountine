@@ -650,6 +650,19 @@ export default function ConceptsHubView({
                           </span>
                         </div>
                         <span className="truncate text-xs font-extrabold">{ch.name}</span>
+                        {ch.examStatus && (
+                          <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-black self-start inline-flex items-center gap-1 ${
+                            isSelected
+                              ? "bg-slate-950/30 text-slate-950"
+                              : ch.examStatus === "board_exam"
+                              ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/25"
+                              : ch.examStatus === "partial_board"
+                              ? "bg-amber-500/15 text-amber-400 border border-amber-500/25"
+                              : "bg-sky-500/15 text-sky-400 border border-sky-500/25"
+                          }`}>
+                            <span>🎯</span> {ch.examStatusLabel || "Board Exam 2026"}
+                          </span>
+                        )}
                       </a>
                     );
                   })
@@ -782,6 +795,11 @@ export default function ConceptsHubView({
             <h3 className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
               {activeSubject === "math" ? activeMathChapter.title : activeSubject === "science" ? activeScienceMeta.name : activeSSTMeta.name} — Board Weightage: {activeCurrentBlueprint.expectedMarks}
             </h3>
+            {activeSubject === "sst" && activeSSTMeta.boardExamNote && (
+              <p className={`text-xs font-mono font-semibold ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>
+                🎯 {activeSSTMeta.boardExamNote}
+              </p>
+            )}
           </div>
 
           <span className={`text-xs font-mono font-black px-4 py-2 rounded-2xl border shadow-xs ${

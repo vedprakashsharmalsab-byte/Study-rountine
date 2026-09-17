@@ -5304,8 +5304,16 @@ export default function CBSECommandCenter() {
 
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0">
                   <a
-                    href={getTabHref("concepts", commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math", ncertNum || 1)}
+                    href={getTabHref(commandSubjectId === "hindi" ? "hindi" : "concepts", commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math", ncertNum || 1)}
                     onClick={(e) => {
+                      if (commandSubjectId === "hindi") {
+                        handleNavClick(e, "hindi", {
+                          customAction: () => {
+                            setActiveTab("hindi");
+                          }
+                        });
+                        return;
+                      }
                       const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
                       handleNavClick(e, "concepts", {
                         subject: targetSub,
@@ -5333,9 +5341,9 @@ export default function CBSECommandCenter() {
                 {[
                   { id: "math", label: "📐 Maths", chCount: 14 },
                   { id: "science", label: "🧪 Science", chCount: 13 },
-                  { id: "sst", label: "🌍 SST", chCount: 10 },
+                  { id: "sst", label: "🌍 SST", chCount: "22 Ch" },
                   { id: "english", label: "📖 English", chCount: "Code 184" },
-                  { id: "hindi", label: "🇮🇳 Hindi", chCount: "Code 085" }
+                  { id: "hindi", label: "🇮🇳 Hindi", chCount: "26 Ch" }
                 ].map((s) => {
                   const isSelected = commandSubjectId === s.id;
                   return (
@@ -5388,9 +5396,24 @@ export default function CBSECommandCenter() {
                     }`}>
                       {activeSubject.name} · Chapter {ncertNum}
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 text-emerald-500 dark:text-emerald-400 border border-emerald-500/20 leading-none inline-flex items-center">
-                      Official Board Syllabus
-                    </span>
+                    {activeChapter.examStatus === "partial_board" ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 leading-none inline-flex items-center gap-1">
+                        <span>⚠️</span> Partial Board Syllabus (Subtopics 1–1.3 Only)
+                      </span>
+                    ) : activeChapter.examStatus === "periodic_test_only" ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30 leading-none inline-flex items-center gap-1">
+                        <span>📋</span> School Periodic Tests Only (Not in Board)
+                      </span>
+                    ) : activeChapter.examStatus === "project_only" ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30 leading-none inline-flex items-center gap-1">
+                        <span>📝</span> Internal Project Only (No Board Theory)
+                      </span>
+                    ) : (
+                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-500 dark:text-emerald-400 border border-emerald-500/20 leading-none inline-flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        🎯 Official 80M Board Exam Paper
+                      </span>
+                    )}
                   </div>
                   <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight ${
                     isDark ? "text-white" : "text-slate-900"
@@ -5400,6 +5423,20 @@ export default function CBSECommandCenter() {
                   <p className={`text-xs sm:text-sm ${isDark ? "text-zinc-400" : "text-slate-500"}`}>
                     {totalTopics} Official NCERT Sub-Topics • Target: 100% Board Readiness
                   </p>
+                  {activeChapter.syllabusNote && (
+                    <div className={`mt-2 px-3 py-1.5 rounded-xl text-xs font-mono font-medium flex items-center gap-2 border ${
+                      activeChapter.examStatus === "partial_board"
+                        ? "bg-amber-500/10 text-amber-300 border-amber-500/25"
+                        : activeChapter.examStatus === "periodic_test_only"
+                        ? "bg-sky-500/10 text-sky-300 border-sky-500/25"
+                        : activeChapter.examStatus === "project_only"
+                        ? "bg-purple-500/10 text-purple-300 border-purple-500/25"
+                        : "bg-emerald-500/10 text-emerald-300 border-emerald-500/25"
+                    }`}>
+                      <span>ℹ️</span>
+                      <span>{activeChapter.syllabusNote}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Dual Subject & Chapter Selectors (Apple Refined Controls) */}
@@ -5461,11 +5498,19 @@ export default function CBSECommandCenter() {
                         }
                       }}
                     >
-                      {activeSubject.chapters.map((ch, idx) => (
-                        <option key={ch.id} value={ch.id}>
-                          {ch.ncertChapterNo ? `Ch ${ch.ncertChapterNo}: ` : `${idx + 1}. `}{ch.name}
-                        </option>
-                      ))}
+                      {activeSubject.chapters.map((ch, idx) => {
+                        let statusTag = "";
+                        if (ch.examStatus === "board_exam") statusTag = " [🎯 Board Exam]";
+                        else if (ch.examStatus === "partial_board") statusTag = " [⚠️ Partial: Subtopics Only]";
+                        else if (ch.examStatus === "periodic_test_only") statusTag = " [📋 Periodic Tests Only]";
+                        else if (ch.examStatus === "project_only") statusTag = " [📝 Project Work Only]";
+
+                        return (
+                          <option key={ch.id} value={ch.id}>
+                            {ch.ncertChapterNo ? `Ch ${ch.ncertChapterNo}: ` : `${idx + 1}. `}{ch.name}{statusTag}
+                          </option>
+                        );
+                      })}
                     </select>
                     <div className="fabulous-select-icon text-zinc-400">
                       <ChevronDown className="w-4 h-4" />
@@ -5563,6 +5608,23 @@ export default function CBSECommandCenter() {
                   >
                     <Calendar className="w-3.5 h-3.5" />
                     <span>2. Metro Timelines</span>
+                  </a>
+                )}
+
+                {commandSubjectId === "hindi" && (
+                  <a
+                    href={getTabHref("hindi")}
+                    onClick={(e) => {
+                      handleNavClick(e, "hindi", {
+                        customAction: () => {
+                          setActiveTab("hindi");
+                        }
+                      });
+                    }}
+                    className="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 shadow-2xs"
+                  >
+                    <BookOpen className="w-3.5 h-3.5" />
+                    <span>2. सम्पूर्ण हिंदी मास्टर स्टूडियो (Literature & Grammar)</span>
                   </a>
                 )}
 

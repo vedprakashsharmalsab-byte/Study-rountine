@@ -12,6 +12,9 @@ export interface Chapter {
   name: string;
   ncertChapterNo?: number;
   topics: ChapterTopic[];
+  examStatus?: "board_exam" | "partial_board" | "periodic_test_only" | "project_only" | "deleted";
+  examStatusLabel?: string;
+  syllabusNote?: string;
 }
 
 export interface Subject {
@@ -2192,6 +2195,9 @@ export const CBSE_SUBJECTS: Subject[] = [
       "id": "sst_his1",
       "name": "History: The Rise of Nationalism in Europe",
       "ncertChapterNo": 1,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (6–8 Marks)",
+      "syllabusNote": "Core Chapter: Tested in Board Theory (MCQs, 3M SA, 5M LA).",
       "topics": [
         {
           "id": "h_1_1",
@@ -2231,6 +2237,9 @@ export const CBSE_SUBJECTS: Subject[] = [
       "id": "sst_his2",
       "name": "History: Nationalism in India",
       "ncertChapterNo": 2,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (7–9 Marks + 2M Map)",
+      "syllabusNote": "High Weightage: Compulsory 2M Map Pointing + 5M LA / 3M SA in Board Exam.",
       "topics": [
         {
           "id": "h_2_1",
@@ -2243,15 +2252,15 @@ export const CBSE_SUBJECTS: Subject[] = [
         {
           "id": "h_2_2",
           "sectionCode": "2.2",
-          "title": "Differing Strands of Non-Cooperation: Middle Class in Cities, Peasants in Awadh (Baba Ramchandra), Tribal Rebellion (Alluri Sitaram Raju), Assam Plantations",
+          "title": "Non-Cooperation Movement: Differing Strands in Towns, Countryside & Tribal Awadh/Gudem Hills",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "5M"
+          "expectedMarks": "3M / 5M"
         },
         {
           "id": "h_2_3",
           "sectionCode": "2.3",
-          "title": "Salt March (Dandi March), Civil Disobedience Movement 1930 & Gandhi-Irwin Pact",
+          "title": "Salt March, Civil Disobedience Movement Launch, Round Table Conferences & Gandhi-Irwin Pact",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "5M"
@@ -2259,10 +2268,10 @@ export const CBSE_SUBJECTS: Subject[] = [
         {
           "id": "h_2_4",
           "sectionCode": "2.4",
-          "title": "Sense of Collective Belonging (Bharat Mata, Folklore, Tricolour Flag) & Mandatory Board Map Work",
+          "title": "Limits of Civil Disobedience, Dalits & Dr. Ambedkar Poona Pact (1932) & Sense of Collective Belonging",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "2M Map / 3M"
+          "expectedMarks": "3M / 5M"
         }
       ]
     },
@@ -2270,19 +2279,22 @@ export const CBSE_SUBJECTS: Subject[] = [
       "id": "sst_his3",
       "name": "History: The Making of a Global World",
       "ncertChapterNo": 3,
+      "examStatus": "partial_board",
+      "examStatusLabel": "Partial: Subtopics 1 to 1.3 Only (2–3M)",
+      "syllabusNote": "CBSE Official Syllabus: Subtopics 1 to 1.3 only (Pre-modern World to Conquest, Disease & Trade) evaluated in Board Exam. Subtopics 2 to 4 evaluated in Interdisciplinary Project.",
       "topics": [
         {
           "id": "h_3_1",
           "sectionCode": "3.1",
-          "title": "Pre-Modern World: Silk Routes Linking Asia, Europe & North Africa",
+          "title": "The Pre-modern World, Ancient Silk Routes & Food Travels (Spaghetti & Potato)",
           "isImportantForBoards": true,
-          "probability": "Medium Chance (60-80%)",
+          "probability": "1M Foundation / Conceptual",
           "expectedMarks": "1M / 2M"
         },
         {
           "id": "h_3_2",
           "sectionCode": "3.2",
-          "title": "Food Travels: Spaghetti and Potato & Biological Conquest via Smallpox in the Americas",
+          "title": "Conquest, Disease and Trade: Smallpox as a Biological Weapon in America & Precious Metals Flow",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "2M / 3M"
@@ -2290,46 +2302,83 @@ export const CBSE_SUBJECTS: Subject[] = [
         {
           "id": "h_3_3",
           "sectionCode": "3.3",
-          "title": "Nineteenth Century Global Economy: Trade, Labor Migration & Capital Flows",
-          "isImportantForBoards": true,
+          "title": "The Nineteenth Century (1815-1914): Flow of Trade, Labour & Capital (Project / Interdisciplinary)",
+          "isImportantForBoards": false,
           "probability": "Medium Chance (60-80%)",
-          "expectedMarks": "3M"
+          "expectedMarks": "Project Only"
+        }
+      ]
+    },
+    {
+      "id": "sst_his_ind",
+      "name": "History: The Age of Industrialisation",
+      "ncertChapterNo": 4,
+      "examStatus": "periodic_test_only",
+      "examStatusLabel": "Periodic Tests Only (NOT in Board Exam)",
+      "syllabusNote": "Assessed ONLY in School Periodic Tests. Zero questions appear in the 80 Marks Board Theory Paper.",
+      "topics": [
+        {
+          "id": "h_ind_1",
+          "sectionCode": "4.1",
+          "title": "Before the Industrial Revolution & Proto-industrialisation in Countryside",
+          "isImportantForBoards": false,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "Periodic Test"
+        },
+        {
+          "id": "h_ind_2",
+          "sectionCode": "4.2",
+          "title": "Hand Labour and Steam Power in Victorian Britain",
+          "isImportantForBoards": false,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "Periodic Test"
+        },
+        {
+          "id": "h_ind_3",
+          "sectionCode": "4.3",
+          "title": "Industrialisation in the Colonies & Early Indian Entrepreneurs",
+          "isImportantForBoards": false,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "Periodic Test"
         }
       ]
     },
     {
       "id": "sst_his4",
       "name": "History: Print Culture and the Modern World",
-      "ncertChapterNo": 4,
+      "ncertChapterNo": 5,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (4–5 Marks)",
+      "syllabusNote": "Core Chapter: Tested in Board Theory (Gutenberg Press, Print Revolution, Women Readers).",
       "topics": [
         {
           "id": "h_4_1",
-          "sectionCode": "4.1",
-          "title": "First Printed Books: Woodblock Printing in China, Japan (Ukiyo-e) & Korea",
+          "sectionCode": "5.1",
+          "title": "First Printed Books (China, Japan - Diamond Sutra) & Marco Polo's Woodblock Printing to Europe",
           "isImportantForBoards": true,
-          "probability": "Medium Chance (60-80%)",
-          "expectedMarks": "2M"
+          "probability": "High Chance 90%+ Recurring",
+          "expectedMarks": "1M / 2M"
         },
         {
           "id": "h_4_2",
-          "sectionCode": "4.2",
-          "title": "Gutenberg's Printing Press (Mainz, Germany) & Print Revolution's Impact on European Society",
+          "sectionCode": "5.2",
+          "title": "Johann Gutenberg Printing Press Innovation (1448) & The Print Revolution",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
         },
         {
           "id": "h_4_3",
-          "sectionCode": "4.3",
-          "title": "Religious Debates: Martin Luther's Ninety-Five Theses & Protestant Reformation",
+          "sectionCode": "5.3",
+          "title": "Religious Debates: Martin Luther Ninety-Five Theses & Roman Catholic Church Index of Prohibited Books",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
           "id": "h_4_4",
-          "sectionCode": "4.4",
-          "title": "India and the World of Print: Manuscripts, Vernacular Newspapers & Women's Education Reforms",
+          "sectionCode": "5.4",
+          "title": "India and the World of Print: Bengal Gazette, Vernacular Press Act (1878) & Women Reformers (Rashsundari Debi)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
@@ -2339,145 +2388,157 @@ export const CBSE_SUBJECTS: Subject[] = [
     {
       "id": "sst_civ1",
       "name": "Civics: Power Sharing",
-      "ncertChapterNo": 1,
+      "ncertChapterNo": 6,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (4–5 Marks)",
+      "syllabusNote": "Core Chapter: Belgium vs Sri Lanka case study, Prudential vs Moral reasons.",
       "topics": [
         {
           "id": "c_1_1",
-          "sectionCode": "1.1",
-          "title": "Ethnic Composition of Belgium (Dutch/French/German) vs Sri Lanka (Sinhala/Tamil)",
+          "sectionCode": "6.1",
+          "title": "Ethnic Composition of Belgium (Dutch 59%, French 40%, German 1%) & Brussels Special Dynamic",
           "isImportantForBoards": true,
-          "probability": "1M Foundation / Conceptual",
-          "expectedMarks": "1M MCQ / 2M"
+          "probability": "High Chance 90%+ Recurring",
+          "expectedMarks": "1M / 2M"
         },
         {
           "id": "c_1_2",
-          "sectionCode": "1.2",
-          "title": "Majoritarianism in Sri Lanka (1956 Act) & Alienation of Sri Lankan Tamils",
-          "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M"
-        },
-        {
-          "id": "c_1_3",
-          "sectionCode": "1.3",
-          "title": "Accommodation in Belgium: Four Key Constitutional Amendments for Peaceful Coexistence",
+          "sectionCode": "6.2",
+          "title": "Majoritarianism in Sri Lanka (1956 Sinhala Act, State Patronage to Buddhism & Tamil Alienation)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
         },
         {
-          "id": "c_1_4",
-          "sectionCode": "1.4",
-          "title": "Why Power Sharing is Desirable: Prudential Reasons vs Moral Reasons & Forms of Power Sharing",
+          "id": "c_1_3",
+          "sectionCode": "6.3",
+          "title": "Belgian Model of Accommodation: Equal Representation, Community Govt & Brussels Capital of EU",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "5M"
+          "expectedMarks": "3M"
+        },
+        {
+          "id": "c_1_4",
+          "sectionCode": "6.4",
+          "title": "Why Power Sharing is Desirable (Prudential vs Moral Reasons) & Forms of Power Sharing (Horizontal vs Vertical)",
+          "isImportantForBoards": true,
+          "probability": "High Chance 90%+ Recurring",
+          "expectedMarks": "3M / 5M"
         }
       ]
     },
     {
       "id": "sst_civ2",
       "name": "Civics: Federalism",
-      "ncertChapterNo": 2,
+      "ncertChapterNo": 7,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (4–5 Marks)",
+      "syllabusNote": "Core Chapter: 3-Fold Distribution (Union, State, Concurrent), 1992 Decentralisation.",
       "topics": [
         {
           "id": "c_2_1",
-          "sectionCode": "2.1",
-          "title": "Key Features of Federalism: Two or More Tiers, Rigid Constitution, Jurisdiction",
+          "sectionCode": "7.1",
+          "title": "What is Federalism? Key Features (Two or more levels, separate jurisdiction, constitutional guarantee)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
+          "expectedMarks": "3M"
         },
         {
           "id": "c_2_2",
-          "sectionCode": "2.2",
-          "title": "Coming Together Federations (USA, Switzerland) vs Holding Together Federations (India, Spain)",
+          "sectionCode": "7.2",
+          "title": "Routes to Federation: 'Coming Together' (USA, Switzerland, Australia) vs 'Holding Together' (India, Spain, Belgium)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "2M / 3M"
         },
         {
           "id": "c_2_3",
-          "sectionCode": "2.3",
-          "title": "Legislative Lists: Union List (National Importance), State List, Concurrent List & Residuary Subjects",
+          "sectionCode": "7.3",
+          "title": "Three-fold Legislative Powers: Union List (100), State List (61), Concurrent List (52) & Residuary Subjects",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
           "id": "c_2_4",
-          "sectionCode": "2.4",
-          "title": "Decentralization in India: 73rd & 74th Constitutional Amendments (1992 Reforms, Panchayati Raj)",
+          "sectionCode": "7.4",
+          "title": "How Federalism is Practiced (Linguistic States, Language Policy, Center-State Relations) & 1992 Decentralisation",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "5M"
+          "expectedMarks": "3M / 5M"
         }
       ]
     },
     {
       "id": "sst_civ3",
       "name": "Civics: Gender, Religion and Caste",
-      "ncertChapterNo": 3,
+      "ncertChapterNo": 8,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (4–5 Marks)",
+      "syllabusNote": "Core Chapter: Sexual division of labour, Communalism vs Secular State, Caste in Politics.",
       "topics": [
         {
           "id": "c_3_1",
-          "sectionCode": "3.1",
-          "title": "Gender Division, Sexual Division of Labor, Feminist Movement & Women's Political Representation",
+          "sectionCode": "8.1",
+          "title": "Gender & Politics: Sexual Division of Labour, Feminist Movements, Patriarchal Society & Women Political Representation",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
           "id": "c_3_2",
-          "sectionCode": "3.2",
-          "title": "Religion, Communalism and Politics: Communal Politics Forms & Constitutional Secularism",
+          "sectionCode": "8.2",
+          "title": "Religion, Communalism and Politics: Communal Politics Forms & Constitutional Provisions of Secular State",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
         },
         {
           "id": "c_3_3",
-          "sectionCode": "3.3",
-          "title": "Caste in Politics (Mobilization, Vote Banks) and Politics in Caste (Coalitions, Backward/Forward)",
+          "sectionCode": "8.3",
+          "title": "Caste & Politics: Caste Inequalities, Role of Caste in Politics & Politics in Caste",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
+          "expectedMarks": "3M"
         }
       ]
     },
     {
       "id": "sst_civ4",
       "name": "Civics: Political Parties",
-      "ncertChapterNo": 4,
+      "ncertChapterNo": 9,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (5–6 Marks)",
+      "syllabusNote": "High Probability 5M Question: Functions of Political Parties & Challenges they face.",
       "topics": [
         {
           "id": "c_4_1",
-          "sectionCode": "4.1",
-          "title": "Meaning, Components (Leaders, Active Members, Followers) & 7 Core Functions of Political Parties",
+          "sectionCode": "9.1",
+          "title": "Why Do We Need Political Parties? Definition, 3 Components (Leaders, Active Members, Followers)",
           "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "5M"
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "1M / 2M"
         },
         {
           "id": "c_4_2",
-          "sectionCode": "4.2",
-          "title": "Necessity of Political Parties: Why Representative Democracy Cannot Function Without Them",
+          "sectionCode": "9.2",
+          "title": "Key Functions of Political Parties (Contesting Elections, Policy Formulation, Making Laws, Role of Opposition)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M"
+          "expectedMarks": "3M / 5M"
         },
         {
           "id": "c_4_3",
-          "sectionCode": "4.3",
-          "title": "Election Commission Criteria for Recognizing National Parties vs State/Regional Parties",
+          "sectionCode": "9.3",
+          "title": "Party Systems (One-Party, Two-Party, Multi-Party) & National vs State Recognised Political Parties Criteria (ECI)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
           "id": "c_4_4",
-          "sectionCode": "4.4",
-          "title": "Challenges to Political Parties (Lack of Internal Democracy, Dynastic Succession, Money/Muscle Power, Meaningful Choice) & Reforms",
+          "sectionCode": "9.4",
+          "title": "Challenges to Political Parties (Lack of Internal Democracy, Dynastic Succession, Money & Muscle Power, Meaningful Choice) & Reforms",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "5M"
@@ -2487,28 +2548,31 @@ export const CBSE_SUBJECTS: Subject[] = [
     {
       "id": "sst_civ5",
       "name": "Civics: Outcomes of Democracy",
-      "ncertChapterNo": 5,
+      "ncertChapterNo": 10,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (4–5 Marks)",
+      "syllabusNote": "Core Chapter: Accountable, Responsive & Legitimate Govt; Economic Growth vs Inequality.",
       "topics": [
         {
           "id": "c_5_1",
-          "sectionCode": "5.1",
-          "title": "Accountable, Responsive and Legitimate Government Assessment",
-          "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
-        },
-        {
-          "id": "c_5_2",
-          "sectionCode": "5.2",
-          "title": "Economic Growth, Development & Reduction of Inequality and Poverty in Democracies",
+          "sectionCode": "10.1",
+          "title": "How Do We Assess Democracy's Outcomes? Promotes Equality, Enhances Dignity, Improves Quality of Decision Making",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
+          "id": "c_5_2",
+          "sectionCode": "10.2",
+          "title": "Accountable, Responsive and Legitimate Government: Transparency, Right to Information, Decision-Making Deliberations",
+          "isImportantForBoards": true,
+          "probability": "High Chance 90%+ Recurring",
+          "expectedMarks": "3M / 5M"
+        },
+        {
           "id": "c_5_3",
-          "sectionCode": "5.3",
-          "title": "Accommodation of Social Diversity, Protection of Minority Rights & Dignity and Freedom of Citizens",
+          "sectionCode": "10.3",
+          "title": "Economic Growth and Development vs Reduction of Inequality and Poverty & Accommodation of Social Diversity",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
@@ -2518,137 +2582,149 @@ export const CBSE_SUBJECTS: Subject[] = [
     {
       "id": "sst_geo1",
       "name": "Geography: Resources and Development",
-      "ncertChapterNo": 1,
+      "ncertChapterNo": 11,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (4–5 Marks + Map)",
+      "syllabusNote": "Core Chapter: Soil Identification Map Skill + Rio Earth Summit 1992 + Land Degradation.",
       "topics": [
         {
           "id": "g_1_1",
-          "sectionCode": "1.1",
-          "title": "Resource Classification (Biotic/Abiotic, Renewable/Non-Renewable, Individual/Community/National/International)",
+          "sectionCode": "11.1",
+          "title": "Classification of Resources (Origin, Exhaustibility, Ownership & Status of Development - Potential, Developed, Stock, Reserves)",
           "isImportantForBoards": true,
           "probability": "1M Foundation / Conceptual",
-          "expectedMarks": "1M MCQ / 2M"
+          "expectedMarks": "1M / 2M"
         },
         {
           "id": "g_1_2",
-          "sectionCode": "1.2",
-          "title": "Resource Planning in India: 3 Stages & Sustainable Development (Rio Earth Summit 1992)",
+          "sectionCode": "11.2",
+          "title": "Sustainable Development, Rio de Janeiro Earth Summit 1992 & Agenda 21",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
           "id": "g_1_3",
-          "sectionCode": "1.3",
-          "title": "Land Utilization, Land Use Pattern in India & Causes of Land Degradation with Conservation Measures",
+          "sectionCode": "11.3",
+          "title": "Land Resources in India, Land Use Pattern (NSA, Forests) & Causes of Land Degradation (Mining, Overgrazing, Over-irrigation)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
         },
         {
           "id": "g_1_4",
-          "sectionCode": "1.4",
-          "title": "Major Soil Types (Alluvial, Black/Regur, Red & Yellow, Laterite, Arid, Forest) & Soil Erosion Methods",
+          "sectionCode": "11.4",
+          "title": "Soil as a Resource: Classification (Alluvial, Black/Regur, Red & Yellow, Laterite, Arid, Forest) & Soil Conservation Methods",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / Map Work"
+          "expectedMarks": "3M / Map"
         }
       ]
     },
     {
       "id": "sst_geo2",
       "name": "Geography: Forest and Wildlife Resources",
-      "ncertChapterNo": 2,
+      "ncertChapterNo": 12,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (3–4 Marks)",
+      "syllabusNote": "Core Chapter: Reserved vs Protected vs Unclassed Forests; JFM & Community Conservation.",
       "topics": [
         {
           "id": "g_2_1",
-          "sectionCode": "2.1",
-          "title": "Biodiversity Flora & Fauna in India & IUCN Classification of Species",
+          "sectionCode": "12.1",
+          "title": "Flora and Fauna in India & IUCN Classification (Normal, Endangered, Vulnerable, Rare, Endemic, Extinct)",
           "isImportantForBoards": true,
-          "probability": "Medium Chance (60-80%)",
-          "expectedMarks": "2M"
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "1M / 2M"
         },
         {
           "id": "g_2_2",
-          "sectionCode": "2.2",
-          "title": "Forest Classification: Reserved Forests, Protected Forests & Unclassed Forests",
+          "sectionCode": "12.2",
+          "title": "Conservation of Forest and Wildlife: Indian Wildlife Protection Act 1972 & Project Tiger 1973",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
           "id": "g_2_3",
-          "sectionCode": "2.3",
-          "title": "Community-Led Conservation: Chipko Movement, Beej Bachao Andolan & Joint Forest Management (JFM)",
+          "sectionCode": "12.3",
+          "title": "Types of Forests (Reserved, Protected, Unclassed) & Community Conservation (Sariska, Chipko, Beej Bachao Andolan, JFM)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
+          "expectedMarks": "3M"
         }
       ]
     },
     {
       "id": "sst_geo3",
       "name": "Geography: Water Resources",
-      "ncertChapterNo": 3,
+      "ncertChapterNo": 13,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (4–5 Marks + Map)",
+      "syllabusNote": "Core Chapter: Compulsory Map (Salal, Bhakra Nangal, Tehri, Rana Pratap, Sardar Sarovar, Hirakud, Nagarjuna Sagar, Tungabhadra) + Rainwater Harvesting.",
       "topics": [
         {
           "id": "g_3_1",
-          "sectionCode": "3.1",
-          "title": "Water Scarcity Causes: Over-exploitation, Unequal Access & Industrial Contamination",
+          "sectionCode": "13.1",
+          "title": "Water Scarcity Causes (Over-exploitation, Unequal Access, Industrial Pollution) & Need for Water Conservation",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M"
+          "expectedMarks": "2M / 3M"
         },
         {
           "id": "g_3_2",
-          "sectionCode": "3.2",
-          "title": "Multi-Purpose River Valley Projects: Benefits vs Ecological & Social Displacement Concerns",
+          "sectionCode": "13.2",
+          "title": "Multi-purpose River Projects: Advantages (Irrigation, Hydroelectricity) vs Environmental/Social Criticisms (Narmada Bachao Andolan)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
         },
         {
           "id": "g_3_3",
-          "sectionCode": "3.3",
-          "title": "Traditional Rainwater Harvesting: Guls/Kuls (Himalayas), Khadins/Johads & Tankas (Rajasthan), Rooftop Systems",
+          "sectionCode": "13.3",
+          "title": "Rainwater Harvesting: Guls/Kuls (Himalayas), Johads/Khadins (Rajasthan), Tankas (Bikaner/Phalodi), Bamboo Drip Irrigation & Tamil Nadu Law",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 4M Case Study"
+          "expectedMarks": "3M"
         }
       ]
     },
     {
       "id": "sst_geo4",
       "name": "Geography: Agriculture",
-      "ncertChapterNo": 4,
+      "ncertChapterNo": 14,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (5–6 Marks + Map)",
+      "syllabusNote": "Core Chapter: Major Cropping Seasons, Rice/Wheat geographical conditions, Map Pointing.",
       "topics": [
         {
           "id": "g_4_1",
-          "sectionCode": "4.1",
-          "title": "Farming Types: Primitive Subsistence (Jhumming Slash-and-Burn), Intensive Subsistence & Commercial",
+          "sectionCode": "14.1",
+          "title": "Types of Farming: Primitive Subsistence (Jhumming/Slash-and-Burn), Intensive Subsistence & Commercial Farming (Plantations)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
           "id": "g_4_2",
-          "sectionCode": "4.2",
-          "title": "Cropping Seasons: Rabi (Wheat, Mustard), Kharif (Rice, Maize), Zaid (Watermelon, Fodder)",
+          "sectionCode": "14.2",
+          "title": "Cropping Pattern: Rabi (Wheat, Mustard), Kharif (Paddy, Maize, Cotton) & Zaid (Watermelon, Cucumber) Seasons",
           "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "2M / 3M"
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "1M / 2M"
         },
         {
           "id": "g_4_3",
-          "sectionCode": "4.3",
-          "title": "Major Food & Cash Crops: Climate & Soil for Rice, Wheat, Millets, Sugarcane, Tea, Cotton, Jute",
+          "sectionCode": "14.3",
+          "title": "Major Crops (Food Grains): Rice, Wheat, Millets (Jowar, Bajra, Ragi), Maize, Pulses — Geographical Requirements & Production States",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M / Map Work"
+          "expectedMarks": "3M / 5M / Map"
         },
         {
           "id": "g_4_4",
-          "sectionCode": "4.4",
-          "title": "Institutional & Technical Reforms in Agriculture, Green Revolution & Bhoodan-Gramdan Movement",
+          "sectionCode": "14.4",
+          "title": "Non-Food & Cash Crops (Sugarcane, Tea, Coffee, Rubber, Cotton, Jute) & Institutional/Technological Reforms (Bhoodan-Gramdan)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
@@ -2658,75 +2734,81 @@ export const CBSE_SUBJECTS: Subject[] = [
     {
       "id": "sst_geo5",
       "name": "Geography: Minerals and Energy Resources",
-      "ncertChapterNo": 5,
+      "ncertChapterNo": 15,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (5–6 Marks + Map)",
+      "syllabusNote": "Core Chapter: Thermal/Nuclear power plants Map + Conventional vs Non-Conventional Energy.",
       "topics": [
         {
           "id": "g_5_1",
-          "sectionCode": "5.1",
-          "title": "Mode of Occurrence of Minerals: Veins & Lodes, Beds/Layers, Residual Masses, Alluvial Placer Deposits",
+          "sectionCode": "15.1",
+          "title": "What is a Mineral? Modes of Occurrence (Igneous/Metamorphic veins, Sedimentary beds, Placer deposits & Ocean waters)",
+          "isImportantForBoards": true,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "1M / 2M"
+        },
+        {
+          "id": "g_5_2",
+          "sectionCode": "15.2",
+          "title": "Ferrous Minerals (Iron Ore - Hematite/Magnetite belts in Odisha-Jharkhand, Durg-Bastar-Chandrapur, Kudremukh; Manganese)",
+          "isImportantForBoards": true,
+          "probability": "High Chance 90%+ Recurring",
+          "expectedMarks": "3M / Map"
+        },
+        {
+          "id": "g_5_3",
+          "sectionCode": "15.3",
+          "title": "Non-Ferrous & Non-Metallic Minerals: Bauxite (Panchpatmali in Koraput), Copper (Khetri), Mica (Koderma) & Hazards of Mining",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
-          "id": "g_5_2",
-          "sectionCode": "5.2",
-          "title": "Ferrous Minerals (Iron Ore Belts, Manganese) vs Non-Ferrous Minerals (Bauxite, Copper)",
-          "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / Map Work"
-        },
-        {
-          "id": "g_5_3",
-          "sectionCode": "5.3",
-          "title": "Conventional Energy: Coal (Anthracite, Bituminous, Lignite), Petroleum (Offshore Mumbai High) & Natural Gas",
-          "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
-        },
-        {
           "id": "g_5_4",
-          "sectionCode": "5.4",
-          "title": "Non-Conventional Energy: Solar Energy, Wind Power, Biogas Plants, Tidal & Geothermal Energy",
+          "sectionCode": "15.4",
+          "title": "Energy Resources: Conventional (Coal - Anthracite/Bituminous/Lignite, Petroleum - Mumbai High, Digboi; Natural Gas) vs Non-Conventional (Solar, Wind, Biogas, Nuclear)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 4M Case Study"
+          "expectedMarks": "5M / Map"
         }
       ]
     },
     {
       "id": "sst_geo6",
       "name": "Geography: Manufacturing Industries",
-      "ncertChapterNo": 6,
+      "ncertChapterNo": 16,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (5–6 Marks + Map)",
+      "syllabusNote": "Core Chapter: Industrial Pollution control + Iron & Steel / Cotton Textile centers Map.",
       "topics": [
         {
           "id": "g_6_1",
-          "sectionCode": "6.1",
-          "title": "Importance of Manufacturing as Backbone of Economic Development & Factors Influencing Industrial Location",
+          "sectionCode": "16.1",
+          "title": "Importance of Manufacturing as Backbone of Economic Development & Factors of Industrial Location (Agglomeration Economies)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
           "id": "g_6_2",
-          "sectionCode": "6.2",
-          "title": "Agro-Based Industries: Cotton Textile (Localization in Maharashtra/Gujarat) & Sugar Industry (Shift to South)",
+          "sectionCode": "16.2",
+          "title": "Classification of Industries: Agro-Based (Cotton, Jute Mills in Hugli basin, Sugar) & Mineral-Based Industries",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
+          "expectedMarks": "3M"
         },
         {
           "id": "g_6_3",
-          "sectionCode": "6.3",
-          "title": "Mineral-Based Industries: Iron & Steel (Chotanagpur Plateau concentration), Aluminium Smelting, Chemical & IT",
+          "sectionCode": "16.3",
+          "title": "Heavy Industries: Iron & Steel Industry (Raw Material Proportions 4:2:1, Chota Nagpur concentration) & Aluminium Smelting",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
+          "expectedMarks": "3M / 5M / Map"
         },
         {
           "id": "g_6_4",
-          "sectionCode": "6.4",
-          "title": "Industrial Pollution (Air, Water, Thermal, Noise) & Environmental Degradation Prevention Measures (NTPC)",
+          "sectionCode": "16.4",
+          "title": "Chemical, Fertilizer, Cement, Automobile, IT & Electronics Industries, Industrial Pollution (Air, Water, Thermal, Noise) & NTPC Proactive Measures",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "5M"
@@ -2736,114 +2818,123 @@ export const CBSE_SUBJECTS: Subject[] = [
     {
       "id": "sst_geo7",
       "name": "Geography: Lifelines of National Economy",
-      "ncertChapterNo": 7,
+      "ncertChapterNo": 17,
+      "examStatus": "partial_board",
+      "examStatusLabel": "Map Items ONLY in Board Exam (1M)",
+      "syllabusNote": "CBSE Official Syllabus: Only MAP ITEMS (Major Sea Ports & International Airports) are evaluated in Board Exam. Theoretical chapter content is evaluated in Interdisciplinary Project.",
       "topics": [
         {
           "id": "g_7_1",
-          "sectionCode": "7.1",
-          "title": "Roadways in India: Golden Quadrilateral Super Highways, National, State & District Roads vs Railways Advantages",
-          "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
+          "sectionCode": "17.1",
+          "title": "Roadways: Golden Quadrilateral Super Highways, National, State & Rural Roads, Road Density Challenges",
+          "isImportantForBoards": false,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "Project Only"
         },
         {
           "id": "g_7_2",
-          "sectionCode": "7.2",
-          "title": "Railways Challenges (Northern Plains vs Himalayan terrain) & Pipelines Network (Hazira-Vijaipur-Jagdishpur)",
-          "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M"
+          "sectionCode": "17.2",
+          "title": "Railways, Pipelines (Hazira-Vijaipur-Jagdishpur HVJ) & Waterways (National Waterway 1 Ganga)",
+          "isImportantForBoards": false,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "Project Only"
         },
         {
           "id": "g_7_3",
-          "sectionCode": "7.3",
-          "title": "Waterways (National Waterway 1 Ganga) & Major Sea Ports (Kandla, Mumbai, Marmagao, Chennai, Visakhapatnam)",
+          "sectionCode": "17.3",
+          "title": "Major Sea Ports (Kandla, Mumbai, Marmagao, New Mangalore, Kochi, Tuticorin, Chennai, Visakhapatnam, Paradip, Haldia) - MAP CORE",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / Map Work"
+          "expectedMarks": "Board Map Core"
         },
         {
           "id": "g_7_4",
-          "sectionCode": "7.4",
-          "title": "Airways, Communication Networks (Telecom/Mass Media), International Trade Balance & Tourism as Trade",
+          "sectionCode": "17.4",
+          "title": "Airways, International Airports (Amritsar, Delhi, Mumbai, Chennai, Kolkata, Hyderabad - MAP) & Communication and International Trade as Economic Barometer",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 4M Case Study"
+          "expectedMarks": "Board Map Core"
         }
       ]
     },
     {
       "id": "sst_eco1",
       "name": "Economics: Development",
-      "ncertChapterNo": 1,
+      "ncertChapterNo": 18,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (5–6 Marks)",
+      "syllabusNote": "Core Chapter: Per Capita Income vs UNDP Human Development Index (HDI) Comparison.",
       "topics": [
         {
           "id": "e_1_1",
-          "sectionCode": "1.1",
-          "title": "What Development Promises: Different People, Different Goals & Conflicting Notions of Development",
+          "sectionCode": "18.1",
+          "title": "What Development Promises: Different People, Different Goals & Conflicting Developmental Aspirations",
           "isImportantForBoards": true,
-          "probability": "1M Foundation / Conceptual",
-          "expectedMarks": "1M MCQ / 2M"
-        },
-        {
-          "id": "e_1_2",
-          "sectionCode": "1.2",
-          "title": "Income and Other Goals (Freedom, Security, Respect) & National Development Criteria",
-          "isImportantForBoards": true,
-          "probability": "Medium Chance (60-80%)",
+          "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "2M / 3M"
         },
         {
+          "id": "e_1_2",
+          "sectionCode": "18.2",
+          "title": "Income and Other Goals (Security, Freedom, Equal Treatment) & National Development Criteria",
+          "isImportantForBoards": true,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "1M / 2M"
+        },
+        {
           "id": "e_1_3",
-          "sectionCode": "1.3",
-          "title": "Comparing Countries: World Bank Per Capita Income (Limitations) vs UNDP Human Development Index (HDI: Health, Education, Income)",
+          "sectionCode": "18.3",
+          "title": "Comparing Countries & States: Per Capita Income (World Bank Criterion & Disparities Limitation)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "5M"
+          "expectedMarks": "3M"
         },
         {
           "id": "e_1_4",
-          "sectionCode": "1.4",
-          "title": "Public Facilities Importance (PDS, Kerala Infant Mortality) & Sustainability of Development (Groundwater/Crude Oil)",
+          "sectionCode": "18.4",
+          "title": "Public Facilities, Infant Mortality Rate (IMR), Literacy Rate, Net Attendance Ratio & UNDP Human Development Index (HDI) vs World Bank",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 4M Case Study"
+          "expectedMarks": "3M / 5M"
         }
       ]
     },
     {
       "id": "sst_eco2",
       "name": "Economics: Sectors of the Indian Economy",
-      "ncertChapterNo": 2,
+      "ncertChapterNo": 19,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (7–8 Marks)",
+      "syllabusNote": "High Weightage: GDP Calculation, Disguised Unemployment, MGNREGA 2005, Organised vs Unorganised.",
       "topics": [
         {
           "id": "e_2_1",
-          "sectionCode": "2.1",
-          "title": "Three Sectors: Primary (Agriculture/Mining), Secondary (Manufacturing), Tertiary (Services & IT)",
+          "sectionCode": "19.1",
+          "title": "Sectors of Economic Activities: Primary (Agriculture), Secondary (Industrial) & Tertiary (Service Sector)",
           "isImportantForBoards": true,
           "probability": "1M Foundation / Conceptual",
-          "expectedMarks": "1M MCQ / 2M"
+          "expectedMarks": "1M / 2M"
         },
         {
           "id": "e_2_2",
-          "sectionCode": "2.2",
-          "title": "Historical Changes & Rising Importance of the Tertiary Sector in Indian GDP Contribution",
+          "sectionCode": "19.2",
+          "title": "Comparing the Three Sectors: Calculating GDP through Value of Final Goods and Services Produced",
+          "isImportantForBoards": true,
+          "probability": "High Chance 90%+ Recurring",
+          "expectedMarks": "3M"
+        },
+        {
+          "id": "e_2_3",
+          "sectionCode": "19.3",
+          "title": "Historical Shifts in Sectors, Rising Importance of Tertiary Sector & Where are Most People Employed?",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
         },
         {
-          "id": "e_2_3",
-          "sectionCode": "2.3",
-          "title": "Disguised Unemployment (Underemployment in Agriculture) & Strategies to Create Rural/Urban Employment (MGNREGA 2005)",
-          "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "5M"
-        },
-        {
           "id": "e_2_4",
-          "sectionCode": "2.4",
-          "title": "Organised vs Unorganised Sectors (Job Security, Paid Leaves) & Public vs Private Sectors",
+          "sectionCode": "19.4",
+          "title": "Disguised Unemployment (Underemployment) in Agriculture, How to Create More Employment & MGNREGA 2005 (100 Days Guarantee)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
@@ -2853,36 +2944,39 @@ export const CBSE_SUBJECTS: Subject[] = [
     {
       "id": "sst_eco3",
       "name": "Economics: Money and Credit",
-      "ncertChapterNo": 3,
+      "ncertChapterNo": 20,
+      "examStatus": "board_exam",
+      "examStatusLabel": "Coming in Board Exam (6–7 Marks)",
+      "syllabusNote": "Core Chapter: Terms of Credit, Formal vs Informal Sector Loans, Role of RBI & SHGs.",
       "topics": [
         {
           "id": "e_3_1",
-          "sectionCode": "3.1",
-          "title": "Barter System & Double Coincidence of Wants vs Money as Medium of Exchange",
+          "sectionCode": "20.1",
+          "title": "Money as a Medium of Exchange, Barter System & Double Coincidence of Wants",
           "isImportantForBoards": true,
           "probability": "1M Foundation / Conceptual",
-          "expectedMarks": "1M MCQ / 2M"
+          "expectedMarks": "1M / 2M"
         },
         {
           "id": "e_3_2",
-          "sectionCode": "3.2",
-          "title": "Modern Forms of Money: Currency (Authorized by RBI), Demand Deposits & Cheque Payment Mechanism",
+          "sectionCode": "20.2",
+          "title": "Modern Forms of Money: Currency (Authorized by Govt), Demand Deposits in Banks & Cheque Payment Mechanism",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M"
+          "expectedMarks": "2M / 3M"
         },
         {
           "id": "e_3_3",
-          "sectionCode": "3.3",
-          "title": "Terms of Credit (Interest Rate, Collateral Security, Documentation, Mode of Repayment) & Debt Trap (Swapna)",
+          "sectionCode": "20.3",
+          "title": "Loan Activities of Banks, Two Different Credit Situations (Positive Return vs Debt-Trap) & Terms of Credit (Collateral, Interest, Documentation)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M / 5M"
         },
         {
           "id": "e_3_4",
-          "sectionCode": "3.4",
-          "title": "Formal Sources (Banks, Cooperatives supervised by RBI) vs Informal Sources (Moneylenders, High Interest) & Self-Help Groups (SHGs)",
+          "sectionCode": "20.4",
+          "title": "Formal Sector Credit (Commercial Banks, Cooperatives monitored by RBI) vs Informal Sector Credit (Moneylenders) & Self-Help Groups (SHGs) for the Poor",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "5M"
@@ -2892,39 +2986,76 @@ export const CBSE_SUBJECTS: Subject[] = [
     {
       "id": "sst_eco4",
       "name": "Economics: Globalization and the Indian Economy",
-      "ncertChapterNo": 4,
+      "ncertChapterNo": 21,
+      "examStatus": "partial_board",
+      "examStatusLabel": "Partial: What is Globalization & Factors Only (3M)",
+      "syllabusNote": "CBSE Official Syllabus: 'What is Globalization?' and 'Factors that have Enabled Globalization' evaluated in Board Exam. Rest evaluated in Project Work.",
       "topics": [
         {
           "id": "e_4_1",
-          "sectionCode": "4.1",
-          "title": "Production Across Countries: Multinational Corporations (MNCs) & Methods of Interlinking Production (Joint Ventures, Local Buyouts)",
+          "sectionCode": "21.1",
+          "title": "Production Across Countries & Multinational Corporations (MNCs) Interlinking Production Across Borders",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
+          "expectedMarks": "2M / 3M"
         },
         {
           "id": "e_4_2",
-          "sectionCode": "4.2",
-          "title": "Foreign Trade & Market Integration (Choice of Goods, Price Equalization)",
+          "sectionCode": "21.2",
+          "title": "What is Globalization? Definition, Rapid Integration of Markets & Goods/Services Movement Across Nations",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
           "expectedMarks": "3M"
         },
         {
           "id": "e_4_3",
-          "sectionCode": "4.3",
-          "title": "Factors Enabling Globalization: Rapid Information & Communication Technology (ICT), Containerization & Trade Barrier Liberalization (1991)",
+          "sectionCode": "21.3",
+          "title": "Factors Enabling Globalization: Rapid Improvements in Transportation & Information and Communication Technology (ICT)",
           "isImportantForBoards": true,
           "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "5M"
+          "expectedMarks": "3M"
         },
         {
           "id": "e_4_4",
-          "sectionCode": "4.4",
-          "title": "Role of World Trade Organization (WTO), Impact on Small Producers vs Consumers & Strategies for Fair Globalization",
-          "isImportantForBoards": true,
-          "probability": "High Chance 90%+ Recurring",
-          "expectedMarks": "3M / 5M"
+          "sectionCode": "21.4",
+          "title": "Role of World Trade Organization (WTO), Impact on Small Producers vs Consumers & Strategies for Fair Globalization (Project)",
+          "isImportantForBoards": false,
+          "probability": "Medium Chance (60-80%)",
+          "expectedMarks": "Project Only"
+        }
+      ]
+    },
+    {
+      "id": "sst_eco5",
+      "name": "Economics: Consumer Rights",
+      "ncertChapterNo": 22,
+      "examStatus": "project_only",
+      "examStatusLabel": "Project Work Only (NOT in Board Theory)",
+      "syllabusNote": "As per CBSE Curriculum 2024-26, this chapter is for Project Work only and will NOT appear in the Board Theory Paper.",
+      "topics": [
+        {
+          "id": "e_5_1",
+          "sectionCode": "22.1",
+          "title": "The Consumer in the Marketplace & Forms of Consumer Exploitation",
+          "isImportantForBoards": false,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "Project Only"
+        },
+        {
+          "id": "e_5_2",
+          "sectionCode": "22.2",
+          "title": "Consumer Movement in India & Consumer Protection Act (COPRA 1986 / 2019)",
+          "isImportantForBoards": false,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "Project Only"
+        },
+        {
+          "id": "e_5_3",
+          "sectionCode": "22.3",
+          "title": "Consumer Rights: Right to Safety, Information, Choice, Redressal & Representation",
+          "isImportantForBoards": false,
+          "probability": "1M Foundation / Conceptual",
+          "expectedMarks": "Project Only"
         }
       ]
     }
@@ -3051,64 +3182,357 @@ export const CBSE_SUBJECTS: Subject[] = [
     category: "Language",
     chapters: [
       {
-        id: "hin_gram",
-        name: "व्यावहारिक व्याकरण (Grammar - 16 Marks)",
+        id: "hin_sp_p1",
+        name: "स्पर्श: बड़े भाई साहब (प्रेमचंद)",
         ncertChapterNo: 1,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श गद्य पाठ १: बाल-मनोविज्ञान, रटंत विद्या बनाम व्यावहारिक अनुभव, रावण का उदाहरण।",
         topics: [
-          { id: "hin_g_1", sectionCode: "V1", title: "समास (तत्पुरुष, कर्मधारय, द्विगु, द्वंद्व, बहुव्रीहि, अव्ययीभाव समास पहचान व विग्रह)", isImportantForBoards: true },
-          { id: "hin_g_2", sectionCode: "V2", title: "रचना के आधार पर वाक्य रूपांतरण (सरल, संयुक्त, मिश्र वाक्य)", isImportantForBoards: true },
-          { id: "hin_g_3", sectionCode: "V3", title: "पदबंध (संज्ञा, सर्वनाम, विशेषण, क्रिया, क्रियाविशेषण पदबंध)", isImportantForBoards: true },
-          { id: "hin_g_4", sectionCode: "V4", title: "मुहावरे (पाठ्यपुस्तक आधारित अर्थ एवं सटीक वाक्य प्रयोग)", isImportantForBoards: true }
+          { id: "hin_p1_1", sectionCode: "1.1", title: "दो भाइयों के स्वभाव व अध्ययन पद्धति में अंतर", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_p1_2", sectionCode: "1.2", title: "बड़े भाई साहब का उपदेश व रावण का ऐतिहासिक उदाहरण", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_p1_3", sectionCode: "1.3", title: "वार्षिक परीक्षा परिणाम: छोटा भाई अव्वल, बड़े भाई फेल", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_p1_4", sectionCode: "1.4", title: "पतंगबाजी की घटना व बड़े भाई का बड़प्पन एवं कर्तव्य-बोध", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" }
         ]
       },
       {
-        id: "hin_sparsh_gadya",
-        name: "स्पर्श भाग २ (गद्य खंड)",
+        id: "hin_sp_p2",
+        name: "स्पर्श: डायरी का एक पन्ना (सीताराम सेकसरिया)",
         ncertChapterNo: 2,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श गद्य पाठ २: 26 जनवरी 1931 कोलकाता का स्वतंत्रता संग्राम, पुलिसिया लाठीचार्ज, महिलाओं का योगदान।",
         topics: [
-          { id: "hin_sg_1", sectionCode: "SG1", title: "बड़े भाई साहब (प्रेमचंद - पढ़ाई का महत्व व अनुभव)", isImportantForBoards: true },
-          { id: "hin_sg_2", sectionCode: "SG2", title: "डायरी का एक पन्ना (सीताराम सेकसरिया - स्वतंत्रता आंदोलन कोलकाता)", isImportantForBoards: true },
-          { id: "hin_sg_3", sectionCode: "SG3", title: "तँतारा-वामीरो कथा (लीलाधर मंडलोई - अंडमान निकोबार लोककथा)", isImportantForBoards: true },
-          { id: "hin_sg_4", sectionCode: "SG4", title: "तीसरी कसम के शिल्पकार शैलेंद्र (प्रहलाद अग्रवाल)", isImportantForBoards: true },
-          { id: "hin_sg_5", sectionCode: "SG5", title: "अब कहाँ दूसरे के दुख से दुखी होने वाले (निदा फाज़ली - संवेदनशीलता)", isImportantForBoards: true },
-          { id: "hin_sg_6", sectionCode: "SG6", title: "पतझर में टूटी पत्तियाँ (गिन्नी का सोना, झेन की देन)", isImportantForBoards: true },
-          { id: "hin_sg_7", sectionCode: "SG7", title: "कारतूस (हबीब तनवीर - वज़ीर अली की जाँबाज़ी)", isImportantForBoards: true }
+          { id: "hin_p2_1", sectionCode: "2.1", title: "26 जनवरी 1931: कोलकाता में प्रथम स्वतंत्रता दिवस का भव्य आयोजन", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_p2_2", sectionCode: "2.2", title: "पुलिस कमिश्नर की नोटिस बनाम काउंसिल का खुला आह्वान", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_p2_3", sectionCode: "2.3", title: "सुभाष बाबू का जुलूस, पुलिस लाठीचार्ज व महिलाओं की गिरफ्तारी", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_p2_4", sectionCode: "2.4", title: "कोलकाता पर लगे कलंक का परिमार्जन व ऐतिहासिक सीख", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" }
         ]
       },
       {
-        id: "hin_sparsh_padya",
-        name: "स्पर्श भाग २ (पद्य खंड)",
+        id: "hin_sp_p3",
+        name: "स्पर्श: तँतारा-वामीरो कथा (लीलाधर मंडलोई)",
         ncertChapterNo: 3,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श गद्य पाठ ३: अंडमान निकोबार लोककथा, रूढ़ियों का त्याग, तँतारा की दैवीय तलवार।",
         topics: [
-          { id: "hin_sp_1", sectionCode: "SP1", title: "कबीर – साखी (मीठी वाणी, कस्तूरी कुंडल, बिरह भुवंगम)", isImportantForBoards: true },
-          { id: "hin_sp_2", sectionCode: "SP2", title: "मीरा – पद (हरि आप हरो जन री भीर)", isImportantForBoards: true },
-          { id: "hin_sp_3", sectionCode: "SP3", title: "मैथिलीशरण गुप्त – मनुष्यता (वही मनुष्य है कि जो मनुष्य के लिए मरे)", isImportantForBoards: true },
-          { id: "hin_sp_4", sectionCode: "SP4", title: "सुमित्रानंदन पंत – पर्वत प्रदेश में पावस", isImportantForBoards: true },
-          { id: "hin_sp_5", sectionCode: "SP5", title: "वीरेन डंगवाल – तोप (कंपनी बाग की तोप)", isImportantForBoards: true },
-          { id: "hin_sp_6", sectionCode: "SP6", title: "कैफ़ी आज़मी – कर चले हम फ़िदा (शहादत का गीत)", isImportantForBoards: true },
-          { id: "hin_sp_7", sectionCode: "SP7", title: "रवींद्रनाथ ठाकुर – आत्मत्राण (प्रभु से निर्भयता की प्रार्थना)", isImportantForBoards: true }
+          { id: "hin_p3_1", sectionCode: "3.1", title: "पासा गाँव का वीर व परोपकारी युवक तँतारा व उसकी जादुई लकड़ी की तलवार", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_p3_2", sectionCode: "3.2", title: "समुद्र तट पर वामीरो का मधुर गायन व प्रथम साक्षात्कार", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_p3_3", sectionCode: "3.3", title: "पशु-पर्व पर अपमान, रूढ़ियों के विरुद्ध विद्रोह व द्वीप का दो टुकड़ों में विभक्त होना", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" },
+          { id: "hin_p3_4", sectionCode: "3.4", title: "तँतारा-वामीरो का त्यागमय बलिदान व समाज में रूढ़िवादी परंपरा का अंत", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" }
         ]
       },
       {
-        id: "hin_sanchayan",
-        name: "संचयन भाग २ (पूरक पाठ्यपुस्तक)",
+        id: "hin_sp_p4",
+        name: "स्पर्श: तीसरी कसम के शिल्पकार शैलेंद्र (प्रहलाद अग्रवाल)",
         ncertChapterNo: 4,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श गद्य पाठ ४: शैलेंद्र की संवेदनशीलता, राजकपूर, फणीश्वरनाथ रेणु की 'मारे गए गुलफाम'।",
         topics: [
-          { id: "hin_san_1", sectionCode: "SAN1", title: "हरिहर काका (मिथलेश्वर - पारिवारिक स्वार्थ व संपत्ति का लालच)", isImportantForBoards: true },
-          { id: "hin_san_2", sectionCode: "SAN2", title: "सपनों के-से दिन (गुरदयाल सिंह - बचपन की यादें व हेडमास्टर शर्मा जी)", isImportantForBoards: true },
-          { id: "hin_san_3", sectionCode: "SAN3", title: "टोपी शुक्ला (राही मासूम रज़ा - बाल मनोविज्ञान व सच्ची आत्मीयता)", isImportantForBoards: true }
+          { id: "hin_p4_1", sectionCode: "4.1", title: "कवि शैलेंद्र का व्यक्तित्व: आदर्शवादी, संवेदनशील व आत्मसम्मान से परिपूर्ण", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_p4_2", sectionCode: "4.2", title: "फिल्म 'तीसरी कसम' का निर्माण: विशुद्ध कलात्मक प्रतिबद्धता बनाम व्यावसायिकता", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_p4_3", sectionCode: "4.3", title: "गीतों की सार्थकता: 'रातों दसों दिशाओं से कहेंगी अपनी कहानियाँ' का अमर संदेश", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_p4_4", sectionCode: "4.4", title: "राजकपूर का हीरामन अभिनय व फिल्म को राष्ट्रपति स्वर्ण पदक सम्मान", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" }
         ]
       },
       {
-        id: "hin_write",
-        name: "रचनात्मक लेखन (Writing Skills - 22 Marks)",
+        id: "hin_sp_p5",
+        name: "स्पर्श: अब कहाँ दूसरे के दुख से दुखी होने वाले (निदा फाज़ली)",
         ncertChapterNo: 5,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श गद्य पाठ ५: प्रकृति का संतुलन, सुलेमान व चींटियाँ, नूह का रोना, कबूतर के अंडे की घटना।",
         topics: [
-          { id: "hin_w_1", sectionCode: "HW1", title: "अनुच्छेद लेखन (100-120 शब्द समसामयिक व वैचारिक विषय)", isImportantForBoards: true },
-          { id: "hin_w_2", sectionCode: "HW2", title: "औपचारिक पत्र लेखन (संपादक, शिकायती, प्रार्थना पत्र)", isImportantForBoards: true },
-          { id: "hin_w_3", sectionCode: "HW3", title: "सूचना लेखन (मानक प्रारूप, 50 शब्द)", isImportantForBoards: true },
-          { id: "hin_w_4", sectionCode: "HW4", title: "विज्ञापन लेखन (आकर्षक बॉक्स, स्लोगन, चित्र, 50 शब्द)", isImportantForBoards: true },
-          { id: "hin_w_5", sectionCode: "HW5", title: "ई-मेल लेखन / लघुकथा लेखन (100 शब्द)", isImportantForBoards: true }
+          { id: "hin_p5_1", sectionCode: "5.1", title: "सृष्टि का संतुलन: प्रकृति किसी एक की जागीर नहीं, सभी जीवों का समान अधिकार", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_p5_2", sectionCode: "5.2", title: "सुलेमान व चींटियों का प्रसंग एवं हज़रत नूह का जीवन भर पश्चाताप (कुत्ते से माफ़ी)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_p5_3", sectionCode: "5.3", title: "लेखक की माँ का प्रायश्चित: कबूतर का अंडा टूटने पर दिन भर का रोज़ा", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_p5_4", sectionCode: "5.4", title: "प्रकृति का रौद्र रूप: मुंबई में समुद्री तूफान व मनुष्यों की स्वार्थपरकता", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" }
+        ]
+      },
+      {
+        id: "hin_sp_p6",
+        name: "स्पर्श: पतझर में टूटी पत्तियाँ (रवींद्र केलेकर)",
+        ncertChapterNo: 6,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श गद्य पाठ ६: गिन्नी का सोना (शुद्ध आदर्श बनाम व्यावहारिकता) व झेन की देन (टी-सेरेमनी व वर्तमान में जीना)।",
+        topics: [
+          { id: "hin_p6_1", sectionCode: "6.1", title: "गिन्नी का सोना: शुद्ध सोने (आदर्श) और ताँबे (व्यावहारिकता) का दार्शनिक अंतर", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_p6_2", sectionCode: "6.2", title: "गाँधी जी का व्यावहारिक आदर्शवाद: आदर्शों को ऊँचा रखना न कि नीचे गिराना", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_p6_3", sectionCode: "6.3", title: "झेन की देन: जापानी टी-सेरेमनी (चा-नो-यू) एवं मानसिक तनाव मुक्ति", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_p6_4", sectionCode: "6.4", title: "वर्तमान क्षण में जीना: भूतकाल और भविष्य काल दोनों मिथ्या हैं", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" }
+        ]
+      },
+      {
+        id: "hin_sp_p7",
+        name: "स्पर्श: कारतूस (हबीब तनवीर)",
+        ncertChapterNo: 7,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श गद्य पाठ ७: वज़ीर अली की देशभक्ति व जाँबाज़ी, कर्नल और लेफ्टिनेंट का खेमा, गोरखपुर का जंगल।",
+        topics: [
+          { id: "hin_p7_1", sectionCode: "7.1", title: "गोरखपुर के जंगलों में कर्नल और लेफ्टिनेंट का डेरा व वज़ीर अली का आतंक", isImportantForBoards: true, probability: "1M Foundation / Conceptual", expectedMarks: "1M / 2M" },
+          { id: "hin_p7_2", sectionCode: "7.2", title: "सआदत अली खान की गद्दारी व अंग्रेजों द्वारा अवध के तख्त पर कब्जा", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_p7_3", sectionCode: "7.3", title: "वज़ीर अली का बनारस में वकील की हत्या व कंपनी के खिलाफ जंग का ऐलान", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_p7_4", sectionCode: "7.4", title: "सवार का अकेले खेमे में आना, कर्नल से कारतूस लेना व जाँबाज़ सिपाही का परिचय", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" }
+        ]
+      },
+      {
+        id: "hin_sp_k1",
+        name: "स्पर्श: कबीर – साखी",
+        ncertChapterNo: 8,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श काव्य पाठ १: सधुक्कड़ी भाषा, कस्तूरी कुंडल, मीठी वाणी, बिरह भुवंगम, दीपक जोया।",
+        topics: [
+          { id: "hin_k1_1", sectionCode: "8.1", title: "ऐसी बाणी बोलिए मन का आपा खोइ (वाणी का प्रभाव व अहंकार त्याग)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_k1_2", sectionCode: "8.2", title: "कस्तूरी कुंडलि बसै मृग ढूँढै बन माहि (ईश्वर घट-घट में व्याप्त)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_k1_3", sectionCode: "8.3", title: "जब मैं था तब हरि नहीं, अब हरि हैं मैं नाहिं (ज्ञान का दीपक व अहंकार नाश)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_k1_4", sectionCode: "8.4", title: "सुखिया सब संसार है खावै अरु सोवै (सांसारिक अज्ञान बनाम साधक की विरह पीड़ा)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" }
+        ]
+      },
+      {
+        id: "hin_sp_k2",
+        name: "स्पर्श: मीरा – पद",
+        ncertChapterNo: 9,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श काव्य पाठ २: ब्रज-मिश्रित राजस्थानी, द्रौपदी लाज, प्रह्लाद, ऐरावत उद्धार, चाकर राखो जी।",
+        topics: [
+          { id: "hin_k2_1", sectionCode: "9.1", title: "हरि आप हरो जन री भीर (द्रौपदी, प्रह्लाद व गजराज के उद्धार का दृष्टांत)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_k2_2", sectionCode: "9.2", title: "स्याम म्हाने चाकर राखो जी (श्रीकृष्ण की दासी बनने का सौभाग्य व तीन लाभ)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_k2_3", sectionCode: "9.3", title: "श्रीकृष्ण के अलौकिक रूप का सौंदर्य (मोरमुकुट, पीतांबर, वैजयंती माला)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_k2_4", sectionCode: "9.4", title: "यमुना तट पर आधी रात में दर्शन की अभिलाषा व प्रेम की विह्वलता", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" }
+        ]
+      },
+      {
+        id: "hin_sp_k3",
+        name: "स्पर्श: मैथिलीशरण गुप्त – मनुष्यता",
+        ncertChapterNo: 10,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श काव्य पाठ ३: खड़ी बोली, दधीचि, कर्ण, रंतिदेव, उशीनर (शिबि) का त्याग; 'वही मनुष्य है कि जो मनुष्य के लिए मरे'।",
+        topics: [
+          { id: "hin_k3_1", sectionCode: "10.1", title: "मृत्य की सार्थकता व सुमृत्यु (परहित में प्राण न्योछावर करने वाले की अमरता)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_k3_2", sectionCode: "10.2", title: "पौराणिक महापुरुषों का बलिदान: रंतिदेव की थाली, दधीचि की अस्थियाँ, शिबि का मांस व कर्ण का कुंडल", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_k3_3", sectionCode: "10.3", title: "सहानुभूति व उदारता: महात्मा बुद्ध का करुणा भाव व विश्व-बंधुत्व", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_k3_4", sectionCode: "10.4", title: "सच्चा मनुष्य कौन? जो संकीर्ण स्वार्थ से परे होकर सम्पूर्ण मानवता हेतु जिए", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" }
+        ]
+      },
+      {
+        id: "hin_sp_k4",
+        name: "स्पर्श: सुमित्रानंदन पंत – पर्वत प्रदेश में पावस",
+        ncertChapterNo: 11,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श काव्य पाठ ४: छायावादी प्रकृति चित्रण, मानवीकरण अलंकार, मेखलाकार पर्वत, सहस्त्र दृग सुमन, झरने, साल के वृक्ष।",
+        topics: [
+          { id: "hin_k4_1", sectionCode: "11.1", title: "पावस ऋतु में प्रकृति का प्रतिपल बदलता वेष व मेखलाकार पर्वत का रूप", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_k4_2", sectionCode: "11.2", title: "सहस्त्र दृग-सुमन (फूल रूपी नेत्र) व नीचे दर्पण सा फैला ताल", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_k4_3", sectionCode: "11.3", title: "झरनों का मोती की लड़ियों जैसा झाग व पर्वतों के हृदय से उठते साल के वृक्ष", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_k4_4", sectionCode: "11.4", title: "धुंध का प्रकोप, बादलों का उड़ना व इंद्र का जादुई खेल (इंद्रजाल)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" }
+        ]
+      },
+      {
+        id: "hin_sp_k5",
+        name: "स्पर्श: वीरेन डंगवाल – तोप",
+        ncertChapterNo: 12,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श काव्य पाठ ५: 1857 की तोप, कंपनी बाग मुहाना, चिड़ियों (गौरैयों) का बैठना; चाहे कितना भी बड़ा क्रूर शासक हो अंत निश्चित है।",
+        topics: [
+          { id: "hin_k5_1", sectionCode: "12.1", title: "कंपनी बाग के मुहाने पर रखी 1857 की तोप व उसकी ऐतिहासिक धरोहर", isImportantForBoards: true, probability: "1M Foundation / Conceptual", expectedMarks: "1M / 2M" },
+          { id: "hin_k5_2", sectionCode: "12.2", title: "तोप की आत्मस्वीकारोक्ति: 'मैंने बड़े-बड़े सूरमाओं के उड़ा दिए थे धज्जे'", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_k5_3", sectionCode: "12.3", title: "वर्तमान स्थिति: बच्चों की सवारी व चिड़ियों, विशेषकर गौरैयों की गपशप", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_k5_4", sectionCode: "12.4", title: "तोप कविता का मूल संदेश: क्रूर दमनकारी सत्ता चाहे कितनी भी बलवान हो, एक दिन उसका मुँह बंद हो जाता है", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" }
+        ]
+      },
+      {
+        id: "hin_sp_k6",
+        name: "स्पर्श: कैफ़ी आज़मी – कर चले हम फ़िदा",
+        ncertChapterNo: 13,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श काव्य पाठ ६: 1962 भारत-चीन युद्ध पृष्ठभूमि, 'हकीकत' फिल्म का गीत, सैनिकों का देशवासियों को संदेश, सीता का आंचल।",
+        topics: [
+          { id: "hin_k6_1", sectionCode: "13.1", title: "सैनिकों का अंतिम संदेश: 'कर चले हम फ़िदा जान-ओ-तन साथियो, अब तुम्हारे हवाले वतन साथियो'", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_k6_2", sectionCode: "13.2", title: "कुर्बानी की राह कभी वीरान न हो: काफिले तैयार रखने का संकल्प", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_k6_3", sectionCode: "13.3", title: "मौत को दुल्हन मानना व सर पर कफ़न बाँधने की परंपरा", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_k6_4", sectionCode: "13.4", title: "लक्ष्मण रेखा का रूपक: भारत माता रूपी सीता के आँचल को कोई रावण रूपी शत्रु छू न पाए", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" }
+        ]
+      },
+      {
+        id: "hin_sp_k7",
+        name: "स्पर्श: रवींद्रनाथ ठाकुर – आत्मत्राण",
+        ncertChapterNo: 14,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "स्पर्श काव्य पाठ ७: प्रार्थना गीत, दुखों से मुक्ति नहीं बल्कि संकटों पर विजय पाने के आत्मबल की याचना।",
+        topics: [
+          { id: "hin_k7_1", sectionCode: "14.1", title: "विपदाओं से रक्षा नहीं, अपितु संकटों से कभी न डरने की प्रार्थना", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_k7_2", sectionCode: "14.2", title: "दुख-भार कम करने की नहीं, बल्कि उसे वहन करने की असीम शक्ति की माँग", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_k7_3", sectionCode: "14.3", title: "संसार द्वारा वंचना मिलने पर भी मन में संशय या ईश्वर पर अविश्वास न होने का दृढ़ संकल्प", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_k7_4", sectionCode: "14.4", title: "सुख के दिनों में भी सिर झुकाकर ईश्वर को स्मरण करने का पावन भाव", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" }
+        ]
+      },
+      {
+        id: "hin_san_1",
+        name: "संचयन: हरिहर काका (मिथिलेश्वर)",
+        ncertChapterNo: 15,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "संचयन पाठ १: पारिवारिक स्वार्थ, महंत व ठाकुरबारी का षड्यंत्र, 15 बीघे जमीन का लालच, काका का मौन।",
+        topics: [
+          { id: "hin_s1_1", sectionCode: "15.1", title: "हरिहर काका का पारिवारिक परिवेश: चार भाई, 15 बीघे उपजाऊ ज़मीन व भाइयों की उपेक्षा", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_s1_2", sectionCode: "15.2", title: "ठाकुरबारी का महंत: धर्म की आड़ में संपत्ति हड़पने का घृणित षड्यंत्र", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_s1_3", sectionCode: "15.3", title: "काका का अपहरण, जबरन अँगूठे के निशान लगवाना व भाइयों द्वारा निर्मम अत्याचार", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" },
+          { id: "hin_s1_4", sectionCode: "15.4", title: "काका का मौन हो जाना व आधुनिक युग में मानवीय संबंधों और रिश्तों के पतन की यथार्थ तस्वीर", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" }
+        ]
+      },
+      {
+        id: "hin_san_2",
+        name: "संचयन: सपनों के-से दिन (गुरदयाल सिंह)",
+        ncertChapterNo: 16,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "संचयन पाठ २: बचपन की यादें, पीटी मास्टर प्रीतम चंद की क्रूरता, हेडमास्टर शर्मा जी की दयालुता, तोते पालना।",
+        topics: [
+          { id: "hin_s2_1", sectionCode: "16.1", title: "लेखक का बचपन: धूल-मिट्टी में खेलना, पुरानी फटी किताबों की गंध व स्कूल जाने से डरना", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_s2_2", sectionCode: "16.2", title: "पीटी सर प्रीतम चंद का खौफनाक व्यक्तित्व, चमड़ी उधेड़ने वाली पिटाई व अनुशासन", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_s2_3", sectionCode: "16.3", title: "हेडमास्टर मदन मोहन शर्मा जी का संवेदनशील व करुणामय स्वभाव एवं प्रीतम चंद का निलंबन", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_s2_4", sectionCode: "16.4", title: "मुअत्तल होने पर भी प्रीतम चंद द्वारा कमरे में पिंजरे के तोतों को बादाम खिलाना (कठोर आवरण में छिपा कोमल मन)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" }
+        ]
+      },
+      {
+        id: "hin_san_3",
+        name: "संचयन: टोपी शुक्ला (राही मासूम रज़ा)",
+        ncertChapterNo: 17,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam 2026",
+        syllabusNote: "संचयन पाठ ३: बलभद्र नारायण शुक्ला (टोपी) और सैय्यद जरगाम मुर्तज़ा (इफ़्फ़न) की मित्रता, दादी का दुलार, भावनात्मक अकेलापन।",
+        topics: [
+          { id: "hin_s3_1", sectionCode: "17.1", title: "टोपी शुक्ला और इफ़्फ़न की निश्छल मित्रता: धर्म व जाति की दीवारों से परे सच्ची आत्मीयता", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "2M / 3M" },
+          { id: "hin_s3_2", sectionCode: "17.2", title: "इफ़्फ़न की दादी का वात्सल्य व पूरबी बोली का माधुर्य, जो टोपी को अपनी माँ से अधिक प्रिय था", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" },
+          { id: "hin_s3_3", sectionCode: "17.3", title: "दादी के देहावसान के बाद टोपी का असहनीय अकेलापन व घर में 'अम्मी' शब्द कहने पर हुई पिटाई", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" },
+          { id: "hin_s3_4", sectionCode: "17.4", title: "कक्षा में दो बार फेल होने पर घर और स्कूल में टोपी की उपेक्षा व उसकी आंतरिक पीड़ा", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M / 5M" }
+        ]
+      },
+      {
+        id: "hin_v_padbandh",
+        name: "व्याकरण: पदबंध (Phrase - 4 Marks)",
+        ncertChapterNo: 18,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam (4 Marks)",
+        syllabusNote: "व्याकरण खंड: 5 बहुविकल्पी प्रश्नों में से 4 प्रश्न अनिवार्य (संज्ञा, सर्वनाम, विशेषण, क्रिया, क्रियाविशेषण पदबंध)।",
+        topics: [
+          { id: "hin_v1_1", sectionCode: "18.1", title: "पद और पदबंध की परिभाषा व मूलभूत अंतर", isImportantForBoards: true, probability: "1M Foundation / Conceptual", expectedMarks: "1M MCQ" },
+          { id: "hin_v1_2", sectionCode: "18.2", title: "संज्ञा पदबंध एवं सर्वनाम पदबंध की पहचान व शीर्ष पद नियम", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v1_3", sectionCode: "18.3", title: "विशेषण पदबंध की पहचान व रेखांकित अंश के सटीक नियम", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v1_4", sectionCode: "18.4", title: "क्रिया पदबंध एवं क्रियाविशेषण (अव्यय) पदबंध की बोर्ड स्तर की अभ्यास माला", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" }
+        ]
+      },
+      {
+        id: "hin_v_vakya",
+        name: "व्याकरण: रचना के आधार पर वाक्य रूपांतरण (4 Marks)",
+        ncertChapterNo: 19,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam (4 Marks)",
+        syllabusNote: "व्याकरण खंड: सरल, संयुक्त व मिश्र वाक्य पहचान एवं परस्पर रूपांतरण (5 में से 4 प्रश्न)।",
+        topics: [
+          { id: "hin_v2_1", sectionCode: "19.1", title: "सरल वाक्य की संरचना: एक उद्देश्य और एक विधेय की पहचान", isImportantForBoards: true, probability: "1M Foundation / Conceptual", expectedMarks: "1M MCQ" },
+          { id: "hin_v2_2", sectionCode: "19.2", title: "संयुक्त वाक्य की पहचान: समानाधिकरण योजक (और, तथा, एवं, इसलिए, परंतु, किंतु)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v2_3", sectionCode: "19.3", title: "मिश्र वाक्य के भेद: प्रधान उपवाक्य व आश्रित उपवाक्य (संज्ञा, विशेषण, क्रियाविशेषण उपवाक्य)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v2_4", sectionCode: "19.4", title: "बोर्ड मानक वाक्य रूपांतरण तकनीक: बिना अर्थ बदले वाक्य परिवर्तन", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" }
+        ]
+      },
+      {
+        id: "hin_v_samas",
+        name: "व्याकरण: समास (Compound Words - 4 Marks)",
+        ncertChapterNo: 20,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam (4 Marks)",
+        syllabusNote: "व्याकरण खंड: तत्पुरुष, कर्मधारय, द्विगु, द्वंद्व, बहुव्रीहि, अव्ययीभाव समास पहचान व विग्रह।",
+        topics: [
+          { id: "hin_v3_1", sectionCode: "20.1", title: "तत्पुरुष समास एवं उसके कारक-आधारित भेद (कर्म से अधिकरण तक)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v3_2", sectionCode: "20.2", title: "कर्मधारय समास (विशेषण-विशेष्य, उपमेय-उपमान) व द्विगु समास (संख्यावाचक पूर्वपद)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v3_3", sectionCode: "20.3", title: "द्वंद्व समास (दोनों पद प्रधान, योजक चिह्न) व अव्ययीभाव समास (अव्यय पूर्वपद)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v3_4", sectionCode: "20.4", title: "बहुव्रीहि समास (अन्य पद प्रधान) एवं कर्मधारय व बहुव्रीहि में विग्रह-आधारित अंतर", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" }
+        ]
+      },
+      {
+        id: "hin_v_muhavare",
+        name: "व्याकरण: मुहावरे (Idioms - 4 Marks)",
+        ncertChapterNo: 21,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam (4 Marks)",
+        syllabusNote: "व्याकरण खंड: पाठ्यपुस्तक आधारित मुहावरों के अर्थ एवं सटीक वाक्य प्रयोग (5 में से 4 प्रश्न)।",
+        topics: [
+          { id: "hin_v4_1", sectionCode: "21.1", title: "स्पर्श गद्य पाठ १ 'बड़े भाई साहब' आधारित सर्वाधिक पूछे जाने वाले मुहावरे (लोहे के चने चबाना, आँखें फोड़ना, दाँतों पसीना आना)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v4_2", sectionCode: "21.2", title: "स्पर्श गद्य पाठ २ 'डायरी का एक पन्ना' व पाठ ३ 'तँतारा-वामीरो' आधारित मुहावरे (रंग दिखाना, आपे से बाहर होना, सुध-बुध खोना)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v4_3", sectionCode: "21.3", title: "स्पर्श पाठ ५, ६, ७ आधारित मुहावरे (डेरा डालना, हवा लगना, आँखें खुलना, तख्ता पलटना)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" },
+          { id: "hin_v4_4", sectionCode: "21.4", title: "बोर्ड परीक्षा रिक्त स्थान पूर्ति एवं अर्थ पहचान अभ्यास मास्टर", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "1M MCQ" }
+        ]
+      },
+      {
+        id: "hin_w_anuchhed",
+        name: "लेखन: अनुच्छेद लेखन (Paragraph - 5 Marks)",
+        ncertChapterNo: 22,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam (5 Marks)",
+        syllabusNote: "रचनात्मक लेखन: दिए गए संकेत-बिंदुओं के आधार पर 100-120 शब्दों में समसामयिक व वैचारिक अनुच्छेद।",
+        topics: [
+          { id: "hin_w1_1", sectionCode: "22.1", title: "संकेत-बिंदुओं (Hints) के आधार पर अनुच्छेद लेखन का आदर्श प्रारूप एवं शब्द सीमा (100–120 शब्द)", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" },
+          { id: "hin_w1_2", sectionCode: "22.2", title: "भूमिका, विषय-विस्तार व निष्कर्ष में सूक्तियों और काव्यांशों का प्रभावशाली उपयोग", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" }
+        ]
+      },
+      {
+        id: "hin_w_patra",
+        name: "लेखन: औपचारिक पत्र लेखन (Formal Letter - 5 Marks)",
+        ncertChapterNo: 23,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam (5 Marks)",
+        syllabusNote: "रचनात्मक लेखन: शिकायती पत्र, संपादकीय पत्र, आवेदन पत्र का मानक प्रारूप (100 शब्द)।",
+        topics: [
+          { id: "hin_w2_1", sectionCode: "23.1", title: "औपचारिक पत्र का मानक प्रारूप: प्रेषक पता, दिनांक, सेवा में, विषय, महोदय, मुख्य विषय, धन्यवाद व भवदीय", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" },
+          { id: "hin_w2_2", sectionCode: "23.2", title: "समाचार पत्र के संपादक को पत्र एवं नगर निगम / स्वास्थ्य अधिकारी को शिकायती पत्र", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" }
+        ]
+      },
+      {
+        id: "hin_w_suchna",
+        name: "लेखन: सूचना लेखन (Notice - 4 Marks)",
+        ncertChapterNo: 24,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam (4 Marks)",
+        syllabusNote: "रचनात्मक लेखन: विद्यालयीय अथवा सार्वजनिक सूचना (आयोजन, खोया-पाया, अपील) - 50 शब्द।",
+        topics: [
+          { id: "hin_w3_1", sectionCode: "24.1", title: "सूचना लेखन का चौकोर बॉक्स प्रारूप: संस्था का नाम, 'सूचना' शीर्षक, दिनांक, विषय व हस्ताक्षर", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "4M" },
+          { id: "hin_w3_2", sectionCode: "24.2", title: "खोया-पाया, वाद-विवाद प्रतियोगिता, रक्तदान शिविर व अवकाश सूचना अभ्यास", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "4M" }
+        ]
+      },
+      {
+        id: "hin_w_vigyapan",
+        name: "लेखन: विज्ञापन लेखन (Advertisement - 3 Marks)",
+        ncertChapterNo: 25,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam (3 Marks)",
+        syllabusNote: "रचनात्मक लेखन: आकर्षक बॉक्स, तुकबंदी स्लोगन, मुख्य विशेषताएं, संपर्क विवरण (40 शब्द)।",
+        topics: [
+          { id: "hin_w4_1", sectionCode: "25.1", title: "विज्ञापन निर्माण कला: आकर्षक शीर्षक, तुकबंदी वाला स्लोगन (जैसे 'धमाका सेल', 'स्वस्थ जीवन का राज'), रेखाचित्र", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" },
+          { id: "hin_w4_2", sectionCode: "25.2", title: "उत्पाद की विशेषताएँ, रियायत/छूट, संपर्क सूत्र व फोन नंबर का सुरुचिपूर्ण संयोजन", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "3M" }
+        ]
+      },
+      {
+        id: "hin_w_email_laghu",
+        name: "लेखन: ई-मेल लेखन अथवा लघुकथा लेखन (5 Marks)",
+        ncertChapterNo: 26,
+        examStatus: "board_exam",
+        examStatusLabel: "Coming in Board Exam (5 Marks)",
+        syllabusNote: "रचनात्मक लेखन: औपचारिक ई-मेल (To, CC, BCC, Subject) अथवा प्रेरणादायी लघुकथा लेखन (100 शब्द)।",
+        topics: [
+          { id: "hin_w5_1", sectionCode: "26.1", title: "औपचारिक ई-मेल लेखन: प्रेषक (From), प्रेषिती (To), प्रतिलिपि (CC), विषय व शिष्टाचार अभिवादन", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" },
+          { id: "hin_w5_2", sectionCode: "26.2", title: "लघुकथा लेखन: दिए गए प्रस्थान-बिंदु अथवा शीर्षक के आधार पर पात्र, संवाद, कौतूहल व नैतिक सीख", isImportantForBoards: true, probability: "High Chance 90%+ Recurring", expectedMarks: "5M" }
         ]
       }
     ]

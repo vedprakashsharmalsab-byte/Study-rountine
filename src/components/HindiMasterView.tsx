@@ -475,9 +475,31 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                     </span>
                     <span className="font-bold">{ch.title}</span>
                     <span className="text-[10px] opacity-70">({ch.author})</span>
+                    <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-black leading-none ${
+                      isSelected ? "bg-emerald-400 text-slate-950" : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                    }`}>
+                      🎯 बोर्ड परीक्षा
+                    </span>
                   </button>
                 );
               })}
+            </div>
+
+            {/* CBSE Syllabus Status Banner */}
+            <div className={`mt-3 p-3 rounded-2xl border text-xs flex items-center gap-2.5 ${
+              isDark ? "bg-amber-950/20 border-amber-500/30 text-amber-300" : "bg-amber-50 border-amber-200 text-amber-900"
+            }`}>
+              <span className="text-base shrink-0">🎯</span>
+              <div className="leading-relaxed">
+                <strong>सीबीएसई बोर्ड परीक्षा 2026 पाठ्यक्रम:</strong>{" "}
+                <span className="opacity-90">
+                  {activeTab === "sparsh_prose"
+                    ? "उपर्युक्त सभी 7 गद्य पाठ बोर्ड परीक्षा में शामिल हैं। (चेखव कृत 'गिरगिट' पाठ सीबीएसई द्वारा पाठ्यक्रम से हटाया गया है)।"
+                    : activeTab === "sparsh_poetry"
+                    ? "उपर्युक्त सभी 7 कविताएँ बोर्ड परीक्षा में शामिल हैं। (महादेवी वर्मा कृत 'मधुर-मधुर मेरे दीपक जल' और 'बिहारी के दोहे' हटाए गए हैं)।"
+                    : "संचयन के तीनों पाठ (हरिहर काका, सपनों के-से दिन, टोपी शुक्ला) अनिवार्य रूप से 6 अंक हेतु बोर्ड परीक्षा में शामिल हैं।"}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -491,6 +513,10 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-600 border border-rose-500/20 font-mono">
                     {currentChapter.book === "sparsh_prose" ? "Sparsh Prose" : currentChapter.book === "sparsh_poetry" ? "Sparsh Poetry" : "Sanchayan"} • {currentChapter.genre}
+                  </span>
+                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    🎯 बोर्ड परीक्षा 2026 में सम्मिलित (Official Board Syllabus)
                   </span>
                   <span className={`text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                     रचयिता / लेखक: <strong className={isDark ? "text-slate-200" : "text-slate-800"}>{currentChapter.author}</strong>

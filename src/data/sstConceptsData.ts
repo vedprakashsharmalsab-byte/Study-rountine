@@ -63,6 +63,9 @@ export interface SSTChapterMeta {
   timelineAvailable?: boolean;
   mapWorkAvailable?: boolean;
   mnemonicCount: number;
+  examStatus?: "board_exam" | "partial_board" | "periodic_test_only" | "project_only" | "deleted";
+  examStatusLabel?: string;
+  boardExamNote?: string;
 }
 
 export interface SSTMapItemPoint {
@@ -93,7 +96,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "Landmark",
     "timelineAvailable": true,
     "mapWorkAvailable": false,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (6–8 Marks)",
+    "boardExamNote": "Tested in Board Theory: MCQs, 3M Short Answer & 5M Long Answer"
   },
   {
     "no": 2,
@@ -106,7 +112,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "Flag",
     "timelineAvailable": true,
     "mapWorkAvailable": true,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (7–9 Marks + 2M Map)",
+    "boardExamNote": "High Weightage: Compulsory 2M Map Pointing + 5M/3M Board Theory"
   },
   {
     "no": 3,
@@ -119,7 +128,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "Scale",
     "timelineAvailable": false,
     "mapWorkAvailable": false,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (4–5 Marks)",
+    "boardExamNote": "Tested in Board Theory: Belgium vs Sri Lanka, Prudential vs Moral reasons"
   },
   {
     "no": 4,
@@ -132,7 +144,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "Layers",
     "timelineAvailable": false,
     "mapWorkAvailable": false,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (4–5 Marks)",
+    "boardExamNote": "Tested in Board Theory: Union/State/Concurrent lists & 1992 Decentralisation"
   },
   {
     "no": 5,
@@ -145,7 +160,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "Globe",
     "timelineAvailable": false,
     "mapWorkAvailable": true,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (4–5 Marks + Map)",
+    "boardExamNote": "Tested in Board Theory + Soil Identification Map Work"
   },
   {
     "no": 6,
@@ -158,7 +176,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "Trees",
     "timelineAvailable": false,
     "mapWorkAvailable": false,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (3–4 Marks)",
+    "boardExamNote": "Tested in Board Theory: Reserved/Protected/Unclassed Forests & JFM"
   },
   {
     "no": 7,
@@ -171,7 +192,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "Droplets",
     "timelineAvailable": false,
     "mapWorkAvailable": true,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (4–5 Marks + Map)",
+    "boardExamNote": "Tested in Board Theory + Compulsory Major Dams Map Pointing"
   },
   {
     "no": 8,
@@ -184,7 +208,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "TrendingUp",
     "timelineAvailable": false,
     "mapWorkAvailable": false,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (5–6 Marks)",
+    "boardExamNote": "Tested in Board Theory: Per Capita Income vs UNDP HDI Criteria"
   },
   {
     "no": 9,
@@ -197,7 +224,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "Briefcase",
     "timelineAvailable": false,
     "mapWorkAvailable": false,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (7–8 Marks)",
+    "boardExamNote": "High Weightage: GDP Calculation, Disguised Unemployment & MGNREGA 2005"
   },
   {
     "no": 10,
@@ -210,7 +240,10 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "iconName": "Coins",
     "timelineAvailable": false,
     "mapWorkAvailable": false,
-    "mnemonicCount": 2
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (6–7 Marks)",
+    "boardExamNote": "Tested in Board Theory: Terms of Credit, Formal vs Informal, RBI & SHGs"
   }
 ];
 
