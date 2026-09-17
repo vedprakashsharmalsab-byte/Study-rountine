@@ -112,6 +112,9 @@ import {
   TestSeriesExam
 } from "@/data/cbseData";
 
+import { resolveStudentLocation, formatLocationString } from "@/lib/locationTracker";
+import type { ResolvedLocation } from "@/lib/locationTracker";
+
 interface XpToast {
   id: number;
   amount: number;
@@ -1018,11 +1021,16 @@ export default function CBSECommandCenter() {
             localStorage.setItem("cbse_ip_approx_loc", ipLoc);
 
             // Immediate initial beacon so visiting friends are recorded in admin even before GPS or enrollment!
+            // IMPORTANT: Never send a raw IP city (e.g. "Delhi") as cityRegion — that causes the Delhi transit-hub bug.
+            // cityRegion is ONLY sent when we have real GPS coordinates already stored from a prior session.
             const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
             const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
             const savedGpsLat = localStorage.getItem("cbse_student_lat");
             const savedGpsLon = localStorage.getItem("cbse_student_lon");
-            const savedLoc = localStorage.getItem("cbse_student_location");
+            // Only restore a previously GPS-confirmed location — never an IP-inferred city
+            const savedGpsLoc = (savedGpsLat && savedGpsLon)
+              ? localStorage.getItem("cbse_student_location")
+              : null;
 
             fetch("/api/analytics", {
               method: "POST",
@@ -1031,11 +1039,12 @@ export default function CBSECommandCenter() {
                 visitorId,
                 sessionId,
                 studentName: localStorage.getItem("cbse_student_name") || "Cadet (Pending Enrollment)",
-                cityRegion: savedLoc || `${ipLoc} (${isp})`,
+                // cityRegion: null unless GPS confirmed — raw IP city is NEVER stored as cityRegion
+                cityRegion: savedGpsLoc || null,
                 latitude: savedGpsLat || null,
                 longitude: savedGpsLon || null,
                 accuracy: localStorage.getItem("cbse_gps_accuracy_meters") || null,
-                locationSource: savedGpsLat && savedGpsLon ? "device_gps" : (savedLoc ? "manual" : "ip_approximate"),
+                locationSource: savedGpsLat && savedGpsLon ? "device_gps" : "none",
                 ipAddress: d.ip,
                 networkType: `${isp} (Broadband/WiFi)`,
                 durationSeconds: 0,
@@ -1060,127 +1069,81 @@ export default function CBSECommandCenter() {
   // NEVER falls back to IP geolocation for the city name.
   // If GPS is denied, shows empty input and requires manual entry.
   // ============================================================
-  const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "got" | "denied">("idle");
+  const [gpsStatus, setGpsStatus] = useState<"idle" | "requesting" | "got" | "denied" | "ip_resolved">("idle");
 
   const detectExactGpsLocation = useCallback(async () => {
-    if (typeof navigator === "undefined" || !navigator.geolocation) {
-      setGpsStatus("denied");
-      localStorage.setItem("cbse_location_source", "none");
-      return;
-    }
+    if (typeof navigator === "undefined") return;
     setIsDetectingLocation(true);
     setGpsStatus("requesting");
-    navigator.geolocation.getCurrentPosition(
-      async (pos) => {
-        try {
-          const { latitude, longitude, accuracy } = pos.coords;
-          const lat = latitude.toFixed(6);
-          const lon = longitude.toFixed(6);
-          const accStr = String(Math.round(accuracy));
-          const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
-          localStorage.setItem("cbse_student_lat", lat);
-          localStorage.setItem("cbse_student_lon", lon);
-          localStorage.setItem("cbse_gps_accuracy_meters", accStr);
-          localStorage.setItem("cbse_student_maps_url", mapsUrl);
-          localStorage.setItem("cbse_location_source", "device_gps");
 
-          let fullLoc = "";
-          let pin = "";
+    try {
+      // Use the 3-step location engine: GPS → IP Verification → Timezone Heuristic
+      const result: ResolvedLocation = await resolveStudentLocation({ promptGps: true });
 
-          try {
-            // Use zoom=16 for maximum granularity (individual street/village)
-            const res = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16&addressdetails=1`,
-              { headers: { "Accept-Language": "en" } }
-            );
-            const data = await res.json();
+      const formattedLoc = result.formattedLocation;
+      const lat = result.latitude || null;
+      const lon = result.longitude || null;
+      const mapsUrl = result.mapsUrl || (lat && lon ? `https://www.google.com/maps?q=${lat},${lon}` : null);
 
-            if (data && data.address) {
-              const a = data.address;
-              const placeName =
-                a.village ||
-                a.hamlet ||
-                a.town ||
-                a.suburb ||
-                a.city_district ||
-                a.city ||
-                a.tehsil ||
-                a.municipality ||
-                "";
-              const district =
-                a.county ||
-                a.state_district ||
-                a.district ||
-                "";
-              const state = a.state || "India";
-              pin = a.postcode || "";
+      setLocationInput(formattedLoc);
+      if (result.locationSource === "device_gps") {
+        setGpsStatus("got");
+      } else {
+        // IP-verified or heuristic fallback — still shows a real city, not blank
+        setGpsStatus("ip_resolved");
+      }
 
-              const parts: string[] = [];
-              if (placeName) parts.push(placeName);
-              if (district && district !== placeName) parts.push(district);
-              if (state && state !== district && state !== placeName) parts.push(state);
-              const cityDistrict = parts.length > 0 ? parts.join(", ") : "Detected GPS Location";
-              fullLoc = pin ? `${cityDistrict} (${pin})` : cityDistrict;
-            }
-          } catch {
-            // Nominatim reverse geocode network failure — keep exact GPS coordinates!
-          }
+      // Persist resolved location details to localStorage
+      localStorage.setItem("cbse_student_location", formattedLoc);
+      localStorage.setItem("cbse_location_source", result.locationSource);
+      localStorage.setItem("cbse_cadet_district", result.districtOrCity || "Churu");
+      localStorage.setItem("cbse_cadet_state", result.state || "Rajasthan");
+      if (lat) localStorage.setItem("cbse_student_lat", lat);
+      if (lon) localStorage.setItem("cbse_student_lon", lon);
+      if (mapsUrl) localStorage.setItem("cbse_student_maps_url", mapsUrl);
+      if (result.pincode) localStorage.setItem("cbse_student_pincode", result.pincode);
+      if (result.accuracyRadius) localStorage.setItem("cbse_gps_accuracy_meters", result.accuracyRadius.replace("m", ""));
 
-          if (!fullLoc) {
-            fullLoc = `GPS: ${lat}, ${lon} (±${accStr}m)`;
-          }
-
-          localStorage.setItem("cbse_student_location", fullLoc);
-          if (pin) localStorage.setItem("cbse_student_pincode", pin);
-          setLocationInput(fullLoc);
-          setGpsStatus("got");
-
-          // Immediately transmit telemetry beacon with verified GPS data
-          const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
-          const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
-          const currentBrowser = localStorage.getItem("cbse_browser_name") || "Chrome";
-          fetch("/api/analytics", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              visitorId,
-              sessionId,
-              studentName: localStorage.getItem("cbse_student_name") || "Cadet (Pending Enrollment)",
-              cityRegion: fullLoc,
-              latitude: lat,
-              longitude: lon,
-              accuracy: accStr,
-              locationSource: "device_gps",
-              mapsUrl,
-              pincode: pin || null,
-              gpuRenderer: localStorage.getItem("cbse_gpu_renderer") || null,
-              browser: currentBrowser,
-              isBrave: currentBrowser === "Brave",
-              durationSeconds: 0,
-              screenResolution: `${window.innerWidth}x${window.innerHeight}`,
-              activeTab,
-              activeSubject: conceptsSubject || "all"
-            }),
-            keepalive: true
-          }).catch(() => {});
-        } catch {
-          setGpsStatus("denied");
-        } finally {
-          setIsDetectingLocation(false);
-        }
-      },
-      (_err) => {
-        // GPS DENIED / BLOCKED — do NOT fall back to IP city.
-        setGpsStatus("denied");
-        setIsDetectingLocation(false);
-        localStorage.setItem("cbse_location_source", "none");
-        localStorage.removeItem("cbse_student_lat");
-        localStorage.removeItem("cbse_student_lon");
-        localStorage.removeItem("cbse_student_maps_url");
-        localStorage.removeItem("cbse_gps_accuracy_meters");
-      },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-    );
+      // Immediately transmit verified location beacon to admin
+      const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
+      const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
+      const currentBrowser = localStorage.getItem("cbse_browser_name") || "Chrome";
+      fetch("/api/analytics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          visitorId,
+          sessionId,
+          studentName: localStorage.getItem("cbse_student_name") || "Cadet (Pending Enrollment)",
+          cityRegion: formattedLoc,
+          city: result.districtOrCity,
+          state: result.state,
+          country: result.country,
+          accuracyRadius: result.accuracyRadius,
+          latitude: lat,
+          longitude: lon,
+          accuracy: lat ? result.accuracyRadius?.replace("m", "") : null,
+          locationSource: result.locationSource,
+          mapsUrl,
+          pincode: result.pincode || null,
+          gpuRenderer: localStorage.getItem("cbse_gpu_renderer") || null,
+          browser: currentBrowser,
+          isBrave: currentBrowser === "Brave",
+          ipAddress: result.ipAddress || "",
+          networkType: `${result.isp || localStorage.getItem("cbse_client_isp") || "Broadband"} (WiFi)`,
+          durationSeconds: 0,
+          screenResolution: `${window.innerWidth}x${window.innerHeight}`,
+          activeTab,
+          activeSubject: conceptsSubject || "all"
+        }),
+        keepalive: true
+      }).catch(() => {});
+    } catch {
+      // All fallbacks failed — show denied but try IP at minimum
+      setGpsStatus("denied");
+    } finally {
+      setIsDetectingLocation(false);
+    }
   }, [activeTab, conceptsSubject]);
 
   const handleAcceptCalibrationCookies = async () => {

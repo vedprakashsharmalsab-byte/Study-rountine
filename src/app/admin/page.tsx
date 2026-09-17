@@ -41,7 +41,10 @@ import {
   Calendar,
   Sparkles,
   Wifi,
-  HardDrive
+  HardDrive,
+  History,
+  MapPin,
+  X
 } from "lucide-react";
 import { CBSE_SUBJECTS } from "@/data/cbseData";
 
@@ -74,6 +77,10 @@ interface StudentSession {
   visitStartedAt?: string | null;
   lastSeenAt?: string | null;
   cityRegion?: string | null;
+  city?: string | null;
+  state?: string | null;
+  country?: string | null;
+  accuracyRadius?: string | null;
   latitude?: string | null;
   longitude?: string | null;
   accuracy?: string | null;
@@ -96,6 +103,10 @@ interface UniqueStudentProfile {
   networkType: string;
   timezone: string;
   cityRegion: string | null;
+  city?: string | null;
+  state?: string | null;
+  country?: string | null;
+  accuracyRadius?: string | null;
   latitude?: string | null;
   longitude?: string | null;
   accuracy?: string | null;
@@ -144,6 +155,10 @@ interface VisitorStats {
     studentName: string;
     ipAddress: string;
     cityRegion?: string | null;
+    city?: string | null;
+    state?: string | null;
+    country?: string | null;
+    accuracyRadius?: string | null;
     latitude?: string | null;
     longitude?: string | null;
     accuracy?: string | null;
@@ -158,6 +173,12 @@ interface VisitorStats {
     activeChapter?: string;
     durationSeconds: number;
     networkType?: string;
+    hardwareSpecs?: string;
+    gpuRenderer?: string | null;
+    screenResolution?: string;
+    studentXp?: number;
+    studentStreak?: number;
+    studentLevel?: number;
     visitStartedAt?: string | null;
     lastSeenAt?: string | null;
     createdAt: string;
@@ -184,6 +205,7 @@ export default function AdminPage() {
   const [lastRefreshed, setLastRefreshed] = useState<string>("");
   const [streamViewMode, setStreamViewMode] = useState<"students" | "events">("students");
   const [expandedStudentId, setExpandedStudentId] = useState<string | null>(null);
+  const [selectedStudentForModal, setSelectedStudentForModal] = useState<UniqueStudentProfile | null>(null);
   const [visitorFilter, setVisitorFilter] = useState<string>("all");
   const [visitorSearch, setVisitorSearch] = useState<string>("");
 
@@ -259,7 +281,8 @@ export default function AdminPage() {
   const fetchAnalytics = useCallback(async (silent = false) => {
     if (!silent) setIsLoadingAnalytics(true);
     try {
-      const res = await fetch("/api/analytics");
+      // ?all=true fetches up to 10,000 historical records (not just recent 500)
+      const res = await fetch("/api/analytics?all=true");
       const data = await res.json();
       if (data.ok && data.stats) {
         setAnalytics(data.stats);
@@ -447,11 +470,107 @@ export default function AdminPage() {
     } catch {}
   };
 
+  // Escape key closes student details modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && selectedStudentForModal) {
+        setSelectedStudentForModal(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedStudentForModal]);
+
+  // Fast O(1) Student Profile Lookup Map by visitorId
+  const studentProfileMap = useMemo(() => {
+    const map = new Map<string, UniqueStudentProfile>();
+    if (analytics?.uniqueStudents) {
+      for (const s of analytics.uniqueStudents) {
+        map.set(s.visitorId, s);
+      }
+    }
+    return map;
+  }, [analytics]);
+
+  // Fallback profile generator if an event has no pre-aggregated profile
+  const getStudentProfileForEvent = useCallback((ev: VisitorStats["recentEvents"][0]): UniqueStudentProfile => {
+    const existing = studentProfileMap.get(ev.visitorId);
+    if (existing) return existing;
+    return {
+      visitorId: ev.visitorId,
+      studentName: ev.studentName || "Cadet",
+      studentXp: ev.studentXp || 0,
+      studentStreak: ev.studentStreak || 1,
+      studentLevel: ev.studentLevel || 1,
+      deviceType: ev.deviceType,
+      operatingSystem: ev.operatingSystem,
+      browser: ev.browser,
+      screenResolution: ev.screenResolution || "Desktop",
+      hardwareSpecs: ev.hardwareSpecs || "",
+      networkType: ev.networkType || "Broadband/WiFi",
+      timezone: "Asia/Kolkata",
+      cityRegion: ev.cityRegion || null,
+      city: ev.city || null,
+      state: ev.state || null,
+      country: ev.country || "India",
+      accuracyRadius: ev.accuracyRadius || null,
+      latitude: ev.latitude || null,
+      longitude: ev.longitude || null,
+      accuracy: ev.accuracy || null,
+      locationSource: ev.locationSource || null,
+      pincode: ev.pincode || null,
+      mapsUrl: ev.mapsUrl || (ev.latitude && ev.longitude ? `https://www.google.com/maps?q=${ev.latitude},${ev.longitude}` : null),
+      gpuRenderer: ev.gpuRenderer || null,
+      ipAddress: ev.ipAddress,
+      language: "en-IN",
+      visitsToday: 1,
+      totalVisits: 1,
+      totalStudyMinutes: Math.round((ev.durationSeconds || 0) / 60),
+      activeDaysCount: 1,
+      daysSinceFirst: 0,
+      retentionBadge: "New Cadet",
+      is15DayUser: false,
+      is30DayUser: false,
+      firstSeen: ev.visitStartedAt || ev.createdAt,
+      lastActive: ev.lastSeenAt || ev.createdAt,
+      isOnlineNow: false,
+      subjectsStudied: [ev.activeSubject],
+      chaptersStudied: ev.activeChapter ? [ev.activeChapter] : [],
+      sessions: [{
+        id: ev.id,
+        sessionId: ev.sessionId || ev.id,
+        path: "/",
+        activeTab: ev.activeTab,
+        activeSubject: ev.activeSubject,
+        activeChapter: ev.activeChapter,
+        durationSeconds: ev.durationSeconds,
+        referrer: "direct",
+        createdAt: ev.createdAt,
+        visitStartedAt: ev.visitStartedAt,
+        lastSeenAt: ev.lastSeenAt,
+        cityRegion: ev.cityRegion,
+        city: ev.city,
+        state: ev.state,
+        country: ev.country,
+        accuracyRadius: ev.accuracyRadius,
+        latitude: ev.latitude,
+        longitude: ev.longitude,
+        accuracy: ev.accuracy,
+        locationSource: ev.locationSource,
+        mapsUrl: ev.mapsUrl,
+        pincode: ev.pincode
+      }]
+    };
+  }, [studentProfileMap]);
+
   // Filtered unique students
   const filteredStudents = useMemo(() => {
     if (!analytics || !analytics.uniqueStudents) return [];
     return analytics.uniqueStudents.filter((s) => {
       if (visitorFilter === "today" && s.visitsToday === 0) return false;
+      if (visitorFilter === "returning" && s.totalVisits <= 1 && s.daysSinceFirst === 0) return false;
+      if (visitorFilter === "first_time" && (s.totalVisits > 1 || s.daysSinceFirst > 0)) return false;
+      if (visitorFilter === "gps" && s.locationSource !== "device_gps" && !s.latitude) return false;
       if (visitorFilter === "mobile" && s.deviceType !== "mobile") return false;
       if (visitorFilter === "desktop" && s.deviceType !== "desktop") return false;
       if (visitorFilter === "online" && !s.isOnlineNow) return false;
@@ -462,12 +581,13 @@ export default function AdminPage() {
         const matchName = s.studentName.toLowerCase().includes(q);
         const matchId = s.visitorId.toLowerCase().includes(q);
         const matchIp = (s.ipAddress || "").toLowerCase().includes(q);
-        const matchCity = (s.cityRegion || "").toLowerCase().includes(q);
+        const matchCity = (s.cityRegion || "").toLowerCase().includes(q) || (s.city || "").toLowerCase().includes(q) || (s.state || "").toLowerCase().includes(q);
         const matchSubs = s.subjectsStudied.some(sub => sub.toLowerCase().includes(q));
         const matchBrowser = (s.browser || "").toLowerCase().includes(q);
         const matchPin = (s.pincode || "").toLowerCase().includes(q);
         const matchSource = (s.locationSource || "").toLowerCase().includes(q);
-        return matchName || matchId || matchIp || matchCity || matchSubs || matchBrowser || matchPin || matchSource;
+        const matchNet = (s.networkType || "").toLowerCase().includes(q);
+        return matchName || matchId || matchIp || matchCity || matchSubs || matchBrowser || matchPin || matchSource || matchNet;
       }
       return true;
     });
@@ -477,22 +597,36 @@ export default function AdminPage() {
   const filteredEvents = useMemo(() => {
     if (!analytics || !analytics.recentEvents) return [];
     return analytics.recentEvents.filter((ev) => {
+      const student = studentProfileMap.get(ev.visitorId);
+      if (visitorFilter === "returning" && (!student || (student.totalVisits <= 1 && student.daysSinceFirst === 0))) return false;
+      if (visitorFilter === "first_time" && student && (student.totalVisits > 1 || student.daysSinceFirst > 0)) return false;
+      if (visitorFilter === "today") {
+        const d = new Date(ev.visitStartedAt || ev.createdAt);
+        const today = new Date();
+        const isToday = d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear();
+        if (!isToday) return false;
+      }
+      if (visitorFilter === "online" && (!student || !student.isOnlineNow)) return false;
+      if (visitorFilter === "gps" && ev.locationSource !== "device_gps" && !ev.latitude) return false;
       if (visitorFilter === "mobile" && ev.deviceType !== "mobile") return false;
       if (visitorFilter === "desktop" && ev.deviceType !== "desktop") return false;
+      if (visitorFilter === "15day" && (!student || !student.is15DayUser)) return false;
+      if (visitorFilter === "30day" && (!student || !student.is30DayUser)) return false;
       if (visitorSearch.trim()) {
         const q = visitorSearch.toLowerCase();
         const matchName = (ev.studentName || "").toLowerCase().includes(q);
         const matchId = (ev.visitorId || "").toLowerCase().includes(q);
         const matchIp = (ev.ipAddress || "").toLowerCase().includes(q);
-        const matchCity = (ev.cityRegion || "").toLowerCase().includes(q);
+        const matchCity = (ev.cityRegion || "").toLowerCase().includes(q) || (ev.city || "").toLowerCase().includes(q) || (ev.state || "").toLowerCase().includes(q);
         const matchSub = (ev.activeSubject || "").toLowerCase().includes(q);
         const matchCh = (ev.activeChapter || "").toLowerCase().includes(q);
         const matchSource = (ev.locationSource || "").toLowerCase().includes(q);
-        return matchName || matchId || matchIp || matchCity || matchSub || matchCh || matchSource;
+        const matchNet = (ev.networkType || "").toLowerCase().includes(q);
+        return matchName || matchId || matchIp || matchCity || matchSub || matchCh || matchSource || matchNet;
       }
       return true;
     });
-  }, [analytics, visitorFilter, visitorSearch]);
+  }, [analytics, visitorFilter, visitorSearch, studentProfileMap]);
 
   if (isCheckingAuth) {
     return (
@@ -869,7 +1003,7 @@ export default function AdminPage() {
                         streamViewMode === "students" ? "bg-teal-500 text-slate-950 font-black" : "text-slate-400 hover:text-white"
                       }`}
                     >
-                      👤 Unique Students ({analytics?.uniqueStudents?.length || 0})
+                      👤 Cadets Directory ({analytics?.uniqueStudents?.length || 0})
                     </button>
                     <button
                       onClick={() => setStreamViewMode("events")}
@@ -877,7 +1011,7 @@ export default function AdminPage() {
                         streamViewMode === "events" ? "bg-teal-500 text-slate-950 font-black" : "text-slate-400 hover:text-white"
                       }`}
                     >
-                      📋 Raw Sessions ({analytics?.totalEventsCount || 0})
+                      📜 Visit History &amp; Past Visits ({analytics?.totalEventsCount || 0})
                     </button>
                   </div>
 
@@ -889,11 +1023,16 @@ export default function AdminPage() {
                       isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
                     }`}
                   >
-                    <option value="all">All Students</option>
+                    <option value="all">All Visitors &amp; Sessions</option>
+                    <option value="returning">🔁 Visited Before (Returning Students)</option>
+                    <option value="first_time">🆕 First-Time Visitors (1st Visit)</option>
                     <option value="today">📅 Studied Today</option>
                     <option value="online">🟢 Online Now</option>
+                    <option value="gps">📍 GPS Hardware Confirmed</option>
                     <option value="mobile">📱 Mobile Devices</option>
                     <option value="desktop">💻 Desktop / Laptops</option>
+                    <option value="15day">⭐ 15-Day Active Cadets</option>
+                    <option value="30day">🏆 30-Day Veteran Cadets</option>
                   </select>
 
                   {/* Search */}
@@ -999,27 +1138,57 @@ export default function AdminPage() {
                                         rel="noopener noreferrer"
                                         className="text-emerald-300 hover:text-emerald-200 underline underline-offset-2 font-medium"
                                       >
-                                        {student.cityRegion || `${student.latitude}, ${student.longitude}`}
+                                        {student.city && student.state
+                                          ? `${student.city}, ${student.state}`
+                                          : student.cityRegion || `${student.latitude}, ${student.longitude}`}
                                       </a>
                                     ) : (
                                       <span className="text-emerald-300 font-medium">
-                                        {student.cityRegion || `${student.latitude}, ${student.longitude}`}
+                                        {student.city && student.state
+                                          ? `${student.city}, ${student.state}`
+                                          : student.cityRegion || `${student.latitude}, ${student.longitude}`}
                                       </span>
                                     )}
+                                  </div>
+                                ) : student.locationSource === "ip_verified" ? (
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                                      🌐 IP-Verified City
+                                    </span>
+                                    <span className="text-sky-200 font-medium">
+                                      {student.city && student.state
+                                        ? `${student.city}, ${student.state}`
+                                        : student.cityRegion || "India"}
+                                    </span>
+                                  </div>
+                                ) : student.locationSource === "heuristic_fallback" ? (
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30">
+                                      🧭 Region Est.
+                                    </span>
+                                    <span className="text-violet-200 font-medium">
+                                      {student.city && student.state
+                                        ? `${student.city}, ${student.state}`
+                                        : student.cityRegion || "India"}
+                                    </span>
                                   </div>
                                 ) : student.locationSource === "manual" ? (
                                   <div className="flex items-center gap-1.5">
                                     <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
                                       ✍ Manual
                                     </span>
-                                    <span className="text-amber-200 font-medium">{student.cityRegion}</span>
-                                  </div>
-                                ) : student.locationSource === "ip_approximate" || student.cityRegion ? (
-                                  <div className="flex items-center gap-1.5">
-                                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
-                                      🌐 IP Approx (No GPS yet)
+                                    <span className="text-amber-200 font-medium">
+                                      {student.city && student.state
+                                        ? `${student.city}, ${student.state}`
+                                        : student.cityRegion}
                                     </span>
-                                    <span className="text-sky-200 font-medium">{student.cityRegion}</span>
+                                  </div>
+                                ) : student.cityRegion ? (
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-500/20 text-slate-300 border border-slate-500/30">
+                                      🌐 IP Est.
+                                    </span>
+                                    <span className="text-slate-300 font-medium">{student.city && student.state ? `${student.city}, ${student.state}` : student.cityRegion}</span>
                                   </div>
                                 ) : (
                                   <span className="text-slate-500 italic flex items-center gap-1">
@@ -1060,6 +1229,18 @@ export default function AdminPage() {
                                 Last seen {new Date(student.lastActive).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
                               </div>
                             </div>
+
+                            <button
+                              onClick={() => {
+                                playSound("click");
+                                setSelectedStudentForModal(student);
+                              }}
+                              className="px-3 py-2 rounded-xl text-xs font-bold border border-teal-500/30 bg-teal-500/15 text-teal-300 hover:bg-teal-500/25 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+                              title="Open Full Cadet Dossier & Complete Past Visits History"
+                            >
+                              <Eye className="w-3.5 h-3.5" />
+                              <span>Dossier</span>
+                            </button>
 
                             <button
                               onClick={() => {
@@ -1131,7 +1312,9 @@ export default function AdminPage() {
                                   </div>
                                   <div className="flex flex-wrap items-center gap-3">
                                     <span className="font-bold text-white text-sm">
-                                      {student.cityRegion || "Coordinates recorded"}{student.pincode ? ` — PIN ${student.pincode}` : ""}
+                                      {student.city && student.state
+                                        ? `${student.city}, ${student.state}${student.country && student.country !== "India" ? `, ${student.country}` : ", India"}`
+                                        : student.cityRegion || "Coordinates recorded"}{student.pincode ? ` — PIN ${student.pincode}` : ""}
                                     </span>
                                     {student.latitude && student.longitude && (
                                       <span className="text-slate-400 text-[10px] font-mono">
@@ -1164,19 +1347,39 @@ export default function AdminPage() {
                                     </span>
                                   </div>
                                 </div>
-                              ) : student.locationSource === "ip_approximate" || student.cityRegion ? (
+                              ) : student.locationSource === "ip_verified" ? (
                                 <div className="col-span-2 sm:col-span-4 p-3.5 rounded-xl bg-sky-500/[0.04] border border-sky-500/20 space-y-1.5">
                                   <div className="flex items-center justify-between">
                                     <span className="text-[10px] uppercase text-sky-400 flex items-center gap-1.5 font-bold">
-                                      🌐 Network / ISP Approximate Location (Cadet has not granted GPS yet)
+                                      🌐 IP-Verified City (GPS was denied — cross-verified across 3 IP sources)
                                     </span>
                                     <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
-                                      ISP Origin
+                                      {student.accuracyRadius || "~25km"}
                                     </span>
                                   </div>
                                   <div className="flex flex-wrap items-center gap-3">
                                     <span className="font-bold text-white text-sm">
-                                      {student.cityRegion}
+                                      {student.city && student.state
+                                        ? `${student.city}, ${student.state}, India`
+                                        : student.cityRegion || "India"}
+                                    </span>
+                                  </div>
+                                </div>
+                              ) : student.locationSource === "heuristic_fallback" || student.cityRegion ? (
+                                <div className="col-span-2 sm:col-span-4 p-3.5 rounded-xl bg-violet-500/[0.04] border border-violet-500/20 space-y-1.5">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-[10px] uppercase text-violet-400 flex items-center gap-1.5 font-bold">
+                                      🧭 Region Estimate (Derived from timezone &amp; locale — city-level accuracy)
+                                    </span>
+                                    <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30">
+                                      {student.accuracyRadius || "~50km"}
+                                    </span>
+                                  </div>
+                                  <div className="flex flex-wrap items-center gap-3">
+                                    <span className="font-bold text-white text-sm">
+                                      {student.city && student.state
+                                        ? `${student.city}, ${student.state}, India`
+                                        : student.cityRegion || "India"}
                                     </span>
                                   </div>
                                 </div>
@@ -1247,28 +1450,62 @@ export default function AdminPage() {
               {/* ============================================================= */}
               {streamViewMode === "events" && (
                 <div className="space-y-4">
+                  {/* Summary Metric Strip for History View */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+                    <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                      <span className="text-[10px] uppercase text-slate-400 font-bold flex items-center gap-1">
+                        <History className="w-3 h-3 text-teal-400" /> Total Recorded Visits
+                      </span>
+                      <div className="text-xl font-black text-white">{analytics?.totalEventsCount || 0}</div>
+                    </div>
+                    <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                      <span className="text-[10px] uppercase text-slate-400 font-bold flex items-center gap-1">
+                        <Users className="w-3 h-3 text-cyan-400" /> Unique Cadets Tracked
+                      </span>
+                      <div className="text-xl font-black text-teal-300">{analytics?.totalUniqueStudents || 0}</div>
+                    </div>
+                    <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                      <span className="text-[10px] uppercase text-slate-400 font-bold flex items-center gap-1">
+                        <RefreshCw className="w-3 h-3 text-amber-400" /> Cadets Visited Before (2+)
+                      </span>
+                      <div className="text-xl font-black text-amber-300">
+                        {analytics?.uniqueStudents?.filter(s => s.totalVisits > 1 || s.daysSinceFirst > 0).length || 0}
+                      </div>
+                    </div>
+                    <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                      <span className="text-[10px] uppercase text-slate-400 font-bold flex items-center gap-1">
+                        <Zap className="w-3 h-3 text-emerald-400" /> Sessions Today
+                      </span>
+                      <div className="text-xl font-black text-emerald-300">{analytics?.todayTotalSessions || 0}</div>
+                    </div>
+                  </div>
+
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs font-mono">
                       <thead>
                         <tr className={`border-b ${isDark ? "border-white/10 text-slate-400" : "border-slate-200 text-slate-600"}`}>
                           <th className="py-3 px-3 whitespace-nowrap">Visit Timestamp (IST)</th>
                           <th className="py-3 px-3 whitespace-nowrap">Cadet / Student</th>
+                          <th className="py-3 px-3 whitespace-nowrap">Past Visits / History</th>
                           <th className="py-3 px-3 whitespace-nowrap">Verified Location</th>
-                          <th className="py-3 px-3 whitespace-nowrap">IP & Network</th>
-                          <th className="py-3 px-3 whitespace-nowrap">Device & Browser</th>
-                          <th className="py-3 px-3 whitespace-nowrap">Subject & Topic</th>
+                          <th className="py-3 px-3 whitespace-nowrap">IP &amp; Network</th>
+                          <th className="py-3 px-3 whitespace-nowrap">Device &amp; Browser</th>
+                          <th className="py-3 px-3 whitespace-nowrap">Subject &amp; Topic</th>
                           <th className="py-3 px-3 whitespace-nowrap">Visit Duration</th>
+                          <th className="py-3 px-3 whitespace-nowrap text-right">Cadet Details</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-white/5">
                         {filteredEvents.length === 0 ? (
                           <tr>
-                            <td colSpan={7} className="py-8 text-center text-slate-500">
+                            <td colSpan={9} className="py-8 text-center text-slate-500">
                               No visits found matching your filter criteria.
                             </td>
                           </tr>
                         ) : (
                           filteredEvents.map((ev) => {
+                            const student = getStudentProfileForEvent(ev);
+                            const hasVisitedBefore = student.totalVisits > 1 || student.daysSinceFirst > 0;
                             const visitTime = new Date(ev.visitStartedAt || ev.createdAt);
                             const lastActiveTime = ev.lastSeenAt ? new Date(ev.lastSeenAt) : null;
                             const hasGps = ev.locationSource === "device_gps" || (ev.latitude && ev.longitude);
@@ -1294,12 +1531,33 @@ export default function AdminPage() {
 
                                 {/* Student Name & Visitor ID */}
                                 <td className="py-3 px-3 whitespace-nowrap">
-                                  <div className="font-bold text-white">
-                                    {ev.studentName}
+                                  <div className="font-bold text-white flex items-center gap-1.5">
+                                    <span>{ev.studentName}</span>
+                                    {student.isOnlineNow && (
+                                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                                    )}
                                   </div>
                                   <div className="text-[10px] text-teal-400">
                                     {ev.visitorId.slice(0, 16)}...
                                   </div>
+                                </td>
+
+                                {/* Past Visits / History Status */}
+                                <td className="py-3 px-3 whitespace-nowrap">
+                                  {hasVisitedBefore ? (
+                                    <div className="space-y-0.5">
+                                      <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-amber-500/20 text-amber-300 border border-amber-500/30 whitespace-nowrap flex items-center gap-1 w-fit">
+                                        🔁 Visited {student.totalVisits}x before
+                                      </span>
+                                      <div className="text-[10px] text-slate-400">
+                                        {student.visitsToday} today · {student.activeDaysCount} active days
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-slate-500/20 text-slate-300 border border-slate-500/30 whitespace-nowrap">
+                                      🆕 1st Visit
+                                    </span>
+                                  )}
                                 </td>
 
                                 {/* Verified Location */}
@@ -1322,7 +1580,7 @@ export default function AdminPage() {
                                         )}
                                       </div>
                                       <div className="text-emerald-200 font-medium text-xs">
-                                        {ev.cityRegion || `${ev.latitude}, ${ev.longitude}`}{ev.pincode ? ` (${ev.pincode})` : ""}
+                                        {ev.city && ev.state ? `${ev.city}, ${ev.state}` : ev.cityRegion || `${ev.latitude}, ${ev.longitude}`}{ev.pincode ? ` (${ev.pincode})` : ""}
                                       </div>
                                     </div>
                                   ) : hasManual ? (
@@ -1337,10 +1595,10 @@ export default function AdminPage() {
                                   ) : isIpApprox ? (
                                     <div className="space-y-0.5 min-w-[160px]">
                                       <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
-                                        🌐 IP Approx (No GPS yet)
+                                        🌐 IP-Verified
                                       </span>
                                       <div className="text-sky-200 font-medium text-xs">
-                                        {ev.cityRegion}
+                                        {ev.city && ev.state ? `${ev.city}, ${ev.state}` : ev.cityRegion || "India"}
                                       </div>
                                     </div>
                                   ) : (
@@ -1378,6 +1636,21 @@ export default function AdminPage() {
                                 {/* Duration */}
                                 <td className="py-3 px-3 whitespace-nowrap text-slate-200 font-bold">
                                   ⏱️ {ev.durationSeconds > 60 ? `${Math.round(ev.durationSeconds / 60)}m` : `${ev.durationSeconds}s`}
+                                </td>
+
+                                {/* View Details Action */}
+                                <td className="py-3 px-3 whitespace-nowrap text-right">
+                                  <button
+                                    onClick={() => {
+                                      playSound("click");
+                                      setSelectedStudentForModal(student);
+                                    }}
+                                    className="px-3 py-1.5 rounded-xl bg-teal-500/15 hover:bg-teal-500/30 text-teal-300 hover:text-white border border-teal-500/30 font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-xs ml-auto"
+                                    title="View Complete Student History & Hardware Dossier"
+                                  >
+                                    <Eye className="w-3.5 h-3.5" />
+                                    <span>View Details</span>
+                                  </button>
                                 </td>
                               </tr>
                             );
@@ -1749,6 +2022,318 @@ export default function AdminPage() {
           </div>
         )}
       </main>
+
+      {/* ================================================================= */}
+      {/* STUDENT DOSSIER & COMPLETE PAST VISITS HISTORY MODAL */}
+      {/* ================================================================= */}
+      {selectedStudentForModal && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fade-in"
+          onClick={() => setSelectedStudentForModal(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl bg-[#090d16] border border-teal-500/30 rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Sticky Header */}
+            <div className="p-5 sm:p-6 border-b border-white/10 bg-gradient-to-r from-teal-950/40 via-[#0d1526] to-[#090d16] flex items-center justify-between gap-4 shrink-0">
+              <div className="flex items-center gap-4 min-w-0">
+                <div className="relative">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500/30 to-cyan-500/20 border-2 border-teal-500/50 flex items-center justify-center text-teal-300 font-black text-xl shadow-lg shadow-teal-950/50">
+                    {selectedStudentForModal.studentName.slice(0, 2).toUpperCase()}
+                  </div>
+                  {selectedStudentForModal.isOnlineNow && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-[#090d16] animate-ping" />
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className="text-xl font-black text-white truncate">{selectedStudentForModal.studentName}</h2>
+                    {selectedStudentForModal.isOnlineNow && (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                        ● Active Online
+                      </span>
+                    )}
+                    {selectedStudentForModal.is30DayUser ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black bg-purple-500/20 text-purple-300 border border-purple-500/30">🏆 30-Day Veteran</span>
+                    ) : selectedStudentForModal.is15DayUser ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black bg-blue-500/20 text-blue-300 border border-blue-500/30">⭐ 15-Day Active</span>
+                    ) : selectedStudentForModal.retentionBadge === "7-Day Regular" ? (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black bg-teal-500/20 text-teal-300 border border-teal-500/30">✅ 7-Day Regular</span>
+                    ) : (
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-slate-500/20 text-slate-300 border border-slate-500/30">🆕 New Cadet</span>
+                    )}
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400 font-mono mt-1">
+                    <span>Visitor ID: <code className="text-teal-400 font-bold">{selectedStudentForModal.visitorId}</code></span>
+                    <span>·</span>
+                    <span className="text-amber-400 font-bold">Level {selectedStudentForModal.studentLevel}</span>
+                    <span>·</span>
+                    <span className="text-teal-300 font-bold">{selectedStudentForModal.studentXp} XP</span>
+                    <span>·</span>
+                    <span className="text-orange-400 font-bold">Streak {selectedStudentForModal.studentStreak}d</span>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                onClick={() => { playSound("click"); setSelectedStudentForModal(null); }}
+                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors cursor-pointer shrink-0"
+                title="Close (Esc)"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Scrollable Body */}
+            <div className="p-5 sm:p-6 overflow-y-auto space-y-6">
+              {/* Metric Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                  <span className="text-[11px] uppercase tracking-wider font-bold text-slate-400 flex items-center gap-1.5">
+                    <History className="w-3.5 h-3.5 text-teal-400" /> Total Visits
+                  </span>
+                  <div className="text-2xl font-black text-white">
+                    {selectedStudentForModal.totalVisits}
+                  </div>
+                  <div className="text-[10px] text-amber-300 font-mono font-bold">
+                    🔥 {selectedStudentForModal.visitsToday} visits today
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                  <span className="text-[11px] uppercase tracking-wider font-bold text-slate-400 flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-indigo-400" /> Study Time
+                  </span>
+                  <div className="text-2xl font-black text-white">
+                    {selectedStudentForModal.totalStudyMinutes}m
+                  </div>
+                  <div className="text-[10px] text-slate-400 font-mono">
+                    Across {selectedStudentForModal.sessions.length} sessions
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                  <span className="text-[11px] uppercase tracking-wider font-bold text-slate-400 flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-sky-400" /> First Visited
+                  </span>
+                  <div className="text-sm font-black text-white truncate">
+                    {new Date(selectedStudentForModal.firstSeen).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
+                  </div>
+                  <div className="text-[10px] text-slate-400 font-mono">
+                    {selectedStudentForModal.daysSinceFirst} days ago ({selectedStudentForModal.activeDaysCount} active days)
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                  <span className="text-[11px] uppercase tracking-wider font-bold text-slate-400 flex items-center gap-1.5">
+                    <Activity className="w-3.5 h-3.5 text-emerald-400" /> Last Active
+                  </span>
+                  <div className="text-sm font-black text-white truncate">
+                    {new Date(selectedStudentForModal.lastActive).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })} IST
+                  </div>
+                  <div className="text-[10px] text-slate-400 font-mono truncate">
+                    {new Date(selectedStudentForModal.lastActive).toLocaleDateString("en-IN", { day: "2-digit", month: "short" })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Location Card */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-black uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-emerald-400" /> Verified Geographical Location
+                  </h3>
+                  {selectedStudentForModal.locationSource === "device_gps" || selectedStudentForModal.latitude ? (
+                    <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                      📍 Exact Hardware GPS (Accuracy: ±{selectedStudentForModal.accuracy || 15}m)
+                    </span>
+                  ) : selectedStudentForModal.locationSource === "ip_verified" ? (
+                    <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30 flex items-center gap-1">
+                      🌐 IP-Verified City (Cross-Referenced)
+                    </span>
+                  ) : selectedStudentForModal.locationSource === "heuristic_fallback" ? (
+                    <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30 flex items-center gap-1">
+                      🧭 Region Estimate (Timezone &amp; Locale)
+                    </span>
+                  ) : (
+                    <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+                      ✍ Self-Reported / Manual
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-black/40 border border-white/5">
+                  <div className="space-y-1">
+                    <div className="text-base font-bold text-white">
+                      {selectedStudentForModal.city && selectedStudentForModal.state
+                        ? `${selectedStudentForModal.city}, ${selectedStudentForModal.state}${selectedStudentForModal.country && selectedStudentForModal.country !== "India" ? `, ${selectedStudentForModal.country}` : ", India"}`
+                        : selectedStudentForModal.cityRegion || "Location recorded"}
+                      {selectedStudentForModal.pincode ? ` — PIN ${selectedStudentForModal.pincode}` : ""}
+                    </div>
+                    {selectedStudentForModal.latitude && selectedStudentForModal.longitude && (
+                      <div className="text-xs font-mono text-slate-400">
+                        Latitude: <span className="text-emerald-400">{selectedStudentForModal.latitude}</span> · Longitude: <span className="text-emerald-400">{selectedStudentForModal.longitude}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {selectedStudentForModal.mapsUrl && (
+                    <a
+                      href={selectedStudentForModal.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold transition-colors flex items-center gap-1.5"
+                    >
+                      <span>🗺 Open in Google Maps</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Hardware & Network Fingerprint */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
+                <h3 className="text-xs font-black uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                  <Cpu className="w-4 h-4 text-cyan-400" /> Device Hardware &amp; Network Intelligence
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+                  <div className="p-3 rounded-xl bg-black/30 border border-white/5 space-y-1">
+                    <span className="text-[10px] text-slate-400 uppercase">Device &amp; OS</span>
+                    <div className="text-white font-bold">{selectedStudentForModal.deviceType === "mobile" ? "📱 Mobile Device" : "💻 Desktop / Laptop"}</div>
+                    <div className="text-slate-400 text-[11px]">{selectedStudentForModal.operatingSystem}</div>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-black/30 border border-white/5 space-y-1">
+                    <span className="text-[10px] text-slate-400 uppercase">Browser &amp; Display</span>
+                    <div className="text-white font-bold">{selectedStudentForModal.browser}</div>
+                    <div className="text-slate-400 text-[11px]">{selectedStudentForModal.screenResolution}</div>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-black/30 border border-white/5 space-y-1">
+                    <span className="text-[10px] text-slate-400 uppercase">IP &amp; ISP Network</span>
+                    <div className="text-white font-bold truncate">{selectedStudentForModal.ipAddress}</div>
+                    <div className="text-teal-400 text-[11px] truncate">{selectedStudentForModal.networkType}</div>
+                  </div>
+
+                  {selectedStudentForModal.gpuRenderer && (
+                    <div className="col-span-1 sm:col-span-3 p-3 rounded-xl bg-black/30 border border-white/5 space-y-1">
+                      <span className="text-[10px] text-slate-400 uppercase">GPU Graphics Hardware</span>
+                      <div className="text-cyan-300 text-xs font-bold break-all">{selectedStudentForModal.gpuRenderer}</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Subjects & Chapters Explored */}
+              {(selectedStudentForModal.subjectsStudied.length > 0 || selectedStudentForModal.chaptersStudied.length > 0) && (
+                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
+                  <h3 className="text-xs font-black uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-amber-400" /> Curriculum &amp; Study Footprint
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {selectedStudentForModal.subjectsStudied.map((sub, sIdx) => (
+                      <span key={sIdx} className="px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-xs font-mono font-bold text-amber-300 uppercase">
+                        {sub}
+                      </span>
+                    ))}
+                    {selectedStudentForModal.chaptersStudied.map((ch, cIdx) => (
+                      <span key={cIdx} className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-300">
+                        {ch}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Chronological Visits History */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-black uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                    <History className="w-4 h-4 text-amber-400" /> Complete Chronological Visits History ({selectedStudentForModal.sessions.length} sessions)
+                  </h3>
+                  <span className="text-[11px] font-mono text-slate-400">
+                    Ordered newest to oldest
+                  </span>
+                </div>
+
+                <div className="divide-y divide-white/5 rounded-xl border border-white/10 overflow-hidden bg-black/40 font-mono text-xs">
+                  {selectedStudentForModal.sessions.map((sess, idx) => {
+                    const sessDate = new Date(sess.visitStartedAt || sess.createdAt);
+                    const lastDate = sess.lastSeenAt ? new Date(sess.lastSeenAt) : null;
+                    return (
+                      <div key={sess.id || idx} className="p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-white/[0.02] transition-colors">
+                        <div className="space-y-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">
+                              Visit #{selectedStudentForModal.sessions.length - idx}
+                            </span>
+                            <span className="text-white font-bold">
+                              {sessDate.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })} · {sessDate.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} IST
+                            </span>
+                            {lastDate && lastDate.getTime() - sessDate.getTime() > 60000 && (
+                              <span className="text-slate-500 text-[10px]">
+                                (until {lastDate.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })})
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex flex-wrap items-center gap-2 text-slate-400 text-[11px]">
+                            <span className="text-amber-300 font-bold uppercase">{sess.activeSubject}</span>
+                            <span>·</span>
+                            <span>{sess.activeChapter || sess.activeTab}</span>
+                            <span>·</span>
+                            <span>Path: {sess.path || "/"}</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 shrink-0 text-slate-400 text-xs">
+                          <span className="font-bold text-white">
+                            ⏱️ {sess.durationSeconds > 60 ? `${Math.round(sess.durationSeconds / 60)}m` : `${sess.durationSeconds}s`}
+                          </span>
+                          {sess.locationSource === "device_gps" ? (
+                            <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                              📍 GPS
+                            </span>
+                          ) : (
+                            <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                              🌐 Network
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Sticky Footer */}
+            <div className="p-4 border-t border-white/10 bg-[#070b14] flex flex-wrap items-center justify-between gap-3 shrink-0">
+              <div className="text-xs font-mono text-slate-400">
+                Showing all historical telemetry and past visit logs for this cadet.
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(selectedStudentForModal.visitorId);
+                    playSound("success");
+                  }}
+                  className="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-bold border border-white/10 transition-colors cursor-pointer"
+                >
+                  📋 Copy Visitor ID
+                </button>
+                <button
+                  onClick={() => { playSound("click"); setSelectedStudentForModal(null); }}
+                  className="px-4 py-1.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-black transition-colors cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

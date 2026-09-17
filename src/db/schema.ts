@@ -180,11 +180,15 @@ export const visitorEvents = pgTable("visitor_events", {
   // cityRegion is populated by reverse-geocoding the coordinates (device_gps)
   // OR from the student's manual input. NEVER from server-side IP fallback.
   // -------------------------------------------------------------------------
-  cityRegion: text("city_region"),           // human-readable, may be null
+  cityRegion: text("city_region"),           // human-readable, formatted string e.g. "Bissu, Churu, Rajasthan, India"
+  city: text("city"),                       // specific city / town / district
+  state: text("state"),                     // state e.g. "Rajasthan"
+  country: text("country"),                 // country e.g. "India"
+  accuracyRadius: text("accuracy_radius"),   // e.g. "15m", "10km", "25km"
   latitude: text("latitude"),               // from coords.latitude
   longitude: text("longitude"),             // from coords.longitude
   accuracy: text("accuracy"),               // coords.accuracy in metres
-  locationSource: text("location_source").default("none"), // see above
+  locationSource: text("location_source").default("none"), // device_gps | ip_verified | heuristic_fallback | manual | none
   pincode: text("pincode"),
   mapsUrl: text("maps_url"),
   gpuRenderer: text("gpu_renderer"),

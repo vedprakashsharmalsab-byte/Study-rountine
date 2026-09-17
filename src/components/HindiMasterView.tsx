@@ -1306,15 +1306,37 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
             {grammarSubTab === "root_basics" && (
               <div className="mt-6 space-y-6">
                 {/* Foundational Definition Card */}
-                <div className={`p-6 rounded-2xl border ${
+                <div className={`p-6 rounded-2xl border space-y-4 ${
                   isDark ? "bg-purple-950/20 border-purple-800/30" : "bg-purple-50/60 border-purple-200"
                 }`}>
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-purple-600 block mb-2">
-                    आधारभूत परिभाषा एवं संकल्पना (Foundational Definition):
-                  </span>
-                  <p className={`text-base sm:text-lg leading-[2.1] font-medium ${isDark ? "text-slate-200" : "text-slate-800"}`}>
-                    {currentGrammarTopic.definition}
-                  </p>
+                  <div>
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400 block mb-1.5">
+                      सीबीएसई मानक परिभाषा (Official Board Definition):
+                    </span>
+                    <p className={`text-base sm:text-lg leading-[2.1] font-medium ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                      {currentGrammarTopic.definition}
+                    </p>
+                  </div>
+
+                  {currentGrammarTopic.classroomDefinition && (
+                    <div className={`p-4 rounded-xl border ${
+                      isDark ? "bg-emerald-950/30 border-emerald-800/40 text-emerald-200" : "bg-emerald-50 border-emerald-200 text-emerald-900"
+                    }`}>
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="text-[11px] font-bold font-mono px-2 py-0.5 rounded bg-emerald-500 text-white">
+                          📓 कक्षा नोटबुक प्रामाणिक परिभाषा (Classroom Verified Note)
+                        </span>
+                      </div>
+                      <p className="text-sm sm:text-base font-semibold leading-[1.9]">
+                        &quot;{currentGrammarTopic.classroomDefinition}&quot;
+                      </p>
+                      {currentGrammarTopic.introExample && (
+                        <p className="text-xs sm:text-sm mt-2 opacity-90 italic">
+                          💡 <strong>कक्षा परिचयात्मक उदाहरण:</strong> {currentGrammarTopic.introExample}
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Specific Root Concept Deep Dives */}
@@ -1422,6 +1444,58 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                             ))}
                           </ul>
                         </div>
+
+                        {tp.classroomExamples && tp.classroomExamples.length > 0 && (
+                          <div className={`p-4 rounded-xl border mt-3.5 ${
+                            isDark ? "bg-emerald-950/20 border-emerald-900/40" : "bg-emerald-50/70 border-emerald-200"
+                          }`}>
+                            <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                              <span className="text-[11px] font-bold font-mono px-2.5 py-0.5 rounded-full bg-emerald-500 text-white flex items-center gap-1.5 shadow-xs">
+                                <span>📓</span>
+                                <span>कक्षा गृहकार्य व नोटबुक उदाहरण ({tp.classroomExamples.length})</span>
+                              </span>
+                              {tp.classroomDefinition && (
+                                <span className="text-xs text-emerald-700 dark:text-emerald-300 font-medium">
+                                  {tp.classroomDefinition}
+                                </span>
+                              )}
+                            </div>
+                            <div className="space-y-2.5">
+                              {tp.classroomExamples.map((cex, cidx) => (
+                                <div
+                                  key={cidx}
+                                  className={`p-3 rounded-xl border text-xs sm:text-sm ${
+                                    isDark ? "bg-slate-900/90 border-slate-800 text-slate-200" : "bg-white border-emerald-150 text-slate-800 shadow-xs"
+                                  }`}
+                                >
+                                  <div className="flex flex-wrap items-baseline gap-2 mb-1">
+                                    <span className="font-bold text-slate-400 font-mono text-[11px]">उदा. {cidx + 1}:</span>
+                                    <span className="font-semibold leading-[1.9] text-slate-900 dark:text-white">
+                                      {cex.sentence.split(cex.underlinedPart).map((part, pidx, arr) => (
+                                        <span key={pidx}>
+                                          {part}
+                                          {pidx < arr.length - 1 && (
+                                            <span className="underline underline-offset-4 decoration-2 decoration-emerald-500 font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 px-1 py-0.5 rounded">
+                                              {cex.underlinedPart}
+                                            </span>
+                                          )}
+                                        </span>
+                                      ))}
+                                    </span>
+                                  </div>
+                                  <div className="flex flex-wrap items-center gap-2 text-xs mt-1.5 pt-1.5 border-t border-slate-100 dark:border-slate-800">
+                                    <span className="px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-300 border border-purple-500/20 font-mono text-[10px] font-bold">
+                                      शीर्ष पद: {cex.topWord}
+                                    </span>
+                                    <span className="text-slate-600 dark:text-slate-400 italic">
+                                      {cex.explanation}
+                                    </span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -1496,7 +1570,7 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                             : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-black"
                         }`}
                       >
-                        📖 स्पर्श भाग 2 (73)
+                        📖 स्पर्श भाग 2 ({TEXTBOOK_MUHAVARE_LIST.filter(m => m.bookName === "स्पर्श भाग 2").length})
                       </button>
                       <button
                         onClick={() => {
@@ -1509,7 +1583,7 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                             : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-black"
                         }`}
                       >
-                        📘 संचयन भाग 2 (33)
+                        📘 संचयन भाग 2 ({TEXTBOOK_MUHAVARE_LIST.filter(m => m.bookName === "संचयन भाग 2").length})
                       </button>
                     </div>
 
@@ -1875,11 +1949,55 @@ export default function HindiMasterView({ isDark, onJumpToRevision, onOpenQuesti
                   </h3>
                 </div>
 
-                <div className={`p-5 rounded-xl border text-sm sm:text-base leading-relaxed font-serif whitespace-pre-line ${
-                  isDark ? "bg-slate-800/40 border-slate-700 text-slate-200" : "bg-emerald-50/30 border-emerald-100 text-slate-800"
-                }`}>
-                  {currentWritingSample.content}
-                </div>
+                {currentWritingSection.id === "soochna" ? (
+                  <div className={`p-6 rounded-2xl border-2 border-emerald-500/40 shadow-lg ${
+                    isDark ? "bg-slate-950/90 text-slate-100" : "bg-white text-slate-900"
+                  }`}>
+                    <div className="text-center pb-3 border-b border-dashed border-emerald-500/30 mb-4 flex flex-wrap items-center justify-between gap-2">
+                      <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                        📦 सीबीएसई 10वीं बोर्ड मानक: आयताकार सीमा-रेखा (Official Border Box)
+                      </span>
+                      <span className="text-xs text-slate-400 font-mono">शब्द सीमा: ~50-60 शब्द • 4 अंक</span>
+                    </div>
+                    <div className="p-4 sm:p-6 rounded-xl border border-emerald-500/30 bg-emerald-50/20 dark:bg-emerald-950/20 text-sm sm:text-base leading-[2.1] font-serif whitespace-pre-line tracking-wide">
+                      {currentWritingSample.content}
+                    </div>
+                  </div>
+                ) : currentWritingSection.id === "vigyapan" ? (
+                  <div className={`p-6 rounded-2xl border-2 border-purple-500/40 shadow-lg ${
+                    isDark ? "bg-slate-950/90 text-slate-100" : "bg-white text-slate-900"
+                  }`}>
+                    <div className="text-center pb-3 border-b border-dashed border-purple-500/30 mb-4 flex flex-wrap items-center justify-between gap-2">
+                      <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
+                        🎨 सीबीएसई 10वीं बोर्ड मानक: विज्ञापन आरेखन बॉक्स (Design Box Frame)
+                      </span>
+                      <span className="text-xs text-slate-400 font-mono">शब्द सीमा: ~40 शब्द • 3 अंक</span>
+                    </div>
+                    <div className="p-4 sm:p-6 rounded-xl border border-purple-500/30 bg-purple-50/20 dark:bg-purple-950/20 text-sm sm:text-base leading-[2.0] font-serif whitespace-pre-line tracking-wide">
+                      {currentWritingSample.content}
+                    </div>
+                  </div>
+                ) : currentWritingSection.id === "email" ? (
+                  <div className={`p-6 rounded-2xl border-2 border-blue-500/40 shadow-lg ${
+                    isDark ? "bg-slate-950/90 text-slate-100" : "bg-white text-slate-900"
+                  }`}>
+                    <div className="text-center pb-3 border-b border-dashed border-blue-500/30 mb-4 flex flex-wrap items-center justify-between gap-2">
+                      <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                        📧 सीबीएसई 10वीं बोर्ड मानक: औपचारिक ई-मेल तालिका (Official Email Box)
+                      </span>
+                      <span className="text-xs text-slate-400 font-mono">शब्द सीमा: ~80-100 शब्द • 5 अंक</span>
+                    </div>
+                    <div className="p-4 sm:p-6 rounded-xl border border-blue-500/30 bg-blue-50/20 dark:bg-blue-950/20 text-sm sm:text-base leading-[2.0] font-serif whitespace-pre-line tracking-wide">
+                      {currentWritingSample.content}
+                    </div>
+                  </div>
+                ) : (
+                  <div className={`p-5 rounded-xl border text-sm sm:text-base leading-[2.1] font-serif whitespace-pre-line tracking-wide ${
+                    isDark ? "bg-slate-800/40 border-slate-700 text-slate-200" : "bg-emerald-50/30 border-emerald-100 text-slate-800"
+                  }`}>
+                    {currentWritingSample.content}
+                  </div>
+                )}
 
                 {currentWritingSample.examinerNotes && currentWritingSample.examinerNotes.length > 0 && (
                   <div className={`mt-4 p-3 rounded-xl border text-xs flex items-start gap-2 ${

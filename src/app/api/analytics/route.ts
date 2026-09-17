@@ -83,10 +83,8 @@ export async function POST(req: Request) {
     const latitude: string | null  = body.latitude   ? String(body.latitude)  : null;
     const longitude: string | null = body.longitude  ? String(body.longitude) : null;
     const accuracy: string | null  = body.accuracy   ? String(body.accuracy)  : null;
+    const accuracyRadius: string | null = body.accuracyRadius ? String(body.accuracyRadius) : (accuracy ? `${accuracy}m` : null);
 
-    // Only accept cityRegion if the client says it came from GPS or manual entry
-    // An empty / missing cityRegion is stored as null — not replaced with any city
-    // Only accept cityRegion if from real GPS or manual entry; reject fake Delhi fallback
     let cityRegion: string | null = null;
     if (
       body.cityRegion &&
@@ -94,10 +92,23 @@ export async function POST(req: Request) {
       body.cityRegion !== "India" &&
       body.cityRegion !== "Unknown"
     ) {
-      if (body.cityRegion === "Delhi, India" && !latitude && locationSource !== "manual" && locationSource !== "ip_approximate") {
-        cityRegion = null;
-      } else {
-        cityRegion = body.cityRegion.trim();
+      cityRegion = body.cityRegion.trim();
+    }
+
+    // Parse structured location components { city, state, country }
+    let city: string | null = body.city || null;
+    let state: string | null = body.state || null;
+    let country: string | null = body.country || "India";
+
+    if (cityRegion && (!city || !state)) {
+      const parts = cityRegion.split(",").map((s: string) => s.trim());
+      if (parts.length >= 3) {
+        city = city || parts[0];
+        state = state || parts[parts.length - 2];
+        country = country || parts[parts.length - 1];
+      } else if (parts.length === 2) {
+        city = city || parts[0];
+        state = state || parts[1];
       }
     }
 
@@ -138,6 +149,10 @@ export async function POST(req: Request) {
       studentLevel:     parseInt(body.studentLevel,   10) || 1,
       timezone:         body.timezone    || "Asia/Kolkata",
       cityRegion,
+      city,
+      state,
+      country,
+      accuracyRadius,
       latitude,
       longitude,
       accuracy,
@@ -190,16 +205,21 @@ export async function POST(req: Request) {
             updateData.latitude = eventRecord.latitude;
             updateData.longitude = eventRecord.longitude;
             updateData.accuracy = eventRecord.accuracy;
+            updateData.accuracyRadius = eventRecord.accuracyRadius || (eventRecord.accuracy ? `${eventRecord.accuracy}m` : null);
             updateData.locationSource = eventRecord.locationSource;
             updateData.cityRegion = eventRecord.cityRegion || prev.cityRegion;
+            updateData.city = eventRecord.city || prev.city;
+            updateData.state = eventRecord.state || prev.state;
+            updateData.country = eventRecord.country || prev.country;
             updateData.pincode = eventRecord.pincode || prev.pincode;
             updateData.mapsUrl = eventRecord.mapsUrl || prev.mapsUrl;
           }
-        } else if (
-          eventRecord.cityRegion &&
-          (prev.locationSource === "ip_approximate" || prev.locationSource === "none" || !prev.cityRegion || eventRecord.locationSource === "manual")
-        ) {
+        } else if (eventRecord.cityRegion) {
           updateData.cityRegion = eventRecord.cityRegion;
+          updateData.city = eventRecord.city || prev.city;
+          updateData.state = eventRecord.state || prev.state;
+          updateData.country = eventRecord.country || prev.country;
+          updateData.accuracyRadius = eventRecord.accuracyRadius || prev.accuracyRadius;
           updateData.locationSource = eventRecord.locationSource;
         }
 
@@ -274,14 +294,16 @@ export async function PATCH(req: Request) {
 // ---------------------------------------------------------------------------
 // GET — fetch analytics for the admin dashboard
 // Query params:
+//   ?all=true         → fetch all historical visits in a single call
 //   ?page=1&limit=50  → paginated visit history
 //   (no params)       → full analytics summary
 // ---------------------------------------------------------------------------
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
+    const isAll = url.searchParams.get("all") === "true";
     const pageParam  = parseInt(url.searchParams.get("page")  || "1",  10);
-    const limitParam = parseInt(url.searchParams.get("limit") || "50", 10);
+    const limitParam = parseInt(url.searchParams.get("limit") || (isAll ? "10000" : "50"), 10);
     const offset     = (pageParam - 1) * limitParam;
 
     let allEvents: any[] = [];
@@ -291,7 +313,7 @@ export async function GET(req: Request) {
         .select()
         .from(visitorEvents)
         .orderBy(desc(visitorEvents.createdAt))
-        .limit(2000);   // enough to build dedup profiles
+        .limit(10000);   // Fetch all student visits for comprehensive historical tracking
 
       allEvents = records.map((r: any) => mapRecord(r));
     } else {
@@ -340,8 +362,12 @@ export async function GET(req: Request) {
           hardwareSpecs:   ev.hardwareSpecs || "",
           networkType:     ev.networkType  || "Broadband/WiFi",
           timezone:        ev.timezone     || "Asia/Kolkata",
-          // Location — only store if actually from GPS/manual; null otherwise
+          // Location — structured fields & formatted string
           cityRegion:      ev.cityRegion   || null,
+          city:            ev.city         || null,
+          state:           ev.state        || null,
+          country:         ev.country      || null,
+          accuracyRadius:  ev.accuracyRadius || null,
           latitude:        ev.latitude     || null,
           longitude:       ev.longitude    || null,
           accuracy:        ev.accuracy     || null,
@@ -388,6 +414,7 @@ export async function GET(req: Request) {
           s.latitude       = ev.latitude;
           s.longitude      = ev.longitude;
           s.accuracy       = ev.accuracy;
+          s.accuracyRadius = ev.accuracyRadius || (ev.accuracy ? `${ev.accuracy}m` : s.accuracyRadius);
           s.locationSource = ev.locationSource || s.locationSource;
           s.mapsUrl        = ev.mapsUrl || `https://www.google.com/maps?q=${ev.latitude},${ev.longitude}`;
         }
@@ -398,9 +425,14 @@ export async function GET(req: Request) {
             ev.locationSource === "device_gps" ||
             !s.cityRegion ||
             s.locationSource === "none" ||
-            (ev.locationSource === "manual" && s.locationSource === "ip_approximate")
+            (ev.locationSource === "manual" && s.locationSource !== "device_gps") ||
+            (ev.locationSource === "ip_verified" && s.locationSource === "none")
           ) {
             s.cityRegion     = ev.cityRegion;
+            s.city           = ev.city || s.city;
+            s.state          = ev.state || s.state;
+            s.country        = ev.country || s.country;
+            s.accuracyRadius = ev.accuracyRadius || s.accuracyRadius;
             s.locationSource = ev.locationSource || s.locationSource;
           }
         }
@@ -576,6 +608,11 @@ function mapRecord(r: any) {
     hardwareSpecs:   r.hardwareSpecs   || r.hardware_specs    || "",
     activeChapter:   r.activeChapter   || r.active_chapter    || "",
     language:        r.language        || "en-IN",
+    // Structured location components
+    city:            r.city            || null,
+    state:           r.state           || null,
+    country:         r.country         || null,
+    accuracyRadius:  r.accuracyRadius  || r.accuracy_radius   || null,
     visitStartedAt:  r.visitStartedAt  || r.visit_started_at  ? new Date(r.visitStartedAt || r.visit_started_at).toISOString() : null,
     lastSeenAt:      r.lastSeenAt      || r.last_seen_at       ? new Date(r.lastSeenAt || r.last_seen_at).toISOString() : null,
     createdAt:       r.createdAt       ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
