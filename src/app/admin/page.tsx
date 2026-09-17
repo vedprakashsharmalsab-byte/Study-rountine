@@ -466,7 +466,8 @@ export default function AdminPage() {
         const matchSubs = s.subjectsStudied.some(sub => sub.toLowerCase().includes(q));
         const matchBrowser = (s.browser || "").toLowerCase().includes(q);
         const matchPin = (s.pincode || "").toLowerCase().includes(q);
-        return matchName || matchId || matchIp || matchCity || matchSubs || matchBrowser || matchPin;
+        const matchSource = (s.locationSource || "").toLowerCase().includes(q);
+        return matchName || matchId || matchIp || matchCity || matchSubs || matchBrowser || matchPin || matchSource;
       }
       return true;
     });
@@ -1006,12 +1007,19 @@ export default function AdminPage() {
                                       </span>
                                     )}
                                   </div>
-                                ) : student.locationSource === "manual" || student.cityRegion ? (
+                                ) : student.locationSource === "manual" ? (
                                   <div className="flex items-center gap-1.5">
                                     <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
                                       ✍ Manual
                                     </span>
                                     <span className="text-amber-200 font-medium">{student.cityRegion}</span>
+                                  </div>
+                                ) : student.locationSource === "ip_approximate" || student.cityRegion ? (
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                                      🌐 IP Approx (No GPS yet)
+                                    </span>
+                                    <span className="text-sky-200 font-medium">{student.cityRegion}</span>
                                   </div>
                                 ) : (
                                   <span className="text-slate-500 italic flex items-center gap-1">
@@ -1109,15 +1117,11 @@ export default function AdminPage() {
                                 <div className="text-[9px] text-slate-400">{student.activeDaysCount} active day{student.activeDaysCount !== 1 ? "s" : ""} · {student.daysSinceFirst}d since first visit</div>
                               </div>
 
-                              {student.locationSource === "device_gps" || student.latitude || student.cityRegion ? (
-                                <div className="col-span-2 sm:col-span-4 p-3.5 rounded-xl bg-white/[0.03] border border-white/5 space-y-1.5">
+                              {student.locationSource === "device_gps" || student.latitude ? (
+                                <div className="col-span-2 sm:col-span-4 p-3.5 rounded-xl bg-emerald-500/[0.04] border border-emerald-500/20 space-y-1.5">
                                   <div className="flex items-center justify-between">
-                                    <span className="text-[10px] uppercase text-slate-400 flex items-center gap-1.5 font-bold">
-                                      {student.locationSource === "device_gps" || student.latitude ? (
-                                        <span className="text-emerald-400 flex items-center gap-1">📍 Exact GPS Location (Hardware Device Position)</span>
-                                      ) : (
-                                        <span className="text-amber-400 flex items-center gap-1">✍ Self-Reported Location (GPS was not granted)</span>
-                                      )}
+                                    <span className="text-[10px] uppercase text-emerald-400 flex items-center gap-1.5 font-bold">
+                                      📍 Exact GPS Location (Hardware Device Position)
                                     </span>
                                     {student.accuracy && (
                                       <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
@@ -1145,6 +1149,35 @@ export default function AdminPage() {
                                         <span>↗</span>
                                       </a>
                                     )}
+                                  </div>
+                                </div>
+                              ) : student.locationSource === "manual" ? (
+                                <div className="col-span-2 sm:col-span-4 p-3.5 rounded-xl bg-amber-500/[0.04] border border-amber-500/20 space-y-1.5">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-[10px] uppercase text-amber-400 flex items-center gap-1.5 font-bold">
+                                      ✍ Self-Reported Location (GPS was not granted)
+                                    </span>
+                                  </div>
+                                  <div className="flex flex-wrap items-center gap-3">
+                                    <span className="font-bold text-white text-sm">
+                                      {student.cityRegion}
+                                    </span>
+                                  </div>
+                                </div>
+                              ) : student.locationSource === "ip_approximate" || student.cityRegion ? (
+                                <div className="col-span-2 sm:col-span-4 p-3.5 rounded-xl bg-sky-500/[0.04] border border-sky-500/20 space-y-1.5">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-[10px] uppercase text-sky-400 flex items-center gap-1.5 font-bold">
+                                      🌐 Network / ISP Approximate Location (Cadet has not granted GPS yet)
+                                    </span>
+                                    <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                                      ISP Origin
+                                    </span>
+                                  </div>
+                                  <div className="flex flex-wrap items-center gap-3">
+                                    <span className="font-bold text-white text-sm">
+                                      {student.cityRegion}
+                                    </span>
                                   </div>
                                 </div>
                               ) : (
@@ -1188,9 +1221,13 @@ export default function AdminPage() {
                                       <div className="flex items-center gap-3 text-slate-400 text-[11px]">
                                         <span>⏱️ {sess.durationSeconds > 60 ? `${Math.round(sess.durationSeconds / 60)}m` : `${sess.durationSeconds}s`}</span>
                                         <span>🔗 {sess.referrer || "direct"}</span>
-                                        {sess.locationSource === "device_gps" && (
+                                        {sess.locationSource === "device_gps" ? (
                                           <span className="text-emerald-400 font-bold text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">📍 GPS</span>
-                                        )}
+                                        ) : sess.locationSource === "manual" ? (
+                                          <span className="text-amber-400 font-bold text-[10px] bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">✍ Manual</span>
+                                        ) : sess.locationSource === "ip_approximate" ? (
+                                          <span className="text-sky-400 font-bold text-[10px] bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">🌐 IP Approx</span>
+                                        ) : null}
                                       </div>
                                     </div>
                                   );
@@ -1235,7 +1272,8 @@ export default function AdminPage() {
                             const visitTime = new Date(ev.visitStartedAt || ev.createdAt);
                             const lastActiveTime = ev.lastSeenAt ? new Date(ev.lastSeenAt) : null;
                             const hasGps = ev.locationSource === "device_gps" || (ev.latitude && ev.longitude);
-                            const hasManual = ev.locationSource === "manual" || (!hasGps && ev.cityRegion);
+                            const hasManual = ev.locationSource === "manual";
+                            const isIpApprox = ev.locationSource === "ip_approximate" || (!hasGps && !hasManual && ev.cityRegion);
 
                             return (
                               <tr key={ev.id} className="hover:bg-white/[0.02] transition-colors">
@@ -1293,6 +1331,15 @@ export default function AdminPage() {
                                         ✍ Manual
                                       </span>
                                       <div className="text-amber-200 font-medium text-xs">
+                                        {ev.cityRegion}
+                                      </div>
+                                    </div>
+                                  ) : isIpApprox ? (
+                                    <div className="space-y-0.5 min-w-[160px]">
+                                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                                        🌐 IP Approx (No GPS yet)
+                                      </span>
+                                      <div className="text-sky-200 font-medium text-xs">
                                         {ev.cityRegion}
                                       </div>
                                     </div>

@@ -94,7 +94,7 @@ export async function POST(req: Request) {
       body.cityRegion !== "India" &&
       body.cityRegion !== "Unknown"
     ) {
-      if (body.cityRegion === "Delhi, India" && !latitude && locationSource !== "manual") {
+      if (body.cityRegion === "Delhi, India" && !latitude && locationSource !== "manual" && locationSource !== "ip_approximate") {
         cityRegion = null;
       } else {
         cityRegion = body.cityRegion.trim();
@@ -195,7 +195,10 @@ export async function POST(req: Request) {
             updateData.pincode = eventRecord.pincode || prev.pincode;
             updateData.mapsUrl = eventRecord.mapsUrl || prev.mapsUrl;
           }
-        } else if (eventRecord.cityRegion && !prev.cityRegion) {
+        } else if (
+          eventRecord.cityRegion &&
+          (prev.locationSource === "ip_approximate" || prev.locationSource === "none" || !prev.cityRegion || eventRecord.locationSource === "manual")
+        ) {
           updateData.cityRegion = eventRecord.cityRegion;
           updateData.locationSource = eventRecord.locationSource;
         }
@@ -389,12 +392,13 @@ export async function GET(req: Request) {
           s.mapsUrl        = ev.mapsUrl || `https://www.google.com/maps?q=${ev.latitude},${ev.longitude}`;
         }
 
-        // GPS-derived city always beats a manual entry or null
+        // GPS-derived city always beats a manual entry or null; manual entry beats ip_approximate
         if (ev.cityRegion) {
           if (
             ev.locationSource === "device_gps" ||
             !s.cityRegion ||
-            s.locationSource === "none"
+            s.locationSource === "none" ||
+            (ev.locationSource === "manual" && s.locationSource === "ip_approximate")
           ) {
             s.cityRegion     = ev.cityRegion;
             s.locationSource = ev.locationSource || s.locationSource;
