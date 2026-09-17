@@ -38,18 +38,24 @@ export async function POST(req: Request) {
       else if (/linux/i.test(userAgent)) os = "Linux";
     }
 
-    // Detect Browser
-    let browser = body.browser || "Other";
-    if (!body.browser) {
+    // High Precision Browser Detection (Brave, Edge, Opera, Chrome, Safari, Firefox)
+    let browser = body.browser || "";
+    if (body.isBrave || browser.toLowerCase() === "brave" || /brave/i.test(userAgent)) {
+      browser = "Brave";
+    } else if (!browser || browser === "Chrome" || browser === "Other") {
       if (/edg/i.test(userAgent)) browser = "Edge";
+      else if (/opr|opera/i.test(userAgent)) browser = "Opera";
+      else if (/vivaldi/i.test(userAgent)) browser = "Vivaldi";
+      else if (/samsungbrowser/i.test(userAgent)) browser = "Samsung Internet";
       else if (/chrome|crios/i.test(userAgent)) browser = "Chrome";
       else if (/firefox|fxios/i.test(userAgent)) browser = "Firefox";
       else if (/safari/i.test(userAgent)) browser = "Safari";
+      else browser = body.browser || "Chrome";
     }
 
     const timezone = body.timezone || "Asia/Kolkata";
 
-    // Precise Geographic Location: Never fall back to generic "Calcutta/Kolkata" timezone label
+    // Precise Geographic Location: Prioritize client GPS / reverse-geocoded address
     let cityRegion = body.cityRegion;
     if (
       !cityRegion ||
@@ -80,6 +86,12 @@ export async function POST(req: Request) {
         ? body.studentName
         : "Cadet (Pending Enrollment)";
 
+    const latitude = body.latitude || null;
+    const longitude = body.longitude || null;
+    const pincode = body.pincode || null;
+    const mapsUrl = body.mapsUrl || (latitude && longitude ? `https://www.google.com/maps?q=${latitude},${longitude}` : null);
+    const gpuRenderer = body.gpuRenderer || null;
+
     const eventRecord = {
       visitorId: body.visitorId || `anon_${Math.random().toString(36).substring(2, 10)}`,
       sessionId: body.sessionId || `sess_${Math.random().toString(36).substring(2, 10)}`,
@@ -100,6 +112,11 @@ export async function POST(req: Request) {
       studentLevel: parseInt(body.studentLevel, 10) || 1,
       timezone,
       cityRegion,
+      latitude,
+      longitude,
+      pincode,
+      mapsUrl,
+      gpuRenderer,
       networkType: body.networkType || "Broadband/WiFi",
       hardwareSpecs: body.hardwareSpecs || "",
       activeChapter: body.activeChapter || "",
@@ -133,7 +150,7 @@ export async function GET(req: Request) {
         .select()
         .from(visitorEvents)
         .orderBy(desc(visitorEvents.createdAt))
-        .limit(600);
+        .limit(1000);
 
       allEvents = records.map((r: any) => {
         let city = r.cityRegion || "Delhi, India";
@@ -165,6 +182,11 @@ export async function GET(req: Request) {
           studentLevel: r.studentLevel || 1,
           timezone: r.timezone || "Asia/Kolkata",
           cityRegion: city,
+          latitude: r.latitude || null,
+          longitude: r.longitude || null,
+          pincode: r.pincode || null,
+          mapsUrl: r.mapsUrl || (r.latitude && r.longitude ? `https://www.google.com/maps?q=${r.latitude},${r.longitude}` : null),
+          gpuRenderer: r.gpuRenderer || null,
           networkType: r.networkType || "Broadband/WiFi",
           hardwareSpecs: r.hardwareSpecs || "",
           activeChapter: r.activeChapter || "",
@@ -176,74 +198,14 @@ export async function GET(req: Request) {
       allEvents = memoryVisitorEvents;
     }
 
-    // Default sample events if brand new empty database
-    if (allEvents.length === 0) {
-      const now = Date.now();
-      const mockVid = "v_lsa_student_delhi";
-      allEvents = [
-        {
-          id: "evt_1",
-          visitorId: mockVid,
-          sessionId: "sess_4",
-          ipAddress: "103.238.113.240",
-          deviceType: "mobile",
-          operatingSystem: "Android",
-          browser: "Chrome",
-          path: "/",
-          activeTab: "concepts",
-          activeSubject: "science",
-          referrer: "whatsapp",
-          durationSeconds: 420,
-          screenResolution: "412x915",
-          studentName: "Aarav Sharma (Class 10-A)",
-          studentXp: 1850,
-          studentStreak: 4,
-          studentLevel: 3,
-          timezone: "Asia/Kolkata",
-          cityRegion: "Delhi, India",
-          networkType: "5G Mobile Data (NIXI)",
-          hardwareSpecs: "8GB RAM · 8 Cores",
-          activeChapter: "Ch 5 Life Processes",
-          language: "en-IN",
-          createdAt: new Date(now - 4 * 60 * 1000).toISOString()
-        },
-        {
-          id: "evt_2",
-          visitorId: mockVid,
-          sessionId: "sess_3",
-          ipAddress: "103.238.113.240",
-          deviceType: "mobile",
-          operatingSystem: "Android",
-          browser: "Chrome",
-          path: "/",
-          activeTab: "questions",
-          activeSubject: "math",
-          referrer: "direct",
-          durationSeconds: 780,
-          screenResolution: "412x915",
-          studentName: "Aarav Sharma (Class 10-A)",
-          studentXp: 1600,
-          studentStreak: 4,
-          studentLevel: 3,
-          timezone: "Asia/Kolkata",
-          cityRegion: "Delhi, India",
-          networkType: "5G Mobile Data (NIXI)",
-          hardwareSpecs: "8GB RAM · 8 Cores",
-          activeChapter: "Ch 1 Real Numbers",
-          language: "en-IN",
-          createdAt: new Date(now - 75 * 60 * 1000).toISOString()
-        }
-      ];
-    }
-
     const now = new Date();
     const todayStr = now.toISOString().slice(0, 10);
     const fiveMinutesAgo = new Date(now.getTime() - 5 * 60 * 1000);
 
     // =========================================================================
-    // DEDUPLICATION & UNIQUE STUDENT PROFILING ENGINE
-    // Group all events by visitorId so 1 user visiting 4 times shows as 1 student
-    // with "4 visits today" and discrete session history!
+    // DEDUPLICATION & RETENTION PROFILING ENGINE
+    // Groups all events by visitorId (1 user visiting 4 times = 1 student)
+    // Tracks 15-day users, 30-day veterans, exact GPS, and Brave browser
     // =========================================================================
     const studentMap = new Map<string, any>();
     const devices: Record<string, number> = { mobile: 0, desktop: 0, tablet: 0 };
@@ -279,6 +241,11 @@ export async function GET(req: Request) {
           networkType: ev.networkType || "Broadband/WiFi",
           timezone: ev.timezone || "Asia/Kolkata",
           cityRegion: ev.cityRegion || "Delhi, India",
+          latitude: ev.latitude || null,
+          longitude: ev.longitude || null,
+          pincode: ev.pincode || null,
+          mapsUrl: ev.mapsUrl || null,
+          gpuRenderer: ev.gpuRenderer || null,
           ipAddress: ev.ipAddress || "127.0.0.1",
           language: ev.language || "en-IN",
           visitsToday: isToday ? 1 : 0,
@@ -287,6 +254,7 @@ export async function GET(req: Request) {
           firstSeen: ev.createdAt,
           lastActive: ev.createdAt,
           isOnlineNow: isOnline,
+          distinctDays: new Set([ev.createdAt.slice(0, 10)]),
           subjectsStudied: new Set(ev.activeSubject ? [ev.activeSubject] : []),
           chaptersStudied: new Set(ev.activeChapter ? [ev.activeChapter] : []),
           sessions: [ev]
@@ -296,6 +264,7 @@ export async function GET(req: Request) {
         student.totalVisits += 1;
         if (isToday) student.visitsToday += 1;
         student.totalDurationSeconds += ev.durationSeconds || 0;
+        student.distinctDays.add(ev.createdAt.slice(0, 10));
 
         // Keep authentic student name over placeholder
         if (
@@ -305,6 +274,15 @@ export async function GET(req: Request) {
         ) {
           student.studentName = ev.studentName;
         }
+
+        // Keep specific GPS coordinates & Google Maps URL
+        if (ev.latitude && ev.longitude) {
+          student.latitude = ev.latitude;
+          student.longitude = ev.longitude;
+          student.mapsUrl = ev.mapsUrl || `https://www.google.com/maps?q=${ev.latitude},${ev.longitude}`;
+        }
+        if (ev.pincode) student.pincode = ev.pincode;
+        if (ev.gpuRenderer) student.gpuRenderer = ev.gpuRenderer;
 
         // Keep specific real city over generic default
         if (
@@ -324,7 +302,7 @@ export async function GET(req: Request) {
           student.studentLevel = Math.max(student.studentLevel, ev.studentLevel || 1);
           student.deviceType = ev.deviceType || student.deviceType;
           student.operatingSystem = ev.operatingSystem || student.operatingSystem;
-          student.browser = ev.browser || student.browser;
+          if (ev.browser && ev.browser !== "Chrome") student.browser = ev.browser;
           student.hardwareSpecs = ev.hardwareSpecs || student.hardwareSpecs;
           student.networkType = ev.networkType || student.networkType;
           student.ipAddress = ev.ipAddress || student.ipAddress;
@@ -347,7 +325,7 @@ export async function GET(req: Request) {
       const o = ev.operatingSystem || "Other";
       oses[o] = (oses[o] || 0) + 1;
 
-      const b = ev.browser || "Other";
+      const b = ev.browser || "Chrome";
       browsers[b] = (browsers[b] || 0) + 1;
 
       const sub = ev.activeSubject || "all";
@@ -362,13 +340,33 @@ export async function GET(req: Request) {
       totalDurationSeconds += ev.durationSeconds || 0;
     });
 
-    // Format unique student profiles
-    const uniqueStudents = Array.from(studentMap.values()).map((s) => ({
-      ...s,
-      subjectsStudied: Array.from(s.subjectsStudied),
-      chaptersStudied: Array.from(s.chaptersStudied),
-      totalStudyMinutes: Math.max(1, Math.round(s.totalDurationSeconds / 60))
-    }));
+    // Format unique student profiles with retention tags (30-day user, 15-day user)
+    const uniqueStudents = Array.from(studentMap.values()).map((s) => {
+      const daysSinceFirst = Math.max(
+        1,
+        Math.ceil((now.getTime() - new Date(s.firstSeen).getTime()) / (1000 * 60 * 60 * 24))
+      );
+      const activeDaysCount = s.distinctDays.size;
+      const is30DayUser = daysSinceFirst >= 30 || activeDaysCount >= 10;
+      const is15DayUser = daysSinceFirst >= 15 || activeDaysCount >= 5;
+
+      let retentionBadge = "New Cadet";
+      if (is30DayUser) retentionBadge = "30-Day Veteran";
+      else if (is15DayUser) retentionBadge = "15-Day Active";
+      else if (daysSinceFirst >= 7 || activeDaysCount >= 3) retentionBadge = "7-Day Regular";
+
+      return {
+        ...s,
+        subjectsStudied: Array.from(s.subjectsStudied),
+        chaptersStudied: Array.from(s.chaptersStudied),
+        totalStudyMinutes: Math.max(1, Math.round(s.totalDurationSeconds / 60)),
+        daysSinceFirst,
+        activeDaysCount,
+        is15DayUser,
+        is30DayUser,
+        retentionBadge
+      };
+    });
 
     // Sort students by lastActive descending
     uniqueStudents.sort((a, b) => new Date(b.lastActive).getTime() - new Date(a.lastActive).getTime());
@@ -376,6 +374,8 @@ export async function GET(req: Request) {
     const totalUniqueStudents = uniqueStudents.length;
     const todayUniqueStudents = uniqueStudents.filter((s) => s.visitsToday > 0).length;
     const liveNowStudents = uniqueStudents.filter((s) => s.isOnlineNow).length;
+    const fifteenDayUsersCount = uniqueStudents.filter((s) => s.is15DayUser).length;
+    const thirtyDayUsersCount = uniqueStudents.filter((s) => s.is30DayUser).length;
     const avgDurationMinutes = totalUniqueStudents > 0
       ? Math.round(totalDurationSeconds / allEvents.length / 60)
       : 1;
@@ -387,6 +387,8 @@ export async function GET(req: Request) {
         todayUniqueStudents: Math.max(todayUniqueStudents, 1),
         todayTotalSessions: todaySessionsCount,
         liveNowStudents: Math.max(liveNowStudents, 1),
+        fifteenDayUsersCount,
+        thirtyDayUsersCount,
         totalEventsCount: allEvents.length,
         avgDurationMinutes: Math.max(1, avgDurationMinutes),
 
@@ -398,7 +400,7 @@ export async function GET(req: Request) {
         referrers,
 
         uniqueStudents,
-        recentEvents: allEvents.slice(0, 60)
+        recentEvents: allEvents.slice(0, 80)
       }
     });
   } catch (error: any) {

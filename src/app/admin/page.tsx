@@ -87,11 +87,21 @@ interface UniqueStudentProfile {
   networkType: string;
   timezone: string;
   cityRegion: string;
+  latitude?: string | null;
+  longitude?: string | null;
+  pincode?: string | null;
+  mapsUrl?: string | null;
+  gpuRenderer?: string | null;
   ipAddress: string;
   language: string;
   visitsToday: number;
   totalVisits: number;
   totalStudyMinutes: number;
+  activeDaysCount: number;
+  daysSinceFirst: number;
+  retentionBadge: string;
+  is15DayUser: boolean;
+  is30DayUser: boolean;
   firstSeen: string;
   lastActive: string;
   isOnlineNow: boolean;
@@ -105,6 +115,8 @@ interface VisitorStats {
   todayUniqueStudents: number;
   todayTotalSessions: number;
   liveNowStudents: number;
+  fifteenDayUsersCount: number;
+  thirtyDayUsersCount: number;
   totalEventsCount: number;
   avgDurationMinutes: number;
   devices: { mobile: number; desktop: number; tablet: number };
@@ -119,6 +131,7 @@ interface VisitorStats {
     visitorId: string;
     studentName: string;
     ipAddress: string;
+    cityRegion?: string;
     deviceType: string;
     operatingSystem: string;
     browser: string;
@@ -413,6 +426,8 @@ export default function AdminPage() {
       if (visitorFilter === "mobile" && s.deviceType !== "mobile") return false;
       if (visitorFilter === "desktop" && s.deviceType !== "desktop") return false;
       if (visitorFilter === "online" && !s.isOnlineNow) return false;
+      if (visitorFilter === "15day" && !s.is15DayUser) return false;
+      if (visitorFilter === "30day" && !s.is30DayUser) return false;
       if (visitorSearch.trim()) {
         const q = visitorSearch.toLowerCase();
         const matchName = s.studentName.toLowerCase().includes(q);
@@ -420,7 +435,9 @@ export default function AdminPage() {
         const matchIp = (s.ipAddress || "").toLowerCase().includes(q);
         const matchCity = (s.cityRegion || "").toLowerCase().includes(q);
         const matchSubs = s.subjectsStudied.some(sub => sub.toLowerCase().includes(q));
-        return matchName || matchId || matchIp || matchCity || matchSubs;
+        const matchBrowser = (s.browser || "").toLowerCase().includes(q);
+        const matchPin = (s.pincode || "").toLowerCase().includes(q);
+        return matchName || matchId || matchIp || matchCity || matchSubs || matchBrowser || matchPin;
       }
       return true;
     });
@@ -907,10 +924,30 @@ export default function AdminPage() {
                                 <span className="text-[10px] font-mono opacity-60">
                                   ({student.totalVisits} all-time)
                                 </span>
+                                {student.is30DayUser ? (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-black bg-purple-500/20 text-purple-300 border border-purple-500/30">🏆 30-Day Veteran</span>
+                                ) : student.is15DayUser ? (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-black bg-blue-500/20 text-blue-300 border border-blue-500/30">⭐ 15-Day Active</span>
+                                ) : student.retentionBadge === "7-Day Regular" ? (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-black bg-teal-500/20 text-teal-300 border border-teal-500/30">✅ 7-Day Regular</span>
+                                ) : (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-slate-500/10 text-slate-400 border border-slate-500/20">🆕 New Cadet</span>
+                                )}
                               </div>
 
                               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400 font-mono">
-                                <span>📍 {student.cityRegion}</span>
+                                {student.mapsUrl ? (
+                                  <a
+                                    href={student.mapsUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1 text-teal-400 hover:text-teal-300 underline-offset-2 hover:underline"
+                                  >
+                                    📍 {student.cityRegion}{student.pincode ? ` (${student.pincode})` : ""}
+                                  </a>
+                                ) : (
+                                  <span>📍 {student.cityRegion}{student.pincode ? ` (${student.pincode})` : ""}</span>
+                                )}
                                 <span>·</span>
                                 <span>🌐 {student.ipAddress}</span>
                                 <span>·</span>
@@ -973,6 +1010,9 @@ export default function AdminPage() {
                                   <HardDrive className="w-3 h-3 text-teal-400" /> Hardware Specs
                                 </span>
                                 <div className="font-bold text-white truncate">{student.hardwareSpecs || "Standard Multi-core"}</div>
+                                {student.gpuRenderer && (
+                                  <div className="text-[9px] text-slate-400 truncate" title={student.gpuRenderer}>GPU: {student.gpuRenderer.length > 30 ? student.gpuRenderer.slice(0, 30) + "…" : student.gpuRenderer}</div>
+                                )}
                               </div>
 
                               <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
@@ -991,12 +1031,35 @@ export default function AdminPage() {
 
                               <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
                                 <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
-                                  <Clock className="w-3 h-3 text-indigo-400" /> First Seen Today
+                                  <Clock className="w-3 h-3 text-indigo-400" /> Joined / Active Days
                                 </span>
                                 <div className="font-bold text-white truncate">
-                                  {new Date(student.firstSeen).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                                  {new Date(student.firstSeen).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
                                 </div>
+                                <div className="text-[9px] text-slate-400">{student.activeDaysCount} active day{student.activeDaysCount !== 1 ? "s" : ""} · {student.daysSinceFirst}d since first visit</div>
                               </div>
+
+                              {(student.mapsUrl || student.latitude) && (
+                                <div className="col-span-2 sm:col-span-4 p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
+                                  <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
+                                    📍 Exact GPS Location
+                                  </span>
+                                  <div className="flex flex-wrap items-center gap-3">
+                                    <span className="font-bold text-white">{student.cityRegion}{student.pincode ? ` — Pincode ${student.pincode}` : ""}</span>
+                                    {student.latitude && <span className="text-slate-400 text-[10px]">Lat {student.latitude}, Lon {student.longitude}</span>}
+                                    {student.mapsUrl && (
+                                      <a
+                                        href={student.mapsUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-3 py-1 rounded-lg bg-teal-500/20 border border-teal-500/30 text-teal-400 text-[10px] font-bold hover:bg-teal-500/30 transition-colors"
+                                      >
+                                        🗺 Open in Google Maps ↗
+                                      </a>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
                             </div>
 
                             {/* Chronological Visit Session Breakdown */}
