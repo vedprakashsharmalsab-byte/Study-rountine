@@ -954,6 +954,85 @@ export default function CBSECommandCenter() {
     }
   }, [conceptsSubject, conceptsChapterNo]);
 
+  // Mandatory First-Time Student Legit Name Onboarding State
+  const [studentFullName, setStudentFullName] = useState<string>("");
+  const [isNameModalOpen, setIsNameModalOpen] = useState<boolean>(false);
+  const [nameInput, setNameInput] = useState<string>("");
+  const [sectionInput, setSectionInput] = useState<string>("Class 10-A");
+  const [nameError, setNameError] = useState<string>("");
+
+  useEffect(() => {
+    try {
+      const savedName = localStorage.getItem("cbse_student_name");
+      if (savedName && savedName.trim().length >= 3) {
+        setStudentFullName(savedName);
+      } else {
+        // First-time visitor! Prompt for their legitimate CBSE student name
+        setIsNameModalOpen(true);
+      }
+    } catch {
+      setIsNameModalOpen(true);
+    }
+  }, []);
+
+  const handleSaveStudentName = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanName = nameInput.trim();
+
+    // Authenticity checks: Must be a legitimate name (at least 3 chars, not generic junk)
+    if (cleanName.length < 3) {
+      setNameError("Please enter your real full name (at least 3 characters).");
+      playSound("bell");
+      return;
+    }
+    if (/^[0-9]+$/.test(cleanName) || /^(.)\1+$/.test(cleanName) || /^(test|asdf|qwerty|abc|xyz|admin|user|unknown)$/i.test(cleanName)) {
+      setNameError("Please enter a legitimate, authentic student name (e.g. Aarav Sharma).");
+      playSound("bell");
+      return;
+    }
+
+    setStudentFullName(cleanName);
+    setNameError("");
+
+    try {
+      localStorage.setItem("cbse_student_name", cleanName);
+      localStorage.setItem("cbse_student_section", sectionInput);
+      localStorage.setItem("cbse_student_username", cleanName);
+      localStorage.setItem("lsa_student_name", cleanName);
+
+      triggerConfetti();
+    } catch {}
+
+    playSound("levelup");
+    setIsNameModalOpen(false);
+
+    // Immediately transmit telemetry beacon with the legitimate student name!
+    try {
+      const visitorId = localStorage.getItem("cbse_v_id") || `v_${Date.now()}`;
+      const sessionId = sessionStorage.getItem("cbse_s_id") || `s_${Date.now()}`;
+      fetch("/api/analytics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          visitorId,
+          sessionId,
+          studentName: cleanName,
+          studentXp: 50,
+          studentStreak: 1,
+          studentLevel: 1,
+          path: window.location.pathname,
+          activeTab,
+          activeSubject: conceptsSubject || "all",
+          referrer: document.referrer ? new URL(document.referrer).hostname : "direct",
+          durationSeconds: 0,
+          screenResolution: `${window.innerWidth}x${window.innerHeight}`,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata",
+          language: navigator.language || "en-IN"
+        }),
+        keepalive: true
+      }).catch(() => {});
+    } catch {}
+  };
 
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
@@ -2491,6 +2570,33 @@ export default function CBSECommandCenter() {
                 }`}>
                   2026–27
                 </span>
+
+                {studentFullName ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setNameInput(studentFullName);
+                      setIsNameModalOpen(true);
+                    }}
+                    className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center gap-1.5 transition-all cursor-pointer ${
+                      isDark
+                        ? "bg-teal-500/20 text-teal-300 border border-teal-500/40 hover:bg-teal-500/30"
+                        : "bg-teal-100 text-teal-900 border border-teal-300 hover:bg-teal-200"
+                    }`}
+                    title="Enrolled Cadet (Click to edit name)"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                    <span className="max-w-[120px] truncate">{studentFullName}</span>
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setIsNameModalOpen(true)}
+                    className="text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse cursor-pointer"
+                  >
+                    <span>⚡ Enter Your Name</span>
+                  </button>
+                )}
               </div>
               <p className={`text-[10px] font-medium hidden sm:flex items-center gap-1.5 mt-1 leading-none ${isDark ? "text-zinc-400" : "text-slate-500"}`}>
                 <span className="truncate">Lakshmipat Singhania Academy</span>
@@ -6884,7 +6990,102 @@ export default function CBSECommandCenter() {
         </div>
       )}
 
+      {/* =========================================================================
+          MANDATORY 1ST-TIME STUDENT IDENTITY & REAL NAME ONBOARDING GATEWAY
+          ========================================================================= */}
+      {isNameModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl animate-fade-in">
+          <div className={`w-full max-w-md p-6 sm:p-8 rounded-3xl border shadow-2xl space-y-6 relative overflow-hidden ${
+            isDark
+              ? "bg-[#0b101c] border-amber-500/30 text-white shadow-[0_20px_60px_rgba(0,0,0,0.9)]"
+              : "bg-white border-slate-200 text-slate-900 shadow-2xl"
+          }`}>
+            {/* Ambient gold glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
+            {/* Header */}
+            <div className="space-y-2 text-center relative z-10">
+              <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-orange-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-amber-500/25">
+                🎓
+              </div>
+              <h2 className="text-xl sm:text-2xl font-black tracking-tight">
+                CBSE Class 10 Cadet Enrollment
+              </h2>
+              <p className="text-xs text-slate-400">
+                Please enter your real full name as per CBSE Board registration. Your daily study streak, XP rank, and telemetry will be calibrated to this profile.
+              </p>
+            </div>
+
+            {/* Error prompt */}
+            {nameError && (
+              <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2 animate-shake">
+                <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                <span>{nameError}</span>
+              </div>
+            )}
+
+            {/* Form */}
+            <form onSubmit={handleSaveStudentName} className="space-y-4 relative z-10">
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                  <span>Full Legal Name (as in CBSE Roll / Admit Card)</span>
+                  <span className="text-amber-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  autoFocus
+                  value={nameInput}
+                  onChange={(e) => {
+                    setNameInput(e.target.value);
+                    if (nameError) setNameError("");
+                  }}
+                  placeholder="e.g. Aarav Sharma"
+                  className={`w-full px-4 py-3 rounded-xl font-medium text-sm border focus:outline-none transition-all ${
+                    isDark
+                      ? "bg-black/40 border-white/10 text-white placeholder-slate-500 focus:border-amber-400"
+                      : "bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:border-amber-500"
+                  }`}
+                />
+                <span className="text-[10px] font-mono text-slate-400 block">
+                  Please enter your real first and last name (e.g. Aarav Sharma).
+                </span>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-300">
+                  Select Class & Section
+                </label>
+                <select
+                  value={sectionInput}
+                  onChange={(e) => setSectionInput(e.target.value)}
+                  className={`w-full px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border focus:outline-none cursor-pointer ${
+                    isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
+                  }`}
+                >
+                  <option value="Class 10-A">Class 10-A (Section A)</option>
+                  <option value="Class 10-B">Class 10-B (Section B)</option>
+                  <option value="Class 10-C">Class 10-C (Section C)</option>
+                  <option value="Class 10-D">Class 10-D (Section D)</option>
+                  <option value="Class 10-External">CBSE Board Candidate (External)</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3.5 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25 active:scale-95 mt-2"
+              >
+                <Sparkles className="w-4 h-4 text-slate-950" />
+                <span>Initialize Command Center (+50 Welcome XP)</span>
+              </button>
+            </form>
+
+            <div className="pt-2 text-center text-[10px] font-mono text-slate-500">
+              Lakshmipat Singhania Academy Bissau · CBSE 100% Century Standard
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* FOOTER */}
       <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-24 md:mb-0 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
