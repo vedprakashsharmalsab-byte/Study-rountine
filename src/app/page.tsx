@@ -94,6 +94,8 @@ import {
   AlertTriangle,
   LayoutGrid,
   Globe,
+  Shield,
+  Radio,
 } from "lucide-react";
 
 import {
@@ -956,6 +958,35 @@ export default function CBSECommandCenter() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [levelUpModalData, setLevelUpModalData] = useState<{ level: number; title: string; badge: string } | null>(null);
+
+  // Admin Broadcast Announcements (synced from /admin console)
+  const [adminBroadcasts, setAdminBroadcasts] = useState<Array<{
+    id: string;
+    title: string;
+    message: string;
+    type: "urgent" | "tip" | "motivation" | "update";
+    active: boolean;
+    publishedAt: string;
+    author: string;
+  }>>([]);
+  const [dismissedBroadcastIds, setDismissedBroadcastIds] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    const loadBroadcasts = () => {
+      try {
+        const saved = localStorage.getItem("cbse_admin_broadcast");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setAdminBroadcasts(parsed.filter((b: any) => b.active));
+          }
+        }
+      } catch {}
+    };
+    loadBroadcasts();
+    window.addEventListener("storage", loadBroadcasts);
+    return () => window.removeEventListener("storage", loadBroadcasts);
+  }, []);
 
   // 4-Pillar Master Workspaces Architecture (Clean, Uncluttered, 100% Content Preserved)
   type MasterCategory = "command" | "concepts" | "practice" | "tools";
@@ -2451,6 +2482,20 @@ export default function CBSECommandCenter() {
                 ⌘K
               </kbd>
             </button>
+
+            {/* ADMIN CONSOLE LINK */}
+            <a
+              href="/admin"
+              className={`p-1.5 sm:px-2.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 min-h-[36px] touch-manipulation active:scale-95 ${
+                isDark
+                  ? "bg-teal-500/15 border-teal-500/40 text-teal-300 hover:bg-teal-500/25 hover:border-teal-400"
+                  : "bg-teal-50 border-teal-300 text-teal-800 hover:bg-teal-100"
+              }`}
+              title="Admin Command Console (Sarthak Sharma)"
+            >
+              <Shield className="w-3.5 h-3.5 shrink-0 text-teal-400" />
+              <span className="hidden xl:inline text-xs font-bold leading-none">Admin</span>
+            </a>
           </div>
         </div>
       </header>
@@ -2827,6 +2872,64 @@ export default function CBSECommandCenter() {
           MAIN APPLICATION CONTENT
           ========================================================================= */}
       <main className="main-content-area max-w-5xl mx-auto px-3.5 sm:px-6 pt-4 sm:pt-6 space-y-5 sm:space-y-6">
+
+        {/* =========================================================================
+            ADMIN BROADCAST BANNER (LIVE FROM /admin CONSOLE)
+            ========================================================================= */}
+        {adminBroadcasts.filter(b => b.active && !dismissedBroadcastIds[b.id]).map((bc) => {
+          const isUrgent = bc.type === "urgent";
+          const isTip = bc.type === "tip";
+          const isMotivation = bc.type === "motivation";
+
+          const bgClasses = isUrgent
+            ? isDark
+              ? "bg-gradient-to-r from-rose-950/80 via-red-900/40 to-amber-950/40 border-rose-500/50 text-rose-100 shadow-[0_0_20px_rgba(244,63,94,0.2)]"
+              : "bg-gradient-to-r from-rose-50 via-red-50 to-amber-50 border-rose-300 text-rose-950 shadow-sm"
+            : isTip
+            ? isDark
+              ? "bg-gradient-to-r from-cyan-950/80 via-teal-900/40 to-emerald-950/40 border-cyan-500/50 text-cyan-100 shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+              : "bg-gradient-to-r from-cyan-50 via-teal-50 to-emerald-50 border-cyan-300 text-cyan-950 shadow-sm"
+            : isMotivation
+            ? isDark
+              ? "bg-gradient-to-r from-amber-950/80 via-orange-900/40 to-yellow-950/40 border-amber-500/50 text-amber-100 shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+              : "bg-gradient-to-r from-amber-50 via-yellow-50 to-orange-50 border-amber-300 text-amber-950 shadow-sm"
+            : isDark
+            ? "bg-gradient-to-r from-indigo-950/80 via-purple-900/40 to-blue-950/40 border-indigo-500/50 text-indigo-100 shadow-[0_0_20px_rgba(99,102,241,0.2)]"
+            : "bg-gradient-to-r from-indigo-50 via-purple-50 to-blue-50 border-indigo-300 text-indigo-950 shadow-sm";
+
+          return (
+            <div
+              key={bc.id}
+              className={`p-3.5 sm:p-4 rounded-2xl border transition-all flex items-start justify-between gap-3 animate-fade-in ${bgClasses}`}
+            >
+              <div className="flex items-start gap-3 min-w-0">
+                <div className="p-2 rounded-xl bg-white/10 shrink-0 mt-0.5">
+                  <Radio className={`w-4 h-4 ${isUrgent ? "text-rose-400 animate-pulse" : "text-amber-400"}`} />
+                </div>
+                <div className="space-y-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[10px] font-mono font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/15 border border-white/20">
+                      {isUrgent ? "🚨 Urgent CBSE Board Advisory" : isTip ? "💡 Examiner Trap Tip" : isMotivation ? "🌟 Century Motivation" : "🚀 Curriculum Update"}
+                    </span>
+                    <span className="text-xs font-black truncate">{bc.title}</span>
+                    <span className="text-[10px] font-mono opacity-60">· {bc.publishedAt}</span>
+                  </div>
+                  <p className="text-xs leading-relaxed font-medium opacity-90">{bc.message}</p>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  playSound("click");
+                  setDismissedBroadcastIds(prev => ({ ...prev, [bc.id]: true }));
+                }}
+                className="p-1.5 rounded-lg hover:bg-white/10 transition-colors opacity-70 hover:opacity-100 shrink-0 cursor-pointer"
+                title="Dismiss Announcement"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          );
+        })}
 
         {/* ===================== TAB 0: TEST SERIES I (SEPT 14 - SEPT 26) ===================== */}
         {activeTab === "test_series" && (
@@ -6690,8 +6793,21 @@ export default function CBSECommandCenter() {
 
 
       {/* FOOTER */}
-      <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-24 md:mb-0 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
-        Lakshmipat Singhania Academy Bissau • CBSE Class 10 Command Center (2026–2027)
+      <footer className={`border-t py-6 text-xs font-mono px-4 sm:px-6 mb-24 md:mb-0 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+          <span>Lakshmipat Singhania Academy Bissau • CBSE Class 10 Command Center (2026–2027)</span>
+          <a
+            href="/admin"
+            className={`px-3 py-1 rounded-full border transition-all inline-flex items-center gap-1.5 font-bold ${
+              isDark
+                ? "bg-teal-500/10 border-teal-500/30 text-teal-400 hover:bg-teal-500/20 hover:border-teal-400/50"
+                : "bg-teal-50 border-teal-200 text-teal-800 hover:bg-teal-100"
+            }`}
+          >
+            <Shield className="w-3.5 h-3.5 text-teal-400" />
+            <span>Admin Console</span>
+          </a>
+        </div>
       </footer>
 
       {/* =========================================================================
