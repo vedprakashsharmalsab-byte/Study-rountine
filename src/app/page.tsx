@@ -1038,6 +1038,20 @@ export default function CBSECommandCenter() {
 
     const sendBeacon = (duration = 0) => {
       try {
+        const studentName =
+          localStorage.getItem("cbse_student_username") ||
+          localStorage.getItem("lsa_student_name") ||
+          "Student Aspirant";
+        const studentXp = parseInt(localStorage.getItem("cbse_total_xp") || "0", 10);
+        const studentStreak = parseInt(localStorage.getItem("cbse_study_streak") || "1", 10);
+        const studentLevel = parseInt(localStorage.getItem("cbse_user_level") || "1", 10);
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata";
+        const lang = navigator.language || "en-IN";
+        const netType = (navigator as any).connection?.effectiveType
+          ? (navigator as any).connection.effectiveType.toUpperCase()
+          : "Broadband/WiFi";
+        const specs = `${(navigator as any).deviceMemory ? (navigator as any).deviceMemory + "GB RAM · " : ""}${navigator.hardwareConcurrency ? navigator.hardwareConcurrency + " Cores · " : ""}${window.screen.width}x${window.screen.height}`;
+
         const payload = {
           visitorId,
           sessionId,
@@ -1046,7 +1060,16 @@ export default function CBSECommandCenter() {
           activeSubject: conceptsSubject || "all",
           referrer: document.referrer ? new URL(document.referrer).hostname : "direct",
           durationSeconds: duration,
-          screenResolution: `${window.innerWidth}x${window.innerHeight}`
+          screenResolution: `${window.innerWidth}x${window.innerHeight}`,
+          studentName,
+          studentXp,
+          studentStreak,
+          studentLevel,
+          timezone: tz,
+          language: lang,
+          networkType: netType,
+          hardwareSpecs: specs,
+          activeChapter: `Ch ${conceptsChapterNo}`
         };
 
         fetch("/api/analytics", {

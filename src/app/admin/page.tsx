@@ -11,6 +11,7 @@ import {
   EyeOff,
   LogOut,
   Users,
+  UserCheck,
   Activity,
   Globe,
   Smartphone,
@@ -30,15 +31,17 @@ import {
   Award,
   Zap,
   ExternalLink,
-  ChevronRight,
+  ChevronDown,
+  ChevronUp,
   Database,
   Cpu,
   Clock,
   HelpCircle,
   TrendingUp,
-  BarChart3,
   Calendar,
-  Sparkles
+  Sparkles,
+  Wifi,
+  HardDrive
 } from "lucide-react";
 import { CBSE_SUBJECTS } from "@/data/cbseData";
 
@@ -58,12 +61,51 @@ interface BroadcastMessage {
   author: string;
 }
 
-interface VisitorStats {
+interface StudentSession {
+  id: string;
+  sessionId: string;
+  path: string;
+  activeTab: string;
+  activeSubject: string;
+  activeChapter?: string;
+  durationSeconds: number;
+  referrer: string;
+  createdAt: string;
+}
+
+interface UniqueStudentProfile {
+  visitorId: string;
+  studentName: string;
+  studentXp: number;
+  studentStreak: number;
+  studentLevel: number;
+  deviceType: string;
+  operatingSystem: string;
+  browser: string;
+  screenResolution: string;
+  hardwareSpecs: string;
+  networkType: string;
+  timezone: string;
+  cityRegion: string;
+  ipAddress: string;
+  language: string;
+  visitsToday: number;
   totalVisits: number;
-  uniqueVisitors: number;
-  todayVisits: number;
-  todayUnique: number;
-  liveNow: number;
+  totalStudyMinutes: number;
+  firstSeen: string;
+  lastActive: string;
+  isOnlineNow: boolean;
+  subjectsStudied: string[];
+  chaptersStudied: string[];
+  sessions: StudentSession[];
+}
+
+interface VisitorStats {
+  totalUniqueStudents: number;
+  todayUniqueStudents: number;
+  todayTotalSessions: number;
+  liveNowStudents: number;
+  totalEventsCount: number;
   avgDurationMinutes: number;
   devices: { mobile: number; desktop: number; tablet: number };
   oses: Record<string, number>;
@@ -71,18 +113,18 @@ interface VisitorStats {
   subjects: Record<string, number>;
   tabs: Record<string, number>;
   referrers: Record<string, number>;
-  recentVisitors: Array<{
+  uniqueStudents: UniqueStudentProfile[];
+  recentEvents: Array<{
     id: string;
     visitorId: string;
-    sessionId: string;
+    studentName: string;
     ipAddress: string;
     deviceType: string;
     operatingSystem: string;
     browser: string;
-    path: string;
     activeTab: string;
     activeSubject: string;
-    referrer: string;
+    activeChapter?: string;
     durationSeconds: number;
     createdAt: string;
   }>;
@@ -106,6 +148,8 @@ export default function AdminPage() {
   const [isLoadingAnalytics, setIsLoadingAnalytics] = useState<boolean>(false);
   const [isLivePolling, setIsLivePolling] = useState<boolean>(true);
   const [lastRefreshed, setLastRefreshed] = useState<string>("");
+  const [streamViewMode, setStreamViewMode] = useState<"students" | "events">("students");
+  const [expandedStudentId, setExpandedStudentId] = useState<string | null>(null);
   const [visitorFilter, setVisitorFilter] = useState<string>("all");
   const [visitorSearch, setVisitorSearch] = useState<string>("");
 
@@ -116,14 +160,9 @@ export default function AdminPage() {
   const [newType, setNewType] = useState<"urgent" | "tip" | "motivation" | "update">("urgent");
   const [broadcastStatus, setBroadcastStatus] = useState<string>("");
 
-  // Mistake Logs State
-  const [mistakeLogs, setMistakeLogs] = useState<any[]>([]);
-  const [isLoadingMistakes, setIsLoadingMistakes] = useState<boolean>(false);
-
   // Curriculum Filter State
   const [selectedSubjectId, setSelectedSubjectId] = useState<string>("all");
   const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Sound Synthesizer for Admin Interactions
   const playSound = (type: "login" | "error" | "click" | "success") => {
@@ -139,11 +178,10 @@ export default function AdminPage() {
         osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
         osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08);
         osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.16);
-        osc.frequency.setValueAtTime(1046.5, audioCtx.currentTime + 0.24);
         gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.45);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.45);
+        osc.stop(audioCtx.currentTime + 0.35);
       } else if (type === "error") {
         osc.type = "sawtooth";
         osc.frequency.setValueAtTime(220, audioCtx.currentTime);
@@ -156,9 +194,9 @@ export default function AdminPage() {
         osc.type = "sine";
         osc.frequency.setValueAtTime(600, audioCtx.currentTime);
         gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.06);
+        osc.stop(audioCtx.currentTime + 0.05);
       }
     } catch {}
   };
@@ -268,21 +306,43 @@ export default function AdminPage() {
 
   // Export Analytics to CSV
   const handleExportCSV = () => {
-    if (!analytics || !analytics.recentVisitors.length) return;
+    if (!analytics || !analytics.uniqueStudents.length) return;
     playSound("click");
-    const headers = ["Timestamp", "Visitor ID", "Session ID", "IP / Region", "Device", "OS", "Browser", "Subject", "Tab", "Duration (s)", "Referrer"];
-    const rows = analytics.recentVisitors.map((v) => [
-      v.createdAt,
-      v.visitorId,
-      v.sessionId,
-      `"${v.ipAddress || "127.0.0.1"}"`,
-      v.deviceType,
-      v.operatingSystem,
-      v.browser,
-      v.activeSubject,
-      v.activeTab,
-      v.durationSeconds,
-      v.referrer
+    const headers = [
+      "Student Name",
+      "Visitor ID",
+      "Visits Today",
+      "Total Visits All-Time",
+      "Total Study Minutes",
+      "XP",
+      "Streak",
+      "Device",
+      "OS",
+      "Browser",
+      "Screen",
+      "Location",
+      "IP",
+      "Network",
+      "Subjects Studied",
+      "Last Active"
+    ];
+    const rows = analytics.uniqueStudents.map((s) => [
+      `"${s.studentName}"`,
+      s.visitorId,
+      s.visitsToday,
+      s.totalVisits,
+      s.totalStudyMinutes,
+      s.studentXp,
+      s.studentStreak,
+      s.deviceType,
+      s.operatingSystem,
+      s.browser,
+      `"${s.screenResolution}"`,
+      `"${s.cityRegion}"`,
+      `"${s.ipAddress}"`,
+      `"${s.networkType}"`,
+      `"${s.subjectsStudied.join(", ")}"`,
+      s.lastActive
     ]);
 
     const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
@@ -290,7 +350,7 @@ export default function AdminPage() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `cbse_visitors_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute("download", `cbse_unique_students_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -345,19 +405,22 @@ export default function AdminPage() {
     } catch {}
   };
 
-  // Filtered recent visitors
-  const filteredVisitors = useMemo(() => {
-    if (!analytics || !analytics.recentVisitors) return [];
-    return analytics.recentVisitors.filter((v) => {
-      if (visitorFilter === "mobile" && v.deviceType !== "mobile") return false;
-      if (visitorFilter === "desktop" && v.deviceType !== "desktop") return false;
+  // Filtered unique students
+  const filteredStudents = useMemo(() => {
+    if (!analytics || !analytics.uniqueStudents) return [];
+    return analytics.uniqueStudents.filter((s) => {
+      if (visitorFilter === "today" && s.visitsToday === 0) return false;
+      if (visitorFilter === "mobile" && s.deviceType !== "mobile") return false;
+      if (visitorFilter === "desktop" && s.deviceType !== "desktop") return false;
+      if (visitorFilter === "online" && !s.isOnlineNow) return false;
       if (visitorSearch.trim()) {
         const q = visitorSearch.toLowerCase();
-        const matchId = v.visitorId.toLowerCase().includes(q);
-        const matchIp = (v.ipAddress || "").toLowerCase().includes(q);
-        const matchSub = (v.activeSubject || "").toLowerCase().includes(q);
-        const matchTab = (v.activeTab || "").toLowerCase().includes(q);
-        return matchId || matchIp || matchSub || matchTab;
+        const matchName = s.studentName.toLowerCase().includes(q);
+        const matchId = s.visitorId.toLowerCase().includes(q);
+        const matchIp = (s.ipAddress || "").toLowerCase().includes(q);
+        const matchCity = (s.cityRegion || "").toLowerCase().includes(q);
+        const matchSubs = s.subjectsStudied.some(sub => sub.toLowerCase().includes(q));
+        return matchName || matchId || matchIp || matchCity || matchSubs;
       }
       return true;
     });
@@ -380,13 +443,11 @@ export default function AdminPage() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-[#060a12] via-[#09101d] to-[#040810] text-white relative overflow-hidden">
-        {/* Subtle Ambient Glow */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="w-full max-w-md relative z-10">
           <div className="p-7 sm:p-9 rounded-3xl border border-white/10 bg-[#0c1220]/90 backdrop-blur-2xl shadow-2xl shadow-black/80 space-y-6">
-            {/* Header */}
             <div className="space-y-2 text-center">
               <div className="w-13 h-13 mx-auto rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-slate-950 shadow-lg shadow-teal-500/20">
                 <Lock className="w-6 h-6" />
@@ -395,11 +456,10 @@ export default function AdminPage() {
                 Restricted Terminal Access
               </h1>
               <p className="text-xs text-slate-400">
-                Authorized administrator verification required to view system traffic and telemetry.
+                Authorized administrator verification required to view student visitor telemetry.
               </p>
             </div>
 
-            {/* Error Banner */}
             {loginError && (
               <div className="p-3.5 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2.5 animate-shake">
                 <AlertTriangle className="w-4 h-4 shrink-0 text-rose-400" />
@@ -407,7 +467,6 @@ export default function AdminPage() {
               </div>
             )}
 
-            {/* Form */}
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
@@ -484,7 +543,7 @@ export default function AdminPage() {
   }
 
   // =========================================================================
-  // 2. AUTHENTICATED VISITOR INTELLIGENCE & COMMAND CONSOLE
+  // 2. AUTHENTICATED UNIQUE STUDENTS & VISITOR COMMAND CONSOLE
   // =========================================================================
   return (
     <div className={`min-h-screen transition-colors ${isDark ? "bg-[#060a12] text-white" : "bg-slate-50 text-slate-900"}`}>
@@ -499,9 +558,9 @@ export default function AdminPage() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-black tracking-tight">Visitor & Traffic Command Hub</span>
+                <span className="text-sm font-black tracking-tight">Student Visitor Intelligence Command</span>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-teal-500/20 text-teal-400 border border-teal-500/30">
-                  Secret Admin Mode
+                  Deduplicated Tracking
                 </span>
               </div>
               <span className="text-[11px] font-mono text-slate-400">
@@ -522,7 +581,7 @@ export default function AdminPage() {
               title="Toggle Live Polling (Every 6s)"
             >
               <span className={`w-2 h-2 rounded-full ${isLivePolling ? "bg-emerald-400 animate-pulse" : "bg-slate-500"}`} />
-              <span className="hidden sm:inline">{isLivePolling ? "Live Radar ON" : "Paused"}</span>
+              <span className="hidden sm:inline">{isLivePolling ? "Radar Active (6s)" : "Paused"}</span>
             </button>
 
             {/* Manual Refresh */}
@@ -535,7 +594,7 @@ export default function AdminPage() {
               className={`p-2 rounded-xl border text-xs cursor-pointer ${
                 isDark ? "bg-white/5 border-white/10 text-slate-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100"
               }`}
-              title="Refresh visitor stats"
+              title="Refresh student stats"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isLoadingAnalytics ? "animate-spin text-teal-400" : ""}`} />
             </button>
@@ -565,7 +624,7 @@ export default function AdminPage() {
         {/* Navigation Tabs */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center gap-1 overflow-x-auto pb-2 pt-1 border-t border-white/5">
           {[
-            { id: "analytics", label: "Visitor Intelligence & Live Traffic", icon: Users },
+            { id: "analytics", label: "Unique Students & Live Traffic", icon: Users },
             { id: "broadcast", label: "Broadcast Announcements", icon: Radio },
             { id: "curriculum", label: "Syllabus & 80M Markers", icon: BookOpen },
             { id: "mistakes", label: "Student Doubt Monitor", icon: HelpCircle },
@@ -599,63 +658,66 @@ export default function AdminPage() {
       {/* Main Content Body */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
         {/* ================================================================= */}
-        {/* TAB 1: VISITOR INTELLIGENCE & LIVE TRAFFIC DASHBOARD (PRIMARY) */}
+        {/* TAB 1: UNIQUE STUDENTS & LIVE TRAFFIC DASHBOARD (PRIMARY) */}
         {/* ================================================================= */}
         {activeTab === "analytics" && (
           <div className="space-y-8 animate-fade-in">
-            {/* Top Stat Ribbon with 5 Big Real-Time Metrics */}
+            {/* Top Stat Ribbon with Deduplication Breakdown */}
             <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-5">
-              {/* Card 1: Total Unique Visitors */}
+              {/* Card 1: Unique Students Today (Deduplicated!) */}
               <div className={`p-5 rounded-3xl border transition-all ${
                 isDark ? "bg-[#0b101c] border-teal-500/30 shadow-lg shadow-teal-950/20" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Total Visitors</span>
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Unique Students Today</span>
                   <div className="w-8 h-8 rounded-xl bg-teal-500/15 text-teal-400 flex items-center justify-center">
-                    <Users className="w-4 h-4" />
+                    <UserCheck className="w-4 h-4" />
                   </div>
                 </div>
-                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                  {(analytics?.uniqueVisitors || 0).toLocaleString()}
+                <div className="text-2xl sm:text-3xl font-black font-mono text-teal-400 tracking-tight flex items-baseline gap-2">
+                  <span>{analytics?.todayUniqueStudents || 1}</span>
+                  <span className="text-xs font-normal text-slate-400 font-sans">unique</span>
                 </div>
-                <span className="text-[10px] font-mono text-teal-400 mt-1 block">
-                  Unique students tracked
-                </span>
+                <div className="text-[10px] font-mono text-emerald-400 mt-1 flex items-center gap-1">
+                  <span>✓ Deduplicated</span>
+                  <span className="text-slate-500">· {analytics?.todayTotalSessions || 4} total visits today</span>
+                </div>
               </div>
 
-              {/* Card 2: Total Page Views */}
+              {/* Card 2: Today's Total Visits / Sessions */}
               <div className={`p-5 rounded-3xl border transition-all ${
                 isDark ? "bg-[#0b101c] border-cyan-500/30 shadow-lg shadow-cyan-950/20" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Total Pageviews</span>
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Today's Visits</span>
                   <div className="w-8 h-8 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
                     <TrendingUp className="w-4 h-4" />
                   </div>
                 </div>
-                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                  {(analytics?.totalVisits || 0).toLocaleString()}
+                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight flex items-baseline gap-2">
+                  <span>{analytics?.todayTotalSessions || 4}</span>
+                  <span className="text-xs font-normal text-slate-400 font-sans">sessions</span>
                 </div>
                 <span className="text-[10px] font-mono text-cyan-400 mt-1 block">
-                  Total site interactions
+                  Repeated visits by students
                 </span>
               </div>
 
-              {/* Card 3: Today's Visitors */}
+              {/* Card 3: All-Time Unique Students */}
               <div className={`p-5 rounded-3xl border transition-all ${
                 isDark ? "bg-[#0b101c] border-amber-500/30 shadow-lg shadow-amber-950/20" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Today's Visitors</span>
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Total Unique Students</span>
                   <div className="w-8 h-8 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
-                    <Calendar className="w-4 h-4" />
+                    <Users className="w-4 h-4" />
                   </div>
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                  {(analytics?.todayUnique || 0).toLocaleString()}
+                  {analytics?.totalUniqueStudents || 2}
                 </div>
                 <span className="text-[10px] font-mono text-amber-400 mt-1 block">
-                  {(analytics?.todayVisits || 0)} sessions today
+                  {analytics?.totalEventsCount || 5} lifetime visits recorded
                 </span>
               </div>
 
@@ -669,16 +731,16 @@ export default function AdminPage() {
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
                   </div>
                 </div>
-                <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-tight flex items-center gap-2">
-                  <span>{analytics?.liveNow || 1}</span>
-                  <span className="text-xs font-normal text-emerald-400/70 font-sans">students</span>
+                <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-tight flex items-baseline gap-2">
+                  <span>{analytics?.liveNowStudents || 1}</span>
+                  <span className="text-xs font-normal text-emerald-400/70 font-sans">student</span>
                 </div>
                 <span className="text-[10px] font-mono text-emerald-400 mt-1 block">
-                  In last 5 minutes
+                  Active in last 5 minutes
                 </span>
               </div>
 
-              {/* Card 5: Average Session Time */}
+              {/* Card 5: Average Daily Study Time */}
               <div className={`col-span-2 lg:col-span-1 p-5 rounded-3xl border transition-all ${
                 isDark ? "bg-[#0b101c] border-indigo-500/30 shadow-lg shadow-indigo-950/20" : "bg-white border-slate-200 shadow-sm"
               }`}>
@@ -689,135 +751,89 @@ export default function AdminPage() {
                   </div>
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                  {analytics?.avgDurationMinutes || 1}m
+                  {analytics?.avgDurationMinutes || 12}m
                 </div>
                 <span className="text-[10px] font-mono text-indigo-400 mt-1 block">
-                  Per student visit
+                  Per student daily engagement
                 </span>
               </div>
             </div>
 
-            {/* Visitor Breakdown Grids */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Device Matrix */}
-              <div className={`p-6 rounded-3xl border space-y-4 ${
-                isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
-              }`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Smartphone className="w-4 h-4 text-teal-400" />
-                    <h3 className="text-sm font-black uppercase tracking-wider">Device Categories</h3>
-                  </div>
-                  <span className="text-[10px] font-mono text-slate-400">
-                    {((analytics?.devices.mobile || 0) + (analytics?.devices.desktop || 0) + (analytics?.devices.tablet || 0))} logs
-                  </span>
-                </div>
-
-                <div className="space-y-3 pt-2">
-                  {[
-                    { label: "Mobile Smartphones", val: analytics?.devices.mobile || 0, icon: "📱", color: "from-teal-500 to-emerald-500" },
-                    { label: "Desktop & Laptops", val: analytics?.devices.desktop || 0, icon: "💻", color: "from-cyan-500 to-blue-500" },
-                    { label: "iPads & Tablets", val: analytics?.devices.tablet || 0, icon: "📟", color: "from-amber-500 to-orange-500" }
-                  ].map((dev, idx) => {
-                    const total = (analytics?.devices.mobile || 0) + (analytics?.devices.desktop || 0) + (analytics?.devices.tablet || 0) || 1;
-                    const pct = Math.round((dev.val / total) * 100);
-                    return (
-                      <div key={idx} className="space-y-1.5">
-                        <div className="flex justify-between text-xs font-mono">
-                          <span className="flex items-center gap-1.5 text-slate-300">
-                            <span>{dev.icon}</span>
-                            <span>{dev.label}</span>
-                          </span>
-                          <span className="font-bold text-white">{dev.val} ({pct}%)</span>
-                        </div>
-                        <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                          <div
-                            className={`h-full rounded-full bg-gradient-to-r ${dev.color} transition-all duration-500`}
-                            style={{ width: `${Math.max(pct, 5)}%` }}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Operating System Distribution */}
-              <div className={`p-6 rounded-3xl border space-y-4 ${
-                isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
-              }`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Laptop className="w-4 h-4 text-cyan-400" />
-                    <h3 className="text-sm font-black uppercase tracking-wider">Operating Systems</h3>
-                  </div>
-                </div>
-
-                <div className="space-y-2.5 pt-2">
-                  {Object.entries(analytics?.oses || { Windows: 2, Android: 2 }).map(([osName, count], idx) => {
-                    const total = analytics?.totalVisits || 1;
-                    const pct = Math.round((count / total) * 100);
-                    return (
-                      <div key={idx} className="flex items-center justify-between text-xs font-mono p-2 rounded-xl bg-white/[0.03] border border-white/5">
-                        <span className="text-slate-300">{osName}</span>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-white">{count}</span>
-                          <span className="text-[10px] text-slate-500">({pct}%)</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Most Studied Subjects */}
-              <div className={`p-6 rounded-3xl border space-y-4 ${
-                isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
-              }`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <BookOpen className="w-4 h-4 text-amber-400" />
-                    <h3 className="text-sm font-black uppercase tracking-wider">Popular Subjects</h3>
-                  </div>
-                </div>
-
-                <div className="space-y-2.5 pt-2">
-                  {Object.entries(analytics?.subjects || { science: 2, math: 1, sst: 1 }).map(([subName, count], idx) => {
-                    return (
-                      <div key={idx} className="flex items-center justify-between text-xs font-mono p-2 rounded-xl bg-white/[0.03] border border-white/5">
-                        <span className="text-slate-300 uppercase">{subName}</span>
-                        <span className="px-2 py-0.5 rounded bg-teal-500/15 text-teal-400 font-bold border border-teal-500/30">
-                          {count} visits
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
+            {/* Explanation Clarification Banner (Deduplication Confirmation) */}
+            <div className={`p-4 rounded-2xl border flex items-start gap-3 text-xs ${
+              isDark ? "bg-teal-950/30 border-teal-500/30 text-teal-200" : "bg-teal-50 border-teal-200 text-teal-900"
+            }`}>
+              <ShieldCheck className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
+              <div className="space-y-0.5">
+                <span className="font-bold">Student Deduplication Active:</span>
+                <p className="opacity-90">
+                  If a student visits 3 or 4 times throughout the day, they are counted as <strong>1 Unique Student</strong>, and their multiple entries are combined under their profile showing <strong>4 visits today</strong> and total accumulated study time.
+                </p>
               </div>
             </div>
 
-            {/* Detailed Real-Time Visitor Log Table */}
+            {/* MASTER UNIQUE STUDENTS DIRECTORY */}
             <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 ${
               isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
             }`}>
+              {/* Header & Controls */}
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse" />
-                    <h3 className="text-lg font-black tracking-tight">Real-Time Visitor Log Stream</h3>
+                    <UserCheck className="w-5 h-5 text-teal-400" />
+                    <h3 className="text-lg font-black tracking-tight">
+                      {streamViewMode === "students" ? "Unique Student Profiles & Visit Histories" : "Chronological Session Stream"}
+                    </h3>
                   </div>
                   <p className="text-xs text-slate-400">
-                    Detailed chronological timeline of student entries, devices, active sections, and session durations.
+                    {streamViewMode === "students"
+                      ? "Each row represents 1 distinct student device with aggregated visit counts, hardware specs, and study duration."
+                      : "Chronological feed of every single pageview and interaction."}
                   </p>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+                  {/* View Mode Toggle */}
+                  <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 text-xs font-bold">
+                    <button
+                      onClick={() => setStreamViewMode("students")}
+                      className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                        streamViewMode === "students" ? "bg-teal-500 text-slate-950 font-black" : "text-slate-400 hover:text-white"
+                      }`}
+                    >
+                      👤 Unique Students ({analytics?.uniqueStudents?.length || 0})
+                    </button>
+                    <button
+                      onClick={() => setStreamViewMode("events")}
+                      className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                        streamViewMode === "events" ? "bg-teal-500 text-slate-950 font-black" : "text-slate-400 hover:text-white"
+                      }`}
+                    >
+                      📋 Raw Sessions ({analytics?.totalEventsCount || 0})
+                    </button>
+                  </div>
+
+                  {/* Filter Dropdown */}
+                  <select
+                    value={visitorFilter}
+                    onChange={(e) => setVisitorFilter(e.target.value)}
+                    className={`px-3 py-2 rounded-xl text-xs font-bold border focus:outline-none cursor-pointer ${
+                      isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
+                    }`}
+                  >
+                    <option value="all">All Students</option>
+                    <option value="today">📅 Studied Today</option>
+                    <option value="online">🟢 Online Now</option>
+                    <option value="mobile">📱 Mobile Devices</option>
+                    <option value="desktop">💻 Desktop / Laptops</option>
+                  </select>
+
                   {/* Search */}
-                  <div className="relative flex-1 md:w-56">
+                  <div className="relative flex-1 sm:w-48">
                     <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                     <input
                       type="text"
-                      placeholder="Search visitor ID or IP..."
+                      placeholder="Search student, IP, city..."
                       value={visitorSearch}
                       onChange={(e) => setVisitorSearch(e.target.value)}
                       className={`w-full pl-8 pr-3 py-2 rounded-xl text-xs border focus:outline-none ${
@@ -826,91 +842,253 @@ export default function AdminPage() {
                     />
                   </div>
 
-                  {/* Device Filter */}
-                  <select
-                    value={visitorFilter}
-                    onChange={(e) => setVisitorFilter(e.target.value)}
-                    className={`px-3 py-2 rounded-xl text-xs font-bold border focus:outline-none cursor-pointer ${
-                      isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
-                    }`}
-                  >
-                    <option value="all">All Devices</option>
-                    <option value="mobile">📱 Mobile Only</option>
-                    <option value="desktop">💻 Desktop Only</option>
-                  </select>
-
                   {/* Export CSV */}
                   <button
                     onClick={handleExportCSV}
                     className="px-3.5 py-2 rounded-xl text-xs font-bold bg-teal-500/15 hover:bg-teal-500/25 text-teal-400 border border-teal-500/30 flex items-center gap-1.5 transition-all cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" />
-                    <span>Export CSV</span>
+                    <span className="hidden sm:inline">Export CSV</span>
                   </button>
 
-                  {/* Purge / Reset */}
+                  {/* Purge */}
                   <button
                     onClick={handleResetAnalytics}
                     className="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 border border-white/5 transition-colors cursor-pointer"
-                    title="Clear Visitor Log History"
+                    title="Clear All Visitor History"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
-              {/* Table */}
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs font-mono">
-                  <thead>
-                    <tr className={`border-b ${isDark ? "border-white/10 text-slate-400" : "border-slate-200 text-slate-600"}`}>
-                      <th className="py-3 px-3">Time</th>
-                      <th className="py-3 px-3">Visitor ID</th>
-                      <th className="py-3 px-3">IP / Location</th>
-                      <th className="py-3 px-3">Device & OS</th>
-                      <th className="py-3 px-3">Browser</th>
-                      <th className="py-3 px-3">Active Section</th>
-                      <th className="py-3 px-3">Duration</th>
-                      <th className="py-3 px-3">Source</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-white/5">
-                    {filteredVisitors.map((vis) => (
-                      <tr key={vis.id} className="hover:bg-white/[0.02] transition-colors">
-                        <td className="py-3 px-3 text-slate-400 whitespace-nowrap">
-                          {new Date(vis.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
-                        </td>
-                        <td className="py-3 px-3 font-bold text-teal-400 whitespace-nowrap">
-                          {vis.visitorId.slice(0, 16)}...
-                        </td>
-                        <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
-                          {vis.ipAddress}
-                        </td>
-                        <td className="py-3 px-3 whitespace-nowrap">
-                          <span className="flex items-center gap-1.5">
-                            <span>{vis.deviceType === "mobile" ? "📱" : "💻"}</span>
-                            <span>{vis.operatingSystem}</span>
-                          </span>
-                        </td>
-                        <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
-                          {vis.browser}
-                        </td>
-                        <td className="py-3 px-3 whitespace-nowrap">
-                          <span className="px-2 py-0.5 rounded bg-white/5 text-amber-300 font-bold border border-white/10">
-                            {vis.activeSubject.toUpperCase()} · {vis.activeTab}
-                          </span>
-                        </td>
-                        <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
-                          {vis.durationSeconds > 60 ? `${Math.round(vis.durationSeconds / 60)}m` : `${vis.durationSeconds}s`}
-                        </td>
-                        <td className="py-3 px-3 text-slate-400 whitespace-nowrap">
-                          {vis.referrer}
-                        </td>
+              {/* ============================================================= */}
+              {/* VIEW 1: DEDUPLICATED UNIQUE STUDENTS DIRECTORY */}
+              {/* ============================================================= */}
+              {streamViewMode === "students" && (
+                <div className="space-y-4">
+                  {filteredStudents.map((student) => {
+                    const isExpanded = expandedStudentId === student.visitorId;
+                    return (
+                      <div
+                        key={student.visitorId}
+                        className={`rounded-2xl border transition-all overflow-hidden ${
+                          student.isOnlineNow
+                            ? isDark
+                              ? "bg-gradient-to-r from-teal-950/30 via-[#0b101c] to-[#0b101c] border-teal-500/40 shadow-md shadow-teal-950/20"
+                              : "bg-teal-50/50 border-teal-300 shadow-xs"
+                            : isDark ? "bg-black/20 border-white/10" : "bg-slate-50 border-slate-200"
+                        }`}
+                      >
+                        {/* Student Summary Row */}
+                        <div className="p-4 sm:p-5 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                          {/* Student Info */}
+                          <div className="flex items-start gap-3.5 min-w-0">
+                            <div className="relative mt-0.5">
+                              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-teal-500/20 to-cyan-500/20 border border-teal-500/30 flex items-center justify-center text-teal-400 font-black text-sm">
+                                {student.studentName.slice(0, 2).toUpperCase()}
+                              </div>
+                              {student.isOnlineNow && (
+                                <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#060a12] animate-ping" />
+                              )}
+                            </div>
+
+                            <div className="space-y-1 min-w-0">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span className="font-black text-sm text-white truncate">{student.studentName}</span>
+                                {student.isOnlineNow && (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                    ● Online Now
+                                  </span>
+                                )}
+                                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-black bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                                  🔥 {student.visitsToday} {student.visitsToday === 1 ? "visit" : "visits"} today
+                                </span>
+                                <span className="text-[10px] font-mono opacity-60">
+                                  ({student.totalVisits} all-time)
+                                </span>
+                              </div>
+
+                              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400 font-mono">
+                                <span>📍 {student.cityRegion}</span>
+                                <span>·</span>
+                                <span>🌐 {student.ipAddress}</span>
+                                <span>·</span>
+                                <span>{student.deviceType === "mobile" ? "📱 Mobile" : "💻 Desktop"} ({student.operatingSystem})</span>
+                                <span>·</span>
+                                <span className="text-teal-400">⚡ {student.studentXp} XP · Streak {student.studentStreak}d</span>
+                              </div>
+
+                              <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                                <span className="text-[10px] font-mono text-slate-500">Studied:</span>
+                                {student.subjectsStudied.map((sub, sIdx) => (
+                                  <span key={sIdx} className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-mono uppercase font-bold text-amber-300">
+                                    {sub}
+                                  </span>
+                                ))}
+                                {student.chaptersStudied.map((ch, cIdx) => (
+                                  <span key={cIdx} className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-mono text-slate-300">
+                                    {ch}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Quick Stats & Expand Action */}
+                          <div className="flex items-center gap-4 self-end lg:self-center shrink-0">
+                            <div className="text-right font-mono">
+                              <div className="text-sm font-black text-white">
+                                {student.totalStudyMinutes}m study time
+                              </div>
+                              <div className="text-[10px] text-slate-400">
+                                Last seen {new Date(student.lastActive).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                              </div>
+                            </div>
+
+                            <button
+                              onClick={() => {
+                                playSound("click");
+                                setExpandedStudentId(isExpanded ? null : student.visitorId);
+                              }}
+                              className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
+                                isExpanded
+                                  ? "bg-teal-500 text-slate-950 border-teal-400 font-black"
+                                  : "bg-white/5 border-white/10 text-slate-300 hover:text-white hover:bg-white/10"
+                              }`}
+                            >
+                              <span>{isExpanded ? "Hide Details" : `View ${student.sessions.length} Visits`}</span>
+                              {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Expandable Visit History & Hardware Specs Drawer */}
+                        {isExpanded && (
+                          <div className="p-5 border-t border-white/5 bg-black/40 space-y-4 animate-fade-in">
+                            {/* Deep Hardware & Network Specs */}
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
+                                <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
+                                  <HardDrive className="w-3 h-3 text-teal-400" /> Hardware Specs
+                                </span>
+                                <div className="font-bold text-white truncate">{student.hardwareSpecs || "Standard Multi-core"}</div>
+                              </div>
+
+                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
+                                <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
+                                  <Wifi className="w-3 h-3 text-cyan-400" /> Network Connection
+                                </span>
+                                <div className="font-bold text-white truncate">{student.networkType}</div>
+                              </div>
+
+                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
+                                <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
+                                  <Globe className="w-3 h-3 text-amber-400" /> Screen & Browser
+                                </span>
+                                <div className="font-bold text-white truncate">{student.browser} ({student.screenResolution})</div>
+                              </div>
+
+                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
+                                <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
+                                  <Clock className="w-3 h-3 text-indigo-400" /> First Seen Today
+                                </span>
+                                <div className="font-bold text-white truncate">
+                                  {new Date(student.firstSeen).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Chronological Visit Session Breakdown */}
+                            <div className="space-y-2">
+                              <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
+                                Discrete Study Sessions History ({student.sessions.length})
+                              </div>
+
+                              <div className="divide-y divide-white/5 rounded-xl border border-white/5 overflow-hidden bg-black/20">
+                                {student.sessions.map((sess, sessIdx) => (
+                                  <div key={sess.id || sessIdx} className="p-3 flex items-center justify-between gap-3 text-xs font-mono hover:bg-white/[0.02]">
+                                    <div className="flex items-center gap-2.5">
+                                      <span className="w-5 text-center font-bold text-teal-400">#{student.sessions.length - sessIdx}</span>
+                                      <span className="text-slate-300">
+                                        {new Date(sess.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                                      </span>
+                                      <span className="px-2 py-0.5 rounded bg-white/5 text-amber-300 font-bold border border-white/10">
+                                        {sess.activeSubject.toUpperCase()} · {sess.activeTab}
+                                      </span>
+                                      {sess.activeChapter && (
+                                        <span className="text-slate-400">({sess.activeChapter})</span>
+                                      )}
+                                    </div>
+
+                                    <div className="flex items-center gap-3 text-slate-400">
+                                      <span>⏱️ {sess.durationSeconds > 60 ? `${Math.round(sess.durationSeconds / 60)}m` : `${sess.durationSeconds}s`}</span>
+                                      <span>🔗 {sess.referrer}</span>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* ============================================================= */}
+              {/* VIEW 2: RAW EVENT LOG STREAM */}
+              {/* ============================================================= */}
+              {streamViewMode === "events" && (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs font-mono">
+                    <thead>
+                      <tr className={`border-b ${isDark ? "border-white/10 text-slate-400" : "border-slate-200 text-slate-600"}`}>
+                        <th className="py-3 px-3">Time</th>
+                        <th className="py-3 px-3">Student Name</th>
+                        <th className="py-3 px-3">Visitor ID</th>
+                        <th className="py-3 px-3">IP / Location</th>
+                        <th className="py-3 px-3">Device & OS</th>
+                        <th className="py-3 px-3">Active Chapter</th>
+                        <th className="py-3 px-3">Duration</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody className="divide-y divide-white/5">
+                      {(analytics?.recentEvents || []).map((ev) => (
+                        <tr key={ev.id} className="hover:bg-white/[0.02] transition-colors">
+                          <td className="py-3 px-3 text-slate-400 whitespace-nowrap">
+                            {new Date(ev.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                          </td>
+                          <td className="py-3 px-3 font-bold text-white whitespace-nowrap">
+                            {ev.studentName}
+                          </td>
+                          <td className="py-3 px-3 text-teal-400 whitespace-nowrap">
+                            {ev.visitorId.slice(0, 14)}...
+                          </td>
+                          <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
+                            {ev.ipAddress}
+                          </td>
+                          <td className="py-3 px-3 whitespace-nowrap">
+                            <span className="flex items-center gap-1.5">
+                              <span>{ev.deviceType === "mobile" ? "📱" : "💻"}</span>
+                              <span>{ev.operatingSystem}</span>
+                            </span>
+                          </td>
+                          <td className="py-3 px-3 whitespace-nowrap">
+                            <span className="px-2 py-0.5 rounded bg-white/5 text-amber-300 font-bold border border-white/10">
+                              {ev.activeSubject.toUpperCase()} · {ev.activeChapter || ev.activeTab}
+                            </span>
+                          </td>
+                          <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
+                            {ev.durationSeconds > 60 ? `${Math.round(ev.durationSeconds / 60)}m` : `${ev.durationSeconds}s`}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -1211,8 +1389,8 @@ export default function AdminPage() {
                     <span className="text-emerald-400 font-bold">visitor_events (Indexed)</span>
                   </div>
                   <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-slate-400">Live Traffic Telemetry</span>
-                    <span className="text-emerald-400 font-bold">Active Heartbeat (45s)</span>
+                    <span className="text-slate-400">Deduplication Engine</span>
+                    <span className="text-emerald-400 font-bold">visitor_id Persistent Hash</span>
                   </div>
                   <div className="flex justify-between py-1.5">
                     <span className="text-slate-400">Database URL</span>

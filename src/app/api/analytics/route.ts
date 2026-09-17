@@ -45,6 +45,9 @@ export async function POST(req: Request) {
       else if (/safari/i.test(userAgent)) browser = "Safari";
     }
 
+    const timezone = body.timezone || "Asia/Kolkata";
+    const cityRegion = body.cityRegion || (timezone.includes("/") ? timezone.split("/")[1].replace("_", " ") + ", India" : "India");
+
     const eventRecord = {
       visitorId: body.visitorId || `anon_${Math.random().toString(36).substring(2, 10)}`,
       sessionId: body.sessionId || `sess_${Math.random().toString(36).substring(2, 10)}`,
@@ -58,7 +61,17 @@ export async function POST(req: Request) {
       activeSubject: body.activeSubject || "all",
       referrer: body.referrer || "direct",
       durationSeconds: parseInt(body.durationSeconds, 10) || 0,
-      screenResolution: body.screenResolution || "unknown"
+      screenResolution: body.screenResolution || "unknown",
+      studentName: body.studentName || "Student Aspirant",
+      studentXp: parseInt(body.studentXp, 10) || 0,
+      studentStreak: parseInt(body.studentStreak, 10) || 1,
+      studentLevel: parseInt(body.studentLevel, 10) || 1,
+      timezone,
+      cityRegion,
+      networkType: body.networkType || "Broadband/WiFi",
+      hardwareSpecs: body.hardwareSpecs || "",
+      activeChapter: body.activeChapter || "",
+      language: body.language || "en-IN"
     };
 
     if (pool && db) {
@@ -88,7 +101,7 @@ export async function GET(req: Request) {
         .select()
         .from(visitorEvents)
         .orderBy(desc(visitorEvents.createdAt))
-        .limit(500);
+        .limit(600);
 
       allEvents = records.map((r: any) => ({
         id: r.id,
@@ -103,20 +116,32 @@ export async function GET(req: Request) {
         activeSubject: r.activeSubject || "all",
         referrer: r.referrer || "direct",
         durationSeconds: r.durationSeconds || 0,
+        screenResolution: r.screenResolution || "1920x1080",
+        studentName: r.studentName || "Student Aspirant",
+        studentXp: r.studentXp || 0,
+        studentStreak: r.studentStreak || 1,
+        studentLevel: r.studentLevel || 1,
+        timezone: r.timezone || "Asia/Kolkata",
+        cityRegion: r.cityRegion || "India",
+        networkType: r.networkType || "Broadband/WiFi",
+        hardwareSpecs: r.hardwareSpecs || "",
+        activeChapter: r.activeChapter || "",
+        language: r.language || "en-IN",
         createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString()
       }));
     } else {
       allEvents = memoryVisitorEvents;
     }
 
-    // Generate starter sample events if brand new database so admin can immediately visualize metrics
+    // Default sample events if brand new empty database
     if (allEvents.length === 0) {
       const now = Date.now();
+      const mockVid = "v_lsa_student_delhi";
       allEvents = [
         {
           id: "evt_1",
-          visitorId: "v_cbse_delhi_982",
-          sessionId: "s_delhi_1",
+          visitorId: mockVid,
+          sessionId: "sess_4",
           ipAddress: "103.21.124.89 (Delhi)",
           deviceType: "mobile",
           operatingSystem: "Android",
@@ -124,54 +149,124 @@ export async function GET(req: Request) {
           path: "/",
           activeTab: "concepts",
           activeSubject: "science",
-          referrer: "google.com",
-          durationSeconds: 340,
-          createdAt: new Date(now - 3 * 60 * 1000).toISOString()
+          referrer: "whatsapp",
+          durationSeconds: 420,
+          screenResolution: "412x915",
+          studentName: "Aarav Sharma",
+          studentXp: 1850,
+          studentStreak: 4,
+          studentLevel: 3,
+          timezone: "Asia/Kolkata",
+          cityRegion: "Delhi, India",
+          networkType: "5G Mobile Data",
+          hardwareSpecs: "8GB RAM · 8 Cores",
+          activeChapter: "Ch 5 Life Processes",
+          language: "en-IN",
+          createdAt: new Date(now - 4 * 60 * 1000).toISOString()
         },
         {
           id: "evt_2",
-          visitorId: "v_cbse_bissau_112",
-          sessionId: "s_bissau_1",
-          ipAddress: "49.207.211.45 (Rajasthan)",
-          deviceType: "desktop",
-          operatingSystem: "Windows",
+          visitorId: mockVid,
+          sessionId: "sess_3",
+          ipAddress: "103.21.124.89 (Delhi)",
+          deviceType: "mobile",
+          operatingSystem: "Android",
           browser: "Chrome",
           path: "/",
-          activeTab: "chapter_dashboard",
+          activeTab: "questions",
           activeSubject: "math",
           referrer: "direct",
-          durationSeconds: 820,
-          createdAt: new Date(now - 14 * 60 * 1000).toISOString()
+          durationSeconds: 780,
+          screenResolution: "412x915",
+          studentName: "Aarav Sharma",
+          studentXp: 1600,
+          studentStreak: 4,
+          studentLevel: 3,
+          timezone: "Asia/Kolkata",
+          cityRegion: "Delhi, India",
+          networkType: "5G Mobile Data",
+          hardwareSpecs: "8GB RAM · 8 Cores",
+          activeChapter: "Ch 1 Real Numbers",
+          language: "en-IN",
+          createdAt: new Date(now - 75 * 60 * 1000).toISOString()
         },
         {
           id: "evt_3",
-          visitorId: "v_cbse_kolkata_341",
-          sessionId: "s_kolkata_1",
-          ipAddress: "157.34.18.90 (Kolkata)",
+          visitorId: mockVid,
+          sessionId: "sess_2",
+          ipAddress: "103.21.124.89 (Delhi)",
           deviceType: "mobile",
-          operatingSystem: "iOS",
-          browser: "Safari",
+          operatingSystem: "Android",
+          browser: "Chrome",
           path: "/",
           activeTab: "hindi",
           activeSubject: "hindi",
-          referrer: "whatsapp",
-          durationSeconds: 490,
-          createdAt: new Date(now - 45 * 60 * 1000).toISOString()
+          referrer: "direct",
+          durationSeconds: 510,
+          screenResolution: "412x915",
+          studentName: "Aarav Sharma",
+          studentXp: 1400,
+          studentStreak: 4,
+          studentLevel: 2,
+          timezone: "Asia/Kolkata",
+          cityRegion: "Delhi, India",
+          networkType: "WiFi Broadband",
+          hardwareSpecs: "8GB RAM · 8 Cores",
+          activeChapter: "बड़े भाई साहब",
+          language: "en-IN",
+          createdAt: new Date(now - 210 * 60 * 1000).toISOString()
         },
         {
           id: "evt_4",
-          visitorId: "v_cbse_mumbai_554",
-          sessionId: "s_mumbai_1",
-          ipAddress: "115.111.23.4 (Mumbai)",
-          deviceType: "desktop",
-          operatingSystem: "Windows",
-          browser: "Edge",
+          visitorId: mockVid,
+          sessionId: "sess_1",
+          ipAddress: "103.21.124.89 (Delhi)",
+          deviceType: "mobile",
+          operatingSystem: "Android",
+          browser: "Chrome",
           path: "/",
           activeTab: "test_series",
           activeSubject: "sst",
           referrer: "google.com",
-          durationSeconds: 610,
-          createdAt: new Date(now - 110 * 60 * 1000).toISOString()
+          durationSeconds: 320,
+          screenResolution: "412x915",
+          studentName: "Aarav Sharma",
+          studentXp: 1200,
+          studentStreak: 4,
+          studentLevel: 2,
+          timezone: "Asia/Kolkata",
+          cityRegion: "Delhi, India",
+          networkType: "WiFi Broadband",
+          hardwareSpecs: "8GB RAM · 8 Cores",
+          activeChapter: "Ch 1 Europe Nationalism",
+          language: "en-IN",
+          createdAt: new Date(now - 380 * 60 * 1000).toISOString()
+        },
+        {
+          id: "evt_5",
+          visitorId: "v_cbse_kolkata_881",
+          sessionId: "sess_k1",
+          ipAddress: "157.34.18.90 (Kolkata)",
+          deviceType: "desktop",
+          operatingSystem: "Windows",
+          browser: "Edge",
+          path: "/",
+          activeTab: "chapter_dashboard",
+          activeSubject: "science",
+          referrer: "direct",
+          durationSeconds: 640,
+          screenResolution: "1920x1080",
+          studentName: "Diya Sengupta",
+          studentXp: 2100,
+          studentStreak: 7,
+          studentLevel: 4,
+          timezone: "Asia/Kolkata",
+          cityRegion: "Kolkata, India",
+          networkType: "Fiber Broadband",
+          hardwareSpecs: "16GB RAM · 12 Cores",
+          activeChapter: "Ch 6 Control & Coordination",
+          language: "en-IN",
+          createdAt: new Date(now - 25 * 60 * 1000).toISOString()
         }
       ];
     }
@@ -180,10 +275,12 @@ export async function GET(req: Request) {
     const todayStr = now.toISOString().slice(0, 10);
     const fiveMinutesAgo = new Date(now.getTime() - 5 * 60 * 1000);
 
-    const uniqueVisitorIds = new Set<string>();
-    const todayVisitorIds = new Set<string>();
-    const liveVisitorIds = new Set<string>();
-
+    // =========================================================================
+    // DEDUPLICATION & UNIQUE STUDENT PROFILING ENGINE
+    // Group all events by visitorId so 1 user visiting 4 times shows as 1 student
+    // with "4 visits today" and discrete session history!
+    // =========================================================================
+    const studentMap = new Map<string, any>();
     const devices: Record<string, number> = { mobile: 0, desktop: 0, tablet: 0 };
     const oses: Record<string, number> = {};
     const browsers: Record<string, number> = {};
@@ -191,68 +288,139 @@ export async function GET(req: Request) {
     const tabs: Record<string, number> = {};
     const referrers: Record<string, number> = {};
 
-    let totalDuration = 0;
-    let todayVisitsCount = 0;
+    let totalDurationSeconds = 0;
+    let todaySessionsCount = 0;
 
     allEvents.forEach((ev) => {
-      uniqueVisitorIds.add(ev.visitorId);
-
+      const isToday = ev.createdAt.startsWith(todayStr);
       const evDate = new Date(ev.createdAt);
-      if (ev.createdAt.startsWith(todayStr)) {
-        todayVisitsCount++;
-        todayVisitorIds.add(ev.visitorId);
+      const isOnline = evDate >= fiveMinutesAgo;
+
+      if (isToday) todaySessionsCount++;
+
+      // Populate studentMap
+      if (!studentMap.has(ev.visitorId)) {
+        studentMap.set(ev.visitorId, {
+          visitorId: ev.visitorId,
+          studentName: ev.studentName || "Student Aspirant",
+          studentXp: ev.studentXp || 0,
+          studentStreak: ev.studentStreak || 1,
+          studentLevel: ev.studentLevel || 1,
+          deviceType: ev.deviceType || "desktop",
+          operatingSystem: ev.operatingSystem || "Windows",
+          browser: ev.browser || "Chrome",
+          screenResolution: ev.screenResolution || "Unknown",
+          hardwareSpecs: ev.hardwareSpecs || "",
+          networkType: ev.networkType || "Broadband/WiFi",
+          timezone: ev.timezone || "Asia/Kolkata",
+          cityRegion: ev.cityRegion || "India",
+          ipAddress: ev.ipAddress || "127.0.0.1",
+          language: ev.language || "en-IN",
+          visitsToday: isToday ? 1 : 0,
+          totalVisits: 1,
+          totalDurationSeconds: ev.durationSeconds || 0,
+          firstSeen: ev.createdAt,
+          lastActive: ev.createdAt,
+          isOnlineNow: isOnline,
+          subjectsStudied: new Set(ev.activeSubject ? [ev.activeSubject] : []),
+          chaptersStudied: new Set(ev.activeChapter ? [ev.activeChapter] : []),
+          sessions: [ev]
+        });
+      } else {
+        const student = studentMap.get(ev.visitorId);
+        student.totalVisits += 1;
+        if (isToday) student.visitsToday += 1;
+        student.totalDurationSeconds += ev.durationSeconds || 0;
+
+        // Keep latest metadata
+        if (new Date(ev.createdAt) > new Date(student.lastActive)) {
+          student.lastActive = ev.createdAt;
+          student.studentName = ev.studentName || student.studentName;
+          student.studentXp = Math.max(student.studentXp, ev.studentXp || 0);
+          student.studentStreak = Math.max(student.studentStreak, ev.studentStreak || 1);
+          student.studentLevel = Math.max(student.studentLevel, ev.studentLevel || 1);
+          student.deviceType = ev.deviceType || student.deviceType;
+          student.operatingSystem = ev.operatingSystem || student.operatingSystem;
+          student.browser = ev.browser || student.browser;
+          student.hardwareSpecs = ev.hardwareSpecs || student.hardwareSpecs;
+          student.networkType = ev.networkType || student.networkType;
+          student.ipAddress = ev.ipAddress || student.ipAddress;
+        }
+        if (new Date(ev.createdAt) < new Date(student.firstSeen)) {
+          student.firstSeen = ev.createdAt;
+        }
+        if (isOnline) {
+          student.isOnlineNow = true;
+        }
+        if (ev.activeSubject) student.subjectsStudied.add(ev.activeSubject);
+        if (ev.activeChapter) student.chaptersStudied.add(ev.activeChapter);
+        student.sessions.push(ev);
       }
 
-      if (evDate >= fiveMinutesAgo) {
-        liveVisitorIds.add(ev.visitorId);
-      }
-
-      // Device
+      // Aggregate meters
       const d = ev.deviceType || "desktop";
       devices[d] = (devices[d] || 0) + 1;
 
-      // OS
       const o = ev.operatingSystem || "Other";
       oses[o] = (oses[o] || 0) + 1;
 
-      // Browser
       const b = ev.browser || "Other";
       browsers[b] = (browsers[b] || 0) + 1;
 
-      // Subject
       const sub = ev.activeSubject || "all";
       subjects[sub] = (subjects[sub] || 0) + 1;
 
-      // Tab
       const tab = ev.activeTab || "chapter_dashboard";
       tabs[tab] = (tabs[tab] || 0) + 1;
 
-      // Referrer
       const ref = ev.referrer || "direct";
       referrers[ref] = (referrers[ref] || 0) + 1;
 
-      totalDuration += ev.durationSeconds || 0;
+      totalDurationSeconds += ev.durationSeconds || 0;
     });
 
-    const totalVisits = allEvents.length;
-    const avgDuration = totalVisits > 0 ? Math.round(totalDuration / totalVisits) : 0;
+    // Format unique student profiles
+    const uniqueStudents = Array.from(studentMap.values()).map((s) => ({
+      ...s,
+      subjectsStudied: Array.from(s.subjectsStudied),
+      chaptersStudied: Array.from(s.chaptersStudied),
+      totalStudyMinutes: Math.max(1, Math.round(s.totalDurationSeconds / 60))
+    }));
+
+    // Sort students by lastActive descending
+    uniqueStudents.sort((a, b) => new Date(b.lastActive).getTime() - new Date(a.lastActive).getTime());
+
+    const totalUniqueStudents = uniqueStudents.length;
+    const todayUniqueStudents = uniqueStudents.filter((s) => s.visitsToday > 0).length;
+    const liveNowStudents = uniqueStudents.filter((s) => s.isOnlineNow).length;
+    const avgDurationMinutes = totalUniqueStudents > 0
+      ? Math.round(totalDurationSeconds / allEvents.length / 60)
+      : 1;
 
     return NextResponse.json({
       ok: true,
       stats: {
-        totalVisits,
-        uniqueVisitors: uniqueVisitorIds.size,
-        todayVisits: todayVisitsCount,
-        todayUnique: todayVisitorIds.size,
-        liveNow: Math.max(liveVisitorIds.size, 1), // At least 1 (current viewer)
-        avgDurationMinutes: Math.max(1, Math.round(avgDuration / 60)),
+        // High-level deduplicated student counts
+        totalUniqueStudents,
+        todayUniqueStudents: Math.max(todayUniqueStudents, 1),
+        todayTotalSessions: todaySessionsCount,
+        liveNowStudents: Math.max(liveNowStudents, 1),
+        totalEventsCount: allEvents.length,
+        avgDurationMinutes: Math.max(1, avgDurationMinutes),
+
+        // Device & Environment breakdowns
         devices,
         oses,
         browsers,
         subjects,
         tabs,
         referrers,
-        recentVisitors: allEvents.slice(0, 50)
+
+        // Deduplicated student profiles with full visit histories
+        uniqueStudents,
+
+        // Raw chronological log stream
+        recentEvents: allEvents.slice(0, 60)
       }
     });
   } catch (error: any) {
