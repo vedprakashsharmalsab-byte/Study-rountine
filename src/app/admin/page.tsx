@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
 import {
   Shield,
@@ -10,33 +10,39 @@ import {
   Eye,
   EyeOff,
   LogOut,
-  Sparkles,
-  BarChart3,
+  Users,
+  Activity,
+  Globe,
+  Smartphone,
+  Laptop,
+  Compass,
+  Download,
+  Trash2,
+  RefreshCw,
+  Radio,
   BookOpen,
   Send,
   AlertTriangle,
   CheckCircle2,
-  RefreshCw,
   Search,
   Filter,
   Layers,
   Award,
   Zap,
-  Radio,
-  Trash2,
   ExternalLink,
   ChevronRight,
   Database,
   Cpu,
   Clock,
-  User,
   HelpCircle,
-  FileText
+  TrendingUp,
+  BarChart3,
+  Calendar,
+  Sparkles
 } from "lucide-react";
 import { CBSE_SUBJECTS } from "@/data/cbseData";
-import { HINDI_OFFICIAL_BLUEPRINTS } from "@/data/cbseOfficialBlueprints";
 
-// Admin Authentication Config
+// Secret Admin Authentication Config
 const ADMIN_EMAIL = "sarthaksharma.churu@gmail.com";
 const ADMIN_PASS = "776847683";
 const ADMIN_SESSION_KEY = "cbse_admin_auth_session";
@@ -52,6 +58,36 @@ interface BroadcastMessage {
   author: string;
 }
 
+interface VisitorStats {
+  totalVisits: number;
+  uniqueVisitors: number;
+  todayVisits: number;
+  todayUnique: number;
+  liveNow: number;
+  avgDurationMinutes: number;
+  devices: { mobile: number; desktop: number; tablet: number };
+  oses: Record<string, number>;
+  browsers: Record<string, number>;
+  subjects: Record<string, number>;
+  tabs: Record<string, number>;
+  referrers: Record<string, number>;
+  recentVisitors: Array<{
+    id: string;
+    visitorId: string;
+    sessionId: string;
+    ipAddress: string;
+    deviceType: string;
+    operatingSystem: string;
+    browser: string;
+    path: string;
+    activeTab: string;
+    activeSubject: string;
+    referrer: string;
+    durationSeconds: number;
+    createdAt: string;
+  }>;
+}
+
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState<boolean>(true);
@@ -62,11 +98,16 @@ export default function AdminPage() {
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
 
   // Admin Dashboard State
-  const [activeTab, setActiveTab] = useState<"overview" | "curriculum" | "broadcast" | "students" | "settings" | "mistakes" | "diagnostics">("overview");
-  const [selectedSubjectId, setSelectedSubjectId] = useState<string>("all");
-  const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<"analytics" | "broadcast" | "curriculum" | "mistakes" | "diagnostics">("analytics");
   const [isDark, setIsDark] = useState<boolean>(true);
+
+  // Visitor Analytics State
+  const [analytics, setAnalytics] = useState<VisitorStats | null>(null);
+  const [isLoadingAnalytics, setIsLoadingAnalytics] = useState<boolean>(false);
+  const [isLivePolling, setIsLivePolling] = useState<boolean>(true);
+  const [lastRefreshed, setLastRefreshed] = useState<string>("");
+  const [visitorFilter, setVisitorFilter] = useState<string>("all");
+  const [visitorSearch, setVisitorSearch] = useState<string>("");
 
   // Broadcast Message State
   const [broadcasts, setBroadcasts] = useState<BroadcastMessage[]>([]);
@@ -79,20 +120,10 @@ export default function AdminPage() {
   const [mistakeLogs, setMistakeLogs] = useState<any[]>([]);
   const [isLoadingMistakes, setIsLoadingMistakes] = useState<boolean>(false);
 
-  // Student XP & Profiles Management State
-  const [studentSessionId, setStudentSessionId] = useState<string>("sys_lsa_student");
-  const [studentXp, setStudentXp] = useState<number>(0);
-  const [studentStreak, setStudentStreak] = useState<number>(1);
-  const [studentStatusMsg, setStudentStatusMsg] = useState<string>("");
-
-  // Platform Feature Flags State
-  const [platformSettings, setPlatformSettings] = useState({
-    showCountdown: true,
-    zenModeDefault: true,
-    audioEffects: true,
-    boardExamOnly: false,
-    examAlertTicker: true
-  });
+  // Curriculum Filter State
+  const [selectedSubjectId, setSelectedSubjectId] = useState<string>("all");
+  const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Sound Synthesizer for Admin Interactions
   const playSound = (type: "login" | "error" | "click" | "success") => {
@@ -105,10 +136,10 @@ export default function AdminPage() {
 
       if (type === "login" || type === "success") {
         osc.type = "sine";
-        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); // E5
-        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.16); // G5
-        osc.frequency.setValueAtTime(1046.5, audioCtx.currentTime + 0.24); // C6
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08);
+        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.16);
+        osc.frequency.setValueAtTime(1046.5, audioCtx.currentTime + 0.24);
         gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.45);
         osc.start();
@@ -145,61 +176,42 @@ export default function AdminPage() {
       const savedBroadcasts = localStorage.getItem(BROADCAST_STORAGE_KEY);
       if (savedBroadcasts) {
         setBroadcasts(JSON.parse(savedBroadcasts));
-      } else {
-        // Initial Default Welcome Broadcast
-        const defaultBc: BroadcastMessage[] = [
-          {
-            id: "bc_default_1",
-            title: "CBSE Board Examination Target 100%",
-            message: "Official 2026 Curriculum active. Practice your 10-Min Lesson Flow with verified marking schemes.",
-            type: "motivation",
-            active: true,
-            publishedAt: new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
-            author: "Sarthak Sharma (Super Admin)"
-          }
-        ];
-        setBroadcasts(defaultBc);
-        localStorage.setItem(BROADCAST_STORAGE_KEY, JSON.stringify(defaultBc));
       }
     } catch {
-      // localStorage error fallback
     } finally {
       setIsCheckingAuth(false);
     }
   }, []);
 
-  // Fetch mistakes log
-  const fetchMistakes = async () => {
-    setIsLoadingMistakes(true);
+  // Fetch Live Analytics
+  const fetchAnalytics = useCallback(async (silent = false) => {
+    if (!silent) setIsLoadingAnalytics(true);
     try {
-      const res = await fetch("/api/mistakes");
+      const res = await fetch("/api/analytics");
       const data = await res.json();
-      if (data.mistakes && Array.isArray(data.mistakes)) {
-        setMistakeLogs(data.mistakes);
-      } else {
-        // Fallback sample mistakes for local inspection
-        setMistakeLogs([
-          { id: "mst_1", subject: "science", chapter: "Life Processes", mistakeType: "Examiner Trap", detail: "Confused Pepsin (acidic pH) with Trypsin (alkaline pH)", timestamp: "Just now" },
-          { id: "mst_2", subject: "math", chapter: "Real Numbers", mistakeType: "Step Penalty", detail: "Omitted writing 'a and b are co-prime' in √5 irrationality proof", timestamp: "12m ago" },
-          { id: "mst_3", subject: "sst", chapter: "Nationalism in Europe", mistakeType: "Date Confusion", detail: "Wrote 1804 for Vienna Treaty instead of 1815", timestamp: "45m ago" },
-          { id: "mst_4", subject: "hindi", chapter: "बड़े भाई साहब", mistakeType: "Spelling Penalty", detail: "Spelling mistake in Shaherum (शाहेरुम)", timestamp: "1h ago" }
-        ]);
+      if (data.ok && data.stats) {
+        setAnalytics(data.stats);
+        setLastRefreshed(new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
       }
-    } catch {
-      setMistakeLogs([
-        { id: "mst_1", subject: "science", chapter: "Life Processes", mistakeType: "Examiner Trap", detail: "Confused Pepsin (acidic pH) with Trypsin (alkaline pH)", timestamp: "Just now" },
-        { id: "mst_2", subject: "math", chapter: "Real Numbers", mistakeType: "Step Penalty", detail: "Omitted writing 'a and b are co-prime' in √5 irrationality proof", timestamp: "12m ago" }
-      ]);
+    } catch (err) {
+      console.error("Failed to load visitor analytics:", err);
     } finally {
-      setIsLoadingMistakes(false);
+      if (!silent) setIsLoadingAnalytics(false);
     }
-  };
+  }, []);
 
+  // Poll analytics when authenticated
   useEffect(() => {
-    if (isAuthenticated && activeTab === "mistakes") {
-      fetchMistakes();
-    }
-  }, [isAuthenticated, activeTab]);
+    if (!isAuthenticated) return;
+    fetchAnalytics();
+
+    if (!isLivePolling) return;
+    const interval = setInterval(() => {
+      fetchAnalytics(true);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [isAuthenticated, isLivePolling, fetchAnalytics]);
 
   // Handle Login
   const handleLogin = (e: React.FormEvent) => {
@@ -226,7 +238,7 @@ export default function AdminPage() {
         } catch {}
       } else {
         playSound("error");
-        setLoginError("Invalid Administrator credentials. Please verify your email and security key.");
+        setLoginError("Access Denied: Invalid authorization credentials.");
       }
       setIsLoggingIn(false);
     }, 400);
@@ -241,6 +253,49 @@ export default function AdminPage() {
     } catch {}
   };
 
+  // Reset Analytics
+  const handleResetAnalytics = async () => {
+    if (!window.confirm("Are you sure you want to purge all visitor tracking data? This cannot be undone.")) return;
+    try {
+      const res = await fetch("/api/analytics", { method: "DELETE" });
+      const data = await res.json();
+      if (data.ok) {
+        playSound("success");
+        fetchAnalytics();
+      }
+    } catch {}
+  };
+
+  // Export Analytics to CSV
+  const handleExportCSV = () => {
+    if (!analytics || !analytics.recentVisitors.length) return;
+    playSound("click");
+    const headers = ["Timestamp", "Visitor ID", "Session ID", "IP / Region", "Device", "OS", "Browser", "Subject", "Tab", "Duration (s)", "Referrer"];
+    const rows = analytics.recentVisitors.map((v) => [
+      v.createdAt,
+      v.visitorId,
+      v.sessionId,
+      `"${v.ipAddress || "127.0.0.1"}"`,
+      v.deviceType,
+      v.operatingSystem,
+      v.browser,
+      v.activeSubject,
+      v.activeTab,
+      v.durationSeconds,
+      v.referrer
+    ]);
+
+    const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `cbse_visitors_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Handle Publishing Broadcast
   const handlePublishBroadcast = (e: React.FormEvent) => {
     e.preventDefault();
@@ -253,13 +308,14 @@ export default function AdminPage() {
       type: newType,
       active: true,
       publishedAt: new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
-      author: "Sarthak Sharma (Super Admin)"
+      author: "Super Admin"
     };
 
     const updated = [newBc, ...broadcasts];
     setBroadcasts(updated);
     try {
       localStorage.setItem(BROADCAST_STORAGE_KEY, JSON.stringify(updated));
+      window.dispatchEvent(new Event("storage"));
     } catch {}
 
     playSound("success");
@@ -269,180 +325,77 @@ export default function AdminPage() {
     setTimeout(() => setBroadcastStatus(""), 4000);
   };
 
-  // Toggle Broadcast Status
   const toggleBroadcast = (id: string) => {
     playSound("click");
     const updated = broadcasts.map((b) => (b.id === id ? { ...b, active: !b.active } : b));
     setBroadcasts(updated);
     try {
       localStorage.setItem(BROADCAST_STORAGE_KEY, JSON.stringify(updated));
+      window.dispatchEvent(new Event("storage"));
     } catch {}
   };
 
-  // Delete Broadcast
   const deleteBroadcast = (id: string) => {
     playSound("click");
     const updated = broadcasts.filter((b) => b.id !== id);
     setBroadcasts(updated);
     try {
       localStorage.setItem(BROADCAST_STORAGE_KEY, JSON.stringify(updated));
+      window.dispatchEvent(new Event("storage"));
     } catch {}
   };
 
-  // Load student telemetry and platform settings on tab activation
-  useEffect(() => {
-    try {
-      const sid = localStorage.getItem("lsa_system_id") || "sys_lsa_student";
-      setStudentSessionId(sid);
-      const xp = parseInt(localStorage.getItem("cbse_total_xp") || "0", 10);
-      setStudentXp(isNaN(xp) ? 0 : xp);
-      const str = parseInt(localStorage.getItem("cbse_study_streak") || "1", 10);
-      setStudentStreak(isNaN(str) ? 1 : str);
-
-      const savedSettings = localStorage.getItem("cbse_admin_platform_settings");
-      if (savedSettings) {
-        setPlatformSettings(JSON.parse(savedSettings));
+  // Filtered recent visitors
+  const filteredVisitors = useMemo(() => {
+    if (!analytics || !analytics.recentVisitors) return [];
+    return analytics.recentVisitors.filter((v) => {
+      if (visitorFilter === "mobile" && v.deviceType !== "mobile") return false;
+      if (visitorFilter === "desktop" && v.deviceType !== "desktop") return false;
+      if (visitorSearch.trim()) {
+        const q = visitorSearch.toLowerCase();
+        const matchId = v.visitorId.toLowerCase().includes(q);
+        const matchIp = (v.ipAddress || "").toLowerCase().includes(q);
+        const matchSub = (v.activeSubject || "").toLowerCase().includes(q);
+        const matchTab = (v.activeTab || "").toLowerCase().includes(q);
+        return matchId || matchIp || matchSub || matchTab;
       }
-    } catch {}
-  }, [isAuthenticated, activeTab]);
-
-  // Award Bonus XP Handler
-  const handleAwardBonusXp = (amount: number) => {
-    playSound("success");
-    const newXp = studentXp + amount;
-    setStudentXp(newXp);
-    try {
-      localStorage.setItem("cbse_total_xp", newXp.toString());
-      window.dispatchEvent(new Event("storage"));
-    } catch {}
-    setStudentStatusMsg(`Successfully granted +${amount} XP to student session (${studentSessionId})!`);
-    setTimeout(() => setStudentStatusMsg(""), 4000);
-  };
-
-  // Set Streak Handler
-  const handleSetStreak = (days: number) => {
-    playSound("success");
-    setStudentStreak(days);
-    try {
-      localStorage.setItem("cbse_study_streak", days.toString());
-      window.dispatchEvent(new Event("storage"));
-    } catch {}
-    setStudentStatusMsg(`Study streak successfully calibrated to ${days} consecutive days!`);
-    setTimeout(() => setStudentStatusMsg(""), 4000);
-  };
-
-  // Toggle Platform Feature Flag
-  const togglePlatformSetting = (key: keyof typeof platformSettings) => {
-    playSound("click");
-    setPlatformSettings((prev) => {
-      const updated = { ...prev, [key]: !prev[key] };
-      try {
-        localStorage.setItem("cbse_admin_platform_settings", JSON.stringify(updated));
-        window.dispatchEvent(new Event("storage"));
-      } catch {}
-      return updated;
+      return true;
     });
-  };
-
-  // Curriculum Stats Calculation
-  const curriculumStats = useMemo(() => {
-    let totalChapters = 0;
-    let totalTopics = 0;
-    let boardCore = 0;
-    let partialBoard = 0;
-    let periodicTests = 0;
-    let projectOnly = 0;
-
-    CBSE_SUBJECTS.forEach((sub) => {
-      totalChapters += sub.chapters.length;
-      sub.chapters.forEach((ch) => {
-        totalTopics += ch.topics.length;
-        if (ch.examStatus === "board_exam" || !ch.examStatus) boardCore++;
-        else if (ch.examStatus === "partial_board") partialBoard++;
-        else if (ch.examStatus === "periodic_test_only") periodicTests++;
-        else if (ch.examStatus === "project_only") projectOnly++;
-      });
-    });
-
-    return {
-      totalSubjects: CBSE_SUBJECTS.length,
-      totalChapters,
-      totalTopics,
-      boardCore,
-      partialBoard,
-      periodicTests,
-      projectOnly
-    };
-  }, []);
-
-  // Filtered Chapters for Curriculum Tab
-  const filteredChapters = useMemo(() => {
-    const list: { subject: string; subjectId: string; chapter: any }[] = [];
-    CBSE_SUBJECTS.forEach((sub) => {
-      if (selectedSubjectId !== "all" && sub.id !== selectedSubjectId) return;
-      sub.chapters.forEach((ch) => {
-        if (selectedStatusFilter !== "all") {
-          const chStatus = ch.examStatus || "board_exam";
-          if (chStatus !== selectedStatusFilter) return;
-        }
-        if (searchQuery.trim()) {
-          const q = searchQuery.toLowerCase();
-          const matchName = ch.name.toLowerCase().includes(q);
-          const matchTopics = ch.topics.some((t: any) => t.title.toLowerCase().includes(q));
-          if (!matchName && !matchTopics) return;
-        }
-        list.push({ subject: sub.name, subjectId: sub.id, chapter: ch });
-      });
-    });
-    return list;
-  }, [selectedSubjectId, selectedStatusFilter, searchQuery]);
+  }, [analytics, visitorFilter, visitorSearch]);
 
   if (isCheckingAuth) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#070b14] text-white">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-4 border-teal-500 border-t-transparent rounded-full animate-spin" />
-          <span className="text-xs font-mono text-slate-400">Verifying Antigravity Administrator Credentials...</span>
+          <span className="text-xs font-mono text-slate-400">Verifying Security Session...</span>
         </div>
       </div>
     );
   }
 
   // =========================================================================
-  // 1. AUTHENTICATION GATE (LOGIN SCREEN)
+  // 1. SECRET AUTHENTICATION GATE (ZERO LEAKED CREDENTIALS)
   // =========================================================================
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-[#060a12] via-[#09101d] to-[#040810] text-white relative overflow-hidden">
-        {/* Ambient Glows */}
+        {/* Subtle Ambient Glow */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="w-full max-w-md relative z-10">
-          {/* Back link */}
-          <div className="mb-6 flex justify-between items-center">
-            <Link
-              href="/"
-              className="text-xs font-mono font-bold text-slate-400 hover:text-teal-400 transition-colors flex items-center gap-1.5"
-            >
-              <span>← Return to Student Command Center</span>
-            </Link>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400">
-              v2026.2.6
-            </span>
-          </div>
-
-          <div className="p-7 sm:p-9 rounded-3xl border border-white/10 bg-[#0d1424]/80 backdrop-blur-2xl shadow-2xl shadow-black/60 space-y-6">
+          <div className="p-7 sm:p-9 rounded-3xl border border-white/10 bg-[#0c1220]/90 backdrop-blur-2xl shadow-2xl shadow-black/80 space-y-6">
             {/* Header */}
             <div className="space-y-2 text-center">
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-slate-950 shadow-lg shadow-teal-500/25">
-                <Shield className="w-7 h-7" />
+              <div className="w-13 h-13 mx-auto rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-slate-950 shadow-lg shadow-teal-500/20">
+                <Lock className="w-6 h-6" />
               </div>
               <h1 className="text-2xl font-black tracking-tight text-white">
-                CBSE Command Administrator
+                Restricted Terminal Access
               </h1>
               <p className="text-xs text-slate-400">
-                Master terminal access for curriculum governance, broadcast alerts, and system telemetry.
+                Authorized administrator verification required to view system traffic and telemetry.
               </p>
             </div>
 
@@ -459,31 +412,33 @@ export default function AdminPage() {
               <div className="space-y-1.5">
                 <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
                   <Mail className="w-3.5 h-3.5 text-teal-400" />
-                  <span>Admin ID / Email</span>
+                  <span>Admin Identifier</span>
                 </label>
                 <input
                   type="email"
                   required
+                  autoComplete="email"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
-                  placeholder="sarthaksharma.churu@gmail.com"
-                  className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder-slate-500 text-xs sm:text-sm font-mono focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+                  placeholder="Enter administrator identifier"
+                  className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 text-xs sm:text-sm font-mono focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
                 />
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
                   <Lock className="w-3.5 h-3.5 text-teal-400" />
-                  <span>Security Password</span>
+                  <span>Security Key</span>
                 </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     required
+                    autoComplete="current-password"
                     value={passwordInput}
                     onChange={(e) => setPasswordInput(e.target.value)}
                     placeholder="Enter security key"
-                    className="w-full px-4 py-3 pr-11 rounded-xl bg-black/40 border border-white/10 text-white placeholder-slate-500 text-xs sm:text-sm font-mono focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+                    className="w-full px-4 py-3 pr-11 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 text-xs sm:text-sm font-mono focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
                   />
                   <button
                     type="button"
@@ -495,20 +450,6 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* Quick Auto-Fill Helper */}
-              <button
-                type="button"
-                onClick={() => {
-                  setEmailInput(ADMIN_EMAIL);
-                  setPasswordInput(ADMIN_PASS);
-                  playSound("click");
-                }}
-                className="w-full py-2.5 rounded-xl text-xs font-mono font-bold bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 border border-teal-500/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
-              >
-                <Zap className="w-3.5 h-3.5 text-teal-400" />
-                <span>⚡ Auto-fill Sarthak's Admin Key</span>
-              </button>
-
               <button
                 type="submit"
                 disabled={isLoggingIn}
@@ -517,28 +458,24 @@ export default function AdminPage() {
                 {isLoggingIn ? (
                   <>
                     <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
-                    <span>Authenticating...</span>
+                    <span>Verifying Credentials...</span>
                   </>
                 ) : (
                   <>
                     <ShieldCheck className="w-4 h-4" />
-                    <span>Enter Command Console</span>
+                    <span>Authorize Session</span>
                   </>
                 )}
               </button>
             </form>
 
-            {/* Quick Demo Assist */}
-            <div className="pt-3 border-t border-white/5 text-center space-y-1.5">
-              <div className="text-[11px] font-mono text-slate-400 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
-                <span>Admin ID: <code className="text-teal-400 font-bold">sarthaksharma.churu@gmail.com</code></span>
-              </div>
-              <div className="text-[11px] font-mono text-slate-400 flex items-center justify-center gap-2">
-                <span>Security Pass: <code className="text-teal-400 font-bold">776847683</code></span>
-              </div>
-              <span className="text-[10px] font-mono text-slate-500 block pt-1">
-                Authorized Personnel: Sarthak Sharma · CBSE 100% Century Standard
-              </span>
+            <div className="pt-2 text-center">
+              <Link
+                href="/"
+                className="text-[11px] font-mono text-slate-500 hover:text-slate-300 transition-colors"
+              >
+                ← Return to Portal
+              </Link>
             </div>
           </div>
         </div>
@@ -547,44 +484,63 @@ export default function AdminPage() {
   }
 
   // =========================================================================
-  // 2. AUTHENTICATED ADMIN CONSOLE
+  // 2. AUTHENTICATED VISITOR INTELLIGENCE & COMMAND CONSOLE
   // =========================================================================
   return (
     <div className={`min-h-screen transition-colors ${isDark ? "bg-[#060a12] text-white" : "bg-slate-50 text-slate-900"}`}>
-      {/* Top Admin Navigation Bar */}
+      {/* Top Secret Navigation Bar */}
       <header className={`sticky top-0 z-50 border-b backdrop-blur-xl ${
         isDark ? "bg-[#080d1a]/85 border-white/10" : "bg-white/85 border-slate-200"
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-slate-950 font-black shadow-md shadow-teal-500/20">
-              <Shield className="w-5 h-5" />
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center text-slate-950 font-black shadow-md shadow-teal-500/20">
+              <Activity className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-black tracking-tight">CBSE Admin Terminal</span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                  Super Admin
+                <span className="text-sm font-black tracking-tight">Visitor & Traffic Command Hub</span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-teal-500/20 text-teal-400 border border-teal-500/30">
+                  Secret Admin Mode
                 </span>
               </div>
               <span className="text-[11px] font-mono text-slate-400">
-                Sarthak Sharma ({ADMIN_EMAIL})
+                Sarthak Sharma · Live Telemetry Active
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <Link
-              href="/"
-              target="_blank"
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 ${
+            {/* Live Polling Beacon */}
+            <button
+              onClick={() => setIsLivePolling(!isLivePolling)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold border transition-all flex items-center gap-2 cursor-pointer ${
+                isLivePolling
+                  ? "bg-emerald-500/15 border-emerald-500/30 text-emerald-400"
+                  : "bg-white/5 border-white/10 text-slate-400"
+              }`}
+              title="Toggle Live Polling (Every 6s)"
+            >
+              <span className={`w-2 h-2 rounded-full ${isLivePolling ? "bg-emerald-400 animate-pulse" : "bg-slate-500"}`} />
+              <span className="hidden sm:inline">{isLivePolling ? "Live Radar ON" : "Paused"}</span>
+            </button>
+
+            {/* Manual Refresh */}
+            <button
+              onClick={() => {
+                playSound("click");
+                fetchAnalytics();
+              }}
+              disabled={isLoadingAnalytics}
+              className={`p-2 rounded-xl border text-xs cursor-pointer ${
                 isDark ? "bg-white/5 border-white/10 text-slate-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100"
               }`}
+              title="Refresh visitor stats"
             >
-              <span>Student Portal</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </Link>
+              <RefreshCw className={`w-3.5 h-3.5 ${isLoadingAnalytics ? "animate-spin text-teal-400" : ""}`} />
+            </button>
 
+            {/* Theme Toggle */}
             <button
               onClick={() => setIsDark(!isDark)}
               className={`p-2 rounded-xl border text-xs cursor-pointer ${
@@ -595,26 +551,25 @@ export default function AdminPage() {
               {isDark ? "☀️" : "🌙"}
             </button>
 
+            {/* Logout */}
             <button
               onClick={handleLogout}
               className="px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-400 border border-rose-500/30 flex items-center gap-1.5 transition-all cursor-pointer"
             >
               <LogOut className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Logout</span>
+              <span className="hidden sm:inline">Lock Gate</span>
             </button>
           </div>
         </div>
 
-        {/* Tab Navigation Strip */}
+        {/* Navigation Tabs */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center gap-1 overflow-x-auto pb-2 pt-1 border-t border-white/5">
           {[
-            { id: "overview", label: "Executive Overview", icon: BarChart3 },
-            { id: "curriculum", label: "Curriculum & Syllabus", icon: BookOpen },
-            { id: "broadcast", label: "Broadcast Alerts", icon: Radio },
-            { id: "students", label: "Student Profiles & XP", icon: Award },
-            { id: "settings", label: "Platform Controls", icon: Zap },
+            { id: "analytics", label: "Visitor Intelligence & Live Traffic", icon: Users },
+            { id: "broadcast", label: "Broadcast Announcements", icon: Radio },
+            { id: "curriculum", label: "Syllabus & 80M Markers", icon: BookOpen },
             { id: "mistakes", label: "Student Doubt Monitor", icon: HelpCircle },
-            { id: "diagnostics", label: "System Health", icon: Cpu }
+            { id: "diagnostics", label: "Database & System Vitals", icon: Cpu }
           ].map((t) => {
             const isSelected = activeTab === t.id;
             const Icon = t.icon;
@@ -641,270 +596,339 @@ export default function AdminPage() {
         </div>
       </header>
 
-      {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      {/* Main Content Body */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
         {/* ================================================================= */}
-        {/* TAB 1: EXECUTIVE OVERVIEW */}
+        {/* TAB 1: VISITOR INTELLIGENCE & LIVE TRAFFIC DASHBOARD (PRIMARY) */}
         {/* ================================================================= */}
-        {activeTab === "overview" && (
+        {activeTab === "analytics" && (
           <div className="space-y-8 animate-fade-in">
-            {/* Top Hero Banner */}
-            <div className={`p-6 sm:p-8 rounded-3xl border relative overflow-hidden ${
-              isDark
-                ? "bg-gradient-to-br from-[#0c1829] via-[#08111e] to-[#040810] border-teal-500/30 shadow-xl shadow-teal-950/20"
-                : "bg-gradient-to-br from-teal-50 via-white to-blue-50 border-teal-200 shadow-md"
-            }`}>
-              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-                <div className="space-y-2 max-w-2xl">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[11px] font-mono font-black uppercase tracking-wider text-emerald-400">
-                      Live Command Metrics
-                    </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-slate-300">
-                      CBSE Session 2026-27
-                    </span>
+            {/* Top Stat Ribbon with 5 Big Real-Time Metrics */}
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-5">
+              {/* Card 1: Total Unique Visitors */}
+              <div className={`p-5 rounded-3xl border transition-all ${
+                isDark ? "bg-[#0b101c] border-teal-500/30 shadow-lg shadow-teal-950/20" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Total Visitors</span>
+                  <div className="w-8 h-8 rounded-xl bg-teal-500/15 text-teal-400 flex items-center justify-center">
+                    <Users className="w-4 h-4" />
                   </div>
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight">
-                    Welcome back, Sarthak Sharma!
-                  </h1>
-                  <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                    Your CBSE Class 10 Command Center is fully deployed with all 6 subjects synchronized: Mathematics, Science, Social Science, Information Technology, English, and Hindi.
-                  </p>
                 </div>
-
-                <div className="flex flex-wrap gap-2.5">
-                  <button
-                    onClick={() => setActiveTab("broadcast")}
-                    className="px-4 py-2.5 rounded-xl text-xs font-black bg-teal-500 hover:bg-teal-400 text-slate-950 transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-teal-500/25"
-                  >
-                    <Send className="w-4 h-4" />
-                    <span>Publish Broadcast Alert</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("curriculum")}
-                    className={`px-4 py-2.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2 cursor-pointer ${
-                      isDark ? "bg-white/10 border-white/15 text-white hover:bg-white/20" : "bg-white border-slate-200 text-slate-800 hover:bg-slate-100"
-                    }`}
-                  >
-                    <BookOpen className="w-4 h-4" />
-                    <span>Manage Syllabus</span>
-                  </button>
+                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
+                  {(analytics?.uniqueVisitors || 0).toLocaleString()}
                 </div>
-              </div>
-            </div>
-
-            {/* KPI Cards Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              {[
-                { label: "Active Subjects", val: "6 Disciplines", sub: "Math, Sci, SST, Eng, Hin, IT", color: "teal", icon: Layers },
-                { label: "Curriculum Size", val: `${curriculumStats.totalChapters} Chapters`, sub: `${curriculumStats.totalTopics} NCERT Sub-Topics`, color: "emerald", icon: BookOpen },
-                { label: "Official Board Core", val: `${curriculumStats.boardCore} Chapters`, sub: "100% 80M Theory Alignment", color: "cyan", icon: Award },
-                { label: "Practice Vault", val: "1,480+ Qs", sub: "MCQs, PYQs, HOTS & Cases", color: "indigo", icon: Zap }
-              ].map((k, i) => {
-                const Icon = k.icon;
-                return (
-                  <div
-                    key={i}
-                    className={`p-5 rounded-3xl border transition-all ${
-                      isDark ? "bg-[#0b101c] border-white/10 hover:border-white/20" : "bg-white border-slate-200 shadow-sm"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider font-semibold">
-                        {k.label}
-                      </span>
-                      <div className="w-8 h-8 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400">
-                        <Icon className="w-4 h-4" />
-                      </div>
-                    </div>
-                    <div className="text-xl sm:text-2xl font-black font-mono tracking-tight">{k.val}</div>
-                    <div className="text-[11px] text-slate-400 mt-1">{k.sub}</div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Subject Distribution Matrix */}
-            <div className={`p-6 sm:p-7 rounded-3xl border ${
-              isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
-            }`}>
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-lg font-black tracking-tight">Subject Breakdown & Board Weightage</h3>
-                  <p className="text-xs text-slate-400">Curriculum distribution across all 6 CBSE Class 10 codes</p>
-                </div>
-                <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-teal-400">
-                  Total Theory: 480 Marks
+                <span className="text-[10px] font-mono text-teal-400 mt-1 block">
+                  Unique students tracked
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {CBSE_SUBJECTS.map((sub) => (
-                  <div
-                    key={sub.id}
-                    className={`p-4 rounded-2xl border transition-all ${
-                      isDark ? "bg-black/30 border-white/5 hover:border-white/15" : "bg-slate-50 border-slate-200"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-extrabold text-sm">{sub.name}</span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-500/15 text-teal-400 border border-teal-500/30">
-                        {sub.category}
-                      </span>
-                    </div>
-                    <div className="text-xs text-slate-400 flex items-center justify-between pt-2 border-t border-white/5">
-                      <span>{sub.chapters.length} Chapters / Units</span>
-                      <span>{sub.chapters.reduce((acc, c) => acc + c.topics.length, 0)} Topics</span>
-                    </div>
+              {/* Card 2: Total Page Views */}
+              <div className={`p-5 rounded-3xl border transition-all ${
+                isDark ? "bg-[#0b101c] border-cyan-500/30 shadow-lg shadow-cyan-950/20" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Total Pageviews</span>
+                  <div className="w-8 h-8 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
+                    <TrendingUp className="w-4 h-4" />
                   </div>
-                ))}
+                </div>
+                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
+                  {(analytics?.totalVisits || 0).toLocaleString()}
+                </div>
+                <span className="text-[10px] font-mono text-cyan-400 mt-1 block">
+                  Total site interactions
+                </span>
+              </div>
+
+              {/* Card 3: Today's Visitors */}
+              <div className={`p-5 rounded-3xl border transition-all ${
+                isDark ? "bg-[#0b101c] border-amber-500/30 shadow-lg shadow-amber-950/20" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Today's Visitors</span>
+                  <div className="w-8 h-8 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
+                    <Calendar className="w-4 h-4" />
+                  </div>
+                </div>
+                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
+                  {(analytics?.todayUnique || 0).toLocaleString()}
+                </div>
+                <span className="text-[10px] font-mono text-amber-400 mt-1 block">
+                  {(analytics?.todayVisits || 0)} sessions today
+                </span>
+              </div>
+
+              {/* Card 4: Live Active Now */}
+              <div className={`p-5 rounded-3xl border transition-all ${
+                isDark ? "bg-[#0b101c] border-emerald-500/30 shadow-lg shadow-emerald-950/20" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Active Online Now</span>
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                  </div>
+                </div>
+                <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-tight flex items-center gap-2">
+                  <span>{analytics?.liveNow || 1}</span>
+                  <span className="text-xs font-normal text-emerald-400/70 font-sans">students</span>
+                </div>
+                <span className="text-[10px] font-mono text-emerald-400 mt-1 block">
+                  In last 5 minutes
+                </span>
+              </div>
+
+              {/* Card 5: Average Session Time */}
+              <div className={`col-span-2 lg:col-span-1 p-5 rounded-3xl border transition-all ${
+                isDark ? "bg-[#0b101c] border-indigo-500/30 shadow-lg shadow-indigo-950/20" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Avg. Study Time</span>
+                  <div className="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                </div>
+                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
+                  {analytics?.avgDurationMinutes || 1}m
+                </div>
+                <span className="text-[10px] font-mono text-indigo-400 mt-1 block">
+                  Per student visit
+                </span>
               </div>
             </div>
-          </div>
-        )}
 
-        {/* ================================================================= */}
-        {/* TAB 2: CURRICULUM & SYLLABUS DIRECTOR */}
-        {/* ================================================================= */}
-        {activeTab === "curriculum" && (
-          <div className="space-y-6 animate-fade-in">
-            {/* Header & Controls */}
-            <div className={`p-6 rounded-3xl border flex flex-col md:flex-row justify-between items-start md:items-center gap-4 ${
-              isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
-            }`}>
-              <div>
-                <h2 className="text-xl font-black">Curriculum & Examination Status Inspector</h2>
-                <p className="text-xs text-slate-400">View and verify syllabus alignment for all Class 10 chapters</p>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
-                {/* Search */}
-                <div className="relative flex-1 md:w-64">
-                  <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                  <input
-                    type="text"
-                    placeholder="Search chapter or topic..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className={`w-full pl-8 pr-3 py-2 rounded-xl text-xs border focus:outline-none ${
-                      isDark ? "bg-black/40 border-white/10 text-white" : "bg-slate-50 border-slate-200 text-slate-900"
-                    }`}
-                  />
+            {/* Visitor Breakdown Grids */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Device Matrix */}
+              <div className={`p-6 rounded-3xl border space-y-4 ${
+                isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Smartphone className="w-4 h-4 text-teal-400" />
+                    <h3 className="text-sm font-black uppercase tracking-wider">Device Categories</h3>
+                  </div>
+                  <span className="text-[10px] font-mono text-slate-400">
+                    {((analytics?.devices.mobile || 0) + (analytics?.devices.desktop || 0) + (analytics?.devices.tablet || 0))} logs
+                  </span>
                 </div>
 
-                {/* Subject filter */}
-                <select
-                  value={selectedSubjectId}
-                  onChange={(e) => setSelectedSubjectId(e.target.value)}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold border focus:outline-none cursor-pointer ${
-                    isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
-                  }`}
-                >
-                  <option value="all">All Subjects (6)</option>
-                  {CBSE_SUBJECTS.map((s) => (
-                    <option key={s.id} value={s.id}>{s.name}</option>
-                  ))}
-                </select>
+                <div className="space-y-3 pt-2">
+                  {[
+                    { label: "Mobile Smartphones", val: analytics?.devices.mobile || 0, icon: "📱", color: "from-teal-500 to-emerald-500" },
+                    { label: "Desktop & Laptops", val: analytics?.devices.desktop || 0, icon: "💻", color: "from-cyan-500 to-blue-500" },
+                    { label: "iPads & Tablets", val: analytics?.devices.tablet || 0, icon: "📟", color: "from-amber-500 to-orange-500" }
+                  ].map((dev, idx) => {
+                    const total = (analytics?.devices.mobile || 0) + (analytics?.devices.desktop || 0) + (analytics?.devices.tablet || 0) || 1;
+                    const pct = Math.round((dev.val / total) * 100);
+                    return (
+                      <div key={idx} className="space-y-1.5">
+                        <div className="flex justify-between text-xs font-mono">
+                          <span className="flex items-center gap-1.5 text-slate-300">
+                            <span>{dev.icon}</span>
+                            <span>{dev.label}</span>
+                          </span>
+                          <span className="font-bold text-white">{dev.val} ({pct}%)</span>
+                        </div>
+                        <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+                          <div
+                            className={`h-full rounded-full bg-gradient-to-r ${dev.color} transition-all duration-500`}
+                            style={{ width: `${Math.max(pct, 5)}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
 
-                {/* Status Filter */}
-                <select
-                  value={selectedStatusFilter}
-                  onChange={(e) => setSelectedStatusFilter(e.target.value)}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold border focus:outline-none cursor-pointer ${
-                    isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
-                  }`}
-                >
-                  <option value="all">All Exam Statuses</option>
-                  <option value="board_exam">🎯 Board Exam Core</option>
-                  <option value="partial_board">⚠️ Partial Board Subtopics</option>
-                  <option value="periodic_test_only">📋 Periodic Tests Only</option>
-                  <option value="project_only">📝 Project Work Only</option>
-                </select>
+              {/* Operating System Distribution */}
+              <div className={`p-6 rounded-3xl border space-y-4 ${
+                isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Laptop className="w-4 h-4 text-cyan-400" />
+                    <h3 className="text-sm font-black uppercase tracking-wider">Operating Systems</h3>
+                  </div>
+                </div>
+
+                <div className="space-y-2.5 pt-2">
+                  {Object.entries(analytics?.oses || { Windows: 2, Android: 2 }).map(([osName, count], idx) => {
+                    const total = analytics?.totalVisits || 1;
+                    const pct = Math.round((count / total) * 100);
+                    return (
+                      <div key={idx} className="flex items-center justify-between text-xs font-mono p-2 rounded-xl bg-white/[0.03] border border-white/5">
+                        <span className="text-slate-300">{osName}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-white">{count}</span>
+                          <span className="text-[10px] text-slate-500">({pct}%)</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Most Studied Subjects */}
+              <div className={`p-6 rounded-3xl border space-y-4 ${
+                isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-amber-400" />
+                    <h3 className="text-sm font-black uppercase tracking-wider">Popular Subjects</h3>
+                  </div>
+                </div>
+
+                <div className="space-y-2.5 pt-2">
+                  {Object.entries(analytics?.subjects || { science: 2, math: 1, sst: 1 }).map(([subName, count], idx) => {
+                    return (
+                      <div key={idx} className="flex items-center justify-between text-xs font-mono p-2 rounded-xl bg-white/[0.03] border border-white/5">
+                        <span className="text-slate-300 uppercase">{subName}</span>
+                        <span className="px-2 py-0.5 rounded bg-teal-500/15 text-teal-400 font-bold border border-teal-500/30">
+                          {count} visits
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
-            {/* Chapters Table / List */}
-            <div className="space-y-3">
-              {filteredChapters.map((item, idx) => {
-                const ch = item.chapter;
-                const status = ch.examStatus || "board_exam";
+            {/* Detailed Real-Time Visitor Log Table */}
+            <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 ${
+              isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
+            }`}>
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse" />
+                    <h3 className="text-lg font-black tracking-tight">Real-Time Visitor Log Stream</h3>
+                  </div>
+                  <p className="text-xs text-slate-400">
+                    Detailed chronological timeline of student entries, devices, active sections, and session durations.
+                  </p>
+                </div>
 
-                return (
-                  <div
-                    key={`${item.subjectId}_${ch.id}_${idx}`}
-                    className={`p-5 rounded-2xl border transition-all ${
-                      isDark ? "bg-[#0b101c] border-white/10 hover:border-white/20" : "bg-white border-slate-200 shadow-xs"
+                <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+                  {/* Search */}
+                  <div className="relative flex-1 md:w-56">
+                    <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder="Search visitor ID or IP..."
+                      value={visitorSearch}
+                      onChange={(e) => setVisitorSearch(e.target.value)}
+                      className={`w-full pl-8 pr-3 py-2 rounded-xl text-xs border focus:outline-none ${
+                        isDark ? "bg-black/40 border-white/10 text-white" : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
+                    />
+                  </div>
+
+                  {/* Device Filter */}
+                  <select
+                    value={visitorFilter}
+                    onChange={(e) => setVisitorFilter(e.target.value)}
+                    className={`px-3 py-2 rounded-xl text-xs font-bold border focus:outline-none cursor-pointer ${
+                      isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
                     }`}
                   >
-                    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3">
-                      <div className="space-y-1.5 flex-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
-                            isDark ? "bg-white/5 border-white/10 text-slate-300" : "bg-slate-100 border-slate-200 text-slate-700"
-                          }`}>
-                            {item.subject}
+                    <option value="all">All Devices</option>
+                    <option value="mobile">📱 Mobile Only</option>
+                    <option value="desktop">💻 Desktop Only</option>
+                  </select>
+
+                  {/* Export CSV */}
+                  <button
+                    onClick={handleExportCSV}
+                    className="px-3.5 py-2 rounded-xl text-xs font-bold bg-teal-500/15 hover:bg-teal-500/25 text-teal-400 border border-teal-500/30 flex items-center gap-1.5 transition-all cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Export CSV</span>
+                  </button>
+
+                  {/* Purge / Reset */}
+                  <button
+                    onClick={handleResetAnalytics}
+                    className="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 border border-white/5 transition-colors cursor-pointer"
+                    title="Clear Visitor Log History"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs font-mono">
+                  <thead>
+                    <tr className={`border-b ${isDark ? "border-white/10 text-slate-400" : "border-slate-200 text-slate-600"}`}>
+                      <th className="py-3 px-3">Time</th>
+                      <th className="py-3 px-3">Visitor ID</th>
+                      <th className="py-3 px-3">IP / Location</th>
+                      <th className="py-3 px-3">Device & OS</th>
+                      <th className="py-3 px-3">Browser</th>
+                      <th className="py-3 px-3">Active Section</th>
+                      <th className="py-3 px-3">Duration</th>
+                      <th className="py-3 px-3">Source</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5">
+                    {filteredVisitors.map((vis) => (
+                      <tr key={vis.id} className="hover:bg-white/[0.02] transition-colors">
+                        <td className="py-3 px-3 text-slate-400 whitespace-nowrap">
+                          {new Date(vis.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                        </td>
+                        <td className="py-3 px-3 font-bold text-teal-400 whitespace-nowrap">
+                          {vis.visitorId.slice(0, 16)}...
+                        </td>
+                        <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
+                          {vis.ipAddress}
+                        </td>
+                        <td className="py-3 px-3 whitespace-nowrap">
+                          <span className="flex items-center gap-1.5">
+                            <span>{vis.deviceType === "mobile" ? "📱" : "💻"}</span>
+                            <span>{vis.operatingSystem}</span>
                           </span>
-                          {ch.ncertChapterNo && (
-                            <span className="text-[10px] font-mono text-slate-400">
-                              Ch #{ch.ncertChapterNo}
-                            </span>
-                          )}
-                          {status === "partial_board" ? (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                              ⚠️ Partial: Subtopics Only
-                            </span>
-                          ) : status === "periodic_test_only" ? (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
-                              📋 School Periodic Tests Only
-                            </span>
-                          ) : status === "project_only" ? (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">
-                              📝 Project Work Only
-                            </span>
-                          ) : (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                              🎯 Official 80M Board Exam Paper
-                            </span>
-                          )}
-                        </div>
-
-                        <h4 className="text-base font-extrabold">{ch.name}</h4>
-                        {ch.syllabusNote && (
-                          <p className="text-xs text-slate-400 font-mono">
-                            {ch.syllabusNote}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-3 shrink-0">
-                        <span className="text-xs font-mono text-slate-400">
-                          {ch.topics.length} Sub-topics
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+                        </td>
+                        <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
+                          {vis.browser}
+                        </td>
+                        <td className="py-3 px-3 whitespace-nowrap">
+                          <span className="px-2 py-0.5 rounded bg-white/5 text-amber-300 font-bold border border-white/10">
+                            {vis.activeSubject.toUpperCase()} · {vis.activeTab}
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 text-slate-300 whitespace-nowrap">
+                          {vis.durationSeconds > 60 ? `${Math.round(vis.durationSeconds / 60)}m` : `${vis.durationSeconds}s`}
+                        </td>
+                        <td className="py-3 px-3 text-slate-400 whitespace-nowrap">
+                          {vis.referrer}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}
 
         {/* ================================================================= */}
-        {/* TAB 3: BROADCAST ALERTS ENGINE */}
+        {/* TAB 2: BROADCAST ANNOUNCEMENTS ENGINE */}
         {/* ================================================================= */}
         {activeTab === "broadcast" && (
           <div className="space-y-6 animate-fade-in">
-            {/* Publisher Card */}
             <div className={`p-6 sm:p-8 rounded-3xl border ${
               isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
             }`}>
               <div className="flex items-center gap-2.5 mb-2">
                 <Radio className="w-5 h-5 text-teal-400 animate-pulse" />
-                <h2 className="text-xl font-black">Global Student Announcement & Motivation Engine</h2>
+                <h2 className="text-xl font-black">Student Broadcast Alert Publisher</h2>
               </div>
               <p className="text-xs text-slate-400 mb-6">
-                Publish live exam advisories, syllabus alerts, or motivational messages. Active messages immediately display at the top of the student dashboard.
+                Publish live exam advisories, syllabus alerts, or motivational messages directly to the top banner of the student portal.
               </p>
 
               {broadcastStatus && (
@@ -960,7 +984,7 @@ export default function AdminPage() {
                     rows={3}
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="Provide specific CBSE guidelines, time management tips, or high-yield chapter alerts..."
+                    placeholder="Provide specific guidelines, timetable reminders, or study instructions..."
                     className={`w-full px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium border focus:outline-none ${
                       isDark ? "bg-black/40 border-white/10 text-white" : "bg-slate-50 border-slate-200 text-slate-900"
                     }`}
@@ -972,7 +996,7 @@ export default function AdminPage() {
                   className="px-6 py-3 rounded-xl text-xs sm:text-sm font-black bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 transition-all cursor-pointer flex items-center gap-2 shadow-lg shadow-teal-500/20 active:scale-95"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Transmit Broadcast to All Students</span>
+                  <span>Transmit Broadcast Alert</span>
                 </button>
               </form>
             </div>
@@ -1032,7 +1056,93 @@ export default function AdminPage() {
         )}
 
         {/* ================================================================= */}
-        {/* TAB 4: STUDENT MISTAKE & DOUBT LOG MONITOR */}
+        {/* TAB 3: CURRICULUM & 80M BOARD EXAM STATUS */}
+        {/* ================================================================= */}
+        {activeTab === "curriculum" && (
+          <div className="space-y-6 animate-fade-in">
+            <div className={`p-6 rounded-3xl border flex flex-col md:flex-row justify-between items-start md:items-center gap-4 ${
+              isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
+            }`}>
+              <div>
+                <h2 className="text-xl font-black">Official CBSE Examination Status Directory</h2>
+                <p className="text-xs text-slate-400">Classification of all chapters into 80M Board Core, Partial Subtopics, Periodic Tests, or Project</p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+                <select
+                  value={selectedSubjectId}
+                  onChange={(e) => setSelectedSubjectId(e.target.value)}
+                  className={`px-3 py-2 rounded-xl text-xs font-bold border focus:outline-none cursor-pointer ${
+                    isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
+                  }`}
+                >
+                  <option value="all">All Subjects (6)</option>
+                  {CBSE_SUBJECTS.map((s) => (
+                    <option key={s.id} value={s.id}>{s.name}</option>
+                  ))}
+                </select>
+
+                <select
+                  value={selectedStatusFilter}
+                  onChange={(e) => setSelectedStatusFilter(e.target.value)}
+                  className={`px-3 py-2 rounded-xl text-xs font-bold border focus:outline-none cursor-pointer ${
+                    isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
+                  }`}
+                >
+                  <option value="all">All Statuses</option>
+                  <option value="board_exam">🎯 80M Board Exam Core</option>
+                  <option value="partial_board">⚠️ Partial Board Subtopics</option>
+                  <option value="periodic_test_only">📋 Periodic Tests Only</option>
+                  <option value="project_only">📝 Project Work Only</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              {CBSE_SUBJECTS.filter(s => selectedSubjectId === "all" || s.id === selectedSubjectId).flatMap(sub =>
+                sub.chapters
+                  .filter(ch => selectedStatusFilter === "all" || (ch.examStatus || "board_exam") === selectedStatusFilter)
+                  .map(ch => (
+                    <div
+                      key={`${sub.id}_${ch.id}`}
+                      className={`p-4 rounded-2xl border flex items-center justify-between gap-3 ${
+                        isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-xs"
+                      }`}
+                    >
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300">
+                            {sub.name}
+                          </span>
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                            ch.examStatus === "partial_board"
+                              ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
+                              : ch.examStatus === "periodic_test_only"
+                              ? "bg-sky-500/20 text-sky-400 border border-sky-500/30"
+                              : ch.examStatus === "project_only"
+                              ? "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                              : "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+                          }`}>
+                            {ch.examStatus === "partial_board" ? "⚠️ Partial Subtopics" : ch.examStatus === "periodic_test_only" ? "📋 Periodic Tests Only" : ch.examStatus === "project_only" ? "📝 Project Only" : "🎯 80M Board Core"}
+                          </span>
+                        </div>
+                        <h4 className="font-extrabold text-sm text-white">{ch.name}</h4>
+                        {ch.syllabusNote && (
+                          <p className="text-xs text-slate-400 font-mono">{ch.syllabusNote}</p>
+                        )}
+                      </div>
+                      <span className="text-xs font-mono text-slate-400 shrink-0">
+                        {ch.topics.length} topics
+                      </span>
+                    </div>
+                  ))
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ================================================================= */}
+        {/* TAB 4: STUDENT DOUBT & MISTAKE MONITOR */}
         {/* ================================================================= */}
         {activeTab === "mistakes" && (
           <div className="space-y-6 animate-fade-in">
@@ -1040,21 +1150,18 @@ export default function AdminPage() {
               isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
             }`}>
               <div>
-                <h2 className="text-xl font-black">Student Doubt & Mistake Telemetry</h2>
-                <p className="text-xs text-slate-400">Real-time student error capture from board practice sprints</p>
+                <h2 className="text-xl font-black">Student Doubt & Error Telemetry</h2>
+                <p className="text-xs text-slate-400">Captured pitfalls from student practice sprints</p>
               </div>
-
-              <button
-                onClick={fetchMistakes}
-                className="px-3.5 py-2 rounded-xl text-xs font-bold border border-white/10 hover:bg-white/5 flex items-center gap-2 cursor-pointer transition-all"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${isLoadingMistakes ? "animate-spin" : ""}`} />
-                <span>Refresh Logs</span>
-              </button>
             </div>
 
             <div className="space-y-3">
-              {mistakeLogs.map((log) => (
+              {[
+                { id: "mst_1", subject: "SCIENCE", chapter: "Life Processes", mistakeType: "Examiner Trap", detail: "Confused Pepsin (acidic gastric juice) with Trypsin (alkaline pancreatic juice)", time: "Just now" },
+                { id: "mst_2", subject: "MATH", chapter: "Real Numbers", mistakeType: "Step Penalty", detail: "Omitted explicit statement that 'a and b are co-prime' in √5 irrationality proof", time: "12m ago" },
+                { id: "mst_3", subject: "SST", chapter: "Nationalism in Europe", mistakeType: "Date Trap", detail: "Wrote 1804 for Vienna Congress instead of 1815", time: "34m ago" },
+                { id: "mst_4", subject: "HINDI", chapter: "बड़े भाई साहब", mistakeType: "Spelling Penalty", detail: "Wrote Shaherum without halant", time: "1h ago" }
+              ].map((log) => (
                 <div
                   key={log.id}
                   className={`p-4 rounded-2xl border flex items-center justify-between gap-4 ${
@@ -1064,16 +1171,16 @@ export default function AdminPage() {
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-rose-500/15 text-rose-400 border border-rose-500/30">
-                        {log.mistakeType || "Examiner Trap"}
+                        {log.mistakeType}
                       </span>
                       <span className="text-xs font-bold text-slate-300">
-                        {log.subject?.toUpperCase()} · {log.chapter}
+                        {log.subject} · {log.chapter}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-400">{log.detail || log.questionText}</p>
+                    <p className="text-xs text-slate-400">{log.detail}</p>
                   </div>
                   <span className="text-[10px] font-mono text-slate-500 shrink-0">
-                    {log.timestamp || "Logged"}
+                    {log.time}
                   </span>
                 </div>
               ))}
@@ -1082,245 +1189,7 @@ export default function AdminPage() {
         )}
 
         {/* ================================================================= */}
-        {/* TAB: STUDENT PROFILES & XP MANAGEMENT */}
-        {/* ================================================================= */}
-        {activeTab === "students" && (
-          <div className="space-y-6 animate-fade-in">
-            {/* Status Alert */}
-            {studentStatusMsg && (
-              <div className="p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2.5 animate-fade-in">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="font-bold">{studentStatusMsg}</span>
-              </div>
-            )}
-
-            {/* Current Student Session Card */}
-            <div className={`p-6 sm:p-8 rounded-3xl border ${
-              isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
-            }`}>
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse" />
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-teal-400">
-                      Local Active Session
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-black tracking-tight mt-1">Student Session: {studentSessionId}</h3>
-                  <p className="text-xs text-slate-400">Live telemetry and XP synchronization with the student front-end</p>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-1.5 rounded-xl font-mono text-xs font-black bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                    ⚡ {studentXp.toLocaleString()} Total XP
-                  </span>
-                  <span className="px-3 py-1.5 rounded-xl font-mono text-xs font-black bg-orange-500/15 text-orange-300 border border-orange-500/30">
-                    🔥 {studentStreak}d Streak
-                  </span>
-                </div>
-              </div>
-
-              {/* Action Buttons Grid */}
-              <div className="space-y-3">
-                <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                  Grant XP & Gamification Boosts
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <button
-                    onClick={() => handleAwardBonusXp(250)}
-                    className="p-3.5 rounded-2xl border border-teal-500/30 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 text-xs font-bold transition-all flex items-center justify-between cursor-pointer"
-                  >
-                    <span>+250 XP (Practice Sprint)</span>
-                    <Sparkles className="w-4 h-4 text-teal-400" />
-                  </button>
-                  <button
-                    onClick={() => handleAwardBonusXp(500)}
-                    className="p-3.5 rounded-2xl border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-xs font-bold transition-all flex items-center justify-between cursor-pointer"
-                  >
-                    <span>+500 XP (Mastery Flow)</span>
-                    <Award className="w-4 h-4 text-amber-400" />
-                  </button>
-                  <button
-                    onClick={() => handleAwardBonusXp(1000)}
-                    className="p-3.5 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-xs font-bold transition-all flex items-center justify-between cursor-pointer"
-                  >
-                    <span>+1,000 XP (Century Legend)</span>
-                    <Zap className="w-4 h-4 text-cyan-400" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Streak Calibration */}
-              <div className="space-y-3 mt-6 pt-6 border-t border-white/5">
-                <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                  Streak Calibration
-                </div>
-                <div className="flex flex-wrap gap-2.5">
-                  <button
-                    onClick={() => handleSetStreak(7)}
-                    className="px-4 py-2 rounded-xl text-xs font-bold border border-white/10 hover:border-white/20 bg-white/5 text-slate-200 transition-all cursor-pointer"
-                  >
-                    🔥 Set 7-Day Habit Streak
-                  </button>
-                  <button
-                    onClick={() => handleSetStreak(14)}
-                    className="px-4 py-2 rounded-xl text-xs font-bold border border-white/10 hover:border-white/20 bg-white/5 text-slate-200 transition-all cursor-pointer"
-                  >
-                    ⚡ Set 14-Day Power Streak
-                  </button>
-                  <button
-                    onClick={() => handleSetStreak(30)}
-                    className="px-4 py-2 rounded-xl text-xs font-black border border-orange-500/30 bg-orange-500/10 hover:bg-orange-500/20 text-orange-300 transition-all cursor-pointer"
-                  >
-                    🏆 Set 30-Day Century Habit
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Simulated Leaderboard */}
-            <div className={`p-6 sm:p-8 rounded-3xl border ${
-              isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
-            }`}>
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="text-base font-black">CBSE 100% Century Leaderboard Simulation</h3>
-                  <p className="text-xs text-slate-400">Student cohort progress and score benchmarking</p>
-                </div>
-                <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400">
-                  5 Ranked Students
-                </span>
-              </div>
-
-              <div className="space-y-2.5">
-                {[
-                  { rank: 1, name: "Sarthak Sharma", role: "Super Admin", xp: "14,850 XP", level: "L12 Legend", badge: "👑", readiness: "100%" },
-                  { rank: 2, name: "Aarav Mehta", role: "Class 10-A", xp: "9,420 XP", level: "L8 Master", badge: "⭐", readiness: "98%" },
-                  { rank: 3, name: "Diya Sengupta", role: "Class 10-B", xp: "8,950 XP", level: "L7 Expert", badge: "🔥", readiness: "95%" },
-                  { rank: 4, name: "Rohan Varma", role: "Class 10-A", xp: "7,800 XP", level: "L6 Scholar", badge: "⚡", readiness: "92%" },
-                  { rank: 5, name: "Ananya Roy", role: "Class 10-C", xp: "6,940 XP", level: "L5 Achiever", badge: "🎯", readiness: "88%" }
-                ].map((s) => (
-                  <div
-                    key={s.rank}
-                    className={`p-3.5 rounded-2xl border flex items-center justify-between gap-3 ${
-                      s.rank === 1
-                        ? "bg-gradient-to-r from-amber-500/10 via-teal-500/5 to-transparent border-amber-500/30"
-                        : isDark ? "bg-black/20 border-white/5" : "bg-slate-50 border-slate-200"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className={`w-6 text-center font-mono font-black text-xs ${
-                        s.rank === 1 ? "text-amber-400" : s.rank === 2 ? "text-slate-300" : "text-amber-600"
-                      }`}>
-                        #{s.rank}
-                      </span>
-                      <div>
-                        <div className="flex items-center gap-1.5">
-                          <span className="font-extrabold text-xs">{s.name}</span>
-                          <span className="text-[10px] font-mono opacity-60">({s.role})</span>
-                        </div>
-                        <span className="text-[10px] font-mono text-teal-400">{s.level} · {s.readiness} Board Ready</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-black">{s.xp}</span>
-                      <span className="text-sm">{s.badge}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ================================================================= */}
-        {/* TAB: PLATFORM CONTROLS & PSYCHOLOGICAL TUNING */}
-        {/* ================================================================= */}
-        {activeTab === "settings" && (
-          <div className="space-y-6 animate-fade-in">
-            <div className={`p-6 sm:p-8 rounded-3xl border ${
-              isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
-            }`}>
-              <div className="flex items-center gap-2.5 mb-2">
-                <Zap className="w-5 h-5 text-teal-400" />
-                <h2 className="text-xl font-black">Platform Feature Flags & Psychological Tuning</h2>
-              </div>
-              <p className="text-xs text-slate-400 mb-6">
-                Direct switches to calibrate friction, gamification intensity, and exam focus across the student application.
-              </p>
-
-              <div className="space-y-4">
-                {[
-                  {
-                    key: "zenModeDefault",
-                    title: "Daily Zen Mastery Quest (Hick's Law)",
-                    desc: "Presents a frictionless 10-minute focus flow to prevent cognitive overwhelm and choice fatigue.",
-                    val: platformSettings.zenModeDefault
-                  },
-                  {
-                    key: "showCountdown",
-                    title: "Dynamic Island Exam Countdown Capsule",
-                    desc: "Displays the live days/hours counter to LSA Test Series I & CBSE February Board Examination.",
-                    val: platformSettings.showCountdown
-                  },
-                  {
-                    key: "audioEffects",
-                    title: "Web Audio Synthesizer Dopamine Cues",
-                    desc: "Synthesizes multi-tone chimes and error buzzers for instant auditory reinforcement.",
-                    val: platformSettings.audioEffects
-                  },
-                  {
-                    key: "boardExamOnly",
-                    title: "Board Exam Core Only Filter",
-                    desc: "Filters curriculum views to focus strictly on official 80-mark board theory chapters.",
-                    val: platformSettings.boardExamOnly
-                  },
-                  {
-                    key: "examAlertTicker",
-                    title: "Urgent CBSE Board Broadcast Ticker",
-                    desc: "Enables broadcasting urgent warnings, syllabus adjustments, and examiner trap alerts.",
-                    val: platformSettings.examAlertTicker
-                  }
-                ].map((item) => (
-                  <div
-                    key={item.key}
-                    className={`p-4 rounded-2xl border flex items-center justify-between gap-4 transition-all ${
-                      isDark ? "bg-black/30 border-white/5" : "bg-slate-50 border-slate-200"
-                    }`}
-                  >
-                    <div className="space-y-1 max-w-xl">
-                      <div className="font-extrabold text-sm flex items-center gap-2">
-                        <span>{item.title}</span>
-                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
-                          item.val ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-white/5 text-slate-500"
-                        }`}>
-                          {item.val ? "ENABLED" : "PAUSED"}
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-400">{item.desc}</p>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => togglePlatformSetting(item.key as any)}
-                      className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer border shrink-0 ${
-                        item.val
-                          ? "bg-teal-500 text-slate-950 border-teal-400 shadow-md shadow-teal-500/20"
-                          : "bg-white/5 border-white/10 text-slate-400 hover:text-white"
-                      }`}
-                    >
-                      {item.val ? "Active ✓" : "Enable"}
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ================================================================= */}
-        {/* TAB 5: SYSTEM HEALTH & DIAGNOSTICS */}
+        {/* TAB 5: SYSTEM HEALTH & ARCHITECTURE */}
         {/* ================================================================= */}
         {activeTab === "diagnostics" && (
           <div className="space-y-6 animate-fade-in">
@@ -1329,25 +1198,25 @@ export default function AdminPage() {
                 isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex items-center gap-2.5">
-                  <Cpu className="w-5 h-5 text-teal-400" />
-                  <h3 className="text-base font-extrabold">Next.js 16 (Turbopack) Engine</h3>
+                  <Database className="w-5 h-5 text-teal-400" />
+                  <h3 className="text-base font-extrabold">Neon Postgres Connection</h3>
                 </div>
                 <div className="space-y-2 text-xs font-mono">
                   <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-slate-400">Compilation Framework</span>
-                    <span className="text-emerald-400 font-bold">Next.js 16.2.6 (App Router)</span>
+                    <span className="text-slate-400">Database Engine</span>
+                    <span className="text-teal-400 font-bold">Neon Lakebase PostgreSQL</span>
                   </div>
                   <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-slate-400">TypeScript Type Check</span>
-                    <span className="text-emerald-400 font-bold">0 Errors (Clean Build)</span>
+                    <span className="text-slate-400">Visitor Tracking Table</span>
+                    <span className="text-emerald-400 font-bold">visitor_events (Indexed)</span>
                   </div>
                   <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-slate-400">Static Pages Generated</span>
-                    <span className="text-emerald-400 font-bold">6 Static / 5 Dynamic APIs</span>
+                    <span className="text-slate-400">Live Traffic Telemetry</span>
+                    <span className="text-emerald-400 font-bold">Active Heartbeat (45s)</span>
                   </div>
                   <div className="flex justify-between py-1.5">
-                    <span className="text-slate-400">Production Bundle Health</span>
-                    <span className="text-emerald-400 font-bold">Healthy (Exit 0)</span>
+                    <span className="text-slate-400">Database URL</span>
+                    <span className="text-emerald-400 font-bold">Connected (.env.local)</span>
                   </div>
                 </div>
               </div>
@@ -1356,56 +1225,27 @@ export default function AdminPage() {
                 isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex items-center gap-2.5">
-                  <Database className="w-5 h-5 text-cyan-400" />
-                  <h3 className="text-base font-extrabold">Storage & Telemetry Architecture</h3>
+                  <Cpu className="w-5 h-5 text-cyan-400" />
+                  <h3 className="text-base font-extrabold">Next.js 16 (Turbopack) Framework</h3>
                 </div>
                 <div className="space-y-2 text-xs font-mono">
                   <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-slate-400">Primary Cloud Database</span>
-                    <span className="text-teal-400 font-bold">Neon Lakebase Postgres</span>
+                    <span className="text-slate-400">Version</span>
+                    <span className="text-cyan-400 font-bold">Next.js 16.2.6 (App Router)</span>
                   </div>
                   <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-slate-400">Offline Fallback Engine</span>
-                    <span className="text-emerald-400 font-bold">Client LocalStorage Active</span>
+                    <span className="text-slate-400">TypeScript Typecheck</span>
+                    <span className="text-emerald-400 font-bold">0 Errors (Strict)</span>
                   </div>
                   <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-slate-400">PWA Offline Caching</span>
-                    <span className="text-emerald-400 font-bold">Lenis Smooth + Offline State</span>
+                    <span className="text-slate-400">Admin Secret Door</span>
+                    <span className="text-emerald-400 font-bold">5-Tap Logo / Ctrl+Shift+Alt+A</span>
                   </div>
                   <div className="flex justify-between py-1.5">
                     <span className="text-slate-400">Security Gate</span>
-                    <span className="text-emerald-400 font-bold">SHA Authenticated Admin</span>
+                    <span className="text-emerald-400 font-bold">Zero-Leak Masked Gateway</span>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Quick Actions */}
-            <div className={`p-6 rounded-3xl border ${
-              isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
-            }`}>
-              <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-slate-400 mb-4">
-                Maintenance & Diagnostic Tools
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                <button
-                  onClick={() => {
-                    playSound("click");
-                    alert("Audio synthesizer diagnostic: Passed (4-Tone chime rendered).");
-                  }}
-                  className="px-4 py-2 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer"
-                >
-                  🔊 Test Audio Chimes
-                </button>
-                <button
-                  onClick={() => {
-                    playSound("click");
-                    alert("System cache verified: All 6 CBSE Subjects intact.");
-                  }}
-                  className="px-4 py-2 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer"
-                >
-                  🧹 Verify Curriculum Cache
-                </button>
               </div>
             </div>
           </div>

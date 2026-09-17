@@ -144,9 +144,27 @@ slot: text("slot").notNull(),
 export const studyNotes = pgTable("study_notes", {
   id: text("id").primaryKey(),
   systemId: text("system_id").notNull().default("global"),
-title: text("title").notNull(),
+  title: text("title").notNull(),
   content: text("content").notNull(),
   color: text("color").notNull(),
   date: text("date").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const visitorEvents = pgTable("visitor_events", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  visitorId: text("visitor_id").notNull(),
+  sessionId: text("session_id").notNull(),
+  ipAddress: text("ip_address").default("127.0.0.1"),
+  userAgent: text("user_agent"),
+  deviceType: text("device_type").default("desktop"),
+  operatingSystem: text("operating_system").default("Windows"),
+  browser: text("browser").default("Chrome"),
+  path: text("path").default("/"),
+  activeTab: text("active_tab").default("chapter_dashboard"),
+  activeSubject: text("active_subject").default("all"),
+  referrer: text("referrer").default("direct"),
+  durationSeconds: integer("duration_seconds").default(0),
+  screenResolution: text("screen_resolution"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

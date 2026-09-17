@@ -988,6 +988,88 @@ export default function CBSECommandCenter() {
     return () => window.removeEventListener("storage", loadBroadcasts);
   }, []);
 
+  // Secret Admin Portal Backdoor: 5 taps on the logo in 3s OR Ctrl+Shift+Alt+A
+  const [logoTapCount, setLogoTapCount] = useState<number>(0);
+  const logoTapTimerRef = useRef<any>(null);
+
+  const handleLogoSecretTap = () => {
+    setLogoTapCount((prev) => {
+      const next = prev + 1;
+      if (next >= 5) {
+        window.location.href = "/admin";
+        return 0;
+      }
+      return next;
+    });
+    if (logoTapTimerRef.current) clearTimeout(logoTapTimerRef.current);
+    logoTapTimerRef.current = setTimeout(() => {
+      setLogoTapCount(0);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.altKey && (e.key === "a" || e.key === "A")) {
+        e.preventDefault();
+        window.location.href = "/admin";
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Silent Visitor Analytics Beacon (Background telemetry for Admin)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let visitorId = localStorage.getItem("cbse_v_id");
+    if (!visitorId) {
+      visitorId = "v_" + Math.random().toString(36).substring(2, 11) + "_" + Date.now().toString(36);
+      localStorage.setItem("cbse_v_id", visitorId);
+    }
+
+    let sessionId = sessionStorage.getItem("cbse_s_id");
+    if (!sessionId) {
+      sessionId = "s_" + Math.random().toString(36).substring(2, 11);
+      sessionStorage.setItem("cbse_s_id", sessionId);
+    }
+
+    const sessionStart = Date.now();
+
+    const sendBeacon = (duration = 0) => {
+      try {
+        const payload = {
+          visitorId,
+          sessionId,
+          path: window.location.pathname,
+          activeTab,
+          activeSubject: conceptsSubject || "all",
+          referrer: document.referrer ? new URL(document.referrer).hostname : "direct",
+          durationSeconds: duration,
+          screenResolution: `${window.innerWidth}x${window.innerHeight}`
+        };
+
+        fetch("/api/analytics", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          keepalive: true
+        }).catch(() => {});
+      } catch {}
+    };
+
+    // Send initial pageview beacon
+    sendBeacon(0);
+
+    // Heartbeat every 45s while browsing
+    const interval = setInterval(() => {
+      const duration = Math.round((Date.now() - sessionStart) / 1000);
+      sendBeacon(duration);
+    }, 45000);
+
+    return () => clearInterval(interval);
+  }, [activeTab, conceptsSubject]);
+
   // 4-Pillar Master Workspaces Architecture (Clean, Uncluttered, 100% Content Preserved)
   type MasterCategory = "command" | "concepts" | "practice" | "tools";
 
@@ -2368,8 +2450,11 @@ export default function CBSECommandCenter() {
       }`}>
         <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-3">
           
-          {/* BRAND EMBLEM & SQUIRCLE */}
-          <div className="flex items-center gap-2.5 shrink-0">
+          {/* BRAND EMBLEM & SQUIRCLE (Secret 5-Tap Backdoor for Sarthak) */}
+          <div
+            onClick={handleLogoSecretTap}
+            className="flex items-center gap-2.5 shrink-0 cursor-pointer select-none"
+          >
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-orange-600 flex items-center justify-center text-slate-950 font-black text-xs shadow-md shadow-amber-500/30 ring-2 ring-amber-400/40 shrink-0 leading-none">
               100
             </div>
@@ -2482,20 +2567,6 @@ export default function CBSECommandCenter() {
                 ⌘K
               </kbd>
             </button>
-
-            {/* ADMIN CONSOLE LINK */}
-            <a
-              href="/admin"
-              className={`p-1.5 sm:px-2.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 min-h-[36px] touch-manipulation active:scale-95 ${
-                isDark
-                  ? "bg-teal-500/15 border-teal-500/40 text-teal-300 hover:bg-teal-500/25 hover:border-teal-400"
-                  : "bg-teal-50 border-teal-300 text-teal-800 hover:bg-teal-100"
-              }`}
-              title="Admin Command Console (Sarthak Sharma)"
-            >
-              <Shield className="w-3.5 h-3.5 shrink-0 text-teal-400" />
-              <span className="hidden xl:inline text-xs font-bold leading-none">Admin</span>
-            </a>
           </div>
         </div>
       </header>
@@ -6793,21 +6864,8 @@ export default function CBSECommandCenter() {
 
 
       {/* FOOTER */}
-      <footer className={`border-t py-6 text-xs font-mono px-4 sm:px-6 mb-24 md:mb-0 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-          <span>Lakshmipat Singhania Academy Bissau • CBSE Class 10 Command Center (2026–2027)</span>
-          <a
-            href="/admin"
-            className={`px-3 py-1 rounded-full border transition-all inline-flex items-center gap-1.5 font-bold ${
-              isDark
-                ? "bg-teal-500/10 border-teal-500/30 text-teal-400 hover:bg-teal-500/20 hover:border-teal-400/50"
-                : "bg-teal-50 border-teal-200 text-teal-800 hover:bg-teal-100"
-            }`}
-          >
-            <Shield className="w-3.5 h-3.5 text-teal-400" />
-            <span>Admin Console</span>
-          </a>
-        </div>
+      <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-24 md:mb-0 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
+        Lakshmipat Singhania Academy Bissau • CBSE Class 10 Command Center (2026–2027)
       </footer>
 
       {/* =========================================================================
