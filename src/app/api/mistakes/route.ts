@@ -7,6 +7,15 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const systemId = searchParams.get("systemId") || "global";
 
+  if (!db) {
+    return NextResponse.json({
+      ok: false,
+      mode: "offline-localstorage",
+      mistakes: [],
+      message: "Database in offline mode. Operating with client LocalStorage."
+    });
+  }
+
   try {
     const logs = await db.select().from(mistakeLogs).where(eq(mistakeLogs.systemId, systemId)).orderBy(desc(mistakeLogs.createdAt));
     return NextResponse.json({ mistakes: logs });
