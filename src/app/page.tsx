@@ -5275,6 +5275,105 @@ export default function CBSECommandCenter() {
 
           return (
           <div className="space-y-6 animate-fade-in">
+            {/* ===================== ZEN HERO MISSION CARD (1-CLICK FLOW) ===================== */}
+            <div className={`p-6 sm:p-8 rounded-3xl border transition-all relative overflow-hidden ${
+              isDark
+                ? "bg-gradient-to-br from-[#0c1a2e] via-[#091424] to-[#070f1a] border-teal-500/30 shadow-[0_12px_40px_rgba(20,184,166,0.15)]"
+                : "bg-gradient-to-br from-teal-50 via-white to-blue-50 border-teal-200 shadow-md"
+            }`}>
+              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                <div className="space-y-2.5 max-w-2xl">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="px-3 py-0.5 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-emerald-500 text-slate-950">
+                      🎯 Daily Mastery Quest
+                    </span>
+                    <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${
+                      isDark ? "bg-teal-950/60 text-teal-300 border-teal-500/30" : "bg-teal-100 text-teal-900 border-teal-300"
+                    }`}>
+                      {activeSubject.name} · Chapter {ncertNum}
+                    </span>
+                  </div>
+                  <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                    Ready to conquer {activeChapter.name}?
+                  </h1>
+                  <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                    Experience the unified studio: visual theory, embedded vector organ schematics, mandatory lab activities, and an instant 3-minute board practice sprint. Zero distractions, pure flow.
+                  </p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0">
+                  <a
+                    href={getTabHref("concepts", commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math", ncertNum || 1)}
+                    onClick={(e) => {
+                      const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
+                      handleNavClick(e, "concepts", {
+                        subject: targetSub,
+                        chapter: ncertNum || 1,
+                        customAction: () => {
+                          setConceptsSubject(targetSub);
+                          setConceptsChapterNo(ncertNum || 1);
+                        }
+                      });
+                    }}
+                    className="px-6 py-3.5 sm:py-4 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2.5 shadow-xl shadow-teal-500/25 active:scale-95 touch-manipulation"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>▶ Start 10-Min Lesson Flow</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 5-SUBJECT STUDIO QUICK SELECTOR */}
+              <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center gap-2">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 mr-1">
+                  Choose Subject:
+                </span>
+                {[
+                  { id: "math", label: "📐 Maths", chCount: 14 },
+                  { id: "science", label: "🧪 Science", chCount: 13 },
+                  { id: "sst", label: "🌍 SST", chCount: 10 },
+                  { id: "english", label: "📖 English", chCount: "Code 184" },
+                  { id: "hindi", label: "🇮🇳 Hindi", chCount: "Code 085" }
+                ].map((s) => {
+                  const isSelected = commandSubjectId === s.id;
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => {
+                        playSound("click");
+                        setCommandSubjectId(s.id);
+                        const sub = CBSE_SUBJECTS.find((subItem) => subItem.id === s.id);
+                        if (sub && sub.chapters.length > 0) {
+                          setCommandChapterId(sub.chapters[0].id);
+                          const chNo = sub.chapters[0].ncertChapterNo || 1;
+                          const subjectType = s.id === "science" ? "science" : s.id === "sst" ? "sst" : s.id === "english" ? "english" : "math";
+                          setActiveVaultSubject(subjectType);
+                          setActiveVaultChapter(chNo);
+                          loadChapterData(chNo, false, subjectType);
+                        }
+                      }}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 border ${
+                        isSelected
+                          ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-md shadow-teal-500/20"
+                          : isDark
+                          ? "bg-white/5 border-white/10 text-slate-300 hover:text-white hover:bg-white/10"
+                          : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100"
+                      }`}
+                    >
+                      <span>{s.label}</span>
+                      <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                        isSelected ? "bg-slate-950/20 text-slate-950" : "bg-white/10 text-slate-400"
+                      }`}>
+                        {s.chCount}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             <div className={`p-5 sm:p-8 rounded-3xl border transition-colors ${
               isDark ? "bg-[#121212]/80 backdrop-blur-2xl border-white/10" : "bg-white border-black/[0.06] shadow-xs"
             }`}>
@@ -5373,6 +5472,119 @@ export default function CBSECommandCenter() {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              {/* 4-MODE CHAPTER STUDIO STRIP (1-CLICK FLOW) */}
+              <div className="flex flex-wrap items-center gap-2 pt-4 pb-2 border-b border-white/10">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mr-1">
+                  Studio Flow:
+                </span>
+                <a
+                  href={getTabHref("concepts", commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math", ncertNum || 1)}
+                  onClick={(e) => {
+                    const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
+                    handleNavClick(e, "concepts", {
+                      subject: targetSub,
+                      chapter: ncertNum || 1,
+                      customAction: () => {
+                        setConceptsSubject(targetSub);
+                        setConceptsChapterNo(ncertNum || 1);
+                      }
+                    });
+                  }}
+                  className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/30"
+                >
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span>1. Visual Theory</span>
+                </a>
+
+                {commandSubjectId === "science" && (
+                  <a
+                    href={getTabHref("diagrams")}
+                    onClick={(e) => {
+                      handleNavClick(e, "diagrams", {
+                        customAction: () => {
+                          setActiveTab("diagrams");
+                        }
+                      });
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30"
+                  >
+                    <Compass className="w-3.5 h-3.5" />
+                    <span>2. Diagrams & Anatomy</span>
+                  </a>
+                )}
+
+                {commandSubjectId === "science" && (
+                  <a
+                    href={getTabHref("activities")}
+                    onClick={(e) => {
+                      handleNavClick(e, "activities", {
+                        customAction: () => {
+                          setActiveTab("activities");
+                        }
+                      });
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 border border-indigo-500/30"
+                  >
+                    <Beaker className="w-3.5 h-3.5" />
+                    <span>3. Lab Experiments</span>
+                  </a>
+                )}
+
+                {commandSubjectId === "math" && (
+                  <a
+                    href={getTabHref("theorems")}
+                    onClick={(e) => {
+                      handleNavClick(e, "theorems", {
+                        customAction: () => {
+                          setActiveTab("theorems");
+                        }
+                      });
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30"
+                  >
+                    <Award className="w-3.5 h-3.5" />
+                    <span>2. Mandatory Proofs</span>
+                  </a>
+                )}
+
+                {commandSubjectId === "sst" && (
+                  <a
+                    href={getTabHref("timelines")}
+                    onClick={(e) => {
+                      handleNavClick(e, "timelines", {
+                        customAction: () => {
+                          setTimelinesChapterKey(ncertNum === 1 ? "ch1_europe" : "ch2_india");
+                        }
+                      });
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30"
+                  >
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>2. Metro Timelines</span>
+                  </a>
+                )}
+
+                <a
+                  href={getTabHref("questions", commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math", ncertNum || 1)}
+                  onClick={(e) => {
+                    const targetSub = commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
+                    handleNavClick(e, "questions", {
+                      subject: targetSub,
+                      chapter: ncertNum || 1,
+                      customAction: () => {
+                        setActiveVaultSubject(targetSub as any);
+                        setActiveVaultChapter(ncertNum || 1);
+                        loadChapterData(ncertNum || 1, false, targetSub as any);
+                      }
+                    });
+                  }}
+                  className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 sm:ml-auto"
+                >
+                  <Zap className="w-3.5 h-3.5" />
+                  <span>4. Practice Vault →</span>
+                </a>
               </div>
 
               {/* Row 2: Apple Activity-Style Metric Widgets (Zero Overlapping) */}

@@ -40,6 +40,8 @@ import {
   ExternalLink,
   Image as ImageIcon,
 } from "lucide-react";
+import BiologyVisualSchematic from "@/components/BiologyVisualSchematics";
+import { getChapterQuestions } from "@/data/chapters";
 import { SCIENCE_CHAPTER_CONCEPTS, getScienceChapter, type ScienceChapterConcept } from "@/data/scienceConcepts";
 
 interface ScienceConceptsHubViewProps {
@@ -188,6 +190,19 @@ function getSectionDiagramAssets(chapterNo: number, sectionId: string, heading: 
   return [];
 }
 
+function getBioSchematicId(diagId: string): string {
+  switch (diagId) {
+    case "diag_bio_digestive_system": return "bio_alimentary_canal";
+    case "diag_bio_respiratory_system": return "bio_respiratory_system";
+    case "diag_bio_heart_circulation": return "bio_heart_double_circulation";
+    case "diag_bio_excretion_nephron": return "bio_excretion_nephron";
+    case "diag_bio_neuron_reflex_arc": return "bio_neuron_reflex_arc";
+    case "diag_bio_flower_pollen": return "bio_flower_anatomy";
+    case "diag_bio_mendel_crosses": return "bio_mendel_crosses";
+    default: return diagId;
+  }
+}
+
 function getSectionMasterDiagram(chapterNo: number, sectionId: string, heading: string): ScienceDiagram | undefined {
   const h = heading.toLowerCase();
   const s = sectionId.toLowerCase();
@@ -195,6 +210,9 @@ function getSectionMasterDiagram(chapterNo: number, sectionId: string, heading: 
   if (chapterNo === 5) {
     if (s.includes("digest") || s.includes("nutrit") || h.includes("digest") || h.includes("nutrit") || h.includes("alimentary")) {
       return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_digestive_system");
+    }
+    if (s.includes("respirat") || s.includes("lung") || s.includes("breath") || h.includes("respirat") || h.includes("lung") || h.includes("breath") || h.includes("trachea")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_respiratory_system");
     }
     if (s.includes("circulat") || s.includes("heart") || s.includes("transport") || h.includes("circulat") || h.includes("heart") || h.includes("transport")) {
       return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_heart_circulation");
@@ -249,7 +267,16 @@ export default function ScienceConceptsHubView({
   const [activeBioPin, setActiveBioPin] = useState<string | null>(null);
   const [expandedSectionIds, setExpandedSectionIds] = useState<Record<string, boolean>>({});
 
+  // 3-Minute Dopamine Board Sprint State
+  const [sprintAnswers, setSprintAnswers] = useState<Record<string, number>>({});
+  const [sprintRevealed, setSprintRevealed] = useState<Record<string, boolean>>({});
+
   const currentChNo = isEmbeddedInCommand && activeChapterNo !== undefined ? activeChapterNo : selectedChapterNo;
+
+  const chapterSprintQuestions = useMemo(() => {
+    const qs = getChapterQuestions(currentChNo, "science");
+    return qs.filter(q => q.options && q.options.length > 0).slice(0, 3);
+  }, [currentChNo]);
 
   useEffect(() => {
     if (activeChapterNo !== undefined) {
@@ -852,6 +879,17 @@ export default function ScienceConceptsHubView({
                                 {bioDiagram.description}
                               </p>
 
+                              {/* Interactive Anatomical SVG Vector Schematic */}
+                              <div className={`w-full my-3 overflow-hidden rounded-2xl border transition-all ${
+                                isDark ? "bg-[#060a14] border-white/10" : "bg-white border-slate-200 shadow-sm"
+                              }`}>
+                                <BiologyVisualSchematic
+                                  id={getBioSchematicId(bioDiagram.id)}
+                                  title={bioDiagram.title}
+                                  isDark={isDark}
+                                />
+                              </div>
+
                               {/* Interactive Anatomical Labels */}
                               {bioDiagram.labels && bioDiagram.labels.length > 0 && (
                                 <div className="space-y-2 pt-2 border-t border-white/5">
@@ -1003,6 +1041,155 @@ export default function ScienceConceptsHubView({
           })
         )}
       </div>
+
+      {/* =========================================================================
+          DOPAMINE PRACTICE SPRINT: 3-MINUTE RAPID BOARD CHECK (+XP REWARD)
+          ========================================================================= */}
+      {chapterSprintQuestions.length > 0 && (
+        <div className={`p-6 sm:p-8 rounded-3xl border space-y-5 my-6 transition-all ${
+          isDark
+            ? "bg-gradient-to-br from-[#081326] via-[#0b172a] to-[#060e1d] border-teal-500/30 shadow-[0_12px_40px_rgba(20,184,166,0.12)]"
+            : "bg-gradient-to-br from-teal-50/90 via-white to-emerald-50/80 border-teal-300 shadow-md"
+        }`}>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-emerald-500 text-slate-950">
+                  3-Minute Dopamine Sprint
+                </span>
+                <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${
+                  isDark ? "bg-teal-950/60 text-teal-300 border-teal-500/30" : "bg-teal-100 text-teal-900 border-teal-300"
+                }`}>
+                  Chapter {currentChNo} Board Mastery
+                </span>
+              </div>
+              <h3 className={`text-xl sm:text-2xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                Lock In What You Just Learned (+50 XP)
+              </h3>
+              <p className={`text-xs ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
+                Answer 3 quick board questions. Instant feedback, no penalty, high dopamine!
+              </p>
+            </div>
+
+            <div className={`px-4 py-2 rounded-2xl border flex items-center gap-2 shrink-0 ${
+              isDark ? "bg-black/40 border-white/10" : "bg-white border-slate-200 shadow-xs"
+            }`}>
+              <Flame className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-mono font-bold text-amber-400">
+                Sprint Score: {Object.keys(sprintAnswers).filter(id => {
+                  const q = chapterSprintQuestions.find(item => item.id === id);
+                  return q && sprintAnswers[id] === q.correctOption;
+                }).length} / {chapterSprintQuestions.length} Correct
+              </span>
+            </div>
+          </div>
+
+          {/* Sprint Questions Grid */}
+          <div className="space-y-4 pt-2">
+            {chapterSprintQuestions.map((q, qIdx) => {
+              const selectedOpt = sprintAnswers[q.id];
+              const isAnswered = selectedOpt !== undefined;
+              const isCorrect = isAnswered && selectedOpt === q.correctOption;
+
+              return (
+                <div
+                  key={q.id}
+                  className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                    isCorrect
+                      ? isDark
+                        ? "bg-emerald-950/25 border-emerald-500/50 shadow-xs"
+                        : "bg-emerald-50 border-emerald-300 shadow-xs"
+                      : isAnswered
+                      ? isDark
+                        ? "bg-rose-950/20 border-rose-500/40"
+                        : "bg-rose-50 border-rose-300"
+                      : isDark
+                      ? "bg-black/35 border-white/10 hover:border-white/20"
+                      : "bg-white border-slate-200 shadow-2xs hover:border-slate-300"
+                  }`}
+                >
+                  <div className="flex items-start gap-3 mb-3">
+                    <span className={`w-6 h-6 rounded-xl flex items-center justify-center text-xs font-mono font-black shrink-0 ${
+                      isCorrect
+                        ? "bg-emerald-500 text-slate-950"
+                        : isAnswered
+                        ? "bg-rose-500 text-white"
+                        : isDark
+                        ? "bg-white/10 text-white"
+                        : "bg-slate-200 text-slate-800"
+                    }`}>
+                      {qIdx + 1}
+                    </span>
+                    <div className={`flex-1 text-xs sm:text-sm font-semibold leading-relaxed ${isDark ? "text-slate-200" : "text-slate-900"}`}>
+                      <PremiumMathRenderer content={q.question} isDark={isDark} />
+                    </div>
+                  </div>
+
+                  {/* Options */}
+                  {q.options && q.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
+                      {q.options.map((opt, optIdx) => {
+                        const isThisSelected = selectedOpt === optIdx;
+                        const isThisCorrect = optIdx === q.correctOption;
+
+                        return (
+                          <button
+                            key={optIdx}
+                            disabled={isAnswered}
+                            onClick={() => {
+                              setSprintAnswers(prev => ({ ...prev, [q.id]: optIdx }));
+                            }}
+                            className={`p-3 rounded-xl border text-left text-xs transition-all cursor-pointer flex items-start gap-2 ${
+                              isAnswered
+                                ? isThisCorrect
+                                  ? "bg-emerald-500/20 border-emerald-500 text-emerald-300 font-bold shadow-xs"
+                                  : isThisSelected
+                                  ? "bg-rose-500/20 border-rose-500 text-rose-300"
+                                  : "opacity-40 border-transparent text-slate-500"
+                                : isDark
+                                ? "bg-white/5 border-white/10 hover:border-teal-400/50 hover:bg-white/10 text-slate-200"
+                                : "bg-slate-50 border-slate-200 hover:border-teal-500 hover:bg-slate-100 text-slate-800"
+                            }`}
+                          >
+                            <span className="font-mono font-bold uppercase text-[10px] opacity-70">
+                              {String.fromCharCode(65 + optIdx)}.
+                            </span>
+                            <span className="flex-1">{opt}</span>
+                            {isAnswered && isThisCorrect && <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Instant Feedback Callout */}
+                  {isAnswered && (
+                    <div className="mt-3 pt-3 border-t border-white/10 space-y-1.5 animate-fade-in text-xs">
+                      {isCorrect ? (
+                        <p className="text-emerald-400 font-bold flex items-center gap-1.5">
+                          <CheckCircle2 className="w-4 h-4" /> Correct! +25 XP awarded.
+                        </p>
+                      ) : (
+                        <p className="text-rose-400 font-bold flex items-center gap-1.5">
+                          <AlertTriangle className="w-4 h-4" /> Incorrect. Correct Answer: {q.answer || `Option ${String.fromCharCode(65 + (q.correctOption || 0))}`}
+                        </p>
+                      )}
+                      {q.examinerNote && (
+                        <p className={`text-[11px] leading-relaxed p-2.5 rounded-xl border ${
+                          isDark ? "bg-amber-500/10 border-amber-500/20 text-amber-200" : "bg-amber-50 border-amber-200 text-amber-900"
+                        }`}>
+                          <strong>💡 CBSE Examiner Trap:</strong> {q.examinerNote}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* ============= CHAPTER NAV FOOTER ============= */}
       <div className={`p-5 sm:p-6 rounded-3xl border flex flex-col sm:flex-row items-center justify-between gap-4 ${

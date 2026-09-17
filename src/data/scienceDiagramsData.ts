@@ -455,6 +455,38 @@ export const SCIENCE_DIAGRAMS_MASTER: ScienceDiagram[] = [
   },
 
   // ==========================================
+  // 7B. BIOLOGY LIFE PROCESSES: HUMAN RESPIRATORY SYSTEM
+  // ==========================================
+  {
+    id: "diag_bio_respiratory_system",
+    title: "Human Respiratory System",
+    chapterNo: 5,
+    chapterName: "Life Processes",
+    category: "Biology Life Processes",
+    boardMarks: 5,
+    boardFrequency: "92% Recurrence (CBSE 2024, 2022 Term 2, 2020, 2017)",
+    ncertFigureRef: "NCERT Class 10 Science, Figure 5.9 (Page 90)",
+    description: "Complete anatomical view of human respiratory tract: nasal passage, pharynx, larynx, trachea with C-shaped rings of cartilage, primary bronchi, branching bronchioles, alveolar sacs, lungs, and diaphragm.",
+    diagramType: "svg_biological_anatomy",
+    labels: [
+      { id: "lbl_trachea", name: "Trachea (Windpipe)", description: "Conducts air towards bronchi. Supported by C-shaped cartilaginous rings preventing collapse during negative pressure inhalation.", boardSignificance: "Cartilaginous rings prevent collapse (+1 Mark)." },
+      { id: "lbl_bronchi", name: "Bronchi & Bronchioles", description: "Bifurcates into left and right primary bronchi, subdividing into extensive arborising bronchiole network.", boardSignificance: "Conveys air into all lung lobes." },
+      { id: "lbl_alveoli", name: "Alveoli (Alveolar Sacs)", description: "Thin-walled balloon-like terminal sacs surrounded by dense capillary network. Monolayer epithelium (~0.2 μm) allows rapid O2 and CO2 diffusion.", boardSignificance: "Enormous surface area (~80 m²) for gas exchange." },
+      { id: "lbl_diaphragm", name: "Diaphragm", description: "Muscular partition between thoracic and abdominal cavities. Contracts (flattens) during inhalation to increase thoracic volume; relaxes (dome-shaped) during exhalation.", boardSignificance: "Drives mechanical ventilation." }
+    ],
+    markingPoints: [
+      "Trachea with rings of cartilage and branching bronchi (+1.5 Marks)",
+      "Lobes of lungs with alveolar sac magnification (+1.5 Marks)",
+      "Diaphragm and correct labeling of 4 key organs (+2 Marks)"
+    ],
+    examinerTraps: [
+      "Omitting C-shaped rings of cartilage on trachea costs 1 mark on CBSE boards.",
+      "Drawing lungs as empty balloons without internal bronchiole branching.",
+      "Drawing diaphragm flat during exhalation (it must be dome-shaped upwards)!"
+    ]
+  },
+
+  // ==========================================
   // 8. BIOLOGY LIFE PROCESSES: HUMAN HEART & DOUBLE CIRCULATION
   // ==========================================
   {
