@@ -33,7 +33,6 @@ import {
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import BiologyVisualSchematic from "@/components/BiologyVisualSchematics";
-import PhysicsSVGDiagram from "@/components/PhysicsSVGDiagrams";
 import {
   SCIENCE_DIAGRAMS_MASTER,
   NCERT_PHYSICS_DIAGRAMS_VAULT,
@@ -486,35 +485,23 @@ export default function ScienceDiagramsView({
                       setZoomScale(1);
                     }
                   }}
-                  className={`relative border-b p-2 min-h-[220px] max-h-[260px] flex items-center justify-center cursor-pointer group touch-manipulation ${isDark ? "bg-[#07090e] border-white/10" : "bg-white border-slate-200"}`}
+                  className="relative bg-white border-b border-slate-200 p-3.5 min-h-[220px] max-h-[240px] flex items-center justify-center cursor-pointer group touch-manipulation"
                 >
-                  {(() => {
-                    // Try SVG first — if the component returns null, fall back to JPEG
-                    const svgDiagram = <PhysicsSVGDiagram id={diag.id} isDark={isDark} />;
-                    if (svgDiagram.type === PhysicsSVGDiagram) {
-                      return (
-                        <div className="w-full transition-transform duration-200 group-hover:scale-[1.02]">
-                          {svgDiagram}
-                        </div>
-                      );
-                    }
-                    // PhysicsSVGDiagram returns null for unknown IDs — use image
-                    return imageErrorMap[diag.id] ? (
-                      <div className="flex flex-col items-center justify-center p-6 text-center space-y-2 text-slate-500 min-h-[180px]">
-                        <Compass className="w-10 h-10 text-cyan-500 opacity-60 animate-pulse" />
-                        <span className="text-xs font-bold text-slate-700">{diag.title}</span>
-                        <span className="text-[10px] text-slate-400 font-mono">Official NCERT Visual Asset</span>
-                      </div>
-                    ) : (
-                      <img
-                        src={diag.imageUrl}
-                        alt={diag.imageAlt}
-                        onError={() => setImageErrorMap((prev) => ({ ...prev, [diag.id]: true }))}
-                        className="max-h-[210px] w-auto max-w-full object-contain transition-transform duration-200 group-hover:scale-[1.03]"
-                        loading="lazy"
-                      />
-                    );
-                  })()}
+                  {imageErrorMap[diag.id] ? (
+                    <div className="flex flex-col items-center justify-center p-6 text-center space-y-2 text-slate-500 min-h-[180px]">
+                      <Compass className="w-10 h-10 text-cyan-500 opacity-60 animate-pulse" />
+                      <span className="text-xs font-bold text-slate-700">{diag.title}</span>
+                      <span className="text-[10px] text-slate-400 font-mono">Official NCERT Visual Asset</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={diag.imageUrl}
+                      alt={diag.imageAlt}
+                      onError={() => setImageErrorMap((prev) => ({ ...prev, [diag.id]: true }))}
+                      className="max-h-[190px] w-auto max-w-full object-contain transition-transform duration-200 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                  )}
 
                   {/* TOP BADGES */}
                   <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 pointer-events-none">
@@ -1752,36 +1739,26 @@ export default function ScienceDiagramsView({
 
             {/* MODAL BODY (CRISP WHITE CANVAS + CRITERIA) */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
-              {/* SVG DIAGRAM DISPLAY — sharp at any zoom, falls back to JPEG */}
-              <div className={`rounded-2xl border overflow-auto flex items-center justify-center min-h-[360px] ${isDark ? "bg-[#07090e] border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                <div
-                  style={{
-                    transform: `scale(${zoomScale})`,
-                    transformOrigin: "top center",
-                    transition: "transform 0.15s ease",
-                    width: "100%",
-                    padding: "12px",
-                  }}
-                >
-                  <PhysicsSVGDiagram id={activeZoomAsset.id} isDark={isDark} />
-                  {/* Fallback JPEG if SVG returned null (shouldn't happen for vault items) */}
-                  {!PhysicsSVGDiagram && (
-                    imageErrorMap[activeZoomAsset.id] ? (
-                      <div className="flex flex-col items-center justify-center p-8 text-center space-y-3">
-                        <Compass className="w-16 h-16 text-cyan-500 opacity-80" />
-                        <h4 className="text-base font-bold">{activeZoomAsset.title}</h4>
-                        <p className="text-xs text-slate-500 max-w-md">{activeZoomAsset.keyRule}</p>
-                      </div>
-                    ) : (
-                      <img
-                        src={activeZoomAsset.imageUrl}
-                        alt={activeZoomAsset.imageAlt}
-                        onError={() => setImageErrorMap((prev) => ({ ...prev, [activeZoomAsset.id]: true }))}
-                        className="max-h-[460px] w-auto max-w-full object-contain select-none"
-                      />
-                    )
-                  )}
-                </div>
+              {/* IMAGE DISPLAY CONTAINER — CLEAN WHITE WELL FOR MAXIMUM CONTRAST */}
+              <div className="p-4 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-inner flex items-center justify-center min-h-[320px] max-h-[500px] overflow-auto">
+                {imageErrorMap[activeZoomAsset.id] ? (
+                  <div className="flex flex-col items-center justify-center p-8 text-center space-y-3">
+                    <Compass className="w-16 h-16 text-cyan-500 opacity-80" />
+                    <h4 className="text-base font-bold text-slate-800">{activeZoomAsset.title}</h4>
+                    <p className="text-xs text-slate-500 max-w-md">{activeZoomAsset.keyRule}</p>
+                  </div>
+                ) : (
+                  <img
+                    src={activeZoomAsset.imageUrl}
+                    alt={activeZoomAsset.imageAlt}
+                    onError={() => setImageErrorMap((prev) => ({ ...prev, [activeZoomAsset.id]: true }))}
+                    style={{
+                      transform: `scale(${zoomScale})`,
+                      transformOrigin: "center center"
+                    }}
+                    className="max-h-[460px] w-auto max-w-full object-contain select-none transition-transform duration-150"
+                  />
+                )}
               </div>
 
               {/* SPEC SHEET & CBSE CRITERIA */}
