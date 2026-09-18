@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
+import { areteAudio } from "@/lib/audio";
 import {
   Calendar,
   Sparkles,
@@ -151,51 +152,12 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
     return [...METRO_STATIONS.ch1_europe, ...METRO_STATIONS.ch2_india];
   }, [selectedChapter]);
 
-  // Sound generator
+  // Sound generator using ARETE audio singleton
   const playSoundEffect = (type: "click" | "success" | "flip" | "error") => {
-    try {
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      if (type === "click") {
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.08);
-      } else if (type === "success") {
-        osc.type = "triangle";
-        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08); // E5
-        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.16); // G5
-        osc.frequency.setValueAtTime(1046.5, audioCtx.currentTime + 0.24); // C6
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.45);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.45);
-      } else if (type === "flip") {
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(320, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(480, audioCtx.currentTime + 0.12);
-        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.12);
-      } else if (type === "error") {
-        osc.type = "sawtooth";
-        osc.frequency.setValueAtTime(240, audioCtx.currentTime);
-        osc.frequency.setValueAtTime(180, audioCtx.currentTime + 0.1);
-        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.25);
-      }
-    } catch {
-      // Audio context fallback ignored
+    if (type === "flip") {
+      areteAudio.play("pop");
+    } else {
+      areteAudio.play(type);
     }
   };
 

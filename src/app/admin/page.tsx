@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { areteAudio } from "@/lib/audio";
 import Link from "next/link";
 import {
   Shield,
@@ -220,41 +221,13 @@ export default function AdminPage() {
   const [selectedSubjectId, setSelectedSubjectId] = useState<string>("all");
   const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>("all");
 
-  // Sound Synthesizer for Admin Interactions
+  // Sound Synthesizer for Admin Interactions using ARETE audio singleton
   const playSound = (type: "login" | "error" | "click" | "success") => {
-    try {
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      if (type === "login" || type === "success") {
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08);
-        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.16);
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.35);
-      } else if (type === "error") {
-        osc.type = "sawtooth";
-        osc.frequency.setValueAtTime(220, audioCtx.currentTime);
-        osc.frequency.setValueAtTime(160, audioCtx.currentTime + 0.12);
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.28);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.28);
-      } else {
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.05);
-      }
-    } catch {}
+    if (type === "login") {
+      areteAudio.play("reveal");
+    } else {
+      areteAudio.play(type);
+    }
   };
 
   // Check saved session on mount

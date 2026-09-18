@@ -26,13 +26,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Study Routine — CBSE Class 10",
-  description: "NCERT syllabus tracker, concept breakdowns, board question bank, flashcards, and mistake logs for CBSE Class 10.",
+  title: "ARETĒ (Ἀρετή) — CBSE Class 10 Command Engine",
+  description: "Ad Astra per Scientiam. Supreme NCERT syllabus mastery, concept breakdowns, board question bank, flashcards, and mistake logs for CBSE Class 10.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Study Routine",
+    title: "ARETĒ",
   },
 };
 

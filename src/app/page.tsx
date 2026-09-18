@@ -57,6 +57,8 @@ import CommandCenterHomeView from "@/components/CommandCenterHomeView";
 import SettingsModal from "@/components/SettingsModal";
 import OnboardingModal from "@/components/OnboardingModal";
 import GlobalSearchModal from "@/components/GlobalSearchModal";
+import AreteLogo from "@/components/AreteLogo";
+import { areteAudio } from "@/lib/audio";
 import { appStorage, STORAGE_KEYS } from "@/lib/storage";
 
 import {
@@ -191,16 +193,16 @@ const MANDATORY_MAP_LOCATIONS = [
   { category: "Nuclear Power Plants", items: ["Narora (Uttar Pradesh)", "Rawatbhata (Rajasthan)", "Kakrapar (Gujarat)", "Tarapur (Maharashtra)", "Kaiga (Karnataka)", "Kalpakkam (Tamil Nadu)"] }
 ];
 
-// LEVEL TIERS DEFINITION
+// ARETĒ CLASSICAL MASTERY LEVEL TIERS (ARISTOTELIAN PROGRESSION)
 const LEVEL_TIERS = [
-  { level: 1, title: "Novice Aspirant", minXp: 0, maxXp: 250, badge: "🎯", color: "from-slate-500 to-slate-700" },
-  { level: 2, title: "Consistent Achiever", minXp: 250, maxXp: 650, badge: "⚡", color: "from-blue-500 to-cyan-600" },
-  { level: 3, title: "Concept Conqueror", minXp: 650, maxXp: 1200, badge: "🧠", color: "from-emerald-500 to-teal-600" },
-  { level: 4, title: "Board Contender", minXp: 1200, maxXp: 1900, badge: "🏆", color: "from-amber-500 to-orange-600" },
-  { level: 5, title: "Rank Booster", minXp: 1900, maxXp: 2800, badge: "🚀", color: "from-purple-500 to-indigo-600" },
-  { level: 6, title: "Distinction Master", minXp: 2800, maxXp: 4000, badge: "💎", color: "from-pink-500 to-rose-600" },
-  { level: 7, title: "Topper Prodigy", minXp: 4000, maxXp: 5500, badge: "🌟", color: "from-yellow-400 to-amber-600" },
-  { level: 8, title: "AIR 1 CBSE Master", minXp: 5500, maxXp: 10000, badge: "👑", color: "from-amber-300 via-yellow-500 to-orange-600" }
+  { level: 1, title: "Aspirant (Disciple)", minXp: 0, maxXp: 250, badge: "🎯", color: "from-slate-500 to-slate-700" },
+  { level: 2, title: "Scholar (Logos)", minXp: 250, maxXp: 650, badge: "⚡", color: "from-blue-500 to-cyan-600" },
+  { level: 3, title: "Theorist (Episteme)", minXp: 650, maxXp: 1200, badge: "🧠", color: "from-emerald-500 to-teal-600" },
+  { level: 4, title: "Strategist (Phronesis)", minXp: 1200, maxXp: 1900, badge: "🏆", color: "from-amber-500 to-orange-600" },
+  { level: 5, title: "Polymath (Noesis)", minXp: 1900, maxXp: 2800, badge: "🚀", color: "from-purple-500 to-indigo-600" },
+  { level: 6, title: "Master of Proofs (Sophia)", minXp: 2800, maxXp: 4000, badge: "💎", color: "from-pink-500 to-rose-600" },
+  { level: 7, title: "Sovereign Scholar (Apex)", minXp: 4000, maxXp: 5500, badge: "🌟", color: "from-yellow-400 to-amber-600" },
+  { level: 8, title: "Archon of Areté (AIR 1)", minXp: 5500, maxXp: 10000, badge: "👑", color: "from-amber-300 via-yellow-500 to-orange-600" }
 ];
 
 // DEFAULT REALISTIC MISTAKE LOGS (FOCUSED ON CH 6 TRIANGLES & HIGH-YIELD TOPICS)
@@ -855,6 +857,118 @@ export const IsolatedConfetti = React.memo(function IsolatedConfetti({ trigger }
           }}
         />
       ))}
+    </div>
+  );
+});
+
+// Memoized Pomodoro Focus Timer: ticks internally every second without re-rendering the root Home tree
+export const IsolatedFocusTimer = React.memo(function IsolatedFocusTimer({
+  isDark,
+  onComplete,
+  showToast,
+  playSound,
+  triggerHaptic,
+  triggerConfetti
+}: {
+  isDark: boolean;
+  onComplete: (mins: number) => void;
+  showToast: (amount: number, text: string) => void;
+  playSound: (type: "bell" | "click" | "done") => void;
+  triggerHaptic: (pattern: number | number[]) => void;
+  triggerConfetti: () => void;
+}) {
+  const [pomoSeconds, setPomoSeconds] = useState(25 * 60);
+  const [isPomoActive, setIsPomoActive] = useState(false);
+  const pomoTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (isPomoActive) {
+      pomoTimerRef.current = setInterval(() => {
+        setPomoSeconds((prev) => {
+          if (prev <= 1) {
+            clearInterval(pomoTimerRef.current!);
+            setIsPomoActive(false);
+            onComplete(25);
+            playSound("bell");
+            triggerConfetti();
+            triggerHaptic([100, 100, 100]);
+            showToast(50, "Focus Session Complete (+50 XP)");
+            return 25 * 60;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      if (pomoTimerRef.current) clearInterval(pomoTimerRef.current);
+    }
+    return () => {
+      if (pomoTimerRef.current) clearInterval(pomoTimerRef.current);
+    };
+  }, [isPomoActive, onComplete, playSound, triggerConfetti, triggerHaptic, showToast]);
+
+  const formattedPomoTime = useMemo(() => {
+    const m = Math.floor(pomoSeconds / 60);
+    const s = pomoSeconds % 60;
+    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+  }, [pomoSeconds]);
+
+  return (
+    <div className={`p-6 sm:p-7 rounded-3xl border flex flex-col items-center justify-center text-center space-y-5 transition-all ${
+      isDark 
+        ? "bg-gradient-to-b from-[#111728] to-[#0a0e1a] border-amber-500/30 shadow-[0_8px_32px_rgba(245,158,11,0.1)]" 
+        : "bg-white border-amber-200 shadow-md"
+    }`}>
+      <div className={`flex items-center gap-2 text-xs font-semibold ${
+        isDark ? "text-amber-400" : "text-amber-800"
+      }`}>
+        <Clock className="w-4 h-4" />
+        <span>25-Minute Focus Block (+50 XP)</span>
+      </div>
+
+      <div className={`w-44 h-44 rounded-full border-4 flex flex-col items-center justify-center transition-all ${
+        isPomoActive
+          ? "border-amber-500 shadow-[0_0_35px_rgba(245,158,11,0.35)] bg-amber-500/10"
+          : isDark ? "border-white/10 bg-black/40" : "border-slate-200 bg-slate-50"
+      }`}>
+        <p className="text-3xl sm:text-4xl font-black font-mono tracking-tight">{formattedPomoTime}</p>
+        <p className={`text-[11px] font-medium mt-1 ${isPomoActive ? "text-amber-400 font-semibold" : isDark ? "text-zinc-400" : "text-slate-600"}`}>
+          {isPomoActive ? "Session Active" : "Ready to Focus"}
+        </p>
+      </div>
+
+      <div className="flex gap-2.5 w-full max-w-xs">
+        <button
+          onClick={() => {
+            triggerHaptic(20);
+            playSound("click");
+            setIsPomoActive(!isPomoActive);
+          }}
+          className={`flex-1 py-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all min-h-[46px] touch-manipulation active:scale-95 ${
+            isPomoActive
+              ? "bg-amber-500 text-slate-950 font-black shadow-md"
+              : isDark
+              ? "bg-white text-slate-900 hover:bg-white/90 shadow-sm"
+              : "bg-slate-900 text-white hover:bg-slate-800 shadow-sm"
+          }`}
+        >
+          {isPomoActive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+          <span>{isPomoActive ? "Pause Focus" : "Start Focus Block"}</span>
+        </button>
+
+        <button
+          onClick={() => {
+            playSound("click");
+            setIsPomoActive(false);
+            setPomoSeconds(25 * 60);
+          }}
+          className={`p-3 border rounded-2xl cursor-pointer min-h-[46px] min-w-[46px] flex items-center justify-center transition-all touch-manipulation active:scale-95 ${
+            isDark ? "bg-white/[0.04] border-white/10 text-zinc-400 hover:text-white" : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
+          }`}
+          title="Reset timer"
+        >
+          <RotateCcw className="w-4 h-4" />
+        </button>
+      </div>
     </div>
   );
 });
@@ -1814,14 +1928,6 @@ export default function CBSECommandCenter() {
     markingStep2: "2 Marks: Simplification and final proof."
   });
 
-  // Pomodoro Focus Timer
-  const [pomoSeconds, setPomoSeconds] = useState(25 * 60);
-  const [isPomoActive, setIsPomoActive] = useState(false);
-  const pomoTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Cached AudioContext to eliminate memory leaks and lag on low-RAM devices
-  const audioCtxRef = useRef<AudioContext | null>(null);
-
   const fetchMistakes = async () => {
     setIsLoadingMistakes(true);
     try {
@@ -2191,77 +2297,14 @@ export default function CBSECommandCenter() {
     correctMcqQuestionIds
   ]);
 
-  // Audio synthesizer
+  // Unified Singleton Audio Synthesizer (Zero-Allocation & Zero-Lag)
   const playSound = useCallback((type: "done" | "undone" | "flip" | "levelup" | "bell" | "click") => {
     if (isSoundMuted || typeof window === "undefined") return;
-    try {
-      let audioCtx = audioCtxRef.current;
-      if (!audioCtx) {
-        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-        if (AudioContextClass) {
-          audioCtx = new AudioContextClass();
-          audioCtxRef.current = audioCtx;
-        }
-      }
-      if (!audioCtx) return;
-      if (audioCtx.state === "suspended") {
-        audioCtx.resume().catch(() => {});
-      }
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      if (type === "done") {
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
-        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.12); // A5
-        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.19);
-      } else if (type === "undone") {
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(520, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(380, audioCtx.currentTime + 0.1);
-        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.13);
-      } else if (type === "flip") {
-        osc.type = "triangle";
-        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.07);
-      } else if (type === "levelup") {
-        const now = audioCtx.currentTime;
-        osc.type = "triangle";
-        osc.frequency.setValueAtTime(523.25, now);
-        osc.frequency.setValueAtTime(659.25, now + 0.1);
-        osc.frequency.setValueAtTime(783.99, now + 0.2);
-        osc.frequency.setValueAtTime(1046.5, now + 0.3);
-        gain.gain.setValueAtTime(0.08, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
-        osc.start(now);
-        osc.stop(now + 0.65);
-      } else if (type === "bell") {
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.09, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.7);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.75);
-      } else {
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.05);
-      }
-    } catch {}
+    if (type === "levelup") {
+      areteAudio.play("badge");
+    } else {
+      areteAudio.play(type as any);
+    }
   }, [isSoundMuted]);
 
   // Haptic feedback for mobile touch
@@ -2515,37 +2558,7 @@ export default function CBSECommandCenter() {
     mounted
   ]);
 
-  // Pomodoro Timer Interval
-  useEffect(() => {
-    if (isPomoActive) {
-      pomoTimerRef.current = setInterval(() => {
-        setPomoSeconds((prev) => {
-          if (prev <= 1) {
-            clearInterval(pomoTimerRef.current!);
-            setIsPomoActive(false);
-            setTotalFocusMins((m) => m + 25);
-            playSound("bell");
-            triggerConfetti();
-            triggerHaptic([100, 100, 100]);
-            showXpToast(50, "Focus Session Complete (+50 XP)");
-            return 25 * 60;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    } else {
-      if (pomoTimerRef.current) clearInterval(pomoTimerRef.current);
-    }
-    return () => {
-      if (pomoTimerRef.current) clearInterval(pomoTimerRef.current);
-    };
-  }, [isPomoActive, playSound, triggerConfetti, triggerHaptic, showXpToast]);
-
-  const formattedPomoTime = useMemo(() => {
-    const m = Math.floor(pomoSeconds / 60);
-    const s = pomoSeconds % 60;
-    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-  }, [pomoSeconds]);
+  // =========================================================================
 
   // =========================================================================
   // HANDLERS (EXPLOIT-FREE & REACTIVE)
@@ -2887,13 +2900,9 @@ export default function CBSECommandCenter() {
       <IsolatedConfetti trigger={confettiTrigger} />
 
       {/* =========================================================================
-          APPLE VISION PRO AMBIENT AURORA BACKLIGHT
+          HIGH-PERFORMANCE ZERO-COST HARDWARE-ACCELERATED BACKLIGHT
           ========================================================================= */}
-      <div className="aurora-mesh" aria-hidden="true">
-        <div className="aurora-mesh-blob-1" />
-        <div className="aurora-mesh-blob-2" />
-        <div className="aurora-mesh-blob-3" />
-      </div>
+      <div className="aurora-mesh" aria-hidden="true" />
 
       {/* =========================================================================
           RIGID FROSTED TOP APP BAR (HEADER + SECONDARY SUB-TOOLBAR)
@@ -2910,54 +2919,48 @@ export default function CBSECommandCenter() {
           {/* BRAND EMBLEM & SQUIRCLE (Secret 5-Tap Backdoor for Sarthak) */}
           <div
             onClick={handleLogoSecretTap}
-            className="flex items-center gap-2.5 shrink-0 cursor-pointer select-none"
+            className="flex items-center gap-3 shrink-0 cursor-pointer select-none"
+            title="ARETĒ: CBSE Class 10 Command Engine (5-Tap for Admin)"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-orange-600 flex items-center justify-center text-slate-950 font-black text-xs shadow-md shadow-amber-500/30 ring-2 ring-amber-400/40 shrink-0 leading-none">
-              100
-            </div>
-            <div className="flex flex-col justify-center">
-              <div className="flex items-center gap-1.5 leading-none">
-                <span className={`text-sm sm:text-base font-black tracking-tight leading-none ${isDark ? "text-white" : "text-slate-900"}`}>
-                  CBSE 10
-                </span>
-                <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
-                  isDark ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "bg-amber-100 text-amber-900 border border-amber-300"
-                }`}>
-                  2026–27
-                </span>
+            <AreteLogo size="md" isDark={isDark} showText={true} showMotto={false} />
 
-                {studentFullName ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setNameInput(studentFullName);
-                      setIsNameModalOpen(true);
-                    }}
-                    className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center gap-1.5 transition-all cursor-pointer ${
-                      isDark
-                        ? "bg-teal-500/20 text-teal-300 border border-teal-500/40 hover:bg-teal-500/30"
-                        : "bg-teal-100 text-teal-900 border border-teal-300 hover:bg-teal-200"
-                    }`}
-                    title="Enrolled Cadet (Click to edit name)"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-                    <span className="max-w-[120px] truncate">{studentFullName}</span>
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setIsNameModalOpen(true)}
-                    className="text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse cursor-pointer"
-                  >
-                    <span>⚡ Enter Your Name</span>
-                  </button>
-                )}
-              </div>
-              <p className={`text-[10px] font-medium hidden sm:flex items-center gap-1.5 mt-1 leading-none ${isDark ? "text-zinc-400" : "text-slate-500"}`}>
-                <span className="truncate">Lakshmipat Singhania Academy</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-                <span className="text-emerald-400 font-mono text-[9px] font-bold tracking-wider shrink-0">MISSION CONTROL</span>
-              </p>
+            <div className="hidden lg:flex items-center gap-1.5 leading-none pl-1">
+              <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
+                isDark ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "bg-amber-100 text-amber-900 border border-amber-300"
+              }`}>
+                2026–27
+              </span>
+
+              {studentFullName ? (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setNameInput(studentFullName);
+                    setIsNameModalOpen(true);
+                  }}
+                  className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold leading-none inline-flex items-center gap-1.5 transition-all cursor-pointer ${
+                    isDark
+                      ? "bg-teal-500/20 text-teal-300 border border-teal-500/40 hover:bg-teal-500/30"
+                      : "bg-teal-100 text-teal-900 border border-teal-300 hover:bg-teal-200"
+                  }`}
+                  title="Enrolled Cadet (Click to edit name)"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                  <span className="max-w-[120px] truncate">{studentFullName}</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsNameModalOpen(true);
+                  }}
+                  className="text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse cursor-pointer"
+                >
+                  <span>⚡ Enter Name</span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -3921,64 +3924,15 @@ export default function CBSECommandCenter() {
             {/* 2-COLUMN FOCUS TIMER & PRIORITIES */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
               
-              {/* CLEAN 25M FOCUS TIMER */}
-              <div className={`p-6 sm:p-7 rounded-3xl border flex flex-col items-center justify-center text-center space-y-5 transition-all ${
-                isDark 
-                  ? "bg-gradient-to-b from-[#111728] to-[#0a0e1a] border-amber-500/30 shadow-[0_8px_32px_rgba(245,158,11,0.1)]" 
-                  : "bg-white border-amber-200 shadow-md"
-              }`}>
-                <div className={`flex items-center gap-2 text-xs font-semibold ${
-                  isDark ? "text-amber-400" : "text-amber-800"
-                }`}>
-                  <Clock className="w-4 h-4" />
-                  <span>25-Minute Focus Block (+50 XP)</span>
-                </div>
-
-                <div className={`w-44 h-44 rounded-full border-4 flex flex-col items-center justify-center transition-all ${
-                  isPomoActive
-                    ? "border-amber-500 shadow-[0_0_35px_rgba(245,158,11,0.35)] bg-amber-500/10"
-                    : isDark ? "border-white/10 bg-black/40" : "border-slate-200 bg-slate-50"
-                }`}>
-                  <p className="text-3xl sm:text-4xl font-black font-mono tracking-tight">{formattedPomoTime}</p>
-                  <p className={`text-[11px] font-medium mt-1 ${isPomoActive ? "text-amber-400 font-semibold" : isDark ? "text-zinc-400" : "text-slate-500"}`}>
-                    {isPomoActive ? "Session Active" : "Ready to Focus"}
-                  </p>
-                </div>
-
-                <div className="flex gap-2.5 w-full max-w-xs">
-                  <button
-                    onClick={() => {
-                      triggerHaptic(20);
-                      playSound("click");
-                      setIsPomoActive(!isPomoActive);
-                    }}
-                    className={`flex-1 py-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all min-h-[46px] touch-manipulation active:scale-95 ${
-                      isPomoActive
-                        ? "bg-amber-500 text-slate-950 font-black shadow-md"
-                        : isDark
-                        ? "bg-white text-slate-900 hover:bg-white/90 shadow-sm"
-                        : "bg-slate-900 text-white hover:bg-slate-800 shadow-sm"
-                    }`}
-                  >
-                    {isPomoActive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                    <span>{isPomoActive ? "Pause Focus" : "Start Focus Block"}</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      playSound("click");
-                      setIsPomoActive(false);
-                      setPomoSeconds(25 * 60);
-                    }}
-                    className={`p-3 border rounded-2xl cursor-pointer min-h-[46px] min-w-[46px] flex items-center justify-center transition-all touch-manipulation active:scale-95 ${
-                      isDark ? "bg-white/[0.04] border-white/10 text-zinc-400 hover:text-white" : "bg-black/[0.03] border-black/[0.08] text-slate-600 hover:text-slate-900"
-                    }`}
-                    title="Reset Timer"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
+              {/* CLEAN 25M FOCUS TIMER (ISOLATED ZERO-RE-RENDER COMPONENT) */}
+              <IsolatedFocusTimer
+                isDark={isDark}
+                onComplete={(mins) => setTotalFocusMins((m) => m + mins)}
+                showToast={showXpToast}
+                playSound={playSound}
+                triggerHaptic={triggerHaptic}
+                triggerConfetti={triggerConfetti}
+              />
 
               {/* REAL DAILY TASKS */}
               <div className={`p-6 sm:p-7 rounded-3xl border flex flex-col justify-between space-y-4 transition-all ${

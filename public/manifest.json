@@ -1,7 +1,7 @@
 {
-  "name": "Study Routine — CBSE Class 10",
-  "short_name": "Study Routine",
-  "description": "NCERT syllabus tracker, concept breakdowns, board question bank, flashcards, and mistake logs for CBSE Class 10.",
+  "name": "ARETĒ — CBSE Class 10 Command Engine",
+  "short_name": "ARETĒ",
+  "description": "Ad Astra per Scientiam. NCERT syllabus mastery, concept breakdowns, board question bank, flashcards, and mistake logs for CBSE Class 10.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#070913",
