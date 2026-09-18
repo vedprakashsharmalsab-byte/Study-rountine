@@ -171,6 +171,14 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
     } catch {}
   }, []);
 
+  // Synchronize when initialChapterKey prop updates from caller
+  useEffect(() => {
+    if (initialChapterKey) {
+      setSelectedChapter(initialChapterKey);
+      setSelectedEra("all");
+    }
+  }, [initialChapterKey]);
+
   // Filter events based on active chapter, era, and search
   const filteredEvents = useMemo(() => {
     return ENRICHED_SST_TIMELINES.filter((item) => {

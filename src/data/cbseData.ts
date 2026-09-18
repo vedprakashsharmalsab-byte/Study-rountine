@@ -5202,14 +5202,34 @@ export const CHAPTER_WISE_FLASHCARDS: FlashcardItem[] = [
     id: "fc_sst1",
     subject: "Social Science",
     chapter: "Nationalism in Europe",
-    topic: "Treaty of Vienna 1815",
-    frontQuestion: "Who hosted the Congress of Vienna in 1815, and what was its primary objective?",
-    backAnswer: "Hosted by Austrian Chancellor Duke Metternich. Objective: To undo the changes brought by Napoleonic wars, restore Bourbon monarchy in France, and establish a conservative order in Europe.",
-    hintOrFormula: "Vienna 1815: Metternich, Bourbon restoration, Balance of power",
+    topic: "Napoleonic Code (Civil Code 1804)",
+    frontQuestion: "What were the key features of the Napoleonic Civil Code of 1804?",
+    backAnswer: "1. Abolished all privileges based on birth.\n2. Established equality before the law.\n3. Secured the right to property.\n4. Abolished feudal dues and serfdom in Dutch Republic, Switzerland, Germany, and Italy.",
+    hintOrFormula: "Birth privileges removed, legal equality, property rights secured",
     difficulty: "High Yield"
   },
   {
     id: "fc_sst2",
+    subject: "Social Science",
+    chapter: "Nationalism in Europe",
+    topic: "Treaty of Vienna 1815",
+    frontQuestion: "Who hosted the Congress of Vienna in 1815, and what was its primary objective?",
+    backAnswer: "Hosted by Austrian Chancellor Duke Metternich. Objective: To undo the territorial changes brought by Napoleonic wars, restore Bourbon monarchy in France, and establish a conservative balance of power in Europe.",
+    hintOrFormula: "Vienna 1815: Metternich, Bourbon restoration, Balance of power",
+    difficulty: "High Yield"
+  },
+  {
+    id: "fc_sst3",
+    subject: "Social Science",
+    chapter: "Nationalism in India",
+    topic: "Rowlatt Act & Jallianwala Bagh",
+    frontQuestion: "Why was the Rowlatt Act (1919) opposed by Indians, and what was its aftermath?",
+    backAnswer: "• The Rowlatt Act gave the colonial government enormous powers to repress political activities and allowed detention of political prisoners without trial for up to 2 years.\n• It led to nationwide Rowlatt Satyagraha, and on 13 April 1919, General Dyer ordered open fire on the unarmed Baisakhi gathering at Jallianwala Bagh, Amritsar.",
+    hintOrFormula: "Detention without trial for 2 years -> Jallianwala Bagh massacre",
+    difficulty: "High Yield"
+  },
+  {
+    id: "fc_sst4",
     subject: "Social Science",
     chapter: "Nationalism in India",
     topic: "Salt March & Civil Disobedience",
@@ -5219,23 +5239,83 @@ export const CHAPTER_WISE_FLASHCARDS: FlashcardItem[] = [
     difficulty: "High Yield"
   },
   {
-    id: "fc_sst3",
+    id: "fc_sst5",
     subject: "Social Science",
     chapter: "Power Sharing",
-    topic: "Belgium Model",
-    frontQuestion: "State two key elements of the Belgian Model of power sharing.",
-    backAnswer: "1. Equal number of Dutch and French-speaking ministers in Central Government.\n2. State governments are not subordinate to the central government.\n3. Equal representation in Brussels Government.\n4. A third 'Community Government' elected by people of one language group to handle cultural and educational affairs.",
-    hintOrFormula: "Equal ministers, Brussels parity, Community Govt",
+    topic: "Prudential vs Moral Reasons",
+    frontQuestion: "Differentiate between Prudential and Moral reasons for power sharing.",
+    backAnswer: "• Prudential Reasons: Based on careful calculation of gains and losses. Power sharing reduces possibilities of social conflict, maintains political stability, and preserves national unity.\n• Moral Reasons: Power sharing is the very spirit of democracy. A legitimate government involves citizens participating in decision-making.",
+    hintOrFormula: "Prudential = Better outcomes & stability; Moral = Spirit of democracy",
     difficulty: "High Yield"
   },
   {
-    id: "fc_sst4",
+    id: "fc_sst6",
+    subject: "Social Science",
+    chapter: "Federalism",
+    topic: "Decentralisation Act 1992",
+    frontQuestion: "What major steps were taken towards decentralisation in India through the 1992 Constitutional Amendment?",
+    backAnswer: "1. Mandatory regular elections for local government bodies.\n2. Reservation of seats for SC, ST, and OBCs.\n3. At least 1/3rd of all seats reserved for women.\n4. Independent State Election Commission created in each state.\n5. State governments required to share revenue and powers with local bodies.",
+    hintOrFormula: "73rd/74th Amendments 1992: 1/3 women reservation, SEC, regular elections",
+    difficulty: "High Yield"
+  },
+  {
+    id: "fc_sst7",
+    subject: "Social Science",
+    chapter: "Resources and Development",
+    topic: "Black Soil (Regur)",
+    frontQuestion: "Mention key properties of Black Soil and name the region where it is predominantly found.",
+    backAnswer: "• Properties: Made of basaltic lava rocks, extremely fine clayey material, high moisture retention capacity, rich in calcium carbonate, magnesium, and potash. Develops deep cracks in summer aiding aeration.\n• Ideal for cotton cultivation (Black Cotton Soil).\n• Found across Deccan Trap (Maharashtra, Saurashtra, Malwa, MP, Chhattisgarh).",
+    hintOrFormula: "Black Soil / Regur: Deccan lava, clayey, moisture holding, cotton ideal",
+    difficulty: "High Yield"
+  },
+  {
+    id: "fc_sst8",
+    subject: "Social Science",
+    chapter: "Forest and Wildlife Resources",
+    topic: "Forest Classification & JFM",
+    frontQuestion: "How are forests classified in India according to conservation status?",
+    backAnswer: "1. Reserved Forests (>50%): Most valuable for conservation of forest and wildlife resources; strictly protected.\n2. Protected Forests (~1/3rd): Protected from any further depletion.\n3. Unclassed Forests: Other forests and wastelands belonging to government, communities, and private individuals.",
+    hintOrFormula: "Reserved (>50% most valuable), Protected (~33%), Unclassed (community/private)",
+    difficulty: "High Yield"
+  },
+  {
+    id: "fc_sst9",
+    subject: "Social Science",
+    chapter: "Water Resources",
+    topic: "Traditional Rainwater Harvesting",
+    frontQuestion: "Explain any two traditional methods of rainwater harvesting in India.",
+    backAnswer: "1. Guls and Kuls: In hilly and mountainous regions (Western Himalayas), diversion channels built for agriculture.\n2. Khadins & Johads: In arid parts of Rajasthan, rain-fed storage structures built to moisten soil for farming.\n3. Rooftop Harvesting ('Tanka'): Underground tanks built in houses of Bikaner, Phalodi, and Barmer to store drinking water.",
+    hintOrFormula: "Guls/Kuls (Himalayas), Khadins/Johads (Rajasthan), Tankas (Bikaner/Phalodi)",
+    difficulty: "High Yield"
+  },
+  {
+    id: "fc_sst10",
+    subject: "Social Science",
+    chapter: "Development",
+    topic: "Per Capita Income vs UNDP HDI",
+    frontQuestion: "Why is Per Capita Income considered an inadequate measure of development compared to UNDP's HDI?",
+    backAnswer: "• Per Capita Income (World Bank) calculates only average income; it hides glaring disparities and ignores health, education, and equality.\n• UNDP's Human Development Index (HDI) evaluates educational levels (mean & expected schooling), health status (life expectancy at birth), and standard of living (Per Capita Income in PPP).",
+    hintOrFormula: "PCI = Average income only (hides inequality); HDI = Income + Health (Life Expectancy) + Education",
+    difficulty: "High Yield"
+  },
+  {
+    id: "fc_sst11",
+    subject: "Social Science",
+    chapter: "Sectors of the Indian Economy",
+    topic: "Disguised Unemployment & MGNREGA 2005",
+    frontQuestion: "What is Disguised Unemployment, and how does MGNREGA 2005 address underemployment?",
+    backAnswer: "• Disguised Unemployment: Situation where more people are working than required; even if some workers are removed, total production does not fall (common in agriculture).\n• MGNREGA 2005: Guarantees 100 days of wage employment per financial year to every rural household whose adult members volunteer to do unskilled manual work; provides unemployment allowance if not employed within 15 days.",
+    hintOrFormula: "Disguised = Zero marginal productivity; MGNREGA 2005 = 100 days guaranteed work",
+    difficulty: "High Yield"
+  },
+  {
+    id: "fc_sst12",
     subject: "Social Science",
     chapter: "Money and Credit",
-    topic: "Formal vs Informal Credit",
-    frontQuestion: "Why is the formal sector of credit preferred over the informal sector?",
-    backAnswer: "1. Formal sector (Banks/Cooperatives) is supervised by RBI; charges reasonable interest rates.\n2. Informal sector (Moneylenders/Traders) charges exorbitant interest, uses unfair means, and leads to debt traps.",
-    hintOrFormula: "Formal = RBI supervision, low interest; Informal = High interest, debt trap",
+    topic: "Self-Help Groups (SHGs) & Formal Credit",
+    frontQuestion: "What is the role of Self-Help Groups (SHGs) for the rural poor, and why is collateral a barrier in informal credit?",
+    backAnswer: "• SHGs (15–20 members) pool small savings regularly, provide small collateral-free loans at low interest, and overcome lack of collateral for poor women.\n• Banks require collateral (assets pledged as security). Poor borrowers lack land or property titles, driving them to informal moneylenders who charge 36–60% interest.",
+    hintOrFormula: "SHGs: 15–20 members, peer accountability, collateral-free credit for women",
     difficulty: "High Yield"
   },
 

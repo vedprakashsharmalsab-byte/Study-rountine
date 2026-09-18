@@ -184,7 +184,7 @@ export default function SmartStudyTopicCard({
                 }`}>
                   {toddlerGuide.truthOrTrap.revealExplanation}
                 </p>
-                <p className="text-[11px] text-slate-400 font-mono">
+                <p className={`text-[11px] font-mono ${isDark ? "text-slate-400" : "text-slate-600 font-medium"}`}>
                   💡 <strong>Examiner Tip:</strong> {toddlerGuide.truthOrTrap.examinerTip}
                 </p>
               </div>
@@ -298,7 +298,7 @@ export default function SmartStudyTopicCard({
               {/* CAST OF CHARACTERS / KEY PLAYERS */}
               {toddlerGuide.toddlerAnalogy.characters.length > 0 && (
                 <div className="space-y-3">
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                  <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                     <span>🎭 The Key Players &amp; What They Stood For</span>
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -314,7 +314,7 @@ export default function SmartStudyTopicCard({
                           <span className={`text-xs font-black block truncate ${isDark ? "text-white" : "text-slate-900"}`}>
                             {char.name}
                           </span>
-                          <p className="text-[11px] text-slate-400 leading-tight mt-0.5">
+                          <p className={`text-[11px] leading-tight mt-0.5 ${isDark ? "text-slate-400" : "text-slate-600 font-medium"}`}>
                             {char.role}
                           </p>
                         </div>

@@ -375,6 +375,32 @@ export default function ConceptsHubView({
     return SST_MAP_WORK.find((m) => m.chapterNo === activeSSTChapterNo);
   }, [activeSSTChapterNo]);
 
+  // Aggregate all visual mnemonics across all topics for the active chapter
+  const allChapterMnemonics = useMemo(() => {
+    const list: { title: string; src: string; description: string; topicTitle?: string }[] = [];
+    const seenSrc = new Set<string>();
+    activeSSTTopics.forEach((topic) => {
+      (topic.mnemonicImages || []).forEach((img) => {
+        if (!seenSrc.has(img.src)) {
+          seenSrc.add(img.src);
+          list.push({ ...img, topicTitle: topic.topicTitle });
+        }
+      });
+    });
+    return list;
+  }, [activeSSTTopics]);
+
+  // Auto-fallback: If user switches to chapter without timeline or mapwork, gracefully restore to concepts
+  useEffect(() => {
+    if (activeSubject === "sst") {
+      if (activeSSTViewTab === "timeline" && !activeSSTMeta.timelineAvailable) {
+        setActiveSSTViewTab("concepts");
+      } else if (activeSSTViewTab === "mapwork" && !activeSSTMeta.mapWorkAvailable) {
+        setActiveSSTViewTab("concepts");
+      }
+    }
+  }, [activeSSTChapterNo, activeSubject, activeSSTMeta, activeSSTViewTab]);
+
   const currentChapterMeta = activeSubject === "math"
     ? MATH_CHAPTER_LIST.find((c) => c.no === activeMathChapterNo) || MATH_CHAPTER_LIST[5]
     : activeSubject === "science"
@@ -618,7 +644,7 @@ export default function ConceptsHubView({
           {isChapterGridOpen && (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 pt-2 transition-all">
               {activeSubject === "sst"
-                ? filteredSSTChapterList.map((ch) => {
+                ? SST_CHAPTER_LIST.map((ch) => {
                     const isSelected = ch.no === activeSSTChapterNo;
                     return (
                       <a
@@ -1726,124 +1752,182 @@ export default function ConceptsHubView({
           )}
 
           {/* TAB 2: CHRONOLOGICAL TIMELINE (HISTORY) */}
-          {activeSSTViewTab === "timeline" && activeSSTTimeline.length > 0 && (
-            <div className={`p-6 sm:p-8 rounded-3xl border ${isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"}`}>
-              {/* SMART STUDY HERO LAUNCHER */}
-              <div className={`p-5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 ${
-                isDark ? "bg-gradient-to-r from-amber-500/15 via-rose-500/10 to-transparent border-amber-500/30" : "bg-gradient-to-r from-amber-50 via-rose-50/50 to-white border-amber-200"
-              }`}>
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500 text-slate-950">
-                      ⚡ Smart Study Suite
-                    </span>
-                    <span className="text-xs font-mono font-bold text-amber-400">
-                      CBSE Exam Ordering Challenges, Flashcards & Quick Matrix
-                    </span>
+          {activeSSTViewTab === "timeline" && (
+            activeSSTTimeline.length > 0 ? (
+              <div className={`p-6 sm:p-8 rounded-3xl border ${isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"}`}>
+                {/* SMART STUDY HERO LAUNCHER */}
+                <div className={`p-5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 ${
+                  isDark ? "bg-gradient-to-r from-amber-500/15 via-rose-500/10 to-transparent border-amber-500/30" : "bg-gradient-to-r from-amber-50 via-rose-50/50 to-white border-amber-200"
+                }`}>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500 text-slate-950">
+                        ⚡ Smart Study Suite
+                      </span>
+                      <span className="text-xs font-mono font-bold text-amber-400">
+                        CBSE Exam Ordering Challenges, Flashcards & Quick Matrix
+                      </span>
+                    </div>
+                    <h4 className={`text-base font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      Interactive Chronology Challenge & Rapid Recall Engine
+                    </h4>
+                    <p className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                      Practice official CBSE board sequence questions with interactive ordering, instant scoring, and active recall flip flashcards.
+                    </p>
                   </div>
-                  <h4 className={`text-base font-black ${isDark ? "text-white" : "text-slate-900"}`}>
-                    Interactive Chronology Challenge & Rapid Recall Engine
-                  </h4>
-                  <p className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                    Practice official CBSE board sequence questions with interactive ordering, instant scoring, and active recall flip flashcards.
-                  </p>
+                  {onOpenTimelines && (
+                    <button
+                      onClick={() => onOpenTimelines(activeSSTChapterNo)}
+                      className="w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 hover:brightness-110 text-slate-950 shadow-lg shadow-amber-500/30 transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0"
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      <span>Launch Dedicated Timelines Master</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  )}
                 </div>
-                {onOpenTimelines && (
-                  <button
-                    onClick={() => onOpenTimelines(activeSSTChapterNo)}
-                    className="w-full sm:w-auto px-5 py-3 rounded-xl text-xs font-black bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 hover:brightness-110 text-slate-950 shadow-lg shadow-amber-500/30 transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0"
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    <span>Launch Dedicated Timelines Master</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                )}
-              </div>
 
-              <div className="flex items-center gap-3 mb-6">
-                <Calendar className="w-6 h-6 text-amber-400" />
-                <div>
-                  <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
-                    Chronological Timeline: {activeSSTMeta.name}
-                  </h3>
-                  <p className="text-xs text-slate-400">
-                    Complete milestone events for CBSE Class 10 Board historical sequence questions.
-                  </p>
+                <div className="flex items-center gap-3 mb-6">
+                  <Calendar className="w-6 h-6 text-amber-400" />
+                  <div>
+                    <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                      Chronological Timeline: {activeSSTMeta.name}
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      Complete milestone events for CBSE Class 10 Board historical sequence questions.
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="relative border-l-2 border-amber-500/30 ml-4 pl-6 space-y-6">
-                {activeSSTTimeline.map((item, idx) => (
-                  <div key={idx} className="relative group">
-                    <span className="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-amber-400 border-4 border-[#0b0f19] shadow-sm" />
-                    <div className={`p-4 rounded-2xl border transition-all ${
-                      isDark ? "bg-white/[0.02] border-white/10 hover:border-amber-500/30" : "bg-slate-50 border-slate-200 hover:border-amber-400 shadow-2xs"
-                    }`}>
-                      <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                        <span className="px-3 py-1 rounded-full text-xs font-mono font-black bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                          {item.year}
-                        </span>
-                        {item.ncertReference && (
-                          <span className="text-[10px] font-mono font-bold text-amber-400/90 px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20">
-                            📖 {item.ncertReference}
+                <div className="relative border-l-2 border-amber-500/30 ml-4 pl-6 space-y-6">
+                  {activeSSTTimeline.map((item, idx) => (
+                    <div key={idx} className="relative group">
+                      <span className="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-amber-400 border-4 border-[#0b0f19] shadow-sm" />
+                      <div className={`p-4 rounded-2xl border transition-all ${
+                        isDark ? "bg-white/[0.02] border-white/10 hover:border-amber-500/30" : "bg-slate-50 border-slate-200 hover:border-amber-400 shadow-2xs"
+                      }`}>
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                          <span className="px-3 py-1 rounded-full text-xs font-mono font-black bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                            {item.year}
                           </span>
-                        )}
+                          {item.ncertReference && (
+                            <span className="text-[10px] font-mono font-bold text-amber-400/90 px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20">
+                              📖 {item.ncertReference}
+                            </span>
+                          )}
+                        </div>
+                        <h4 className={`text-sm sm:text-base font-bold mb-1 ${isDark ? "text-white" : "text-slate-900"}`}>
+                          {item.event}
+                        </h4>
+                        <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                          {item.significance}
+                        </p>
                       </div>
-                      <h4 className={`text-sm sm:text-base font-bold mb-1 ${isDark ? "text-white" : "text-slate-900"}`}>
-                        {item.event}
-                      </h4>
-                      <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                        {item.significance}
-                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className={`p-8 rounded-3xl border text-center space-y-3 ${isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"}`}>
+                <Calendar className="w-10 h-10 text-amber-400 mx-auto" />
+                <h3 className={`text-lg font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                  Chronological Timelines are Specific to History Chapters
+                </h3>
+                <p className={`text-xs max-w-md mx-auto leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                  CBSE chronological milestone questions appear for <strong>Ch 1: The Rise of Nationalism in Europe</strong> and <strong>Ch 2: Nationalism in India</strong>.
+                </p>
+                <div className="flex items-center justify-center gap-2 pt-2">
+                  <button
+                    onClick={() => setActiveSSTChapterNo(1)}
+                    className="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 cursor-pointer"
+                  >
+                    Open Ch 1 Europe Timeline
+                  </button>
+                  <button
+                    onClick={() => setActiveSSTChapterNo(2)}
+                    className="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 cursor-pointer"
+                  >
+                    Open Ch 2 India Timeline
+                  </button>
+                </div>
+              </div>
+            )
+          )}
+
+          {/* TAB 3: CBSE BOARD MAP WORK */}
+          {activeSSTViewTab === "mapwork" && (
+            activeSSTMapWork ? (
+              <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 ${isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"}`}>
+                <div className="flex items-center gap-3">
+                  <Map className="w-6 h-6 text-teal-400" />
+                  <div>
+                    <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                      CBSE Board Prescribed Map Work (Test Series 1)
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      Strictly aligned with CBSE SQP 2026-27 Section F (5 Marks Map Question).
+                    </p>
+                  </div>
+                </div>
+
+                {activeSSTMapWork.items.map((cat, cIdx) => (
+                  <div key={cIdx} className="space-y-3">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-400 block">
+                      {cat.category}
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                      {cat.points.map((pt, pIdx) => (
+                        <div
+                          key={pIdx}
+                          className={`p-4 rounded-2xl border space-y-1.5 ${
+                            isDark ? "bg-white/[0.02] border-white/10" : "bg-teal-50/50 border-teal-200 shadow-2xs"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-bold text-sm text-teal-300">{pt.label}</span>
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">
+                              {pt.river ? pt.river : "Location"}
+                            </span>
+                          </div>
+                          <p className="text-xs font-medium text-amber-300">📍 State / Region: {pt.state}</p>
+                          <p className={`text-[11px] leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>{pt.significance}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
-          )}
-
-          {/* TAB 3: CBSE BOARD MAP WORK */}
-          {activeSSTViewTab === "mapwork" && activeSSTMapWork && (
-            <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 ${isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"}`}>
-              <div className="flex items-center gap-3">
-                <Map className="w-6 h-6 text-teal-400" />
-                <div>
-                  <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
-                    CBSE Board Prescribed Map Work (Test Series 1)
-                  </h3>
-                  <p className="text-xs text-slate-400">
-                    Strictly aligned with CBSE SQP 2026-27 Section F (5 Marks Map Question).
-                  </p>
+            ) : (
+              <div className={`p-8 rounded-3xl border text-center space-y-3 ${isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"}`}>
+                <Map className="w-10 h-10 text-teal-400 mx-auto" />
+                <h3 className={`text-lg font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                  Official CBSE Board Map Work Chapters
+                </h3>
+                <p className={`text-xs max-w-md mx-auto leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                  Official CBSE Section F Map Items are prescribed for <strong>Nationalism in India (Ch 2)</strong>, <strong>Resources & Development (Ch 5 Soils)</strong>, and <strong>Water Resources (Ch 7 Dams)</strong>.
+                </p>
+                <div className="flex items-center justify-center gap-2 pt-2 flex-wrap">
+                  <button
+                    onClick={() => setActiveSSTChapterNo(2)}
+                    className="px-4 py-2 rounded-xl text-xs font-bold bg-teal-500 text-slate-950 hover:bg-teal-400 cursor-pointer"
+                  >
+                    Ch 2 India (History Map)
+                  </button>
+                  <button
+                    onClick={() => setActiveSSTChapterNo(5)}
+                    className="px-4 py-2 rounded-xl text-xs font-bold bg-teal-500 text-slate-950 hover:bg-teal-400 cursor-pointer"
+                  >
+                    Ch 5 Soils Map
+                  </button>
+                  <button
+                    onClick={() => setActiveSSTChapterNo(7)}
+                    className="px-4 py-2 rounded-xl text-xs font-bold bg-teal-500 text-slate-950 hover:bg-teal-400 cursor-pointer"
+                  >
+                    Ch 7 Dams Map
+                  </button>
                 </div>
               </div>
-
-              {activeSSTMapWork.items.map((cat, cIdx) => (
-                <div key={cIdx} className="space-y-3">
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-400 block">
-                    {cat.category}
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                    {cat.points.map((pt, pIdx) => (
-                      <div
-                        key={pIdx}
-                        className={`p-4 rounded-2xl border space-y-1.5 ${
-                          isDark ? "bg-white/[0.02] border-white/10" : "bg-teal-50/50 border-teal-200 shadow-2xs"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="font-bold text-sm text-teal-300">{pt.label}</span>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">
-                            {pt.river ? pt.river : "Location"}
-                          </span>
-                        </div>
-                        <p className="text-xs font-medium text-amber-300">📍 State / Region: {pt.state}</p>
-                        <p className="text-[11px] text-slate-400 leading-relaxed">{pt.significance}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+            )
           )}
 
           {/* TAB 4: VISUAL MNEMONICS */}
@@ -1861,35 +1945,58 @@ export default function ConceptsHubView({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {(activeSSTTopics[0]?.mnemonicImages || []).map((img, iIdx) => (
-                  <div
-                    key={iIdx}
-                    onClick={() => setActiveMnemonicModal(img)}
-                    className={`p-4 rounded-3xl border cursor-pointer group transition-all transform hover:scale-[1.01] ${
-                      isDark ? "bg-white/[0.02] border-white/10 hover:border-amber-500/40" : "bg-slate-50 border-slate-200 hover:border-amber-400 shadow-md"
-                    }`}
+              {allChapterMnemonics.length === 0 ? (
+                <div className={`p-8 rounded-2xl border text-center space-y-2 ${isDark ? "bg-white/[0.02] border-white/10 text-slate-400" : "bg-slate-50 border-slate-200 text-slate-600"}`}>
+                  <Sparkles className="w-8 h-8 text-amber-400 mx-auto" />
+                  <h4 className={`font-bold ${isDark ? "text-white" : "text-slate-900"}`}>Mnemonics Included in Deep Concepts</h4>
+                  <p className="text-xs max-w-md mx-auto">
+                    Visual study aids and memory diagrams for this chapter are integrated directly into the Deep NCERT Concepts cards.
+                  </p>
+                  <button
+                    onClick={() => setActiveSSTViewTab("concepts")}
+                    className="mt-2 px-4 py-2 rounded-xl text-xs font-bold bg-rose-500 text-slate-950 hover:bg-rose-400 cursor-pointer"
                   >
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-black/40 mb-3">
-                      <img
-                        src={img.src}
-                        alt={img.title}
-                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-bold text-xs">
-                        <ZoomIn className="w-5 h-5" /> Click to View Full Resolution
+                    View Deep Concepts
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {allChapterMnemonics.map((img, iIdx) => (
+                    <div
+                      key={iIdx}
+                      onClick={() => setActiveMnemonicModal(img)}
+                      className={`p-4 rounded-3xl border cursor-pointer group transition-all transform hover:scale-[1.01] ${
+                        isDark ? "bg-white/[0.02] border-white/10 hover:border-amber-500/40" : "bg-slate-50 border-slate-200 hover:border-amber-400 shadow-md"
+                      }`}
+                    >
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-black/40 mb-3">
+                        <img
+                          src={img.src}
+                          alt={img.title}
+                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-bold text-xs">
+                          <ZoomIn className="w-5 h-5" /> Click to View Full Resolution
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        {img.topicTitle && (
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 inline-block">
+                            {img.topicTitle}
+                          </span>
+                        )}
+                        <h4 className={`font-bold text-sm ${isDark ? "text-white" : "text-slate-900"}`}>
+                          {img.title}
+                        </h4>
+                        <p className={`text-xs leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600 font-medium"}`}>
+                          {img.description}
+                        </p>
                       </div>
                     </div>
-                    <h4 className={`font-bold text-sm mb-1 ${isDark ? "text-white" : "text-slate-900"}`}>
-                      {img.title}
-                    </h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      {img.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 

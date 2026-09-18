@@ -2071,6 +2071,7 @@ export default function CBSECommandCenter() {
       setActiveVaultQuestions(chapterCacheRef.current[cacheKey]);
       setActiveVaultChapter(chapterId);
       if (!isPreload) {
+        setActiveVaultSubject(subject);
         setVaultDisplayCount(10); // Reset pagination
         if (typeof window !== "undefined") {
           localStorage.setItem("cbse_last_vault_subject", subject);
@@ -2087,6 +2088,7 @@ export default function CBSECommandCenter() {
     if (!isPreload) {
       setActiveVaultQuestions(list);
       setActiveVaultChapter(chapterId);
+      setActiveVaultSubject(subject);
       setVaultDisplayCount(10); // Reset pagination on chapter switch
       if (typeof window !== "undefined") {
         localStorage.setItem("cbse_last_vault_subject", subject);
@@ -4889,7 +4891,7 @@ export default function CBSECommandCenter() {
                       { id: "1", label: "1M: MCQ & A/R" },
                       { id: "2", label: "2M: Short Answer I" },
                       { id: "3", label: "3M: Short Answer II" },
-                      { id: "5", label: "5M: Proofs & HOTS" },
+                      { id: "5", label: activeVaultSubject === "math" ? "5M: Proofs & HOTS" : "5M: Long Answer" },
                       { id: "case", label: "4M: Case Studies" }
                     ].map(f => (
                       <button
