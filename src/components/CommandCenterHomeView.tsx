@@ -33,6 +33,9 @@ import {
   Chapter,
   Subject
 } from "@/data/cbseData";
+import AreteLeaderboard from "@/components/AreteLeaderboard";
+import AreteMotivationalBanner from "@/components/AreteMotivationalBanner";
+import type { StudentProfile } from "@/components/AreteAccessGateModal";
 
 interface CommandCenterHomeViewProps {
   isDark: boolean;
@@ -56,6 +59,8 @@ interface CommandCenterHomeViewProps {
   setActiveVaultChapter: (ch: number) => void;
   loadChapterData: (chapterNo: number, skipAi?: boolean, subjectType?: any) => void | Promise<any>;
   setTimelinesChapterKey?: (key: any) => void;
+  userXP?: number;
+  studentProfile?: StudentProfile | null;
 }
 
 export default function CommandCenterHomeView({
@@ -79,7 +84,9 @@ export default function CommandCenterHomeView({
   setActiveVaultSubject,
   setActiveVaultChapter,
   loadChapterData,
-  setTimelinesChapterKey
+  setTimelinesChapterKey,
+  userXP = 100,
+  studentProfile = null
 }: CommandCenterHomeViewProps) {
   // Student Name & Streak
   const [studentName, setStudentName] = useState<string>("Cadet");
@@ -295,9 +302,44 @@ export default function CommandCenterHomeView({
     }
   }, [commandSubjectId, isDark]);
 
+  const currentXP = userXP || 100;
+  const peerXpList = useMemo(() => [2150, 1980, 1820, 1640, 1420, 1210, 980, 740, 590, 440, 310, 210], []);
+  const userRank = useMemo(() => {
+    return peerXpList.filter(xp => xp > currentXP).length + 1;
+  }, [currentXP, peerXpList]);
+
+  const handleLaunchPracticeVault = () => {
+    playSound("click");
+    setActiveTab("questions");
+  };
+
+  const handleLaunchFlashcardsTab = () => {
+    playSound("click");
+    setActiveTab("flashcards");
+  };
+
+  const handleLaunchPomodoroSprint = () => {
+    playSound("click");
+    setIsFocusActive(true);
+    setFocusSeconds(25 * 60);
+  };
+
   return (
-    <div className="w-full max-w-6xl mx-auto px-3 sm:px-5 py-4 font-sans antialiased relative z-10">
+    <div className="w-full max-w-6xl mx-auto px-3 sm:px-5 py-4 font-sans antialiased relative z-10 space-y-8">
       
+      {/* =========================================================================
+          ARETÉ WISDOM & DYNAMIC MOTIVATIONAL ENGINE (FOR LOWER / ALL XP TIERS)
+          ========================================================================= */}
+      <AreteMotivationalBanner
+        currentXP={currentXP}
+        userRank={userRank}
+        totalContenders={13}
+        isDark={isDark}
+        onLaunchPomodoro={handleLaunchPomodoroSprint}
+        onLaunchPractice={handleLaunchPracticeVault}
+        onLaunchFlashcards={handleLaunchFlashcardsTab}
+      />
+
       {/* =========================================================================
           APPLE VISION PRO SPATIAL STUDY COCKPIT
           ========================================================================= */}
@@ -845,6 +887,16 @@ export default function CommandCenterHomeView({
         </div>
 
       </div>
+
+      {/* =========================================================================
+          ARETÉ ALL-INDIA XP LEADERBOARD (FLAGSHIP ARENA ATTRACTION)
+          ========================================================================= */}
+      <AreteLeaderboard
+        currentXP={currentXP}
+        studentProfile={studentProfile}
+        isDark={isDark}
+        onOpenVault={handleLaunchPracticeVault}
+      />
 
     </div>
   );

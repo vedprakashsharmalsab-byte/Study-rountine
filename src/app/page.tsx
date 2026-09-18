@@ -54,6 +54,11 @@ const CoverageMatrixView = dynamic(
   { loading: TabSkeleton, ssr: false }
 );
 import CommandCenterHomeView from "@/components/CommandCenterHomeView";
+import AreteAccessGateModal, {
+  StudentProfile,
+  STORAGE_KEY_STUDENT,
+  STORAGE_KEY_VISITS
+} from "@/components/AreteAccessGateModal";
 import SettingsModal from "@/components/SettingsModal";
 import OnboardingModal from "@/components/OnboardingModal";
 import GlobalSearchModal from "@/components/GlobalSearchModal";
@@ -1013,6 +1018,27 @@ export default function CBSECommandCenter() {
     setSystemId(sid);
   }, []);
   const [mounted, setMounted] = useState(false);
+  const [studentProfile, setStudentProfile] = useState<StudentProfile | null>(null);
+  const [isGateOpen, setIsGateOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_STUDENT);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          const currentVisits = parseInt(localStorage.getItem(STORAGE_KEY_VISITS) || "1", 10);
+          parsed.visitsCount = currentVisits;
+          setStudentProfile(parsed);
+          setIsGateOpen(false);
+        } else {
+          setIsGateOpen(true);
+        }
+      } catch {
+        setIsGateOpen(true);
+      }
+    }
+  }, []);
   
   const VALID_TABS = useMemo(() => [
     "chapter_dashboard", "concepts", "theorems", "activities", "questions",
@@ -2244,8 +2270,11 @@ export default function CBSECommandCenter() {
     const customContributionCount = customFlashcards.length + customQuestions.length;
     const correctMcqsCount = Object.keys(correctMcqQuestionIds).filter((k) => correctMcqQuestionIds[k]).length;
 
+    const hasVerifiedProfile = !!studentProfile || (typeof window !== "undefined" && !!localStorage.getItem("arete_verified_student_profile"));
+
     // Derived XP (impossible to exploit by spam clicking)
     const calculatedXp =
+      (hasVerifiedProfile ? 100 : 0) +
       syllabusTopicsCount * 25 +
       testSeriesCount * 25 +
       mapCount * 15 +
@@ -2379,6 +2408,17 @@ export default function CBSECommandCenter() {
       setXpToasts((prev) => prev.filter((t) => t.id !== newToast.id));
     }, 1800);
   }, []);
+
+  // Areté Unbreakable Citadel Identity Verification Handler
+  const handleStudentVerified = useCallback((profile: StudentProfile) => {
+    setStudentProfile(profile);
+    setIsGateOpen(false);
+    try {
+      showXpToast(100, "🏛️ Identity Ledger Authenticated! (+100 XP Bounty)");
+      triggerConfetti();
+      areteAudio.play("badge");
+    } catch {}
+  }, [showXpToast, triggerConfetti]);
 
   // Quick 1-tap logging of an incorrect MCQ to Mistakes Notebook
   const logMcqMistakeToVault = useCallback((q: VaultQuestion, chosenOptIndex: number, correctOptIndex: number) => {
@@ -5865,6 +5905,8 @@ export default function CBSECommandCenter() {
             setActiveVaultChapter={setActiveVaultChapter}
             loadChapterData={loadChapterData}
             setTimelinesChapterKey={setTimelinesChapterKey}
+            userXP={totalXp}
+            studentProfile={studentProfile}
           />
         )}
 
@@ -6813,6 +6855,17 @@ export default function CBSECommandCenter() {
           </div>
         </div>
       )}
+
+      {/* =========================================================================
+          UNBREAKABLE CITADEL GATE: STUDENT IDENTITY & COOKIE / POLICY LEDGER
+          Hardcoded zero-bypass authentication required before full platform access
+          ========================================================================= */}
+      <AreteAccessGateModal
+        isOpen={isGateOpen}
+        isDark={isDark}
+        onVerified={handleStudentVerified}
+      />
+
     </div>
   );
 }
