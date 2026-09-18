@@ -2282,6 +2282,9 @@ export default function CBSECommandCenter() {
       }
       if (opts?.customAction) opts.customAction();
       setActiveTab(tabId as any);
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      }
     }
   }, [playSound, loadChapterData]);
 
@@ -2828,7 +2831,7 @@ export default function CBSECommandCenter() {
   const isDark = theme === "dark";
 
   return (
-    <div className={`min-h-screen pb-24 md:pb-12 transition-colors duration-150 relative ${isDark ? "apple-mesh-bg-dark text-slate-100" : "apple-mesh-bg-light text-slate-900"}`}>
+    <div className={`min-h-screen pb-24 md:pb-12 transition-colors duration-150 relative overflow-x-clip max-w-full ${isDark ? "apple-mesh-bg-dark text-slate-100" : "apple-mesh-bg-light text-slate-900"}`}>
       
       {/* FLOATING XP GAIN/LOSS TOASTS */}
       <div className="fixed top-16 right-4 z-50 pointer-events-none space-y-2">
@@ -2851,9 +2854,6 @@ export default function CBSECommandCenter() {
       <IsolatedConfetti trigger={confettiTrigger} />
 
       {/* =========================================================================
-          STICKY HEADER WITH LIVE XP / LEVEL BAR & QUICK CONTROLS
-          ========================================================================= */}
-      {/* =========================================================================
           APPLE VISION PRO AMBIENT AURORA BACKLIGHT
           ========================================================================= */}
       <div className="aurora-mesh" aria-hidden="true">
@@ -2863,13 +2863,15 @@ export default function CBSECommandCenter() {
       </div>
 
       {/* =========================================================================
-          APPLE-STYLE TRANSLUCENT FROSTED GLASS STATUS HEADER
+          RIGID FROSTED TOP APP BAR (HEADER + SECONDARY SUB-TOOLBAR)
+          Combined into one pinned sticky top block so it NEVER drifts or moves!
           ========================================================================= */}
-      <header className={`sticky top-0 z-40 border-b transition-colors backdrop-blur-2xl ${
-        isDark
-          ? "border-white/10 bg-[#080b14]/80 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
-          : "border-slate-200/80 bg-white/85 text-slate-900 shadow-xs"
-      }`}>
+      <div className="sticky top-0 z-40">
+        <header className={`border-b transition-colors backdrop-blur-2xl ${
+          isDark
+            ? "border-white/10 bg-[#080b14]/80 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
+            : "border-slate-200/80 bg-white/85 text-slate-900 shadow-xs"
+        }`}>
         <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-3">
           
           {/* BRAND EMBLEM & SQUIRCLE (Secret 5-Tap Backdoor for Sarthak) */}
@@ -2926,26 +2928,87 @@ export default function CBSECommandCenter() {
             </div>
           </div>
 
-          {/* DYNAMIC ISLAND LIVE TELEMETRY (FUTURISTIC CAPSULE) */}
-          <div className="hidden lg:flex items-center">
-            <button
-              onClick={() => {
-                playSound("click");
-                setActiveTab("test_series");
-              }}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-mono transition-all cursor-pointer group shadow-sm active:scale-[0.98] tabular-nums leading-none ${
-                isDark
-                  ? "bg-gradient-to-r from-amber-500/10 via-white/[0.03] to-cyan-500/10 border-white/15 text-zinc-200 hover:border-amber-400/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)]"
-                  : "bg-gradient-to-r from-amber-50 via-white to-blue-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:shadow-sm"
-              }`}
-              title="Click to view Test Series schedule"
-            >
-              <HeaderExamCountdown isDark={isDark} />
-            </button>
+          {/* MASTER CATEGORY NAVIGATION TABS (INTEGRATED INSIDE HEADER - ZERO JUMP/COLLISION) */}
+          <div className="hidden md:flex items-center">
+            <div className={`p-1 rounded-full border flex items-center gap-1 backdrop-blur-xl transition-all ${
+              isDark
+                ? "bg-white/[0.06] border-white/15 shadow-inner"
+                : "bg-slate-100 border-slate-200"
+            }`}>
+              {CATEGORY_DEFINITIONS.map((cat) => {
+                const isCatActive = activeCategory === cat.id;
+                return (
+                  <a
+                    key={cat.id}
+                    href={getTabHref(cat.defaultTab)}
+                    onClick={(e) => {
+                      handleNavClick(e, cat.defaultTab, {
+                        customAction: () => {
+                          if (cat.id === "concepts") {
+                            if (commandSubjectId === "sst") {
+                              setConceptsSubject("sst");
+                              setConceptsChapterNo(1);
+                            } else if (commandSubjectId === "science") {
+                              setConceptsSubject("science");
+                              setConceptsChapterNo(1);
+                            } else {
+                              setConceptsSubject("math");
+                            }
+                          }
+                        }
+                      });
+                    }}
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] ${
+                      isCatActive
+                        ? isDark
+                          ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/25 ring-1 ring-amber-400 font-extrabold"
+                          : "bg-slate-900 text-white shadow-sm ring-1 ring-slate-950 font-extrabold"
+                        : isDark
+                        ? "text-zinc-300 hover:text-white hover:bg-white/[0.08]"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-black/[0.05]"
+                    }`}
+                  >
+                    <cat.icon className={`w-3.5 h-3.5 ${isCatActive ? (isDark ? "text-slate-950" : "text-amber-400") : "text-zinc-400"} shrink-0`} />
+                    <span className="truncate">{cat.label}</span>
+                    {cat.badge && (
+                      <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full font-black shrink-0 leading-none inline-flex items-center ${
+                        isCatActive
+                          ? isDark
+                            ? "bg-slate-950/30 text-slate-950"
+                            : "bg-white/20 text-white"
+                          : isDark
+                          ? "bg-white/10 text-zinc-300"
+                          : "bg-slate-200 text-slate-700"
+                      }`}>
+                        {cat.badge}
+                      </span>
+                    )}
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
           {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* EXAM COUNTDOWN (2XL+ ULTRA-WIDE SCREENS ONLY - PREVENTS HORIZONTAL OVERFLOW) */}
+            <div className="hidden 2xl:flex items-center">
+              <button
+                onClick={() => {
+                  playSound("click");
+                  setActiveTab("test_series");
+                }}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-mono transition-all cursor-pointer group shadow-sm active:scale-[0.98] tabular-nums leading-none ${
+                  isDark
+                    ? "bg-gradient-to-r from-amber-500/10 via-white/[0.03] to-cyan-500/10 border-white/15 text-zinc-200 hover:border-amber-400/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+                    : "bg-gradient-to-r from-amber-50 via-white to-blue-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:shadow-sm"
+                }`}
+                title="Click to view Test Series schedule"
+              >
+                <HeaderExamCountdown isDark={isDark} />
+              </button>
+            </div>
+
             {/* LEVEL & XP CAPSULE */}
             <div className={`flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-medium shadow-xs leading-none ${
               isDark 
@@ -2975,38 +3038,44 @@ export default function CBSECommandCenter() {
                 setIsSoundMuted(nextMute);
                 if (!nextMute) playSound("click");
               }}
-              className={`p-1.5 sm:p-2 rounded-xl border transition-all cursor-pointer flex items-center justify-center min-w-[34px] min-h-[34px] sm:min-w-[36px] sm:min-h-[36px] touch-manipulation active:scale-95 ${
-                isDark ? "bg-white/[0.04] border-white/10 text-zinc-400 hover:text-white hover:bg-white/[0.08]" : "bg-black/[0.03] border-black/[0.06] text-slate-600 hover:text-slate-900"
+              className={`p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[34px] min-h-[34px] touch-manipulation active:scale-95 ${
+                isDark 
+                  ? isSoundMuted ? "bg-white/5 border-white/10 text-zinc-500" : "bg-white/10 border-white/20 text-zinc-200 hover:text-white"
+                  : isSoundMuted ? "bg-slate-100 border-slate-200 text-slate-400" : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
               }`}
-              title={isSoundMuted ? "Unmute" : "Mute"}
+              title={isSoundMuted ? "Audio muted (Click to enable sound)" : "Audio enabled (Click to mute)"}
+              aria-label={isSoundMuted ? "Unmute Audio" : "Mute Audio"}
             >
-              {isSoundMuted ? <VolumeX className="w-3.5 h-3.5 text-rose-400" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+              {isSoundMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
             </button>
 
-            {/* THEME */}
+            {/* THEME TOGGLE */}
             <button
               onClick={() => {
                 playSound("click");
                 setTheme(isDark ? "light" : "dark");
               }}
-              className={`p-1.5 sm:p-2 rounded-xl border transition-all cursor-pointer flex items-center justify-center min-w-[34px] min-h-[34px] sm:min-w-[36px] sm:min-h-[36px] touch-manipulation active:scale-95 ${
-                isDark ? "bg-white/[0.04] border-white/10 text-zinc-400 hover:text-white hover:bg-white/[0.08]" : "bg-black/[0.03] border-black/[0.06] text-slate-600 hover:text-slate-900"
+              className={`p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[34px] min-h-[34px] touch-manipulation active:scale-95 ${
+                isDark 
+                  ? "bg-white/10 border-white/20 text-amber-400 hover:text-amber-300"
+                  : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
               }`}
-              title="Toggle Theme"
+              title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
+              aria-label={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
             >
-              {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
+              {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
             </button>
 
-            {/* ALL MODULES BUTTON */}
+            {/* ALL 18 MODULES TRIGGER */}
             <button
               onClick={() => {
                 playSound("click");
                 setIsAllModulesModalOpen(true);
               }}
-              className={`p-1.5 sm:px-3.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 min-h-[36px] touch-manipulation active:scale-95 ${
-                isDark 
-                  ? "bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-amber-500/50 text-amber-300 hover:bg-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)]" 
-                  : "bg-gradient-to-r from-amber-100 to-amber-200 border-amber-400 text-amber-950 font-bold hover:brightness-105 shadow-sm"
+              className={`px-3 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1.5 min-h-[34px] touch-manipulation active:scale-95 ${
+                isDark
+                  ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.15)]"
+                  : "bg-amber-100/80 border-amber-300 text-amber-950 hover:bg-amber-200 shadow-xs"
               }`}
               title="Open All Modules (⌘K)"
             >
@@ -3021,83 +3090,12 @@ export default function CBSECommandCenter() {
       </header>
 
       {/* =========================================================================
-          APPLE SEGMENTED MASTER NAVIGATION (PRIMARY CONTROL - DESKTOP ONLY)
-          ========================================================================= */}
-      {/* =========================================================================
-          APPLE VISION PRO FLOATING SPATIAL DOCK (PRIMARY CONTROL - DESKTOP ONLY)
-          ========================================================================= */}
-      <nav
-        ref={navRef}
-        className="hidden md:flex justify-center sticky top-2 sm:top-3 z-30 pointer-events-none py-1"
-      >
-        <div className="flex items-center justify-center pointer-events-auto">
-          {/* APPLE VISIONOS FROSTED CAPSULE DOCK */}
-          <div className={`p-1.5 rounded-full border flex items-center gap-1.5 shadow-2xl backdrop-blur-2xl transition-all ${
-            isDark
-              ? "bg-[#0b101f]/85 border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.6)]"
-              : "bg-white/85 border-slate-200/90 shadow-[0_12px_36px_rgba(15,23,42,0.08)]"
-          }`}>
-            {CATEGORY_DEFINITIONS.map((cat) => {
-              const isCatActive = activeCategory === cat.id;
-              return (
-                <a
-                  key={cat.id}
-                  href={getTabHref(cat.defaultTab)}
-                  onClick={(e) => {
-                    handleNavClick(e, cat.defaultTab, {
-                      customAction: () => {
-                        if (cat.id === "concepts") {
-                          if (commandSubjectId === "sst") {
-                            setConceptsSubject("sst");
-                            setConceptsChapterNo(1);
-                          } else if (commandSubjectId === "science") {
-                            setConceptsSubject("science");
-                            setConceptsChapterNo(1);
-                          } else {
-                            setConceptsSubject("math");
-                          }
-                        }
-                      }
-                    });
-                  }}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] ${
-                    isCatActive
-                      ? isDark
-                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/25 ring-1 ring-amber-400 font-extrabold"
-                        : "bg-slate-900 text-white shadow-sm ring-1 ring-slate-950 font-extrabold"
-                      : isDark
-                      ? "text-zinc-300 hover:text-white hover:bg-white/[0.08]"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-black/[0.05]"
-                  }`}
-                >
-                  <cat.icon className={`w-3.5 h-3.5 ${isCatActive ? (isDark ? "text-slate-950" : "text-amber-400") : "text-zinc-400"} shrink-0`} />
-                  <span className="truncate">{cat.label}</span>
-                  {cat.badge && (
-                    <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-black shrink-0 leading-none inline-flex items-center ${
-                      isCatActive
-                        ? isDark
-                          ? "bg-slate-950/30 text-slate-950"
-                          : "bg-white/20 text-white"
-                        : isDark
-                        ? "bg-white/10 text-zinc-300"
-                        : "bg-slate-200 text-slate-700"
-                    }`}>
-                      {cat.badge}
-                    </span>
-                  )}
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </nav>
-
-      {/* =========================================================================
           SECONDARY SUB-TOOLBAR (FOCUSED ACTIVE WORKSPACE - HIDDEN ON COMMAND)
+          Integrated cleanly inside the fixed top wrapper so it never collides or moves!
           ========================================================================= */}
       {activeCategory !== "command" && (
-        <div className={`border-b transition-colors sticky top-[49px] md:top-[95px] lg:top-[103px] z-20 ${
-          isDark ? "border-white/10 bg-[#070a14]/95" : "border-slate-200 bg-white/95"
+        <div className={`border-b transition-colors backdrop-blur-2xl ${
+          isDark ? "border-white/10 bg-[#070a14]/95" : "border-slate-200/90 bg-white/95"
         }`}>
           <div className="max-w-5xl mx-auto px-3.5 sm:px-6 py-2">
           {(() => {
@@ -3125,6 +3123,9 @@ export default function CBSECommandCenter() {
                           }
                         }
                         setActiveTab(tabId as any);
+                        if (typeof window !== "undefined") {
+                          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+                        }
                       }}
                       className={`fabulous-select ${
                         isDark ? "fabulous-select-dark" : "fabulous-select-light"
@@ -3142,7 +3143,7 @@ export default function CBSECommandCenter() {
                   </div>
                 </div>
 
-                {/* Desktop Wrapped Pills (>= md): Crisp, visible tabs */}
+                {/* Tablet / Desktop Pills (>= md): Styled with high-contrast active state */}
                 <div className="hidden md:flex items-center gap-1.5 flex-wrap">
                   {currentCat.items.map((subItem) => {
                     const isSubActive = activeTab === subItem.id;
@@ -3193,9 +3194,10 @@ export default function CBSECommandCenter() {
               </>
             );
           })()}
+          </div>
         </div>
-      </div>
       )}
+      </div>
 
       {/* =========================================================================
           ALL 18 MODULES MEGA-LAUNCHER DIRECTORY (VIA PORTAL)

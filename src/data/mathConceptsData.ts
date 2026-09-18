@@ -1,1 +1,1 @@
-export * from "./mathConcepts";
+export * from "./mathConcepts/index";
