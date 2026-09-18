@@ -45,7 +45,19 @@ const HindiMasterView = dynamic(
   () => import("@/components/HindiMasterView"),
   { loading: TabSkeleton, ssr: false }
 );
+const ITModuleView = dynamic(
+  () => import("@/components/ITModuleView"),
+  { loading: TabSkeleton, ssr: false }
+);
+const CoverageMatrixView = dynamic(
+  () => import("@/components/CoverageMatrixView"),
+  { loading: TabSkeleton, ssr: false }
+);
 import CommandCenterHomeView from "@/components/CommandCenterHomeView";
+import SettingsModal from "@/components/SettingsModal";
+import OnboardingModal from "@/components/OnboardingModal";
+import GlobalSearchModal from "@/components/GlobalSearchModal";
+import { appStorage, STORAGE_KEYS } from "@/lib/storage";
 
 import {
   Atom,
@@ -97,6 +109,9 @@ import {
   Globe,
   Shield,
   Radio,
+  Settings,
+  Laptop,
+  BarChart3,
 } from "lucide-react";
 
 import {
@@ -885,14 +900,14 @@ export default function CBSECommandCenter() {
     "chapter_dashboard", "concepts", "theorems", "activities", "questions",
     "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
     "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
-    "timelines", "english", "hindi", "tools_diagrams"
+    "timelines", "english", "hindi", "tools_diagrams", "settings"
   ], []);
 
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams">(() => {
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams" | "settings">(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const urlTab = params.get("tab");
-      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams"];
+      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams", "settings"];
       if (urlTab && validTabs.includes(urlTab)) {
         return urlTab as any;
       }

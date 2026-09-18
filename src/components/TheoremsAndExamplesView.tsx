@@ -430,9 +430,10 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
                       <div className="px-6 py-3 border-t border-current/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
                         <div className="flex items-center gap-2">
                           <Flame className="w-4 h-4 text-amber-500 shrink-0" />
-                          <span className={`text-[11px] font-medium ${isDark ? "text-amber-300" : "text-amber-900"}`}>
-                            <strong>Examiner Rubric:</strong> {item.examinerTrap}
-                          </span>
+                          <div className={`text-[11px] font-medium ${isDark ? "text-amber-300" : "text-amber-900"}`}>
+                            <strong className="mr-1">Examiner Rubric:</strong>
+                            <PremiumMathRenderer content={item.examinerTrap} isDark={isDark} />
+                          </div>
                         </div>
 
                         <div className={`flex items-center gap-1 text-[10px] font-mono font-bold shrink-0 ${isDark ? "text-emerald-400" : "text-emerald-800"}`}>

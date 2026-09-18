@@ -322,8 +322,10 @@ export default function CompetitiveHotsView({
                           </div>
 
                           <div className="pt-2 border-t border-white/5 text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
-                            <span className="text-cyan-400 font-bold">Evaluator Rubric:</span>
-                            <span>{st.examinerCheck}</span>
+                            <span className="text-cyan-400 font-bold shrink-0">Evaluator Rubric:</span>
+                            <div className="inline-block">
+                              <PremiumMathRenderer content={st.examinerCheck} isDark={isDark} />
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -335,9 +337,9 @@ export default function CompetitiveHotsView({
                     isDark ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-900"
                   }`}>
                     <span className="text-[10px] uppercase font-bold text-slate-400 block font-mono mb-1">Final Result</span>
-                    <span className="text-sm sm:text-base font-black font-mono">
-                      {q.finalBoxedAnswer}
-                    </span>
+                    <div className="text-sm sm:text-base font-black font-mono inline-block">
+                      <PremiumMathRenderer content={q.finalBoxedAnswer} isDark={isDark} />
+                    </div>
                   </div>
 
                   {/* COMMON STUDENT PITFALL ALERT */}
@@ -347,7 +349,9 @@ export default function CompetitiveHotsView({
                     <AlertTriangle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
                     <div className="space-y-1 text-xs sm:text-sm">
                       <span className="font-bold block text-rose-400">Common Student Deduction Trap:</span>
-                      <p className="leading-relaxed">{q.commonStudentPitfall}</p>
+                      <div className="leading-relaxed">
+                        <PremiumMathRenderer content={q.commonStudentPitfall} isDark={isDark} />
+                      </div>
                     </div>
                   </div>
 

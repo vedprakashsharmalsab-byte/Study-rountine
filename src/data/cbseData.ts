@@ -3543,6 +3543,1556 @@ export const CBSE_SUBJECTS: Subject[] = [
 // 3. MASSIVE CHAPTER-WISE FLASHCARD BANK FOR ACTIVE RECALL
 // -------------------------------------------------------------
 export const CHAPTER_WISE_FLASHCARDS: FlashcardItem[] = [
+  {
+    "id": "fc_thm_1",
+    "subject": "Mathematics",
+    "chapter": "Triangles",
+    "topic": "Theorem 6.1: Basic Proportionality Theorem (BPT / Thales Theorem)",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem 6.1: Basic Proportionality Theorem (BPT / Thales Theorem)",
+    "backAnswer": "Statement: If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, the other two sides are divided in the same ratio.\nProof Strategy: $\\dfrac{AD}{DB} = \\dfrac{AE}{EC} \\quad \\text{[Hence Proved]}$\nExaminer Trap: Crucial Examiner Check: 1 Mark is deducted if you forget to state 'EN is perpendicular to AB and acts as altitude for the obtuse triangle △BDE'. Always write the reason for Eq (3) clearly!",
+    "hintOrFormula": "NCERT Class 10, Chapter 6, Theorem 6.1 (Page 124)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_2",
+    "subject": "Mathematics",
+    "chapter": "Triangles",
+    "topic": "Theorem 6.2: Converse of Basic Proportionality Theorem",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem 6.2: Converse of Basic Proportionality Theorem",
+    "backAnswer": "Statement: If a line divides any two sides of a triangle in the same ratio, then the line is parallel to the third side.\nProof Strategy: $DE \\parallel BC \\quad \\text{[Hence Proved]}$\nExaminer Trap: Method of Contradiction: You must clearly show 'Adding 1 to both sides' to get AC/EC = AC/E'C. Skipping this algebra costs 1 mark.",
+    "hintOrFormula": "NCERT Class 10, Chapter 6, Theorem 6.2 (Page 126)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_3",
+    "subject": "Mathematics",
+    "chapter": "Circles",
+    "topic": "Theorem 10.1: Tangent is Perpendicular to Radius at Point of Contact",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem 10.1: Tangent is Perpendicular to Radius at Point of Contact",
+    "backAnswer": "Statement: The tangent at any point of a circle is perpendicular to the radius through the point of contact.\nProof Strategy: $OP \\perp XY \\quad \\text{[Hence Proved]}$\nExaminer Trap: Do NOT just write 'by definition'. You must write the proof that OP is the shortest distance among all segments from O to XY.",
+    "hintOrFormula": "NCERT Class 10, Chapter 10, Theorem 10.1 (Page 208)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_4",
+    "subject": "Mathematics",
+    "chapter": "Circles",
+    "topic": "Theorem 10.2: Lengths of Tangents from an External Point are Equal",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem 10.2: Lengths of Tangents from an External Point are Equal",
+    "backAnswer": "Statement: The lengths of tangents drawn from an external point to a circle are equal.\nProof Strategy: $PQ = PR \\quad \\text{[Hence Proved]}$\nExaminer Trap: FATAL ERROR: Never write SSS criterion by assuming PQ = PR before it is proved (circular reasoning)! You MUST use RHS congruence using OP (hypotenuse) and OQ=OR (radii).",
+    "hintOrFormula": "NCERT Class 10, Chapter 10, Theorem 10.2 (Page 211)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_5",
+    "subject": "Mathematics",
+    "chapter": "Triangles",
+    "topic": "NCERT Ch 6 Example 1: Parallel Line Corollary AD/AB = AE/AC",
+    "frontQuestion": "State the theorem and key proof strategy for: NCERT Ch 6 Example 1: Parallel Line Corollary AD/AB = AE/AC",
+    "backAnswer": "Statement: If a line intersects sides AB and AC of a △ABC at D and E respectively and is parallel to BC, prove that AD / AB = AE / AC.\nProof Strategy: $\\frac{AD}{AB} = \\frac{AE}{AC} \\quad \\text{[Hence Proved]}$\nExaminer Trap: Do NOT simply say 'obviously'. You must show the inversion, addition of 1, and re-inversion for full 2 marks.",
+    "hintOrFormula": "NCERT Class 10, Chapter 6, Example 1 (Page 126)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_6",
+    "subject": "Mathematics",
+    "chapter": "Triangles",
+    "topic": "NCERT Ch 6 Example 2: Trapezium Parallel Line Ratio AE/ED = BF/FC",
+    "frontQuestion": "State the theorem and key proof strategy for: NCERT Ch 6 Example 2: Trapezium Parallel Line Ratio AE/ED = BF/FC",
+    "backAnswer": "Statement: ABCD is a trapezium with AB ∥ DC. E and F are points on non-parallel sides AD and BC respectively such that EF is parallel to AB. Show that AE / ED = BF / FC.\nProof Strategy: $\\frac{AE}{ED} = \\frac{BF}{FC} \\quad \\text{[Hence Proved]}$\nExaminer Trap: Without the construction 'Join AC to intersect EF at G', you cannot apply BPT! Construction step carries 0.5 mark.",
+    "hintOrFormula": "NCERT Class 10, Chapter 6, Example 2 (Page 127)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_7",
+    "subject": "Mathematics",
+    "chapter": "Triangles",
+    "topic": "NCERT Ch 6 Example 3: Proportional Sides to Isosceles Triangle Proof",
+    "frontQuestion": "State the theorem and key proof strategy for: NCERT Ch 6 Example 3: Proportional Sides to Isosceles Triangle Proof",
+    "backAnswer": "Statement: In the given figure, PS / SQ = PT / TR and ∠PST = ∠PRQ. Prove that △PQR is an isosceles triangle.\nProof Strategy: $\\Delta PQR \\text{ is an isosceles triangle with } PQ = PR \\quad \\text{[Hence Proved]}$\nExaminer Trap: Do NOT confuse BPT with its Converse. Here ratio is given, so Converse of BPT proves ST ∥ QR.",
+    "hintOrFormula": "NCERT Class 10, Chapter 6, Example 3 (Page 127)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_8",
+    "subject": "Mathematics",
+    "chapter": "Triangles",
+    "topic": "NCERT Ch 6 Example 7: The Iconic Lamp-Post Walking Shadow Problem",
+    "frontQuestion": "State the theorem and key proof strategy for: NCERT Ch 6 Example 7: The Iconic Lamp-Post Walking Shadow Problem",
+    "backAnswer": "Statement: A girl of height 90 cm is walking away from the base of a lamp-post at a speed of 1.2 m/s. If the lamp is 3.6 m above the ground, find the length of her shadow after 4 seconds.\nProof Strategy: $\\text{Length of her shadow after 4 seconds } = 1.6\\text{ m } (160\\text{ cm})$\nExaminer Trap: Units Trap: Height is in cm (90 cm) while post is in m (3.6 m). You MUST convert 90 cm = 0.9 m or 3.6 m = 360 cm. Also, big triangle base is (4.8 + x), NOT 4.8!",
+    "hintOrFormula": "NCERT Class 10, Chapter 6, Example 7 (Page 135)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_9",
+    "subject": "Mathematics",
+    "chapter": "Introduction to Trigonometry",
+    "topic": "NCERT Ch 8 Example 15: The Super HOTS Board Proof (sinθ - cosθ + 1)/(sinθ + cosθ - 1)",
+    "frontQuestion": "State the theorem and key proof strategy for: NCERT Ch 8 Example 15: The Super HOTS Board Proof (sinθ - cosθ + 1)/(sinθ + cosθ - 1)",
+    "backAnswer": "Statement: Prove that: $\\frac{\\sin \\theta - \\cos \\theta + 1}{\\sin \\theta + \\cos \\theta - 1} = \\frac{1}{\\sec \\theta - \\tan \\theta}$, using the identity $\\sec^2 \\theta = 1 + \\tan^2 \\theta$.\nProof Strategy: $\\frac{1}{\\sec \\theta - \\tan \\theta} = \\text{RHS} \\quad \\text{[Hence Proved]}$\nExaminer Trap: You must divide by cos θ (NOT sin θ) because the question specifically mandates using sec²θ = 1 + tan²θ!",
+    "hintOrFormula": "NCERT Class 10, Chapter 8, Example 15 (Page 192)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_10",
+    "subject": "Mathematics",
+    "chapter": "Circles",
+    "topic": "NCERT Ch 10 Example 2: Prove that ∠PTQ = 2 ∠OPQ",
+    "frontQuestion": "State the theorem and key proof strategy for: NCERT Ch 10 Example 2: Prove that ∠PTQ = 2 ∠OPQ",
+    "backAnswer": "Statement: Two tangents TP and TQ are drawn to a circle with centre O from an external point T. Prove that ∠PTQ = 2 ∠OPQ.\nProof Strategy: $\\angle PTQ = 2 \\angle OPQ \\quad \\text{[Hence Proved]}$\nExaminer Trap: Do NOT assume OP bisects ∠PTQ without proving congruence! The method shown above using isosceles △TPQ is the official NCERT 100% full-mark method.",
+    "hintOrFormula": "NCERT Class 10, Chapter 10, Example 2 (Page 212)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_11",
+    "subject": "Mathematics",
+    "chapter": "Circles",
+    "topic": "NCERT Ch 10 Example 3: Chord Length 8cm, Radius 5cm, Find Tangent TP",
+    "frontQuestion": "State the theorem and key proof strategy for: NCERT Ch 10 Example 3: Chord Length 8cm, Radius 5cm, Find Tangent TP",
+    "backAnswer": "Statement: PQ is a chord of length 8 cm of a circle of radius 5 cm. The tangents at P and Q intersect at a point T. Find the length TP.\nProof Strategy: $TP = \\frac{20}{3}\\text{ cm} \\approx 6.67\\text{ cm}$\nExaminer Trap: Do NOT approximate to 6.6 cm! Leave it as 20/3 cm (standard board convention) or 6.67 cm.",
+    "hintOrFormula": "NCERT Class 10, Chapter 10, Example 3 (Page 213)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_12",
+    "subject": "Mathematics",
+    "chapter": "Statistics",
+    "topic": "NCERT Ch 13 Example 8: Missing Frequencies (x and y) with Median = 525",
+    "frontQuestion": "State the theorem and key proof strategy for: NCERT Ch 13 Example 8: Missing Frequencies (x and y) with Median = 525",
+    "backAnswer": "Statement: The median of the following data is 525. Find the values of x and y, if the total frequency is 100. (Intervals: 0-100: 2, 100-200: 5, 200-300: x, 300-400: 12, 400-500: 17, 500-600: 20, 600-700: y, 700-800: 9, 800-900: 7, 900-1000: 4).\nProof Strategy: $x = 9, \\quad y = 15$\nExaminer Trap: Bracket Sign Trap: cf is (36 + x). You MUST subtract the entire quantity: 50 - (36 + x) = 50 - 36 - x. Forgetting parentheses gives 50 - 36 + x, causing fatal calculation breakdown!",
+    "hintOrFormula": "NCERT Class 10, Chapter 13, Example 8 (Page 285)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_13",
+    "subject": "Mathematics",
+    "chapter": "Real Numbers",
+    "topic": "Theorem 1.4: Proof of Irrationality of √2",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem 1.4: Proof of Irrationality of √2",
+    "backAnswer": "Statement: Prove that $\\sqrt{2}$ is irrational.\nProof Strategy: $\\sqrt{2} \\text{ is an irrational number.} \\quad \\text{[Hence Proved]}$\nExaminer Trap: Coprime Declaration Trap: If you fail to write 'where a and b are coprime integers (gcd(a, b) = 1)', CBSE marking scheme deducts 1 full mark! Also you must explicitly cite Theorem 1.3 ('p divides a^2 implies p divides a').",
+    "hintOrFormula": "NCERT Class 10, Chapter 1, Theorem 1.4 (Page 12)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_14",
+    "subject": "Mathematics",
+    "chapter": "Real Numbers",
+    "topic": "Theorem: Proof of Irrationality of √5",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem: Proof of Irrationality of √5",
+    "backAnswer": "Statement: Prove that $\\sqrt{5}$ is irrational.\nProof Strategy: $\\sqrt{5} \\text{ is irrational.} \\quad \\text{[Hence Proved]}$\nExaminer Trap: Never write 'a/b is a fraction'. Always explicitly write 'a and b are integers, b ≠ 0, and gcd(a, b) = 1'. CBSE answer keys penalize loose wording.",
+    "hintOrFormula": "NCERT Class 10, Chapter 1, Exercise 1.2 Q1",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_15",
+    "subject": "Mathematics",
+    "chapter": "Real Numbers",
+    "topic": "Theorem: Proof that 3 + 2√5 is Irrational",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem: Proof that 3 + 2√5 is Irrational",
+    "backAnswer": "Statement: Prove that $3 + 2\\sqrt{5}$ is irrational, given that $\\sqrt{5}$ is irrational.\nProof Strategy: $3 + 2\\sqrt{5} \\text{ is irrational.} \\quad \\text{[Hence Proved]}$\nExaminer Trap: Do NOT attempt to reprove that √5 is irrational unless the question explicitly asks for it! Simply isolate √5 and state: 'Since a and b are integers, (a - 3b)/2b is rational, contradicting that √5 is irrational'.",
+    "hintOrFormula": "NCERT Class 10, Chapter 1, Exercise 1.2 Q2",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_16",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Derivation of the Quadratic Formula (Completing the Square Method)",
+    "frontQuestion": "State the theorem and key proof strategy for: Derivation of the Quadratic Formula (Completing the Square Method)",
+    "backAnswer": "Statement: Derive the quadratic formula $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$ for the standard quadratic equation $ax^2 + bx + c = 0$ ($a \neq 0$).\nProof Strategy: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} \\quad \\text{[Quadratic Formula / Shridharacharya's Rule]}$\nExaminer Trap: Denominator Sign Trap: The denominator is strictly 2a, NOT just 2! Also remember to specify that real roots exist only when the discriminant $D = b^2 - 4ac \\ge 0$.",
+    "hintOrFormula": "NCERT Class 10, Chapter 4, Section 4.4 (Page 83)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_17",
+    "subject": "Mathematics",
+    "chapter": "Arithmetic Progressions",
+    "topic": "Derivation of the n-th Term of an AP (an = a + (n - 1)d)",
+    "frontQuestion": "State the theorem and key proof strategy for: Derivation of the n-th Term of an AP (an = a + (n - 1)d)",
+    "backAnswer": "Statement: Derive the formula for the general $n$-th term $a_n$ of an Arithmetic Progression whose first term is $a$ and common difference is $d$.\nProof Strategy: $a_n = a + (n - 1)d \\quad \\text{[General Term of an AP]}$\nExaminer Trap: Zero vs One Index: The first term has (1 - 1)d = 0d! Do not write a_n = a + nd. The number of intervals of common difference between term 1 and term n is strictly (n - 1).",
+    "hintOrFormula": "NCERT Class 10, Chapter 5, Section 5.3 (Page 100)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_18",
+    "subject": "Mathematics",
+    "chapter": "Arithmetic Progressions",
+    "topic": "Derivation of Sum of First n Terms of an AP (Sn = n/2 [2a + (n - 1)d])",
+    "frontQuestion": "State the theorem and key proof strategy for: Derivation of Sum of First n Terms of an AP (Sn = n/2 [2a + (n - 1)d])",
+    "backAnswer": "Statement: Derive the formula for the sum of the first $n$ terms of an AP with first term $a$ and common difference $d$.\nProof Strategy: $S_n = \\frac{n}{2} [2a + (n - 1)d] = \\frac{n}{2} [a + l] \\quad \\text{[Sum of n Terms of an AP]}$\nExaminer Trap: Forgetting the 2a: Students frequently write n/2 [a + (n - 1)d], dropping the coefficient 2. The formula has 2a because it sums the first term a and the n-th term [a + (n - 1)d].",
+    "hintOrFormula": "NCERT Class 10, Chapter 5, Section 5.4 (Page 106)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_19",
+    "subject": "Mathematics",
+    "chapter": "Triangles",
+    "topic": "Theorem: Internal Angle Bisector Theorem (BD/DC = AB/AC)",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem: Internal Angle Bisector Theorem (BD/DC = AB/AC)",
+    "backAnswer": "Statement: The internal bisector of an angle of a triangle divides the opposite side internally in the ratio of the sides containing the angle. That is, in △ABC with AD bisecting ∠A, BD/DC = AB/AC.\nProof Strategy: $\\frac{BD}{DC} = \\frac{AB}{AC} \\quad \\text{[Hence Proved]}$\nExaminer Trap: Common Misconception: AD does NOT bisect side BC unless △ABC is isosceles (AB = AC)! Never assume BD = DC in the proof.",
+    "hintOrFormula": "NCERT Class 10, Chapter 6, Supplementary Extension",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_20",
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry",
+    "topic": "Derivation of the Distance Formula (d = √[(x2 - x1)² + (y2 - y1)²])",
+    "frontQuestion": "State the theorem and key proof strategy for: Derivation of the Distance Formula (d = √[(x2 - x1)² + (y2 - y1)²])",
+    "backAnswer": "Statement: Derive the distance formula for the distance between two points $P(x_1, y_1)$ and $Q(x_2, y_2)$ in the Cartesian plane.\nProof Strategy: $d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \\quad \\text{[Distance Formula]}$\nExaminer Trap: Order Independence: Since $(x_2 - x_1)^2 = (x_1 - x_2)^2$, the order does not change the result, but NEVER mix coordinates like (x2 - y1)!",
+    "hintOrFormula": "NCERT Class 10, Chapter 7, Section 7.2 (Page 156)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_21",
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry",
+    "topic": "Derivation of the Section Formula for Internal Division",
+    "frontQuestion": "State the theorem and key proof strategy for: Derivation of the Section Formula for Internal Division",
+    "backAnswer": "Statement: Derive the coordinates of the point $P(x, y)$ which divides the line segment joining $A(x_1, y_1)$ and $B(x_2, y_2)$ internally in the ratio $m_1 : m_2$.\nProof Strategy: $P(x, y) = \\left( \\frac{m_1 x_2 + m_2 x_1}{m_1 + m_2}, \\frac{m_1 y_2 + m_2 y_1}{m_1 + m_2} \\right) \\quad \\text{[Section Formula]}$\nExaminer Trap: Midpoint Corollary: If P is the midpoint, m1 = m2 = 1, giving M = ((x1 + x2)/2, (y1 + y2)/2). Never reverse indices (do not write m1 x1 + m2 x2)!",
+    "hintOrFormula": "NCERT Class 10, Chapter 7, Section 7.3 (Page 162)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_22",
+    "subject": "Mathematics",
+    "chapter": "Introduction to Trigonometry",
+    "topic": "Derivation of Fundamental Trigonometric Identity sin²θ + cos²θ = 1",
+    "frontQuestion": "State the theorem and key proof strategy for: Derivation of Fundamental Trigonometric Identity sin²θ + cos²θ = 1",
+    "backAnswer": "Statement: Prove the fundamental identity $\\sin^2\\theta + \\cos^2\\theta = 1$, and derive from it $1 + \\tan^2\\theta = \\sec^2\\theta$ and $1 + \\cot^2\\theta = \\csc^2\\theta$.\nProof Strategy: $\\sin^2\\theta + \\cos^2\\theta = 1, \\quad 1 + \\tan^2\\theta = \\sec^2\\theta, \\quad 1 + \\cot^2\\theta = \\csc^2\\theta$\nExaminer Trap: Domain Restrictions: Note that 1 + tan²θ = sec²θ is defined for 0° ≤ θ < 90°, and 1 + cot²θ = csc²θ is defined for 0° < θ ≤ 90°. Mentioning this earns full marks in standard boards.",
+    "hintOrFormula": "NCERT Class 10, Chapter 8, Section 8.4 (Page 190)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_23",
+    "subject": "Mathematics",
+    "chapter": "Circles",
+    "topic": "Theorem: Tangents Subtend Equal Angles at Centre & OP Bisects Angle",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem: Tangents Subtend Equal Angles at Centre & OP Bisects Angle",
+    "backAnswer": "Statement: Prove that the tangents drawn from an external point to a circle: (i) subtend equal angles at the centre, and (ii) are equally inclined to the line segment joining the centre to that point.\nProof Strategy: $\\angle AOP = \\angle BOP \\quad \\text{and} \\quad \\angle APO = \\angle BPO \\quad \\text{[Hence Proved]}$\nExaminer Trap: Angle Sum Property Trap: Notice that $\\angle AOB + \\angle APB = 180^\\circ$ (supplementary angles) because $\\angle OAP + \\angle OBP = 90^\\circ + 90^\\circ = 180^\\circ$. Very frequently asked in 1-mark MCQs!",
+    "hintOrFormula": "NCERT Class 10, Chapter 10, Supplementary Corollaries",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_24",
+    "subject": "Mathematics",
+    "chapter": "Circles",
+    "topic": "Theorem: Quadrilateral Circumscribing a Circle (AB + CD = AD + BC)",
+    "frontQuestion": "State the theorem and key proof strategy for: Theorem: Quadrilateral Circumscribing a Circle (AB + CD = AD + BC)",
+    "backAnswer": "Statement: A quadrilateral ABCD is drawn to circumscribe a circle. Prove that AB + CD = AD + BC.\nProof Strategy: $AB + CD = AD + BC \\quad \\text{[Hence Proved]}$\nExaminer Trap: Grouping Trap: When writing equations, keep (AP, BP) and (CR, DR) on the SAME side! If you write DR = DS but on the next line write CQ = CR, they will not sum to CD!",
+    "hintOrFormula": "NCERT Class 10, Chapter 10, Exercise 10.2 Q8 (Page 214)",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_thm_25",
+    "subject": "Mathematics",
+    "chapter": "Areas Related to Circles",
+    "topic": "Derivation of Sector Area and Arc Length Formulas",
+    "frontQuestion": "State the theorem and key proof strategy for: Derivation of Sector Area and Arc Length Formulas",
+    "backAnswer": "Statement: Derive the formula for: (i) Area of a sector of angle $\\theta$, and (ii) Length of an arc of a sector of angle $\\theta$ of a circle of radius $r$.\nProof Strategy: $\\text{Area} = \\frac{\\theta}{360^\\circ}\\pi r^2, \\quad l = \\frac{\\theta}{360^\\circ}2\\pi r, \\quad \\text{Area} = \\frac{1}{2}lr$\nExaminer Trap: Perimeter of Sector Trap: The perimeter of a sector is NOT just the arc length! It is Perimeter = l + 2r = (θ/360°)2πr + 2r. Forgetting to add 2r costs 1 mark in board exams!",
+    "hintOrFormula": "NCERT Class 10, Chapter 11, Section 11.2",
+    "difficulty": "Topper Level (100%)"
+  },
+  {
+    "id": "fc_chem_1",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Burning of Magnesium Ribbon in Air",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Burning of Magnesium Ribbon in Air",
+    "backAnswer": "Equation: 2\\text{Mg}(s) + \\text{O}_2(g) \\xrightarrow{\\Delta} 2\\text{MgO}(s)\nType: Combination (Exothermic)\nObservations: Burns with a dazzling, brilliant white flame that can damage unprotected eyes.; Forms a brittle, white ash of magnesium oxide (MgO).; MgO dissolved in water turns red litmus paper blue, confirming it is a basic oxide.\nTrap: Why rub with sandpaper first? To scrub off the inert, unreactive coating of basic magnesium carbonate [MgCO3·Mg(OH)2] formed by reaction with atmospheric CO2 and moisture.",
+    "hintOrFormula": "Magnesium + Oxygen → Magnesium oxide + Heat + Light",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_2",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Slaking of Quicklime (Calcium Oxide with Water)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Slaking of Quicklime (Calcium Oxide with Water)",
+    "backAnswer": "Equation: \\text{CaO}(s) + \\text{H}_2\\text{O}(l) \\to \\text{Ca(OH)}_2(aq) + \\text{Heat}\nType: Combination (Exothermic)\nObservations: Vigorous boiling-like bubbling with a loud hissing sound.; The beaker becomes scalding hot to the touch (massive heat release).; Forms slaked lime, which is used for whitewashing walls.\nTrap: Do not confuse Quicklime (CaO) with Slaked lime [Ca(OH)2] or Limestone (CaCO3). Always write (aq) for slaked lime solution.",
+    "hintOrFormula": "Quicklime (Calcium oxide) + Water → Slaked lime (Calcium hydroxide) + Heat",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_3",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Formation of Calcium Carbonate during Whitewashing",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Formation of Calcium Carbonate during Whitewashing",
+    "backAnswer": "Equation: \\text{Ca(OH)}_2(aq) + \\text{CO}_2(g) \\to \\text{CaCO}_3(s) + \\text{H}_2\\text{O}(l)\nType: Combination (Thermoneutral)\nObservations: A thin, shiny crust of marble/calcium carbonate forms on the wall surface after 2-3 days, giving a lustrous white finish.\nTrap: Why does whitewash shine after 2-3 days? Because slaked lime slowly absorbs atmospheric CO2 to form a uniform crystalline layer of CaCO3.",
+    "hintOrFormula": "Calcium hydroxide + Carbon dioxide → Calcium carbonate (shiny layer) + Water",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_4",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Combustion of Coal / Carbon",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Combustion of Coal / Carbon",
+    "backAnswer": "Equation: \\text{C}(s) + \\text{O}_2(g) \\to \\text{CO}_2(g) + \\text{Heat}\nType: Combustion (Exothermic)\nObservations: Coal burns leaving behind little residue; heat and CO2 gas are released.\nTrap: This is simultaneously a Combination Reaction and an Exothermic Reaction.",
+    "hintOrFormula": "Carbon + Oxygen → Carbon dioxide + Heat",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_5",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Combustion of Methane (Natural Gas)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Combustion of Methane (Natural Gas)",
+    "backAnswer": "Equation: \\text{CH}_4(g) + 2\\text{O}_2(g) \\to \\text{CO}_2(g) + 2\\text{H}_2\\text{O}(g) + \\text{Heat}\nType: Combustion (Exothermic)\nObservations: Burns with a clean, blue non-luminous flame in excess oxygen.\nTrap: Notice water is in gaseous form (g) because of the intense heat of combustion.",
+    "hintOrFormula": "Methane + Oxygen → Carbon dioxide + Water vapour + Heat",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_6",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Cellular Respiration (Exothermic Biological Combustion)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Cellular Respiration (Exothermic Biological Combustion)",
+    "backAnswer": "Equation: \\text{C}_6\\text{H}_{12}\\text{O}_6(aq) + 6\\text{O}_2(aq) \\to 6\\text{CO}_2(aq) + 6\\text{H}_2\\text{O}(l) + \\text{Energy (ATP)}\nType: Redox (Oxidation-Reduction) (Exothermic)\nObservations: Glucose is oxidized; energy is stored in ATP molecules.; Proves why respiration is considered an exothermic reaction in CBSE exams.\nTrap: CBSE Question: 'Why is respiration considered an exothermic reaction?' Answer: Because food carbohydrates are broken down into glucose, which combines with oxygen in cells to release energy.",
+    "hintOrFormula": "Glucose + Oxygen → Carbon dioxide + Water + Energy (38 ATP)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_7",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Thermal Decomposition of Ferrous Sulphate Crystals",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Thermal Decomposition of Ferrous Sulphate Crystals",
+    "backAnswer": "Equation: 2\\text{FeSO}_4(s) \\xrightarrow{\\Delta} \\text{Fe}_2\\text{O}_3(s) + \\text{SO}_2(g) + \\text{SO}_3(g)\nType: Thermal Decomposition (Endothermic)\nObservations: Initial heating loses 7 water molecules of crystallisation: pale green crystals turn dirty white anhydrous FeSO4.; On further strong heating, dirty white powder turns reddish-brown Fe2O3.; Pungent, suffocating, characteristic smell of burning sulphur (due to SO2 and SO3).; Moist blue litmus paper held at the boiling tube mouth turns red (acidic oxides).\nTrap: Never sniff boiling tube directly! Waft gas gently towards nose. Both SO2 and SO3 are formed; both are acidic gases.",
+    "hintOrFormula": "Ferrous sulphate (heated) → Ferric oxide + Sulphur dioxide + Sulphur trioxide",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_8",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Thermal Decomposition of Limestone",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Thermal Decomposition of Limestone",
+    "backAnswer": "Equation: \\text{CaCO}_3(s) \\xrightarrow{\\Delta} \\text{CaO}(s) + \\text{CO}_2(g)\nType: Thermal Decomposition (Endothermic)\nObservations: Major industrial reaction for manufacturing cement and glass from limestone.\nTrap: Limestone, Chalk, and Marble are all different physical forms of the same chemical compound: CaCO3.",
+    "hintOrFormula": "Limestone (Calcium carbonate) → Quicklime (Calcium oxide) + Carbon dioxide",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_9",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Thermal Decomposition of Lead Nitrate",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Thermal Decomposition of Lead Nitrate",
+    "backAnswer": "Equation: 2\\text{Pb(NO}_3)_2(s) \\xrightarrow{\\Delta} 2\\text{PbO}(s) + 4\\text{NO}_2(g) + \\text{O}_2(g)\nType: Thermal Decomposition (Endothermic)\nObservations: Crackling (decrepitation) sound heard during heating.; Dense, reddish-brown suffocating fumes of Nitrogen dioxide (NO2) fill the tube.; A glowing incense splinter held at the mouth bursts into flame (confirming O2 release).; A yellow residue of Lead monoxide (PbO) adheres to the glass test tube walls.\nTrap: NO2 is REDDISH-BROWN, not colorless! Writing NO or N2O instead of NO2 is penalized. Coefficient of NO2 is 4, balancing is tested heavily.",
+    "hintOrFormula": "Lead nitrate (white) → Lead monoxide (yellow) + Nitrogen dioxide (brown fumes) + Oxygen",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_10",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Electrolysis of Water (Acidulated Water)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Electrolysis of Water (Acidulated Water)",
+    "backAnswer": "Equation: 2\\text{H}_2\\text{O}(l) \\xrightarrow{\\text{Electric Current}} 2\\text{H}_2(g)[\\text{Cathode}] + \\text{O}_2(g)[\\text{Anode}]\nType: Electrolytic Decomposition (Endothermic (Electrical energy absorbed))\nObservations: Gas collected at cathode is exactly TWICE the volume of gas collected at anode (Ratio 2 : 1).; Cathode gas burns with a sharp 'POP' sound when tested with a burning splinter (Hydrogen).; Anode gas makes a glowing splinter burn brightly (Oxygen).\nTrap: Mnemonic: C-C-H (Cathode is Negative, attracts Cations H+, collects Hydrogen). Ratio is 2:1 because water molecule contains 2 hydrogen atoms for every 1 oxygen atom (H2O).",
+    "hintOrFormula": "Water (with drops of dil. H2SO4) → Hydrogen (Cathode, 2 vols) + Oxygen (Anode, 1 vol)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_11",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Photodecomposition of Silver Chloride",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Photodecomposition of Silver Chloride",
+    "backAnswer": "Equation: 2\\text{AgCl}(s) \\xrightarrow{\\text{Sunlight } (h\\nu)} 2\\text{Ag}(s) + \\text{Cl}_2(g)\nType: Photolytic Decomposition (Endothermic (Light energy absorbed))\nObservations: White silver chloride powder gradually turns dark grey after exposure to bright sunlight for 15-30 minutes.; Used historically in black-and-white photography.; Stored in dark amber/brown reagent bottles to prevent premature photodecomposition by ambient light.\nTrap: Why is AgCl stored in dark amber bottles? To shield it from sunlight which decomposes it into grey silver metal.",
+    "hintOrFormula": "Silver chloride (white) → Silver metal (grey) + Chlorine gas (yellow-green)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_12",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Photodecomposition of Silver Bromide",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Photodecomposition of Silver Bromide",
+    "backAnswer": "Equation: 2\\text{AgBr}(s) \\xrightarrow{\\text{Sunlight } (h\\nu)} 2\\text{Ag}(s) + \\text{Br}_2(g)\nType: Photolytic Decomposition (Endothermic)\nObservations: Pale yellow powder turns grey. Iconic reaction used in black and white photographic film.\nTrap: Both AgCl and AgBr undergo photolytic decomposition; both are used in black and white photography.",
+    "hintOrFormula": "Silver bromide (pale yellow) → Silver metal (grey) + Bromine vapour (reddish brown)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_13",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Iron Nail in Copper Sulphate Solution",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Iron Nail in Copper Sulphate Solution",
+    "backAnswer": "Equation: \\text{Fe}(s) + \\text{CuSO}_4(aq) \\to \\text{FeSO}_4(aq) + \\text{Cu}(s)\nType: Displacement (Exothermic (mild))\nObservations: The deep blue color of copper sulphate solution fades and gradually turns light/pale green.; A shiny reddish-brown layer of pure copper metal is deposited on the surface of the iron nails.; Iron is more reactive than copper and displaces it from its salt solution (Reactivity Series).\nTrap: Do not write 'solution becomes brown'. The SOLUTION turns light green (FeSO4); the NAIL gets a reddish-brown coating of copper.",
+    "hintOrFormula": "Iron nail + Copper sulphate (blue) → Ferrous sulphate (light green) + Copper (reddish brown)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_14",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Zinc with Copper Sulphate Solution",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Zinc with Copper Sulphate Solution",
+    "backAnswer": "Equation: \\text{Zn}(s) + \\text{CuSO}_4(aq) \\to \\text{ZnSO}_4(aq) + \\text{Cu}(s)\nType: Displacement (Exothermic)\nObservations: Blue color of CuSO4 completely disappears to yield a crystal-clear, colorless solution.\nTrap: Zn is more reactive than Cu. If copper metal is placed in ZnSO4 solution, NO REACTION occurs.",
+    "hintOrFormula": "Zinc granules + Copper sulphate (blue) → Zinc sulphate (colorless) + Copper (reddish brown)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_15",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Lead with Copper Chloride Solution",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Lead with Copper Chloride Solution",
+    "backAnswer": "Equation: \\text{Pb}(s) + \\text{CuCl}_2(aq) \\to \\text{PbCl}_2(aq) + \\text{Cu}(s)\nType: Displacement (Exothermic)\nObservations: Greenish-blue solution decolorizes as lead displaces copper.\nTrap: Lead is more reactive than copper in the reactivity series.",
+    "hintOrFormula": "Lead + Copper chloride (green) → Lead chloride (colorless) + Copper (reddish brown)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_16",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Precipitation of Barium Sulphate",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Precipitation of Barium Sulphate",
+    "backAnswer": "Equation: \\text{Na}_2\\text{SO}_4(aq) + \\text{BaCl}_2(aq) \\to \\text{BaSO}_4(s)\\downarrow + 2\\text{NaCl}(aq)\nType: Double Displacement (Precipitation) (Thermoneutral)\nObservations: Immediate formation of an insoluble, dense, milky-white precipitate of Barium sulphate (BaSO4).; The precipitate does not dissolve even in dilute hydrochloric acid (used as confirmatory test for sulphate ion SO4²⁻).\nTrap: Always include the down-arrow (↓) or state symbol (s) for BaSO4! Missing this costs 0.5 mark on CBSE papers.",
+    "hintOrFormula": "Sodium sulphate + Barium chloride → Barium sulphate (white ppt) + Sodium chloride",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_17",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Precipitation of Lead Iodide (Golden Yellow)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Precipitation of Lead Iodide (Golden Yellow)",
+    "backAnswer": "Equation: \\text{Pb(NO}_3)_2(aq) + 2\\text{KI}(aq) \\to \\text{PbI}_2(s)\\downarrow + 2\\text{KNO}_3(aq)\nType: Double Displacement (Precipitation) (Thermoneutral)\nObservations: Two completely clear, colorless liquids mix to immediately generate a spectacular, opaque, golden-yellow precipitate.; If the mixture is heated, PbI2 dissolves; upon slow cooling, it recrystallizes as shimmering golden spangles ('Golden Rain').\nTrap: Formula of lead iodide is PbI2 (Lead has valency 2+; Iodide is 1-), NOT PbI!",
+    "hintOrFormula": "Lead nitrate + Potassium iodide → Lead iodide (brilliant yellow ppt) + Potassium nitrate",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_18",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Oxidation of Copper to Copper(II) Oxide",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Oxidation of Copper to Copper(II) Oxide",
+    "backAnswer": "Equation: 2\\text{Cu}(s) + \\text{O}_2(g) \\xrightarrow{\\Delta} 2\\text{CuO}(s)\nType: Redox (Oxidation-Reduction) (Exothermic)\nObservations: The surface of reddish-brown copper powder becomes coated with a jet-black substance (Copper(II) oxide).; Copper has gained oxygen: it has been oxidized.\nTrap: Color of CuO is BLACK. Do not say brown or grey.",
+    "hintOrFormula": "Copper powder (brown) + Oxygen → Copper(II) oxide (black coating)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_19",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Reduction of Copper(II) Oxide by Hydrogen Gas",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Reduction of Copper(II) Oxide by Hydrogen Gas",
+    "backAnswer": "Equation: \\text{CuO}(s) + \\text{H}_2(g) \\xrightarrow{\\Delta} \\text{Cu}(s) + \\text{H}_2\\text{O}(g)\nType: Redox (Oxidation-Reduction) (Endothermic)\nObservations: The black surface coating turns back into reddish-brown elemental copper metal.; CuO loses oxygen: it is reduced (Oxidizing Agent = CuO).; H2 gains oxygen: it is oxidized (Reducing Agent = H2).\nTrap: Identify Oxidizing & Reducing Agents: Oxidizing agent is ALWAYS the substance reduced (CuO); Reducing agent is the substance oxidized (H2).",
+    "hintOrFormula": "Copper oxide (black) + Hydrogen → Copper metal (reddish brown) + Water vapour",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_20",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Reaction of Manganese Dioxide with Hydrochloric Acid",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Reaction of Manganese Dioxide with Hydrochloric Acid",
+    "backAnswer": "Equation: \\text{MnO}_2(s) + 4\\text{HCl}(aq) \\to \\text{MnCl}_2(aq) + 2\\text{H}_2\\text{O}(l) + \\text{Cl}_2(g)\nType: Redox (Oxidation-Reduction) (Exothermic)\nObservations: MnO2 is reduced to MnCl2 (loses oxygen, oxidation state of Mn drops from +4 to +2).; HCl is oxidized to Cl2 (loses hydrogen / electrons, Cl drops from -1 to 0).; Oxidizing Agent: MnO2; Reducing Agent: HCl.\nTrap: Super high-frequency board question! Students often erroneously write that HCl is reduced. HCl is OXIDIZED to Cl2.",
+    "hintOrFormula": "Manganese dioxide + Hydrochloric acid → Manganese chloride + Water + Chlorine gas",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_21",
+    "subject": "Science",
+    "chapter": "Chemical Reactions and Equations",
+    "topic": "Rusting of Iron (Hydrated Ferric Oxide Formation)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Rusting of Iron (Hydrated Ferric Oxide Formation)",
+    "backAnswer": "Equation: 4\\text{Fe}(s) + 3\\text{O}_2(g) + 2x\\text{H}_2\\text{O}(l) \\to 2\\text{Fe}_2\\text{O}_3 \\cdot x\\text{H}_2\\text{O}(s)\nType: Corrosion & Rusting (Exothermic (very slow))\nObservations: Reddish-brown flaky crust forms on iron, eating away the structural metal.; Prevention methods: Galvanization (coating with molten zinc), painting, greasing, chrome plating, alloying into stainless steel (Fe + Ni + Cr).\nTrap: Why 'x' in formula? Because the number of water molecules varies with atmospheric humidity. Write Fe2O3·xH2O, not Fe2O3.",
+    "hintOrFormula": "Iron + Oxygen + Moisture → Rust (Hydrated ferric oxide, reddish-brown flaky crust)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_22",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Reaction of Zinc with Dilute Sulphuric Acid",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Reaction of Zinc with Dilute Sulphuric Acid",
+    "backAnswer": "Equation: \\text{Zn}(s) + \\text{H}_2\\text{SO}_4(aq) \\to \\text{ZnSO}_4(aq) + \\text{H}_2(g)\\uparrow\nType: Displacement (Exothermic)\nObservations: Brisk effervescence of gas bubbles appearing on the surface of zinc granules.; When gas is passed through soap solution, soap bubbles filled with hydrogen rise in the air.; A burning candle brought near a gas bubble bursts it with a distinct 'POP' sound.\nTrap: Confirmatory Test for H2: Always write 'Burns with a pop sound when a burning splinter is brought near the gas'.",
+    "hintOrFormula": "Zinc granules + Dilute Sulphuric acid → Zinc sulphate + Hydrogen gas (Pop sound)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_23",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Reaction of Zinc with Sodium Hydroxide (Amphoteric Nature)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Reaction of Zinc with Sodium Hydroxide (Amphoteric Nature)",
+    "backAnswer": "Equation: \\text{Zn}(s) + 2\\text{NaOH}(aq) \\xrightarrow{\\Delta} \\text{Na}_2\\text{ZnO}_2(aq) + \\text{H}_2(g)\\uparrow\nType: Displacement (Exothermic)\nObservations: Brisk evolution of Hydrogen gas upon warming.; Confirms that Zinc is an amphoteric metal capable of reacting with both acids and strong alkalis.\nTrap: Super critical formula: Sodium zincate is Na2ZnO2 (Zincate radical is ZnO2²⁻), NOT NaZnO2!",
+    "hintOrFormula": "Zinc + Sodium hydroxide (warm) → Sodium zincate + Hydrogen gas",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_24",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Reaction of Sodium Carbonate with Hydrochloric Acid",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Reaction of Sodium Carbonate with Hydrochloric Acid",
+    "backAnswer": "Equation: \\text{Na}_2\\text{CO}_3(s) + 2\\text{HCl}(aq) \\to 2\\text{NaCl}(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)\\uparrow\nType: Acid-Carbonate Gas Evolution (Exothermic)\nObservations: Vigorous, brisk effervescence (bubbling).; Gas evolved turns freshly prepared limewater milky, confirming CO2.\nTrap: Brisk effervescence is due to CO2, NOT H2! H2 does not show effervescence with carbonates.",
+    "hintOrFormula": "Sodium carbonate + Hydrochloric acid → Sodium chloride + Water + Carbon dioxide",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_25",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Reaction of Sodium Hydrogen Carbonate with Hydrochloric Acid",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Reaction of Sodium Hydrogen Carbonate with Hydrochloric Acid",
+    "backAnswer": "Equation: \\text{NaHCO}_3(s) + \\text{HCl}(aq) \\to \\text{NaCl}(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)\\uparrow\nType: Acid-Carbonate Gas Evolution (Endothermic / mild cooling)\nObservations: Brisk effervescence; gas turns limewater milky.\nTrap: Notice mole ratio is 1:1 for NaHCO3 with HCl, whereas it is 1:2 for Na2CO3 with HCl.",
+    "hintOrFormula": "Sodium hydrogen carbonate + Hydrochloric acid → Sodium chloride + Water + Carbon dioxide",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_26",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Lime Water Test for Carbon Dioxide Gas",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Lime Water Test for Carbon Dioxide Gas",
+    "backAnswer": "Equation: \\text{Ca(OH)}_2(aq) + \\text{CO}_2(g) \\to \\text{CaCO}_3(s)\\downarrow + \\text{H}_2\\text{O}(l)\nType: Double Displacement (Precipitation) (Thermoneutral)\nObservations: The completely clear limewater turns opaque, milky turbid white due to formation of insoluble CaCO3 precipitate.\nTrap: What happens if CO2 is passed for too long? See rx_2_6 below! Milkiness DISAPPEARS upon excess CO2.",
+    "hintOrFormula": "Lime water (Calcium hydroxide) + Carbon dioxide → Calcium carbonate (milky white ppt) + Water",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_27",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Passing Excess Carbon Dioxide through Milky Lime Water",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Passing Excess Carbon Dioxide through Milky Lime Water",
+    "backAnswer": "Equation: \\text{CaCO}_3(s) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g) \\to \\text{Ca(HCO}_3)_2(aq)\nType: Combination (Thermoneutral)\nObservations: The cloudy white milkiness completely vanishes, leaving behind a sparkling clear solution.; Because Calcium hydrogen carbonate is readily soluble in water.\nTrap: Iconic board question: 'Why does milkiness disappear on passing excess CO2?' Answer: Due to formation of water-soluble calcium hydrogen carbonate [Ca(HCO3)2].",
+    "hintOrFormula": "Calcium carbonate (milky ppt) + Water + Excess CO2 → Calcium hydrogen carbonate (soluble, clear)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_28",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Neutralization of Strong Acid with Strong Base",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Neutralization of Strong Acid with Strong Base",
+    "backAnswer": "Equation: \\text{HCl}(aq) + \\text{NaOH}(aq) \\to \\text{NaCl}(aq) + \\text{H}_2\\text{O}(l) + \\text{Heat}\nType: Neutralization (Exothermic)\nObservations: Phenolphthalein is pink in NaOH; adding dilute HCl drop by drop suddenly discharges pink color to completely colorless at neutralization point.; Net ionic equation is: H+(aq) + OH-(aq) → H2O(l).\nTrap: Phenolphthalein color in acid: COLORLESS; in base: PINK. Methyl orange in acid: RED; in base: YELLOW.",
+    "hintOrFormula": "Hydrochloric acid + Sodium hydroxide → Sodium chloride + Water + Heat",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_29",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Reaction of Copper(II) Oxide with Hydrochloric Acid",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Reaction of Copper(II) Oxide with Hydrochloric Acid",
+    "backAnswer": "Equation: \\text{CuO}(s) + 2\\text{HCl}(aq) \\to \\text{CuCl}_2(aq) + \\text{H}_2\\text{O}(l)\nType: Neutralization (Exothermic)\nObservations: The black copper oxide powder dissolves.; The solution turns a vivid, beautiful blue-green color due to the formation of CuCl2.; Proves that metallic oxides are BASIC in nature because they react with acids to yield salt + water.\nTrap: Color of CuCl2 solution is BLUE-GREEN. Why are metallic oxides called basic oxides? Because like bases, they react with acids to give salt and water.",
+    "hintOrFormula": "Copper(II) oxide (black powder) + Hydrochloric acid → Copper(II) chloride (blue-green) + Water",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_30",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Electrolysis of Brine (Chlor-Alkali Process)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Electrolysis of Brine (Chlor-Alkali Process)",
+    "backAnswer": "Equation: 2\\text{NaCl}(aq) + 2\\text{H}_2\\text{O}(l) \\xrightarrow{\\text{Electricity}} 2\\text{NaOH}(aq) + \\text{Cl}_2(g)[\\text{Anode}] + \\text{H}_2(g)[\\text{Cathode}]\nType: Chlor-Alkali Process (Endothermic (Electrical energy))\nObservations: Why called 'Chlor-Alkali'? 'Chlor' for Chlorine product, and 'Alkali' for Sodium hydroxide (NaOH).; Uses: Cl2 for water treatment/PVC/bleaching; H2 for fuels/ammonia for fertilizers; NaOH for de-greasing metals/soaps/paper making.\nTrap: Products at electrodes: Anode = Cl2; Cathode = H2; NaOH solution forms near the cathode.",
+    "hintOrFormula": "Brine (Aqueous sodium chloride) + Water → Sodium hydroxide + Chlorine (Anode) + Hydrogen (Cathode)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_31",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Manufacture of Bleaching Powder",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Manufacture of Bleaching Powder",
+    "backAnswer": "Equation: \\text{Ca(OH)}_2(s) + \\text{Cl}_2(g) \\to \\text{CaOCl}_2(s) + \\text{H}_2\\text{O}(l)\nType: Salt Preparation / Hydration (Exothermic)\nObservations: Bleaching powder has a strong, pungent smell of chlorine because it slowly reacts with atmospheric CO2.; Used for bleaching cotton and linen in textile industry, bleaching wood pulp, and as a disinfectant for sterilizing drinking water.\nTrap: Must be DRY slaked lime Ca(OH)2(s), NOT limewater solution! Formula is CaOCl2.",
+    "hintOrFormula": "Dry slaked lime + Chlorine gas → Bleaching powder (Calcium oxychloride) + Water",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_32",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Manufacture of Baking Soda (Sodium Hydrogen Carbonate)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Manufacture of Baking Soda (Sodium Hydrogen Carbonate)",
+    "backAnswer": "Equation: \\text{NaCl} + \\text{H}_2\\text{O} + \\text{CO}_2 + \\text{NH}_3 \\to \\text{NH}_4\\text{Cl} + \\text{NaHCO}_3(s)\\downarrow\nType: Salt Preparation / Hydration (Exothermic)\nObservations: NaHCO3 is sparingly soluble in the presence of excess NH4+ and Na+ ions, precipitating out.; NaHCO3 is a mild non-corrosive basic salt with pH ~8.3, used as an antacid to neutralize stomach acidity.\nTrap: Raw materials for Solvay process: NaCl, H2O, CO2, and NH3. Memorize this 4-component recipe.",
+    "hintOrFormula": "Sodium chloride + Water + Carbon dioxide + Ammonia → Ammonium chloride + Sodium hydrogen carbonate",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_33",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Thermal Decomposition of Baking Soda during Cooking",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Thermal Decomposition of Baking Soda during Cooking",
+    "backAnswer": "Equation: 2\\text{NaHCO}_3(s) \\xrightarrow{\\Delta} \\text{Na}_2\\text{CO}_3(s) + \\text{H}_2\\text{O}(g) + \\text{CO}_2(g)\\uparrow\nType: Thermal Decomposition (Endothermic)\nObservations: CO2 gas bubbles trapped in dough expand on heating, causing bread, pakoras, and cakes to rise and become soft and spongy.; Baking Powder contains Baking Soda + a mild edible acid like Tartaric acid (to neutralize the bitter taste of Na2CO3).\nTrap: Difference between Baking Soda and Baking Powder: Baking Soda is pure NaHCO3. Baking Powder is NaHCO3 + Tartaric acid (which reacts with Na2CO3 to prevent bitter taste).",
+    "hintOrFormula": "Sodium hydrogen carbonate (heated) → Sodium carbonate + Water vapour + Carbon dioxide gas",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_34",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Recrystallisation of Sodium Carbonate (Washing Soda)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Recrystallisation of Sodium Carbonate (Washing Soda)",
+    "backAnswer": "Equation: \\text{Na}_2\\text{CO}_3(s) + 10\\text{H}_2\\text{O}(l) \\to \\text{Na}_2\\text{CO}_3 \\cdot 10\\text{H}_2\\text{O}(s)\nType: Salt Preparation / Hydration (Exothermic)\nObservations: Contains 10 molecules of water of crystallisation per formula unit.; Used in glass, soap, and paper industries, for domestic cleaning, and for removing permanent hardness of water.\nTrap: How does washing soda remove permanent hardness of water? It precipitates dissolved Ca²⁺ and Mg²⁺ ions as insoluble carbonates: CaSO4 + Na2CO3 → CaCO3↓ + Na2SO4.",
+    "hintOrFormula": "Sodium carbonate + 10 Water molecules → Washing soda (Sodium carbonate decahydrate)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_chem_35",
+    "subject": "Science",
+    "chapter": "Acids, Bases and Salts",
+    "topic": "Heating Gypsum to make Plaster of Paris (POP)",
+    "frontQuestion": "Give balanced chemical equation, observations, and reaction type for: Heating Gypsum to make Plaster of Paris (POP)",
+    "backAnswer": "Equation: \\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O}(s) \\xrightarrow{373\\text{ K } (100^\\circ\\text{C})} \\text{CaSO}_4 \\cdot \\frac{1}{2}\\text{H}_2\\text{O}(s) + 1\\frac{1}{2}\\text{H}_2\\text{O}(g)\nType: Thermal Decomposition (Endothermic)\nObservations: Why 'hemihydrate' (1/2 H2O)? Two formula units of CaSO4 share one molecule of H2O: 2CaSO4·H2O.; If heated above 373 K, it loses all water to become anhydrous calcium sulphate ('dead burnt plaster'), which does not set with water!\nTrap: Temperature must NOT exceed 373 K (100 °C)! Above 373 K, it forms dead burnt plaster CaSO4 with no setting property.",
+    "hintOrFormula": "Gypsum (heated at 373 K) → Plaster of Paris (Calcium sulphate hemihydrate) + 1.5 Water vapour",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_1",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1789: The French Revolution Begins",
+    "frontQuestion": "What occurred in Year 1789 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: The French Revolution Begins\nSignificance: First clear political expression of nationalism in European history. Sovereignty was transferred from an absolute Bourbon monarch to a sovereign assembly of French citizens.\nKey Personalities: Louis XVI, Third Estate Delegates\nBoard Trap: Do NOT write that French revolutionaries abolished monarchy instantly; constitutional monarchy existed first (1791) before the Republic was declared in 1792.",
+    "hintOrFormula": "FC-TUM: Fatherland (Patrie), Citizen (Citoyen), Tricolour, Uniform laws, Metric system",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_2",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1797: Napoleon Invades Italy; Napoleonic Wars Commence",
+    "frontQuestion": "What occurred in Year 1797 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Napoleon Invades Italy; Napoleonic Wars Commence\nSignificance: French revolutionary armies crossed frontiers into Italy, Switzerland, and the Low Countries, carrying radical concepts of liberty, equality, and state reorganization abroad.\nKey Personalities: Napoleon Bonaparte\nBoard Trap: Students forget that initial reception by Dutch, Swiss, and Milanese cities hailed French soldiers as 'harbingers of liberty' before reality hit.",
+    "hintOrFormula": "Year 1797",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_3",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1804: The Napoleonic Code (Civil Code of 1804) Enacted",
+    "frontQuestion": "What occurred in Year 1804 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: The Napoleonic Code (Civil Code of 1804) Enacted\nSignificance: A landmark modern legal synthesis: abolished all birth privileges, guaranteed equality before the law, secured property rights, and abolished feudal manorial dues in conquered regions.\nKey Personalities: Napoleon Bonaparte\nBoard Trap: Writing that the Napoleonic Code granted women equal rights! The Code actually stripped women of legal independence, reducing them to minors subject to fathers and husbands.",
+    "hintOrFormula": "PEEP: Privileges abolished, Equality before law, Established property rights, Peasant dues eliminated",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_4",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1813: Battle of Leipzig (Battle of the Nations)",
+    "frontQuestion": "What occurred in Year 1813 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Battle of Leipzig (Battle of the Nations)\nSignificance: Coalition armies of Prussia, Russia, Austria, and Sweden decisively defeated Napoleon in Saxony, shattering French hegemony in Central Europe and forcing Napoleon's retreat.\nKey Personalities: Napoleon Bonaparte, Gebhard von Blücher, Prince Schwarzenberg\nBoard Trap: Confusing the Battle of Leipzig (1813) with Waterloo (1815). Leipzig caused Napoleon's first abdication to Elba.",
+    "hintOrFormula": "Year 1813",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_5",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1815: Defeat of Napoleon at Waterloo & Treaty of Vienna (1815)",
+    "frontQuestion": "What occurred in Year 1815 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Defeat of Napoleon at Waterloo & Treaty of Vienna (1815)\nSignificance: Hosted by Austrian Chancellor Duke Metternich. Major European powers (Britain, Russia, Prussia, Austria) redrew the map of Europe to restore the conservative monarchical order and contain France.\nKey Personalities: Duke Metternich, Kaiser Francis I, Tsar Alexander I, King Frederick William III\nBoard Trap: Saying Napoleon's German Confederation of 39 states was dismantled! The Treaty of Vienna left the German Confederation of 39 states untouched.",
+    "hintOrFormula": "METT: Monarchy restored (Bourbons), Encirclement buffer states, Thirty-nine German states untouched, Territorially compensated powers",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_6",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1821: Greek War of Independence Begins",
+    "frontQuestion": "What occurred in Year 1821 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Greek War of Independence Begins\nSignificance: Greeks mobilized against the Muslim Ottoman Empire, sparking pan-European sympathy among romantic poets and intellectuals who revered Greece as the cradle of European civilisation.\nKey Personalities: Lord Byron, Alexandros Ypsilantis, Sultan Mahmud II\nBoard Trap: Assuming Greece won independence immediately in 1821; the war dragged on for 11 brutal years until the Treaty of Constantinople in 1832.",
+    "hintOrFormula": "Year 1821",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_7",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1824: English Romantic Poet Lord Byron Dies at Missolonghi",
+    "frontQuestion": "What occurred in Year 1824 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: English Romantic Poet Lord Byron Dies at Missolonghi\nSignificance: Lord Byron gathered private funds, bought arms, and sailed to Greece to lead volunteer troops against Ottoman armies before dying of malaria/fever at Missolonghi.\nKey Personalities: Lord Byron\nBoard Trap: Writing that Byron died fighting in battle; he died of fever/illness while organizing the campaign at Missolonghi.",
+    "hintOrFormula": "Year 1824",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_8",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "July 1830: July Revolution in France Overthrows Bourbon Dynasty",
+    "frontQuestion": "What occurred in Year July 1830 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: July Revolution in France Overthrows Bourbon Dynasty\nSignificance: Liberal revolutionaries barricaded Paris streets and overthrew the reactionary Bourbon King Charles X. Installed Louis Philippe as constitutional monarch and proved Metternich's adage: 'When France sneezes, the rest of Europe catches cold.'\nKey Personalities: Charles X, Louis Philippe, Duke Metternich\nBoard Trap: Thinking July 1830 proclaimed a Republic; it installed a Constitutional Monarchy under Louis Philippe.",
+    "hintOrFormula": "Year July 1830",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_9",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1831: Giuseppe Mazzini Founds 'Young Italy' in Marseilles",
+    "frontQuestion": "What occurred in Year 1831 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Giuseppe Mazzini Founds 'Young Italy' in Marseilles\nSignificance: Italian revolutionary Mazzini established the secret society 'Young Italy' (Giovine Italia) to unify the fractured Italian peninsula into a single, indivisible republican nation.\nKey Personalities: Giuseppe Mazzini, Duke Metternich\nBoard Trap: Mazzini wanted a democratic REPUBLIC, whereas Cavour and Victor Emmanuel II wanted a constitutional MONARCHY under Piedmont.",
+    "hintOrFormula": "M-MYE: Mazzini founded Marseilles Young Italy, Berne Young Europe",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_10",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1831: Armed Rebellion in Poland Against Russian Tsarist Rule",
+    "frontQuestion": "What occurred in Year 1831 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Armed Rebellion in Poland Against Russian Tsarist Rule\nSignificance: Polish army officers and nationalists revolted against Tsarist autocracy. When Russia brutally crushed the armed uprising, Polish priests weaponized the Polish language in Catholic liturgy as silent resistance.\nKey Personalities: Tsar Nicholas I, Polish Catholic Clergy\nBoard Trap: Writing that the Polish rebellion succeeded; it was crushed with ruthless severity by Russian armed forces.",
+    "hintOrFormula": "Year 1831",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_11",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1832: Treaty of Constantinople Recognizes Independent Greece",
+    "frontQuestion": "What occurred in Year 1832 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Treaty of Constantinople Recognizes Independent Greece\nSignificance: Formally recognized Greece as an independent sovereign nation state, bringing the 11-year war of independence to a successful conclusion and ending Ottoman suzerainty.\nKey Personalities: King Otto of Bavaria (first King of Greece)\nBoard Trap: Do NOT write Treaty of Vienna or Treaty of Versailles!",
+    "hintOrFormula": "Year 1832",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_12",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1833: Mazzini Founds 'Young Europe' in Berne",
+    "frontQuestion": "What occurred in Year 1833 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Mazzini Founds 'Young Europe' in Berne\nSignificance: Established an international federation of republican underground societies in Switzerland, uniting young radicals from Poland, Italy, Germany, and France to overthrow autocracies.\nKey Personalities: Giuseppe Mazzini\nBoard Trap: Swapping the cities: Young Italy was in Marseilles (France); Young Europe was in Berne (Switzerland).",
+    "hintOrFormula": "Year 1833",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_13",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1834: Zollverein (German Customs Union) Established",
+    "frontQuestion": "What occurred in Year 1834 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Zollverein (German Customs Union) Established\nSignificance: Initiated by Prussia and joined by most German states. Abolished internal tariff barriers and reduced currencies from over thirty to just two, harnessing economic unity to foster political nationalism.\nKey Personalities: Friedrich List (Economist), Prussian Administrators\nBoard Trap: Remember that Austria was deliberately EXCLUDED from the Zollverein; Prussia led it.",
+    "hintOrFormula": "Z-2-CT: Zollverein reduced currencies to 2, abolished Customs Tariffs",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_14",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1845: Silesian Weavers' Revolt Against Exploitative Contractors",
+    "frontQuestion": "What occurred in Year 1845 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Silesian Weavers' Revolt Against Exploitative Contractors\nSignificance: Desperate cotton weavers marched on contractors' mansions demanding fair wages for woven cloth. Mansions were plundered and porcelain smashed. Army called in; 11 weavers shot dead.\nKey Personalities: Wilhelm Wolff (Journalist), Silesian Contractors\nBoard Trap: The contractors fled and returned within 24 hours with army backing; it was an economic revolt against contractors, not an anti-monarchical coup.",
+    "hintOrFormula": "Year 1845",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_15",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "February 1848: Popular Uprising in Paris; French Republic Proclaimed",
+    "frontQuestion": "What occurred in Year February 1848 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Popular Uprising in Paris; French Republic Proclaimed\nSignificance: Severe food shortages and widespread industrial unemployment brought armed barricades to Paris. King Louis Philippe fled into exile; National Assembly declared a Republic, granted male suffrage (>21), and guaranteed the right to work.\nKey Personalities: Louis Philippe (deposed), French National Assembly\nBoard Trap: Suffrage was granted to ALL adult MALES above 21; women were still excluded from political voting rights.",
+    "hintOrFormula": "Year February 1848",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_16",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "18 May 1848: Frankfurt Parliament Convenes at Church of St. Paul",
+    "frontQuestion": "What occurred in Year 18 May 1848 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Frankfurt Parliament Convenes at Church of St. Paul\nSignificance: 831 elected German middle-class representatives met in Frankfurt to draft a constitution for a unified German nation headed by a constitutional monarch. The crown was offered to Friedrich Wilhelm IV of Prussia, who spurned it.\nKey Personalities: King Friedrich Wilhelm IV of Prussia, German Middle-Class Deputies\nBoard Trap: Women were admitted only as observers to stand in the visitors' gallery, even though they participated actively in newspapers and demonstrations.",
+    "hintOrFormula": "831-SP-FW: 831 deputies at St. Paul, refused by Friedrich Wilhelm",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_17",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1859: Sardinia-Piedmont Defeats Austrian Forces",
+    "frontQuestion": "What occurred in Year 1859 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Sardinia-Piedmont Defeats Austrian Forces\nSignificance: Engineered by Chief Minister Count Camillo de Cavour through a tactical diplomatic alliance with Napoleon III of France. Piedmont routed the Austrian army at Magenta and Solferino, liberating Lombardy.\nKey Personalities: Count Camillo de Cavour, Victor Emmanuel II, Napoleon III\nBoard Trap: Do NOT describe Cavour as a passionate Italian patriot or republican; he was a pragmatic monarchist diplomat.",
+    "hintOrFormula": "Year 1859",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_18",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1860: Garibaldi Leads 'Expedition of the Thousand' (Red Shirts)",
+    "frontQuestion": "What occurred in Year 1860 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Garibaldi Leads 'Expedition of the Thousand' (Red Shirts)\nSignificance: Giuseppe Garibaldi and his armed Red Shirt volunteers marched into the Kingdom of the Two Sicilies, rallying local illiterate peasants to drive out the Spanish Bourbon rulers.\nKey Personalities: Giuseppe Garibaldi, Bourbon Monarch of Naples\nBoard Trap: Garibaldi handed over all conquered southern territories to King Victor Emmanuel II rather than creating a southern republic.",
+    "hintOrFormula": "Year 1860",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_19",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1861: Victor Emmanuel II Proclaimed King of United Italy",
+    "frontQuestion": "What occurred in Year 1861 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Victor Emmanuel II Proclaimed King of United Italy\nSignificance: Official proclamation of the unified Kingdom of Italy under the Royal House of Savoy. Though Venetia (1866) and Rome (1870) joined later, Italy was at last an integrated national state.\nKey Personalities: Victor Emmanuel II, Count Cavour\nBoard Trap: Italy had 7 separate states before unification, and only ONE (Sardinia-Piedmont) was ruled by an Italian princely house!",
+    "hintOrFormula": "Year 1861",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_20",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1866–1871: Three Wars of German Unification over Seven Years",
+    "frontQuestion": "What occurred in Year 1866–1871 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Three Wars of German Unification over Seven Years\nSignificance: Prussian Prime Minister Otto von Bismarck ('Blood and Iron') orchestrated three victorious wars against Denmark (1864), Austria (1866), and France (1870–71), systematically forging German unity.\nKey Personalities: Otto von Bismarck, General von Moltke, Kaiser William I\nBoard Trap: Bismarck did not unify Germany through parliamentary speeches or democratic votes, but through military force and Prussian royal dominance ('Iron and Blood').",
+    "hintOrFormula": "Year 1866–1871",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_21",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "18 January 1871: Proclamation of the German Empire in the Hall of Mirrors",
+    "frontQuestion": "What occurred in Year 18 January 1871 and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Proclamation of the German Empire in the Hall of Mirrors\nSignificance: In the freezing Hall of Mirrors at the Palace of Versailles, King William I of Prussia was proclaimed German Emperor (Kaiser). Symbolized Prussian dominance in modernizing German banking, currency, and judicial systems.\nKey Personalities: Kaiser William I, Otto von Bismarck\nBoard Trap: Students often write the ceremony took place in Berlin; it deliberately took place in Versailles, France, to humiliate defeated France!",
+    "hintOrFormula": "V-1871-KW: Versailles 1871 Kaiser William I",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_22",
+    "subject": "Social Science",
+    "chapter": "The Rise of Nationalism in Europe",
+    "topic": "1871 onwards: Balkan Nationalist Explosions & Great Power Rivalries",
+    "frontQuestion": "What occurred in Year 1871 onwards and why is it pivotal in The Rise of Nationalism in Europe?",
+    "backAnswer": "Event: Balkan Nationalist Explosions & Great Power Rivalries\nSignificance: The disintegrating Ottoman Empire left the Balkan nationalities (Slavs: Romania, Serbia, Bulgaria, Greece, Bosnia) locked in territorial envy, exploited by Russia, Germany, Britain, and Austria-Hungary, directly triggering World War I in 1914.\nKey Personalities: Tsar of Russia, Kaiser Wilhelm II, Franz Joseph\nBoard Trap: The Balkans was explosive not just because of internal ethnic jealousies, but because Great European Powers directly meddled to secure naval routes and colonial influence.",
+    "hintOrFormula": "Year 1871 onwards",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_23",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "January 1915: Mahatma Gandhi Returns to India from South Africa",
+    "frontQuestion": "What occurred in Year January 1915 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Mahatma Gandhi Returns to India from South Africa\nSignificance: Gandhiji returned after 21 years with his tested moral technique of Satyagraha — non-violent soul-force which had defeated racist discriminatory registration laws in South Africa.\nKey Personalities: Mahatma Gandhi, Gopal Krishna Gokhale\nBoard Trap: Satyagraha is NOT 'passive resistance'; Gandhiji explicitly stated it requires intense active moral bravery, not physical weakness.",
+    "hintOrFormula": "Year January 1915",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_24",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "1917: Champaran Satyagraha in Bihar",
+    "frontQuestion": "What occurred in Year 1917 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Champaran Satyagraha in Bihar\nSignificance: Gandhiji's first mass satyagraha on Indian soil. Organized impoverished indigo peasants against European planters exploiting them under the oppressive Tinkathia system.\nKey Personalities: Mahatma Gandhi, Rajkumar Shukla, Dr. Rajendra Prasad\nBoard Trap: Don't confuse Champaran (Indigo peasants, Bihar) with Kheda (Crop failure revenue remission, Gujarat).",
+    "hintOrFormula": "CAK: Champaran (1917), Ahmedabad (1918), Kheda (1917/18)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_25",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "1917: Kheda Satyagraha in Gujarat",
+    "frontQuestion": "What occurred in Year 1917 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Kheda Satyagraha in Gujarat\nSignificance: Supported peasants hit by crop failure and bubonic plague epidemic who were unable to pay land revenue and demanded full remission from colonial collectors.\nKey Personalities: Mahatma Gandhi, Sardar Vallabhbhai Patel\nBoard Trap: Kheda was for PEASANT crop failure revenue remission; Ahmedabad was for TEXTILE MILL WORKERS wages.",
+    "hintOrFormula": "Year 1917",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_26",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "1918: Ahmedabad Mill Workers' Strike in Gujarat",
+    "frontQuestion": "What occurred in Year 1918 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Ahmedabad Mill Workers' Strike in Gujarat\nSignificance: Gandhiji organized cotton textile mill workers demanding a 35% wage hike to cope with wartime inflation. Undertook his first hunger strike, successfully compelling mill owners to concede.\nKey Personalities: Mahatma Gandhi, Anasuya Sarabhai, Ambalal Sarabhai\nBoard Trap: Workers originally wanted a 50% plague bonus; owners offered 20%; Gandhiji mediated a compromise of exactly 35%.",
+    "hintOrFormula": "Year 1918",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_27",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "March 1919: Imperial Legislative Council Enacts the Rowlatt Act",
+    "frontQuestion": "What occurred in Year March 1919 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Imperial Legislative Council Enacts the Rowlatt Act\nSignificance: Passed hurriedly despite unanimous opposition by Indian members. Empowered the British colonial police to arrest and detain any political suspect without trial for up to two years.\nKey Personalities: Sir Sidney Rowlatt, Lord Chelmsford\nBoard Trap: Indians called it the 'Black Act' (Kala Kanoon), passed through the Imperial Council despite unanimous vote against it by Indian members like Jinnah and Malaviya.",
+    "hintOrFormula": "Year March 1919",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_28",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "March 1919: Khilafat Committee Formed in Bombay",
+    "frontQuestion": "What occurred in Year March 1919 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Khilafat Committee Formed in Bombay\nSignificance: Formed by brothers Muhammad Ali and Shaukat Ali (Ali brothers) to protect the temporal and spiritual status of the Ottoman Sultan (Khalifa) following Turkey's defeat in WWI.\nKey Personalities: Muhammad Ali, Shaukat Ali, Abul Kalam Azad\nBoard Trap: The Khilafat movement was rooted in the fate of Turkey and the Ottoman Khalifa, but integrated into India's anti-colonial Swaraj struggle.",
+    "hintOrFormula": "Year March 1919",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_29",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "6 April 1919: All-India Rowlatt Hartal Observed",
+    "frontQuestion": "What occurred in Year 6 April 1919 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: All-India Rowlatt Hartal Observed\nSignificance: Gandhiji called for a nationwide day of fasting, prayer, and non-violent strike. Shops shut, factories halted, and massive demonstrations erupted across Indian cities.\nKey Personalities: Mahatma Gandhi\nBoard Trap: Gandhiji was barred from entering Delhi and Punjab by British authorities, provoking violent clashes in Delhi and Amritsar.",
+    "hintOrFormula": "Year 6 April 1919",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_30",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "10 April 1919: Police Firing on Peaceful Procession in Amritsar",
+    "frontQuestion": "What occurred in Year 10 April 1919 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Police Firing on Peaceful Procession in Amritsar\nSignificance: British police fired on a peaceful march demanding the release of popular leaders Dr. Saifuddin Kitchlew and Dr. Satyapal. Enraged crowds attacked banks, post offices, and railway stations; Martial Law was proclaimed under Brigadier-General Dyer.\nKey Personalities: Dr. Saifuddin Kitchlew, Dr. Satyapal, General Reginald Dyer\nBoard Trap: Many villagers gathered at Jallianwala Bagh three days later (13 April) had come from rural areas and were completely unaware of the Martial Law prohibition!",
+    "hintOrFormula": "Year 10 April 1919",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_31",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "13 April 1919: Jallianwala Bagh Massacre at Amritsar",
+    "frontQuestion": "What occurred in Year 13 April 1919 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Jallianwala Bagh Massacre at Amritsar\nSignificance: Dyer blocked all narrow exit passages of the walled garden and ordered troops to open fire without warning on thousands of unarmed men, women, and children attending the annual Baisakhi fair. Hundreds slaughtered. Dyer stated his intent was to 'produce a moral effect and strike terror'.\nKey Personalities: Brigadier-General Reginald Dyer, Rabindranath Tagore\nBoard Trap: Map Work: Amritsar is in PUNJAB, not Haryana or UP. Tagore renounced his British KNIGHTHOOD (not Nobel prize).",
+    "hintOrFormula": "13-A-TAG: 13 April, Amritsar, Tagore renounced Knighthood",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_32",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "September 1920: Calcutta Special Session of Indian National Congress",
+    "frontQuestion": "What occurred in Year September 1920 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Calcutta Special Session of Indian National Congress\nSignificance: Gandhiji convinced senior Congress leaders that launching a Non-Cooperation Movement was imperative in support of the Khilafat cause as well as for Swaraj.\nKey Personalities: Mahatma Gandhi, Lala Lajpat Rai (President)\nBoard Trap: Do NOT confuse Calcutta (September 1920 - Proposal introduced) with Nagpur (December 1920 - Programme formally ratified)!",
+    "hintOrFormula": "Year September 1920",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_33",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "October 1920: Oudh Kisan Sabha Formed in Awadh",
+    "frontQuestion": "What occurred in Year October 1920 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Oudh Kisan Sabha Formed in Awadh\nSignificance: Organized by Jawaharlal Nehru, Baba Ramchandra (indentured laborer returned from Fiji), and others. Within a month, over 300 village branches mushroomed across Awadh to combat talukdar exploitation.\nKey Personalities: Baba Ramchandra, Jawaharlal Nehru\nBoard Trap: Peasants in Awadh used the slogan of 'Gandhi Raj' to justify attacking talukdars' houses and looting grain hoards, which saddened Congress leaders.",
+    "hintOrFormula": "Year October 1920",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_34",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "December 1920: Nagpur Session of Congress Ratifies Non-Cooperation",
+    "frontQuestion": "What occurred in Year December 1920 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Nagpur Session of Congress Ratifies Non-Cooperation\nSignificance: Intense debate between compromise factions ended in unanimous adoption. The Non-Cooperation programme was officially ratified and launched nationwide.\nKey Personalities: Mahatma Gandhi, C. Vijayaraghavachariar (President), C.R. Das\nBoard Trap: September 1920 = Calcutta (West Bengal); December 1920 = Nagpur (Maharashtra). Both are mandatory CBSE map points!",
+    "hintOrFormula": "Year December 1920",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_sst_35",
+    "subject": "Social Science",
+    "chapter": "Nationalism in India",
+    "topic": "January 1921: Non-Cooperation–Khilafat Movement Launched Nationwide",
+    "frontQuestion": "What occurred in Year January 1921 and why is it pivotal in Nationalism in India?",
+    "backAnswer": "Event: Non-Cooperation–Khilafat Movement Launched Nationwide\nSignificance: Massive participation across Indian society: thousands of students left government schools, lawyers boycotted courts, titles surrendered, foreign cloth boycotted and burned. Foreign cloth imports halved from Rs 102 crore to Rs 57 crore.\nKey Personalities: Mahatma Gandhi, Motilal Nehru, C.R. Das\nBoard Trap: Council elections were boycotted in most provinces, EXCEPT Madras, where the Justice Party (non-Brahmins) contested to gain political power.",
+    "hintOrFormula": "BOY-COTT: Boycott titles, Outlaw foreign cloth, Yield no court attendance, Teach in national schools",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_1",
+    "subject": "English",
+    "chapter": "A Letter to God",
+    "topic": "Irony",
+    "frontQuestion": "What is the supreme irony at the climax of 'A Letter to God'?",
+    "backAnswer": "Lencho suspected the benevolent post office employees who collected money for him of being 'a bunch of crooks'.",
+    "hintOrFormula": "Helpers accused of theft",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_2",
+    "subject": "English",
+    "chapter": "Nelson Mandela",
+    "topic": "Courage",
+    "frontQuestion": "How does Nelson Mandela define true courage?",
+    "backAnswer": "Courage is not the absence of fear, but the triumph over it. The brave person is the one who conquers fear.",
+    "hintOrFormula": "Triumph over fear",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_3",
+    "subject": "English",
+    "chapter": "Dust of Snow",
+    "topic": "Symbolism",
+    "frontQuestion": "How does Robert Frost subvert traditional symbols in 'Dust of Snow'?",
+    "backAnswer": "He uses the crow and hemlock tree (traditionally symbols of death and ill omen) as positive agents of emotional healing.",
+    "hintOrFormula": "Crow and hemlock bring joy",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_4",
+    "subject": "English",
+    "chapter": "Fire and Ice",
+    "topic": "Themes",
+    "frontQuestion": "What do 'Fire' and 'Ice' symbolize in Robert Frost's poem?",
+    "backAnswer": "Fire represents uncontrolled passion, greed, and desire. Ice represents cold hatred, apathy, and emotional rigidity.",
+    "hintOrFormula": "Fire = Desire; Ice = Hatred",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_5",
+    "subject": "English",
+    "chapter": "A Tiger in the Zoo",
+    "topic": "Contrast",
+    "frontQuestion": "Contrast the tiger's condition in the cage with his natural habitat.",
+    "backAnswer": "In cage: Quiet rage, velvet pads, ignores visitors, stares at stars. In jungle: Lurking in grass, stalking plump deer near water.",
+    "hintOrFormula": "Velvet pads vs stalking deer",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_6",
+    "subject": "English",
+    "chapter": "Two Stories About Flying",
+    "topic": "First Flight",
+    "frontQuestion": "What finally compelled the young seagull to take his first flight?",
+    "backAnswer": "Maddened by extreme hunger, he dived towards the fish in his mother's beak and his wings opened automatically.",
+    "hintOrFormula": "Maddened by hunger",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_7",
+    "subject": "English",
+    "chapter": "The Diary of Anne Frank",
+    "topic": "Solitude",
+    "frontQuestion": "Why did Anne Frank say 'Paper has more patience than people'?",
+    "backAnswer": "She felt people lacked genuine patience to listen to deep confidences, whereas her diary 'Kitty' offered a non-judgmental space.",
+    "hintOrFormula": "Paper has more patience",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_8",
+    "subject": "English",
+    "chapter": "Glimpses of India",
+    "topic": "Goan Bakers",
+    "frontQuestion": "What was the traditional dress of Goan bakers and what were they called?",
+    "backAnswer": "Called 'Pader'. They wore 'Kabai', a single-piece long frock reaching down to the knees.",
+    "hintOrFormula": "Pader and Kabai",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_9",
+    "subject": "English",
+    "chapter": "Mijbil the Otter",
+    "topic": "Otter Behavior",
+    "frontQuestion": "What unique playful habit did Mijbil develop with ping-pong balls?",
+    "backAnswer": "He would place the ball on the sloping lid of a damaged suitcase and run to catch it before it fell off.",
+    "hintOrFormula": "Sloping suitcase game",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_10",
+    "subject": "English",
+    "chapter": "Madam Rides the Bus",
+    "topic": "Valli's Maturity",
+    "frontQuestion": "What sight during the return journey shattered Valli's joyful excitement?",
+    "backAnswer": "The sight of the same young cow lying dead by the roadside, struck by a fast-moving vehicle.",
+    "hintOrFormula": "Dead cow by roadside",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_11",
+    "subject": "English",
+    "chapter": "The Sermon at Benares",
+    "topic": "Grief and Acceptance",
+    "frontQuestion": "What lesson did Buddha teach Kisa Gotami with the mustard seeds?",
+    "backAnswer": "Death is common to all mortals; grief and weeping cannot restore life and only increase physical and mental suffering.",
+    "hintOrFormula": "Mustard seed from a home with no death",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_12",
+    "subject": "English",
+    "chapter": "The Proposal",
+    "topic": "Farce",
+    "frontQuestion": "What two absurd disputes derailed Lomov's marriage proposal to Natalya?",
+    "backAnswer": "1. Ownership of the Oxen Meadows.\n2. Comparison of their hunting dogs (Guess vs Squeezer).",
+    "hintOrFormula": "Oxen Meadows & Guess vs Squeezer",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_13",
+    "subject": "English",
+    "chapter": "A Triumph of Surgery",
+    "topic": "Tricki's Cure",
+    "frontQuestion": "How did Dr. Herriot cure Tricki without medicinal surgery?",
+    "backAnswer": "By putting him on a strict calorie-restricted diet with abundant water and mandatory physical play with other dogs.",
+    "hintOrFormula": "Zero medicine, strict diet & exercise",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_14",
+    "subject": "English",
+    "chapter": "The Thief's Story",
+    "topic": "Transformation",
+    "frontQuestion": "Why did Hari Singh return to Anil after stealing the 600 rupees?",
+    "backAnswer": "Because Anil had trusted him completely and was teaching him to read, write, and add numbers, which held far more value than stolen cash.",
+    "hintOrFormula": "Education vs temporary cash",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_15",
+    "subject": "English",
+    "chapter": "The Midnight Visitor",
+    "topic": "Ausable's Wit",
+    "frontQuestion": "How did Ausable outsmart the armed spy Max without a weapon?",
+    "backAnswer": "By fabricating a convincing story about a non-existent balcony, tricking Max into jumping out the window to his death.",
+    "hintOrFormula": "The imaginary balcony",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_16",
+    "subject": "English",
+    "chapter": "A Question of Trust",
+    "topic": "Horace Danby",
+    "frontQuestion": "How was Horace Danby outwitted at Shotover Grange?",
+    "backAnswer": "A younger lady thief posed as the lady of the house and tricked Horace into opening the safe without gloves.",
+    "hintOrFormula": "Honor among thieves",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_17",
+    "subject": "English",
+    "chapter": "Footprints Without Feet",
+    "topic": "Griffin",
+    "frontQuestion": "Why was Griffin described as a lawless person despite being a brilliant scientist?",
+    "backAnswer": "He used his scientific discovery of invisibility for theft, arson, burglary, and physical assault rather than humanity's benefit.",
+    "hintOrFormula": "Brilliant scientist but lawless",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_18",
+    "subject": "English",
+    "chapter": "The Making of a Scientist",
+    "topic": "Ebright",
+    "frontQuestion": "What book opened the world of science to Richard Ebright?",
+    "backAnswer": "'The Travels of Monarch X' by Dr. Fredrick A. Urquhart, which inspired him to tag monarch butterflies.",
+    "hintOrFormula": "The Travels of Monarch X",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_19",
+    "subject": "English",
+    "chapter": "The Necklace",
+    "topic": "Tragic Irony",
+    "frontQuestion": "What was the tragic discovery Matilda Loisel made after 10 years of grueling labor?",
+    "backAnswer": "Madame Forestier revealed that the original borrowed necklace was made of fake paste stones worth at most 500 francs.",
+    "hintOrFormula": "Necklace was fake, worth 500 francs",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_eng_20",
+    "subject": "English",
+    "chapter": "Bholi",
+    "topic": "Empowerment",
+    "frontQuestion": "Why did Bholi refuse to marry Bishamber Nath at the wedding altar?",
+    "backAnswer": "Because Bishamber demanded 5,000 rupees dowry upon seeing her pockmarks; she refused to marry a greedy, mean, and cowardly man.",
+    "hintOrFormula": "Refused greedy dowry seeker",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_1",
+    "subject": "Hindi",
+    "chapter": "बड़े भाई साहब",
+    "topic": "शिक्षा व्यवस्था पर व्यंग्य",
+    "frontQuestion": "बड़े भाई साहब कहानी में तत्कालीन शिक्षा प्रणाली पर क्या व्यंग्य किया गया है?",
+    "backAnswer": "रटंत प्रणाली और व्यावहारिक ज्ञान के अभाव पर व्यंग्य है; केवल परीक्षा पास करना योग्यता का प्रमाण नहीं है, बल्कि जीवन का अनुभव और समझ अधिक महत्वपूर्ण है।",
+    "hintOrFormula": "रटंत शिक्षा बनाम अनुभव",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_2",
+    "subject": "Hindi",
+    "chapter": "डायरी का एक पन्ना",
+    "topic": "कोलकाता में स्वतंत्रता संग्राम",
+    "frontQuestion": "26 जनवरी 1931 को कोलकाता में हुए प्रदर्शन का क्या महत्व था?",
+    "backAnswer": "सुभाष चंद्र बोस के नेतृत्व में विशाल जुलूस निकला और महिलाओं (जानकी देवी, मदालसा) ने बढ़-चढ़कर भाग लिया। इससे सिद्ध हुआ कि कोलकाता भी आजादी के आंदोलन में पूरी तरह सक्रिय है।",
+    "hintOrFormula": "कोलकाता पर लगा कलंक धुल गया",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_3",
+    "subject": "Hindi",
+    "chapter": "तताँरा-वामीरो कथा",
+    "topic": "रूढ़ियों का टूटना",
+    "frontQuestion": "तताँरा और वामीरो के बलिदान से निकोबार द्वीप में क्या युगांतकारी परिवर्तन आया?",
+    "backAnswer": "दोनों के आत्मबलिदान के बाद निकोबारियों ने अपनी सदियों पुरानी रूढ़िवादी प्रथा (दूसरे गाँव में विवाह न करने का नियम) को हमेशा के लिए त्याग दिया।",
+    "hintOrFormula": "रूढ़ियाँ जब बंधन बनें तो टूटना ही श्रेयस्कर है",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_4",
+    "subject": "Hindi",
+    "chapter": "तीसरी कसम",
+    "topic": "हीरामन की कसमें",
+    "frontQuestion": "हीरामन ने कौन-सी तीन कसमें खाई थीं?",
+    "backAnswer": "1. चोरी का माल (बांस) गाड़ी में न लादना।\n2. बांस की लदनी न करना।\n3. नौटंकी की बाई (सवारी) को कभी अपनी गाड़ी में न बैठाना।",
+    "hintOrFormula": "तीन कसमें",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_5",
+    "subject": "Hindi",
+    "chapter": "अब कहाँ दूसरे के दुख से दुखी होने वाले",
+    "topic": "प्रकृति से खिलवाड़",
+    "frontQuestion": "निदा फ़ाज़ली के अनुसार मनुष्य ने प्रकृति का संतुलन कैसे बिगाड़ दिया है?",
+    "backAnswer": "पेड़ों को काटकर, समुद्र को पीछे धकेलकर और कंक्रीट के जंगल बनाकर बेजुबान पक्षियों और जानवरों के आशियाने छीन लिए, जिससे प्राकृतिक आपदाएँ बढ़ गई हैं।",
+    "hintOrFormula": "प्रकृति की सहनशीलता की सीमा",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_6",
+    "subject": "Hindi",
+    "chapter": "पतझर में टूटी पत्तियाँ",
+    "topic": "गिन्नी का सोना",
+    "frontQuestion": "शुद्ध आदर्शवादी और व्यावहारिक आदर्शवादी (गांधीजी) में क्या अंतर बताया गया है?",
+    "backAnswer": "शुद्ध सोना शुद्ध आदर्श है; ताँबा मिलाने से चमक बढ़ती है पर शुद्धता घटती है। गांधीजी शुद्ध आदर्शों को नीचे नहीं लाए, बल्कि लोगों को आदर्शों के स्तर तक ऊपर उठाया।",
+    "hintOrFormula": "शुद्ध सोना बनाम ताँबे की मिलावट",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_7",
+    "subject": "Hindi",
+    "chapter": "कारतूस",
+    "topic": "वज़ीर अली की जाँबाजी",
+    "frontQuestion": "वज़ीर अली ने कर्नल के खेमे में अकेले जाकर क्या साहसिक कार्य किया?",
+    "backAnswer": "वह अकेला कर्नल के खेमे में घुसा, उससे कारतूस हासिल किए और अपना असली नाम बताकर सुरक्षित निकल गया। कर्नल उसकी निडरता देखकर हक्का-बक्का रह गया।",
+    "hintOrFormula": "जाँबाज सिपाही",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_8",
+    "subject": "Hindi",
+    "chapter": "कबीर की साखी",
+    "topic": "कस्तूरी मृग रूपक",
+    "frontQuestion": "'कस्तूरी कुंडलि बसै मृग ढूँढै बन माहिं' का आध्यात्मिक संदेश क्या है?",
+    "backAnswer": "जिस प्रकार हिरण की नाभि में सुगंधित कस्तूरी होती है पर वह उसे पूरे जंगल में खोजता है, उसी प्रकार ईश्वर प्रत्येक मनुष्य के हृदय में विद्यमान हैं, पर अज्ञानी मनुष्य उन्हें बाहर मंदिरों-मस्जिदों में ढूँढता है।",
+    "hintOrFormula": "ईश्वर घट-घट में वास करते हैं",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_9",
+    "subject": "Hindi",
+    "chapter": "मीरा के पद",
+    "topic": "भक्ति भाव",
+    "frontQuestion": "मीराबाई ने श्रीकृष्ण से अपने कष्ट हरने के लिए किन पौराणिक उदाहरणों का उल्लेख किया है?",
+    "backAnswer": "1. द्रौपदी की लाज बचाकर वस्त्र बढ़ाना।\n2. प्रह्लाद की रक्षा के लिए नरसिंह रूप धारण करना।\n3. डूबते हुए गजराज (ऐरावत) को मगरमच्छ से बचाना।",
+    "hintOrFormula": "द्रौपदी, प्रह्लाद और गजराज",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_10",
+    "subject": "Hindi",
+    "chapter": "मनुष्यता (मैथिलीशरण गुप्त)",
+    "topic": "सच्ची मानवता",
+    "frontQuestion": "मैथिलीशरण गुप्त के अनुसार 'सच्चा मनुष्य' कौन है?",
+    "backAnswer": "सच्चा मनुष्य वही है जो संपूर्ण मानव जाति को अपना बंधु समझता है और दूसरों के कल्याण के लिए अपना सर्वस्व न्योछावर कर देता है ('वही मनुष्य है कि जो मनुष्य के लिए मरे')।",
+    "hintOrFormula": "परोपकार ही सच्चा धर्म है",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_11",
+    "subject": "Hindi",
+    "chapter": "पर्वत प्रदेश में पावस",
+    "topic": "प्रकृति चित्रण",
+    "frontQuestion": "सुमित्रानंदन पंत ने सहस्त्र दृग-सुमन से क्या तात्पर्य प्रकट किया है?",
+    "backAnswer": "पर्वत पर खिले हुए हजारों फूल पर्वत के नेत्रों के समान प्रतीत होते हैं, जिनसे वह अपने चरणों में स्थित दर्पण रूपी विशाल तालाब में अपना सौंदर्य निहार रहा है।",
+    "hintOrFormula": "फूल रूपी आँखें",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_12",
+    "subject": "Hindi",
+    "chapter": "तोप (वीरेन डंगवाल)",
+    "topic": "ऐतिहासिक चेतावनी",
+    "frontQuestion": "1857 की तोप आज कंपनी बाग में क्या संदेश दे रही है?",
+    "backAnswer": "तोप कितनी भी शक्तिशाली और संहारक क्यों न हो, एक दिन उसका मुँह बंद हो जाता है और उस पर बच्चे या चिड़ियाँ बैठकर खेलती हैं। अत्याचार और सत्ता हमेशा के लिए नहीं टिकती।",
+    "hintOrFormula": "सत्ता का घमंड स्थायी नहीं होता",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_13",
+    "subject": "Hindi",
+    "chapter": "कर चले हम फ़िदा",
+    "topic": "देशभक्ति",
+    "frontQuestion": "कैफ़ी आज़मी के गीत में 'सर पर कफ़न बाँधना' और 'ख़ून से ज़मीं पर लकीर खींचना' का क्या आशय है?",
+    "backAnswer": "देश की रक्षा के लिए हंसते-हंसते प्राणों का बलिदान देना और अपनी मातृभूमि पर किसी विदेशी शत्रु का पैर न पड़ने देना (लक्ष्मण रेखा के समान)।",
+    "hintOrFormula": "मातृभूमि की रक्षा में बलिदान",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_14",
+    "subject": "Hindi",
+    "chapter": "हरिहर काका",
+    "topic": "स्वार्थ की पराकाष्ठा",
+    "frontQuestion": "हरिहर काका के साथ उनके भाइयों और महंत जी ने कैसा विश्वासघात किया?",
+    "backAnswer": "काका की 15 बीघे उपजाऊ ज़मीन हड़पने के लिए धार्मिक महंत ने उन्हें बंधक बनाकर अंगूठे के निशान लिए, और सगे भाइयों ने भी उन्हें यातनाएँ देकर अपनी दरिंदगी दिखाई।",
+    "hintOrFormula": "रिश्तों में स्वार्थ और पाखंड",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_15",
+    "subject": "Hindi",
+    "chapter": "सपनों के-से दिन",
+    "topic": "हेडमास्टर साहब बनाम पीटी सर",
+    "frontQuestion": "कहानी में हेडमास्टर मदन मोहन शर्मा और पीटी मास्टर प्रीतम चंद के स्वभाव में क्या अंतर था?",
+    "backAnswer": "हेडमास्टर साहब अत्यंत दयालु, सौम्य और बच्चों को प्रेम से समझाने वाले थे; जबकि पीटी सर अत्यंत कठोर, क्रूर और बच्चों को 'मुर्गा' बनाकर अमानवीय दंड देते थे।",
+    "hintOrFormula": "स्नेह बनाम क्रूरता",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_16",
+    "subject": "Hindi",
+    "chapter": "टोपी शुक्ला",
+    "topic": "इफ़्फ़न की दादी",
+    "frontQuestion": "टोपी शुक्ला का इफ़्फ़न की दादी से इतना गहरा लगाव क्यों था?",
+    "backAnswer": "टोपी को अपने घर में माँ और दादी से स्नेह नहीं मिलता था, जबकि इफ़्फ़न की दादी पूरबी बोली में उसे अगाध वात्सल्य, प्रेम और कहानियाँ सुनाती थीं; प्रेम किसी धर्म का मोहताज नहीं होता।",
+    "hintOrFormula": "सच्चे स्नेह का कोई धर्म नहीं होता",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_17",
+    "subject": "Hindi",
+    "chapter": "पदबंध",
+    "topic": "संज्ञा पदबंध",
+    "frontQuestion": "'अयोध्या के राजा दशरथ के चार पुत्र थे' में संज्ञा पदबंध पहचानिए।",
+    "backAnswer": "'अयोध्या के राजा दशरथ' - यह पूरा पद-समूह दशरथ (संज्ञा) की ओर संकेत करता है और शीर्ष पद संज्ञा है, अतः संज्ञा पदबंध है।",
+    "hintOrFormula": "शीर्ष पद दशरथ (संज्ञा)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_18",
+    "subject": "Hindi",
+    "chapter": "पदबंध",
+    "topic": "सर्वनाम पदबंध",
+    "frontQuestion": "'दूसरों का भला चाहने वाले आप' संकट में नहीं पड़ सकते। रेखांकित पदबंध बताइए।",
+    "backAnswer": "'दूसरों का भला चाहने वाले आप' - शीर्ष पद 'आप' सर्वनाम है, अतः यह सर्वनाम पदबंध है।",
+    "hintOrFormula": "शीर्ष पद 'आप' (सर्वनाम)",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_19",
+    "subject": "Hindi",
+    "chapter": "समास",
+    "topic": "अव्ययीभाव समास",
+    "frontQuestion": "अव्ययीभाव समास की पहचान और दो उदाहरण दीजिए।",
+    "backAnswer": "जिस समस्त पद का पूर्व पद अव्यय (यथा, प्रति, आ, बे, भर) हो और वही प्रधान हो। उदाहरण: यथाशक्ति (शक्ति के अनुसार), प्रतिदिन (प्रत्येक दिन), आजन्म (जन्म से लेकर)।",
+    "hintOrFormula": "पूर्व पद अव्यय",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_hin_20",
+    "subject": "Hindi",
+    "chapter": "मुहावरे",
+    "topic": "परीक्षा में बार-बार पूछे जाने वाले मुहावरे",
+    "frontQuestion": "'ईंट का जवाब पत्थर से देना' और 'तलवे चाटना' का अर्थ स्पष्ट कीजिए।",
+    "backAnswer": "1. ईंट का जवाब पत्थर से देना: शत्रु के प्रहार का मुंहतोड़ जवाब देना।\n2. तलवे चाटना: अत्यधिक चापलूसी या खुशामद करना।",
+    "hintOrFormula": "मुंहतोड़ जवाब देना",
+    "difficulty": "High Yield"
+  },
+  {
+    "id": "fc_it_1",
+    "subject": "Information Technology",
+    "chapter": "Communication Skills - II",
+    "topic": "7Cs of Communication",
+    "frontQuestion": "What are the 7Cs of effective communication?",
+    "backAnswer": "Clear, Concise, Concrete, Correct, Coherent, Complete, Courteous.",
+    "hintOrFormula": "7Cs framework",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_2",
+    "subject": "Information Technology",
+    "chapter": "Communication Skills - II",
+    "topic": "Communication Barriers",
+    "frontQuestion": "Name four common barriers to effective communication.",
+    "backAnswer": "1. Physical barriers (noise, distance)\n2. Linguistic barriers (jargon, language)\n3. Interpersonal barriers (prejudice, lack of trust)\n4. Cultural barriers.",
+    "hintOrFormula": "Noise, language, culture",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_3",
+    "subject": "Information Technology",
+    "chapter": "Self-Management Skills - II",
+    "topic": "Stress Management",
+    "frontQuestion": "Name three physical and psychological stress management techniques.",
+    "backAnswer": "Yoga, meditation, physical sports/exercise, nature walks, and proper sleep hygiene.",
+    "hintOrFormula": "Mind and body balance",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_4",
+    "subject": "Information Technology",
+    "chapter": "ICT Skills - II",
+    "topic": "System Maintenance",
+    "frontQuestion": "State two maintenance procedures to keep a computer running smoothly.",
+    "backAnswer": "1. Disk Defragmentation and Disk Cleanup (removing temp files).\n2. Regular Antivirus scanning and Operating System security updates.",
+    "hintOrFormula": "Cleanup and antivirus",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_5",
+    "subject": "Information Technology",
+    "chapter": "Entrepreneurial Skills - II",
+    "topic": "Role of Entrepreneur",
+    "frontQuestion": "State three vital roles played by entrepreneurs in society.",
+    "backAnswer": "1. Employment generation\n2. Wealth creation and capital formation\n3. Innovation and community development.",
+    "hintOrFormula": "Jobs, wealth, innovation",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_6",
+    "subject": "Information Technology",
+    "chapter": "Green Skills - II",
+    "topic": "SDGs",
+    "frontQuestion": "How many Sustainable Development Goals (SDGs) were established by the UN?",
+    "backAnswer": "17 SDGs with 169 targets to be achieved by 2030, covering poverty, hunger, clean water, climate, and education.",
+    "hintOrFormula": "17 SDGs",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_7",
+    "subject": "Information Technology",
+    "chapter": "Digital Documentation (Advanced)",
+    "topic": "Styles in Writer",
+    "frontQuestion": "List four categories of styles available in LibreOffice Writer.",
+    "backAnswer": "Paragraph Styles, Character Styles, Frame Styles, Page Styles, List Styles.",
+    "hintOrFormula": "F11 shortcut",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_8",
+    "subject": "Information Technology",
+    "chapter": "Digital Documentation (Advanced)",
+    "topic": "Fill Format Mode",
+    "frontQuestion": "What is Fill Format mode in LibreOffice Writer and how is it used?",
+    "backAnswer": "A quick formatting tool that allows applying a style to multiple scattered text blocks without re-opening the Styles dialog each time (acts like a paint bucket).",
+    "hintOrFormula": "Paint bucket tool",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_9",
+    "subject": "Information Technology",
+    "chapter": "Digital Documentation (Advanced)",
+    "topic": "Templates",
+    "frontQuestion": "What is the file extension of a LibreOffice Writer template?",
+    "backAnswer": "The default template file extension is .ott (OpenDocument Text Template).",
+    "hintOrFormula": ".ott extension",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_10",
+    "subject": "Information Technology",
+    "chapter": "Digital Documentation (Advanced)",
+    "topic": "Mail Merge",
+    "frontQuestion": "What are the two mandatory files required for Mail Merge?",
+    "backAnswer": "1. Main Document (letter template)\n2. Data Source (table containing recipient names, addresses, etc.).",
+    "hintOrFormula": "Template + Data Source",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_11",
+    "subject": "Information Technology",
+    "chapter": "Electronic Spreadsheet (Advanced)",
+    "topic": "Consolidate Data",
+    "frontQuestion": "What does the Consolidate Data tool do in LibreOffice Calc?",
+    "backAnswer": "It combines and aggregates data from multiple worksheet ranges or workbooks into a single summary table using mathematical functions (SUM, AVERAGE).",
+    "hintOrFormula": "Data → Consolidate",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_12",
+    "subject": "Information Technology",
+    "chapter": "Electronic Spreadsheet (Advanced)",
+    "topic": "Goal Seek",
+    "frontQuestion": "Explain the purpose of Goal Seek with an example.",
+    "backAnswer": "Goal Seek determines what input value is needed to produce a specific target formula result. E.g. finding what exam score is needed to achieve an 85% aggregate.",
+    "hintOrFormula": "Single variable What-If",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_13",
+    "subject": "Information Technology",
+    "chapter": "Electronic Spreadsheet (Advanced)",
+    "topic": "Solver",
+    "frontQuestion": "How does Solver differ from Goal Seek?",
+    "backAnswer": "Solver can optimize equations with MULTIPLE unknown variables subject to user-defined constraints and conditions, whereas Goal Seek handles only a single variable.",
+    "hintOrFormula": "Multiple variables + constraints",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_14",
+    "subject": "Information Technology",
+    "chapter": "Electronic Spreadsheet (Advanced)",
+    "topic": "Macros",
+    "frontQuestion": "What is a Macro and how does it save time in spreadsheets?",
+    "backAnswer": "A saved sequence of keystrokes and commands recorded to automate repetitive tasks with a single click or keyboard shortcut.",
+    "hintOrFormula": "Tools → Macros → Record",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_15",
+    "subject": "Information Technology",
+    "chapter": "Database Management System (DBMS)",
+    "topic": "Primary Key",
+    "frontQuestion": "State two inviolable rules for a Primary Key in a relational table.",
+    "backAnswer": "1. It must contain UNIQUE values for every record (no duplicates).\n2. It CANNOT contain NULL (empty) values.",
+    "hintOrFormula": "Unique and Not Null",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_16",
+    "subject": "Information Technology",
+    "chapter": "Database Management System (DBMS)",
+    "topic": "Foreign Key",
+    "frontQuestion": "What is the function of a Foreign Key in relational databases?",
+    "backAnswer": "It links a field in one table to the Primary Key of another table, ensuring referential integrity and preventing orphan records.",
+    "hintOrFormula": "Referential integrity",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_17",
+    "subject": "Information Technology",
+    "chapter": "Database Management System (DBMS)",
+    "topic": "DDL vs DML",
+    "frontQuestion": "Classify into DDL or DML: CREATE, INSERT, DROP, SELECT, UPDATE, ALTER.",
+    "backAnswer": "DDL (Structure): CREATE, DROP, ALTER.\nDML (Data): INSERT, SELECT, UPDATE.",
+    "hintOrFormula": "DDL defines; DML manipulates",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_18",
+    "subject": "Information Technology",
+    "chapter": "Web Applications and Security",
+    "topic": "Accessibility Options",
+    "frontQuestion": "What are StickyKeys and FilterKeys designed for?",
+    "backAnswer": "StickyKeys: Allows pressing modifier keys (Shift, Ctrl, Alt) sequentially rather than simultaneously for users with motor disabilities.\nFilterKeys: Ignores brief or repeated keystrokes for users with tremors.",
+    "hintOrFormula": "StickyKeys & FilterKeys",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_19",
+    "subject": "Information Technology",
+    "chapter": "Web Applications and Security",
+    "topic": "Strong Password Policy",
+    "frontQuestion": "State three rules for creating a cryptographically strong password.",
+    "backAnswer": "1. At least 10–12 characters long.\n2. Mix of uppercase, lowercase, numbers, and special symbols (!@#$%).\n3. No dictionary words, personal names, or birthdates.",
+    "hintOrFormula": "Length + Complexity",
+    "difficulty": "Fundamental"
+  },
+  {
+    "id": "fc_it_20",
+    "subject": "Information Technology",
+    "chapter": "Web Applications and Security",
+    "topic": "Phishing Prevention",
+    "frontQuestion": "State two ways to identify and avoid phishing attacks.",
+    "backAnswer": "1. Check the URL for correct domain spelling and HTTPS padlock.\n2. Never click suspicious email links asking for passwords or bank OTPs.",
+    "hintOrFormula": "Inspect URL & never share OTP",
+    "difficulty": "Fundamental"
+  },
   // MATHEMATICS FLASHCARDS
   {
     id: "fc_m1",

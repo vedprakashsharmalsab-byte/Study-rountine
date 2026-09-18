@@ -5,6 +5,7 @@ import "./globals.css";
 import "lenis/dist/lenis.css";
 import "katex/dist/katex.min.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,12 +26,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CBSE Class 10 Command Center (2026–2027) — Target 100%",
-  description: "Elite practical study command center, NCERT topic tracker, RD Sharma HOTS bank, and PhET 3D virtual science labs for CBSE Class 10.",
+  title: "Study Routine — CBSE Class 10",
+  description: "NCERT syllabus tracker, concept breakdowns, board question bank, flashcards, and mistake logs for CBSE Class 10.",
+  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "CBSE Command",
+    title: "Study Routine",
   },
 };
 
@@ -39,13 +41,14 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#ffffff",
+  themeColor: "#070913",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable}`}>
       <body className="antialiased selection:bg-yellow-500/30 selection:text-yellow-200">
+        <ServiceWorkerRegister />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
