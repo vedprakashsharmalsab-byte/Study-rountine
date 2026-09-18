@@ -12,7 +12,6 @@ import {
   Sparkles,
   ArrowRight,
   ChevronDown,
-  ChevronLeft,
   ChevronRight,
   Layers,
   FileText,
@@ -31,7 +30,7 @@ import {
   Globe2,
   GraduationCap,
   Languages,
-  Filter
+  CheckSquare
 } from "lucide-react";
 import {
   CBSE_SUBJECTS,
@@ -91,7 +90,7 @@ export default function CommandCenterHomeView({
   // Student Name & Streak
   const [studentName, setStudentName] = useState<string>("Cadet");
   const [studyStreak, setStudyStreak] = useState<number>(1);
-  const [topicFilter, setTopicFilter] = useState<"all" | "high_yield" | "pending">("all");
+  const [topicFilter, setTopicFilter] = useState<"all" | "pending" | "high_yield">("all");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -158,10 +157,6 @@ export default function CommandCenterHomeView({
     return CBSE_SUBJECTS.find((s) => s.id === commandSubjectId) || CBSE_SUBJECTS[0];
   }, [commandSubjectId]);
 
-  const currentChapterIndex = useMemo(() => {
-    return currentSubject.chapters.findIndex((c) => c.id === commandChapterId);
-  }, [currentSubject, commandChapterId]);
-
   const currentChapter: Chapter = useMemo(() => {
     const found = currentSubject.chapters.find((c) => c.id === commandChapterId);
     return found || currentSubject.chapters[0] || {
@@ -191,6 +186,9 @@ export default function CommandCenterHomeView({
     ? Math.round((completedInChapter / chapterTopics.length) * 100)
     : 0;
 
+  // Next unfinished topic (Milestone)
+  const nextTargetTopic = chapterTopics.find((t) => !completedTopicIds[t.id]) || chapterTopics[0];
+
   // Filtered Topics
   const filteredTopics = useMemo(() => {
     if (topicFilter === "high_yield") {
@@ -201,9 +199,6 @@ export default function CommandCenterHomeView({
     }
     return chapterTopics;
   }, [chapterTopics, topicFilter, completedTopicIds]);
-
-  // Next unfinished topic (Milestone)
-  const nextTargetTopic = chapterTopics.find((t) => !completedTopicIds[t.id]) || chapterTopics[0];
 
   // Subject Switcher
   const handleSelectSubject = (subId: string) => {
@@ -229,21 +224,6 @@ export default function CommandCenterHomeView({
       setActiveVaultSubject(activeSubjectKey as any);
       setActiveVaultChapter(chNum);
       loadChapterData(chNum, true, activeSubjectKey as any);
-    }
-  };
-
-  // Prev / Next Chapter Navigation
-  const handlePrevChapter = () => {
-    if (currentChapterIndex > 0) {
-      const prevCh = currentSubject.chapters[currentChapterIndex - 1];
-      handleSelectChapter(prevCh.id);
-    }
-  };
-
-  const handleNextChapter = () => {
-    if (currentChapterIndex < currentSubject.chapters.length - 1) {
-      const nextCh = currentSubject.chapters[currentChapterIndex + 1];
-      handleSelectChapter(nextCh.id);
     }
   };
 
@@ -278,14 +258,12 @@ export default function CommandCenterHomeView({
     <div className="w-full max-w-6xl mx-auto px-3 sm:px-5 py-4 font-sans antialiased text-slate-800">
       
       {/* =========================================================================
-          MASTER FLIGHT DECK (Single Zero-Scroll Unified Studio Card)
+          STUDIO FLIGHT DECK (Single Clean Studio Canvas)
           ========================================================================= */}
-      <div className="bg-white rounded-2xl border border-slate-200/90 shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)] overflow-hidden">
+      <div className="bg-white rounded-3xl border border-slate-200/90 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06)] overflow-hidden space-y-0">
         
-        {/* TOP RIBBON: Greeting, 5-Subject Segmented Pill, & Board Countdown */}
-        <div className="px-5 py-3.5 border-b border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-3 bg-slate-50/50">
-          
-          {/* Identity & Streak */}
+        {/* TOP STATUS BAR: Greeting, Streak, Days to Boards, & Focus Timer */}
+        <div className="px-5 py-3.5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50/50">
           <div className="flex items-center gap-2.5 flex-wrap">
             <span className="text-sm font-bold text-slate-900 truncate">
               {greetingText}, {studentName} 👋
@@ -296,35 +274,12 @@ export default function CommandCenterHomeView({
               {studyStreak} Day Streak
             </span>
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200/80 shrink-0">
-              🎯 Boards: {daysUntilBoards}d Left
+              🎯 Boards: {daysUntilBoards} Days Left (Feb 1)
             </span>
           </div>
 
-          {/* Sleek Segmented 5-Subject Selector */}
-          <div className="flex items-center gap-1 bg-white border border-slate-200/80 p-1 rounded-xl shadow-xs overflow-x-auto">
-            {CBSE_SUBJECTS.map((sub) => {
-              const isSelected = sub.id === commandSubjectId;
-              const shortName = sub.name.split("(")[0].trim().replace("Mathematics", "Maths").replace("Social Science", "SST");
-
-              return (
-                <button
-                  key={sub.id}
-                  type="button"
-                  onClick={() => handleSelectSubject(sub.id)}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                    isSelected
-                      ? "bg-slate-900 text-white shadow-xs"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
-                  }`}
-                >
-                  {shortName}
-                </button>
-              );
-            })}
-          </div>
-
           {/* 25-Min Focus Sprint Companion */}
-          <div className="flex items-center gap-2 self-start lg:self-center shrink-0">
+          <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
             <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-slate-200/80 shadow-xs">
               <Clock className="w-3.5 h-3.5 text-slate-400" />
               <span className="text-xs font-mono font-bold text-slate-900 tabular-nums">
@@ -361,144 +316,118 @@ export default function CommandCenterHomeView({
           </div>
         </div>
 
+        {/* 5-SUBJECT STUDIO SEGMENTED BAR */}
+        <div className="px-5 py-3 border-b border-slate-100 bg-white flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          {CBSE_SUBJECTS.map((sub) => {
+            const isSelected = sub.id === commandSubjectId;
+            const shortName = sub.name.split("(")[0].trim().replace("Mathematics", "Maths").replace("Social Science", "SST");
+            const icon = sub.id === "maths" ? <Calculator className="w-3.5 h-3.5" /> :
+                         sub.id === "science" ? <FlaskConical className="w-3.5 h-3.5" /> :
+                         sub.id === "social" ? <Globe2 className="w-3.5 h-3.5" /> :
+                         sub.id === "english" ? <GraduationCap className="w-3.5 h-3.5" /> :
+                         <Languages className="w-3.5 h-3.5" />;
+
+            return (
+              <button
+                key={sub.id}
+                type="button"
+                onClick={() => handleSelectSubject(sub.id)}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 ${
+                  isSelected
+                    ? "bg-slate-900 text-white shadow-sm ring-1 ring-slate-950"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                }`}
+              >
+                {icon}
+                <span>{shortName}</span>
+                <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                  isSelected ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"
+                }`}>
+                  {sub.chapters.length}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
         {/* =========================================================================
-            CENTER STAGE: TWO-COLUMN ZERO-SCROLL SPLIT COCKPIT
+            INTERACTIVE CHAPTER PLAYER COCKPIT (Side-by-Side Zero Clutter)
             ========================================================================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
           
-          {/* LEFT COLUMN: The Mission Focus (5 of 12 columns) */}
-          <div className="lg:col-span-5 p-5 sm:p-6 flex flex-col justify-between space-y-5 bg-white">
-            
-            <div className="space-y-4">
-              {/* Subject Tag & Interactive Chapter Navigation */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200/60">
-                    {currentSubject.name.split("(")[0].trim()}
-                  </span>
-                  <span className="text-xs font-semibold text-slate-500">
-                    Ch {currentChapterNum} of {currentSubject.chapters.length}
-                  </span>
-                </div>
+          {/* LEFT RAIL: Chapter Selector Drawer (4 of 12 columns) */}
+          <div className="lg:col-span-4 p-4 sm:p-5 bg-slate-50/40 flex flex-col justify-between space-y-3">
+            <div>
+              <div className="flex items-center justify-between pb-2 border-b border-slate-200/80 mb-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                  {currentSubject.name.split("(")[0].trim()} Chapters
+                </span>
+                <span className="text-[11px] font-mono font-bold text-slate-500">
+                  {currentSubject.chapters.length} Chapters
+                </span>
+              </div>
 
-                {/* Chapter Dropdown with Prev/Next Fast Navigation */}
-                <div className="flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={handlePrevChapter}
-                    disabled={currentChapterIndex <= 0}
-                    className="p-2.5 rounded-xl border border-slate-300/80 bg-slate-50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0 cursor-pointer"
-                    title="Previous Chapter"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
+              {/* Scrollable Chapter List */}
+              <div className="max-h-[460px] overflow-y-auto pr-1 space-y-1 custom-scrollbar">
+                {currentSubject.chapters.map((ch, idx) => {
+                  const isSelected = ch.id === commandChapterId;
+                  const chNo = ch.ncertChapterNo || idx + 1;
+                  const chCompleted = (ch.topics || []).filter(t => completedTopicIds[t.id]).length;
+                  const chTotal = (ch.topics || []).length;
+                  const isFinished = chTotal > 0 && chCompleted === chTotal;
 
-                  <div className="relative flex-1">
-                    <label htmlFor="chapter-select" className="sr-only">Select Chapter</label>
-                    <select
-                      id="chapter-select"
-                      value={commandChapterId}
-                      onChange={(e) => handleSelectChapter(e.target.value)}
-                      aria-label="Select Chapter"
-                      className="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-slate-300/80 bg-slate-50 text-xs font-bold text-slate-800 pr-9 cursor-pointer hover:bg-slate-100/70 transition-colors shadow-xs"
+                  return (
+                    <button
+                      key={ch.id}
+                      type="button"
+                      onClick={() => handleSelectChapter(ch.id)}
+                      className={`w-full text-left p-2.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 ${
+                        isSelected
+                          ? "bg-white border-slate-900 text-slate-950 shadow-xs font-bold ring-1 ring-slate-900"
+                          : isFinished
+                          ? "bg-emerald-50/50 border-emerald-200/70 text-emerald-900 hover:bg-emerald-100/50"
+                          : "bg-white border-slate-200/70 text-slate-700 hover:bg-slate-100/70 hover:border-slate-300"
+                      }`}
                     >
-                      {currentSubject.chapters.map((ch, idx) => (
-                        <option key={ch.id} value={ch.id}>
-                          Ch {ch.ncertChapterNo || idx + 1}: {ch.name}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
-                  </div>
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded shrink-0 ${
+                          isSelected
+                            ? "bg-slate-900 text-white"
+                            : isFinished
+                            ? "bg-emerald-600 text-white"
+                            : "bg-slate-100 text-slate-600"
+                        }`}>
+                          Ch {chNo}
+                        </span>
+                        <span className="text-xs truncate">
+                          {ch.name}
+                        </span>
+                      </div>
 
-                  <button
-                    type="button"
-                    onClick={handleNextChapter}
-                    disabled={currentChapterIndex >= currentSubject.chapters.length - 1}
-                    className="p-2.5 rounded-xl border border-slate-300/80 bg-slate-50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0 cursor-pointer"
-                    title="Next Chapter"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Active Chapter Title */}
-              <div>
-                <h2 className="text-xl font-bold tracking-tight text-slate-900 leading-tight">
-                  {currentChapter.name}
-                </h2>
-                <div className="flex items-center justify-between text-xs mt-2 text-slate-500 font-medium">
-                  <span>Progress: {completedInChapter} of {chapterTopics.length} done</span>
-                  <span className="font-mono font-bold text-slate-800">{chapterProgressPercent}%</span>
-                </div>
-                <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden mt-1.5">
-                  <div
-                    className="h-full bg-emerald-500 rounded-full transition-all duration-300"
-                    style={{ width: `${chapterProgressPercent}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* Next Milestone Card */}
-              {nextTargetTopic && (
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
-                  <div className="flex items-center justify-between text-[11px]">
-                    <span className="font-bold text-blue-700 uppercase tracking-wider flex items-center gap-1">
-                      👉 Next Target
-                    </span>
-                    {nextTargetTopic.isImportantForBoards && (
-                      <span className="font-bold px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 text-[10px] border border-rose-200/60">
-                        90%+ Recurring
-                      </span>
-                    )}
-                  </div>
-                  <div className="text-xs font-semibold text-slate-900 line-clamp-2">
-                    {nextTargetTopic.title}
-                  </div>
-                </div>
-              )}
-
-              {/* 2 Big 1-Click Action Buttons */}
-              <div className="space-y-2 pt-1">
-                <Link
-                  href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
-                  onClick={(e) => handleNavClick(e, "concepts", {
-                    subject: activeSubjectKey,
-                    chapter: currentChapterNum
-                  })}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-xs group cursor-pointer"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <BookOpen className="w-4 h-4 text-white" />
-                    <span className="text-xs font-bold">Start Lesson Notes (10 Min)</span>
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-
-                <Link
-                  href={getTabHref("questions", activeSubjectKey, currentChapterNum)}
-                  onClick={(e) => handleNavClick(e, "questions", {
-                    subject: activeSubjectKey,
-                    chapter: currentChapterNum
-                  })}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200/70 text-slate-900 transition-all shadow-xs group cursor-pointer"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <HelpCircle className="w-4 h-4 text-amber-600" />
-                    <span className="text-xs font-bold">Practice Board Questions</span>
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
+                      <div className="flex items-center gap-1 shrink-0 text-[10px] font-mono">
+                        {isFinished ? (
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                        ) : (
+                          <span className="text-slate-400">
+                            {chCompleted}/{chTotal}
+                          </span>
+                        )}
+                        <ChevronRight className={`w-3.5 h-3.5 transition-transform ${
+                          isSelected ? "text-slate-900 translate-x-0.5" : "text-slate-300"
+                        }`} />
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Bottom 4 Compact Utility Pills */}
-            <div className="grid grid-cols-2 gap-1.5 pt-3 border-t border-slate-100 text-[11px] font-semibold">
+            {/* Bottom 4 Compact Quick Tools */}
+            <div className="pt-3 border-t border-slate-200/80 grid grid-cols-2 gap-1.5 text-[11px] font-semibold">
               <Link
                 href={getTabHref("flashcards")}
                 onClick={(e) => handleNavClick(e, "flashcards")}
-                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors cursor-pointer"
+                className="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-between transition-colors shadow-2xs"
               >
                 <span>🗂 Flashcards</span>
                 <span className="font-mono text-slate-500 font-bold">{chapterFlashcardsCount}</span>
@@ -507,7 +436,7 @@ export default function CommandCenterHomeView({
               <Link
                 href={getTabHref("common_mistakes")}
                 onClick={(e) => handleNavClick(e, "common_mistakes")}
-                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors cursor-pointer"
+                className="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-between transition-colors shadow-2xs"
               >
                 <span>⚠️ Mistakes</span>
                 <span className="font-mono text-rose-600 font-bold">{chapterMistakesCount}</span>
@@ -526,7 +455,7 @@ export default function CommandCenterHomeView({
                   activeSubjectKey === "sst" ? "timelines" :
                   activeSubjectKey === "hindi" ? "hindi" : "english"
                 )}
-                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors cursor-pointer"
+                className="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-between transition-colors shadow-2xs"
               >
                 <span>📐 Cheat-Sheet</span>
                 <span className="text-slate-400">→</span>
@@ -535,130 +464,200 @@ export default function CommandCenterHomeView({
               <Link
                 href={getTabHref("roadmap")}
                 onClick={(e) => handleNavClick(e, "roadmap")}
-                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors cursor-pointer"
+                className="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-between transition-colors shadow-2xs"
               >
-                <span>📅 30-Day Plan</span>
+                <span>📅 Blueprint</span>
                 <span className="text-slate-400">→</span>
               </Link>
             </div>
-
           </div>
 
-          {/* RIGHT COLUMN: The Interactive Topic Runway (7 of 12 columns) */}
-          <div className="lg:col-span-7 p-5 sm:p-6 flex flex-col justify-between bg-slate-50/30">
+          {/* RIGHT STAGE: Active Study Hero & Topic Runway (8 of 12 columns) */}
+          <div className="lg:col-span-8 p-5 sm:p-6 bg-white space-y-5 flex flex-col justify-between">
             
-            <div className="space-y-3">
-              {/* Header Strip with Interactive Filter Pills */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
+            <div className="space-y-4">
+              {/* Active Chapter Header & Progress Bar */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    NCERT Topic Checklist
-                  </h3>
-                  <p className="text-xs text-slate-500 font-medium mt-0.5">
-                    Check off topics as you study (+25 XP each)
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200/80">
+                      Ch {currentChapterNum} • {currentSubject.name.split("(")[0].trim()}
+                    </span>
+                    {chapterProgressPercent === 100 && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        ✓ Chapter Mastered
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-1 leading-tight">
+                    {currentChapter.name}
+                  </h2>
                 </div>
 
-                {/* Filter Pills */}
-                <div className="flex items-center gap-1 bg-white border border-slate-200/80 p-0.5 rounded-lg self-start sm:self-auto">
-                  <button
-                    type="button"
-                    onClick={() => setTopicFilter("all")}
-                    className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
-                      topicFilter === "all" ? "bg-slate-900 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    All ({chapterTopics.length})
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setTopicFilter("pending")}
-                    className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
-                      topicFilter === "pending" ? "bg-slate-900 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    Pending ({chapterTopics.length - completedInChapter})
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setTopicFilter("high_yield")}
-                    className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
-                      topicFilter === "high_yield" ? "bg-slate-900 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    High-Yield ({chapterTopics.filter(t => t.isImportantForBoards).length})
-                  </button>
+                <div className="text-right sm:self-center">
+                  <div className="text-xs font-mono font-bold text-slate-800">
+                    {completedInChapter} of {chapterTopics.length} Topics ({chapterProgressPercent}%)
+                  </div>
+                  <div className="w-36 h-2 bg-slate-100 rounded-full overflow-hidden mt-1 sm:ml-auto">
+                    <div
+                      className="h-full bg-emerald-500 rounded-full transition-all duration-300"
+                      style={{ width: `${chapterProgressPercent}%` }}
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Contained Zero-Scroll Topic List */}
-              <div className="max-h-[380px] overflow-y-auto pr-1 space-y-1.5 custom-scrollbar">
-                {filteredTopics.length === 0 ? (
-                  <div className="p-8 text-center text-xs text-slate-400 font-medium bg-white rounded-xl border border-dashed border-slate-200">
-                    No topics match the selected filter.
+              {/* 10X CHARISMATIC CONTINUE STUDY HERO */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white shadow-md space-y-3 relative overflow-hidden">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5 text-[11px]">
+                    <Sparkles className="w-3.5 h-3.5 fill-amber-400" />
+                    Up Next Milestone
+                  </span>
+                  {nextTargetTopic?.isImportantForBoards && (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-400/40">
+                      90%+ Recurring Board Question
+                    </span>
+                  )}
+                </div>
+
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold text-white leading-snug">
+                    {nextTargetTopic ? nextTargetTopic.title : "All topics completed! Practice board questions below."}
+                  </h3>
+                </div>
+
+                {/* 2 Big Primary Actions */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                  <Link
+                    href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
+                    onClick={(e) => handleNavClick(e, "concepts", {
+                      subject: activeSubjectKey,
+                      chapter: currentChapterNum
+                    })}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition-all shadow-sm cursor-pointer active:scale-98"
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    <span>Read Topic Notes (10 Min)</span>
+                  </Link>
+
+                  <Link
+                    href={getTabHref("questions", activeSubjectKey, currentChapterNum)}
+                    onClick={(e) => handleNavClick(e, "questions", {
+                      subject: activeSubjectKey,
+                      chapter: currentChapterNum
+                    })}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs transition-all shadow-sm cursor-pointer active:scale-98"
+                  >
+                    <HelpCircle className="w-4 h-4 text-amber-300" />
+                    <span>Practice Board Questions</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Interactive Topic Runway */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between pt-1">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    NCERT Topic Checklist
+                  </span>
+                  
+                  {/* Topic Filter Pills */}
+                  <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg">
+                    <button
+                      type="button"
+                      onClick={() => setTopicFilter("all")}
+                      className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                        topicFilter === "all" ? "bg-white text-slate-900 shadow-xs" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      All ({chapterTopics.length})
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setTopicFilter("pending")}
+                      className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                        topicFilter === "pending" ? "bg-white text-slate-900 shadow-xs" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      Pending ({chapterTopics.length - completedInChapter})
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setTopicFilter("high_yield")}
+                      className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                        topicFilter === "high_yield" ? "bg-white text-slate-900 shadow-xs" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      High-Yield ({chapterTopics.filter(t => t.isImportantForBoards).length})
+                    </button>
                   </div>
-                ) : (
-                  filteredTopics.map((topic, index) => {
-                    const isDone = !!completedTopicIds[topic.id];
+                </div>
 
-                    return (
-                      <div
-                        key={topic.id}
-                        className={`p-3 rounded-xl border flex items-center justify-between gap-3 transition-all ${
-                          isDone
-                            ? "bg-emerald-50/50 border-emerald-200/70 text-slate-600"
-                            : "bg-white border-slate-200/90 text-slate-800 hover:border-slate-300 shadow-xs"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <button
-                            type="button"
-                            onClick={() => toggleTopic(topic.id)}
-                            className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-all cursor-pointer ${
-                              isDone
-                                ? "bg-emerald-600 border-emerald-600 text-white"
-                                : "border-slate-300 hover:border-slate-400 bg-white"
-                            }`}
-                            title={isDone ? "Mark incomplete" : "Mark completed (+25 XP)"}
-                          >
-                            {isDone && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                          </button>
+                {/* Contained Checklist */}
+                <div className="max-h-[220px] overflow-y-auto pr-1 space-y-1.5 custom-scrollbar">
+                  {filteredTopics.length === 0 ? (
+                    <div className="p-6 text-center text-xs text-slate-400 font-medium bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                      No topics found for this filter.
+                    </div>
+                  ) : (
+                    filteredTopics.map((topic, index) => {
+                      const isDone = !!completedTopicIds[topic.id];
 
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-1.5">
-                              <span className="text-[10px] font-mono font-semibold text-slate-400">
-                                {topic.sectionCode || `${index + 1}`}
+                      return (
+                        <div
+                          key={topic.id}
+                          className={`p-2.5 rounded-xl border flex items-center justify-between gap-3 transition-all ${
+                            isDone
+                              ? "bg-emerald-50/40 border-emerald-200/70 text-slate-600"
+                              : "bg-white border-slate-200/80 text-slate-800 hover:border-slate-300 shadow-2xs"
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <button
+                              type="button"
+                              onClick={() => toggleTopic(topic.id)}
+                              className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-all cursor-pointer ${
+                                isDone
+                                  ? "bg-emerald-600 border-emerald-600 text-white"
+                                  : "border-slate-300 hover:border-slate-400 bg-white"
+                              }`}
+                              title={isDone ? "Mark incomplete" : "Mark completed (+25 XP)"}
+                            >
+                              {isDone && <Check className="w-3 h-3 stroke-[3]" />}
+                            </button>
+
+                            <div className="min-w-0">
+                              <span className={`text-xs font-semibold block truncate ${
+                                isDone ? "line-through text-slate-400" : "text-slate-900"
+                              }`}>
+                                {topic.title}
                               </span>
-                              {topic.isImportantForBoards && (
-                                <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 border border-rose-200/60">
-                                  High-Yield
-                                </span>
-                              )}
                             </div>
-                            <span className={`text-xs font-semibold mt-0.5 block truncate ${
-                              isDone ? "line-through text-slate-400" : "text-slate-900"
-                            }`}>
-                              {topic.title}
-                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            {topic.isImportantForBoards && (
+                              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 border border-rose-200/60 hidden sm:inline">
+                                High-Yield
+                              </span>
+                            )}
+                            <Link
+                              href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
+                              onClick={(e) => handleNavClick(e, "concepts", {
+                                subject: activeSubjectKey,
+                                chapter: currentChapterNum
+                              })}
+                              className="px-2 py-0.5 rounded text-[10px] font-bold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 transition-colors cursor-pointer"
+                            >
+                              Study
+                            </Link>
                           </div>
                         </div>
-
-                        <div className="shrink-0">
-                          <Link
-                            href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
-                            onClick={(e) => handleNavClick(e, "concepts", {
-                              subject: activeSubjectKey,
-                              chapter: currentChapterNum
-                            })}
-                            className="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 transition-colors cursor-pointer"
-                          >
-                            Study
-                          </Link>
-                        </div>
-                      </div>
-                    );
-                  })
-                )}
+                      );
+                    })
+                  )}
+                </div>
               </div>
             </div>
 

@@ -3093,12 +3093,13 @@ export default function CBSECommandCenter() {
       </nav>
 
       {/* =========================================================================
-          SECONDARY SUB-TOOLBAR (FOCUSED ACTIVE WORKSPACE)
+          SECONDARY SUB-TOOLBAR (FOCUSED ACTIVE WORKSPACE - HIDDEN ON COMMAND)
           ========================================================================= */}
-      <div className={`border-b transition-colors sticky top-[49px] md:top-[95px] lg:top-[103px] z-20 ${
-        isDark ? "border-white/10 bg-[#070a14]/95" : "border-slate-200 bg-white/95"
-      }`}>
-        <div className="max-w-5xl mx-auto px-3.5 sm:px-6 py-2">
+      {activeCategory !== "command" && (
+        <div className={`border-b transition-colors sticky top-[49px] md:top-[95px] lg:top-[103px] z-20 ${
+          isDark ? "border-white/10 bg-[#070a14]/95" : "border-slate-200 bg-white/95"
+        }`}>
+          <div className="max-w-5xl mx-auto px-3.5 sm:px-6 py-2">
           {(() => {
             const currentCat = CATEGORY_DEFINITIONS.find((c) => c.id === activeCategory) || CATEGORY_DEFINITIONS[0];
             return (
@@ -3194,6 +3195,7 @@ export default function CBSECommandCenter() {
           })()}
         </div>
       </div>
+      )}
 
       {/* =========================================================================
           ALL 18 MODULES MEGA-LAUNCHER DIRECTORY (VIA PORTAL)
