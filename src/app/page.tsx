@@ -1514,11 +1514,8 @@ export default function CBSECommandCenter() {
       icon: Target,
       defaultTab: "chapter_dashboard",
       items: [
-        { id: "chapter_dashboard", label: "Chapter Dashboard", icon: Target },
-        { id: "test_series", label: "Sept 14 Exam", icon: Clock },
-        { id: "today", label: "Daily Focus", icon: Calendar },
-        { id: "syllabus", label: "NCERT Syllabus", icon: BookOpen },
-        { id: "roadmap", label: "100% Roadmap", icon: Compass },
+        { id: "chapter_dashboard", label: "Study Command Center", icon: Target },
+        { id: "roadmap", label: "30-Day Blueprint", icon: Compass },
       ]
     },
     {
@@ -3259,7 +3256,7 @@ export default function CBSECommandCenter() {
                 {
                   group: "Core Learning & Question Mastery",
                   items: [
-                    { id: "chapter_dashboard", label: "Chapter Command", sub: "Systematic Syllabus Navigator", icon: Target, color: "text-amber-400 bg-amber-500/15" },
+                    { id: "chapter_dashboard", label: "Study Command Center", sub: "Interactive NCERT Chapter Cockpit", icon: Target, color: "text-amber-400 bg-amber-500/15" },
                     { id: "concepts", label: "Chapter Concepts & Theory (37 Ch)", sub: "NCERT Theory, Chapter Concepts & Rubrics", icon: BookOpen, color: "text-blue-400 bg-blue-500/15" },
                     { id: "questions", label: "Master Question Bank", sub: "1,200+ CBSE Board-Graded Questions", icon: Zap, color: "text-emerald-400 bg-emerald-500/15" },
                     { id: "hots", label: "Competitive HOTS Vault", sub: "35 Master NTSE / Olympiad Problems", icon: Flame, color: "text-rose-400 bg-rose-500/15" },

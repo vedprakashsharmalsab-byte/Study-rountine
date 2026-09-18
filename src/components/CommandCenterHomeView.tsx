@@ -12,6 +12,8 @@ import {
   Sparkles,
   ArrowRight,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Layers,
   FileText,
   HelpCircle,
@@ -28,7 +30,8 @@ import {
   FlaskConical,
   Globe2,
   GraduationCap,
-  Languages
+  Languages,
+  Filter
 } from "lucide-react";
 import {
   CBSE_SUBJECTS,
@@ -88,6 +91,7 @@ export default function CommandCenterHomeView({
   // Student Name & Streak
   const [studentName, setStudentName] = useState<string>("Cadet");
   const [studyStreak, setStudyStreak] = useState<number>(1);
+  const [topicFilter, setTopicFilter] = useState<"all" | "high_yield" | "pending">("all");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -108,6 +112,13 @@ export default function CommandCenterHomeView({
     if (hour < 12) return "Good morning";
     if (hour < 17) return "Good afternoon";
     return "Good evening";
+  }, []);
+
+  // Days until CBSE Boards (Feb 1, 2027)
+  const daysUntilBoards = useMemo(() => {
+    const boardDate = new Date("2027-02-01T09:00:00").getTime();
+    const diff = boardDate - Date.now();
+    return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
   }, []);
 
   // 25-Min Focus Sprint Companion
@@ -147,6 +158,10 @@ export default function CommandCenterHomeView({
     return CBSE_SUBJECTS.find((s) => s.id === commandSubjectId) || CBSE_SUBJECTS[0];
   }, [commandSubjectId]);
 
+  const currentChapterIndex = useMemo(() => {
+    return currentSubject.chapters.findIndex((c) => c.id === commandChapterId);
+  }, [currentSubject, commandChapterId]);
+
   const currentChapter: Chapter = useMemo(() => {
     const found = currentSubject.chapters.find((c) => c.id === commandChapterId);
     return found || currentSubject.chapters[0] || {
@@ -176,6 +191,17 @@ export default function CommandCenterHomeView({
     ? Math.round((completedInChapter / chapterTopics.length) * 100)
     : 0;
 
+  // Filtered Topics
+  const filteredTopics = useMemo(() => {
+    if (topicFilter === "high_yield") {
+      return chapterTopics.filter((t) => t.isImportantForBoards);
+    }
+    if (topicFilter === "pending") {
+      return chapterTopics.filter((t) => !completedTopicIds[t.id]);
+    }
+    return chapterTopics;
+  }, [chapterTopics, topicFilter, completedTopicIds]);
+
   // Next unfinished topic (Milestone)
   const nextTargetTopic = chapterTopics.find((t) => !completedTopicIds[t.id]) || chapterTopics[0];
 
@@ -203,6 +229,21 @@ export default function CommandCenterHomeView({
       setActiveVaultSubject(activeSubjectKey as any);
       setActiveVaultChapter(chNum);
       loadChapterData(chNum, true, activeSubjectKey as any);
+    }
+  };
+
+  // Prev / Next Chapter Navigation
+  const handlePrevChapter = () => {
+    if (currentChapterIndex > 0) {
+      const prevCh = currentSubject.chapters[currentChapterIndex - 1];
+      handleSelectChapter(prevCh.id);
+    }
+  };
+
+  const handleNextChapter = () => {
+    if (currentChapterIndex < currentSubject.chapters.length - 1) {
+      const nextCh = currentSubject.chapters[currentChapterIndex + 1];
+      handleSelectChapter(nextCh.id);
     }
   };
 
@@ -241,11 +282,11 @@ export default function CommandCenterHomeView({
           ========================================================================= */}
       <div className="bg-white rounded-2xl border border-slate-200/90 shadow-[0_2px_16px_-4px_rgba(0,0,0,0.06)] overflow-hidden">
         
-        {/* TOP RIBBON: Greeting, 5-Subject Segmented Pill, & Focus Sprint */}
+        {/* TOP RIBBON: Greeting, 5-Subject Segmented Pill, & Board Countdown */}
         <div className="px-5 py-3.5 border-b border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-3 bg-slate-50/50">
           
           {/* Identity & Streak */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 flex-wrap">
             <span className="text-sm font-bold text-slate-900 truncate">
               {greetingText}, {studentName} 👋
             </span>
@@ -253,6 +294,9 @@ export default function CommandCenterHomeView({
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/80 shrink-0">
               <Flame className="w-3 h-3 text-amber-500 fill-amber-500" />
               {studyStreak} Day Streak
+            </span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-800 border border-blue-200/80 shrink-0">
+              🎯 Boards: {daysUntilBoards}d Left
             </span>
           </div>
 
@@ -267,7 +311,7 @@ export default function CommandCenterHomeView({
                   key={sub.id}
                   type="button"
                   onClick={() => handleSelectSubject(sub.id)}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all shrink-0 ${
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${
                     isSelected
                       ? "bg-slate-900 text-white shadow-xs"
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
@@ -293,7 +337,7 @@ export default function CommandCenterHomeView({
                 playSound("click");
                 setIsFocusActive(!isFocusActive);
               }}
-              className={`p-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`p-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 isFocusActive
                   ? "bg-amber-100 text-amber-900 hover:bg-amber-200"
                   : "bg-slate-900 text-white hover:bg-slate-800"
@@ -309,7 +353,7 @@ export default function CommandCenterHomeView({
                 setIsFocusActive(false);
                 setFocusSeconds(25 * 60);
               }}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               title="Reset Timer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -326,7 +370,7 @@ export default function CommandCenterHomeView({
           <div className="lg:col-span-5 p-5 sm:p-6 flex flex-col justify-between space-y-5 bg-white">
             
             <div className="space-y-4">
-              {/* Subject Tag & Chapter Selector */}
+              {/* Subject Tag & Interactive Chapter Navigation */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200/60">
@@ -337,23 +381,45 @@ export default function CommandCenterHomeView({
                   </span>
                 </div>
 
-                {/* Chapter Dropdown */}
-                <div className="relative">
-                  <label htmlFor="chapter-select" className="sr-only">Select Chapter</label>
-                  <select
-                    id="chapter-select"
-                    value={commandChapterId}
-                    onChange={(e) => handleSelectChapter(e.target.value)}
-                    aria-label="Select Chapter"
-                    className="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-slate-300/80 bg-slate-50 text-xs font-bold text-slate-800 pr-9 cursor-pointer hover:bg-slate-100/70 transition-colors shadow-xs"
+                {/* Chapter Dropdown with Prev/Next Fast Navigation */}
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={handlePrevChapter}
+                    disabled={currentChapterIndex <= 0}
+                    className="p-2.5 rounded-xl border border-slate-300/80 bg-slate-50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0 cursor-pointer"
+                    title="Previous Chapter"
                   >
-                    {currentSubject.chapters.map((ch, idx) => (
-                      <option key={ch.id} value={ch.id}>
-                        Ch {ch.ncertChapterNo || idx + 1}: {ch.name}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+
+                  <div className="relative flex-1">
+                    <label htmlFor="chapter-select" className="sr-only">Select Chapter</label>
+                    <select
+                      id="chapter-select"
+                      value={commandChapterId}
+                      onChange={(e) => handleSelectChapter(e.target.value)}
+                      aria-label="Select Chapter"
+                      className="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-slate-300/80 bg-slate-50 text-xs font-bold text-slate-800 pr-9 cursor-pointer hover:bg-slate-100/70 transition-colors shadow-xs"
+                    >
+                      {currentSubject.chapters.map((ch, idx) => (
+                        <option key={ch.id} value={ch.id}>
+                          Ch {ch.ncertChapterNo || idx + 1}: {ch.name}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleNextChapter}
+                    disabled={currentChapterIndex >= currentSubject.chapters.length - 1}
+                    className="p-2.5 rounded-xl border border-slate-300/80 bg-slate-50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0 cursor-pointer"
+                    title="Next Chapter"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
 
@@ -401,7 +467,7 @@ export default function CommandCenterHomeView({
                     subject: activeSubjectKey,
                     chapter: currentChapterNum
                   })}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-xs group"
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-xs group cursor-pointer"
                 >
                   <div className="flex items-center gap-2.5">
                     <BookOpen className="w-4 h-4 text-white" />
@@ -416,7 +482,7 @@ export default function CommandCenterHomeView({
                     subject: activeSubjectKey,
                     chapter: currentChapterNum
                   })}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200/70 text-slate-900 transition-all shadow-xs group"
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200/70 text-slate-900 transition-all shadow-xs group cursor-pointer"
                 >
                   <div className="flex items-center gap-2.5">
                     <HelpCircle className="w-4 h-4 text-amber-600" />
@@ -432,7 +498,7 @@ export default function CommandCenterHomeView({
               <Link
                 href={getTabHref("flashcards")}
                 onClick={(e) => handleNavClick(e, "flashcards")}
-                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors"
+                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors cursor-pointer"
               >
                 <span>🗂 Flashcards</span>
                 <span className="font-mono text-slate-500 font-bold">{chapterFlashcardsCount}</span>
@@ -441,7 +507,7 @@ export default function CommandCenterHomeView({
               <Link
                 href={getTabHref("common_mistakes")}
                 onClick={(e) => handleNavClick(e, "common_mistakes")}
-                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors"
+                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors cursor-pointer"
               >
                 <span>⚠️ Mistakes</span>
                 <span className="font-mono text-rose-600 font-bold">{chapterMistakesCount}</span>
@@ -460,18 +526,18 @@ export default function CommandCenterHomeView({
                   activeSubjectKey === "sst" ? "timelines" :
                   activeSubjectKey === "hindi" ? "hindi" : "english"
                 )}
-                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors"
+                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors cursor-pointer"
               >
                 <span>📐 Cheat-Sheet</span>
                 <span className="text-slate-400">→</span>
               </Link>
 
               <Link
-                href={getTabHref("test_series")}
-                onClick={(e) => handleNavClick(e, "test_series")}
-                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors"
+                href={getTabHref("roadmap")}
+                onClick={(e) => handleNavClick(e, "roadmap")}
+                className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/70 text-slate-700 flex items-center justify-between transition-colors cursor-pointer"
               >
-                <span>🎯 Test Series</span>
+                <span>📅 30-Day Plan</span>
                 <span className="text-slate-400">→</span>
               </Link>
             </div>
@@ -482,8 +548,8 @@ export default function CommandCenterHomeView({
           <div className="lg:col-span-7 p-5 sm:p-6 flex flex-col justify-between bg-slate-50/30">
             
             <div className="space-y-3">
-              {/* Header Strip */}
-              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+              {/* Header Strip with Interactive Filter Pills */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
                 <div>
                   <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">
                     NCERT Topic Checklist
@@ -492,83 +558,117 @@ export default function CommandCenterHomeView({
                     Check off topics as you study (+25 XP each)
                   </p>
                 </div>
-                <span className="text-xs font-mono font-bold text-slate-700 bg-white border border-slate-200/80 px-2.5 py-0.5 rounded-lg shadow-xs">
-                  {completedInChapter}/{chapterTopics.length} Done
-                </span>
+
+                {/* Filter Pills */}
+                <div className="flex items-center gap-1 bg-white border border-slate-200/80 p-0.5 rounded-lg self-start sm:self-auto">
+                  <button
+                    type="button"
+                    onClick={() => setTopicFilter("all")}
+                    className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                      topicFilter === "all" ? "bg-slate-900 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    All ({chapterTopics.length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTopicFilter("pending")}
+                    className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                      topicFilter === "pending" ? "bg-slate-900 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    Pending ({chapterTopics.length - completedInChapter})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTopicFilter("high_yield")}
+                    className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                      topicFilter === "high_yield" ? "bg-slate-900 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    High-Yield ({chapterTopics.filter(t => t.isImportantForBoards).length})
+                  </button>
+                </div>
               </div>
 
-              {/* Contained Zero-Scroll Topic List (max-h-96 with clean scroll) */}
+              {/* Contained Zero-Scroll Topic List */}
               <div className="max-h-[380px] overflow-y-auto pr-1 space-y-1.5 custom-scrollbar">
-                {chapterTopics.map((topic, index) => {
-                  const isDone = !!completedTopicIds[topic.id];
+                {filteredTopics.length === 0 ? (
+                  <div className="p-8 text-center text-xs text-slate-400 font-medium bg-white rounded-xl border border-dashed border-slate-200">
+                    No topics match the selected filter.
+                  </div>
+                ) : (
+                  filteredTopics.map((topic, index) => {
+                    const isDone = !!completedTopicIds[topic.id];
 
-                  return (
-                    <div
-                      key={topic.id}
-                      className={`p-3 rounded-xl border flex items-center justify-between gap-3 transition-all ${
-                        isDone
-                          ? "bg-emerald-50/50 border-emerald-200/70 text-slate-600"
-                          : "bg-white border-slate-200/90 text-slate-800 hover:border-slate-300 shadow-xs"
-                      }`}
-                    >
-                      <div className="flex items-center gap-3 min-w-0">
-                        <button
-                          type="button"
-                          onClick={() => toggleTopic(topic.id)}
-                          className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-all ${
-                            isDone
-                              ? "bg-emerald-600 border-emerald-600 text-white"
-                              : "border-slate-300 hover:border-slate-400 bg-white"
-                          }`}
-                          title={isDone ? "Mark incomplete" : "Mark completed (+25 XP)"}
-                        >
-                          {isDone && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                        </button>
+                    return (
+                      <div
+                        key={topic.id}
+                        className={`p-3 rounded-xl border flex items-center justify-between gap-3 transition-all ${
+                          isDone
+                            ? "bg-emerald-50/50 border-emerald-200/70 text-slate-600"
+                            : "bg-white border-slate-200/90 text-slate-800 hover:border-slate-300 shadow-xs"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <button
+                            type="button"
+                            onClick={() => toggleTopic(topic.id)}
+                            className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-all cursor-pointer ${
+                              isDone
+                                ? "bg-emerald-600 border-emerald-600 text-white"
+                                : "border-slate-300 hover:border-slate-400 bg-white"
+                            }`}
+                            title={isDone ? "Mark incomplete" : "Mark completed (+25 XP)"}
+                          >
+                            {isDone && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                          </button>
 
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] font-mono font-semibold text-slate-400">
-                              {topic.sectionCode || `${index + 1}`}
-                            </span>
-                            {topic.isImportantForBoards && (
-                              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 border border-rose-200/60">
-                                High-Yield
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-[10px] font-mono font-semibold text-slate-400">
+                                {topic.sectionCode || `${index + 1}`}
                               </span>
-                            )}
+                              {topic.isImportantForBoards && (
+                                <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 border border-rose-200/60">
+                                  High-Yield
+                                </span>
+                              )}
+                            </div>
+                            <span className={`text-xs font-semibold mt-0.5 block truncate ${
+                              isDone ? "line-through text-slate-400" : "text-slate-900"
+                            }`}>
+                              {topic.title}
+                            </span>
                           </div>
-                          <span className={`text-xs font-semibold mt-0.5 block truncate ${
-                            isDone ? "line-through text-slate-400" : "text-slate-900"
-                          }`}>
-                            {topic.title}
-                          </span>
+                        </div>
+
+                        <div className="shrink-0">
+                          <Link
+                            href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
+                            onClick={(e) => handleNavClick(e, "concepts", {
+                              subject: activeSubjectKey,
+                              chapter: currentChapterNum
+                            })}
+                            className="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 transition-colors cursor-pointer"
+                          >
+                            Study
+                          </Link>
                         </div>
                       </div>
-
-                      <div className="shrink-0">
-                        <Link
-                          href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
-                          onClick={(e) => handleNavClick(e, "concepts", {
-                            subject: activeSubjectKey,
-                            chapter: currentChapterNum
-                          })}
-                          className="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 transition-colors"
-                        >
-                          Study
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                )}
               </div>
             </div>
 
             {/* Quick Helper Note */}
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-medium">
-              <span>💡 Tip: Complete 2 topics daily for 100% CBSE syllabus mastery</span>
+              <span>💡 Target: Master 2 NCERT topics daily for 100% board readiness</span>
               <Link
                 href={getTabHref("roadmap")}
                 onClick={(e) => handleNavClick(e, "roadmap")}
-                className="font-bold text-slate-600 hover:text-slate-900 underline decoration-slate-300"
+                className="font-bold text-slate-600 hover:text-slate-900 underline decoration-slate-300 cursor-pointer"
               >
                 View 30-Day Blueprint →
               </Link>
