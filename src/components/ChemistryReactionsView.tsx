@@ -159,13 +159,15 @@ export default function ChemistryReactionsView({
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div className="space-y-2 max-w-3xl">
             <div className="flex items-center gap-2.5 flex-wrap">
-              <div className="w-9 h-9 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+              <div className={`w-9 h-9 rounded-2xl border flex items-center justify-center ${
+                isDark ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-400" : "bg-emerald-100 border-emerald-300 text-emerald-700"
+              }`}>
                 <FlaskConical className="w-5 h-5" />
               </div>
-              <span className="px-3 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-emerald-500 text-slate-950">
+              <span className="px-3 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-emerald-600 text-white">
                 100% CBSE Board Standard
               </span>
-              <span className="text-xs font-mono text-emerald-400 font-bold">
+              <span className={`text-xs font-mono font-bold ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>
                 Chapters 1 to 4 Master Bank
               </span>
             </div>
@@ -180,12 +182,12 @@ export default function ChemistryReactionsView({
 
           <div className="flex items-center gap-2 w-full lg:w-auto">
             <div className={`p-4 rounded-2xl border text-center flex-1 sm:flex-none ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
-              <div className="text-2xl font-black text-emerald-400">{CHEMISTRY_REACTIONS_MASTER.length}</div>
-              <div className="text-[10px] uppercase font-bold text-slate-400">Total Reactions</div>
+              <div className={`text-2xl font-black ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>{CHEMISTRY_REACTIONS_MASTER.length}</div>
+              <div className={`text-[10px] uppercase font-bold ${isDark ? "text-slate-400" : "text-slate-600"}`}>Total Reactions</div>
             </div>
             <div className={`p-4 rounded-2xl border text-center flex-1 sm:flex-none ${isDark ? "bg-black/40 border-white/5" : "bg-white border-slate-200"}`}>
-              <div className="text-2xl font-black text-cyan-400">17</div>
-              <div className="text-[10px] uppercase font-bold text-slate-400">Reaction Types</div>
+              <div className={`text-2xl font-black ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>17</div>
+              <div className={`text-[10px] uppercase font-bold ${isDark ? "text-slate-400" : "text-slate-600"}`}>Reaction Types</div>
             </div>
           </div>
         </div>

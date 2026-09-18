@@ -735,8 +735,12 @@ export const LiveCountdown = React.memo(function LiveCountdown({
   }
 
   // card-grid: Apple Watch / Fitness squircle 4-tile layout with Apple VisionOS tactile gradients
-  const textColor = isAmber ? "text-amber-400" : "text-cyan-400";
-  const secColor = isAmber ? "text-amber-500" : "text-cyan-500";
+  const textColor = isDark
+    ? (isAmber ? "text-amber-400" : "text-cyan-400")
+    : (isAmber ? "text-amber-800" : "text-cyan-800");
+  const secColor = isDark
+    ? (isAmber ? "text-amber-500" : "text-cyan-500")
+    : (isAmber ? "text-amber-700" : "text-cyan-700");
   const bgBox = isDark
     ? "bg-gradient-to-b from-white/[0.08] to-white/[0.02] border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.12),0_4px_12px_rgba(0,0,0,0.3)]"
     : isAmber
@@ -798,14 +802,14 @@ export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
           </span>
-          <span className="font-bold text-amber-400 group-hover:underline inline-flex items-center leading-none">
+          <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-amber-400 group-hover:underline" : "text-amber-700 group-hover:underline"}`}>
             {examLabel}:
           </span>
           <LiveCountdown targetDate={upcomingExam.date} variant="badge" colorScheme="amber" isDark={isDark} />
-          <span className={`${isDark ? "text-white/30" : "text-slate-300"} select-none inline-flex items-center leading-none`}>•</span>
+          <span className={`${isDark ? "text-white/30" : "text-slate-400"} select-none inline-flex items-center leading-none`}>•</span>
         </>
       )}
-      <span className="font-bold text-cyan-400 inline-flex items-center leading-none">Boards:</span>
+      <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>Boards:</span>
       <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
     </>
   );
@@ -1309,6 +1313,20 @@ export default function CBSECommandCenter() {
   };
 
   const [theme, setTheme] = useState<"dark" | "light">("light");
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      const root = document.documentElement;
+      if (theme === "dark") {
+        root.classList.add("dark");
+        root.classList.remove("light");
+      } else {
+        root.classList.remove("dark");
+        root.classList.add("light");
+      }
+    }
+  }, [theme]);
+
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [levelUpModalData, setLevelUpModalData] = useState<{ level: number; title: string; badge: string } | null>(null);
 
@@ -3488,11 +3506,13 @@ export default function CBSECommandCenter() {
                   }`}>
                     ⚡ LSA TEST SERIES I (SEPT 14–26)
                   </span>
-                  <span className="text-xs font-mono text-amber-400 font-black flex items-center gap-1.5 leading-none">
+                  <span className={`text-xs font-mono font-black flex items-center gap-1.5 leading-none ${
+                    isDark ? "text-amber-400" : "text-amber-800"
+                  }`}>
                     {new Date(activeExam.date + "T12:30:00").getTime() < Date.now() ? (
-                      <span className="text-emerald-400 font-bold">✓</span>
+                      <span className={`font-bold ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>✓</span>
                     ) : (
-                      <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0"></span>
+                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping shrink-0"></span>
                     )}
                     <span>Exam {activeExam.displayDate}</span>
                   </span>
@@ -3514,10 +3534,10 @@ export default function CBSECommandCenter() {
                 </div>
 
                 {/* PROGRESS BAR */}
-                <div className="pt-3 border-t border-white/[0.08] relative z-10 space-y-1.5">
+                <div className={`pt-3 border-t relative z-10 space-y-1.5 ${isDark ? "border-white/[0.08]" : "border-amber-200"}`}>
                   <div className="flex items-center justify-between text-xs font-mono">
                     <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>Curriculum Mastery Grip</span>
-                    <span className="text-amber-400 font-black">{testSeriesPercentage}% ({testSeriesCompleted}/{testSeriesTotal} Topics)</span>
+                    <span className={`font-black ${isDark ? "text-amber-400" : "text-amber-800"}`}>{testSeriesPercentage}% ({testSeriesCompleted}/{testSeriesTotal} Topics)</span>
                   </div>
                   <div className={`w-full h-2 rounded-full overflow-hidden border ${isDark ? "bg-black/40 border-white/5" : "bg-slate-200 border-slate-300"}`}>
                     <div 
@@ -3545,7 +3565,9 @@ export default function CBSECommandCenter() {
                   }`}>
                     🎯 CBSE CLASS 10 BOARDS (2026–2027)
                   </span>
-                  <span className="text-xs font-mono text-cyan-400 font-black flex items-center gap-1.5 leading-none">
+                  <span className={`text-xs font-mono font-black flex items-center gap-1.5 leading-none ${
+                    isDark ? "text-cyan-400" : "text-cyan-800"
+                  }`}>
                     <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0"></span>
                     <span>Target: AIR 1 (100%)</span>
                   </span>
@@ -3566,10 +3588,10 @@ export default function CBSECommandCenter() {
                 </div>
 
                 {/* PROGRESS BAR */}
-                <div className="pt-3 border-t border-white/[0.08] relative z-10 space-y-1.5">
+                <div className={`pt-3 border-t relative z-10 space-y-1.5 ${isDark ? "border-white/[0.08]" : "border-cyan-200"}`}>
                   <div className="flex items-center justify-between text-xs font-mono">
                     <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>All-Subject Syllabus Grip</span>
-                    <span className="text-cyan-400 font-black">{overallSyllabusPercentage}% ({completedCount}/{totalTopics} NCERT Sub-Topics)</span>
+                    <span className={`font-black ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>{overallSyllabusPercentage}% ({completedCount}/{totalTopics} NCERT Sub-Topics)</span>
                   </div>
                   <div className={`w-full h-2 rounded-full overflow-hidden border ${isDark ? "bg-black/40 border-white/5" : "bg-slate-200 border-slate-300"}`}>
                     <div 
@@ -3876,15 +3898,19 @@ export default function CBSECommandCenter() {
                   isDark ? "bg-white/[0.03] border-white/[0.08]" : "bg-black/[0.02] border-black/[0.06]"
                 }`}>
                   <div className="text-center px-1">
-                    <p className="text-2xl sm:text-3xl font-black text-amber-400 font-mono">{overallSyllabusPercentage}%</p>
-                    <p className={`text-[10px] uppercase font-semibold tracking-wider mt-0.5 ${isDark ? "text-zinc-400" : "text-slate-500"}`}>
+                    <p className={`text-2xl sm:text-3xl font-black font-mono ${
+                      isDark ? "text-amber-400" : "text-amber-800"
+                    }`}>{overallSyllabusPercentage}%</p>
+                    <p className={`text-[10px] uppercase font-semibold tracking-wider mt-0.5 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
                       Syllabus Grip
                     </p>
                   </div>
-                  <div className={`w-px h-8 ${isDark ? "bg-white/10" : "bg-black/10"}`} />
+                  <div className={`w-px h-8 ${isDark ? "bg-white/10" : "bg-slate-200"}`} />
                   <div className="text-center px-1">
-                    <p className="text-2xl sm:text-3xl font-black text-cyan-400 font-mono">{totalFocusMins}m</p>
-                    <p className={`text-[10px] uppercase font-semibold tracking-wider mt-0.5 ${isDark ? "text-zinc-400" : "text-slate-500"}`}>
+                    <p className={`text-2xl sm:text-3xl font-black font-mono ${
+                      isDark ? "text-cyan-400" : "text-cyan-800"
+                    }`}>{totalFocusMins}m</p>
+                    <p className={`text-[10px] uppercase font-semibold tracking-wider mt-0.5 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
                       Focus Logged
                     </p>
                   </div>
@@ -3901,7 +3927,9 @@ export default function CBSECommandCenter() {
                   ? "bg-gradient-to-b from-[#111728] to-[#0a0e1a] border-amber-500/30 shadow-[0_8px_32px_rgba(245,158,11,0.1)]" 
                   : "bg-white border-amber-200 shadow-md"
               }`}>
-                <div className="flex items-center gap-2 text-xs font-semibold text-amber-400">
+                <div className={`flex items-center gap-2 text-xs font-semibold ${
+                  isDark ? "text-amber-400" : "text-amber-800"
+                }`}>
                   <Clock className="w-4 h-4" />
                   <span>25-Minute Focus Block (+50 XP)</span>
                 </div>

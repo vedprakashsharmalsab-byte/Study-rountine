@@ -93,7 +93,9 @@ export default function CoverageMatrixView({ isDark }: { isDark: boolean }) {
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-3 rounded-2xl bg-amber-500/20 text-amber-400">
+            <div className={`p-3 rounded-2xl ${
+              isDark ? "bg-amber-500/20 text-amber-400" : "bg-amber-100 text-amber-800"
+            }`}>
               <BarChart3 className="w-7 h-7" />
             </div>
             <div>
@@ -101,18 +103,22 @@ export default function CoverageMatrixView({ isDark }: { isDark: boolean }) {
                 <h1 className="text-xl sm:text-2xl font-black tracking-tight">
                   Curriculum Coverage Matrix
                 </h1>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold border ${
+                  isDark ? "bg-amber-500/15 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-900 border-amber-300 font-black"
+                }`}>
                   Live Audit View
                 </span>
               </div>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+              <p className={`text-xs sm:text-sm mt-1 ${isDark ? "text-zinc-400" : "text-slate-600 font-medium"}`}>
                 Transparent verification of all NCERT theory, concept breakdowns, questions, and flashcard distributions.
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300">
+            <span className={`px-3 py-1.5 rounded-xl border ${
+              isDark ? "bg-white/5 border-white/10 text-zinc-300" : "bg-slate-100 border-slate-200 text-slate-800 font-bold"
+            }`}>
               {totalChapters} Total Chapters · {totalConcepts} Concepts
             </span>
           </div>
@@ -149,14 +155,14 @@ export default function CoverageMatrixView({ isDark }: { isDark: boolean }) {
         </div>
 
         <div className="relative min-w-[220px]">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
+          <Search className={`w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 ${isDark ? "text-zinc-400" : "text-slate-500"}`} />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search chapter..."
             className={`w-full pl-9 pr-3 py-1.5 rounded-xl text-xs border transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
-              isDark ? "bg-white/5 border-white/10 text-white" : "bg-white border-slate-200 text-slate-900"
+              isDark ? "bg-white/5 border-white/10 text-white placeholder:text-zinc-500" : "bg-white border-slate-300 text-slate-900 placeholder:text-slate-400"
             }`}
           />
         </div>
@@ -169,7 +175,7 @@ export default function CoverageMatrixView({ isDark }: { isDark: boolean }) {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className={`border-b font-mono uppercase text-[10px] ${
-              isDark ? "bg-white/5 border-white/10 text-zinc-400" : "bg-slate-50 border-slate-200 text-slate-500"
+              isDark ? "bg-white/5 border-white/10 text-zinc-400" : "bg-slate-50 border-slate-200 text-slate-600 font-bold"
             }`}>
               <tr>
                 <th className="p-3.5 sm:p-4">Subject</th>
@@ -190,27 +196,33 @@ export default function CoverageMatrixView({ isDark }: { isDark: boolean }) {
                     isDark ? "hover:bg-white/[0.02]" : "hover:bg-slate-50"
                   }`}
                 >
-                  <td className="p-3.5 sm:p-4 font-mono font-bold text-amber-400">
+                  <td className={`p-3.5 sm:p-4 font-mono font-bold ${isDark ? "text-amber-400" : "text-amber-800"}`}>
                     {r.subjectName}
                   </td>
-                  <td className="p-3.5 sm:p-4 font-mono text-zinc-400">
+                  <td className={`p-3.5 sm:p-4 font-mono ${isDark ? "text-zinc-400" : "text-slate-600 font-medium"}`}>
                     Ch {r.chapterNo}
                   </td>
                   <td className="p-3.5 sm:p-4 font-semibold max-w-xs truncate">
                     {r.chapterTitle}
                   </td>
                   <td className="p-3.5 sm:p-4 text-center font-mono">
-                    <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-bold">
+                    <span className={`px-2 py-0.5 rounded font-bold ${
+                      isDark ? "bg-blue-500/10 text-blue-400" : "bg-blue-50 text-blue-800 border border-blue-200"
+                    }`}>
                       {r.conceptsCount}
                     </span>
                   </td>
                   <td className="p-3.5 sm:p-4 text-center font-mono">
-                    <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-bold">
+                    <span className={`px-2 py-0.5 rounded font-bold ${
+                      isDark ? "bg-emerald-500/10 text-emerald-400" : "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                    }`}>
                       {r.questionsCount}
                     </span>
                   </td>
                   <td className="p-3.5 sm:p-4 text-center font-mono">
-                    <span className="px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-bold">
+                    <span className={`px-2 py-0.5 rounded font-bold ${
+                      isDark ? "bg-purple-500/10 text-purple-400" : "bg-purple-50 text-purple-800 border border-purple-200"
+                    }`}>
                       {r.flashcardsCount}
                     </span>
                   </td>
@@ -218,12 +230,12 @@ export default function CoverageMatrixView({ isDark }: { isDark: boolean }) {
                     {r.weightage}M
                   </td>
                   <td className="p-3.5 sm:p-4">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold inline-flex items-center gap-1 ${
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold inline-flex items-center gap-1 border ${
                       r.status === "Comprehensive (100%)"
-                        ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/30"
+                        ? isDark ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/30" : "bg-emerald-50 text-emerald-800 border-emerald-300 font-bold"
                         : r.status === "Core Board Ready"
-                        ? "bg-blue-500/10 text-blue-300 border border-blue-500/30"
-                        : "bg-zinc-500/10 text-zinc-300 border border-zinc-500/30"
+                        ? isDark ? "bg-blue-500/10 text-blue-300 border-blue-500/30" : "bg-blue-50 text-blue-800 border-blue-300 font-bold"
+                        : isDark ? "bg-zinc-500/10 text-zinc-300 border-zinc-500/30" : "bg-slate-100 text-slate-700 border-slate-300 font-bold"
                     }`}>
                       <CheckCircle2 className="w-3 h-3" />
                       {r.status}

@@ -256,7 +256,7 @@ export default function CommandCenterHomeView({
           glow: "rgba(6,182,212,0.35)",
           activeRing: isDark ? "ring-2 ring-cyan-400 border-cyan-400/50" : "ring-2 ring-cyan-500 border-cyan-300",
           pillBg: isDark ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40" : "bg-cyan-50 text-cyan-800 border-cyan-200",
-          accentText: "text-cyan-400",
+          accentText: isDark ? "text-cyan-400" : "text-cyan-700",
           buttonGrad: "from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white"
         };
       case "science":
@@ -264,7 +264,7 @@ export default function CommandCenterHomeView({
           glow: "rgba(16,185,129,0.35)",
           activeRing: isDark ? "ring-2 ring-emerald-400 border-emerald-400/50" : "ring-2 ring-emerald-500 border-emerald-300",
           pillBg: isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40" : "bg-emerald-50 text-emerald-800 border-emerald-200",
-          accentText: "text-emerald-400",
+          accentText: isDark ? "text-emerald-400" : "text-emerald-700",
           buttonGrad: "from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white"
         };
       case "social":
@@ -272,7 +272,7 @@ export default function CommandCenterHomeView({
           glow: "rgba(245,158,11,0.35)",
           activeRing: isDark ? "ring-2 ring-amber-400 border-amber-400/50" : "ring-2 ring-amber-500 border-amber-300",
           pillBg: isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40" : "bg-amber-50 text-amber-800 border-amber-200",
-          accentText: "text-amber-400",
+          accentText: isDark ? "text-amber-400" : "text-amber-700",
           buttonGrad: "from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950"
         };
       case "english":
@@ -280,7 +280,7 @@ export default function CommandCenterHomeView({
           glow: "rgba(168,85,247,0.35)",
           activeRing: isDark ? "ring-2 ring-purple-400 border-purple-400/50" : "ring-2 ring-purple-500 border-purple-300",
           pillBg: isDark ? "bg-purple-500/20 text-purple-300 border-purple-500/40" : "bg-purple-50 text-purple-800 border-purple-200",
-          accentText: "text-purple-400",
+          accentText: isDark ? "text-purple-400" : "text-purple-700",
           buttonGrad: "from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white"
         };
       case "hindi":
@@ -289,7 +289,7 @@ export default function CommandCenterHomeView({
           glow: "rgba(244,63,94,0.35)",
           activeRing: isDark ? "ring-2 ring-rose-400 border-rose-400/50" : "ring-2 ring-rose-500 border-rose-300",
           pillBg: isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : "bg-rose-50 text-rose-800 border-rose-200",
-          accentText: "text-rose-400",
+          accentText: isDark ? "text-rose-400" : "text-rose-700",
           buttonGrad: "from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white"
         };
     }
@@ -419,18 +419,26 @@ export default function CommandCenterHomeView({
         {/* =========================================================================
             VISIONOS SPATIAL FLIGHT DECK (SIDE-BY-SIDE SPATIAL LAYOUT)
             ========================================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
+        <div className={`grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x ${
+          isDark ? "divide-white/10" : "divide-slate-200"
+        }`}>
           
           {/* LEFT RAIL: Interactive Spatial Chapter Drawer (4 of 12 columns) */}
           <div className={`lg:col-span-4 p-4 sm:p-5 flex flex-col justify-between space-y-4 ${
             isDark ? "bg-black/20" : "bg-slate-50/50"
           }`}>
             <div>
-              <div className="flex items-center justify-between pb-2.5 border-b border-white/10 mb-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <div className={`flex items-center justify-between pb-2.5 border-b mb-3 ${
+                isDark ? "border-white/10" : "border-slate-200"
+              }`}>
+                <span className={`text-xs font-bold uppercase tracking-wider ${
+                  isDark ? "text-slate-400" : "text-slate-600"
+                }`}>
                   {currentSubject.name.split("(")[0].trim()} Chapters
                 </span>
-                <span className="text-[11px] font-mono font-bold text-slate-400">
+                <span className={`text-[11px] font-mono font-bold ${
+                  isDark ? "text-slate-400" : "text-slate-600"
+                }`}>
                   {currentSubject.chapters.length} Units
                 </span>
               </div>
@@ -518,7 +526,9 @@ export default function CommandCenterHomeView({
             </div>
 
             {/* Bottom 4 Frosted Quick Tools */}
-            <div className="pt-3 border-t border-white/10 grid grid-cols-2 gap-1.5 text-[11px] font-semibold">
+            <div className={`pt-3 border-t grid grid-cols-2 gap-1.5 text-[11px] font-semibold ${
+              isDark ? "border-white/10" : "border-slate-200"
+            }`}>
               <Link
                 href={getTabHref("flashcards")}
                 onClick={(e) => handleNavClick(e, "flashcards")}
@@ -527,7 +537,7 @@ export default function CommandCenterHomeView({
                 }`}
               >
                 <span>🗂 Flashcards</span>
-                <span className="font-mono text-cyan-400 font-bold">{chapterFlashcardsCount}</span>
+                <span className={`font-mono font-bold ${isDark ? "text-cyan-400" : "text-cyan-700"}`}>{chapterFlashcardsCount}</span>
               </Link>
               
               <Link
@@ -538,7 +548,7 @@ export default function CommandCenterHomeView({
                 }`}
               >
                 <span>⚠️ Mistakes</span>
-                <span className="font-mono text-rose-400 font-bold">{chapterMistakesCount}</span>
+                <span className={`font-mono font-bold ${isDark ? "text-rose-400" : "text-rose-700"}`}>{chapterMistakesCount}</span>
               </Link>
 
               <Link
@@ -624,12 +634,16 @@ export default function CommandCenterHomeView({
               }`}>
                 {/* Iridescent Ambient Top Accent */}
                 <div className="flex items-center justify-between text-xs mb-2">
-                  <span className="font-extrabold uppercase tracking-wider flex items-center gap-1.5 text-xs text-amber-400">
-                    <Sparkles className="w-4 h-4 text-amber-400 fill-amber-400" />
+                  <span className={`font-extrabold uppercase tracking-wider flex items-center gap-1.5 text-xs ${
+                    isDark ? "text-amber-400" : "text-amber-800"
+                  }`}>
+                    <Sparkles className={`w-4 h-4 fill-current ${isDark ? "text-amber-400" : "text-amber-600"}`} />
                     Up Next Milestone
                   </span>
                   {nextTargetTopic?.isImportantForBoards && (
-                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 backdrop-blur-md">
+                    <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border backdrop-blur-md ${
+                      isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : "bg-rose-50 text-rose-800 border-rose-300 font-extrabold"
+                    }`}>
                       90%+ Recurring Board Question
                     </span>
                   )}
@@ -672,7 +686,7 @@ export default function CommandCenterHomeView({
                         : "bg-white hover:bg-slate-100 border-slate-300 text-slate-800"
                     }`}
                   >
-                    <HelpCircle className="w-4 h-4 text-amber-400" />
+                    <HelpCircle className={`w-4 h-4 ${isDark ? "text-amber-400" : "text-amber-600"}`} />
                     <span>Practice Board Questions</span>
                   </Link>
                 </div>
@@ -681,7 +695,9 @@ export default function CommandCenterHomeView({
               {/* INTERACTIVE TOPIC RUNWAY */}
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <span className={`text-xs font-bold uppercase tracking-wider ${
+                    isDark ? "text-slate-400" : "text-slate-600"
+                  }`}>
                     NCERT Topic Checklist
                   </span>
                   
@@ -779,7 +795,9 @@ export default function CommandCenterHomeView({
 
                           <div className="flex items-center gap-2 shrink-0">
                             {topic.isImportantForBoards && (
-                              <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 hidden sm:inline">
+                              <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full border hidden sm:inline ${
+                                isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : "bg-rose-50 text-rose-800 border-rose-300 font-extrabold"
+                              }`}>
                                 High-Yield
                               </span>
                             )}

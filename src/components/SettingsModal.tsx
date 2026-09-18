@@ -114,7 +114,9 @@ export default function SettingsModal({
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-white transition-all cursor-pointer"
+            className={`p-2 rounded-xl transition-all cursor-pointer ${
+              isDark ? "hover:bg-white/10 text-slate-400 hover:text-white" : "hover:bg-slate-100 text-slate-500 hover:text-slate-900"
+            }`}
           >
             <X className="w-5 h-5" />
           </button>
@@ -125,24 +127,30 @@ export default function SettingsModal({
           {/* 1. DATA BACKUP & EXPORT/IMPORT (DEFECT C1) */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+              <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                isDark ? "text-amber-400" : "text-amber-700"
+              }`}>
                 <ShieldCheck className="w-4 h-4" /> Data Portability (Backup & Restore)
               </span>
               {lastExport && (
-                <span className="text-[10px] font-mono text-zinc-400">
+                <span className={`text-[10px] font-mono ${isDark ? "text-zinc-400" : "text-slate-600 font-medium"}`}>
                   Last backup: {new Date(lastExport).toLocaleDateString()}
                 </span>
               )}
             </div>
             
-            <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+            <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700 font-medium"}`}>
               Export your completed topics, streak, mistake logs, flashcard mastery, and solved questions into an open JSON file. Transfer across devices or keep a local backup.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
               <button
                 onClick={handleExport}
-                className="px-4 py-3 rounded-2xl border flex items-center justify-center gap-2 font-bold text-xs transition-all cursor-pointer active:scale-95 bg-gradient-to-r from-amber-500/15 to-orange-500/15 border-amber-500/40 text-amber-300 hover:bg-amber-500/25 shadow-xs"
+                className={`px-4 py-3 rounded-2xl border flex items-center justify-center gap-2 font-bold text-xs transition-all cursor-pointer active:scale-95 shadow-xs ${
+                  isDark
+                    ? "bg-gradient-to-r from-amber-500/15 to-orange-500/15 border-amber-500/40 text-amber-300 hover:bg-amber-500/25"
+                    : "bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100"
+                }`}
               >
                 <Download className="w-4 h-4" />
                 <span>Export JSON Backup</span>
@@ -150,7 +158,11 @@ export default function SettingsModal({
 
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="px-4 py-3 rounded-2xl border flex items-center justify-center gap-2 font-bold text-xs transition-all cursor-pointer active:scale-95 bg-white/5 hover:bg-white/10 border-white/15 text-slate-200"
+                className={`px-4 py-3 rounded-2xl border flex items-center justify-center gap-2 font-bold text-xs transition-all cursor-pointer active:scale-95 ${
+                  isDark
+                    ? "bg-white/5 hover:bg-white/10 border-white/15 text-slate-200"
+                    : "bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800"
+                }`}
               >
                 <Upload className="w-4 h-4" />
                 <span>Import JSON Backup</span>
@@ -168,8 +180,8 @@ export default function SettingsModal({
             {importStatus && (
               <div className={`p-3 rounded-xl text-xs font-mono flex items-center gap-2 border ${
                 importStatus.startsWith("Error") 
-                  ? "bg-rose-500/10 border-rose-500/30 text-rose-300" 
-                  : "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
+                  ? (isDark ? "bg-rose-500/10 border-rose-500/30 text-rose-300" : "bg-rose-50 border-rose-300 text-rose-800 font-semibold")
+                  : (isDark ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-800 font-semibold")
               }`}>
                 <FileJson className="w-4 h-4 shrink-0" />
                 <span>{importStatus}</span>
@@ -179,24 +191,26 @@ export default function SettingsModal({
 
           {/* 2. ACADEMIC CALENDAR DATES (DEFECT C10) */}
           <div className="space-y-2 pt-2 border-t border-current/10">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+            <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+              isDark ? "text-cyan-400" : "text-cyan-800"
+            }`}>
               <Calendar className="w-4 h-4" /> Academic Calendar Targets
             </span>
             <div className={`p-3 rounded-2xl border text-xs space-y-1.5 font-mono ${
               isDark ? "bg-black/30 border-white/5 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-700"
             }`}>
               <div className="flex justify-between">
-                <span className="text-zinc-400">Board Exam Start:</span>
-                <span className="font-bold text-amber-400">{ACADEMIC_CALENDAR.boardExamStartDate}</span>
+                <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>Board Exam Start:</span>
+                <span className={`font-bold ${isDark ? "text-amber-400" : "text-amber-800"}`}>{ACADEMIC_CALENDAR.boardExamStartDate}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400">Test Series 1 Window:</span>
-                <span className="font-bold text-emerald-400">
+                <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>Test Series 1 Window:</span>
+                <span className={`font-bold ${isDark ? "text-emerald-400" : "text-emerald-800"}`}>
                   {ACADEMIC_CALENDAR.testSeries1.startDate} – {ACADEMIC_CALENDAR.testSeries1.endDate}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400">Affiliation Standard:</span>
+                <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>Affiliation Standard:</span>
                 <span className="font-bold">{PERSONAL_CONFIG.schoolName}</span>
               </div>
             </div>
@@ -204,19 +218,27 @@ export default function SettingsModal({
 
           {/* 3. RESET PROGRESS */}
           <div className="space-y-2 pt-2 border-t border-current/10">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
+            <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+              isDark ? "text-rose-400" : "text-rose-700"
+            }`}>
               <AlertTriangle className="w-4 h-4" /> Danger Zone
             </span>
             {!isResetConfirmOpen ? (
               <button
                 onClick={() => setIsResetConfirmOpen(true)}
-                className="w-full px-4 py-2.5 rounded-2xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 font-bold text-xs transition-all cursor-pointer flex items-center justify-center gap-2"
+                className={`w-full px-4 py-2.5 rounded-2xl border font-bold text-xs transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                  isDark
+                    ? "border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300"
+                    : "border-rose-300 bg-rose-50 hover:bg-rose-100 text-rose-700"
+                }`}
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset All Study Progress</span>
               </button>
             ) : (
-              <div className="p-3.5 rounded-2xl border border-rose-500/50 bg-rose-950/40 text-rose-200 text-xs space-y-3">
+              <div className={`p-3.5 rounded-2xl border text-xs space-y-3 ${
+                isDark ? "border-rose-500/50 bg-rose-950/40 text-rose-200" : "border-rose-300 bg-rose-50 text-rose-900"
+              }`}>
                 <p className="font-semibold">Are you sure you want to reset all XP, streaks, completed topics, and mistake logs to zero?</p>
                 <div className="flex gap-2">
                   <button
@@ -231,7 +253,9 @@ export default function SettingsModal({
                   </button>
                   <button
                     onClick={() => setIsResetConfirmOpen(false)}
-                    className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 font-bold text-xs transition-all cursor-pointer"
+                    className={`px-4 py-2 rounded-xl font-bold text-xs transition-all cursor-pointer ${
+                      isDark ? "bg-white/10 hover:bg-white/20 text-slate-300" : "bg-slate-200 hover:bg-slate-300 text-slate-800"
+                    }`}
                   >
                     Cancel
                   </button>

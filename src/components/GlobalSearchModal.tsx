@@ -182,24 +182,28 @@ export default function GlobalSearchModal({
       >
         {/* SEARCH BAR */}
         <div className="p-4 sm:p-5 border-b border-current/10 flex items-center gap-3">
-          <Search className="w-5 h-5 text-amber-400 shrink-0" />
+          <Search className={`w-5 h-5 shrink-0 ${isDark ? "text-amber-400" : "text-amber-600"}`} />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search chapters, theorems, formulas, HOTS, timelines (e.g. 'quadratic', 'BPT', '1804')..."
-            className={`w-full bg-transparent text-sm sm:text-base font-bold focus:outline-none placeholder:text-zinc-500`}
+            className={`w-full bg-transparent text-sm sm:text-base font-bold focus:outline-none ${
+              isDark ? "placeholder:text-zinc-500 text-white" : "placeholder:text-slate-400 text-slate-900"
+            }`}
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="p-1 rounded-lg text-zinc-400 hover:text-white cursor-pointer"
+              className={`p-1 rounded-lg text-zinc-400 cursor-pointer ${isDark ? "hover:text-white" : "hover:text-slate-900"}`}
             >
               <X className="w-4 h-4" />
             </button>
           )}
-          <div className="hidden sm:flex items-center gap-1 text-[10px] font-mono text-zinc-500 border border-white/10 px-2 py-0.5 rounded">
+          <div className={`hidden sm:flex items-center gap-1 text-[10px] font-mono border px-2 py-0.5 rounded ${
+            isDark ? "text-zinc-400 border-white/10" : "text-slate-500 border-slate-300"
+          }`}>
             <span>ESC</span>
           </div>
         </div>
@@ -207,18 +211,18 @@ export default function GlobalSearchModal({
         {/* RESULTS LIST */}
         <div className="p-2 sm:p-3 overflow-y-auto space-y-1.5 flex-1">
           {filteredResults.length === 0 ? (
-            <div className="p-8 text-center text-zinc-500 text-xs">
+            <div className={`p-8 text-center text-xs ${isDark ? "text-zinc-500" : "text-slate-500 font-medium"}`}>
               No matching chapters, theorems, or questions found for "{query}".
             </div>
           ) : (
             filteredResults.map((item) => {
               const iconMap = {
-                chapter: <BookOpen className="w-4 h-4 text-blue-400" />,
-                theorem: <Award className="w-4 h-4 text-amber-400" />,
-                timeline: <Calendar className="w-4 h-4 text-orange-400" />,
-                hots: <Flame className="w-4 h-4 text-rose-400" />,
-                flashcard: <BookMarked className="w-4 h-4 text-purple-400" />,
-                mistake: <AlertTriangle className="w-4 h-4 text-red-400" />
+                chapter: <BookOpen className={`w-4 h-4 ${isDark ? "text-blue-400" : "text-blue-600"}`} />,
+                theorem: <Award className={`w-4 h-4 ${isDark ? "text-amber-400" : "text-amber-600"}`} />,
+                timeline: <Calendar className={`w-4 h-4 ${isDark ? "text-orange-400" : "text-orange-600"}`} />,
+                hots: <Flame className={`w-4 h-4 ${isDark ? "text-rose-400" : "text-rose-600"}`} />,
+                flashcard: <BookMarked className={`w-4 h-4 ${isDark ? "text-purple-400" : "text-purple-600"}`} />,
+                mistake: <AlertTriangle className={`w-4 h-4 ${isDark ? "text-red-400" : "text-red-600"}`} />
               };
 
               return (
@@ -231,23 +235,29 @@ export default function GlobalSearchModal({
                       : "hover:bg-slate-100 border border-transparent hover:border-slate-200"
                   }`}
                 >
-                  <div className="p-2 rounded-xl bg-white/5 shrink-0 mt-0.5">
-                    {iconMap[item.type] || <Zap className="w-4 h-4 text-amber-400" />}
+                  <div className={`p-2 rounded-xl shrink-0 mt-0.5 ${isDark ? "bg-white/5" : "bg-slate-100"}`}>
+                    {iconMap[item.type] || <Zap className={`w-4 h-4 ${isDark ? "text-amber-400" : "text-amber-600"}`} />}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-bold text-xs sm:text-sm truncate group-hover:text-amber-400 transition-colors">
+                      <span className={`font-bold text-xs sm:text-sm truncate transition-colors ${
+                        isDark ? "group-hover:text-amber-400" : "group-hover:text-amber-700 text-slate-900"
+                      }`}>
                         {item.title}
                       </span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/10 text-zinc-400 font-bold shrink-0">
+                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded-md font-bold shrink-0 border ${
+                        isDark ? "bg-white/10 text-zinc-300 border-white/10" : "bg-slate-100 text-slate-700 border-slate-200"
+                      }`}>
                         {item.badge}
                       </span>
                     </div>
-                    <p className="text-[11px] text-zinc-400 truncate mt-0.5">
+                    <p className={`text-[11px] truncate mt-0.5 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
                       {item.subtitle}
                     </p>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-zinc-600 group-hover:text-amber-400 shrink-0 self-center transition-colors" />
+                  <ArrowRight className={`w-4 h-4 shrink-0 self-center transition-colors ${
+                    isDark ? "text-zinc-600 group-hover:text-amber-400" : "text-slate-400 group-hover:text-amber-700"
+                  }`} />
                 </button>
               );
             })

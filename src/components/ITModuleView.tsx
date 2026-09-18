@@ -134,7 +134,9 @@ export default function ITModuleView({ isDark, onOpenQuestionBank }: ITModuleVie
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-3 rounded-2xl bg-cyan-500/20 text-cyan-400">
+            <div className={`p-3 rounded-2xl ${
+              isDark ? "bg-cyan-500/20 text-cyan-400" : "bg-cyan-100 text-cyan-800"
+            }`}>
               <Laptop className="w-7 h-7" />
             </div>
             <div>
@@ -142,18 +144,22 @@ export default function ITModuleView({ isDark, onOpenQuestionBank }: ITModuleVie
                 <h1 className="text-xl sm:text-2xl font-black tracking-tight">
                   Information Technology (Code 402)
                 </h1>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold border ${
+                  isDark ? "bg-cyan-500/15 text-cyan-300 border-cyan-500/30" : "bg-cyan-100 text-cyan-950 border-cyan-300 font-black"
+                }`}>
                   50M Theory + 50M Practical
                 </span>
               </div>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+              <p className={`text-xs sm:text-sm mt-1 ${isDark ? "text-zinc-400" : "text-slate-600 font-medium"}`}>
                 Official CBSE Class 10 Skill Subject Curriculum: LibreOffice Writer, Calc, Base DBMS, and Web Security.
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300">
+            <span className={`px-3 py-1.5 rounded-xl border ${
+              isDark ? "bg-white/5 border-white/10 text-zinc-300" : "bg-slate-100 border-slate-200 text-slate-800 font-bold"
+            }`}>
               {IT_CHAPTERS.length} Units Covered
             </span>
           </div>
@@ -164,7 +170,9 @@ export default function ITModuleView({ isDark, onOpenQuestionBank }: ITModuleVie
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* SIDEBAR: CHAPTER LIST */}
         <div className="lg:col-span-4 space-y-3">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 block px-1">
+          <span className={`text-xs font-mono font-bold uppercase tracking-wider block px-1 ${
+            isDark ? "text-cyan-400" : "text-cyan-800"
+          }`}>
             Curriculum Units:
           </span>
           <div className="space-y-2">
@@ -176,13 +184,15 @@ export default function ITModuleView({ isDark, onOpenQuestionBank }: ITModuleVie
                   selectedChapterId === ch.id
                     ? isDark
                       ? "bg-cyan-500/20 border-cyan-500 text-cyan-200 font-bold shadow-md"
-                      : "bg-cyan-50 border-cyan-400 text-cyan-900 font-bold shadow-xs"
+                      : "bg-cyan-50 border-cyan-400 text-cyan-950 font-bold shadow-xs"
                     : isDark
                     ? "bg-white/[0.02] border-white/5 hover:bg-white/5 text-zinc-300"
                     : "bg-white border-slate-200 hover:bg-slate-50 text-slate-700"
                 }`}
               >
-                <div className="flex items-center justify-between text-[10px] font-mono mb-1 text-zinc-400">
+                <div className={`flex items-center justify-between text-[10px] font-mono mb-1 ${
+                  isDark ? "text-zinc-400" : "text-slate-600 font-medium"
+                }`}>
                   <span>Unit {ch.unitNo}</span>
                   <span className="truncate max-w-[150px]">{ch.part.split(":")[0]}</span>
                 </div>
@@ -201,14 +211,18 @@ export default function ITModuleView({ isDark, onOpenQuestionBank }: ITModuleVie
           }`}>
             <div className="flex items-center justify-between border-b border-current/10 pb-4 mb-4">
               <div>
-                <span className="text-xs font-mono text-cyan-400 font-bold">
+                <span className={`text-xs font-mono font-bold ${
+                  isDark ? "text-cyan-400" : "text-cyan-800"
+                }`}>
                   {activeChapter.part}
                 </span>
                 <h2 className="text-lg sm:text-xl font-black mt-0.5">
                   Unit {activeChapter.unitNo}: {activeChapter.title}
                 </h2>
               </div>
-              <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-bold">
+              <span className={`text-xs font-mono px-2.5 py-1 rounded-full border font-bold ${
+                isDark ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/20" : "bg-emerald-50 text-emerald-800 border-emerald-300"
+              }`}>
                 100% Board Syllabus
               </span>
             </div>
@@ -217,13 +231,17 @@ export default function ITModuleView({ isDark, onOpenQuestionBank }: ITModuleVie
             <div className={`p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed mb-5 ${
               isDark ? "bg-white/5 border-white/10 text-zinc-300" : "bg-slate-50 border-slate-200 text-slate-800"
             }`}>
-              <strong className="block text-cyan-400 mb-1 font-mono uppercase text-xs">Core Concept Summary:</strong>
+              <strong className={`block mb-1 font-mono uppercase text-xs ${
+                isDark ? "text-cyan-400" : "text-cyan-800"
+              }`}>Core Concept Summary:</strong>
               {activeChapter.summary}
             </div>
 
             {/* TOPICS BREAKDOWN */}
             <div className="space-y-3">
-              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
+              <h3 className={`text-xs font-mono font-bold uppercase tracking-wider ${
+                isDark ? "text-zinc-400" : "text-slate-600"
+              }`}>
                 Mandatory CBSE Learning Objectives:
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -234,7 +252,7 @@ export default function ITModuleView({ isDark, onOpenQuestionBank }: ITModuleVie
                       isDark ? "bg-black/30 border-white/5 text-zinc-300" : "bg-slate-50 border-slate-200 text-slate-700"
                     }`}
                   >
-                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${isDark ? "text-cyan-400" : "text-cyan-700"}`} />
                     <span>{t}</span>
                   </div>
                 ))}
@@ -244,10 +262,14 @@ export default function ITModuleView({ isDark, onOpenQuestionBank }: ITModuleVie
             {/* BOARD QUESTIONS SLOT */}
             <div className="mt-6 pt-5 border-t border-current/10">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                  isDark ? "text-amber-400" : "text-amber-800"
+                }`}>
                   <Award className="w-4 h-4" /> Board Exam Question Bank:
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
+                  isDark ? "bg-amber-500/10 text-amber-300 border-amber-500/20" : "bg-amber-100 text-amber-900 border-amber-300 font-bold"
+                }`}>
                   Updated for 2026–27
                 </span>
               </div>

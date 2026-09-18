@@ -38,15 +38,17 @@ export default function OnboardingModal({ isOpen, onComplete, isDark }: Onboardi
                 key={s} 
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   s === step 
-                    ? "w-8 bg-amber-400" 
+                    ? (isDark ? "w-8 bg-amber-400" : "w-8 bg-amber-600")
                     : s < step 
-                    ? "w-4 bg-amber-400/50" 
-                    : "w-4 bg-white/15"
+                    ? (isDark ? "w-4 bg-amber-400/50" : "w-4 bg-amber-400") 
+                    : (isDark ? "w-4 bg-white/15" : "w-4 bg-slate-200")
                 }`} 
               />
             ))}
           </div>
-          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400">
+          <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
+            isDark ? "text-amber-400" : "text-amber-700"
+          }`}>
             Step {step} of 3
           </span>
         </div>
@@ -54,24 +56,28 @@ export default function OnboardingModal({ isOpen, onComplete, isDark }: Onboardi
         {/* STEP 1: CADET IDENTIFICATION */}
         {step === 1 && (
           <div className="space-y-4 animate-fade-in">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
+              isDark ? "bg-amber-500/20 text-amber-400" : "bg-amber-100 text-amber-700"
+            }`}>
               <Target className="w-6 h-6" />
             </div>
             <div>
               <h2 className="text-lg sm:text-xl font-black tracking-tight">Welcome to Study Routine</h2>
-              <p className="text-xs text-zinc-400 mt-1">
+              <p className={`text-xs mt-1 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
                 Your personal CBSE Class 10 (2026–2027) NCERT mastery engine. What should we call you?
               </p>
             </div>
             <div className="space-y-1.5">
-              <label className="text-xs font-mono text-zinc-300 font-medium">Your Name / Call-Sign:</label>
+              <label className={`text-xs font-mono font-medium ${isDark ? "text-zinc-300" : "text-slate-700 font-semibold"}`}>
+                Your Name / Call-Sign:
+              </label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Sarthak, Aarav..."
                 className={`w-full px-4 py-3 rounded-2xl border text-sm font-bold transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
-                  isDark ? "bg-white/5 border-white/15 text-white" : "bg-slate-50 border-slate-200 text-slate-900"
+                  isDark ? "bg-white/5 border-white/15 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
                 }`}
                 autoFocus
                 onKeyDown={(e) => {
@@ -92,12 +98,14 @@ export default function OnboardingModal({ isOpen, onComplete, isDark }: Onboardi
         {/* STEP 2: TARGET TIMELINE */}
         {step === 2 && (
           <div className="space-y-4 animate-fade-in">
-            <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
+              isDark ? "bg-cyan-500/20 text-cyan-400" : "bg-cyan-100 text-cyan-800"
+            }`}>
               <Compass className="w-6 h-6" />
             </div>
             <div>
               <h2 className="text-lg sm:text-xl font-black tracking-tight">Academic Board Target</h2>
-              <p className="text-xs text-zinc-400 mt-1">
+              <p className={`text-xs mt-1 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
                 All countdowns and study blocks are synced to official CBSE milestones.
               </p>
             </div>
@@ -105,22 +113,24 @@ export default function OnboardingModal({ isOpen, onComplete, isDark }: Onboardi
               isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"
             }`}>
               <div className="flex justify-between items-center">
-                <span className="text-zinc-400">Class 10 Board Exams:</span>
-                <span className="font-bold text-amber-400">February 1, 2027</span>
+                <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>Class 10 Board Exams:</span>
+                <span className={`font-bold ${isDark ? "text-amber-400" : "text-amber-800"}`}>February 1, 2027</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-zinc-400">Test Series 1 (Mid-Term):</span>
-                <span className="font-bold text-emerald-400">Sept 14 – 26, 2026</span>
+                <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>Test Series 1 (Mid-Term):</span>
+                <span className={`font-bold ${isDark ? "text-emerald-400" : "text-emerald-800"}`}>Sept 14 – 26, 2026</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-zinc-400">NCERT Syllabus Chapters:</span>
-                <span className="font-bold text-cyan-400">27 Chapters (6 Subjects)</span>
+                <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>NCERT Syllabus Chapters:</span>
+                <span className={`font-bold ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>27 Chapters (6 Subjects)</span>
               </div>
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => setStep(1)}
-                className="px-4 py-3 rounded-2xl border border-white/15 text-xs font-bold hover:bg-white/5 cursor-pointer"
+                className={`px-4 py-3 rounded-2xl border text-xs font-bold cursor-pointer ${
+                  isDark ? "border-white/15 hover:bg-white/5 text-slate-200" : "border-slate-300 hover:bg-slate-100 text-slate-700"
+                }`}
               >
                 Back
               </button>
@@ -138,35 +148,43 @@ export default function OnboardingModal({ isOpen, onComplete, isDark }: Onboardi
         {/* STEP 3: MECHANICS TOUR */}
         {step === 3 && (
           <div className="space-y-4 animate-fade-in">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
+              isDark ? "bg-emerald-500/20 text-emerald-400" : "bg-emerald-100 text-emerald-800"
+            }`}>
               <Sparkles className="w-6 h-6" />
             </div>
             <div>
               <h2 className="text-lg sm:text-xl font-black tracking-tight">How You Level Up</h2>
-              <p className="text-xs text-zinc-400 mt-1">
+              <p className={`text-xs mt-1 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
                 Zero fake metrics. Every reward maps strictly to authentic studying completed.
               </p>
             </div>
             <div className="space-y-2.5 text-xs">
-              <div className="flex items-start gap-3 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
-                <Award className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+              <div className={`flex items-start gap-3 p-2.5 rounded-xl border ${
+                isDark ? "bg-amber-500/10 border-amber-500/20" : "bg-amber-50 border-amber-200"
+              }`}>
+                <Award className={`w-4 h-4 shrink-0 mt-0.5 ${isDark ? "text-amber-400" : "text-amber-700"}`} />
                 <div>
-                  <strong className="text-amber-300 block">XP & Levels 1–100:</strong>
-                  <span className="text-zinc-400 text-[11px]">Earn XP by reading NCERT topics, mastering flashcards, and writing proofs.</span>
+                  <strong className={`block ${isDark ? "text-amber-300" : "text-amber-900 font-bold"}`}>XP & Levels 1–100:</strong>
+                  <span className={`text-[11px] ${isDark ? "text-zinc-400" : "text-slate-600"}`}>Earn XP by reading NCERT topics, mastering flashcards, and writing proofs.</span>
                 </div>
               </div>
-              <div className="flex items-start gap-3 p-2.5 rounded-xl bg-orange-500/10 border border-orange-500/20">
-                <Flame className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
+              <div className={`flex items-start gap-3 p-2.5 rounded-xl border ${
+                isDark ? "bg-orange-500/10 border-orange-500/20" : "bg-orange-50 border-orange-200"
+              }`}>
+                <Flame className={`w-4 h-4 shrink-0 mt-0.5 ${isDark ? "text-orange-400" : "text-orange-700"}`} />
                 <div>
-                  <strong className="text-orange-300 block">Daily Streak & Grace Window:</strong>
-                  <span className="text-zinc-400 text-[11px]">Study every day. Automatic Streak Freeze protects your hard work if life gets busy.</span>
+                  <strong className={`block ${isDark ? "text-orange-300" : "text-orange-900 font-bold"}`}>Daily Streak & Grace Window:</strong>
+                  <span className={`text-[11px] ${isDark ? "text-zinc-400" : "text-slate-600"}`}>Study every day. Automatic Streak Freeze protects your hard work if life gets busy.</span>
                 </div>
               </div>
-              <div className="flex items-start gap-3 p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                <BookOpen className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+              <div className={`flex items-start gap-3 p-2.5 rounded-xl border ${
+                isDark ? "bg-blue-500/10 border-blue-500/20" : "bg-blue-50 border-blue-200"
+              }`}>
+                <BookOpen className={`w-4 h-4 shrink-0 mt-0.5 ${isDark ? "text-blue-400" : "text-blue-700"}`} />
                 <div>
-                  <strong className="text-blue-300 block">Spaced Repetition (SM-2):</strong>
-                  <span className="text-zinc-400 text-[11px]">Flashcards schedule themselves based on how easily you recall them.</span>
+                  <strong className={`block ${isDark ? "text-blue-300" : "text-blue-900 font-bold"}`}>Spaced Repetition (SM-2):</strong>
+                  <span className={`text-[11px] ${isDark ? "text-zinc-400" : "text-slate-600"}`}>Flashcards schedule themselves based on how easily you recall them.</span>
                 </div>
               </div>
             </div>

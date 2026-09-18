@@ -79,13 +79,15 @@ export default function CompetitiveHotsView({
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div className="space-y-2 max-w-3xl">
             <div className="flex items-center gap-2.5 flex-wrap">
-              <div className="w-9 h-9 rounded-2xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400">
+              <div className={`w-9 h-9 rounded-2xl border flex items-center justify-center ${
+                isDark ? "bg-rose-500/20 border-rose-500/40 text-rose-400" : "bg-rose-100 border-rose-300 text-rose-700"
+              }`}>
                 <Flame className="w-5 h-5" />
               </div>
-              <span className="px-3 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-rose-500 text-white">
+              <span className="px-3 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-rose-600 text-white">
                 Olympiad & NTSE Tier
               </span>
-              <span className="text-xs font-mono text-rose-400 font-bold">
+              <span className={`text-xs font-mono font-bold ${isDark ? "text-rose-400" : "text-rose-700"}`}>
                 Higher Order Thinking Skills (HOTS)
               </span>
             </div>
@@ -100,12 +102,12 @@ export default function CompetitiveHotsView({
 
           <div className="grid grid-cols-2 sm:flex sm:items-center gap-2.5 sm:gap-3 w-full lg:w-auto shrink-0">
             <div className={`px-4 py-3 rounded-2xl border text-center flex flex-col justify-center min-w-[125px] overflow-hidden ${isDark ? "bg-black/40 border-white/10 shadow-xs" : "bg-white border-slate-200 shadow-2xs"}`}>
-              <div className="text-lg sm:text-xl font-black text-rose-400 tracking-tight whitespace-nowrap">Section D/E</div>
-              <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider whitespace-nowrap">CBSE Standards</div>
+              <div className={`text-lg sm:text-xl font-black tracking-tight whitespace-nowrap ${isDark ? "text-rose-400" : "text-rose-700"}`}>Section D/E</div>
+              <div className={`text-[10px] uppercase font-bold tracking-wider whitespace-nowrap ${isDark ? "text-slate-400" : "text-slate-600"}`}>CBSE Standards</div>
             </div>
             <div className={`px-4 py-3 rounded-2xl border text-center flex flex-col justify-center min-w-[110px] overflow-hidden ${isDark ? "bg-black/40 border-white/10 shadow-xs" : "bg-white border-slate-200 shadow-2xs"}`}>
-              <div className="text-lg sm:text-xl font-black text-amber-400 tracking-tight whitespace-nowrap">100%</div>
-              <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider whitespace-nowrap">Step Solved</div>
+              <div className={`text-lg sm:text-xl font-black tracking-tight whitespace-nowrap ${isDark ? "text-amber-400" : "text-amber-800"}`}>100%</div>
+              <div className={`text-[10px] uppercase font-bold tracking-wider whitespace-nowrap ${isDark ? "text-slate-400" : "text-slate-600"}`}>Step Solved</div>
             </div>
           </div>
         </div>
@@ -113,7 +115,7 @@ export default function CompetitiveHotsView({
         {/* SEARCH & FILTERS */}
         <div className="mt-6 pt-6 border-t border-current/10 space-y-4">
           <div className="relative">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className={`w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 ${isDark ? "text-slate-400" : "text-slate-500"}`} />
             <input
               type="text"
               value={searchQuery}
@@ -149,11 +151,13 @@ export default function CompetitiveHotsView({
             </div>
 
             {/* Desktop Wrapped Pills */}
-            <div className="hidden md:flex items-center gap-1.5 p-1 rounded-2xl border bg-black/20 border-white/5 flex-wrap">
+            <div className={`hidden md:flex items-center gap-1.5 p-1 rounded-2xl border flex-wrap ${
+              isDark ? "bg-black/20 border-white/5" : "bg-slate-100 border-slate-200"
+            }`}>
               <button
                 onClick={() => setSelectedSubject("all")}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
-                  selectedSubject === "all" ? "bg-rose-500 text-white shadow-sm" : "text-slate-400 hover:text-white"
+                  selectedSubject === "all" ? "bg-rose-500 text-white shadow-sm" : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 All Subjects
@@ -161,7 +165,7 @@ export default function CompetitiveHotsView({
               <button
                 onClick={() => setSelectedSubject("math")}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
-                  selectedSubject === "math" ? "bg-amber-500 text-slate-950 shadow-sm" : "text-slate-400 hover:text-white"
+                  selectedSubject === "math" ? "bg-amber-500 text-slate-950 shadow-sm" : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 📐 Mathematics HOTS
@@ -169,7 +173,7 @@ export default function CompetitiveHotsView({
               <button
                 onClick={() => setSelectedSubject("science")}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
-                  selectedSubject === "science" ? "bg-cyan-500 text-slate-950 shadow-sm" : "text-slate-400 hover:text-white"
+                  selectedSubject === "science" ? "bg-cyan-500 text-slate-950 shadow-sm" : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 🧪 Science HOTS
@@ -177,14 +181,14 @@ export default function CompetitiveHotsView({
               <button
                 onClick={() => setSelectedSubject("sst")}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
-                  selectedSubject === "sst" ? "bg-emerald-500 text-slate-950 shadow-sm" : "text-slate-400 hover:text-white"
+                  selectedSubject === "sst" ? "bg-emerald-500 text-slate-950 shadow-sm" : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 🌍 Social Science HOTS
               </button>
             </div>
 
-            <span className="text-xs font-mono text-slate-400 ml-auto">
+            <span className={`text-xs font-mono ml-auto ${isDark ? "text-slate-400" : "text-slate-600 font-medium"}`}>
               Showing {filteredQuestions.length} HOTS Problems
             </span>
           </div>
@@ -215,13 +219,17 @@ export default function CompetitiveHotsView({
               >
                 <div className="space-y-2 flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider bg-slate-800 text-slate-300 border border-slate-700">
+                    <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider border ${
+                      isDark ? "bg-slate-800 text-slate-300 border-slate-700" : "bg-slate-100 text-slate-700 border-slate-300"
+                    }`}>
                       Ch {q.chapterNo}: {q.chapterName}
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                    <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold border ${
+                      isDark ? "bg-rose-500/10 text-rose-400 border-rose-500/20" : "bg-rose-50 text-rose-700 border-rose-200"
+                    }`}>
                       {q.difficulty}
                     </span>
-                    <span className="text-[10px] font-mono text-amber-400 font-bold">
+                    <span className={`text-[10px] font-mono font-bold ${isDark ? "text-amber-400" : "text-amber-800"}`}>
                       {q.boardRecurrence}
                     </span>
                   </div>
@@ -232,7 +240,9 @@ export default function CompetitiveHotsView({
                 </div>
 
                 <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 self-end sm:self-center">
-                  <span className="px-3 py-1 rounded-xl text-xs font-mono font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                  <span className={`px-3 py-1 rounded-xl text-xs font-mono font-bold border ${
+                    isDark ? "bg-rose-500/10 text-rose-400 border-rose-500/20" : "bg-rose-50 text-rose-700 border-rose-200"
+                  }`}>
                     {q.marks} Marks
                   </span>
 
@@ -264,22 +274,28 @@ export default function CompetitiveHotsView({
                   {/* HINTS / CONCEPT CLUES ACCORDION */}
                   <div className={`p-4 rounded-2xl border space-y-2 ${isDark ? "bg-amber-950/20 border-amber-500/20" : "bg-amber-50 border-amber-200"}`}>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                      <span className={`text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                        isDark ? "text-amber-400" : "text-amber-800"
+                      }`}>
                         <Lightbulb className="w-4 h-4" /> Strategy & Core Concept Clues:
                       </span>
                       <button
                         onClick={() => toggleClue(q.id)}
-                        className="text-xs font-bold text-amber-400 flex items-center gap-1 cursor-pointer hover:underline touch-manipulation min-h-[32px] px-2 py-1 rounded-lg hover:bg-amber-400/10"
+                        className={`text-xs font-bold flex items-center gap-1 cursor-pointer hover:underline touch-manipulation min-h-[32px] px-2 py-1 rounded-lg ${
+                          isDark ? "text-amber-400 hover:bg-amber-400/10" : "text-amber-800 hover:bg-amber-100"
+                        }`}
                       >
                         {isClueRevealed ? <><EyeOff className="w-3.5 h-3.5" /> Hide Clues</> : <><Eye className="w-3.5 h-3.5" /> Reveal Clues</>}
                       </button>
                     </div>
 
                     {isClueRevealed ? (
-                      <ul className={`space-y-1.5 text-xs sm:text-sm pt-2 border-t border-amber-500/20 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                      <ul className={`space-y-1.5 text-xs sm:text-sm pt-2 border-t ${
+                        isDark ? "border-amber-500/20 text-slate-300" : "border-amber-200 text-slate-700"
+                      }`}>
                         {q.keyConceptClues.map((clue, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-amber-400 font-bold">•</span>
+                            <span className={`font-bold ${isDark ? "text-amber-400" : "text-amber-800"}`}>•</span>
                             <span>{clue}</span>
                           </li>
                         ))}
@@ -293,7 +309,9 @@ export default function CompetitiveHotsView({
 
                   {/* TOPPER STEP-BY-STEP ANSWER SHEET */}
                   <div className="space-y-3">
-                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                    <span className={`text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                      isDark ? "text-emerald-400" : "text-emerald-800"
+                    }`}>
                       <Award className="w-4 h-4" /> Official 100% Board Evaluator Answer Sheet:
                     </span>
 
@@ -306,13 +324,19 @@ export default function CompetitiveHotsView({
                           }`}
                         >
                           <div className="flex items-center justify-between flex-wrap gap-2">
-                            <span className="text-xs font-black text-emerald-400 flex items-center gap-1.5">
-                              <span className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center text-[10px]">
+                            <span className={`text-xs font-black flex items-center gap-1.5 ${
+                              isDark ? "text-emerald-400" : "text-emerald-800"
+                            }`}>
+                              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${
+                                isDark ? "bg-emerald-500/20 text-emerald-400" : "bg-emerald-100 text-emerald-800"
+                              }`}>
                                 {st.stepNo}
                               </span>
                               {st.stepHeading}
                             </span>
-                            <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                            <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-lg border ${
+                              isDark ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/20" : "bg-emerald-50 text-emerald-800 border-emerald-200"
+                            }`}>
                               {st.marksAwarded}
                             </span>
                           </div>
@@ -321,8 +345,8 @@ export default function CompetitiveHotsView({
                             <PremiumMathRenderer content={st.working} isDark={isDark} />
                           </div>
 
-                          <div className="pt-2 border-t border-white/5 text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
-                            <span className="text-cyan-400 font-bold shrink-0">Evaluator Rubric:</span>
+                          <div className="pt-2 border-t border-current/10 text-[11px] font-mono flex items-center gap-1.5">
+                            <span className={`font-bold shrink-0 ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>Evaluator Rubric:</span>
                             <div className="inline-block">
                               <PremiumMathRenderer content={st.examinerCheck} isDark={isDark} />
                             </div>
@@ -336,7 +360,9 @@ export default function CompetitiveHotsView({
                   <div className={`p-4 rounded-2xl border text-center ${
                     isDark ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-900"
                   }`}>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block font-mono mb-1">Final Result</span>
+                    <span className={`text-[10px] uppercase font-bold block font-mono mb-1 ${
+                      isDark ? "text-slate-400" : "text-slate-600"
+                    }`}>Final Result</span>
                     <div className="text-sm sm:text-base font-black font-mono inline-block">
                       <PremiumMathRenderer content={q.finalBoxedAnswer} isDark={isDark} />
                     </div>
@@ -346,9 +372,9 @@ export default function CompetitiveHotsView({
                   <div className={`p-4 rounded-2xl border flex items-start gap-3 ${
                     isDark ? "bg-rose-950/20 border-rose-500/30 text-rose-200" : "bg-rose-50 border-rose-200 text-rose-900"
                   }`}>
-                    <AlertTriangle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                    <AlertTriangle className={`w-5 h-5 shrink-0 mt-0.5 ${isDark ? "text-rose-400" : "text-rose-700"}`} />
                     <div className="space-y-1 text-xs sm:text-sm">
-                      <span className="font-bold block text-rose-400">Common Student Deduction Trap:</span>
+                      <span className={`font-bold block ${isDark ? "text-rose-400" : "text-rose-800"}`}>Common Student Deduction Trap:</span>
                       <div className="leading-relaxed">
                         <PremiumMathRenderer content={q.commonStudentPitfall} isDark={isDark} />
                       </div>

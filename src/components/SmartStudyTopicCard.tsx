@@ -111,13 +111,17 @@ export default function SmartStudyTopicCard({
       >
         <div className="space-y-2 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-black uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/30">
+            <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-black uppercase tracking-wider border ${
+              isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/30" : "bg-rose-100 text-rose-800 border-rose-300"
+            }`}>
               NCERT TOPIC #{topicIdx + 1}
             </span>
-            <span className={`text-[11px] font-mono font-semibold ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+            <span className={`text-[11px] font-mono font-semibold ${isDark ? "text-slate-400" : "text-slate-600"}`}>
               {topic.ncertSection}
             </span>
-            <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/25 flex items-center gap-1">
+            <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold border flex items-center gap-1 ${
+              isDark ? "bg-amber-500/15 text-amber-400 border-amber-500/25" : "bg-amber-100 text-amber-800 border-amber-300"
+            }`}>
               <span>👶 Toddler Story + Class 10 Depth</span>
             </span>
           </div>
@@ -127,17 +131,21 @@ export default function SmartStudyTopicCard({
           </h3>
 
           {!isExpanded && (
-            <p className={`text-xs line-clamp-1 italic ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+            <p className={`text-xs line-clamp-1 italic ${isDark ? "text-slate-400" : "text-slate-600"}`}>
               {toddlerGuide.toddlerAnalogy.hook} • {toddlerGuide.toddlerAnalogy.scenario.substring(0, 110)}...
             </p>
           )}
         </div>
 
         <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
-          <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span className={`text-[11px] font-mono font-bold px-2 py-0.5 rounded-md border ${
+            isDark ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-emerald-100 text-emerald-800 border-emerald-300"
+          }`}>
             {topic.examples.length} Solved Qs
           </span>
-          <div className={`p-2 rounded-xl border border-white/10 shrink-0 transition-transform duration-200 ${isExpanded ? "rotate-180 bg-rose-500/20 text-rose-400" : ""}`}>
+          <div className={`p-2 rounded-xl border shrink-0 transition-transform duration-200 ${
+            isDark ? "border-white/10" : "border-slate-300"
+          } ${isExpanded ? "rotate-180 bg-rose-500/20 text-rose-400" : ""}`}>
             <ChevronDown className="w-4 h-4" />
           </div>
         </div>

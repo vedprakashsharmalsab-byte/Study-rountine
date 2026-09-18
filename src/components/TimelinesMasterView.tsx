@@ -403,11 +403,15 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                 isDark ? "bg-slate-900/70 border-white/10" : "bg-white border-slate-200 shadow-xs"
               }`}
             >
-              <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-black text-lg border border-amber-500/40">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-mono font-black text-lg border ${
+                isDark ? "bg-amber-500/20 text-amber-400 border-amber-500/40" : "bg-amber-100 text-amber-800 border-amber-300"
+              }`}>
                 {percentageMemorized}%
               </div>
               <div>
-                <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider font-bold">
+                <div className={`text-[11px] font-mono uppercase tracking-wider font-bold ${
+                  isDark ? "text-slate-400" : "text-slate-600"
+                }`}>
                   Milestone Mastery
                 </div>
                 <div className="text-sm font-bold">
@@ -435,7 +439,9 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
         </div>
 
         {/* MODE SELECTOR NAVIGATION TABS */}
-        <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-2 sm:gap-3">
+        <div className={`mt-8 pt-6 border-t flex flex-wrap gap-2 sm:gap-3 ${
+          isDark ? "border-white/10" : "border-slate-200"
+        }`}>
           {[
             { id: "storyline", label: "Interactive Storyline", icon: Sparkles, badge: "Full Flow" },
             { id: "chronology_game", label: "CBSE Sequence Game", icon: Zap, badge: "Trainer (+50 XP)" },
@@ -458,7 +464,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                     : "bg-white border-slate-200 hover:border-amber-400 text-slate-700"
                 }`}
               >
-                <tab.icon className={`w-4 h-4 ${isActive ? "text-slate-950" : "text-amber-400"}`} />
+                <tab.icon className={`w-4 h-4 ${isActive ? "text-slate-950" : isDark ? "text-amber-400" : "text-amber-700"}`} />
                 <span>{tab.label}</span>
                 <span
                   className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${

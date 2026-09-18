@@ -99,19 +99,19 @@ export default function TheoremsAndExamplesView({ isDark, onOpenQuestionBank }: 
         {/* STATS STRIP */}
         <div className="mt-6 pt-6 border-t border-current/10 grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
-            <span className="text-[10px] uppercase font-bold text-emerald-400 block font-mono">Core Proofs</span>
+            <span className={`text-[10px] uppercase font-bold block font-mono ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>Core Proofs</span>
             <span className="text-lg sm:text-xl font-black">{THEOREMS_AND_EXAMPLES_BANK.filter(t => t.type === "Theorem Proof").length} Theorems</span>
           </div>
           <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
-            <span className="text-[10px] uppercase font-bold text-amber-400 block font-mono">Iconic Examples</span>
+            <span className={`text-[10px] uppercase font-bold block font-mono ${isDark ? "text-amber-400" : "text-amber-800"}`}>Iconic Examples</span>
             <span className="text-lg sm:text-xl font-black">8 NCERT Solved</span>
           </div>
           <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
-            <span className="text-[10px] uppercase font-bold text-cyan-400 block font-mono">Exam Weightage</span>
+            <span className={`text-[10px] uppercase font-bold block font-mono ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>Exam Weightage</span>
             <span className="text-lg sm:text-xl font-black">~15-20 Marks</span>
           </div>
           <div className={`p-3 rounded-2xl border ${isDark ? "bg-black/30 border-white/5" : "bg-white/80 border-slate-200"}`}>
-            <span className="text-[10px] uppercase font-bold text-rose-400 block font-mono">Presentation</span>
+            <span className={`text-[10px] uppercase font-bold block font-mono ${isDark ? "text-rose-400" : "text-rose-700"}`}>Presentation</span>
             <span className="text-lg sm:text-xl font-black">Single Sheet</span>
           </div>
         </div>
