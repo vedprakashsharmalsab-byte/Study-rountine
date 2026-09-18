@@ -2854,15 +2854,21 @@ export default function CBSECommandCenter() {
           STICKY HEADER WITH LIVE XP / LEVEL BAR & QUICK CONTROLS
           ========================================================================= */}
       {/* =========================================================================
-          LUXURY COMMAND CENTER MASTER STATUS BAR (HIGH-TECH, VIBRANT & RICH)
+          APPLE VISION PRO AMBIENT AURORA BACKLIGHT
           ========================================================================= */}
+      <div className="aurora-mesh" aria-hidden="true">
+        <div className="aurora-mesh-blob-1" />
+        <div className="aurora-mesh-blob-2" />
+        <div className="aurora-mesh-blob-3" />
+      </div>
+
       {/* =========================================================================
           APPLE-STYLE TRANSLUCENT FROSTED GLASS STATUS HEADER
           ========================================================================= */}
-      <header className={`sticky top-0 z-40 border-b transition-colors ${
+      <header className={`sticky top-0 z-40 border-b transition-colors backdrop-blur-2xl ${
         isDark
-          ? "border-white/10 bg-[#080b14]/90 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
-          : "border-slate-200 bg-white/95 text-slate-900 shadow-sm"
+          ? "border-white/10 bg-[#080b14]/80 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
+          : "border-slate-200/80 bg-white/85 text-slate-900 shadow-xs"
       }`}>
         <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-3">
           
@@ -3017,18 +3023,19 @@ export default function CBSECommandCenter() {
       {/* =========================================================================
           APPLE SEGMENTED MASTER NAVIGATION (PRIMARY CONTROL - DESKTOP ONLY)
           ========================================================================= */}
+      {/* =========================================================================
+          APPLE VISION PRO FLOATING SPATIAL DOCK (PRIMARY CONTROL - DESKTOP ONLY)
+          ========================================================================= */}
       <nav
         ref={navRef}
-        className={`hidden md:block border-b transition-colors sticky top-[49px] sm:top-[53px] z-30 ${
-          isDark
-            ? "border-white/10 bg-[#080b14]/95 shadow-sm"
-            : "border-slate-200 bg-white/95 shadow-xs"
-        }`}
+        className="hidden md:flex justify-center sticky top-2 sm:top-3 z-30 pointer-events-none py-1"
       >
-        <div className="max-w-5xl mx-auto px-3.5 sm:px-6 py-2 flex items-center justify-between gap-3">
-          {/* APPLE SEGMENTED MASTER TABS */}
-          <div className={`p-1 rounded-2xl border flex items-center gap-1 max-w-full overflow-x-auto no-scrollbar ${
-            isDark ? "bg-white/[0.04] border-white/10" : "bg-slate-100 border-slate-200"
+        <div className="flex items-center justify-center pointer-events-auto">
+          {/* APPLE VISIONOS FROSTED CAPSULE DOCK */}
+          <div className={`p-1.5 rounded-full border flex items-center gap-1.5 shadow-2xl backdrop-blur-2xl transition-all ${
+            isDark
+              ? "bg-[#0b101f]/85 border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.6)]"
+              : "bg-white/85 border-slate-200/90 shadow-[0_12px_36px_rgba(15,23,42,0.08)]"
           }`}>
             {CATEGORY_DEFINITIONS.map((cat) => {
               const isCatActive = activeCategory === cat.id;
@@ -3053,14 +3060,14 @@ export default function CBSECommandCenter() {
                       }
                     });
                   }}
-                  className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-[0.98] ${
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] ${
                     isCatActive
                       ? isDark
-                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/25 ring-1 ring-amber-400"
-                        : "bg-slate-900 text-white shadow-sm ring-1 ring-slate-950"
+                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/25 ring-1 ring-amber-400 font-extrabold"
+                        : "bg-slate-900 text-white shadow-sm ring-1 ring-slate-950 font-extrabold"
                       : isDark
-                      ? "text-zinc-400 hover:text-white hover:bg-white/[0.06]"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-black/[0.04]"
+                      ? "text-zinc-300 hover:text-white hover:bg-white/[0.08]"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-black/[0.05]"
                   }`}
                 >
                   <cat.icon className={`w-3.5 h-3.5 ${isCatActive ? (isDark ? "text-slate-950" : "text-amber-400") : "text-zinc-400"} shrink-0`} />
@@ -3081,13 +3088,6 @@ export default function CBSECommandCenter() {
                 </a>
               );
             })}
-          </div>
-
-          {/* QUICK SHORTCUT HINT (DESKTOP) */}
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="text-[11px] font-mono text-zinc-400">
-              Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white font-mono text-[10px]">⌘K</kbd> for All Modules
-            </span>
           </div>
         </div>
       </nav>
