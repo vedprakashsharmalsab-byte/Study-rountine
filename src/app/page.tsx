@@ -2272,9 +2272,8 @@ export default function CBSECommandCenter() {
 
     const hasVerifiedProfile = !!studentProfile || (typeof window !== "undefined" && !!localStorage.getItem("arete_verified_student_profile"));
 
-    // Derived XP (impossible to exploit by spam clicking)
+    // Derived XP (impossible to exploit by spam clicking) - starts clean at 0
     const calculatedXp =
-      (hasVerifiedProfile ? 100 : 0) +
       syllabusTopicsCount * 25 +
       testSeriesCount * 25 +
       mapCount * 15 +

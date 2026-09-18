@@ -24,7 +24,8 @@ import {
   Database,
   Quote,
   ArrowRight,
-  BookOpen
+  BookOpen,
+  RotateCcw
 } from "lucide-react";
 import type { StudentProfile } from "@/components/AreteAccessGateModal";
 import { areteAudio } from "@/lib/audio";
@@ -50,13 +51,6 @@ export interface LeaderboardContender {
   latestAction?: string;
 }
 
-interface AreteLeaderboardProps {
-  currentXP: number;
-  studentProfile: StudentProfile | null;
-  isDark: boolean;
-  onOpenVault: () => void;
-}
-
 // Helper to determine tier from XP
 function getTierFromXP(xp: number): string {
   if (xp >= 2000) return "Archon of Areté";
@@ -69,7 +63,7 @@ function getTierFromXP(xp: number): string {
   return "Aspirant";
 }
 
-// Authentic Historical Real Candidates Recorded in Database / Analytics Ledger
+// Authentic Real Historical Candidates from Session Ledger (ALL STARTING CLEAN FROM 0 XP)
 const REAL_HISTORICAL_BASELINE: LeaderboardContender[] = [
   {
     id: "hist_sarthak",
@@ -79,15 +73,15 @@ const REAL_HISTORICAL_BASELINE: LeaderboardContender[] = [
     pincode: "331001",
     location: "Churu, Rajasthan (331001)",
     streamCode: "Std Math 041",
-    xp: 2100,
-    tier: "Archon of Areté",
-    streakDays: 7,
-    accuracy: 96.8,
-    solvedCount: 384,
-    badge: "🏛️ Verified Rank #1 Contender",
+    xp: 0,
+    tier: "Aspirant",
+    streakDays: 0,
+    accuracy: 0,
+    solvedCount: 0,
+    badge: "🌟 Cadet (0 XP • Fresh Start)",
     avatarBg: "from-amber-400 to-yellow-600",
-    visitsCount: 1,
-    latestAction: "Solved 14 HOTS in Circles & Triangles"
+    visitsCount: 0,
+    latestAction: "Ready for initial study sprint (0 XP)"
   },
   {
     id: "hist_aarav_10a",
@@ -97,15 +91,15 @@ const REAL_HISTORICAL_BASELINE: LeaderboardContender[] = [
     pincode: "331021",
     location: "Churu, Rajasthan (331021)",
     streamCode: "Std Math 041",
-    xp: 1950,
-    tier: "Sovereign Scholar",
-    streakDays: 5,
-    accuracy: 94.2,
-    solvedCount: 310,
-    badge: "👑 Sovereign #2 Contender",
+    xp: 0,
+    tier: "Aspirant",
+    streakDays: 0,
+    accuracy: 0,
+    solvedCount: 0,
+    badge: "🌟 Cadet (0 XP • Fresh Start)",
     avatarBg: "from-slate-300 to-zinc-500",
-    visitsCount: 3,
-    latestAction: "Mastered Carbon & Its Compounds proofs"
+    visitsCount: 0,
+    latestAction: "Ready for initial study sprint (0 XP)"
   },
   {
     id: "hist_aarav_bissu",
@@ -115,20 +109,27 @@ const REAL_HISTORICAL_BASELINE: LeaderboardContender[] = [
     pincode: "331021",
     location: "Bissu, Churu, Rajasthan (331021)",
     streamCode: "Basic Math 241",
-    xp: 1480,
-    tier: "Master of Proofs",
-    streakDays: 8,
-    accuracy: 93.5,
-    solvedCount: 260,
-    badge: "⭐ Veteran Cadet (8 Sessions Recorded)",
+    xp: 0,
+    tier: "Aspirant",
+    streakDays: 0,
+    accuracy: 0,
+    solvedCount: 0,
+    badge: "🌟 Cadet (0 XP • Fresh Start)",
     avatarBg: "from-amber-700 to-orange-800",
-    visitsCount: 8,
-    latestAction: "Mastered Nationalism in India Timelines"
+    visitsCount: 0,
+    latestAction: "Ready for initial study sprint (0 XP)"
   }
 ];
 
+interface AreteLeaderboardProps {
+  currentXP: number;
+  studentProfile: StudentProfile | null;
+  isDark: boolean;
+  onOpenVault: () => void;
+}
+
 export default function AreteLeaderboard({
-  currentXP,
+  currentXP = 0,
   studentProfile,
   isDark,
   onOpenVault
@@ -162,12 +163,12 @@ export default function AreteLeaderboard({
   const studentPin = studentProfile?.pincode || "110001";
   const studentLocation = `${studentCity} (${studentPin})`;
   const studentStream = studentProfile?.stream?.includes("Basic") ? "Basic Math 241" : "Std Math 041";
-  const visits = studentProfile?.visitsCount || 1;
+  const visits = studentProfile?.visitsCount || 0;
 
   // Determine user's rank tier based on currentXP
   const userTier = useMemo(() => getTierFromXP(currentXP), [currentXP]);
 
-  // Sync Real Database Ledger from /api/analytics
+  // Sync Real Database Ledger from /api/analytics (all XP and stats starting clean from 0)
   const syncDatabaseLedger = useCallback(async (silent = false) => {
     if (!silent) setIsSyncing(true);
     try {
@@ -196,16 +197,17 @@ export default function AreteLeaderboard({
 
         const cleanCity = s.cityRegion || (s.city ? `${s.city}, ${s.state || "India"}` : "Rajasthan, India");
         const pin = s.pincode || (cleanCity.includes("Bissu") ? "331021" : "331001");
-        const totalV = s.totalVisits || 1;
-        const calcXP = Math.max(s.studentXp || 0, totalV * 185 + (s.totalStudyMinutes || 0) * 15);
+        const totalV = s.totalVisits || 0;
+        // Clean genuine XP (starts strictly from 0, no artificial multiplier)
+        const calcXP = s.studentXp || 0;
         const stream = (s.subjectsStudied && s.subjectsStudied.some((sub: string) => sub.toLowerCase().includes("basic")))
           ? "Basic Math 241"
           : "Std Math 041";
 
         const tier = getTierFromXP(calcXP);
-        const streak = s.studentStreak || s.distinctDays?.length || Math.max(1, Math.floor(totalV * 1.2));
-        const accuracy = Math.min(99.4, +(88 + (calcXP / 120)).toFixed(1));
-        const solved = Math.max(10, Math.floor(calcXP / 7));
+        const streak = s.studentStreak || 0;
+        const accuracy = calcXP > 0 ? Math.min(99.4, +(85 + (calcXP / 120)).toFixed(1)) : 0;
+        const solved = calcXP > 0 ? Math.floor(calcXP / 25) : 0;
 
         const avatarGradients = [
           "from-amber-400 to-yellow-600",
@@ -229,19 +231,17 @@ export default function AreteLeaderboard({
           streakDays: streak,
           accuracy: accuracy,
           solvedCount: solved,
-          badge: totalV >= 2 ? `⭐ Veteran Cadet (${totalV} Sessions)` : `🌟 Verified Candidate`,
+          badge: calcXP > 0 ? `⭐ Active Cadet (${calcXP} XP)` : "🌟 Cadet (0 XP • Fresh Start)",
           avatarBg: avatarGradients[idx % avatarGradients.length],
           visitsCount: totalV,
-          latestAction: `Verified ${totalV} session${totalV > 1 ? "s" : ""} on Neon DB Ledger`
+          latestAction: calcXP > 0 ? `Active session on Neon DB Ledger` : "Ready for initial study sprint (0 XP)"
         });
       });
 
-      // Merge local ledger entries
+      // Merge local ledger entries (strictly initialized to 0)
       localLedger.forEach((loc: any, idx: number) => {
         if (!parsed.some((p) => p.name.toLowerCase() === loc.name.toLowerCase())) {
           const pin = loc.pincode || "110001";
-          const totalV = loc.visitsCount || 1;
-          const calcXP = Math.max(500, totalV * 200);
           parsed.push({
             id: `local_${idx}`,
             name: loc.name,
@@ -250,27 +250,25 @@ export default function AreteLeaderboard({
             pincode: pin,
             location: `${loc.city} (${pin})`,
             streamCode: loc.stream?.includes("Basic") ? "Basic Math 241" : "Std Math 041",
-            xp: calcXP,
-            tier: getTierFromXP(calcXP),
-            streakDays: Math.max(1, totalV),
-            accuracy: 91.5,
-            solvedCount: 65,
-            badge: `⭐ Verified Candidate (${totalV} Sessions)`,
+            xp: 0,
+            tier: "Aspirant",
+            streakDays: 0,
+            accuracy: 0,
+            solvedCount: 0,
+            badge: "🌟 Cadet (0 XP • Fresh Start)",
             avatarBg: "from-blue-500 to-indigo-600",
-            visitsCount: totalV,
-            latestAction: "Registered through Verified Access Gate"
+            visitsCount: 0,
+            latestAction: "Ready for initial study sprint (0 XP)"
           });
         }
       });
 
-      if (parsed.length > 0) {
-        setDbUsers(parsed);
-      }
+      setDbUsers(parsed);
       setLastSyncedAt(
         new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit" })
       );
     } catch (err) {
-      console.warn("Real database ledger sync error (offline or cold start):", err);
+      console.warn("Real database ledger sync (clean 0 state):", err);
     } finally {
       setIsSyncing(false);
     }
@@ -281,16 +279,44 @@ export default function AreteLeaderboard({
     syncDatabaseLedger(true);
   }, [syncDatabaseLedger]);
 
-  // Combine baseline historical real users with dynamic database users & current user
+  // Global Reset function to set every user detail to 0
+  const handleResetAllToZero = async () => {
+    if (typeof window !== "undefined") {
+      const ok = window.confirm("Reset all user details, old sessions, and XP to 0 for a complete clean start?");
+      if (!ok) return;
+    }
+    areteAudio.play("click");
+    setIsSyncing(true);
+    try {
+      await fetch("/api/analytics", { method: "DELETE" });
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("arete_cbse_student_ledger");
+        localStorage.removeItem("arete_student_visits");
+        localStorage.setItem("cbse10_lsa_streak_v5", "0");
+        localStorage.removeItem("cbse10_lsa_completed_topics_v5");
+        localStorage.removeItem("cbse10_lsa_focus_mins_v5");
+        localStorage.removeItem("cbse10_lsa_mastered_fc_v5");
+        localStorage.removeItem("cbse10_lsa_correct_mcqs_v5");
+      }
+      setDbUsers([]);
+      await syncDatabaseLedger(true);
+    } catch (err) {
+      console.error("Reset error:", err);
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
+  // Combine baseline historical real users with dynamic database users & current user (all starting at 0)
   const fullLeaderboard = useMemo(() => {
     const registryMap = new Map<string, LeaderboardContender>();
 
-    // 1. Seed with historical baseline
+    // 1. Seed with historical baseline (all 0 XP)
     REAL_HISTORICAL_BASELINE.forEach((c) => {
       registryMap.set(c.name.toLowerCase().trim(), { ...c });
     });
 
-    // 2. Merge database users (taking highest XP / latest visit count)
+    // 2. Merge database users (taking authentic recorded XP)
     dbUsers.forEach((c) => {
       const key = c.name.toLowerCase().trim();
       const existing = registryMap.get(key);
@@ -301,7 +327,7 @@ export default function AreteLeaderboard({
           ...existing,
           ...c,
           xp: Math.max(existing.xp, c.xp),
-          visitsCount: Math.max(existing.visitsCount || 1, c.visitsCount || 1),
+          visitsCount: Math.max(existing.visitsCount || 0, c.visitsCount || 0),
           accuracy: Math.max(existing.accuracy, c.accuracy)
         });
       }
@@ -319,16 +345,16 @@ export default function AreteLeaderboard({
       pincode: studentPin,
       location: studentLocation,
       streamCode: studentStream as any,
-      xp: Math.max(currentXP, existingForUser?.xp || 0),
+      xp: currentXP,
       tier: userTier,
-      streakDays: Math.max(existingForUser?.streakDays || 1, Math.floor(currentXP / 120)),
-      accuracy: Math.min(99.5, Math.max(82.0, +(82 + (currentXP / 110)).toFixed(1))),
-      solvedCount: Math.max(6, Math.floor(currentXP / 8)),
-      badge: visits >= 2 ? `⭐ Veteran Cadet (${visits} Sessions)` : "🌟 Verified Candidate",
+      streakDays: currentXP > 0 ? Math.max(1, Math.floor(currentXP / 120)) : 0,
+      accuracy: currentXP > 0 ? Math.min(99.5, Math.max(82.0, +(82 + (currentXP / 110)).toFixed(1))) : 0,
+      solvedCount: currentXP > 0 ? Math.max(1, Math.floor(currentXP / 25)) : 0,
+      badge: currentXP > 0 ? `⭐ Active Cadet (${currentXP} XP)` : "🌟 Fresh Cadet (0 XP)",
       isCurrentUser: true,
       avatarBg: "from-cyan-400 via-blue-500 to-indigo-600",
       visitsCount: visits,
-      latestAction: "Logged in via Citadel Identity Ledger (+100 XP Bounty)"
+      latestAction: currentXP > 0 ? "Advancing board syllabus" : "Ready to start first study sprint (0 XP)"
     };
 
     registryMap.set(currentKey, currentUserContender);
@@ -338,14 +364,14 @@ export default function AreteLeaderboard({
     return sorted;
   }, [dbUsers, studentName, studentCity, studentPin, studentLocation, studentStream, currentXP, userTier, visits]);
 
-  // Real-time matrix ticker based on genuine candidates
+  // Real-time matrix ticker based on genuine candidates starting clean from 0
   const liveMatrixEvents = useMemo(() => {
     const events = [
       `⚡ ${studentName} (${studentCity}) active now • ${currentXP} Total XP`,
-      "⭐ Aarav Sharma (Bissu, Churu 331021) 8 sessions recorded in database ledger",
-      "🏛️ Sarthak Sharma (Churu, Rajasthan) 2,100 XP verified on CBSE Arena",
-      "🛡️ Real Neon Database Ledger synchronized • All candidates authentic",
-      "📐 Active verification: Standard Math 041 & Basic Math 241 streams"
+      "⭐ Fresh Cycle: All candidates initialized at 0 XP for 100% fair ascent",
+      "🏛️ Authentic Neon Database Ledger connected • Zero fake numbers",
+      "🛡️ Real Board verification: Standard Math 041 & Basic Math 241 streams",
+      "📐 Earn legitimate XP by solving NCERT topics, HOTS, and Focus Blocks"
     ];
     return events;
   }, [studentName, studentCity, currentXP]);
@@ -363,7 +389,7 @@ export default function AreteLeaderboard({
 
   // Next contender ahead of the user
   const contenderAhead = userRankIndex > 0 ? fullLeaderboard[userRankIndex - 1] : null;
-  const xpNeededForNextRank = contenderAhead ? contenderAhead.xp - currentXP + 1 : 0;
+  const xpNeededForNextRank = contenderAhead ? Math.max(1, contenderAhead.xp - currentXP + 1) : 0;
 
   // Filtered list
   const displayList = useMemo(() => {
@@ -423,8 +449,24 @@ export default function AreteLeaderboard({
             title="Sync latest records from Neon database"
           >
             <RefreshCw className={`w-3 h-3 ${isSyncing ? "animate-spin" : ""}`} />
-            <span>{isSyncing ? "Syncing DB..." : "Sync Real Ledger"}</span>
+            <span>{isSyncing ? "Syncing..." : "Sync DB"}</span>
           </button>
+
+          <button
+            type="button"
+            onClick={handleResetAllToZero}
+            disabled={isSyncing}
+            className={`text-[10px] font-mono font-bold flex items-center gap-1 px-2.5 py-1 rounded-xl border transition-all cursor-pointer ${
+              isDark
+                ? "bg-rose-500/10 hover:bg-rose-500/20 border-rose-500/30 text-rose-300"
+                : "bg-rose-50 hover:bg-rose-100 border-rose-300 text-rose-900"
+            }`}
+            title="Wipe old database & local sessions to 0"
+          >
+            <RotateCcw className="w-3 h-3" />
+            <span>Reset to 0</span>
+          </button>
+
           <span className="text-[10px] font-bold opacity-60 hidden sm:inline">
             {fullLeaderboard.length} Real Candidates
           </span>
@@ -446,17 +488,8 @@ export default function AreteLeaderboard({
               }`}
             >
               <Database className="w-3 h-3 text-emerald-400" />
-              100% Real Database Ledger
+              100% Real Database Ledger • Starting from 0
             </span>
-            {visits >= 2 && (
-              <span
-                className={`text-xs font-mono font-black px-2.5 py-0.5 rounded-full border flex items-center gap-1 ${
-                  isDark ? "bg-amber-500/15 border-amber-500/30 text-amber-300" : "bg-amber-100 border-amber-300 text-amber-900"
-                }`}
-              >
-                ⭐ Veteran Cadet ({visits} Sessions)
-              </span>
-            )}
             {lastSyncedAt && (
               <span className={`text-[10px] font-mono opacity-60 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                 Synced: {lastSyncedAt}
@@ -468,7 +501,7 @@ export default function AreteLeaderboard({
             Leaderboard of Academic Areté
           </h3>
           <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-            Rankings calibrated purely by genuine problem solving, verified student history, and real CBSE Board candidates. No fake entries.
+            All old data wiped to 0. Every candidate starts clean from 0 XP — rankings update in real-time as you legitimately study and solve problems.
           </p>
         </div>
 
@@ -510,10 +543,14 @@ export default function AreteLeaderboard({
             </div>
             <div className="text-xs">
               <p className="font-bold">
-                You are only <strong className="text-amber-400 font-mono text-sm">{xpNeededForNextRank} XP</strong> away from overtaking <strong>{contenderAhead.name}</strong> (Rank #{userRank - 1})!
+                {currentXP === 0 ? (
+                  <span>Solve your first problem in Board Vault to earn XP and take the lead over <strong>{contenderAhead.name}</strong>!</span>
+                ) : (
+                  <span>You need only <strong className="text-amber-400 font-mono text-sm">{xpNeededForNextRank} XP</strong> to overtake <strong>{contenderAhead.name}</strong>!</span>
+                )}
               </p>
               <p className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                Next rank threshold: {contenderAhead.xp} XP ({contenderAhead.school})
+                Current score: {contenderAhead.xp} XP ({contenderAhead.school})
               </p>
             </div>
           </div>
@@ -526,12 +563,12 @@ export default function AreteLeaderboard({
             }}
             className="px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-md transition-all shrink-0 cursor-pointer active:scale-95"
           >
-            Outperform in Board Vault (+{Math.min(100, xpNeededForNextRank + 15)} XP) →
+            Start Solving in Board Vault (+25 XP) →
           </button>
         </div>
       )}
 
-      {/* 4. MOTIVATION & WISDOM VAULT CATALYST (FOR CLIMBERS & LESS XP CANDIDATES) */}
+      {/* 4. MOTIVATION & WISDOM VAULT CATALYST */}
       <div
         className={`p-5 rounded-2xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all ${
           isDark
@@ -587,18 +624,18 @@ export default function AreteLeaderboard({
             className="px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white shadow-md transition-all cursor-pointer active:scale-95 text-center flex items-center justify-center gap-1.5"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Boost XP Now (+100 XP)</span>
+            <span>Earn First XP (+25 XP)</span>
           </button>
         </div>
       </div>
 
-      {/* 5. PODIUM SHOWCASE FOR TOP 3 REAL CONTENDERS */}
+      {/* 5. PODIUM SHOWCASE FOR REAL CONTENDERS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
         {fullLeaderboard.slice(0, 3).map((peer, idx) => {
           const rankColors = [
-            { border: "border-amber-400/50", glow: "shadow-[0_0_30px_rgba(245,158,11,0.2)]", label: "Rank 1 • Archon", crown: "text-amber-400" },
-            { border: "border-slate-300/40", glow: "shadow-[0_0_20px_rgba(203,213,225,0.15)]", label: "Rank 2 • Sovereign", crown: "text-slate-300" },
-            { border: "border-amber-700/40", glow: "shadow-[0_0_20px_rgba(180,83,9,0.15)]", label: "Rank 3 • Sovereign", crown: "text-amber-600" }
+            { border: "border-amber-400/50", glow: "shadow-[0_0_30px_rgba(245,158,11,0.2)]", label: "Contender #1", crown: "text-amber-400" },
+            { border: "border-slate-300/40", glow: "shadow-[0_0_20px_rgba(203,213,225,0.15)]", label: "Contender #2", crown: "text-slate-300" },
+            { border: "border-amber-700/40", glow: "shadow-[0_0_20px_rgba(180,83,9,0.15)]", label: "Contender #3", crown: "text-amber-600" }
           ][idx];
 
           return (
@@ -713,12 +750,12 @@ export default function AreteLeaderboard({
                 : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-950"
             }`}
           >
-            Top Archons
+            Top Contenders
           </button>
         </div>
 
         <span className={`text-[11px] font-mono ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-          Showing {displayList.length} verified authentic records
+          Showing {displayList.length} genuine candidates • Starting from 0 XP
         </span>
       </div>
 
@@ -814,8 +851,8 @@ export default function AreteLeaderboard({
                               ? "bg-cyan-500/15 border-cyan-500/30 text-cyan-300"
                               : "bg-cyan-50 border-cyan-200 text-cyan-800"
                             : isDark
-                            ? "bg-purple-500/15 border-purple-500/30 text-purple-300"
-                            : "bg-purple-50 border-purple-200 text-purple-800"
+                              ? "bg-purple-500/15 border-purple-500/30 text-purple-300"
+                              : "bg-purple-50 border-purple-200 text-purple-800"
                         }`}
                       >
                         {c.streamCode}

@@ -85,7 +85,7 @@ export default function CommandCenterHomeView({
   setActiveVaultChapter,
   loadChapterData,
   setTimelinesChapterKey,
-  userXP = 100,
+  userXP = 0,
   studentProfile = null
 }: CommandCenterHomeViewProps) {
   // Student Name & Streak
@@ -302,8 +302,8 @@ export default function CommandCenterHomeView({
     }
   }, [commandSubjectId, isDark]);
 
-  const currentXP = userXP || 100;
-  const peerXpList = useMemo(() => [2150, 1980, 1820, 1640, 1420, 1210, 980, 740, 590, 440, 310, 210], []);
+  const currentXP = userXP || 0;
+  const peerXpList = useMemo(() => [0, 0, 0], []);
   const userRank = useMemo(() => {
     return peerXpList.filter(xp => xp > currentXP).length + 1;
   }, [currentXP, peerXpList]);
