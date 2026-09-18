@@ -2404,7 +2404,12 @@ export default function CBSECommandCenter() {
         if (sMasteredFC) setMasteredFlashcardIds(JSON.parse(sMasteredFC));
         if (sCustomQ) setCustomQuestions(JSON.parse(sCustomQ));
         if (sFocus) setTotalFocusMins(parseInt(sFocus));
-        if (sTheme && (sTheme === "light" || sTheme === "dark")) {
+        const hasMigratedV7 = localStorage.getItem("cbse10_lsa_theme_v7_white_default");
+        if (!hasMigratedV7) {
+          setTheme("light");
+          localStorage.setItem("cbse10_lsa_theme_v5", "light");
+          localStorage.setItem("cbse10_lsa_theme_v7_white_default", "true");
+        } else if (sTheme && (sTheme === "light" || sTheme === "dark")) {
           setTheme(sTheme as any);
         } else {
           setTheme("light");
