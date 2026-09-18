@@ -1,30 +1,29 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
+import Link from "next/link";
 import {
-  Target,
-  Sparkles,
-  ArrowRight,
-  CheckCircle2,
   BookOpen,
-  Compass,
-  Beaker,
-  Award,
-  Calendar,
-  Zap,
-  Flame,
-  BookMarked,
-  Clock,
+  CheckCircle2,
+  Circle,
   Play,
   Pause,
   RotateCcw,
-  Check,
+  Sparkles,
+  ArrowRight,
   ChevronDown,
   Layers,
-  BarChart3,
-  Lightbulb,
-  ShieldCheck,
-  GraduationCap
+  FileText,
+  HelpCircle,
+  AlertTriangle,
+  Award,
+  Clock,
+  Compass,
+  Zap,
+  Bookmark,
+  ExternalLink,
+  Flame,
+  Check
 } from "lucide-react";
 import {
   CBSE_SUBJECTS,
@@ -79,929 +78,696 @@ export default function CommandCenterHomeView({
   loadChapterData,
   setTimelinesChapterKey
 }: CommandCenterHomeViewProps) {
-  // Psychological Micro-Sprint Timer (Pomodoro Habit Trigger: 25 min focus / 5 min rest)
-  const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(25 * 60);
-  const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
-  const [timerMode, setTimerMode] = useState<"focus" | "break">("focus");
-
+  // Student Name
+  const [studentName, setStudentName] = useState<string>("Cadet");
   useEffect(() => {
-    let interval: any = null;
-    if (isTimerRunning && pomodoroSeconds > 0) {
-      interval = setInterval(() => {
-        setPomodoroSeconds((prev) => prev - 1);
-      }, 1000);
-    } else if (pomodoroSeconds === 0) {
-      setIsTimerRunning(false);
-      playSound("complete");
-      if (timerMode === "focus") {
-        setTimerMode("break");
-        setPomodoroSeconds(5 * 60);
-      } else {
-        setTimerMode("focus");
-        setPomodoroSeconds(25 * 60);
+    if (typeof window !== "undefined") {
+      const name = localStorage.getItem("cbse_student_name");
+      if (name && name.trim().length > 0) {
+        setStudentName(name.trim());
       }
     }
-    return () => clearInterval(interval);
-  }, [isTimerRunning, pomodoroSeconds, timerMode, playSound]);
+  }, []);
 
-  const formatTimer = (secs: number) => {
-    const m = Math.floor(secs / 60);
-    const s = secs % 60;
+  // Today's formatted date
+  const todayFormatted = useMemo(() => {
+    return new Date().toLocaleDateString("en-IN", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }, []);
+
+  // 25-min Calm Focus Companion (Simple, clean, distraction-free)
+  const [focusSeconds, setFocusSeconds] = useState(25 * 60);
+  const [isFocusActive, setIsFocusActive] = useState(false);
+  const focusTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (isFocusActive) {
+      focusTimerRef.current = setInterval(() => {
+        setFocusSeconds((prev) => {
+          if (prev <= 1) {
+            clearInterval(focusTimerRef.current!);
+            setIsFocusActive(false);
+            try { playSound("bell"); } catch {}
+            return 25 * 60;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else if (focusTimerRef.current) {
+      clearInterval(focusTimerRef.current);
+    }
+    return () => {
+      if (focusTimerRef.current) clearInterval(focusTimerRef.current);
+    };
+  }, [isFocusActive, playSound]);
+
+  const formattedFocusTime = useMemo(() => {
+    const m = Math.floor(focusSeconds / 60);
+    const s = focusSeconds % 60;
     return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+  }, [focusSeconds]);
+
+  // Active Subject & Chapter Resolution
+  const currentSubject = useMemo(() => {
+    return CBSE_SUBJECTS.find((s) => s.id === commandSubjectId) || CBSE_SUBJECTS[0];
+  }, [commandSubjectId]);
+
+  const currentChapter = useMemo(() => {
+    const found = currentSubject.chapters.find((c) => c.id === commandChapterId);
+    return found || currentSubject.chapters[0] || {
+      id: "ch_default",
+      ncertChapterNo: 1,
+      name: "Introduction",
+      topics: []
+    };
+  }, [currentSubject, commandChapterId]);
+
+  // Map internal subject ID to routing key
+  const activeSubjectKey = useMemo(() => {
+    if (commandSubjectId === "maths") return "math";
+    if (commandSubjectId === "science") return "science";
+    if (commandSubjectId === "social") return "sst";
+    if (commandSubjectId === "english") return "english";
+    if (commandSubjectId === "hindi") return "hindi";
+    return "math";
+  }, [commandSubjectId]);
+
+  const currentChapterNum = currentChapter.ncertChapterNo || 1;
+
+  // Chapter Topics Progress
+  const chapterTopics = currentChapter.topics || [];
+  const completedInChapter = chapterTopics.filter((t) => completedTopicIds[t.id]).length;
+  const chapterProgressPercent = chapterTopics.length > 0
+    ? Math.round((completedInChapter / chapterTopics.length) * 100)
+    : 0;
+
+  // Next unfinished topic
+  const nextTargetTopic = chapterTopics.find((t) => !completedTopicIds[t.id]) || chapterTopics[0];
+
+  // Subject Selection Handler
+  const handleSelectSubject = (subId: string) => {
+    playSound("click");
+    setCommandSubjectId(subId);
+    const sub = CBSE_SUBJECTS.find((s) => s.id === subId);
+    if (sub && sub.chapters.length > 0) {
+      setCommandChapterId(sub.chapters[0].id);
+    }
   };
 
-  const activeSubject = CBSE_SUBJECTS.find((s) => s.id === commandSubjectId) || CBSE_SUBJECTS[0];
-  const activeChapter = activeSubject.chapters.find((c) => c.id === commandChapterId) || activeSubject.chapters[0];
-  const ncertNum = activeChapter.ncertChapterNo;
-
-  // Real progress calculations
-  const totalTopics = activeChapter.topics.length;
-  const completedTopicsCount = activeChapter.topics.filter((t) => completedTopicIds[t.id]).length;
-  const progressPct = totalTopics > 0 ? Math.round((completedTopicsCount / totalTopics) * 100) : 0;
-  const masteryPct = progressPct;
-
-  // Question bank statistics
-  const chapterQuestionsCount =
-    activeVaultQuestions.length > 0 && ncertNum === activeVaultChapter
-      ? activeVaultQuestions.length
-      : totalTopics * 4 || 25;
-  const attemptedCount = Math.min(completedTopicsCount, chapterQuestionsCount);
-  const attemptedStr = `${attemptedCount}/${chapterQuestionsCount}`;
-  const accuracyStr =
-    attemptedCount > 0
-      ? `${Math.min(100, Math.round((completedTopicsCount / attemptedCount) * 100))}%`
-      : "0%";
-
-  // Real mistake logs count
-  const chapterMistakesCount = myMistakes.filter((m) => {
-    const chap = (m.chapter || "").toLowerCase();
-    const sName = (activeChapter.name || "").toLowerCase();
-    return chap.includes(sName) || (ncertNum && chap.includes(`ch ${ncertNum}`));
-  }).length;
-
-  // Real flashcards count
-  const chapterFlashcardsCount =
-    CHAPTER_WISE_FLASHCARDS.filter((fc) =>
-      fc.chapter?.toLowerCase().includes(activeChapter.name.toLowerCase())
-    ).length +
-    customFlashcards.filter((fc) =>
-      fc.chapter?.toLowerCase().includes(activeChapter.name.toLowerCase())
-    ).length;
-
-  // Next target uncompleted topics
-  const uncompletedTopics = activeChapter.topics.filter((t) => !completedTopicIds[t.id]);
-  const nextTargetTopic = uncompletedTopics.length > 0 ? uncompletedTopics[0] : null;
-  const weakAreas =
-    uncompletedTopics.length > 0
-      ? uncompletedTopics.slice(0, 3).map((t) => t.title)
-      : ["All Core NCERT Topics Completed! 🎉"];
-
-  // Dynamic Concept Mastery Nodes
-  const concepts = activeChapter.topics.slice(0, 6).map((t) => {
-    const isDone = !!completedTopicIds[t.id];
-    return {
-      id: t.id,
-      name: t.title,
-      pct: isDone ? 100 : 0,
-      status: isDone ? "Mastered" : "Unattempted",
-      color: isDone ? "emerald" : "rose"
-    };
-  });
-
-  // Overall Board Syllabus coverage badge info
-  const syllabusBadge = useMemo(() => {
-    if (activeChapter.examStatus === "partial_board") {
-      return {
-        label: "Partial Board Syllabus (Subtopics 1–1.3)",
-        bg: isDark ? "bg-amber-500/15 text-amber-300 border-amber-500/30" : "bg-amber-50 text-amber-800 border-amber-200",
-        icon: "⚠️"
-      };
+  // Chapter Selection Handler
+  const handleSelectChapter = (chId: string) => {
+    playSound("click");
+    setCommandChapterId(chId);
+    const ch = currentSubject.chapters.find((c) => c.id === chId);
+    if (ch) {
+      const chNum = ch.ncertChapterNo || 1;
+      if (["math", "science", "sst"].includes(activeSubjectKey)) {
+        setConceptsSubject(activeSubjectKey);
+        setConceptsChapterNo(chNum);
+      }
+      setActiveVaultSubject(activeSubjectKey as any);
+      setActiveVaultChapter(chNum);
+      loadChapterData(chNum, true, activeSubjectKey as any);
     }
-    if (activeChapter.examStatus === "periodic_test_only") {
-      return {
-        label: "Periodic School Tests Only (Not in Board)",
-        bg: isDark ? "bg-sky-500/15 text-sky-300 border-sky-500/30" : "bg-sky-50 text-sky-800 border-sky-200",
-        icon: "📋"
-      };
-    }
-    if (activeChapter.examStatus === "project_only") {
-      return {
-        label: "Internal Assessment Project Only",
-        bg: isDark ? "bg-purple-500/15 text-purple-300 border-purple-500/30" : "bg-purple-50 text-purple-800 border-purple-200",
-        icon: "📝"
-      };
-    }
-    return {
-      label: "Official 80M Board Exam Paper",
-      bg: isDark ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" : "bg-emerald-50 text-emerald-800 border-emerald-200",
-      icon: "🎯"
-    };
-  }, [activeChapter.examStatus, isDark]);
+  };
+
+  // Chapter-Specific Revision Items
+  const chapterMistakesCount = useMemo(() => {
+    return myMistakes.filter((m) => {
+      const matchSub = (m.subject || "").toLowerCase().includes(activeSubjectKey);
+      const matchCh = (m.chapter || "").toLowerCase().includes(`${currentChapterNum}`) ||
+                      (m.chapter || "").toLowerCase().includes(currentChapter.name.toLowerCase());
+      return matchSub || matchCh;
+    }).length;
+  }, [myMistakes, activeSubjectKey, currentChapterNum, currentChapter.name]);
+
+  const chapterFlashcardsCount = useMemo(() => {
+    const rawSub = activeSubjectKey === "math" ? "Mathematics" :
+                   activeSubjectKey === "science" ? "Science" :
+                   activeSubjectKey === "sst" ? "Social Science" :
+                   activeSubjectKey === "english" ? "English" : "Hindi";
+    const subCards: FlashcardItem[] = (CHAPTER_WISE_FLASHCARDS as any)[rawSub] || [];
+    const bankCards = subCards.filter(
+      (f: FlashcardItem) => f.chapter.toLowerCase().includes(currentChapter.name.toLowerCase()) ||
+                            f.chapter.toLowerCase().includes(`chapter ${currentChapterNum}`)
+    );
+    const userCards = customFlashcards.filter(
+      (f: any) => (f.subject || "").toLowerCase().includes(activeSubjectKey)
+    );
+    return bankCards.length + userCards.length;
+  }, [activeSubjectKey, currentChapter.name, currentChapterNum, customFlashcards]);
+
+  // Overall Subject Progress
+  const subjectTotalTopics = useMemo(() => {
+    return currentSubject.chapters.reduce((acc, ch) => acc + (ch.topics?.length || 0), 0);
+  }, [currentSubject]);
+
+  const subjectCompletedTopics = useMemo(() => {
+    return currentSubject.chapters.reduce((acc, ch) => {
+      return acc + (ch.topics?.filter((t) => completedTopicIds[t.id]).length || 0);
+    }, 0);
+  }, [currentSubject, completedTopicIds]);
+
+  const subjectProgressPercent = subjectTotalTopics > 0
+    ? Math.round((subjectCompletedTopics / subjectTotalTopics) * 100)
+    : 0;
 
   return (
-    <div className="space-y-6 sm:space-y-7 animate-fade-in font-sans">
-      {/* ========================================================================= */}
-      {/* ZONE 1: THE BEHAVIORAL KEYSTONE HERO (ELIMINATES CHOICE PARALYSIS)        */}
-      {/* ========================================================================= */}
-      <div
-        className={`rounded-3xl border transition-all relative overflow-hidden ${
-          isDark
-            ? "bg-gradient-to-b from-[#0e1726] to-[#0a101d] border-slate-800 shadow-xl text-slate-100"
-            : "bg-white border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06)] text-slate-900"
-        }`}
-      >
-        <div className="p-6 sm:p-8 lg:p-10">
-          {/* Top Compass Strip: Habit Streak + Micro-Pomodoro Sprint */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-200/60 dark:border-slate-800/80">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Daily Keystone Session</span>
+    <div className={`w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-8 font-sans ${
+      isDark ? "text-slate-100" : "text-slate-800"
+    }`}>
+
+      {/* =========================================================================
+          1. HEADER: GREETING & FOCUS COMPANION (Clean, Calm, Respectful)
+          ========================================================================= */}
+      <div className={`p-6 rounded-2xl border transition-all ${
+        isDark
+          ? "bg-slate-900/60 border-slate-800 shadow-sm"
+          : "bg-white border-slate-200/90 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.04)]"
+      }`}>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                CBSE Class 10 Study Routine
               </span>
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${syllabusBadge.bg}`}>
-                <span>{syllabusBadge.icon}</span>
-                <span>{activeSubject.name} • Ch {ncertNum}</span>
+              <span className="text-slate-300">•</span>
+              <span className="text-xs text-slate-500 font-medium">
+                {todayFormatted}
               </span>
             </div>
+            <h1 className={`text-2xl sm:text-3xl font-bold tracking-tight mt-1 ${
+              isDark ? "text-white" : "text-slate-900"
+            }`}>
+              Welcome back, {studentName}
+            </h1>
+            <p className="text-sm text-slate-500 mt-0.5">
+              Follow your planned syllabus step-by-step. Consistency creates mastery.
+            </p>
+          </div>
 
-            {/* Scientific Focus Sprint Timer (25m Focus Block) */}
-            <div
-              className={`flex items-center gap-3 px-4 py-2 rounded-2xl border transition-all ${
-                isDark ? "bg-slate-900/90 border-slate-800" : "bg-slate-50 border-slate-200/80"
+          {/* Simple 25-Min Study Sprint Timer */}
+          <div className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border shrink-0 ${
+            isDark
+              ? "bg-slate-800/80 border-slate-700"
+              : "bg-slate-50 border-slate-200"
+          }`}>
+            <Clock className="w-4 h-4 text-slate-500" />
+            <div className="text-right">
+              <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                Study Sprint
+              </div>
+              <div className="text-base font-mono font-bold text-slate-900 dark:text-white tabular-nums">
+                {formattedFocusTime}
+              </div>
+            </div>
+            <div className="flex items-center gap-1 ml-1">
+              <button
+                type="button"
+                onClick={() => {
+                  playSound("click");
+                  setIsFocusActive(!isFocusActive);
+                }}
+                className={`p-2 rounded-lg font-medium text-xs transition-colors ${
+                  isFocusActive
+                    ? "bg-amber-100 text-amber-800 hover:bg-amber-200 dark:bg-amber-900/40 dark:text-amber-300"
+                    : "bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900"
+                }`}
+                title={isFocusActive ? "Pause sprint" : "Start 25-min focus sprint"}
+              >
+                {isFocusActive ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  playSound("click");
+                  setIsFocusActive(false);
+                  setFocusSeconds(25 * 60);
+                }}
+                className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/50 dark:hover:bg-slate-700 transition-colors"
+                title="Reset timer"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          2. SUBJECT SELECTOR (Crisp, High-Speed Tabs)
+          ========================================================================= */}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            Select Subject
+          </label>
+          <span className="text-xs font-medium text-slate-500">
+            {currentSubject.name}: {subjectCompletedTopics}/{subjectTotalTopics} Topics Mastered ({subjectProgressPercent}%)
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+          {CBSE_SUBJECTS.map((sub) => {
+            const isSelected = sub.id === commandSubjectId;
+            const subTopicsTotal = sub.chapters.reduce((acc, c) => acc + (c.topics?.length || 0), 0);
+            const subTopicsDone = sub.chapters.reduce((acc, c) => {
+              return acc + (c.topics?.filter((t) => completedTopicIds[t.id]).length || 0);
+            }, 0);
+            const pct = subTopicsTotal > 0 ? Math.round((subTopicsDone / subTopicsTotal) * 100) : 0;
+
+            return (
+              <button
+                key={sub.id}
+                type="button"
+                onClick={() => handleSelectSubject(sub.id)}
+                className={`p-3 rounded-xl border text-left transition-all ${
+                  isSelected
+                    ? "bg-slate-900 text-white border-slate-900 shadow-sm dark:bg-white dark:text-slate-900 dark:border-white"
+                    : isDark
+                    ? "bg-slate-900/40 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-800/40"
+                    : "bg-white border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+                }`}
+              >
+                <div className="text-xs font-bold truncate">
+                  {sub.name}
+                </div>
+                <div className="flex items-center justify-between mt-1 text-[11px] opacity-75">
+                  <span>{sub.chapters.length} Chapters</span>
+                  <span className="font-mono font-medium">{pct}%</span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* =========================================================================
+          3. ACTIVE CHAPTER & DIRECT REDIRECTS (Hero Study Card)
+          ========================================================================= */}
+      <div className={`p-6 sm:p-7 rounded-2xl border transition-all ${
+        isDark
+          ? "bg-slate-900/60 border-slate-800"
+          : "bg-white border-slate-200 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.04)]"
+      }`}>
+        <div className="space-y-6">
+          {/* Chapter Selector Dropdown */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200/80 dark:border-slate-800">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200/60 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800">
+                  Chapter {currentChapterNum}
+                </span>
+                <span className="text-xs font-semibold text-slate-500">
+                  {currentChapter.topics?.length || 0} NCERT Topics
+                </span>
+              </div>
+              <h2 className={`text-xl sm:text-2xl font-bold tracking-tight ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}>
+                {currentChapter.name}
+              </h2>
+            </div>
+
+            {/* Change Chapter Dropdown */}
+            <div className="relative shrink-0 w-full sm:w-auto">
+              <label htmlFor="chapter-select" className="sr-only">Change Chapter</label>
+              <select
+                id="chapter-select"
+                value={commandChapterId}
+                onChange={(e) => handleSelectChapter(e.target.value)}
+                aria-label="Select chapter"
+                className={`w-full sm:w-64 appearance-none px-3.5 py-2.5 rounded-xl border text-xs font-bold pr-9 cursor-pointer transition-colors ${
+                  isDark
+                    ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-750"
+                    : "bg-slate-50 border-slate-300 text-slate-800 hover:bg-slate-100"
+                }`}
+              >
+                {currentSubject.chapters.map((ch, idx) => (
+                  <option key={ch.id} value={ch.id}>
+                    Ch {ch.ncertChapterNo || idx + 1}: {ch.name}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
+            </div>
+          </div>
+
+          {/* Chapter Progress Bar */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-semibold text-slate-500">
+                Chapter Completion: {completedInChapter} of {chapterTopics.length} topics finished
+              </span>
+              <span className="font-mono font-bold text-slate-900 dark:text-white">
+                {chapterProgressPercent}%
+              </span>
+            </div>
+            <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+              <div
+                className="h-full bg-emerald-500 rounded-full transition-all duration-300"
+                style={{ width: `${chapterProgressPercent}%` }}
+              />
+            </div>
+          </div>
+
+          {/* 1-CLICK FAST REDIRECT BUTTONS (Instant Study Action) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <Link
+              href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
+              onClick={(e) => handleNavClick(e, "concepts", {
+                subject: activeSubjectKey,
+                chapter: currentChapterNum
+              })}
+              className="flex items-center justify-between p-4 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-colors shadow-sm dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-white/10 dark:bg-slate-900/10 flex items-center justify-center shrink-0">
+                  <BookOpen className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold">
+                    Read Theory & Notes
+                  </div>
+                  <div className="text-xs text-white/70 dark:text-slate-500">
+                    NCERT concepts & key definitions
+                  </div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 opacity-70" />
+            </Link>
+
+            <Link
+              href={getTabHref("questions", activeSubjectKey, currentChapterNum)}
+              onClick={(e) => handleNavClick(e, "questions", {
+                subject: activeSubjectKey,
+                chapter: currentChapterNum
+              })}
+              className={`flex items-center justify-between p-4 rounded-xl border transition-colors ${
+                isDark
+                  ? "bg-slate-800/80 border-slate-700 text-white hover:bg-slate-700/80"
+                  : "bg-slate-50 border-slate-200 text-slate-900 hover:bg-slate-100"
               }`}
             >
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span className="text-xs font-mono font-bold tracking-wider">
-                  {timerMode === "focus" ? "25m Sprint" : "5m Break"}:
-                </span>
-                <span className="text-sm font-mono font-extrabold text-emerald-600 dark:text-emerald-400">
-                  {formatTimer(pomodoroSeconds)}
-                </span>
-              </div>
-              <div className="flex items-center gap-1 border-l pl-2.5 border-slate-300 dark:border-slate-700">
-                <button
-                  onClick={() => {
-                    playSound("click");
-                    setIsTimerRunning(!isTimerRunning);
-                  }}
-                  className={`p-1.5 rounded-lg transition-all cursor-pointer ${
-                    isTimerRunning
-                      ? "bg-amber-500/15 text-amber-600 dark:text-amber-400 hover:bg-amber-500/25"
-                      : "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/25"
-                  }`}
-                  title={isTimerRunning ? "Pause Sprint" : "Start Sprint"}
-                >
-                  {isTimerRunning ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                </button>
-                <button
-                  onClick={() => {
-                    playSound("click");
-                    setIsTimerRunning(false);
-                    setPomodoroSeconds(25 * 60);
-                    setTimerMode("focus");
-                  }}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-all cursor-pointer"
-                  title="Reset Sprint"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Hero Core Content: Prompt to Conquer Next Topic */}
-          <div className="pt-6 sm:pt-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div className="space-y-3 max-w-3xl">
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                <Target className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span>Next Immediate Milestone</span>
-              </div>
-
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
-                {activeChapter.name}
-              </h1>
-
-              <p className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-300 font-normal" : "text-slate-600 font-normal"}`}>
-                {nextTargetTopic ? (
-                  <>
-                    Target for this session: <strong className="font-semibold text-slate-900 dark:text-white">"{nextTargetTopic.title}"</strong>. Visual theory breakdown, mandatory diagrams/proofs, and immediate high-yield CBSE board practice.
-                  </>
-                ) : (
-                  "Congratulations! All core syllabus sub-topics for this chapter have been marked as mastered. Review flashcards or complete an exam sprint to consolidate memory."
-                )}
-              </p>
-
-              {activeChapter.syllabusNote && (
-                <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs border ${
-                  isDark ? "bg-slate-900/60 text-slate-300 border-slate-800" : "bg-slate-50 text-slate-700 border-slate-200"
-                }`}>
-                  <span className="text-amber-500">ℹ️</span>
-                  <span>{activeChapter.syllabusNote}</span>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                  <HelpCircle className="w-4 h-4" />
                 </div>
-              )}
-            </div>
-
-            {/* Primary Action Button (The "Routine" Trigger) */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-              <a
-                href={getTabHref(
-                  commandSubjectId === "hindi" ? "hindi" : "concepts",
-                  commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math",
-                  ncertNum || 1
-                )}
-                onClick={(e) => {
-                  playSound("click");
-                  if (commandSubjectId === "hindi") {
-                    handleNavClick(e, "hindi", {
-                      customAction: () => {
-                        setActiveTab("hindi");
-                      }
-                    });
-                    return;
-                  }
-                  const targetSub =
-                    commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
-                  handleNavClick(e, "concepts", {
-                    subject: targetSub,
-                    chapter: ncertNum || 1,
-                    customAction: () => {
-                      setConceptsSubject(targetSub);
-                      setConceptsChapterNo(ncertNum || 1);
-                    }
-                  });
-                }}
-                className="px-7 py-4 rounded-2xl text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/20 transition-all cursor-pointer flex items-center justify-center gap-2.5 active:scale-98 touch-manipulation"
-              >
-                <Sparkles className="w-4 h-4" />
-                <span>Start 10-Min Lesson Flow</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* 5-Subject Scientific Selector Bar */}
-        <div className={`px-6 sm:px-8 py-4 border-t flex items-center gap-2 overflow-x-auto ${
-          isDark ? "bg-slate-950/40 border-slate-800" : "bg-slate-50/70 border-slate-100"
-        }`}>
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mr-2 shrink-0">
-            Subject:
-          </span>
-          <div className="flex items-center gap-2">
-            {[
-              { id: "math", label: "Mathematics", icon: "📐", chCount: 14 },
-              { id: "science", label: "Science", icon: "🔬", chCount: 13 },
-              { id: "sst", label: "Social Science", icon: "🌍", chCount: 21 },
-              { id: "english", label: "English", icon: "📖", chCount: 184 },
-              { id: "hindi", label: "Hindi (Code 085)", icon: "✍️", chCount: 17 }
-            ].map((s) => {
-              const isSelected = commandSubjectId === s.id;
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => {
-                    playSound("switch");
-                    setCommandSubjectId(s.id);
-                    const sub = CBSE_SUBJECTS.find((subItem) => subItem.id === s.id);
-                    if (sub && sub.chapters.length > 0) {
-                      setCommandChapterId(sub.chapters[0].id);
-                      const chNo = sub.chapters[0].ncertChapterNo || 1;
-                      const subjectType =
-                        s.id === "science" ? "science" : s.id === "sst" ? "sst" : s.id === "english" ? "english" : "math";
-                      setActiveVaultSubject(subjectType);
-                      setActiveVaultChapter(chNo);
-                      loadChapterData(chNo, false, subjectType);
-                    }
-                  }}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 shrink-0 cursor-pointer border ${
-                    isSelected
-                      ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
-                      : isDark
-                      ? "bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800"
-                      : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100/80"
-                  }`}
-                >
-                  <span>{s.icon}</span>
-                  <span>{s.label}</span>
-                  <span
-                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
-                      isSelected ? "bg-white/20 text-white" : isDark ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-500"
-                    }`}
-                  >
-                    {s.chCount}
-                  </span>
-                </button>
-              );
-            })}
+                <div>
+                  <div className="text-sm font-bold">
+                    Practice Board Questions
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    Previous 10-year CBSE vault
+                  </div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
+            </Link>
           </div>
         </div>
       </div>
 
-      {/* ========================================================================= */}
-      {/* ZONE 2: CHAPTER NAVIGATION & 4 CORE METRIC CARDS                          */}
-      {/* ========================================================================= */}
-      <div
-        className={`p-6 sm:p-8 rounded-3xl border transition-all ${
-          isDark
-            ? "bg-[#0f172a]/90 border-slate-800 shadow-xl"
-            : "bg-white border-slate-200/80 shadow-[0_2px_12px_-3px_rgba(0,0,0,0.04)]"
-        }`}
-      >
-        {/* Chapter Switcher Row */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
+      {/* =========================================================================
+          4. SUB-TOPICS CHECKLIST (Simple, Clear, Frictionless)
+          ========================================================================= */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 block mb-1">
-              Curriculum Navigator
-            </span>
-            <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
-              {activeChapter.name}
-            </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              {totalTopics} Official NCERT Sub-Topics • Target: 100% Board Readiness
-            </p>
-          </div>
-
-          {/* Clean Dropdown Selectors */}
-          <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
-            <div className={`flex items-center gap-2 px-3 py-2 rounded-xl border text-xs font-semibold ${
-              isDark ? "bg-slate-900 border-slate-800 text-slate-200" : "bg-slate-50 border-slate-200 text-slate-800"
+            <h3 className={`text-base font-bold tracking-tight ${
+              isDark ? "text-white" : "text-slate-900"
             }`}>
-              <span className="text-[10px] uppercase font-bold text-slate-400">Subject:</span>
-              <select
-                className="bg-transparent font-bold outline-none cursor-pointer"
-                value={commandSubjectId}
-                onChange={(e) => {
-                  playSound("click");
-                  const newSubId = e.target.value;
-                  setCommandSubjectId(newSubId);
-                  const sub = CBSE_SUBJECTS.find((s) => s.id === newSubId);
-                  if (sub && sub.chapters.length > 0) {
-                    setCommandChapterId(sub.chapters[0].id);
-                    const chNo = sub.chapters[0].ncertChapterNo || 1;
-                    const subjectType =
-                      newSubId === "science" ? "science" : newSubId === "sst" ? "sst" : newSubId === "english" ? "english" : "math";
-                    setActiveVaultSubject(subjectType);
-                    setActiveVaultChapter(chNo);
-                    loadChapterData(chNo, false, subjectType);
-                  }
-                }}
-              >
-                {CBSE_SUBJECTS.map((s) => (
-                  <option key={s.id} value={s.id} className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className={`flex items-center gap-2 px-3 py-2 rounded-xl border text-xs font-semibold max-w-[260px] ${
-              isDark ? "bg-slate-900 border-slate-800 text-slate-200" : "bg-slate-50 border-slate-200 text-slate-800"
-            }`}>
-              <span className="text-[10px] uppercase font-bold text-slate-400">Chapter:</span>
-              <select
-                className="bg-transparent font-bold outline-none cursor-pointer truncate max-w-[170px]"
-                value={commandChapterId}
-                onChange={(e) => {
-                  playSound("click");
-                  const newChId = e.target.value;
-                  setCommandChapterId(newChId);
-                  const ch = activeSubject.chapters.find((c) => c.id === newChId);
-                  if (ch) {
-                    const chNo = ch.ncertChapterNo || 1;
-                    const subjectType =
-                      commandSubjectId === "science"
-                        ? "science"
-                        : commandSubjectId === "sst"
-                        ? "sst"
-                        : commandSubjectId === "english"
-                        ? "english"
-                        : "math";
-                    setActiveVaultSubject(subjectType);
-                    setActiveVaultChapter(chNo);
-                    loadChapterData(chNo, false, subjectType);
-                  }
-                }}
-              >
-                {activeSubject.chapters.map((c) => (
-                  <option key={c.id} value={c.id} className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>
-                    {c.ncertChapterNo ? `Ch ${c.ncertChapterNo}: ` : ""}{c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* 4 Clean Metric Cards (Zero Glare, High Legibility) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6">
-          <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
-            isDark ? "bg-slate-900/60 border-slate-800 hover:border-emerald-500/30" : "bg-slate-50/70 border-slate-200/80 hover:border-emerald-300"
-          }`}>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-                Progress
-              </span>
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            </div>
-            <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-              {progressPct}%
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
-              {completedTopicsCount} of {totalTopics} Topics Mastered
-            </p>
-            <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-3 overflow-hidden">
-              <div
-                className="bg-emerald-500 h-full rounded-full transition-all duration-500"
-                style={{ width: `${progressPct}%` }}
-              />
-            </div>
-          </div>
-
-          <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
-            isDark ? "bg-slate-900/60 border-slate-800 hover:border-blue-500/30" : "bg-slate-50/70 border-slate-200/80 hover:border-blue-300"
-          }`}>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-                Readiness
-              </span>
-              <span className="w-2 h-2 rounded-full bg-blue-500" />
-            </div>
-            <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-              {masteryPct}%
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
-              NCERT Exemplar & Proofs
-            </p>
-            <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-3 overflow-hidden">
-              <div
-                className="bg-blue-500 h-full rounded-full transition-all duration-500"
-                style={{ width: `${masteryPct}%` }}
-              />
-            </div>
-          </div>
-
-          <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
-            isDark ? "bg-slate-900/60 border-slate-800 hover:border-amber-500/30" : "bg-slate-50/70 border-slate-200/80 hover:border-amber-300"
-          }`}>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
-                Practice Bank
-              </span>
-              <span className="w-2 h-2 rounded-full bg-amber-500" />
-            </div>
-            <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-              {attemptedStr}
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
-              Accuracy: {accuracyStr}
-            </p>
-            <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-3 overflow-hidden">
-              <div
-                className="bg-amber-500 h-full rounded-full transition-all duration-500"
-                style={{ width: accuracyStr }}
-              />
-            </div>
-          </div>
-
-          <div className={`p-4 sm:p-5 rounded-2xl border transition-all ${
-            isDark ? "bg-slate-900/60 border-slate-800 hover:border-rose-500/30" : "bg-slate-50/70 border-slate-200/80 hover:border-rose-300"
-          }`}>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider">
-                Revision Items
-              </span>
-              <span className="w-2 h-2 rounded-full bg-rose-500" />
-            </div>
-            <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-              {chapterMistakesCount + chapterFlashcardsCount}
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">
-              {chapterFlashcardsCount} Cards • {chapterMistakesCount} Traps
-            </p>
-            <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-3 overflow-hidden">
-              <div
-                className="bg-rose-500 h-full rounded-full transition-all duration-500"
-                style={{
-                  width: `${Math.min(100, (chapterMistakesCount + chapterFlashcardsCount) * 10)}%`
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Quick Action Navigation Strip */}
-        <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1">
-            Jump Directly To:
-          </span>
-
-          <a
-            href={getTabHref(
-              commandSubjectId === "hindi" ? "hindi" : "concepts",
-              commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math",
-              ncertNum || 1
-            )}
-            onClick={(e) => {
-              if (commandSubjectId === "hindi") {
-                handleNavClick(e, "hindi", {
-                  customAction: () => {
-                    setActiveTab("hindi");
-                  }
-                });
-                return;
-              }
-              const targetSub =
-                commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
-              handleNavClick(e, "concepts", {
-                subject: targetSub,
-                chapter: ncertNum || 1,
-                customAction: () => {
-                  setConceptsSubject(targetSub);
-                  setConceptsChapterNo(ncertNum || 1);
-                }
-              });
-            }}
-            className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 dark:bg-emerald-950/30 dark:hover:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60"
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>1. Visual Theory</span>
-          </a>
-
-          {commandSubjectId === "science" && (
-            <a
-              href={getTabHref("diagrams")}
-              onClick={(e) => {
-                handleNavClick(e, "diagrams", {
-                  customAction: () => {
-                    setActiveTab("diagrams");
-                  }
-                });
-              }}
-              className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-sky-50 hover:bg-sky-100 text-sky-800 dark:bg-sky-950/30 dark:hover:bg-sky-950/50 dark:text-sky-300 border border-sky-200 dark:border-sky-800/60"
-            >
-              <Compass className="w-3.5 h-3.5" />
-              <span>2. Diagrams & Sheets</span>
-            </a>
-          )}
-
-          {commandSubjectId === "science" && (
-            <a
-              href={getTabHref("activities")}
-              onClick={(e) => {
-                handleNavClick(e, "activities", {
-                  customAction: () => {
-                    setActiveTab("activities");
-                  }
-                });
-              }}
-              className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 dark:bg-indigo-950/30 dark:hover:bg-indigo-950/50 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60"
-            >
-              <Beaker className="w-3.5 h-3.5" />
-              <span>3. Lab Experiments</span>
-            </a>
-          )}
-
-          {commandSubjectId === "math" && (
-            <a
-              href={getTabHref("theorems")}
-              onClick={(e) => {
-                handleNavClick(e, "theorems", {
-                  customAction: () => {
-                    setActiveTab("theorems");
-                  }
-                });
-              }}
-              className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 dark:bg-amber-950/30 dark:hover:bg-amber-950/50 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60"
-            >
-              <Award className="w-3.5 h-3.5" />
-              <span>2. Mandatory Proofs</span>
-            </a>
-          )}
-
-          {commandSubjectId === "sst" && (
-            <a
-              href={getTabHref("timelines")}
-              onClick={(e) => {
-                handleNavClick(e, "timelines", {
-                  customAction: () => {
-                    if (setTimelinesChapterKey) {
-                      setTimelinesChapterKey(ncertNum === 1 ? "ch1_europe" : "ch2_india");
-                    }
-                  }
-                });
-              }}
-              className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 dark:bg-amber-950/30 dark:hover:bg-amber-950/50 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60"
-            >
-              <Calendar className="w-3.5 h-3.5" />
-              <span>2. Metro Timelines</span>
-            </a>
-          )}
-
-          {commandSubjectId === "hindi" && (
-            <a
-              href={getTabHref("hindi")}
-              onClick={(e) => {
-                handleNavClick(e, "hindi", {
-                  customAction: () => {
-                    setActiveTab("hindi");
-                  }
-                });
-              }}
-              className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-800 dark:bg-rose-950/30 dark:hover:bg-rose-950/50 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60"
-            >
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>2. संपूर्ण हिंदी मास्टर (Literature & Grammar)</span>
-            </a>
-          )}
-
-          <a
-            href={getTabHref(
-              "questions",
-              commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math",
-              ncertNum || 1
-            )}
-            onClick={(e) => {
-              const targetSub =
-                commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
-              handleNavClick(e, "questions", {
-                subject: targetSub,
-                chapter: ncertNum || 1,
-                customAction: () => {
-                  setActiveVaultSubject(targetSub as any);
-                  setActiveVaultChapter(ncertNum || 1);
-                  loadChapterData(ncertNum || 1, false, targetSub as any);
-                }
-              });
-            }}
-            className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs sm:ml-auto"
-          >
-            <Zap className="w-3.5 h-3.5" />
-            <span>Practice Vault →</span>
-          </a>
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* ZONE 3: SEQUENTIAL SUB-TOPIC HABIT CHECKLIST                              */}
-      {/* ========================================================================= */}
-      <div
-        className={`p-6 sm:p-8 rounded-3xl border transition-all ${
-          isDark
-            ? "bg-[#0f172a]/90 border-slate-800 shadow-xl"
-            : "bg-white border-slate-200/80 shadow-[0_2px_12px_-3px_rgba(0,0,0,0.04)]"
-        }`}
-      >
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
-          <div>
-            <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-              <span>NCERT Chapter Sub-Topics Roadmap</span>
+              Chapter Topics & Micro-Habits
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Check off each topic as you master it to earn +25 XP and build your study streak
+            <p className="text-xs text-slate-500">
+              Check off topics as you study. Each completed topic adds +25 XP to your progress.
             </p>
           </div>
-
-          <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-            {completedTopicsCount} / {totalTopics} Completed
+          <span className="text-xs font-mono font-semibold text-slate-500">
+            {completedInChapter}/{chapterTopics.length} Done
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {activeChapter.topics.map((topic, idx) => {
+        <div className="space-y-2">
+          {chapterTopics.map((topic, index) => {
             const isDone = !!completedTopicIds[topic.id];
+
             return (
               <div
                 key={topic.id}
-                className={`p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
+                className={`p-3.5 sm:p-4 rounded-xl border flex items-center justify-between gap-3 transition-all ${
                   isDone
                     ? isDark
-                      ? "bg-emerald-950/20 border-emerald-500/30"
-                      : "bg-emerald-50/60 border-emerald-200"
+                      ? "bg-emerald-950/20 border-emerald-900/40 text-slate-400"
+                      : "bg-emerald-50/50 border-emerald-200/70 text-slate-600"
                     : isDark
-                    ? "bg-slate-900/50 border-slate-800 hover:border-slate-700"
-                    : "bg-slate-50/50 border-slate-200/80 hover:border-slate-300"
+                    ? "bg-slate-900/50 border-slate-800 text-slate-200 hover:border-slate-700"
+                    : "bg-white border-slate-200 text-slate-800 hover:border-slate-300 shadow-xs"
                 }`}
               >
-                <div className="flex items-center gap-3 min-w-0 flex-1">
+                <div className="flex items-center gap-3.5 min-w-0">
                   <button
-                    onClick={() => {
-                      playSound("click");
-                      toggleTopic(topic.id);
-                    }}
-                    className={`w-7 h-7 rounded-xl flex items-center justify-center transition-all cursor-pointer shrink-0 border active:scale-90 ${
+                    type="button"
+                    onClick={() => toggleTopic(topic.id)}
+                    className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${
                       isDone
-                        ? "bg-emerald-600 text-white border-emerald-600 font-bold"
+                        ? "bg-emerald-600 border-emerald-600 text-white"
                         : isDark
-                        ? "bg-slate-800 border-slate-700 text-transparent hover:border-emerald-500"
-                        : "bg-white border-slate-300 text-transparent hover:border-emerald-600"
+                        ? "border-slate-700 hover:border-slate-500"
+                        : "border-slate-300 hover:border-slate-400 bg-white"
                     }`}
-                    title={isDone ? "Mark as Incomplete" : "Mark as Mastered"}
+                    title={isDone ? "Mark topic incomplete" : "Mark topic complete (+25 XP)"}
                   >
-                    <Check className="w-4 h-4" />
+                    {isDone && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                   </button>
 
-                  <div className="min-w-0 flex-1">
-                    <span className="text-[10px] font-mono text-slate-400 block font-semibold">
-                      Sub-Topic #{idx + 1}
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-mono font-semibold text-slate-400 mr-2">
+                      {index + 1}.
                     </span>
-                    <p
-                      className={`text-xs sm:text-sm font-semibold leading-tight break-words ${
-                        isDone
-                          ? "text-emerald-700 dark:text-emerald-300 line-through opacity-85"
-                          : isDark
-                          ? "text-slate-100"
-                          : "text-slate-800"
-                      }`}
-                    >
+                    <span className={`text-sm font-semibold ${
+                      isDone ? "line-through text-slate-400 dark:text-slate-500" : ""
+                    }`}>
                       {topic.title}
-                    </p>
+                    </span>
                   </div>
                 </div>
 
-                <a
-                  href={getTabHref(
-                    "concepts",
-                    commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math",
-                    ncertNum || 1
-                  )}
-                  onClick={(e) => {
-                    const targetSub =
-                      commandSubjectId === "science" ? "science" : commandSubjectId === "sst" ? "sst" : "math";
-                    handleNavClick(e, "concepts", {
-                      subject: targetSub,
-                      chapter: ncertNum || 1,
-                      customAction: () => {
-                        setConceptsSubject(targetSub);
-                        setConceptsChapterNo(ncertNum || 1);
-                      }
-                    });
-                  }}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer whitespace-nowrap flex items-center gap-1 shrink-0 ${
-                    isDark
-                      ? "bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-200"
-                      : "bg-white border-slate-200 hover:bg-slate-100 text-slate-700"
-                  }`}
-                >
-                  <span>Study</span>
-                  <ArrowRight className="w-3 h-3" />
-                </a>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Link
+                    href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
+                    onClick={(e) => handleNavClick(e, "concepts", {
+                      subject: activeSubjectKey,
+                      chapter: currentChapterNum
+                    })}
+                    className="px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800 transition-colors"
+                  >
+                    Study
+                  </Link>
+                </div>
               </div>
             );
           })}
         </div>
       </div>
 
-      {/* ========================================================================= */}
-      {/* ZONE 4: REINFORCEMENT BENTO (TARGETS, DUE FOR REVISION, MASTERY MAP)      */}
-      {/* ========================================================================= */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Next Targets Card */}
-        <div
-          className={`p-6 rounded-3xl border transition-all ${
-            isDark
-              ? "bg-[#0f172a]/90 border-slate-800 shadow-xl"
-              : "bg-white border-slate-200/80 shadow-[0_2px_12px_-3px_rgba(0,0,0,0.04)]"
-          }`}
-        >
-          <h4 className="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-            <Flame className="w-4 h-4" /> Next Target Topics ({uncompletedTopics.length} Remaining)
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {weakAreas.map((w, i) => (
-              <span
-                key={i}
-                className={`px-3 py-1 text-xs font-medium rounded-full border ${
-                  isDark
-                    ? "bg-rose-950/30 text-rose-300 border-rose-800/40"
-                    : "bg-rose-50 text-rose-800 border-rose-200"
-                }`}
-              >
-                {w}
-              </span>
-            ))}
+      {/* =========================================================================
+          5. ACTIVE RECALL & QUICK TOOLKIT (Clean, Fast Shortcuts)
+          ========================================================================= */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Revision & Mistake Status */}
+        <div className={`p-5 rounded-2xl border transition-all ${
+          isDark
+            ? "bg-slate-900/60 border-slate-800"
+            : "bg-white border-slate-200 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.04)]"
+        }`}>
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+            <Bookmark className="w-3.5 h-3.5" />
+            <span>Active Recall & Revision</span>
           </div>
-        </div>
 
-        {/* Due For Revision Card */}
-        <div
-          className={`p-6 rounded-3xl border transition-all ${
-            isDark
-              ? "bg-[#0f172a]/90 border-slate-800 shadow-xl"
-              : "bg-white border-slate-200/80 shadow-[0_2px_12px_-3px_rgba(0,0,0,0.04)]"
-          }`}
-        >
-          <h4 className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-            <BookMarked className="w-4 h-4" /> Active Recall & Spaced Repetition
-          </h4>
-          <div className="flex justify-between items-center text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">
-            <span>{chapterFlashcardsCount} Flashcards Available</span>
-            <span>{chapterMistakesCount} Error Logs Recorded</span>
-          </div>
-          <div className="mt-4 flex gap-2.5">
-            <a
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <Link
               href={getTabHref("flashcards")}
               onClick={(e) => handleNavClick(e, "flashcards")}
-              className={`flex-1 py-2.5 text-xs font-bold rounded-xl border transition-all cursor-pointer flex items-center justify-center ${
+              className={`p-3.5 rounded-xl border text-left transition-colors ${
                 isDark
-                  ? "bg-amber-950/20 hover:bg-amber-950/40 text-amber-300 border-amber-800/40"
-                  : "bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-200"
+                  ? "bg-slate-800/60 border-slate-700 hover:bg-slate-700/60"
+                  : "bg-slate-50 border-slate-200 hover:bg-slate-100"
               }`}
             >
-              Start Flashcards
-            </a>
-            <a
+              <div className="text-xl font-bold font-mono text-slate-900 dark:text-white">
+                {chapterFlashcardsCount}
+              </div>
+              <div className="text-xs font-semibold text-slate-500 mt-0.5">
+                Flashcards Ready
+              </div>
+            </Link>
+
+            <Link
               href={getTabHref("common_mistakes")}
               onClick={(e) => handleNavClick(e, "common_mistakes")}
-              className={`flex-1 py-2.5 text-xs font-bold rounded-xl border transition-all cursor-pointer flex items-center justify-center ${
+              className={`p-3.5 rounded-xl border text-left transition-colors ${
                 isDark
-                  ? "bg-amber-950/20 hover:bg-amber-950/40 text-amber-300 border-amber-800/40"
-                  : "bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-200"
+                  ? "bg-slate-800/60 border-slate-700 hover:bg-slate-700/60"
+                  : "bg-slate-50 border-slate-200 hover:bg-slate-100"
               }`}
             >
-              Review Mistakes
-            </a>
+              <div className="text-xl font-bold font-mono text-rose-600 dark:text-rose-400">
+                {chapterMistakesCount}
+              </div>
+              <div className="text-xs font-semibold text-slate-500 mt-0.5">
+                Mistakes Logged
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        {/* Essential Tools Rail */}
+        <div className={`p-5 rounded-2xl border transition-all ${
+          isDark
+            ? "bg-slate-900/60 border-slate-800"
+            : "bg-white border-slate-200 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.04)]"
+        }`}>
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+            <Layers className="w-3.5 h-3.5" />
+            <span>Curriculum Toolkit</span>
+          </div>
+
+          <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-bold">
+            {activeSubjectKey === "math" ? (
+              <>
+                <Link
+                  href={getTabHref("theorems")}
+                  onClick={(e) => handleNavClick(e, "theorems")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  📐 Mandatory Proofs
+                </Link>
+                <Link
+                  href={getTabHref("activities")}
+                  onClick={(e) => handleNavClick(e, "activities")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  🧪 Lab Experiments
+                </Link>
+              </>
+            ) : activeSubjectKey === "science" ? (
+              <>
+                <Link
+                  href={getTabHref("diagrams")}
+                  onClick={(e) => handleNavClick(e, "diagrams")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  🫀 Anatomy Diagrams
+                </Link>
+                <Link
+                  href={getTabHref("reactions")}
+                  onClick={(e) => handleNavClick(e, "reactions")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  ⚗️ Chemical Reactions
+                </Link>
+              </>
+            ) : activeSubjectKey === "sst" ? (
+              <>
+                <Link
+                  href={getTabHref("timelines")}
+                  onClick={(e) => handleNavClick(e, "timelines")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  🗺️ Metro Timelines
+                </Link>
+                <Link
+                  href={getTabHref("syllabus")}
+                  onClick={(e) => handleNavClick(e, "syllabus")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  📋 Map Work Syllabus
+                </Link>
+              </>
+            ) : activeSubjectKey === "hindi" ? (
+              <>
+                <Link
+                  href={getTabHref("hindi")}
+                  onClick={(e) => handleNavClick(e, "hindi")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  📖 व्याकरण व मुहावरे
+                </Link>
+                <Link
+                  href={getTabHref("hindi")}
+                  onClick={(e) => handleNavClick(e, "hindi")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  ✍️ सूचना व लेखन
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href={getTabHref("english")}
+                  onClick={(e) => handleNavClick(e, "english")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  📚 First Flight & Footprints
+                </Link>
+                <Link
+                  href={getTabHref("english")}
+                  onClick={(e) => handleNavClick(e, "english")}
+                  className={`p-2.5 rounded-xl border text-center transition-colors ${
+                    isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+                  }`}
+                >
+                  ✍️ Writing Skills & Grammar
+                </Link>
+              </>
+            )}
+
+            <Link
+              href={getTabHref("roadmap")}
+              onClick={(e) => handleNavClick(e, "roadmap")}
+              className={`p-2.5 rounded-xl border text-center transition-colors ${
+                isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+              }`}
+            >
+              📅 30-Day Blueprint
+            </Link>
+            <Link
+              href={getTabHref("test_series")}
+              onClick={(e) => handleNavClick(e, "test_series")}
+              className={`p-2.5 rounded-xl border text-center transition-colors ${
+                isDark ? "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+              }`}
+            >
+              🎯 Full Test Series
+            </Link>
           </div>
         </div>
       </div>
 
-      {/* Concept Mastery Matrix */}
-      <div
-        className={`p-6 sm:p-8 rounded-3xl border transition-all ${
-          isDark
-            ? "bg-[#0f172a]/90 border-slate-800 shadow-xl"
-            : "bg-white border-slate-200/80 shadow-[0_2px_12px_-3px_rgba(0,0,0,0.04)]"
-        }`}
-      >
-        <div className="flex justify-between items-center mb-5">
-          <h4 className="text-xs font-bold uppercase tracking-wider flex items-center gap-2 text-slate-600 dark:text-slate-400">
-            <Compass className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>Concept Mastery Matrix: {activeChapter.name}</span>
-          </h4>
-          <span className="text-[11px] font-mono text-slate-400">
-            Tap node to toggle mastery (+25 XP)
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {concepts.map((concept, cIdx) => (
-            <div
-              key={cIdx}
-              onClick={() => {
-                playSound("click");
-                toggleTopic(concept.id);
-              }}
-              className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center gap-3.5 ${
-                concept.pct > 0
-                  ? isDark
-                    ? "bg-emerald-950/25 border-emerald-500/40"
-                    : "bg-emerald-50/70 border-emerald-300"
-                  : isDark
-                  ? "bg-slate-900/50 border-slate-800 hover:border-slate-700"
-                  : "bg-slate-50/60 border-slate-200/80 hover:border-slate-300"
-              }`}
-            >
-              <div
-                className={`w-11 h-11 rounded-xl flex items-center justify-center border font-mono font-bold shrink-0 text-xs ${
-                  concept.pct > 0
-                    ? "border-emerald-500 bg-emerald-600 text-white"
-                    : isDark
-                    ? "border-slate-700 bg-slate-800 text-slate-400"
-                    : "border-slate-300 bg-white text-slate-600"
-                }`}
-              >
-                {concept.pct > 0 ? <CheckCircle2 className="w-5 h-5" /> : `${concept.pct}%`}
-              </div>
-
-              <div className="min-w-0 flex-1">
-                <p
-                  className={`text-xs font-bold truncate ${
-                    concept.pct > 0
-                      ? isDark
-                        ? "text-emerald-300"
-                        : "text-emerald-900"
-                      : isDark
-                      ? "text-slate-100"
-                      : "text-slate-800"
-                  }`}
-                >
-                  {concept.name}
-                </p>
-                <span
-                  className={`text-[10px] font-mono font-semibold block mt-0.5 ${
-                    concept.pct > 0
-                      ? "text-emerald-600 dark:text-emerald-400"
-                      : "text-slate-400"
-                  }`}
-                >
-                  {concept.status} • Tap to toggle
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

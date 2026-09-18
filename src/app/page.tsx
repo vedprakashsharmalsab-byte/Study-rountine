@@ -1293,7 +1293,7 @@ export default function CBSECommandCenter() {
     } catch {}
   };
 
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [levelUpModalData, setLevelUpModalData] = useState<{ level: number; title: string; badge: string } | null>(null);
 
@@ -2404,7 +2404,11 @@ export default function CBSECommandCenter() {
         if (sMasteredFC) setMasteredFlashcardIds(JSON.parse(sMasteredFC));
         if (sCustomQ) setCustomQuestions(JSON.parse(sCustomQ));
         if (sFocus) setTotalFocusMins(parseInt(sFocus));
-        if (sTheme) setTheme(sTheme as any);
+        if (sTheme && (sTheme === "light" || sTheme === "dark")) {
+          setTheme(sTheme as any);
+        } else {
+          setTheme("light");
+        }
         if (sCorrectMcqs) {
           try { setCorrectMcqQuestionIds(JSON.parse(sCorrectMcqs)); } catch {}
         }
