@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Sparkles,
   Flame,
@@ -12,9 +12,11 @@ import {
   BookOpen,
   Timer,
   CheckCircle2,
-  Quote
+  Quote,
+  Compass
 } from "lucide-react";
 import { areteAudio } from "@/lib/audio";
+import { ARETE_WISDOM_VAULT, WisdomQuote } from "@/data/areteQuotesVault";
 
 interface AreteMotivationalBannerProps {
   currentXP: number;
@@ -25,45 +27,6 @@ interface AreteMotivationalBannerProps {
   onLaunchPractice: () => void;
   onLaunchFlashcards: () => void;
 }
-
-const MOTIVATIONAL_WISDOM = [
-  {
-    quote: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
-    author: "Aristotle (The Philosopher of Areté)",
-    category: "Consistency",
-    context: "Every question you solve today builds an unshakeable foundation for February 2027."
-  },
-  {
-    quote: "The impediment to action advances action. What stands in the way becomes the way.",
-    author: "Marcus Aurelius (Meditations)",
-    category: "Resilience",
-    context: "Struggling with a difficult theorem or history date? That exact struggle is where your intellect expands."
-  },
-  {
-    quote: "No man is free who is not master of himself.",
-    author: "Epictetus",
-    category: "Discipline",
-    context: "Put away distractions for 25 minutes. A single focused Pomodoro will leapfrog your leaderboard rank."
-  },
-  {
-    quote: "Every Archon of Areté was once an Aspirant who simply refused to yield.",
-    author: "ARETĒ Creed",
-    category: "Momentum",
-    context: "Your rank today is just your starting line. 3 questions = +30 XP. Start now."
-  },
-  {
-    quote: "Luck is what happens when preparation meets opportunity.",
-    author: "Seneca",
-    category: "Preparation",
-    context: "CBSE Board toppers don't guess in the exam hall; they automate their recall through deliberate repetition."
-  },
-  {
-    quote: "Do not pray for an easy life, pray for the strength to endure a difficult one.",
-    author: "Bruce Lee / Epictetus",
-    category: "Mental Fortitude",
-    context: "Embrace the challenging questions in the Practice Vault. That is where rank is won."
-  }
-];
 
 export default function AreteMotivationalBanner({
   currentXP,
@@ -76,13 +39,27 @@ export default function AreteMotivationalBanner({
 }: AreteMotivationalBannerProps) {
   const [quoteIdx, setQuoteIdx] = useState(0);
 
-  const activeQuote = useMemo(() => {
-    return MOTIVATIONAL_WISDOM[quoteIdx % MOTIVATIONAL_WISDOM.length];
+  // Advance to a fresh quote on every visit/mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = parseInt(localStorage.getItem("arete_last_quote_idx") || "-1", 10);
+      const nextIdx = (saved + 1) % ARETE_WISDOM_VAULT.length;
+      localStorage.setItem("arete_last_quote_idx", nextIdx.toString());
+      setQuoteIdx(nextIdx);
+    }
+  }, []);
+
+  const activeQuote: WisdomQuote = useMemo(() => {
+    return ARETE_WISDOM_VAULT[quoteIdx % ARETE_WISDOM_VAULT.length] || ARETE_WISDOM_VAULT[0];
   }, [quoteIdx]);
 
   const handleNextQuote = () => {
     areteAudio.play("pop");
-    setQuoteIdx((prev) => (prev + 1) % MOTIVATIONAL_WISDOM.length);
+    const nextIdx = Math.floor(Math.random() * ARETE_WISDOM_VAULT.length);
+    setQuoteIdx(nextIdx);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("arete_last_quote_idx", nextIdx.toString());
+    }
   };
 
   const isLowXP = currentXP < 600 || userRank > 10;
@@ -94,6 +71,7 @@ export default function AreteMotivationalBanner({
           ? "bg-gradient-to-br from-[#121c2e] via-[#0d1424] to-[#150e20] border-amber-500/30 shadow-[0_8px_32px_rgba(245,158,11,0.12)]"
           : "bg-gradient-to-br from-amber-50/90 via-orange-50/60 to-rose-50/80 border-amber-200 shadow-lg"
       }`}
+      style={{ transform: "translateZ(0)" }}
     >
       {/* BACKGROUND RADIANT ACCENT */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
@@ -110,6 +88,11 @@ export default function AreteMotivationalBanner({
               isDark ? "bg-white/5 border-white/10 text-amber-300" : "bg-white border-amber-300 text-amber-900"
             }`}>
               {activeQuote.category}
+            </span>
+            <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${
+              isDark ? "bg-cyan-500/10 border-cyan-500/20 text-cyan-300" : "bg-cyan-50 border-cyan-200 text-cyan-800"
+            }`}>
+              Wisdom #{quoteIdx + 1} of {ARETE_WISDOM_VAULT.length}
             </span>
             {isLowXP && (
               <span className={`text-[10px] font-mono font-black px-2.5 py-0.5 rounded-full border flex items-center gap-1 ${
@@ -129,128 +112,127 @@ export default function AreteMotivationalBanner({
                 &ldquo;{activeQuote.quote}&rdquo;
               </p>
             </div>
-            <div className="flex items-center justify-between gap-4 pl-7">
+            <div className="flex flex-wrap items-center justify-between gap-3 pl-7">
               <span className={`text-xs font-mono font-bold ${isDark ? "text-amber-400" : "text-amber-800"}`}>
-                — {activeQuote.author}
+                — {activeQuote.author} <span className="opacity-75 font-normal">({activeQuote.source})</span>
               </span>
               <button
                 type="button"
                 onClick={handleNextQuote}
-                className={`text-[11px] font-mono font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
-                  isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-950"
+                className={`text-[11px] font-mono font-bold flex items-center gap-1.5 px-2.5 py-1 rounded-xl border transition-all cursor-pointer ${
+                  isDark
+                    ? "bg-white/5 hover:bg-white/10 border-white/10 text-slate-300 hover:text-white"
+                    : "bg-white hover:bg-slate-50 border-slate-200 text-slate-700"
                 }`}
-                title="Shuffle Quote"
+                title="Shuffle next insight from 800+ quotes"
               >
                 <RefreshCw className="w-3 h-3" />
-                <span>Next Wisdom</span>
+                <span>Next Insight (800+ Vault)</span>
               </button>
             </div>
           </div>
 
-          <p className={`text-xs leading-relaxed pl-7 ${isDark ? "text-slate-300/90" : "text-slate-700 font-medium"}`}>
-            💡 <strong>Topper Strategy:</strong> {activeQuote.context}
+          <p className={`text-xs pl-7 border-l-2 ${
+            isDark ? "border-amber-500/40 text-slate-300" : "border-amber-500 text-slate-700 font-medium"
+          }`}>
+            💡 <strong>Board Strategist Action:</strong> {activeQuote.context}
           </p>
         </div>
 
-        {/* RIGHT: QUICK MOMENTUM BOOSTERS (1-TAP QUESTS) */}
-        <div className={`w-full lg:w-80 p-4 sm:p-5 rounded-2xl border space-y-3 shrink-0 ${
-          isDark
-            ? "bg-black/40 border-white/10 shadow-inner"
-            : "bg-white/90 border-amber-200 shadow-md backdrop-blur-sm"
+        {/* RIGHT: RAPID XP BOOSTER QUESTS (1-CLICK DIRECT ACCELERATORS) */}
+        <div className={`p-4 sm:p-5 rounded-2xl border space-y-3 shrink-0 w-full lg:w-80 ${
+          isDark ? "bg-black/40 border-white/10" : "bg-white border-amber-200 shadow-sm"
         }`}>
           <div className="flex items-center justify-between">
-            <span className={`text-[11px] font-mono font-black uppercase tracking-wider flex items-center gap-1.5 ${
-              isDark ? "text-amber-400" : "text-amber-900"
-            }`}>
-              <Zap className="w-3.5 h-3.5 text-amber-400" /> Immediate XP Boosters
+            <span className="text-xs font-mono font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+              <Zap className="w-3.5 h-3.5 fill-current" />
+              1-Click XP Boosters
             </span>
-            <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
-              isDark ? "bg-amber-500/20 text-amber-300" : "bg-amber-100 text-amber-900"
+            <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${
+              isDark ? "bg-white/10 text-slate-300" : "bg-slate-100 text-slate-700"
             }`}>
-              Rank #{userRank} of {totalContenders}
+              Quick Rank Climb
             </span>
           </div>
 
+          <p className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+            Rank is won through execution. Choose a quest to earn XP immediately:
+          </p>
+
           <div className="space-y-2">
+            {/* QUEST 1: SOLVE 3 MCQs */}
             <button
+              type="button"
               onClick={() => {
                 areteAudio.play("click");
                 onLaunchPractice();
               }}
-              className={`w-full p-2.5 rounded-xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer group ${
+              className={`w-full p-2.5 rounded-xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer group active:scale-98 ${
                 isDark
-                  ? "bg-white/[0.03] border-white/10 hover:border-emerald-500/40 hover:bg-emerald-500/10"
-                  : "bg-emerald-50/60 border-emerald-200 hover:bg-emerald-100/80 shadow-2xs"
+                  ? "bg-white/[0.04] hover:bg-white/[0.08] border-white/10 hover:border-amber-500/40 text-white"
+                  : "bg-slate-50 hover:bg-white border-slate-200 hover:border-amber-400 text-slate-900"
               }`}
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <span className="p-1.5 rounded-lg bg-emerald-500 text-slate-950 shrink-0">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                </span>
+                <div className="p-1.5 rounded-lg bg-amber-500/20 text-amber-400 group-hover:scale-110 transition-transform">
+                  <Target className="w-3.5 h-3.5" />
+                </div>
                 <div className="min-w-0">
-                  <span className={`text-xs font-bold block truncate ${isDark ? "text-white" : "text-slate-900"}`}>
-                    Solve 3 Board MCQs
-                  </span>
-                  <span className="text-[10px] font-mono text-emerald-400 font-bold block">
-                    +30 XP Instant Bounty
-                  </span>
+                  <span className="text-xs font-bold block truncate">Solve 3 Board MCQs</span>
+                  <span className={`text-[10px] block ${isDark ? "text-slate-400" : "text-slate-500"}`}>Questions Vault</span>
                 </div>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+              <span className="text-xs font-mono font-black text-amber-400 shrink-0">+30 XP</span>
             </button>
 
+            {/* QUEST 2: 15-MIN POMODORO */}
             <button
+              type="button"
               onClick={() => {
                 areteAudio.play("click");
                 onLaunchPomodoro();
               }}
-              className={`w-full p-2.5 rounded-xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer group ${
+              className={`w-full p-2.5 rounded-xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer group active:scale-98 ${
                 isDark
-                  ? "bg-white/[0.03] border-white/10 hover:border-amber-500/40 hover:bg-amber-500/10"
-                  : "bg-amber-50/60 border-amber-200 hover:bg-amber-100/80 shadow-2xs"
+                  ? "bg-white/[0.04] hover:bg-white/[0.08] border-white/10 hover:border-emerald-500/40 text-white"
+                  : "bg-slate-50 hover:bg-white border-slate-200 hover:border-emerald-400 text-slate-900"
               }`}
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <span className="p-1.5 rounded-lg bg-amber-500 text-slate-950 shrink-0">
+                <div className="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 group-hover:scale-110 transition-transform">
                   <Timer className="w-3.5 h-3.5" />
-                </span>
+                </div>
                 <div className="min-w-0">
-                  <span className={`text-xs font-bold block truncate ${isDark ? "text-white" : "text-slate-900"}`}>
-                    15-Min Focus Sprint
-                  </span>
-                  <span className="text-[10px] font-mono text-amber-400 font-bold block">
-                    +30 XP Focus Mastery
-                  </span>
+                  <span className="text-xs font-bold block truncate">25-Min Focus Sprint</span>
+                  <span className={`text-[10px] block ${isDark ? "text-slate-400" : "text-slate-500"}`}>Pomodoro Engine</span>
                 </div>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+              <span className="text-xs font-mono font-black text-emerald-400 shrink-0">+50 XP</span>
             </button>
 
+            {/* QUEST 3: FLASHCARDS */}
             <button
+              type="button"
               onClick={() => {
                 areteAudio.play("click");
                 onLaunchFlashcards();
               }}
-              className={`w-full p-2.5 rounded-xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer group ${
+              className={`w-full p-2.5 rounded-xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer group active:scale-98 ${
                 isDark
-                  ? "bg-white/[0.03] border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/10"
-                  : "bg-cyan-50/60 border-cyan-200 hover:bg-cyan-100/80 shadow-2xs"
+                  ? "bg-white/[0.04] hover:bg-white/[0.08] border-white/10 hover:border-cyan-500/40 text-white"
+                  : "bg-slate-50 hover:bg-white border-slate-200 hover:border-cyan-400 text-slate-900"
               }`}
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <span className="p-1.5 rounded-lg bg-cyan-500 text-slate-950 shrink-0">
+                <div className="p-1.5 rounded-lg bg-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform">
                   <BookOpen className="w-3.5 h-3.5" />
-                </span>
+                </div>
                 <div className="min-w-0">
-                  <span className={`text-xs font-bold block truncate ${isDark ? "text-white" : "text-slate-900"}`}>
-                    5 Recall Flashcards
-                  </span>
-                  <span className="text-[10px] font-mono text-cyan-400 font-bold block">
-                    +25 XP Memory Boost
-                  </span>
+                  <span className="text-xs font-bold block truncate">5 Active Flashcards</span>
+                  <span className={`text-[10px] block ${isDark ? "text-slate-400" : "text-slate-500"}`}>Recall Sprint</span>
                 </div>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+              <span className="text-xs font-mono font-black text-cyan-400 shrink-0">+25 XP</span>
             </button>
           </div>
         </div>

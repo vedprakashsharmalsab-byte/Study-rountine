@@ -174,6 +174,16 @@ export default function AreteAccessGateModal({
 
     localStorage.setItem(STORAGE_KEY_STUDENT, JSON.stringify(profile));
 
+    // Save to persistent multi-student ledger so real local user history is retained for the leaderboard
+    try {
+      const existingLedger = JSON.parse(localStorage.getItem("arete_cbse_student_ledger") || "[]");
+      const filtered = existingLedger.filter((s: any) => s.name.toLowerCase() !== cleanName.toLowerCase());
+      filtered.push(profile);
+      localStorage.setItem("arete_cbse_student_ledger", JSON.stringify(filtered));
+    } catch (err) {
+      console.warn("Ledger save error:", err);
+    }
+
     setTimeout(() => {
       setIsSubmitting(false);
       onVerified(profile);
