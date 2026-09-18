@@ -75,7 +75,7 @@ export default function OnboardingModal({ isOpen, onComplete, isDark }: Onboardi
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Sarthak, Aarav..."
+                placeholder="e.g. Aarav, Ananya, Rohan..."
                 className={`w-full px-4 py-3 rounded-2xl border text-sm font-bold transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
                   isDark ? "bg-white/5 border-white/15 text-white" : "bg-slate-50 border-slate-300 text-slate-900"
                 }`}

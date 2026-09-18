@@ -2363,13 +2363,23 @@ export default function CBSECommandCenter() {
     return `/?${p.toString()}`;
   }, [conceptsSubject, conceptsChapterNo, activeVaultSubject, activeVaultChapter]);
 
-  // Handle navigation clicks: left-click navigates in-app, middle-click / Ctrl-click opens in new tab natively
+  // Handle navigation clicks: left-click navigates in-app, middle-click / scroll wheel / Ctrl-click opens in new tab
   const handleNavClick = useCallback((
     e: React.MouseEvent,
     tabId: string,
     opts?: { subject?: any; chapter?: number; customAction?: () => void }
   ) => {
-    if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+    // Mouse middle-click (button === 1) or Ctrl/Cmd/Shift click: open in new tab cleanly
+    if (e.button === 1 || e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const href = getTabHref(tabId, opts?.subject, opts?.chapter);
+      if (typeof window !== "undefined") {
+        window.open(href, "_blank", "noopener,noreferrer");
+      }
+      return;
+    }
+
+    if (e.button === 0 && !e.altKey) {
       e.preventDefault();
       playSound("click");
       if (opts?.subject) {
@@ -2393,7 +2403,7 @@ export default function CBSECommandCenter() {
         window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       }
     }
-  }, [playSound, loadChapterData]);
+  }, [playSound, loadChapterData, getTabHref]);
 
   // Confetti trigger — increments counter so IsolatedConfetti handles its own animation loop
   const triggerConfetti = useCallback(() => {

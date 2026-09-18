@@ -434,6 +434,12 @@ export default function CommandCenterHomeView({
                 key={sub.id}
                 type="button"
                 onClick={() => handleSelectSubject(sub.id)}
+                onAuxClick={(e) => {
+                  if (e.button === 1) {
+                    e.preventDefault();
+                    window.open(getTabHref("chapter_dashboard", sub.id), "_blank", "noopener,noreferrer");
+                  }
+                }}
                 className={`px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-2 border active:scale-95 ${
                   isSelected
                     ? isDark
@@ -500,6 +506,12 @@ export default function CommandCenterHomeView({
                       key={ch.id}
                       type="button"
                       onClick={() => handleSelectChapter(ch.id)}
+                      onAuxClick={(e) => {
+                        if (e.button === 1) {
+                          e.preventDefault();
+                          window.open(getTabHref("concepts", activeSubjectKey, chNo), "_blank", "noopener,noreferrer");
+                        }
+                      }}
                       className={`w-full text-left p-3 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 group active:scale-[0.98] ${
                         isSelected
                           ? isDark
