@@ -548,7 +548,68 @@ export default function ConceptsHubView({
             >
               <span>🌍 Social Science (10 Chs)</span>
             </a>
+
+            {/* 4th Fast Access: Chemistry Basics */}
+            <button
+              onClick={() => {
+                setActiveSubject("science");
+                setActiveScienceChapterNo(0);
+                setIsChapterGridOpen(false);
+              }}
+              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 border ${
+                activeSubject === "science" && activeScienceChapterNo === 0
+                  ? isDark
+                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 border-amber-300 shadow-md font-black ring-1 ring-amber-400"
+                    : "bg-amber-600 text-white shadow-md font-black ring-1 ring-amber-500"
+                  : isDark
+                  ? "bg-amber-500/15 border-amber-500/30 text-amber-300 hover:bg-amber-500/25"
+                  : "bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100"
+              }`}
+            >
+              <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
+              <span>⚗️ Chemistry Basics (Prerequisite)</span>
+            </button>
           </div>
+        </div>
+
+        {/* Standout Chemistry Basics Foundation Banner */}
+        <div className={`p-4 sm:p-5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all ${
+          activeSubject === "science" && activeScienceChapterNo === 0
+            ? "bg-amber-500/20 border-amber-400 text-white shadow-lg ring-1 ring-amber-400"
+            : isDark
+            ? "bg-gradient-to-r from-amber-950/30 via-[#16120b] to-amber-950/20 border-amber-500/30 text-amber-200"
+            : "bg-gradient-to-r from-amber-50 via-orange-50/60 to-yellow-50 border-amber-300 text-amber-950 shadow-sm"
+        }`}>
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0">
+              <FlaskConical className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xs sm:text-sm font-black flex items-center gap-2">
+                <span>Class 10 Chemistry Foundation Prerequisite (Zero-to-Hero)</span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  Essential Class 9 Foundation
+                </span>
+              </div>
+              <div className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                Interactive Criss-Cross Formula Builder, Valency Matrix (Elements 1–20), Equation Balancing Guide, Reactivity Series Simulator &amp; Board Lab Observations!
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              setActiveSubject("science");
+              setActiveScienceChapterNo(0);
+              setIsChapterGridOpen(false);
+            }}
+            className={`w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 shadow-md ${
+              activeSubject === "science" && activeScienceChapterNo === 0
+                ? "bg-amber-400 text-slate-950 font-black ring-2 ring-white"
+                : "bg-amber-500 hover:bg-amber-400 text-slate-950"
+            }`}
+          >
+            <span>{activeSubject === "science" && activeScienceChapterNo === 0 ? "Currently Viewing Basics ✅" : "Open Chemistry Basics ➔"}</span>
+          </button>
         </div>
 
         {/* =========================================================================

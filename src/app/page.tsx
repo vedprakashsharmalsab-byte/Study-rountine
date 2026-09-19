@@ -1699,6 +1699,7 @@ export default function CBSECommandCenter() {
       defaultTab: "concepts",
       items: [
         { id: "concepts", label: "Chapter Concepts & Theory", icon: BookOpen, count: "37 Ch" },
+        { id: "chemistry_basics", label: "⚗️ Chemistry Basics", icon: FlaskConical, count: "Foundation" },
         { id: "diagrams", label: "Science Diagrams & Sheets", icon: Compass, count: "29 Diag + 15 Sheets" },
         { id: "english", label: "English Master", icon: Feather, count: "184 Ch" },
         { id: "hindi", label: "Hindi Master", icon: BookOpen, count: "Code 085" },
@@ -2165,7 +2166,11 @@ export default function CBSECommandCenter() {
         "timelines", "english", "hindi", "tools_diagrams"
       ];
 
-      if (urlTab && validTabs.includes(urlTab)) {
+      if (urlTab === "chemistry_basics") {
+        setActiveTab("concepts");
+        setConceptsSubject("science");
+        setConceptsChapterNo(0);
+      } else if (urlTab && validTabs.includes(urlTab)) {
         setActiveTab(urlTab as any);
       } else {
         setActiveTab("chapter_dashboard");
@@ -2178,7 +2183,7 @@ export default function CBSECommandCenter() {
       if (urlSub && ["math", "science", "sst"].includes(urlSub)) {
         setConceptsSubject(urlSub as any);
       }
-      if (parsedCh && !isNaN(parsedCh) && parsedCh >= 1) {
+      if (parsedCh !== null && !isNaN(parsedCh) && parsedCh >= 0) {
         setConceptsChapterNo(parsedCh);
       }
 
@@ -2348,11 +2353,14 @@ export default function CBSECommandCenter() {
 
   // Generate real URL for tabs & chapters (enables browser middle-click to open in new tab)
   const getTabHref = useCallback((tabId: string, sub?: string, ch?: number) => {
+    if (tabId === "chemistry_basics") {
+      return `/?tab=concepts&subject=science&chapter=0`;
+    }
     const p = new URLSearchParams();
     p.set("tab", tabId);
     if (tabId === "concepts") {
       p.set("subject", sub || conceptsSubject);
-      p.set("chapter", (ch || conceptsChapterNo).toString());
+      p.set("chapter", (ch !== undefined ? ch : conceptsChapterNo).toString());
     } else if (tabId === "questions") {
       const s = sub || activeVaultSubject;
       const c = ch || activeVaultChapter;
@@ -2381,6 +2389,15 @@ export default function CBSECommandCenter() {
     if (e.button === 0 && !e.altKey) {
       e.preventDefault();
       playSound("click");
+      if (tabId === "chemistry_basics") {
+        setConceptsSubject("science");
+        setConceptsChapterNo(0);
+        setActiveTab("concepts");
+        if (typeof window !== "undefined") {
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        }
+        return;
+      }
       if (opts?.subject) {
         if (["math", "science", "sst"].includes(opts.subject)) {
           setConceptsSubject(opts.subject);
