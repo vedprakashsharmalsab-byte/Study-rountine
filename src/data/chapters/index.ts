@@ -66,7 +66,7 @@ export {
 };
 
 export function getChapterQuestions(chapterId: number, subject: string = "math"): VaultQuestion[] {
-  if (subject === "sst" || subject === "social_science") {
+  if (subject === "sst" || subject === "social_science" || subject === "social") {
     return getSSTChapterQuestions(chapterId);
   }
 

@@ -40,7 +40,7 @@ export const SST_TIMELINE_ERAS: TimelineEra[] = [
     chapterKey: "ch1_europe",
     name: "French Revolution & Napoleonic Era",
     timeSpan: "1789 – 1815",
-    description: "Birth of civic nationalism, export of revolutionary ideals via Napoleonic Code, and fall of Bonaparte at Leipzig.",
+    description: "Birth of civic nationalism, export of revolutionary ideals via Napoleonic Code, and final defeat of Bonaparte at Waterloo (1815).",
     color: "from-blue-500/20 to-indigo-500/20 border-blue-500/40 text-blue-300",
     accent: "blue"
   },
@@ -598,7 +598,7 @@ export const ENRICHED_SST_TIMELINES: EnrichedTimelineEvent[] = [
     examProbability: "CRITICAL (95%+)",
     causes: ["Tinkathia system forcing peasants to cultivate indigo on 3/20th of their best land for British landlords"],
     consequences: ["Government appointed an inquiry committee; planters agreed to refund illegal extractions; moral victory for Gandhiji"],
-    quickMnemonic: "CAK: Champaran (1917), Ahmedabad (1918), Kheda (1917/18)"
+    quickMnemonic: "C-K-A rule: Champaran (Bihar 1917) ➔ Kheda (Peasants 1917) ➔ Ahmedabad (Mill workers 1918)"
   },
   {
     id: "in_1917_kheda",

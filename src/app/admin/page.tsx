@@ -221,6 +221,12 @@ export default function AdminPage() {
   const [selectedSubjectId, setSelectedSubjectId] = useState<string>("all");
   const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>("all");
 
+  // Real Student Mistakes Telemetry State
+  const [mistakeLogsList, setMistakeLogsList] = useState<any[]>([]);
+  const [isLoadingMistakes, setIsLoadingMistakes] = useState<boolean>(false);
+  const [mistakeSubjectFilter, setMistakeSubjectFilter] = useState<string>("all");
+  const [mistakeSearch, setMistakeSearch] = useState<string>("");
+
   // Sound Synthesizer for Admin Interactions using ARETE audio singleton
   const playSound = (type: "login" | "error" | "click" | "success") => {
     if (type === "login") {
@@ -268,18 +274,38 @@ export default function AdminPage() {
     }
   }, []);
 
-  // Poll analytics when authenticated
+  // Fetch Real Student Mistakes Telemetry
+  const fetchMistakes = useCallback(async () => {
+    setIsLoadingMistakes(true);
+    try {
+      const res = await fetch("/api/mistakes?all=true");
+      const data = await res.json();
+      if (data.ok && Array.isArray(data.mistakes)) {
+        setMistakeLogsList(data.mistakes);
+      }
+    } catch (err) {
+      console.error("Failed to load student mistake telemetry:", err);
+    } finally {
+      setIsLoadingMistakes(false);
+    }
+  }, []);
+
+  // Poll analytics and telemetry when authenticated
   useEffect(() => {
     if (!isAuthenticated) return;
     fetchAnalytics();
+    fetchMistakes();
 
     if (!isLivePolling) return;
     const interval = setInterval(() => {
       fetchAnalytics(true);
+      if (activeTab === "mistakes") {
+        fetchMistakes();
+      }
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [isAuthenticated, isLivePolling, fetchAnalytics]);
+  }, [isAuthenticated, isLivePolling, fetchAnalytics, fetchMistakes, activeTab]);
 
   // Handle Login
   const handleLogin = (e: React.FormEvent) => {
@@ -351,6 +377,7 @@ export default function AdminPage() {
       "Browser",
       "Screen",
       "Location",
+      "Pincode",
       "Location Source",
       "Latitude",
       "Longitude",
@@ -360,8 +387,14 @@ export default function AdminPage() {
       "Subjects Studied",
       "Last Active"
     ];
+
+    const esc = (val: any) => {
+      if (val === null || val === undefined) return '""';
+      return `"${String(val).replace(/"/g, '""')}"`;
+    };
+
     const rows = analytics.uniqueStudents.map((s) => [
-      `"${s.studentName}"`,
+      esc(s.studentName),
       s.visitorId,
       s.visitsToday,
       s.totalVisits,
@@ -371,15 +404,16 @@ export default function AdminPage() {
       s.deviceType,
       s.operatingSystem,
       s.browser,
-      `"${s.screenResolution}"`,
-      `"${s.cityRegion || "Not provided"}"`,
-      s.locationSource || (s.latitude ? "device_gps" : (s.cityRegion ? "manual" : "none")),
+      esc(s.screenResolution),
+      esc(s.cityRegion || "Not provided"),
+      esc(s.pincode || ""),
+      esc(s.locationSource || (s.latitude ? "device_gps" : (s.cityRegion ? "manual" : "none"))),
       s.latitude || "",
       s.longitude || "",
       s.accuracy || "",
-      `"${s.ipAddress}"`,
-      `"${s.networkType}"`,
-      `"${s.subjectsStudied.join(", ")}"`,
+      esc(s.ipAddress),
+      esc(s.networkType),
+      esc(s.subjectsStudied.join(", ")),
       s.lastActive
     ]);
 
@@ -392,6 +426,38 @@ export default function AdminPage() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  // Delete Individual Mistake Record
+  const handleDeleteMistake = async (id: string) => {
+    if (!window.confirm("Are you sure you want to remove this student mistake record?")) return;
+    playSound("click");
+    try {
+      const res = await fetch(`/api/mistakes?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+      const data = await res.json();
+      if (data.ok) {
+        playSound("success");
+        setMistakeLogsList((prev) => prev.filter((m) => m.id !== id));
+      }
+    } catch (err) {
+      console.error("Failed to delete mistake log:", err);
+    }
+  };
+
+  // Clear All Mistake Telemetry
+  const handleClearAllMistakes = async () => {
+    if (!window.confirm("Purge ALL student mistake telemetry? This cannot be undone.")) return;
+    playSound("click");
+    try {
+      const res = await fetch("/api/mistakes?all=true", { method: "DELETE" });
+      const data = await res.json();
+      if (data.ok) {
+        playSound("success");
+        setMistakeLogsList([]);
+      }
+    } catch (err) {
+      console.error("Failed to clear mistake logs:", err);
+    }
   };
 
   // Handle Publishing Broadcast
@@ -593,13 +659,35 @@ export default function AdminPage() {
         const matchCity = (ev.cityRegion || "").toLowerCase().includes(q) || (ev.city || "").toLowerCase().includes(q) || (ev.state || "").toLowerCase().includes(q);
         const matchSub = (ev.activeSubject || "").toLowerCase().includes(q);
         const matchCh = (ev.activeChapter || "").toLowerCase().includes(q);
+        const matchPin = (ev.pincode || "").toLowerCase().includes(q);
+        const matchCountry = (ev.country || "").toLowerCase().includes(q);
         const matchSource = (ev.locationSource || "").toLowerCase().includes(q);
         const matchNet = (ev.networkType || "").toLowerCase().includes(q);
-        return matchName || matchId || matchIp || matchCity || matchSub || matchCh || matchSource || matchNet;
+        return matchName || matchId || matchIp || matchCity || matchSub || matchCh || matchSource || matchNet || matchPin || matchCountry;
       }
       return true;
     });
   }, [analytics, visitorFilter, visitorSearch, studentProfileMap]);
+
+  // Filtered student mistakes
+  const filteredMistakes = useMemo(() => {
+    return mistakeLogsList.filter((m) => {
+      if (mistakeSubjectFilter !== "all" && (m.subject || "").toLowerCase() !== mistakeSubjectFilter.toLowerCase()) {
+        return false;
+      }
+      if (mistakeSearch.trim()) {
+        const q = mistakeSearch.toLowerCase();
+        const matchSub = (m.subject || "").toLowerCase().includes(q);
+        const matchCh = (m.chapter || "").toLowerCase().includes(q);
+        const matchQ = (m.question || "").toLowerCase().includes(q);
+        const matchType = (m.mistakeType || "").toLowerCase().includes(q);
+        const matchReason = (m.reason || "").toLowerCase().includes(q);
+        const matchConcept = (m.concept || "").toLowerCase().includes(q);
+        return matchSub || matchCh || matchQ || matchType || matchReason || matchConcept;
+      }
+      return true;
+    });
+  }, [mistakeLogsList, mistakeSubjectFilter, mistakeSearch]);
 
   if (isCheckingAuth) {
     return (
@@ -739,7 +827,7 @@ export default function AdminPage() {
                 </span>
               </div>
               <span className="text-[11px] font-mono text-slate-400">
-                Sarthak Sharma · Live Telemetry Active
+                ARETE Citadel · Live Telemetry Active
               </span>
             </div>
           </div>
@@ -850,12 +938,12 @@ export default function AdminPage() {
                   </div>
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-teal-400 tracking-tight flex items-baseline gap-2">
-                  <span>{analytics?.todayUniqueStudents || 1}</span>
+                  <span>{analytics?.todayUniqueStudents ?? 0}</span>
                   <span className="text-xs font-normal text-slate-400 font-sans">unique</span>
                 </div>
                 <div className="text-[10px] font-mono text-emerald-400 mt-1 flex items-center gap-1">
                   <span>✓ Deduplicated</span>
-                  <span className="text-slate-500">· {analytics?.todayTotalSessions || 4} total visits today</span>
+                  <span className="text-slate-500">· {analytics?.todayTotalSessions ?? 0} total visits today</span>
                 </div>
               </div>
 
@@ -870,7 +958,7 @@ export default function AdminPage() {
                   </div>
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight flex items-baseline gap-2">
-                  <span>{analytics?.todayTotalSessions || 4}</span>
+                  <span>{analytics?.todayTotalSessions ?? 0}</span>
                   <span className="text-xs font-normal text-slate-400 font-sans">sessions</span>
                 </div>
                 <span className="text-[10px] font-mono text-cyan-400 mt-1 block">
@@ -889,10 +977,10 @@ export default function AdminPage() {
                   </div>
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                  {analytics?.totalUniqueStudents || 2}
+                  {analytics?.totalUniqueStudents ?? 0}
                 </div>
                 <span className="text-[10px] font-mono text-amber-400 mt-1 block">
-                  {analytics?.totalEventsCount || 5} lifetime visits recorded
+                  {analytics?.totalEventsCount ?? 0} lifetime visits recorded
                 </span>
               </div>
 
@@ -907,7 +995,7 @@ export default function AdminPage() {
                   </div>
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-tight flex items-baseline gap-2">
-                  <span>{analytics?.liveNowStudents || 1}</span>
+                  <span>{analytics?.liveNowStudents ?? 0}</span>
                   <span className="text-xs font-normal text-emerald-400/70 font-sans">student</span>
                 </div>
                 <span className="text-[10px] font-mono text-emerald-400 mt-1 block">
@@ -926,7 +1014,7 @@ export default function AdminPage() {
                   </div>
                 </div>
                 <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                  {analytics?.avgDurationMinutes || 12}m
+                  {analytics?.avgDurationMinutes ?? 0}m
                 </div>
                 <span className="text-[10px] font-mono text-indigo-400 mt-1 block">
                   Per student daily engagement
@@ -1890,45 +1978,176 @@ export default function AdminPage() {
         {/* ================================================================= */}
         {activeTab === "mistakes" && (
           <div className="space-y-6 animate-fade-in">
-            <div className={`p-6 rounded-3xl border flex justify-between items-center ${
+            <div className={`p-6 sm:p-8 rounded-3xl border flex flex-col md:flex-row justify-between items-start md:items-center gap-4 ${
               isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
             }`}>
               <div>
-                <h2 className="text-xl font-black">Student Doubt & Error Telemetry</h2>
-                <p className="text-xs text-slate-400">Captured pitfalls from student practice sprints</p>
+                <div className="flex items-center gap-2.5 mb-1">
+                  <HelpCircle className="w-5 h-5 text-rose-400" />
+                  <h2 className="text-xl font-black">Student Doubt & Error Telemetry</h2>
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                    {filteredMistakes.length} recorded
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400">
+                  Live feed of traps, concept blunders, and incorrect answers submitted across student practice runs.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+                {/* Subject Filter */}
+                <select
+                  value={mistakeSubjectFilter}
+                  onChange={(e) => setMistakeSubjectFilter(e.target.value)}
+                  className={`px-3 py-2 rounded-xl text-xs font-bold border focus:outline-none cursor-pointer ${
+                    isDark ? "bg-black/50 border-white/10 text-white" : "bg-white border-slate-200 text-slate-800"
+                  }`}
+                >
+                  <option value="all">All Disciplines</option>
+                  <option value="science">Science</option>
+                  <option value="math">Mathematics</option>
+                  <option value="sst">Social Science (SST)</option>
+                  <option value="english">English</option>
+                  <option value="hindi">Hindi</option>
+                  <option value="it">Information Tech</option>
+                </select>
+
+                {/* Search */}
+                <div className="relative flex-1 sm:w-48">
+                  <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type="text"
+                    placeholder="Search trap, concept..."
+                    value={mistakeSearch}
+                    onChange={(e) => setMistakeSearch(e.target.value)}
+                    className={`w-full pl-8 pr-3 py-2 rounded-xl text-xs border focus:outline-none ${
+                      isDark ? "bg-black/40 border-white/10 text-white" : "bg-slate-50 border-slate-200 text-slate-900"
+                    }`}
+                  />
+                </div>
+
+                {/* Refresh */}
+                <button
+                  onClick={() => {
+                    playSound("click");
+                    fetchMistakes();
+                  }}
+                  disabled={isLoadingMistakes}
+                  className={`p-2 rounded-xl border text-xs cursor-pointer ${
+                    isDark ? "bg-white/5 border-white/10 text-slate-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100"
+                  }`}
+                  title="Reload Mistake Telemetry"
+                >
+                  <RefreshCw className={`w-4 h-4 ${isLoadingMistakes ? "animate-spin" : ""}`} />
+                </button>
+
+                {/* Purge */}
+                {mistakeLogsList.length > 0 && (
+                  <button
+                    onClick={handleClearAllMistakes}
+                    className="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 border border-white/5 transition-colors cursor-pointer"
+                    title="Purge All Mistake Telemetry"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
 
-            <div className="space-y-3">
-              {[
-                { id: "mst_1", subject: "SCIENCE", chapter: "Life Processes", mistakeType: "Examiner Trap", detail: "Confused Pepsin (acidic gastric juice) with Trypsin (alkaline pancreatic juice)", time: "Just now" },
-                { id: "mst_2", subject: "MATH", chapter: "Real Numbers", mistakeType: "Step Penalty", detail: "Omitted explicit statement that 'a and b are co-prime' in √5 irrationality proof", time: "12m ago" },
-                { id: "mst_3", subject: "SST", chapter: "Nationalism in Europe", mistakeType: "Date Trap", detail: "Wrote 1804 for Vienna Congress instead of 1815", time: "34m ago" },
-                { id: "mst_4", subject: "HINDI", chapter: "बड़े भाई साहब", mistakeType: "Spelling Penalty", detail: "Wrote Shaherum without halant", time: "1h ago" }
-              ].map((log) => (
-                <div
-                  key={log.id}
-                  className={`p-4 rounded-2xl border flex items-center justify-between gap-4 ${
-                    isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-xs"
-                  }`}
-                >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-rose-500/15 text-rose-400 border border-rose-500/30">
-                        {log.mistakeType}
-                      </span>
-                      <span className="text-xs font-bold text-slate-300">
-                        {log.subject} · {log.chapter}
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-400">{log.detail}</p>
-                  </div>
-                  <span className="text-[10px] font-mono text-slate-500 shrink-0">
-                    {log.time}
-                  </span>
+            {/* Mistakes List */}
+            {isLoadingMistakes ? (
+              <div className="py-12 flex flex-col items-center justify-center gap-3 text-slate-400">
+                <RefreshCw className="w-6 h-6 animate-spin text-teal-400" />
+                <span className="text-xs font-mono">Loading telemetry feed...</span>
+              </div>
+            ) : filteredMistakes.length === 0 ? (
+              <div className={`p-12 text-center rounded-3xl border border-dashed ${
+                isDark ? "bg-[#0b101c]/50 border-white/10" : "bg-white border-slate-200"
+              }`}>
+                <div className="w-12 h-12 mx-auto mb-3 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                  <CheckCircle2 className="w-6 h-6" />
                 </div>
-              ))}
-            </div>
+                <h3 className="text-base font-bold text-white mb-1">
+                  {mistakeSearch || mistakeSubjectFilter !== "all"
+                    ? "No pitfalls match current filter"
+                    : "Zero Unresolved Student Pitfalls"}
+                </h3>
+                <p className="text-xs text-slate-400 max-w-md mx-auto font-mono">
+                  {mistakeSearch || mistakeSubjectFilter !== "all"
+                    ? "Try adjusting search terms or discipline filter."
+                    : "Cadets are maintaining high accuracy across practice sprints. New captured traps will appear here live."}
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {filteredMistakes.map((log: any) => (
+                  <div
+                    key={log.id}
+                    className={`p-5 rounded-2xl border flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all ${
+                      isDark ? "bg-[#0b101c] border-white/10 hover:border-white/20" : "bg-white border-slate-200 shadow-xs"
+                    }`}
+                  >
+                    <div className="space-y-2 min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-rose-500/15 text-rose-400 border border-rose-500/30">
+                          {log.mistakeType || "Examiner Trap"}
+                        </span>
+                        <span className="text-xs font-bold text-amber-300 font-mono uppercase">
+                          {log.subject} · {log.chapter}
+                        </span>
+                        {log.priority && (
+                          <span className={`px-2 py-0.2 rounded text-[9px] font-mono font-bold ${
+                            log.priority === "Critical" ? "bg-rose-500/20 text-rose-300" : "bg-amber-500/20 text-amber-300"
+                          }`}>
+                            {log.priority}
+                          </span>
+                        )}
+                      </div>
+
+                      {log.question && (
+                        <p className="text-xs font-bold text-white break-words">
+                          Q: {log.question}
+                        </p>
+                      )}
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+                        {log.wrongAnswer && (
+                          <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 space-y-0.5">
+                            <span className="text-[10px] uppercase font-bold text-rose-400 block">❌ Student Blunder:</span>
+                            <div className="break-words">{log.wrongAnswer}</div>
+                          </div>
+                        )}
+                        {log.correctAnswer && (
+                          <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 space-y-0.5">
+                            <span className="text-[10px] uppercase font-bold text-emerald-400 block">✓ Verified Correct:</span>
+                            <div className="break-words">{log.correctAnswer}</div>
+                          </div>
+                        )}
+                      </div>
+
+                      {(log.reason || log.concept) && (
+                        <p className="text-xs text-slate-400">
+                          💡 <strong>Key Concept:</strong> {log.reason || log.concept}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="flex md:flex-col items-center md:items-end justify-between gap-3 shrink-0">
+                      <span className="text-[10px] font-mono text-slate-500">
+                        {log.dateAdded || (log.createdAt ? new Date(log.createdAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short" }) : "Recent")}
+                      </span>
+                      <button
+                        onClick={() => handleDeleteMistake(log.id)}
+                        className="p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors cursor-pointer"
+                        title="Delete mistake log"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
@@ -2119,7 +2338,7 @@ export default function AdminPage() {
                   </h3>
                   {selectedStudentForModal.locationSource === "device_gps" || selectedStudentForModal.latitude ? (
                     <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                      📍 Exact Hardware GPS (Accuracy: ±{selectedStudentForModal.accuracy || 15}m)
+                      📍 Exact Hardware GPS {selectedStudentForModal.accuracy ? `(Accuracy: ±${selectedStudentForModal.accuracy}m)` : "(Hardware Verified)"}
                     </span>
                   ) : selectedStudentForModal.locationSource === "ip_verified" ? (
                     <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30 flex items-center gap-1">
