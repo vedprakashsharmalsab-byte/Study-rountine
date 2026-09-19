@@ -186,9 +186,10 @@ export default function CommandCenterHomeView({
   const chapterProgressPercent = chapterTopics.length > 0
     ? Math.round((completedInChapter / chapterTopics.length) * 100)
     : 0;
+  const allChapterTopicsCompleted = chapterTopics.length > 0 && completedInChapter === chapterTopics.length;
 
   // Next unfinished topic (Milestone)
-  const nextTargetTopic = chapterTopics.find((t) => !completedTopicIds[t.id]) || chapterTopics[0];
+  const nextTargetTopic = chapterTopics.find((t) => !completedTopicIds[t.id]) || null;
 
   // Filtered Topics
   const filteredTopics = useMemo(() => {
@@ -228,17 +229,19 @@ export default function CommandCenterHomeView({
     }
   };
 
-  // Chapter Mistakes Count
+  // Chapter Mistakes Count (Scoped strictly to active chapter)
   const chapterMistakesCount = useMemo(() => {
     return myMistakes.filter((m) => {
       const matchSub = (m.subject || "").toLowerCase().includes(activeSubjectKey);
-      const matchCh = (m.chapter || "").toLowerCase().includes(`${currentChapterNum}`) ||
-                      (m.chapter || "").toLowerCase().includes(currentChapter.name.toLowerCase());
-      return matchSub || matchCh;
+      const chapterStr = (m.chapter || "").toLowerCase();
+      const matchCh = !chapterStr ||
+                      chapterStr.includes(`${currentChapterNum}`) ||
+                      chapterStr.includes(currentChapter.name.toLowerCase());
+      return matchSub && matchCh;
     }).length;
   }, [myMistakes, activeSubjectKey, currentChapterNum, currentChapter.name]);
 
-  // Chapter Flashcards Count
+  // Chapter Flashcards Count (Scoped strictly to active chapter)
   const chapterFlashcardsCount = useMemo(() => {
     const rawSub = activeSubjectKey === "math" ? "Mathematics" :
                    activeSubjectKey === "science" ? "Science" :
@@ -249,9 +252,12 @@ export default function CommandCenterHomeView({
       (f: FlashcardItem) => f.chapter.toLowerCase().includes(currentChapter.name.toLowerCase()) ||
                             f.chapter.toLowerCase().includes(`chapter ${currentChapterNum}`)
     );
-    const userCards = customFlashcards.filter(
-      (f: any) => (f.subject || "").toLowerCase().includes(activeSubjectKey)
-    );
+    const userCards = customFlashcards.filter((f: any) => {
+      const matchSub = (f.subject || "").toLowerCase().includes(activeSubjectKey);
+      const chStr = (f.chapter || "").toLowerCase();
+      const matchCh = !chStr || chStr.includes(`${currentChapterNum}`) || chStr.includes(currentChapter.name.toLowerCase());
+      return matchSub && matchCh;
+    });
     return bankCards.length + userCards.length;
   }, [activeSubjectKey, currentChapter.name, currentChapterNum, customFlashcards]);
 
@@ -303,10 +309,30 @@ export default function CommandCenterHomeView({
   }, [commandSubjectId, isDark]);
 
   const currentXP = userXP || 0;
-  const peerXpList = useMemo(() => [0, 0, 0], []);
-  const userRank = useMemo(() => {
-    return peerXpList.filter(xp => xp > currentXP).length + 1;
-  }, [currentXP, peerXpList]);
+  const [totalContendersCount, setTotalContendersCount] = useState<number>(14);
+  const [calculatedUserRank, setCalculatedUserRank] = useState<number>(1);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = localStorage.getItem("arete_neon_db_users_cache");
+        let peers: number[] = [];
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed)) {
+            peers = parsed.map((p: any) => p.xp || 0);
+          }
+        }
+        const total = Math.max(14, peers.length + 1);
+        setTotalContendersCount(total);
+        const rank = peers.filter((xp) => xp > currentXP).length + 1;
+        setCalculatedUserRank(rank);
+      } catch {
+        setTotalContendersCount(14);
+        setCalculatedUserRank(1);
+      }
+    }
+  }, [currentXP]);
 
   const handleLaunchPracticeVault = () => {
     playSound("click");
@@ -332,8 +358,8 @@ export default function CommandCenterHomeView({
           ========================================================================= */}
       <AreteMotivationalBanner
         currentXP={currentXP}
-        userRank={userRank}
-        totalContenders={13}
+        userRank={calculatedUserRank}
+        totalContenders={totalContendersCount}
         isDark={isDark}
         onLaunchPomodoro={handleLaunchPomodoroSprint}
         onLaunchPractice={handleLaunchPracticeVault}
@@ -452,10 +478,10 @@ export default function CommandCenterHomeView({
               >
                 {icon}
                 <span>{shortName}</span>
-                <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${
                   isSelected
                     ? isDark ? "bg-white/20 text-white" : "bg-white/20 text-white"
-                    : isDark ? "bg-white/10 text-zinc-400" : "bg-slate-100 text-slate-500"
+                    : isDark ? "bg-white/10 text-zinc-400" : "bg-slate-100 text-slate-600"
                 }`}>
                   {sub.chapters.length}
                 </span>
@@ -480,12 +506,12 @@ export default function CommandCenterHomeView({
                 isDark ? "border-white/10" : "border-slate-200"
               }`}>
                 <span className={`text-xs font-bold uppercase tracking-wider ${
-                  isDark ? "text-slate-400" : "text-slate-600"
+                  isDark ? "text-slate-400" : "text-slate-700"
                 }`}>
                   {currentSubject.name.split("(")[0].trim()} Chapters
                 </span>
-                <span className={`text-[11px] font-mono font-bold ${
-                  isDark ? "text-slate-400" : "text-slate-600"
+                <span className={`text-xs font-mono font-bold ${
+                  isDark ? "text-slate-400" : "text-slate-700"
                 }`}>
                   {currentSubject.chapters.length} Units
                 </span>
@@ -522,7 +548,7 @@ export default function CommandCenterHomeView({
                             ? "bg-emerald-500/[0.08] border-emerald-500/20 text-emerald-300 hover:bg-emerald-500/[0.12]"
                             : "bg-emerald-50/70 border-emerald-200 text-emerald-900 hover:bg-emerald-100/70"
                           : isDark
-                          ? "bg-white/[0.03] border-white/8 text-zinc-300 hover:bg-white/[0.07] hover:border-white/20 hover:text-white"
+                          ? "bg-white/[0.03] border-white/[0.08] text-zinc-300 hover:bg-white/[0.07] hover:border-white/20 hover:text-white"
                           : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-slate-300"
                       }`}
                     >
@@ -551,7 +577,7 @@ export default function CommandCenterHomeView({
                               className="transition-all duration-500"
                             />
                           </svg>
-                          <span className="absolute text-[9px] font-mono font-black">
+                          <span className="absolute text-[11px] font-mono font-bold">
                             {chNo}
                           </span>
                         </div>
@@ -561,11 +587,11 @@ export default function CommandCenterHomeView({
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-1 shrink-0 text-[10px] font-mono">
+                      <div className="flex items-center gap-1 shrink-0 text-xs font-mono">
                         {isFinished ? (
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                         ) : (
-                          <span className="text-slate-400">
+                          <span className={isDark ? "text-slate-400" : "text-slate-600"}>
                             {chCompleted}/{chTotal}
                           </span>
                         )}
@@ -580,7 +606,7 @@ export default function CommandCenterHomeView({
             </div>
 
             {/* Bottom 4 Frosted Quick Tools */}
-            <div className={`pt-3 border-t grid grid-cols-2 gap-1.5 text-[11px] font-semibold ${
+            <div className={`pt-3 border-t grid grid-cols-2 gap-1.5 text-xs font-semibold ${
               isDark ? "border-white/10" : "border-slate-200"
             }`}>
               <Link
@@ -622,7 +648,12 @@ export default function CommandCenterHomeView({
                   isDark ? "bg-white/[0.04] border-white/10 text-zinc-300 hover:bg-white/[0.08] hover:text-white" : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100"
                 }`}
               >
-                <span>📐 Cheat-Sheet</span>
+                <span>
+                  {activeSubjectKey === "math" ? "📐 Theorems" :
+                   activeSubjectKey === "science" ? "🔬 Diagrams" :
+                   activeSubjectKey === "sst" ? "⏳ Timelines" :
+                   activeSubjectKey === "hindi" ? "📖 हिंदी व्याकरण" : "✍️ Literature"}
+                </span>
                 <span className="text-slate-400">→</span>
               </Link>
 
@@ -647,11 +678,11 @@ export default function CommandCenterHomeView({
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border backdrop-blur-md ${subjectTheme.pillBg}`}>
+                    <span className={`text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border backdrop-blur-md ${subjectTheme.pillBg}`}>
                       Ch {currentChapterNum} • {currentSubject.name.split("(")[0].trim()}
                     </span>
                     {chapterProgressPercent === 100 && (
-                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                      <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
                         ✓ Chapter Mastered
                       </span>
                     )}
@@ -683,74 +714,136 @@ export default function CommandCenterHomeView({
               {/* =========================================================================
                   VISIONOS SPATIAL LESSON SPOTLIGHT HERO CARD
                   ========================================================================= */}
-              <div className={`p-5 sm:p-6 rounded-3xl transition-all relative overflow-hidden ${
-                isDark ? "vision-hero" : "vision-hero-light"
-              }`}>
-                {/* Iridescent Ambient Top Accent */}
-                <div className="flex items-center justify-between text-xs mb-2">
-                  <span className={`font-extrabold uppercase tracking-wider flex items-center gap-1.5 text-xs ${
-                    isDark ? "text-amber-400" : "text-amber-800"
-                  }`}>
-                    <Sparkles className={`w-4 h-4 fill-current ${isDark ? "text-amber-400" : "text-amber-600"}`} />
-                    Up Next Milestone
-                  </span>
-                  {nextTargetTopic?.isImportantForBoards && (
-                    <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border backdrop-blur-md ${
-                      isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : "bg-rose-50 text-rose-800 border-rose-300 font-extrabold"
+              {allChapterTopicsCompleted ? (
+                <div className={`p-5 sm:p-6 rounded-3xl transition-all relative overflow-hidden border ${
+                  isDark
+                    ? "bg-gradient-to-br from-emerald-950/60 via-[#0a1818] to-slate-950 border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.15)]"
+                    : "bg-gradient-to-br from-emerald-50/90 via-teal-50/50 to-white border-emerald-300 shadow-md"
+                }`}>
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <span className={`font-extrabold uppercase tracking-wider flex items-center gap-1.5 text-xs ${
+                      isDark ? "text-emerald-400" : "text-emerald-800"
                     }`}>
-                      90%+ Recurring Board Question
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      Chapter 100% Mastered
                     </span>
-                  )}
-                </div>
+                    <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ${
+                      isDark ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-300" : "bg-emerald-100 border-emerald-300 text-emerald-900"
+                    }`}>
+                      All {chapterTopics.length} Units Completed
+                    </span>
+                  </div>
 
-                {/* Next Topic Title */}
-                <div className="mb-4">
-                  <h3 className={`text-lg sm:text-xl font-black leading-snug ${isDark ? "text-white" : "text-slate-900"}`}>
-                    {nextTargetTopic ? nextTargetTopic.title : "All topics completed! Practice board questions below."}
-                  </h3>
-                </div>
+                  <div className="mb-4">
+                    <h3 className={`text-lg sm:text-xl font-black leading-snug ${isDark ? "text-white" : "text-slate-900"}`}>
+                      🎉 Exceptional work! You&apos;ve mastered every NCERT topic in this chapter.
+                    </h3>
+                    <p className={`text-xs sm:text-sm mt-1 leading-relaxed ${isDark ? "text-zinc-300" : "text-slate-600"}`}>
+                      Cement your score with authentic CBSE Board PYQs and timed exam questions.
+                    </p>
+                  </div>
 
-                {/* 2 Big VisionOS Action Buttons */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                  <Link
-                    href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
-                    onClick={(e) => handleNavClick(e, "concepts", {
-                      subject: activeSubjectKey,
-                      chapter: currentChapterNum
-                    })}
-                    className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-black text-xs transition-all shadow-lg cursor-pointer active:scale-95 ${
-                      isDark
-                        ? "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-slate-950 shadow-amber-500/20 hover:brightness-110"
-                        : "bg-slate-900 text-white hover:bg-slate-800 shadow-md"
-                    }`}
-                  >
-                    <BookOpen className="w-4 h-4" />
-                    <span>Read Topic Notes (10 Min)</span>
-                  </Link>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                    <Link
+                      href={getTabHref("questions", activeSubjectKey, currentChapterNum)}
+                      onClick={(e) => handleNavClick(e, "questions", {
+                        subject: activeSubjectKey,
+                        chapter: currentChapterNum
+                      })}
+                      className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-black text-xs transition-all shadow-lg cursor-pointer active:scale-95 ${
+                        isDark
+                          ? "bg-gradient-to-r from-emerald-400 to-teal-500 text-slate-950 shadow-emerald-500/20 hover:brightness-110"
+                          : "bg-emerald-600 text-white hover:bg-emerald-700 shadow-md"
+                      }`}
+                    >
+                      <HelpCircle className="w-4 h-4" />
+                      <span>Solve Board Exam PYQs</span>
+                    </Link>
 
-                  <Link
-                    href={getTabHref("questions", activeSubjectKey, currentChapterNum)}
-                    onClick={(e) => handleNavClick(e, "questions", {
-                      subject: activeSubjectKey,
-                      chapter: currentChapterNum
-                    })}
-                    className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs transition-all border backdrop-blur-xl shadow-md cursor-pointer active:scale-95 ${
-                      isDark
-                        ? "bg-white/10 hover:bg-white/15 border-white/20 text-white shadow-white/5"
-                        : "bg-white hover:bg-slate-100 border-slate-300 text-slate-800"
-                    }`}
-                  >
-                    <HelpCircle className={`w-4 h-4 ${isDark ? "text-amber-400" : "text-amber-600"}`} />
-                    <span>Practice Board Questions</span>
-                  </Link>
+                    <Link
+                      href={getTabHref("flashcards")}
+                      onClick={(e) => handleNavClick(e, "flashcards")}
+                      className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs transition-all border backdrop-blur-xl shadow-md cursor-pointer active:scale-95 ${
+                        isDark
+                          ? "bg-white/10 hover:bg-white/15 border-white/20 text-white shadow-white/5"
+                          : "bg-white hover:bg-slate-100 border-slate-300 text-slate-800"
+                      }`}
+                    >
+                      <BookOpen className={`w-4 h-4 ${isDark ? "text-emerald-400" : "text-emerald-600"}`} />
+                      <span>Review Chapter Flashcards</span>
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className={`p-5 sm:p-6 rounded-3xl transition-all relative overflow-hidden ${
+                  isDark ? "vision-hero" : "vision-hero-light"
+                }`}>
+                  {/* Iridescent Ambient Top Accent */}
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <span className={`font-extrabold uppercase tracking-wider flex items-center gap-1.5 text-xs ${
+                      isDark ? "text-amber-400" : "text-amber-800"
+                    }`}>
+                      <Sparkles className={`w-4 h-4 fill-current ${isDark ? "text-amber-400" : "text-amber-600"}`} />
+                      Up Next Milestone
+                    </span>
+                    {nextTargetTopic?.isImportantForBoards && (
+                      <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border backdrop-blur-md ${
+                        isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : "bg-rose-50 text-rose-800 border-rose-300 font-extrabold"
+                      }`}>
+                        90%+ Recurring Board Question
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Next Topic Title */}
+                  <div className="mb-4">
+                    <h3 className={`text-lg sm:text-xl font-black leading-snug ${isDark ? "text-white" : "text-slate-900"}`}>
+                      {nextTargetTopic ? nextTargetTopic.title : "Practice board questions below."}
+                    </h3>
+                  </div>
+
+                  {/* 2 Big VisionOS Action Buttons */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                    <Link
+                      href={getTabHref("concepts", activeSubjectKey, currentChapterNum)}
+                      onClick={(e) => handleNavClick(e, "concepts", {
+                        subject: activeSubjectKey,
+                        chapter: currentChapterNum
+                      })}
+                      className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-black text-xs transition-all shadow-lg cursor-pointer active:scale-95 ${
+                        isDark
+                          ? "bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-slate-950 shadow-amber-500/20 hover:brightness-110"
+                          : "bg-slate-900 text-white hover:bg-slate-800 shadow-md"
+                      }`}
+                    >
+                      <BookOpen className="w-4 h-4" />
+                      <span>Read Topic Notes (10 Min)</span>
+                    </Link>
+
+                    <Link
+                      href={getTabHref("questions", activeSubjectKey, currentChapterNum)}
+                      onClick={(e) => handleNavClick(e, "questions", {
+                        subject: activeSubjectKey,
+                        chapter: currentChapterNum
+                      })}
+                      className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs transition-all border backdrop-blur-xl shadow-md cursor-pointer active:scale-95 ${
+                        isDark
+                          ? "bg-white/10 hover:bg-white/15 border-white/20 text-white shadow-white/5"
+                          : "bg-white hover:bg-slate-100 border-slate-300 text-slate-800"
+                      }`}
+                    >
+                      <HelpCircle className={`w-4 h-4 ${isDark ? "text-amber-400" : "text-amber-600"}`} />
+                      <span>Practice Board Questions</span>
+                    </Link>
+                  </div>
+                </div>
+              )}
 
               {/* INTERACTIVE TOPIC RUNWAY */}
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between pt-1">
                   <span className={`text-xs font-bold uppercase tracking-wider ${
-                    isDark ? "text-slate-400" : "text-slate-600"
+                    isDark ? "text-slate-400" : "text-slate-700"
                   }`}>
                     NCERT Topic Checklist
                   </span>
@@ -762,7 +855,7 @@ export default function CommandCenterHomeView({
                     <button
                       type="button"
                       onClick={() => setTopicFilter("all")}
-                      className={`px-3 py-0.5 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                      className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
                         topicFilter === "all"
                           ? isDark ? "bg-white/20 text-white shadow-sm" : "bg-white text-slate-900 shadow-sm"
                           : isDark ? "text-zinc-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
@@ -773,7 +866,7 @@ export default function CommandCenterHomeView({
                     <button
                       type="button"
                       onClick={() => setTopicFilter("pending")}
-                      className={`px-3 py-0.5 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                      className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
                         topicFilter === "pending"
                           ? isDark ? "bg-white/20 text-white shadow-sm" : "bg-white text-slate-900 shadow-sm"
                           : isDark ? "text-zinc-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
@@ -784,7 +877,7 @@ export default function CommandCenterHomeView({
                     <button
                       type="button"
                       onClick={() => setTopicFilter("high_yield")}
-                      className={`px-3 py-0.5 rounded-full text-[10px] font-bold transition-all cursor-pointer ${
+                      className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
                         topicFilter === "high_yield"
                           ? isDark ? "bg-white/20 text-white shadow-sm" : "bg-white text-slate-900 shadow-sm"
                           : isDark ? "text-zinc-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
@@ -799,7 +892,7 @@ export default function CommandCenterHomeView({
                 <div className="max-h-[220px] overflow-y-auto pr-1 space-y-2 custom-scrollbar">
                   {filteredTopics.length === 0 ? (
                     <div className={`p-6 text-center text-xs font-medium rounded-2xl border border-dashed ${
-                      isDark ? "bg-white/[0.02] border-white/10 text-zinc-500" : "bg-slate-50 border-slate-200 text-slate-400"
+                      isDark ? "bg-white/[0.02] border-white/10 text-zinc-500" : "bg-slate-100/70 border-slate-300 text-slate-600"
                     }`}>
                       No topics found for this filter.
                     </div>
@@ -817,7 +910,7 @@ export default function CommandCenterHomeView({
                                 : "bg-emerald-50/50 border-emerald-200 text-slate-600"
                               : isDark
                               ? "bg-white/[0.04] border-white/10 text-white hover:bg-white/[0.08] hover:border-white/20"
-                              : "bg-white border-slate-200/80 text-slate-800 hover:border-slate-300 shadow-2xs"
+                              : "bg-white border-slate-200/80 text-slate-800 hover:border-slate-300 shadow-xs"
                           }`}
                         >
                           <div className="flex items-center gap-3 min-w-0">
@@ -839,7 +932,7 @@ export default function CommandCenterHomeView({
                             <div className="min-w-0">
                               <span className={`text-xs font-bold block truncate ${
                                 isDone
-                                  ? "line-through text-slate-400"
+                                  ? isDark ? "line-through text-zinc-400" : "line-through text-slate-500 font-semibold"
                                   : isDark ? "text-zinc-100" : "text-slate-900"
                               }`}>
                                 {topic.title}
@@ -849,7 +942,7 @@ export default function CommandCenterHomeView({
 
                           <div className="flex items-center gap-2 shrink-0">
                             {topic.isImportantForBoards && (
-                              <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full border hidden sm:inline ${
+                              <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border hidden sm:inline ${
                                 isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : "bg-rose-50 text-rose-800 border-rose-300 font-extrabold"
                               }`}>
                                 High-Yield
@@ -861,7 +954,7 @@ export default function CommandCenterHomeView({
                                 subject: activeSubjectKey,
                                 chapter: currentChapterNum
                               })}
-                              className={`px-3 py-1 rounded-full text-[10px] font-bold transition-all cursor-pointer border ${
+                              className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer border ${
                                 isDark
                                   ? "bg-white/10 hover:bg-white/20 border-white/15 text-white"
                                   : "bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700"
@@ -879,8 +972,8 @@ export default function CommandCenterHomeView({
             </div>
 
             {/* Quick Helper Note */}
-            <div className={`pt-3 border-t flex items-center justify-between text-[11px] font-medium ${
-              isDark ? "border-white/10 text-zinc-400" : "border-slate-100 text-slate-500"
+            <div className={`pt-3 border-t flex items-center justify-between text-xs font-medium ${
+              isDark ? "border-white/10 text-zinc-400" : "border-slate-200 text-slate-600"
             }`}>
               <span>💡 Target: Master 2 NCERT topics daily for 100% board readiness</span>
               <Link
