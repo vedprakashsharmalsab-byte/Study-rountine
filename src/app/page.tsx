@@ -1382,7 +1382,7 @@ export default function CBSECommandCenter() {
       return;
     }
     if (/^[0-9]+$/.test(cleanName) || /^(.)\1+$/.test(cleanName) || /^(test|asdf|qwerty|abc|xyz|admin|user|unknown)$/i.test(cleanName)) {
-      setNameError("Please enter a legitimate, authentic student name (e.g. Aarav Sharma).");
+      setNameError("Please enter your legitimate, authentic full name.");
       playSound("bell");
       return;
     }
@@ -6637,7 +6637,7 @@ export default function CBSECommandCenter() {
                     setNameInput(e.target.value);
                     if (nameError) setNameError("");
                   }}
-                  placeholder="e.g. Aarav Sharma"
+                  placeholder="Enter your full name (e.g. Priya Patel, Rohan Kumar)"
                   className={`w-full px-4 py-3 rounded-xl font-medium text-sm border focus:outline-none transition-all ${
                     isDark
                       ? "bg-black/40 border-white/10 text-white placeholder-slate-500 focus:border-amber-400"
@@ -6645,7 +6645,7 @@ export default function CBSECommandCenter() {
                   }`}
                 />
                 <span className="text-[10px] font-mono text-slate-400 block">
-                  Please enter your real first and last name (e.g. Aarav Sharma).
+                  Please enter your real first and last name.
                 </span>
               </div>
 

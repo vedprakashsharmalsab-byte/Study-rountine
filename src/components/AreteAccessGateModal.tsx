@@ -258,7 +258,7 @@ export default function AreteAccessGateModal({
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Aarav Sharma, Ananya Verma, Rohan Meena..."
+              placeholder="e.g. Ananya Verma, Rohan Meena, Priya Patel..."
               className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm font-bold transition-all focus:outline-none focus:ring-2 focus:ring-amber-400 ${
                 isDark ? "bg-black/50 border-white/20 text-white placeholder-slate-500" : "bg-white border-slate-300 text-slate-900 placeholder-slate-400 shadow-2xs"
               }`}

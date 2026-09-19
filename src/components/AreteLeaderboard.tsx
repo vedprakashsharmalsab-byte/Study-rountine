@@ -63,63 +63,6 @@ function getTierFromXP(xp: number): string {
   return "Aspirant";
 }
 
-// Authentic Real Historical Candidates from Session Ledger (ALL STARTING CLEAN FROM 0 XP)
-const REAL_HISTORICAL_BASELINE: LeaderboardContender[] = [
-  {
-    id: "hist_aarav",
-    name: "Aarav Gupta (Class 10-A)",
-    school: "CBSE Secondary Wing (Class 10-A)",
-    city: "Jaipur, Rajasthan",
-    pincode: "302001",
-    location: "Jaipur, Rajasthan (302001)",
-    streamCode: "Std Math 041",
-    xp: 0,
-    tier: "Aspirant",
-    streakDays: 0,
-    accuracy: 0,
-    solvedCount: 0,
-    badge: "🌟 Cadet (0 XP • Fresh Start)",
-    avatarBg: "from-amber-400 to-yellow-600",
-    visitsCount: 0,
-    latestAction: "Ready for initial study sprint (0 XP)"
-  },
-  {
-    id: "hist_aarav_10a",
-    name: "Aarav Sharma (Class 10-A)",
-    school: "CBSE Secondary Wing (Class 10-A)",
-    city: "Churu, Rajasthan",
-    pincode: "331021",
-    location: "Churu, Rajasthan (331021)",
-    streamCode: "Std Math 041",
-    xp: 0,
-    tier: "Aspirant",
-    streakDays: 0,
-    accuracy: 0,
-    solvedCount: 0,
-    badge: "🌟 Cadet (0 XP • Fresh Start)",
-    avatarBg: "from-slate-300 to-zinc-500",
-    visitsCount: 0,
-    latestAction: "Ready for initial study sprint (0 XP)"
-  },
-  {
-    id: "hist_aarav_bissu",
-    name: "Aarav Sharma",
-    school: "Bissu Secondary Academy (CBSE 10)",
-    city: "Bissu, Churu, Rajasthan, India",
-    pincode: "331021",
-    location: "Bissu, Churu, Rajasthan (331021)",
-    streamCode: "Basic Math 241",
-    xp: 0,
-    tier: "Aspirant",
-    streakDays: 0,
-    accuracy: 0,
-    solvedCount: 0,
-    badge: "🌟 Cadet (0 XP • Fresh Start)",
-    avatarBg: "from-amber-700 to-orange-800",
-    visitsCount: 0,
-    latestAction: "Ready for initial study sprint (0 XP)"
-  }
-];
 
 interface AreteLeaderboardProps {
   currentXP: number;
@@ -214,7 +157,19 @@ export default function AreteLeaderboard({
 
       uniqueStudents.forEach((s: any, idx: number) => {
         const rawName = s.studentName;
-        if (!rawName || rawName === "Cadet (Pending Enrollment)" || rawName === "Student Aspirant") {
+        if (!rawName || typeof rawName !== "string") {
+          return;
+        }
+        const lowerName = rawName.toLowerCase().trim();
+        if (
+          lowerName === "" ||
+          lowerName.includes("cadet (pending") ||
+          lowerName.includes("student aspirant") ||
+          lowerName.includes("aarav sharma") ||
+          lowerName.includes("aarav gupta") ||
+          lowerName === "test" ||
+          lowerName === "test user"
+        ) {
           return;
         }
 
@@ -263,7 +218,22 @@ export default function AreteLeaderboard({
 
       // Merge local ledger entries (strictly initialized to 0)
       localLedger.forEach((loc: any, idx: number) => {
-        if (!parsed.some((p) => p.name.toLowerCase() === loc.name.toLowerCase())) {
+        const locName = loc.name?.trim();
+        if (!locName || typeof locName !== "string") return;
+        const lowerLoc = locName.toLowerCase();
+        if (
+          lowerLoc === "" ||
+          lowerLoc.includes("cadet (pending") ||
+          lowerLoc.includes("student aspirant") ||
+          lowerLoc.includes("aarav sharma") ||
+          lowerLoc.includes("aarav gupta") ||
+          lowerLoc === "test" ||
+          lowerLoc === "test user"
+        ) {
+          return;
+        }
+
+        if (!parsed.some((p) => p.name.toLowerCase() === lowerLoc)) {
           const pin = loc.pincode || "110001";
           parsed.push({
             id: `local_${idx}`,
@@ -330,18 +300,26 @@ export default function AreteLeaderboard({
     }
   };
 
-  // Combine baseline historical real users with dynamic database users & current user (all starting at 0)
+  // Combine dynamic database users & current user (all starting clean from 0)
   const fullLeaderboard = useMemo(() => {
     const registryMap = new Map<string, LeaderboardContender>();
 
-    // 1. Seed with historical baseline (all 0 XP)
-    REAL_HISTORICAL_BASELINE.forEach((c) => {
-      registryMap.set(c.name.toLowerCase().trim(), { ...c });
-    });
-
-    // 2. Merge database users (taking authentic recorded XP)
+    // 1. Merge genuine database users
     dbUsers.forEach((c) => {
-      const key = c.name.toLowerCase().trim();
+      const cleanName = c.name?.trim();
+      if (!cleanName) return;
+      const lower = cleanName.toLowerCase();
+      if (
+        lower.includes("cadet (pending") ||
+        lower.includes("student aspirant") ||
+        lower.includes("aarav sharma") ||
+        lower.includes("aarav gupta") ||
+        lower === "test" ||
+        lower === "test user"
+      ) {
+        return;
+      }
+      const key = lower;
       const existing = registryMap.get(key);
       if (!existing) {
         registryMap.set(key, { ...c });
@@ -356,31 +334,37 @@ export default function AreteLeaderboard({
       }
     });
 
-    // 3. Merge current user
+    // 2. Merge authenticated current user
     const currentKey = studentName.toLowerCase().trim();
-    const existingForUser = registryMap.get(currentKey);
+    if (
+      currentKey &&
+      !currentKey.includes("cadet (pending") &&
+      !currentKey.includes("student aspirant")
+    ) {
+      const existingForUser = registryMap.get(currentKey);
 
-    const currentUserContender: LeaderboardContender = {
-      id: "current_user_contender",
-      name: studentName,
-      school: existingForUser?.school || "CBSE Class 10 Candidate (Verified Identity)",
-      city: studentCity,
-      pincode: studentPin,
-      location: studentLocation,
-      streamCode: studentStream as any,
-      xp: currentXP,
-      tier: userTier,
-      streakDays: currentXP > 0 ? Math.max(1, Math.floor(currentXP / 120)) : 0,
-      accuracy: currentXP > 0 ? Math.min(99.5, Math.max(82.0, +(82 + (currentXP / 110)).toFixed(1))) : 0,
-      solvedCount: currentXP > 0 ? Math.max(1, Math.floor(currentXP / 25)) : 0,
-      badge: currentXP > 0 ? `⭐ Active Cadet (${currentXP} XP)` : "🌟 Fresh Cadet (0 XP)",
-      isCurrentUser: true,
-      avatarBg: "from-cyan-400 via-blue-500 to-indigo-600",
-      visitsCount: visits,
-      latestAction: currentXP > 0 ? "Advancing board syllabus" : "Ready to start first study sprint (0 XP)"
-    };
+      const currentUserContender: LeaderboardContender = {
+        id: "current_user_contender",
+        name: studentName,
+        school: existingForUser?.school || "CBSE Class 10 Candidate (Verified Identity)",
+        city: studentCity,
+        pincode: studentPin,
+        location: studentLocation,
+        streamCode: studentStream as any,
+        xp: currentXP,
+        tier: userTier,
+        streakDays: currentXP > 0 ? Math.max(1, Math.floor(currentXP / 120)) : 0,
+        accuracy: currentXP > 0 ? Math.min(99.5, Math.max(82.0, +(82 + (currentXP / 110)).toFixed(1))) : 0,
+        solvedCount: currentXP > 0 ? Math.max(1, Math.floor(currentXP / 25)) : 0,
+        badge: currentXP > 0 ? `⭐ Active Cadet (${currentXP} XP)` : "🌟 Fresh Cadet (0 XP)",
+        isCurrentUser: true,
+        avatarBg: "from-cyan-400 via-blue-500 to-indigo-600",
+        visitsCount: visits,
+        latestAction: currentXP > 0 ? "Advancing board syllabus" : "Ready to start first study sprint (0 XP)"
+      };
 
-    registryMap.set(currentKey, currentUserContender);
+      registryMap.set(currentKey, currentUserContender);
+    }
 
     // Convert to sorted array
     const sorted = Array.from(registryMap.values()).sort((a, b) => b.xp - a.xp);
@@ -646,15 +630,22 @@ export default function AreteLeaderboard({
       </div>
 
       {/* 5. PODIUM SHOWCASE FOR REAL CONTENDERS */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-        {fullLeaderboard.slice(0, 3).map((peer, idx) => {
-          const rankColors = [
-            { border: "border-amber-400/50", glow: "shadow-[0_0_30px_rgba(245,158,11,0.2)]", label: "Contender #1", crown: "text-amber-400" },
-            { border: "border-slate-300/40", glow: "shadow-[0_0_20px_rgba(203,213,225,0.15)]", label: "Contender #2", crown: "text-slate-300" },
-            { border: "border-amber-700/40", glow: "shadow-[0_0_20px_rgba(180,83,9,0.15)]", label: "Contender #3", crown: "text-amber-600" }
-          ][idx];
+      {fullLeaderboard.length > 0 && (
+        <div className={`grid grid-cols-1 ${
+          fullLeaderboard.length >= 3
+            ? "md:grid-cols-3"
+            : fullLeaderboard.length === 2
+            ? "md:grid-cols-2 max-w-2xl mx-auto"
+            : "max-w-md mx-auto"
+        } gap-4 pt-2`}>
+          {fullLeaderboard.slice(0, 3).map((peer, idx) => {
+            const rankColors = [
+              { border: "border-amber-400/50", glow: "shadow-[0_0_30px_rgba(245,158,11,0.2)]", label: "Contender #1", crown: "text-amber-400" },
+              { border: "border-slate-300/40", glow: "shadow-[0_0_20px_rgba(203,213,225,0.15)]", label: "Contender #2", crown: "text-slate-300" },
+              { border: "border-amber-700/40", glow: "shadow-[0_0_20px_rgba(180,83,9,0.15)]", label: "Contender #3", crown: "text-amber-600" }
+            ][idx] || { border: "border-slate-400/40", glow: "", label: `Contender #${idx + 1}`, crown: "text-amber-400" };
 
-          return (
+            return (
             <div
               key={peer.id}
               className={`p-5 rounded-3xl border flex flex-col justify-between space-y-4 relative overflow-hidden transition-all hover:scale-[1.02] ${rankColors.border} ${rankColors.glow} ${
@@ -708,6 +699,7 @@ export default function AreteLeaderboard({
           );
         })}
       </div>
+      )}
 
       {/* 6. FILTER BAR */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2">
@@ -799,7 +791,19 @@ export default function AreteLeaderboard({
               </tr>
             </thead>
             <tbody className={`divide-y font-medium ${isDark ? "divide-white/5" : "divide-slate-100"}`}>
-              {displayList.map((c) => {
+              {displayList.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="text-center py-12 px-4">
+                    <p className={`text-sm font-semibold ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                      No registered contenders found for this filter.
+                    </p>
+                    <p className="text-xs text-slate-500 mt-1">
+                      New genuine candidates will appear here as they register and earn XP.
+                    </p>
+                  </td>
+                </tr>
+              ) : (
+                displayList.map((c) => {
                 const actualRank = fullLeaderboard.findIndex((p) => p.id === c.id) + 1;
                 const isUser = c.isCurrentUser;
 
@@ -902,7 +906,8 @@ export default function AreteLeaderboard({
                     </td>
                   </tr>
                 );
-              })}
+              })
+              )}
             </tbody>
           </table>
         </div>
