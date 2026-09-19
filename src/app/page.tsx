@@ -1889,8 +1889,8 @@ export default function CBSECommandCenter() {
   const [confettiTrigger, setConfettiTrigger] = useState(0);
   const [xpToasts, setXpToasts] = useState<XpToast[]>([]);
 
-  // Persistent Student Data
-  const [streak, setStreak] = useState(1);
+  // Persistent Student Data (Fresh Zero Progression)
+  const [streak, setStreak] = useState(0);
   const [dayType, setDayType] = useState<"weekday" | "weekend">("weekday");
   const [completedTopicIds, setCompletedTopicIds] = useState<{ [topicId: string]: boolean }>({});
   const [completedTestSeriesTopics, setCompletedTestSeriesTopics] = useState<{ [topicKey: string]: boolean }>({});
@@ -2495,15 +2495,33 @@ export default function CBSECommandCenter() {
   useEffect(() => {
     const timer = setTimeout(() => {
       try {
-        // One-time cleanup to ensure fresh 0 XP start for all users as requested
-        const isV5Initialized = localStorage.getItem("cbse10_lsa_v5_cleared");
-        if (!isV5Initialized) {
+        // Universal cleanup ensuring fresh 0 XP and 0 progress start for all users (including existing sessions)
+        const isFreshV10Cleared = localStorage.getItem("cbse10_lsa_fresh_zero_v10");
+        if (!isFreshV10Cleared) {
           Object.keys(localStorage).forEach((key) => {
-            if (key.startsWith("cbse10_lsa_")) {
+            if (key.startsWith("cbse10_lsa_") || key.startsWith("arete_") || key.startsWith("cbse_")) {
+              if (key === "cbse_admin_auth_session") return;
               localStorage.removeItem(key);
             }
           });
+          localStorage.setItem("cbse10_lsa_fresh_zero_v10", "true");
           localStorage.setItem("cbse10_lsa_v5_cleared", "true");
+          localStorage.setItem("cbse10_lsa_theme_v7_white_default", "true");
+          localStorage.setItem("cbse10_lsa_theme_v5", "light");
+          localStorage.setItem("cbse10_lsa_streak_v5", "0");
+          localStorage.setItem("cbse10_lsa_focus_v5", "0");
+          setCompletedTopicIds({});
+          setCompletedTestSeriesTopics({});
+          setCompletedMapItems({});
+          setStreak(0);
+          setCustomFlashcards([]);
+          setMasteredFlashcardIds({});
+          setCustomQuestions([]);
+          setTotalFocusMins(0);
+          setCorrectMcqQuestionIds({});
+          setSelectedMcqOptions({});
+          setMyMistakes([]);
+          setResolvedMistakeIds({});
         }
 
         const sTopics = localStorage.getItem("cbse10_lsa_topics_v5");

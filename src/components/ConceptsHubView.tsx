@@ -94,6 +94,7 @@ interface ConceptsHubViewProps {
 
 // Science Chapter Metadata with Official CBSE Units
 const SCIENCE_CHAPTER_LIST = [
+  { no: 0, name: "Basics of Chemistry Required for Class 10", shortName: "Foundation: Basics", discipline: "Chemistry", unit: "Bridge Course: Fundamentals", weightage: "100% Prerequisite", icon: FlaskConical },
   { no: 1, name: "Chemical Reactions and Equations", shortName: "Ch 1: Reactions", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "6–8 Marks", icon: FlaskConical },
   { no: 2, name: "Acids, Bases and Salts", shortName: "Ch 2: Acids & Salts", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "6–8 Marks", icon: FlaskConical },
   { no: 3, name: "Metals and Non-Metals", shortName: "Ch 3: Metals & Non-metals", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "7–9 Marks", icon: FlaskConical },
@@ -166,12 +167,12 @@ export default function ConceptsHubView({
   });
 
   const [activeScienceChapterNo, setActiveScienceChapterNo] = useState<number>(() => {
-    if (initialSubject === "science" && initialChapterNo) return initialChapterNo;
+    if (initialSubject === "science" && initialChapterNo !== undefined) return initialChapterNo;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_science_chapter");
       if (saved) {
         const p = parseInt(saved);
-        if (!isNaN(p) && p >= 1 && p <= 13) return p;
+        if (!isNaN(p) && p >= 0 && p <= 13) return p;
       }
     }
     return 1; // Default to Chapter 1: Chemical Reactions
@@ -556,13 +557,26 @@ export default function ConceptsHubView({
         <div className="pt-5 mt-5 border-t border-white/10 space-y-3">
           {/* Quick Chapter Selector Bar */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
                 Active Chapter:
               </span>
               <span className="px-2.5 py-0.5 rounded-md text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                {activeSubject === "math" ? `Ch ${activeMathChapterNo}: ${currentChapterMeta.name}` : activeSubject === "science" ? `Ch ${activeScienceChapterNo}: ${currentChapterMeta.name}` : `${currentChapterMeta.shortName} (${'discipline' in currentChapterMeta ? currentChapterMeta.discipline : 'SST'})`}
+                {activeSubject === "math" ? `Ch ${activeMathChapterNo}: ${currentChapterMeta.name}` : activeSubject === "science" ? (activeScienceChapterNo === 0 ? "🧪 Foundation: Chemistry Basics (Class 10 Prerequisite)" : `Ch ${activeScienceChapterNo}: ${currentChapterMeta.name}`) : `${currentChapterMeta.shortName} (${'discipline' in currentChapterMeta ? currentChapterMeta.discipline : 'SST'})`}
               </span>
+              {activeSubject === "science" && (
+                <button
+                  onClick={() => setActiveScienceChapterNo(0)}
+                  className={`px-2.5 py-0.5 rounded-md text-xs font-bold transition-all cursor-pointer flex items-center gap-1 border ${
+                    activeScienceChapterNo === 0
+                      ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-sm"
+                      : "bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/25"
+                  }`}
+                >
+                  <FlaskConical className="w-3 h-3" />
+                  <span>🧪 Chemistry Basics Prerequisite</span>
+                </button>
+              )}
             </div>
 
             {/* Toggle Grid Selector Button */}

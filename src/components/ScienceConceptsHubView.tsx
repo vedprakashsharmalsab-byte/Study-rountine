@@ -42,6 +42,7 @@ import {
 } from "lucide-react";
 import BiologyVisualSchematic from "@/components/BiologyVisualSchematics";
 import { getChapterQuestions } from "@/data/chapters";
+import ChemistryBasicsMasterView from "@/components/ChemistryBasicsMasterView";
 import { SCIENCE_CHAPTER_CONCEPTS, getScienceChapter, type ScienceChapterConcept } from "@/data/scienceConcepts";
 
 interface ScienceConceptsHubViewProps {
@@ -57,6 +58,7 @@ interface ScienceConceptsHubViewProps {
 
 // Chapter metadata list
 const CHAPTER_LIST = [
+  { no: 0, name: "Basics of Chemistry Required for Class 10", shortName: "Foundation: Basics", discipline: "Chemistry", weightage: "Foundation (Prerequisite)", icon: FlaskConical },
   { no: 1, name: "Chemical Reactions and Equations", shortName: "Ch 1: Reactions", discipline: "Chemistry", weightage: "6–8 Marks", icon: FlaskConical },
   { no: 2, name: "Acids, Bases and Salts", shortName: "Ch 2: Acids & Salts", discipline: "Chemistry", weightage: "6–8 Marks", icon: FlaskConical },
   { no: 3, name: "Metals and Non-Metals", shortName: "Ch 3: Metals", discipline: "Chemistry", weightage: "7–9 Marks", icon: FlaskConical },
@@ -341,6 +343,139 @@ export default function ScienceConceptsHubView({
   const colors = getDisciplineColors(currentMeta.discipline, isDark);
   const disciplineIcon = getDisciplineIcon(currentMeta.discipline);
 
+  if (currentChNo === 0) {
+    return (
+      <div id="sci-concepts-top" className="space-y-6">
+        {/* ============= CHAPTER SELECTOR RIBBON (standalone mode) ============= */}
+        {!isEmbeddedInCommand && (
+          <div className={`p-5 sm:p-6 rounded-3xl border space-y-4 ${
+            isDark
+              ? "bg-[#0c121e]/90 backdrop-blur-2xl border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+              : "bg-white border-slate-200 shadow-lg"
+          }`}>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0">
+                  <FlaskConical className="w-5 h-5 text-amber-400" />
+                </div>
+                <div>
+                  <h2 className={`text-xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>Science — Toddler-to-Pro Master</h2>
+                  <p className={`text-xs font-medium ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                    Foundation: Master Valencies, Formula Writing, Balancing &amp; Colors before Ch 1!
+                  </p>
+                </div>
+              </div>
+              {/* Discipline filter */}
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  { id: "all", label: "All" },
+                  { id: "Chemistry", label: "🧪 Chemistry" },
+                  { id: "Biology", label: "🧬 Biology" },
+                  { id: "Physics", label: "⚡ Physics" },
+                  { id: "Natural Resources", label: "🌿 Ecology" },
+                ].map((d) => (
+                  <button
+                    key={d.id}
+                    onClick={() => setDisciplineFilter(d.id)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                      disciplineFilter === d.id
+                        ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-sm"
+                        : isDark
+                        ? "bg-black/30 border-white/5 text-slate-400 hover:text-white"
+                        : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+                    }`}
+                  >
+                    {d.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Direct Chapter Dropdown + Quick Prev/Next */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
+              <div className="flex items-center gap-2 flex-1">
+                <label htmlFor="science-chapter-select-foundation" className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 shrink-0">
+                  Chapter:
+                </label>
+                <div className="fabulous-select-wrapper flex-1">
+                  <select
+                    id="science-chapter-select-foundation"
+                    aria-label="Select Science Chapter directly"
+                    value={currentChNo}
+                    onChange={(e) => handleSelectChapter(Number(e.target.value))}
+                    className={`fabulous-select ${
+                      isDark ? "fabulous-select-dark" : "fabulous-select-light"
+                    }`}
+                  >
+                    {CHAPTER_LIST.filter((c) => disciplineFilter === "all" || c.discipline === disciplineFilter).map((ch) => (
+                      <option key={ch.no} value={ch.no}>
+                        {ch.no === 0 ? "🧪 Foundation: " : `Ch ${ch.no}: `}{ch.name} ({ch.discipline} • {ch.weightage})
+                      </option>
+                    ))}
+                  </select>
+                  <div className="fabulous-select-icon text-zinc-400">
+                    <ChevronDown className="w-4 h-4" />
+                  </div>
+                </div>
+
+                {/* Prev / Next Buttons */}
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <button
+                    onClick={() => handleSelectChapter(13)}
+                    className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center transition-all cursor-pointer min-h-[42px] min-w-[42px] active:scale-95 ${
+                      isDark ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
+                    }`}
+                    title="Previous Chapter"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => handleSelectChapter(1)}
+                    className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center transition-all cursor-pointer min-h-[42px] min-w-[42px] active:scale-95 ${
+                      isDark ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
+                    }`}
+                    title="Next Chapter"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Clean Wrapped Chapter Pills */}
+            <div className="flex flex-wrap gap-1.5 pt-1.5">
+              {CHAPTER_LIST.filter((c) => disciplineFilter === "all" || c.discipline === disciplineFilter).map((ch) => {
+                const isSelected = ch.no === currentChNo;
+                const Icon = ch.icon;
+                return (
+                  <button
+                    key={ch.no}
+                    onClick={() => handleSelectChapter(ch.no)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 border active:scale-95 ${
+                      isSelected
+                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 border-amber-300 font-black shadow-md"
+                        : isDark
+                        ? "bg-black/30 border-white/5 text-slate-300 hover:text-white hover:border-white/20"
+                        : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300"
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5 opacity-80 shrink-0" />
+                    <span>{ch.shortName}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <ChemistryBasicsMasterView
+          isDark={isDark}
+          onNavigateToChapter={handleSelectChapter}
+        />
+      </div>
+    );
+  }
+
   if (!currentChapter) {
     return (
       <div className={`p-12 text-center rounded-3xl border ${isDark ? "bg-black/20 border-white/10" : "bg-slate-50 border-slate-200"}`}>
@@ -482,6 +617,41 @@ export default function ScienceConceptsHubView({
               );
             })}
           </div>
+        </div>
+      )}
+
+      {/* Prerequisite Alert for Chemistry Chapters (1-4) */}
+      {currentMeta.discipline === "Chemistry" && (
+        <div
+          className={`p-4 sm:p-5 rounded-3xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all ${
+            isDark
+              ? "bg-gradient-to-r from-amber-950/40 via-[#1a140c] to-amber-950/20 border-amber-500/30 text-amber-200 shadow-md"
+              : "bg-gradient-to-r from-amber-50 via-orange-50/50 to-yellow-50 border-amber-300 text-amber-950 shadow-sm"
+          }`}
+        >
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0">
+              <FlaskConical className="w-5 h-5" />
+            </div>
+            <div className="space-y-0.5">
+              <div className="text-xs sm:text-sm font-black flex items-center gap-2">
+                <span>Class 10 Chemistry Foundation Prerequisite</span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300">
+                  Must Read First
+                </span>
+              </div>
+              <div className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                Revise Valencies, Criss-Cross formula writing, Balancing equations, and Reactivity Series to master this chapter!
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => handleSelectChapter(0)}
+            className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-black bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 shadow-md"
+          >
+            <span>Open Chemistry Basics</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
       )}
 
