@@ -2994,11 +2994,11 @@ export default function CBSECommandCenter() {
           RIGID FROSTED TOP APP BAR (HEADER + SECONDARY SUB-TOOLBAR)
           Combined into one pinned sticky top block so it NEVER drifts or moves!
           ========================================================================= */}
-      <div className="sticky top-0 z-40">
-        <header className={`border-b transition-colors backdrop-blur-2xl ${
+      <div className="sticky top-0 z-40 transform-gpu">
+        <header className={`border-b transition-colors backdrop-blur-md ${
           isDark
-            ? "border-white/10 bg-[#080b14]/80 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
-            : "border-slate-200/80 bg-white/85 text-slate-900 shadow-xs"
+            ? "border-white/10 bg-[#080b14]/92 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
+            : "border-slate-200/80 bg-white/95 text-slate-900 shadow-xs"
         }`}>
         <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-3">
           
@@ -4173,7 +4173,7 @@ export default function CBSECommandCenter() {
                 return (
                   <div
                     key={chapter.id}
-                    className={`rounded-2xl sm:rounded-3xl border p-4 sm:p-5 transition-all ${
+                    className={`perf-card rounded-2xl sm:rounded-3xl border p-4 sm:p-5 transition-all ${
                       isDark ? "apple-surface" : "apple-surface-light"
                     }`}
                   >
@@ -5708,7 +5708,7 @@ export default function CBSECommandCenter() {
                       : isDark ? "bg-blue-500/15 text-blue-300 border-blue-500/30" : "bg-blue-50 text-blue-700 border-blue-200";
 
                     return (
-                      <div key={idx} className={`p-6 sm:p-7 rounded-3xl border transition-all ${
+                      <div key={idx} className={`perf-card p-6 sm:p-7 rounded-3xl border transition-all ${
                         isDark ? "apple-surface border-white/[0.08] text-slate-100 shadow-xl" : "apple-surface-light border-black/[0.06] shadow-sm text-slate-900"
                       }`}>
                         <div className="flex flex-wrap items-center gap-2 mb-5">

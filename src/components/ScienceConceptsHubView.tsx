@@ -851,7 +851,7 @@ export default function ScienceConceptsHubView({
               <div
                 key={section.id}
                 id={`sci-section-${section.id}`}
-                className={`rounded-3xl border transition-all duration-200 overflow-hidden ${
+                className={`perf-card rounded-3xl border transition-all duration-200 overflow-hidden ${
                   isDark
                     ? "bg-[#0f172a]/85 border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.3)] hover:border-teal-500/30"
                     : "bg-white border-slate-200 shadow-md hover:border-teal-400"

@@ -32,7 +32,7 @@ interface SmartStudyTopicCardProps {
   onToggle: () => void;
 }
 
-export default function SmartStudyTopicCard({
+const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
   topic,
   topicIdx,
   isDark,
@@ -61,7 +61,7 @@ export default function SmartStudyTopicCard({
 
   return (
     <div
-      className={`rounded-3xl border transition-all overflow-hidden ${
+      className={`perf-card rounded-3xl border transition-all overflow-hidden ${
         isDark
           ? "bg-[#0b0f19] border-white/10 hover:border-white/20 shadow-xl"
           : "bg-white border-slate-200 hover:border-rose-300 shadow-md"
@@ -589,4 +589,6 @@ export default function SmartStudyTopicCard({
       )}
     </div>
   );
-}
+});
+
+export default SmartStudyTopicCard;

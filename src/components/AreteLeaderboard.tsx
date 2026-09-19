@@ -128,6 +128,30 @@ interface AreteLeaderboardProps {
   onOpenVault: () => void;
 }
 
+// Isolated Telemetry Ticker: updates every 4.5s in isolation without triggering
+// expensive sorting, filtering, or list re-renders on AreteLeaderboard.
+const LeaderboardTelemetryTicker = React.memo(function LeaderboardTelemetryTicker({
+  events
+}: {
+  events: string[];
+}) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (!events.length) return;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % events.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [events.length]);
+
+  return (
+    <span className="truncate text-[11px] text-amber-300 font-medium animate-fade-in">
+      {events[index] || ""}
+    </span>
+  );
+});
+
 export default function AreteLeaderboard({
   currentXP = 0,
   studentProfile,
@@ -135,7 +159,6 @@ export default function AreteLeaderboard({
   onOpenVault
 }: AreteLeaderboardProps) {
   const [filter, setFilter] = useState<"all" | "std_math" | "basic_math" | "top5">("all");
-  const [telemetryIndex, setTelemetryIndex] = useState(0);
   const [dbUsers, setDbUsers] = useState<LeaderboardContender[]>([]);
   const [isSyncing, setIsSyncing] = useState(false);
   const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null);
@@ -376,12 +399,7 @@ export default function AreteLeaderboard({
     return events;
   }, [studentName, studentCity, currentXP]);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTelemetryIndex((prev) => (prev + 1) % liveMatrixEvents.length);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, [liveMatrixEvents.length]);
+
 
   // Find user's current rank
   const userRankIndex = fullLeaderboard.findIndex((c) => c.isCurrentUser);
@@ -428,9 +446,7 @@ export default function AreteLeaderboard({
           <span className="text-[10px] uppercase font-black tracking-wider text-emerald-400 shrink-0">
             LIVE MATRIX:
           </span>
-          <span className="truncate text-[11px] text-amber-300 font-medium animate-fade-in">
-            {liveMatrixEvents[telemetryIndex]}
-          </span>
+          <LeaderboardTelemetryTicker events={liveMatrixEvents} />
         </div>
 
         <div className="flex items-center gap-2 shrink-0">

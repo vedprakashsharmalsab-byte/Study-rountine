@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
   BookOpen,
@@ -63,6 +63,106 @@ interface CommandCenterHomeViewProps {
   studentProfile?: StudentProfile | null;
 }
 
+// Isolated Spatial Focus Sprint Companion: 1-second ticks remain isolated here,
+// completely preventing root-level re-renders of the 1,000-line CommandCenterHomeView!
+const SpatialFocusSprintCompanion = React.memo(function SpatialFocusSprintCompanion({
+  isDark,
+  playSound,
+  onRegisterTrigger
+}: {
+  isDark: boolean;
+  playSound: (sound: any) => void;
+  onRegisterTrigger?: (trigger: () => void) => void;
+}) {
+  const [focusSeconds, setFocusSeconds] = useState(25 * 60);
+  const [isFocusActive, setIsFocusActive] = useState(false);
+  const focusTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startSprint = useCallback(() => {
+    setIsFocusActive(true);
+    setFocusSeconds(25 * 60);
+  }, []);
+
+  useEffect(() => {
+    if (onRegisterTrigger) {
+      onRegisterTrigger(startSprint);
+    }
+  }, [onRegisterTrigger, startSprint]);
+
+  useEffect(() => {
+    if (isFocusActive) {
+      focusTimerRef.current = setInterval(() => {
+        setFocusSeconds((prev) => {
+          if (prev <= 1) {
+            clearInterval(focusTimerRef.current!);
+            setIsFocusActive(false);
+            try { playSound("bell"); } catch {}
+            return 25 * 60;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else if (focusTimerRef.current) {
+      clearInterval(focusTimerRef.current);
+    }
+    return () => {
+      if (focusTimerRef.current) clearInterval(focusTimerRef.current);
+    };
+  }, [isFocusActive, playSound]);
+
+  const formattedFocusTime = useMemo(() => {
+    const m = Math.floor(focusSeconds / 60);
+    const s = focusSeconds % 60;
+    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+  }, [focusSeconds]);
+
+  return (
+    <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
+      <div className={`flex items-center gap-2 px-3 py-1 rounded-full border backdrop-blur-md ${
+        isDark ? "bg-black/60 border-white/15 text-white" : "bg-white/90 border-slate-200 text-slate-900 shadow-xs"
+      }`}>
+        <span className={`w-2 h-2 rounded-full ${isFocusActive ? "bg-emerald-400 animate-pulse" : "bg-slate-400"}`} />
+        <Clock className="w-3.5 h-3.5 text-slate-400" />
+        <span className="text-xs font-mono font-bold tabular-nums">
+          {formattedFocusTime}
+        </span>
+      </div>
+      <button
+        type="button"
+        onClick={() => {
+          playSound("click");
+          setIsFocusActive(!isFocusActive);
+        }}
+        className={`p-1.5 px-3 rounded-full text-xs font-bold transition-all cursor-pointer border flex items-center gap-1.5 shadow-xs active:scale-95 ${
+          isFocusActive
+            ? "bg-amber-500/20 border-amber-500/40 text-amber-300 hover:bg-amber-500/30"
+            : isDark
+            ? "bg-white/10 border-white/20 text-white hover:bg-white/20"
+            : "bg-slate-900 text-white hover:bg-slate-800 border-slate-900"
+        }`}
+        title={isFocusActive ? "Pause Sprint" : "Start 25-Min Sprint"}
+      >
+        {isFocusActive ? <Pause className="w-3 h-3 fill-current" /> : <Play className="w-3 h-3 fill-current" />}
+        <span>{isFocusActive ? "Pause" : "Focus"}</span>
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          playSound("click");
+          setIsFocusActive(false);
+          setFocusSeconds(25 * 60);
+        }}
+        className={`p-1.5 rounded-full border transition-colors cursor-pointer ${
+          isDark ? "border-white/10 text-slate-400 hover:text-white hover:bg-white/10" : "border-slate-200 text-slate-500 hover:bg-slate-100"
+        }`}
+        title="Reset Timer"
+      >
+        <RotateCcw className="w-3 h-3" />
+      </button>
+    </div>
+  );
+});
+
 export default function CommandCenterHomeView({
   isDark,
   commandSubjectId,
@@ -121,37 +221,11 @@ export default function CommandCenterHomeView({
     return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
   }, []);
 
-  // 25-Min Spatial Focus Sprint Companion
-  const [focusSeconds, setFocusSeconds] = useState(25 * 60);
-  const [isFocusActive, setIsFocusActive] = useState(false);
-  const focusTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    if (isFocusActive) {
-      focusTimerRef.current = setInterval(() => {
-        setFocusSeconds((prev) => {
-          if (prev <= 1) {
-            clearInterval(focusTimerRef.current!);
-            setIsFocusActive(false);
-            try { playSound("bell"); } catch {}
-            return 25 * 60;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    } else if (focusTimerRef.current) {
-      clearInterval(focusTimerRef.current);
-    }
-    return () => {
-      if (focusTimerRef.current) clearInterval(focusTimerRef.current);
-    };
-  }, [isFocusActive, playSound]);
-
-  const formattedFocusTime = useMemo(() => {
-    const m = Math.floor(focusSeconds / 60);
-    const s = focusSeconds % 60;
-    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-  }, [focusSeconds]);
+  // Spatial Focus Sprint Trigger Ref (prevents 1s interval re-renders on entire view)
+  const pomodoroTriggerRef = useRef<(() => void) | null>(null);
+  const handleRegisterPomodoroTrigger = useCallback((triggerFn: () => void) => {
+    pomodoroTriggerRef.current = triggerFn;
+  }, []);
 
   // Active Subject & Chapter Resolution
   const currentSubject: Subject = useMemo(() => {
@@ -346,8 +420,9 @@ export default function CommandCenterHomeView({
 
   const handleLaunchPomodoroSprint = () => {
     playSound("click");
-    setIsFocusActive(true);
-    setFocusSeconds(25 * 60);
+    if (pomodoroTriggerRef.current) {
+      pomodoroTriggerRef.current();
+    }
   };
 
   return (
@@ -396,50 +471,12 @@ export default function CommandCenterHomeView({
             </span>
           </div>
 
-          {/* SPATIAL FOCUS COMPANION ORB */}
-          <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
-            <div className={`flex items-center gap-2 px-3 py-1 rounded-full border backdrop-blur-xl ${
-              isDark ? "bg-black/40 border-white/15 text-white" : "bg-white/80 border-slate-200 text-slate-900"
-            }`}>
-              <span className={`w-2 h-2 rounded-full ${isFocusActive ? "bg-emerald-400 animate-pulse" : "bg-slate-400"}`} />
-              <Clock className="w-3.5 h-3.5 text-slate-400" />
-              <span className="text-xs font-mono font-bold tabular-nums">
-                {formattedFocusTime}
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => {
-                playSound("click");
-                setIsFocusActive(!isFocusActive);
-              }}
-              className={`p-1.5 px-3 rounded-full text-xs font-bold transition-all cursor-pointer backdrop-blur-xl border flex items-center gap-1.5 shadow-sm active:scale-95 ${
-                isFocusActive
-                  ? "bg-amber-500/20 border-amber-500/40 text-amber-300 hover:bg-amber-500/30"
-                  : isDark
-                  ? "bg-white/10 border-white/20 text-white hover:bg-white/20"
-                  : "bg-slate-900 text-white hover:bg-slate-800 border-slate-900"
-              }`}
-              title={isFocusActive ? "Pause Sprint" : "Start 25-Min Sprint"}
-            >
-              {isFocusActive ? <Pause className="w-3 h-3 fill-current" /> : <Play className="w-3 h-3 fill-current" />}
-              <span>{isFocusActive ? "Pause" : "Focus"}</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                playSound("click");
-                setIsFocusActive(false);
-                setFocusSeconds(25 * 60);
-              }}
-              className={`p-1.5 rounded-full border transition-colors cursor-pointer ${
-                isDark ? "border-white/10 text-slate-400 hover:text-white hover:bg-white/10" : "border-slate-200 text-slate-500 hover:bg-slate-100"
-              }`}
-              title="Reset Timer"
-            >
-              <RotateCcw className="w-3 h-3" />
-            </button>
-          </div>
+          {/* SPATIAL FOCUS COMPANION ORB (Isolated component: 0ms re-render overhead on home view) */}
+          <SpatialFocusSprintCompanion
+            isDark={isDark}
+            playSound={playSound}
+            onRegisterTrigger={handleRegisterPomodoroTrigger}
+          />
         </div>
 
         {/* 5-SUBJECT LUMINOUS FLOATING CAPSULE BAR */}

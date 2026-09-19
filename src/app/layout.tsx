@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Outfit, JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
-import "lenis/dist/lenis.css";
 import "katex/dist/katex.min.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";

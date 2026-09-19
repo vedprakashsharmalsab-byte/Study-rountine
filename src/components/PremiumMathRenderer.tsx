@@ -27,6 +27,11 @@ const MATH_INDICATORS = /[\$\\\{\}\^_\=\+\-\*\/]/;
  * Safely maps fractions, roots, and trig functions without affecting markdown structure.
  */
 function convertPlainMathToLatex(text: string): string {
+    // Fast path: if token doesn't contain operators, symbols, or math keywords, return as-is
+    if (!/[°\/\\=\+\-\*^]|\b(sqrt|sin|cos|tan|cosec|sec|cot|theta|pi|alpha|beta|gamma)\b/i.test(text)) {
+        return text;
+    }
+
     let result = text;
 
     // Convert degrees
@@ -175,13 +180,26 @@ function convertPlainMathToLatex(text: string): string {
     return out;
 }
 
+// High-performance LRU-like Map cache for parsed math content.
+// Eliminates repetitive regex executions and tokenizer passes across re-renders.
+const mathCache = new Map<string, string>();
+const MAX_MATH_CACHE_SIZE = 3000;
+
 function preprocessMathContent(raw: string): string {
   if (!raw || typeof raw !== 'string') return '';
   
+  const cached = mathCache.get(raw);
+  if (cached !== undefined) return cached;
+
   let text = raw.replace(/\\n(?![a-zA-Z])/g, '\n').trim();
   text = text.replace(/\\{2,}([a-zA-Z]+)/g, '\\$1');
 
   if (/^\$\$[\s\S]*\$\$$/.test(text) || (/^\$[^\$]+\$$/.test(text) && !text.slice(1, -1).includes('$'))) {
+    if (mathCache.size >= MAX_MATH_CACHE_SIZE) {
+      const keysToDelete = Array.from(mathCache.keys()).slice(0, 500);
+      for (const k of keysToDelete) mathCache.delete(k);
+    }
+    mathCache.set(raw, text);
     return text;
   }
 
@@ -210,7 +228,13 @@ function preprocessMathContent(raw: string): string {
     return out;
   });
 
-  return processedTokens.join('');
+  const result = processedTokens.join('');
+  if (mathCache.size >= MAX_MATH_CACHE_SIZE) {
+    const keysToDelete = Array.from(mathCache.keys()).slice(0, 500);
+    for (const k of keysToDelete) mathCache.delete(k);
+  }
+  mathCache.set(raw, result);
+  return result;
 }
 
 const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
