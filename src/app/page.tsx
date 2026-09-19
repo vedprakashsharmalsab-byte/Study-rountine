@@ -1499,24 +1499,7 @@ export default function CBSECommandCenter() {
     return () => window.removeEventListener("storage", loadBroadcasts);
   }, []);
 
-  // Secret Admin Portal Backdoor: 5 taps on the logo in 3s OR Ctrl+Shift+Alt+A
-  const [logoTapCount, setLogoTapCount] = useState<number>(0);
-  const logoTapTimerRef = useRef<any>(null);
-
-  const handleLogoSecretTap = () => {
-    setLogoTapCount((prev) => {
-      const next = prev + 1;
-      if (next >= 5) {
-        window.location.href = "/admin";
-        return 0;
-      }
-      return next;
-    });
-    if (logoTapTimerRef.current) clearTimeout(logoTapTimerRef.current);
-    logoTapTimerRef.current = setTimeout(() => {
-      setLogoTapCount(0);
-    }, 3000);
-  };
+  // Administrator Hotkey: Ctrl+Shift+Alt+A
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -3002,11 +2985,17 @@ export default function CBSECommandCenter() {
         }`}>
         <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-3">
           
-          {/* BRAND EMBLEM & SQUIRCLE (Secret 5-Tap Backdoor for Administrator) */}
+          {/* BRAND EMBLEM & SQUIRCLE: Direct Navigation to Home Dashboard */}
           <div
-            onClick={handleLogoSecretTap}
-            className="flex items-center gap-3 shrink-0 cursor-pointer select-none"
-            title="ARETĒ: CBSE Class 10 Command Engine (5-Tap for Admin)"
+            onClick={() => {
+              playSound("click");
+              setActiveTab("chapter_dashboard");
+              if (typeof window !== "undefined") {
+                window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+              }
+            }}
+            className="flex items-center gap-3 shrink-0 cursor-pointer select-none transition-transform active:scale-[0.98]"
+            title="ARETĒ: CBSE Class 10 Command Engine (Home Dashboard)"
           >
             <AreteLogo size="md" isDark={isDark} showText={true} showMotto={false} />
 

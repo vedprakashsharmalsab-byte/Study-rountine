@@ -263,6 +263,21 @@ export default function SettingsModal({
               </div>
             )}
           </div>
+
+          {/* 4. ADMINISTRATOR PORTAL */}
+          <div className="space-y-2 pt-2 border-t border-current/10">
+            <a
+              href="/admin"
+              className={`w-full px-4 py-2.5 rounded-2xl border font-bold text-xs transition-all flex items-center justify-center gap-2 ${
+                isDark
+                  ? "border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300"
+                  : "border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900"
+              }`}
+            >
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Administrator Portal</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
