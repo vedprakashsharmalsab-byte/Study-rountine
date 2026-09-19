@@ -66,12 +66,12 @@ function getTierFromXP(xp: number): string {
 // Authentic Real Historical Candidates from Session Ledger (ALL STARTING CLEAN FROM 0 XP)
 const REAL_HISTORICAL_BASELINE: LeaderboardContender[] = [
   {
-    id: "hist_sarthak",
-    name: "Sarthak Sharma (Class 10-A)",
+    id: "hist_aarav",
+    name: "Aarav Gupta (Class 10-A)",
     school: "CBSE Secondary Wing (Class 10-A)",
-    city: "Churu, Rajasthan",
-    pincode: "331001",
-    location: "Churu, Rajasthan (331001)",
+    city: "Jaipur, Rajasthan",
+    pincode: "302001",
+    location: "Jaipur, Rajasthan (302001)",
     streamCode: "Std Math 041",
     xp: 0,
     tier: "Aspirant",

@@ -730,7 +730,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
               </button>
             </div>
           ) : (
-            <div className="relative ml-2 sm:ml-6 pl-5 sm:pl-8 border-l-2 border-amber-500/30 space-y-8">
+            <div className="relative ml-3 sm:ml-8 pl-5 sm:pl-8 border-l-2 border-amber-500/40 space-y-8">
               {filteredEvents.map((item, idx) => {
                 const isExpanded = expandedEventId === item.id;
                 const isDone = !!memorizedEvents[item.id];
@@ -739,12 +739,12 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                 const isStationActive = activeMetroStation === item.id;
 
                 return (
-                  <div key={item.id} id={`timeline-card-${item.id}`} className="relative group scroll-mt-28">
-                    {/* Glowing Node on the Timeline Track */}
+                  <div key={item.id} id={`timeline-card-${item.id}`} className="relative group scroll-mt-28 min-w-0">
+                    {/* Glowing Node on the Timeline Track - centered directly over border-l-2 */}
                     <div
                       onClick={() => toggleMemorize(item.id, item.event)}
                       title={isDone ? "Memorized! Click to unmark" : "Click to mark memorized (+15 XP)"}
-                      className={`absolute -left-[31px] sm:-left-[39px] top-4 w-5 h-5 rounded-full border-4 cursor-pointer transition-all flex items-center justify-center ${
+                      className={`absolute -left-[31px] sm:-left-[43px] top-4 w-5 h-5 rounded-full border-4 cursor-pointer transition-all flex items-center justify-center z-10 ${
                         isDone
                           ? "bg-emerald-500 border-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.7)] scale-110"
                           : isDark
@@ -757,7 +757,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
 
                     {/* Milestone Card */}
                     <div
-                      className={`p-5 sm:p-6 rounded-3xl border transition-all ${
+                      className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl border transition-all ${
                         isStationActive
                           ? "ring-2 ring-amber-400 border-amber-400 shadow-xl shadow-amber-500/20"
                           : ""
@@ -814,13 +814,13 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                       </div>
 
                       {/* Event Title with Drama Emoji */}
-                      <div className="flex items-start gap-3 mb-3">
+                      <div className="flex items-start gap-3 mb-3 min-w-0">
                         <span className="text-2xl sm:text-3xl p-2 rounded-2xl bg-amber-500/10 border border-amber-500/20 shadow-xs shrink-0 select-none">
                           {toddler.dramaEmoji}
                         </span>
-                        <div>
+                        <div className="min-w-0 flex-1">
                           <h4
-                            className={`text-base sm:text-lg font-black tracking-tight ${
+                            className={`text-base sm:text-lg font-black tracking-tight break-words ${
                               isDone
                                 ? "text-emerald-400"
                                 : isDark
@@ -835,7 +835,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                               {item.keyPersonalities.map((person, pIdx) => (
                                 <span
                                   key={pIdx}
-                                  className={`text-[11px] font-medium px-2 py-0.5 rounded-md border ${
+                                  className={`text-[11px] font-medium px-2 py-0.5 rounded-md border break-words ${
                                     isDark
                                       ? "bg-white/5 border-white/10 text-slate-300"
                                       : "bg-slate-100 border-slate-200 text-slate-700"
@@ -852,7 +852,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                       {/* 1. TODDLER STORY SECTION (When in 'toddler' or 'combo' mode) */}
                       {(timelineDisplayMode === "toddler" || timelineDisplayMode === "combo") && (
                         <div
-                          className={`p-4 sm:p-5 rounded-2xl border transition-all mb-3.5 ${
+                          className={`p-4 sm:p-5 rounded-2xl border transition-all mb-3.5 min-w-0 ${
                             isDark
                               ? "bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-transparent border-amber-500/25"
                               : "bg-gradient-to-r from-amber-50 via-orange-50/50 to-white border-amber-200"
@@ -867,7 +867,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                             </span>
                           </div>
                           <p
-                            className={`text-xs sm:text-sm font-medium leading-relaxed ${
+                            className={`text-xs sm:text-sm font-medium leading-relaxed break-words ${
                               isDark ? "text-amber-100/90" : "text-amber-950"
                             }`}
                           >
@@ -877,7 +877,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                       )}
 
                       {/* 2. INTERACTIVE "WHY DID THIS HAPPEN?" TODDLER MYSTERY CARD */}
-                      <div className="mb-4">
+                      <div className="mb-4 min-w-0">
                         {!isMysteryRevealed ? (
                           <button
                             onClick={() => {
@@ -885,15 +885,15 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                               setRevealedMysteries((prev) => ({ ...prev, [item.id]: true }));
                               onAddXP?.(5, `Curiosity Bonus: Solved ${item.year} Mystery!`);
                             }}
-                            className={`w-full p-3 rounded-2xl border border-dashed transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-left group ${
+                            className={`w-full p-3 rounded-2xl border border-dashed transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-left group min-w-0 ${
                               isDark
                                 ? "bg-white/[0.02] border-amber-500/30 hover:border-amber-400 hover:bg-amber-500/5 text-slate-300"
                                 : "bg-amber-50/40 border-amber-300 hover:border-amber-500 hover:bg-amber-50 text-slate-700"
                             }`}
                           >
-                            <span className="text-xs font-bold flex items-center gap-2">
-                              <span className="text-lg">❓</span>
-                              <span>
+                            <span className="text-xs font-bold flex items-center gap-2 min-w-0 flex-1 break-words">
+                              <span className="text-lg shrink-0">❓</span>
+                              <span className="break-words">
                                 Board Mystery: <strong>{toddler.toddlerQuestion}</strong>
                               </span>
                             </span>
@@ -903,21 +903,21 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                           </button>
                         ) : (
                           <div
-                            className={`p-4 rounded-2xl border animate-fade-in ${
+                            className={`p-4 rounded-2xl border animate-fade-in min-w-0 ${
                               isDark
                                 ? "bg-emerald-950/20 border-emerald-500/40 text-emerald-200"
                                 : "bg-emerald-50 border-emerald-300 text-emerald-950"
                             }`}
                           >
-                            <div className="flex items-center justify-between mb-1.5">
-                              <span className="text-[11px] font-mono font-black uppercase text-emerald-400 flex items-center gap-1.5">
-                                <CheckCircle2 className="w-4 h-4" /> Solved: {toddler.toddlerQuestion}
+                            <div className="flex items-center justify-between mb-1.5 gap-2">
+                              <span className="text-[11px] font-mono font-black uppercase text-emerald-400 flex items-center gap-1.5 break-words">
+                                <CheckCircle2 className="w-4 h-4 shrink-0" /> Solved: {toddler.toddlerQuestion}
                               </span>
-                              <span className="text-[10px] font-mono font-bold text-emerald-400 px-2 py-0.5 rounded-md bg-emerald-500/20">
+                              <span className="text-[10px] font-mono font-bold text-emerald-400 px-2 py-0.5 rounded-md bg-emerald-500/20 shrink-0">
                                 +5 XP Earned
                               </span>
                             </div>
-                            <p className="text-xs sm:text-sm font-medium leading-relaxed">
+                            <p className="text-xs sm:text-sm font-medium leading-relaxed break-words">
                               {toddler.toddlerAnswer}
                             </p>
                           </div>
@@ -1114,8 +1114,8 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
             </div>
 
             {/* Challenge Round Dropdown */}
-            <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-              <div className="fabulous-select-wrapper flex-1 sm:flex-initial min-w-[260px]">
+            <div className="flex items-center gap-2 w-full md:w-auto">
+              <div className="fabulous-select-wrapper w-full sm:w-auto flex-1 sm:flex-initial min-w-0 sm:min-w-[260px]">
                 <select
                   value={selectedChallengeId}
                   onChange={(e) => {
@@ -1143,7 +1143,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                   playSoundEffect("click");
                   loadChallenge(selectedChallengeId);
                 }}
-                className={`p-2 rounded-xl border text-xs cursor-pointer ${
+                className={`p-2 rounded-xl border text-xs cursor-pointer shrink-0 ${
                   isDark
                     ? "bg-white/5 border-white/10 hover:bg-white/10 text-slate-300"
                     : "bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-700"
@@ -1574,7 +1574,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
             }`}
           >
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
+              <table className="w-full min-w-[760px] text-left text-xs">
                 <thead
                   className={`border-b font-mono font-bold uppercase ${
                     isDark
@@ -1583,12 +1583,12 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                   }`}
                 >
                   <tr>
-                    <th className="p-4">Year / Date</th>
-                    <th className="p-4">Chapter & Era</th>
-                    <th className="p-4">Historical Milestone</th>
-                    <th className="p-4">Key Figures</th>
-                    <th className="p-4">Examiner Trap to Avoid</th>
-                    <th className="p-4">Ref</th>
+                    <th className="p-4 w-[110px]">Year / Date</th>
+                    <th className="p-4 w-[140px]">Chapter &amp; Era</th>
+                    <th className="p-4 min-w-[220px]">Historical Milestone</th>
+                    <th className="p-4 w-[150px]">Key Figures</th>
+                    <th className="p-4 min-w-[180px]">Examiner Trap to Avoid</th>
+                    <th className="p-4 w-[90px]">Ref</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">

@@ -73,11 +73,11 @@ export default function SmartStudyTopicCard({
           playSound("click");
           onToggle();
         }}
-        className={`p-5 sm:p-6 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors select-none ${
+        className={`p-5 sm:p-6 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors select-none min-w-0 ${
           isDark ? "hover:bg-white/[0.02]" : "hover:bg-slate-50"
         }`}
       >
-        <div className="space-y-2 flex-1">
+        <div className="space-y-2 flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-black uppercase tracking-wider border ${
               isDark ? "bg-rose-500/20 text-rose-300 border-rose-500/30" : "bg-rose-100 text-rose-800 border-rose-300"
@@ -94,12 +94,12 @@ export default function SmartStudyTopicCard({
             </span>
           </div>
 
-          <h3 className={`text-base sm:text-lg lg:text-xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+          <h3 className={`text-base sm:text-lg lg:text-xl font-black tracking-tight break-words ${isDark ? "text-white" : "text-slate-900"}`}>
             {topic.topicTitle}
           </h3>
 
           {!isExpanded && (
-            <p className={`text-xs line-clamp-1 italic ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+            <p className={`text-xs line-clamp-1 italic break-words ${isDark ? "text-slate-400" : "text-slate-600"}`}>
               {toddlerGuide.toddlerAnalogy.hook} • {toddlerGuide.toddlerAnalogy.scenario.substring(0, 110)}...
             </p>
           )}
@@ -121,14 +121,14 @@ export default function SmartStudyTopicCard({
 
       {/* 2. EXPANDED SMART STUDY CONTENT (ZERO BORING PARAGRAPHS) */}
       {isExpanded && (
-        <div className="px-5 pb-6 sm:px-6 sm:pb-6 space-y-6 border-t border-white/10 pt-5">
+        <div className="px-5 pb-6 sm:px-6 sm:pb-6 space-y-6 border-t border-white/10 pt-5 min-w-0">
           {/* INTERACTIVE TRUTH OR TRAP? TAP-TO-TEST CARD */}
           <div
             onClick={() => {
               playSound("reveal");
               setIsTrapRevealed(prev => !prev);
             }}
-            className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer select-none relative overflow-hidden ${
+            className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer select-none relative overflow-hidden min-w-0 ${
               isTrapRevealed
                 ? isDark
                   ? "bg-gradient-to-r from-rose-950/40 via-amber-950/20 to-black border-amber-500/40 shadow-lg"
@@ -138,15 +138,15 @@ export default function SmartStudyTopicCard({
                 : "bg-gradient-to-r from-rose-50 to-amber-50/60 border-rose-200 hover:border-amber-400"
             }`}
           >
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex items-start gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 min-w-0">
+              <div className="flex items-start gap-3 min-w-0 flex-1">
                 <div className={`p-2.5 rounded-xl shrink-0 mt-0.5 ${
                   isTrapRevealed ? "bg-amber-500 text-slate-950" : "bg-rose-500 text-white animate-pulse"
                 }`}>
                   <HelpCircle className="w-4 h-4" />
                 </div>
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
+                <div className="space-y-1 min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="text-[10px] font-mono font-black uppercase tracking-wider text-rose-400">
                       🕹️ Interactive Challenge • Tap to Test Yourself
                     </span>
@@ -154,16 +154,16 @@ export default function SmartStudyTopicCard({
                       {isTrapRevealed ? "Tap to Hide" : "Tap to Reveal"}
                     </span>
                   </div>
-                  <h4 className={`text-xs sm:text-sm font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                  <h4 className={`text-xs sm:text-sm font-black break-words ${isDark ? "text-white" : "text-slate-900"}`}>
                     {toddlerGuide.truthOrTrap.question}
                   </h4>
-                  <p className={`text-xs italic ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                  <p className={`text-xs italic break-words ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                     Claim: &ldquo;{toddlerGuide.truthOrTrap.trapStatement}&rdquo;
                   </p>
                 </div>
               </div>
 
-              <span className={`text-[10px] font-mono font-black uppercase px-2.5 py-1 rounded-lg shrink-0 border ${
+              <span className={`text-[10px] font-mono font-black uppercase px-2.5 py-1 rounded-lg shrink-0 border self-start sm:self-auto ${
                 isTrapRevealed
                   ? "bg-amber-500 text-slate-950 border-amber-400 font-black"
                   : isDark ? "bg-white/10 text-slate-300 border-white/20" : "bg-slate-200 text-slate-600 border-slate-300"
@@ -192,13 +192,13 @@ export default function SmartStudyTopicCard({
           </div>
 
           {/* MODE SELECTOR PILLS */}
-          <div className={`flex items-center gap-1.5 p-1.5 rounded-2xl border flex-wrap ${isDark ? "bg-black/20 border-white/5" : "bg-slate-100 border-slate-200"}`}>
+          <div className={`flex items-center gap-1.5 p-1.5 rounded-2xl border overflow-x-auto no-scrollbar sm:flex-wrap ${isDark ? "bg-black/20 border-white/5" : "bg-slate-100 border-slate-200"}`}>
             <button
               onClick={() => {
                 playSound("pop");
                 setActiveMode("toddler");
               }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap ${
                 activeMode === "toddler"
                   ? "bg-amber-500 text-slate-950 shadow-md font-black scale-102"
                   : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-950"
@@ -213,7 +213,7 @@ export default function SmartStudyTopicCard({
                 playSound("pop");
                 setActiveMode("storyboard");
               }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap ${
                 activeMode === "storyboard"
                   ? "bg-rose-500 text-white shadow-md font-black scale-102"
                   : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-950"
@@ -228,7 +228,7 @@ export default function SmartStudyTopicCard({
                 playSound("pop");
                 setActiveMode("topper");
               }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap ${
                 activeMode === "topper"
                   ? "bg-blue-500 text-white shadow-md font-black scale-102"
                   : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-950"
@@ -243,7 +243,7 @@ export default function SmartStudyTopicCard({
                 playSound("pop");
                 setActiveMode("practice");
               }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap ${
                 activeMode === "practice"
                   ? "bg-emerald-500 text-slate-950 shadow-md font-black scale-102"
                   : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-950"
@@ -258,20 +258,20 @@ export default function SmartStudyTopicCard({
               MODE 1: TODDLER STORY (ELI5 - HILARIOUS & INTUITIVE MENTAL MODEL)
               ========================================================================= */}
           {activeMode === "toddler" && (
-            <div className="space-y-5 animate-fadeIn">
+            <div className="space-y-5 animate-fadeIn min-w-0">
               {/* THE TODDLER SCENARIO HERO */}
               <div
-                className={`p-5 sm:p-6 rounded-3xl border relative overflow-hidden ${
+                className={`p-5 sm:p-6 rounded-3xl border relative overflow-hidden min-w-0 ${
                   isDark
                     ? "bg-gradient-to-br from-amber-950/40 via-[#0d1424] to-black border-amber-500/30 shadow-xl"
                     : "bg-gradient-to-br from-amber-50 via-orange-50/40 to-yellow-50/60 border-amber-200 shadow-md"
                 }`}
               >
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 min-w-0">
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center text-2xl font-black shrink-0 shadow-lg shadow-amber-500/30">
                     👶
                   </div>
-                  <div className="space-y-2 flex-1">
+                  <div className="space-y-2 flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500 text-slate-950">
                         Explain Like I&apos;m 5 • Toddler Mental Model
@@ -281,13 +281,13 @@ export default function SmartStudyTopicCard({
                       </span>
                     </div>
 
-                    <p className={`text-sm sm:text-base leading-relaxed font-medium ${isDark ? "text-slate-100" : "text-slate-800"}`}>
+                    <p className={`text-sm sm:text-base leading-relaxed font-medium break-words ${isDark ? "text-slate-100" : "text-slate-800"}`}>
                       {toddlerGuide.toddlerAnalogy.scenario}
                     </p>
 
-                    <div className="pt-2 flex items-center gap-2 text-xs font-bold text-amber-400">
+                    <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-bold text-amber-400">
                       <span>💡 The Core Realization:</span>
-                      <span className={isDark ? "text-amber-200" : "text-amber-900"}>
+                      <span className={`break-words ${isDark ? "text-amber-200" : "text-amber-900"}`}>
                         {toddlerGuide.toddlerAnalogy.moralOrAha}
                       </span>
                     </div>
