@@ -426,7 +426,7 @@ export default function CommandCenterHomeView({
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-3 sm:px-5 py-4 font-sans antialiased relative z-10 space-y-8">
+    <div className="w-full py-2 font-sans antialiased relative z-10 space-y-8">
       
       {/* =========================================================================
           ARETÉ WISDOM & DYNAMIC MOTIVATIONAL ENGINE (FOR LOWER / ALL XP TIERS)

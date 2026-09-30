@@ -3208,7 +3208,7 @@ export default function CBSECommandCenter() {
         <div className={`border-b transition-colors backdrop-blur-2xl ${
           isDark ? "border-white/10 bg-[#070a14]/95" : "border-slate-200/90 bg-white/95"
         }`}>
-          <div className="max-w-5xl mx-auto px-3.5 sm:px-6 py-2">
+          <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-2">
           {(() => {
             const currentCat = CATEGORY_DEFINITIONS.find((c) => c.id === activeCategory) || CATEGORY_DEFINITIONS[0];
             return (
@@ -3500,7 +3500,7 @@ export default function CBSECommandCenter() {
       {/* =========================================================================
           MAIN APPLICATION CONTENT
           ========================================================================= */}
-      <main className="main-content-area max-w-5xl mx-auto px-3.5 sm:px-6 pt-4 sm:pt-6 space-y-5 sm:space-y-6">
+      <main className="main-content-area max-w-7xl mx-auto px-3.5 sm:px-6 pt-4 sm:pt-6 space-y-5 sm:space-y-6">
 
         {/* =========================================================================
             ADMIN BROADCAST BANNER (LIVE FROM /admin CONSOLE)
