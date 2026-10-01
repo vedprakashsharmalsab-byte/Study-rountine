@@ -207,19 +207,19 @@ export default function CommandCenterHomeView({
   }, []);
 
   // Time-aware greeting
-  const greetingText = useMemo(() => {
+  const [greetingText] = useState<string>(() => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good morning";
     if (hour < 17) return "Good afternoon";
     return "Good evening";
-  }, []);
+  });
 
   // Days until CBSE Boards (Feb 1, 2027)
-  const daysUntilBoards = useMemo(() => {
+  const [daysUntilBoards] = useState<number>(() => {
     const boardDate = new Date("2027-02-01T09:00:00").getTime();
     const diff = boardDate - Date.now();
     return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
-  }, []);
+  });
 
   // Spatial Focus Sprint Trigger Ref (prevents 1s interval re-renders on entire view)
   const pomodoroTriggerRef = useRef<(() => void) | null>(null);
@@ -255,7 +255,7 @@ export default function CommandCenterHomeView({
   const currentChapterNum = currentChapter.ncertChapterNo || 1;
 
   // Chapter Topics Progress
-  const chapterTopics = currentChapter.topics || [];
+  const chapterTopics = useMemo(() => currentChapter.topics || [], [currentChapter]);
   const completedInChapter = chapterTopics.filter((t) => completedTopicIds[t.id]).length;
   const chapterProgressPercent = chapterTopics.length > 0
     ? Math.round((completedInChapter / chapterTopics.length) * 100)
@@ -525,6 +525,45 @@ export default function CommandCenterHomeView({
               </button>
             );
           })}
+        </div>
+
+        {/* MATHS 100/100 MASTER PREPARATION SYSTEM (CH 1–5) BANNER */}
+        <div className={`mx-4 sm:mx-6 my-4 p-4 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md ${
+          isDark
+            ? "bg-gradient-to-r from-indigo-950/80 via-slate-900 to-emerald-950/60 border-indigo-500/40 text-white shadow-[0_0_25px_rgba(99,102,241,0.15)]"
+            : "bg-gradient-to-r from-indigo-50 via-white to-emerald-50 border-indigo-200 text-slate-900 shadow-sm"
+        }`}>
+          <div className="flex items-center gap-3">
+            <div className={`p-2.5 rounded-xl border shrink-0 ${
+              isDark ? "bg-indigo-500/20 text-indigo-400 border-indigo-500/30" : "bg-indigo-100 text-indigo-700 border-indigo-200"
+            }`}>
+              <Calculator className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  Target: 100/100 Board Mastery
+                </span>
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  Chapters 1–5 Engine
+                </span>
+              </div>
+              <h4 className="text-sm font-bold mt-1">Class 10 Mathematics 100/100 Preparation System</h4>
+              <p className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                Real Numbers, Polynomials, Linear Eq, Quadratics & AP with 5-Level Graded Practice, 10-Yr PYQ Matrix &amp; Error Notebook.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              playSound("click");
+              setActiveTab("math_mastery");
+            }}
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-500 hover:to-emerald-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 shrink-0 transition active:scale-95 cursor-pointer"
+          >
+            <span>Launch Maths Mastery</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
 
         {/* =========================================================================

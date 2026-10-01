@@ -1512,7 +1512,6 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
                   isDark ? "bg-black/40" : "bg-slate-100"
                 }`}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 {failedImages[img.src] ? (
                   <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center space-y-2">
                     <Sparkles className="w-8 h-8 text-amber-500 opacity-70 animate-pulse" />
@@ -1699,7 +1698,6 @@ export default function MnemonicGallery({ isDark = true }: { isDark?: boolean })
                   <p className="text-xs text-slate-400 max-w-md">{activeModalImage.description}</p>
                 </div>
               ) : (
-                /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   src={activeModalImage.src}
                   alt={activeModalImage.title}

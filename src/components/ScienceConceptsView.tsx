@@ -77,7 +77,6 @@ export default function ScienceConceptsView({
   // Sync when activeChapterNo changes from parent (Chapter Command)
   useEffect(() => {
     if (activeChapterNo !== undefined) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedChapterNo(activeChapterNo);
     }
   }, [activeChapterNo]);
@@ -103,7 +102,6 @@ export default function ScienceConceptsView({
     chapterTopics.forEach((t) => {
       newState[t.id] = true;
     });
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setExpandedTopicIds(newState);
 
     // Expand the first 2 examples of each topic by default
@@ -113,7 +111,6 @@ export default function ScienceConceptsView({
         exState[ex.id] = true;
       });
     });
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setExpandedExampleIds(exState);
   }, [currentChNo, chapterTopics]);
 

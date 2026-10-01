@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect, useRef } from "react";
+import Link from "next/link";
 import {
   BookOpen,
   FlaskConical,
@@ -256,10 +257,8 @@ export default function ConceptsHubView({
       prevChRef.current = initialChapterNo;
       const targetSub = initialSubject || activeSubject;
       if (targetSub === "math") {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveMathChapterNo(initialChapterNo);
       } else if (targetSub === "science") {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveScienceChapterNo(initialChapterNo);
       } else if (targetSub === "sst") {
         setActiveSSTChapterNo(initialChapterNo);
@@ -485,7 +484,7 @@ export default function ConceptsHubView({
           <div className={`p-1.5 rounded-2xl border flex items-center gap-1.5 w-full sm:w-auto justify-center ${
             isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"
           }`}>
-            <a
+            <Link
               href="/?tab=concepts&subject=math&chapter=1"
               onClick={(e) => {
                 if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
@@ -505,8 +504,8 @@ export default function ConceptsHubView({
               }`}
             >
               <span>📐 Mathematics (14 Ch)</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/?tab=concepts&subject=science&chapter=1"
               onClick={(e) => {
                 if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
@@ -526,8 +525,8 @@ export default function ConceptsHubView({
               }`}
             >
               <span>🧪 Science (13 Ch)</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/?tab=concepts&subject=sst&chapter=1"
               onClick={(e) => {
                 if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
@@ -547,7 +546,7 @@ export default function ConceptsHubView({
               }`}
             >
               <span>🌍 Social Science (10 Chs)</span>
-            </a>
+            </Link>
 
             {/* 4th Fast Access: Chemistry Basics */}
             <button

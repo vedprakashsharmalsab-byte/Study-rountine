@@ -53,6 +53,10 @@ const CoverageMatrixView = dynamic(
   () => import("@/components/CoverageMatrixView"),
   { loading: TabSkeleton, ssr: false }
 );
+const Math100MasteryView = dynamic(
+  () => import("@/components/Math100MasteryView"),
+  { loading: TabSkeleton, ssr: false }
+);
 import CommandCenterHomeView from "@/components/CommandCenterHomeView";
 import AreteAccessGateModal, {
   StudentProfile,
@@ -70,6 +74,7 @@ import {
   Atom,
   ArrowRight,
   Award,
+  Calculator,
   Beaker,
   BookOpen,
   Check,
@@ -782,40 +787,8 @@ export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
 }: {
   isDark: boolean;
 }) {
-  const [now, setNow] = useState(() => Date.now());
-
-  useEffect(() => {
-    const timer = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const upcomingExam = useMemo(() => getUpcomingTestSeriesExam(TEST_SERIES_I_SCHEDULE, now), [now]);
-
-  const examLabel = useMemo(() => {
-    if (!upcomingExam) return null;
-    const parts = upcomingExam.date.split("-");
-    const monthNames = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-    const month = monthNames[parseInt(parts[1], 10)] || parts[1];
-    const day = parseInt(parts[2], 10);
-    const shortSub = upcomingExam.subject.split(" ")[0];
-    return `${month} ${day} ${shortSub}`;
-  }, [upcomingExam]);
-
   return (
     <>
-      {upcomingExam && examLabel && (
-        <>
-          <span className="relative flex h-2 w-2 shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-          </span>
-          <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-amber-400 group-hover:underline" : "text-amber-700 group-hover:underline"}`}>
-            {examLabel}:
-          </span>
-          <LiveCountdown targetDate={upcomingExam.date} variant="badge" colorScheme="amber" isDark={isDark} />
-          <span className={`${isDark ? "text-white/30" : "text-slate-400"} select-none inline-flex items-center leading-none`}>•</span>
-        </>
-      )}
       <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>Boards:</span>
       <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
     </>
@@ -827,6 +800,8 @@ export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
 export const IsolatedConfetti = React.memo(function IsolatedConfetti({ trigger }: { trigger: number }) {
   const [show, setShow] = useState(false);
   const [key, setKey] = useState(0);
+  // Generate deterministic offsets once at mount (no Math.random during render)
+  const [offsets] = useState<number[]>(() => Array.from({ length: 28 }, (_, i) => i * 3.57));
 
   useEffect(() => {
     if (trigger === 0) return;
@@ -852,7 +827,7 @@ export const IsolatedConfetti = React.memo(function IsolatedConfetti({ trigger }
           key={i}
           style={{
             position: "absolute",
-            left: `${(i * 3.57 + Math.random() * 3) % 100}%`,
+            left: `${(offsets[i] + (i * 1.13)) % 100}%`,
             top: `-${8 + (i % 5) * 4}px`,
             width: `${5 + (i % 4) * 2}px`,
             height: `${5 + (i % 4) * 2}px`,
@@ -865,6 +840,7 @@ export const IsolatedConfetti = React.memo(function IsolatedConfetti({ trigger }
     </div>
   );
 });
+
 
 // Memoized Pomodoro Focus Timer: ticks internally every second without re-rendering the root Home tree
 export const IsolatedFocusTimer = React.memo(function IsolatedFocusTimer({
@@ -1041,17 +1017,17 @@ export default function CBSECommandCenter() {
   }, []);
   
   const VALID_TABS = useMemo(() => [
-    "chapter_dashboard", "concepts", "theorems", "activities", "questions",
+    "chapter_dashboard", "math_mastery", "concepts", "theorems", "activities", "questions",
     "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
     "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
     "timelines", "english", "hindi", "tools_diagrams", "settings"
   ], []);
 
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams" | "settings">(() => {
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "math_mastery" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams" | "settings">(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const urlTab = params.get("tab");
-      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams", "settings"];
+      const validTabs = ["chapter_dashboard", "math_mastery", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams", "settings"];
       if (urlTab && validTabs.includes(urlTab)) {
         return urlTab as any;
       }
@@ -1367,7 +1343,6 @@ export default function CBSECommandCenter() {
       }, 400);
       return () => clearTimeout(t);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNameModalOpen, detectExactGpsLocation]);
 
   const handleSaveStudentName = (e: React.FormEvent) => {
@@ -1634,7 +1609,7 @@ export default function CBSECommandCenter() {
       clearInterval(interval);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [activeTab, conceptsSubject]);
+  }, [activeTab, conceptsSubject, conceptsChapterNo, studentFullName]);
 
   // 4-Pillar Master Workspaces Architecture (Clean, Uncluttered, 100% Content Preserved)
   type MasterCategory = "command" | "concepts" | "practice" | "tools";
@@ -1642,7 +1617,7 @@ export default function CBSECommandCenter() {
   const activeCategory: MasterCategory = useMemo(() => {
     if (["chapter_dashboard", "today", "test_series", "syllabus", "roadmap"].includes(activeTab)) return "command";
     if (["concepts", "english", "hindi", "timelines", "theorems", "reactions", "activities", "experiments", "diagrams"].includes(activeTab)) return "concepts";
-    if (["questions", "hots"].includes(activeTab)) return "practice";
+    if (["questions", "hots", "math_mastery"].includes(activeTab)) return "practice";
     if (["mnemonics", "flashcards", "common_mistakes", "tools_diagrams"].includes(activeTab)) return "tools";
     return "command";
   }, [activeTab]);
@@ -1671,6 +1646,7 @@ export default function CBSECommandCenter() {
       defaultTab: "chapter_dashboard",
       items: [
         { id: "chapter_dashboard", label: "Study Command Center", icon: Target },
+        { id: "math_mastery", label: "Maths 100/100 (Ch 1-5)", icon: Calculator, count: "Ch 1–5" },
         { id: "roadmap", label: "30-Day Blueprint", icon: Compass },
       ]
     },
@@ -1696,8 +1672,9 @@ export default function CBSECommandCenter() {
       id: "practice",
       label: "Practice",
       icon: Zap,
-      defaultTab: "questions",
+      defaultTab: "math_mastery",
       items: [
+        { id: "math_mastery", label: "Maths 100/100 Master", icon: Calculator, count: "Ch 1–5 Mastery" },
         { id: "questions", label: "Question Bank", icon: Zap, count: "1,200+" },
         { id: "hots", label: "Competitive HOTS", icon: Flame, count: "35 Sets" },
       ]
@@ -2070,7 +2047,7 @@ export default function CBSECommandCenter() {
   // Instant In-Memory Cache for Chapter Question Banks (Supports Math & Science)
   const chapterCacheRef = useRef<Record<string, VaultQuestion[]>>({});
 
-  const loadChapterData = (
+  const loadChapterData = useCallback((
     chapterId: number, 
     isPreload = false, 
     subject: "math" | "science" | "sst" | "english" | "hindi" = activeVaultSubject
@@ -2106,7 +2083,7 @@ export default function CBSECommandCenter() {
         localStorage.setItem(`cbse_last_vault_${subject}_chapter`, chapterId.toString());
       }
     }
-  };
+  }, [activeVaultSubject]);
 
   // Initial load: restore chapter from URL or localStorage
   useEffect(() => {
@@ -2132,7 +2109,7 @@ export default function CBSECommandCenter() {
     } else {
       loadChapterData(6, false, "math");
     }
-  }, []);
+  }, [loadChapterData, activeTab]);
 
   // PopState Listener: Handles browser Back/Forward (Undo/Redo) buttons natively
   const isNavigatingViaHistory = useRef(false);
@@ -2143,7 +2120,7 @@ export default function CBSECommandCenter() {
       const params = new URLSearchParams(window.location.search);
       const urlTab = params.get("tab");
       const validTabs = [
-        "chapter_dashboard", "concepts", "theorems", "activities", "questions",
+        "chapter_dashboard", "math_mastery", "concepts", "theorems", "activities", "questions",
         "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
         "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
         "timelines", "english", "hindi", "tools_diagrams"
@@ -2181,7 +2158,7 @@ export default function CBSECommandCenter() {
 
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
+  }, [loadChapterData]);
 
   // Synchronize state changes to URL and browser history (pushState)
   useEffect(() => {
@@ -2231,7 +2208,7 @@ export default function CBSECommandCenter() {
       correct: correctQuestions.length,
       accuracy
     };
-  }, [mcqQuestionsInVault, selectedMcqOptions, resolveCorrectOptionIndex]);
+  }, [mcqQuestionsInVault, selectedMcqOptions]);
 
   const activeExam = useMemo(() => {
     return TEST_SERIES_I_SCHEDULE.find((e) => e.id === selectedExamId) || TEST_SERIES_I_SCHEDULE[0];
@@ -2312,7 +2289,8 @@ export default function CBSECommandCenter() {
     totalFocusMins,
     customFlashcards,
     customQuestions,
-    correctMcqQuestionIds
+    correctMcqQuestionIds,
+    studentProfile
   ]);
 
   // Unified Singleton Audio Synthesizer (Zero-Allocation & Zero-Lag)
@@ -2624,7 +2602,11 @@ export default function CBSECommandCenter() {
     totalFocusMins,
     theme,
     isSoundMuted,
-    mounted
+    mounted,
+    myMistakes,
+    resolvedMistakeIds,
+    correctMcqQuestionIds,
+    selectedMcqOptions
   ]);
 
   // =========================================================================
@@ -3564,67 +3546,8 @@ export default function CBSECommandCenter() {
         {activeTab === "test_series" && (
           <div className="space-y-5 sm:space-y-6 animate-fade-in">
             
-            {/* HERO DUAL COUNTDOWN CARDS: TEST SERIES I & FEB 1 FINAL BOARDS */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
-              
-              {/* CARD 1: TEST SERIES I (NEXT EXAM) */}
-              <div className={`relative p-5 sm:p-7 rounded-3xl border transition-all overflow-hidden apple-card-hover ${
-                isDark
-                  ? "bg-gradient-to-br from-[#1c1407] via-[#121829] to-[#0a0d18] border-amber-500/40 shadow-[0_12px_40px_rgba(245,158,11,0.15)]"
-                  : "bg-gradient-to-br from-amber-50/90 via-white to-orange-50/50 border-amber-300 shadow-[0_10px_30px_rgba(245,158,11,0.12)]"
-              }`}>
-                {/* Radial Glow Highlight */}
-                <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-amber-500/15 blur-3xl pointer-events-none" />
-
-                <div className="flex items-center justify-between gap-2 mb-3 relative z-10">
-                  <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-black tracking-wider uppercase border shadow-xs leading-none inline-flex items-center ${
-                    isDark 
-                      ? "bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]" 
-                      : "bg-amber-100 text-amber-950 border-amber-400 font-bold"
-                  }`}>
-                    ⚡ LSA TEST SERIES I (SEPT 14–26)
-                  </span>
-                  <span className={`text-xs font-mono font-black flex items-center gap-1.5 leading-none ${
-                    isDark ? "text-amber-400" : "text-amber-800"
-                  }`}>
-                    {new Date(activeExam.date + "T12:30:00").getTime() < Date.now() ? (
-                      <span className={`font-bold ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>✓</span>
-                    ) : (
-                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping shrink-0"></span>
-                    )}
-                    <span>Exam {activeExam.displayDate}</span>
-                  </span>
-                </div>
-
-                <h3 className={`text-xl sm:text-2xl font-black tracking-tight mb-1 relative z-10 flex flex-wrap items-baseline gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
-                  <span>{new Date(activeExam.date + "T12:30:00").getTime() < Date.now() ? "Concluded Paper:" : "Next Upcoming Paper:"}</span>
-                  <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">{activeExam.subject}</span>
-                  <span className="text-xs font-mono font-normal opacity-70">({activeExam.code})</span>
-                </h3>
-
-                <p className={`text-xs mb-4 relative z-10 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
-                  Lead Faculty: <strong className={isDark ? "text-amber-200" : "text-slate-900"}>{activeExam.teachers}</strong>
-                </p>
-
-                {/* 4-BLOCK COUNTDOWN TIMER */}
-                <div className="relative z-10 mb-4">
-                  <LiveCountdown targetDate={activeExam.date} variant="card-grid" colorScheme="amber" isDark={isDark} />
-                </div>
-
-                {/* PROGRESS BAR */}
-                <div className={`pt-3 border-t relative z-10 space-y-1.5 ${isDark ? "border-white/[0.08]" : "border-amber-200"}`}>
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>Curriculum Mastery Grip</span>
-                    <span className={`font-black ${isDark ? "text-amber-400" : "text-amber-800"}`}>{testSeriesPercentage}% ({testSeriesCompleted}/{testSeriesTotal} Topics)</span>
-                  </div>
-                  <div className={`w-full h-2 rounded-full overflow-hidden border ${isDark ? "bg-black/40 border-white/5" : "bg-slate-200 border-slate-300"}`}>
-                    <div 
-                      className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]"
-                      style={{ width: `${testSeriesPercentage}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
+            {/* HERO COUNTDOWN CARD: FEB 1 FINAL BOARDS (Test Series 1 timer temporarily removed as exams concluded) */}
+            <div className="grid grid-cols-1 gap-4 sm:gap-5">
 
               {/* CARD 2: FEB 1, 2027 FINAL CBSE BOARD EXAMINATIONS */}
               <div className={`relative p-5 sm:p-7 rounded-3xl border transition-all overflow-hidden apple-card-hover ${
@@ -4645,6 +4568,11 @@ export default function CBSECommandCenter() {
               setActiveTab("questions");
             }}
           />
+        )}
+
+        {/* ===================== TAB: CLASS 10 MATHEMATICS 100/100 MASTERY SYSTEM ===================== */}
+        {activeTab === "math_mastery" && (
+          <Math100MasteryView />
         )}
 
         {/* ===================== TAB 4: TRAINING VAULT (PREMIUM) ===================== */}

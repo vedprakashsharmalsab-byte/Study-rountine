@@ -86,7 +86,7 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
     }
 
     return [{ tag: "Ans.", content: formatSubItems(answer) }];
-  }, [rawSteps, question.answer, isPureMathDerivation]);
+  }, [question.answer, isPureMathDerivation]);
 
   // Determine if question has a separate, concise final result vs a full theory explanation
   const isMultiParagraphTheory = question.answer && question.answer.length > 160;

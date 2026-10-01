@@ -361,7 +361,7 @@ export default function TrigValuesMasterTable({ isDark = true }: TrigValuesMaste
           </span>
         </div>
         <div className="text-xs font-mono text-amber-400">
-          ★ Pro Tip: Tan 90°, Csc 0°, Sec 90°, Cot 0° are ALL "Not Defined" (Division by 0)
+          ★ Pro Tip: Tan 90°, Csc 0°, Sec 90°, Cot 0° are ALL &quot;Not Defined&quot; (Division by 0)
         </div>
       </div>
     </div>

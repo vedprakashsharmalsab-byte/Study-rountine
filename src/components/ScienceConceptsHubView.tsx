@@ -282,7 +282,6 @@ export default function ScienceConceptsHubView({
 
   useEffect(() => {
     if (activeChapterNo !== undefined) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedChapterNo(activeChapterNo);
     }
   }, [activeChapterNo]);
@@ -301,7 +300,6 @@ export default function ScienceConceptsHubView({
     currentChapter.sections.forEach((s, idx) => {
       init[s.id] = idx < 2; // first 2 expanded by default
     });
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setExpandedSectionIds(init);
   }, [currentChNo, currentChapter]);
 

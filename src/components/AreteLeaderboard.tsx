@@ -106,14 +106,10 @@ export default function AreteLeaderboard({
   const [isSyncing, setIsSyncing] = useState(false);
   const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null);
 
-  // Motivational quote state for climbers
-  const [motivationalQuoteIdx, setMotivationalQuoteIdx] = useState(0);
-
-  useEffect(() => {
-    // Pick a random inspirational quote on mount
-    const initialIdx = Math.floor(Math.random() * ARETE_WISDOM_VAULT.length);
-    setMotivationalQuoteIdx(initialIdx);
-  }, []);
+  // Motivational quote state for climbers — initialized once at mount
+  const [motivationalQuoteIdx, setMotivationalQuoteIdx] = useState(
+    () => Math.floor(Math.random() * ARETE_WISDOM_VAULT.length)
+  );
 
   const currentQuote: WisdomQuote = useMemo(() => {
     return ARETE_WISDOM_VAULT[motivationalQuoteIdx % ARETE_WISDOM_VAULT.length] || ARETE_WISDOM_VAULT[0];

@@ -952,7 +952,7 @@ export default function AdminPage() {
                 isDark ? "bg-[#0b101c] border-cyan-500/30 shadow-lg shadow-cyan-950/20" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Today's Visits</span>
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Today&apos;s Visits</span>
                   <div className="w-8 h-8 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
                     <TrendingUp className="w-4 h-4" />
                   </div>
