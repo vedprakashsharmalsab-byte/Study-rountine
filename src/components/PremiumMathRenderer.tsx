@@ -359,11 +359,12 @@ const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
   className = "",
   inline = false
 }: PremiumMathRendererProps) {
-  if (!content) return null;
-
   const processedContent = useMemo(() => {
+    if (!content) return "";
     return preprocessMathContent(content);
   }, [content]);
+
+  if (!content) return null;
 
   const components = isDark
     ? (inline ? COMPONENTS_DARK_INLINE : COMPONENTS_DARK_BLOCK)
