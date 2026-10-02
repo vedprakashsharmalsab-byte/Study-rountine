@@ -110,7 +110,6 @@ interface ConceptsHubViewProps {
 
 // Science Chapter Metadata with Official CBSE Units
 const SCIENCE_CHAPTER_LIST = [
-  { no: 0, name: "Basics of Chemistry Required for Class 10", shortName: "Foundation: Basics", discipline: "Chemistry", unit: "Bridge Course: Fundamentals", weightage: "100% Prerequisite", icon: FlaskConical },
   { no: 1, name: "Chemical Reactions and Equations", shortName: "Ch 1: Reactions", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "6–8 Marks", icon: FlaskConical },
   { no: 2, name: "Acids, Bases and Salts", shortName: "Ch 2: Acids & Salts", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "6–8 Marks", icon: FlaskConical },
   { no: 3, name: "Metals and Non-Metals", shortName: "Ch 3: Metals & Non-metals", discipline: "Chemistry", unit: "Unit I: Chemical Substances", weightage: "7–9 Marks", icon: FlaskConical },

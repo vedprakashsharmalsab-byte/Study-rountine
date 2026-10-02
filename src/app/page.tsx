@@ -31,6 +31,7 @@ const ScienceConceptsView = dynamic(() => import("@/components/ScienceConceptsVi
 const ScienceActivitiesView = dynamic(() => import("@/components/ScienceActivitiesView"), { loading: TabSkeleton, ssr: false });
 const ConceptsHubView = dynamic(() => import("@/components/ConceptsHubView"), { loading: TabSkeleton, ssr: false });
 const ChemistryReactionsView = dynamic(() => import("@/components/ChemistryReactionsView"), { loading: TabSkeleton, ssr: false });
+const ChemistryBasicsMasterView = dynamic(() => import("@/components/ChemistryBasicsMasterView"), { loading: TabSkeleton, ssr: false });
 const ScienceDiagramsView = dynamic(() => import("@/components/ScienceDiagramsView"), { loading: TabSkeleton, ssr: false });
 const CompetitiveHotsView = dynamic(() => import("@/components/CompetitiveHotsView"), { loading: TabSkeleton, ssr: false });
 const TimelinesMasterView = dynamic(
@@ -1020,14 +1021,14 @@ export default function CBSECommandCenter() {
     "chapter_dashboard", "concepts", "theorems", "activities", "questions",
     "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
     "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
-    "timelines", "english", "hindi", "tools_diagrams", "settings"
+    "timelines", "english", "hindi", "tools_diagrams", "chemistry_basics", "settings"
   ], []);
 
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams" | "settings">(() => {
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams" | "chemistry_basics" | "settings">(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const urlTab = params.get("tab");
-      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams", "settings"];
+      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams", "chemistry_basics", "settings"];
       if (urlTab && validTabs.includes(urlTab)) {
         return urlTab as any;
       }
@@ -1616,7 +1617,7 @@ export default function CBSECommandCenter() {
 
   const activeCategory: MasterCategory = useMemo(() => {
     if (["chapter_dashboard", "today", "test_series", "syllabus", "roadmap"].includes(activeTab)) return "command";
-    if (["concepts", "english", "hindi", "timelines", "theorems", "reactions", "activities", "experiments", "diagrams"].includes(activeTab)) return "concepts";
+    if (["concepts", "english", "hindi", "timelines", "theorems", "reactions", "activities", "experiments", "diagrams", "chemistry_basics"].includes(activeTab)) return "concepts";
     if (["questions", "hots"].includes(activeTab)) return "practice";
     if (["mnemonics", "flashcards", "common_mistakes", "tools_diagrams"].includes(activeTab)) return "tools";
     return "command";
@@ -2121,14 +2122,10 @@ export default function CBSECommandCenter() {
         "chapter_dashboard", "concepts", "theorems", "activities", "questions",
         "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
         "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
-        "timelines", "english", "hindi", "tools_diagrams"
+        "timelines", "english", "hindi", "tools_diagrams", "chemistry_basics"
       ];
 
-      if (urlTab === "chemistry_basics") {
-        setActiveTab("concepts");
-        setConceptsSubject("science");
-        setConceptsChapterNo(0);
-      } else if (urlTab && validTabs.includes(urlTab)) {
+      if (urlTab && validTabs.includes(urlTab)) {
         setActiveTab(urlTab as any);
       } else {
         setActiveTab("chapter_dashboard");
@@ -2963,7 +2960,7 @@ export default function CBSECommandCenter() {
             ? "border-white/10 bg-[#080b14]/92 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
             : "border-slate-200/80 bg-white/95 text-slate-900 shadow-xs"
         }`}>
-        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-3">
+        <div className="w-full max-w-7xl mx-auto px-2.5 sm:px-4 lg:px-6 py-2 flex items-center justify-between gap-1.5 sm:gap-2.5 min-w-0">
           
           {/* BRAND EMBLEM & SQUIRCLE: Direct Navigation to Home Dashboard */}
           <div
@@ -2974,12 +2971,12 @@ export default function CBSECommandCenter() {
                 window.scrollTo({ top: 0, left: 0, behavior: "instant" });
               }
             }}
-            className="flex items-center gap-3 shrink-0 cursor-pointer select-none transition-transform active:scale-[0.98]"
+            className="flex items-center gap-2 sm:gap-3 shrink-0 cursor-pointer select-none transition-transform active:scale-[0.98]"
             title="ARETĒ: CBSE Class 10 Command Engine (Home Dashboard)"
           >
             <AreteLogo size="md" isDark={isDark} showText={true} showMotto={false} />
 
-            <div className="hidden lg:flex items-center gap-1.5 leading-none pl-1">
+            <div className="hidden xl:flex items-center gap-1.5 leading-none pl-1">
               <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
                 isDark ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "bg-amber-100 text-amber-900 border border-amber-300"
               }`}>
@@ -3019,9 +3016,9 @@ export default function CBSECommandCenter() {
             </div>
           </div>
 
-          {/* MASTER CATEGORY NAVIGATION TABS (INTEGRATED INSIDE HEADER - ZERO JUMP/COLLISION) */}
-          <div className="hidden md:flex items-center">
-            <div className={`p-1 rounded-full border flex items-center gap-1 backdrop-blur-xl transition-all ${
+          {/* MASTER CATEGORY NAVIGATION TABS (INTEGRATED INSIDE HEADER - ZERO OVERFLOW) */}
+          <div className="hidden md:flex items-center min-w-0">
+            <div className={`p-0.5 sm:p-1 rounded-full border flex items-center gap-0.5 sm:gap-1 backdrop-blur-xl transition-all ${
               isDark
                 ? "bg-white/[0.06] border-white/15 shadow-inner"
                 : "bg-slate-100 border-slate-200"
@@ -3049,7 +3046,7 @@ export default function CBSECommandCenter() {
                         }
                       });
                     }}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] ${
+                    className={`px-2.5 sm:px-3 lg:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] ${
                       isCatActive
                         ? isDark
                           ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/25 ring-1 ring-amber-400 font-extrabold"
@@ -3060,9 +3057,9 @@ export default function CBSECommandCenter() {
                     }`}
                   >
                     <cat.icon className={`w-3.5 h-3.5 ${isCatActive ? (isDark ? "text-slate-950" : "text-amber-400") : "text-zinc-400"} shrink-0`} />
-                    <span className="truncate leading-none inline-flex items-center">{cat.label}</span>
+                    <span className="leading-none inline-flex items-center">{cat.label}</span>
                     {cat.badge && (
-                      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full font-black shrink-0 leading-none inline-flex items-center ${
+                      <span className={`hidden xl:inline-flex text-[10px] font-mono px-1.5 py-0.5 rounded-full font-black shrink-0 leading-none items-center ${
                         isCatActive
                           ? isDark
                             ? "bg-slate-950/30 text-slate-950"
@@ -3078,14 +3075,14 @@ export default function CBSECommandCenter() {
                 );
               })}
 
-              {/* ALL 18 MODULES TRIGGER (INTEGRATED CLEANLY INSIDE UPPER NAVIGATION TABS) */}
+              {/* ALL MODULES TRIGGER (COMPACT RESPONSIVE PILL) */}
               <button
                 type="button"
                 onClick={() => {
                   playSound("click");
                   setIsAllModulesModalOpen(true);
                 }}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border ${
+                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border ${
                   isDark
                     ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
                     : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200 shadow-xs"
@@ -3093,8 +3090,10 @@ export default function CBSECommandCenter() {
                 title="Open All Modules (⌘K)"
               >
                 <LayoutGrid className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                <span className="leading-none inline-flex items-center">All Modules</span>
-                <kbd className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-black shrink-0 leading-none inline-flex items-center ${
+                <span className="leading-none inline-flex items-center">
+                  <span className="hidden lg:inline">All </span>Modules
+                </span>
+                <kbd className={`hidden xl:inline-flex text-[9px] font-mono px-1.5 py-0.5 rounded font-black shrink-0 leading-none items-center ${
                   isDark ? "bg-black/40 text-amber-300 border border-amber-500/30" : "bg-white/80 text-amber-900 border border-amber-300"
                 }`}>
                   ⌘K
@@ -3103,9 +3102,9 @@ export default function CBSECommandCenter() {
             </div>
           </div>
 
-          {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            {/* EXAM COUNTDOWN (2XL+ ULTRA-WIDE SCREENS ONLY - PREVENTS HORIZONTAL OVERFLOW) */}
+          {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (ZERO-OVERFLOW COMPACT CAPSULES) */}
+          <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 shrink-0">
+            {/* EXAM COUNTDOWN (2XL+ ULTRA-WIDE SCREENS ONLY) */}
             <div className="hidden 2xl:flex items-center">
               <button
                 onClick={() => {
@@ -3124,19 +3123,19 @@ export default function CBSECommandCenter() {
             </div>
 
             {/* LEVEL & XP CAPSULE */}
-            <div className={`flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-medium shadow-xs leading-none ${
+            <div className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-medium shadow-xs leading-none whitespace-nowrap shrink-0 ${
               isDark 
                 ? "bg-gradient-to-r from-amber-500/15 to-amber-600/10 border-amber-500/30 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.15)]" 
                 : "bg-amber-50 border-amber-300 text-amber-950 font-bold"
             }`}>
-              <span className="text-xs leading-none inline-flex items-center">{currentLevelInfo.badge}</span>
+              <span className="hidden sm:inline-flex text-xs leading-none items-center">{currentLevelInfo.badge}</span>
               <span className="font-black text-amber-400 leading-none inline-flex items-center">L{currentLevelInfo.level}</span>
               <span className={`${isDark ? "text-amber-500/40" : "text-amber-300"} select-none leading-none inline-flex items-center`}>•</span>
               <span className="font-bold leading-none inline-flex items-center tabular-nums">{totalXp} XP</span>
             </div>
 
             {/* STREAK */}
-            <div className={`flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-bold shadow-xs leading-none ${
+            <div className={`flex items-center gap-1 px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-bold shadow-xs leading-none whitespace-nowrap shrink-0 ${
               isDark 
                 ? "bg-gradient-to-r from-orange-500/20 to-red-500/10 border-orange-500/40 text-orange-300 shadow-[0_0_12px_rgba(249,115,22,0.15)]" 
                 : "bg-orange-50 border-orange-300 text-orange-900"
@@ -3152,7 +3151,7 @@ export default function CBSECommandCenter() {
                 setIsSoundMuted(nextMute);
                 if (!nextMute) playSound("click");
               }}
-              className={`p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[34px] min-h-[34px] touch-manipulation active:scale-95 ${
+              className={`p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
                 isDark 
                   ? isSoundMuted ? "bg-white/5 border-white/10 text-zinc-500" : "bg-white/10 border-white/20 text-zinc-200 hover:text-white"
                   : isSoundMuted ? "bg-slate-100 border-slate-200 text-slate-400" : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
@@ -3169,7 +3168,7 @@ export default function CBSECommandCenter() {
                 playSound("click");
                 setTheme(isDark ? "light" : "dark");
               }}
-              className={`p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[34px] min-h-[34px] touch-manipulation active:scale-95 ${
+              className={`p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
                 isDark 
                   ? "bg-white/10 border-white/20 text-amber-400 hover:text-amber-300"
                   : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
@@ -3187,7 +3186,7 @@ export default function CBSECommandCenter() {
                 playSound("click");
                 setIsAllModulesModalOpen(true);
               }}
-              className={`md:hidden p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[34px] min-h-[34px] touch-manipulation active:scale-95 ${
+              className={`md:hidden p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] touch-manipulation active:scale-95 shrink-0 ${
                 isDark
                   ? "bg-amber-500/15 border-amber-500/35 text-amber-300"
                   : "bg-amber-100 border-amber-300 text-amber-950"
@@ -3386,6 +3385,7 @@ export default function CBSECommandCenter() {
                     { id: "timelines", label: "SST Timelines Master", sub: "56 Milestones, Chronology Game, Flashcards & Matrix", icon: Calendar, color: "text-amber-400 bg-amber-500/15" },
                     { id: "diagrams", label: "NCERT Visual Diagrams", sub: "29 Cropped Ray & Circuit Diagrams", icon: Compass, color: "text-cyan-400 bg-cyan-500/15" },
                     { id: "theorems", label: "Theorems & Converses", sub: "25 Formal Geometry Proofs & Corollaries", icon: Award, color: "text-amber-400 bg-amber-500/15" },
+                    { id: "chemistry_basics", label: "Chemistry Fundamentals Masterclass", sub: "Valency, Criss-Cross, Reactions & Reactivity Matrix", icon: FlaskConical, color: "text-amber-400 bg-amber-500/15" },
                     { id: "reactions", label: "Chemistry Reactions", sub: "56 Equations with States & Conditions", icon: FlaskConical, color: "text-teal-400 bg-teal-500/15" },
                     { id: "activities", label: "NCERT Lab Activities", sub: "Step-by-Step Practical Vivas", icon: Beaker, color: "text-indigo-400 bg-indigo-500/15" }
                   ]
@@ -4347,6 +4347,19 @@ export default function CBSECommandCenter() {
               setActiveVaultChapter(ch);
               loadChapterData(ch, false, sub);
               setActiveTab("questions");
+            }}
+          />
+        )}
+
+        {/* ===================== TAB: CHEMISTRY BASICS & FOUNDATION MASTERCLASS ===================== */}
+        {activeTab === "chemistry_basics" && (
+          <ChemistryBasicsMasterView
+            isDark={isDark}
+            onNavigateToChapter={(chNo) => {
+              playSound("click");
+              setConceptsSubject("science");
+              setConceptsChapterNo(chNo);
+              setActiveTab("concepts");
             }}
           />
         )}

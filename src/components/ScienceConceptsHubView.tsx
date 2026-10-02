@@ -43,7 +43,6 @@ import {
 } from "lucide-react";
 import BiologyVisualSchematic from "@/components/BiologyVisualSchematics";
 import { getChapterQuestions } from "@/data/chapters";
-import ChemistryBasicsMasterView from "@/components/ChemistryBasicsMasterView";
 import { SCIENCE_CHAPTER_CONCEPTS, getScienceChapter, type ScienceChapterConcept } from "@/data/scienceConcepts";
 import {
   SCIENCE_CONCEPTS_AND_EXAMPLES,
@@ -65,7 +64,6 @@ interface ScienceConceptsHubViewProps {
 
 // Chapter metadata list
 const CHAPTER_LIST = [
-  { no: 0, name: "Basics of Chemistry Required for Class 10", shortName: "Foundation: Basics", discipline: "Chemistry", weightage: "Foundation (Prerequisite)", icon: FlaskConical },
   { no: 1, name: "Chemical Reactions and Equations", shortName: "Ch 1: Reactions", discipline: "Chemistry", weightage: "6–8 Marks", icon: FlaskConical },
   { no: 2, name: "Acids, Bases and Salts", shortName: "Ch 2: Acids & Salts", discipline: "Chemistry", weightage: "6–8 Marks", icon: FlaskConical },
   { no: 3, name: "Metals and Non-Metals", shortName: "Ch 3: Metals", discipline: "Chemistry", weightage: "7–9 Marks", icon: FlaskConical },
@@ -85,35 +83,35 @@ function getDisciplineColors(discipline: string, isDark: boolean) {
   switch (discipline) {
     case "Chemistry":
       return {
-        badge: isDark ? "bg-amber-500/15 text-amber-400 border-amber-500/30" : "bg-amber-100 text-amber-900 border-amber-300",
+        badge: isDark ? "bg-amber-500/15 text-amber-400 border-amber-500/30" : "bg-amber-100 text-amber-950 font-extrabold border-amber-300",
         accent: isDark ? "border-amber-500/30" : "border-amber-300",
         glow: "shadow-amber-500/10",
         icon: isDark ? "text-amber-400" : "text-amber-700",
-        tag: isDark ? "bg-amber-950/40 text-amber-300 border-amber-800/40" : "bg-amber-50 text-amber-800 border-amber-200",
+        tag: isDark ? "bg-amber-950/40 text-amber-300 border-amber-800/40" : "bg-amber-100 text-amber-950 font-bold border-amber-300",
       };
     case "Biology":
       return {
-        badge: isDark ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30" : "bg-emerald-100 text-emerald-900 border-emerald-300",
+        badge: isDark ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30" : "bg-emerald-100 text-emerald-950 font-extrabold border-emerald-300",
         accent: isDark ? "border-emerald-500/30" : "border-emerald-300",
         glow: "shadow-emerald-500/10",
         icon: isDark ? "text-emerald-400" : "text-emerald-700",
-        tag: isDark ? "bg-emerald-950/40 text-emerald-300 border-emerald-800/40" : "bg-emerald-50 text-emerald-800 border-emerald-200",
+        tag: isDark ? "bg-emerald-950/40 text-emerald-300 border-emerald-800/40" : "bg-emerald-100 text-emerald-950 font-bold border-emerald-300",
       };
     case "Physics":
       return {
-        badge: isDark ? "bg-blue-500/15 text-blue-400 border-blue-500/30" : "bg-blue-100 text-blue-900 border-blue-300",
+        badge: isDark ? "bg-blue-500/15 text-blue-400 border-blue-500/30" : "bg-blue-100 text-blue-950 font-extrabold border-blue-300",
         accent: isDark ? "border-blue-500/30" : "border-blue-300",
         glow: "shadow-blue-500/10",
         icon: isDark ? "text-blue-400" : "text-blue-700",
-        tag: isDark ? "bg-blue-950/40 text-blue-300 border-blue-800/40" : "bg-blue-50 text-blue-800 border-blue-200",
+        tag: isDark ? "bg-blue-950/40 text-blue-300 border-blue-800/40" : "bg-blue-100 text-blue-950 font-bold border-blue-300",
       };
     default:
       return {
-        badge: isDark ? "bg-teal-500/15 text-teal-400 border-teal-500/30" : "bg-teal-100 text-teal-900 border-teal-300",
+        badge: isDark ? "bg-teal-500/15 text-teal-400 border-teal-500/30" : "bg-teal-100 text-teal-950 font-extrabold border-teal-300",
         accent: isDark ? "border-teal-500/30" : "border-teal-300",
         glow: "shadow-teal-500/10",
         icon: isDark ? "text-teal-400" : "text-teal-700",
-        tag: isDark ? "bg-teal-950/40 text-teal-300 border-teal-800/40" : "bg-teal-50 text-teal-800 border-teal-200",
+        tag: isDark ? "bg-teal-950/40 text-teal-300 border-teal-800/40" : "bg-teal-100 text-teal-950 font-bold border-teal-200",
       };
   }
 }
@@ -383,138 +381,7 @@ export default function ScienceConceptsHubView({
   const colors = getDisciplineColors(currentMeta.discipline, isDark);
   const disciplineIcon = getDisciplineIcon(currentMeta.discipline);
 
-  if (currentChNo === 0) {
-    return (
-      <div id="sci-concepts-top" className="space-y-6">
-        {/* ============= CHAPTER SELECTOR RIBBON (standalone mode) ============= */}
-        {!isEmbeddedInCommand && (
-          <div className={`p-5 sm:p-6 rounded-3xl border space-y-4 ${
-            isDark
-              ? "bg-[#0c121e]/90 backdrop-blur-2xl border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
-              : "bg-white border-slate-200 shadow-lg"
-          }`}>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0">
-                  <FlaskConical className="w-5 h-5 text-amber-400" />
-                </div>
-                <div>
-                  <h2 className={`text-xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>Science — Toddler-to-Pro Master</h2>
-                  <p className={`text-xs font-medium ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                    Foundation: Master Valencies, Formula Writing, Balancing &amp; Colors before Ch 1!
-                  </p>
-                </div>
-              </div>
-              {/* Discipline filter */}
-              <div className="flex flex-wrap gap-1.5">
-                {[
-                  { id: "all", label: "All" },
-                  { id: "Chemistry", label: "🧪 Chemistry" },
-                  { id: "Biology", label: "🧬 Biology" },
-                  { id: "Physics", label: "⚡ Physics" },
-                  { id: "Natural Resources", label: "🌿 Ecology" },
-                ].map((d) => (
-                  <button
-                    key={d.id}
-                    onClick={() => setDisciplineFilter(d.id)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                      disciplineFilter === d.id
-                        ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-sm"
-                        : isDark
-                        ? "bg-black/30 border-white/5 text-slate-400 hover:text-white"
-                        : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
-                    }`}
-                  >
-                    {d.label}
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            {/* Direct Chapter Dropdown + Quick Prev/Next */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
-              <div className="flex items-center gap-2 flex-1">
-                <label htmlFor="science-chapter-select-foundation" className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 shrink-0">
-                  Chapter:
-                </label>
-                <div className="fabulous-select-wrapper flex-1">
-                  <select
-                    id="science-chapter-select-foundation"
-                    aria-label="Select Science Chapter directly"
-                    value={currentChNo}
-                    onChange={(e) => handleSelectChapter(Number(e.target.value))}
-                    className={`fabulous-select ${
-                      isDark ? "fabulous-select-dark" : "fabulous-select-light"
-                    }`}
-                  >
-                    {CHAPTER_LIST.filter((c) => disciplineFilter === "all" || c.discipline === disciplineFilter).map((ch) => (
-                      <option key={ch.no} value={ch.no}>
-                        {ch.no === 0 ? "🧪 Foundation: " : `Ch ${ch.no}: `}{ch.name} ({ch.discipline} • {ch.weightage})
-                      </option>
-                    ))}
-                  </select>
-                  <div className="fabulous-select-icon text-zinc-400">
-                    <ChevronDown className="w-4 h-4" />
-                  </div>
-                </div>
-
-                {/* Prev / Next Buttons */}
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <button
-                    onClick={() => handleSelectChapter(13)}
-                    className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center transition-all cursor-pointer min-h-[42px] min-w-[42px] active:scale-95 ${
-                      isDark ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
-                    }`}
-                    title="Previous Chapter"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => handleSelectChapter(1)}
-                    className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center transition-all cursor-pointer min-h-[42px] min-w-[42px] active:scale-95 ${
-                      isDark ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white" : "bg-white border-slate-200 text-slate-700 shadow-2xs"
-                    }`}
-                    title="Next Chapter"
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Clean Wrapped Chapter Pills */}
-            <div className="flex flex-wrap gap-1.5 pt-1.5">
-              {CHAPTER_LIST.filter((c) => disciplineFilter === "all" || c.discipline === disciplineFilter).map((ch) => {
-                const isSelected = ch.no === currentChNo;
-                const Icon = ch.icon;
-                return (
-                  <button
-                    key={ch.no}
-                    onClick={() => handleSelectChapter(ch.no)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 border active:scale-95 ${
-                      isSelected
-                        ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 border-amber-300 font-black shadow-md"
-                        : isDark
-                        ? "bg-black/30 border-white/5 text-slate-300 hover:text-white hover:border-white/20"
-                        : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300"
-                    }`}
-                  >
-                    <Icon className="w-3.5 h-3.5 opacity-80 shrink-0" />
-                    <span>{ch.shortName}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        <ChemistryBasicsMasterView
-          isDark={isDark}
-          onNavigateToChapter={handleSelectChapter}
-        />
-      </div>
-    );
-  }
 
   if (!currentChapter) {
     return (
@@ -537,8 +404,10 @@ export default function ScienceConceptsHubView({
         }`}>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-teal-500/20 border border-teal-500/40 flex items-center justify-center shrink-0">
-                <Atom className="w-5 h-5 text-teal-400" />
+              <div className={`w-10 h-10 rounded-2xl border flex items-center justify-center shrink-0 ${
+                isDark ? "bg-teal-500/20 border-teal-500/40 text-teal-400" : "bg-teal-100 border-teal-300 text-teal-800"
+              }`}>
+                <Atom className="w-5 h-5" />
               </div>
               <div>
                 <h2 className={`text-xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>Science — Toddler-to-Pro Master</h2>
@@ -670,28 +539,31 @@ export default function ScienceConceptsHubView({
           }`}
         >
           <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0">
+            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 border ${
+              isDark ? "bg-amber-500/20 border-amber-500/40 text-amber-400" : "bg-amber-100 border-amber-300 text-amber-800"
+            }`}>
               <FlaskConical className="w-5 h-5" />
             </div>
             <div className="space-y-0.5">
               <div className="text-xs sm:text-sm font-black flex items-center gap-2">
-                <span>Class 10 Chemistry Foundation Prerequisite</span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300">
-                  Must Read First
+                <span>Chemistry Foundation &amp; Core Essentials</span>
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${
+                  isDark ? "bg-amber-500/20 text-amber-300" : "bg-amber-200 text-amber-950 font-bold border border-amber-300"
+                }`}>
+                  Recommended
                 </span>
               </div>
-              <div className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                Revise Valencies, Criss-Cross formula writing, Balancing equations, and Reactivity Series to master this chapter!
+              <div className={`text-xs ${isDark ? "text-slate-300" : "text-slate-700 font-medium"}`}>
+                Master Valencies, Criss-Cross formula writing, Balancing equations, and Reactivity Series to master this chapter!
               </div>
             </div>
           </div>
-          <button
-            onClick={() => handleSelectChapter(0)}
-            className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-black bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 shadow-md"
+          <a
+            href="/chemistry-basics"
+            className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-black bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 shadow-md decoration-transparent"
           >
-            <span>Open Chemistry Basics</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+            <span>Launch Dedicated Chemistry Basics Suite ➔</span>
+          </a>
         </div>
       )}
 
@@ -711,7 +583,9 @@ export default function ScienceConceptsHubView({
               <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${colors.tag}`}>
                 Chapter {currentChNo} of 13
               </span>
-              <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">
+              <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
+                isDark ? "bg-amber-500/15 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-950 font-bold border-amber-300"
+              }`}>
                 Board: {currentMeta.weightage}
               </span>
             </div>
@@ -721,13 +595,13 @@ export default function ScienceConceptsHubView({
             </h2>
 
             {/* One-liner */}
-            <p className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-teal-300/90 font-medium" : "text-teal-800 font-semibold"}`}>
+            <p className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-teal-300/90 font-medium" : "text-teal-900 font-semibold"}`}>
               💡 {currentChapter.oneLiner}
             </p>
 
             {/* Section jump pills */}
             <div className="pt-1">
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-2">
+              <span className={`text-[11px] font-mono font-bold uppercase tracking-wider block mb-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                 Topics in this chapter:
               </span>
               <div className="flex flex-wrap gap-2">
@@ -741,7 +615,7 @@ export default function ScienceConceptsHubView({
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
                       isDark
                         ? "bg-white/5 border-white/10 text-teal-300 hover:bg-teal-500/20 hover:border-teal-400/40"
-                        : "bg-white border-slate-200 text-teal-800 hover:bg-teal-50 shadow-xs"
+                        : "bg-white border-slate-200 text-teal-900 hover:bg-teal-50 shadow-xs"
                     }`}
                   >
                     <span className="w-4 h-4 rounded-full bg-teal-500/20 text-[10px] flex items-center justify-center font-mono font-black">
@@ -761,7 +635,7 @@ export default function ScienceConceptsHubView({
                         : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200"
                     }`}
                   >
-                    <Target className="w-3.5 h-3.5 text-amber-400" />
+                    <Target className={`w-3.5 h-3.5 ${isDark ? "text-amber-400" : "text-amber-700"}`} />
                     <span>🎯 {chapterExamples.length} Board Solved Qs</span>
                   </button>
                 )}
@@ -776,7 +650,7 @@ export default function ScienceConceptsHubView({
                         : "bg-emerald-100 border-emerald-300 text-emerald-950 hover:bg-emerald-200"
                     }`}
                   >
-                    <Flame className="w-3.5 h-3.5 text-emerald-400" />
+                    <Flame className={`w-3.5 h-3.5 ${isDark ? "text-emerald-400" : "text-emerald-700"}`} />
                     <span>⏱️ 3-Min Sprint (+XP)</span>
                   </button>
                 )}
@@ -789,12 +663,12 @@ export default function ScienceConceptsHubView({
             <div className={`p-4 rounded-2xl border text-center ${isDark ? "bg-black/30 border-white/10" : "bg-white border-slate-200 shadow-xs"}`}>
               <div className="flex items-center justify-around gap-5">
                 <div>
-                  <span className="text-[10px] font-mono uppercase font-bold text-teal-400 block">Sections</span>
+                  <span className={`text-[10px] font-mono uppercase font-bold block ${isDark ? "text-teal-400" : "text-teal-700 font-extrabold"}`}>Sections</span>
                   <span className="text-2xl font-mono font-black">{currentChapter.sections.length}</span>
                 </div>
-                <div className="w-px h-8 bg-white/10" />
+                <div className={`w-px h-8 ${isDark ? "bg-white/10" : "bg-slate-200"}`} />
                 <div>
-                  <span className="text-[10px] font-mono uppercase font-bold text-amber-400 block">Discipline</span>
+                  <span className={`text-[10px] font-mono uppercase font-bold block ${isDark ? "text-amber-400" : "text-amber-700 font-extrabold"}`}>Discipline</span>
                   <span className="text-sm font-mono font-black">{currentMeta.discipline}</span>
                 </div>
               </div>
@@ -811,10 +685,14 @@ export default function ScienceConceptsHubView({
               {onOpenDiagrams && (
                 <button
                   onClick={() => onOpenDiagrams(currentChNo)}
-                  className="px-3 py-2 rounded-xl text-xs font-bold bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                  className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 shadow-sm ${
+                    isDark
+                      ? "bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border-purple-500/30"
+                      : "bg-purple-100 hover:bg-purple-200 text-purple-950 font-bold border-purple-300"
+                  }`}
                   title="Open Diagrams Vault for this chapter"
                 >
-                  <Compass className="w-3.5 h-3.5 text-purple-400" />
+                  <Compass className={`w-3.5 h-3.5 ${isDark ? "text-purple-400" : "text-purple-700"}`} />
                   <span>Diagrams</span>
                 </button>
               )}
@@ -822,10 +700,14 @@ export default function ScienceConceptsHubView({
               {onOpenHots && (
                 <button
                   onClick={() => onOpenHots("science", currentChNo)}
-                  className="px-3 py-2 rounded-xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                  className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    isDark
+                      ? "bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border-rose-500/30"
+                      : "bg-rose-100 hover:bg-rose-200 text-rose-950 font-bold border-rose-300"
+                  }`}
                   title="Open Competitive HOTS questions"
                 >
-                  <Flame className="w-3.5 h-3.5 text-rose-400" />
+                  <Flame className={`w-3.5 h-3.5 ${isDark ? "text-rose-400" : "text-rose-700"}`} />
                   <span>HOTS</span>
                 </button>
               )}
@@ -833,10 +715,14 @@ export default function ScienceConceptsHubView({
               {onOpenActivities && (
                 <button
                   onClick={() => onOpenActivities(currentChNo)}
-                  className="px-3 py-2 rounded-xl text-xs font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                  className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    isDark
+                      ? "bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border-cyan-500/30"
+                      : "bg-cyan-100 hover:bg-cyan-200 text-cyan-950 font-bold border-cyan-300"
+                  }`}
                   title="Open NCERT Lab Activities"
                 >
-                  <FlaskConical className="w-3.5 h-3.5 text-cyan-400" />
+                  <FlaskConical className={`w-3.5 h-3.5 ${isDark ? "text-cyan-400" : "text-cyan-700"}`} />
                   <span>Lab Activities</span>
                 </button>
               )}
@@ -844,10 +730,14 @@ export default function ScienceConceptsHubView({
               {onOpenReactions && (
                 <button
                   onClick={() => onOpenReactions(currentChNo)}
-                  className="px-3 py-2 rounded-xl text-xs font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition-all cursor-pointer flex items-center gap-1.5"
+                  className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    isDark
+                      ? "bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border-emerald-500/30"
+                      : "bg-emerald-100 hover:bg-emerald-200 text-emerald-950 font-bold border-emerald-300"
+                  }`}
                   title="Open Chemical Reactions vault"
                 >
-                  <Atom className="w-3.5 h-3.5 text-emerald-400" />
+                  <Atom className={`w-3.5 h-3.5 ${isDark ? "text-emerald-400" : "text-emerald-700"}`} />
                   <span>Reactions</span>
                 </button>
               )}
@@ -874,18 +764,18 @@ export default function ScienceConceptsHubView({
       }`}>
         <div className="flex items-start gap-4">
           <div className="w-10 h-10 rounded-2xl bg-violet-500/20 border border-violet-500/30 flex items-center justify-center shrink-0">
-            <Lightbulb className="w-5 h-5 text-violet-400" />
+            <Lightbulb className={`w-5 h-5 ${isDark ? "text-violet-400" : "text-violet-700"}`} />
           </div>
           <div className="space-y-2 flex-1">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-violet-400">
+              <span className={`text-xs font-mono font-bold uppercase tracking-wider ${isDark ? "text-violet-400" : "text-violet-900 font-extrabold"}`}>
                 Toddler Analogy — Understand Before You Memorise
               </span>
             </div>
             <h3 className={`text-lg sm:text-xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
               {currentChapter.analogyTitle}
             </h3>
-            <div className={`text-sm sm:text-base leading-relaxed whitespace-pre-line ${isDark ? "text-violet-200/90" : "text-violet-900"}`}>
+            <div className={`text-sm sm:text-base leading-relaxed whitespace-pre-line ${isDark ? "text-violet-200/90" : "text-violet-950 font-medium"}`}>
               <PremiumMathRenderer content={currentChapter.analogyContent} isDark={isDark} />
             </div>
           </div>
@@ -964,7 +854,9 @@ export default function ScienceConceptsHubView({
                 >
                   <div className="space-y-1.5 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="px-3 py-1 rounded-full text-xs font-mono font-black bg-teal-500/15 text-teal-400 border border-teal-500/30">
+                      <span className={`px-3 py-1 rounded-full text-xs font-mono font-black border ${
+                        isDark ? "bg-teal-500/15 text-teal-400 border-teal-500/30" : "bg-teal-100 text-teal-950 font-bold border-teal-300"
+                      }`}>
                         {sIdx + 1} / {filteredSections.length}
                       </span>
                       <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ${colors.badge}`}>
@@ -984,7 +876,7 @@ export default function ScienceConceptsHubView({
                     <span className={`text-xs font-mono font-bold px-3 py-1.5 rounded-xl border ${colors.tag}`}>
                       {section.label}
                     </span>
-                    <button className={`p-2 rounded-xl transition-colors ${isDark ? "bg-white/5 hover:bg-white/10 text-teal-400" : "bg-slate-100 hover:bg-slate-200 text-teal-600"}`}>
+                    <button className={`p-2 rounded-xl transition-colors ${isDark ? "bg-white/5 hover:bg-white/10 text-teal-400" : "bg-slate-100 hover:bg-slate-200 text-teal-700"}`}>
                       {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                     </button>
                   </div>
@@ -1001,8 +893,8 @@ export default function ScienceConceptsHubView({
                       isDark ? "bg-black/35 border-white/8 text-slate-200" : "bg-white border-slate-200 text-slate-800 shadow-xs"
                     }`}>
                       <div className="flex items-center gap-2 mb-4">
-                        <BookOpen className="w-4 h-4 text-teal-400 shrink-0" />
-                        <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-400">
+                        <BookOpen className={`w-4 h-4 shrink-0 ${isDark ? "text-teal-400" : "text-teal-700"}`} />
+                        <span className={`text-xs font-mono font-bold uppercase tracking-wider ${isDark ? "text-teal-400" : "text-teal-900 font-extrabold"}`}>
                           NCERT Concept — Step by Step from Scratch
                         </span>
                       </div>
@@ -1026,11 +918,15 @@ export default function ScienceConceptsHubView({
                           <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-cyan-500/20">
                             <div className="flex items-center gap-2">
                               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
-                              <h4 className="text-sm sm:text-base font-black tracking-tight text-cyan-400 flex items-center gap-2">
-                                <ImageIcon className="w-4 h-4" /> Official NCERT Visual Diagrams & Schematics
+                              <h4 className={`text-sm sm:text-base font-black tracking-tight flex items-center gap-2 ${
+                                isDark ? "text-cyan-400" : "text-cyan-950 font-extrabold"
+                              }`}>
+                                <ImageIcon className="w-4 h-4" /> Official NCERT Visual Diagrams &amp; Schematics
                               </h4>
                             </div>
-                            <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                            <span className={`text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${
+                              isDark ? "bg-cyan-500/10 text-cyan-300 border-cyan-500/20" : "bg-cyan-100 text-cyan-950 font-bold border-cyan-300"
+                            }`}>
                               {visualAssets.length > 0 ? `${visualAssets.length} Board Figures` : "Interactive Schematic"}
                             </span>
                           </div>
@@ -1089,16 +985,16 @@ export default function ScienceConceptsHubView({
                                       </h5>
                                       {asset.objectPosition && (
                                         <div className="mt-1.5 grid grid-cols-2 gap-1 text-[11px] font-mono">
-                                          <div className={`p-1.5 rounded ${isDark ? "bg-white/5 text-slate-300" : "bg-white text-slate-700"}`}>
-                                            <span className="text-cyan-400 font-bold">Obj:</span> {asset.objectPosition}
+                                          <div className={`p-1.5 rounded ${isDark ? "bg-white/5 text-slate-300" : "bg-white text-slate-700 border border-slate-200"}`}>
+                                            <span className={`font-bold ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>Obj:</span> {asset.objectPosition}
                                           </div>
-                                          <div className={`p-1.5 rounded ${isDark ? "bg-white/5 text-slate-300" : "bg-white text-slate-700"}`}>
-                                            <span className="text-emerald-400 font-bold">Img:</span> {asset.imagePosition}
+                                          <div className={`p-1.5 rounded ${isDark ? "bg-white/5 text-slate-300" : "bg-white text-slate-700 border border-slate-200"}`}>
+                                            <span className={`font-bold ${isDark ? "text-emerald-400" : "text-emerald-800"}`}>Img:</span> {asset.imagePosition}
                                           </div>
                                         </div>
                                       )}
                                       {asset.natureOfImage && (
-                                        <div className="mt-1 text-[10px] font-mono text-amber-400">
+                                        <div className={`mt-1 text-[10px] font-mono ${isDark ? "text-amber-400" : "text-amber-900 font-bold"}`}>
                                           ✦ Nature: <strong>{asset.natureOfImage}</strong>
                                         </div>
                                       )}
@@ -1106,9 +1002,9 @@ export default function ScienceConceptsHubView({
 
                                     {(asset.examinerAlert || asset.markingTip) && (
                                       <div className={`mt-2 p-2 rounded-xl text-[11px] leading-relaxed border ${
-                                        isDark ? "bg-amber-500/10 border-amber-500/20 text-amber-200" : "bg-amber-50 border-amber-200 text-amber-900"
+                                        isDark ? "bg-amber-500/10 border-amber-500/20 text-amber-200" : "bg-amber-50 border-amber-300 text-amber-950 font-medium"
                                       }`}>
-                                        <span className="font-bold text-amber-400">💡 Exam Tip:</span> {asset.examinerAlert || asset.markingTip}
+                                        <span className={`font-bold ${isDark ? "text-amber-400" : "text-amber-800 font-extrabold"}`}>💡 Exam Tip:</span> {asset.examinerAlert || asset.markingTip}
                                       </div>
                                     )}
                                   </div>
@@ -1127,14 +1023,18 @@ export default function ScienceConceptsHubView({
                                   <h5 className={`text-sm font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
                                     {bioDiagram.title}
                                   </h5>
-                                  <p className="text-[11px] text-slate-400 font-mono">
+                                  <p className={`text-[11px] font-mono ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                                     {bioDiagram.ncertFigureRef} • {bioDiagram.boardFrequency}
                                   </p>
                                 </div>
                                 {onOpenDiagrams && (
                                   <button
                                     onClick={() => onOpenDiagrams(currentChNo)}
-                                    className="px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 flex items-center gap-1.5 transition-all"
+                                    className={`px-3 py-1.5 rounded-xl text-xs font-bold border flex items-center gap-1.5 transition-all ${
+                                      isDark
+                                        ? "bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border-cyan-500/30"
+                                        : "bg-cyan-100 hover:bg-cyan-200 text-cyan-950 font-bold border-cyan-300"
+                                    }`}
                                   >
                                     <ExternalLink className="w-3.5 h-3.5" />
                                     <span>Interactive Ray / Lab View</span>
@@ -1160,7 +1060,7 @@ export default function ScienceConceptsHubView({
                               {/* Interactive Anatomical Labels */}
                               {bioDiagram.labels && bioDiagram.labels.length > 0 && (
                                 <div className="space-y-2 pt-2 border-t border-white/5">
-                                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-teal-400">
+                                  <span className={`text-[11px] font-mono font-bold uppercase tracking-wider ${isDark ? "text-teal-400" : "text-teal-900 font-extrabold"}`}>
                                     Click any component to inspect board marking significance:
                                   </span>
                                   <div className="flex flex-wrap gap-1.5">
@@ -1186,13 +1086,13 @@ export default function ScienceConceptsHubView({
                                     if (!pin) return null;
                                     return (
                                       <div className={`mt-2 p-3 rounded-xl border text-xs leading-relaxed animate-in fade-in slide-in-from-top-1 ${
-                                        isDark ? "bg-teal-950/40 border-teal-500/30 text-teal-100" : "bg-teal-50 border-teal-200 text-teal-900"
+                                        isDark ? "bg-teal-950/40 border-teal-500/30 text-teal-100" : "bg-teal-50 border-teal-300 text-teal-950"
                                       }`}>
-                                        <div className="font-bold text-teal-300 font-mono text-[11px] uppercase mb-1">
+                                        <div className={`font-bold font-mono text-[11px] uppercase mb-1 ${isDark ? "text-teal-300" : "text-teal-900 font-extrabold"}`}>
                                           📍 {pin.name} — Anatomical Function
                                         </div>
                                         <p>{pin.description}</p>
-                                        <div className="mt-1.5 pt-1.5 border-t border-teal-500/20 text-[11px] text-amber-300">
+                                        <div className={`mt-1.5 pt-1.5 border-t text-[11px] ${isDark ? "border-teal-500/20 text-amber-300" : "border-teal-200 text-amber-900 font-semibold"}`}>
                                           <strong>Board Exam Key:</strong> {pin.boardSignificance}
                                         </div>
                                       </div>
@@ -1209,24 +1109,26 @@ export default function ScienceConceptsHubView({
 {/* Key Formulas / Points */}
                     {section.formulasOrKeyPoints && section.formulasOrKeyPoints.length > 0 && (
                       <div className="space-y-3">
-                        <h4 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                        <h4 className={`text-xs sm:text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${
+                          isDark ? "text-amber-400" : "text-amber-900 font-extrabold"
+                        }`}>
                           <Target className="w-4 h-4" />
-                          Board-Critical Formulas & Key Points
+                          Board-Critical Formulas &amp; Key Points
                         </h4>
                         <div className="space-y-3">
                           {section.formulasOrKeyPoints.map((fp, fIdx) => (
                             <div key={fIdx} className={`p-5 rounded-2xl border ${
                               isDark ? "bg-amber-950/15 border-amber-500/20" : "bg-amber-50/70 border-amber-200 shadow-xs"
                             }`}>
-                              <div className={`text-xs font-mono font-black uppercase tracking-wider mb-3 ${isDark ? "text-amber-400" : "text-amber-800"}`}>
+                              <div className={`text-xs font-mono font-black uppercase tracking-wider mb-3 ${isDark ? "text-amber-400" : "text-amber-900"}`}>
                                 📐 {fp.title}
                               </div>
-                              <div className={`text-sm leading-relaxed ${isDark ? "text-amber-100/90" : "text-amber-900"}`}>
+                              <div className={`text-sm leading-relaxed ${isDark ? "text-amber-100/90" : "text-amber-950 font-medium"}`}>
                                 <PremiumMathRenderer content={fp.content} isDark={isDark} />
                               </div>
                               {fp.note && (
                                 <div className={`mt-3 pt-3 border-t border-dashed flex items-start gap-2 text-xs ${
-                                  isDark ? "border-amber-800/40 text-amber-300" : "border-amber-300 text-amber-800"
+                                  isDark ? "border-amber-800/40 text-amber-300" : "border-amber-300 text-amber-950 font-medium"
                                 }`}>
                                   <Lightbulb className="w-3.5 h-3.5 shrink-0 mt-0.5" />
                                   <span><strong>Topper Note:</strong> {fp.note}</span>
@@ -1241,7 +1143,9 @@ export default function ScienceConceptsHubView({
                     {/* Step-by-Step Guide */}
                     {section.stepByStepGuide && section.stepByStepGuide.length > 0 && (
                       <div className="space-y-3">
-                        <h4 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-2">
+                        <h4 className={`text-xs sm:text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${
+                          isDark ? "text-emerald-400" : "text-emerald-900 font-extrabold"
+                        }`}>
                           <ListChecks className="w-4 h-4" />
                           CBSE Answer Template — Step-by-Step
                         </h4>
@@ -1250,18 +1154,20 @@ export default function ScienceConceptsHubView({
                             <div key={step.stepNo} className={`p-5 rounded-2xl border flex items-start gap-4 ${
                               isDark ? "bg-emerald-950/20 border-emerald-500/20" : "bg-emerald-50/60 border-emerald-200"
                             }`}>
-                              <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center shrink-0 font-mono font-black text-sm text-emerald-400">
+                              <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 font-mono font-black text-sm border ${
+                                isDark ? "bg-emerald-500/20 border-emerald-500/30 text-emerald-400" : "bg-emerald-100 border-emerald-300 text-emerald-950"
+                              }`}>
                                 {step.stepNo}
                               </div>
                               <div className="flex-1 space-y-1.5">
-                                <div className={`font-bold text-sm ${isDark ? "text-emerald-300" : "text-emerald-800"}`}>
+                                <div className={`font-bold text-sm ${isDark ? "text-emerald-300" : "text-emerald-950 font-black"}`}>
                                   {step.title}
                                 </div>
                                 <div className={`text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                                   {step.action}
                                 </div>
                                 {step.proTip && (
-                                  <div className={`flex items-start gap-1.5 text-xs mt-1 ${isDark ? "text-teal-400" : "text-teal-700"}`}>
+                                  <div className={`flex items-start gap-1.5 text-xs mt-1 ${isDark ? "text-teal-400" : "text-teal-800 font-semibold"}`}>
                                     <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5" />
                                     <span><strong>Pro Tip:</strong> {step.proTip}</span>
                                   </div>
@@ -1276,7 +1182,9 @@ export default function ScienceConceptsHubView({
                     {/* Examiner Traps */}
                     {section.examinerTraps && section.examinerTraps.length > 0 && (
                       <div className="space-y-3">
-                        <h4 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-rose-400 flex items-center gap-2">
+                        <h4 className={`text-xs sm:text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${
+                          isDark ? "text-rose-400" : "text-rose-900 font-extrabold"
+                        }`}>
                           <Shield className="w-4 h-4" />
                           CBSE Examiner Traps — Marks Deduction Warnings
                         </h4>
@@ -1321,7 +1229,9 @@ export default function ScienceConceptsHubView({
           }`}>
             <div className="space-y-1.5">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="p-2 rounded-xl bg-teal-500/20 text-teal-400 border border-teal-500/30">
+                <span className={`p-2 rounded-xl border ${
+                  isDark ? "bg-teal-500/20 text-teal-400 border-teal-500/30" : "bg-teal-100 text-teal-800 border-teal-300"
+                }`}>
                   <Target className="w-5 h-5" />
                 </span>
                 <span className="px-3 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-teal-500 text-slate-950">
@@ -1359,8 +1269,10 @@ export default function ScienceConceptsHubView({
 
           {/* Level Filter Tabs */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1.5">
-              <Filter className="w-3.5 h-3.5 text-teal-400" /> Filter Level:
+            <span className={`text-xs font-mono font-bold uppercase tracking-wider mr-1 flex items-center gap-1.5 ${
+              isDark ? "text-slate-400" : "text-slate-600"
+            }`}>
+              <Filter className={`w-3.5 h-3.5 ${isDark ? "text-teal-400" : "text-teal-700"}`} /> Filter Level:
             </span>
             {[
               { id: "all", label: `All Questions (${chapterExamples.length})` },
@@ -1484,9 +1396,9 @@ export default function ScienceConceptsHubView({
                         <div className={`p-4 rounded-2xl border flex items-start gap-3 ${
                           isDark ? "bg-amber-950/20 border-amber-500/30 text-amber-200" : "bg-amber-50 border-amber-300 text-amber-950"
                         }`}>
-                          <Lightbulb className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                          <Lightbulb className={`w-5 h-5 shrink-0 mt-0.5 ${isDark ? "text-amber-400" : "text-amber-600"}`} />
                           <div className="text-xs sm:text-sm leading-relaxed">
-                            <span className="font-bold text-amber-400 block mb-0.5">💡 Key Takeaway (Board Golden Rule):</span>
+                            <span className={`font-bold block mb-0.5 ${isDark ? "text-amber-400" : "text-amber-900 font-black"}`}>💡 Key Takeaway (Board Golden Rule):</span>
                             <span>{ex.keyTakeaway}</span>
                           </div>
                         </div>
@@ -1497,9 +1409,9 @@ export default function ScienceConceptsHubView({
                         <div className={`p-4 rounded-2xl border flex items-start gap-3 ${
                           isDark ? "bg-rose-950/20 border-rose-500/30 text-rose-200" : "bg-rose-50 border-rose-300 text-rose-950"
                         }`}>
-                          <AlertTriangle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                          <AlertTriangle className={`w-5 h-5 shrink-0 mt-0.5 ${isDark ? "text-rose-400" : "text-rose-600"}`} />
                           <div className="text-xs sm:text-sm leading-relaxed">
-                            <span className="font-bold text-rose-400 block mb-0.5">⚠️ CBSE Examiner Trap (Marks Deduction Warning):</span>
+                            <span className={`font-bold block mb-0.5 ${isDark ? "text-rose-400" : "text-rose-900 font-black"}`}>⚠️ CBSE Examiner Trap (Marks Deduction Warning):</span>
                             <span>{ex.examinerTrap}</span>
                           </div>
                         </div>
@@ -1546,8 +1458,8 @@ export default function ScienceConceptsHubView({
             <div className={`px-4 py-2 rounded-2xl border flex items-center gap-2 shrink-0 ${
               isDark ? "bg-black/40 border-white/10" : "bg-white border-slate-200 shadow-xs"
             }`}>
-              <Flame className="w-4 h-4 text-amber-400" />
-              <span className="text-xs font-mono font-bold text-amber-400">
+              <Flame className={`w-4 h-4 ${isDark ? "text-amber-400" : "text-amber-600"}`} />
+              <span className={`text-xs font-mono font-bold ${isDark ? "text-amber-400" : "text-amber-900 font-extrabold"}`}>
                 Sprint Score: {Object.keys(sprintAnswers).filter(id => {
                   const q = chapterSprintQuestions.find(item => item.id === id);
                   return q && sprintAnswers[id] === q.correctOption;
@@ -1638,17 +1550,17 @@ export default function ScienceConceptsHubView({
                   {isAnswered && (
                     <div className="mt-3 pt-3 border-t border-white/10 space-y-1.5 animate-fade-in text-xs">
                       {isCorrect ? (
-                        <p className="text-emerald-400 font-bold flex items-center gap-1.5">
+                        <p className={`font-bold flex items-center gap-1.5 ${isDark ? "text-emerald-400" : "text-emerald-800 font-extrabold"}`}>
                           <CheckCircle2 className="w-4 h-4" /> Correct! +25 XP awarded.
                         </p>
                       ) : (
-                        <p className="text-rose-400 font-bold flex items-center gap-1.5">
+                        <p className={`font-bold flex items-center gap-1.5 ${isDark ? "text-rose-400" : "text-rose-800 font-extrabold"}`}>
                           <AlertTriangle className="w-4 h-4" /> Incorrect. Correct Answer: {q.answer || `Option ${String.fromCharCode(65 + (q.correctOption || 0))}`}
                         </p>
                       )}
                       {q.examinerNote && (
                         <p className={`text-[11px] leading-relaxed p-2.5 rounded-xl border ${
-                          isDark ? "bg-amber-500/10 border-amber-500/20 text-amber-200" : "bg-amber-50 border-amber-200 text-amber-900"
+                          isDark ? "bg-amber-500/10 border-amber-500/20 text-amber-200" : "bg-amber-50 border-amber-300 text-amber-950 font-medium"
                         }`}>
                           <strong>💡 CBSE Examiner Trap:</strong> {q.examinerNote}
                         </p>
@@ -1673,7 +1585,7 @@ export default function ScienceConceptsHubView({
               isDark ? "border-white/10 hover:border-teal-400/40 text-slate-300 hover:text-white" : "border-slate-200 hover:border-teal-400 text-slate-700 bg-slate-50 hover:bg-slate-100"
             }`}
           >
-            <ArrowLeft className="w-4 h-4 text-teal-400" />
+            <ArrowLeft className={`w-4 h-4 ${isDark ? "text-teal-400" : "text-teal-700"}`} />
             <span>Prev: Ch {prevChapter.no} — {prevChapter.shortName}</span>
           </button>
         ) : <div className="hidden sm:block" />}
@@ -1696,7 +1608,7 @@ export default function ScienceConceptsHubView({
             }`}
           >
             <span>Next: Ch {nextChapter.no} — {nextChapter.shortName}</span>
-            <ArrowRight className="w-4 h-4 text-teal-400" />
+            <ArrowRight className={`w-4 h-4 ${isDark ? "text-teal-400" : "text-teal-700"}`} />
           </button>
         ) : <div className="hidden sm:block" />}
       </div>
@@ -1772,19 +1684,19 @@ export default function ScienceConceptsHubView({
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {activeZoomAsset.objectPosition && (
                   <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                    <span className="text-[11px] font-mono uppercase font-bold text-cyan-400 block mb-1">Object Position</span>
+                    <span className={`text-[11px] font-mono uppercase font-bold block mb-1 ${isDark ? "text-cyan-400" : "text-cyan-900 font-extrabold"}`}>Object Position</span>
                     <span className="text-sm font-semibold">{activeZoomAsset.objectPosition}</span>
                   </div>
                 )}
                 {activeZoomAsset.imagePosition && (
                   <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                    <span className="text-[11px] font-mono uppercase font-bold text-emerald-400 block mb-1">Image Position</span>
+                    <span className={`text-[11px] font-mono uppercase font-bold block mb-1 ${isDark ? "text-emerald-400" : "text-emerald-900 font-extrabold"}`}>Image Position</span>
                     <span className="text-sm font-semibold">{activeZoomAsset.imagePosition}</span>
                   </div>
                 )}
                 {activeZoomAsset.natureOfImage && (
                   <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                    <span className="text-[11px] font-mono uppercase font-bold text-amber-400 block mb-1">Nature & Size</span>
+                    <span className={`text-[11px] font-mono uppercase font-bold block mb-1 ${isDark ? "text-amber-400" : "text-amber-900 font-extrabold"}`}>Nature &amp; Size</span>
                     <span className="text-sm font-semibold">{activeZoomAsset.natureOfImage}</span>
                   </div>
                 )}
@@ -1792,8 +1704,8 @@ export default function ScienceConceptsHubView({
 
               {/* Key Ray Rule & Examiner Tip */}
               {activeZoomAsset.keyRule && (
-                <div className={`p-4 rounded-2xl border ${isDark ? "bg-cyan-950/20 border-cyan-500/30 text-cyan-100" : "bg-cyan-50 border-cyan-200 text-cyan-900"}`}>
-                  <h4 className="text-xs font-mono uppercase font-black tracking-wider text-cyan-400 mb-1">
+                <div className={`p-4 rounded-2xl border ${isDark ? "bg-cyan-950/20 border-cyan-500/30 text-cyan-100" : "bg-cyan-50 border-cyan-200 text-cyan-950"}`}>
+                  <h4 className={`text-xs font-mono uppercase font-black tracking-wider mb-1 ${isDark ? "text-cyan-400" : "text-cyan-900 font-bold"}`}>
                     ✦ Mandatory Ray Tracing Rule
                   </h4>
                   <p className="text-xs sm:text-sm leading-relaxed">{activeZoomAsset.keyRule}</p>
@@ -1801,9 +1713,9 @@ export default function ScienceConceptsHubView({
               )}
 
               {(activeZoomAsset.examinerAlert || activeZoomAsset.markingTip) && (
-                <div className={`p-4 rounded-2xl border ${isDark ? "bg-amber-950/20 border-amber-500/30 text-amber-100" : "bg-amber-50 border-amber-200 text-amber-900"}`}>
-                  <h4 className="text-xs font-mono uppercase font-black tracking-wider text-amber-400 mb-1">
-                    💡 CBSE Examiner Evaluation Key & Marks Breakdown
+                <div className={`p-4 rounded-2xl border ${isDark ? "bg-amber-950/20 border-amber-500/30 text-amber-100" : "bg-amber-50 border-amber-300 text-amber-950"}`}>
+                  <h4 className={`text-xs font-mono uppercase font-black tracking-wider mb-1 ${isDark ? "text-amber-400" : "text-amber-900 font-bold"}`}>
+                    💡 CBSE Examiner Evaluation Key &amp; Marks Breakdown
                   </h4>
                   <p className="text-xs sm:text-sm leading-relaxed">
                     {activeZoomAsset.examinerAlert} {activeZoomAsset.markingTip ? `— ${activeZoomAsset.markingTip}` : ""}
