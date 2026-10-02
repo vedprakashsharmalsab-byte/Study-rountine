@@ -2366,11 +2366,13 @@ export default function CBSECommandCenter() {
           }
         }
       }
-      if (opts?.chapter) {
-        setConceptsChapterNo(opts.chapter);
-      }
       if (opts?.customAction) opts.customAction();
-      setActiveTab(tabId as any);
+      React.startTransition(() => {
+        if (opts?.chapter) {
+          setConceptsChapterNo(opts.chapter);
+        }
+        setActiveTab(tabId as any);
+      });
       if (typeof window !== "undefined") {
         window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       }
@@ -3233,7 +3235,9 @@ export default function CBSECommandCenter() {
                             setConceptsSubject("math");
                           }
                         }
-                        setActiveTab(tabId as any);
+                        React.startTransition(() => {
+                          setActiveTab(tabId as any);
+                        });
                         if (typeof window !== "undefined") {
                           window.scrollTo({ top: 0, left: 0, behavior: "instant" });
                         }
@@ -4310,7 +4314,9 @@ export default function CBSECommandCenter() {
               }
             }}
             onChapterChange={(ch) => {
-              setConceptsChapterNo(ch);
+              React.startTransition(() => {
+                setConceptsChapterNo(ch);
+              });
               if (typeof window !== "undefined") {
                 localStorage.setItem(`cbse_last_${conceptsSubject}_chapter`, ch.toString());
                 localStorage.setItem("cbse_last_concepts_chapter", ch.toString());

@@ -14,8 +14,6 @@ interface PremiumMathRendererProps {
   inline?: boolean;
 }
 
-const MATH_INDICATORS = /[\$\\\{\}\^_\=\+\-\*\/]/;
-
 /**
  * Intelligent LaTeX Preprocessor
  * Ensures that LaTeX math blocks are cleanly preserved,
@@ -237,6 +235,135 @@ function preprocessMathContent(raw: string): string {
   return result;
 }
 
+const NEEDS_MARKDOWN_OR_MATH = /[\$\\\*#`|~>]|(?:\b(?:sqrt|sin|cos|tan|cosec|sec|cot|theta|pi|alpha|beta|gamma|frac)\b)|(?:\d+\/\d+)|[°\^]|(?:^\s*[-+*]\s)|(?:\n\s*[-+*]\s)|(?:\n\s*\d+\.\s)/i;
+
+const REMARK_PLUGINS = [remarkMath, remarkGfm];
+const REHYPE_PLUGINS = [rehypeKatex];
+
+function buildMarkdownComponents(isDark: boolean, inline: boolean) {
+  return {
+    h3: ({ node, ...props }: any) => (
+      <h3 className={`font-bold mt-4 mb-2 tracking-wider uppercase text-sm sm:text-base border-b pb-1 flex items-center gap-2 ${
+        isDark ? "text-emerald-400 border-emerald-500/20" : "text-emerald-800 border-emerald-500/30"
+      }`} {...props} />
+    ),
+    h4: ({ node, ...props }: any) => (
+      <h4 className={`font-bold mt-2 mb-1 text-sm tracking-wide ${
+        isDark ? "text-amber-400" : "text-amber-800"
+      }`} {...props} />
+    ),
+    p: ({ node, ...props }: any) => {
+      if (inline) {
+        return <span className="inline text-inherit" {...props} />;
+      }
+      return <p className={`leading-relaxed my-2 text-inherit ${isDark ? "text-slate-200" : "text-slate-900"}`} {...props} />;
+    },
+    strong: ({ node, ...props }: any) => (
+      <strong className={`font-black ${isDark ? "text-white" : "text-slate-950"}`} {...props} />
+    ),
+    em: ({ node, ...props }: any) => (
+      <em className={`italic ${isDark ? "text-slate-300" : "text-slate-800"}`} {...props} />
+    ),
+    blockquote: ({ node, ...props }: any) => (
+      <blockquote className={`border-l-4 p-3.5 rounded-r-xl my-3 text-sm font-medium italic ${
+        isDark
+          ? "border-emerald-500/50 bg-emerald-950/20 text-emerald-200"
+          : "border-emerald-600 bg-emerald-50 text-emerald-950 shadow-xs"
+      }`} {...props} />
+    ),
+    table: ({ node, ...props }: any) => (
+      <div className={`overflow-x-auto my-4 rounded-2xl border shadow-lg ${
+        isDark ? "border-white/10" : "border-slate-200/80"
+      }`}>
+        <table className="w-full text-xs sm:text-sm border-collapse" {...props} />
+      </div>
+    ),
+    thead: ({ node, ...props }: any) => (
+      <thead className={isDark ? "bg-teal-500/20" : "bg-teal-50"} {...props} />
+    ),
+    tbody: ({ node, ...props }: any) => (
+      <tbody {...props} />
+    ),
+    tr: ({ node, ...props }: any) => (
+      <tr
+        className={`border-b transition-colors last:border-0 ${
+          isDark
+            ? "border-white/8 even:bg-white/[0.025] hover:bg-teal-500/10"
+            : "border-slate-200 even:bg-slate-50/70 hover:bg-teal-50/80"
+        }`}
+        {...props}
+      />
+    ),
+    th: ({ node, ...props }: any) => (
+      <th
+        className={`px-4 py-3 text-left font-black text-xs uppercase tracking-widest whitespace-nowrap ${
+          isDark ? "text-teal-300" : "text-teal-800"
+        }`}
+        {...props}
+      />
+    ),
+    td: ({ node, ...props }: any) => (
+      <td
+        className={`px-4 py-3 leading-relaxed align-top ${
+          isDark ? "text-slate-200" : "text-slate-800"
+        }`}
+        {...props}
+      />
+    ),
+    ul: ({ node, ...props }: any) => (
+      <ul className="my-3 space-y-2 pl-5 list-disc list-outside" {...props} />
+    ),
+    ol: ({ node, ...props }: any) => (
+      <ol className="my-3 space-y-2 pl-5 list-decimal list-outside" {...props} />
+    ),
+    li: ({ node, ...props }: any) => (
+      <li
+        className={`leading-relaxed text-sm sm:text-base my-1 pl-1 ${
+          isDark ? "text-slate-200" : "text-slate-800"
+        }`}
+        {...props}
+      />
+    ),
+    code: ({ node, className: codeClassName, children, ...props }: any) => {
+      const isBlock = codeClassName?.includes('language-');
+      if (isBlock) {
+        return (
+          <pre className={`my-3 p-4 rounded-xl overflow-x-auto text-xs font-mono ${
+            isDark ? "bg-black/50 text-emerald-300 border border-white/10" : "bg-slate-100 text-slate-900 border border-slate-200"
+          }`}>
+            <code {...props}>{children}</code>
+          </pre>
+        );
+      }
+      return (
+        <code
+          className={`px-1.5 py-0.5 rounded-md text-xs font-mono font-bold ${
+            isDark ? "bg-white/10 text-amber-300" : "bg-slate-100 text-amber-700"
+          }`}
+          {...props}
+        >{children}</code>
+      );
+    },
+    div: ({ node, className: divClassName, ...props }: any) => {
+      if (divClassName?.includes('math-display')) {
+        return (
+          <div className={`overflow-x-auto py-3.5 my-3.5 sm:my-4 flex justify-center items-center min-h-[3em] text-inherit ${
+            isDark ? "text-slate-100" : "text-slate-900"
+          }`}>
+            <div className={`${divClassName} max-w-full font-serif text-base sm:text-lg`} style={{ lineHeight: '1.8', overflowY: 'visible' }} {...props} />
+          </div>
+        );
+      }
+      return <div className={divClassName} {...props} />;
+    },
+  };
+}
+
+const COMPONENTS_DARK_BLOCK = buildMarkdownComponents(true, false);
+const COMPONENTS_LIGHT_BLOCK = buildMarkdownComponents(false, false);
+const COMPONENTS_DARK_INLINE = buildMarkdownComponents(true, true);
+const COMPONENTS_LIGHT_INLINE = buildMarkdownComponents(false, true);
+
 const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
   content,
   isDark = true,
@@ -246,7 +373,7 @@ const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
   // Fast path: if string has no math indicators or markdown symbols, render directly
   const hasSpecialChars = useMemo(() => {
     if (!content) return false;
-    return MATH_INDICATORS.test(content) || content.includes('\n') || content.includes('#') || content.includes('*');
+    return NEEDS_MARKDOWN_OR_MATH.test(content);
   }, [content]);
 
   const processedContent = useMemo(() => {
@@ -258,136 +385,22 @@ const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
 
   if (!hasSpecialChars) {
     return (
-      <Container className={`math-renderer ${inline ? 'math-renderer-inline inline' : 'font-sans leading-relaxed block'} ${isDark ? "text-slate-100" : "text-slate-900"} ${className}`}>
+      <Container className={`math-renderer ${inline ? 'math-renderer-inline inline' : 'font-sans leading-relaxed block whitespace-pre-line'} ${isDark ? "text-slate-100" : "text-slate-900"} ${className}`}>
         {content}
       </Container>
     );
   }
 
+  const components = isDark
+    ? (inline ? COMPONENTS_DARK_INLINE : COMPONENTS_DARK_BLOCK)
+    : (inline ? COMPONENTS_LIGHT_INLINE : COMPONENTS_LIGHT_BLOCK);
+
   return (
     <Container className={`math-renderer ${inline ? 'math-renderer-inline inline' : 'font-sans leading-relaxed block'} ${isDark ? "text-slate-100" : "text-slate-900"} ${className}`}>
       <ReactMarkdown
-        remarkPlugins={[remarkMath, remarkGfm]}
-        rehypePlugins={[rehypeKatex]}
-        components={{
-          h3: ({ node, ...props }) => (
-            <h3 className={`font-bold mt-4 mb-2 tracking-wider uppercase text-sm sm:text-base border-b pb-1 flex items-center gap-2 ${
-              isDark ? "text-emerald-400 border-emerald-500/20" : "text-emerald-800 border-emerald-500/30"
-            }`} {...props} />
-          ),
-          h4: ({ node, ...props }) => (
-            <h4 className={`font-bold mt-2 mb-1 text-sm tracking-wide ${
-              isDark ? "text-amber-400" : "text-amber-800"
-            }`} {...props} />
-          ),
-          p: ({ node, ...props }) => {
-            if (inline) {
-              return <span className="inline text-inherit" {...props} />;
-            }
-            return <p className={`leading-relaxed my-2 text-inherit ${isDark ? "text-slate-200" : "text-slate-900"}`} {...props} />;
-          },
-          strong: ({ node, ...props }) => (
-            <strong className={`font-black ${isDark ? "text-white" : "text-slate-950"}`} {...props} />
-          ),
-          em: ({ node, ...props }) => (
-            <em className={`italic ${isDark ? "text-slate-300" : "text-slate-800"}`} {...props} />
-          ),
-          blockquote: ({ node, ...props }) => (
-            <blockquote className={`border-l-4 p-3.5 rounded-r-xl my-3 text-sm font-medium italic ${
-              isDark
-                ? "border-emerald-500/50 bg-emerald-950/20 text-emerald-200"
-                : "border-emerald-600 bg-emerald-50 text-emerald-950 shadow-xs"
-            }`} {...props} />
-          ),
-          // ── Beautiful styled tables ──────────────────────────────────────────
-          table: ({ node, ...props }) => (
-            <div className={`overflow-x-auto my-4 rounded-2xl border shadow-lg ${
-              isDark ? "border-white/10" : "border-slate-200/80"
-            }`}>
-              <table className="w-full text-xs sm:text-sm border-collapse" {...props} />
-            </div>
-          ),
-          thead: ({ node, ...props }) => (
-            <thead className={isDark ? "bg-teal-500/20" : "bg-teal-50"} {...props} />
-          ),
-          tbody: ({ node, ...props }) => (
-            <tbody {...props} />
-          ),
-          tr: ({ node, ...props }) => (
-            <tr
-              className={`border-b transition-colors last:border-0 ${
-                isDark
-                  ? "border-white/8 even:bg-white/[0.025] hover:bg-teal-500/10"
-                  : "border-slate-200 even:bg-slate-50/70 hover:bg-teal-50/80"
-              }`}
-              {...props}
-            />
-          ),
-          th: ({ node, ...props }) => (
-            <th
-              className={`px-4 py-3 text-left font-black text-xs uppercase tracking-widest whitespace-nowrap ${
-                isDark ? "text-teal-300" : "text-teal-800"
-              }`}
-              {...props}
-            />
-          ),
-          td: ({ node, ...props }) => (
-            <td
-              className={`px-4 py-3 leading-relaxed align-top ${
-                isDark ? "text-slate-200" : "text-slate-800"
-              }`}
-              {...props}
-            />
-          ),
-          // ── Lists with proper spacing & zero block distortion ────────────────
-          ul: ({ node, ...props }) => (
-            <ul className="my-3 space-y-2 pl-5 list-disc list-outside" {...props} />
-          ),
-          ol: ({ node, ...props }) => (
-            <ol className="my-3 space-y-2 pl-5 list-decimal list-outside" {...props} />
-          ),
-          li: ({ node, ...props }) => (
-            <li
-              className={`leading-relaxed text-sm sm:text-base my-1 pl-1 ${
-                isDark ? "text-slate-200" : "text-slate-800"
-              }`}
-              {...props}
-            />
-          ),
-          // ── Inline code ──────────────────────────────────────────────────────
-          code: ({ node, className: codeClassName, children, ...props }) => {
-            const isBlock = codeClassName?.includes('language-');
-            if (isBlock) {
-              return (
-                <pre className={`my-3 p-4 rounded-xl overflow-x-auto text-xs font-mono ${
-                  isDark ? "bg-black/50 text-emerald-300 border border-white/10" : "bg-slate-100 text-slate-900 border border-slate-200"
-                }`}>
-                  <code {...props}>{children}</code>
-                </pre>
-              );
-            }
-            return (
-              <code
-                className={`px-1.5 py-0.5 rounded-md text-xs font-mono font-bold ${
-                  isDark ? "bg-white/10 text-amber-300" : "bg-slate-100 text-amber-700"
-                }`}
-                {...props}
-              >{children}</code>
-            );
-          },
-          div: ({ node, className: divClassName, ...props }) => {
-            if (divClassName?.includes('math-display')) {
-              return (
-                <div className={`overflow-x-auto py-3.5 my-3.5 sm:my-4 flex justify-center items-center min-h-[3em] text-inherit ${
-                  isDark ? "text-slate-100" : "text-slate-900"
-                }`}>
-                  <div className={`${divClassName} max-w-full font-serif text-base sm:text-lg`} style={{ lineHeight: '1.8', overflowY: 'visible' }} {...props} />
-                </div>
-              );
-            }
-            return <div className={divClassName} {...props} />;
-          },
-        }}
+        remarkPlugins={REMARK_PLUGINS}
+        rehypePlugins={REHYPE_PLUGINS}
+        components={components}
       >
         {processedContent}
       </ReactMarkdown>

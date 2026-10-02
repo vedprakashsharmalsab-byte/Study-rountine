@@ -282,6 +282,7 @@ export default function ScienceConceptsHubView({
   // Leveled Board Solved Examples State (1M, 2M-3M, 4M-5M Case Studies)
   const [examplesLevelFilter, setExamplesLevelFilter] = useState<"all" | "level1" | "level2" | "level3">("all");
   const [revealedExampleSolutions, setRevealedExampleSolutions] = useState<Record<string, boolean>>({});
+  const [exampleDisplayLimit, setExampleDisplayLimit] = useState<number>(6);
 
   const currentChNo = isEmbeddedInCommand && activeChapterNo !== undefined ? activeChapterNo : selectedChapterNo;
 
@@ -319,6 +320,14 @@ export default function ScienceConceptsHubView({
     return chapterExamples.filter(e => e.level.includes("Level 3"));
   }, [chapterExamples, examplesLevelFilter]);
 
+  const displayedChapterExamples = useMemo(() => {
+    return filteredChapterExamples.slice(0, exampleDisplayLimit);
+  }, [filteredChapterExamples, exampleDisplayLimit]);
+
+  useEffect(() => {
+    setExampleDisplayLimit(6);
+  }, [currentChNo, examplesLevelFilter]);
+
   const toggleExampleSolution = (id: string) => {
     setRevealedExampleSolutions(prev => ({ ...prev, [id]: !prev[id] }));
   };
@@ -332,12 +341,12 @@ export default function ScienceConceptsHubView({
     setRevealedExampleSolutions(next);
   };
 
-  // Auto-expand first 2 sections when chapter changes
+  // Auto-expand first section when chapter changes for instant snappy loading
   useEffect(() => {
     if (!currentChapter) return;
     const init: Record<string, boolean> = {};
     currentChapter.sections.forEach((s, idx) => {
-      init[s.id] = idx < 2; // first 2 expanded by default
+      init[s.id] = idx === 0; // first section expanded by default
     });
     setExpandedSectionIds(init);
   }, [currentChNo, currentChapter]);
@@ -355,10 +364,20 @@ export default function ScienceConceptsHubView({
   }, [currentChapter, expandedSectionIds]);
 
   const handleSelectChapter = useCallback((chNo: number) => {
-    setSelectedChapterNo(chNo);
-    onChapterChange?.(chNo);
-    setSearchQuery("");
-    document.getElementById("sci-concepts-top")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    React.startTransition(() => {
+      setSelectedChapterNo(chNo);
+      onChapterChange?.(chNo);
+      setSearchQuery("");
+      setSprintRevealed({});
+      setSprintAnswers({});
+      setRevealedExampleSolutions({});
+    });
+    if (typeof window !== "undefined") {
+      const topEl = document.getElementById("sci-concepts-top");
+      if (topEl) {
+        topEl.scrollIntoView({ behavior: "instant", block: "start" });
+      }
+    }
   }, [onChapterChange]);
 
   const filteredSections = useMemo(() => {
@@ -1298,7 +1317,7 @@ export default function ScienceConceptsHubView({
 
           {/* Questions Grid */}
           <div className="space-y-4">
-            {filteredChapterExamples.map((ex, idx) => {
+            {displayedChapterExamples.map((ex, idx) => {
               const isRevealed = revealedExampleSolutions[ex.id] ?? false;
               const isL1 = ex.level.includes("Level 1");
               const isL2 = ex.level.includes("Level 2");
@@ -1422,6 +1441,32 @@ export default function ScienceConceptsHubView({
               );
             })}
           </div>
+
+          {/* Show More / Show All Pagination Controls */}
+          {filteredChapterExamples.length > displayedChapterExamples.length && (
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
+              <button
+                onClick={() => setExampleDisplayLimit(prev => Math.min(prev + 8, filteredChapterExamples.length))}
+                className={`px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold border transition-all cursor-pointer shadow-sm flex items-center gap-2 ${
+                  isDark
+                    ? "bg-teal-500/20 border-teal-500/40 text-teal-300 hover:bg-teal-500/30"
+                    : "bg-teal-50 border-teal-300 text-teal-900 hover:bg-teal-100"
+                }`}
+              >
+                <span>Load More Solved Examples ({filteredChapterExamples.length - displayedChapterExamples.length} remaining) ▼</span>
+              </button>
+              <button
+                onClick={() => setExampleDisplayLimit(filteredChapterExamples.length)}
+                className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold border transition-all cursor-pointer ${
+                  isDark
+                    ? "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
+                    : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                <span>Show All ({filteredChapterExamples.length})</span>
+              </button>
+            </div>
+          )}
         </div>
       )}
 

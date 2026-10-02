@@ -231,11 +231,16 @@ export default function ConceptsHubView({
     onSubjectChange?.(activeSubject);
   }, [activeSubject, onSubjectChange]);
 
+  // Sync props only when initialSubject or initialChapterNo change externally from explicit navigation
+  const prevSubRef = useRef(initialSubject);
+  const prevChRef = useRef(initialChapterNo);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("cbse_last_math_chapter", activeMathChapterNo.toString());
     }
     if (activeSubject === "math") {
+      prevChRef.current = activeMathChapterNo;
       onChapterChange?.(activeMathChapterNo);
     }
   }, [activeMathChapterNo, activeSubject, onChapterChange]);
@@ -245,6 +250,7 @@ export default function ConceptsHubView({
       localStorage.setItem("cbse_last_science_chapter", activeScienceChapterNo.toString());
     }
     if (activeSubject === "science") {
+      prevChRef.current = activeScienceChapterNo;
       onChapterChange?.(activeScienceChapterNo);
     }
   }, [activeScienceChapterNo, activeSubject, onChapterChange]);
@@ -254,6 +260,7 @@ export default function ConceptsHubView({
       localStorage.setItem("cbse_last_sst_chapter", activeSSTChapterNo.toString());
     }
     if (activeSubject === "sst") {
+      prevChRef.current = activeSSTChapterNo;
       onChapterChange?.(activeSSTChapterNo);
     }
   }, [activeSSTChapterNo, activeSubject, onChapterChange]);
@@ -277,9 +284,6 @@ export default function ConceptsHubView({
     sci_c1_t2: true
   });
 
-  // Sync props only when initialSubject or initialChapterNo change externally from explicit navigation
-  const prevSubRef = useRef(initialSubject);
-  const prevChRef = useRef(initialChapterNo);
   useEffect(() => {
     if (initialSubject && initialSubject !== prevSubRef.current) {
       prevSubRef.current = initialSubject;
@@ -493,31 +497,39 @@ export default function ConceptsHubView({
 
   // Previous and Next Navigation Handlers
   const handlePrevChapter = () => {
-    if (activeSubject === "math") {
-      const prev = activeMathChapterNo > 1 ? activeMathChapterNo - 1 : 14;
-      setActiveMathChapterNo(prev);
-    } else if (activeSubject === "science") {
-      const prev = activeScienceChapterNo > 1 ? activeScienceChapterNo - 1 : 13;
-      setActiveScienceChapterNo(prev);
-    } else {
-      const prev = activeSSTChapterNo > 1 ? activeSSTChapterNo - 1 : 10;
-      setActiveSSTChapterNo(prev);
+    React.startTransition(() => {
+      if (activeSubject === "math") {
+        const prev = activeMathChapterNo > 1 ? activeMathChapterNo - 1 : 14;
+        setActiveMathChapterNo(prev);
+      } else if (activeSubject === "science") {
+        const prev = activeScienceChapterNo > 1 ? activeScienceChapterNo - 1 : 13;
+        setActiveScienceChapterNo(prev);
+      } else {
+        const prev = activeSSTChapterNo > 1 ? activeSSTChapterNo - 1 : 10;
+        setActiveSSTChapterNo(prev);
+      }
+    });
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleNextChapter = () => {
-    if (activeSubject === "math") {
-      const next = activeMathChapterNo < 14 ? activeMathChapterNo + 1 : 1;
-      setActiveMathChapterNo(next);
-    } else if (activeSubject === "science") {
-      const next = activeScienceChapterNo < 13 ? activeScienceChapterNo + 1 : 1;
-      setActiveScienceChapterNo(next);
-    } else {
-      const next = activeSSTChapterNo < 10 ? activeSSTChapterNo + 1 : 1;
-      setActiveSSTChapterNo(next);
+    React.startTransition(() => {
+      if (activeSubject === "math") {
+        const next = activeMathChapterNo < 14 ? activeMathChapterNo + 1 : 1;
+        setActiveMathChapterNo(next);
+      } else if (activeSubject === "science") {
+        const next = activeScienceChapterNo < 13 ? activeScienceChapterNo + 1 : 1;
+        setActiveScienceChapterNo(next);
+      } else {
+        const next = activeSSTChapterNo < 10 ? activeSSTChapterNo + 1 : 1;
+        setActiveSSTChapterNo(next);
+      }
+    });
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const toggleScienceTopic = (id: string) => {
@@ -805,9 +817,11 @@ export default function ConceptsHubView({
                   value={activeSubject === "math" ? activeMathChapterNo : activeSubject === "science" ? activeScienceChapterNo : activeSSTChapterNo}
                   onChange={(e) => {
                     const num = parseInt(e.target.value);
-                    if (activeSubject === "math") setActiveMathChapterNo(num);
-                    else if (activeSubject === "science") setActiveScienceChapterNo(num);
-                    else setActiveSSTChapterNo(num);
+                    React.startTransition(() => {
+                      if (activeSubject === "math") setActiveMathChapterNo(num);
+                      else if (activeSubject === "science") setActiveScienceChapterNo(num);
+                      else setActiveSSTChapterNo(num);
+                    });
                   }}
                   className={`fabulous-select ${
                     isDark ? "fabulous-select-dark" : "fabulous-select-light"
@@ -863,7 +877,9 @@ export default function ConceptsHubView({
                         onClick={(e) => {
                           if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
                             e.preventDefault();
-                            setActiveSSTChapterNo(ch.no);
+                            React.startTransition(() => {
+                              setActiveSSTChapterNo(ch.no);
+                            });
                             setIsChapterGridOpen(false);
                           }
                         }}
@@ -912,7 +928,9 @@ export default function ConceptsHubView({
                         onClick={(e) => {
                           if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
                             e.preventDefault();
-                            setActiveMathChapterNo(ch.no);
+                            React.startTransition(() => {
+                              setActiveMathChapterNo(ch.no);
+                            });
                             setIsChapterGridOpen(false);
                           }
                         }}
@@ -948,7 +966,9 @@ export default function ConceptsHubView({
                         onClick={(e) => {
                           if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
                             e.preventDefault();
-                            setActiveScienceChapterNo(ch.no);
+                            React.startTransition(() => {
+                              setActiveScienceChapterNo(ch.no);
+                            });
                             setIsChapterGridOpen(false);
                           }
                         }}
