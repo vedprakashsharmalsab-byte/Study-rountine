@@ -23,6 +23,7 @@ import {
   CheckCircle2,
   Compass,
   Flame,
+  Filter,
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import {
@@ -44,11 +45,17 @@ import BiologyVisualSchematic from "@/components/BiologyVisualSchematics";
 import { getChapterQuestions } from "@/data/chapters";
 import ChemistryBasicsMasterView from "@/components/ChemistryBasicsMasterView";
 import { SCIENCE_CHAPTER_CONCEPTS, getScienceChapter, type ScienceChapterConcept } from "@/data/scienceConcepts";
+import {
+  SCIENCE_CONCEPTS_AND_EXAMPLES,
+  type ScienceConceptTopic,
+  type ScienceConceptExample
+} from "@/data/scienceConceptsAndExamples";
 
 interface ScienceConceptsHubViewProps {
   isDark: boolean;
   activeChapterNo?: number;
   isEmbeddedInCommand?: boolean;
+  onChapterChange?: (chapterNo: number) => void;
   onOpenQuestionBank?: (chapterNo?: number) => void;
   onOpenActivities?: (chapterNo?: number) => void;
   onOpenReactions?: (chapterNo?: number) => void;
@@ -255,6 +262,7 @@ export default function ScienceConceptsHubView({
   isDark,
   activeChapterNo,
   isEmbeddedInCommand = false,
+  onChapterChange,
   onOpenQuestionBank,
   onOpenActivities,
   onOpenReactions,
@@ -272,6 +280,10 @@ export default function ScienceConceptsHubView({
   // 3-Minute Dopamine Board Sprint State
   const [sprintAnswers, setSprintAnswers] = useState<Record<string, number>>({});
   const [sprintRevealed, setSprintRevealed] = useState<Record<string, boolean>>({});
+
+  // Leveled Board Solved Examples State (1M, 2M-3M, 4M-5M Case Studies)
+  const [examplesLevelFilter, setExamplesLevelFilter] = useState<"all" | "level1" | "level2" | "level3">("all");
+  const [revealedExampleSolutions, setRevealedExampleSolutions] = useState<Record<string, boolean>>({});
 
   const currentChNo = isEmbeddedInCommand && activeChapterNo !== undefined ? activeChapterNo : selectedChapterNo;
 
@@ -292,6 +304,35 @@ export default function ScienceConceptsHubView({
   );
 
   const currentMeta = useMemo(() => CHAPTER_LIST.find((c) => c.no === currentChNo) || CHAPTER_LIST[0], [currentChNo]);
+
+  // Chapter Topics and Examples from SCIENCE_CONCEPTS_AND_EXAMPLES
+  const chapterTopics = useMemo(() => {
+    return SCIENCE_CONCEPTS_AND_EXAMPLES.filter((t) => t.chapterNo === currentChNo);
+  }, [currentChNo]);
+
+  const chapterExamples = useMemo(() => {
+    return chapterTopics.flatMap((t) => t.examples);
+  }, [chapterTopics]);
+
+  const filteredChapterExamples = useMemo(() => {
+    if (examplesLevelFilter === "all") return chapterExamples;
+    if (examplesLevelFilter === "level1") return chapterExamples.filter(e => e.level.includes("Level 1"));
+    if (examplesLevelFilter === "level2") return chapterExamples.filter(e => e.level.includes("Level 2"));
+    return chapterExamples.filter(e => e.level.includes("Level 3"));
+  }, [chapterExamples, examplesLevelFilter]);
+
+  const toggleExampleSolution = (id: string) => {
+    setRevealedExampleSolutions(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const toggleAllExampleSolutions = () => {
+    const allRevealed = filteredChapterExamples.every(e => revealedExampleSolutions[e.id]);
+    const next: Record<string, boolean> = {};
+    filteredChapterExamples.forEach(e => {
+      next[e.id] = !allRevealed;
+    });
+    setRevealedExampleSolutions(next);
+  };
 
   // Auto-expand first 2 sections when chapter changes
   useEffect(() => {
@@ -317,9 +358,10 @@ export default function ScienceConceptsHubView({
 
   const handleSelectChapter = useCallback((chNo: number) => {
     setSelectedChapterNo(chNo);
+    onChapterChange?.(chNo);
     setSearchQuery("");
     document.getElementById("sci-concepts-top")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
+  }, [onChapterChange]);
 
   const filteredSections = useMemo(() => {
     if (!currentChapter) return [];
@@ -708,6 +750,36 @@ export default function ScienceConceptsHubView({
                     <span>{s.label.split(".")[1]?.trim() || s.label}</span>
                   </button>
                 ))}
+                {chapterExamples.length > 0 && (
+                  <button
+                    onClick={() => {
+                      document.getElementById("sci-solved-examples")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+                      isDark
+                        ? "bg-amber-500/15 border-amber-500/30 text-amber-300 hover:bg-amber-500/25"
+                        : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200"
+                    }`}
+                  >
+                    <Target className="w-3.5 h-3.5 text-amber-400" />
+                    <span>🎯 {chapterExamples.length} Board Solved Qs</span>
+                  </button>
+                )}
+                {chapterSprintQuestions.length > 0 && (
+                  <button
+                    onClick={() => {
+                      document.getElementById("sci-sprint-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+                      isDark
+                        ? "bg-emerald-500/15 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25"
+                        : "bg-emerald-100 border-emerald-300 text-emerald-950 hover:bg-emerald-200"
+                    }`}
+                  >
+                    <Flame className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>⏱️ 3-Min Sprint (+XP)</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -820,20 +892,47 @@ export default function ScienceConceptsHubView({
         </div>
       </div>
 
-      {/* ============= SEARCH BAR ============= */}
-      <div className="relative">
-        <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-        <input
-          type="text"
-          placeholder={`Search within Chapter ${currentChNo}: ${currentChapter.title}...`}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className={`w-full pl-10 pr-4 py-3 rounded-2xl text-sm font-medium border outline-none transition-all ${
+      {/* ============= SEARCH & SECTION CONTROLS TOOLBAR ============= */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div className="relative flex-1">
+          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <input
+            type="text"
+            placeholder={`Search within Chapter ${currentChNo}: ${currentChapter.title}...`}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className={`w-full pl-10 pr-10 py-2.5 rounded-2xl text-xs sm:text-sm font-medium border outline-none transition-all ${
+              isDark
+                ? "bg-black/40 border-white/10 text-white focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                : "bg-white border-slate-200 text-slate-900 focus:border-teal-500 shadow-sm"
+            }`}
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white cursor-pointer px-1 py-0.5 rounded"
+              title="Clear search"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+
+        <button
+          onClick={expandAll}
+          className={`px-3.5 py-2.5 rounded-2xl text-xs font-bold border transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0 ${
             isDark
-              ? "bg-black/40 border-white/10 text-white focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
-              : "bg-white border-slate-200 text-slate-900 focus:border-teal-500 shadow-sm"
+              ? "bg-white/5 border-white/10 text-slate-300 hover:text-white hover:bg-white/10"
+              : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50 shadow-2xs"
           }`}
-        />
+          title="Toggle expanding all topics or collapsing into a simplified roadmap"
+        >
+          <span>
+            {currentChapter && currentChapter.sections.every(s => expandedSectionIds[s.id])
+              ? "Collapse All Topics ▲"
+              : "Expand All Topics ▼"}
+          </span>
+        </button>
       </div>
 
       {/* ============= SECTIONS ============= */}
@@ -1211,10 +1310,214 @@ export default function ScienceConceptsHubView({
       </div>
 
       {/* =========================================================================
+          OFFICIAL CBSE LEVELED BOARD SOLVED EXAMPLES (1M, 2M–3M, 4M–5M CASE STUDIES)
+          ========================================================================= */}
+      {chapterExamples.length > 0 && (
+        <div id="sci-solved-examples" className="space-y-5 my-6 scroll-mt-24">
+          <div className={`p-6 sm:p-7 rounded-3xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all ${
+            isDark
+              ? "bg-gradient-to-r from-teal-950/40 via-[#0a1524] to-cyan-950/30 border-teal-500/30"
+              : "bg-gradient-to-r from-teal-50/90 via-cyan-50/60 to-emerald-50/70 border-teal-200 shadow-sm"
+          }`}>
+            <div className="space-y-1.5">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="p-2 rounded-xl bg-teal-500/20 text-teal-400 border border-teal-500/30">
+                  <Target className="w-5 h-5" />
+                </span>
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-teal-500 text-slate-950">
+                  Official CBSE Board Leveled Examples
+                </span>
+                <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
+                  isDark ? "bg-white/5 border-white/10 text-teal-300" : "bg-white border-slate-200 text-teal-900"
+                }`}>
+                  {chapterExamples.length} Board Solved Questions
+                </span>
+              </div>
+              <h3 className={`text-xl sm:text-2xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                Step-by-Step Scoring Distribution &amp; Examiner Traps
+              </h3>
+              <p className={`text-xs sm:text-sm ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                NCERT board standard questions leveled from 1 Mark Objective to 5 Mark Case Studies with exact marking criteria.
+              </p>
+            </div>
+
+            <button
+              onClick={toggleAllExampleSolutions}
+              className={`px-4 py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
+                isDark
+                  ? "bg-white/5 border-white/10 text-teal-300 hover:bg-white/10"
+                  : "bg-white border-slate-300 text-teal-950 hover:bg-slate-100 shadow-xs"
+              }`}
+            >
+              <span>
+                {filteredChapterExamples.every(e => revealedExampleSolutions[e.id])
+                  ? "Hide All Marking Schemes"
+                  : "Show All Marking Schemes"}
+              </span>
+            </button>
+          </div>
+
+          {/* Level Filter Tabs */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1.5">
+              <Filter className="w-3.5 h-3.5 text-teal-400" /> Filter Level:
+            </span>
+            {[
+              { id: "all", label: `All Questions (${chapterExamples.length})` },
+              { id: "level1", label: `Level 1: 1M Foundation (${chapterExamples.filter(e => e.level.includes("Level 1")).length})` },
+              { id: "level2", label: `Level 2: 2M–3M Board Standard (${chapterExamples.filter(e => e.level.includes("Level 2")).length})` },
+              { id: "level3", label: `Level 3: 4M–5M Case Study (${chapterExamples.filter(e => e.level.includes("Level 3")).length})` },
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setExamplesLevelFilter(tab.id as any)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                  examplesLevelFilter === tab.id
+                    ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-sm"
+                    : isDark
+                    ? "bg-white/5 border-white/10 text-slate-300 hover:text-white"
+                    : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Questions Grid */}
+          <div className="space-y-4">
+            {filteredChapterExamples.map((ex, idx) => {
+              const isRevealed = revealedExampleSolutions[ex.id] ?? false;
+              const isL1 = ex.level.includes("Level 1");
+              const isL2 = ex.level.includes("Level 2");
+
+              return (
+                <div
+                  key={ex.id}
+                  className={`p-6 rounded-3xl border transition-all ${
+                    isDark
+                      ? "bg-[#0b1220]/90 border-white/10 hover:border-teal-500/30"
+                      : "bg-white border-slate-200 shadow-sm hover:border-teal-400"
+                  }`}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className={`px-2.5 py-0.5 rounded-md text-[11px] font-mono font-bold border ${
+                        isL1
+                          ? isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" : "bg-emerald-100 text-emerald-900 border-emerald-300"
+                          : isL2
+                          ? isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-900 border-amber-300"
+                          : isDark ? "bg-purple-500/20 text-purple-300 border-purple-500/30" : "bg-purple-100 text-purple-900 border-purple-300"
+                      }`}>
+                        {ex.level}
+                      </span>
+                      <span className={`px-2.5 py-0.5 rounded-md text-[11px] font-mono font-bold border ${
+                        isDark ? "bg-teal-500/20 text-teal-300 border-teal-500/30" : "bg-teal-100 text-teal-900 border-teal-300"
+                      }`}>
+                        Question {idx + 1}
+                      </span>
+                    </div>
+
+                    <span className={`px-3 py-1 rounded-xl text-xs font-mono font-black border self-start sm:self-auto ${
+                      isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                    }`}>
+                      {ex.marks} Mark{ex.marks > 1 ? "s" : ""}
+                    </span>
+                  </div>
+
+                  {/* Question Statement */}
+                  <div className={`py-4 text-base sm:text-lg font-bold leading-relaxed ${
+                    isDark ? "text-white" : "text-slate-900"
+                  }`}>
+                    <PremiumMathRenderer content={ex.question} isDark={isDark} />
+                  </div>
+
+                  {/* Toggle Solution Button */}
+                  <div className="flex items-center justify-between pt-2">
+                    <button
+                      onClick={() => toggleExampleSolution(ex.id)}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-2 ${
+                        isRevealed
+                          ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-xs"
+                          : isDark
+                          ? "bg-white/5 border-white/10 text-teal-300 hover:bg-white/10"
+                          : "bg-slate-100 border-slate-200 text-teal-900 hover:bg-slate-200"
+                      }`}
+                    >
+                      <span>{isRevealed ? "Hide Marking Scheme & Solution ▲" : "View Step Marking Scheme & Solution ▼"}</span>
+                    </button>
+                  </div>
+
+                  {/* Solution & Scheme Accordion */}
+                  {isRevealed && (
+                    <div className="mt-4 pt-4 border-t border-white/10 space-y-4 animate-fade-in">
+                      {/* Step-by-Step Scoring Distribution */}
+                      <div className="space-y-2.5">
+                        <span className={`text-xs font-mono font-bold uppercase tracking-wider block ${
+                          isDark ? "text-teal-400" : "text-teal-800 font-extrabold"
+                        }`}>
+                          Official Step-by-Step Solution Breakdown:
+                        </span>
+                        <div className="space-y-2">
+                          {ex.solutionSteps.map((step, sIdx) => (
+                            <div
+                              key={sIdx}
+                              className={`p-3.5 rounded-xl border flex items-start gap-3 ${
+                                isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
+                              }`}
+                            >
+                              <span className={`w-6 h-6 rounded-md flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5 ${
+                                isDark ? "bg-teal-500/20 text-teal-400" : "bg-teal-100 text-teal-950 border border-teal-300"
+                              }`}>
+                                {sIdx + 1}
+                              </span>
+                              <div className={`text-sm leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                                <PremiumMathRenderer content={step} isDark={isDark} />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Key Takeaway */}
+                      {ex.keyTakeaway && (
+                        <div className={`p-4 rounded-2xl border flex items-start gap-3 ${
+                          isDark ? "bg-amber-950/20 border-amber-500/30 text-amber-200" : "bg-amber-50 border-amber-300 text-amber-950"
+                        }`}>
+                          <Lightbulb className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                          <div className="text-xs sm:text-sm leading-relaxed">
+                            <span className="font-bold text-amber-400 block mb-0.5">💡 Key Takeaway (Board Golden Rule):</span>
+                            <span>{ex.keyTakeaway}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Examiner Trap */}
+                      {ex.examinerTrap && (
+                        <div className={`p-4 rounded-2xl border flex items-start gap-3 ${
+                          isDark ? "bg-rose-950/20 border-rose-500/30 text-rose-200" : "bg-rose-50 border-rose-300 text-rose-950"
+                        }`}>
+                          <AlertTriangle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                          <div className="text-xs sm:text-sm leading-relaxed">
+                            <span className="font-bold text-rose-400 block mb-0.5">⚠️ CBSE Examiner Trap (Marks Deduction Warning):</span>
+                            <span>{ex.examinerTrap}</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
           DOPAMINE PRACTICE SPRINT: 3-MINUTE RAPID BOARD CHECK (+XP REWARD)
           ========================================================================= */}
       {chapterSprintQuestions.length > 0 && (
-        <div className={`p-6 sm:p-8 rounded-3xl border space-y-5 my-6 transition-all ${
+        <div id="sci-sprint-section" className={`p-6 sm:p-8 rounded-3xl border space-y-5 my-6 transition-all scroll-mt-24 ${
           isDark
             ? "bg-gradient-to-br from-[#081326] via-[#0b172a] to-[#060e1d] border-teal-500/30 shadow-[0_12px_40px_rgba(20,184,166,0.12)]"
             : "bg-gradient-to-br from-teal-50/90 via-white to-emerald-50/80 border-teal-300 shadow-md"

@@ -661,6 +661,38 @@ summary,
               0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+.apple-hero-science {
+  background: radial-gradient(circle at 15% 20%, rgba(20, 184, 166, 0.2), transparent 45%),
+              radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.16), transparent 45%),
+              linear-gradient(135deg, rgba(8, 20, 28, 0.95), rgba(6, 15, 22, 0.98));
+  box-shadow: 0 12px 40px -10px rgba(20, 184, 166, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.apple-hero-science-light {
+  background: radial-gradient(circle at 15% 20%, rgba(20, 184, 166, 0.12), transparent 45%),
+              radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.08), transparent 45%),
+              linear-gradient(135deg, #ffffff, #f0fdfa);
+  box-shadow: 0 10px 30px -8px rgba(20, 184, 166, 0.18),
+              0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.apple-hero-sst {
+  background: radial-gradient(circle at 15% 20%, rgba(244, 63, 94, 0.2), transparent 45%),
+              radial-gradient(circle at 85% 80%, rgba(245, 158, 11, 0.14), transparent 45%),
+              linear-gradient(135deg, rgba(28, 13, 22, 0.95), rgba(18, 10, 23, 0.98));
+  box-shadow: 0 12px 40px -10px rgba(244, 63, 94, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.apple-hero-sst-light {
+  background: radial-gradient(circle at 15% 20%, rgba(244, 63, 94, 0.1), transparent 45%),
+              radial-gradient(circle at 85% 80%, rgba(245, 158, 11, 0.08), transparent 45%),
+              linear-gradient(135deg, #ffffff, #fff1f2);
+  box-shadow: 0 10px 30px -8px rgba(244, 63, 94, 0.18),
+              0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
 .apple-insight-card {
   background: radial-gradient(circle at 10% 10%, rgba(245, 158, 11, 0.16), transparent 50%),
               linear-gradient(135deg, #131722, #0d111a);

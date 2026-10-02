@@ -317,7 +317,7 @@ export default function ConceptsHubView({
     return MATH_BOARD_SOLVED_EXAMPLES.filter((ex) => ex.chapterNo === activeMathChapterNo);
   }, [activeMathChapterNo]);
 
-  // Active Math 100/100 Preparation System Data (Chapters 1 to 5)
+  // Active Math 100/100 Preparation System Data (Chapters 1 to 10)
   const activeMathMasteryData = useMemo(() => {
     return getChapterData(activeMathChapterNo);
   }, [activeMathChapterNo]);
@@ -633,80 +633,130 @@ export default function ConceptsHubView({
               <span>🌍 Social Science (10 Chs)</span>
             </Link>
 
-            {/* 4th Fast Access: Chemistry Basics */}
-            <button
-              onClick={() => {
-                setActiveSubject("science");
-                setActiveScienceChapterNo(0);
-                setIsChapterGridOpen(false);
-              }}
-              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 border ${
-                activeSubject === "science" && activeScienceChapterNo === 0
-                  ? isDark
-                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 border-amber-300 shadow-md font-black ring-1 ring-amber-400"
-                    : "bg-amber-600 text-white shadow-md font-black ring-1 ring-amber-500"
-                  : isDark
-                  ? "bg-amber-500/15 border-amber-500/30 text-amber-300 hover:bg-amber-500/25"
-                  : "bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100"
-              }`}
-            >
-              <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
-              <span>⚗️ Chemistry Basics (Prerequisite)</span>
-            </button>
+            {/* Fast Access: Chemistry Basics (Only shown in Science mode to keep Math & SST 100% focused) */}
+            {activeSubject === "science" && (
+              <button
+                onClick={() => {
+                  setActiveScienceChapterNo(0);
+                  setIsChapterGridOpen(false);
+                }}
+                className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 border ${
+                  activeScienceChapterNo === 0
+                    ? isDark
+                      ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 border-amber-300 shadow-md font-black ring-1 ring-amber-400"
+                      : "bg-amber-600 text-white shadow-md font-black ring-1 ring-amber-500"
+                    : isDark
+                    ? "bg-amber-500/15 border-amber-500/30 text-amber-300 hover:bg-amber-500/25"
+                    : "bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100"
+                }`}
+              >
+                <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
+                <span>⚗️ Chemistry Basics (Prerequisite)</span>
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Standout Chemistry Basics Foundation Banner */}
-        <div className={`p-4 sm:p-5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all ${
-          activeSubject === "science" && activeScienceChapterNo === 0
-            ? "bg-amber-500/20 border-amber-400 text-white shadow-lg ring-1 ring-amber-400"
-            : isDark
-            ? "bg-gradient-to-r from-amber-950/30 via-[#16120b] to-amber-950/20 border-amber-500/30 text-amber-200"
-            : "bg-gradient-to-r from-amber-50 via-orange-50/60 to-yellow-50 border-amber-300 text-amber-950 shadow-sm"
-        }`}>
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0">
-              <FlaskConical className="w-5 h-5" />
+        {/* Math Laser-Focused 100/100 Mission Banner (Pure Math Focus, No Clutter) */}
+        {activeSubject === "math" && (
+          <div className={`p-4 sm:p-5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all ${
+            isDark
+              ? "bg-gradient-to-r from-blue-950/40 via-[#0d1527] to-indigo-950/30 border-blue-500/30 text-blue-200"
+              : "bg-gradient-to-r from-blue-50 via-indigo-50/60 to-cyan-50 border-blue-300 text-blue-950 shadow-sm"
+          }`}>
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-2xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 shrink-0">
+                <Calculator className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="text-xs sm:text-sm font-black flex items-center gap-2">
+                  <span>CBSE Class 10 Mathematics 100/100 Masterclass (All 14 Chapters)</span>
+                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono border ${
+                    isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" : "bg-emerald-100 text-emerald-950 border-emerald-300 font-bold"
+                  }`}>
+                    Target: 100/100
+                  </span>
+                </div>
+                <div className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                  9-Stage Zero-to-Hero Mastery: Real-Life Intuition • Simplified Core Theory • Step-by-Step Solving Guide • Formulas &amp; Shortcuts Vault • Solved Board Examples • Instant-Check Drills • 20-Year PYQs • 15-Min Mock Test • 1-Page Revision Summary.
+                </div>
+              </div>
             </div>
-            <div>
-              <div className="text-xs sm:text-sm font-black flex items-center gap-2">
-                <span>Class 10 Chemistry Foundation Prerequisite (Zero-to-Hero)</span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                  Essential Class 9 Foundation
-                </span>
-              </div>
-              <div className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                Interactive Criss-Cross Formula Builder, Valency Matrix (Elements 1–20), Equation Balancing Guide, Reactivity Series Simulator &amp; Board Lab Observations!
-              </div>
+            <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+              <button
+                onClick={() => {
+                  setMathMasterySubTab("formulas");
+                  setTimeout(() => {
+                    const el = document.getElementById("sec-formulas");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }, 50);
+                }}
+                className={`w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 shadow-md ${
+                  isDark ? "bg-blue-600 hover:bg-blue-500 text-white" : "bg-blue-600 hover:bg-blue-700 text-white"
+                }`}
+              >
+                <span>⚡ Formulas Vault</span>
+              </button>
             </div>
           </div>
-          <button
-            onClick={() => {
-              setActiveSubject("science");
-              setActiveScienceChapterNo(0);
-              setIsChapterGridOpen(false);
-            }}
-            className={`w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 shadow-md ${
-              activeSubject === "science" && activeScienceChapterNo === 0
-                ? "bg-amber-400 text-slate-950 font-black ring-2 ring-white"
-                : "bg-amber-500 hover:bg-amber-400 text-slate-950"
-            }`}
-          >
-            <span>{activeSubject === "science" && activeScienceChapterNo === 0 ? "Currently Viewing Basics ✅" : "Open Chemistry Basics ➔"}</span>
-          </button>
-        </div>
+        )}
+
+        {/* Science Chemistry Basics Foundation Banner (Only in Science mode) */}
+        {activeSubject === "science" && (
+          <div className={`p-4 sm:p-5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all ${
+            activeScienceChapterNo === 0
+              ? "bg-amber-500/20 border-amber-400 text-white shadow-lg ring-1 ring-amber-400"
+              : isDark
+              ? "bg-gradient-to-r from-amber-950/30 via-[#16120b] to-amber-950/20 border-amber-500/30 text-amber-200"
+              : "bg-gradient-to-r from-amber-50 via-orange-50/60 to-yellow-50 border-amber-300 text-amber-950 shadow-sm"
+          }`}>
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0">
+                <FlaskConical className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="text-xs sm:text-sm font-black flex items-center gap-2">
+                  <span>Class 10 Chemistry Foundation Prerequisite (Zero-to-Hero)</span>
+                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono border ${
+                    isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-amber-200/80 text-amber-950 border-amber-400 font-bold"
+                  }`}>
+                    Essential Class 9 Foundation
+                  </span>
+                </div>
+                <div className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                  Interactive Criss-Cross Formula Builder, Valency Matrix (Elements 1–20), Equation Balancing Guide, Reactivity Series Simulator &amp; Board Lab Observations!
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                setActiveScienceChapterNo(0);
+                setIsChapterGridOpen(false);
+              }}
+              className={`w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 shadow-md ${
+                activeScienceChapterNo === 0
+                  ? "bg-amber-400 text-slate-950 font-black ring-2 ring-white"
+                  : "bg-amber-500 hover:bg-amber-400 text-slate-950"
+              }`}
+            >
+              <span>{activeScienceChapterNo === 0 ? "Currently Viewing Basics ✅" : "Open Chemistry Basics ➔"}</span>
+            </button>
+          </div>
+        )}
 
         {/* =========================================================================
             MOBILE-FIRST RESPONSIVE CHAPTER SELECTOR (NO HORIZONTAL SCROLL TRAPS!)
             ========================================================================= */}
-        <div className="pt-5 mt-5 border-t border-white/10 space-y-3">
+        <div className={`pt-5 mt-5 border-t space-y-3 ${isDark ? "border-white/10" : "border-slate-200"}`}>
           {/* Quick Chapter Selector Bar */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+              <span className={`text-xs font-mono font-bold uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                 Active Chapter:
               </span>
-              <span className="px-2.5 py-0.5 rounded-md text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+              <span className={`px-2.5 py-0.5 rounded-md text-xs font-bold border ${
+                isDark ? "bg-blue-500/20 text-blue-300 border-blue-500/30" : "bg-blue-100 text-blue-950 border-blue-300"
+              }`}>
                 {activeSubject === "math" ? `Ch ${activeMathChapterNo}: ${currentChapterMeta.name}` : activeSubject === "science" ? (activeScienceChapterNo === 0 ? "🧪 Foundation: Chemistry Basics (Class 10 Prerequisite)" : `Ch ${activeScienceChapterNo}: ${currentChapterMeta.name}`) : `${currentChapterMeta.shortName} (${'discipline' in currentChapterMeta ? currentChapterMeta.discipline : 'SST'})`}
               </span>
               {activeSubject === "science" && (
@@ -715,7 +765,9 @@ export default function ConceptsHubView({
                   className={`px-2.5 py-0.5 rounded-md text-xs font-bold transition-all cursor-pointer flex items-center gap-1 border ${
                     activeScienceChapterNo === 0
                       ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-sm"
-                      : "bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/25"
+                      : isDark
+                      ? "bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/25"
+                      : "bg-amber-100 text-amber-950 border-amber-300 hover:bg-amber-200"
                   }`}
                 >
                   <FlaskConical className="w-3 h-3" />
@@ -961,7 +1013,15 @@ export default function ConceptsHubView({
       <div
         className={`p-7 sm:p-9 rounded-3xl border transition-all ${
           isDark
-            ? "apple-hero-math border-blue-500/30"
+            ? activeSubject === "science"
+              ? "apple-hero-science border-teal-500/30"
+              : activeSubject === "sst"
+              ? "apple-hero-sst border-rose-500/30"
+              : "apple-hero-math border-blue-500/30"
+            : activeSubject === "science"
+            ? "apple-hero-science-light border-teal-200"
+            : activeSubject === "sst"
+            ? "apple-hero-sst-light border-rose-200"
             : "apple-hero-math-light border-blue-200"
         }`}
       >
@@ -1180,8 +1240,10 @@ export default function ConceptsHubView({
                   }`}>
                     Chapter {activeMathChapter.chapterNo} of 14 • {activeMathBlueprint.unitName}
                   </span>
-                  <span className="text-xs font-mono font-bold px-3.5 py-1.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-xs flex items-center gap-1.5">
-                    <Target className="w-3.5 h-3.5 text-amber-400" />
+                  <span className={`text-xs font-mono font-bold px-3.5 py-1.5 rounded-full border shadow-xs flex items-center gap-1.5 ${
+                    isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40" : "bg-amber-100 text-amber-950 border-amber-300"
+                  }`}>
+                    <Target className="w-3.5 h-3.5 text-amber-500" />
                     {activeMathChapter.weightage}
                   </span>
                 </div>
@@ -1204,9 +1266,13 @@ export default function ConceptsHubView({
                 {onOpenTheorems && [1, 4, 5, 6, 7, 8, 10, 11, 13].includes(activeMathChapter.chapterNo) && (
                   <button
                     onClick={onOpenTheorems}
-                    className="px-4 py-2.5 rounded-2xl text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/35 transition-all cursor-pointer flex items-center gap-2 shadow-xs hover:scale-[1.02] active:scale-95"
+                    className={`px-4 py-2.5 rounded-2xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-xs hover:scale-[1.02] active:scale-95 ${
+                      isDark
+                        ? "bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border-amber-500/35"
+                        : "bg-amber-100 hover:bg-amber-200 text-amber-950 border-amber-300"
+                    }`}
                   >
-                    <Award className="w-4 h-4 text-amber-400" />
+                    <Award className="w-4 h-4 text-amber-500" />
                     <span>Theorems & Derivations</span>
                   </button>
                 )}
@@ -1214,9 +1280,13 @@ export default function ConceptsHubView({
                 {onOpenHots && (
                   <button
                     onClick={() => onOpenHots("math", activeMathChapter.chapterNo)}
-                    className="px-4 py-2.5 rounded-2xl text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/35 transition-all cursor-pointer flex items-center gap-2 shadow-xs hover:scale-[1.02] active:scale-95"
+                    className={`px-4 py-2.5 rounded-2xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-xs hover:scale-[1.02] active:scale-95 ${
+                      isDark
+                        ? "bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border-rose-500/35"
+                        : "bg-rose-100 hover:bg-rose-200 text-rose-950 border-rose-300"
+                    }`}
                   >
-                    <Flame className="w-4 h-4 text-rose-400" />
+                    <Flame className="w-4 h-4 text-rose-500" />
                     <span>Competitive HOTS</span>
                   </button>
                 )}
@@ -1241,7 +1311,9 @@ export default function ConceptsHubView({
               <div className={`p-4 rounded-3xl border shadow-sm transition-all ${
                 isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200"
               }`}>
-                <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3.5 pb-3 border-b border-white/10">
+                <div className={`flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3.5 pb-3 border-b ${
+                  isDark ? "border-white/10" : "border-slate-200"
+                }`}>
                   {/* Mode Tabs */}
                   <div className="flex items-center gap-2">
                     <button
@@ -1254,7 +1326,7 @@ export default function ConceptsHubView({
                           : "bg-slate-100 text-slate-700 hover:text-slate-950 hover:bg-slate-200"
                       }`}
                     >
-                      <Sparkles className="w-4 h-4 text-amber-300" />
+                      <Sparkles className={`w-4 h-4 ${isDark ? "text-amber-300" : "text-amber-400"}`} />
                       <span>🌟 Complete Masterclass (All 9 Stages in Sequence)</span>
                     </button>
 
@@ -1270,7 +1342,7 @@ export default function ConceptsHubView({
                           : "bg-slate-100 text-slate-700 hover:text-slate-950 hover:bg-slate-200"
                       }`}
                     >
-                      <Target className="w-4 h-4 text-indigo-300" />
+                      <Target className={`w-4 h-4 ${isDark ? "text-indigo-300" : "text-indigo-400"}`} />
                       <span>🎯 Focus on 1 Section</span>
                     </button>
                   </div>
@@ -1424,7 +1496,9 @@ export default function ConceptsHubView({
                 <div className={`p-6 sm:p-8 rounded-3xl border space-y-5 ${
                   isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                 }`}>
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                  <div className={`flex flex-wrap items-center justify-between gap-3 border-b pb-4 ${
+                    isDark ? "border-white/10" : "border-slate-200"
+                  }`}>
                     <div className="flex items-center gap-2.5">
                       <span className="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30">
                         <GraduationCap className="w-5 h-5" />
@@ -1434,7 +1508,7 @@ export default function ConceptsHubView({
                           CBSE Board Strategic Blueprint: {activeMathMasteryData.chapterName}
                         </h3>
                         <p className={`text-xs sm:text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                          Estimated Weightage: <span className="font-bold text-amber-500">{activeMathMasteryData.weightageEstimate}</span>
+                          Estimated Weightage: <span className={`font-bold ${isDark ? "text-amber-400" : "text-amber-800"}`}>{activeMathMasteryData.weightageEstimate}</span>
                         </p>
                       </div>
                     </div>
@@ -1518,7 +1592,9 @@ export default function ConceptsHubView({
                   </div>
                   <div className="space-y-3 flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono uppercase font-black text-amber-400 tracking-wider px-3 py-1 rounded-md bg-amber-500/20 border border-amber-500/30">
+                      <span className={`text-xs font-mono uppercase font-black tracking-wider px-3 py-1 rounded-md border ${
+                        isDark ? "text-amber-400 bg-amber-500/20 border-amber-500/30" : "text-amber-950 bg-amber-100 border-amber-300 font-extrabold"
+                      }`}>
                         Stage 1: 📖 Concept Story &amp; Everyday Intuition
                       </span>
                     </div>
@@ -1526,13 +1602,13 @@ export default function ConceptsHubView({
                       {activeMathChapter.analogyTitle}
                     </h3>
                     <div className={`text-base sm:text-lg leading-relaxed sm:leading-8 font-medium pt-1 ${isDark ? "text-slate-100" : "text-slate-900"}`}>
-                      <PremiumMathRenderer content={activeMathChapter.analogyContent} />
+                      <PremiumMathRenderer content={activeMathChapter.analogyContent} isDark={isDark} />
                     </div>
                   </div>
                 </div>
 
                 {/* Next Stage Navigation Button */}
-                <div className="pt-4 mt-4 border-t border-amber-500/20 flex justify-end">
+                <div className={`pt-4 mt-4 border-t flex justify-end ${isDark ? "border-amber-500/20" : "border-amber-200"}`}>
                   <button
                     onClick={() => {
                       const el = document.getElementById("sec-theory");
@@ -1553,7 +1629,9 @@ export default function ConceptsHubView({
               {/* Core Sections & Step-by-Step Problem Solving Guides */}
               <div id="sec-theory" className="space-y-8 scroll-mt-24">
                 <div className="flex items-center gap-2.5 pb-2">
-                  <span className="text-xs font-mono font-black uppercase text-blue-400 px-3 py-1 rounded-md bg-blue-500/15 border border-blue-500/30">
+                  <span className={`text-xs font-mono font-black uppercase px-3 py-1 rounded-md border ${
+                    isDark ? "text-blue-400 bg-blue-500/15 border-blue-500/30" : "text-blue-900 bg-blue-100 border-blue-300 font-extrabold"
+                  }`}>
                     Stage 2: 💡 Core Concepts in Simple Words
                   </span>
                 </div>
@@ -1566,12 +1644,16 @@ export default function ConceptsHubView({
                     }`}
                   >
                     {/* Section Header */}
-                    <div className="border-b pb-6 border-white/10 space-y-2.5">
+                    <div className={`border-b pb-6 space-y-2.5 ${isDark ? "border-white/10" : "border-slate-200"}`}>
                       <div className="flex items-center gap-2">
-                        <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/40">
+                        <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${
+                          isDark ? "bg-blue-500/20 text-blue-300 border-blue-500/40" : "bg-blue-100 text-blue-900 border-blue-300 font-bold"
+                        }`}>
                           SECTION {sIdx + 1}
                         </span>
-                        <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-slate-300">
+                        <span className={`text-xs sm:text-sm font-mono font-bold uppercase tracking-wider ${
+                          isDark ? "text-slate-300" : "text-slate-700 font-extrabold"
+                        }`}>
                           {section.label}
                         </span>
                       </div>
@@ -1680,8 +1762,10 @@ export default function ConceptsHubView({
                 {/* Key Formulas & Golden Relationships */}
                 {section.formulasOrKeyPoints && section.formulasOrKeyPoints.length > 0 && (
                   <div className="space-y-4 pt-4">
-                    <h4 className="text-sm font-mono font-bold uppercase tracking-wider text-teal-400 flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4" /> Key Formulas & Governing Relations
+                    <h4 className={`text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${
+                      isDark ? "text-teal-400" : "text-teal-900 font-black"
+                    }`}>
+                      <CheckCircle2 className="w-4 h-4" /> Key Formulas &amp; Governing Relations
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       {section.formulasOrKeyPoints.map((fp, i) => {
@@ -1743,7 +1827,9 @@ export default function ConceptsHubView({
                 {/* Step-by-Step Problem Solving Guide */}
                 {section.stepByStepGuide && section.stepByStepGuide.length > 0 && (
                   <div className="space-y-4 pt-4">
-                    <h4 className="text-sm font-mono font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-2">
+                    <h4 className={`text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${
+                      isDark ? "text-indigo-400" : "text-indigo-900 font-black"
+                    }`}>
                       <Compass className="w-4 h-4" /> Step-by-Step Problem Solving Method
                     </h4>
                     <div className="space-y-3.5">
@@ -1754,11 +1840,13 @@ export default function ConceptsHubView({
                             isDark ? "bg-white/[0.03] border-white/8" : "bg-slate-50 border-slate-200 shadow-xs"
                           }`}
                         >
-                          <span className="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 flex items-center justify-center font-mono font-black text-xs shrink-0 mt-0.5">
+                          <span className={`w-8 h-8 rounded-xl border flex items-center justify-center font-mono font-black text-xs shrink-0 mt-0.5 ${
+                            isDark ? "bg-indigo-500/20 border-indigo-500/30 text-indigo-300" : "bg-indigo-100 border-indigo-300 text-indigo-900 font-bold"
+                          }`}>
                             {st.stepNo}
                           </span>
                           <div className="space-y-2 flex-1">
-                            <h5 className="font-bold text-base text-indigo-300 block">
+                            <h5 className={`font-bold text-base block ${isDark ? "text-indigo-300" : "text-indigo-950 font-black"}`}>
                               <PremiumMathRenderer content={st.title} isDark={isDark} inline />
                             </h5>
                             <div className={`text-base sm:text-lg leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900 font-normal"}`}>
@@ -1779,8 +1867,10 @@ export default function ConceptsHubView({
                 {/* CBSE Examiner Traps */}
                 {section.examinerTraps && section.examinerTraps.length > 0 && (
                   <div className="space-y-4 pt-4">
-                    <h4 className="text-sm font-mono font-bold uppercase tracking-wider text-rose-400 flex items-center gap-2">
-                      <ShieldAlert className="w-4 h-4" /> High-Risk Board Pitfalls & Corrections
+                    <h4 className={`text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${
+                      isDark ? "text-rose-400" : "text-rose-900 font-black"
+                    }`}>
+                      <ShieldAlert className="w-4 h-4" /> High-Risk Board Pitfalls &amp; Corrections
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       {section.examinerTraps.map((tr, i) => (
@@ -1893,7 +1983,9 @@ export default function ConceptsHubView({
                       isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                     }`}
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                    <div className={`flex flex-wrap items-center justify-between gap-3 border-b pb-4 ${
+                      isDark ? "border-white/10" : "border-slate-200"
+                    }`}>
                       <div className="flex items-center gap-3">
                         <span className={`w-8 h-8 rounded-xl font-mono font-black text-sm flex items-center justify-center border ${
                           isDark ? "bg-indigo-500/20 text-indigo-300 border-indigo-500/30" : "bg-indigo-50 text-indigo-900 border-indigo-200"
@@ -2085,7 +2177,9 @@ export default function ConceptsHubView({
                     </span>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        <span className={`px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase border ${
+                          isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-950 border-amber-300"
+                        }`}>
                           Stage 4 &bull; Formulas &amp; Shortcuts
                         </span>
                       </div>
@@ -2113,9 +2207,13 @@ export default function ConceptsHubView({
                       isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                     }`}
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                    <div className={`flex flex-wrap items-center justify-between gap-3 border-b pb-4 ${
+                      isDark ? "border-white/10" : "border-slate-200"
+                    }`}>
                       <div className="flex items-center gap-3">
-                        <span className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 font-mono font-black text-sm flex items-center justify-center border border-amber-500/30">
+                        <span className={`w-8 h-8 rounded-xl font-mono font-black text-sm flex items-center justify-center border ${
+                          isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-950 border-amber-300"
+                        }`}>
                           {fIdx + 1}
                         </span>
                         <h4 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
@@ -2153,7 +2251,9 @@ export default function ConceptsHubView({
                               isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
                             }`}
                           >
-                            <span className="px-3 py-1 rounded-lg bg-blue-500/20 text-blue-300 font-mono font-bold text-xs sm:text-sm shrink-0">
+                            <span className={`px-3 py-1 rounded-lg font-mono font-bold text-xs sm:text-sm shrink-0 border ${
+                              isDark ? "bg-blue-500/20 text-blue-300 border-blue-500/30" : "bg-blue-100 text-blue-900 border-blue-300 font-bold"
+                            }`}>
                               {sym.symbol}
                             </span>
                             <span className={`text-xs sm:text-sm font-medium ${isDark ? "text-slate-200" : "text-slate-800"}`}>
@@ -2286,7 +2386,9 @@ export default function ConceptsHubView({
                     </span>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        <span className={`px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase border ${
+                          isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-950 border-amber-300"
+                        }`}>
                           Stage 5 &bull; Step-Marking Model Problems
                         </span>
                       </div>
@@ -2315,7 +2417,7 @@ export default function ConceptsHubView({
                       isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                     }`}
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                    <div className={`flex flex-wrap items-center justify-between gap-3 border-b pb-4 ${isDark ? "border-white/10" : "border-slate-200"}`}>
                       <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${
                         isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-950 border-amber-300"
                       }`}>
@@ -2348,7 +2450,9 @@ export default function ConceptsHubView({
                             }`}
                           >
                             <div className="flex items-start gap-3">
-                              <span className="w-7 h-7 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">
+                              <span className={`w-7 h-7 rounded-md flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5 ${
+                                isDark ? "bg-emerald-500/20 text-emerald-400" : "bg-emerald-100 text-emerald-950 border border-emerald-300"
+                              }`}>
                                 {st.stepNo}
                               </span>
                               <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-800"}`}>
@@ -2423,7 +2527,9 @@ export default function ConceptsHubView({
                     </span>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        <span className={`px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase border ${
+                          isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                        }`}>
                           Stage 6 &bull; Practice Questions
                         </span>
                       </div>
@@ -2493,9 +2599,11 @@ export default function ConceptsHubView({
                           isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                         }`}
                       >
-                        <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                        <div className={`flex flex-wrap items-center justify-between gap-3 border-b pb-4 ${isDark ? "border-white/10" : "border-slate-200"}`}>
                           <div className="flex items-center gap-2.5">
-                            <span className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 font-mono font-black text-sm flex items-center justify-center border border-emerald-500/30">
+                            <span className={`w-8 h-8 rounded-xl font-mono font-black text-sm flex items-center justify-center border ${
+                              isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                            }`}>
                               {qIdx + 1}
                             </span>
                             <span className={`text-xs sm:text-sm font-mono font-bold ${
@@ -2621,7 +2729,9 @@ export default function ConceptsHubView({
                           {q.hints && q.hints.length > 0 && (
                             <button
                               onClick={() => setMathRevealedHints(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                              className="text-xs sm:text-sm font-bold text-amber-400 hover:text-amber-300 transition flex items-center gap-1.5 cursor-pointer"
+                              className={`text-xs sm:text-sm font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                                isDark ? "text-amber-400 hover:text-amber-300" : "text-amber-800 hover:text-amber-900"
+                              }`}
                             >
                               <Lightbulb className="w-4 h-4" />
                               <span>{isHintOpen ? "Hide Hint" : "Need a Hint?"}</span>
@@ -2629,7 +2739,9 @@ export default function ConceptsHubView({
                           )}
                           <button
                             onClick={() => setMathRevealedSolutions(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                            className="text-xs sm:text-sm font-bold text-indigo-400 hover:text-indigo-300 transition flex items-center gap-1.5 cursor-pointer"
+                            className={`text-xs sm:text-sm font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                              isDark ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-800 hover:text-indigo-900"
+                            }`}
                           >
                             <FileText className="w-4 h-4" />
                             <span>{isSolutionOpen ? "Hide Complete Solution" : "View Step-by-Step Solution"}</span>
@@ -2665,7 +2777,9 @@ export default function ConceptsHubView({
                             <div className="space-y-3">
                               {q.solutionSteps.map((step, sIdx) => (
                                 <div key={sIdx} className="flex items-start gap-3 text-sm sm:text-base">
-                                  <span className="w-6 h-6 rounded-lg bg-emerald-500/25 text-emerald-300 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                                  <span className={`w-6 h-6 rounded-lg font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 ${
+                                    isDark ? "bg-emerald-500/25 text-emerald-300" : "bg-emerald-100 text-emerald-950 border border-emerald-300"
+                                  }`}>
                                     {sIdx + 1}
                                   </span>
                                   <div className={`flex-1 leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
@@ -2733,7 +2847,9 @@ export default function ConceptsHubView({
                     </span>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                        <span className={`px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase border ${
+                          isDark ? "bg-blue-500/20 text-blue-300 border-blue-500/30" : "bg-blue-100 text-blue-950 border-blue-300"
+                        }`}>
                           Stage 7 &bull; 20-Year Board Questions
                         </span>
                       </div>
@@ -2761,7 +2877,7 @@ export default function ConceptsHubView({
                       isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                     }`}
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                    <div className={`flex flex-wrap items-center justify-between gap-3 border-b pb-4 ${isDark ? "border-white/10" : "border-slate-200"}`}>
                       <div className="flex items-center gap-2.5">
                         <span className={`px-3.5 py-1 rounded-full text-xs sm:text-sm font-mono font-bold border ${
                           isDark ? "bg-blue-500/20 text-blue-200 border-blue-500/40" : "bg-blue-100 text-blue-950 border-blue-300"
@@ -2812,7 +2928,9 @@ export default function ConceptsHubView({
                               }`}
                             >
                               <div className="flex items-start gap-3">
-                                <span className="w-6 h-6 rounded-md bg-emerald-500/25 text-emerald-300 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                                <span className={`w-6 h-6 rounded-md font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 ${
+                                  isDark ? "bg-emerald-500/25 text-emerald-300" : "bg-emerald-100 text-emerald-950 border border-emerald-300"
+                                }`}>
                                   {sIdx + 1}
                                 </span>
                                 <span className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
@@ -2890,7 +3008,9 @@ export default function ConceptsHubView({
                     </span>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        <span className={`px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase border ${
+                          isDark ? "bg-purple-500/20 text-purple-300 border-purple-500/30" : "bg-purple-100 text-purple-950 border-purple-300"
+                        }`}>
                           Stage 8 &bull; Timed Mock Test
                         </span>
                       </div>
@@ -2951,7 +3071,7 @@ export default function ConceptsHubView({
                     isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                   }`}>
                     {/* Test Header */}
-                    <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-4 border-white/10">
+                    <div className={`flex flex-wrap items-center justify-between gap-4 border-b pb-4 ${isDark ? "border-white/10" : "border-slate-200"}`}>
                       <div>
                         <h4 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                           {currentTest.testType}: {activeMathMasteryData.chapterName}
@@ -3022,7 +3142,9 @@ export default function ConceptsHubView({
                               </span>
                               {mathTestSubmitted && (
                                 <span className={`text-xs sm:text-sm font-mono font-bold px-2.5 py-0.5 rounded ${
-                                  isCorrect ? "bg-emerald-500/20 text-emerald-300" : "bg-rose-500/20 text-rose-300"
+                                  isCorrect
+                                    ? isDark ? "bg-emerald-500/20 text-emerald-300" : "bg-emerald-100 text-emerald-950 border border-emerald-300"
+                                    : isDark ? "bg-rose-500/20 text-rose-300" : "bg-rose-100 text-rose-950 border border-rose-300"
                                 }`}>
                                   {isCorrect ? `+${q.marks} Marks` : "0 Marks"}
                                 </span>
@@ -3135,7 +3257,9 @@ export default function ConceptsHubView({
                     </span>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        <span className={`px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase border ${
+                          isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-950 border-amber-300"
+                        }`}>
                           Stage 9 &bull; 1-Page Summary
                         </span>
                       </div>
@@ -3161,7 +3285,7 @@ export default function ConceptsHubView({
                 <div className={`p-6 sm:p-8 rounded-3xl border space-y-4 ${
                   isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                 }`}>
-                  <div className="flex items-center gap-2.5 border-b pb-3.5 border-white/10">
+                  <div className={`flex items-center gap-2.5 border-b pb-3.5 ${isDark ? "border-white/10" : "border-slate-200"}`}>
                     <span className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400">
                       <ShieldCheck className="w-5 h-5" />
                     </span>
@@ -3199,7 +3323,7 @@ export default function ConceptsHubView({
                 <div className={`p-6 sm:p-8 rounded-3xl border space-y-4 ${
                   isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                 }`}>
-                  <div className="flex items-center gap-2.5 border-b pb-3.5 border-white/10">
+                  <div className={`flex items-center gap-2.5 border-b pb-3.5 ${isDark ? "border-white/10" : "border-slate-200"}`}>
                     <span className="p-2.5 rounded-xl bg-blue-500/20 text-blue-400">
                       <Zap className="w-5 h-5" />
                     </span>
@@ -3225,7 +3349,7 @@ export default function ConceptsHubView({
                 <div className={`p-6 sm:p-8 rounded-3xl border space-y-4 ${
                   isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                 }`}>
-                  <div className="flex items-center gap-2.5 border-b pb-3.5 border-white/10">
+                  <div className={`flex items-center gap-2.5 border-b pb-3.5 ${isDark ? "border-white/10" : "border-slate-200"}`}>
                     <span className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
                       <Target className="w-5 h-5" />
                     </span>
@@ -3305,7 +3429,7 @@ export default function ConceptsHubView({
           )}
 
           {/* Sticky/Bottom Navigation Bar */}
-          <div className="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
+          <div className={`pt-6 border-t flex items-center justify-between gap-4 ${isDark ? "border-white/10" : "border-slate-200"}`}>
             <button
               onClick={handlePrevChapter}
               className={`flex-1 py-3 rounded-2xl border text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
@@ -3335,6 +3459,8 @@ export default function ConceptsHubView({
         <ScienceConceptsHubView
           isDark={isDark}
           activeChapterNo={activeScienceChapterNo}
+          isEmbeddedInCommand={true}
+          onChapterChange={(chNo) => setActiveScienceChapterNo(chNo)}
           onOpenQuestionBank={(chNo) => onOpenQuestionBank?.("science", chNo || activeScienceChapterNo)}
           onOpenActivities={onOpenActivities}
           onOpenReactions={onOpenReactions}

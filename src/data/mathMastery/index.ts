@@ -4,17 +4,40 @@ import { CH2_DATA } from './ch2_polynomials';
 import { CH3_DATA } from './ch3_linear_equations';
 import { CH4_DATA } from './ch4_quadratic_equations';
 import { CH5_DATA } from './ch5_arithmetic_progressions';
+import { CH6_DATA } from './ch6_triangles';
+import { CH7_DATA } from './ch7_coordinate_geometry';
+import { CH8_DATA } from './ch8_trigonometry';
+import { CH9_DATA } from './ch9_applications_trigonometry';
+import { CH10_DATA } from './ch10_circles';
+import { CH11_DATA } from './ch11_areas_related_to_circles';
+import { CH12_DATA } from './ch12_surface_areas_volumes';
+import { CH13_DATA } from './ch13_statistics';
+import { CH14_DATA } from './ch14_probability';
 import { MIXED_CHAPTERS_1_TO_5_QUESTIONS } from './mixedPractice';
 
 export * from './types';
 export * from './mixedPractice';
+export { 
+  CH1_DATA, CH2_DATA, CH3_DATA, CH4_DATA, CH5_DATA, 
+  CH6_DATA, CH7_DATA, CH8_DATA, CH9_DATA, CH10_DATA,
+  CH11_DATA, CH12_DATA, CH13_DATA, CH14_DATA 
+};
 
 export const MATH_CHAPTERS: ChapterData[] = [
   CH1_DATA,
   CH2_DATA,
   CH3_DATA,
   CH4_DATA,
-  CH5_DATA
+  CH5_DATA,
+  CH6_DATA,
+  CH7_DATA,
+  CH8_DATA,
+  CH9_DATA,
+  CH10_DATA,
+  CH11_DATA,
+  CH12_DATA,
+  CH13_DATA,
+  CH14_DATA
 ];
 
 export function getChapterData(chapterNum: number): ChapterData | undefined {

@@ -3060,9 +3060,9 @@ export default function CBSECommandCenter() {
                     }`}
                   >
                     <cat.icon className={`w-3.5 h-3.5 ${isCatActive ? (isDark ? "text-slate-950" : "text-amber-400") : "text-zinc-400"} shrink-0`} />
-                    <span className="truncate">{cat.label}</span>
+                    <span className="truncate leading-none inline-flex items-center">{cat.label}</span>
                     {cat.badge && (
-                      <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full font-black shrink-0 leading-none inline-flex items-center ${
+                      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full font-black shrink-0 leading-none inline-flex items-center ${
                         isCatActive
                           ? isDark
                             ? "bg-slate-950/30 text-slate-950"
@@ -3077,6 +3077,29 @@ export default function CBSECommandCenter() {
                   </a>
                 );
               })}
+
+              {/* ALL 18 MODULES TRIGGER (INTEGRATED CLEANLY INSIDE UPPER NAVIGATION TABS) */}
+              <button
+                type="button"
+                onClick={() => {
+                  playSound("click");
+                  setIsAllModulesModalOpen(true);
+                }}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border ${
+                  isDark
+                    ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+                    : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200 shadow-xs"
+                }`}
+                title="Open All Modules (⌘K)"
+              >
+                <LayoutGrid className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                <span className="leading-none inline-flex items-center">All Modules</span>
+                <kbd className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-black shrink-0 leading-none inline-flex items-center ${
+                  isDark ? "bg-black/40 text-amber-300 border border-amber-500/30" : "bg-white/80 text-amber-900 border border-amber-300"
+                }`}>
+                  ⌘K
+                </kbd>
+              </button>
             </div>
           </div>
 
@@ -3157,24 +3180,22 @@ export default function CBSECommandCenter() {
               {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
             </button>
 
-            {/* ALL 18 MODULES TRIGGER */}
+            {/* MOBILE ONLY ALL MODULES ICON (< md screens) */}
             <button
+              type="button"
               onClick={() => {
                 playSound("click");
                 setIsAllModulesModalOpen(true);
               }}
-              className={`px-3 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1.5 min-h-[34px] touch-manipulation active:scale-95 ${
+              className={`md:hidden p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[34px] min-h-[34px] touch-manipulation active:scale-95 ${
                 isDark
-                  ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.15)]"
-                  : "bg-amber-100/80 border-amber-300 text-amber-950 hover:bg-amber-200 shadow-xs"
+                  ? "bg-amber-500/15 border-amber-500/35 text-amber-300"
+                  : "bg-amber-100 border-amber-300 text-amber-950"
               }`}
               title="Open All Modules (⌘K)"
+              aria-label="Open All Modules"
             >
               <LayoutGrid className="w-3.5 h-3.5 shrink-0" />
-              <span className="hidden sm:inline text-xs font-bold leading-none">All Modules</span>
-              <kbd className="hidden lg:inline-flex text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/30 text-amber-300 ml-0.5 leading-none inline-flex items-center">
-                ⌘K
-              </kbd>
             </button>
           </div>
         </div>
@@ -3270,7 +3291,7 @@ export default function CBSECommandCenter() {
                         }`}
                       >
                         <subItem.icon className="w-3.5 h-3.5 shrink-0" />
-                        <span>{subItem.label}</span>
+                        <span className="leading-none inline-flex items-center">{subItem.label}</span>
                         {subItem.count !== undefined && (
                           <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded-full font-black leading-none inline-flex items-center ${
                             isSubActive ? "bg-amber-500 text-slate-950" : "bg-white/10 text-zinc-400"

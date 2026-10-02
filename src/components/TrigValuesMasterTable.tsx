@@ -150,7 +150,9 @@ export default function TrigValuesMasterTable({ isDark = true }: TrigValuesMaste
         </div>
 
         {/* View Mode Buttons */}
-        <div className="flex items-center gap-1.5 p-1 rounded-2xl border self-start md:self-auto shrink-0 bg-black/20 border-white/10">
+        <div className={`flex items-center gap-1.5 p-1 rounded-2xl border self-start md:self-auto shrink-0 ${
+          isDark ? "bg-black/20 border-white/10" : "bg-slate-100 border-slate-200"
+        }`}>
           <button
             onClick={() => setViewMode("standard")}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
@@ -347,20 +349,28 @@ export default function TrigValuesMasterTable({ isDark = true }: TrigValuesMaste
         isDark ? "bg-black/30 border-white/10 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-700"
       }`}>
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          <span className="font-mono font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1 text-xs">
+          <span className={`font-mono font-bold uppercase tracking-wider flex items-center gap-1 text-xs ${
+            isDark ? "text-emerald-400" : "text-emerald-800"
+          }`}>
             <Check className="w-3.5 h-3.5" /> High-Yield Anchors:
           </span>
-          <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono text-xs">
+          <span className={`px-2.5 py-1 rounded-lg border font-mono text-xs ${
+            isDark ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-300" : "bg-emerald-100 border-emerald-300 text-emerald-950 font-bold"
+          }`}>
             <PremiumMathRenderer content="$\sin 30^\circ = \cos 60^\circ = \frac{1}{2}$" isDark={isDark} inline />
           </span>
-          <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono text-xs">
+          <span className={`px-2.5 py-1 rounded-lg border font-mono text-xs ${
+            isDark ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-300" : "bg-emerald-100 border-emerald-300 text-emerald-950 font-bold"
+          }`}>
             <PremiumMathRenderer content="$\sin 45^\circ = \cos 45^\circ = \frac{1}{\sqrt{2}}$" isDark={isDark} inline />
           </span>
-          <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono text-xs">
+          <span className={`px-2.5 py-1 rounded-lg border font-mono text-xs ${
+            isDark ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-300" : "bg-emerald-100 border-emerald-300 text-emerald-950 font-bold"
+          }`}>
             <PremiumMathRenderer content="$\tan 45^\circ = \cot 45^\circ = 1$" isDark={isDark} inline />
           </span>
         </div>
-        <div className="text-xs font-mono text-amber-400">
+        <div className={`text-xs font-mono font-bold ${isDark ? "text-amber-400" : "text-amber-900"}`}>
           ★ Pro Tip: Tan 90°, Csc 0°, Sec 90°, Cot 0° are ALL &quot;Not Defined&quot; (Division by 0)
         </div>
       </div>
