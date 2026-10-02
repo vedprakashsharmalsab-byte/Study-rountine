@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Flame,
   Award,
@@ -26,14 +26,19 @@ import {
 
 interface CompetitiveHotsViewProps {
   isDark: boolean;
+  initialSubject?: "all" | "math" | "science" | "sst";
+  initialChapterNo?: number;
   onOpenQuestionBank?: (subject: "math" | "science" | "sst", chapterNo?: number) => void;
 }
 
 export default function CompetitiveHotsView({
   isDark,
+  initialSubject = "all",
+  initialChapterNo,
   onOpenQuestionBank
 }: CompetitiveHotsViewProps) {
-  const [selectedSubject, setSelectedSubject] = useState<"all" | "math" | "science" | "sst">("all");
+  const [selectedSubject, setSelectedSubject] = useState<"all" | "math" | "science" | "sst">(initialSubject || "all");
+  const [selectedChapterNo, setSelectedChapterNo] = useState<number | "all">(initialChapterNo || "all");
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [revealedClueIds, setRevealedClueIds] = useState<Record<string, boolean>>({});
@@ -43,6 +48,11 @@ export default function CompetitiveHotsView({
     hots_sst_hist_napoleon_frankfurt: true
   });
 
+  useEffect(() => {
+    if (initialSubject) setSelectedSubject(initialSubject);
+    if (initialChapterNo !== undefined) setSelectedChapterNo(initialChapterNo);
+  }, [initialSubject, initialChapterNo]);
+
   const toggleExpand = (id: string) => {
     setExpandedIds(prev => ({ ...prev, [id]: !prev[id] }));
   };
@@ -51,9 +61,23 @@ export default function CompetitiveHotsView({
     setRevealedClueIds(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
+  const availableChapters = useMemo(() => {
+    const list = COMPETITIVE_HOTS_BANK.filter(q => selectedSubject === "all" || q.subject === selectedSubject);
+    const seen = new Map<number, string>();
+    list.forEach(q => {
+      if (!seen.has(q.chapterNo)) {
+        seen.set(q.chapterNo, q.chapterName);
+      }
+    });
+    return Array.from(seen.entries())
+      .map(([no, name]) => ({ no, name }))
+      .sort((a, b) => a.no - b.no);
+  }, [selectedSubject]);
+
   const filteredQuestions = useMemo(() => {
     return COMPETITIVE_HOTS_BANK.filter(q => {
       if (selectedSubject !== "all" && q.subject !== selectedSubject) return false;
+      if (selectedChapterNo !== "all" && q.chapterNo !== selectedChapterNo) return false;
       if (selectedDifficulty !== "all" && q.difficulty !== selectedDifficulty) return false;
       if (searchQuery.trim()) {
         const term = searchQuery.toLowerCase();
@@ -64,7 +88,16 @@ export default function CompetitiveHotsView({
       }
       return true;
     });
-  }, [selectedSubject, selectedDifficulty, searchQuery]);
+  }, [selectedSubject, selectedChapterNo, selectedDifficulty, searchQuery]);
+
+  const toggleAllExpanded = () => {
+    const allExpanded = filteredQuestions.every(q => expandedIds[q.id]);
+    const next: Record<string, boolean> = {};
+    filteredQuestions.forEach(q => {
+      next[q.id] = !allExpanded;
+    });
+    setExpandedIds(next);
+  };
 
   return (
     <div className="space-y-8 animate-fadeIn max-w-7xl mx-auto pb-16">
@@ -85,7 +118,7 @@ export default function CompetitiveHotsView({
                 <Flame className="w-5 h-5" />
               </div>
               <span className="px-3 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-rose-600 text-white">
-                Olympiad & NTSE Tier
+                Olympiad &amp; NTSE Tier
               </span>
               <span className={`text-xs font-mono font-bold ${isDark ? "text-rose-400" : "text-rose-700"}`}>
                 Higher Order Thinking Skills (HOTS)
@@ -93,10 +126,10 @@ export default function CompetitiveHotsView({
             </div>
 
             <h1 className={`text-2xl sm:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-              Competitive HOTS & Multi-Concept Case Study Vault
+              Competitive HOTS &amp; Multi-Concept Case Study Vault
             </h1>
             <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-              The differentiator between a 90% score and a 100% Century. Features non-routine mixed resistor networks with switch states, multi-step chemical reaction chains, optics lens shifts, moving airplane trigonometry, circle geometry proofs, and deep analytical Social Science case studies (Napoleonic dichotomy, Salt strategy, Poona Pact, Belgian accommodation, and disguised employment).
+              The differentiator between a 90% score and a 100% Century. Features non-routine mixed resistor networks with switch states, multi-step chemical reaction chains, optics lens shifts, moving airplane trigonometry, circle geometry proofs, and deep analytical Social Science case studies.
             </p>
           </div>
 
@@ -127,35 +160,17 @@ export default function CompetitiveHotsView({
             />
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
-            {/* Mobile Dropdown */}
-            <div className="md:hidden w-full">
-              <div className="fabulous-select-wrapper">
-                <select
-                  aria-label="Select Subject Filter"
-                  value={selectedSubject}
-                  onChange={(e) => setSelectedSubject(e.target.value as any)}
-                  className={`fabulous-select ${
-                    isDark ? "fabulous-select-dark" : "fabulous-select-light"
-                  }`}
-                >
-                  <option value="all">All Subjects ({COMPETITIVE_HOTS_BANK.length} Problems)</option>
-                  <option value="math">📐 Mathematics HOTS</option>
-                  <option value="science">🧪 Science HOTS</option>
-                  <option value="sst">🌍 Social Science HOTS</option>
-                </select>
-                <div className="fabulous-select-icon text-zinc-400">
-                  <ChevronDown className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
-
-            {/* Desktop Wrapped Pills */}
-            <div className={`hidden md:flex items-center gap-1.5 p-1 rounded-2xl border flex-wrap ${
+          {/* Row 1: Subject Filter Pills + Chapter Dropdown */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 flex-wrap">
+            {/* Subject Selector */}
+            <div className={`flex items-center gap-1.5 p-1 rounded-2xl border flex-wrap ${
               isDark ? "bg-black/20 border-white/5" : "bg-slate-100 border-slate-200"
             }`}>
               <button
-                onClick={() => setSelectedSubject("all")}
+                onClick={() => {
+                  setSelectedSubject("all");
+                  setSelectedChapterNo("all");
+                }}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
                   selectedSubject === "all" ? "bg-rose-500 text-white shadow-sm" : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                 }`}
@@ -163,7 +178,10 @@ export default function CompetitiveHotsView({
                 All Subjects
               </button>
               <button
-                onClick={() => setSelectedSubject("math")}
+                onClick={() => {
+                  setSelectedSubject("math");
+                  setSelectedChapterNo("all");
+                }}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
                   selectedSubject === "math" ? "bg-amber-500 text-slate-950 shadow-sm" : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                 }`}
@@ -171,7 +189,10 @@ export default function CompetitiveHotsView({
                 📐 Mathematics HOTS
               </button>
               <button
-                onClick={() => setSelectedSubject("science")}
+                onClick={() => {
+                  setSelectedSubject("science");
+                  setSelectedChapterNo("all");
+                }}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
                   selectedSubject === "science" ? "bg-cyan-500 text-slate-950 shadow-sm" : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                 }`}
@@ -179,7 +200,10 @@ export default function CompetitiveHotsView({
                 🧪 Science HOTS
               </button>
               <button
-                onClick={() => setSelectedSubject("sst")}
+                onClick={() => {
+                  setSelectedSubject("sst");
+                  setSelectedChapterNo("all");
+                }}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all touch-manipulation min-h-[36px] ${
                   selectedSubject === "sst" ? "bg-emerald-500 text-slate-950 shadow-sm" : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
                 }`}
@@ -188,7 +212,73 @@ export default function CompetitiveHotsView({
               </button>
             </div>
 
-            <span className={`text-xs font-mono ml-auto ${isDark ? "text-slate-400" : "text-slate-600 font-medium"}`}>
+            {/* Chapter Filter Dropdown */}
+            <div className="flex items-center gap-2">
+              <div className="fabulous-select-wrapper min-w-[200px]">
+                <select
+                  aria-label="Filter by Chapter"
+                  value={selectedChapterNo}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setSelectedChapterNo(val === "all" ? "all" : parseInt(val, 10));
+                  }}
+                  className={`fabulous-select ${
+                    isDark ? "fabulous-select-dark" : "fabulous-select-light"
+                  }`}
+                >
+                  <option value="all">All Chapters ({availableChapters.length} Chapters)</option>
+                  {availableChapters.map((ch) => (
+                    <option key={ch.no} value={ch.no}>
+                      Ch {ch.no}: {ch.name}
+                    </option>
+                  ))}
+                </select>
+                <div className="fabulous-select-icon text-zinc-400">
+                  <ChevronDown className="w-4 h-4" />
+                </div>
+              </div>
+
+              {/* Expand All / Collapse All */}
+              <button
+                onClick={toggleAllExpanded}
+                className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all whitespace-nowrap cursor-pointer ${
+                  isDark ? "bg-white/5 border-white/10 text-slate-300 hover:text-white hover:bg-white/10" : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
+                }`}
+              >
+                {filteredQuestions.every(q => expandedIds[q.id]) ? "Collapse All ▲" : "Expand All ▼"}
+              </button>
+            </div>
+          </div>
+
+          {/* Row 2: Difficulty Tiers & Metrics */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-current/10">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className={`text-[11px] font-mono font-bold uppercase tracking-wider mr-1 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                Difficulty:
+              </span>
+              {[
+                { id: "all", label: "All Tiers" },
+                { id: "HOTS (Higher Order Thinking)", label: "🔥 HOTS" },
+                { id: "Olympiad / NTSE Level", label: "🏆 Olympiad / NTSE" },
+                { id: "CBSE Section E Case Study", label: "📋 Section E Case Study" },
+              ].map((tier) => (
+                <button
+                  key={tier.id}
+                  onClick={() => setSelectedDifficulty(tier.id)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                    selectedDifficulty === tier.id
+                      ? "bg-rose-500 text-white font-black shadow-xs"
+                      : isDark
+                      ? "bg-white/5 text-slate-400 hover:text-white hover:bg-white/10"
+                      : "bg-slate-100 text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  {tier.label}
+                </button>
+              ))}
+            </div>
+
+            <span className={`text-xs font-mono ${isDark ? "text-slate-400" : "text-slate-600 font-medium"}`}>
               Showing {filteredQuestions.length} HOTS Problems
             </span>
           </div>

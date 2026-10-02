@@ -1098,6 +1098,51 @@ export default function CBSECommandCenter() {
     }
   }, [conceptsSubject, conceptsChapterNo]);
 
+  const [hotsSubject, setHotsSubject] = useState<"all" | "math" | "science" | "sst">(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const urlTab = params.get("tab");
+      const urlSub = params.get("subject");
+      if (urlTab === "hots" && urlSub && ["all", "math", "science", "sst"].includes(urlSub)) {
+        return urlSub as any;
+      }
+      const saved = localStorage.getItem("cbse_last_hots_subject");
+      if (saved && ["all", "math", "science", "sst"].includes(saved)) {
+        return saved as any;
+      }
+    }
+    return "all";
+  });
+
+  const [hotsChapterNo, setHotsChapterNo] = useState<number | undefined>(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const urlTab = params.get("tab");
+      const urlCh = params.get("chapter");
+      if (urlTab === "hots" && urlCh) {
+        const p = parseInt(urlCh, 10);
+        if (!isNaN(p) && p >= 1) return p;
+      }
+      const saved = localStorage.getItem("cbse_last_hots_chapter");
+      if (saved) {
+        const p = parseInt(saved, 10);
+        if (!isNaN(p) && p >= 1) return p;
+      }
+    }
+    return undefined;
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cbse_last_hots_subject", hotsSubject);
+      if (hotsChapterNo !== undefined) {
+        localStorage.setItem("cbse_last_hots_chapter", hotsChapterNo.toString());
+      } else {
+        localStorage.removeItem("cbse_last_hots_chapter");
+      }
+    }
+  }, [hotsSubject, hotsChapterNo]);
+
   // Mandatory First-Time Student Legit Name & Exact Location Onboarding State
   const [studentFullName, setStudentFullName] = useState<string>("");
   const [isNameModalOpen, setIsNameModalOpen] = useState<boolean>(false);
@@ -1679,7 +1724,7 @@ export default function CBSECommandCenter() {
       defaultTab: "questions",
       items: [
         { id: "questions", label: "Question Bank", icon: Zap, count: "1,200+" },
-        { id: "hots", label: "Competitive HOTS", icon: Flame, count: "35 Sets" },
+        { id: "hots", label: "Competitive HOTS", icon: Flame, count: "40 Sets" },
       ]
     },
     {
@@ -2153,6 +2198,15 @@ export default function CBSECommandCenter() {
           loadChapterData(parsedCh, false, urlSub as any);
         }
       }
+
+      if (urlTab === "hots") {
+        if (urlSub && ["all", "math", "science", "sst"].includes(urlSub)) {
+          setHotsSubject(urlSub as any);
+        }
+        if (parsedCh && !isNaN(parsedCh) && parsedCh >= 1) {
+          setHotsChapterNo(parsedCh);
+        }
+      }
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -2179,13 +2233,20 @@ export default function CBSECommandCenter() {
       if (activeVaultChapter) {
         nextParams.set("chapter", activeVaultChapter.toString());
       }
+    } else if (activeTab === "hots") {
+      if (hotsSubject && hotsSubject !== "all") {
+        nextParams.set("subject", hotsSubject);
+      }
+      if (hotsChapterNo !== undefined) {
+        nextParams.set("chapter", hotsChapterNo.toString());
+      }
     }
 
     if (currentParams.toString() !== nextParams.toString()) {
       const newUrl = `${window.location.pathname}?${nextParams.toString()}`;
       window.history.pushState({ tab: activeTab }, "", newUrl);
     }
-  }, [activeTab, conceptsSubject, conceptsChapterNo, activeVaultSubject, activeVaultChapter, mounted]);
+  }, [activeTab, conceptsSubject, conceptsChapterNo, activeVaultSubject, activeVaultChapter, hotsSubject, hotsChapterNo, mounted]);
 
   // Interactive MCQ Questions & Live Scoring Stats for Active Vault Chapter
   const mcqQuestionsInVault = useMemo(() => {
@@ -2326,9 +2387,14 @@ export default function CBSECommandCenter() {
       const c = ch || activeVaultChapter;
       if (s) p.set("subject", s);
       if (c) p.set("chapter", c.toString());
+    } else if (tabId === "hots") {
+      const s = sub || hotsSubject;
+      const c = ch !== undefined ? ch : hotsChapterNo;
+      if (s && s !== "all") p.set("subject", s);
+      if (c !== undefined) p.set("chapter", c.toString());
     }
     return `/?${p.toString()}`;
-  }, [conceptsSubject, conceptsChapterNo, activeVaultSubject, activeVaultChapter]);
+  }, [conceptsSubject, conceptsChapterNo, activeVaultSubject, activeVaultChapter, hotsSubject, hotsChapterNo]);
 
   // Handle navigation clicks: left-click navigates in-app, middle-click / scroll wheel / Ctrl-click opens in new tab
   const handleNavClick = useCallback((
@@ -2366,10 +2432,16 @@ export default function CBSECommandCenter() {
             loadChapterData(opts.chapter, false, opts.subject);
           }
         }
+        if (["all", "math", "science", "sst"].includes(opts.subject)) {
+          setHotsSubject(opts.subject);
+        }
+      }
+      if (tabId === "hots" && opts?.chapter !== undefined) {
+        setHotsChapterNo(opts.chapter);
       }
       if (opts?.customAction) opts.customAction();
       React.startTransition(() => {
-        if (opts?.chapter) {
+        if (opts?.chapter && tabId === "concepts") {
           setConceptsChapterNo(opts.chapter);
         }
         setActiveTab(tabId as any);
@@ -4291,6 +4363,8 @@ export default function CBSECommandCenter() {
         {activeTab === "hots" && (
           <CompetitiveHotsView
             isDark={isDark}
+            initialSubject={hotsSubject}
+            initialChapterNo={hotsChapterNo}
             onOpenQuestionBank={(sub, targetChNo) => {
               playSound("click");
               const ch = targetChNo || 1;
@@ -4341,7 +4415,14 @@ export default function CBSECommandCenter() {
             }}
             onOpenHots={(sub, targetChNo) => {
               playSound("click");
-              setActiveTab("hots");
+              setHotsSubject(sub);
+              setHotsChapterNo(targetChNo);
+              React.startTransition(() => {
+                setActiveTab("hots");
+              });
+              if (typeof window !== "undefined") {
+                window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+              }
             }}
             onOpenTimelines={(targetChNo) => {
               playSound("click");

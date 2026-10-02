@@ -189,7 +189,8 @@ function preprocessMathContent(raw: string): string {
   const cached = mathCache.get(raw);
   if (cached !== undefined) return cached;
 
-  let text = raw.replace(/\\n(?![a-zA-Z])/g, '\n').trim();
+  // Safely convert escaped newlines (\n) to actual newlines, preserving LaTeX commands that start with \n (like \neq, \nabla, \nu)
+  let text = raw.replace(/\\n(?!(?:eq|abla|u|ot|eg|otin|parallel|Rightarrow)\b)/g, '\n').trim();
   text = text.replace(/\\{2,}([a-zA-Z]+)/g, '\\$1');
 
   if (/^\$\$[\s\S]*\$\$$/.test(text) || (/^\$[^\$]+\$$/.test(text) && !text.slice(1, -1).includes('$'))) {
@@ -208,16 +209,6 @@ function preprocessMathContent(raw: string): string {
     }
     
     let out = convertPlainMathToLatex(token);
-
-    const hasMathCommands = /\\[a-zA-Z]+/.test(out);
-    if (hasMathCommands) {
-      const words = out.replace(/\\[a-zA-Z]+(\{[^}]*\})?/g, '').trim().split(/\s+/).filter(w => /^[a-zA-Z]{4,}$/.test(w));
-      if (words.length <= 2) {
-         let stripped = out.replace(/\$/g, '');
-         stripped = stripped.replace(/^(Prove:|Prove that|Show that:|Show that|Evaluate:|Evaluate|Find:|Find|Solve:|Solve|Simplify:|Simplify|Calculate:|Calculate|Determine:|Determine)\s+/i, '\\text{$1} ');
-         return `$${stripped}$`;
-      }
-    }
 
     out = out.replace(/(?<!\$)((\\(?:d?frac)\{[^{}]+\}\{[^{}]+\}))(?!\$)/g, '$$$1$$');
     out = out.replace(/(?<!\$)(\\sqrt(?:\[[0-9]+\])?\{[^{}]+\})(?!\$)/g, '$$$1$$');
