@@ -200,12 +200,12 @@ export default function ConceptsHubView({
   const [mathTestScore, setMathTestScore] = useState<{ score: number; total: number } | null>(null);
 
   const [activeScienceChapterNo, setActiveScienceChapterNo] = useState<number>(() => {
-    if (initialSubject === "science" && initialChapterNo !== undefined) return initialChapterNo;
+    if (initialSubject === "science" && initialChapterNo !== undefined && initialChapterNo >= 1 && initialChapterNo <= 13) return initialChapterNo;
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("cbse_last_science_chapter");
       if (saved) {
         const p = parseInt(saved);
-        if (!isNaN(p) && p >= 0 && p <= 13) return p;
+        if (!isNaN(p) && p >= 1 && p <= 13) return p;
       }
     }
     return 1; // Default to Chapter 1: Chemical Reactions
@@ -295,7 +295,7 @@ export default function ConceptsHubView({
       if (targetSub === "math") {
         setActiveMathChapterNo(initialChapterNo);
       } else if (targetSub === "science") {
-        setActiveScienceChapterNo(initialChapterNo);
+        setActiveScienceChapterNo(initialChapterNo >= 1 && initialChapterNo <= 13 ? initialChapterNo : 1);
       } else if (targetSub === "sst") {
         setActiveSSTChapterNo(initialChapterNo);
       }

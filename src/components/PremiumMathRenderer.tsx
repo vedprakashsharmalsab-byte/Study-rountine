@@ -235,8 +235,6 @@ function preprocessMathContent(raw: string): string {
   return result;
 }
 
-const NEEDS_MARKDOWN_OR_MATH = /[\$\\\*#`|~>]|(?:\b(?:sqrt|sin|cos|tan|cosec|sec|cot|theta|pi|alpha|beta|gamma|frac)\b)|(?:\d+\/\d+)|[°\^]|(?:^\s*[-+*]\s)|(?:\n\s*[-+*]\s)|(?:\n\s*\d+\.\s)/i;
-
 const REMARK_PLUGINS = [remarkMath, remarkGfm];
 const REHYPE_PLUGINS = [rehypeKatex];
 
@@ -370,30 +368,17 @@ const PremiumMathRenderer = React.memo(function PremiumMathRenderer({
   className = "",
   inline = false
 }: PremiumMathRendererProps) {
-  // Fast path: if string has no math indicators or markdown symbols, render directly
-  const hasSpecialChars = useMemo(() => {
-    if (!content) return false;
-    return NEEDS_MARKDOWN_OR_MATH.test(content);
-  }, [content]);
+  if (!content) return null;
 
   const processedContent = useMemo(() => {
-    if (!hasSpecialChars) return content;
     return preprocessMathContent(content);
-  }, [content, hasSpecialChars]);
-
-  const Container = inline ? 'span' : 'div';
-
-  if (!hasSpecialChars) {
-    return (
-      <Container className={`math-renderer ${inline ? 'math-renderer-inline inline' : 'font-sans leading-relaxed block whitespace-pre-line'} ${isDark ? "text-slate-100" : "text-slate-900"} ${className}`}>
-        {content}
-      </Container>
-    );
-  }
+  }, [content]);
 
   const components = isDark
     ? (inline ? COMPONENTS_DARK_INLINE : COMPONENTS_DARK_BLOCK)
     : (inline ? COMPONENTS_LIGHT_INLINE : COMPONENTS_LIGHT_BLOCK);
+
+  const Container = inline ? 'span' : 'div';
 
   return (
     <Container className={`math-renderer ${inline ? 'math-renderer-inline inline' : 'font-sans leading-relaxed block'} ${isDark ? "text-slate-100" : "text-slate-900"} ${className}`}>

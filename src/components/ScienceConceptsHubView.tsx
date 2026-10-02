@@ -284,7 +284,8 @@ export default function ScienceConceptsHubView({
   const [revealedExampleSolutions, setRevealedExampleSolutions] = useState<Record<string, boolean>>({});
   const [exampleDisplayLimit, setExampleDisplayLimit] = useState<number>(6);
 
-  const currentChNo = isEmbeddedInCommand && activeChapterNo !== undefined ? activeChapterNo : selectedChapterNo;
+  const rawChNo = isEmbeddedInCommand && activeChapterNo !== undefined ? activeChapterNo : selectedChapterNo;
+  const currentChNo = rawChNo >= 1 && rawChNo <= 13 ? rawChNo : 1;
 
   const chapterSprintQuestions = useMemo(() => {
     const qs = getChapterQuestions(currentChNo, "science");
@@ -293,12 +294,13 @@ export default function ScienceConceptsHubView({
 
   useEffect(() => {
     if (activeChapterNo !== undefined) {
-      setSelectedChapterNo(activeChapterNo);
+      const clamped = activeChapterNo >= 1 && activeChapterNo <= 13 ? activeChapterNo : 1;
+      setSelectedChapterNo(clamped);
     }
   }, [activeChapterNo]);
 
-  const currentChapter = useMemo<ScienceChapterConcept | undefined>(
-    () => getScienceChapter(currentChNo),
+  const currentChapter = useMemo<ScienceChapterConcept>(
+    () => getScienceChapter(currentChNo) || SCIENCE_CHAPTER_CONCEPTS[0],
     [currentChNo]
   );
 
@@ -341,12 +343,12 @@ export default function ScienceConceptsHubView({
     setRevealedExampleSolutions(next);
   };
 
-  // Auto-expand first section when chapter changes for instant snappy loading
+  // Auto-expand first 2 sections when chapter changes
   useEffect(() => {
     if (!currentChapter) return;
     const init: Record<string, boolean> = {};
     currentChapter.sections.forEach((s, idx) => {
-      init[s.id] = idx === 0; // first section expanded by default
+      init[s.id] = idx < 2; // first 2 sections expanded by default
     });
     setExpandedSectionIds(init);
   }, [currentChNo, currentChapter]);

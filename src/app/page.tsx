@@ -1088,9 +1088,13 @@ export default function CBSECommandCenter() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const validCh = conceptsChapterNo >= 1 ? conceptsChapterNo : 1;
       localStorage.setItem("cbse_last_concepts_subject", conceptsSubject);
-      localStorage.setItem(`cbse_last_${conceptsSubject}_chapter`, conceptsChapterNo.toString());
-      localStorage.setItem("cbse_last_concepts_chapter", conceptsChapterNo.toString());
+      localStorage.setItem(`cbse_last_${conceptsSubject}_chapter`, validCh.toString());
+      localStorage.setItem("cbse_last_concepts_chapter", validCh.toString());
+      if (localStorage.getItem("cbse_last_science_chapter") === "0") {
+        localStorage.setItem("cbse_last_science_chapter", "1");
+      }
     }
   }, [conceptsSubject, conceptsChapterNo]);
 
@@ -2310,7 +2314,7 @@ export default function CBSECommandCenter() {
   // Generate real URL for tabs & chapters (enables browser middle-click to open in new tab)
   const getTabHref = useCallback((tabId: string, sub?: string, ch?: number) => {
     if (tabId === "chemistry_basics") {
-      return `/?tab=concepts&subject=science&chapter=0`;
+      return `/chemistry-basics`;
     }
     const p = new URLSearchParams();
     p.set("tab", tabId);
@@ -2346,11 +2350,8 @@ export default function CBSECommandCenter() {
       e.preventDefault();
       playSound("click");
       if (tabId === "chemistry_basics") {
-        setConceptsSubject("science");
-        setConceptsChapterNo(0);
-        setActiveTab("concepts");
         if (typeof window !== "undefined") {
-          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+          window.location.href = "/chemistry-basics";
         }
         return;
       }
