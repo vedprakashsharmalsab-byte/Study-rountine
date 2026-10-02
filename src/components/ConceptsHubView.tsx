@@ -182,10 +182,10 @@ export default function ConceptsHubView({
     return 1; // Default to Chapter 1: Real Numbers (NEVER hardcoded to Triangles)
   });
 
-  // Math 100/100 Integrated Sub-View Mode
+  // Math 100/100 Integrated Sub-View Mode (Defaults to 'all' for seamless chronological masterclass flow)
   const [mathMasterySubTab, setMathMasterySubTab] = useState<
-    "theory" | "method_guide" | "formulas" | "graded_practice" | "pyqs" | "tests" | "revision"
-  >("theory");
+    "all" | "theory" | "method_guide" | "formulas" | "graded_practice" | "pyqs" | "tests" | "revision"
+  >("all");
 
   // Interactive practice state for Math
   const [mathSelectedLevel, setMathSelectedLevel] = useState<number>(1);
@@ -360,6 +360,8 @@ export default function ConceptsHubView({
   useEffect(() => {
     if (!getChapterData(activeMathChapterNo)) {
       setMathMasterySubTab("theory");
+    } else {
+      setMathMasterySubTab("all");
     }
     setMathTestSubmitted(false);
     setMathTestScore(null);
@@ -966,11 +968,11 @@ export default function ConceptsHubView({
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-5 pb-5 border-b border-white/10">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2.5">
-              <span className="px-3.5 py-1 rounded-full text-[11px] font-mono font-black uppercase tracking-wider bg-blue-500 text-white shadow-md shadow-blue-500/25 flex items-center gap-1.5">
+              <span className="px-3.5 py-1 rounded-full text-xs font-mono font-black uppercase tracking-wider bg-blue-500 text-white shadow-md shadow-blue-500/25 flex items-center gap-1.5">
                 <Target className="w-3.5 h-3.5" /> Official CBSE Board Blueprint 2026-27
               </span>
-              <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
-                isDark ? "bg-amber-500/15 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-900 border-amber-300"
+              <span className={`text-xs sm:text-sm font-mono font-bold px-3 py-1 rounded-full border ${
+                isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/40" : "bg-amber-100 text-amber-900 border-amber-300"
               }`}>
                 {activeCurrentBlueprint.unitName}
               </span>
@@ -979,14 +981,14 @@ export default function ConceptsHubView({
               {activeSubject === "math" ? activeMathChapter.title : activeSubject === "science" ? activeScienceMeta.name : activeSSTMeta.name} — Board Weightage: {activeCurrentBlueprint.expectedMarks}
             </h3>
             {activeSubject === "sst" && activeSSTMeta.boardExamNote && (
-              <p className={`text-xs font-mono font-semibold ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>
+              <p className={`text-xs sm:text-sm font-mono font-semibold ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>
                 🎯 {activeSSTMeta.boardExamNote}
               </p>
             )}
           </div>
 
-          <span className={`text-xs font-mono font-black px-4 py-2 rounded-2xl border shadow-xs ${
-            isDark ? "bg-emerald-500/15 border-emerald-500/35 text-emerald-300" : "bg-emerald-100 border-emerald-300 text-emerald-950"
+          <span className={`text-xs sm:text-sm font-mono font-black px-4 py-2 rounded-2xl border shadow-xs ${
+            isDark ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-300" : "bg-emerald-100 border-emerald-300 text-emerald-950"
           }`}>
             Target: 100/100 Perfect Marking
           </span>
@@ -1003,17 +1005,17 @@ export default function ConceptsHubView({
           return (
             <div className="pt-6 space-y-3.5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span className="text-xs font-mono font-black uppercase tracking-wider text-slate-400 block">
+                <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-wider text-slate-200 block">
                   CBSE Question Paper Pattern Breakdown (Pool) vs Weightage:
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className={`text-[10px] font-mono font-black px-3 py-1 rounded-full border shadow-sm ${
-                    isDark ? "bg-amber-500/15 border-amber-500/40 text-amber-300" : "bg-amber-100 border-amber-300 text-amber-900"
+                  <span className={`text-xs font-mono font-black px-3 py-1 rounded-full border shadow-sm ${
+                    isDark ? "bg-amber-500/20 border-amber-500/40 text-amber-300" : "bg-amber-100 border-amber-300 text-amber-900"
                   }`}>
                     Weightage: {currentBlueprint.expectedMarks}
                   </span>
-                  <span className={`text-[10px] font-mono font-black px-3 py-1 rounded-full border ${
-                    isDark ? "bg-blue-500/15 border-blue-500/30 text-blue-300" : "bg-blue-50 border-blue-200 text-blue-800"
+                  <span className={`text-xs font-mono font-black px-3 py-1 rounded-full border ${
+                    isDark ? "bg-blue-500/20 border-blue-500/40 text-blue-300" : "bg-blue-50 border-blue-200 text-blue-800"
                   }`}>
                     Pool: {chapterTotalMarks} Marks ({chapterTotalQuestions} Qs)
                   </span>
@@ -1036,7 +1038,7 @@ export default function ConceptsHubView({
                       className={`p-4 rounded-2xl border text-center transition-all ${
                         isTested
                           ? isDark
-                            ? "bg-black/50 border-blue-500/30 shadow-md shadow-blue-500/5 hover:scale-[1.03] hover:border-blue-400"
+                            ? "bg-black/60 border-blue-500/40 shadow-md shadow-blue-500/10 hover:scale-[1.03] hover:border-blue-400"
                             : "bg-white border-blue-200 shadow-sm hover:scale-[1.03] hover:border-blue-400"
                           : isDark
                             ? "bg-white/[0.02] border-white/5 opacity-40 grayscale-[40%]"
@@ -1044,23 +1046,23 @@ export default function ConceptsHubView({
                       }`}
                     >
                       <div className="flex items-center justify-between gap-1 mb-1">
-                        <span className="text-[11px] font-mono font-bold text-slate-400">{p.section} ({p.marksEach}M)</span>
+                        <span className="text-xs font-mono font-bold text-slate-300">{p.section} ({p.marksEach}M)</span>
                         {isTested ? (
-                          <span className="text-[10px] font-mono font-extrabold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                          <span className="text-xs font-mono font-extrabold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
                             +{sectionTotalMarks}M
                           </span>
                         ) : (
-                          <span className="text-[10px] font-mono text-slate-500 px-1.5 py-0.5 rounded bg-white/5">
+                          <span className="text-xs font-mono text-slate-400 px-1.5 py-0.5 rounded bg-white/5">
                             0M
                           </span>
                         )}
                       </div>
                       <span className={`text-xl sm:text-2xl font-mono font-black block my-1 ${
-                        isTested ? "text-blue-400" : "text-slate-500"
+                        isTested ? "text-blue-400" : "text-slate-400"
                       }`}>
-                        {p.count} <span className="text-xs font-normal opacity-80">Q{p.count !== 1 ? "s" : ""}</span>
+                        {p.count} <span className="text-xs font-normal opacity-90">Q{p.count !== 1 ? "s" : ""}</span>
                       </span>
-                      <span className="text-[11px] text-slate-400 block truncate font-medium">{p.type}</span>
+                      <span className="text-xs text-slate-300 block truncate font-medium">{p.type}</span>
                     </div>
                   );
                 })}
@@ -1071,7 +1073,7 @@ export default function ConceptsHubView({
 
         {/* Step-by-Step Scoring Rubric */}
         <div className="pt-6 mt-6 border-t border-white/10 space-y-3">
-          <span className="text-xs font-mono font-black uppercase tracking-wider text-teal-400 flex items-center gap-2">
+          <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-wider text-teal-400 flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4" /> Official CBSE Step-by-Step Mark Award Rubric:
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
@@ -1079,16 +1081,16 @@ export default function ConceptsHubView({
               <div
                 key={i}
                 className={`p-4 rounded-2xl border flex items-start justify-between gap-3.5 ${
-                  isDark ? "bg-white/[0.025] border-white/8" : "bg-white border-slate-200 shadow-2xs"
+                  isDark ? "bg-white/[0.035] border-white/10" : "bg-white border-slate-200 shadow-2xs"
                 }`}
               >
                 <div className="space-y-1">
-                  <span className={`font-bold block text-sm ${isDark ? "text-slate-100" : "text-slate-800"}`}>
+                  <span className={`font-bold block text-sm sm:text-base ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                     {r.step}
                   </span>
-                  <span className="text-xs text-slate-400 font-mono block">{r.rubricNote}</span>
+                  <span className="text-xs sm:text-sm text-slate-300 font-mono block leading-relaxed">{r.rubricNote}</span>
                 </div>
-                <span className="px-2.5 py-1 rounded-xl text-xs font-mono font-black bg-teal-500/20 text-teal-300 border border-teal-500/35 shrink-0">
+                <span className="px-2.5 py-1 rounded-xl text-xs sm:text-sm font-mono font-black bg-teal-500/20 text-teal-300 border border-teal-500/40 shrink-0">
                   +{r.marks}
                 </span>
               </div>
@@ -1098,10 +1100,10 @@ export default function ConceptsHubView({
 
         {/* Mandatory Examiner Penalties */}
         <div className="pt-5 mt-5 border-t border-white/10">
-          <span className="text-xs font-mono font-black uppercase tracking-wider text-rose-400 flex items-center gap-2 mb-2">
+          <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-wider text-rose-400 flex items-center gap-2 mb-2">
             <ShieldAlert className="w-4 h-4" /> Examiner Trap Penalties (Marks Deducted by Board Evaluators):
           </span>
-          <ul className="space-y-2 text-xs sm:text-sm text-rose-300 font-medium">
+          <ul className="space-y-2 text-sm sm:text-base text-rose-200 font-medium">
             {activeCurrentBlueprint.examinerPenalties.map((pen, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="text-rose-400 font-bold shrink-0 mt-0.5">⚠️</span>
@@ -1232,101 +1234,161 @@ export default function ConceptsHubView({
 
           {/* Class 10 Mathematics 100/100 Integrated Sub-Mode Switcher */}
           {activeMathMasteryData && (
-            <div className={`p-2 rounded-2xl border flex items-center gap-1.5 overflow-x-auto scrollbar-none shadow-sm ${
-              isDark ? "bg-[#0b0f19]/90 border-white/10" : "bg-white/90 border-slate-200"
-            }`}>
-              {[
-                { id: "theory", label: "Core Theory & Model", icon: BookOpen, count: `${activeMathChapter.sections.length} Sec` },
-                { id: "method_guide", label: "7-Step Method Guide", icon: Compass, count: `${activeMathMasteryData.methodGuides.length} Patterns` },
-                { id: "formulas", label: "Formula & Theorem Vault", icon: Calculator, count: `${activeMathMasteryData.formulas.length} Formulas` },
-                { id: "graded_practice", label: "5-Level Graded Drills", icon: Target, count: `${activeMathMasteryData.gradedQuestions.length} Qs` },
-                { id: "pyqs", label: "10-Yr CBSE PYQs", icon: FileText, count: `${activeMathMasteryData.pyqs.length} Boards` },
-                { id: "tests", label: "Chapter Master Tests", icon: GraduationCap, count: `${activeMathMasteryData.tests.length} Tests` },
-                { id: "revision", label: "Last-Day 100/100 Sheet", icon: Zap, count: "High-Yield" },
-              ].map((tab) => {
-                const Icon = tab.icon;
-                const isActive = mathMasterySubTab === tab.id;
-                return (
+            <div className="space-y-3">
+              {/* Primary Mode Selector */}
+              <div className={`p-2 rounded-2xl border flex items-center gap-1.5 overflow-x-auto scrollbar-none shadow-sm ${
+                isDark ? "bg-[#0b0f19]/90 border-white/10" : "bg-white/90 border-slate-200"
+              }`}>
+                {[
+                  { id: "all", label: "🌟 Full Masterclass", icon: Sparkles, count: "All-in-One Chronological" },
+                  { id: "theory", label: "📖 Core Theory & Story", icon: BookOpen, count: `${activeMathChapter.sections.length} Sec` },
+                  { id: "method_guide", label: "🧭 7-Step Method Guides", icon: Compass, count: `${activeMathMasteryData.methodGuides.length} Archetypes` },
+                  { id: "formulas", label: "🔐 Formula & Theorem Vault", icon: Calculator, count: `${activeMathMasteryData.formulas.length} Formulas` },
+                  { id: "graded_practice", label: "🎯 5-Level Graded Drills", icon: Target, count: `${activeMathMasteryData.gradedQuestions.length} Qs` },
+                  { id: "pyqs", label: "📜 10-Yr CBSE PYQs", icon: FileText, count: `${activeMathMasteryData.pyqs.length} Boards` },
+                  { id: "tests", label: "📝 Chapter Master Tests", icon: GraduationCap, count: `${activeMathMasteryData.tests.length} Tests` },
+                  { id: "revision", label: "⚡ Last-Day Speed Sheet", icon: Zap, count: "High-Yield" },
+                ].map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = mathMasterySubTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setMathMasterySubTab(tab.id as any)}
+                      className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer ${
+                        isActive
+                          ? isDark
+                            ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30 scale-[1.02]"
+                            : "bg-blue-600 text-white shadow-md shadow-blue-600/25 scale-[1.02]"
+                          : isDark
+                          ? "text-slate-300 hover:text-white hover:bg-white/5"
+                          : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4 shrink-0" />
+                      <span>{tab.label}</span>
+                      <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-full ${
+                        isActive ? "bg-white/20 text-white" : isDark ? "bg-white/10 text-slate-300" : "bg-slate-200 text-slate-800"
+                      }`}>
+                        {tab.count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Quick-Jump Stage Ribbon (Only in All-in-One Masterclass mode to jump without losing flow) */}
+              {mathMasterySubTab === "all" ? (
+                <div className={`p-2.5 px-4 rounded-2xl border flex items-center gap-2 overflow-x-auto scrollbar-none transition-all ${
+                  isDark ? "bg-[#060a14]/80 backdrop-blur-md border-blue-500/20" : "bg-blue-50/70 border-blue-200"
+                }`}>
+                  <span className="text-xs font-mono font-black uppercase text-amber-400 pl-1 shrink-0 flex items-center gap-1.5">
+                    <Zap className="w-3.5 h-3.5" /> Quick Jump:
+                  </span>
+                  {[
+                    { id: "sec-story", label: "1. Origin Story" },
+                    { id: "sec-theory", label: "2. Core Concepts" },
+                    { id: "sec-methods", label: "3. 7-Step Methods" },
+                    { id: "sec-formulas", label: "4. Formula Vault" },
+                    { id: "sec-solved", label: "5. Solved Board Models" },
+                    { id: "sec-drills", label: "6. Practice Drills" },
+                    { id: "sec-pyqs", label: "7. 10-Yr PYQs" },
+                    { id: "sec-tests", label: "8. Master Tests" },
+                    { id: "sec-revision", label: "9. Speed Sheet" },
+                  ].map((pill) => (
+                    <button
+                      key={pill.id}
+                      onClick={() => {
+                        const el = document.getElementById(pill.id);
+                        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all cursor-pointer border flex items-center gap-1 ${
+                        isDark
+                          ? "bg-white/5 hover:bg-white/15 border-white/10 text-slate-200 hover:text-white"
+                          : "bg-white hover:bg-blue-100 border-slate-200 hover:border-blue-300 text-slate-800"
+                      }`}
+                    >
+                      <span>{pill.label}</span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex items-center justify-between p-3 px-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+                  <span className="text-xs sm:text-sm font-bold text-blue-300 flex items-center gap-1.5">
+                    <span>📌</span> Focused on: {
+                      mathMasterySubTab === "theory" ? "Core Theory & Concepts" :
+                      mathMasterySubTab === "method_guide" ? "7-Step Method Guides" :
+                      mathMasterySubTab === "formulas" ? "Formula & Theorem Vault" :
+                      mathMasterySubTab === "graded_practice" ? "5-Level Graded Drills" :
+                      mathMasterySubTab === "pyqs" ? "10-Yr CBSE PYQs" :
+                      mathMasterySubTab === "tests" ? "Chapter Master Tests" : "Last-Day Speed Sheet"
+                    }
+                  </span>
                   <button
-                    key={tab.id}
-                    onClick={() => setMathMasterySubTab(tab.id as any)}
-                    className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                      isActive
-                        ? isDark
-                          ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30 scale-[1.02]"
-                          : "bg-blue-600 text-white shadow-md shadow-blue-600/25 scale-[1.02]"
-                        : isDark
-                        ? "text-slate-400 hover:text-white hover:bg-white/5"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-                    }`}
+                    onClick={() => setMathMasterySubTab("all")}
+                    className="text-xs sm:text-sm font-bold text-blue-400 hover:text-blue-300 underline cursor-pointer"
                   >
-                    <Icon className="w-4 h-4 shrink-0" />
-                    <span>{tab.label}</span>
-                    <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
-                      isActive ? "bg-white/20 text-white" : isDark ? "bg-white/10 text-slate-400" : "bg-slate-200 text-slate-700"
-                    }`}>
-                      {tab.count}
-                    </span>
+                    ← Back to Full Masterclass
                   </button>
-                );
-              })}
+                </div>
+              )}
             </div>
           )}
 
-          {mathMasterySubTab === "theory" && (
+          {(mathMasterySubTab === "all" || mathMasterySubTab === "theory") && (
             <>
               {/* Strategic Chapter Overview Briefing */}
               {activeMathMasteryData?.overview && (
-                <div className={`p-6 sm:p-8 rounded-3xl border space-y-4 ${
+                <div className={`p-6 sm:p-8 rounded-3xl border space-y-5 ${
                   isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                 }`}>
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
                     <div className="flex items-center gap-2.5">
-                      <span className="p-2 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                      <span className="p-2.5 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30">
                         <GraduationCap className="w-5 h-5" />
                       </span>
                       <div>
-                        <h3 className={`text-base sm:text-lg font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                        <h3 className={`text-lg sm:text-xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                           CBSE Board Strategic Blueprint: {activeMathMasteryData.chapterName}
                         </h3>
-                        <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                        <p className={`text-xs sm:text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                           Estimated Weightage: <span className="font-bold text-amber-400">{activeMathMasteryData.weightageEstimate}</span>
                         </p>
                       </div>
                     </div>
-                    <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-bold">
+                    <span className="text-xs font-mono px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">
                       100/100 Master Engine Active
                     </span>
                   </div>
-                  <p className={`text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                  <p className={`text-base sm:text-lg leading-relaxed ${isDark ? "text-slate-100" : "text-slate-800"}`}>
                     {activeMathMasteryData.overview.about}
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                    <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"}`}>
-                      <h4 className="text-xs font-mono font-bold uppercase text-indigo-400 mb-2 flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5" /> Prerequisites
+                    <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/8" : "bg-slate-50 border-slate-200"}`}>
+                      <h4 className="text-xs sm:text-sm font-mono font-bold uppercase text-indigo-400 mb-2.5 flex items-center gap-1.5">
+                        <CheckCircle2 className="w-4 h-4" /> Prerequisites
                       </h4>
-                      <ul className="text-xs space-y-1.5 list-disc list-inside text-slate-400">
+                      <ul className="text-sm sm:text-base space-y-2 list-disc list-inside text-slate-200 leading-relaxed font-medium">
                         {activeMathMasteryData.overview.prerequisites.map((p, i) => (
                           <li key={i}>{p}</li>
                         ))}
                       </ul>
                     </div>
-                    <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"}`}>
-                      <h4 className="text-xs font-mono font-bold uppercase text-emerald-400 mb-2 flex items-center gap-1.5">
-                        <Target className="w-3.5 h-3.5" /> Core Concepts
+                    <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/8" : "bg-slate-50 border-slate-200"}`}>
+                      <h4 className="text-xs sm:text-sm font-mono font-bold uppercase text-emerald-400 mb-2.5 flex items-center gap-1.5">
+                        <Target className="w-4 h-4" /> Core Concepts
                       </h4>
-                      <ul className="text-xs space-y-1.5 list-disc list-inside text-slate-400">
+                      <ul className="text-sm sm:text-base space-y-2 list-disc list-inside text-slate-200 leading-relaxed font-medium">
                         {activeMathMasteryData.overview.coreIdeas.map((c, i) => (
                           <li key={i}>{c}</li>
                         ))}
                       </ul>
                     </div>
-                    <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"}`}>
-                      <h4 className="text-xs font-mono font-bold uppercase text-rose-400 mb-2 flex items-center gap-1.5">
-                        <AlertTriangle className="w-3.5 h-3.5" /> Watch Out For
+                    <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/8" : "bg-slate-50 border-slate-200"}`}>
+                      <h4 className="text-xs sm:text-sm font-mono font-bold uppercase text-rose-400 mb-2.5 flex items-center gap-1.5">
+                        <AlertTriangle className="w-4 h-4" /> Watch Out For
                       </h4>
-                      <ul className="text-xs space-y-1.5 list-disc list-inside text-slate-400">
+                      <ul className="text-sm sm:text-base space-y-2 list-disc list-inside text-rose-200 leading-relaxed font-medium">
                         {activeMathMasteryData.overview.frequentMisunderstandings.map((m, i) => (
                           <li key={i}>{m}</li>
                         ))}
@@ -1338,64 +1400,70 @@ export default function ConceptsHubView({
 
               {/* Intuitive Real-World Analogy Card - Apple Keynote Callout */}
               <div
-                className={`p-7 sm:p-9 rounded-3xl border transition-all ${
+                id="sec-story"
+                className={`p-7 sm:p-9 rounded-3xl border transition-all scroll-mt-24 ${
                   isDark ? "apple-insight-card border-amber-500/30" : "apple-insight-card-light border-amber-300/80"
                 }`}
               >
-            <div className="flex flex-col sm:flex-row items-start gap-5">
-              <div className="p-3.5 rounded-2xl bg-amber-500/25 text-amber-400 border border-amber-500/40 shadow-inner shrink-0">
-                <Lightbulb className="w-7 h-7" />
+                <div className="flex flex-col sm:flex-row items-start gap-5">
+                  <div className="p-3.5 rounded-2xl bg-amber-500/25 text-amber-400 border border-amber-500/40 shadow-inner shrink-0">
+                    <Lightbulb className="w-7 h-7" />
+                  </div>
+                  <div className="space-y-3 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono uppercase font-black text-amber-400 tracking-wider px-3 py-1 rounded-md bg-amber-500/20 border border-amber-500/30">
+                        Stage 1: Zero-to-One Keynote Mental Model
+                      </span>
+                    </div>
+                    <h3 className={`text-2xl sm:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                      {activeMathChapter.analogyTitle}
+                    </h3>
+                    <div className={`text-base sm:text-lg leading-relaxed sm:leading-8 font-medium pt-1 ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+                      <PremiumMathRenderer content={activeMathChapter.analogyContent} />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-2.5 flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-mono uppercase font-black text-amber-400 tracking-widest px-2.5 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/25">
-                    Keynote Mental Model
+
+              {/* Core Sections & Step-by-Step Problem Solving Guides */}
+              <div id="sec-theory" className="space-y-8 scroll-mt-24">
+                <div className="flex items-center gap-2.5 pb-2">
+                  <span className="text-xs font-mono font-black uppercase text-blue-400 px-3 py-1 rounded-md bg-blue-500/15 border border-blue-500/30">
+                    Stage 2: Chronological Concept Masterclass
                   </span>
                 </div>
-                <h3 className={`text-xl sm:text-2xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-                  {activeMathChapter.analogyTitle}
-                </h3>
-                <div className={`text-sm sm:text-base leading-relaxed font-normal pt-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
-                  <PremiumMathRenderer content={activeMathChapter.analogyContent} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Core Sections & Step-by-Step Problem Solving Guides */}
-          <div className="space-y-8">
-            {activeMathChapter.sections.map((section, sIdx) => (
-              <div
-                key={section.id}
-                style={{ contentVisibility: "auto", containIntrinsicSize: "800px" }}
-                className={`p-7 sm:p-10 rounded-3xl border space-y-7 transition-all ${
-                  isDark ? "apple-bento-section-dark" : "apple-bento-section-light"
-                }`}
-              >
-                {/* Section Header */}
-                <div className="border-b pb-6 border-white/10 space-y-2.5">
-                  <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-500/15 text-blue-400 border border-blue-500/30">
-                      SECTION {sIdx + 1}
-                    </span>
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
-                      {section.label}
-                    </span>
-                  </div>
-                  <h3 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-                    <PremiumMathRenderer content={section.heading} isDark={isDark} inline />
-                  </h3>
-                  {section.subheading && (
-                    <div className={`text-sm sm:text-base font-semibold ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                      <PremiumMathRenderer content={section.subheading} isDark={isDark} inline />
+                {activeMathChapter.sections.map((section, sIdx) => (
+                  <div
+                    key={section.id}
+                    style={{ contentVisibility: "auto", containIntrinsicSize: "800px" }}
+                    className={`p-7 sm:p-10 rounded-3xl border space-y-7 transition-all ${
+                      isDark ? "apple-bento-section-dark" : "apple-bento-section-light"
+                    }`}
+                  >
+                    {/* Section Header */}
+                    <div className="border-b pb-6 border-white/10 space-y-2.5">
+                      <div className="flex items-center gap-2">
+                        <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/40">
+                          SECTION {sIdx + 1}
+                        </span>
+                        <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-slate-300">
+                          {section.label}
+                        </span>
+                      </div>
+                      <h3 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                        <PremiumMathRenderer content={section.heading} isDark={isDark} inline />
+                      </h3>
+                      {section.subheading && (
+                        <div className={`text-base sm:text-lg font-bold ${isDark ? "text-blue-300" : "text-blue-700"}`}>
+                          <PremiumMathRenderer content={section.subheading} isDark={isDark} inline />
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
 
-                {/* Core Explanation */}
-                <div className={`text-base sm:text-lg leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
-                  <PremiumMathRenderer content={section.explanation} isDark={isDark} />
-                </div>
+                    {/* Core Explanation */}
+                    <div className={`text-base sm:text-lg leading-relaxed sm:leading-8 ${isDark ? "text-slate-100" : "text-slate-900 font-normal"}`}>
+                      <PremiumMathRenderer content={section.explanation} isDark={isDark} />
+                    </div>
 
                 {/* Embedded High-Yield CBSE Math Vector Figures */}
                 {activeMathChapter.chapterNo === 6 && (section.id === "bpt_theorem" || section.id === "converse_bpt") && (
@@ -1518,20 +1586,20 @@ export default function ConceptsHubView({
                                 <div className="w-7 h-7 rounded-xl bg-teal-500/20 border border-teal-500/30 flex items-center justify-center shrink-0 mt-0.5">
                                   <span className="text-xs font-black text-teal-400">{i + 1}</span>
                                 </div>
-                                <div className={`text-base sm:text-lg font-black leading-snug ${ isDark ? "text-teal-300" : "text-teal-900 font-black" }`}>
+                                <div className={`text-lg sm:text-xl font-black leading-snug ${ isDark ? "text-teal-300" : "text-teal-900 font-black" }`}>
                                   <PremiumMathRenderer content={fp.title} isDark={isDark} inline />
                                 </div>
                               </div>
-                              <div className={`text-base sm:text-lg rounded-2xl p-5 border overflow-x-auto ${
+                              <div className={`text-lg sm:text-xl font-bold rounded-2xl p-6 sm:p-7 border overflow-x-auto ${
                                 isDark
-                                  ? "bg-black/50 border-teal-500/20 text-slate-100 shadow-inner"
-                                  : "bg-teal-50/90 border-teal-200 text-slate-900 shadow-inner"
+                                  ? "bg-[#040814] border-teal-500/30 text-white shadow-inner"
+                                  : "bg-teal-50/90 border-teal-200 text-slate-950 shadow-inner"
                               }`}>
                                 <PremiumMathRenderer content={fp.content} isDark={isDark} />
                               </div>
                               {fp.note && (
-                                <div className={`text-xs sm:text-sm font-medium pt-3 mt-1 border-t flex items-start gap-2.5 ${
-                                  isDark ? "border-teal-500/20 text-amber-300" : "border-teal-200 text-amber-800 font-semibold"
+                                <div className={`text-sm sm:text-base font-medium pt-3 mt-1 border-t flex items-start gap-2.5 ${
+                                  isDark ? "border-teal-500/20 text-amber-200" : "border-teal-200 text-amber-900 font-semibold"
                                 }`}>
                                   <span className="shrink-0 text-base">💡</span>
                                   <div className="flex-1">
@@ -1568,11 +1636,11 @@ export default function ConceptsHubView({
                             <h5 className="font-bold text-base text-indigo-300 block">
                               <PremiumMathRenderer content={st.title} isDark={isDark} inline />
                             </h5>
-                            <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                            <div className={`text-base sm:text-lg leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900 font-normal"}`}>
                               <PremiumMathRenderer content={st.action} isDark={isDark} />
                             </div>
                             {st.proTip && (
-                              <div className={`text-xs sm:text-sm font-mono pt-1.5 ${isDark ? "text-emerald-300" : "text-emerald-800 font-semibold"}`}>
+                              <div className={`text-sm sm:text-base font-mono pt-1.5 ${isDark ? "text-emerald-300" : "text-emerald-800 font-semibold"}`}>
                                 <PremiumMathRenderer content={`💡 **Topper Tip:** ${st.proTip}`} isDark={isDark} />
                               </div>
                             )}
@@ -1610,7 +1678,7 @@ export default function ConceptsHubView({
                                     isDark ? "bg-rose-500/20 text-rose-300 border border-rose-500/30" : "bg-rose-100 text-rose-800 border border-rose-300"
                                   }`}>❌ Common Trap #{i + 1}</span>
                                 </div>
-                                <div className={`text-sm sm:text-base font-medium leading-relaxed ${ isDark ? "text-rose-200" : "text-rose-950" }`}>
+                                <div className={`text-base sm:text-lg font-medium leading-relaxed ${ isDark ? "text-rose-100" : "text-rose-950" }`}>
                                   <PremiumMathRenderer content={tr.trap} isDark={isDark} />
                                 </div>
                               </div>
@@ -1621,7 +1689,7 @@ export default function ConceptsHubView({
                                 <span className={`text-xs font-mono font-black uppercase tracking-wider px-3 py-1 rounded-md inline-flex items-center gap-1.5 ${
                                   isDark ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30" : "bg-emerald-50 text-emerald-800 border border-emerald-300"
                                 }`}>✅ Mandatory Correction</span>
-                                <div className={`text-sm sm:text-base leading-relaxed ${ isDark ? "text-emerald-200" : "text-emerald-950 font-medium" }`}>
+                                <div className={`text-base sm:text-lg leading-relaxed ${ isDark ? "text-emerald-100" : "text-emerald-950 font-medium" }`}>
                                   <PremiumMathRenderer content={tr.correction} isDark={isDark} />
                                 </div>
                               </div>
@@ -1640,13 +1708,18 @@ export default function ConceptsHubView({
               MATHEMATICS SOLVED BOARD EXAMPLES WITH STEP MARKS BREAKDOWN
               ========================================================================= */}
           {activeMathExamples.length > 0 && (
-            <div className="space-y-5 pt-4">
-              <div className="flex items-center justify-between">
-                <h3 className={`text-xl sm:text-2xl font-black flex items-center gap-2.5 ${isDark ? "text-white" : "text-slate-900"}`}>
-                  <Sparkles className="w-5 h-5 text-amber-400" />
-                  CBSE Board Solved Model Problems with Official Mark Rubric
-                </h3>
-                <span className="text-xs font-mono font-bold text-slate-400">
+            <div id="sec-solved" className="space-y-5 pt-4 scroll-mt-24">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="space-y-1">
+                  <span className="text-xs font-mono font-black uppercase text-amber-400 px-3 py-1 rounded-md bg-amber-500/15 border border-amber-500/30 inline-block mb-1">
+                    Stage 5: CBSE Board Solved Model Problems
+                  </span>
+                  <h3 className={`text-xl sm:text-2xl font-black flex items-center gap-2.5 ${isDark ? "text-white" : "text-slate-900"}`}>
+                    <Sparkles className="w-5 h-5 text-amber-400" />
+                    CBSE Board Solved Model Problems with Official Mark Rubric
+                  </h3>
+                </div>
+                <span className="text-xs font-mono font-bold text-slate-300">
                   {activeMathExamples.length} Model Question{activeMathExamples.length > 1 ? "s" : ""}
                 </span>
               </div>
@@ -1664,33 +1737,33 @@ export default function ConceptsHubView({
                       <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
                         {ex.level}
                       </span>
-                      <span className="text-xs font-mono font-bold text-emerald-400">
+                      <span className="text-xs sm:text-sm font-mono font-bold text-emerald-400">
                         Total Marks: {ex.marks}
                       </span>
                     </div>
 
-                    <h4 className={`text-base sm:text-lg font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
+                    <h4 className={`text-lg sm:text-xl font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
                       <PremiumMathRenderer content={ex.question} isDark={isDark} />
                     </h4>
 
                     {/* Step-by-Step Marking Scheme */}
                     <div className="space-y-2.5 pt-1">
-                      <span className="text-xs font-mono uppercase font-bold text-emerald-400 block">
+                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-emerald-400 block">
                         Official Step-by-Step Scoring Distribution:
                       </span>
                       <div className="space-y-2.5">
                         {ex.markingSchemeSteps.map((st) => (
                           <div
                             key={st.stepNo}
-                            className={`p-3.5 rounded-xl border flex items-start justify-between gap-3 ${
-                              isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"
+                            className={`p-4 rounded-xl border flex items-start justify-between gap-3 ${
+                              isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
                             }`}
                           >
                             <div className="flex items-start gap-3">
-                              <span className="w-6 h-6 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">
+                              <span className="w-7 h-7 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">
                                 {st.stepNo}
                               </span>
-                              <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                              <div className={`text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-800"}`}>
                                 <PremiumMathRenderer content={st.description} isDark={isDark} />
                               </div>
                             </div>
@@ -1703,17 +1776,17 @@ export default function ConceptsHubView({
                     </div>
 
                     {/* Final Answer Box */}
-                    <div className={`p-4 rounded-2xl border font-bold text-sm flex items-center justify-between ${
+                    <div className={`p-4 sm:p-5 rounded-2xl border font-bold text-base flex flex-col sm:flex-row sm:items-center justify-between gap-2 ${
                       isDark ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-300" : "bg-emerald-50 border-emerald-200 text-emerald-950"
                     }`}>
-                      <span className="text-sm font-bold">Official Final Answer:</span>
-                      <span className="font-mono text-base px-3.5 py-1.5 rounded-xl bg-black/40 border border-emerald-500/40">
+                      <span className="text-base font-bold">Official Final Answer:</span>
+                      <span className="font-mono text-base sm:text-lg px-3.5 py-1.5 rounded-xl bg-black/40 border border-emerald-500/40 text-emerald-300">
                         <PremiumMathRenderer content={ex.finalAnswer} isDark={isDark} inline />
                       </span>
                     </div>
 
                     {ex.examinerTrap && (
-                      <div className="text-xs sm:text-sm text-rose-400 font-mono">
+                      <div className="text-sm sm:text-base text-rose-300 font-mono pt-1">
                         <PremiumMathRenderer content={`⚠️ **Examiner Caution:** ${ex.examinerTrap}`} isDark={isDark} />
                       </div>
                     )}
@@ -1725,28 +1798,33 @@ export default function ConceptsHubView({
           </>)}
 
           {/* =========================================================================
-              SUB-TAB 2: 7-STEP METHOD IDENTIFICATION SYSTEM
+              STAGE 3: 7-STEP METHOD IDENTIFICATION PROTOCOL
               ========================================================================= */}
-          {mathMasterySubTab === "method_guide" && activeMathMasteryData && (
-            <div className="space-y-6 animate-fade-in">
+          {(mathMasterySubTab === "all" || mathMasterySubTab === "method_guide") && activeMathMasteryData && (
+            <div id="sec-methods" className="space-y-6 animate-fade-in scroll-mt-28">
               <div className={`p-6 sm:p-8 rounded-3xl border ${
                 isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="p-3 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
-                      <Compass className="w-6 h-6" />
+                    <span className="p-3.5 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+                      <Compass className="w-7 h-7" />
                     </span>
                     <div>
-                      <h3 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                          Stage 3 &bull; Blueprint Recognition
+                        </span>
+                      </div>
+                      <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                         7-Step Method Identification Protocol
                       </h3>
-                      <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                        How to instantly recognize problem types in 5 seconds and trigger the correct mathematical procedure.
+                      <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        How to instantly recognize problem types in under 5 seconds and trigger the exact algorithmic solution.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-indigo-500/20 text-indigo-200 border border-indigo-500/40">
                     {activeMathMasteryData.methodGuides.length} Core Archetypes
                   </span>
                 </div>
@@ -1760,30 +1838,30 @@ export default function ConceptsHubView({
                       isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                     }`}
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-4 border-white/10">
-                      <div className="flex items-center gap-2">
-                        <span className="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-300 font-mono font-black text-xs flex items-center justify-center border border-indigo-500/30">
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                      <div className="flex items-center gap-3">
+                        <span className="w-8 h-8 rounded-xl bg-indigo-500/20 text-indigo-300 font-mono font-black text-sm flex items-center justify-center border border-indigo-500/30">
                           {idx + 1}
                         </span>
-                        <h4 className={`text-lg sm:text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                        <h4 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                           {mg.questionPattern}
                         </h4>
                       </div>
-                      <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-500/15 text-blue-300 border border-blue-500/30">
+                      <span className="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-mono font-bold bg-blue-500/20 text-blue-200 border border-blue-500/40">
                         {mg.requiredConcept}
                       </span>
                     </div>
 
-                    <div className="space-y-2">
-                      <span className="text-xs font-mono uppercase font-bold text-amber-400 flex items-center gap-1.5">
-                        <Search className="w-3.5 h-3.5" /> Exam Trigger Keywords (Underline These in Question)
+                    <div className="space-y-2.5">
+                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-amber-300 flex items-center gap-2">
+                        <Search className="w-4 h-4" /> Exam Trigger Keywords (Spot & Underline These in Question)
                       </span>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2.5">
                         {mg.recognitionClues.map((clue, cIdx) => (
                           <span
                             key={cIdx}
-                            className={`px-3 py-1 rounded-xl text-xs font-semibold border ${
-                              isDark ? "bg-amber-500/10 text-amber-300 border-amber-500/30" : "bg-amber-50 text-amber-800 border-amber-200"
+                            className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border ${
+                              isDark ? "bg-amber-500/15 text-amber-200 border-amber-500/30" : "bg-amber-50 text-amber-900 border-amber-200"
                             }`}
                           >
                             &ldquo;{clue}&rdquo;
@@ -1793,51 +1871,51 @@ export default function ConceptsHubView({
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"}`}>
-                        <span className="text-xs font-mono font-bold uppercase text-slate-400 block mb-1">
-                          📥 What Is Given:
+                      <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-slate-300 block mb-1.5">
+                          📥 What Is Given in Question:
                         </span>
-                        <div className={`text-sm ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                        <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                           <PremiumMathRenderer content={mg.whatIsGiven} isDark={isDark} />
                         </div>
                       </div>
-                      <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"}`}>
-                        <span className="text-xs font-mono font-bold uppercase text-slate-400 block mb-1">
+                      <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-slate-300 block mb-1.5">
                           🎯 What Must Be Found / Proved:
                         </span>
-                        <div className={`text-sm ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                        <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                           <PremiumMathRenderer content={mg.whatMustBeFound} isDark={isDark} />
                         </div>
                       </div>
                     </div>
 
-                    <div className={`p-4 rounded-2xl border ${
-                      isDark ? "bg-indigo-950/20 border-indigo-500/30" : "bg-indigo-50/70 border-indigo-200"
+                    <div className={`p-5 rounded-2xl border ${
+                      isDark ? "bg-indigo-950/25 border-indigo-500/40" : "bg-indigo-50/80 border-indigo-200"
                     }`}>
-                      <span className="text-xs font-mono uppercase font-bold text-indigo-400 block mb-1.5">
+                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-indigo-300 block mb-2">
                         ⚙️ Method Selection Rationale:
                       </span>
-                      <div className={`text-sm sm:text-base font-semibold ${isDark ? "text-indigo-200" : "text-indigo-950"}`}>
+                      <div className={`text-base sm:text-lg font-semibold ${isDark ? "text-indigo-100" : "text-indigo-950"}`}>
                         <PremiumMathRenderer content={mg.chosenMethod} isDark={isDark} />
                       </div>
                     </div>
 
                     <div className="space-y-3">
-                      <span className="text-xs font-mono uppercase font-bold text-emerald-400 block">
+                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-emerald-300 block">
                         📋 Step-by-Step Execution Protocol:
                       </span>
-                      <div className="space-y-2">
+                      <div className="space-y-2.5">
                         {mg.executionSteps.map((step, sIdx) => (
                           <div
                             key={sIdx}
-                            className={`p-3.5 rounded-xl border flex items-start gap-3 ${
-                              isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"
+                            className={`p-4 rounded-xl border flex items-start gap-3.5 ${
+                              isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
                             }`}
                           >
-                            <span className="w-6 h-6 rounded-md bg-emerald-500/20 text-emerald-400 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                            <span className="w-7 h-7 rounded-lg bg-emerald-500/25 text-emerald-300 font-mono font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 mt-0.5">
                               {sIdx + 1}
                             </span>
-                            <div className={`text-sm ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                            <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                               <PremiumMathRenderer content={step} isDark={isDark} />
                             </div>
                           </div>
@@ -1846,47 +1924,47 @@ export default function ConceptsHubView({
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-                      <div className={`p-4 rounded-2xl border ${
-                        isDark ? "bg-teal-950/20 border-teal-500/30 text-teal-300" : "bg-teal-50 border-teal-200 text-teal-950"
+                      <div className={`p-5 rounded-2xl border ${
+                        isDark ? "bg-teal-950/25 border-teal-500/40 text-teal-200" : "bg-teal-50 border-teal-200 text-teal-950"
                       }`}>
-                        <span className="text-xs font-mono font-bold uppercase block mb-1">
+                        <span className="text-xs sm:text-sm font-mono font-bold uppercase block mb-1.5 text-teal-300">
                           ⏱️ 30-Second Verification Check:
                         </span>
-                        <div className="text-xs sm:text-sm leading-relaxed">
+                        <div className="text-sm sm:text-base leading-relaxed">
                           <PremiumMathRenderer content={mg.verificationMethod} isDark={isDark} />
                         </div>
                       </div>
-                      <div className={`p-4 rounded-2xl border ${
-                        isDark ? "bg-rose-950/20 border-rose-500/30 text-rose-300" : "bg-rose-50 border-rose-200 text-rose-950"
+                      <div className={`p-5 rounded-2xl border ${
+                        isDark ? "bg-rose-950/25 border-rose-500/40 text-rose-200" : "bg-rose-50 border-rose-200 text-rose-950"
                       }`}>
-                        <span className="text-xs font-mono font-bold uppercase block mb-1">
+                        <span className="text-xs sm:text-sm font-mono font-bold uppercase block mb-1.5 text-rose-300">
                           ⚠️ Fatal Examiner Trap:
                         </span>
-                        <div className="text-xs sm:text-sm leading-relaxed">
+                        <div className="text-sm sm:text-base leading-relaxed">
                           <PremiumMathRenderer content={mg.commonTrap} isDark={isDark} />
                         </div>
                       </div>
                     </div>
 
-                    <div className={`p-5 rounded-2xl border space-y-3 ${
-                      isDark ? "bg-white/[0.02] border-white/10" : "bg-slate-100/70 border-slate-200"
+                    <div className={`p-6 rounded-2xl border space-y-4 ${
+                      isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-100/70 border-slate-200"
                     }`}>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono uppercase font-bold text-amber-400">
+                        <span className="text-xs sm:text-sm font-mono uppercase font-bold text-amber-300">
                           Exemplar Model Question
                         </span>
-                        <span className="text-[11px] font-mono font-bold text-slate-400">
+                        <span className="text-xs font-mono font-bold text-slate-400">
                           Standard CBSE Rubric
                         </span>
                       </div>
-                      <div className={`text-sm sm:text-base font-medium ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+                      <div className={`text-base sm:text-lg font-medium ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                         <PremiumMathRenderer content={mg.exemplarQuestion} isDark={isDark} />
                       </div>
-                      <div className={`p-3.5 rounded-xl border text-sm font-semibold flex items-center justify-between ${
-                        isDark ? "bg-black/40 border-emerald-500/30 text-emerald-300" : "bg-white border-emerald-300 text-emerald-800"
+                      <div className={`p-4 rounded-xl border text-sm sm:text-base font-semibold flex items-center justify-between ${
+                        isDark ? "bg-black/40 border-emerald-500/40 text-emerald-300" : "bg-white border-emerald-300 text-emerald-950"
                       }`}>
-                        <span className="text-xs font-mono uppercase">Final Result:</span>
-                        <span className="font-mono">
+                        <span className="text-xs sm:text-sm font-mono uppercase">Official Final Answer:</span>
+                        <span className="font-mono text-base sm:text-lg">
                           <PremiumMathRenderer content={mg.exemplarAnswer} isDark={isDark} inline />
                         </span>
                       </div>
@@ -1898,28 +1976,33 @@ export default function ConceptsHubView({
           )}
 
           {/* =========================================================================
-              SUB-TAB 3: FORMULA & THEOREM SECURITY VAULT
+              STAGE 4: FORMULA & THEOREM SECURITY VAULT
               ========================================================================= */}
-          {mathMasterySubTab === "formulas" && activeMathMasteryData && (
-            <div className="space-y-6 animate-fade-in">
+          {(mathMasterySubTab === "all" || mathMasterySubTab === "formulas") && activeMathMasteryData && (
+            <div id="sec-formulas" className="space-y-6 animate-fade-in scroll-mt-28">
               <div className={`p-6 sm:p-8 rounded-3xl border ${
                 isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="p-3 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                      <Calculator className="w-6 h-6" />
+                    <span className="p-3.5 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                      <Calculator className="w-7 h-7" />
                     </span>
                     <div>
-                      <h3 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                          Stage 4 &bull; Algebraic Vault
+                        </span>
+                      </div>
+                      <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                         Formula & Theorem Security Vault
                       </h3>
-                      <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                      <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                         Complete algebraic specification: symbol breakdowns, applicability conditions, instant mini-substitutions, and traps.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-amber-500/20 text-amber-200 border border-amber-500/40">
                     {activeMathMasteryData.formulas.length} Core Formulas
                   </span>
                 </div>
@@ -1933,46 +2016,46 @@ export default function ConceptsHubView({
                       isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                     }`}
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-4 border-white/10">
-                      <div className="flex items-center gap-2">
-                        <span className="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-300 font-mono font-black text-xs flex items-center justify-center border border-amber-500/30">
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                      <div className="flex items-center gap-3">
+                        <span className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 font-mono font-black text-sm flex items-center justify-center border border-amber-500/30">
                           {fIdx + 1}
                         </span>
-                        <h4 className={`text-lg sm:text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                        <h4 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                           {f.name}
                         </h4>
                       </div>
-                      <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                      <span className="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-mono font-bold bg-amber-500/20 text-amber-200 border border-amber-500/40">
                         Board Essential
                       </span>
                     </div>
 
                     {/* Formula Large Display Box */}
-                    <div className={`p-5 sm:p-6 rounded-2xl border text-center ${
-                      isDark ? "bg-amber-950/15 border-amber-500/30" : "bg-amber-50/70 border-amber-200"
+                    <div className={`p-6 sm:p-8 rounded-2xl border text-center ${
+                      isDark ? "bg-amber-950/20 border-amber-500/40" : "bg-amber-50/80 border-amber-300"
                     }`}>
-                      <div className="text-xl sm:text-2xl font-bold tracking-wide">
+                      <div className="text-2xl sm:text-3xl font-black tracking-wide">
                         <PremiumMathRenderer content={`$$${f.formula}$$`} isDark={isDark} />
                       </div>
                     </div>
 
                     {/* Symbol Meanings Table */}
                     <div className="space-y-2.5">
-                      <span className="text-xs font-mono uppercase font-bold text-slate-400 block">
+                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-slate-300 block">
                         🔍 Symbol Clarification Table:
                       </span>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                         {f.symbolMeanings.map((sym, sIdx) => (
                           <div
                             key={sIdx}
-                            className={`p-3 rounded-xl border flex items-center gap-3 ${
-                              isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"
+                            className={`p-3.5 rounded-xl border flex items-center gap-3 ${
+                              isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
                             }`}
                           >
-                            <span className="px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-400 font-mono font-bold text-xs shrink-0">
+                            <span className="px-3 py-1 rounded-lg bg-blue-500/20 text-blue-300 font-mono font-bold text-xs sm:text-sm shrink-0">
                               {sym.symbol}
                             </span>
-                            <span className={`text-xs ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                            <span className={`text-xs sm:text-sm font-medium ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                               {sym.meaning}
                             </span>
                           </div>
@@ -1982,21 +2065,21 @@ export default function ConceptsHubView({
 
                     {/* Applicability Conditions & Substitutions */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"}`}>
-                        <span className="text-xs font-mono font-bold uppercase text-indigo-400 block mb-2">
+                      <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-indigo-300 block mb-2">
                           🛡️ Conditions Where Valid:
                         </span>
-                        <ul className="text-xs space-y-1.5 list-disc list-inside text-slate-400">
+                        <ul className="text-sm space-y-2 list-disc list-inside text-slate-200">
                           {f.conditions.map((c, cIdx) => (
                             <li key={cIdx}>{c}</li>
                           ))}
                         </ul>
                       </div>
-                      <div className={`p-4 rounded-2xl border ${isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"}`}>
-                        <span className="text-xs font-mono font-bold uppercase text-emerald-400 block mb-2">
+                      <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-emerald-300 block mb-2">
                           🔄 Common Variations:
                         </span>
-                        <ul className="text-xs space-y-1.5 list-disc list-inside text-slate-400">
+                        <ul className="text-sm space-y-2 list-disc list-inside text-slate-200">
                           {f.commonSubstitutions.map((sub, subIdx) => (
                             <li key={subIdx}>{sub}</li>
                           ))}
@@ -2006,17 +2089,17 @@ export default function ConceptsHubView({
 
                     {/* Instant Mini-Example */}
                     {f.miniExample && (
-                      <div className={`p-4 rounded-2xl border space-y-2 ${
-                        isDark ? "bg-teal-950/20 border-teal-500/30" : "bg-teal-50 border-teal-200"
+                      <div className={`p-5 rounded-2xl border space-y-3 ${
+                        isDark ? "bg-teal-950/25 border-teal-500/40" : "bg-teal-50 border-teal-200"
                       }`}>
-                        <span className="text-xs font-mono font-bold uppercase text-teal-400 block">
+                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-teal-300 block">
                           ⚡ Instant 1-Step Substitution Example:
                         </span>
-                        <p className={`text-xs sm:text-sm ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                        <p className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                           <strong>Q:</strong> {f.miniExample.question}
                         </p>
-                        <div className={`p-2.5 rounded-xl border text-xs font-mono ${
-                          isDark ? "bg-black/30 border-white/10 text-teal-300" : "bg-white border-teal-200 text-teal-900"
+                        <div className={`p-3.5 rounded-xl border text-sm font-mono ${
+                          isDark ? "bg-black/40 border-white/10 text-teal-200" : "bg-white border-teal-200 text-teal-950"
                         }`}>
                           Sub: {f.miniExample.substitution} ⟹ Result: <strong>{f.miniExample.result}</strong>
                         </div>
@@ -2026,13 +2109,13 @@ export default function ConceptsHubView({
                     {/* Fatal Traps & Memory Trick */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {f.commonMistakes && f.commonMistakes.length > 0 && (
-                        <div className={`p-4 rounded-2xl border ${
-                          isDark ? "bg-rose-950/20 border-rose-500/30 text-rose-300" : "bg-rose-50 border-rose-200 text-rose-950"
+                        <div className={`p-5 rounded-2xl border ${
+                          isDark ? "bg-rose-950/25 border-rose-500/40 text-rose-200" : "bg-rose-50 border-rose-200 text-rose-950"
                         }`}>
-                          <span className="text-xs font-mono font-bold uppercase block mb-1">
+                          <span className="text-xs sm:text-sm font-mono font-bold uppercase block mb-2 text-rose-300">
                             ⚠️ Fatal Exam Pitfalls:
                           </span>
-                          <ul className="text-xs space-y-1 list-disc list-inside">
+                          <ul className="text-sm space-y-1.5 list-disc list-inside">
                             {f.commonMistakes.map((m, mIdx) => (
                               <li key={mIdx}>{m}</li>
                             ))}
@@ -2041,13 +2124,13 @@ export default function ConceptsHubView({
                       )}
 
                       {f.memoryTrick && (
-                        <div className={`p-4 rounded-2xl border ${
-                          isDark ? "bg-purple-950/20 border-purple-500/30 text-purple-300" : "bg-purple-50 border-purple-200 text-purple-950"
+                        <div className={`p-5 rounded-2xl border ${
+                          isDark ? "bg-purple-950/25 border-purple-500/40 text-purple-200" : "bg-purple-50 border-purple-200 text-purple-950"
                         }`}>
-                          <span className="text-xs font-mono font-bold uppercase block mb-1">
+                          <span className="text-xs sm:text-sm font-mono font-bold uppercase block mb-2 text-purple-300">
                             💡 Mnemonic / Memory Trick:
                           </span>
-                          <p className="text-xs sm:text-sm font-medium">
+                          <p className="text-sm sm:text-base font-semibold">
                             {f.memoryTrick}
                           </p>
                         </div>
@@ -2060,35 +2143,40 @@ export default function ConceptsHubView({
           )}
 
           {/* =========================================================================
-              SUB-TAB 4: 5-LEVEL GRADED MASTERY DRILLS
+              STAGE 6: 5-LEVEL GRADED MASTERY DRILLS
               ========================================================================= */}
-          {mathMasterySubTab === "graded_practice" && activeMathMasteryData && (
-            <div className="space-y-6 animate-fade-in">
+          {(mathMasterySubTab === "all" || mathMasterySubTab === "graded_practice") && activeMathMasteryData && (
+            <div id="sec-drills" className="space-y-6 animate-fade-in scroll-mt-28">
               <div className={`p-6 sm:p-8 rounded-3xl border ${
                 isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="p-3 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                      <Target className="w-6 h-6" />
+                    <span className="p-3.5 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                      <Target className="w-7 h-7" />
                     </span>
                     <div>
-                      <h3 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                          Stage 6 &bull; Graded Drills
+                        </span>
+                      </div>
+                      <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                         5-Level Graded Practice Drills
                       </h3>
-                      <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                      <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                         Progressive mastery from NCERT foundations to CBSE Board 100/100 challenge problems.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-500/40">
                     {activeMathMasteryData.gradedQuestions.length} Total Questions
                   </span>
                 </div>
               </div>
 
               {/* Level Filter Tabs */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2.5">
                 {[
                   { level: 1, label: "L1: Foundation", count: activeMathMasteryData.gradedQuestions.filter(q => q.level === 1).length },
                   { level: 2, label: "L2: Standard", count: activeMathMasteryData.gradedQuestions.filter(q => q.level === 2).length },
@@ -2101,17 +2189,17 @@ export default function ConceptsHubView({
                     <button
                       key={lvl.level}
                       onClick={() => setMathSelectedLevel(lvl.level)}
-                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                      className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
                         isActive
                           ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 scale-[1.02]"
                           : isDark
-                          ? "bg-white/5 text-slate-400 hover:text-white border border-white/10"
+                          ? "bg-white/5 text-slate-300 hover:text-white border border-white/10"
                           : "bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200"
                       }`}
                     >
                       <span>{lvl.label}</span>
-                      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
-                        isActive ? "bg-white/20" : isDark ? "bg-white/10" : "bg-slate-200"
+                      <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${
+                        isActive ? "bg-white/20 text-white" : isDark ? "bg-white/10 text-slate-300" : "bg-slate-200 text-slate-800"
                       }`}>
                         {lvl.count}
                       </span>
@@ -2133,53 +2221,53 @@ export default function ConceptsHubView({
                     return (
                       <div
                         key={q.id || qIdx}
-                        className={`p-6 sm:p-8 rounded-3xl border space-y-5 transition-all ${
+                        className={`p-6 sm:p-8 rounded-3xl border space-y-6 transition-all ${
                           isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                         }`}
                       >
-                        <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-3 border-white/10">
-                          <div className="flex items-center gap-2">
-                            <span className="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-300 font-mono font-black text-xs flex items-center justify-center border border-emerald-500/30">
+                        <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                          <div className="flex items-center gap-2.5">
+                            <span className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 font-mono font-black text-sm flex items-center justify-center border border-emerald-500/30">
                               {qIdx + 1}
                             </span>
-                            <span className="text-xs font-mono font-bold text-slate-400">
+                            <span className="text-xs sm:text-sm font-mono font-bold text-slate-300">
                               {q.topic}
                             </span>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                          <div className="flex items-center gap-2.5">
+                            <span className="px-3 py-1 rounded-lg text-xs sm:text-sm font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
                               {q.marks} Mark{q.marks > 1 ? "s" : ""}
                             </span>
-                            <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-white/5 text-slate-400 border border-white/10">
+                            <span className="px-3 py-1 rounded-lg text-xs sm:text-sm font-mono font-bold bg-white/5 text-slate-300 border border-white/10">
                               {q.levelLabel}
                             </span>
                           </div>
                         </div>
 
                         {/* Question Text */}
-                        <div className={`text-base sm:text-lg font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
+                        <div className={`text-lg sm:text-xl font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
                           <PremiumMathRenderer content={q.question} isDark={isDark} />
                         </div>
 
                         {/* MCQ Options (if present) */}
                         {q.options && q.options.length > 0 && (
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                             {q.options.map((opt, optIdx) => {
                               const isSelected = userAns === opt;
                               return (
                                 <button
                                   key={optIdx}
                                   onClick={() => setMathUserAnswers(prev => ({ ...prev, [q.id]: opt }))}
-                                  className={`p-3.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                                  className={`p-4 rounded-xl border text-left text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${
                                     isSelected
                                       ? "bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-600/25"
                                       : isDark
-                                      ? "bg-white/[0.02] border-white/10 text-slate-300 hover:bg-white/5"
-                                      : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100"
+                                      ? "bg-white/[0.03] border-white/10 text-slate-200 hover:bg-white/10"
+                                      : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
                                   }`}
                                 >
                                   <span>{opt}</span>
-                                  {isSelected && <Check className="w-4 h-4 shrink-0" />}
+                                  {isSelected && <Check className="w-5 h-5 shrink-0" />}
                                 </button>
                               );
                             })}
@@ -2194,15 +2282,15 @@ export default function ConceptsHubView({
                               value={userAns}
                               onChange={(e) => setMathUserAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
                               placeholder="Type your final answer here (e.g. 12, -3, x=5)..."
-                              className={`flex-1 px-4 py-2.5 rounded-xl border text-xs font-mono outline-none transition-all ${
+                              className={`flex-1 px-4 py-3 rounded-xl border text-sm sm:text-base font-mono outline-none transition-all ${
                                 isDark
-                                  ? "bg-black/40 border-white/10 text-white placeholder-slate-500 focus:border-blue-500"
+                                  ? "bg-black/40 border-white/15 text-white placeholder-slate-500 focus:border-blue-500"
                                   : "bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400 focus:border-blue-500"
                               }`}
                             />
                             <button
                               onClick={() => handleCheckMathPractice(q)}
-                              className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold cursor-pointer transition shadow-md shadow-blue-600/20 active:scale-95"
+                              className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-bold cursor-pointer transition shadow-md shadow-blue-600/20 active:scale-95"
                             >
                               Check Answer
                             </button>
@@ -2215,7 +2303,7 @@ export default function ConceptsHubView({
                             <button
                               onClick={() => handleCheckMathPractice(q)}
                               disabled={!userAns}
-                              className={`px-5 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition shadow-md ${
+                              className={`px-6 py-3 rounded-xl text-xs sm:text-sm font-bold cursor-pointer transition shadow-md ${
                                 !userAns
                                   ? "opacity-50 cursor-not-allowed bg-slate-700 text-slate-400"
                                   : "bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/20 active:scale-95"
@@ -2228,18 +2316,18 @@ export default function ConceptsHubView({
 
                         {/* Feedback Banner */}
                         {feedback && (
-                          <div className={`p-4 rounded-xl border flex items-center justify-between gap-3 ${
+                          <div className={`p-4 sm:p-5 rounded-xl border flex items-center justify-between gap-3 ${
                             feedback === "correct"
-                              ? isDark ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-900"
-                              : isDark ? "bg-rose-950/30 border-rose-500/40 text-rose-300" : "bg-rose-50 border-rose-300 text-rose-900"
+                              ? isDark ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-200" : "bg-emerald-50 border-emerald-300 text-emerald-950"
+                              : isDark ? "bg-rose-950/30 border-rose-500/40 text-rose-200" : "bg-rose-50 border-rose-300 text-rose-950"
                           }`}>
-                            <div className="flex items-center gap-2.5">
+                            <div className="flex items-center gap-3">
                               {feedback === "correct" ? (
-                                <CheckCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+                                <CheckCheck className="w-6 h-6 text-emerald-400 shrink-0" />
                               ) : (
-                                <AlertTriangle className="w-5 h-5 text-rose-400 shrink-0" />
+                                <AlertTriangle className="w-6 h-6 text-rose-400 shrink-0" />
                               )}
-                              <span className="text-xs font-bold">
+                              <span className="text-sm sm:text-base font-bold">
                                 {feedback === "correct"
                                   ? "Correct! Flawless mathematical execution."
                                   : `Incorrect. The official answer is: ${q.correctAnswer}`}
@@ -2247,7 +2335,7 @@ export default function ConceptsHubView({
                             </div>
                             <button
                               onClick={() => setMathRevealedSolutions(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                              className="text-xs underline font-bold cursor-pointer shrink-0"
+                              className="text-xs sm:text-sm underline font-bold cursor-pointer shrink-0"
                             >
                               {isSolutionOpen ? "Hide Solution" : "Inspect Steps"}
                             </button>
@@ -2255,33 +2343,33 @@ export default function ConceptsHubView({
                         )}
 
                         {/* Hints Ladder & Solution Toggles */}
-                        <div className="flex flex-wrap items-center gap-3 pt-2">
+                        <div className="flex flex-wrap items-center gap-4 pt-1">
                           {q.hints && q.hints.length > 0 && (
                             <button
                               onClick={() => setMathRevealedHints(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                              className="text-xs font-bold text-amber-400 hover:text-amber-300 transition flex items-center gap-1.5 cursor-pointer"
+                              className="text-xs sm:text-sm font-bold text-amber-400 hover:text-amber-300 transition flex items-center gap-1.5 cursor-pointer"
                             >
-                              <Lightbulb className="w-3.5 h-3.5" />
+                              <Lightbulb className="w-4 h-4" />
                               <span>{isHintOpen ? "Hide Hint" : "Need a Hint?"}</span>
                             </button>
                           )}
                           <button
                             onClick={() => setMathRevealedSolutions(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                            className="text-xs font-bold text-indigo-400 hover:text-indigo-300 transition flex items-center gap-1.5 cursor-pointer"
+                            className="text-xs sm:text-sm font-bold text-indigo-400 hover:text-indigo-300 transition flex items-center gap-1.5 cursor-pointer"
                           >
-                            <FileText className="w-3.5 h-3.5" />
+                            <FileText className="w-4 h-4" />
                             <span>{isSolutionOpen ? "Hide Complete Solution" : "View Step-by-Step Solution"}</span>
                           </button>
                         </div>
 
                         {/* Hint Box */}
                         {isHintOpen && q.hints && q.hints.length > 0 && (
-                          <div className={`p-4 rounded-xl border space-y-1.5 ${
-                            isDark ? "bg-amber-950/20 border-amber-500/30 text-amber-300" : "bg-amber-50 border-amber-200 text-amber-950"
+                          <div className={`p-5 rounded-2xl border space-y-2 ${
+                            isDark ? "bg-amber-950/25 border-amber-500/40 text-amber-200" : "bg-amber-50 border-amber-200 text-amber-950"
                           }`}>
-                            <span className="text-xs font-mono font-bold uppercase block">💡 Strategy Clue:</span>
+                            <span className="text-xs sm:text-sm font-mono font-bold uppercase block text-amber-300">💡 Strategy Clue:</span>
                             {q.hints.map((h, hIdx) => (
-                              <p key={hIdx} className="text-xs leading-relaxed">
+                              <p key={hIdx} className="text-sm sm:text-base leading-relaxed">
                                 {h}
                               </p>
                             ))}
@@ -2290,36 +2378,36 @@ export default function ConceptsHubView({
 
                         {/* Solution Drawer */}
                         {isSolutionOpen && (
-                          <div className={`p-5 rounded-2xl border space-y-4 ${
-                            isDark ? "bg-white/[0.02] border-white/10" : "bg-slate-50 border-slate-200"
+                          <div className={`p-6 rounded-2xl border space-y-4 ${
+                            isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
                           }`}>
-                            <span className="text-xs font-mono uppercase font-bold text-emerald-400 block">
+                            <span className="text-xs sm:text-sm font-mono uppercase font-bold text-emerald-300 block">
                               Official Step-by-Step Scoring Distribution:
                             </span>
-                            <div className="space-y-2">
+                            <div className="space-y-3">
                               {q.solutionSteps.map((step, sIdx) => (
-                                <div key={sIdx} className="flex items-start gap-2.5 text-xs sm:text-sm">
-                                  <span className="w-5 h-5 rounded-md bg-emerald-500/20 text-emerald-400 font-mono font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">
+                                <div key={sIdx} className="flex items-start gap-3 text-sm sm:text-base">
+                                  <span className="w-6 h-6 rounded-lg bg-emerald-500/25 text-emerald-300 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
                                     {sIdx + 1}
                                   </span>
-                                  <div className={`flex-1 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                                  <div className={`flex-1 leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                                     <PremiumMathRenderer content={step} isDark={isDark} />
                                   </div>
                                 </div>
                               ))}
                             </div>
 
-                            <div className={`p-3.5 rounded-xl border font-bold text-xs flex items-center justify-between ${
-                              isDark ? "bg-black/30 border-emerald-500/30 text-emerald-300" : "bg-emerald-50 border-emerald-200 text-emerald-950"
+                            <div className={`p-4 rounded-xl border font-bold text-sm sm:text-base flex items-center justify-between ${
+                              isDark ? "bg-black/40 border-emerald-500/40 text-emerald-300" : "bg-emerald-50 border-emerald-200 text-emerald-950"
                             }`}>
                               <span>Correct Final Value:</span>
-                              <span className="font-mono text-sm">
+                              <span className="font-mono text-base sm:text-lg">
                                 <PremiumMathRenderer content={q.correctAnswer} isDark={isDark} inline />
                               </span>
                             </div>
 
                             {q.commonTrap && (
-                              <div className="text-xs text-rose-400 font-mono">
+                              <div className="text-sm text-rose-300 font-mono pt-1">
                                 <PremiumMathRenderer content={`⚠️ **Examiner Caution:** ${q.commonTrap}`} isDark={isDark} />
                               </div>
                             )}
@@ -2333,28 +2421,33 @@ export default function ConceptsHubView({
           )}
 
           {/* =========================================================================
-              SUB-TAB 5: 10-YEAR CBSE PYQ MATRIX (2016-2025)
+              STAGE 7: 10-YEAR CBSE PYQ MATRIX (2016-2025)
               ========================================================================= */}
-          {mathMasterySubTab === "pyqs" && activeMathMasteryData && (
-            <div className="space-y-6 animate-fade-in">
+          {(mathMasterySubTab === "all" || mathMasterySubTab === "pyqs") && activeMathMasteryData && (
+            <div id="sec-pyqs" className="space-y-6 animate-fade-in scroll-mt-28">
               <div className={`p-6 sm:p-8 rounded-3xl border ${
                 isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="p-3 rounded-2xl bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                      <FileText className="w-6 h-6" />
+                    <span className="p-3.5 rounded-2xl bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                      <FileText className="w-7 h-7" />
                     </span>
                     <div>
-                      <h3 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                          Stage 7 &bull; Board Exam Vault
+                        </span>
+                      </div>
+                      <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                         10-Year CBSE PYQ Matrix (2016–2025)
                       </h3>
-                      <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                      <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                         Authentic board examination problems paired with official CBSE step-marking rubrics.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-blue-500/20 text-blue-200 border border-blue-500/40">
                     {activeMathMasteryData.pyqs.length} Board Problems
                   </span>
                 </div>
@@ -2364,25 +2457,25 @@ export default function ConceptsHubView({
                 {activeMathMasteryData.pyqs.map((pyq, pIdx) => (
                   <div
                     key={pyq.id || pIdx}
-                    className={`p-6 sm:p-8 rounded-3xl border space-y-5 transition-all ${
+                    className={`p-6 sm:p-8 rounded-3xl border space-y-6 transition-all ${
                       isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                     }`}
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-3 border-white/10">
-                      <div className="flex items-center gap-2">
-                        <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                      <div className="flex items-center gap-2.5">
+                        <span className="px-3.5 py-1 rounded-full text-xs sm:text-sm font-mono font-bold bg-blue-500/20 text-blue-200 border border-blue-500/40">
                           {pyq.year}
                         </span>
-                        <span className="text-xs font-mono font-bold text-slate-400">
+                        <span className="text-xs sm:text-sm font-mono font-bold text-slate-300">
                           {pyq.topic}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      <div className="flex items-center gap-2.5">
+                        <span className="px-3 py-1 rounded-full text-xs sm:text-sm font-mono font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-500/40">
                           {pyq.marks} Mark{pyq.marks > 1 ? "s" : ""}
                         </span>
                         {pyq.frequencyTrend && (
-                          <span className="text-[11px] font-mono text-amber-400">
+                          <span className="text-xs font-mono font-bold text-amber-300">
                             🔥 {pyq.frequencyTrend}
                           </span>
                         )}
@@ -2390,33 +2483,33 @@ export default function ConceptsHubView({
                     </div>
 
                     {/* Question Text */}
-                    <div className={`text-base sm:text-lg font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
+                    <div className={`text-lg sm:text-xl font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
                       <PremiumMathRenderer content={pyq.question} isDark={isDark} />
                     </div>
 
                     {/* Step-by-Step Marking Scheme */}
                     {pyq.markingSchemeBreakdown && pyq.markingSchemeBreakdown.length > 0 && (
-                      <div className="space-y-2 pt-1">
-                        <span className="text-xs font-mono uppercase font-bold text-emerald-400 block">
+                      <div className="space-y-2.5 pt-1">
+                        <span className="text-xs sm:text-sm font-mono uppercase font-bold text-emerald-300 block">
                           Official Step-Marking Scheme:
                         </span>
-                        <div className="space-y-2">
+                        <div className="space-y-2.5">
                           {pyq.markingSchemeBreakdown.map((st, sIdx) => (
                             <div
                               key={sIdx}
-                              className={`p-3 rounded-xl border flex items-center justify-between gap-3 ${
-                                isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"
+                              className={`p-3.5 rounded-xl border flex items-center justify-between gap-3 ${
+                                isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
                               }`}
                             >
-                              <div className="flex items-start gap-2.5">
-                                <span className="w-5 h-5 rounded-md bg-emerald-500/20 text-emerald-400 font-mono font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">
+                              <div className="flex items-start gap-3">
+                                <span className="w-6 h-6 rounded-md bg-emerald-500/25 text-emerald-300 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
                                   {sIdx + 1}
                                 </span>
-                                <span className={`text-xs sm:text-sm ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                                <span className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                                   <PremiumMathRenderer content={st.step} isDark={isDark} inline />
                                 </span>
                               </div>
-                              <span className="px-2 py-0.5 rounded text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
+                              <span className="px-2.5 py-1 rounded text-xs sm:text-sm font-mono font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-500/40 shrink-0">
                                 {st.marks}M
                               </span>
                             </div>
@@ -2426,19 +2519,19 @@ export default function ConceptsHubView({
                     )}
 
                     {/* Full Solution */}
-                    <div className={`p-4 sm:p-5 rounded-2xl border space-y-2 ${
-                      isDark ? "bg-white/[0.02] border-white/10" : "bg-slate-100/70 border-slate-200"
+                    <div className={`p-5 sm:p-6 rounded-2xl border space-y-2.5 ${
+                      isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-100/70 border-slate-200"
                     }`}>
-                      <span className="text-xs font-mono uppercase font-bold text-blue-400 block">
+                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-blue-300 block">
                         Topper Model Working:
                       </span>
-                      <div className={`text-xs sm:text-sm leading-relaxed ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                      <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                         <PremiumMathRenderer content={pyq.fullSolution} isDark={isDark} />
                       </div>
                     </div>
 
                     {pyq.commonMistake && (
-                      <div className="text-xs text-rose-400 font-mono">
+                      <div className="text-sm text-rose-300 font-mono pt-1">
                         <PremiumMathRenderer content={`⚠️ **CBSE Evaluator Warning:** ${pyq.commonMistake}`} isDark={isDark} />
                       </div>
                     )}
@@ -2449,35 +2542,40 @@ export default function ConceptsHubView({
           )}
 
           {/* =========================================================================
-              SUB-TAB 6: CHAPTER MASTER TEST SIMULATORS
+              STAGE 8: CHAPTER MASTER TEST SIMULATORS
               ========================================================================= */}
-          {mathMasterySubTab === "tests" && activeMathMasteryData && (
-            <div className="space-y-6 animate-fade-in">
+          {(mathMasterySubTab === "all" || mathMasterySubTab === "tests") && activeMathMasteryData && (
+            <div id="sec-tests" className="space-y-6 animate-fade-in scroll-mt-28">
               <div className={`p-6 sm:p-8 rounded-3xl border ${
                 isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="p-3 rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
-                      <GraduationCap className="w-6 h-6" />
+                    <span className="p-3.5 rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                      <GraduationCap className="w-7 h-7" />
                     </span>
                     <div>
-                      <h3 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                          Stage 8 &bull; Exam Diagnostic
+                        </span>
+                      </div>
+                      <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                         Chapter Master Test Simulators
                       </h3>
-                      <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                      <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                         Timed diagnostic and full board test simulators with automated scoring and error analysis.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-purple-500/20 text-purple-200 border border-purple-500/40">
                     {activeMathMasteryData.tests.length} Active Simulators
                   </span>
                 </div>
               </div>
 
               {/* Test Selector Tabs */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2.5">
                 {activeMathMasteryData.tests.map((test) => {
                   const isCurrent = (activeMathTestKey || activeMathMasteryData.tests[0].testType) === test.testType;
                   return (
@@ -2487,17 +2585,17 @@ export default function ConceptsHubView({
                         setActiveMathTestKey(test.testType);
                         handleResetMathTest();
                       }}
-                      className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                      className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
                         isCurrent
                           ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30 scale-[1.02]"
                           : isDark
-                          ? "bg-white/5 text-slate-400 hover:text-white border border-white/10"
+                          ? "bg-white/5 text-slate-300 hover:text-white border border-white/10"
                           : "bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200"
                       }`}
                     >
                       <span>{test.testType}</span>
-                      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
-                        isCurrent ? "bg-white/20" : isDark ? "bg-white/10" : "bg-slate-200"
+                      <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${
+                        isCurrent ? "bg-white/20 text-white" : isDark ? "bg-white/10 text-slate-300" : "bg-slate-200 text-slate-800"
                       }`}>
                         {test.durationMinutes}m | {test.totalMarks}M
                       </span>
@@ -2519,18 +2617,18 @@ export default function ConceptsHubView({
                     {/* Test Header */}
                     <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-4 border-white/10">
                       <div>
-                        <h4 className={`text-lg sm:text-xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                        <h4 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                           {currentTest.testType}: {activeMathMasteryData.chapterName}
                         </h4>
-                        <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                        <p className={`text-sm ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                           Complete all questions under real exam conditions.
                         </p>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="flex items-center gap-1 text-xs font-mono px-3 py-1.5 rounded-xl bg-purple-500/15 text-purple-300 border border-purple-500/30 font-bold">
-                          <Clock className="w-3.5 h-3.5" /> {currentTest.durationMinutes} Minutes
+                        <span className="flex items-center gap-1.5 text-xs sm:text-sm font-mono px-3.5 py-1.5 rounded-xl bg-purple-500/20 text-purple-200 border border-purple-500/40 font-bold">
+                          <Clock className="w-4 h-4" /> {currentTest.durationMinutes} Minutes
                         </span>
-                        <span className="text-xs font-mono px-3 py-1.5 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-bold">
+                        <span className="text-xs sm:text-sm font-mono px-3.5 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-200 border border-emerald-500/40 font-bold">
                           {currentTest.totalMarks} Total Marks
                         </span>
                       </div>
@@ -2540,13 +2638,13 @@ export default function ConceptsHubView({
                     {mathTestSubmitted && mathTestScore && (
                       <div className={`p-6 rounded-2xl border text-center space-y-3 ${
                         mathTestScore.score / mathTestScore.total >= 0.8
-                          ? isDark ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-900"
-                          : isDark ? "bg-amber-950/30 border-amber-500/40 text-amber-300" : "bg-amber-50 border-amber-300 text-amber-900"
+                          ? isDark ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-200" : "bg-emerald-50 border-emerald-300 text-emerald-900"
+                          : isDark ? "bg-amber-950/30 border-amber-500/40 text-amber-200" : "bg-amber-50 border-amber-300 text-amber-900"
                       }`}>
                         <div className="text-3xl font-black font-mono">
                           {mathTestScore.score} / {mathTestScore.total} Marks
                         </div>
-                        <p className="text-xs sm:text-sm font-semibold">
+                        <p className="text-sm sm:text-base font-semibold">
                           Score Percentage: {Math.round((mathTestScore.score / mathTestScore.total) * 100)}% &bull;{" "}
                           {mathTestScore.score / mathTestScore.total >= 0.9
                             ? "🏆 AIR 1 Potential: 100/100 Ready!"
@@ -2556,7 +2654,7 @@ export default function ConceptsHubView({
                         </p>
                         <button
                           onClick={handleResetMathTest}
-                          className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition cursor-pointer"
+                          className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-bold transition cursor-pointer"
                         >
                           Retake Test
                         </button>
@@ -2572,43 +2670,43 @@ export default function ConceptsHubView({
                         return (
                           <div
                             key={q.id || qIdx}
-                            className={`p-5 rounded-2xl border space-y-4 ${
-                              isDark ? "bg-white/[0.02] border-white/5" : "bg-slate-50 border-slate-200"
+                            className={`p-6 rounded-2xl border space-y-4 ${
+                              isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
                             }`}
                           >
                             <div className="flex items-center justify-between">
-                              <span className="text-xs font-mono font-bold text-purple-400">
+                              <span className="text-xs sm:text-sm font-mono font-bold text-purple-300">
                                 Question {qIdx + 1} ({q.marks} Mark{q.marks > 1 ? "s" : ""})
                               </span>
                               {mathTestSubmitted && (
-                                <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
-                                  isCorrect ? "bg-emerald-500/20 text-emerald-400" : "bg-rose-500/20 text-rose-400"
+                                <span className={`text-xs sm:text-sm font-mono font-bold px-2.5 py-0.5 rounded ${
+                                  isCorrect ? "bg-emerald-500/20 text-emerald-300" : "bg-rose-500/20 text-rose-300"
                                 }`}>
                                   {isCorrect ? `+${q.marks} Marks` : "0 Marks"}
                                 </span>
                               )}
                             </div>
 
-                            <div className={`text-sm sm:text-base font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                            <div className={`text-base sm:text-lg font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
                               <PremiumMathRenderer content={q.question} isDark={isDark} />
                             </div>
 
                             {/* Options or text input */}
                             {q.options && q.options.length > 0 ? (
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {q.options.map((opt, oIdx) => (
                                   <button
                                     key={oIdx}
                                     disabled={mathTestSubmitted}
                                     onClick={() => setMathTestUserAnswers(prev => ({ ...prev, [q.id]: opt }))}
-                                    className={`p-3 rounded-xl border text-left text-xs font-semibold transition cursor-pointer flex items-center justify-between ${
+                                    className={`p-4 rounded-xl border text-left text-sm sm:text-base font-semibold transition cursor-pointer flex items-center justify-between ${
                                       userAns === opt
                                         ? "bg-purple-600 text-white border-purple-500"
-                                        : isDark ? "bg-white/5 border-white/10 text-slate-300" : "bg-white border-slate-200 text-slate-700"
+                                        : isDark ? "bg-white/5 border-white/10 text-slate-200 hover:bg-white/10" : "bg-white border-slate-200 text-slate-800"
                                     }`}
                                   >
                                     <span>{opt}</span>
-                                    {userAns === opt && <Check className="w-4 h-4 shrink-0" />}
+                                    {userAns === opt && <Check className="w-5 h-5 shrink-0" />}
                                   </button>
                                 ))}
                               </div>
@@ -2619,22 +2717,22 @@ export default function ConceptsHubView({
                                 value={userAns}
                                 onChange={(e) => setMathTestUserAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
                                 placeholder="Type final numerical or algebraic answer..."
-                                className={`w-full px-4 py-2 rounded-xl border text-xs font-mono outline-none ${
-                                  isDark ? "bg-black/30 border-white/10 text-white" : "bg-white border-slate-200 text-slate-900"
+                                className={`w-full px-4 py-3 rounded-xl border text-sm sm:text-base font-mono outline-none ${
+                                  isDark ? "bg-black/40 border-white/15 text-white focus:border-purple-500" : "bg-white border-slate-200 text-slate-900 focus:border-purple-500"
                                 }`}
                               />
                             )}
 
                             {/* Explanation if submitted */}
                             {mathTestSubmitted && (
-                              <div className={`p-4 rounded-xl border space-y-2 text-xs ${
+                              <div className={`p-4 rounded-xl border space-y-2 text-sm ${
                                 isDark ? "bg-black/40 border-white/10" : "bg-white border-slate-200"
                               }`}>
                                 <div className="flex items-center justify-between">
-                                  <span className="font-bold text-slate-400">Correct Answer:</span>
-                                  <span className="font-mono font-bold text-emerald-400">{q.correctAnswer}</span>
+                                  <span className="font-bold text-slate-300">Correct Answer:</span>
+                                  <span className="font-mono font-bold text-emerald-300 text-base">{q.correctAnswer}</span>
                                 </div>
-                                <div className="space-y-1 pt-1 text-slate-400">
+                                <div className="space-y-1.5 pt-1 text-slate-300 leading-relaxed">
                                   {q.solutionSteps.map((st, stIdx) => (
                                     <div key={stIdx}>&bull; {st}</div>
                                   ))}
@@ -2650,7 +2748,7 @@ export default function ConceptsHubView({
                       <div className="pt-2 flex justify-end">
                         <button
                           onClick={() => handleGradeMathTest(currentTest)}
-                          className="px-6 py-3 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-black transition cursor-pointer shadow-lg shadow-purple-600/30 active:scale-95"
+                          className="px-8 py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-black transition cursor-pointer shadow-lg shadow-purple-600/30 active:scale-95"
                         >
                           Submit Test & Grade My Answers
                         </button>
@@ -2663,28 +2761,33 @@ export default function ConceptsHubView({
           )}
 
           {/* =========================================================================
-              SUB-TAB 7: LAST-DAY 100/100 REVISION SHEET
+              STAGE 9: LAST-DAY 100/100 REVISION SHEET
               ========================================================================= */}
-          {mathMasterySubTab === "revision" && activeMathMasteryData && (
-            <div className="space-y-6 animate-fade-in">
+          {(mathMasterySubTab === "all" || mathMasterySubTab === "revision") && activeMathMasteryData && (
+            <div id="sec-revision" className="space-y-6 animate-fade-in scroll-mt-28">
               <div className={`p-6 sm:p-8 rounded-3xl border ${
                 isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="p-3 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                      <Zap className="w-6 h-6" />
+                    <span className="p-3.5 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                      <Zap className="w-7 h-7" />
                     </span>
                     <div>
-                      <h3 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                          Stage 9 &bull; Speed Revision
+                        </span>
+                      </div>
+                      <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                         Last-Day 100/100 Revision Sheet
                       </h3>
-                      <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                      <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                         High-yield 1-page rapid summary: must-remember formulas, 30-second speed hacks, and pitfall checklists.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-amber-500/20 text-amber-200 border border-amber-500/40">
                     High Yield
                   </span>
                 </div>
@@ -2693,18 +2796,18 @@ export default function ConceptsHubView({
               {/* 3 Bento Cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* 1. Must Remember Points */}
-                <div className={`p-6 rounded-3xl border space-y-4 ${
+                <div className={`p-6 sm:p-8 rounded-3xl border space-y-4 ${
                   isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                 }`}>
-                  <div className="flex items-center gap-2 border-b pb-3 border-white/10">
-                    <span className="p-2 rounded-xl bg-emerald-500/20 text-emerald-400">
-                      <ShieldCheck className="w-4 h-4" />
+                  <div className="flex items-center gap-2.5 border-b pb-3.5 border-white/10">
+                    <span className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400">
+                      <ShieldCheck className="w-5 h-5" />
                     </span>
-                    <h4 className={`text-base font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                    <h4 className={`text-lg sm:text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
                       Must-Remember Core Ideas
                     </h4>
                   </div>
-                  <div className="space-y-2.5">
+                  <div className="space-y-3">
                     {activeMathMasteryData.revisionSheet.mustRememberPoints.map((pt, i) => {
                       const key = `pt_${i}`;
                       const isChecked = !!mathRevisionChecked[key];
@@ -2712,18 +2815,18 @@ export default function ConceptsHubView({
                         <div
                           key={i}
                           onClick={() => toggleRevisionCheck(key)}
-                          className={`p-3 rounded-xl border text-xs cursor-pointer transition-all flex items-start gap-2.5 ${
+                          className={`p-3.5 rounded-xl border text-sm sm:text-base cursor-pointer transition-all flex items-start gap-3 ${
                             isChecked
                               ? isDark ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-300 line-through opacity-70" : "bg-emerald-50 border-emerald-200 text-emerald-900 line-through opacity-70"
-                              : isDark ? "bg-white/[0.02] border-white/5 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-700"
+                              : isDark ? "bg-white/[0.03] border-white/10 text-slate-200 hover:bg-white/[0.06]" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
                           }`}
                         >
-                          <span className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 mt-0.5 ${
-                            isChecked ? "bg-emerald-500 border-emerald-500 text-white" : "border-slate-500"
+                          <span className={`w-5 h-5 rounded border flex items-center justify-center shrink-0 mt-0.5 ${
+                            isChecked ? "bg-emerald-500 border-emerald-500 text-white" : "border-slate-400"
                           }`}>
-                            {isChecked && <Check className="w-3 h-3" />}
+                            {isChecked && <Check className="w-3.5 h-3.5" />}
                           </span>
-                          <span className="leading-relaxed">{pt}</span>
+                          <span className="leading-relaxed font-medium">{pt}</span>
                         </div>
                       );
                     })}
@@ -2731,23 +2834,23 @@ export default function ConceptsHubView({
                 </div>
 
                 {/* 2. 30-Second Speed Hacks */}
-                <div className={`p-6 rounded-3xl border space-y-4 ${
+                <div className={`p-6 sm:p-8 rounded-3xl border space-y-4 ${
                   isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                 }`}>
-                  <div className="flex items-center gap-2 border-b pb-3 border-white/10">
-                    <span className="p-2 rounded-xl bg-blue-500/20 text-blue-400">
-                      <Zap className="w-4 h-4" />
+                  <div className="flex items-center gap-2.5 border-b pb-3.5 border-white/10">
+                    <span className="p-2.5 rounded-xl bg-blue-500/20 text-blue-400">
+                      <Zap className="w-5 h-5" />
                     </span>
-                    <h4 className={`text-base font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                    <h4 className={`text-lg sm:text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
                       Speed Tips & Calculation Hacks
                     </h4>
                   </div>
-                  <div className="space-y-2.5">
+                  <div className="space-y-3">
                     {activeMathMasteryData.revisionSheet.speedTips.map((tip, i) => (
                       <div
                         key={i}
-                        className={`p-3 rounded-xl border text-xs leading-relaxed ${
-                          isDark ? "bg-white/[0.02] border-white/5 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-700"
+                        className={`p-3.5 rounded-xl border text-sm sm:text-base leading-relaxed font-medium ${
+                          isDark ? "bg-white/[0.03] border-white/10 text-slate-200" : "bg-slate-50 border-slate-200 text-slate-800"
                         }`}
                       >
                         ⚡ {tip}
@@ -2757,18 +2860,18 @@ export default function ConceptsHubView({
                 </div>
 
                 {/* 3. Last-Day Checklist */}
-                <div className={`p-6 rounded-3xl border space-y-4 ${
+                <div className={`p-6 sm:p-8 rounded-3xl border space-y-4 ${
                   isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
                 }`}>
-                  <div className="flex items-center gap-2 border-b pb-3 border-white/10">
-                    <span className="p-2 rounded-xl bg-amber-500/20 text-amber-400">
-                      <Target className="w-4 h-4" />
+                  <div className="flex items-center gap-2.5 border-b pb-3.5 border-white/10">
+                    <span className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
+                      <Target className="w-5 h-5" />
                     </span>
-                    <h4 className={`text-base font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                    <h4 className={`text-lg sm:text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
                       Last-Day Readiness Checklist
                     </h4>
                   </div>
-                  <div className="space-y-2.5">
+                  <div className="space-y-3">
                     {activeMathMasteryData.revisionSheet.lastDayChecklist.map((chk, i) => {
                       const key = `chk_${i}`;
                       const isChecked = !!mathRevisionChecked[key];
@@ -2776,18 +2879,18 @@ export default function ConceptsHubView({
                         <div
                           key={i}
                           onClick={() => toggleRevisionCheck(key)}
-                          className={`p-3 rounded-xl border text-xs cursor-pointer transition-all flex items-start gap-2.5 ${
+                          className={`p-3.5 rounded-xl border text-sm sm:text-base cursor-pointer transition-all flex items-start gap-3 ${
                             isChecked
                               ? isDark ? "bg-amber-950/20 border-amber-500/30 text-amber-300 line-through opacity-70" : "bg-amber-50 border-amber-200 text-amber-900 line-through opacity-70"
-                              : isDark ? "bg-white/[0.02] border-white/5 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-700"
+                              : isDark ? "bg-white/[0.03] border-white/10 text-slate-200 hover:bg-white/[0.06]" : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
                           }`}
                         >
-                          <span className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 mt-0.5 ${
-                            isChecked ? "bg-amber-500 border-amber-500 text-white" : "border-slate-500"
+                          <span className={`w-5 h-5 rounded border flex items-center justify-center shrink-0 mt-0.5 ${
+                            isChecked ? "bg-amber-500 border-amber-500 text-white" : "border-slate-400"
                           }`}>
-                            {isChecked && <Check className="w-3 h-3" />}
+                            {isChecked && <Check className="w-3.5 h-3.5" />}
                           </span>
-                          <span className="leading-relaxed">{chk}</span>
+                          <span className="leading-relaxed font-medium">{chk}</span>
                         </div>
                       );
                     })}
