@@ -1005,7 +1005,9 @@ export default function ConceptsHubView({
           return (
             <div className="pt-6 space-y-3.5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-wider text-slate-200 block">
+                <span className={`text-xs sm:text-sm font-mono font-black uppercase tracking-wider block ${
+                  isDark ? "text-slate-200" : "text-slate-800"
+                }`}>
                   CBSE Question Paper Pattern Breakdown (Pool) vs Weightage:
                 </span>
                 <div className="flex items-center gap-2">
@@ -1046,7 +1048,7 @@ export default function ConceptsHubView({
                       }`}
                     >
                       <div className="flex items-center justify-between gap-1 mb-1">
-                        <span className="text-xs font-mono font-bold text-slate-300">{p.section} ({p.marksEach}M)</span>
+                        <span className={`text-xs font-mono font-bold ${isDark ? "text-slate-300" : "text-slate-700"}`}>{p.section} ({p.marksEach}M)</span>
                         {isTested ? (
                           <span className="text-xs font-mono font-extrabold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
                             +{sectionTotalMarks}M
@@ -1062,7 +1064,7 @@ export default function ConceptsHubView({
                       }`}>
                         {p.count} <span className="text-xs font-normal opacity-90">Q{p.count !== 1 ? "s" : ""}</span>
                       </span>
-                      <span className="text-xs text-slate-300 block truncate font-medium">{p.type}</span>
+                      <span className={`text-xs block truncate font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>{p.type}</span>
                     </div>
                   );
                 })}
@@ -1088,7 +1090,7 @@ export default function ConceptsHubView({
                   <span className={`font-bold block text-sm sm:text-base ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                     {r.step}
                   </span>
-                  <span className="text-xs sm:text-sm text-slate-300 font-mono block leading-relaxed">{r.rubricNote}</span>
+                  <span className={`text-xs sm:text-sm font-mono block leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600 font-medium"}`}>{r.rubricNote}</span>
                 </div>
                 <span className="px-2.5 py-1 rounded-xl text-xs sm:text-sm font-mono font-black bg-teal-500/20 text-teal-300 border border-teal-500/40 shrink-0">
                   +{r.marks}
@@ -1103,7 +1105,7 @@ export default function ConceptsHubView({
           <span className="text-xs sm:text-sm font-mono font-black uppercase tracking-wider text-rose-400 flex items-center gap-2 mb-2">
             <ShieldAlert className="w-4 h-4" /> Examiner Trap Penalties (Marks Deducted by Board Evaluators):
           </span>
-          <ul className="space-y-2 text-sm sm:text-base text-rose-200 font-medium">
+          <ul className={`space-y-2 text-sm sm:text-base font-medium ${isDark ? "text-rose-200" : "text-rose-900"}`}>
             {activeCurrentBlueprint.examinerPenalties.map((pen, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="text-rose-400 font-bold shrink-0 mt-0.5">⚠️</span>
@@ -1232,106 +1234,186 @@ export default function ConceptsHubView({
             </div>
           </div>
 
-          {/* Class 10 Mathematics 100/100 Integrated Sub-Mode Switcher */}
+          {/* Class 10 Mathematics 100/100 Integrated Learning Journey Navigation */}
           {activeMathMasteryData && (
-            <div className="space-y-3">
-              {/* Primary Mode Selector */}
-              <div className={`p-2 rounded-2xl border flex items-center gap-1.5 overflow-x-auto scrollbar-none shadow-sm ${
-                isDark ? "bg-[#0b0f19]/90 border-white/10" : "bg-white/90 border-slate-200"
+            <div className="space-y-3.5">
+              {/* Top Control Bar: Mode Toggle + Direct Stage Jumper */}
+              <div className={`p-4 rounded-3xl border shadow-sm transition-all ${
+                isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200"
               }`}>
-                {[
-                  { id: "all", label: "🌟 Full Masterclass", icon: Sparkles, count: "All-in-One Chronological" },
-                  { id: "theory", label: "📖 Core Theory & Story", icon: BookOpen, count: `${activeMathChapter.sections.length} Sec` },
-                  { id: "method_guide", label: "🧭 7-Step Method Guides", icon: Compass, count: `${activeMathMasteryData.methodGuides.length} Archetypes` },
-                  { id: "formulas", label: "🔐 Formula & Theorem Vault", icon: Calculator, count: `${activeMathMasteryData.formulas.length} Formulas` },
-                  { id: "graded_practice", label: "🎯 5-Level Graded Drills", icon: Target, count: `${activeMathMasteryData.gradedQuestions.length} Qs` },
-                  { id: "pyqs", label: "📜 10-Yr CBSE PYQs", icon: FileText, count: `${activeMathMasteryData.pyqs.length} Boards` },
-                  { id: "tests", label: "📝 Chapter Master Tests", icon: GraduationCap, count: `${activeMathMasteryData.tests.length} Tests` },
-                  { id: "revision", label: "⚡ Last-Day Speed Sheet", icon: Zap, count: "High-Yield" },
-                ].map((tab) => {
-                  const Icon = tab.icon;
-                  const isActive = mathMasterySubTab === tab.id;
-                  return (
+                <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3.5 pb-3 border-b border-white/10">
+                  {/* Mode Tabs */}
+                  <div className="flex items-center gap-2">
                     <button
-                      key={tab.id}
-                      onClick={() => setMathMasterySubTab(tab.id as any)}
-                      className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer ${
-                        isActive
-                          ? isDark
-                            ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30 scale-[1.02]"
-                            : "bg-blue-600 text-white shadow-md shadow-blue-600/25 scale-[1.02]"
+                      onClick={() => setMathMasterySubTab("all")}
+                      className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                        mathMasterySubTab === "all"
+                          ? "bg-blue-600 text-white shadow-md shadow-blue-600/30 scale-[1.02]"
                           : isDark
-                          ? "text-slate-300 hover:text-white hover:bg-white/5"
-                          : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
+                          ? "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10"
+                          : "bg-slate-100 text-slate-700 hover:text-slate-950 hover:bg-slate-200"
                       }`}
                     >
-                      <Icon className="w-4 h-4 shrink-0" />
-                      <span>{tab.label}</span>
-                      <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-full ${
-                        isActive ? "bg-white/20 text-white" : isDark ? "bg-white/10 text-slate-300" : "bg-slate-200 text-slate-800"
-                      }`}>
-                        {tab.count}
-                      </span>
+                      <Sparkles className="w-4 h-4 text-amber-300" />
+                      <span>🌟 Complete Masterclass (All 9 Stages in Sequence)</span>
                     </button>
-                  );
-                })}
-              </div>
 
-              {/* Quick-Jump Stage Ribbon (Only in All-in-One Masterclass mode to jump without losing flow) */}
-              {mathMasterySubTab === "all" ? (
-                <div className={`p-2.5 px-4 rounded-2xl border flex items-center gap-2 overflow-x-auto scrollbar-none transition-all ${
-                  isDark ? "bg-[#060a14]/80 backdrop-blur-md border-blue-500/20" : "bg-blue-50/70 border-blue-200"
-                }`}>
-                  <span className="text-xs font-mono font-black uppercase text-amber-400 pl-1 shrink-0 flex items-center gap-1.5">
-                    <Zap className="w-3.5 h-3.5" /> Quick Jump:
-                  </span>
-                  {[
-                    { id: "sec-story", label: "1. Origin Story" },
-                    { id: "sec-theory", label: "2. Core Concepts" },
-                    { id: "sec-methods", label: "3. 7-Step Methods" },
-                    { id: "sec-formulas", label: "4. Formula Vault" },
-                    { id: "sec-solved", label: "5. Solved Board Models" },
-                    { id: "sec-drills", label: "6. Practice Drills" },
-                    { id: "sec-pyqs", label: "7. 10-Yr PYQs" },
-                    { id: "sec-tests", label: "8. Master Tests" },
-                    { id: "sec-revision", label: "9. Speed Sheet" },
-                  ].map((pill) => (
                     <button
-                      key={pill.id}
                       onClick={() => {
-                        const el = document.getElementById(pill.id);
-                        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                        if (mathMasterySubTab === "all") setMathMasterySubTab("theory");
                       }}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all cursor-pointer border flex items-center gap-1 ${
-                        isDark
-                          ? "bg-white/5 hover:bg-white/15 border-white/10 text-slate-200 hover:text-white"
-                          : "bg-white hover:bg-blue-100 border-slate-200 hover:border-blue-300 text-slate-800"
+                      className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                        mathMasterySubTab !== "all"
+                          ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30 scale-[1.02]"
+                          : isDark
+                          ? "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10"
+                          : "bg-slate-100 text-slate-700 hover:text-slate-950 hover:bg-slate-200"
                       }`}
                     >
-                      <span>{pill.label}</span>
+                      <Target className="w-4 h-4 text-indigo-300" />
+                      <span>🎯 Focus on 1 Section</span>
                     </button>
-                  ))}
+                  </div>
+
+                  {/* Stage Quick Jump Dropdown (Always visible on mobile & laptop for instant access) */}
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className={`text-xs font-mono font-bold uppercase tracking-wider ${
+                      isDark ? "text-amber-400" : "text-amber-700 font-extrabold"
+                    }`}>
+                      📍 Jump to Stage:
+                    </span>
+                    <select
+                      aria-label="Jump directly to Stage"
+                      onChange={(e) => {
+                        const targetId = e.target.value;
+                        if (targetId) {
+                          if (mathMasterySubTab !== "all") {
+                            setMathMasterySubTab("all");
+                            setTimeout(() => {
+                              const el = document.getElementById(targetId);
+                              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                            }, 100);
+                          } else {
+                            const el = document.getElementById(targetId);
+                            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                          }
+                        }
+                      }}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold border outline-none cursor-pointer ${
+                        isDark
+                          ? "bg-[#141a29] text-white border-white/15"
+                          : "bg-slate-50 text-slate-900 border-slate-300 shadow-2xs"
+                      }`}
+                    >
+                      <option value="sec-story">Stage 1: 📖 Concept Story & Intuition</option>
+                      <option value="sec-theory">Stage 2: 💡 Core Concepts in Simple Words</option>
+                      <option value="sec-methods">Stage 3: 🪜 Step-by-Step Solving Guide</option>
+                      <option value="sec-formulas">Stage 4: ⚡ Formulas & Shortcuts Vault</option>
+                      <option value="sec-solved">Stage 5: 🎯 Solved Board Examples (with Marks)</option>
+                      <option value="sec-drills">Stage 6: 📝 Practice Questions (Instant Check)</option>
+                      <option value="sec-pyqs">Stage 7: 🏆 Most Repeated Board Qs (20 Years)</option>
+                      <option value="sec-tests">Stage 8: ⏱️ 15-Minute Exam Mock Test</option>
+                      <option value="sec-revision">Stage 9: 📄 1-Page Summary Before Exam</option>
+                    </select>
+                  </div>
                 </div>
-              ) : (
-                <div className="flex items-center justify-between p-3 px-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                  <span className="text-xs sm:text-sm font-bold text-blue-300 flex items-center gap-1.5">
-                    <span>📌</span> Focused on: {
-                      mathMasterySubTab === "theory" ? "Core Theory & Concepts" :
-                      mathMasterySubTab === "method_guide" ? "7-Step Method Guides" :
-                      mathMasterySubTab === "formulas" ? "Formula & Theorem Vault" :
-                      mathMasterySubTab === "graded_practice" ? "5-Level Graded Drills" :
-                      mathMasterySubTab === "pyqs" ? "10-Yr CBSE PYQs" :
-                      mathMasterySubTab === "tests" ? "Chapter Master Tests" : "Last-Day Speed Sheet"
-                    }
-                  </span>
-                  <button
-                    onClick={() => setMathMasterySubTab("all")}
-                    className="text-xs sm:text-sm font-bold text-blue-400 hover:text-blue-300 underline cursor-pointer"
-                  >
-                    ← Back to Full Masterclass
-                  </button>
-                </div>
-              )}
+
+                {/* Sub-Tabs Grid (No Horizontal Scroll Trap - Clean Wrapped Layout) */}
+                {mathMasterySubTab === "all" ? (
+                  <div className="pt-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className={`text-xs font-mono font-bold uppercase tracking-wider ${
+                        isDark ? "text-slate-400" : "text-slate-600 font-semibold"
+                      }`}>
+                        Stage Roadmap (Zero to 100/100):
+                      </span>
+                      <span className={`text-[11px] font-mono ${isDark ? "text-emerald-400" : "text-emerald-700 font-bold"}`}>
+                        ✓ All 9 stages active &amp; displayed chronologically
+                      </span>
+                    </div>
+                    {/* Clean Wrapped Grid for Desktop and Laptop */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2">
+                      {[
+                        { id: "sec-story", label: "1. Story", num: "1", icon: Lightbulb },
+                        { id: "sec-theory", label: "2. Concepts", num: "2", icon: BookOpen },
+                        { id: "sec-methods", label: "3. Methods", num: "3", icon: Compass },
+                        { id: "sec-formulas", label: "4. Formulas", num: "4", icon: Calculator },
+                        { id: "sec-solved", label: "5. Solved Qs", num: "5", icon: Sparkles },
+                        { id: "sec-drills", label: "6. Practice", num: "6", icon: Target },
+                        { id: "sec-pyqs", label: "7. PYQs", num: "7", icon: FileText },
+                        { id: "sec-tests", label: "8. Mock Test", num: "8", icon: GraduationCap },
+                        { id: "sec-revision", label: "9. Summary", num: "9", icon: Zap },
+                      ].map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <button
+                            key={item.id}
+                            onClick={() => {
+                              const el = document.getElementById(item.id);
+                              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                            }}
+                            className={`p-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex flex-col items-center justify-center gap-1 text-center hover:scale-[1.03] active:scale-95 ${
+                              isDark
+                                ? "bg-white/[0.04] hover:bg-blue-600/20 border-white/10 hover:border-blue-400/40 text-slate-200 hover:text-white"
+                                : "bg-slate-50 hover:bg-blue-50 border-slate-200 hover:border-blue-300 text-slate-800 hover:text-blue-900 shadow-2xs"
+                            }`}
+                          >
+                            <div className="flex items-center gap-1">
+                              <span className="font-mono text-[10px] opacity-70 font-bold">{item.num}.</span>
+                              <Icon className="w-3.5 h-3.5 text-blue-500" />
+                            </div>
+                            <span className="leading-none text-[11px] truncate w-full">{item.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="pt-3 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <span className={`text-xs font-bold ${isDark ? "text-blue-300" : "text-blue-900"}`}>
+                        Currently Focusing on One Section:
+                      </span>
+                      <button
+                        onClick={() => setMathMasterySubTab("all")}
+                        className="text-xs font-bold text-blue-500 hover:underline cursor-pointer"
+                      >
+                        ← Return to Complete Masterclass
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2">
+                      {[
+                        { id: "theory", label: "Core Theory", icon: BookOpen },
+                        { id: "method_guide", label: "Solving Guides", icon: Compass },
+                        { id: "formulas", label: "Formulas", icon: Calculator },
+                        { id: "graded_practice", label: "Practice Drills", icon: Target },
+                        { id: "pyqs", label: "10-Yr PYQs", icon: FileText },
+                        { id: "tests", label: "Mock Tests", icon: GraduationCap },
+                        { id: "revision", label: "1-Page Summary", icon: Zap },
+                      ].map((sub) => {
+                        const Icon = sub.icon;
+                        const isSelected = mathMasterySubTab === sub.id;
+                        return (
+                          <button
+                            key={sub.id}
+                            onClick={() => setMathMasterySubTab(sub.id as any)}
+                            className={`p-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                              isSelected
+                                ? "bg-indigo-600 text-white border-indigo-500 shadow-md scale-[1.02]"
+                                : isDark
+                                ? "bg-white/5 border-white/10 text-slate-300 hover:text-white"
+                                : "bg-slate-50 border-slate-200 text-slate-700 hover:text-slate-900"
+                            }`}
+                          >
+                            <Icon className="w-3.5 h-3.5 shrink-0" />
+                            <span className="truncate">{sub.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
@@ -1352,11 +1434,13 @@ export default function ConceptsHubView({
                           CBSE Board Strategic Blueprint: {activeMathMasteryData.chapterName}
                         </h3>
                         <p className={`text-xs sm:text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                          Estimated Weightage: <span className="font-bold text-amber-400">{activeMathMasteryData.weightageEstimate}</span>
+                          Estimated Weightage: <span className="font-bold text-amber-500">{activeMathMasteryData.weightageEstimate}</span>
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs font-mono px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">
+                    <span className={`text-xs font-mono px-3.5 py-1 rounded-full border font-bold ${
+                      isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                    }`}>
                       100/100 Master Engine Active
                     </span>
                   </div>
@@ -1364,31 +1448,54 @@ export default function ConceptsHubView({
                     {activeMathMasteryData.overview.about}
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                    <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/8" : "bg-slate-50 border-slate-200"}`}>
-                      <h4 className="text-xs sm:text-sm font-mono font-bold uppercase text-indigo-400 mb-2.5 flex items-center gap-1.5">
-                        <CheckCircle2 className="w-4 h-4" /> Prerequisites
+                    {/* 1. What You Need to Know First (Basics / Prerequisites) */}
+                    <div className={`p-5 rounded-2xl border transition-all ${
+                      isDark ? "bg-white/[0.03] border-white/10" : "bg-white border-slate-200 shadow-xs"
+                    }`}>
+                      <h4 className={`text-xs sm:text-sm font-mono font-bold uppercase mb-2.5 flex items-center gap-1.5 ${
+                        isDark ? "text-indigo-400" : "text-indigo-800 font-extrabold"
+                      }`}>
+                        <CheckCircle2 className="w-4 h-4" /> 🧠 What You Need to Know First (Basics)
                       </h4>
-                      <ul className="text-sm sm:text-base space-y-2 list-disc list-inside text-slate-200 leading-relaxed font-medium">
+                      <ul className={`text-sm sm:text-base space-y-2 list-disc list-inside leading-relaxed font-medium ${
+                        isDark ? "text-slate-100" : "text-slate-900"
+                      }`}>
                         {activeMathMasteryData.overview.prerequisites.map((p, i) => (
                           <li key={i}>{p}</li>
                         ))}
                       </ul>
                     </div>
-                    <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/8" : "bg-slate-50 border-slate-200"}`}>
-                      <h4 className="text-xs sm:text-sm font-mono font-bold uppercase text-emerald-400 mb-2.5 flex items-center gap-1.5">
-                        <Target className="w-4 h-4" /> Core Concepts
+
+                    {/* 2. Core Concepts in Simple Words */}
+                    <div className={`p-5 rounded-2xl border transition-all ${
+                      isDark ? "bg-white/[0.03] border-white/10" : "bg-white border-slate-200 shadow-xs"
+                    }`}>
+                      <h4 className={`text-xs sm:text-sm font-mono font-bold uppercase mb-2.5 flex items-center gap-1.5 ${
+                        isDark ? "text-emerald-400" : "text-emerald-800 font-extrabold"
+                      }`}>
+                        <Target className="w-4 h-4" /> 💡 Main Ideas in Simple Words
                       </h4>
-                      <ul className="text-sm sm:text-base space-y-2 list-disc list-inside text-slate-200 leading-relaxed font-medium">
+                      <ul className={`text-sm sm:text-base space-y-2 list-disc list-inside leading-relaxed font-medium ${
+                        isDark ? "text-slate-100" : "text-slate-900"
+                      }`}>
                         {activeMathMasteryData.overview.coreIdeas.map((c, i) => (
                           <li key={i}>{c}</li>
                         ))}
                       </ul>
                     </div>
-                    <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/8" : "bg-slate-50 border-slate-200"}`}>
-                      <h4 className="text-xs sm:text-sm font-mono font-bold uppercase text-rose-400 mb-2.5 flex items-center gap-1.5">
-                        <AlertTriangle className="w-4 h-4" /> Watch Out For
+
+                    {/* 3. Common Mistakes Students Make */}
+                    <div className={`p-5 rounded-2xl border transition-all ${
+                      isDark ? "bg-white/[0.03] border-white/10" : "bg-white border-slate-200 shadow-xs"
+                    }`}>
+                      <h4 className={`text-xs sm:text-sm font-mono font-bold uppercase mb-2.5 flex items-center gap-1.5 ${
+                        isDark ? "text-rose-400" : "text-rose-800 font-extrabold"
+                      }`}>
+                        <AlertTriangle className="w-4 h-4" /> ⚠️ Common Mistakes to Avoid
                       </h4>
-                      <ul className="text-sm sm:text-base space-y-2 list-disc list-inside text-rose-200 leading-relaxed font-medium">
+                      <ul className={`text-sm sm:text-base space-y-2 list-disc list-inside leading-relaxed font-medium ${
+                        isDark ? "text-rose-200" : "text-rose-950 font-semibold"
+                      }`}>
                         {activeMathMasteryData.overview.frequentMisunderstandings.map((m, i) => (
                           <li key={i}>{m}</li>
                         ))}
@@ -1412,7 +1519,7 @@ export default function ConceptsHubView({
                   <div className="space-y-3 flex-1">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-mono uppercase font-black text-amber-400 tracking-wider px-3 py-1 rounded-md bg-amber-500/20 border border-amber-500/30">
-                        Stage 1: Zero-to-One Keynote Mental Model
+                        Stage 1: 📖 Concept Story &amp; Everyday Intuition
                       </span>
                     </div>
                     <h3 className={`text-2xl sm:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
@@ -1423,13 +1530,31 @@ export default function ConceptsHubView({
                     </div>
                   </div>
                 </div>
+
+                {/* Next Stage Navigation Button */}
+                <div className="pt-4 mt-4 border-t border-amber-500/20 flex justify-end">
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById("sec-theory");
+                      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }}
+                    className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-2xs ${
+                      isDark
+                        ? "bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border-blue-500/30 hover:scale-[1.02]"
+                        : "bg-blue-50 hover:bg-blue-100 text-blue-900 border-blue-200 hover:scale-[1.02]"
+                    }`}
+                  >
+                    <span>Continue to Stage 2: Core Concepts in Simple Words</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
 
               {/* Core Sections & Step-by-Step Problem Solving Guides */}
               <div id="sec-theory" className="space-y-8 scroll-mt-24">
                 <div className="flex items-center gap-2.5 pb-2">
                   <span className="text-xs font-mono font-black uppercase text-blue-400 px-3 py-1 rounded-md bg-blue-500/15 border border-blue-500/30">
-                    Stage 2: Chronological Concept Masterclass
+                    Stage 2: 💡 Core Concepts in Simple Words
                   </span>
                 </div>
                 {activeMathChapter.sections.map((section, sIdx) => (
@@ -1702,103 +1827,29 @@ export default function ConceptsHubView({
                 )}
               </div>
             ))}
-          </div>
-
-          {/* =========================================================================
-              MATHEMATICS SOLVED BOARD EXAMPLES WITH STEP MARKS BREAKDOWN
-              ========================================================================= */}
-          {activeMathExamples.length > 0 && (
-            <div id="sec-solved" className="space-y-5 pt-4 scroll-mt-24">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="space-y-1">
-                  <span className="text-xs font-mono font-black uppercase text-amber-400 px-3 py-1 rounded-md bg-amber-500/15 border border-amber-500/30 inline-block mb-1">
-                    Stage 5: CBSE Board Solved Model Problems
-                  </span>
-                  <h3 className={`text-xl sm:text-2xl font-black flex items-center gap-2.5 ${isDark ? "text-white" : "text-slate-900"}`}>
-                    <Sparkles className="w-5 h-5 text-amber-400" />
-                    CBSE Board Solved Model Problems with Official Mark Rubric
-                  </h3>
-                </div>
-                <span className="text-xs font-mono font-bold text-slate-300">
-                  {activeMathExamples.length} Model Question{activeMathExamples.length > 1 ? "s" : ""}
-                </span>
-              </div>
-
-              <div className="space-y-5">
-                {activeMathExamples.map((ex) => (
-                  <div
-                    key={ex.id}
-                    style={{ contentVisibility: "auto", containIntrinsicSize: "450px" }}
-                    className={`p-6 sm:p-7 rounded-3xl border space-y-5 transition-all ${
-                      isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-md"
+                {/* Stage 2 to 3 Next Button */}
+                <div className="pt-4 flex justify-end">
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById("sec-methods");
+                      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }}
+                    className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-2xs hover:scale-[1.02] ${
+                      isDark
+                        ? "bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border-indigo-500/30"
+                        : "bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border-indigo-200"
                     }`}
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-3 border-white/10">
-                      <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                        {ex.level}
-                      </span>
-                      <span className="text-xs sm:text-sm font-mono font-bold text-emerald-400">
-                        Total Marks: {ex.marks}
-                      </span>
-                    </div>
-
-                    <h4 className={`text-lg sm:text-xl font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
-                      <PremiumMathRenderer content={ex.question} isDark={isDark} />
-                    </h4>
-
-                    {/* Step-by-Step Marking Scheme */}
-                    <div className="space-y-2.5 pt-1">
-                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-emerald-400 block">
-                        Official Step-by-Step Scoring Distribution:
-                      </span>
-                      <div className="space-y-2.5">
-                        {ex.markingSchemeSteps.map((st) => (
-                          <div
-                            key={st.stepNo}
-                            className={`p-4 rounded-xl border flex items-start justify-between gap-3 ${
-                              isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
-                            }`}
-                          >
-                            <div className="flex items-start gap-3">
-                              <span className="w-7 h-7 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">
-                                {st.stepNo}
-                              </span>
-                              <div className={`text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-800"}`}>
-                                <PremiumMathRenderer content={st.description} isDark={isDark} />
-                              </div>
-                            </div>
-                            <span className="px-2.5 py-1 rounded text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
-                              {st.marksAwarded}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Final Answer Box */}
-                    <div className={`p-4 sm:p-5 rounded-2xl border font-bold text-base flex flex-col sm:flex-row sm:items-center justify-between gap-2 ${
-                      isDark ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-300" : "bg-emerald-50 border-emerald-200 text-emerald-950"
-                    }`}>
-                      <span className="text-base font-bold">Official Final Answer:</span>
-                      <span className="font-mono text-base sm:text-lg px-3.5 py-1.5 rounded-xl bg-black/40 border border-emerald-500/40 text-emerald-300">
-                        <PremiumMathRenderer content={ex.finalAnswer} isDark={isDark} inline />
-                      </span>
-                    </div>
-
-                    {ex.examinerTrap && (
-                      <div className="text-sm sm:text-base text-rose-300 font-mono pt-1">
-                        <PremiumMathRenderer content={`⚠️ **Examiner Caution:** ${ex.examinerTrap}`} isDark={isDark} />
-                      </div>
-                    )}
-                  </div>
-                ))}
+                    <span>Continue to Stage 3: Step-by-Step Question Solving Guide</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
-            </div>
+            </>
           )}
-          </>)}
 
           {/* =========================================================================
-              STAGE 3: 7-STEP METHOD IDENTIFICATION PROTOCOL
+              STAGE 3: STEP-BY-STEP QUESTION SOLVING GUIDE
               ========================================================================= */}
           {(mathMasterySubTab === "all" || mathMasterySubTab === "method_guide") && activeMathMasteryData && (
             <div id="sec-methods" className="space-y-6 animate-fade-in scroll-mt-28">
@@ -1812,20 +1863,24 @@ export default function ConceptsHubView({
                     </span>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                          Stage 3 &bull; Blueprint Recognition
+                        <span className={`px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase ${
+                          isDark ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30" : "bg-indigo-50 text-indigo-900 border border-indigo-200"
+                        }`}>
+                          Stage 3 &bull; Problem Solving Guide
                         </span>
                       </div>
                       <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
-                        7-Step Method Identification Protocol
+                        Step-by-Step Question Solving Guide
                       </h3>
                       <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                        How to instantly recognize problem types in under 5 seconds and trigger the exact algorithmic solution.
+                        How to look at any exam question, instantly know what formula to use, and solve it without mistakes.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-indigo-500/20 text-indigo-200 border border-indigo-500/40">
-                    {activeMathMasteryData.methodGuides.length} Core Archetypes
+                  <span className={`text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full border ${
+                    isDark ? "bg-indigo-500/20 text-indigo-200 border border-indigo-500/40" : "bg-indigo-50 text-indigo-900 border-indigo-200"
+                  }`}>
+                    {activeMathMasteryData.methodGuides.length} Core Question Types
                   </span>
                 </div>
               </div>
@@ -1840,28 +1895,34 @@ export default function ConceptsHubView({
                   >
                     <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
                       <div className="flex items-center gap-3">
-                        <span className="w-8 h-8 rounded-xl bg-indigo-500/20 text-indigo-300 font-mono font-black text-sm flex items-center justify-center border border-indigo-500/30">
+                        <span className={`w-8 h-8 rounded-xl font-mono font-black text-sm flex items-center justify-center border ${
+                          isDark ? "bg-indigo-500/20 text-indigo-300 border-indigo-500/30" : "bg-indigo-50 text-indigo-900 border-indigo-200"
+                        }`}>
                           {idx + 1}
                         </span>
                         <h4 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                           {mg.questionPattern}
                         </h4>
                       </div>
-                      <span className="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-mono font-bold bg-blue-500/20 text-blue-200 border border-blue-500/40">
+                      <span className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-mono font-bold border ${
+                        isDark ? "bg-blue-500/20 text-blue-200 border-blue-500/40" : "bg-blue-50 text-blue-900 border-blue-200"
+                      }`}>
                         {mg.requiredConcept}
                       </span>
                     </div>
 
                     <div className="space-y-2.5">
-                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-amber-300 flex items-center gap-2">
-                        <Search className="w-4 h-4" /> Exam Trigger Keywords (Spot & Underline These in Question)
+                      <span className={`text-xs sm:text-sm font-mono uppercase font-bold flex items-center gap-2 ${
+                        isDark ? "text-amber-300" : "text-amber-900 font-extrabold"
+                      }`}>
+                        <Search className="w-4 h-4 text-amber-500" /> Exam Trigger Keywords (Spot &amp; Underline These in Question)
                       </span>
                       <div className="flex flex-wrap gap-2.5">
                         {mg.recognitionClues.map((clue, cIdx) => (
                           <span
                             key={cIdx}
                             className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold border ${
-                              isDark ? "bg-amber-500/15 text-amber-200 border-amber-500/30" : "bg-amber-50 text-amber-900 border-amber-200"
+                              isDark ? "bg-amber-500/15 text-amber-200 border-amber-500/30" : "bg-amber-50 text-amber-950 border-amber-300"
                             }`}
                           >
                             &ldquo;{clue}&rdquo;
@@ -1872,7 +1933,9 @@ export default function ConceptsHubView({
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-slate-300 block mb-1.5">
+                        <span className={`text-xs sm:text-sm font-mono font-bold uppercase block mb-1.5 ${
+                          isDark ? "text-slate-300" : "text-slate-700 font-extrabold"
+                        }`}>
                           📥 What Is Given in Question:
                         </span>
                         <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
@@ -1880,7 +1943,9 @@ export default function ConceptsHubView({
                         </div>
                       </div>
                       <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-slate-300 block mb-1.5">
+                        <span className={`text-xs sm:text-sm font-mono font-bold uppercase block mb-1.5 ${
+                          isDark ? "text-slate-300" : "text-slate-700 font-extrabold"
+                        }`}>
                           🎯 What Must Be Found / Proved:
                         </span>
                         <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
@@ -1892,7 +1957,9 @@ export default function ConceptsHubView({
                     <div className={`p-5 rounded-2xl border ${
                       isDark ? "bg-indigo-950/25 border-indigo-500/40" : "bg-indigo-50/80 border-indigo-200"
                     }`}>
-                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-indigo-300 block mb-2">
+                      <span className={`text-xs sm:text-sm font-mono uppercase font-bold block mb-2 ${
+                        isDark ? "text-indigo-300" : "text-indigo-900 font-extrabold"
+                      }`}>
                         ⚙️ Method Selection Rationale:
                       </span>
                       <div className={`text-base sm:text-lg font-semibold ${isDark ? "text-indigo-100" : "text-indigo-950"}`}>
@@ -1901,7 +1968,9 @@ export default function ConceptsHubView({
                     </div>
 
                     <div className="space-y-3">
-                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-emerald-300 block">
+                      <span className={`text-xs sm:text-sm font-mono uppercase font-bold block ${
+                        isDark ? "text-emerald-300" : "text-emerald-900 font-extrabold"
+                      }`}>
                         📋 Step-by-Step Execution Protocol:
                       </span>
                       <div className="space-y-2.5">
@@ -1912,7 +1981,9 @@ export default function ConceptsHubView({
                               isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
                             }`}
                           >
-                            <span className="w-7 h-7 rounded-lg bg-emerald-500/25 text-emerald-300 font-mono font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 mt-0.5">
+                            <span className={`w-7 h-7 rounded-lg font-mono font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 mt-0.5 ${
+                              isDark ? "bg-emerald-500/25 text-emerald-300" : "bg-emerald-100 text-emerald-900"
+                            }`}>
                               {sIdx + 1}
                             </span>
                             <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
@@ -1927,7 +1998,9 @@ export default function ConceptsHubView({
                       <div className={`p-5 rounded-2xl border ${
                         isDark ? "bg-teal-950/25 border-teal-500/40 text-teal-200" : "bg-teal-50 border-teal-200 text-teal-950"
                       }`}>
-                        <span className="text-xs sm:text-sm font-mono font-bold uppercase block mb-1.5 text-teal-300">
+                        <span className={`text-xs sm:text-sm font-mono font-bold uppercase block mb-1.5 ${
+                          isDark ? "text-teal-300" : "text-teal-900 font-extrabold"
+                        }`}>
                           ⏱️ 30-Second Verification Check:
                         </span>
                         <div className="text-sm sm:text-base leading-relaxed">
@@ -1937,7 +2010,9 @@ export default function ConceptsHubView({
                       <div className={`p-5 rounded-2xl border ${
                         isDark ? "bg-rose-950/25 border-rose-500/40 text-rose-200" : "bg-rose-50 border-rose-200 text-rose-950"
                       }`}>
-                        <span className="text-xs sm:text-sm font-mono font-bold uppercase block mb-1.5 text-rose-300">
+                        <span className={`text-xs sm:text-sm font-mono font-bold uppercase block mb-1.5 ${
+                          isDark ? "text-rose-300" : "text-rose-900 font-extrabold"
+                        }`}>
                           ⚠️ Fatal Examiner Trap:
                         </span>
                         <div className="text-sm sm:text-base leading-relaxed">
@@ -1950,10 +2025,12 @@ export default function ConceptsHubView({
                       isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-100/70 border-slate-200"
                     }`}>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs sm:text-sm font-mono uppercase font-bold text-amber-300">
+                        <span className={`text-xs sm:text-sm font-mono uppercase font-bold ${
+                          isDark ? "text-amber-300" : "text-amber-900 font-extrabold"
+                        }`}>
                           Exemplar Model Question
                         </span>
-                        <span className="text-xs font-mono font-bold text-slate-400">
+                        <span className={`text-xs font-mono font-bold ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                           Standard CBSE Rubric
                         </span>
                       </div>
@@ -1971,6 +2048,24 @@ export default function ConceptsHubView({
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* Next Stage Navigation Button */}
+              <div className="pt-4 flex justify-end">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById("sec-formulas");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-2xs hover:scale-[1.02] ${
+                    isDark
+                      ? "bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 border-amber-500/30"
+                      : "bg-amber-50 hover:bg-amber-100 text-amber-950 border-amber-300"
+                  }`}
+                >
+                  <span>Continue to Stage 4: Formulas &amp; Shortcuts Vault</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           )}
@@ -1991,18 +2086,20 @@ export default function ConceptsHubView({
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                          Stage 4 &bull; Algebraic Vault
+                          Stage 4 &bull; Formulas &amp; Shortcuts
                         </span>
                       </div>
                       <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
-                        Formula & Theorem Security Vault
+                        Stage 4: ⚡ All Formulas, Theorems &amp; Shortcuts Vault
                       </h3>
                       <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                         Complete algebraic specification: symbol breakdowns, applicability conditions, instant mini-substitutions, and traps.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-amber-500/20 text-amber-200 border border-amber-500/40">
+                  <span className={`text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full border ${
+                    isDark ? "bg-amber-500/20 text-amber-200 border-amber-500/40" : "bg-amber-100 text-amber-950 border-amber-300"
+                  }`}>
                     {activeMathMasteryData.formulas.length} Core Formulas
                   </span>
                 </div>
@@ -2025,7 +2122,9 @@ export default function ConceptsHubView({
                           {f.name}
                         </h4>
                       </div>
-                      <span className="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-mono font-bold bg-amber-500/20 text-amber-200 border border-amber-500/40">
+                      <span className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-mono font-bold border ${
+                        isDark ? "bg-amber-500/20 text-amber-200 border-amber-500/40" : "bg-amber-100 text-amber-950 border-amber-300"
+                      }`}>
                         Board Essential
                       </span>
                     </div>
@@ -2041,7 +2140,9 @@ export default function ConceptsHubView({
 
                     {/* Symbol Meanings Table */}
                     <div className="space-y-2.5">
-                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-slate-300 block">
+                      <span className={`text-xs sm:text-sm font-mono uppercase font-bold block ${
+                        isDark ? "text-slate-300" : "text-slate-700 font-semibold"
+                      }`}>
                         🔍 Symbol Clarification Table:
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -2066,20 +2167,24 @@ export default function ConceptsHubView({
                     {/* Applicability Conditions & Substitutions */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-indigo-300 block mb-2">
+                        <span className={`text-xs sm:text-sm font-mono font-bold uppercase block mb-2 ${
+                          isDark ? "text-indigo-300" : "text-indigo-800 font-extrabold"
+                        }`}>
                           🛡️ Conditions Where Valid:
                         </span>
-                        <ul className="text-sm space-y-2 list-disc list-inside text-slate-200">
+                        <ul className={`text-sm space-y-2 list-disc list-inside font-medium ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                           {f.conditions.map((c, cIdx) => (
                             <li key={cIdx}>{c}</li>
                           ))}
                         </ul>
                       </div>
                       <div className={`p-5 rounded-2xl border ${isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-emerald-300 block mb-2">
+                        <span className={`text-xs sm:text-sm font-mono font-bold uppercase block mb-2 ${
+                          isDark ? "text-emerald-300" : "text-emerald-800 font-extrabold"
+                        }`}>
                           🔄 Common Variations:
                         </span>
-                        <ul className="text-sm space-y-2 list-disc list-inside text-slate-200">
+                        <ul className={`text-sm space-y-2 list-disc list-inside font-medium ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                           {f.commonSubstitutions.map((sub, subIdx) => (
                             <li key={subIdx}>{sub}</li>
                           ))}
@@ -2092,14 +2197,16 @@ export default function ConceptsHubView({
                       <div className={`p-5 rounded-2xl border space-y-3 ${
                         isDark ? "bg-teal-950/25 border-teal-500/40" : "bg-teal-50 border-teal-200"
                       }`}>
-                        <span className="text-xs sm:text-sm font-mono font-bold uppercase text-teal-300 block">
+                        <span className={`text-xs sm:text-sm font-mono font-bold uppercase block ${
+                          isDark ? "text-teal-300" : "text-teal-800 font-extrabold"
+                        }`}>
                           ⚡ Instant 1-Step Substitution Example:
                         </span>
                         <p className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
                           <strong>Q:</strong> {f.miniExample.question}
                         </p>
                         <div className={`p-3.5 rounded-xl border text-sm font-mono ${
-                          isDark ? "bg-black/40 border-white/10 text-teal-200" : "bg-white border-teal-200 text-teal-950"
+                          isDark ? "bg-black/40 border-white/10 text-teal-200" : "bg-white border-teal-200 text-teal-950 font-bold"
                         }`}>
                           Sub: {f.miniExample.substitution} ⟹ Result: <strong>{f.miniExample.result}</strong>
                         </div>
@@ -2112,10 +2219,12 @@ export default function ConceptsHubView({
                         <div className={`p-5 rounded-2xl border ${
                           isDark ? "bg-rose-950/25 border-rose-500/40 text-rose-200" : "bg-rose-50 border-rose-200 text-rose-950"
                         }`}>
-                          <span className="text-xs sm:text-sm font-mono font-bold uppercase block mb-2 text-rose-300">
+                          <span className={`text-xs sm:text-sm font-mono font-bold uppercase block mb-2 ${
+                            isDark ? "text-rose-300" : "text-rose-800 font-extrabold"
+                          }`}>
                             ⚠️ Fatal Exam Pitfalls:
                           </span>
-                          <ul className="text-sm space-y-1.5 list-disc list-inside">
+                          <ul className="text-sm space-y-1.5 list-disc list-inside font-medium">
                             {f.commonMistakes.map((m, mIdx) => (
                               <li key={mIdx}>{m}</li>
                             ))}
@@ -2127,7 +2236,9 @@ export default function ConceptsHubView({
                         <div className={`p-5 rounded-2xl border ${
                           isDark ? "bg-purple-950/25 border-purple-500/40 text-purple-200" : "bg-purple-50 border-purple-200 text-purple-950"
                         }`}>
-                          <span className="text-xs sm:text-sm font-mono font-bold uppercase block mb-2 text-purple-300">
+                          <span className={`text-xs sm:text-sm font-mono font-bold uppercase block mb-2 ${
+                            isDark ? "text-purple-300" : "text-purple-800 font-extrabold"
+                          }`}>
                             💡 Mnemonic / Memory Trick:
                           </span>
                           <p className="text-sm sm:text-base font-semibold">
@@ -2138,6 +2249,161 @@ export default function ConceptsHubView({
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* Next Stage Navigation Button */}
+              <div className="pt-4 flex justify-end">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById("sec-solved");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-2xs hover:scale-[1.02] ${
+                    isDark
+                      ? "bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 border-amber-500/30"
+                      : "bg-amber-50 hover:bg-amber-100 text-amber-950 border-amber-300"
+                  }`}
+                >
+                  <span>Continue to Stage 5: Solved Board Questions with Marks ➔</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* =========================================================================
+              STAGE 5: SOLVED BOARD EXAMPLES WITH STEP MARKS BREAKDOWN
+              ========================================================================= */}
+          {(mathMasterySubTab === "all" || mathMasterySubTab === "graded_practice" || mathMasterySubTab === "theory") && activeMathExamples.length > 0 && (
+            <div id="sec-solved" className="space-y-6 animate-fade-in scroll-mt-28">
+              <div className={`p-6 sm:p-8 rounded-3xl border ${
+                isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="p-3.5 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                      <Sparkles className="w-7 h-7" />
+                    </span>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                          Stage 5 &bull; Step-Marking Model Problems
+                        </span>
+                      </div>
+                      <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                        Stage 5: 🎯 Solved Board Questions (with Official Marks Breakdown)
+                      </h3>
+                      <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                        CBSE Board standard problems solved with official step-by-step mark distribution.
+                      </p>
+                    </div>
+                  </div>
+                  <span className={`text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full border ${
+                    isDark ? "bg-amber-500/20 text-amber-200 border-amber-500/40" : "bg-amber-100 text-amber-950 border-amber-300"
+                  }`}>
+                    {activeMathExamples.length} Model Question{activeMathExamples.length > 1 ? "s" : ""}
+                  </span>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                {activeMathExamples.map((ex) => (
+                  <div
+                    key={ex.id}
+                    style={{ contentVisibility: "auto", containIntrinsicSize: "450px" }}
+                    className={`p-6 sm:p-8 rounded-3xl border space-y-6 transition-all ${
+                      isDark ? "bg-[#0b0f19] border-white/10" : "bg-white border-slate-200 shadow-sm"
+                    }`}
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
+                      <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${
+                        isDark ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-amber-100 text-amber-950 border-amber-300"
+                      }`}>
+                        {ex.level}
+                      </span>
+                      <span className={`text-xs sm:text-sm font-mono font-bold ${
+                        isDark ? "text-emerald-400" : "text-emerald-800 font-bold"
+                      }`}>
+                        Total Marks: {ex.marks}
+                      </span>
+                    </div>
+
+                    <h4 className={`text-lg sm:text-xl font-bold leading-relaxed ${isDark ? "text-white" : "text-slate-900"}`}>
+                      <PremiumMathRenderer content={ex.question} isDark={isDark} />
+                    </h4>
+
+                    {/* Step-by-Step Marking Scheme */}
+                    <div className="space-y-2.5 pt-1">
+                      <span className={`text-xs sm:text-sm font-mono uppercase font-bold block ${
+                        isDark ? "text-emerald-400" : "text-emerald-800 font-extrabold"
+                      }`}>
+                        Official Step-by-Step Scoring Distribution:
+                      </span>
+                      <div className="space-y-2.5">
+                        {ex.markingSchemeSteps.map((st) => (
+                          <div
+                            key={st.stepNo}
+                            className={`p-4 rounded-xl border flex items-start justify-between gap-3 ${
+                              isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
+                            }`}
+                          >
+                            <div className="flex items-start gap-3">
+                              <span className="w-7 h-7 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">
+                                {st.stepNo}
+                              </span>
+                              <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-800"}`}>
+                                <PremiumMathRenderer content={st.description} isDark={isDark} />
+                              </div>
+                            </div>
+                            <span className={`px-2.5 py-1 rounded text-xs font-mono font-bold border shrink-0 ${
+                              isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                            }`}>
+                              {st.marksAwarded}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Final Answer Box */}
+                    <div className={`p-4 sm:p-5 rounded-2xl border font-bold text-sm sm:text-base flex flex-col sm:flex-row sm:items-center justify-between gap-2 ${
+                      isDark ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-950"
+                    }`}>
+                      <span className="text-sm sm:text-base font-bold">Official Final Answer:</span>
+                      <span className={`font-mono text-base sm:text-lg px-3.5 py-1.5 rounded-xl border ${
+                        isDark ? "bg-black/40 border-emerald-500/40 text-emerald-300" : "bg-white border-emerald-300 text-emerald-950"
+                      }`}>
+                        <PremiumMathRenderer content={ex.finalAnswer} isDark={isDark} inline />
+                      </span>
+                    </div>
+
+                    {ex.examinerTrap && (
+                      <div className={`text-xs sm:text-sm font-mono pt-1 ${
+                        isDark ? "text-rose-300" : "text-rose-800 font-bold"
+                      }`}>
+                        <PremiumMathRenderer content={`⚠️ **Examiner Caution:** ${ex.examinerTrap}`} isDark={isDark} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Next Stage Navigation Button */}
+              <div className="pt-4 flex justify-end">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById("sec-drills");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-2xs hover:scale-[1.02] ${
+                    isDark
+                      ? "bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border-emerald-500/30"
+                      : "bg-emerald-50 hover:bg-emerald-100 text-emerald-950 border-emerald-300"
+                  }`}
+                >
+                  <span>Continue to Stage 6: Practice Questions ➔</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           )}
@@ -2158,18 +2424,20 @@ export default function ConceptsHubView({
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                          Stage 6 &bull; Graded Drills
+                          Stage 6 &bull; Practice Questions
                         </span>
                       </div>
                       <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
-                        5-Level Graded Practice Drills
+                        Stage 6: 📝 Practice Questions (From Easy to Board Level)
                       </h3>
                       <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                         Progressive mastery from NCERT foundations to CBSE Board 100/100 challenge problems.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-500/40">
+                  <span className={`text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full border ${
+                    isDark ? "bg-emerald-500/20 text-emerald-200 border-emerald-500/40" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                  }`}>
                     {activeMathMasteryData.gradedQuestions.length} Total Questions
                   </span>
                 </div>
@@ -2230,15 +2498,21 @@ export default function ConceptsHubView({
                             <span className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 font-mono font-black text-sm flex items-center justify-center border border-emerald-500/30">
                               {qIdx + 1}
                             </span>
-                            <span className="text-xs sm:text-sm font-mono font-bold text-slate-300">
+                            <span className={`text-xs sm:text-sm font-mono font-bold ${
+                              isDark ? "text-slate-300" : "text-slate-700 font-semibold"
+                            }`}>
                               {q.topic}
                             </span>
                           </div>
                           <div className="flex items-center gap-2.5">
-                            <span className="px-3 py-1 rounded-lg text-xs sm:text-sm font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                            <span className={`px-3 py-1 rounded-lg text-xs sm:text-sm font-mono font-bold border ${
+                              isDark ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                            }`}>
                               {q.marks} Mark{q.marks > 1 ? "s" : ""}
                             </span>
-                            <span className="px-3 py-1 rounded-lg text-xs sm:text-sm font-mono font-bold bg-white/5 text-slate-300 border border-white/10">
+                            <span className={`px-3 py-1 rounded-lg text-xs sm:text-sm font-mono font-bold border ${
+                              isDark ? "bg-white/5 text-slate-300 border-white/10" : "bg-slate-100 text-slate-700 border-slate-200"
+                            }`}>
                               {q.levelLabel}
                             </span>
                           </div>
@@ -2318,8 +2592,8 @@ export default function ConceptsHubView({
                         {feedback && (
                           <div className={`p-4 sm:p-5 rounded-xl border flex items-center justify-between gap-3 ${
                             feedback === "correct"
-                              ? isDark ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-200" : "bg-emerald-50 border-emerald-300 text-emerald-950"
-                              : isDark ? "bg-rose-950/30 border-rose-500/40 text-rose-200" : "bg-rose-50 border-rose-300 text-rose-950"
+                              ? isDark ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-200" : "bg-emerald-50 border-emerald-300 text-emerald-950 font-bold"
+                              : isDark ? "bg-rose-950/30 border-rose-500/40 text-rose-200" : "bg-rose-50 border-rose-300 text-rose-950 font-bold"
                           }`}>
                             <div className="flex items-center gap-3">
                               {feedback === "correct" ? (
@@ -2367,7 +2641,9 @@ export default function ConceptsHubView({
                           <div className={`p-5 rounded-2xl border space-y-2 ${
                             isDark ? "bg-amber-950/25 border-amber-500/40 text-amber-200" : "bg-amber-50 border-amber-200 text-amber-950"
                           }`}>
-                            <span className="text-xs sm:text-sm font-mono font-bold uppercase block text-amber-300">💡 Strategy Clue:</span>
+                            <span className={`text-xs sm:text-sm font-mono font-bold uppercase block ${
+                              isDark ? "text-amber-300" : "text-amber-800 font-extrabold"
+                            }`}>💡 Strategy Clue:</span>
                             {q.hints.map((h, hIdx) => (
                               <p key={hIdx} className="text-sm sm:text-base leading-relaxed">
                                 {h}
@@ -2381,7 +2657,9 @@ export default function ConceptsHubView({
                           <div className={`p-6 rounded-2xl border space-y-4 ${
                             isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
                           }`}>
-                            <span className="text-xs sm:text-sm font-mono uppercase font-bold text-emerald-300 block">
+                            <span className={`text-xs sm:text-sm font-mono uppercase font-bold block ${
+                              isDark ? "text-emerald-300" : "text-emerald-800 font-extrabold"
+                            }`}>
                               Official Step-by-Step Scoring Distribution:
                             </span>
                             <div className="space-y-3">
@@ -2398,7 +2676,7 @@ export default function ConceptsHubView({
                             </div>
 
                             <div className={`p-4 rounded-xl border font-bold text-sm sm:text-base flex items-center justify-between ${
-                              isDark ? "bg-black/40 border-emerald-500/40 text-emerald-300" : "bg-emerald-50 border-emerald-200 text-emerald-950"
+                              isDark ? "bg-black/40 border-emerald-500/40 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-950 font-bold"
                             }`}>
                               <span>Correct Final Value:</span>
                               <span className="font-mono text-base sm:text-lg">
@@ -2407,7 +2685,9 @@ export default function ConceptsHubView({
                             </div>
 
                             {q.commonTrap && (
-                              <div className="text-sm text-rose-300 font-mono pt-1">
+                              <div className={`text-sm font-mono pt-1 ${
+                                isDark ? "text-rose-300" : "text-rose-800 font-bold"
+                              }`}>
                                 <PremiumMathRenderer content={`⚠️ **Examiner Caution:** ${q.commonTrap}`} isDark={isDark} />
                               </div>
                             )}
@@ -2416,6 +2696,24 @@ export default function ConceptsHubView({
                       </div>
                     );
                   })}
+              </div>
+
+              {/* Next Stage Navigation Button */}
+              <div className="pt-4 flex justify-end">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById("sec-pyqs");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-2xs hover:scale-[1.02] ${
+                    isDark
+                      ? "bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border-blue-500/30"
+                      : "bg-blue-50 hover:bg-blue-100 text-blue-950 border-blue-300"
+                  }`}
+                >
+                  <span>Continue to Stage 7: Most Repeated Board Questions (Last 20 Years) ➔</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           )}
@@ -2436,18 +2734,20 @@ export default function ConceptsHubView({
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                          Stage 7 &bull; Board Exam Vault
+                          Stage 7 &bull; 20-Year Board Questions
                         </span>
                       </div>
                       <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
-                        10-Year CBSE PYQ Matrix (2016–2025)
+                        Stage 7: 🏆 Most Repeated Board Questions (Last 20 Years)
                       </h3>
                       <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                        Authentic board examination problems paired with official CBSE step-marking rubrics.
+                        Authentic CBSE previous year exam problems with official step-by-step marking rubrics.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-blue-500/20 text-blue-200 border border-blue-500/40">
+                  <span className={`text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full border ${
+                    isDark ? "bg-blue-500/20 text-blue-200 border-blue-500/40" : "bg-blue-100 text-blue-950 border-blue-300"
+                  }`}>
                     {activeMathMasteryData.pyqs.length} Board Problems
                   </span>
                 </div>
@@ -2463,19 +2763,27 @@ export default function ConceptsHubView({
                   >
                     <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/10">
                       <div className="flex items-center gap-2.5">
-                        <span className="px-3.5 py-1 rounded-full text-xs sm:text-sm font-mono font-bold bg-blue-500/20 text-blue-200 border border-blue-500/40">
+                        <span className={`px-3.5 py-1 rounded-full text-xs sm:text-sm font-mono font-bold border ${
+                          isDark ? "bg-blue-500/20 text-blue-200 border-blue-500/40" : "bg-blue-100 text-blue-950 border-blue-300"
+                        }`}>
                           {pyq.year}
                         </span>
-                        <span className="text-xs sm:text-sm font-mono font-bold text-slate-300">
+                        <span className={`text-xs sm:text-sm font-mono font-bold ${
+                          isDark ? "text-slate-300" : "text-slate-700 font-semibold"
+                        }`}>
                           {pyq.topic}
                         </span>
                       </div>
                       <div className="flex items-center gap-2.5">
-                        <span className="px-3 py-1 rounded-full text-xs sm:text-sm font-mono font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-500/40">
+                        <span className={`px-3 py-1 rounded-full text-xs sm:text-sm font-mono font-bold border ${
+                          isDark ? "bg-emerald-500/20 text-emerald-200 border-emerald-500/40" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                        }`}>
                           {pyq.marks} Mark{pyq.marks > 1 ? "s" : ""}
                         </span>
                         {pyq.frequencyTrend && (
-                          <span className="text-xs font-mono font-bold text-amber-300">
+                          <span className={`text-xs font-mono font-bold ${
+                            isDark ? "text-amber-300" : "text-amber-800 font-bold"
+                          }`}>
                             🔥 {pyq.frequencyTrend}
                           </span>
                         )}
@@ -2490,7 +2798,9 @@ export default function ConceptsHubView({
                     {/* Step-by-Step Marking Scheme */}
                     {pyq.markingSchemeBreakdown && pyq.markingSchemeBreakdown.length > 0 && (
                       <div className="space-y-2.5 pt-1">
-                        <span className="text-xs sm:text-sm font-mono uppercase font-bold text-emerald-300 block">
+                        <span className={`text-xs sm:text-sm font-mono uppercase font-bold block ${
+                          isDark ? "text-emerald-300" : "text-emerald-800 font-extrabold"
+                        }`}>
                           Official Step-Marking Scheme:
                         </span>
                         <div className="space-y-2.5">
@@ -2509,7 +2819,9 @@ export default function ConceptsHubView({
                                   <PremiumMathRenderer content={st.step} isDark={isDark} inline />
                                 </span>
                               </div>
-                              <span className="px-2.5 py-1 rounded text-xs sm:text-sm font-mono font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-500/40 shrink-0">
+                              <span className={`px-2.5 py-1 rounded text-xs sm:text-sm font-mono font-bold border shrink-0 ${
+                                isDark ? "bg-emerald-500/20 text-emerald-200 border-emerald-500/40" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                              }`}>
                                 {st.marks}M
                               </span>
                             </div>
@@ -2522,7 +2834,9 @@ export default function ConceptsHubView({
                     <div className={`p-5 sm:p-6 rounded-2xl border space-y-2.5 ${
                       isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-100/70 border-slate-200"
                     }`}>
-                      <span className="text-xs sm:text-sm font-mono uppercase font-bold text-blue-300 block">
+                      <span className={`text-xs sm:text-sm font-mono uppercase font-bold block ${
+                        isDark ? "text-blue-300" : "text-blue-800 font-extrabold"
+                      }`}>
                         Topper Model Working:
                       </span>
                       <div className={`text-sm sm:text-base leading-relaxed ${isDark ? "text-slate-100" : "text-slate-900"}`}>
@@ -2531,12 +2845,32 @@ export default function ConceptsHubView({
                     </div>
 
                     {pyq.commonMistake && (
-                      <div className="text-sm text-rose-300 font-mono pt-1">
+                      <div className={`text-sm font-mono pt-1 ${
+                        isDark ? "text-rose-300" : "text-rose-800 font-bold"
+                      }`}>
                         <PremiumMathRenderer content={`⚠️ **CBSE Evaluator Warning:** ${pyq.commonMistake}`} isDark={isDark} />
                       </div>
                     )}
                   </div>
                 ))}
+              </div>
+
+              {/* Next Stage Navigation Button */}
+              <div className="pt-4 flex justify-end">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById("sec-tests");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-2xs hover:scale-[1.02] ${
+                    isDark
+                      ? "bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border-purple-500/30"
+                      : "bg-purple-50 hover:bg-purple-100 text-purple-950 border-purple-300"
+                  }`}
+                >
+                  <span>Continue to Stage 8: Exam-Ready Timed Mock Test ➔</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           )}
@@ -2557,18 +2891,20 @@ export default function ConceptsHubView({
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                          Stage 8 &bull; Exam Diagnostic
+                          Stage 8 &bull; Timed Mock Test
                         </span>
                       </div>
                       <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
-                        Chapter Master Test Simulators
+                        Stage 8: ⏱️ Exam-Ready Timed Mock Test
                       </h3>
                       <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                        Timed diagnostic and full board test simulators with automated scoring and error analysis.
+                        Timed test simulators matching real CBSE pattern with instant automatic grading and answer analysis.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-purple-500/20 text-purple-200 border border-purple-500/40">
+                  <span className={`text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full border ${
+                    isDark ? "bg-purple-500/20 text-purple-200 border-purple-500/40" : "bg-purple-100 text-purple-950 border-purple-300"
+                  }`}>
                     {activeMathMasteryData.tests.length} Active Simulators
                   </span>
                 </div>
@@ -2625,10 +2961,14 @@ export default function ConceptsHubView({
                         </p>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="flex items-center gap-1.5 text-xs sm:text-sm font-mono px-3.5 py-1.5 rounded-xl bg-purple-500/20 text-purple-200 border border-purple-500/40 font-bold">
+                        <span className={`flex items-center gap-1.5 text-xs sm:text-sm font-mono px-3.5 py-1.5 rounded-xl font-bold border ${
+                          isDark ? "bg-purple-500/20 text-purple-200 border-purple-500/40" : "bg-purple-100 text-purple-950 border-purple-300"
+                        }`}>
                           <Clock className="w-4 h-4" /> {currentTest.durationMinutes} Minutes
                         </span>
-                        <span className="text-xs sm:text-sm font-mono px-3.5 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-200 border border-emerald-500/40 font-bold">
+                        <span className={`text-xs sm:text-sm font-mono px-3.5 py-1.5 rounded-xl font-bold border ${
+                          isDark ? "bg-emerald-500/20 text-emerald-200 border-emerald-500/40" : "bg-emerald-100 text-emerald-950 border-emerald-300"
+                        }`}>
                           {currentTest.totalMarks} Total Marks
                         </span>
                       </div>
@@ -2650,7 +2990,7 @@ export default function ConceptsHubView({
                             ? "🏆 AIR 1 Potential: 100/100 Ready!"
                             : mathTestScore.score / mathTestScore.total >= 0.75
                             ? "⚡ Strong Command: Review minor pitfalls below"
-                            : "📚 Needs Reinforcement: Review 7-step method guides and re-attempt"}
+                            : "📚 Needs Reinforcement: Review step-by-step methods and re-attempt"}
                         </p>
                         <button
                           onClick={handleResetMathTest}
@@ -2675,7 +3015,9 @@ export default function ConceptsHubView({
                             }`}
                           >
                             <div className="flex items-center justify-between">
-                              <span className="text-xs sm:text-sm font-mono font-bold text-purple-300">
+                              <span className={`text-xs sm:text-sm font-mono font-bold ${
+                                isDark ? "text-purple-300" : "text-purple-800 font-extrabold"
+                              }`}>
                                 Question {qIdx + 1} ({q.marks} Mark{q.marks > 1 ? "s" : ""})
                               </span>
                               {mathTestSubmitted && (
@@ -2702,7 +3044,7 @@ export default function ConceptsHubView({
                                     className={`p-4 rounded-xl border text-left text-sm sm:text-base font-semibold transition cursor-pointer flex items-center justify-between ${
                                       userAns === opt
                                         ? "bg-purple-600 text-white border-purple-500"
-                                        : isDark ? "bg-white/5 border-white/10 text-slate-200 hover:bg-white/10" : "bg-white border-slate-200 text-slate-800"
+                                        : isDark ? "bg-white/5 border-white/10 text-slate-200 hover:bg-white/10" : "bg-white border-slate-200 text-slate-800 hover:bg-slate-100"
                                     }`}
                                   >
                                     <span>{opt}</span>
@@ -2729,10 +3071,10 @@ export default function ConceptsHubView({
                                 isDark ? "bg-black/40 border-white/10" : "bg-white border-slate-200"
                               }`}>
                                 <div className="flex items-center justify-between">
-                                  <span className="font-bold text-slate-300">Correct Answer:</span>
-                                  <span className="font-mono font-bold text-emerald-300 text-base">{q.correctAnswer}</span>
+                                  <span className={`font-bold ${isDark ? "text-slate-300" : "text-slate-700"}`}>Correct Answer:</span>
+                                  <span className={`font-mono font-bold text-base ${isDark ? "text-emerald-300" : "text-emerald-800"}`}>{q.correctAnswer}</span>
                                 </div>
-                                <div className="space-y-1.5 pt-1 text-slate-300 leading-relaxed">
+                                <div className={`space-y-1.5 pt-1 leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
                                   {q.solutionSteps.map((st, stIdx) => (
                                     <div key={stIdx}>&bull; {st}</div>
                                   ))}
@@ -2757,6 +3099,24 @@ export default function ConceptsHubView({
                   </div>
                 );
               })()}
+
+              {/* Next Stage Navigation Button */}
+              <div className="pt-4 flex justify-end">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById("sec-revision");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer flex items-center gap-2 shadow-2xs hover:scale-[1.02] ${
+                    isDark
+                      ? "bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 border-amber-500/30"
+                      : "bg-amber-50 hover:bg-amber-100 text-amber-950 border-amber-300"
+                  }`}
+                >
+                  <span>Continue to Stage 9: 1-Page Summary Before Exam ➔</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           )}
 
@@ -2776,18 +3136,20 @@ export default function ConceptsHubView({
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                          Stage 9 &bull; Speed Revision
+                          Stage 9 &bull; 1-Page Summary
                         </span>
                       </div>
                       <h3 className={`text-2xl sm:text-3xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
-                        Last-Day 100/100 Revision Sheet
+                        Stage 9: 📄 1-Page Summary Before Exam
                       </h3>
                       <p className={`text-sm sm:text-base ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                        High-yield 1-page rapid summary: must-remember formulas, 30-second speed hacks, and pitfall checklists.
+                        High-yield rapid review: must-remember formulas, 30-second speed hacks, and pitfall checklists.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full bg-amber-500/20 text-amber-200 border border-amber-500/40">
+                  <span className={`text-xs sm:text-sm font-mono font-bold px-3.5 py-1.5 rounded-full border ${
+                    isDark ? "bg-amber-500/20 text-amber-200 border-amber-500/40" : "bg-amber-100 text-amber-950 border-amber-300"
+                  }`}>
                     High Yield
                   </span>
                 </div>
@@ -2895,6 +3257,48 @@ export default function ConceptsHubView({
                       );
                     })}
                   </div>
+                </div>
+              </div>
+
+              {/* Congratulatory Completion Banner */}
+              <div className={`p-6 sm:p-8 rounded-3xl border flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left transition-all ${
+                isDark
+                  ? "bg-gradient-to-r from-emerald-950/40 via-[#0b1420] to-blue-950/30 border-emerald-500/30"
+                  : "bg-gradient-to-r from-emerald-50 via-teal-50 to-blue-50 border-emerald-200 shadow-sm"
+              }`}>
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-2xl shrink-0">
+                    🏆
+                  </div>
+                  <div>
+                    <h4 className={`text-xl sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                      All 9 Stages Completed! 100/100 Masterclass Conquered
+                    </h4>
+                    <p className={`text-xs sm:text-sm ${isDark ? "text-slate-300" : "text-slate-700 font-medium"}`}>
+                      You have mastered {activeMathMasteryData.chapterName} from ground basics to official board-level questions.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 shrink-0">
+                  <button
+                    onClick={() => {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer ${
+                      isDark
+                        ? "bg-white/5 hover:bg-white/10 text-white border-white/15"
+                        : "bg-white hover:bg-slate-100 text-slate-800 border-slate-300 shadow-xs"
+                    }`}
+                  >
+                    ↑ Return to Top
+                  </button>
+                  <button
+                    onClick={handleNextChapter}
+                    className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white transition-all cursor-pointer shadow-md shadow-blue-600/25 flex items-center gap-2"
+                  >
+                    <span>Next Chapter</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
             </div>

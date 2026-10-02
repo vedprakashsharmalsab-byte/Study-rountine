@@ -53,6 +53,10 @@ const CoverageMatrixView = dynamic(
   () => import("@/components/CoverageMatrixView"),
   { loading: TabSkeleton, ssr: false }
 );
+const SyllabusHubView = dynamic(
+  () => import("@/components/SyllabusHubView"),
+  { loading: TabSkeleton, ssr: false }
+);
 import CommandCenterHomeView from "@/components/CommandCenterHomeView";
 import AreteAccessGateModal, {
   StudentProfile,
@@ -1788,7 +1792,7 @@ export default function CBSECommandCenter() {
         if (!isNaN(p) && p >= 1) return p;
       }
     }
-    return 6; // Vault math default
+    return 1; // Vault math default (Ch 1: Real Numbers)
   });
   const [activeVaultQuestions, setActiveVaultQuestions] = useState<VaultQuestion[]>(() => {
     if (typeof window !== "undefined") {
@@ -1798,13 +1802,13 @@ export default function CBSECommandCenter() {
       const savedSub = (urlSub && ["math", "science", "sst", "english", "hindi"].includes(urlSub))
         ? urlSub as any
         : (localStorage.getItem("cbse_last_vault_subject") as any) || "math";
-      const fallbackCh = savedSub === "math" ? "6" : "1";
+      const fallbackCh = "1";
       const savedCh = urlCh ? parseInt(urlCh) : parseInt(localStorage.getItem("cbse_last_vault_chapter") || fallbackCh);
       if (!isNaN(savedCh) && savedCh >= 1) {
         return getChapterQuestions(savedCh, savedSub);
       }
     }
-    return getChapterQuestions(6, "math");
+    return getChapterQuestions(1, "math");
   });
   const [isAnalyzingVault, setIsAnalyzingVault] = useState(false);
   const [vaultAnalysisLogs, setVaultAnalysisLogs] = useState<string[]>([]);
@@ -2089,9 +2093,9 @@ export default function CBSECommandCenter() {
       const savedSub = (urlSub && ["math", "science", "sst", "english", "hindi"].includes(urlSub))
         ? urlSub as any
         : (localStorage.getItem("cbse_last_vault_subject") as any) || "math";
-      const fallbackCh = savedSub === "math" ? "6" : "1";
+      const fallbackCh = "1";
       const savedCh = urlCh ? parseInt(urlCh) : parseInt(localStorage.getItem("cbse_last_vault_chapter") || fallbackCh);
-      const targetCh = (!isNaN(savedCh) && savedCh >= 1) ? savedCh : (savedSub === "math" ? 6 : 1);
+      const targetCh = (!isNaN(savedCh) && savedCh >= 1) ? savedCh : 1;
       loadChapterData(targetCh, false, savedSub);
 
       // If URL has no ?tab=, write initial state with replaceState so history entry is well-formed
@@ -2101,7 +2105,7 @@ export default function CBSECommandCenter() {
         window.history.replaceState({ tab: activeTab }, "", newUrl);
       }
     } else {
-      loadChapterData(6, false, "math");
+      loadChapterData(1, false, "math");
     }
   }, [loadChapterData, activeTab]);
 
@@ -4002,190 +4006,21 @@ export default function CBSECommandCenter() {
           </div>
         )}
 
-        {/* ===================== TAB 2: FULL 6-SUBJECT NCERT TRACKER ===================== */}
+        {/* ===================== TAB 2: OFFICIAL CBSE 2026-27 SYLLABUS COMMAND HUB ===================== */}
         {activeTab === "syllabus" && (
-          <div className="space-y-5 sm:space-y-6 animate-fade-in">
-            <div className={`p-5 sm:p-7 rounded-3xl border space-y-1.5 transition-colors ${
-              isDark ? "apple-surface" : "apple-surface-light"
-            }`}>
-              <h2 className={`text-base sm:text-xl font-bold tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-                2026–2027 Complete NCERT Syllabus Mastery
-              </h2>
-              <p className={`text-xs ${isDark ? "text-zinc-400" : "text-slate-500"}`}>
-                Mathematics, Science, Social Science, Information Technology 402, English, and Hindi.
-              </p>
-            </div>
-
-            {/* SUBJECT SELECTOR (DROPDOWN ON MOBILE, WRAPPED PILLS ON TABLET/DESKTOP - ZERO SIDE SCROLL) */}
-            <div className="sm:hidden">
-              <div className="fabulous-select-wrapper">
-                <select
-                  aria-label="Select Syllabus Subject"
-                  value={selectedSubjectId}
-                  onChange={(e) => {
-                    playSound("click");
-                    setSelectedSubjectId(e.target.value);
-                  }}
-                  className={`fabulous-select ${
-                    isDark ? "fabulous-select-dark" : "fabulous-select-light"
-                  }`}
-                >
-                  {CBSE_SUBJECTS.map((sub) => (
-                    <option key={sub.id} value={sub.id}>
-                      {sub.name}
-                    </option>
-                  ))}
-                </select>
-                <div className="fabulous-select-icon text-zinc-400">
-                  <ChevronDown className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
-
-            <div className="hidden sm:flex flex-wrap gap-2">
-              {CBSE_SUBJECTS.map((sub) => {
-                const isSelected = sub.id === selectedSubjectId;
-                return (
-                  <button
-                    key={sub.id}
-                    onClick={() => {
-                      playSound("click");
-                      setSelectedSubjectId(sub.id);
-                    }}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer shrink-0 border min-h-[40px] touch-manipulation active:scale-95 ${
-                      isSelected
-                        ? isDark
-                          ? "bg-white/20 border-white/20 text-white font-bold shadow-xs ring-1 ring-white/20"
-                          : "bg-slate-900 text-white border-slate-900 font-bold shadow-xs"
-                        : isDark
-                        ? "bg-white/[0.03] border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white"
-                        : "bg-white border-black/[0.06] text-slate-700 hover:bg-slate-50 shadow-xs"
-                    }`}
-                  >
-                    {sub.name}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* CHAPTERS ACCORDION */}
-            <div className="space-y-3">
-              {selectedSubject.chapters.map((chapter) => {
-                const isExpanded = expandedChapterIds[chapter.id] || false;
-                const chapterCompletedTopics = chapter.topics.filter((t) => completedTopicIds[t.id]).length;
-                const chapterTotalTopics = chapter.topics.length;
-                const isAllDone = chapterCompletedTopics === chapterTotalTopics && chapterTotalTopics > 0;
-
-                return (
-                  <div
-                    key={chapter.id}
-                    className={`perf-card rounded-2xl sm:rounded-3xl border p-4 sm:p-5 transition-all ${
-                      isDark ? "apple-surface" : "apple-surface-light"
-                    }`}
-                  >
-                    <div
-                      onClick={() => toggleChapterExpand(chapter.id)}
-                      className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 cursor-pointer select-none"
-                    >
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-xs font-mono font-bold text-amber-400">
-                            {chapter.ncertChapterNo ? `Ch ${chapter.ncertChapterNo}` : "Unit"}
-                          </span>
-                          <h4 className={`text-xs sm:text-sm font-bold ${isDark ? "text-white" : "text-slate-900"}`}>{chapter.name}</h4>
-                          {isAllDone && (
-                            <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold border border-emerald-500/25">
-                              100% Mastered
-                            </span>
-                          )}
-                        </div>
-                        <p className={`text-[11px] font-mono ${isDark ? "text-zinc-400" : "text-slate-500"}`}>
-                          {chapterCompletedTopics} of {chapterTotalTopics} Sub-Topics Mastered
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-3 self-end sm:self-auto">
-                        <div className={`w-24 sm:w-32 h-1.5 rounded-full overflow-hidden ${isDark ? "bg-white/10" : "bg-black/10"}`}>
-                          <div
-                            className="h-full bg-amber-500 rounded-full transition-all duration-300"
-                            style={{ width: `${Math.round((chapterCompletedTopics / (chapterTotalTopics || 1)) * 100)}%` }}
-                          />
-                        </div>
-                        <span className="text-xs font-mono font-bold text-amber-400">
-                          {Math.round((chapterCompletedTopics / (chapterTotalTopics || 1)) * 100)}%
-                        </span>
-                        {isExpanded ? <ChevronUp className="w-4 h-4 text-zinc-400" /> : <ChevronDown className="w-4 h-4 text-zinc-400" />}
-                      </div>
-                    </div>
-
-                    {/* TOPICS BREAKDOWN */}
-                    {isExpanded && (
-                      <div className={`mt-3.5 pt-3.5 border-t space-y-2 animate-fade-in ${isDark ? "border-white/[0.08]" : "border-black/[0.06]"}`}>
-                        {chapter.topics.map((topic) => {
-                          const isChecked = completedTopicIds[topic.id] || false;
-                          return (
-                            <div
-                              key={topic.id}
-                              onClick={() => toggleTopic(topic.id)}
-                              className={`p-3 rounded-2xl border flex items-center justify-between gap-3 cursor-pointer transition-all min-h-[48px] touch-manipulation active:scale-[0.99] ${
-                                isChecked
-                                  ? isDark
-                                    ? "bg-amber-500/10 border-amber-500/30 text-amber-200"
-                                    : "bg-amber-50 border-amber-300 text-amber-950 font-medium"
-                                  : isDark
-                                  ? "bg-white/[0.02] border-white/[0.06] text-zinc-300 hover:bg-white/[0.05]"
-                                  : "bg-white border-black/[0.06] text-slate-700 hover:bg-slate-50"
-                              }`}
-                            >
-                              <div className="flex items-center gap-3 min-w-0 flex-1">
-                                {isChecked ? (
-                                  <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
-                                ) : (
-                                  <Square className={`w-4 h-4 shrink-0 ${isDark ? "text-zinc-600" : "text-slate-400"}`} />
-                                )}
-                                <div className="min-w-0 flex-1">
-                                  <span className="text-[10px] font-mono font-semibold opacity-70 mr-1.5">
-                                    Sec {topic.sectionCode}
-                                  </span>
-                                  <span className={`text-xs font-medium break-words ${isChecked ? "line-through opacity-70" : isDark ? "text-white" : "text-slate-900"}`}>{topic.title}</span>
-                                </div>
-                              </div>
-
-                              <div className="flex items-center gap-1.5 flex-wrap justify-end shrink-0">
-                                {topic.expectedMarks && (
-                                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold font-mono border ${
-                                    isDark ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/20" : "bg-cyan-50 text-cyan-900 border-cyan-200"
-                                  }`}>
-                                    {topic.expectedMarks}
-                                  </span>
-                                )}
-                                {topic.probability ? (
-                                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold font-mono border ${
-                                    topic.probability.includes("High Chance")
-                                      ? "bg-rose-500/10 text-rose-400 border-rose-500/20"
-                                      : topic.probability.includes("Medium Chance")
-                                      ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
-                                      : "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
-                                  }`}>
-                                    {topic.probability}
-                                  </span>
-                                ) : topic.isImportantForBoards && (
-                                  <span className="px-2 py-0.5 rounded-full text-[9px] font-bold font-mono bg-rose-500/15 text-rose-400 border border-rose-500/25">
-                                    High Yield
-                                  </span>
-                                )}
-                                <span className="text-[10px] font-mono text-amber-500 font-bold shrink-0">+25 XP</span>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <SyllabusHubView
+            isDark={isDark}
+            selectedSubjectId={selectedSubjectId}
+            onSelectSubjectId={(id) => {
+              playSound("click");
+              setSelectedSubjectId(id);
+            }}
+            completedTopicIds={completedTopicIds}
+            onToggleTopic={toggleTopic}
+            expandedChapterIds={expandedChapterIds}
+            onToggleChapterExpand={toggleChapterExpand}
+            playSound={playSound}
+          />
         )}
 
         {/* ===================== TAB 3: CHAPTER FLASHCARDS ENGINE ===================== */}
@@ -4743,6 +4578,11 @@ export default function CBSECommandCenter() {
                   >
                     {activeVaultSubject === "math" ? (
                       <>
+                        <option value="1">Ch 1: Real Numbers (25 Questions)</option>
+                        <option value="2">Ch 2: Polynomials (25 Questions)</option>
+                        <option value="3">Ch 3: Pair of Linear Equations (25 Questions)</option>
+                        <option value="4">Ch 4: Quadratic Equations (25 Questions)</option>
+                        <option value="5">Ch 5: Arithmetic Progressions (25 Questions)</option>
                         <option value="6">Ch 6: Triangles (60 Questions)</option>
                         <option value="8">Ch 8: Introduction to Trigonometry (60 Questions)</option>
                         <option value="9">Ch 9: Some Applications of Trig (55 Questions)</option>

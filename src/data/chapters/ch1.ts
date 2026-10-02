@@ -367,5 +367,189 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     formula: "HCF(420, 130) = 10; Stacks = Total / HCF",
     examinerNote: "Competency questions award partial marks for each independent sub-part. Show working clearly for part (iii).",
     source: "CBSE Official Sample Paper 2024-25 & CFPQ 2024"
+  },
+  {
+    id: "vq_1_mcq_6",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2024 Standard] Assertion (A): The HCF of two numbers is 5 and their product is 150, then their LCM is 30.\nReason (R): For any two positive integers a and b, HCF(a, b) * LCM(a, b) = a * b.",
+    options: [
+      "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+      "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
+      "(A) is true but (R) is false",
+      "(A) is false but (R) is true"
+    ],
+    correctOption: 0,
+    answer: "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+    steps: [
+      "Step 1: Reason formula is standard theorem: HCF(a, b) * LCM(a, b) = a * b. Reason is True.",
+      "Step 2: Check Assertion: 5 * LCM = 150 => LCM = 150 / 5 = 30. Assertion is True.",
+      "Step 3: Reason is the exact mathematical principle that justifies the calculation in Assertion."
+    ],
+    explanation: "Since HCF * LCM = Product of two numbers, 5 * 30 = 150, which matches.",
+    formula: "HCF(a, b) * LCM(a, b) = a * b",
+    examinerNote: "Assertion-Reason questions are compulsory Section A items in CBSE 2024-2026. Verify both calculation and causality.",
+    source: "CBSE 2024 Standard Board Examination"
+  },
+  {
+    id: "vq_1_mcq_7",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2023 Standard] If a = 2^3 * 3, b = 2 * 3 * 5, c = 3^n * 5 and LCM(a, b, c) = 2^3 * 3^2 * 5, then the value of n is:",
+    options: ["1", "2", "3", "4"],
+    correctOption: 1,
+    answer: "2",
+    steps: [
+      "Step 1: LCM contains the highest power of each prime factor involved in the numbers.",
+      "Step 2: Prime factors involved are 2, 3, and 5.",
+      "Step 3: In LCM, the power of 3 is 2. The powers of 3 in a, b, c are 1, 1, and n respectively.",
+      "Step 4: Therefore, max(1, 1, n) = 2 => n = 2."
+    ],
+    explanation: "LCM takes the greatest exponent of each prime factor across all numbers.",
+    formula: "Exponent in LCM = max(exponents of that prime in given numbers)",
+    examinerNote: "Careful: Do not confuse LCM exponent rule with HCF exponent rule.",
+    source: "CBSE 2023 Standard Set 30/1/2"
+  },
+  {
+    id: "vq_1_vsa_4",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2020, 2022] Can two positive integers have 16 as their HCF and 380 as their LCM? Justify your answer.",
+    answer: "No, because HCF must strictly divide LCM, and 380 is not divisible by 16.",
+    steps: [
+      "Step 1: By definition, HCF of two numbers is always a factor of their LCM.",
+      "Step 2: Check divisibility of 380 by 16: 380 / 16 = 23.75 (not an integer). Remainder = 12.",
+      "Step 3: Since 16 does not divide 380 completely, two such numbers cannot exist."
+    ],
+    explanation: "Every common factor dividing both numbers also divides any multiple of both numbers, so HCF must divide LCM without remainder.",
+    formula: "LCM % HCF == 0 for any pair of integers",
+    examinerNote: "Always write the division and explicitly show the non-zero remainder to secure full 2 marks.",
+    source: "CBSE All India Board Examination"
+  },
+  {
+    id: "vq_1_vsa_5",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2021] Write the prime factorisation of 2058 and hence state the number of distinct prime factors.",
+    answer: "2058 = 2 * 3 * 7^3; Distinct prime factors = 3 (namely 2, 3, and 7)",
+    steps: [
+      "Step 1: 2058 / 2 = 1029.",
+      "Step 2: 1029 / 3 = 343.",
+      "Step 3: 343 = 7^3.",
+      "Step 4: Prime factorisation = 2^1 * 3^1 * 7^3.",
+      "Step 5: Distinct prime factors are 2, 3, and 7, so there are 3 distinct primes."
+    ],
+    explanation: "Do not count powers when asked for distinct prime factors: 2, 3, and 7 are 3 unique primes.",
+    formula: "N = 2 * 3 * 7^3",
+    examinerNote: "Students often write 5 (1 + 1 + 3) instead of 3. 'Distinct' means unique primes.",
+    source: "CBSE Term-1 Board Exam"
+  },
+  {
+    id: "vq_1_sa_6",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024 Standard] Three bells toll together at intervals of 9, 12, and 15 minutes respectively. If they toll together now, after how many hours will they toll together again?",
+    answer: "3 hours (180 minutes)",
+    steps: [
+      "Step 1: The time interval when all three bells toll together again is the LCM of their individual intervals.",
+      "Step 2: Prime factorise each interval:\n9 = 3^2\n12 = 2^2 * 3\n15 = 3 * 5",
+      "Step 3: LCM(9, 12, 15) = 2^2 * 3^2 * 5 = 4 * 9 * 5 = 180 minutes.",
+      "Step 4: Convert minutes to hours: 180 / 60 = 3 hours.",
+      "Step 5: Therefore, the bells will toll together again after 3 hours."
+    ],
+    explanation: "Simultaneous cyclic events repeat at intervals equal to the LCM of the cycle times.",
+    formula: "T = LCM(t1, t2, t3)",
+    examinerNote: "Question asks for answer in HOURS. Writing only 180 minutes without converting to 3 hours loses 0.5 marks.",
+    source: "CBSE Board 2024 Standard (Set 30/3/1)"
+  },
+  {
+    id: "vq_1_sa_7",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2023 Set-2] Prove that 2 - 3√5 is an irrational number, given that √5 is an irrational number.",
+    answer: "Proof by contradiction showing 2 - 3√5 cannot be expressed as p/q.",
+    steps: [
+      "Step 1: Let us assume to the contrary that 2 - 3√5 is a rational number.",
+      "Step 2: Then there exist co-prime integers a and b (b != 0) such that:\n2 - 3√5 = a/b.",
+      "Step 3: Rearranging to isolate √5:\n3√5 = 2 - a/b = (2b - a)/b\n=> √5 = (2b - a) / (3b).",
+      "Step 4: Since a and b are integers, 2b - a and 3b are integers, and 3b != 0.",
+      "Step 5: Therefore, (2b - a)/(3b) is a rational number.",
+      "Step 6: This implies that √5 is rational. But this contradicts the given fact that √5 is irrational.",
+      "Step 7: Hence, our assumption was incorrect, and 2 - 3√5 is irrational."
+    ],
+    explanation: "Linear rearrangement isolates the known irrational on one side and an integer ratio on the other, creating the desired contradiction.",
+    formula: "√5 = (2b - a) / (3b)",
+    examinerNote: "Since √5 is already given as irrational, do NOT re-prove √5 from p^2/q^2. Only 5 lines of algebraic isolation are required.",
+    source: "CBSE Board 2023 Standard (Set 30/2/2)"
+  },
+  {
+    id: "vq_1_la_3",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024 Sample Paper] A circular track has a circumference of 360 m. Two cyclists start together from the same point at speeds of 18 km/h and 24 km/h in the same direction. Find:\n(i) Time taken by each cyclist to complete one round.\n(ii) After how much time will they meet again at the starting point?\n(iii) How many rounds will each cyclist have completed when they meet?",
+    answer: "(i) A = 72 s, B = 54 s; (ii) 216 seconds (3 min 36 s); (iii) A = 3 rounds, B = 4 rounds",
+    steps: [
+      "Step 1: Convert speeds from km/h to m/s:\nSpeed of A = 18 * (5/18) = 5 m/s.\nSpeed of B = 24 * (5/18) = 20/3 m/s.",
+      "Step 2: Time for one complete lap (360 m):\nTime for A = 360 / 5 = 72 seconds.\nTime for B = 360 / (20/3) = 360 * 3 / 20 = 54 seconds.",
+      "Step 3: They will meet at starting point after a time equal to LCM(72, 54):\n72 = 2^3 * 3^2\n54 = 2 * 3^3\nLCM(72, 54) = 2^3 * 3^3 = 8 * 27 = 216 seconds = 3 minutes 36 seconds.",
+      "Step 4: Number of rounds completed by A:\n216 / 72 = 3 rounds.",
+      "Step 5: Number of rounds completed by B:\n216 / 54 = 4 rounds."
+    ],
+    explanation: "Physical motion problems require converting speeds to SI units, computing single-lap periods, and finding their LCM for recurrence.",
+    formula: "Time = Distance / Speed; Meeting Time = LCM(T_A, T_B)",
+    examinerNote: "Always check speed unit conversions (km/h to m/s using multiplication by 5/18).",
+    source: "CBSE Official Sample Paper 2024"
+  },
+  {
+    id: "vq_1_case_2",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2025 Official Sample Paper Case Study] In a national conference, participants in Mathematics, Science, and Social Science are 60, 84, and 108 respectively. The organizing committee wants to accommodate them in minimum number of rooms such that each room has the same number of participants and all participants in a room belong to the same subject.\n\nAnswer the following:\n(i) What is the maximum capacity of participants that can be seated in each room? (1 Mark)\n(ii) Find the minimum number of rooms required for Mathematics participants. (1 Mark)\n(iii) (a) Find the total minimum number of rooms required for the entire conference. (2 Marks)\nOR\n(iii) (b) If each room requires 12 desks and 2 sanitizers, find total desks and sanitizers needed for all rooms. (2 Marks)",
+    answer: "(i) 12 participants per room; (ii) 5 rooms; (iii)(a) 21 rooms; (iii)(b) 252 desks and 42 sanitizers",
+    steps: [
+      "Part (i): To minimize rooms, room capacity must be the MAXIMUM possible equal divisor of 60, 84, and 108.\n60 = 2^2 * 3 * 5\n84 = 2^2 * 3 * 7\n108 = 2^2 * 3^3\nHCF(60, 84, 108) = 2^2 * 3 = 12 participants per room.",
+      "Part (ii): Rooms for Mathematics = 60 / 12 = 5 rooms.",
+      "Part (iii)(a): Rooms for Science = 84 / 12 = 7 rooms.\nRooms for Social Science = 108 / 12 = 9 rooms.\nTotal minimum rooms = 5 + 7 + 9 = 21 rooms.",
+      "Part (iii)(b) Alternative: Total desks = 21 * 12 = 252 desks.\nTotal sanitizers = 21 * 2 = 42 sanitizers."
+    ],
+    explanation: "Minimizing total rooms requires maximizing individual room capacity, which is the HCF of all participant counts.",
+    formula: "Capacity = HCF(60, 84, 108) = 12; Total Rooms = Sum of quotients",
+    examinerNote: "Make sure to show prime factorisation of all three numbers to justify HCF = 12.",
+    source: "CBSE Official Sample Paper 2024-25 (Standard)"
+  },
+  {
+    id: "vq_1_case_3",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2024 Competency Case Study] Traffic light signals at three consecutive junctions on an arterial highway change their lights after every 48 seconds, 72 seconds, and 108 seconds respectively. If all three signals change simultaneously at 8:00:00 AM:\n\n(i) Find the prime factorisation of 48, 72, and 108. (1 Mark)\n(ii) After how many seconds will all three signals change simultaneously again? (1 Mark)\n(iii) (a) At what exact time on the clock will they change simultaneously next? (2 Marks)\nOR\n(iii) (b) How many times will they change simultaneously between 8:00 AM and 9:00 AM (inclusive)? (2 Marks)",
+    answer: "(i) 48=2^4*3, 72=2^3*3^2, 108=2^2*3^3; (ii) 432 seconds; (iii)(a) 8:07:12 AM; (iii)(b) 9 times",
+    steps: [
+      "Part (i): 48 = 2^4 * 3; 72 = 2^3 * 3^2; 108 = 2^2 * 3^3.",
+      "Part (ii): LCM(48, 72, 108) = 2^4 * 3^3 = 16 * 27 = 432 seconds.",
+      "Part (iii)(a): Convert 432 seconds to minutes and seconds:\n432 / 60 = 7 minutes with a remainder of 12 seconds.\nTime on clock = 8:00:00 AM + 7 min 12 s = 8:07:12 AM.",
+      "Part (iii)(b) Alternative: 1 hour = 3600 seconds.\nNumber of intervals = floor(3600 / 432) = 8.\nIncluding the starting change at 8:00:00 AM, total times = 8 + 1 = 9 times."
+    ],
+    explanation: "Traffic light cycles synchronize at multiples of their LCM. Time of next sync is obtained by adding the LCM duration to the starting timestamp.",
+    formula: "Sync Interval = LCM(48, 72, 108) = 432 seconds = 7 min 12 s",
+    examinerNote: "Students often forget to add the starting timestamp in part (iii)(b), writing 8 instead of 9.",
+    source: "CBSE Competency-Focused Practice Questions (CFPQ)"
   }
 ];

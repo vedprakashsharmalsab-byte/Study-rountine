@@ -329,5 +329,241 @@ export const CH3_QUESTIONS: VaultQuestion[] = [
     formula: "Total Cost = Fixed + Rate * Distance",
     examinerNote: "Don't forget rupee symbols and km units in the final answer.",
     source: "CBSE Official CFPQ 2024 & Sample Paper 2024-25"
+  },
+  {
+    id: "vq_3_mcq_6",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2024 Standard] Assertion (A): The pair of linear equations 3x - 5y = 7 and 6x - 10y = 3 has no solution.\nReason (R): The pair of equations a1*x + b1*y + c1 = 0 and a2*x + b2*y + c2 = 0 represents parallel lines if a1/a2 = b1/b2 != c1/c2.",
+    options: [
+      "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+      "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
+      "(A) is true but (R) is false",
+      "(A) is false but (R) is true"
+    ],
+    correctOption: 0,
+    answer: "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+    steps: [
+      "Step 1: Write in standard form: 3x - 5y - 7 = 0 and 6x - 10y - 3 = 0.",
+      "Step 2: Calculate ratios: a1/a2 = 3/6 = 1/2; b1/b2 = -5/(-10) = 1/2; c1/c2 = -7/(-3) = 7/3.",
+      "Step 3: Notice a1/a2 = b1/b2 != c1/c2 (1/2 = 1/2 != 7/3). Therefore, lines are parallel and have NO solution.",
+      "Step 4: Assertion is True and Reason is the exact matching criterion."
+    ],
+    explanation: "Parallel lines never meet, hence consistent intersection does not exist.",
+    formula: "No solution: a1/a2 = b1/b2 != c1/c2",
+    examinerNote: "Always rewrite equations so constant terms are on the same side before evaluating c1/c2.",
+    source: "CBSE 2024 Standard Board Examination"
+  },
+  {
+    id: "vq_3_mcq_7",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2023 Standard] The pair of equations x = a and y = b graphically represents lines which are:",
+    options: [
+      "parallel",
+      "intersecting at (b, a)",
+      "coincident",
+      "intersecting at (a, b)"
+    ],
+    correctOption: 3,
+    answer: "intersecting at (a, b)",
+    steps: [
+      "Step 1: x = a is a vertical line parallel to the y-axis, passing through (a, 0).",
+      "Step 2: y = b is a horizontal line parallel to the x-axis, passing through (0, b).",
+      "Step 3: A vertical line and a horizontal line are perpendicular to each other and intersect at the unique point (a, b)."
+    ],
+    explanation: "x = a fixes the x-coordinate and y = b fixes the y-coordinate, yielding unique intersection (a, b).",
+    formula: "Intersection point = (a, b)",
+    examinerNote: "Don't confuse (a, b) with (b, a). Coordinates are strictly ordered (x, y).",
+    source: "CBSE 2023 Standard (Set 30/1/3)"
+  },
+  {
+    id: "vq_3_mcq_8",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2020 Standard] Solve 2x + 3y = 11 and 2x - 4y = -24, and hence find the value of 'm' for which y = mx + 3.",
+    options: ["m = 1", "m = -1", "m = 2", "m = -2"],
+    correctOption: 1,
+    answer: "m = -1",
+    steps: [
+      "Step 1: Subtract equations: (2x + 3y) - (2x - 4y) = 11 - (-24) => 7y = 35 => y = 5.",
+      "Step 2: Substitute y = 5 into 2x + 3(5) = 11 => 2x + 15 = 11 => 2x = -4 => x = -2.",
+      "Step 3: Substitute x = -2 and y = 5 into y = mx + 3:\n5 = m(-2) + 3 => 2 = -2m => m = -1."
+    ],
+    explanation: "Eliminate 2x to find y=5, then x=-2. Finally substitute both coordinates into the linear slope equation.",
+    formula: "m = (y - 3) / x",
+    examinerNote: "Double check sign when subtracting -24: 11 - (-24) = 11 + 24 = 35.",
+    source: "CBSE 2020 Standard Board Examination"
+  },
+  {
+    id: "vq_3_vsa_4",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2023 Standard] Find the value of k for which the system of equations 3x + y = 1 and (2k - 1)x + (k - 1)y = 2k + 1 has no solution.",
+    answer: "k = 2",
+    steps: [
+      "Step 1: For no solution: a1/a2 = b1/b2 != c1/c2.",
+      "Step 2: a1 = 3, b1 = 1, c1 = 1; a2 = 2k - 1, b2 = k - 1, c2 = 2k + 1.",
+      "Step 3: 3 / (2k - 1) = 1 / (k - 1)\nCross-multiplying: 3(k - 1) = 2k - 1\n3k - 3 = 2k - 1 => k = 2.",
+      "Step 4: Check inequality: c1/c2 = 1 / (2(2) + 1) = 1/5. Here b1/b2 = 1 / (2 - 1) = 1. Since 1 != 1/5, condition holds.",
+      "Step 5: Therefore, k = 2."
+    ],
+    explanation: "Parallel line condition requires equal slope (a1/a2 = b1/b2) and distinct intercepts (b1/b2 != c1/c2).",
+    formula: "a1/a2 = b1/b2 != c1/c2",
+    examinerNote: "Checking the inequality condition != c1/c2 is mandatory to secure the final 0.5 mark.",
+    source: "CBSE Board 2023 Standard"
+  },
+  {
+    id: "vq_3_vsa_5",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2020, 2022] Solve the following pair of linear equations by the method of cross-addition and subtraction: 47x + 31y = 63 and 31x + 47y = 15.",
+    answer: "x = 2, y = -1",
+    steps: [
+      "Step 1: Add the two equations:\n(47 + 31)x + (31 + 47)y = 63 + 15\n78x + 78y = 78 => x + y = 1  --- (Equation 3).",
+      "Step 2: Subtract the second equation from the first:\n(47 - 31)x + (31 - 47)y = 63 - 15\n16x - 16y = 48 => x - y = 3  --- (Equation 4).",
+      "Step 3: Add (3) and (4): 2x = 4 => x = 2.",
+      "Step 4: Subtract (4) from (3): 2y = -2 => y = -1.",
+      "Step 5: Verification: 47(2) + 31(-1) = 94 - 31 = 63. Correct!"
+    ],
+    explanation: "When coefficients of x and y are interchanged, adding and subtracting yields simple reduced equations x+y and x-y.",
+    formula: "(x + y) and (x - y) reduction technique",
+    examinerNote: "Do not attempt to multiply 47 by 31; this cyclic method solves the problem in 4 simple lines.",
+    source: "CBSE 2022 Term-2 Board Examination"
+  },
+  {
+    id: "vq_3_sa_4",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024 Standard] 2 women and 5 men can together finish an embroidery work in 4 days, while 3 women and 6 men can finish it in 3 days. Find the time taken by 1 woman alone to finish the work, and also that taken by 1 man alone.",
+    answer: "1 woman alone = 18 days; 1 man alone = 36 days",
+    steps: [
+      "Step 1: Let 1 woman take x days and 1 man take y days alone.\nWork done by 1 woman in 1 day = 1/x; by 1 man = 1/y.",
+      "Step 2: Given 2 women and 5 men take 4 days:\n2/x + 5/y = 1/4  --- (Equation 1).\nGiven 3 women and 6 men take 3 days:\n3/x + 6/y = 1/3 => 1/x + 2/y = 1/9  --- (Equation 2).",
+      "Step 3: Let u = 1/x and v = 1/y:\n2u + 5v = 1/4 => 8u + 20v = 1\nu + 2v = 1/9 => 9u + 18v = 1.",
+      "Step 4: Multiply second by 8 and first by 9:\n72u + 180v = 9\n72u + 144v = 8\nSubtract: 36v = 1 => v = 1/36 => y = 36 days.",
+      "Step 5: u = 1/9 - 2(1/36) = 1/9 - 1/18 = 1/18 => x = 18 days.",
+      "Step 6: Therefore, 1 woman takes 18 days alone and 1 man takes 36 days alone."
+    ],
+    explanation: "Rate of work per day is reciprocal of total days. Reducible linear equations yield individual times.",
+    formula: "Daily Work = 1 / Days; n_1 * (1/x) + n_2 * (1/y) = 1 / Total Days",
+    examinerNote: "Be sure to state the final answer in days, not as the reciprocal rates 1/18 and 1/36.",
+    source: "CBSE Board 2024 Standard (Set 30/2/1)"
+  },
+  {
+    id: "vq_3_sa_5",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2023 Standard] A fraction becomes 9/11 if 2 is added to both the numerator and the denominator. If 3 is added to both the numerator and the denominator, it becomes 5/6. Find the fraction.",
+    answer: "The fraction is 7/9",
+    steps: [
+      "Step 1: Let the numerator be x and denominator be y. Fraction = x/y.",
+      "Step 2: Condition 1: (x + 2) / (y + 2) = 9/11\nCross-multiply: 11(x + 2) = 9(y + 2)\n11x + 22 = 9y + 18 => 11x - 9y = -4  --- (Equation 1).",
+      "Step 3: Condition 2: (x + 3) / (y + 3) = 5/6\nCross-multiply: 6(x + 3) = 5(y + 3)\n6x + 18 = 5y + 15 => 6x - 5y = -3  --- (Equation 2).",
+      "Step 4: Multiply (1) by 5 and (2) by 9:\n55x - 45y = -20\n54x - 45y = -27\nSubtract: x = 7.",
+      "Step 5: Substitute x = 7 into (2): 6(7) - 5y = -3 => 42 - 5y = -3 => 5y = 45 => y = 9.",
+      "Step 6: Required fraction = x/y = 7/9.",
+      "Step 7: Verification: (7+2)/(9+2) = 9/11; (7+3)/(9+3) = 10/12 = 5/6. Fully verified!"
+    ],
+    explanation: "Cross-multiplication transforms rational proportion statements into standard linear simultaneous equations.",
+    formula: "Fraction = x/y; solve 11x - 9y = -4 and 6x - 5y = -3",
+    examinerNote: "State the fraction as 7/9, not just x = 7 and y = 9.",
+    source: "CBSE Board 2023 Standard (Set 30/3/2)"
+  },
+  {
+    id: "vq_3_sa_6",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2020 Standard] Points A and B are 100 km apart on a highway. One car starts from A and another from B at the same time. If the cars travel in the same direction at different speeds, they meet in 5 hours. If they travel towards each other, they meet in 1 hour. What are the speeds of the two cars?",
+    answer: "Speed of car from A = 60 km/h; Speed of car from B = 40 km/h",
+    steps: [
+      "Step 1: Let the speed of the car from A be x km/h and that of the car from B be y km/h (x > y).",
+      "Step 2: Case 1 (Same direction, meeting in 5 hours):\nRelative speed = x - y.\nDistance = Relative Speed * Time => 100 = (x - y) * 5 => x - y = 20  --- (Equation 1).",
+      "Step 3: Case 2 (Towards each other, meeting in 1 hour):\nRelative speed = x + y.\nDistance = Relative Speed * Time => 100 = (x + y) * 1 => x + y = 100  --- (Equation 2).",
+      "Step 4: Add (1) and (2): 2x = 120 => x = 60 km/h.",
+      "Step 5: Subtract (1) from (2): 2y = 80 => y = 40 km/h.",
+      "Step 6: Speed of car A = 60 km/h; Speed of car B = 40 km/h."
+    ],
+    explanation: "Relative speed concept: (x - y) when moving in same direction, (x + y) when moving towards each other.",
+    formula: "Same direction: d = (x - y)t; Opposite: d = (x + y)t",
+    examinerNote: "Assume x > y explicitly at the start so that x - y is positive.",
+    source: "CBSE Board 2020 Standard"
+  },
+  {
+    id: "vq_3_la_3",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2017, 2020, 2024] A motorboat can travel 30 km upstream and 44 km downstream in 10 hours. In 13 hours, it can travel 40 km upstream and 55 km downstream. Determine the speed of the stream and that of the boat in still water.",
+    answer: "Speed of boat in still water = 8 km/h; Speed of stream = 3 km/h",
+    steps: [
+      "Step 1: Let speed of boat in still water be x km/h and speed of stream be y km/h (x > y).\nSpeed upstream = (x - y) km/h; Speed downstream = (x + y) km/h.",
+      "Step 2: Total time = Upstream Time + Downstream Time.\nCondition 1: 30 / (x - y) + 44 / (x + y) = 10.\nCondition 2: 40 / (x - y) + 55 / (x + y) = 13.",
+      "Step 3: Let u = 1 / (x - y) and v = 1 / (x + y):\n30u + 44v = 10  --- (1)\n40u + 55v = 13  --- (2)",
+      "Step 4: Multiply (1) by 4 and (2) by 3:\n120u + 176v = 40\n120u + 165v = 39\nSubtract: 11v = 1 => v = 1/11.",
+      "Step 5: Substitute v = 1/11 into (1): 30u + 44(1/11) = 10 => 30u + 4 = 10 => 30u = 6 => u = 1/5.",
+      "Step 6: Now: x - y = 1/u = 5, and x + y = 1/v = 11.",
+      "Step 7: Add equations: 2x = 16 => x = 8 km/h.\nSubtract equations: 2y = 6 => y = 3 km/h.",
+      "Step 8: Speed of boat in still water = 8 km/h; Speed of stream = 3 km/h."
+    ],
+    explanation: "Two-stage reduction: first solve for reciprocal parameters u and v, then solve the resulting linear system in x and y.",
+    formula: "v_up = x - y; v_down = x + y; Time = d_up/(x - y) + d_down/(x + y)",
+    examinerNote: "This 5-mark problem appears regularly across 20-year papers. Ensure units (km/h) are explicitly written.",
+    source: "CBSE Board 2020 & 2024 All India"
+  },
+  {
+    id: "vq_3_case_2",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2024 Sample Paper Case Study] Lending Library Pricing: A public lending library has a fixed charge for the first three days and an additional charge for each day thereafter. Saritha paid Rs 27 for a book kept for seven days, while Susy paid Rs 21 for the book she kept for five days.\n\n(i) Formulate the pair of linear equations representing this situation. (1 Mark)\n(ii) Find the fixed charge for the first 3 days. (1 Mark)\n(iii) (a) Find the charge for each extra day. (1 Mark) How much would a member pay for keeping a book for 9 days? (1 Mark)\nOR\n(iii) (b) If a student has Rs 45 in total library credit, what is the maximum number of days they can borrow the book? (2 Marks)",
+    answer: "(i) x + 4y = 27 and x + 2y = 21; (ii) Fixed charge = Rs 15; (iii)(a) Extra day = Rs 3/day, 9 days = Rs 33; (iii)(b) 13 days",
+    steps: [
+      "Part (i): Let fixed charge for first 3 days be Rs x and charge per extra day be Rs y.\nSaritha kept for 7 days (3 fixed + 4 extra): x + 4y = 27  --- (1).\nSusy kept for 5 days (3 fixed + 2 extra): x + 2y = 21  --- (2).",
+      "Part (ii): Subtract (2) from (1): 2y = 6 => y = 3. Rate per extra day = Rs 3.\nSubstitute y = 3 into (2): x + 2(3) = 21 => x + 6 = 21 => x = Rs 15. Fixed charge = Rs 15.",
+      "Part (iii)(a): Extra day charge = Rs 3.\nFor 9 days: 3 fixed + 6 extra days = x + 6y = 15 + 6(3) = 15 + 18 = Rs 33.",
+      "Part (iii)(b) Alternative: Total cost <= 45:\n15 + (d - 3)*3 <= 45\n(d - 3)*3 <= 30 => d - 3 <= 10 => d <= 13 days.\nMaximum days = 13 days."
+    ],
+    explanation: "Careful definition of variables: days beyond the initial 3-day window are charged extra, so d days incur (d - 3) daily charges.",
+    formula: "Total = x + (Days - 3)*y for Days >= 3",
+    examinerNote: "Common trap: writing x + 7y = 27 instead of x + 4y = 27. The fixed charge covers the first 3 days.",
+    source: "CBSE Official Sample Paper 2024"
+  },
+  {
+    id: "vq_3_case_3",
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2025 Competency Case Study] Educational Excursion Ticket Booking: A school organizes a science trip. The ticket counter offers child tickets and adult tickets. A group of 4 teachers and 20 students paid Rs 2800. Another group of 5 teachers and 35 students from the same school paid Rs 4600.\n\n(i) Represent the given situation algebraically. (1 Mark)\n(ii) Find the cost of one adult ticket. (1 Mark)\n(iii) (a) Find the cost of one student ticket, and the total cost for 2 teachers and 15 students. (2 Marks)\nOR\n(iii) (b) If the school has a budget of Rs 6000 for a third group consisting of 6 teachers, what is the maximum number of students that can accompany them? (2 Marks)",
+    answer: "(i) 4x + 20y = 2800 and 5x + 35y = 4600; (ii) Adult ticket = Rs 150; (iii)(a) Student ticket = Rs 110, Group cost = Rs 1950; (iii)(b) 46 students",
+    steps: [
+      "Part (i): Let adult ticket be Rs x and student ticket be Rs y.\n4x + 20y = 2800 => x + 5y = 700  --- (1).\n5x + 35y = 4600 => x + 7y = 920  --- (2).",
+      "Part (ii): Subtract (1) from (2): 2y = 220 => y = 110. Student ticket = Rs 110.\nSubstitute into (1): x + 5(110) = 700 => x + 550 = 700 => x = Rs 150. Adult ticket = Rs 150.",
+      "Part (iii)(a): Student ticket = Rs 110.\nFor 2 teachers and 15 students: 2(150) + 15(110) = 300 + 1650 = Rs 1950.",
+      "Part (iii)(b) Alternative: Budget = Rs 6000 with 6 teachers:\nCost for 6 teachers = 6 * 150 = Rs 900.\nRemaining for students = 6000 - 900 = Rs 5100.\nNumber of students = floor(5100 / 110) = floor(46.36) = 46 students."
+    ],
+    explanation: "System of linear equations derived from commercial pricing tiers. Integer floor division determines capacity within budget.",
+    formula: "Cost = N_adult * x + N_child * y",
+    examinerNote: "In part (iii)(b), you cannot round up to 47 because that would exceed the budget of Rs 6000. Take floor = 46.",
+    source: "CBSE Competency Assessment Framework 2025"
   }
 ];

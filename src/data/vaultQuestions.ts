@@ -51,6 +51,201 @@ export interface VaultChapterInfo {
 
 export const VAULT_CHAPTER_INFO: VaultChapterInfo[] = [
   {
+    chapter: 1,
+    chapterName: "Real Numbers",
+    emoji: "🔢",
+    accentColor: "blue",
+    theoryBlocks: [
+      {
+        title: "Fundamental Theorem of Arithmetic (Unique DNA of Numbers)",
+        content: "Every composite number can be uniquely expressed (factored) as a product of prime numbers, regardless of the order in which the primes are written. For example, 12 is always 2² × 3. This is the cornerstone of all number theory in Class 10.",
+        formula: "N = p₁ᵃ¹ · p₂ᵃ² ··· pₖᵃᵏ"
+      },
+      {
+        title: "HCF and LCM Fundamental Relationship",
+        content: "For ANY TWO positive integers a and b: HCF(a, b) × LCM(a, b) = a × b. HCF takes the SMALLEST power of common prime factors. LCM takes the GREATEST power of EVERY prime factor involved. CRITICAL TRAP: This formula works ONLY for TWO numbers! It is algebraically FALSE for three numbers.",
+        formula: "HCF(a, b) × LCM(a, b) = a × b"
+      },
+      {
+        title: "Proof of Irrationality by Contradiction",
+        content: "To prove √2, √3, or √5 is irrational: (1) Assume it is rational: √p = a/b where a and b are COPRIME integers and b ≠ 0. (2) Square both sides: p = a²/b² ⟹ pb² = a². (3) By Theorem: since p divides a², p must divide a. Let a = pc. (4) Substitute back: pb² = (pc)² = p²c² ⟹ b² = pc². So p divides b² ⟹ p divides b. (5) Both a and b have p as a common factor, which CONTRADICTS that a and b are coprime! Hence √p is irrational.",
+        formula: "p | a² ⟹ p | a  (where p is prime)"
+      },
+      {
+        title: "Sum / Difference of Rational & Irrational",
+        content: "If √p is already given to be irrational, proving that (a + b√p) is irrational requires only 3 lines of simple algebra: Assume a + b√p = r (where r is rational). Then b√p = r - a ⟹ √p = (r - a)/b. Since r, a, b are integers/rational, the RHS is rational. But LHS (√p) is irrational! A rational cannot equal an irrational. Hence contradiction!"
+      }
+    ],
+    topTraps: [
+      "Applying HCF × LCM = a × b × c for 3 numbers — this formula is STRICTLY for 2 numbers only!",
+      "Forgetting to write 'where a and b are coprime integers and b ≠ 0' in irrationality proofs — CBSE evaluators deduct 1/2 mark immediately!",
+      "Re-proving √5 from scratch when the question explicitly states: 'Given that √5 is irrational, prove that 3 + 2√5 is irrational'. Only rearrange to √5 = (r - 3)/2!",
+      "Confusing exponents: when asked for 'sum of exponents of prime factors of 144', 144 = 2⁴ × 3², sum = 4 + 2 = 6 (not just 4)!"
+    ],
+    keyFormulas: [
+      { name: "HCF × LCM", expr: "HCF(a,b) × LCM(a,b) = a × b" },
+      { name: "Prime Factorisation", expr: "N = p₁ᵃ · p₂ᵇ ···" },
+      { name: "HCF of Primes", expr: "Product of smallest powers of common primes" },
+      { name: "LCM of Primes", expr: "Product of greatest powers of all primes" }
+    ]
+  },
+  {
+    chapter: 2,
+    chapterName: "Polynomials",
+    emoji: "📈",
+    accentColor: "indigo",
+    theoryBlocks: [
+      {
+        title: "Geometric Meaning of Zeroes",
+        content: "A zero of a polynomial P(x) is any x-value where P(x) = 0. Geometrically, the zeroes are the x-coordinates of the points where the graph y = P(x) INTERSECTS OR TOUCHES THE X-AXIS! A quadratic polynomial ax² + bx + c (a ≠ 0) is a parabola and can have at most 2 zeroes."
+      },
+      {
+        title: "Relationship Between Zeroes & Coefficients",
+        content: "For a quadratic polynomial P(x) = ax² + bx + c with zeroes α and β: (1) Sum of Zeroes: α + β = -b/a = -(coefficient of x)/(coefficient of x²). (2) Product of Zeroes: αβ = c/a = (constant term)/(coefficient of x²). Always remember the MINUS sign on the sum!",
+        formula: "α + β = -b/a,  αβ = c/a"
+      },
+      {
+        title: "Forming a Quadratic Polynomial Given Sum & Product",
+        content: "If the sum of zeroes is S and the product is P, the family of quadratic polynomials is: k[x² - Sx + P] = k[x² - (α + β)x + αβ], where k is any non-zero real number. Do NOT forget the factor k, especially when fractions are involved (e.g. S = 1/4, P = -1 ⟹ k(x² - x/4 - 1) ⟹ 4x² - x - 4).",
+        formula: "P(x) = k[x² - (α+β)x + αβ]"
+      },
+      {
+        title: "Board Exam Algebraic Identity Hacks",
+        content: "CBSE frequently asks for symmetric expressions of zeroes: (1) α² + β² = (α + β)² - 2αβ. (2) 1/α + 1/β = (α + β)/(αβ). (3) α/β + β/α = (α² + β²)/(αβ) = [(α + β)² - 2αβ]/(αβ). (4) (α - β)² = (α + β)² - 4αβ. Memorizing these saves 5 minutes in the exam!",
+        formula: "α² + β² = (α+β)² - 2αβ"
+      }
+    ],
+    topTraps: [
+      "Forgetting the negative sign in sum of zeroes: α + β = -b/a (many write b/a)!",
+      "Counting intersections on the y-axis instead of the x-axis when finding number of zeroes from a graph!",
+      "Confusing 'zeroes are 4 and -2' with 'sum and product are 4 and -2'. Read the question carefully!",
+      "Forgetting the constant k when writing the polynomial formula k(x² - Sx + P)."
+    ],
+    keyFormulas: [
+      { name: "Sum of Zeroes", expr: "α + β = -b/a" },
+      { name: "Product of Zeroes", expr: "αβ = c/a" },
+      { name: "Polynomial Formation", expr: "P(x) = k[x² - (α+β)x + αβ]" },
+      { name: "Symmetric Identity", expr: "α² + β² = (α+β)² - 2αβ" }
+    ]
+  },
+  {
+    chapter: 3,
+    chapterName: "Pair of Linear Equations in Two Variables",
+    emoji: "⚔️",
+    accentColor: "emerald",
+    theoryBlocks: [
+      {
+        title: "Standard Form & The 3 Conditions for Consistency (100% Board Asked)",
+        content: "For a pair of lines a₁x + b₁y + c₁ = 0 and a₂x + b₂y + c₂ = 0: (1) UNIQUE SOLUTION (Intersecting lines, Consistent): a₁/a₂ ≠ b₁/b₂. (2) INFINITELY MANY SOLUTIONS (Coincident lines, Dependent & Consistent): a₁/a₂ = b₁/b₂ = c₁/c₂. (3) NO SOLUTION (Parallel lines, Inconsistent): a₁/a₂ = b₁/b₂ ≠ c₁/c₂. This is tested in almost every single CBSE paper!",
+        formula: "a₁/a₂ ≠ b₁/b₂ (Unique),  a₁/a₂ = b₁/b₂ = c₁/c₂ (Infinite),  a₁/a₂ = b₁/b₂ ≠ c₁/c₂ (No Sol)"
+      },
+      {
+        title: "Elimination & Substitution Methods",
+        content: "In Elimination: Multiply one or both equations by suitable non-zero constants so that the coefficients of one variable (either x or y) become numerically equal, then ADD or SUBTRACT to eliminate that variable. Always substitute the found value into the simpler original equation."
+      },
+      {
+        title: "Boat & Stream Word Problem Masterclass",
+        content: "Let speed of boat in still water = x km/h, speed of stream = y km/h (x > y). (1) Downstream speed (with current): (x + y) km/h. (2) Upstream speed (against current): (x - y) km/h. Time = Distance / Speed. Never write (y - x); boat speed must always be greater than stream speed!",
+        formula: "v_down = x + y,  v_up = x - y"
+      },
+      {
+        title: "Fraction, Age & Fixed Charge Word Problems",
+        content: "Fraction problems: Let fraction be x/y. Follow conditions strictly (e.g. (x+1)/(y-1) = 1). Age problems: 'Five years ago' means (x - 5) and (y - 5); 'Ten years later' means (x + 10) and (y + 10). Fixed charge (taxi/library): Total cost = Fixed charge (x) + Charge per km/day (y × distance/days)."
+      }
+    ],
+    topTraps: [
+      "Not writing equations in standard form (moving constants to the same side) before comparing ratios a₁/a₂, b₁/b₂, c₁/c₂. Signs will flip and answer will be wrong!",
+      "In upstream/downstream problems, writing upstream as (y - x) instead of (x - y).",
+      "Confusing 'Inconsistent' (No solution, parallel lines) with 'Dependent' (Infinite solutions, coincident lines).",
+      "Arithmetic errors when subtracting algebraic equations in the elimination method."
+    ],
+    keyFormulas: [
+      { name: "Unique Solution", expr: "a₁/a₂ ≠ b₁/b₂" },
+      { name: "Infinitely Many", expr: "a₁/a₂ = b₁/b₂ = c₁/c₂" },
+      { name: "No Solution", expr: "a₁/a₂ = b₁/b₂ ≠ c₁/c₂" },
+      { name: "Upstream / Downstream", expr: "v_up = x - y,  v_down = x + y" }
+    ]
+  },
+  {
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    emoji: "🎯",
+    accentColor: "rose",
+    theoryBlocks: [
+      {
+        title: "Standard Form & Nature of Roots (Discriminant D)",
+        content: "Standard Form: ax² + bx + c = 0 (a ≠ 0). The Discriminant is D = b² - 4ac. (1) D > 0: Two DISTINCT REAL roots. (2) D = 0: Two EQUAL REAL roots (x = -b/(2a)). (3) D < 0: NO REAL roots. CBSE loves questions like 'Find k for which the equation has equal roots' ⟹ Set D = 0!",
+        formula: "D = b² - 4ac"
+      },
+      {
+        title: "Quadratic Formula (Sridharacharya Formula)",
+        content: "Roots are given by: x = [-b ± √(b² - 4ac)] / (2a). Step 1: Write equation in standard form ax² + bx + c = 0. Step 2: Identify a, b, c with their correct signs. Step 3: Compute D = b² - 4ac first! If D < 0, write 'No real roots'. If D ≥ 0, calculate x.",
+        formula: "x = (-b ± √D) / (2a)"
+      },
+      {
+        title: "Factorisation by Splitting the Middle Term",
+        content: "To factorise ax² + bx + c = 0: Find two numbers p and q such that p + q = b and p × q = a × c. Especially watch out for radical (surd) coefficients like √3x² + 10x + 7√3 = 0: Here a·c = √3 × 7√3 = 21, and 7 + 3 = 10 ⟹ Split 10x into 7x + 3x!"
+      },
+      {
+        title: "Speed, Time & Distance Word Problems",
+        content: "A train travels a distance D at uniform speed s. If speed is increased by Δs, time taken decreases by T hours: Equation is: [D / s] - [D / (s + Δs)] = T. Always equate Time = Distance / Speed. Solve the resulting quadratic and REJECT the negative root since speed cannot be negative!",
+        formula: "D/s_slow - D/s_fast = Time Difference"
+      }
+    ],
+    topTraps: [
+      "Sign error when squaring negative b: (-5)² = +25, NEVER -25!",
+      "Dividing only the radical by 2a instead of the whole numerator: x = [-b ± √D] / (2a).",
+      "Forgetting to reject negative values for speed, age, length, or time with an explicit note: 'Since speed cannot be negative, x = ...'.",
+      "When D = 0 gives k² = 16, forgetting the negative root k = ±4 (not just +4)!"
+    ],
+    keyFormulas: [
+      { name: "Discriminant", expr: "D = b² - 4ac" },
+      { name: "Quadratic Formula", expr: "x = (-b ± √D) / (2a)" },
+      { name: "Equal Roots Condition", expr: "b² - 4ac = 0 ⟹ x = -b/(2a)" },
+      { name: "Speed-Time Relation", expr: "Time = Distance / Speed" }
+    ]
+  },
+  {
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    emoji: "🪜",
+    accentColor: "cyan",
+    theoryBlocks: [
+      {
+        title: "What is an AP? Common Difference & nth Term",
+        content: "An Arithmetic Progression is a sequence where each term after the first is obtained by adding a fixed number d (common difference) to the preceding term. d = aₙ - aₙ₋₁ (can be positive, negative, or zero). The nth term from the beginning is: aₙ = a + (n - 1)d.",
+        formula: "aₙ = a + (n - 1)d"
+      },
+      {
+        title: "nth Term from the END",
+        content: "If an AP has last term l and common difference d, the nth term from the end is given by: l - (n - 1)d. Alternatively, reverse the AP so the first term is l and common difference is -d!",
+        formula: "aₙ (from end) = l - (n - 1)d"
+      },
+      {
+        title: "Sum of First n Terms (Sₙ)",
+        content: "The sum of first n terms is: Sₙ = (n/2)[2a + (n - 1)d] = (n/2)[a + l], where l is the last term (l = aₙ). Crucial relation between Sₙ and aₙ: aₙ = Sₙ - Sₙ₋₁. If Sₙ is given as an algebraic expression in n (e.g. Sₙ = 3n² + 5n), find a₁ = S₁ and a₂ = S₂ - S₁, then d = a₂ - a₁!",
+        formula: "Sₙ = (n/2)[2a + (n - 1)d] = (n/2)[a + l],  aₙ = Sₙ - Sₙ₋₁"
+      },
+      {
+        title: "Choosing Terms Conveniently in Word Problems",
+        content: "When sum of terms is given: (1) 3 terms in AP: (a - d), a, (a + d) ⟹ Sum is 3a! (2) 4 terms in AP: (a - 3d), (a - d), (a + d), (a + 3d) with common difference 2d ⟹ Sum is 4a! This instantly eliminates d and solves for a in 1 step."
+      }
+    ],
+    topTraps: [
+      "Mixing up n (number of terms / position) and aₙ (the actual value of the term). n MUST always be a positive natural number (n ∈ ℕ)!",
+      "When d is negative (e.g. d = -3), writing a + (n-1)-3 instead of a + (n-1)(-3). Multiplying without brackets leads to total disaster!",
+      "When solving Sₙ = k gives a quadratic in n, getting two values: if one is fractional or negative, REJECT it with reason 'n must be a positive integer'.",
+      "Using aₙ = Sₙ - Sₙ₋₁ only for n ≥ 2, and remembering that a₁ = S₁."
+    ],
+    keyFormulas: [
+      { name: "nth Term", expr: "aₙ = a + (n - 1)d" },
+      { name: "nth Term from End", expr: "l - (n - 1)d" },
+      { name: "Sum of n Terms", expr: "Sₙ = (n/2)[2a + (n - 1)d]" },
+      { name: "Term from Sum", expr: "aₙ = Sₙ - Sₙ₋₁" },
+      { name: "Sum of First n Naturals", expr: "Sₙ = n(n + 1)/2" }
+    ]
+  },
+  {
     chapter: 6,
     chapterName: "Triangles",
     emoji: "📐",

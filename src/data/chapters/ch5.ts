@@ -114,6 +114,52 @@ export const CH5_QUESTIONS: VaultQuestion[] = [
     examinerNote: "Use the 2*A shortcut in MCQs to find the common difference in 2 seconds.",
     source: "CBSE Board 2024 Standard (Set 30/1/1)"
   },
+  {
+    id: "vq_5_mcq_6",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2023, 2024] Assertion (A): The sequence -5, -5/2, 0, 5/2, ... is an AP with common difference 5/2.\nReason (R): The terms of an arithmetic progression can have a positive, negative, or zero common difference.",
+    options: [
+      "Both Assertion (A) and Reason (R) are true and (R) is the correct explanation of (A)",
+      "Both Assertion (A) and Reason (R) are true but (R) is not the correct explanation of (A)",
+      "Assertion (A) is true but Reason (R) is false",
+      "Assertion (A) is false but Reason (R) is true"
+    ],
+    correctOption: 1,
+    answer: "Both Assertion (A) and Reason (R) are true but (R) is not the correct explanation of (A)",
+    steps: [
+      "Step 1: Check Assertion (A): -5/2 - (-5) = -5/2 + 5 = 5/2. 0 - (-5/2) = 5/2. The difference is constant (5/2). So (A) is true.",
+      "Step 2: Check Reason (R): By definition, the common difference d of an AP can be positive, negative, or zero. So (R) is true.",
+      "Step 3: While both statements are true, (R) is a general definition and not the specific arithmetic verification that (-5/2) - (-5) = 5/2.",
+      "Step 4: Therefore, both (A) and (R) are true, but (R) is not the correct explanation of (A)."
+    ],
+    explanation: "Both statements are mathematically correct facts, but the reason does not explain the calculation showing d = 5/2.",
+    formula: "d = a_{k+1} - a_k (constant)",
+    examinerNote: "CBSE official marking scheme standard for Assertion-Reason questions.",
+    source: "CBSE Board 2024 (Set 30/1/2)"
+  },
+  {
+    id: "vq_5_mcq_7",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2020, 2023 Standard] If the n-th term of an AP is given by a_n = 7 - 4n, then its common difference is:",
+    options: ["4", "-4", "3", "7"],
+    correctOption: 1,
+    answer: "-4",
+    steps: [
+      "Step 1: Method 1 (Direct Shortcut): For any linear expression a_n = An + B, the common difference is always the coefficient of n, which is -4.",
+      "Step 2: Method 2 (Formal Calculation):\na_1 = 7 - 4(1) = 3.\na_2 = 7 - 4(2) = 7 - 8 = -1.\na_3 = 7 - 4(3) = 7 - 12 = -5.",
+      "Step 3: Common difference d = a_2 - a_1 = -1 - 3 = -4."
+    ],
+    explanation: "In any AP, the n-th term is linear in n. The coefficient of n is always the common difference: d = -4.",
+    formula: "a_n = An + B => d = A",
+    examinerNote: "Do not forget the negative sign; d = -4, not 4.",
+    source: "CBSE Board 2023 Standard (Set 30/2/1)"
+  },
 
   // -----------------------------------------------------------------------
   // SECTION B: 2-MARK VERY SHORT ANSWER (VSA)
@@ -179,6 +225,46 @@ export const CH5_QUESTIONS: VaultQuestion[] = [
     formula: "a_n - a_m = (n - m)d",
     examinerNote: "Avoid computing the large number a_54 = 3 + 53(12) = 639. Use the (n - 54)d shortcut.",
     source: "CBSE Board 2022 Standard & NCERT Ex 5.2"
+  },
+  {
+    id: "vq_5_vsa_4",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2016, 2020, 2023 Standard] Check whether -150 is a term of the AP: 11, 8, 5, 2, ...",
+    answer: "No, -150 is not a term of this AP",
+    steps: [
+      "Step 1: Given AP: 11, 8, 5, 2, ...\nFirst term a = 11, common difference d = 8 - 11 = -3.",
+      "Step 2: Let -150 be the n-th term of the AP: a_n = -150.",
+      "Step 3: Use formula a_n = a + (n - 1)d:\n-150 = 11 + (n - 1)(-3)\n-150 - 11 = -3(n - 1)\n-161 = -3(n - 1).",
+      "Step 4: Solve for n:\nn - 1 = -161 / -3 = 161 / 3\nn = 161/3 + 1 = 164/3 = 54.67 (or 54 2/3).",
+      "Step 5: The number of terms n MUST be a positive integer (natural number). Since 164/3 is a fraction, -150 cannot be a term of this AP."
+    ],
+    explanation: "For any number to belong to an AP, the index n must evaluate to a positive integer. Here n = 54 2/3, so -150 does not belong to the sequence.",
+    formula: "n = (a_n - a)/d + 1 must be in N",
+    examinerNote: "Explicitly state: 'Since n is not a natural number (positive integer), -150 is not a term.'",
+    source: "CBSE Board 2023 Standard & NCERT Ex 5.2 Q6"
+  },
+  {
+    id: "vq_5_vsa_5",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2015, 2021, 2024 Standard] Find the middle term of the finite AP: 6, 13, 20, ..., 216.",
+    answer: "111 (16th term)",
+    steps: [
+      "Step 1: In the given AP, first term a = 6, common difference d = 13 - 6 = 7, and last term a_n = 216.",
+      "Step 2: Find total number of terms n:\n216 = 6 + (n - 1) * 7\n210 = 7(n - 1) => n - 1 = 30 => n = 31.",
+      "Step 3: Since n = 31 is odd, there is exactly one middle term:\nMiddle term index = (n + 1) / 2 = (31 + 1) / 2 = 16th term.",
+      "Step 4: Calculate the 16th term a_16:\na_16 = a + (16 - 1)d = 6 + 15 * 7 = 6 + 105 = 111.",
+      "Step 5: Therefore, the middle term of the AP is 111."
+    ],
+    explanation: "When total terms n is odd, the middle term is ((n + 1)/2)-th term. Here n = 31, middle term is a_16 = 111.",
+    formula: "Middle term index = (n + 1)/2 when n is odd",
+    examinerNote: "Always show both steps: finding total number of terms n = 31, then finding a_16 = 111.",
+    source: "CBSE Board 2024 Standard (Set 30/2/1) & 2015 All India"
   },
 
   // -----------------------------------------------------------------------
@@ -274,6 +360,50 @@ export const CH5_QUESTIONS: VaultQuestion[] = [
     examinerNote: "Proving d = 2a carries 2 marks; substituting to find ratio carries the final 1 mark.",
     source: "CBSE Board 2020 Standard (Set 30/1/1)"
   },
+  {
+    id: "vq_5_sa_5",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2009, 2014, 2024 Standard] The sum of the 4th and 8th terms of an AP is 24 and the sum of the 6th and 10th terms is 44. Find the first three terms of the AP.",
+    answer: "-13, -8, -3",
+    steps: [
+      "Step 1: Let the first term be 'a' and common difference be 'd'.\n4th term a_4 = a + 3d, 8th term a_8 = a + 7d.\n6th term a_6 = a + 5d, 10th term a_10 = a + 9d.",
+      "Step 2: Given: a_4 + a_8 = 24:\n(a + 3d) + (a + 7d) = 24 => 2a + 10d = 24.\nDivide by 2: a + 5d = 12  --- (Equation 1).",
+      "Step 3: Given: a_6 + a_10 = 44:\n(a + 5d) + (a + 9d) = 44 => 2a + 14d = 44.\nDivide by 2: a + 7d = 22  --- (Equation 2).",
+      "Step 4: Subtract Equation (1) from Equation (2):\n(a + 7d) - (a + 5d) = 22 - 12\n2d = 10 => d = 5.",
+      "Step 5: Substitute d = 5 into Equation (1):\na + 5(5) = 12 => a + 25 = 12 => a = 12 - 25 = -13.",
+      "Step 6: The first three terms are:\na_1 = a = -13\na_2 = a + d = -13 + 5 = -8\na_3 = a + 2d = -8 + 5 = -3.",
+      "Step 7: Conclude: The first three terms of the AP are -13, -8, and -3."
+    ],
+    explanation: "Two linear equations in two variables (a and d) are formed from the given sums. Solving simultaneously yields a = -13 and d = 5.",
+    formula: "a_n = a + (n - 1)d",
+    examinerNote: "Common mistake is adding incorrectly: 12 - 25 = -13 (not +13). Check negative sign carefully.",
+    source: "CBSE Board 2024 (Set 30/1/3) & 2014 Delhi"
+  },
+  {
+    id: "vq_5_sa_6",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2017, 2022, 2024 Standard] Find the sum of the first 25 terms of an AP whose n-th term is given by a_n = 2 - 3n.",
+    answer: "-925",
+    steps: [
+      "Step 1: Given n-th term formula: a_n = 2 - 3n.",
+      "Step 2: Find the first term (n = 1):\na_1 = a = 2 - 3(1) = 2 - 3 = -1.",
+      "Step 3: Find the 25th term (n = 25):\na_25 = l = 2 - 3(25) = 2 - 75 = -73.",
+      "Step 4: Use the shortcut sum formula S_n = (n / 2)(a + l):\nS_25 = (25 / 2) * [a_1 + a_25].",
+      "Step 5: Substitute values:\nS_25 = (25 / 2) * [-1 + (-73)] = (25 / 2) * (-74).",
+      "Step 6: S_25 = 25 * (-37) = -925.",
+      "Step 7: Conclude: The sum of the first 25 terms of the AP is -925."
+    ],
+    explanation: "Finding first term a_1 = -1 and last term a_25 = -73 allows direct evaluation using S_n = (n/2)(a + l) = 25 * (-37) = -925.",
+    formula: "S_n = (n/2)(a + l)",
+    examinerNote: "Finding a_1 and a_25 directly is 3 times faster and less error-prone than finding d and using the 2a + (n-1)d formula.",
+    source: "CBSE Board 2022 Standard & 2017 All India"
+  },
 
   // -----------------------------------------------------------------------
   // SECTION D: 5-MARK LONG ANSWER (LA)
@@ -326,6 +456,50 @@ export const CH5_QUESTIONS: VaultQuestion[] = [
     examinerNote: "Assuming a, a+d, a+2d, a+3d makes the algebra 4 times harder. Always use symmetric terms.",
     source: "CBSE Board 2020 Standard (Set 30/2/1) & 2018 All India"
   },
+  {
+    id: "vq_5_la_3",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 5,
+    type: "Proof",
+    question: "[CBSE 2012, 2019, 2023 Standard] If S_n denotes the sum of the first n terms of an AP, prove that S_12 = 3(S_8 - S_4).",
+    answer: "LHS = RHS = 12a + 66d (Proved)",
+    steps: [
+      "Step 1: Let the first term of the AP be 'a' and common difference be 'd'.",
+      "Step 2: General formula for sum of n terms: S_n = (n / 2)[2a + (n - 1)d].",
+      "Step 3: Express S_12 (LHS):\nS_12 = (12 / 2)[2a + (12 - 1)d] = 6[2a + 11d] = 12a + 66d  --- (Equation 1).",
+      "Step 4: Express S_8 and S_4:\nS_8 = (8 / 2)[2a + (8 - 1)d] = 4[2a + 7d] = 8a + 28d.\nS_4 = (4 / 2)[2a + (4 - 1)d] = 2[2a + 3d] = 4a + 6d.",
+      "Step 5: Compute (S_8 - S_4):\nS_8 - S_4 = (8a + 28d) - (4a + 6d)\nS_8 - S_4 = (8a - 4a) + (28d - 6d) = 4a + 22d.",
+      "Step 6: Compute 3(S_8 - S_4) (RHS):\n3(S_8 - S_4) = 3 * (4a + 22d) = 12a + 66d  --- (Equation 2).",
+      "Step 7: From Equation (1) and Equation (2):\nLHS = RHS = 12a + 66d.\nTherefore, S_12 = 3(S_8 - S_4). Hence proved!"
+    ],
+    explanation: "Expanding S_12, S_8, and S_4 in terms of a and d shows that both LHS and RHS reduce identically to 12a + 66d.",
+    formula: "S_n = (n/2)[2a + (n - 1)d]",
+    examinerNote: "Classic 5-mark proof question that tests algebraic manipulation and accuracy with signs.",
+    source: "CBSE Board 2023 Standard (Set 30/1/1) & 2019 Delhi"
+  },
+  {
+    id: "vq_5_la_4",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2015, 2018, 2021 Standard] 200 logs are stacked in the following manner: 20 logs in the bottom row, 19 in the next row, 18 in the row next to it and so on. In how many rows are the 200 logs placed and how many logs are in the top row?",
+    answer: "16 rows, with 5 logs in the top row",
+    steps: [
+      "Step 1: The number of logs in each row forms an AP:\nBottom row: a_1 = 20, next row: a_2 = 19, next: a_3 = 18, ...",
+      "Step 2: Here first term a = 20, common difference d = 19 - 20 = -1, and total sum S_n = 200.",
+      "Step 3: Apply the sum formula S_n = (n / 2)[2a + (n - 1)d]:\n200 = (n / 2) * [2(20) + (n - 1)(-1)]\n400 = n * [40 - n + 1]\n400 = n * (41 - n) = 41n - n^2.",
+      "Step 4: Rearrange into standard quadratic equation:\nn^2 - 41n + 400 = 0.",
+      "Step 5: Solve by splitting the middle term (product = 400, sum = -41):\nn^2 - 25n - 16n + 400 = 0\nn(n - 25) - 16(n - 25) = 0\n(n - 16)(n - 25) = 0 => n = 16 or n = 25.",
+      "Step 6: Physical verification of both values of n:\nCase 1: If n = 25:\nNumber of logs in top row a_25 = a + 24d = 20 + 24(-1) = 20 - 24 = -4.\nA row cannot contain -4 logs (physically impossible), so n = 25 is rejected.\nCase 2: If n = 16:\nNumber of logs in top row a_16 = a + 15d = 20 + 15(-1) = 20 - 15 = 5 logs.",
+      "Step 7: Conclude: The 200 logs are placed in 16 rows, and there are 5 logs in the top row."
+    ],
+    explanation: "The quadratic equation yields two roots n = 16 and n = 25. Physically verifying the top row rejects n = 25 because logs cannot be negative, confirming n = 16 rows with 5 logs.",
+    formula: "S_n = (n/2)[2a + (n - 1)d]; a_n = a + (n - 1)d",
+    examinerNote: "Crucial marking step: You MUST show why n = 25 is rejected (a_25 = -4 logs is impossible). Leaving n = 25 unaddressed loses 1 full mark.",
+    source: "CBSE Board 2021 Term-2 & NCERT Ex 5.3 Q19"
+  },
 
   // -----------------------------------------------------------------------
   // SECTION E: 4-MARK COMPETENCY CASE STUDY (CBSE 2024-2026 PATTERN)
@@ -348,5 +522,43 @@ export const CH5_QUESTIONS: VaultQuestion[] = [
     formula: "a_n = a + (n - 1)d; S_n = (n/2)[2a + (n - 1)d]",
     examinerNote: "Include units (Rs) with every numerical answer.",
     source: "CBSE Official CFPQ 2024 & Sample Paper 2024-25"
+  },
+  {
+    id: "vq_5_case_2",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2023, 2025 Model] Factory Output & Uniform Growth: A manufacturer of television sets produces 600 sets in the third year and 700 sets in the seventh year. Assuming that the production increases uniformly by a fixed number every year, answer the following:\n\n(i) Find the production in the 1st year. (1 Mark)\n(ii) Find the production in the 10th year. (1 Mark)\n(iii) (a) Find the total production in the first 7 years. (2 Marks)\nOR\n(iii) (b) In which year will the annual production reach 1,000 sets? (2 Marks)",
+    answer: "(i) 550 sets; (ii) 775 sets; (iii)(a) 4,375 sets; (iii)(b) 19th year",
+    steps: [
+      "Part (i): Since production increases uniformly by a constant number each year, the annual production forms an AP.\nGiven: a_3 = 600 and a_7 = 700.\na_3 = a + 2d = 600  --- (1)\na_7 = a + 6d = 700  --- (2)\nSubtracting (1) from (2): 4d = 100 => d = 25 sets/year.\nSubstitute d = 25 into (1): a + 2(25) = 600 => a + 50 = 600 => a = 550 sets in the 1st year.",
+      "Part (ii): Production in the 10th year:\na_10 = a + 9d = 550 + 9(25) = 550 + 225 = 775 sets.",
+      "Part (iii)(a): Total production in first 7 years = S_7:\nS_7 = (7 / 2)[a + a_7] = (7 / 2)[550 + 700] = (7 / 2) * 1250 = 7 * 625 = 4,375 sets.",
+      "Part (iii)(b) Alternative: In which year production reaches 1,000 sets:\na_n = 1000\na + (n - 1)d = 1000\n550 + (n - 1)(25) = 1000\n25(n - 1) = 450 => n - 1 = 450 / 25 = 18 => n = 19th year."
+    ],
+    explanation: "Standard uniform linear growth modeled by an AP where a = 550, d = 25. Solving standard n-th term and sum equations yields each milestone.",
+    formula: "a_n = a + (n - 1)d; S_n = (n/2)(a + l)",
+    examinerNote: "Write units ('sets' or 'years') after every calculated value.",
+    source: "CBSE Official Sample Question Paper 2024-25 & NCERT Ex 5.3"
+  },
+  {
+    id: "vq_5_case_3",
+    chapter: 5,
+    chapterName: "Arithmetic Progressions",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2022, 2024 Sample Paper] Decorative Semicircular Spiral: A spiral is made up of successive semicircles, with centers alternately at A and B, starting with center at A, of radii 0.5 cm, 1.0 cm, 1.5 cm, 2.0 cm, ... (Take pi = 22/7)\n\nBased on this information, answer the following questions:\n(i) What is the length of the first semicircle l_1? (1 Mark)\n(ii) Show that the lengths of successive semicircles form an AP and find its common difference. (1 Mark)\n(iii) (a) What is the total length of such a spiral made up of 13 consecutive semicircles? (2 Marks)\nOR\n(iii) (b) If the total length of a spiral is 396 cm, how many consecutive semicircles does it contain? (2 Marks)",
+    answer: "(i) 11/7 cm (or 1.57 cm); (ii) Common difference d = 11/7 cm; (iii)(a) 143 cm; (iii)(b) 21 semicircles",
+    steps: [
+      "Part (i): Perimeter of a semicircle of radius r is l = pi * r.\nFor first semicircle r_1 = 0.5 cm = 1/2 cm:\nl_1 = pi * (0.5) = (22/7) * (1/2) = 11/7 cm (= 1.57 cm).",
+      "Part (ii): Lengths of successive semicircles:\nl_1 = pi * 0.5, l_2 = pi * 1.0, l_3 = pi * 1.5, ...\nDifference l_2 - l_1 = pi(1.0 - 0.5) = 0.5*pi = (1/2)*(22/7) = 11/7 cm.\nDifference l_3 - l_2 = pi(1.5 - 1.0) = 0.5*pi = 11/7 cm.\nSince the difference between consecutive lengths is constant (d = 11/7 cm), the lengths form an AP.",
+      "Part (iii)(a): Total length of 13 consecutive semicircles = S_13:\nS_13 = (13 / 2) * [2 * a + (13 - 1)d] where a = 11/7 and d = 11/7.\nS_13 = (13 / 2) * [2(11/7) + 12(11/7)] = (13 / 2) * [14 * (11/7)] = (13 / 2) * [2 * 11] = (13 / 2) * 22 = 13 * 11 = 143 cm.",
+      "Part (iii)(b) Alternative: Given total length S_n = 396 cm:\nS_n = (n / 2)[2a + (n - 1)d] = (n / 2) * (11/7) * [2 + n - 1] = (n / 2) * (11/7) * (n + 1) = [11 * n(n + 1)] / 14 = 396.\nn(n + 1) = (396 * 14) / 11 = 36 * 14 = 504.\nn^2 + n - 504 = 0 => (n + 24)(n - 21) = 0 => n = 21 (since n > 0).\nTherefore, the spiral contains 21 consecutive semicircles."
+    ],
+    explanation: "Perimeter of semicircle is pi*r. When radius increases in AP (0.5, 1.0, 1.5...), perimeter lengths form an AP with a = pi/2 and d = pi/2. Total length is the sum S_13 = 143 cm.",
+    formula: "l = pi * r; S_n = (n/2)[2a + (n - 1)d]",
+    examinerNote: "Factoring out (pi * 0.5) from the sum makes the calculation: (11/7) * [1 + 2 + ... + 13] = (11/7) * 91 = 11 * 13 = 143 cm.",
+    source: "CBSE Board 2024 Sample Paper & NCERT Ex 5.3 Q18"
   }
 ];

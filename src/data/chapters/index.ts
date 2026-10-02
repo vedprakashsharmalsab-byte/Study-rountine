@@ -5,9 +5,12 @@ import { CH3_QUESTIONS } from "./ch3";
 import { CH4_QUESTIONS } from "./ch4";
 import { CH5_QUESTIONS } from "./ch5";
 import { CH6_QUESTIONS } from "./ch6";
+import { CH7_QUESTIONS } from "./ch7";
 import { CH8_QUESTIONS } from "./ch8";
 import { CH9_QUESTIONS } from "./ch9";
 import { CH10_QUESTIONS } from "./ch10";
+import { CH11_QUESTIONS } from "./ch11";
+import { CH12_QUESTIONS } from "./ch12";
 import { CH13_QUESTIONS } from "./ch13";
 import { CH14_QUESTIONS } from "./ch14";
 
@@ -15,7 +18,13 @@ import { CH14_QUESTIONS } from "./ch14";
 import { SCI_CH1_QUESTIONS } from "./science/sci_ch1";
 import { SCI_CH2_QUESTIONS } from "./science/sci_ch2";
 import { SCI_CH3_QUESTIONS } from "./science/sci_ch3";
+import { SCI_CH4_QUESTIONS } from "./science/sci_ch4";
 import { SCI_CH5_QUESTIONS } from "./science/sci_ch5";
+import { SCI_CH6_QUESTIONS } from "./science/sci_ch6";
+import { SCI_CH7_QUESTIONS } from "./science/sci_ch7";
+import { SCI_CH8_QUESTIONS } from "./science/sci_ch8";
+import { SCI_CH9_QUESTIONS } from "./science/sci_ch9";
+import { SCI_CH10_QUESTIONS } from "./science/sci_ch10";
 import { SCI_CH11_QUESTIONS } from "./science/sci_ch11";
 import { SCI_CH12_QUESTIONS } from "./science/sci_ch12";
 import { SCI_CH13_QUESTIONS } from "./science/sci_ch13";
@@ -50,15 +59,24 @@ export {
   CH4_QUESTIONS,
   CH5_QUESTIONS,
   CH6_QUESTIONS,
+  CH7_QUESTIONS,
   CH8_QUESTIONS,
   CH9_QUESTIONS,
   CH10_QUESTIONS,
+  CH11_QUESTIONS,
+  CH12_QUESTIONS,
   CH13_QUESTIONS,
   CH14_QUESTIONS,
   SCI_CH1_QUESTIONS,
   SCI_CH2_QUESTIONS,
   SCI_CH3_QUESTIONS,
+  SCI_CH4_QUESTIONS,
   SCI_CH5_QUESTIONS,
+  SCI_CH6_QUESTIONS,
+  SCI_CH7_QUESTIONS,
+  SCI_CH8_QUESTIONS,
+  SCI_CH9_QUESTIONS,
+  SCI_CH10_QUESTIONS,
   SCI_CH11_QUESTIONS,
   SCI_CH12_QUESTIONS,
   SCI_CH13_QUESTIONS,
@@ -85,7 +103,13 @@ export function getChapterQuestions(chapterId: number, subject: string = "math")
       case 1: return SCI_CH1_QUESTIONS;
       case 2: return SCI_CH2_QUESTIONS;
       case 3: return SCI_CH3_QUESTIONS;
+      case 4: return SCI_CH4_QUESTIONS;
       case 5: return SCI_CH5_QUESTIONS;
+      case 6: return SCI_CH6_QUESTIONS;
+      case 7: return SCI_CH7_QUESTIONS;
+      case 8: return SCI_CH8_QUESTIONS;
+      case 9: return SCI_CH9_QUESTIONS;
+      case 10: return SCI_CH10_QUESTIONS;
       case 11: return SCI_CH11_QUESTIONS;
       case 12: return SCI_CH12_QUESTIONS;
       case 13: return SCI_CH13_QUESTIONS;
@@ -109,12 +133,14 @@ export function getChapterQuestions(chapterId: number, subject: string = "math")
     case 4: return CH4_QUESTIONS;
     case 5: return CH5_QUESTIONS;
     case 6: return CH6_QUESTIONS;
+    case 7: return CH7_QUESTIONS;
     case 8: return CH8_QUESTIONS;
     case 9: return CH9_QUESTIONS;
     case 10: return CH10_QUESTIONS;
+    case 11: return CH11_QUESTIONS;
+    case 12: return CH12_QUESTIONS;
     case 13: return CH13_QUESTIONS;
     case 14: return CH14_QUESTIONS;
     default: return CH1_QUESTIONS;
   }
 }
-

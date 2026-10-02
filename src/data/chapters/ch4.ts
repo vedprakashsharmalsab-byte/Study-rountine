@@ -352,5 +352,219 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
     formula: "Area = L * B; Volume = L * B * H",
     examinerNote: "Divide equation by 2 for simplest form: x^2 + 2x - 48 = 0. Show rejection of x = -8.",
     source: "CBSE Official CFPQ 2024 & Sample Paper 2024-25"
+  },
+  {
+    id: "vq_4_mcq_6",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2024 Standard] Assertion (A): The equation 4x^2 - 12x + 9 = 0 has two real and equal roots.\nReason (R): For any quadratic equation ax^2 + bx + c = 0, the roots are real and equal if and only if b^2 - 4ac = 0.",
+    options: [
+      "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+      "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
+      "(A) is true but (R) is false",
+      "(A) is false but (R) is true"
+    ],
+    correctOption: 0,
+    answer: "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+    steps: [
+      "Step 1: Check Reason (R): The discriminant condition D = b^2 - 4ac = 0 is the exact definition of real and equal roots. Reason is TRUE.",
+      "Step 2: Check Assertion (A): For 4x^2 - 12x + 9 = 0: a = 4, b = -12, c = 9.\nD = (-12)^2 - 4(4)(9) = 144 - 144 = 0.\nSince D = 0, the equation has two real and equal roots. Assertion is TRUE.",
+      "Step 3: Reason is the exact criterion proving Assertion."
+    ],
+    explanation: "D = 0 guarantees that the quadratic expression is a perfect square (2x - 3)^2 = 0, giving double root x = 3/2.",
+    formula: "D = b^2 - 4ac = 0 => real and equal roots",
+    examinerNote: "Standard Section A question. Calculating D = 0 directly verifies both assertion and reason.",
+    source: "CBSE 2024 Standard Board Examination"
+  },
+  {
+    id: "vq_4_mcq_7",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2023 Standard] Which of the following is NOT a quadratic equation?",
+    options: [
+      "(x - 2)^2 + 1 = 2x - 3",
+      "x(x + 1) + 8 = (x + 2)(x - 2)",
+      "x(2x + 3) = x^2 + 1",
+      "(x + 2)^3 = x^3 - 4"
+    ],
+    correctOption: 1,
+    answer: "x(x + 1) + 8 = (x + 2)(x - 2)",
+    steps: [
+      "Step 1: Expand option (b): LHS = x^2 + x + 8; RHS = x^2 - 4.",
+      "Step 2: Equating: x^2 + x + 8 = x^2 - 4.",
+      "Step 3: Subtract x^2 from both sides: x + 8 = -4 => x + 12 = 0.",
+      "Step 4: This is a linear equation (degree 1), NOT quadratic (degree 2)."
+    ],
+    explanation: "When x^2 cancels out completely on both sides, the equation reduces to degree 1.",
+    formula: "Quadratic requires coefficient of x^2 to be non-zero (a != 0)",
+    examinerNote: "Notice that in option (d), x^3 cancels out on expansion, leaving a quadratic equation 6x^2 + 12x + 12 = 0.",
+    source: "CBSE 2023 Standard (Set 30/2/1)"
+  },
+  {
+    id: "vq_4_vsa_4",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2023 Standard] Find the discriminant of the quadratic equation 2x^2 - 4x + 3 = 0, and hence state the nature of its roots.",
+    answer: "Discriminant D = -8; Roots are not real (no real roots)",
+    steps: [
+      "Step 1: In 2x^2 - 4x + 3 = 0, a = 2, b = -4, c = 3.",
+      "Step 2: Discriminant D = b^2 - 4ac = (-4)^2 - 4(2)(3) = 16 - 24 = -8.",
+      "Step 3: Since D < 0 (negative), the given quadratic equation has no real roots (two distinct complex roots)."
+    ],
+    explanation: "Negative discriminant indicates that the parabola does not intersect the x-axis, so no real roots exist.",
+    formula: "D = b^2 - 4ac; D < 0 => No real roots",
+    examinerNote: "Write both the numerical value (-8) and the verbal nature ('no real roots') to get full 2 marks.",
+    source: "CBSE Board 2023 Standard"
+  },
+  {
+    id: "vq_4_vsa_5",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2021, 2022] Find the value of p for which the quadratic equation px(x - 3) + 9 = 0 has two equal real roots.",
+    answer: "p = 4 (p != 0)",
+    steps: [
+      "Step 1: Expand the equation: px^2 - 3px + 9 = 0.",
+      "Step 2: Here a = p, b = -3p, c = 9 (with p != 0 for quadratic).",
+      "Step 3: For equal real roots, D = b^2 - 4ac = 0:\n(-3p)^2 - 4(p)(9) = 0\n9p^2 - 36p = 0\n9p(p - 4) = 0.",
+      "Step 4: p = 0 or p = 4.",
+      "Step 5: If p = 0, the equation reduces to 9 = 0, which is invalid and not quadratic. Hence p != 0.",
+      "Step 6: Therefore, p = 4."
+    ],
+    explanation: "Factor out 9p and reject p = 0 because a quadratic equation requires non-zero leading coefficient.",
+    formula: "D = b^2 - 4ac = 0; a != 0",
+    examinerNote: "Failing to reject p = 0 loses 0.5 marks. Always state that p = 0 destroys the quadratic nature.",
+    source: "CBSE Term-2 Board Examination"
+  },
+  {
+    id: "vq_4_sa_5",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024 Standard] Solve for x: 1/((x - 1)(x - 2)) + 1/((x - 2)(x - 3)) = 2/3, where x != 1, 2, 3.",
+    answer: "x = 4 or x = 0",
+    steps: [
+      "Step 1: Take LCM of the denominators: LCM = (x - 1)(x - 2)(x - 3).\nLHS = [(x - 3) + (x - 1)] / [(x - 1)(x - 2)(x - 3)]\n= (2x - 4) / [(x - 1)(x - 2)(x - 3)].",
+      "Step 2: Factor 2 from numerator: 2(x - 2) / [(x - 1)(x - 2)(x - 3)].",
+      "Step 3: Cancel common factor (x - 2) since x != 2:\n2 / [(x - 1)(x - 3)] = 2/3.",
+      "Step 4: Divide both sides by 2:\n1 / [(x - 1)(x - 3)] = 1/3 => (x - 1)(x - 3) = 3.",
+      "Step 5: Expand and solve: x^2 - 4x + 3 = 3 => x^2 - 4x = 0 => x(x - 4) = 0.",
+      "Step 6: Therefore, x = 0 or x = 4. Both values satisfy x != 1, 2, 3."
+    ],
+    explanation: "Recognizing the common binomial factor (x - 2) in numerator and denominator avoids creating a 4th degree equation.",
+    formula: "Simplify by canceling (x - 2) => x(x - 4) = 0",
+    examinerNote: "Very elegant CBSE problem. Canceling (x - 2) reduces it to a simple 1-line quadratic.",
+    source: "CBSE Board 2024 Standard (Set 30/4/1)"
+  },
+  {
+    id: "vq_4_sa_6",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2020 Standard] The diagonal of a rectangular field is 60 meters more than the shorter side. If the longer side is 30 meters more than the shorter side, find the sides of the field.",
+    answer: "Shorter side = 90 m, Longer side = 120 m (Diagonal = 150 m)",
+    steps: [
+      "Step 1: Let the shorter side be x meters (x > 0).\nLonger side = (x + 30) meters.\nDiagonal = (x + 60) meters.",
+      "Step 2: By Pythagoras theorem: (Diagonal)^2 = (Shorter side)^2 + (Longer side)^2.\n(x + 60)^2 = x^2 + (x + 30)^2.",
+      "Step 3: Expand both sides:\nx^2 + 120x + 3600 = x^2 + x^2 + 60x + 900\nx^2 - 60x - 2700 = 0.",
+      "Step 4: Factorise (product = -2700, sum = -60 => -90, 30):\n(x - 90)(x + 30) = 0 => x = 90 or x = -30.",
+      "Step 5: Since length cannot be negative, x = 90 meters.\nShorter side = 90 m; Longer side = 90 + 30 = 120 m.",
+      "Step 6: Check: 90^2 + 120^2 = 8100 + 14400 = 22500 = 150^2 = (90 + 60)^2. Verified!"
+    ],
+    explanation: "Right triangle geometry with algebraic sides modeled via Pythagoras theorem, yielding a solvable quadratic.",
+    formula: "a^2 + b^2 = c^2; (x+30)^2 + x^2 = (x+60)^2",
+    examinerNote: "Explicitly reject the negative root x = -30 with physical reason.",
+    source: "CBSE Board 2020 Standard & NCERT Ex 4.3"
+  },
+  {
+    id: "vq_4_sa_7",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2018, 2023 Standard] A train travels 360 km at a uniform speed. If the speed had been 5 km/h more, it would have taken 1 hour less for the same journey. Find the original speed of the train.",
+    answer: "Original speed = 40 km/h",
+    steps: [
+      "Step 1: Let the original speed of the train be x km/h (x > 0).\nIncreased speed = (x + 5) km/h.\nDistance = 360 km.",
+      "Step 2: Time at original speed = 360 / x hours.\nTime at increased speed = 360 / (x + 5) hours.",
+      "Step 3: Difference in time is 1 hour:\n360 / x - 360 / (x + 5) = 1.",
+      "Step 4: 360 [(x + 5) - x] / [x(x + 5)] = 1\n360(5) / (x^2 + 5x) = 1\n1800 = x^2 + 5x => x^2 + 5x - 1800 = 0.",
+      "Step 5: Factorise (product = -1800, sum = 5 => 45, -40):\n(x + 45)(x - 40) = 0 => x = 40 or x = -45.",
+      "Step 6: Since speed cannot be negative, x = 40 km/h.\nOriginal speed of the train = 40 km/h.",
+      "Step 7: Verification: 360/40 = 9 hours; 360/45 = 8 hours; 9 - 8 = 1 hour difference. Verified!"
+    ],
+    explanation: "Speed-distance-time relation: slower time minus faster time equals time saved.",
+    formula: "d/v_1 - d/v_2 = Delta t; 360/x - 360/(x+5) = 1",
+    examinerNote: "Writing the verification (9h - 8h = 1h) guarantees 100% full marks.",
+    source: "CBSE Board 2023 Standard & 2018 All India"
+  },
+  {
+    id: "vq_4_la_3",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2019, 2024 Standard] A motor boat whose speed is 18 km/h in still water takes 1 hour more to go 24 km upstream than to return downstream to the same spot. Find the speed of the stream.",
+    answer: "Speed of the stream = 6 km/h",
+    steps: [
+      "Step 1: Let the speed of the stream be y km/h (0 < y < 18).\nSpeed of boat in still water = 18 km/h.\nSpeed upstream = (18 - y) km/h; Speed downstream = (18 + y) km/h.\nDistance each way = 24 km.",
+      "Step 2: Time upstream = 24 / (18 - y); Time downstream = 24 / (18 + y).",
+      "Step 3: Upstream time exceeds downstream time by 1 hour:\n24 / (18 - y) - 24 / (18 + y) = 1.",
+      "Step 4: 24 [(18 + y) - (18 - y)] / [(18 - y)(18 + y)] = 1\n24(2y) / (324 - y^2) = 1\n48y = 324 - y^2 => y^2 + 48y - 324 = 0.",
+      "Step 5: Factorise (product = -324, sum = 48 => 54, -6):\n(y + 54)(y - 6) = 0 => y = 6 or y = -54.",
+      "Step 6: Since stream speed cannot be negative, y = 6 km/h.",
+      "Step 7: Verification: Upstream speed = 18 - 6 = 12 km/h => Time = 24/12 = 2 hours.\nDownstream speed = 18 + 6 = 24 km/h => Time = 24/24 = 1 hour.\nDifference = 2 - 1 = 1 hour. Correct!"
+    ],
+    explanation: "Classic physics river problem where stream speed is the variable. The resulting difference equation yields y^2 + 48y - 324 = 0.",
+    formula: "t_up - t_down = Delta t; 24/(18 - y) - 24/(18 + y) = 1",
+    examinerNote: "Do not confuse upstream (18 - y) with downstream (18 + y). Upstream is always slower.",
+    source: "CBSE Board 2024 Standard & 2019 All India"
+  },
+  {
+    id: "vq_4_case_2",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2024 Sample Paper Case Study] Commercial Flight Delay: An aircraft was delayed by 30 minutes at takeoff due to inclement weather. In order to reach its destination 1500 km away on schedule, the pilot had to increase the aircraft's cruising speed by 250 km/h from its usual speed.\n\n(i) If usual speed is x km/h, write the expression for time taken at usual speed and increased speed. (1 Mark)\n(ii) Formulate the quadratic equation governing this situation. (1 Mark)\n(iii) (a) Find the usual cruising speed of the aircraft and the original scheduled flight duration. (2 Marks)\nOR\n(iii) (b) If the aircraft instead had to decrease its speed by 100 km/h on a return journey of 1500 km, find the additional time taken compared to usual speed. (2 Marks)",
+    answer: "(i) 1500/x and 1500/(x+250); (ii) x^2 + 250x - 750000 = 0; (iii)(a) Speed = 750 km/h, Scheduled time = 2 hours; (iii)(b) 18.5 minutes delay",
+    steps: [
+      "Part (i): Time at usual speed = 1500/x hours; Time at increased speed = 1500/(x + 250) hours.",
+      "Part (ii): 30 minutes = 1/2 hour.\n1500/x - 1500/(x + 250) = 1/2\n1500(250) / [x(x + 250)] = 1/2\n375000 * 2 = x^2 + 250x => x^2 + 250x - 750000 = 0.",
+      "Part (iii)(a): Solve x^2 + 250x - 750000 = 0 (factors 1000, -750):\n(x + 1000)(x - 750) = 0 => x = 750 km/h (since x > 0).\nUsual cruising speed = 750 km/h.\nScheduled flight time = 1500 / 750 = 2 hours.",
+      "Part (iii)(b) Alternative: Reduced speed = 750 - 100 = 650 km/h.\nTime at 650 km/h = 1500 / 650 = 30 / 13 = 2.3077 hours = 2 hours 18.46 minutes.\nAdditional time = 18.5 minutes."
+    ],
+    explanation: "Aviation navigation problem where delay recovery requires increasing airspeed to balance fixed arrival deadlines.",
+    formula: "Delta t = d/v_usual - d/v_fast; x^2 + 250x - 750000 = 0",
+    examinerNote: "Convert 30 minutes to 1/2 hour before setting up the equation.",
+    source: "CBSE Official Sample Paper 2024"
+  },
+  {
+    id: "vq_4_case_3",
+    chapter: 4,
+    chapterName: "Quadratic Equations",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2025 Competency Case Study] Solar Rooftop Installation: A green building design team plans a solar panel array on a rectangular roof of dimensions 20 meters by 15 meters. A walkway of uniform width x meters is left all around the boundary of the roof for maintenance, and the remaining inner central area of 176 square meters is covered with solar panels.\n\n(i) Express the length and breadth of the solar panel zone in terms of walkway width x. (1 Mark)\n(ii) Formulate the quadratic equation for the solar panel area. (1 Mark)\n(iii) (a) Find the width of the walkway x. (2 Marks)\nOR\n(iii) (b) If each square meter of solar panel produces 1.5 kWh of electricity daily, find the daily electricity generation of the installation. (2 Marks)",
+    answer: "(i) Length = 20 - 2x, Breadth = 15 - 2x; (ii) 4x^2 - 70x + 124 = 0; (iii)(a) x = 2 meters; (iii)(b) 264 kWh daily",
+    steps: [
+      "Part (i): Walkway of width x surrounds all 4 sides.\nLength of solar zone = 20 - 2x meters;\nBreadth of solar zone = 15 - 2x meters (x < 7.5).",
+      "Part (ii): Area = (20 - 2x)(15 - 2x) = 176\n300 - 40x - 30x + 4x^2 = 176\n4x^2 - 70x + 124 = 0 => 2x^2 - 35x + 62 = 0.",
+      "Part (iii)(a): Solve 2x^2 - 35x + 62 = 0 (product = 124, sum = -35 => -31, -4):\n2x^2 - 4x - 31x + 62 = 0\n2x(x - 2) - 31(x - 2) = 0\n(x - 2)(2x - 31) = 0 => x = 2 or x = 15.5.\nSince 2x < 15, x = 15.5 is impossible. Walkway width x = 2 meters.",
+      "Part (iii)(b) Alternative: Area = 176 m^2.\nDaily generation = 176 m^2 * 1.5 kWh/m^2 = 264 kWh."
+    ],
+    explanation: "Border of uniform width x subtracts 2x from both length and breadth. Physical constraints reject root exceeding half-breadth.",
+    formula: "Inner Area = (L - 2x)(B - 2x) = 176",
+    examinerNote: "Reject x = 15.5 because the total roof width is only 15 meters!",
+    source: "CBSE Competency Assessment Framework 2025"
   }
 ];

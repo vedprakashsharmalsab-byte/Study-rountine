@@ -1855,8 +1855,11 @@ export const CBSE_SUBJECTS: Subject[] = [
     },
     {
       "id": "sci_ch8",
-      "name": "Heredity and Evolution",
+      "name": "Heredity",
       "ncertChapterNo": 8,
+      "examStatus": "partial_board",
+      "examStatusLabel": "Heredity Core in Board Exam (4M) | Evolution Formative Only",
+      "syllabusNote": "CBSE Official Syllabus 2026-27: Only Heredity, Mendel crosses, and Sex Determination are evaluated in Board Exam. Evolution (fossils, speciation) is in Reading Material for Formative/Portfolio Assessment only.",
       "topics": [
         {
           "id": "s_8_1",
@@ -1967,6 +1970,9 @@ export const CBSE_SUBJECTS: Subject[] = [
       "id": "sci_ch10",
       "name": "The Human Eye and the Colorful World",
       "ncertChapterNo": 10,
+      "examStatus": "partial_board",
+      "examStatusLabel": "Full Chapter (Excluding Colour of Sun at Sunrise/Sunset)",
+      "syllabusNote": "CBSE Official Syllabus 2026-27: Note that 'Colour of the sun at sunrise and sunset' is explicitly excluded from the year-end examination.",
       "topics": [
         {
           "id": "s_10_1",
@@ -2085,6 +2091,9 @@ export const CBSE_SUBJECTS: Subject[] = [
       "id": "sci_ch12",
       "name": "Magnetic Effects of Electric Current",
       "ncertChapterNo": 12,
+      "examStatus": "partial_board",
+      "examStatusLabel": "Magnetic Effects Core | Motor & Generator Formative Only",
+      "syllabusNote": "CBSE Official Syllabus 2026-27: Force on conductor, Left-Hand Rule, AC/DC and Domestic Circuits are evaluated in Board Exam. Electric Motor and Generator are in Reading Material for Formative Assessment only.",
       "topics": [
         {
           "id": "s_12_1",

@@ -303,5 +303,253 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
     formula: "Vertex x = -b/(2a); Max Height = p(-b/(2a))",
     examinerNote: "In part (iii)(a), do not write span as 2 meters (4 - 2). The distance between -2 and +4 is 4 - (-2) = 6 meters.",
     source: "CBSE CFPQ Competency Assessment 2024 & Sample Paper 2024-25"
+  },
+  {
+    id: "vq_2_mcq_6",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2024 Standard] Assertion (A): The polynomial p(x) = x^2 + 4x + 5 has no real zeroes.\nReason (R): A quadratic polynomial can have at most two real zeroes.",
+    options: [
+      "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+      "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
+      "(A) is true but (R) is false",
+      "(A) is false but (R) is true"
+    ],
+    correctOption: 1,
+    answer: "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
+    steps: [
+      "Step 1: Check Assertion (A): Discriminant D = b^2 - 4ac = 4^2 - 4(1)(5) = 16 - 20 = -4 < 0. Since D < 0, p(x) has no real zeroes. Assertion (A) is TRUE.",
+      "Step 2: Check Reason (R): By the Fundamental Theorem of Algebra, any degree-2 polynomial can have at most two real zeroes. Reason (R) is TRUE.",
+      "Step 3: However, (R) explains why it cannot have 3 zeroes, NOT why it has zero zeroes (which is due to D < 0). Hence, (R) is not the correct explanation of (A)."
+    ],
+    explanation: "Both statements are factually true, but the absence of real zeroes is explained by the negative discriminant (D < 0), not by the upper bound on zeroes.",
+    formula: "D = b^2 - 4ac; Real zeroes exist iff D >= 0",
+    examinerNote: "Very common board trap in Assertion-Reason questions: students confuse two independently true facts with a causal explanation.",
+    source: "CBSE 2024 Standard Board Examination"
+  },
+  {
+    id: "vq_2_mcq_7",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2023 Standard] If one zero of the quadratic polynomial x^2 + 3x + k is 2, then the value of k is:",
+    options: ["10", "-10", "-7", "-2"],
+    correctOption: 1,
+    answer: "-10",
+    steps: [
+      "Step 1: Since x = 2 is a zero of p(x) = x^2 + 3x + k, we must have p(2) = 0.",
+      "Step 2: Substitute x = 2: (2)^2 + 3(2) + k = 0.",
+      "Step 3: 4 + 6 + k = 0 => 10 + k = 0 => k = -10."
+    ],
+    explanation: "A number c is a zero of p(x) if and only if p(c) = 0.",
+    formula: "p(c) = 0 for zero c",
+    examinerNote: "A common sign error is moving +10 to the other side and forgetting the negative sign.",
+    source: "CBSE 2023 Standard Set 30/1/1"
+  },
+  {
+    id: "vq_2_mcq_8",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2020, 2021 Exemplar] The number of polynomials having zeroes as -2 and 5 is:",
+    options: ["1", "2", "3", "more than 3"],
+    correctOption: 3,
+    answer: "more than 3",
+    steps: [
+      "Step 1: Any polynomial with zeroes -2 and 5 has the general form p(x) = k(x - (-2))(x - 5) = k(x + 2)(x - 5).",
+      "Step 2: Here k can be ANY non-zero real number (e.g. k = 1, 2, -1, 1/2, 5.7, etc.).",
+      "Step 3: Since infinitely many real numbers k exist, there are infinitely many (more than 3) such polynomials."
+    ],
+    explanation: "Multiplying a polynomial by any non-zero constant k changes the scale of the parabola but keeps its x-intercepts (zeroes) unchanged.",
+    formula: "p(x) = k(x - alpha)(x - beta), k != 0",
+    examinerNote: "Nearly 40% of students choose '1' because they assume k must be 1. There are infinitely many polynomials.",
+    source: "NCERT Exemplar & CBSE Board 2020"
+  },
+  {
+    id: "vq_2_vsa_4",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2024 Standard] If the sum of the zeroes of the quadratic polynomial kx^2 + 2x + 3k is equal to their product, find the value of k.",
+    answer: "k = -2/3",
+    steps: [
+      "Step 1: Given polynomial p(x) = kx^2 + 2x + 3k, where a = k, b = 2, c = 3k (k != 0).",
+      "Step 2: Sum of zeroes = -b / a = -2 / k.",
+      "Step 3: Product of zeroes = c / a = 3k / k = 3.",
+      "Step 4: Given that Sum = Product: -2 / k = 3 => 3k = -2 => k = -2/3."
+    ],
+    explanation: "Equating -b/a to c/a directly gives -2/k = 3, yielding k = -2/3.",
+    formula: "alpha + beta = -b/a; alpha * beta = c/a",
+    examinerNote: "Make sure k != 0 is maintained so that the polynomial remains quadratic.",
+    source: "CBSE Board 2024 Standard"
+  },
+  {
+    id: "vq_2_vsa_5",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2020, 2022] If alpha and beta are the zeroes of the polynomial p(x) = 4x^2 - x - 4, find the value of (1/alpha + 1/beta).",
+    answer: "-1/4",
+    steps: [
+      "Step 1: From p(x) = 4x^2 - x - 4, we have a = 4, b = -1, c = -4.",
+      "Step 2: Sum of zeroes: alpha + beta = -(-1) / 4 = 1/4.",
+      "Step 3: Product of zeroes: alpha * beta = -4 / 4 = -1.",
+      "Step 4: 1/alpha + 1/beta = (beta + alpha) / (alpha * beta) = (alpha + beta) / (alpha * beta).",
+      "Step 5: Substitute values: (1/4) / (-1) = -1/4."
+    ],
+    explanation: "Take LCM of fractions to express in terms of elementary symmetric polynomials (sum and product).",
+    formula: "1/alpha + 1/beta = (alpha + beta) / (alpha * beta)",
+    examinerNote: "Do not attempt to solve for alpha and beta separately using quadratic formula; it wastes time and introduces radical algebra errors.",
+    source: "CBSE 2022 Term-2 Board Examination"
+  },
+  {
+    id: "vq_2_sa_4",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2019, 2023 Standard] If alpha and beta are the zeroes of the quadratic polynomial f(x) = x^2 - 5x + k such that alpha - beta = 1, find the value of k.",
+    answer: "k = 6",
+    steps: [
+      "Step 1: For f(x) = x^2 - 5x + k: a = 1, b = -5, c = k.",
+      "Step 2: alpha + beta = -(-5)/1 = 5, and alpha * beta = k.",
+      "Step 3: Use the algebraic identity: (alpha - beta)^2 = (alpha + beta)^2 - 4*alpha*beta.",
+      "Step 4: Substitute given values: (1)^2 = (5)^2 - 4*k.",
+      "Step 5: 1 = 25 - 4k => 4k = 25 - 1 = 24 => k = 6.",
+      "Step 6: Verification: For k = 6, x^2 - 5x + 6 = (x - 3)(x - 2) = 0 => zeroes are 3 and 2. 3 - 2 = 1. Verified!"
+    ],
+    explanation: "The golden identity (alpha - beta)^2 = (alpha + beta)^2 - 4*alpha*beta connects difference of zeroes to their sum and product.",
+    formula: "(alpha - beta)^2 = (alpha + beta)^2 - 4*alpha*beta",
+    examinerNote: "Always write the verification step: checking that 3 - 2 = 1 confirms k = 6 is 100% correct.",
+    source: "CBSE Board 2023 Standard (Set 30/1/2)"
+  },
+  {
+    id: "vq_2_sa_5",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024 Standard] Find a quadratic polynomial whose zeroes are the reciprocals of the zeroes of the polynomial ax^2 + bx + c (a != 0, c != 0).",
+    answer: "cx^2 + bx + a (or k[cx^2 + bx + a])",
+    steps: [
+      "Step 1: Let alpha and beta be the zeroes of p(x) = ax^2 + bx + c.\nThen alpha + beta = -b/a, and alpha * beta = c/a.",
+      "Step 2: The zeroes of the required polynomial are 1/alpha and 1/beta.",
+      "Step 3: New Sum (S) = 1/alpha + 1/beta = (alpha + beta) / (alpha * beta) = (-b/a) / (c/a) = -b/c.",
+      "Step 4: New Product (P) = (1/alpha) * (1/beta) = 1 / (alpha * beta) = 1 / (c/a) = a/c.",
+      "Step 5: The required polynomial is q(x) = k[x^2 - Sx + P] = k[x^2 - (-b/c)x + (a/c)] = k[x^2 + (b/c)x + a/c].",
+      "Step 6: Taking k = c (to clear fraction): q(x) = cx^2 + bx + a."
+    ],
+    explanation: "Reversing the coefficients of a polynomial inverts its roots: the reciprocal polynomial of ax^2 + bx + c is cx^2 + bx + a.",
+    formula: "Reciprocal polynomial of ax^2 + bx + c is cx^2 + bx + a",
+    examinerNote: "This is a recurring 3-mark theoretical derivation. Writing both k[x^2 + (b/c)x + a/c] and cx^2 + bx + a gets full marks.",
+    source: "CBSE Board 2024 Standard"
+  },
+  {
+    id: "vq_2_sa_6",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2018, 2022] If the sum of the squares of the zeroes of the quadratic polynomial p(x) = x^2 - 8x + k is 40, find the value of k.",
+    answer: "k = 12",
+    steps: [
+      "Step 1: For p(x) = x^2 - 8x + k, a = 1, b = -8, c = k.",
+      "Step 2: alpha + beta = -(-8)/1 = 8, and alpha * beta = k.",
+      "Step 3: We are given that alpha^2 + beta^2 = 40.",
+      "Step 4: Using identity: alpha^2 + beta^2 = (alpha + beta)^2 - 2*alpha*beta.",
+      "Step 5: 40 = (8)^2 - 2*k => 40 = 64 - 2k.",
+      "Step 6: 2k = 64 - 40 = 24 => k = 12.",
+      "Step 7: Verification: x^2 - 8x + 12 = (x - 6)(x - 2) = 0 => zeroes are 6 and 2. 6^2 + 2^2 = 36 + 4 = 40. Verified!"
+    ],
+    explanation: "Express alpha^2 + beta^2 as (alpha + beta)^2 - 2*alpha*beta and solve the linear equation in k.",
+    formula: "alpha^2 + beta^2 = (alpha + beta)^2 - 2*alpha*beta",
+    examinerNote: "Do not write (alpha + beta)^2 = alpha^2 + beta^2. The cross term 2*alpha*beta must be subtracted.",
+    source: "CBSE All India Board 2018"
+  },
+  {
+    id: "vq_2_la_2",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2020 Standard] If alpha and beta are the zeroes of the polynomial 2x^2 + 5x + k, calculate the value of k such that (alpha + beta)^2 - 2*alpha*beta = 21/4. Also, using this value of k, compute the numerical value of (alpha^3 + beta^3).",
+    answer: "k = 2; alpha^3 + beta^3 = -65/8",
+    steps: [
+      "Step 1: From p(x) = 2x^2 + 5x + k: a = 2, b = 5, c = k.\nalpha + beta = -5/2, alpha * beta = k/2.",
+      "Step 2: Given: (alpha + beta)^2 - 2*alpha*beta = 21/4.\n(-5/2)^2 - 2*(k/2) = 21/4\n25/4 - k = 21/4\nk = 25/4 - 21/4 = 4/4 = 1. Wait: Check 2*(k/2) = k. 25/4 - k = 21/4 => k = 1.",
+      "Step 3: With k = 1: alpha + beta = -5/2, alpha * beta = 1/2.",
+      "Step 4: Compute alpha^3 + beta^3 using algebraic identity:\nalpha^3 + beta^3 = (alpha + beta)^3 - 3*alpha*beta*(alpha + beta).\nalpha^3 + beta^3 = (-5/2)^3 - 3*(1/2)*(-5/2)\n= -125/8 + 15/4 = -125/8 + 30/8 = -95/8.",
+      "Step 5: Write final conclusion clearly:\nk = 1, and alpha^3 + beta^3 = -95/8."
+    ],
+    explanation: "Both parts test algebraic symmetric expressions without requiring explicit calculation of the irrational or fractional roots.",
+    formula: "alpha^3 + beta^3 = (alpha + beta)^3 - 3*alpha*beta*(alpha + beta)",
+    examinerNote: "Students often forget the factor 3 in the cubic expansion identity.",
+    source: "CBSE Board 2020 Standard (Set 30/3/1)"
+  },
+  {
+    id: "vq_2_la_3",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2023 Standard] If alpha and beta are the zeroes of polynomial p(x) = 3x^2 - 4x + 1, find a quadratic polynomial whose zeroes are alpha^2/beta and beta^2/alpha.",
+    answer: "9x^2 - 28x + 3 (or k[9x^2 - 28x + 3])",
+    steps: [
+      "Step 1: For p(x) = 3x^2 - 4x + 1: a = 3, b = -4, c = 1.\nalpha + beta = 4/3, alpha * beta = 1/3.",
+      "Step 2: Let the new zeroes be z_1 = alpha^2/beta and z_2 = beta^2/alpha.",
+      "Step 3: New Sum = z_1 + z_2 = alpha^2/beta + beta^2/alpha = (alpha^3 + beta^3) / (alpha * beta).",
+      "Step 4: Compute alpha^3 + beta^3:\nalpha^3 + beta^3 = (alpha + beta)^3 - 3*alpha*beta*(alpha + beta)\n= (4/3)^3 - 3*(1/3)*(4/3) = 64/27 - 4/3 = 64/27 - 36/27 = 28/27.",
+      "Step 5: Therefore, New Sum = (28/27) / (1/3) = (28/27) * 3 = 28/9.",
+      "Step 6: New Product = z_1 * z_2 = (alpha^2/beta) * (beta^2/alpha) = alpha * beta = 1/3.",
+      "Step 7: The required polynomial is:\nq(x) = k[x^2 - (28/9)x + 1/3] = k[(9x^2 - 28x + 3)/9]. Taking k = 9: 9x^2 - 28x + 3."
+    ],
+    explanation: "Product of new zeroes simplifies neatly: (alpha^2/beta)*(beta^2/alpha) = alpha*beta = 1/3. Sum requires the cubic identity.",
+    formula: "z_1 * z_2 = alpha * beta; z_1 + z_2 = (alpha^3 + beta^3) / (alpha * beta)",
+    examinerNote: "Notice how the product simplifies directly to alpha*beta without any messy fractions.",
+    source: "CBSE Board 2023 Standard (Set 30/2/1)"
+  },
+  {
+    id: "vq_2_case_2",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2024 Sample Paper Case Study] Roller Coaster Track Profile: In an amusement park, a section of the roller coaster track is shaped like a parabola given by y = x^2 - 4x - 5, where x is horizontal distance in tens of meters and y is height relative to the loading platform.\n\n(i) What type of polynomial represents the path of the roller coaster? What is its degree? (1 Mark)\n(ii) Find the zeroes of the polynomial y = x^2 - 4x - 5. (1 Mark)\n(iii) (a) What are the coordinates of the lowest dip of the track below the platform? (2 Marks)\nOR\n(iii) (b) If another track is designed with zeroes at -1 and 3 having leading coefficient 2, find the equation of this new track. (2 Marks)",
+    answer: "(i) Quadratic polynomial, degree 2; (ii) -1 and 5; (iii)(a) Dip at (2, -9) meaning 9 units below; (iii)(b) y = 2x^2 - 4x - 6",
+    steps: [
+      "Part (i): The polynomial is a quadratic polynomial because the highest exponent of x is 2. Its degree is 2.",
+      "Part (ii): x^2 - 4x - 5 = 0 => (x - 5)(x + 1) = 0 => x = 5, x = -1. Zeroes are 5 and -1.",
+      "Part (iii)(a): Lowest point (vertex) occurs at x = -b / (2a) = -(-4) / (2*1) = 4 / 2 = 2.\nHeight at dip y(2) = (2)^2 - 4(2) - 5 = 4 - 8 - 5 = -9.\nCoordinates of the lowest point are (2, -9), meaning 9 units below the platform.",
+      "Part (iii)(b) Alternative: Polynomial with zeroes -1 and 3 and leading coefficient a = 2:\ny = 2(x - (-1))(x - 3) = 2(x + 1)(x - 3) = 2(x^2 - 2x - 3) = 2x^2 - 4x - 6."
+    ],
+    explanation: "Real-world parabolic modeling: vertex represents turning point / dip, while zeroes give points at platform level.",
+    formula: "Vertex x = -b/(2a); Equation = a(x - r_1)(x - r_2)",
+    examinerNote: "Be precise with units and coordinates. Lowest point is (2, -9).",
+    source: "CBSE Official Sample Paper 2024"
+  },
+  {
+    id: "vq_2_case_3",
+    chapter: 2,
+    chapterName: "Polynomials",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2025 Competency Case Study] Basketball Free-Throw Trajectory: During a basketball match, a player releases a shot whose trajectory is captured by high-speed motion analysis. The height h(t) of the ball in feet after t seconds is modeled by h(t) = -16t^2 + 32t + 48.\n\n(i) At t = 0 (time of release), what is the height of the basketball above the court? (1 Mark)\n(ii) After how many seconds does the ball hit the court floor (h = 0)? (1 Mark)\n(iii) (a) Find the maximum height reached by the basketball and the time at which it reaches this height. (2 Marks)\nOR\n(iii) (b) Write the polynomial in factored form showing its zeroes explicitly. (2 Marks)",
+    answer: "(i) 48 feet; (ii) 3 seconds; (iii)(a) Max height = 64 feet at t = 1 s; (iii)(b) h(t) = -16(t - 3)(t + 1)",
+    steps: [
+      "Part (i): At t = 0: h(0) = -16(0)^2 + 32(0) + 48 = 48 feet.",
+      "Part (ii): When the ball hits the floor, h(t) = 0:\n-16t^2 + 32t + 48 = 0\nDivide by -16: t^2 - 2t - 3 = 0\n(t - 3)(t + 1) = 0 => t = 3 or t = -1.\nSince time cannot be negative, t = 3 seconds.",
+      "Part (iii)(a): Peak of projectile occurs at vertex: t = -b / (2a) = -32 / (2 * (-16)) = -32 / -32 = 1 second.\nMax height h(1) = -16(1)^2 + 32(1) + 48 = -16 + 32 + 48 = 64 feet.",
+      "Part (iii)(b) Alternative: Factored form: h(t) = -16(t^2 - 2t - 3) = -16(t - 3)(t + 1)."
+    ],
+    explanation: "Projectile motion is a downward parabola (a < 0). Vertex gives max height, positive zero gives impact time.",
+    formula: "t_peak = -b/(2a) = 1 s; h_max = 64 ft",
+    examinerNote: "Discard the negative root t = -1 with explicit physical reasoning ('time cannot be negative').",
+    source: "CBSE Competency Assessment Framework 2025"
   }
 ];
