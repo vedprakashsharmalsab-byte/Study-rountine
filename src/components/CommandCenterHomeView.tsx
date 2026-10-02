@@ -557,7 +557,9 @@ export default function CommandCenterHomeView({
           <button
             onClick={() => {
               playSound("click");
-              setActiveTab("math_mastery");
+              setConceptsSubject("math");
+              setConceptsChapterNo(1);
+              setActiveTab("concepts");
             }}
             className="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-500 hover:to-emerald-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 shrink-0 transition active:scale-95 cursor-pointer"
           >

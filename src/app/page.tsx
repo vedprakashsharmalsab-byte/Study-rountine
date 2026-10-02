@@ -53,10 +53,6 @@ const CoverageMatrixView = dynamic(
   () => import("@/components/CoverageMatrixView"),
   { loading: TabSkeleton, ssr: false }
 );
-const Math100MasteryView = dynamic(
-  () => import("@/components/Math100MasteryView"),
-  { loading: TabSkeleton, ssr: false }
-);
 import CommandCenterHomeView from "@/components/CommandCenterHomeView";
 import AreteAccessGateModal, {
   StudentProfile,
@@ -1017,17 +1013,17 @@ export default function CBSECommandCenter() {
   }, []);
   
   const VALID_TABS = useMemo(() => [
-    "chapter_dashboard", "math_mastery", "concepts", "theorems", "activities", "questions",
+    "chapter_dashboard", "concepts", "theorems", "activities", "questions",
     "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
     "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
     "timelines", "english", "hindi", "tools_diagrams", "settings"
   ], []);
 
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "math_mastery" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams" | "settings">(() => {
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams" | "settings">(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const urlTab = params.get("tab");
-      const validTabs = ["chapter_dashboard", "math_mastery", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams", "settings"];
+      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams", "settings"];
       if (urlTab && validTabs.includes(urlTab)) {
         return urlTab as any;
       }
@@ -1617,7 +1613,7 @@ export default function CBSECommandCenter() {
   const activeCategory: MasterCategory = useMemo(() => {
     if (["chapter_dashboard", "today", "test_series", "syllabus", "roadmap"].includes(activeTab)) return "command";
     if (["concepts", "english", "hindi", "timelines", "theorems", "reactions", "activities", "experiments", "diagrams"].includes(activeTab)) return "concepts";
-    if (["questions", "hots", "math_mastery"].includes(activeTab)) return "practice";
+    if (["questions", "hots"].includes(activeTab)) return "practice";
     if (["mnemonics", "flashcards", "common_mistakes", "tools_diagrams"].includes(activeTab)) return "tools";
     return "command";
   }, [activeTab]);
@@ -1646,7 +1642,6 @@ export default function CBSECommandCenter() {
       defaultTab: "chapter_dashboard",
       items: [
         { id: "chapter_dashboard", label: "Study Command Center", icon: Target },
-        { id: "math_mastery", label: "Maths 100/100 (Ch 1-5)", icon: Calculator, count: "Ch 1–5" },
         { id: "roadmap", label: "30-Day Blueprint", icon: Compass },
       ]
     },
@@ -1672,9 +1667,8 @@ export default function CBSECommandCenter() {
       id: "practice",
       label: "Practice",
       icon: Zap,
-      defaultTab: "math_mastery",
+      defaultTab: "questions",
       items: [
-        { id: "math_mastery", label: "Maths 100/100 Master", icon: Calculator, count: "Ch 1–5 Mastery" },
         { id: "questions", label: "Question Bank", icon: Zap, count: "1,200+" },
         { id: "hots", label: "Competitive HOTS", icon: Flame, count: "35 Sets" },
       ]
@@ -2120,7 +2114,7 @@ export default function CBSECommandCenter() {
       const params = new URLSearchParams(window.location.search);
       const urlTab = params.get("tab");
       const validTabs = [
-        "chapter_dashboard", "math_mastery", "concepts", "theorems", "activities", "questions",
+        "chapter_dashboard", "concepts", "theorems", "activities", "questions",
         "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
         "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
         "timelines", "english", "hindi", "tools_diagrams"
@@ -4568,11 +4562,6 @@ export default function CBSECommandCenter() {
               setActiveTab("questions");
             }}
           />
-        )}
-
-        {/* ===================== TAB: CLASS 10 MATHEMATICS 100/100 MASTERY SYSTEM ===================== */}
-        {activeTab === "math_mastery" && (
-          <Math100MasteryView />
         )}
 
         {/* ===================== TAB 4: TRAINING VAULT (PREMIUM) ===================== */}
