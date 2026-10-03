@@ -351,8 +351,8 @@ export default function CompetitiveHotsView({
                   <PremiumMathRenderer content={q.questionText} isDark={isDark} />
                   
                   {q.diagramSvg && (
-                    <div className="mt-4 space-y-2">
-                      <div className="flex items-center justify-between text-xs font-mono font-bold">
+                    <div className="mt-4 pt-3 border-t border-current/10 space-y-2">
+                      <div className="flex items-center justify-between text-xs font-mono font-bold max-w-xl mx-auto px-1">
                         <span className={`inline-flex items-center gap-1.5 ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>
                           <Compass className="w-4 h-4 shrink-0 text-cyan-500" />
                           <span>Official Technical Schematic / Figure</span>
@@ -362,11 +362,11 @@ export default function CompetitiveHotsView({
                         </span>
                       </div>
                       <div 
-                        className={`p-4 sm:p-5 flex justify-center items-center rounded-2xl border transition-all overflow-x-auto ${
+                        className={`w-full max-w-xl mx-auto p-4 sm:p-5 flex justify-center items-center rounded-2xl border transition-all overflow-hidden ${
                           isDark 
-                            ? "bg-slate-950/70 border-cyan-500/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.4)] text-slate-100" 
+                            ? "bg-slate-950/80 border-cyan-500/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.4)] text-slate-100" 
                             : "bg-gradient-to-b from-slate-50 to-white border-slate-200 shadow-sm text-slate-900"
-                        }`} 
+                        } [&_svg]:w-full [&_svg]:max-w-[460px] sm:[&_svg]:max-w-[500px] [&_svg]:h-auto [&_svg]:max-h-[260px] sm:[&_svg]:max-h-[290px] [&_svg]:block [&_svg]:mx-auto`} 
                         dangerouslySetInnerHTML={{ __html: q.diagramSvg }} 
                       />
                     </div>
