@@ -3,8 +3,10 @@
 // Standard: CBSE Board Exam 2026-27 (Code 041 & 086) + NTSE / Olympiad Tier
 // Covers multi-step reasoning, mixed concepts, unknown identification chains,
 // complex circuits, and olympiad-grade geometric proofs with topper solutions.
-// Total Questions: 35 (18 Maths, 17 Science)
+// Total Questions: 40 (18 Maths, 17 Science, 5 Social Science)
 // =========================================================================
+
+import { HOTS_DIAGRAMS } from "./hotsDiagrams";
 
 export interface CompetitiveQuestion {
   id: string;
@@ -79,7 +81,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "(a) Req1 = 18 Ω, I1 = 0.67 A; (b) Req2 = 9 Ω, I2 = 1.33 A; (c) Power Ratio P1 : P2 = 1 : 2",
     "commonStudentPitfall": "Many students mistakenly include R3 in Case (a) even though the switch is open! Never include open circuit branches in resistance calculations.",
-    "diagramSvg": "<svg width=\"300\" height=\"200\" viewBox=\"0 0 300 200\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"50\" y=\"50\" width=\"200\" height=\"100\" rx=\"4\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"150\" y1=\"50\" x2=\"150\" y2=\"150\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"150\" cy=\"50\" r=\"4\" fill=\"currentColor\"/><circle cx=\"150\" cy=\"150\" r=\"4\" fill=\"currentColor\"/><text x=\"160\" y=\"100\" fill=\"currentColor\" font-size=\"12\">Switch S</text><text x=\"100\" y=\"40\" fill=\"currentColor\" font-size=\"12\">R1 = 6Ω</text><text x=\"220\" y=\"100\" fill=\"currentColor\" font-size=\"12\">R2 = 12Ω</text><text x=\"100\" y=\"160\" fill=\"currentColor\" font-size=\"12\">R3 = 4Ω</text><text x=\"50\" y=\"100\" fill=\"currentColor\" font-size=\"12\" text-anchor=\"end\">12V</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_sci_circuit_switch"]
   },
   {
     "id": "hots_sci_unknown_chemical_chain",
@@ -128,7 +130,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "X = FeSO4·7H2O, Y = FeSO4, Z = Fe2O3, W = SO2, V = SO3 [Thermal Decomposition]",
     "commonStudentPitfall": "Students frequently confuse FeSO4 with Copper sulphate (CuSO4·5H2O, which is blue, not green) or forget that TWO gases (SO2 and SO3) are formed.",
-    "diagramSvg": "<svg width=\"350\" height=\"150\" viewBox=\"0 0 350 150\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"20\" y=\"50\" width=\"60\" height=\"40\" rx=\"8\" fill=\"#4ade80\" fill-opacity=\"0.2\" stroke=\"#4ade80\" stroke-width=\"2\"/><text x=\"50\" y=\"75\" fill=\"#4ade80\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">X</text><path d=\"M85 70 L135 70\" stroke=\"currentColor\" stroke-width=\"2\" marker-end=\"url(#arrow)\"/><text x=\"110\" y=\"60\" fill=\"currentColor\" font-size=\"10\" text-anchor=\"middle\">Heat</text><rect x=\"140\" y=\"50\" width=\"60\" height=\"40\" rx=\"8\" fill=\"#e2e8f0\" fill-opacity=\"0.2\" stroke=\"#e2e8f0\" stroke-width=\"2\"/><text x=\"170\" y=\"75\" fill=\"#e2e8f0\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">Y</text><path d=\"M205 70 L255 70\" stroke=\"currentColor\" stroke-width=\"2\" marker-end=\"url(#arrow)\"/><text x=\"230\" y=\"60\" fill=\"currentColor\" font-size=\"10\" text-anchor=\"middle\">Strong Heat</text><rect x=\"260\" y=\"30\" width=\"60\" height=\"30\" rx=\"8\" fill=\"#ef4444\" fill-opacity=\"0.2\" stroke=\"#ef4444\" stroke-width=\"2\"/><text x=\"290\" y=\"50\" fill=\"#ef4444\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Z (Solid)</text><rect x=\"260\" y=\"70\" width=\"60\" height=\"30\" rx=\"8\" fill=\"#3b82f6\" fill-opacity=\"0.2\" stroke=\"#3b82f6\" stroke-width=\"2\"/><text x=\"290\" y=\"90\" fill=\"#3b82f6\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">W (Gas)</text><rect x=\"260\" y=\"110\" width=\"60\" height=\"30\" rx=\"8\" fill=\"#3b82f6\" fill-opacity=\"0.2\" stroke=\"#3b82f6\" stroke-width=\"2\"/><text x=\"290\" y=\"130\" fill=\"#3b82f6\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">V (Gas)</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_sci_unknown_chemical_chain"]
   },
   {
     "id": "hots_sci_optics_lens_displacement",
@@ -170,7 +172,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "(a) u1 = -20 cm, f = +15 cm; (b) New Object Distance u2 = -10 cm, New Image Position v2 = -30 cm",
     "commonStudentPitfall": "Sign convention disaster: When m = -3, v is +60 cm; but when m = +3, v must be 3u (negative). Never mix up the plus/minus signs of magnification!",
-    "diagramSvg": "<svg width=\"400\" height=\"150\" viewBox=\"0 0 400 150\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"20\" y1=\"75\" x2=\"380\" y2=\"75\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4\"/><ellipse cx=\"200\" cy=\"75\" rx=\"10\" ry=\"40\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M120 75 L120 40\" stroke=\"#f59e0b\" stroke-width=\"2\" marker-end=\"url(#arrow-obj)\"/><path d=\"M120 40 L200 40 L260 75\" stroke=\"#f59e0b\" stroke-width=\"1.5\"/><path d=\"M120 40 L200 75 L280 110\" stroke=\"#f59e0b\" stroke-width=\"1.5\"/><path d=\"M260 75 L260 110\" stroke=\"#ef4444\" stroke-width=\"2\" marker-end=\"url(#arrow-img)\"/><text x=\"120\" y=\"130\" fill=\"currentColor\" font-size=\"12\" text-anchor=\"middle\">u = ?</text><text x=\"260\" y=\"130\" fill=\"currentColor\" font-size=\"12\" text-anchor=\"middle\">v = +60 cm</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_sci_optics_lens_displacement"]
   },
   {
     "id": "hots_math_circle_supplementary",
@@ -217,7 +219,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "∠AOB + ∠COD = 180° and ∠BOC + ∠AOD = 180° [Hence Proved]",
     "commonStudentPitfall": "Grouping mistake: When adding angles around point O, ensure you pair (1, 2) for AB and (5, 6) for CD. Pairing randomly will not yield the opposite sides.",
-    "diagramSvg": "<svg width=\"200\" height=\"200\" viewBox=\"0 0 200 200\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"100\" cy=\"100\" r=\"60\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M30 40 L170 30 L180 160 L40 170 Z\" stroke=\"#3b82f6\" stroke-width=\"2\"/><line x1=\"100\" y1=\"100\" x2=\"30\" y2=\"40\" stroke=\"currentColor\" stroke-width=\"1\" stroke-dasharray=\"4\"/><line x1=\"100\" y1=\"100\" x2=\"170\" y2=\"30\" stroke=\"currentColor\" stroke-width=\"1\" stroke-dasharray=\"4\"/><line x1=\"100\" y1=\"100\" x2=\"180\" y2=\"160\" stroke=\"currentColor\" stroke-width=\"1\" stroke-dasharray=\"4\"/><line x1=\"100\" y1=\"100\" x2=\"40\" y2=\"170\" stroke=\"currentColor\" stroke-width=\"1\" stroke-dasharray=\"4\"/><text x=\"100\" y=\"105\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\">O</text><text x=\"20\" y=\"30\" fill=\"currentColor\" font-size=\"14\">A</text><text x=\"180\" y=\"20\" fill=\"currentColor\" font-size=\"14\">B</text><text x=\"190\" y=\"170\" fill=\"currentColor\" font-size=\"14\">C</text><text x=\"20\" y=\"180\" fill=\"currentColor\" font-size=\"14\">D</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_circle_supplementary"]
   },
   {
     "id": "hots_math_incircle_inradius_formula",
@@ -264,7 +266,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "Inradius r = (a + c - b) / 2 = (Base + Perpendicular - Hypotenuse) / 2 [Hence Proved]",
     "commonStudentPitfall": "Many students attempt cumbersome area formulas (Area = r × semiperimeter). While valid, the tangent method shown above is 4 times faster and awards 100% full marks.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_incircle_inradius_formula"]
   },
   {
     "id": "hots_math_trig_airplane_speed",
@@ -314,7 +316,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "Speed of the Aeroplane = 240 m/s = 864 km/h",
     "commonStudentPitfall": "Units Penalty: Leaving the answer as 240 m/s when the question specifically asks 'in km/h' costs 1 full mark. Always multiply m/s by 18/5 to get km/h!",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_trig_airplane_speed"]
   },
   {
     "id": "hots_sci_ch1_redox_zinc_copper",
@@ -363,8 +365,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "X = Cu, Y = CuO, Z = CuSO4, W = ZnSO4 | H2 oxidized (reducing agent), CuO reduced (oxidizing agent)",
-    "commonStudentPitfall": "Students often write 'Cu is reduced' instead of 'CuO is reduced'. Remember: the entire compound (reactant) is reduced or oxidized, not an individual atom.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Students often write 'Cu is reduced' instead of 'CuO is reduced'. Remember: the entire compound (reactant) is reduced or oxidized, not an individual atom."
   },
   {
     "id": "hots_sci_ch2_baking_washing_soda",
@@ -411,8 +412,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "A = NaHCO3, B = CO2, C = Na2CO3, D = Na2CO3·10H2O | Tartaric acid neutralizes bitter Na2CO3",
-    "commonStudentPitfall": "Do not confuse Baking Soda (pure NaHCO3) with Baking Powder (mixture of NaHCO3 + mild edible acid like tartaric acid).",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Do not confuse Baking Soda (pure NaHCO3) with Baking Powder (mixture of NaHCO3 + mild edible acid like tartaric acid)."
   },
   {
     "id": "hots_sci_ch3_thermite_metallurgy",
@@ -459,8 +459,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "HgS -> HgO -> Hg(l) | Fe2O3 + 2Al -> 2Fe(l) + Al2O3 (Molten Iron) | Al2O3 forms AlCl3 with acid & NaAlO2 with base",
-    "commonStudentPitfall": "Many students write Al + FeO instead of Fe2O3 (Hematite) in thermite reaction. Also, sodium aluminate formula is NaAlO2, not Na2AlO2.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Many students write Al + FeO instead of Fe2O3 (Hematite) in thermite reaction. Also, sodium aluminate formula is NaAlO2, not Na2AlO2."
   },
   {
     "id": "hots_sci_ch4_esterification_saponification",
@@ -509,8 +508,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "A = CH3CH2OH, B = CH3COOH, C = CH3COOC2H5, D = CH3COONa | Conc. H2SO4 acts as catalyst and dehydrating agent",
-    "commonStudentPitfall": "Students forget that conc. H2SO4 is BOTH a catalyst AND a dehydrating agent. Mentioning both earns full 1.0 mark.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Students forget that conc. H2SO4 is BOTH a catalyst AND a dehydrating agent. Mentioning both earns full 1.0 mark."
   },
   {
     "id": "hots_sci_ch5_respiration_atp_nephron",
@@ -558,8 +556,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Aerobic yield = 38 ATP vs Anaerobic yield = 2 ATP | Lactic acid causes cramps | Glomerular filtration -> Selective reabsorption -> Secretion",
-    "commonStudentPitfall": "Do not write that kidneys excrete 180 L of urine! 180 L is the initial filtrate, but 99% (approx 178 L) is selectively reabsorbed; only 1 to 2 L is excreted as urine.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Do not write that kidneys excrete 180 L of urine! 180 L is the initial filtrate, but 99% (approx 178 L) is selectively reabsorbed; only 1 to 2 L is excreted as urine."
   },
   {
     "id": "hots_sci_ch6_phototropism_reflex_arc",
@@ -605,8 +602,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Auxin on shaded side causes differential elongation -> shoot bends to light | Receptor -> Sensory -> Relay -> Motor -> Effector | Synapse is unidirectional",
-    "commonStudentPitfall": "Students frequently confuse positive phototropism of shoots with negative phototropism of roots. Roots grow away from light; shoots grow towards light.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Students frequently confuse positive phototropism of shoots with negative phototropism of roots. Roots grow away from light; shoots grow towards light."
   },
   {
     "id": "hots_sci_ch7_double_fertilisation_pollen",
@@ -652,8 +648,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Syngamy (n + n -> 2n Zygote) + Triple Fusion (n + 2n -> 3n Endosperm) = Double Fertilisation | Ovary -> Fruit, Ovule -> Seed",
-    "commonStudentPitfall": "Do not write that ovary becomes seed and ovule becomes fruit! It is strictly Ovary -> Fruit, Ovule -> Seed.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Do not write that ovary becomes seed and ovule becomes fruit! It is strictly Ovary -> Fruit, Ovule -> Seed."
   },
   {
     "id": "hots_sci_ch8_dihybrid_cross_ratio",
@@ -700,8 +695,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "F1 = RrYy (Round Yellow) | Gametes = RY, Ry, rY, ry | F2 Phenotypic Ratio = 9 : 3 : 3 : 1 [Law of Independent Assortment]",
-    "commonStudentPitfall": "Students confuse Phenotypic ratio (9:3:3:1) with Genotypic ratio (1:2:2:4:1:2:1:2:1). CBSE questions typically ask for the phenotypic ratio.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Students confuse Phenotypic ratio (9:3:3:1) with Genotypic ratio (1:2:2:4:1:2:1:2:1). CBSE questions typically ask for the phenotypic ratio."
   },
   {
     "id": "hots_sci_ch9_combination_lenses_power",
@@ -741,8 +735,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Combined F = +33.33 cm, Power P = +3.0 D (Converging) | Apparent Depth = 9.0 cm, Coin Raised by 3.0 cm",
-    "commonStudentPitfall": "Units blunder in Power: Calculating P = 1/F with F in centimetres (e.g. 1/33.3 = 0.03 D) is a fatal mistake! Always convert focal length to METRES before calculating power (Dioptres = m^-1).",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Units blunder in Power: Calculating P = 1/F with F in centimetres (e.g. 1/33.3 = 0.03 D) is a fatal mistake! Always convert focal length to METRES before calculating power (Dioptres = m^-1)."
   },
   {
     "id": "hots_sci_ch11_bulb_glow_series_parallel",
@@ -790,7 +783,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "R1 = 1936 Ω, R2 = 484 Ω | In Series: 25W bulb glows brighter (16W vs 4W) | In Parallel: 100W bulb glows brighter",
     "commonStudentPitfall": "Common intuition trap: Students assume a 100W bulb always glows brighter. In SERIES, the 25W bulb glows much brighter because of its higher resistance (P = I²R)!",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_sci_ch11_bulb_glow_series_parallel"]
   },
   {
     "id": "hots_sci_ch12_solenoid_fleming_left_hand",
@@ -838,7 +831,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "Inside solenoid field is uniform (parallel lines) | B increases with I, n, soft iron core | Alpha deflects UPWARDS, Electron deflects DOWNWARDS",
     "commonStudentPitfall": "Direction of current trap: For electrons, conventional current is OPPOSITE to motion. Forgetting this inverts the direction of force, losing 1.0 mark!",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_sci_ch12_solenoid_fleming_left_hand"]
   },
   {
     "id": "hots_math_ch1_prime_irrational_hcf",
@@ -877,8 +870,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "√p is irrational [Hence Proved] | Largest positive integer = 17",
-    "commonStudentPitfall": "In remainder problems, students often take HCF of the original numbers (398, 436, 542). You MUST subtract the remainders FIRST before finding the HCF!",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "In remainder problems, students often take HCF of the original numbers (398, 436, 542). You MUST subtract the remainders FIRST before finding the HCF!"
   },
   {
     "id": "hots_math_ch2_symmetric_roots_polynomial",
@@ -926,8 +918,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Required Polynomial: qx² - (p³ - 3pq)x + q²  (or k[x² - ((p³ - 3pq)/q)x + q])",
-    "commonStudentPitfall": "Forgetting the minus sign in identity: Many students write α³ + β³ = (α + β)³ + 3αβ(α + β). The formula is strictly (α + β)³ - 3αβ(α + β).",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Forgetting the minus sign in identity: Many students write α³ + β³ = (α + β)³ + 3αβ(α + β). The formula is strictly (α + β)³ - 3αβ(α + β)."
   },
   {
     "id": "hots_math_ch3_upstream_downstream_boat",
@@ -975,8 +966,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Speed of Boat in Still Water = 8 km/h | Speed of Stream = 3 km/h",
-    "commonStudentPitfall": "Units error: Omitting 'km/h' in final answer loses 0.5 mark. Always state final values with units clearly in a box.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Units error: Omitting 'km/h' in final answer loses 0.5 mark. Always state final values with units clearly in a box."
   },
   {
     "id": "hots_math_ch4_train_speed_taps",
@@ -1024,8 +1014,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Time for Smaller Tap = 25 hours | Time for Larger Tap = 15 hours",
-    "commonStudentPitfall": "Students fail to write the sentence rejecting x = 3.75! You MUST explicitly state: 'x = 3.75 rejected because time for larger tap would be negative'.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Students fail to write the sentence rejecting x = 3.75! You MUST explicitly state: 'x = 3.75 rejected because time for larger tap would be negative'."
   },
   {
     "id": "hots_math_ch5_ratio_sums_terms",
@@ -1072,8 +1061,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "am / an = (2m - 1) / (2n - 1) [Hence Proved]",
-    "commonStudentPitfall": "Many students attempt cumbersome cross-multiplication. The substitution method replacing m with (2m - 1) is recognized by CBSE board toppers and takes only 4 lines.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Many students attempt cumbersome cross-multiplication. The substitution method replacing m with (2m - 1) is recognized by CBSE board toppers and takes only 4 lines."
   },
   {
     "id": "hots_math_ch6_perpendicular_ad_bc",
@@ -1122,7 +1110,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "2AB² = 2AC² + BC² [Hence Proved]",
     "commonStudentPitfall": "Algebraic sign error: Be careful with BD = 3/4 BC and CD = 1/4 BC. (3/4)² is 9/16, NOT 6/16.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_ch6_perpendicular_ad_bc"]
   },
   {
     "id": "hots_math_ch7_circumcentre_equidistant",
@@ -1170,7 +1158,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "Circumcentre O(5, 2) | Circumradius R = 5 units",
     "commonStudentPitfall": "Alternative shortcut: Notice that line AB is vertical (x=8) and BC is horizontal (y=-2), so ∠B = 90°! In a right triangle, circumcentre is simply the MIDPOINT of hypotenuse AC = ((8+2)/2, (6-2)/2) = (5, 2)! Both methods earn full marks.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_ch7_circumcentre_equidistant"]
   },
   {
     "id": "hots_math_ch8_sin_plus_cos_root3",
@@ -1216,8 +1204,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "tan θ + cot θ = 1 [Hence Proved]",
-    "commonStudentPitfall": "Do not attempt to find the angle θ directly! While θ = 30° or 60° gives sin 30° + cos 30° = 1/2 + √3/2 ≠ √3, solving algebraically through the identity works universally without domain assumptions.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Do not attempt to find the angle θ directly! While θ = 30° or 60° gives sin 30° + cos 30° = 1/2 + √3/2 ≠ √3, solving algebraically through the identity works universally without domain assumptions."
   },
   {
     "id": "hots_math_ch9_cloud_reflection_lake",
@@ -1267,7 +1254,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "Height of Cloud H = h (tan β + tan α) / (tan β - tan α) [Hence Proved]",
     "commonStudentPitfall": "Common physics mistake: Students forget that distance of reflection is measured from the WATER SURFACE, not from the observation point! So the reflection distance from sight line is H + h, not H - h.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_ch9_cloud_reflection_lake"]
   },
   {
     "id": "hots_math_ch10_tangent_angle_ptq",
@@ -1308,7 +1295,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "∠PTQ = 2 ∠OPQ [Hence Proved]",
     "commonStudentPitfall": "Do not attempt complicated congruence proofs! The 2-step method using isosceles ΔTPQ and ∠OPT = 90° is the fastest and cleanest standard board proof.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_ch10_tangent_angle_ptq"]
   },
   {
     "id": "hots_math_ch12_cylinder_cone_cavity",
@@ -1356,7 +1343,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "Total Surface Area = 17.6 cm² (≈ 18 cm²) | Remaining Volume = 2.464 cm³",
     "commonStudentPitfall": "Surface area subtraction error: Many students mistakenly SUBTRACT the cone's surface area. When a cavity is hollowed out, the inner surface area is EXPOSED and therefore ADDED to the total surface area!",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_ch12_cylinder_cone_cavity"]
   },
   {
     "id": "hots_math_ch13_missing_frequencies_mean",
@@ -1403,8 +1390,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Missing Frequencies: f1 = 28 and f2 = 24",
-    "commonStudentPitfall": "Arithmetic slip in multiplying 50 × 120 = 6000 or 7 × 52 = 364. Always verify that f1 + f2 equals 52!",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Arithmetic slip in multiplying 50 × 120 = 6000 or 7 × 52 = 364. Always verify that f1 + f2 equals 52!"
   },
   {
     "id": "hots_sci_ch10_atmospheric_refraction_sunrise",
@@ -1453,7 +1439,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "Daylight is extended by 4 minutes (2 min advance + 2 min delayed) due to continuous atmospheric refraction towards normal. Without atmosphere, day would shorten by 4 minutes.",
     "commonStudentPitfall": "Students confuse atmospheric refraction with scattering of light (Tyndall effect). Advance sunrise is strictly a REFRACTION phenomenon; reddish colour is due to SCATTERING. Never mix the two!",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_sci_ch10_atmospheric_refraction_sunrise"]
   },
   {
     "id": "hots_sci_ch13_ten_percent_biomagnification",
@@ -1500,8 +1486,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Grass = 10,000 J | Grasshopper = 1,000 J | Frog = 100 J | Snake = 10 J | Peacock = 1 J | Peacock has highest DDT due to Biological Magnification.",
-    "commonStudentPitfall": "FATAL ERROR: Applying 10% to the initial 1,000,000 J solar radiation! CBSE marking guidelines strictly penalize this: plants only capture 1% of solar energy, NOT 10%!",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "FATAL ERROR: Applying 10% to the initial 1,000,000 J solar radiation! CBSE marking guidelines strictly penalize this: plants only capture 1% of solar energy, NOT 10%!"
   },
   {
     "id": "hots_sci_ch5_double_circulation_cardiac_valves",
@@ -1548,8 +1533,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Right Atrium -> RV -> Pulmonary Artery -> Lungs -> Pulmonary Vein -> LA -> LV -> Aorta. Left ventricle is thickest to generate 120 mm Hg systemic pressure.",
-    "commonStudentPitfall": "Misidentifying vessels: Remember that Pulmonary ARTERY carries deoxygenated blood to lungs, while Pulmonary VEIN carries oxygenated blood to heart. Artery = Away from heart; Vein = Visits the heart!",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Misidentifying vessels: Remember that Pulmonary ARTERY carries deoxygenated blood to lungs, while Pulmonary VEIN carries oxygenated blood to heart. Artery = Away from heart; Vein = Visits the heart!"
   },
   {
     "id": "hots_math_ch11_circular_race_track_area",
@@ -1599,7 +1583,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "Inner distance = 2804/7 m (400.57 m) | Outer distance = 3244/7 m (463.43 m) | Track Area = 4,320 m² | Turfing Cost = ₹2,29,714.29",
     "commonStudentPitfall": "Careless mistake: Forgetting to multiply the straight section area by 2 (top and bottom strips), or taking diameter 60 as radius instead of 30.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_ch11_circular_race_track_area"]
   },
   {
     "id": "hots_math_ch14_leap_year_53_sundays_dice",
@@ -1647,8 +1631,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "(a) Leap year: 2/7 | (b) Non-leap year: 1/7 | (c)(i) 1/4 | (c)(ii) 1/9 | (c)(iii) 1/6 | (c)(iv) 23/36",
-    "commonStudentPitfall": "Part (c)(ii): Many students include (1,2) and (2,1) which gives product 2. But 2 is an EVEN prime! The question specifically asks for ODD prime, so only 3 and 5 qualify.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Part (c)(ii): Many students include (1,2) and (2,1) which gives product 2. But 2 is an EVEN prime! The question specifically asks for ODD prime, so only 3 and 5 qualify."
   },
   {
     "id": "hots_math_ch6_trapezium_diagonals_po_oq",
@@ -1697,7 +1680,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
     ],
     "finalBoxedAnswer": "Proven: (a) AO/CO = BO/DO = AB/DC | (b) PO = OQ | (c) 1/PO = 1/AB + 1/CD",
     "commonStudentPitfall": "Students often try to prove PO = OQ directly without proving AO/AC = BO/BD first. You must link the triangle similarity with BPT corollaries.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    diagramSvg: HOTS_DIAGRAMS["hots_math_ch6_trapezium_diagonals_po_oq"]
   },
   {
     "id": "hots_sst_hist_napoleon_frankfurt",
@@ -1735,8 +1718,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Administrative efficiency without political self-determination sparks nationalist revolt; middle-class constitutionalism without working-class socio-economic inclusion collapses under monarchical-military suppression.",
-    "commonStudentPitfall": "Students often only state that Napoleon increased taxes without mentioning forced conscription or censorship, and fail to mention that the Frankfurt assembly lost popular support because it resisted workers' and artisans' demands.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Students often only state that Napoleon increased taxes without mentioning forced conscription or censorship, and fail to mention that the Frankfurt assembly lost popular support because it resisted workers' and artisans' demands."
   },
   {
     "id": "hots_sst_hist_salt_poona",
@@ -1774,8 +1756,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Salt universalized anti-imperial struggle beyond class lines; the Poona Pact (1932) balanced affirmative political representation (reserved seats) with national social cohesion (joint electorate).",
-    "commonStudentPitfall": "Confusing 'Separate Electorates' with 'Reserved Seats'. In separate electorates, only community members vote; in reserved seats within joint electorates, the candidate is from the reserved community but all citizens cast votes.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Confusing 'Separate Electorates' with 'Reserved Seats'. In separate electorates, only community members vote; in reserved seats within joint electorates, the candidate is from the reserved community but all citizens cast votes."
   },
   {
     "id": "hots_sst_civics_belgium_srilanka",
@@ -1813,8 +1794,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Belgian institutional parity fostered peaceful coexistence; Sri Lankan majoritarian dominance triggered civil war. Power sharing is prudentially indispensable for peace and morally essential for true democracy.",
-    "commonStudentPitfall": "Confusing the prudential reason with the moral reason. Remember: Prudential = avoiding conflict, maintaining stability; Moral = democracy's core essence that people must have a say in how they are governed.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Confusing the prudential reason with the moral reason. Remember: Prudential = avoiding conflict, maintaining stability; Moral = democracy's core essence that people must have a say in how they are governed."
   },
   {
     "id": "hots_sst_geo_canal_dam_disputes",
@@ -1859,8 +1839,7 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Dams cause flood hazards through sedimentation, degrade soils via capillary salinization, and spark both social displacement crises (Narmada) and inter-state riparian disputes (Krishna-Godavari).",
-    "commonStudentPitfall": "Stating that dams completely stop floods without explaining how siltation and emergency spillway release can cause severe downstream flooding.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Stating that dams completely stop floods without explaining how siltation and emergency spillway release can cause severe downstream flooding."
   },
   {
     "id": "hots_sst_eco_structural_shg",
@@ -1898,7 +1877,6 @@ export const COMPETITIVE_HOTS_BANK: CompetitiveQuestion[] = [
       }
     ],
     "finalBoxedAnswer": "Tertiary GDP dominance failed to absorb agricultural labor due to high skill thresholds and sluggish factory growth; SHGs bridge the financial divide by substituting social peer collateral for physical asset collateral.",
-    "commonStudentPitfall": "Students frequently fail to mention that the tertiary sector is bifurcated: high-income IT/finance employs very few, while unorganized transport/retail pays subsistence wages with no job security.",
-    "diagramSvg": "<svg width=\"100%\" height=\"120\" viewBox=\"0 0 400 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"100\" rx=\"8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-dasharray=\"4 4\" fill=\"currentColor\" fill-opacity=\"0.02\"/><text x=\"200\" y=\"65\" fill=\"currentColor\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Diagram / Visual Reference for HOTS</text></svg>"
+    "commonStudentPitfall": "Students frequently fail to mention that the tertiary sector is bifurcated: high-income IT/finance employs very few, while unorganized transport/retail pays subsistence wages with no job security."
   }
 ];

@@ -782,17 +782,24 @@ export const LiveCountdown = React.memo(function LiveCountdown({
   );
 });
 
-// Dynamic Top Header Countdown: automatically transitions to next exam when previous ends, and vanishes when test series concludes
+// Dynamic Top Header Countdown: dual-timer featuring upcoming 21 Oct Milestone and Feb 1 Boards
 export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
   isDark
 }: {
   isDark: boolean;
 }) {
   return (
-    <>
-      <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>Boards:</span>
-      <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
-    </>
+    <div className="flex items-center gap-2 sm:gap-2.5 font-mono text-[11px] leading-none">
+      <div className="flex items-center gap-1.5">
+        <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 21 Oct:</span>
+        <LiveCountdown targetDate="2026-10-21" variant="badge" colorScheme="amber" isDark={isDark} />
+      </div>
+      <span className={`opacity-25 select-none leading-none ${isDark ? "text-white" : "text-slate-900"}`}>|</span>
+      <div className="flex items-center gap-1.5">
+        <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>🎯 Boards:</span>
+        <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
+      </div>
+    </div>
   );
 });
 
@@ -3179,8 +3186,8 @@ export default function CBSECommandCenter() {
 
           {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (ZERO-OVERFLOW COMPACT CAPSULES) */}
           <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 shrink-0">
-            {/* EXAM COUNTDOWN (2XL+ ULTRA-WIDE SCREENS ONLY) */}
-            <div className="hidden 2xl:flex items-center">
+            {/* EXAM COUNTDOWN (VISIBLE ON LAPTOPS, DESKTOPS, & WIDESCREENS) */}
+            <div className="hidden lg:flex items-center">
               <button
                 onClick={() => {
                   playSound("click");
@@ -3642,8 +3649,62 @@ export default function CBSECommandCenter() {
         {activeTab === "test_series" && (
           <div className="space-y-5 sm:space-y-6 animate-fade-in">
             
-            {/* HERO COUNTDOWN CARD: FEB 1 FINAL BOARDS (Test Series 1 timer temporarily removed as exams concluded) */}
-            <div className="grid grid-cols-1 gap-4 sm:gap-5">
+            {/* HERO DUAL COUNTDOWN CARDS: 21 OCT 2026 BENCHMARK & 1 FEB 2027 CBSE BOARDS */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+
+              {/* CARD 1: 21 OCT 2026 PRE-BOARD PHASE 1 / TEST SERIES II */}
+              <div className={`relative p-5 sm:p-7 rounded-3xl border transition-all overflow-hidden apple-card-hover ${
+                isDark
+                  ? "bg-gradient-to-br from-[#1c1203] via-[#161006] to-[#0a0a0d] border-amber-500/40 shadow-[0_12px_40px_rgba(245,158,11,0.15)]"
+                  : "bg-gradient-to-br from-amber-50/90 via-white to-orange-50/50 border-amber-300 shadow-[0_10px_30px_rgba(245,158,11,0.12)]"
+              }`}>
+                {/* Radial Glow Highlight */}
+                <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-amber-500/15 blur-3xl pointer-events-none" />
+
+                <div className="flex items-center justify-between gap-2 mb-3 relative z-10">
+                  <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-black tracking-wider uppercase border shadow-xs leading-none inline-flex items-center ${
+                    isDark 
+                      ? "bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]" 
+                      : "bg-amber-100 text-amber-950 border-amber-400 font-bold"
+                  }`}>
+                    ⚡ PRE-BOARD PHASE 1 • OCT 21, 2026
+                  </span>
+                  <span className={`text-xs font-mono font-black flex items-center gap-1.5 leading-none ${
+                    isDark ? "text-amber-400" : "text-amber-800"
+                  }`}>
+                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0"></span>
+                    <span>Test Series II Kickoff</span>
+                  </span>
+                </div>
+
+                <h3 className={`text-xl sm:text-2xl font-black tracking-tight mb-1 relative z-10 flex flex-wrap items-baseline gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
+                  <span>Phase 1 Milestone:</span>
+                  <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Oct 21, 2026</span>
+                </h3>
+
+                <p className={`text-xs mb-4 relative z-10 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
+                  Intensive Pre-Board Assessment & Comprehensive Mid-Term Benchmark
+                </p>
+
+                {/* 4-BLOCK COUNTDOWN TIMER */}
+                <div className="relative z-10 mb-4">
+                  <LiveCountdown targetDate="2026-10-21" variant="card-grid" colorScheme="amber" isDark={isDark} />
+                </div>
+
+                {/* PROGRESS / READINESS BAR */}
+                <div className={`pt-3 border-t relative z-10 space-y-1.5 ${isDark ? "border-white/[0.08]" : "border-amber-200"}`}>
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className={isDark ? "text-zinc-400" : "text-slate-600 font-medium"}>Phase 1 Preparedness Target</span>
+                    <span className={`font-black ${isDark ? "text-amber-400" : "text-amber-800"}`}>High-Intensity Revision</span>
+                  </div>
+                  <div className={`w-full h-2 rounded-full overflow-hidden border ${isDark ? "bg-black/40 border-white/5" : "bg-slate-200 border-slate-300"}`}>
+                    <div 
+                      className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]"
+                      style={{ width: `${Math.min(100, Math.round((overallSyllabusPercentage / 75) * 100))}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
 
               {/* CARD 2: FEB 1, 2027 FINAL CBSE BOARD EXAMINATIONS */}
               <div className={`relative p-5 sm:p-7 rounded-3xl border transition-all overflow-hidden apple-card-hover ${

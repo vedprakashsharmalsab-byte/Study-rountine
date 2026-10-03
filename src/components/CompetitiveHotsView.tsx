@@ -16,7 +16,8 @@ import {
   BookOpen,
   ArrowRight,
   Filter,
-  FileText
+  FileText,
+  Compass
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import {
@@ -350,10 +351,25 @@ export default function CompetitiveHotsView({
                   <PremiumMathRenderer content={q.questionText} isDark={isDark} />
                   
                   {q.diagramSvg && (
-                    <div 
-                      className={`mt-4 p-4 flex justify-center rounded-xl border ${isDark ? "bg-black/20 border-white/10" : "bg-white border-slate-200"}`} 
-                      dangerouslySetInnerHTML={{ __html: q.diagramSvg }} 
-                    />
+                    <div className="mt-4 space-y-2">
+                      <div className="flex items-center justify-between text-xs font-mono font-bold">
+                        <span className={`inline-flex items-center gap-1.5 ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>
+                          <Compass className="w-4 h-4 shrink-0 text-cyan-500" />
+                          <span>Official Technical Schematic / Figure</span>
+                        </span>
+                        <span className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold border ${isDark ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-300" : "bg-cyan-50 border-cyan-300 text-cyan-900"}`}>
+                          CBSE Board Standard Visual
+                        </span>
+                      </div>
+                      <div 
+                        className={`p-4 sm:p-5 flex justify-center items-center rounded-2xl border transition-all overflow-x-auto ${
+                          isDark 
+                            ? "bg-slate-950/70 border-cyan-500/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.4)] text-slate-100" 
+                            : "bg-gradient-to-b from-slate-50 to-white border-slate-200 shadow-sm text-slate-900"
+                        }`} 
+                        dangerouslySetInnerHTML={{ __html: q.diagramSvg }} 
+                      />
+                    </div>
                   )}
                 </div>
               </div>
