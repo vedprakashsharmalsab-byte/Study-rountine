@@ -1416,6 +1416,30 @@ export const SST_CH10_QUESTIONS: VaultQuestion[] = [
   }
 ];
 
+import { SST_CH11_QUESTIONS } from "./sst_ch11_global_world";
+import { SST_CH12_QUESTIONS } from "./sst_ch12_print_culture";
+import { SST_CH13_QUESTIONS } from "./sst_ch13_agriculture";
+import { SST_CH14_QUESTIONS } from "./sst_ch14_minerals_energy";
+import { SST_CH15_QUESTIONS } from "./sst_ch15_manufacturing";
+import { SST_CH16_QUESTIONS } from "./sst_ch16_lifelines_map";
+import { SST_CH17_QUESTIONS } from "./sst_ch17_gender_religion";
+import { SST_CH18_QUESTIONS } from "./sst_ch18_political_parties";
+import { SST_CH19_QUESTIONS } from "./sst_ch19_outcomes_democracy";
+import { SST_CH20_QUESTIONS } from "./sst_ch20_globalisation";
+
+export {
+  SST_CH11_QUESTIONS,
+  SST_CH12_QUESTIONS,
+  SST_CH13_QUESTIONS,
+  SST_CH14_QUESTIONS,
+  SST_CH15_QUESTIONS,
+  SST_CH16_QUESTIONS,
+  SST_CH17_QUESTIONS,
+  SST_CH18_QUESTIONS,
+  SST_CH19_QUESTIONS,
+  SST_CH20_QUESTIONS
+};
+
 export function getSSTChapterQuestions(chapterId: number): VaultQuestion[] {
   switch (chapterId) {
     case 1: return SST_CH1_QUESTIONS;
@@ -1428,6 +1452,17 @@ export function getSSTChapterQuestions(chapterId: number): VaultQuestion[] {
     case 8: return SST_CH8_QUESTIONS;
     case 9: return SST_CH9_QUESTIONS;
     case 10: return SST_CH10_QUESTIONS;
+    case 11: return SST_CH11_QUESTIONS;
+    case 12: return SST_CH12_QUESTIONS;
+    case 13: return SST_CH13_QUESTIONS;
+    case 14: return SST_CH14_QUESTIONS;
+    case 15: return SST_CH15_QUESTIONS;
+    case 16: return SST_CH16_QUESTIONS;
+    case 17: return SST_CH17_QUESTIONS;
+    case 18: return SST_CH18_QUESTIONS;
+    case 19: return SST_CH19_QUESTIONS;
+    case 20: return SST_CH20_QUESTIONS;
     default: return SST_CH1_QUESTIONS;
   }
 }
+

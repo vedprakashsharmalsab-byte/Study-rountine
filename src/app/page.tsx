@@ -75,6 +75,9 @@ import AreteLogo from "@/components/AreteLogo";
 import { areteAudio } from "@/lib/audio";
 import { appStorage, STORAGE_KEYS } from "@/lib/storage";
 import PracticeTimer from "@/components/PracticeTimer";
+import Class10ExamCountdown from "@/components/Class10ExamCountdown";
+import InteractiveGuidedTutorial from "@/components/InteractiveGuidedTutorial";
+import { SST_CHAPTER_LIST } from "@/data/sstConceptsData";
 
 import {
   Atom,
@@ -799,13 +802,13 @@ export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
   isDark: boolean;
 }) {
   return (
-    <div className="flex items-center gap-2 sm:gap-2.5 font-mono text-[11px] leading-none">
-      <div className="flex items-center gap-1.5">
-        <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 26 Oct:</span>
+    <div className="flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] leading-none">
+      <div className="flex items-center gap-1 sm:gap-1.5">
+        <span className={`font-black inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 26 Oct:</span>
         <LiveCountdown targetDate="2026-10-26" variant="badge" colorScheme="amber" isDark={isDark} />
       </div>
-      <span className={`opacity-25 select-none leading-none ${isDark ? "text-white" : "text-slate-900"}`}>|</span>
-      <div className="flex items-center gap-1.5">
+      <span className={`hidden sm:inline-flex opacity-25 select-none leading-none ${isDark ? "text-white" : "text-slate-900"}`}>|</span>
+      <div className="hidden sm:flex items-center gap-1.5">
         <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>🎯 Boards:</span>
         <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
       </div>
@@ -3072,6 +3075,7 @@ export default function CBSECommandCenter() {
           
           {/* BRAND EMBLEM & SQUIRCLE: Direct Navigation to Home Dashboard */}
           <div
+            id="tutorial-brand-header"
             onClick={() => {
               playSound("click");
               setActiveTab("chapter_dashboard");
@@ -3106,7 +3110,7 @@ export default function CBSECommandCenter() {
           </div>
 
           {/* MASTER CATEGORY NAVIGATION TABS (INTEGRATED INSIDE HEADER - ZERO OVERFLOW) */}
-          <div className="hidden md:flex items-center min-w-0">
+          <div id="tutorial-nav-tabs" className="hidden md:flex items-center min-w-0">
             <div className={`p-0.5 sm:p-1 rounded-full border flex items-center gap-0.5 sm:gap-1 backdrop-blur-xl transition-all ${
               isDark
                 ? "bg-white/[0.06] border-white/15 shadow-inner"
@@ -3117,6 +3121,7 @@ export default function CBSECommandCenter() {
                 return (
                   <a
                     key={cat.id}
+                    id={cat.id === "concepts" ? "tutorial-concepts-tab" : cat.id === "practice" ? "tutorial-questions-tab" : undefined}
                     href={getTabHref(cat.defaultTab)}
                     onClick={(e) => {
                       handleNavClick(e, cat.defaultTab, {
@@ -3166,6 +3171,7 @@ export default function CBSECommandCenter() {
 
               {/* ALL MODULES TRIGGER (COMPACT RESPONSIVE PILL) */}
               <button
+                id="tutorial-all-modules-btn"
                 type="button"
                 onClick={() => {
                   playSound("click");
@@ -3193,26 +3199,26 @@ export default function CBSECommandCenter() {
 
           {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (ZERO-OVERFLOW COMPACT CAPSULES) */}
           <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 shrink-0">
-            {/* EXAM COUNTDOWN (VISIBLE ON LAPTOPS, DESKTOPS, & WIDESCREENS) */}
-            <div className="hidden lg:flex items-center">
+            {/* EXAM COUNTDOWN (VISIBLE ON ALL MOBILE, SMARTPHONE, & WIDESCREEN VIEWPORTS) */}
+            <div id="tutorial-countdown-capsule" className="flex items-center">
               <button
                 onClick={() => {
                   playSound("click");
                   setActiveTab("test_series");
                 }}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-mono transition-all cursor-pointer group shadow-sm active:scale-[0.98] tabular-nums leading-none ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono transition-all cursor-pointer group shadow-sm active:scale-[0.98] tabular-nums leading-none ${
                   isDark
                     ? "bg-gradient-to-r from-amber-500/10 via-white/[0.03] to-cyan-500/10 border-white/15 text-zinc-200 hover:border-amber-400/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)]"
                     : "bg-gradient-to-r from-amber-50 via-white to-blue-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:shadow-sm"
                 }`}
-                title="Click to view Test Series schedule"
+                title="Class 10 Exam Countdown (Click to view schedule)"
               >
                 <HeaderExamCountdown isDark={isDark} />
               </button>
             </div>
 
             {/* LEVEL & XP CAPSULE */}
-            <div className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-medium shadow-xs leading-none whitespace-nowrap shrink-0 ${
+            <div id="tutorial-xp-capsule" className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-medium shadow-xs leading-none whitespace-nowrap shrink-0 ${
               isDark 
                 ? "bg-gradient-to-r from-amber-500/15 to-amber-600/10 border-amber-500/30 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.15)]" 
                 : "bg-amber-50 border-amber-300 text-amber-950 font-bold"
@@ -3233,43 +3239,47 @@ export default function CBSECommandCenter() {
               <span className="leading-none inline-flex items-center tabular-nums">{streak}d</span>
             </div>
 
-            {/* SOUND */}
-            <button
-              onClick={() => {
-                const nextMute = !isSoundMuted;
-                setIsSoundMuted(nextMute);
-                if (!nextMute) playSound("click");
-              }}
-              className={`p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
-                isDark 
-                  ? isSoundMuted ? "bg-white/5 border-white/10 text-zinc-500" : "bg-white/10 border-white/20 text-zinc-200 hover:text-white"
-                  : isSoundMuted ? "bg-slate-100 border-slate-200 text-slate-400" : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
-              }`}
-              title={isSoundMuted ? "Audio muted (Click to enable sound)" : "Audio enabled (Click to mute)"}
-              aria-label={isSoundMuted ? "Unmute Audio" : "Mute Audio"}
-            >
-              {isSoundMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-            </button>
+            {/* SOUND & THEME CONTROLS */}
+            <div id="tutorial-theme-controls" className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+              {/* SOUND */}
+              <button
+                onClick={() => {
+                  const nextMute = !isSoundMuted;
+                  setIsSoundMuted(nextMute);
+                  if (!nextMute) playSound("click");
+                }}
+                className={`p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
+                  isDark 
+                    ? isSoundMuted ? "bg-white/5 border-white/10 text-zinc-500" : "bg-white/10 border-white/20 text-zinc-200 hover:text-white"
+                    : isSoundMuted ? "bg-slate-100 border-slate-200 text-slate-400" : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
+                }`}
+                title={isSoundMuted ? "Audio muted (Click to enable sound)" : "Audio enabled (Click to mute)"}
+                aria-label={isSoundMuted ? "Unmute Audio" : "Mute Audio"}
+              >
+                {isSoundMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+              </button>
 
-            {/* THEME TOGGLE */}
-            <button
-              onClick={() => {
-                playSound("click");
-                setTheme(isDark ? "light" : "dark");
-              }}
-              className={`p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
-                isDark 
-                  ? "bg-white/10 border-white/20 text-amber-400 hover:text-amber-300"
-                  : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
-              }`}
-              title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
-              aria-label={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
-            >
-              {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-            </button>
+              {/* THEME TOGGLE */}
+              <button
+                onClick={() => {
+                  playSound("click");
+                  setTheme(isDark ? "light" : "dark");
+                }}
+                className={`p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
+                  isDark 
+                    ? "bg-white/10 border-white/20 text-amber-400 hover:text-amber-300"
+                    : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
+                }`}
+                title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
+                aria-label={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
+              >
+                {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+              </button>
+            </div>
 
             {/* MOBILE ONLY ALL MODULES ICON (< md screens) */}
             <button
+              id="tutorial-all-modules-btn-mobile"
               type="button"
               onClick={() => {
                 playSound("click");
@@ -3577,6 +3587,21 @@ export default function CBSECommandCenter() {
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset Progress (0 XP)</span>
                 </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsAllModulesModalOpen(false);
+                    window.dispatchEvent(new CustomEvent("arete:open-tutorial"));
+                  }}
+                  className={`px-3 py-1.5 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-colors cursor-pointer touch-manipulation min-h-[36px] ${
+                    isDark ? "bg-amber-500/15 border-amber-500/40 text-amber-300 hover:bg-amber-500/25" : "bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100"
+                  }`}
+                  title="Replay Interactive Guided Tutorial"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Interactive Tour</span>
+                </button>
               </div>
               <button
                 onClick={() => setIsAllModulesModalOpen(false)}
@@ -3652,6 +3677,19 @@ export default function CBSECommandCenter() {
             </div>
           );
         })}
+
+        {/* =========================================================================
+            PROMINENT GLOBAL HERO COUNTDOWN: 26 OCTOBER 2026 CLASS 10 EXAM COUNTDOWN
+            Permanently visible across ALL views (Questions, Today, Concepts, etc.)
+            Engineered with dual responsiveness for 9:16 mobile portrait & 16:9 laptop landscape!
+            ========================================================================= */}
+        <div id="tutorial-countdown-banner">
+          <Class10ExamCountdown
+            isDark={isDark}
+            variant="hero"
+            className="mb-2 sm:mb-4"
+          />
+        </div>
 
         {/* ===================== TAB 0: TEST SERIES I (SEPT 14 - SEPT 26) ===================== */}
         {activeTab === "test_series" && (
@@ -4008,7 +4046,6 @@ export default function CBSECommandCenter() {
         {/* ===================== TAB 1: DAILY FOCUS ROUTINE & POMODORO ===================== */}
         {activeTab === "today" && (
           <div className="space-y-5 sm:space-y-6 animate-fade-in">
-            
             {/* HERO STUDY CARD */}
             <div className={`p-5 sm:p-7 rounded-3xl border transition-all ${
               isDark 
@@ -4815,16 +4852,34 @@ export default function CBSECommandCenter() {
                       </>
                     ) : activeVaultSubject === "sst" ? (
                       <>
-                        <option value="1">History Ch 1: The Rise of Nationalism in Europe (6-8 Marks)</option>
-                        <option value="2">History Ch 2: Nationalism in India (7-9 Marks)</option>
-                        <option value="3">Civics Ch 1: Power Sharing (4-5 Marks)</option>
-                        <option value="4">Civics Ch 2: Federalism (4-5 Marks)</option>
-                        <option value="5">Geography Ch 1: Resources and Development (4-5 Marks)</option>
-                        <option value="6">Geography Ch 2: Forest and Wildlife Resources (3-4 Marks)</option>
-                        <option value="7">Geography Ch 3: Water Resources (4-5 Marks)</option>
-                        <option value="8">Economics Ch 1: Development (5-6 Marks)</option>
-                        <option value="9">Economics Ch 2: Sectors of the Indian Economy (7-8 Marks)</option>
-                        <option value="10">Economics Ch 3: Money and Credit (6-7 Marks)</option>
+                        <optgroup label="🌍 GEOGRAPHY (CONTEMPORARY INDIA - II)">
+                          <option value="5">Geography — Chapter 1: Resources and Development (4-5 Marks)</option>
+                          <option value="6">Geography — Chapter 2: Forest and Wildlife Resources (3-4 Marks)</option>
+                          <option value="7">Geography — Chapter 3: Water Resources (4-5 Marks + Map)</option>
+                          <option value="13">Geography — Chapter 4: Agriculture (5-6 Marks)</option>
+                          <option value="14">Geography — Chapter 5: Minerals and Energy Resources (5-6 Marks)</option>
+                          <option value="15">Geography — Chapter 6: Manufacturing Industries (5-6 Marks)</option>
+                          <option value="16">Geography — Chapter 7: Lifelines of National Economy (Map & Corridors)</option>
+                        </optgroup>
+                        <optgroup label="📜 HISTORY (INDIA & CONTEMPORARY WORLD - II)">
+                          <option value="1">History — Chapter 1: The Rise of Nationalism in Europe (6-8 Marks)</option>
+                          <option value="2">History — Chapter 2: Nationalism in India (7-9 Marks + 2M Map)</option>
+                          <option value="11">History — Chapter 3: The Making of a Global World [Subtopics 1-1.3] (3-5 Marks)</option>
+                          <option value="12">History — Chapter 4: Print Culture and the Modern World (4-6 Marks)</option>
+                        </optgroup>
+                        <optgroup label="⚖️ POLITICAL SCIENCE / CIVICS (DEMOCRATIC POLITICS - II)">
+                          <option value="3">Civics — Chapter 1: Power Sharing (4-5 Marks)</option>
+                          <option value="4">Civics — Chapter 2: Federalism (4-5 Marks)</option>
+                          <option value="17">Civics — Chapter 3: Gender, Religion and Caste (4-5 Marks)</option>
+                          <option value="18">Civics — Chapter 4: Political Parties (5-6 Marks)</option>
+                          <option value="19">Civics — Chapter 5: Outcomes of Democracy (3-5 Marks)</option>
+                        </optgroup>
+                        <optgroup label="📈 ECONOMICS (UNDERSTANDING ECONOMIC DEVELOPMENT)">
+                          <option value="8">Economics — Chapter 1: Development (5-6 Marks)</option>
+                          <option value="9">Economics — Chapter 2: Sectors of the Indian Economy (7-8 Marks)</option>
+                          <option value="10">Economics — Chapter 3: Money and Credit (6-7 Marks)</option>
+                          <option value="20">Economics — Chapter 4: Globalisation and the Indian Economy (5-6 Marks)</option>
+                        </optgroup>
                       </>
                     ) : activeVaultSubject === "english" ? (
                       <>
@@ -4930,6 +4985,58 @@ export default function CBSECommandCenter() {
                   activeSubject={activeVaultSubject}
                   activeChapter={activeVaultChapter}
                 />
+
+                {/* SST Chapter Discipline Heading & Chapter Subheading Header */}
+                {activeVaultSubject === "sst" && (() => {
+                  const sstMeta = SST_CHAPTER_LIST.find((c) => c.no === activeVaultChapter);
+                  if (!sstMeta) return null;
+                  return (
+                    <div className={`p-4 sm:p-5 rounded-2xl sm:rounded-3xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all ${
+                      isDark
+                        ? "bg-gradient-to-r from-rose-950/40 via-[#180d15] to-amber-950/20 border-rose-500/30 shadow-md"
+                        : "bg-gradient-to-r from-rose-50 via-white to-amber-50/70 border-rose-200 shadow-sm"
+                    }`}>
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-xs font-mono font-black uppercase tracking-wider text-rose-400">
+                            {sstMeta.discipline === "Geography" ? "🌍 GEOGRAPHY (CONTEMPORARY INDIA - II)" :
+                             sstMeta.discipline === "History" ? "📜 HISTORY (INDIA & CONTEMPORARY WORLD - II)" :
+                             sstMeta.discipline === "Political Science" ? "⚖️ POLITICAL SCIENCE / CIVICS (DEMOCRATIC POLITICS - II)" :
+                             "📈 ECONOMICS (UNDERSTANDING ECONOMIC DEVELOPMENT)"}
+                          </span>
+                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
+                            isDark ? "bg-rose-500/20 text-rose-300" : "bg-rose-100 text-rose-800"
+                          }`}>
+                            {sstMeta.weightage}
+                          </span>
+                          {sstMeta.examStatusLabel && (
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded font-black bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                              🎯 {sstMeta.examStatusLabel}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className={`text-lg sm:text-2xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
+                          Chapter {sstMeta.disciplineChapterNo}: {sstMeta.name}
+                        </h3>
+                        <p className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                          CBSE Board Practice Vault &bull; 1M MCQs, 2M/3M Short Answers, 5M Long Answers &amp; Case-Based Questions
+                        </p>
+                      </div>
+
+                      <a
+                        href={`/?tab=concepts&subject=sst&chapter=${sstMeta.no}`}
+                        className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border flex items-center gap-2 shrink-0 ${
+                          isDark
+                            ? "bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border-rose-500/40"
+                            : "bg-rose-600 hover:bg-rose-700 text-white border-rose-600 shadow-sm"
+                        }`}
+                      >
+                        <BookOpen className="w-4 h-4" />
+                        <span>Study NCERT Concept Notes</span>
+                      </a>
+                    </div>
+                  );
+                })()}
 
                 {/* Format Filter Bar (Apple Pills) */}
                 <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-1 border-b pb-4 ${
@@ -6745,7 +6852,7 @@ export default function CBSECommandCenter() {
       {/* =========================================================================
           APPLE NATIVE FLOATING BOTTOM DOCK (MOBILE ONLY: < 768px)
           ========================================================================= */}
-      <div className="fixed bottom-0 inset-x-0 z-40 md:hidden pointer-events-none flex justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <div id="tutorial-nav-dock-mobile" className="fixed bottom-0 inset-x-0 z-40 md:hidden pointer-events-none flex justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <div className={`pointer-events-auto w-full max-w-md p-1.5 rounded-3xl border flex items-center justify-around shadow-2xl backdrop-blur-2xl transition-all ${
           isDark
             ? "bg-[#07070a]/85 border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
@@ -6756,6 +6863,7 @@ export default function CBSECommandCenter() {
             return (
               <a
                 key={cat.id}
+                id={cat.id === "concepts" ? "tutorial-concepts-tab-mobile" : cat.id === "practice" ? "tutorial-questions-tab-mobile" : undefined}
                 href={getTabHref(cat.defaultTab)}
                 onClick={(e) => {
                   handleNavClick(e, cat.defaultTab, {
@@ -6887,6 +6995,12 @@ export default function CBSECommandCenter() {
         isDark={isDark}
         onVerified={handleStudentVerified}
       />
+
+      {/* =========================================================================
+          MANDATORY INTERACTIVE GUIDED ONBOARDING TUTORIAL (FIRST-VISIT)
+          Strict zero-bypass sequential tour highlighting features one by one
+          ========================================================================= */}
+      <InteractiveGuidedTutorial isDark={isDark} />
 
     </div>
   );

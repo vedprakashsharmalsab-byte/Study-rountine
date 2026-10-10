@@ -35,6 +35,7 @@ import {
 } from "@/data/cbseData";
 import AreteLeaderboard from "@/components/AreteLeaderboard";
 import AreteMotivationalBanner from "@/components/AreteMotivationalBanner";
+import Class10ExamCountdown from "@/components/Class10ExamCountdown";
 import type { StudentProfile } from "@/components/AreteAccessGateModal";
 
 interface CommandCenterHomeViewProps {

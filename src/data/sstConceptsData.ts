@@ -1,9 +1,11 @@
 // =========================================================================
 // CBSE Class 10 Social Science — 100% Comprehensive NCERT Concept & Solved Guide
-// Standard: CBSE Board 2026-27 (Code 087) & Test Series 1 Syllabus (10 Chapters)
+// Standard: CBSE Board 2026-27 (Code 087) & Full 20-Chapter Syllabus
 // Complete coverage of EVERY single topic from NCERT with ZERO skipped details.
 // Each chapter has full topic explanations, timelines, and leveled solved board questions.
 // =========================================================================
+
+import { SST_EXTENDED_CONCEPTS } from "./sstExtendedConceptsData";
 
 export interface SSTTimelineEvent {
   year: string;
@@ -244,6 +246,166 @@ export const SST_CHAPTER_LIST: SSTChapterMeta[] = [
     "examStatus": "board_exam",
     "examStatusLabel": "Coming in Board Exam 2026 (6–7 Marks)",
     "boardExamNote": "Tested in Board Theory: Terms of Credit, Formal vs Informal, RBI & SHGs"
+  },
+  {
+    "no": 11,
+    "disciplineChapterNo": 3,
+    "name": "The Making of a Global World",
+    "shortName": "Ch 3: Global World",
+    "discipline": "History",
+    "unit": "Unit I: India and the Contemporary World - II",
+    "weightage": "3–5 Marks",
+    "iconName": "Globe",
+    "timelineAvailable": true,
+    "mapWorkAvailable": false,
+    "mnemonicCount": 2,
+    "examStatus": "partial_board",
+    "examStatusLabel": "Board Exam (Subtopics 1 to 1.3)",
+    "boardExamNote": "CBSE Board Syllabus: Subtopics 1 to 1.3 (Pre-modern world, Silk routes, Food travels, Conquest, Disease and Trade)"
+  },
+  {
+    "no": 12,
+    "disciplineChapterNo": 5,
+    "name": "Print Culture and the Modern World",
+    "shortName": "Ch 5: Print Culture",
+    "discipline": "History",
+    "unit": "Unit I: India and the Contemporary World - II",
+    "weightage": "4–6 Marks",
+    "iconName": "BookOpen",
+    "timelineAvailable": true,
+    "mapWorkAvailable": false,
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (4–6 Marks)",
+    "boardExamNote": "Tested in Board Theory: Gutenberg press, Martin Luther, Reading mania, 19th c. India print culture"
+  },
+  {
+    "no": 13,
+    "disciplineChapterNo": 4,
+    "name": "Agriculture",
+    "shortName": "Ch 4: Agriculture",
+    "discipline": "Geography",
+    "unit": "Unit II: Contemporary India - II",
+    "weightage": "5–6 Marks",
+    "iconName": "Wheat",
+    "timelineAvailable": false,
+    "mapWorkAvailable": true,
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (5–6 Marks + Map)",
+    "boardExamNote": "Tested in Board Theory: Cropping seasons, Major crops, Institutional reforms & Bhoodan-Gramdan"
+  },
+  {
+    "no": 14,
+    "disciplineChapterNo": 5,
+    "name": "Minerals and Energy Resources",
+    "shortName": "Ch 5: Minerals & Energy",
+    "discipline": "Geography",
+    "unit": "Unit II: Contemporary India - II",
+    "weightage": "5–6 Marks",
+    "iconName": "Compass",
+    "timelineAvailable": false,
+    "mapWorkAvailable": true,
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (5–6 Marks + Map)",
+    "boardExamNote": "High Weightage: Iron ore belts, Conventional vs Non-conventional energy, Conservation of minerals"
+  },
+  {
+    "no": 15,
+    "disciplineChapterNo": 6,
+    "name": "Manufacturing Industries",
+    "shortName": "Ch 6: Manufacturing",
+    "discipline": "Geography",
+    "unit": "Unit II: Contemporary India - II",
+    "weightage": "5–6 Marks",
+    "iconName": "Factory",
+    "timelineAvailable": false,
+    "mapWorkAvailable": true,
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (5–6 Marks + Map)",
+    "boardExamNote": "Tested in Board Theory: Agglomeration economies, Sugar & Steel industries, Environmental pollution control"
+  },
+  {
+    "no": 16,
+    "disciplineChapterNo": 7,
+    "name": "Lifelines of National Economy",
+    "shortName": "Ch 7: Lifelines (Map)",
+    "discipline": "Geography",
+    "unit": "Unit II: Contemporary India - II",
+    "weightage": "3–4 Marks Map",
+    "iconName": "Navigation",
+    "timelineAvailable": false,
+    "mapWorkAvailable": true,
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Board Exam Map Pointing Only (3–4 Marks)",
+    "boardExamNote": "Designated in CBSE Syllabus for Map Pointing: Major Sea Ports, International Airports, Super Highway Corridors"
+  },
+  {
+    "no": 17,
+    "disciplineChapterNo": 3,
+    "name": "Gender, Religion and Caste",
+    "shortName": "Ch 3: Gender, Religion & Caste",
+    "discipline": "Political Science",
+    "unit": "Unit III: Democratic Politics - II",
+    "weightage": "4–5 Marks",
+    "iconName": "Users",
+    "timelineAvailable": false,
+    "mapWorkAvailable": false,
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (4–5 Marks)",
+    "boardExamNote": "Tested in Board Theory: Women's representation, Secular state provisions, Caste in politics vs Politics in caste"
+  },
+  {
+    "no": 18,
+    "disciplineChapterNo": 4,
+    "name": "Political Parties",
+    "shortName": "Ch 4: Political Parties",
+    "discipline": "Political Science",
+    "unit": "Unit III: Democratic Politics - II",
+    "weightage": "5–6 Marks",
+    "iconName": "Shield",
+    "timelineAvailable": false,
+    "mapWorkAvailable": false,
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (5–6 Marks)",
+    "boardExamNote": "High Weightage: Functions, National/State party criteria, 4 Challenges, Anti-defection & Reforms"
+  },
+  {
+    "no": 19,
+    "disciplineChapterNo": 5,
+    "name": "Outcomes of Democracy",
+    "shortName": "Ch 5: Outcomes of Democracy",
+    "discipline": "Political Science",
+    "unit": "Unit III: Democratic Politics - II",
+    "weightage": "3–5 Marks",
+    "iconName": "CheckCircle2",
+    "timelineAvailable": false,
+    "mapWorkAvailable": false,
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (3–5 Marks)",
+    "boardExamNote": "Tested in Board Theory: Accountable & legitimate govt, Accommodating social diversity, Dignity & freedom"
+  },
+  {
+    "no": 20,
+    "disciplineChapterNo": 4,
+    "name": "Globalisation and the Indian Economy",
+    "shortName": "Ch 4: Globalisation",
+    "discipline": "Economics",
+    "unit": "Unit IV: Understanding Economic Development",
+    "weightage": "5–6 Marks",
+    "iconName": "TrendingUp",
+    "timelineAvailable": false,
+    "mapWorkAvailable": false,
+    "mnemonicCount": 2,
+    "examStatus": "board_exam",
+    "examStatusLabel": "Coming in Board Exam 2026 (5–6 Marks)",
+    "boardExamNote": "Tested in Board Theory: What is Globalisation, Factors enabling it (IT, Liberalisation), SEZs, WTO & Fair Globalisation"
   }
 ];
 
@@ -754,7 +916,7 @@ export const SST_MAP_WORK: SSTMapWorkChapter[] = [
   }
 ];
 
-export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
+const SST_BASE_CONCEPTS: SSTConceptTopic[] = [
   {
     "id": "sst_his_c1_t1",
     "chapterNo": 1,
@@ -5046,3 +5208,9 @@ export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
     ]
   }
 ];
+
+export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
+  ...SST_BASE_CONCEPTS,
+  ...SST_EXTENDED_CONCEPTS
+];
+

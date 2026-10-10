@@ -216,7 +216,34 @@ export default function SettingsModal({
             </div>
           </div>
 
-          {/* 3. RESET PROGRESS */}
+          {/* 3. PLATFORM ONBOARDING TOUR */}
+          <div className="space-y-2 pt-2 border-t border-current/10">
+            <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+              isDark ? "text-amber-400" : "text-amber-800"
+            }`}>
+              <Sparkles className="w-4 h-4" /> Platform Onboarding Tour
+            </span>
+            <p className={`text-xs leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700 font-medium"}`}>
+              Replay the interactive feature spotlight tutorial anytime to refresh your understanding of modules, countdowns, and exam prep workflows.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                window.dispatchEvent(new CustomEvent("arete:open-tutorial"));
+              }}
+              className={`w-full px-4 py-2.5 rounded-2xl border flex items-center justify-center gap-2 font-bold text-xs transition-all cursor-pointer active:scale-95 shadow-xs ${
+                isDark
+                  ? "bg-amber-500/15 border-amber-500/40 text-amber-300 hover:bg-amber-500/25"
+                  : "bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100"
+              }`}
+            >
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Launch Guided Tutorial Spotlight</span>
+            </button>
+          </div>
+
+          {/* 4. RESET PROGRESS */}
           <div className="space-y-2 pt-2 border-t border-current/10">
             <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${
               isDark ? "text-rose-400" : "text-rose-700"

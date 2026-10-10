@@ -495,6 +495,8 @@ export default function ConceptsHubView({
     ? activeScienceMeta
     : activeSSTMeta;
 
+  const SST_ORDERED_IDS = [5, 6, 7, 13, 14, 15, 16, 1, 2, 11, 12, 3, 4, 17, 18, 19, 8, 9, 10, 20];
+
   // Previous and Next Navigation Handlers
   const handlePrevChapter = () => {
     React.startTransition(() => {
@@ -505,8 +507,9 @@ export default function ConceptsHubView({
         const prev = activeScienceChapterNo > 1 ? activeScienceChapterNo - 1 : 13;
         setActiveScienceChapterNo(prev);
       } else {
-        const prev = activeSSTChapterNo > 1 ? activeSSTChapterNo - 1 : 10;
-        setActiveSSTChapterNo(prev);
+        const idx = SST_ORDERED_IDS.indexOf(activeSSTChapterNo);
+        const prevIdx = idx > 0 ? idx - 1 : SST_ORDERED_IDS.length - 1;
+        setActiveSSTChapterNo(SST_ORDERED_IDS[prevIdx]);
       }
     });
     if (typeof window !== "undefined") {
@@ -523,8 +526,9 @@ export default function ConceptsHubView({
         const next = activeScienceChapterNo < 13 ? activeScienceChapterNo + 1 : 1;
         setActiveScienceChapterNo(next);
       } else {
-        const next = activeSSTChapterNo < 10 ? activeSSTChapterNo + 1 : 1;
-        setActiveSSTChapterNo(next);
+        const idx = SST_ORDERED_IDS.indexOf(activeSSTChapterNo);
+        const nextIdx = idx >= 0 && idx < SST_ORDERED_IDS.length - 1 ? idx + 1 : 0;
+        setActiveSSTChapterNo(SST_ORDERED_IDS[nextIdx]);
       }
     });
     if (typeof window !== "undefined") {
@@ -623,6 +627,7 @@ export default function ConceptsHubView({
               <span>🧪 Science (13 Ch)</span>
             </Link>
             <Link
+              id="tutorial-sst-discipline"
               href="/?tab=concepts&subject=sst&chapter=1"
               onClick={(e) => {
                 if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
@@ -641,7 +646,7 @@ export default function ConceptsHubView({
                   : "text-slate-600 hover:text-slate-900"
               }`}
             >
-              <span>🌍 Social Science (10 Chs)</span>
+              <span>🌍 Social Science (20 Chapters)</span>
             </Link>
 
             {/* Fast Access: Chemistry Basics (Only shown in Science mode to keep Math & SST 100% focused) */}
@@ -827,11 +832,50 @@ export default function ConceptsHubView({
                     isDark ? "fabulous-select-dark" : "fabulous-select-light"
                   }`}
                 >
-                  {(activeSubject === "math" ? MATH_CHAPTER_LIST : activeSubject === "science" ? SCIENCE_CHAPTER_LIST : SST_CHAPTER_LIST).map((ch) => (
-                    <option key={ch.no} value={ch.no}>
-                      {ch.shortName} ({ch.weightage})
-                    </option>
-                  ))}
+                  {activeSubject === "math" ? (
+                    MATH_CHAPTER_LIST.map((ch) => (
+                      <option key={ch.no} value={ch.no}>
+                        {ch.shortName} ({ch.weightage})
+                      </option>
+                    ))
+                  ) : activeSubject === "science" ? (
+                    SCIENCE_CHAPTER_LIST.map((ch) => (
+                      <option key={ch.no} value={ch.no}>
+                        {ch.shortName} ({ch.weightage})
+                      </option>
+                    ))
+                  ) : (
+                    <>
+                      <optgroup label="🌍 GEOGRAPHY (CONTEMPORARY INDIA - II)">
+                        {SST_CHAPTER_LIST.filter((c) => c.discipline === "Geography").map((ch) => (
+                          <option key={ch.no} value={ch.no}>
+                            Chapter {ch.disciplineChapterNo}: {ch.name} ({ch.weightage})
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="📜 HISTORY (INDIA & CONTEMPORARY WORLD - II)">
+                        {SST_CHAPTER_LIST.filter((c) => c.discipline === "History").map((ch) => (
+                          <option key={ch.no} value={ch.no}>
+                            Chapter {ch.disciplineChapterNo}: {ch.name} ({ch.weightage})
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="⚖️ POLITICAL SCIENCE / CIVICS (DEMOCRATIC POLITICS - II)">
+                        {SST_CHAPTER_LIST.filter((c) => c.discipline === "Political Science").map((ch) => (
+                          <option key={ch.no} value={ch.no}>
+                            Chapter {ch.disciplineChapterNo}: {ch.name} ({ch.weightage})
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="📈 ECONOMICS (UNDERSTANDING ECONOMIC DEVELOPMENT)">
+                        {SST_CHAPTER_LIST.filter((c) => c.discipline === "Economics").map((ch) => (
+                          <option key={ch.no} value={ch.no}>
+                            Chapter {ch.disciplineChapterNo}: {ch.name} ({ch.weightage})
+                          </option>
+                        ))}
+                      </optgroup>
+                    </>
+                  )}
                 </select>
                 <div className="fabulous-select-icon text-zinc-400">
                   <ChevronDown className="w-4 h-4" />
@@ -866,60 +910,81 @@ export default function ConceptsHubView({
 
           {/* Direct Responsive Grid (Zero Horizontal Scrolling, toggled or displayed cleanly) */}
           {isChapterGridOpen && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 pt-2 transition-all">
-              {activeSubject === "sst"
-                ? SST_CHAPTER_LIST.map((ch) => {
-                    const isSelected = ch.no === activeSSTChapterNo;
-                    return (
-                      <a
-                        key={ch.no}
-                        href={`/?tab=concepts&subject=sst&chapter=${ch.no}`}
-                        onClick={(e) => {
-                          if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
-                            e.preventDefault();
-                            React.startTransition(() => {
-                              setActiveSSTChapterNo(ch.no);
-                            });
-                            setIsChapterGridOpen(false);
-                          }
-                        }}
-                        className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer flex flex-col justify-between gap-1 border min-h-[56px] ${
-                          isSelected
-                            ? isDark
-                              ? "bg-rose-500 text-slate-950 border-rose-400 font-black shadow-md scale-[1.02]"
-                              : "bg-rose-600 text-white border-rose-600 font-black shadow-md scale-[1.02]"
-                            : isDark
-                            ? "bg-[#0b0f19] text-slate-300 hover:text-white border-white/5 hover:border-white/10"
-                            : "bg-white text-slate-700 hover:text-slate-950 border-slate-200 hover:border-slate-300"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between w-full">
-                          <span className="font-mono text-[10px] opacity-75">{ch.discipline}</span>
-                          <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded leading-none inline-flex items-center ${
-                            isSelected ? "bg-black/20 text-slate-950 font-bold" : "bg-white/10 text-slate-400"
-                          }`}>
-                            {ch.weightage}
-                          </span>
-                        </div>
-                        <span className="truncate text-xs font-extrabold">{ch.name}</span>
-                        {ch.examStatus && (
-                          <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-black self-start inline-flex items-center gap-1 ${
-                            isSelected
-                              ? "bg-slate-950/30 text-slate-950"
-                              : ch.examStatus === "board_exam"
-                              ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/25"
-                              : ch.examStatus === "partial_board"
-                              ? "bg-amber-500/15 text-amber-400 border border-amber-500/25"
-                              : "bg-sky-500/15 text-sky-400 border border-sky-500/25"
-                          }`}>
-                            <span>🎯</span> {ch.examStatusLabel || "Board Exam 2026"}
-                          </span>
-                        )}
-                      </a>
-                    );
-                  })
-                : activeSubject === "math"
-                ? MATH_CHAPTER_LIST.map((ch) => {
+            <div className="pt-2 transition-all">
+              {activeSubject === "sst" ? (
+                <div className="space-y-4">
+                  {[
+                    { title: "🌍 GEOGRAPHY (CONTEMPORARY INDIA - II)", discipline: "Geography" },
+                    { title: "📜 HISTORY (INDIA & CONTEMPORARY WORLD - II)", discipline: "History" },
+                    { title: "⚖️ POLITICAL SCIENCE / CIVICS (DEMOCRATIC POLITICS - II)", discipline: "Political Science" },
+                    { title: "📈 ECONOMICS (UNDERSTANDING ECONOMIC DEVELOPMENT)", discipline: "Economics" }
+                  ].map((sec) => (
+                    <div key={sec.discipline} className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-mono font-black uppercase tracking-wider text-rose-400">
+                          {sec.title}
+                        </span>
+                        <div className={`h-px flex-1 ${isDark ? "bg-white/10" : "bg-slate-200"}`} />
+                      </div>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2">
+                        {SST_CHAPTER_LIST.filter((c) => c.discipline === sec.discipline).map((ch) => {
+                          const isSelected = ch.no === activeSSTChapterNo;
+                          return (
+                            <a
+                              key={ch.no}
+                              href={`/?tab=concepts&subject=sst&chapter=${ch.no}`}
+                              onClick={(e) => {
+                                if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+                                  e.preventDefault();
+                                  React.startTransition(() => {
+                                    setActiveSSTChapterNo(ch.no);
+                                  });
+                                  setIsChapterGridOpen(false);
+                                }
+                              }}
+                              className={`p-2.5 rounded-xl text-left text-xs font-bold transition-all cursor-pointer flex flex-col justify-between gap-1 border min-h-[60px] ${
+                                isSelected
+                                  ? isDark
+                                    ? "bg-rose-500 text-slate-950 border-rose-400 font-black shadow-md scale-[1.02]"
+                                    : "bg-rose-600 text-white border-rose-600 font-black shadow-md scale-[1.02]"
+                                  : isDark
+                                  ? "bg-[#0b0f19] text-slate-300 hover:text-white border-white/5 hover:border-white/10"
+                                  : "bg-white text-slate-700 hover:text-slate-950 border-slate-200 hover:border-slate-300"
+                              }`}
+                            >
+                              <div className="flex items-center justify-between w-full">
+                                <span className="font-mono text-[10px] opacity-75">Ch {ch.disciplineChapterNo}</span>
+                                <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded leading-none inline-flex items-center ${
+                                  isSelected ? "bg-black/20 text-slate-950 font-bold" : "bg-white/10 text-slate-400"
+                                }`}>
+                                  {ch.weightage.split(" ")[0]}
+                                </span>
+                              </div>
+                              <span className="truncate text-xs font-extrabold">{ch.name}</span>
+                              {ch.examStatus && (
+                                <span className={`text-[8.5px] font-mono px-1.5 py-0.5 rounded font-black self-start inline-flex items-center gap-1 ${
+                                  isSelected
+                                    ? "bg-slate-950/30 text-slate-950"
+                                    : ch.examStatus === "board_exam"
+                                    ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/25"
+                                    : ch.examStatus === "partial_board"
+                                    ? "bg-amber-500/15 text-amber-400 border border-amber-500/25"
+                                    : "bg-sky-500/15 text-sky-400 border border-sky-500/25"
+                                }`}>
+                                  <span>🎯</span> {ch.examStatusLabel || "Board Exam 2026"}
+                                </span>
+                              )}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2">
+                  {activeSubject === "math"
+                    ? MATH_CHAPTER_LIST.map((ch) => {
                     const isSelected = ch.no === activeMathChapterNo;
                     return (
                       <a
@@ -990,6 +1055,8 @@ export default function ConceptsHubView({
                       </a>
                     );
                   })}
+                </div>
+              )}
             </div>
           )}
 
@@ -1007,7 +1074,7 @@ export default function ConceptsHubView({
               <span>Prev Chapter</span>
             </button>
             <span className={`text-[11px] font-mono font-bold ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-              {activeSubject === "math" ? `${activeMathChapterNo} of 14` : activeSubject === "science" ? `${activeScienceChapterNo} of 13` : `${activeSSTChapterNo} of 10`}
+              {activeSubject === "math" ? `${activeMathChapterNo} of 14` : activeSubject === "science" ? `${activeScienceChapterNo} of 13` : `${SST_ORDERED_IDS.indexOf(activeSSTChapterNo) + 1} of 20`}
             </span>
             <button
               onClick={handleNextChapter}
@@ -3498,7 +3565,7 @@ export default function ConceptsHubView({
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1.5">
               <Filter className="w-3.5 h-3.5 text-rose-400" /> Filter Discipline:
             </span>
-            {(["All", "History", "Political Science", "Geography", "Economics"] as const).map((disc) => (
+            {(["All", "Geography", "History", "Political Science", "Economics"] as const).map((disc) => (
               <button
                 key={disc}
                 onClick={() => setSstDisciplineFilter(disc)}
@@ -3512,11 +3579,11 @@ export default function ConceptsHubView({
                     : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100"
                 }`}
               >
-                {disc === "All" && "🌐 All (10 Chs)"}
-                {disc === "History" && "🏛️ History (2 Chs)"}
-                {disc === "Political Science" && "⚖️ Civics (2 Chs)"}
-                {disc === "Geography" && "🌍 Geography (3 Chs)"}
-                {disc === "Economics" && "📈 Economics (3 Chs)"}
+                {disc === "All" && "🌐 All (20 Chs)"}
+                {disc === "Geography" && "🌍 Geography (7 Chs)"}
+                {disc === "History" && "📜 History (4 Chs)"}
+                {disc === "Political Science" && "⚖️ Civics (5 Chs)"}
+                {disc === "Economics" && "📈 Economics (4 Chs)"}
               </button>
             ))}
           </div>
@@ -3538,18 +3605,26 @@ export default function ConceptsHubView({
                   <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
                     isDark ? "bg-rose-950/60 text-rose-300 border-rose-500/30" : "bg-rose-100 text-rose-900 border-rose-300"
                   }`}>
-                    {activeSSTMeta.discipline} • {activeSSTMeta.unit}
+                    {activeSSTMeta.discipline === "Geography" ? "🌍 Geography" : activeSSTMeta.discipline === "History" ? "📜 History" : activeSSTMeta.discipline === "Political Science" ? "⚖️ Political Science / Civics" : "📈 Economics"} • {activeSSTMeta.unit}
                   </span>
                   <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">
                     Board Weightage: {activeSSTMeta.weightage}
                   </span>
                 </div>
 
-                <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${
-                  isDark ? "text-white" : "text-slate-900"
-                }`}>
-                  {activeSSTMeta.name}
-                </h2>
+                <div className="space-y-1">
+                  <div className="text-xs sm:text-sm font-mono font-black uppercase tracking-wider text-rose-400">
+                    {activeSSTMeta.discipline === "Geography" ? "🌍 GEOGRAPHY (CONTEMPORARY INDIA - II)" :
+                     activeSSTMeta.discipline === "History" ? "📜 HISTORY (INDIA & CONTEMPORARY WORLD - II)" :
+                     activeSSTMeta.discipline === "Political Science" ? "⚖️ POLITICAL SCIENCE / CIVICS (DEMOCRATIC POLITICS - II)" :
+                     "📈 ECONOMICS (UNDERSTANDING ECONOMIC DEVELOPMENT)"}
+                  </div>
+                  <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${
+                    isDark ? "text-white" : "text-slate-900"
+                  }`}>
+                    Chapter {activeSSTMeta.disciplineChapterNo}: {activeSSTMeta.name}
+                  </h2>
+                </div>
 
                 <p className={`text-sm sm:text-base leading-relaxed ${
                   isDark ? "text-slate-300" : "text-slate-700 font-medium"
