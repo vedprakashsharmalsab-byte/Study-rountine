@@ -74,6 +74,7 @@ import GlobalSearchModal from "@/components/GlobalSearchModal";
 import AreteLogo from "@/components/AreteLogo";
 import { areteAudio } from "@/lib/audio";
 import { appStorage, STORAGE_KEYS } from "@/lib/storage";
+import PracticeTimer from "@/components/PracticeTimer";
 
 import {
   Atom,
@@ -3769,6 +3770,9 @@ export default function CBSECommandCenter() {
 
             </div>
 
+            {/* LIVE MOCK EXAM & PRACTICE TIMER */}
+            <PracticeTimer isDark={isDark} />
+
             {/* TEST SERIES I DATE SHEET TABS */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5">
               {TEST_SERIES_I_SCHEDULE.map((exam) => {
@@ -4787,13 +4791,27 @@ export default function CBSECommandCenter() {
                       </>
                     ) : activeVaultSubject === "science" ? (
                       <>
-                        <option value="1">Ch 1: Chemical Reactions & Equations (35 Questions)</option>
-                        <option value="2">Ch 2: Acids, Bases and Salts (35 Questions)</option>
-                        <option value="3">Ch 3: Metals and Non-Metals (35 Questions)</option>
-                        <option value="5">Ch 5: Life Processes (35 Questions)</option>
-                        <option value="11">Ch 11: Electricity (35 Questions)</option>
-                        <option value="12">Ch 12: Magnetic Effects of Current (30 Questions)</option>
-                        <option value="13">Ch 13: Our Environment (30 Questions)</option>
+                        <optgroup label="🧪 CHEMISTRY (25 MARKS)">
+                          <option value="1">Ch 1: Chemical Reactions & Equations (42 Questions)</option>
+                          <option value="2">Ch 2: Acids, Bases and Salts (42 Questions)</option>
+                          <option value="3">Ch 3: Metals and Non-Metals (42 Questions)</option>
+                          <option value="4">Ch 4: Carbon and its Compounds (24 Questions)</option>
+                        </optgroup>
+                        <optgroup label="🧬 BIOLOGY (30 MARKS)">
+                          <option value="5">Ch 5: Life Processes — Nutrition, Respiration, Transport, Excretion (42 Qs)</option>
+                          <option value="6">Ch 6: Control and Coordination (24 Questions)</option>
+                          <option value="7">Ch 7: How do Organisms Reproduce? (13 Questions)</option>
+                          <option value="8">Ch 8: Heredity and Evolution (13 Questions)</option>
+                        </optgroup>
+                        <optgroup label="⚡ PHYSICS (25 MARKS)">
+                          <option value="9">Ch 9: Light — Reflection and Refraction (13 Questions)</option>
+                          <option value="10">Ch 10: The Human Eye and Colourful World (14 Questions)</option>
+                          <option value="11">Ch 11: Electricity (44 Questions)</option>
+                          <option value="12">Ch 12: Magnetic Effects of Current (42 Questions)</option>
+                        </optgroup>
+                        <optgroup label="🌿 NATURAL RESOURCES (5 MARKS)">
+                          <option value="13">Ch 13: Our Environment (43 Questions)</option>
+                        </optgroup>
                       </>
                     ) : activeVaultSubject === "sst" ? (
                       <>
@@ -4906,6 +4924,13 @@ export default function CBSECommandCenter() {
 
             {!isAnalyzingVault && activeVaultChapter !== null && (
               <div className="space-y-6">
+                {/* PRACTICE & EXAM SESSION TIMER */}
+                <PracticeTimer
+                  isDark={isDark}
+                  activeSubject={activeVaultSubject}
+                  activeChapter={activeVaultChapter}
+                />
+
                 {/* Format Filter Bar (Apple Pills) */}
                 <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-1 border-b pb-4 ${
                   isDark ? "border-white/[0.08]" : "border-slate-200"
@@ -5038,7 +5063,7 @@ export default function CBSECommandCenter() {
                   return (
                   <div
                     key={q.id}
-                    className={`virtual-card p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border space-y-4 sm:space-y-5 transition-all duration-300 ${
+                    className={`virtual-card content-auto p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border space-y-4 sm:space-y-5 transition-all duration-300 ${
                       isDark 
                         ? "glass-card border-white/[0.08] hover:border-emerald-500/30 hover:shadow-[0_12px_40px_rgba(16,185,129,0.06)]" 
                         : "glass-card-light border-slate-200/80 shadow-md hover:shadow-xl"
@@ -5468,7 +5493,13 @@ export default function CBSECommandCenter() {
                       "Ch 1: Chemical Reactions",
                       "Ch 2: Acids, Bases & Salts",
                       "Ch 3: Metals & Non-Metals",
+                      "Ch 4: Carbon Compounds",
                       "Ch 5: Life Processes",
+                      "Ch 6: Control & Coordination",
+                      "Ch 7: Reproduction",
+                      "Ch 8: Heredity",
+                      "Ch 9: Light",
+                      "Ch 10: Human Eye",
                       "Ch 11: Electricity",
                       "Ch 12: Magnetic Effects",
                       "Ch 13: Our Environment"
@@ -6229,7 +6260,13 @@ export default function CBSECommandCenter() {
                         <option value="Ch 1: Chemical Reactions and Equations">Ch 1: Chemical Reactions & Equations</option>
                         <option value="Ch 2: Acids, Bases and Salts">Ch 2: Acids, Bases and Salts</option>
                         <option value="Ch 3: Metals and Non-Metals">Ch 3: Metals and Non-Metals</option>
+                        <option value="Ch 4: Carbon and its Compounds">Ch 4: Carbon & Compounds</option>
                         <option value="Ch 5: Life Processes">Ch 5: Life Processes</option>
+                        <option value="Ch 6: Control and Coordination">Ch 6: Control & Coordination</option>
+                        <option value="Ch 7: How do Organisms Reproduce?">Ch 7: Reproduction</option>
+                        <option value="Ch 8: Heredity and Evolution">Ch 8: Heredity</option>
+                        <option value="Ch 9: Light — Reflection and Refraction">Ch 9: Light</option>
+                        <option value="Ch 10: The Human Eye and Colourful World">Ch 10: Human Eye</option>
                         <option value="Ch 11: Electricity">Ch 11: Electricity</option>
                         <option value="Ch 12: Magnetic Effects of Electric Current">Ch 12: Magnetic Effects</option>
                         <option value="Ch 13: Our Environment">Ch 13: Our Environment</option>

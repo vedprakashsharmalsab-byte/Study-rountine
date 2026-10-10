@@ -49,6 +49,7 @@ import {
   type ScienceConceptTopic,
   type ScienceConceptExample
 } from "@/data/scienceConceptsAndExamples";
+import ScienceDefinitionsView from "@/components/ScienceDefinitionsView";
 
 interface ScienceConceptsHubViewProps {
   isDark: boolean;
@@ -645,6 +646,19 @@ export default function ScienceConceptsHubView({
                     <span>{s.label.split(".")[1]?.trim() || s.label}</span>
                   </button>
                 ))}
+                <button
+                  onClick={() => {
+                    document.getElementById("sci-definitions-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    isDark
+                      ? "bg-teal-500/15 border-teal-500/30 text-teal-300 hover:bg-teal-500/25"
+                      : "bg-teal-100 border-teal-300 text-teal-950 hover:bg-teal-200"
+                  }`}
+                >
+                  <Sparkles className={`w-3.5 h-3.5 ${isDark ? "text-teal-400" : "text-teal-700"}`} />
+                  <span>💎 Core Definitions</span>
+                </button>
                 {chapterExamples.length > 0 && (
                   <button
                     onClick={() => {
@@ -801,6 +815,16 @@ export default function ScienceConceptsHubView({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* ============= FOUNDATIONS & CORE DEFINITIONS ============= */}
+      <div id="sci-definitions-section">
+        <ScienceDefinitionsView
+          isDark={isDark}
+          activeChapterNo={currentChNo}
+          chapterTitle={currentChapter.title}
+          onOpenQuestionBank={onOpenQuestionBank}
+        />
       </div>
 
       {/* ============= SEARCH & SECTION CONTROLS TOOLBAR ============= */}
