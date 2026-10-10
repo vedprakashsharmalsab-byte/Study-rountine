@@ -340,6 +340,36 @@ export async function GET(req: Request) {
     let totalDurationSeconds = 0;
     let todaySessionsCount   = 0;
 
+    const currentMonthStr = todayStr.slice(0, 7); // YYYY-MM
+    const currentYearStr  = todayStr.slice(0, 4); // YYYY
+
+    // Temporal Aggregation Maps for Day, Month, and Year Ledgers
+    const dayAggregation = new Map<string, {
+      date: string;
+      dateFormatted: string;
+      totalSessions: number;
+      visitorIds: Set<string>;
+      totalDurationSeconds: number;
+      mobile: number;
+      desktop: number;
+      tablet: number;
+    }>();
+
+    const monthAggregation = new Map<string, {
+      month: string;
+      monthFormatted: string;
+      totalSessions: number;
+      visitorIds: Set<string>;
+      totalDurationSeconds: number;
+    }>();
+
+    const yearAggregation = new Map<string, {
+      year: string;
+      totalSessions: number;
+      visitorIds: Set<string>;
+      totalDurationSeconds: number;
+    }>();
+
     allEvents.forEach((ev) => {
       const isToday  = ev.createdAt.startsWith(todayStr);
       const evDate   = new Date(ev.lastSeenAt || ev.createdAt);
@@ -347,6 +377,72 @@ export async function GET(req: Request) {
 
       if (isToday) todaySessionsCount++;
       totalDurationSeconds += ev.durationSeconds || 0;
+
+      // Temporal classification:
+      const dKey = (ev.visitStartedAt || ev.createdAt || todayStr).slice(0, 10);
+      const mKey = dKey.slice(0, 7);
+      const yKey = dKey.slice(0, 4);
+
+      // Day Ledger
+      if (!dayAggregation.has(dKey)) {
+        let formatted = dKey;
+        try {
+          const dObj = new Date(dKey + "T00:00:00Z");
+          formatted = dObj.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+        } catch {}
+        dayAggregation.set(dKey, {
+          date: dKey,
+          dateFormatted: formatted,
+          totalSessions: 0,
+          visitorIds: new Set<string>(),
+          totalDurationSeconds: 0,
+          mobile: 0,
+          desktop: 0,
+          tablet: 0,
+        });
+      }
+      const dayRec = dayAggregation.get(dKey)!;
+      dayRec.totalSessions++;
+      dayRec.visitorIds.add(ev.visitorId);
+      dayRec.totalDurationSeconds += ev.durationSeconds || 0;
+      const devType = (ev.deviceType || "desktop").toLowerCase();
+      if (devType === "mobile") dayRec.mobile++;
+      else if (devType === "tablet") dayRec.tablet++;
+      else dayRec.desktop++;
+
+      // Month Ledger
+      if (!monthAggregation.has(mKey)) {
+        let mFormatted = mKey;
+        try {
+          const mObj = new Date(mKey + "-01T00:00:00Z");
+          mFormatted = mObj.toLocaleDateString("en-IN", { month: "long", year: "numeric", timeZone: "UTC" });
+        } catch {}
+        monthAggregation.set(mKey, {
+          month: mKey,
+          monthFormatted: mFormatted,
+          totalSessions: 0,
+          visitorIds: new Set<string>(),
+          totalDurationSeconds: 0,
+        });
+      }
+      const monthRec = monthAggregation.get(mKey)!;
+      monthRec.totalSessions++;
+      monthRec.visitorIds.add(ev.visitorId);
+      monthRec.totalDurationSeconds += ev.durationSeconds || 0;
+
+      // Year Ledger
+      if (!yearAggregation.has(yKey)) {
+        yearAggregation.set(yKey, {
+          year: yKey,
+          totalSessions: 0,
+          visitorIds: new Set<string>(),
+          totalDurationSeconds: 0,
+        });
+      }
+      const yearRec = yearAggregation.get(yKey)!;
+      yearRec.totalSessions++;
+      yearRec.visitorIds.add(ev.visitorId);
+      yearRec.totalDurationSeconds += ev.durationSeconds || 0;
 
       if (!studentMap.has(ev.visitorId)) {
         studentMap.set(ev.visitorId, {
@@ -517,6 +613,52 @@ export async function GET(req: Request) {
       : 0;
 
     // -----------------------------------------------------------------------
+    // Temporal Ledgers (Per Day, Per Month, Per Year)
+    // -----------------------------------------------------------------------
+    const dailyBreakdown = Array.from(dayAggregation.values())
+      .map((d) => ({
+        date: d.date,
+        dateFormatted: d.dateFormatted,
+        totalSessions: d.totalSessions,
+        uniqueVisitors: d.visitorIds.size,
+        totalDurationSeconds: d.totalDurationSeconds,
+        avgDurationMinutes: d.totalSessions > 0 ? Math.round(d.totalDurationSeconds / d.totalSessions / 60) : 0,
+        mobile: d.mobile,
+        desktop: d.desktop,
+        tablet: d.tablet,
+      }))
+      .sort((a, b) => b.date.localeCompare(a.date));
+
+    const monthlyBreakdown = Array.from(monthAggregation.values())
+      .map((m) => ({
+        month: m.month,
+        monthFormatted: m.monthFormatted,
+        totalSessions: m.totalSessions,
+        uniqueVisitors: m.visitorIds.size,
+        totalDurationSeconds: m.totalDurationSeconds,
+        avgDurationMinutes: m.totalSessions > 0 ? Math.round(m.totalDurationSeconds / m.totalSessions / 60) : 0,
+      }))
+      .sort((a, b) => b.month.localeCompare(a.month));
+
+    const yearlyBreakdown = Array.from(yearAggregation.values())
+      .map((y) => ({
+        year: y.year,
+        totalSessions: y.totalSessions,
+        uniqueVisitors: y.visitorIds.size,
+        totalDurationSeconds: y.totalDurationSeconds,
+        avgDurationMinutes: y.totalSessions > 0 ? Math.round(y.totalDurationSeconds / y.totalSessions / 60) : 0,
+      }))
+      .sort((a, b) => b.year.localeCompare(a.year));
+
+    const monthRecordNow = monthAggregation.get(currentMonthStr);
+    const yearRecordNow  = yearAggregation.get(currentYearStr);
+
+    const monthUniqueStudents = monthRecordNow ? monthRecordNow.visitorIds.size : 0;
+    const monthTotalSessions  = monthRecordNow ? monthRecordNow.totalSessions : 0;
+    const yearUniqueStudents  = yearRecordNow  ? yearRecordNow.visitorIds.size : 0;
+    const yearTotalSessions   = yearRecordNow  ? yearRecordNow.totalSessions : 0;
+
+    // -----------------------------------------------------------------------
     // Paginated visit history — all raw events with location details
     // -----------------------------------------------------------------------
     const totalEvents     = allEvents.length;
@@ -528,6 +670,10 @@ export async function GET(req: Request) {
         totalUniqueStudents,
         todayUniqueStudents:  Math.max(todayUniqueStudents,  0),
         todayTotalSessions:   todaySessionsCount,
+        monthUniqueStudents,
+        monthTotalSessions,
+        yearUniqueStudents,
+        yearTotalSessions,
         liveNowStudents:      Math.max(liveNowStudents,      0),
         fifteenDayUsersCount,
         thirtyDayUsersCount,
@@ -540,6 +686,9 @@ export async function GET(req: Request) {
         tabs,
         referrers,
         uniqueStudents,
+        dailyBreakdown,
+        monthlyBreakdown,
+        yearlyBreakdown,
         recentEvents: paginatedEvents,
         // Pagination meta for visit history tab
         pagination: {

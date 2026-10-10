@@ -1023,13 +1023,25 @@ export default function CBSECommandCenter() {
           const currentVisits = parseInt(localStorage.getItem(STORAGE_KEY_VISITS) || "1", 10);
           parsed.visitsCount = currentVisits;
           setStudentProfile(parsed);
-          setIsGateOpen(false);
         } else {
-          setIsGateOpen(true);
+          const defaultProf: StudentProfile = {
+            name: "CBSE Scholar",
+            city: "Bissau",
+            pincode: "331027",
+            location: "Bissau, Rajasthan",
+            targetScore: "100",
+            stream: "Class 10-A",
+            verifiedAt: new Date().toISOString(),
+            visitsCount: 1,
+            acceptedCookies: true,
+            acceptedPolicies: true,
+          };
+          localStorage.setItem(STORAGE_KEY_STUDENT, JSON.stringify(defaultProf));
+          localStorage.setItem(STORAGE_KEY_VISITS, "1");
+          setStudentProfile(defaultProf);
         }
-      } catch {
-        setIsGateOpen(true);
-      }
+      } catch {}
+      setIsGateOpen(false);
     }
   }, []);
   
@@ -1196,12 +1208,15 @@ export default function CBSECommandCenter() {
       if (savedName && savedName.trim().length >= 3) {
         setStudentFullName(savedName);
       } else {
-        setIsNameModalOpen(true);
+        const defaultName = "CBSE Scholar";
+        localStorage.setItem("cbse_student_name", defaultName);
+        localStorage.setItem("cbse_student_username", defaultName);
+        setStudentFullName(defaultName);
       }
+      setIsNameModalOpen(false);
 
-      if (!localStorage.getItem("cbse_cookies_accepted")) {
-        setIsCookieBannerOpen(true);
-      }
+      localStorage.setItem("cbse_cookies_accepted", "true");
+      setIsCookieBannerOpen(false);
 
       // Detect Brave browser silently
       if ((navigator as any).brave && typeof (navigator as any).brave.isBrave === "function") {
@@ -1261,7 +1276,7 @@ export default function CBSECommandCenter() {
         })
         .catch(() => {});
     } catch {
-      setIsNameModalOpen(true);
+      setIsNameModalOpen(false);
     }
   }, []);
 
@@ -3075,36 +3090,17 @@ export default function CBSECommandCenter() {
                 2026–27
               </span>
 
-              {studentFullName ? (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setNameInput(studentFullName);
-                    setIsNameModalOpen(true);
-                  }}
-                  className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold leading-none inline-flex items-center gap-1.5 transition-all cursor-pointer ${
-                    isDark
-                      ? "bg-teal-500/20 text-teal-300 border border-teal-500/40 hover:bg-teal-500/30"
-                      : "bg-teal-100 text-teal-900 border border-teal-300 hover:bg-teal-200"
-                  }`}
-                  title="Enrolled Cadet (Click to edit name)"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-                  <span className="max-w-[120px] truncate">{studentFullName}</span>
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsNameModalOpen(true);
-                  }}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse cursor-pointer"
-                >
-                  <span>⚡ Enter Name</span>
-                </button>
-              )}
+              <div
+                className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold leading-none inline-flex items-center gap-1.5 transition-all ${
+                  isDark
+                    ? "bg-teal-500/20 text-teal-300 border border-teal-500/40"
+                    : "bg-teal-100 text-teal-900 border border-teal-300"
+                }`}
+                title="Cadet Profile Active"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                <span className="max-w-[120px] truncate">{studentFullName || "CBSE Scholar"}</span>
+              </div>
             </div>
           </div>
 
@@ -6546,7 +6542,7 @@ export default function CBSECommandCenter() {
       {/* =========================================================================
           MANDATORY 1ST-TIME STUDENT IDENTITY & REAL NAME ONBOARDING GATEWAY
           ========================================================================= */}
-      {isNameModalOpen && (
+      {false && isNameModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl animate-fade-in">
           <div className={`w-full max-w-md p-6 sm:p-8 rounded-3xl border shadow-2xl space-y-6 relative overflow-hidden ${
             isDark
@@ -6802,7 +6798,7 @@ export default function CBSECommandCenter() {
           - GPU renderer (WEBGL_debug_renderer_info)
           - ISP + network type
           ========================================================================= */}
-      {isCookieBannerOpen && (
+      {false && isCookieBannerOpen && (
         <div
           className="fixed bottom-0 left-0 right-0 z-[9999] px-4 pb-4 pt-3 animate-fade-in"
           style={{ backdropFilter: "blur(12px)" }}
@@ -6850,7 +6846,7 @@ export default function CBSECommandCenter() {
           Hardcoded zero-bypass authentication required before full platform access
           ========================================================================= */}
       <AreteAccessGateModal
-        isOpen={isGateOpen}
+        isOpen={false}
         isDark={isDark}
         onVerified={handleStudentVerified}
       />

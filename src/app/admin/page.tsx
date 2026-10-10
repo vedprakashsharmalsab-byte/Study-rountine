@@ -133,10 +133,43 @@ interface UniqueStudentProfile {
   sessions: StudentSession[];
 }
 
+export interface DailyBreakdownRecord {
+  date: string;
+  dateFormatted: string;
+  totalSessions: number;
+  uniqueVisitors: number;
+  totalDurationSeconds: number;
+  avgDurationMinutes: number;
+  mobile: number;
+  desktop: number;
+  tablet: number;
+}
+
+export interface MonthlyBreakdownRecord {
+  month: string;
+  monthFormatted: string;
+  totalSessions: number;
+  uniqueVisitors: number;
+  totalDurationSeconds: number;
+  avgDurationMinutes: number;
+}
+
+export interface YearlyBreakdownRecord {
+  year: string;
+  totalSessions: number;
+  uniqueVisitors: number;
+  totalDurationSeconds: number;
+  avgDurationMinutes: number;
+}
+
 interface VisitorStats {
   totalUniqueStudents: number;
   todayUniqueStudents: number;
   todayTotalSessions: number;
+  monthUniqueStudents?: number;
+  monthTotalSessions?: number;
+  yearUniqueStudents?: number;
+  yearTotalSessions?: number;
   liveNowStudents: number;
   fifteenDayUsersCount: number;
   thirtyDayUsersCount: number;
@@ -149,6 +182,9 @@ interface VisitorStats {
   tabs: Record<string, number>;
   referrers: Record<string, number>;
   uniqueStudents: UniqueStudentProfile[];
+  dailyBreakdown?: DailyBreakdownRecord[];
+  monthlyBreakdown?: MonthlyBreakdownRecord[];
+  yearlyBreakdown?: YearlyBreakdownRecord[];
   recentEvents: Array<{
     id: string;
     visitorId: string;
@@ -205,6 +241,8 @@ export default function AdminPage() {
   const [isLivePolling, setIsLivePolling] = useState<boolean>(true);
   const [lastRefreshed, setLastRefreshed] = useState<string>("");
   const [streamViewMode, setStreamViewMode] = useState<"students" | "events">("students");
+  const [timeHorizonTab, setTimeHorizonTab] = useState<"day" | "month" | "year">("day");
+  const [horizonSearch, setHorizonSearch] = useState<string>("");
   const [expandedStudentId, setExpandedStudentId] = useState<string | null>(null);
   const [selectedStudentForModal, setSelectedStudentForModal] = useState<UniqueStudentProfile | null>(null);
   const [visitorFilter, setVisitorFilter] = useState<string>("all");
@@ -423,6 +461,58 @@ export default function AdminPage() {
     const link = document.createElement("a");
     link.setAttribute("href", url);
     link.setAttribute("download", `cbse_unique_students_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Export Temporal Breakdown (Day / Month / Year) to CSV
+  const handleExportHorizonCSV = (horizon: "day" | "month" | "year") => {
+    if (!analytics) return;
+    playSound("click");
+    let csvContent = "";
+    if (horizon === "day") {
+      const headers = ["Date", "Formatted Date", "Unique Visitors", "Total Sessions / Visits", "Mobile", "Desktop", "Tablet", "Total Duration (sec)", "Avg Duration (min)"];
+      const rows = (analytics.dailyBreakdown || []).map((d) => [
+        `"${d.date}"`,
+        `"${d.dateFormatted}"`,
+        d.uniqueVisitors,
+        d.totalSessions,
+        d.mobile,
+        d.desktop,
+        d.tablet,
+        d.totalDurationSeconds,
+        d.avgDurationMinutes
+      ]);
+      csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+    } else if (horizon === "month") {
+      const headers = ["Month", "Formatted Month", "Unique Visitors", "Total Sessions / Visits", "Total Duration (sec)", "Avg Duration (min)"];
+      const rows = (analytics.monthlyBreakdown || []).map((m) => [
+        `"${m.month}"`,
+        `"${m.monthFormatted}"`,
+        m.uniqueVisitors,
+        m.totalSessions,
+        m.totalDurationSeconds,
+        m.avgDurationMinutes
+      ]);
+      csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+    } else {
+      const headers = ["Year", "Unique Visitors", "Total Sessions / Visits", "Total Duration (sec)", "Avg Duration (min)"];
+      const rows = (analytics.yearlyBreakdown || []).map((y) => [
+        `"${y.year}"`,
+        y.uniqueVisitors,
+        y.totalSessions,
+        y.totalDurationSeconds,
+        y.avgDurationMinutes
+      ]);
+      csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+    }
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `cbse_traffic_ledger_${horizon}_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -926,98 +1016,119 @@ export default function AdminPage() {
         {activeTab === "analytics" && (
           <div className="space-y-8 animate-fade-in">
             {/* Top Stat Ribbon with Deduplication Breakdown */}
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-5">
-              {/* Card 1: Unique Students Today (Deduplicated!) */}
-              <div className={`p-5 rounded-3xl border transition-all ${
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+              {/* Card 1: Unique Students Today */}
+              <div className={`p-4 sm:p-5 rounded-3xl border transition-all ${
                 isDark ? "bg-[#0b101c] border-teal-500/30 shadow-lg shadow-teal-950/20" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Unique Students Today</span>
-                  <div className="w-8 h-8 rounded-xl bg-teal-500/15 text-teal-400 flex items-center justify-center">
-                    <UserCheck className="w-4 h-4" />
+                  <span className="text-[10px] font-mono font-bold uppercase text-slate-400">Today Unique</span>
+                  <div className="w-7 h-7 rounded-xl bg-teal-500/15 text-teal-400 flex items-center justify-center">
+                    <UserCheck className="w-3.5 h-3.5" />
                   </div>
                 </div>
-                <div className="text-2xl sm:text-3xl font-black font-mono text-teal-400 tracking-tight flex items-baseline gap-2">
+                <div className={`text-2xl font-black font-mono tracking-tight flex items-baseline gap-1.5 ${isDark ? "text-teal-400" : "text-teal-600"}`}>
                   <span>{analytics?.todayUniqueStudents ?? 0}</span>
-                  <span className="text-xs font-normal text-slate-400 font-sans">unique</span>
+                  <span className="text-[11px] font-normal text-slate-400 font-sans">cadets</span>
                 </div>
-                <div className="text-[10px] font-mono text-emerald-400 mt-1 flex items-center gap-1">
+                <div className="text-[10px] font-mono text-emerald-500 mt-1 flex items-center gap-1">
                   <span>✓ Deduplicated</span>
-                  <span className="text-slate-500">· {analytics?.todayTotalSessions ?? 0} total visits today</span>
+                  <span className="text-slate-400">· {analytics?.todayTotalSessions ?? 0} visits</span>
                 </div>
               </div>
 
-              {/* Card 2: Today's Total Visits / Sessions */}
-              <div className={`p-5 rounded-3xl border transition-all ${
+              {/* Card 2: Today Total Sessions */}
+              <div className={`p-4 sm:p-5 rounded-3xl border transition-all ${
                 isDark ? "bg-[#0b101c] border-cyan-500/30 shadow-lg shadow-cyan-950/20" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Today&apos;s Visits</span>
-                  <div className="w-8 h-8 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
-                    <TrendingUp className="w-4 h-4" />
+                  <span className="text-[10px] font-mono font-bold uppercase text-slate-400">Today Visits</span>
+                  <div className="w-7 h-7 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
+                    <TrendingUp className="w-3.5 h-3.5" />
                   </div>
                 </div>
-                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight flex items-baseline gap-2">
+                <div className={`text-2xl font-black font-mono tracking-tight flex items-baseline gap-1.5 ${isDark ? "text-cyan-400" : "text-cyan-700"}`}>
                   <span>{analytics?.todayTotalSessions ?? 0}</span>
-                  <span className="text-xs font-normal text-slate-400 font-sans">sessions</span>
+                  <span className="text-[11px] font-normal text-slate-400 font-sans">sessions</span>
                 </div>
-                <span className="text-[10px] font-mono text-cyan-400 mt-1 block">
-                  Repeated visits by students
+                <span className="text-[10px] font-mono text-slate-400 mt-1 block">
+                  Repeated daily sessions
                 </span>
               </div>
 
-              {/* Card 3: All-Time Unique Students */}
-              <div className={`p-5 rounded-3xl border transition-all ${
-                isDark ? "bg-[#0b101c] border-amber-500/30 shadow-lg shadow-amber-950/20" : "bg-white border-slate-200 shadow-sm"
-              }`}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Total Unique Students</span>
-                  <div className="w-8 h-8 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
-                    <Users className="w-4 h-4" />
-                  </div>
-                </div>
-                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                  {analytics?.totalUniqueStudents ?? 0}
-                </div>
-                <span className="text-[10px] font-mono text-amber-400 mt-1 block">
-                  {analytics?.totalEventsCount ?? 0} lifetime visits recorded
-                </span>
-              </div>
-
-              {/* Card 4: Live Active Now */}
-              <div className={`p-5 rounded-3xl border transition-all ${
-                isDark ? "bg-[#0b101c] border-emerald-500/30 shadow-lg shadow-emerald-950/20" : "bg-white border-slate-200 shadow-sm"
-              }`}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Active Online Now</span>
-                  <div className="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                  </div>
-                </div>
-                <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400 tracking-tight flex items-baseline gap-2">
-                  <span>{analytics?.liveNowStudents ?? 0}</span>
-                  <span className="text-xs font-normal text-emerald-400/70 font-sans">student</span>
-                </div>
-                <span className="text-[10px] font-mono text-emerald-400 mt-1 block">
-                  Active in last 5 minutes
-                </span>
-              </div>
-
-              {/* Card 5: Average Daily Study Time */}
-              <div className={`col-span-2 lg:col-span-1 p-5 rounded-3xl border transition-all ${
+              {/* Card 3: Month Horizon */}
+              <div className={`p-4 sm:p-5 rounded-3xl border transition-all ${
                 isDark ? "bg-[#0b101c] border-indigo-500/30 shadow-lg shadow-indigo-950/20" : "bg-white border-slate-200 shadow-sm"
               }`}>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-mono font-bold uppercase text-slate-400">Avg. Study Time</span>
-                  <div className="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center">
-                    <Clock className="w-4 h-4" />
+                  <span className="text-[10px] font-mono font-bold uppercase text-slate-400">This Month</span>
+                  <div className="w-7 h-7 rounded-xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center">
+                    <Calendar className="w-3.5 h-3.5" />
                   </div>
                 </div>
-                <div className="text-2xl sm:text-3xl font-black font-mono text-white tracking-tight">
-                  {analytics?.avgDurationMinutes ?? 0}m
+                <div className={`text-2xl font-black font-mono tracking-tight flex items-baseline gap-1.5 ${isDark ? "text-indigo-400" : "text-indigo-700"}`}>
+                  <span>{analytics?.monthUniqueStudents ?? 0}</span>
+                  <span className="text-[11px] font-normal text-slate-400 font-sans">unique</span>
                 </div>
                 <span className="text-[10px] font-mono text-indigo-400 mt-1 block">
-                  Per student daily engagement
+                  {analytics?.monthTotalSessions ?? 0} sessions this month
+                </span>
+              </div>
+
+              {/* Card 4: Year Horizon */}
+              <div className={`p-4 sm:p-5 rounded-3xl border transition-all ${
+                isDark ? "bg-[#0b101c] border-purple-500/30 shadow-lg shadow-purple-950/20" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-mono font-bold uppercase text-slate-400">This Year</span>
+                  <div className="w-7 h-7 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center">
+                    <Award className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+                <div className={`text-2xl font-black font-mono tracking-tight flex items-baseline gap-1.5 ${isDark ? "text-purple-400" : "text-purple-700"}`}>
+                  <span>{analytics?.yearUniqueStudents ?? 0}</span>
+                  <span className="text-[11px] font-normal text-slate-400 font-sans">unique</span>
+                </div>
+                <span className="text-[10px] font-mono text-purple-400 mt-1 block">
+                  {analytics?.yearTotalSessions ?? 0} sessions in 2026
+                </span>
+              </div>
+
+              {/* Card 5: All-Time Cadets */}
+              <div className={`p-4 sm:p-5 rounded-3xl border transition-all ${
+                isDark ? "bg-[#0b101c] border-amber-500/30 shadow-lg shadow-amber-950/20" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-mono font-bold uppercase text-slate-400">All-Time Cadets</span>
+                  <div className="w-7 h-7 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
+                    <Users className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+                <div className={`text-2xl font-black font-mono tracking-tight flex items-baseline gap-1.5 ${isDark ? "text-amber-400" : "text-amber-700"}`}>
+                  <span>{analytics?.totalUniqueStudents ?? 0}</span>
+                  <span className="text-[11px] font-normal text-slate-400 font-sans">cadets</span>
+                </div>
+                <span className="text-[10px] font-mono text-amber-400 mt-1 block">
+                  {analytics?.totalEventsCount ?? 0} lifetime pageviews
+                </span>
+              </div>
+
+              {/* Card 6: Live Online & Avg Time */}
+              <div className={`p-4 sm:p-5 rounded-3xl border transition-all ${
+                isDark ? "bg-[#0b101c] border-emerald-500/30 shadow-lg shadow-emerald-950/20" : "bg-white border-slate-200 shadow-sm"
+              }`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-mono font-bold uppercase text-slate-400">Live &amp; Study Time</span>
+                  <div className="w-7 h-7 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  </div>
+                </div>
+                <div className={`text-2xl font-black font-mono tracking-tight flex items-baseline gap-1.5 ${isDark ? "text-emerald-400" : "text-emerald-700"}`}>
+                  <span>{analytics?.liveNowStudents ?? 0}</span>
+                  <span className="text-[11px] font-normal text-slate-400 font-sans">live · {analytics?.avgDurationMinutes ?? 0}m</span>
+                </div>
+                <span className="text-[10px] font-mono text-emerald-400 mt-1 block">
+                  Active in past 5m radar
                 </span>
               </div>
             </div>
@@ -1028,11 +1139,325 @@ export default function AdminPage() {
             }`}>
               <ShieldCheck className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
               <div className="space-y-0.5">
-                <span className="font-bold">Student Deduplication Active:</span>
+                <span className="font-bold">Automated Deduplication Protocol:</span>
                 <p className="opacity-90">
-                  If a student visits 3 or 4 times throughout the day, they are counted as <strong>1 Unique Student</strong>, and their multiple entries are combined under their profile showing <strong>4 visits today</strong> and total accumulated study time.
+                  Cadets visiting multiple times daily are deduplicated into <strong>1 Unique Student</strong> for daily/monthly/yearly counts, while their total visits and continuous study hours accumulate transparently.
                 </p>
               </div>
+            </div>
+
+            {/* ============================================================= */}
+            {/* TRAFFIC TIME HORIZONS (PER DAY · PER MONTH · PER YEAR LEDGER) */}
+            {/* ============================================================= */}
+            <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 ${
+              isDark ? "bg-[#0b101c] border-white/10" : "bg-white border-slate-200 shadow-sm"
+            }`}>
+              {/* Header & Controls */}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-indigo-400" />
+                    <h3 className={`text-lg font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                      Visitor Traffic Horizons (Day · Month · Year Breakdown)
+                    </h3>
+                  </div>
+                  <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                    Comprehensive temporal ledger showing unique students, total sessions, device mix, and accumulated study time per period.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+                  {/* Horizon Tabs */}
+                  <div className={`flex items-center p-1 rounded-xl text-xs font-bold border ${
+                    isDark ? "bg-white/5 border-white/10" : "bg-slate-100 border-slate-200"
+                  }`}>
+                    <button
+                      onClick={() => setTimeHorizonTab("day")}
+                      className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                        timeHorizonTab === "day"
+                          ? "bg-indigo-600 text-white font-black shadow-xs"
+                          : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      📅 Per Day ({analytics?.dailyBreakdown?.length || 0})
+                    </button>
+                    <button
+                      onClick={() => setTimeHorizonTab("month")}
+                      className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                        timeHorizonTab === "month"
+                          ? "bg-indigo-600 text-white font-black shadow-xs"
+                          : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      🗓️ Per Month ({analytics?.monthlyBreakdown?.length || 0})
+                    </button>
+                    <button
+                      onClick={() => setTimeHorizonTab("year")}
+                      className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                        timeHorizonTab === "year"
+                          ? "bg-indigo-600 text-white font-black shadow-xs"
+                          : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      📆 Per Year ({analytics?.yearlyBreakdown?.length || 0})
+                    </button>
+                  </div>
+
+                  {/* Horizon Search */}
+                  <div className="relative">
+                    <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder="Filter date / month..."
+                      value={horizonSearch}
+                      onChange={(e) => setHorizonSearch(e.target.value)}
+                      className={`pl-8 pr-3 py-1.5 rounded-xl text-xs border focus:outline-none ${
+                        isDark ? "bg-black/40 border-white/10 text-white placeholder-slate-500" : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                      }`}
+                    />
+                  </div>
+
+                  {/* Export Horizon CSV */}
+                  <button
+                    onClick={() => handleExportHorizonCSV(timeHorizonTab)}
+                    className="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-400 border border-indigo-500/30 flex items-center gap-1.5 transition-all cursor-pointer"
+                    title={`Export ${timeHorizonTab} ledger to CSV`}
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Export {timeHorizonTab.toUpperCase()} CSV</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* HORIZON VIEW 1: DAILY BREAKDOWN */}
+              {timeHorizonTab === "day" && (
+                <div className="space-y-4">
+                  <div className="overflow-x-auto rounded-2xl border border-white/5">
+                    <table className="w-full text-left text-xs font-mono">
+                      <thead>
+                        <tr className={`border-b ${isDark ? "bg-white/[0.02] border-white/10 text-slate-400" : "bg-slate-100/80 border-slate-200 text-slate-700"}`}>
+                          <th className="py-3 px-4 whitespace-nowrap">Date (IST)</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Unique Visitors</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Total Visits / Sessions</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Device Distribution</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Total Duration</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Avg Time / Visit</th>
+                          <th className="py-3 px-4 whitespace-nowrap text-right">Traffic Volume</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {(() => {
+                          const records = (analytics?.dailyBreakdown || []).filter((d) => {
+                            if (!horizonSearch.trim()) return true;
+                            const q = horizonSearch.toLowerCase();
+                            return d.date.toLowerCase().includes(q) || d.dateFormatted.toLowerCase().includes(q);
+                          });
+                          if (!records.length) {
+                            return (
+                              <tr>
+                                <td colSpan={7} className="py-8 text-center text-slate-500 italic">
+                                  No daily records matching query.
+                                </td>
+                              </tr>
+                            );
+                          }
+                          const maxSessions = Math.max(...records.map((r) => r.totalSessions), 1);
+                          return records.map((day) => {
+                            const totalHours = Math.floor(day.totalDurationSeconds / 3600);
+                            const totalMins = Math.floor((day.totalDurationSeconds % 3600) / 60);
+                            const durationLabel = totalHours > 0 ? `${totalHours}h ${totalMins}m` : `${totalMins}m`;
+                            const totalDevices = day.mobile + day.desktop + day.tablet || 1;
+                            const mobilePct = Math.round((day.mobile / totalDevices) * 100);
+                            const desktopPct = Math.round((day.desktop / totalDevices) * 100);
+                            const widthPct = Math.min(Math.round((day.totalSessions / maxSessions) * 100), 100);
+
+                            return (
+                              <tr key={day.date} className={`transition-colors ${isDark ? "hover:bg-white/[0.03]" : "hover:bg-slate-50"}`}>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className={`font-bold ${isDark ? "text-white" : "text-slate-900"}`}>{day.dateFormatted}</div>
+                                  <div className="text-[10px] text-slate-500">{day.date}</div>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span className="px-2 py-0.5 rounded-full text-xs font-bold font-mono bg-teal-500/15 text-teal-400 border border-teal-500/30">
+                                    {day.uniqueVisitors} unique
+                                  </span>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className={`font-bold ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                                    {day.totalSessions} sessions
+                                  </div>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className="flex items-center gap-2 text-[11px]">
+                                    <span title={`Mobile: ${day.mobile}`}>📱 {mobilePct}%</span>
+                                    <span>·</span>
+                                    <span title={`Desktop: ${day.desktop}`}>💻 {desktopPct}%</span>
+                                  </div>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap text-slate-400">
+                                  ⏱️ {durationLabel}
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span className="font-bold text-indigo-400">{day.avgDurationMinutes}m</span>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap text-right">
+                                  <div className="w-24 ml-auto h-2 rounded-full bg-white/5 overflow-hidden">
+                                    <div className="h-full bg-gradient-to-r from-indigo-500 to-teal-400 rounded-full" style={{ width: `${Math.max(widthPct, 8)}%` }} />
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          });
+                        })()}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {/* HORIZON VIEW 2: MONTHLY BREAKDOWN */}
+              {timeHorizonTab === "month" && (
+                <div className="space-y-4">
+                  <div className="overflow-x-auto rounded-2xl border border-white/5">
+                    <table className="w-full text-left text-xs font-mono">
+                      <thead>
+                        <tr className={`border-b ${isDark ? "bg-white/[0.02] border-white/10 text-slate-400" : "bg-slate-100/80 border-slate-200 text-slate-700"}`}>
+                          <th className="py-3 px-4 whitespace-nowrap">Month</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Unique Students</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Total Sessions / Visits</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Study Engagement</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Avg Time / Visit</th>
+                          <th className="py-3 px-4 whitespace-nowrap text-right">Monthly Traffic Share</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {(() => {
+                          const records = (analytics?.monthlyBreakdown || []).filter((m) => {
+                            if (!horizonSearch.trim()) return true;
+                            const q = horizonSearch.toLowerCase();
+                            return m.month.toLowerCase().includes(q) || m.monthFormatted.toLowerCase().includes(q);
+                          });
+                          if (!records.length) {
+                            return (
+                              <tr>
+                                <td colSpan={6} className="py-8 text-center text-slate-500 italic">
+                                  No monthly records matching query.
+                                </td>
+                              </tr>
+                            );
+                          }
+                          const maxSessions = Math.max(...records.map((r) => r.totalSessions), 1);
+                          return records.map((m) => {
+                            const hours = Math.round((m.totalDurationSeconds / 3600) * 10) / 10;
+                            const widthPct = Math.min(Math.round((m.totalSessions / maxSessions) * 100), 100);
+
+                            return (
+                              <tr key={m.month} className={`transition-colors ${isDark ? "hover:bg-white/[0.03]" : "hover:bg-slate-50"}`}>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className={`font-bold ${isDark ? "text-white" : "text-slate-900"}`}>{m.monthFormatted}</div>
+                                  <div className="text-[10px] text-slate-500">{m.month}</div>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span className="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-indigo-500/15 text-indigo-400 border border-indigo-500/30">
+                                    {m.uniqueVisitors} unique
+                                  </span>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className={`font-bold text-sm ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                                    {m.totalSessions} sessions
+                                  </div>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap text-slate-400">
+                                  📚 {hours} total hours
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span className="font-bold text-teal-400">{m.avgDurationMinutes}m avg</span>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap text-right">
+                                  <div className="w-28 ml-auto h-2 rounded-full bg-white/5 overflow-hidden">
+                                    <div className="h-full bg-gradient-to-r from-purple-500 to-indigo-400 rounded-full" style={{ width: `${Math.max(widthPct, 10)}%` }} />
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          });
+                        })()}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {/* HORIZON VIEW 3: YEARLY BREAKDOWN */}
+              {timeHorizonTab === "year" && (
+                <div className="space-y-4">
+                  <div className="overflow-x-auto rounded-2xl border border-white/5">
+                    <table className="w-full text-left text-xs font-mono">
+                      <thead>
+                        <tr className={`border-b ${isDark ? "bg-white/[0.02] border-white/10 text-slate-400" : "bg-slate-100/80 border-slate-200 text-slate-700"}`}>
+                          <th className="py-3 px-4 whitespace-nowrap">Academic Year</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Annual Unique Students</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Total Recorded Sessions</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Cumulative Study Time</th>
+                          <th className="py-3 px-4 whitespace-nowrap">Avg Session Time</th>
+                          <th className="py-3 px-4 whitespace-nowrap text-right">Annual Proportion</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {(() => {
+                          const records = (analytics?.yearlyBreakdown || []).filter((y) => {
+                            if (!horizonSearch.trim()) return true;
+                            return y.year.includes(horizonSearch.trim());
+                          });
+                          if (!records.length) {
+                            return (
+                              <tr>
+                                <td colSpan={6} className="py-8 text-center text-slate-500 italic">
+                                  No yearly records matching query.
+                                </td>
+                              </tr>
+                            );
+                          }
+                          const maxSessions = Math.max(...records.map((r) => r.totalSessions), 1);
+                          return records.map((y) => {
+                            const hours = Math.round((y.totalDurationSeconds / 3600) * 10) / 10;
+                            const widthPct = Math.min(Math.round((y.totalSessions / maxSessions) * 100), 100);
+
+                            return (
+                              <tr key={y.year} className={`transition-colors ${isDark ? "hover:bg-white/[0.03]" : "hover:bg-slate-50"}`}>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className={`font-black text-sm ${isDark ? "text-white" : "text-slate-900"}`}>Academic Year {y.year}</div>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span className="px-2.5 py-1 rounded-full text-xs font-bold font-mono bg-purple-500/15 text-purple-400 border border-purple-500/30">
+                                    {y.uniqueVisitors} unique
+                                  </span>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className={`font-bold text-sm ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+                                    {y.totalSessions} sessions
+                                  </div>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap text-slate-400">
+                                  🏛️ {hours} cumulative hours
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span className="font-bold text-amber-400">{y.avgDurationMinutes}m avg</span>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap text-right">
+                                  <div className="w-28 ml-auto h-2 rounded-full bg-white/5 overflow-hidden">
+                                    <div className="h-full bg-gradient-to-r from-amber-500 to-emerald-400 rounded-full" style={{ width: `${Math.max(widthPct, 15)}%` }} />
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          });
+                        })()}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* MASTER UNIQUE STUDENTS DIRECTORY */}
@@ -1163,7 +1588,7 @@ export default function AdminPage() {
 
                             <div className="space-y-1 min-w-0">
                               <div className="flex flex-wrap items-center gap-2">
-                                <span className="font-black text-sm text-white truncate">{student.studentName}</span>
+                                <span className={`font-black text-sm truncate ${isDark ? "text-white" : "text-slate-900"}`}>{student.studentName}</span>
                                 {student.isOnlineNow && (
                                   <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                                     ● Online Now
@@ -1283,7 +1708,7 @@ export default function AdminPage() {
                           {/* Quick Stats & Expand Action */}
                           <div className="flex items-center gap-4 self-end lg:self-center shrink-0">
                             <div className="text-right font-mono">
-                              <div className="text-sm font-black text-white">
+                              <div className={`text-sm font-black ${isDark ? "text-white" : "text-slate-900"}`}>
                                 {student.totalStudyMinutes}m study time
                               </div>
                               <div className="text-[10px] text-slate-400">
@@ -1322,38 +1747,38 @@ export default function AdminPage() {
 
                         {/* Expandable Visit History & Hardware Specs Drawer */}
                         {isExpanded && (
-                          <div className="p-5 border-t border-white/5 bg-black/40 space-y-4 animate-fade-in">
+                          <div className={`p-5 border-t space-y-4 animate-fade-in ${isDark ? "border-white/5 bg-black/40" : "border-slate-200 bg-slate-100/90"}`}>
                             {/* Deep Hardware & Network Specs */}
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
-                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
+                              <div className={`p-3 rounded-xl border space-y-0.5 ${isDark ? "bg-white/[0.03] border-white/5" : "bg-white border-slate-200 shadow-xs"}`}>
                                 <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
                                   <HardDrive className="w-3 h-3 text-teal-400" /> Hardware Specs
                                 </span>
-                                <div className="font-bold text-white truncate">{student.hardwareSpecs || "Standard Multi-core"}</div>
+                                <div className={`font-bold truncate ${isDark ? "text-white" : "text-slate-900"}`}>{student.hardwareSpecs || "Standard Multi-core"}</div>
                                 {student.gpuRenderer && (
                                   <div className="text-[9px] text-slate-400 truncate" title={student.gpuRenderer}>GPU: {student.gpuRenderer.length > 30 ? student.gpuRenderer.slice(0, 30) + "…" : student.gpuRenderer}</div>
                                 )}
                               </div>
 
-                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
+                              <div className={`p-3 rounded-xl border space-y-0.5 ${isDark ? "bg-white/[0.03] border-white/5" : "bg-white border-slate-200 shadow-xs"}`}>
                                 <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
                                   <Wifi className="w-3 h-3 text-cyan-400" /> Network Connection
                                 </span>
-                                <div className="font-bold text-white truncate">{student.networkType}</div>
+                                <div className={`font-bold truncate ${isDark ? "text-white" : "text-slate-900"}`}>{student.networkType}</div>
                               </div>
 
-                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
+                              <div className={`p-3 rounded-xl border space-y-0.5 ${isDark ? "bg-white/[0.03] border-white/5" : "bg-white border-slate-200 shadow-xs"}`}>
                                 <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
                                   <Globe className="w-3 h-3 text-amber-400" /> Screen & Browser
                                 </span>
-                                <div className="font-bold text-white truncate">{student.browser} ({student.screenResolution})</div>
+                                <div className={`font-bold truncate ${isDark ? "text-white" : "text-slate-900"}`}>{student.browser} ({student.screenResolution})</div>
                               </div>
 
-                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 space-y-0.5">
+                              <div className={`p-3 rounded-xl border space-y-0.5 ${isDark ? "bg-white/[0.03] border-white/5" : "bg-white border-slate-200 shadow-xs"}`}>
                                 <span className="text-[10px] uppercase text-slate-500 flex items-center gap-1">
                                   <Clock className="w-3 h-3 text-indigo-400" /> Joined / Active Days
                                 </span>
-                                <div className="font-bold text-white truncate">
+                                <div className={`font-bold truncate ${isDark ? "text-white" : "text-slate-900"}`}>
                                   {new Date(student.firstSeen).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
                                 </div>
                                 <div className="text-[9px] text-slate-400">{student.activeDaysCount} active day{student.activeDaysCount !== 1 ? "s" : ""} · {student.daysSinceFirst}d since first visit</div>
@@ -1372,7 +1797,7 @@ export default function AdminPage() {
                                     )}
                                   </div>
                                   <div className="flex flex-wrap items-center gap-3">
-                                    <span className="font-bold text-white text-sm">
+                                    <span className={`font-bold text-sm ${isDark ? "text-white" : "text-slate-900"}`}>
                                       {student.city && student.state
                                         ? `${student.city}, ${student.state}${student.country && student.country !== "India" ? `, ${student.country}` : ", India"}`
                                         : student.cityRegion || "Coordinates recorded"}{student.pincode ? ` — PIN ${student.pincode}` : ""}
@@ -1574,10 +1999,14 @@ export default function AdminPage() {
                             const isIpApprox = ev.locationSource === "ip_approximate" || (!hasGps && !hasManual && ev.cityRegion);
 
                             return (
-                              <tr key={ev.id} className="hover:bg-white/[0.02] transition-colors">
+                              <tr key={ev.id} className={`transition-colors ${
+                                student.isOnlineNow
+                                  ? isDark ? "bg-emerald-950/20 hover:bg-emerald-950/30" : "bg-emerald-50 hover:bg-emerald-100/50"
+                                  : isDark ? "hover:bg-white/[0.02]" : "hover:bg-slate-50"
+                              }`}>
                                 {/* Timestamp IST */}
                                 <td className="py-3 px-3 whitespace-nowrap">
-                                  <div className="text-white font-bold">
+                                  <div className={`font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
                                     {visitTime.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
                                   </div>
                                   <div className="text-[11px] text-slate-400">
@@ -1592,7 +2021,7 @@ export default function AdminPage() {
 
                                 {/* Student Name & Visitor ID */}
                                 <td className="py-3 px-3 whitespace-nowrap">
-                                  <div className="font-bold text-white flex items-center gap-1.5">
+                                  <div className={`font-bold flex items-center gap-1.5 ${isDark ? "text-white" : "text-slate-900"}`}>
                                     <span>{ev.studentName}</span>
                                     {student.isOnlineNow && (
                                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
@@ -1671,13 +2100,13 @@ export default function AdminPage() {
 
                                 {/* IP Address & Network */}
                                 <td className="py-3 px-3 whitespace-nowrap">
-                                  <div className="text-slate-200">{ev.ipAddress}</div>
+                                  <div className={isDark ? "text-slate-200" : "text-slate-800 font-medium"}>{ev.ipAddress}</div>
                                   <div className="text-[10px] text-slate-500">{ev.networkType || "Broadband/WiFi"}</div>
                                 </td>
 
                                 {/* Device & Browser */}
                                 <td className="py-3 px-3 whitespace-nowrap">
-                                  <div className="flex items-center gap-1.5 text-slate-200">
+                                  <div className={`flex items-center gap-1.5 ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                                     <span>{ev.deviceType === "mobile" ? "📱" : "💻"}</span>
                                     <span>{ev.operatingSystem}</span>
                                   </div>
@@ -1686,7 +2115,7 @@ export default function AdminPage() {
 
                                 {/* Active Subject & Chapter */}
                                 <td className="py-3 px-3 whitespace-nowrap">
-                                  <span className="px-2 py-0.5 rounded bg-white/5 text-amber-300 font-bold border border-white/10">
+                                  <span className={`px-2 py-0.5 rounded text-amber-500 font-bold border ${isDark ? "bg-white/5 border-white/10" : "bg-amber-50 border-amber-200 text-amber-800"}`}>
                                     {ev.activeSubject.toUpperCase()}
                                   </span>
                                   <div className="text-[10px] text-slate-400 mt-0.5 truncate max-w-[140px]">
@@ -1695,7 +2124,7 @@ export default function AdminPage() {
                                 </td>
 
                                 {/* Duration */}
-                                <td className="py-3 px-3 whitespace-nowrap text-slate-200 font-bold">
+                                <td className={`py-3 px-3 whitespace-nowrap font-bold ${isDark ? "text-slate-200" : "text-slate-800"}`}>
                                   ⏱️ {ev.durationSeconds > 60 ? `${Math.round(ev.durationSeconds / 60)}m` : `${ev.durationSeconds}s`}
                                 </td>
 
@@ -2224,11 +2653,17 @@ export default function AdminPage() {
           onClick={() => setSelectedStudentForModal(null)}
         >
           <div
-            className="relative w-full max-w-4xl bg-[#090d16] border border-teal-500/30 rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
+            className={`relative w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col border ${
+              isDark ? "bg-[#090d16] text-white border-teal-500/30" : "bg-white text-slate-900 border-slate-200"
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Sticky Header */}
-            <div className="p-5 sm:p-6 border-b border-white/10 bg-gradient-to-r from-teal-950/40 via-[#0d1526] to-[#090d16] flex items-center justify-between gap-4 shrink-0">
+            <div className={`p-5 sm:p-6 border-b flex items-center justify-between gap-4 shrink-0 ${
+              isDark
+                ? "border-white/10 bg-gradient-to-r from-teal-950/40 via-[#0d1526] to-[#090d16]"
+                : "border-slate-200 bg-gradient-to-r from-teal-50 via-slate-50 to-white"
+            }`}>
               <div className="flex items-center gap-4 min-w-0">
                 <div className="relative">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500/30 to-cyan-500/20 border-2 border-teal-500/50 flex items-center justify-center text-teal-300 font-black text-xl shadow-lg shadow-teal-950/50">
@@ -2240,7 +2675,7 @@ export default function AdminPage() {
                 </div>
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="text-xl font-black text-white truncate">{selectedStudentForModal.studentName}</h2>
+                    <h2 className={`text-xl font-black truncate ${isDark ? "text-white" : "text-slate-900"}`}>{selectedStudentForModal.studentName}</h2>
                     {selectedStudentForModal.isOnlineNow && (
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
                         ● Active Online
@@ -2270,7 +2705,9 @@ export default function AdminPage() {
 
               <button
                 onClick={() => { playSound("click"); setSelectedStudentForModal(null); }}
-                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors cursor-pointer shrink-0"
+                className={`p-2.5 rounded-xl border transition-colors cursor-pointer shrink-0 ${
+                  isDark ? "bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border-white/10" : "bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 border-slate-200"
+                }`}
                 title="Close (Esc)"
               >
                 <X className="w-5 h-5" />
@@ -2501,7 +2938,9 @@ export default function AdminPage() {
             </div>
 
             {/* Modal Sticky Footer */}
-            <div className="p-4 border-t border-white/10 bg-[#070b14] flex flex-wrap items-center justify-between gap-3 shrink-0">
+            <div className={`p-4 border-t flex flex-wrap items-center justify-between gap-3 shrink-0 ${
+              isDark ? "border-white/10 bg-[#070b14]" : "border-slate-200 bg-slate-50"
+            }`}>
               <div className="text-xs font-mono text-slate-400">
                 Showing all historical telemetry and past visit logs for this cadet.
               </div>
