@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import { areteAudio } from "@/lib/audio";
+import AtomicStructureMasterView from "@/components/AtomicStructureMasterView";
 
 interface ChemistryBasicsMasterViewProps {
   isDark: boolean;
@@ -502,8 +503,8 @@ export default function ChemistryBasicsMasterView({
 }: ChemistryBasicsMasterViewProps) {
   // Navigation sub-tabs within Chemistry Basics
   const [activeTab, setActiveTab] = useState<
-    "criss_cross" | "elements_matrix" | "bonding" | "balancing" | "reactivity" | "observations" | "quiz"
-  >("criss_cross");
+    "atomic_structure" | "criss_cross" | "elements_matrix" | "bonding" | "balancing" | "reactivity" | "observations" | "quiz"
+  >("atomic_structure");
 
   // Criss-Cross Interactive State
   const [selectedCationId, setSelectedCationId] = useState<string>("al");
@@ -752,9 +753,10 @@ export default function ChemistryBasicsMasterView({
         {/* Navigation Tabs Bar */}
         <div className={`flex flex-wrap items-center gap-2 pt-6 mt-6 border-t ${isDark ? "border-white/10" : "border-slate-200"}`}>
           {[
-            { id: "criss_cross", label: "🧪 Criss-Cross Formula Builder", icon: Atom },
+            { id: "atomic_structure", label: "⚛️ Atomic Structure & Shells (0 to Hero)", icon: Atom },
+            { id: "criss_cross", label: "🧪 Criss-Cross Formula Builder", icon: Sparkles },
             { id: "elements_matrix", label: "📊 Elements 1–30 Valency Matrix", icon: Layers },
-            { id: "bonding", label: "⚛️ Ionic vs Covalent Bonding", icon: Compass },
+            { id: "bonding", label: "🧭 Ionic vs Covalent Bonding", icon: Compass },
             { id: "balancing", label: "⚖️ Equation Balancing Mechanics", icon: RefreshCw },
             { id: "reactivity", label: "⚡ Reactivity Series & Simulator", icon: Zap },
             { id: "observations", label: "🎨 Board Lab Colors & Gas Tests", icon: TestTube2 },
@@ -786,6 +788,13 @@ export default function ChemistryBasicsMasterView({
           })}
         </div>
       </div>
+
+      {/* =========================================================================
+          MODULE 0: FOUNDATIONAL ATOMIC STRUCTURE & ELECTRON SHELLS (ZERO TO HERO)
+          ========================================================================= */}
+      {activeTab === "atomic_structure" && (
+        <AtomicStructureMasterView isDark={isDark} />
+      )}
 
       {/* =========================================================================
           MODULE 1: INTERACTIVE CRISS-CROSS FORMULA GENERATOR

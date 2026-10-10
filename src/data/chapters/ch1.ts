@@ -21,11 +21,14 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     correctOption: 2,
     answer: "6",
     steps: [
-      "Step 1: Perform prime factorisation of 144: 144 = 2 * 72 = 2^2 * 36 = 2^3 * 18 = 2^4 * 9 = 2^4 * 3^2.",
-      "Step 2: Identify the exponents of the prime factors: Exponent of 2 is 4; Exponent of 3 is 2.",
-      "Step 3: Sum of exponents = 4 + 2 = 6."
+      "Step 1: Divide by the smallest prime number 2:\n144 = 2 × 72",
+      "Step 2: Continue successive division by 2:\n72 = 2 × 36\n36 = 2 × 18\n18 = 2 × 9",
+      "Step 3: Factorise 9 with prime number 3:\n9 = 3 × 3",
+      "Step 4: Express 144 as a product of prime powers:\n144 = 2 × 2 × 2 × 2 × 3 × 3\n144 = 2⁴ × 3²",
+      "Step 5: Identify the exponents of prime factors:\nExponent of prime 2 is 4\nExponent of prime 3 is 2",
+      "Step 6: Compute the required sum of exponents:\nSum = 4 + 2 = 6"
     ],
-    explanation: "Fundamental Theorem of Arithmetic states that every composite number can be uniquely expressed as a product of powers of primes. The sum of exponents is 4 + 2 = 6.",
+    explanation: "Fundamental Theorem of Arithmetic states that every composite number can be uniquely expressed as a product of powers of primes. Expressing 144 = 2⁴ × 3², the sum of exponents is 4 + 2 = 6.",
     formula: "Composite Number N = p_1^{a_1} * p_2^{a_2} * ... => Sum = a_1 + a_2 + ...",
     examinerNote: "Do not just state the exponent of 2 (which is 4). The question asks for the SUM of all prime factor exponents (4 + 2 = 6).",
     source: "CBSE Board 2020 Standard (Set 30/1/1)"
@@ -310,8 +313,8 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     answer: "Maximum columns = 8; Band members per column = 4, Contingent members per column = 77",
     steps: [
       "Step 1: The maximum number of columns that can divide both 616 and 32 equally is given by HCF(616, 32).",
-      "Step 2: Prime factorisation method:\n32 = 2^5\n616 = 2 * 308 = 2 * 2 * 154 = 2^3 * 77 = 2^3 * 7 * 11",
-      "Step 3: Calculate HCF:\nHCF(616, 32) = 2^3 = 8.",
+      "Step 2: Prime factorise each value:\n32 = 2⁵\nFor 616:\n616 = 2 × 308\n308 = 2 × 154\n154 = 2 × 77\n77 = 7 × 11\nTherefore, 616 = 2³ × 7 × 11",
+      "Step 3: Calculate HCF:\nHCF(616, 32) = 2³ = 8.",
       "Step 4: Maximum number of columns = 8 columns.",
       "Step 5: Number of band members in each column:\n32 / 8 = 4 members per column.",
       "Step 6: Number of contingent members in each column:\n616 / 8 = 77 members per column.",

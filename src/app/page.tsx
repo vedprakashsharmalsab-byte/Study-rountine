@@ -58,6 +58,10 @@ const SyllabusHubView = dynamic(
   () => import("@/components/SyllabusHubView"),
   { loading: TabSkeleton, ssr: false }
 );
+const QuotesVaultView = dynamic(
+  () => import("@/components/QuotesVaultView"),
+  { loading: TabSkeleton, ssr: false }
+);
 import CommandCenterHomeView from "@/components/CommandCenterHomeView";
 import AreteAccessGateModal, {
   StudentProfile,
@@ -125,6 +129,7 @@ import {
   Settings,
   Laptop,
   BarChart3,
+  Quote,
 } from "lucide-react";
 
 import {
@@ -657,12 +662,16 @@ const DEFAULT_MISTAKE_LOGS = [
 // Eliminates root-level re-renders: runs on 0% CPU on 2GB/4GB RAM machines
 // =========================================================================
 function getPrecisionCountdown(targetDateString: string) {
-  const target = new Date(targetDateString + "T09:00:00").getTime();
+  // Support explicit IST (UTC+05:30) to eliminate timezone ambiguity and hydration drift
+  const isoStr = targetDateString.includes("T")
+    ? targetDateString
+    : `${targetDateString}T09:00:00+05:30`;
+  const target = new Date(isoStr).getTime();
   const diff = target - Date.now();
-  if (diff <= 0) return { days: 0, hours: 0, mins: 0, secs: 0, isPassed: true };
+  if (diff <= 0 || isNaN(diff)) return { days: 0, hours: 0, mins: 0, secs: 0, isPassed: true };
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((diff % (1000 * 60)) / (1000 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   const secs = Math.floor((diff % (1000 * 60)) / 1000);
   return { days, hours, mins, secs, isPassed: false };
 }
@@ -782,7 +791,7 @@ export const LiveCountdown = React.memo(function LiveCountdown({
   );
 });
 
-// Dynamic Top Header Countdown: dual-timer featuring upcoming 21 Oct Milestone and Feb 1 Boards
+// Dynamic Top Header Countdown: dual-timer featuring upcoming 26 Oct Milestone and Feb 1 Boards
 export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
   isDark
 }: {
@@ -791,8 +800,8 @@ export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
   return (
     <div className="flex items-center gap-2 sm:gap-2.5 font-mono text-[11px] leading-none">
       <div className="flex items-center gap-1.5">
-        <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 21 Oct:</span>
-        <LiveCountdown targetDate="2026-10-21" variant="badge" colorScheme="amber" isDark={isDark} />
+        <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 26 Oct:</span>
+        <LiveCountdown targetDate="2026-10-26" variant="badge" colorScheme="amber" isDark={isDark} />
       </div>
       <span className={`opacity-25 select-none leading-none ${isDark ? "text-white" : "text-slate-900"}`}>|</span>
       <div className="flex items-center gap-1.5">
@@ -1028,14 +1037,14 @@ export default function CBSECommandCenter() {
     "chapter_dashboard", "concepts", "theorems", "activities", "questions",
     "mnemonics", "flashcards", "common_mistakes", "test_series", "today",
     "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap",
-    "timelines", "english", "hindi", "tools_diagrams", "chemistry_basics", "settings"
+    "timelines", "english", "hindi", "tools_diagrams", "chemistry_basics", "quotes", "settings"
   ], []);
 
-  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams" | "chemistry_basics" | "settings">(() => {
+  const [activeTab, setActiveTab] = useState<"chapter_dashboard" | "concepts" | "theorems" | "activities" | "questions" | "mnemonics" | "flashcards" | "common_mistakes" | "test_series" | "today" | "syllabus" | "experiments" | "reactions" | "diagrams" | "hots" | "roadmap" | "timelines" | "english" | "hindi" | "tools_diagrams" | "chemistry_basics" | "quotes" | "settings">(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const urlTab = params.get("tab");
-      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams", "chemistry_basics", "settings"];
+      const validTabs = ["chapter_dashboard", "concepts", "theorems", "activities", "questions", "mnemonics", "flashcards", "common_mistakes", "test_series", "today", "syllabus", "experiments", "reactions", "diagrams", "hots", "roadmap", "timelines", "english", "hindi", "tools_diagrams", "chemistry_basics", "quotes", "settings"];
       if (urlTab && validTabs.includes(urlTab)) {
         return urlTab as any;
       }
@@ -1675,7 +1684,7 @@ export default function CBSECommandCenter() {
     if (["chapter_dashboard", "today", "test_series", "syllabus", "roadmap"].includes(activeTab)) return "command";
     if (["concepts", "english", "hindi", "timelines", "theorems", "reactions", "activities", "experiments", "diagrams", "chemistry_basics"].includes(activeTab)) return "concepts";
     if (["questions", "hots"].includes(activeTab)) return "practice";
-    if (["mnemonics", "flashcards", "common_mistakes", "tools_diagrams"].includes(activeTab)) return "tools";
+    if (["mnemonics", "flashcards", "common_mistakes", "tools_diagrams", "quotes"].includes(activeTab)) return "tools";
     return "command";
   }, [activeTab]);
 
@@ -1743,6 +1752,7 @@ export default function CBSECommandCenter() {
         { id: "tools_diagrams", label: "NCERT Diagrams", icon: Compass, count: "29 HD" },
         { id: "mnemonics", label: "Visual Mnemonics", icon: Sparkles, count: "49 Maps" },
         { id: "flashcards", label: "Flashcards Deck", icon: BookMarked },
+        { id: "quotes", label: "Scholarly Quotes Vault", icon: Quote, count: "804 Verified" },
         { id: "common_mistakes", label: "My Mistakes", icon: AlertTriangle },
       ]
     }
@@ -3164,7 +3174,7 @@ export default function CBSECommandCenter() {
                   playSound("click");
                   setIsAllModulesModalOpen(true);
                 }}
-                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border ${
+                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer hidden md:flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border ${
                   isDark
                     ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
                     : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200 shadow-xs"
@@ -3417,7 +3427,7 @@ export default function CBSECommandCenter() {
                   <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400">
                     <LayoutGrid className="w-5 h-5" />
                   </div>
-                  <h2 className="text-base sm:text-xl font-black">All 18 CBSE Learning Modules</h2>
+                  <h2 className="text-base sm:text-xl font-black">All 19 CBSE Learning Modules</h2>
                 </div>
                 <p className="text-xs text-slate-400">
                   Instant launchpad to every vault, theory hub, revision engine, and exam planner.
@@ -3479,6 +3489,7 @@ export default function CBSECommandCenter() {
                   items: [
                     { id: "mnemonics", label: "Visual Mnemonics Hub", sub: "49 Infographic Cheat Sheets", icon: Sparkles, color: "text-purple-400 bg-purple-500/15" },
                     { id: "flashcards", label: "Flashcards Engine", sub: "Spaced Repetition Active Recall", icon: BookMarked, color: "text-blue-400 bg-blue-500/15" },
+                    { id: "quotes", label: "Scholarly Quotes Vault", sub: "804 Authentic Primary Quotes with Citations", icon: Quote, color: "text-purple-400 bg-purple-500/15" },
                     { id: "common_mistakes", label: "My Mistakes Error Log", sub: "Examiner Pitfalls & Deduction Traps", icon: AlertTriangle, color: "text-rose-400 bg-rose-500/15" }
                   ]
                 },
@@ -3649,10 +3660,10 @@ export default function CBSECommandCenter() {
         {activeTab === "test_series" && (
           <div className="space-y-5 sm:space-y-6 animate-fade-in">
             
-            {/* HERO DUAL COUNTDOWN CARDS: 21 OCT 2026 BENCHMARK & 1 FEB 2027 CBSE BOARDS */}
+            {/* HERO DUAL COUNTDOWN CARDS: 26 OCT 2026 BENCHMARK & 1 FEB 2027 CBSE BOARDS */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
 
-              {/* CARD 1: 21 OCT 2026 PRE-BOARD PHASE 1 / TEST SERIES II */}
+              {/* CARD 1: 26 OCT 2026 PRE-BOARD PHASE 1 / TEST SERIES II */}
               <div className={`relative p-5 sm:p-7 rounded-3xl border transition-all overflow-hidden apple-card-hover ${
                 isDark
                   ? "bg-gradient-to-br from-[#1c1203] via-[#161006] to-[#0a0a0d] border-amber-500/40 shadow-[0_12px_40px_rgba(245,158,11,0.15)]"
@@ -3667,7 +3678,7 @@ export default function CBSECommandCenter() {
                       ? "bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]" 
                       : "bg-amber-100 text-amber-950 border-amber-400 font-bold"
                   }`}>
-                    ⚡ PRE-BOARD PHASE 1 • OCT 21, 2026
+                    ⚡ PRE-BOARD PHASE 1 • OCT 26, 2026
                   </span>
                   <span className={`text-xs font-mono font-black flex items-center gap-1.5 leading-none ${
                     isDark ? "text-amber-400" : "text-amber-800"
@@ -3679,7 +3690,7 @@ export default function CBSECommandCenter() {
 
                 <h3 className={`text-xl sm:text-2xl font-black tracking-tight mb-1 relative z-10 flex flex-wrap items-baseline gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
                   <span>Phase 1 Milestone:</span>
-                  <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Oct 21, 2026</span>
+                  <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Oct 26, 2026</span>
                 </h3>
 
                 <p className={`text-xs mb-4 relative z-10 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
@@ -3688,7 +3699,7 @@ export default function CBSECommandCenter() {
 
                 {/* 4-BLOCK COUNTDOWN TIMER */}
                 <div className="relative z-10 mb-4">
-                  <LiveCountdown targetDate="2026-10-21" variant="card-grid" colorScheme="amber" isDark={isDark} />
+                  <LiveCountdown targetDate="2026-10-26" variant="card-grid" colorScheme="amber" isDark={isDark} />
                 </div>
 
                 {/* PROGRESS / READINESS BAR */}
@@ -4511,6 +4522,11 @@ export default function CBSECommandCenter() {
               setActiveTab("concepts");
             }}
           />
+        )}
+
+        {/* ===================== TAB: SCHOLARLY QUOTES ARCHIVE (804 VERIFIED) ===================== */}
+        {activeTab === "quotes" && (
+          <QuotesVaultView isDark={isDark} />
         )}
 
         {/* ===================== TAB: SST TIMELINES MASTER & CHRONOLOGY GAME ===================== */}
