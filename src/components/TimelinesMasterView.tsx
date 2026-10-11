@@ -315,6 +315,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
           HERO BANNER: SMART STUDY TIMELINES MASTER
           ========================================================================= */}
       <div
+        id="tutorial-tools-vault"
         className={`p-6 sm:p-8 rounded-3xl border relative overflow-hidden transition-all shadow-xl ${
           isDark
             ? "bg-gradient-to-br from-[#0c1322] via-[#09111e] to-[#121b2d] border-amber-500/30 shadow-[0_8px_32px_rgba(245,158,11,0.12)]"

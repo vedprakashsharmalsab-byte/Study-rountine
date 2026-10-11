@@ -6,15 +6,15 @@ import {
   Clock,
   Sparkles,
   Target,
-  AlertCircle,
   CheckCircle2,
   Settings,
   ChevronDown,
   ChevronUp,
   Flame,
   Award,
+  Globe,
   Zap,
-  Globe
+  ArrowRight
 } from "lucide-react";
 
 interface Class10ExamCountdownProps {
@@ -25,11 +25,9 @@ interface Class10ExamCountdownProps {
   collapsible?: boolean;
 }
 
-// Default target: 26 October 2026 at 10:30 AM IST (Official CBSE Board Exam Session)
-const DEFAULT_TARGET_DATE_STR = "26 October 2026";
 const TIMEZONE_LABEL = "Asia/Kolkata (IST • UTC+05:30)";
 
-interface CountdownBreakdown {
+export interface CountdownBreakdown {
   days: number;
   hours: number;
   minutes: number;
@@ -39,7 +37,7 @@ interface CountdownBreakdown {
   isToday: boolean;
 }
 
-function calculateTimeRemaining(targetIsoString: string): CountdownBreakdown {
+export function calculateTimeRemaining(targetIsoString: string): CountdownBreakdown {
   const targetTimeMs = new Date(targetIsoString).getTime();
   const nowMs = Date.now();
   const diffMs = targetTimeMs - nowMs;
@@ -58,15 +56,15 @@ function calculateTimeRemaining(targetIsoString: string): CountdownBreakdown {
 
   const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+  const minutes = Math.floor((diffMs % (1000 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diffMs % 1000) / 1000);
   const totalSeconds = Math.floor(diffMs / 1000);
 
   return {
     days,
     hours,
     minutes,
-    seconds,
+    seconds: Math.floor((diffMs / 1000) % 60),
     totalSeconds,
     isPassed: false,
     isToday: days === 0
@@ -85,60 +83,87 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
   const [showConfig, setShowConfig] = useState<boolean>(false);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
-  // Target ISO anchored to Asia/Kolkata (+05:30)
-  const targetIsoString = useMemo(() => {
-    return `2026-10-26T${selectedExamTime}:00+05:30`;
+  // Dual Targets: "oct_milestone" (Oct 15, 2026) vs "feb_boards" (Feb 1, 2027)
+  const [activeTarget, setActiveTarget] = useState<"oct_milestone" | "feb_boards">("oct_milestone");
+
+  // Target ISO strings anchored to Asia/Kolkata (+05:30)
+  const octIsoString = useMemo(() => {
+    return `2026-10-15T${selectedExamTime}:00+05:30`;
   }, [selectedExamTime]);
 
-  const [countdown, setCountdown] = useState<CountdownBreakdown>(() => {
-    return calculateTimeRemaining(targetIsoString);
-  });
+  const febIsoString = useMemo(() => {
+    return `2027-02-01T09:00:00+05:30`;
+  }, []);
+
+  const [octCountdown, setOctCountdown] = useState<CountdownBreakdown>(() => calculateTimeRemaining(octIsoString));
+  const [febCountdown, setFebCountdown] = useState<CountdownBreakdown>(() => calculateTimeRemaining(febIsoString));
 
   useEffect(() => {
-    setCountdown(calculateTimeRemaining(targetIsoString));
+    const update = () => {
+      const oct = calculateTimeRemaining(octIsoString);
+      const feb = calculateTimeRemaining(febIsoString);
+      setOctCountdown(oct);
+      setFebCountdown(feb);
 
-    const interval = setInterval(() => {
-      const updated = calculateTimeRemaining(targetIsoString);
-      setCountdown(updated);
-      if (updated.isPassed && onTargetReached) {
-        onTargetReached();
+      // Smart Thinking Power & Auto-Termination:
+      // If October 15 target has passed, automatically roll over focus to Feb 1, 2027 Boards!
+      if (oct.isPassed && activeTarget === "oct_milestone") {
+        setActiveTarget("feb_boards");
+        if (onTargetReached) onTargetReached();
       }
-    }, 1000);
+    };
 
+    update();
+    const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
-  }, [targetIsoString, onTargetReached]);
+  }, [octIsoString, febIsoString, activeTarget, onTargetReached]);
 
   const padNumber = (n: number) => (n < 10 ? `0${n}` : `${n}`);
+
+  const activeCountdown = activeTarget === "oct_milestone" ? octCountdown : febCountdown;
+  const activeDateTitle = activeTarget === "oct_milestone" ? "15 October 2026" : "1 February 2027";
+  const activeMilestoneLabel = activeTarget === "oct_milestone" 
+    ? "Pre-Board Phase 1 • Mid-Term Sprint" 
+    : "Official CBSE Class 10 Board Exams";
 
   // Preparedness completion estimate relative to start of Class 10 academic session (April 1, 2026)
   const progressPercent = useMemo(() => {
     const sessionStart = new Date("2026-04-01T00:00:00+05:30").getTime();
-    const examTarget = new Date(targetIsoString).getTime();
-    const totalDuration = examTarget - sessionStart;
+    const targetMs = new Date(activeTarget === "oct_milestone" ? octIsoString : febIsoString).getTime();
+    const totalDuration = targetMs - sessionStart;
     const elapsed = Date.now() - sessionStart;
     if (elapsed <= 0) return 0;
     if (elapsed >= totalDuration) return 100;
     return Math.min(100, Math.max(0, Math.round((elapsed / totalDuration) * 100)));
-  }, [targetIsoString]);
+  }, [activeTarget, octIsoString, febIsoString]);
 
   // COMPACT CAPSULE VARIANT (for top navbars / headers)
   if (variant === "compact") {
     return (
       <div className={`flex items-center gap-1.5 sm:gap-2 font-mono text-xs tabular-nums select-none ${className}`}>
-        <span className={`px-2.5 py-1 rounded-full border flex items-center gap-1.5 font-bold shadow-xs ${
-          isDark
-            ? "bg-amber-500/15 border-amber-500/40 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]"
-            : "bg-amber-100 border-amber-300 text-amber-950 shadow-2xs"
-        }`}>
+        <button
+          type="button"
+          onClick={() => setActiveTarget(activeTarget === "oct_milestone" ? "feb_boards" : "oct_milestone")}
+          className={`px-2.5 py-1 rounded-full border flex items-center gap-1.5 font-bold shadow-xs transition-all cursor-pointer active:scale-95 ${
+            isDark
+              ? "bg-amber-500/15 border-amber-500/40 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]"
+              : "bg-amber-100 border-amber-300 text-amber-950 shadow-2xs"
+          }`}
+          title="Click to toggle between Oct 15 Milestone and Feb 1 Boards"
+        >
           <Flame className="w-3.5 h-3.5 text-amber-500 animate-pulse shrink-0" />
-          <span className="font-extrabold text-[11px] sm:text-xs">26 Oct Exam:</span>
-          <span>{countdown.days}d {padNumber(countdown.hours)}h {padNumber(countdown.minutes)}m {padNumber(countdown.seconds)}s</span>
-        </span>
+          <span className="font-extrabold text-[11px] sm:text-xs">
+            {activeTarget === "oct_milestone" ? "15 Oct:" : "1 Feb Boards:"}
+          </span>
+          <span>
+            {activeCountdown.days}d {padNumber(activeCountdown.hours)}h {padNumber(activeCountdown.minutes)}m {padNumber(activeCountdown.seconds)}s
+          </span>
+        </button>
       </div>
     );
   }
 
-  // COLLAPSED BAR VARIANT (When user chooses to minimize the main hero banner)
+  // COLLAPSED BAR VARIANT
   if (isCollapsed) {
     return (
       <div className={`w-full p-2.5 sm:p-3 rounded-2xl border transition-all flex items-center justify-between gap-3 shadow-md ${
@@ -151,10 +176,10 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
             <Flame className="w-3.5 h-3.5 animate-pulse" />
           </span>
           <span className="text-xs sm:text-sm font-black truncate">
-            Class 10 Exam Countdown (26 Oct 2026):
+            {activeDateTitle} ({activeMilestoneLabel}):
           </span>
           <span className="font-mono text-xs sm:text-sm font-bold tabular-nums">
-            {countdown.days}d {padNumber(countdown.hours)}h {padNumber(countdown.minutes)}m {padNumber(countdown.seconds)}s
+            {activeCountdown.days}d {padNumber(activeCountdown.hours)}h {padNumber(activeCountdown.minutes)}m {padNumber(activeCountdown.seconds)}s
           </span>
         </div>
         <button
@@ -171,10 +196,10 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
     );
   }
 
-  // HERO COUNTDOWN VIEW — DUAL 9:16 (SMARTPHONE) & 16:9 (LAPTOP) PERFECTION
+  // HERO COUNTDOWN VIEW — DUAL TARGETS WITH SMART THINKING & REAL-TIME PROGRESS
   return (
     <section
-      aria-label="Class 10 Exam Countdown"
+      aria-label="Class 10 Dual Exam Countdown"
       className={`w-full rounded-3xl border transition-all duration-300 relative overflow-hidden shadow-2xl ${
         isDark
           ? "bg-gradient-to-br from-[#191102] via-[#0f0b03] to-[#07070a] border-amber-500/35 shadow-[0_16px_50px_rgba(245,158,11,0.18)]"
@@ -187,20 +212,47 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
 
       <div className="p-4 sm:p-6 md:p-8 relative z-10 space-y-4 sm:space-y-6">
 
-        {/* TOP ROW: BADGES, MAIN TITLES, TIMEZONE & CONTROLS */}
+        {/* TOP ROW: DUAL-TIMER TOGGLE PILLS, TIMEZONE & CONTROLS */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 border-b pb-4 sm:pb-5 border-amber-500/20">
           
-          {/* Left: High-Contrast Heading & Target Date */}
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              <span className={`px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider border shadow-xs inline-flex items-center gap-1.5 leading-none ${
-                isDark
-                  ? "bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.25)]"
-                  : "bg-amber-200/90 text-amber-950 border-amber-400 font-extrabold"
-              }`}>
-                <Flame className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500 animate-pulse shrink-0" />
-                <span>OFFICIAL CLASS 10 EXAM COUNTDOWN</span>
-              </span>
+              {/* TARGET 1: 15 OCT 2026 MILESTONE */}
+              <button
+                type="button"
+                onClick={() => setActiveTarget("oct_milestone")}
+                className={`px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider border transition-all cursor-pointer flex items-center gap-1.5 shadow-xs ${
+                  activeTarget === "oct_milestone"
+                    ? isDark
+                      ? "bg-amber-500 text-slate-950 border-amber-400 font-extrabold shadow-[0_0_15px_rgba(245,158,11,0.4)]"
+                      : "bg-amber-500 text-slate-950 border-amber-500 font-extrabold shadow-sm"
+                    : isDark
+                    ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white"
+                    : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                <Flame className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                <span>⚡ 15 Oct 2026 (Syllabus Sprint)</span>
+                {octCountdown.isPassed && <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/30 text-emerald-300">Conquered</span>}
+              </button>
+
+              {/* TARGET 2: 1 FEB 2027 BOARDS */}
+              <button
+                type="button"
+                onClick={() => setActiveTarget("feb_boards")}
+                className={`px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider border transition-all cursor-pointer flex items-center gap-1.5 shadow-xs ${
+                  activeTarget === "feb_boards"
+                    ? isDark
+                      ? "bg-cyan-500 text-slate-950 border-cyan-400 font-extrabold shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                      : "bg-cyan-600 text-white border-cyan-700 font-extrabold shadow-sm"
+                    : isDark
+                    ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white"
+                    : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                <Target className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                <span>🎯 1 Feb 2027 (CBSE Boards)</span>
+              </button>
 
               <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold border inline-flex items-center gap-1 ${
                 isDark ? "bg-white/5 border-white/10 text-zinc-300" : "bg-slate-100 border-slate-300 text-slate-700"
@@ -212,39 +264,47 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
 
             <div className="flex items-baseline gap-2 sm:gap-3 flex-wrap">
               <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-                Time Left Until Exams
+                {activeTarget === "oct_milestone" ? "Time Left to 15 Oct Milestone" : "Time Left to CBSE Board Exams"}
               </h2>
-              <span className={`text-xs sm:text-sm font-semibold font-mono ${isDark ? "text-amber-400/90" : "text-amber-700"}`}>
-                (Class 10 Exam Countdown)
+              <span className={`text-xs sm:text-sm font-semibold font-mono ${
+                activeTarget === "oct_milestone" ? "text-amber-400" : "text-cyan-400"
+              }`}>
+                ({activeMilestoneLabel})
               </span>
             </div>
 
             <p className={`text-xs sm:text-sm leading-relaxed flex items-center gap-1.5 flex-wrap ${isDark ? "text-zinc-300" : "text-slate-700"}`}>
-              <span>Target Examination Date:</span>
+              <span>Active Target:</span>
               <strong className="text-amber-500 dark:text-amber-300 font-black underline decoration-amber-500/50 tracking-wide text-xs sm:text-sm">
-                {DEFAULT_TARGET_DATE_STR}
+                {activeDateTitle}
               </strong>
               <span>at</span>
-              <strong className="font-mono text-xs sm:text-sm">{selectedExamTime} AM IST</strong>
-              <span className="text-[11px] opacity-75">(Standard CBSE Session Start)</span>
+              <strong className="font-mono text-xs sm:text-sm">
+                {activeTarget === "oct_milestone" ? `${selectedExamTime} AM IST` : "09:00 AM IST"}
+              </strong>
+              <span className="text-[11px] opacity-75">
+                {activeTarget === "oct_milestone" ? "(Test Series II Phase)" : "(Official Annual Session)"}
+              </span>
             </p>
           </div>
 
           {/* Right: Quick Action Controls */}
           <div className="flex items-center gap-2 self-start lg:self-center shrink-0">
-            <button
-              onClick={() => setShowConfig(!showConfig)}
-              className={`px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 ${
-                isDark
-                  ? "bg-white/5 hover:bg-white/10 border-white/10 text-zinc-200"
-                  : "bg-white hover:bg-slate-50 border-slate-300 text-slate-700 shadow-2xs"
-              }`}
-              title="Change Examination Time"
-            >
-              <Settings className="w-3.5 h-3.5 text-amber-400" />
-              <span>Exam Time</span>
-              <ChevronDown className={`w-3 h-3 transition-transform ${showConfig ? "rotate-180" : ""}`} />
-            </button>
+            {activeTarget === "oct_milestone" && (
+              <button
+                onClick={() => setShowConfig(!showConfig)}
+                className={`px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 ${
+                  isDark
+                    ? "bg-white/5 hover:bg-white/10 border-white/10 text-zinc-200"
+                    : "bg-white hover:bg-slate-50 border-slate-300 text-slate-700 shadow-2xs"
+                }`}
+                title="Change Examination Session Time"
+              >
+                <Settings className="w-3.5 h-3.5 text-amber-400" />
+                <span>Time Config</span>
+                <ChevronDown className={`w-3 h-3 transition-transform ${showConfig ? "rotate-180" : ""}`} />
+              </button>
+            )}
 
             {collapsible && (
               <button
@@ -260,8 +320,8 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
           </div>
         </div>
 
-        {/* TIME CONFIGURATION DRAWER (SMOOTH POPDOWN) */}
-        {showConfig && (
+        {/* TIME CONFIGURATION DRAWER */}
+        {showConfig && activeTarget === "oct_milestone" && (
           <div className={`p-3.5 sm:p-4 rounded-2xl border animate-fade-in ${
             isDark ? "bg-black/60 border-amber-500/30 text-zinc-200" : "bg-white/95 border-amber-200 text-slate-800 shadow-sm"
           }`}>
@@ -269,7 +329,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
               <div className="space-y-0.5">
                 <span className="text-xs font-bold block">Configurable Examination Session Start Time:</span>
                 <span className="text-[11px] opacity-75">
-                  CBSE exams traditionally commence at 10:30 AM IST. Select your specific batch time if different:
+                  Select your specific batch session time if different:
                 </span>
               </div>
               <div className="flex items-center gap-1.5 flex-wrap">
@@ -302,22 +362,32 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
           </div>
         )}
 
-        {/* MAIN 4-SQUIRCLE COUNTDOWN TILES (OPTIMIZED FOR 9:16 AND 16:9) */}
-        {countdown.isPassed ? (
+        {/* MAIN 4-SQUIRCLE COUNTDOWN TILES */}
+        {activeCountdown.isPassed ? (
           <div className={`p-6 sm:p-8 rounded-3xl border text-center animate-fade-in ${
             isDark ? "bg-emerald-950/40 border-emerald-500/50 text-emerald-300" : "bg-emerald-50 border-emerald-300 text-emerald-950"
           }`}>
             <CheckCircle2 className="w-8 h-8 text-emerald-400 animate-bounce mx-auto mb-2" />
             <h3 className="text-xl sm:text-2xl font-black">
-              Class 10 Board Examinations Have Commenced!
+              {activeDateTitle} Milestone Has Commenced!
             </h3>
             <p className="text-xs sm:text-sm max-w-md mx-auto mt-1 opacity-90">
-              The target timestamp of 26 October 2026 has been reached. Step into the examination hall with total clarity, confidence, and calm!
+              Target date reached with total focus! Transitioning into active examination mode.
             </p>
+            {activeTarget === "oct_milestone" && (
+              <button
+                type="button"
+                onClick={() => setActiveTarget("feb_boards")}
+                className="mt-3 px-4 py-2 rounded-xl text-xs font-black bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-all cursor-pointer inline-flex items-center gap-1.5"
+              >
+                <span>Switch to 1 Feb 2027 CBSE Boards Countdown</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
         ) : (
           <div className="space-y-4 sm:space-y-5">
-            {/* 4-BLOCK GRID: 4 COLUMNS ON ALL SCREENS (9:16 MOBILE & 16:9 DESKTOP) */}
+            {/* 4-BLOCK GRID: 4 COLUMNS ON ALL SCREENS */}
             <div className="grid grid-cols-4 gap-1.5 sm:gap-3 md:gap-4 lg:gap-5 font-mono text-center">
               
               {/* DAYS TILE */}
@@ -326,8 +396,10 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
                   ? "bg-gradient-to-b from-white/[0.08] to-white/[0.02] border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.12),0_8px_24px_rgba(0,0,0,0.4)]"
                   : "bg-gradient-to-b from-amber-100/95 to-amber-50/70 border-amber-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_4px_16px_rgba(245,158,11,0.12)]"
               }`}>
-                <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-amber-500 dark:text-amber-400 drop-shadow-sm tabular-nums leading-none">
-                  {countdown.days}
+                <div className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight drop-shadow-sm tabular-nums leading-none ${
+                  activeTarget === "oct_milestone" ? "text-amber-500 dark:text-amber-400" : "text-cyan-500 dark:text-cyan-400"
+                }`}>
+                  {activeCountdown.days}
                 </div>
                 <div className={`text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider mt-1 sm:mt-1.5 ${
                   isDark ? "text-zinc-300 group-hover:text-amber-300" : "text-amber-950"
@@ -345,8 +417,10 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
                   ? "bg-gradient-to-b from-white/[0.08] to-white/[0.02] border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.12),0_8px_24px_rgba(0,0,0,0.4)]"
                   : "bg-gradient-to-b from-amber-100/95 to-amber-50/70 border-amber-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_4px_16px_rgba(245,158,11,0.12)]"
               }`}>
-                <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-amber-500 dark:text-amber-400 drop-shadow-sm tabular-nums leading-none">
-                  {padNumber(countdown.hours)}
+                <div className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight drop-shadow-sm tabular-nums leading-none ${
+                  activeTarget === "oct_milestone" ? "text-amber-500 dark:text-amber-400" : "text-cyan-500 dark:text-cyan-400"
+                }`}>
+                  {padNumber(activeCountdown.hours)}
                 </div>
                 <div className={`text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider mt-1 sm:mt-1.5 ${
                   isDark ? "text-zinc-300 group-hover:text-amber-300" : "text-amber-950"
@@ -364,8 +438,10 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
                   ? "bg-gradient-to-b from-white/[0.08] to-white/[0.02] border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.12),0_8px_24px_rgba(0,0,0,0.4)]"
                   : "bg-gradient-to-b from-amber-100/95 to-amber-50/70 border-amber-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_4px_16px_rgba(245,158,11,0.12)]"
               }`}>
-                <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-amber-500 dark:text-amber-400 drop-shadow-sm tabular-nums leading-none">
-                  {padNumber(countdown.minutes)}
+                <div className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight drop-shadow-sm tabular-nums leading-none ${
+                  activeTarget === "oct_milestone" ? "text-amber-500 dark:text-amber-400" : "text-cyan-500 dark:text-cyan-400"
+                }`}>
+                  {padNumber(activeCountdown.minutes)}
                 </div>
                 <div className={`text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider mt-1 sm:mt-1.5 ${
                   isDark ? "text-zinc-300 group-hover:text-amber-300" : "text-amber-950"
@@ -384,7 +460,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
                   : "bg-gradient-to-b from-amber-200/95 to-amber-100/70 border-amber-400 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_4px_20px_rgba(245,158,11,0.2)]"
               }`}>
                 <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-orange-500 dark:text-orange-400 drop-shadow-md tabular-nums leading-none">
-                  {padNumber(countdown.seconds)}
+                  {padNumber(activeCountdown.seconds)}
                 </div>
                 <div className={`text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider mt-1 sm:mt-1.5 flex items-center justify-center gap-1 ${
                   isDark ? "text-orange-400" : "text-orange-950"
@@ -405,7 +481,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
                 <span className="text-xs font-semibold">
-                  Class 10 Prep Progress: <strong className="font-mono text-amber-500">{progressPercent}%</strong>
+                  {activeMilestoneLabel} Progress: <strong className="font-mono text-amber-500">{progressPercent}%</strong>
                 </span>
               </div>
 

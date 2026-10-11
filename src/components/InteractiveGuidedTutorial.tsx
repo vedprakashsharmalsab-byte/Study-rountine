@@ -15,7 +15,10 @@ import {
   Flame,
   Volume2,
   Compass,
-  GraduationCap
+  GraduationCap,
+  Clock,
+  Zap,
+  CheckCircle2
 } from "lucide-react";
 
 export interface TutorialStep {
@@ -25,96 +28,108 @@ export interface TutorialStep {
   description: string;
   icon: React.ComponentType<{ className?: string }>;
   badgeText: string;
-  preferredPlacement?: "bottom" | "top" | "center";
+  tab?: string;
+  preferredPlacement?: "bottom" | "top" | "center" | "beside";
+  showLiveTimer?: boolean;
 }
 
 const TUTORIAL_STEPS: TutorialStep[] = [
   {
     id: "welcome",
+    tab: "chapter_dashboard",
     selector: "#tutorial-brand-header",
-    title: "Welcome to ARETĒ CBSE Class 10 Command Engine",
-    description: "Your unified board examination command center for Class 10 (2026–2027). Fully aligned with official NCERT syllabi, step-by-step marking schemes, and leveled practice vaults across all subjects.",
+    title: "ARETĒ CBSE Command Engine (Class 10 2026–2027)",
+    description: "Welcome Cadet! This unified cockpit powers your entire Class 10 preparation with NCERT-aligned theory, authentic CBSE board vault questions, formula sheets, and real-time progress tracking.",
     icon: GraduationCap,
-    badgeText: "System Overview",
+    badgeText: "Command Cockpit",
     preferredPlacement: "bottom"
   },
   {
     id: "countdown",
+    tab: "chapter_dashboard",
     selector: "#tutorial-countdown-banner, #tutorial-countdown-capsule",
-    title: "Class 10 Exam Countdown — 26 October 2026",
-    description: "Real-time, live countdown ticking down to your upcoming examinations on 26 October 2026 in Asia/Kolkata timezone (+05:30). Keeps you focused on your target date every second.",
+    title: "Dual Milestone Exam Timers (15 Oct Sprint & 1 Feb Boards)",
+    description: "Live real-time dual countdown tracking both your upcoming 15 Oct 2026 Mid-Term Sprint and the Official CBSE Class 10 Board Examinations (1 Feb 2027) with smart auto-termination.",
     icon: Calendar,
-    badgeText: "Target Milestone",
+    badgeText: "Dual Exam Timers",
+    preferredPlacement: "bottom",
+    showLiveTimer: true
+  },
+  {
+    id: "chapter-progress",
+    tab: "chapter_dashboard",
+    selector: "#tutorial-chapter-progress",
+    title: "Dynamic Syllabus Mastery & Real-Time Progress Bar",
+    description: "Right next to your greeting, this live progress bar tracks your syllabus completion across all chapters. As you tick off topics, it updates in real time with instant percentage and XP rewards.",
+    icon: Sparkles,
+    badgeText: "Live Progress Bar",
+    preferredPlacement: "bottom"
+  },
+  {
+    id: "chapter-checklist",
+    tab: "chapter_dashboard",
+    selector: "#tutorial-chapter-checklist",
+    title: "NCERT Topic Checklist Runway (+25 XP per Topic)",
+    description: "Mark concepts and chapter topics as completed. Each completed topic awards +25 XP directly to your Cadet rank and immediately recalculates your chapter mastery.",
+    icon: Zap,
+    badgeText: "Topic Runway",
     preferredPlacement: "bottom"
   },
   {
     id: "nav-tabs",
     selector: "#tutorial-nav-tabs, #tutorial-nav-dock-mobile",
-    title: "All Modules Navigation Hub",
-    description: "Switch seamlessly between the Chapter Dashboard, NCERT Concept Hub, CBSE Practice Vault, Historical Timelines, and Competitive HOTS without losing your study progress.",
+    title: "Navigation Hub & Quick Launcher (⌘K)",
+    description: "Switch seamlessly across the 4 core workspaces: Command Dashboard, NCERT Concept Hub, CBSE Practice Vault, and Tools & Memory. Press ⌘K or click 'All Modules' anytime to search all 16 tools.",
     icon: Layers,
-    badgeText: "Navigation",
-    preferredPlacement: "bottom"
-  },
-  {
-    id: "all-modules",
-    selector: "#tutorial-all-modules-btn, #tutorial-all-modules-btn-mobile",
-    title: "Full Module Directory & Quick Launcher (⌘K)",
-    description: "Click 'All Modules' or press ⌘K anytime to access all 16 specialized modules including Geometry Proofs, Chemistry Reactions, and Formula Vaults.",
-    icon: Compass,
-    badgeText: "Module Directory",
+    badgeText: "Navigation Hub",
     preferredPlacement: "bottom"
   },
   {
     id: "concepts",
-    selector: "#tutorial-concepts-tab, #tutorial-concepts-tab-mobile",
-    title: "NCERT Concept Hub — Deep Theory & Board Traps",
-    description: "Comprehensive NCERT syllabus notes for Mathematics (14 Chs), Science (13 Chs), and Social Science (20 Chapters). Features core principles, key definitions, common board traps, and leveled solved examples.",
+    tab: "concepts",
+    selector: "#tutorial-sst-discipline, #tutorial-concepts-tab",
+    title: "NCERT Concept Hub — Theory & SST 20 Chapters",
+    description: "In-depth chapter notes across Mathematics (14 Ch), Science (13 Ch), and Social Science (20 Chapters arranged by Geography, History, Civics, and Economics). Includes core theory, board trap alerts, and solved examples.",
     icon: BookOpen,
-    badgeText: "Theory & Concepts",
+    badgeText: "Concepts & Theory",
     preferredPlacement: "bottom"
   },
   {
     id: "questions",
-    selector: "#tutorial-questions-tab, #tutorial-questions-tab-mobile",
-    title: "CBSE Practice Vault & Interactive Self-Test",
-    description: "Practice authentic CBSE board questions categorized into 1M MCQs, 2M/3M Short Answers, 5M Proofs, and 4M Case Studies with instant answer check and mistake logging.",
+    tab: "questions",
+    selector: "#tutorial-practice-vault, #tutorial-questions-tab",
+    title: "CBSE Leveled Practice Vault & Self-Test Timer",
+    description: "1,200+ authentic board questions leveled into 1-Mark MCQs, 2M/3M Short Answers, 5M Long Proofs, and 4M Case Studies. Features instant answer check, model rubrics, and mistake logging.",
     icon: Target,
     badgeText: "Practice Vault",
     preferredPlacement: "bottom"
   },
   {
-    id: "sst-module",
-    selector: "#tutorial-sst-discipline, #tutorial-concepts-tab, #tutorial-concepts-tab-mobile",
-    title: "Social Science (SST) Complete Discipline Coverage",
-    description: "Structured strictly by discipline: Geography (7 chapters first!), History (4 chapters), Political Science (5 chapters), and Economics (4 chapters). Includes visual mnemonic sheets and map pointers.",
-    icon: Sparkles,
-    badgeText: "SST 20 Chapters",
+    id: "tools",
+    tab: "timelines",
+    selector: "#tutorial-tools-vault, #tutorial-nav-tabs",
+    title: "Tools, Timelines & Memory Vaults",
+    description: "Access 56 dated chronological SST historical events, 25 Geometry Theorem proofs, 56 Chemistry reaction equations, science lab activities, and your personal Mistakes Notebook for laser revision.",
+    icon: Compass,
+    badgeText: "Tools & Memory",
     preferredPlacement: "bottom"
   },
   {
     id: "xp-capsule",
-    selector: "#tutorial-xp-capsule",
-    title: "Gamified XP Leveling & Mistake Elimination",
-    description: "Earn XP for every answered question and topic mastered. Log tricky questions to your personal Mistakes Notebook for focused revision before exam day.",
+    tab: "chapter_dashboard",
+    selector: "#tutorial-xp-capsule, #tutorial-theme-controls",
+    title: "Gamified XP Leveling, Streaks & Eye-Comfort Modes",
+    description: "Climb through 10 Cadet ranks (Novice to Grandmaster) by solving questions. Maintain your daily study streak, enable tactile audio feedback, or switch to OLED Dark Mode for night sessions.",
     icon: Flame,
-    badgeText: "Gamified Progress",
-    preferredPlacement: "bottom"
-  },
-  {
-    id: "theme-controls",
-    selector: "#tutorial-theme-controls",
-    title: "Haptic Audio Feedback & Eye-Comfort Themes",
-    description: "Toggle tactile audio cues and switch between ultra-deep OLED Dark Mode and crisp High-Contrast Light Mode designed for late-night and morning study sessions.",
-    icon: Volume2,
-    badgeText: "Audio & Themes",
+    badgeText: "Progress & Themes",
     preferredPlacement: "bottom"
   },
   {
     id: "completion",
+    tab: "chapter_dashboard",
     selector: "#tutorial-brand-header",
-    title: "You Are Ready to Excel in Class 10!",
-    description: "Your study system is now fully configured. Work through each chapter methodically, practice board questions daily, and achieve your 100/100 goal!",
+    title: "You Are Ready to Conquer Class 10!",
+    description: "Your Command Center is calibrated and ready. Work through topics daily, solve board vault questions, eliminate mistakes, and achieve your 100/100 goal! Good luck Cadet!",
     icon: Award,
     badgeText: "Ready to Conquer",
     preferredPlacement: "center"
@@ -126,35 +141,46 @@ export const TUTORIAL_STORAGE_KEY = "cbse10_guided_tutorial_completed_v1";
 interface InteractiveGuidedTutorialProps {
   isDark: boolean;
   onTutorialComplete?: () => void;
+  setActiveTab?: (tab: any) => void;
 }
 
 export default function InteractiveGuidedTutorial({
   isDark,
-  onTutorialComplete
+  onTutorialComplete,
+  setActiveTab
 }: InteractiveGuidedTutorialProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [targetRect, setTargetRect] = useState<DOMRect | null>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const isNavigatingRef = useRef(false);
+  const [viewportDims, setViewportDims] = useState<{ width: number; height: number }>({ width: 1200, height: 800 });
+
+  // Live seconds tick for countdown display inside popover
+  const [liveSeconds, setLiveSeconds] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setLiveSeconds(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, []);
 
   // Check initial first-visit state or URL/custom trigger
   useEffect(() => {
     setIsMounted(true);
+    if (typeof window !== "undefined") {
+      setViewportDims({ width: window.innerWidth, height: window.innerHeight });
+    }
+
     const checkTutorialTrigger = () => {
       try {
         const isCompleted = localStorage.getItem(TUTORIAL_STORAGE_KEY);
         const urlParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
         const forceOpen = urlParams?.get("tutorial") === "true";
         if (forceOpen || isCompleted !== "true") {
-          // Small delay to ensure DOM elements have painted
           const timer = setTimeout(() => {
             setIsOpen(true);
           }, 400);
           return () => clearTimeout(timer);
         }
       } catch {
-        // If local storage is disabled, allow showing once
         setIsOpen(true);
       }
     };
@@ -164,6 +190,7 @@ export default function InteractiveGuidedTutorial({
     const handleCustomTrigger = () => {
       setCurrentStepIndex(0);
       setIsOpen(true);
+      if (setActiveTab) setActiveTab("chapter_dashboard");
     };
 
     window.addEventListener("arete:open-tutorial", handleCustomTrigger);
@@ -171,7 +198,7 @@ export default function InteractiveGuidedTutorial({
       if (cleanup) cleanup();
       window.removeEventListener("arete:open-tutorial", handleCustomTrigger);
     };
-  }, []);
+  }, [setActiveTab]);
 
   const currentStep = TUTORIAL_STEPS[currentStepIndex] || TUTORIAL_STEPS[0];
   const StepIcon = currentStep.icon;
@@ -184,86 +211,100 @@ export default function InteractiveGuidedTutorial({
       return;
     }
 
-    const element = document.querySelector(currentStep.selector);
-    if (element) {
-      const rect = element.getBoundingClientRect();
-      // Ensure target is somewhat visible or scroll it into view
-      if (rect.width > 0 && rect.height > 0) {
-        setTargetRect(rect);
-        return;
+    // Attempt selectors in order
+    const selectors = currentStep.selector.split(",").map(s => s.trim());
+    let foundEl: Element | null = null;
+    for (const sel of selectors) {
+      const el = document.querySelector(sel);
+      if (el) {
+        const r = el.getBoundingClientRect();
+        if (r.width > 0 && r.height > 0) {
+          foundEl = el;
+          break;
+        }
       }
     }
-    // Fallback: target not found or has 0 dimensions
-    setTargetRect(null);
-  }, [isOpen, currentStep]);
 
-  // Scroll target into view whenever step changes
-  useEffect(() => {
-    if (!isOpen) return;
-
-    if (currentStep.preferredPlacement === "center") {
-      setTargetRect(null);
-      return;
-    }
-
-    const element = document.querySelector(currentStep.selector);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-      const timer = setTimeout(() => {
-        updateTargetRect();
-      }, 350);
-      return () => clearTimeout(timer);
+    if (foundEl) {
+      const rect = foundEl.getBoundingClientRect();
+      setTargetRect(rect);
     } else {
       setTargetRect(null);
     }
-  }, [currentStepIndex, isOpen, currentStep, updateTargetRect]);
+  }, [isOpen, currentStep]);
+
+  // Route to the appropriate tab when step changes and scroll into view
+  useEffect(() => {
+    if (!isOpen) return;
+
+    if (currentStep.tab && setActiveTab) {
+      setActiveTab(currentStep.tab);
+    }
+
+    // Delay measurement to allow tab components to mount and paint
+    const timer = setTimeout(() => {
+      const selectors = currentStep.selector.split(",").map(s => s.trim());
+      let element: Element | null = null;
+      for (const sel of selectors) {
+        const el = document.querySelector(sel);
+        if (el) {
+          element = el;
+          break;
+        }
+      }
+
+      if (element && currentStep.preferredPlacement !== "center") {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest"
+        });
+      }
+
+      // Re-measure after scroll settling
+      setTimeout(updateTargetRect, 250);
+    }, 180);
+
+    return () => clearTimeout(timer);
+  }, [isOpen, currentStepIndex, currentStep, setActiveTab, updateTargetRect]);
 
   // Window resize & scroll listeners
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleResizeOrScroll = () => {
+    const handleResize = () => {
+      setViewportDims({ width: window.innerWidth, height: window.innerHeight });
       updateTargetRect();
     };
 
-    window.addEventListener("resize", handleResizeOrScroll, { passive: true });
-    window.addEventListener("scroll", handleResizeOrScroll, { passive: true });
-
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", updateTargetRect, { passive: true });
     return () => {
-      window.removeEventListener("resize", handleResizeOrScroll);
-      window.removeEventListener("scroll", handleResizeOrScroll);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", updateTargetRect);
     };
   }, [isOpen, updateTargetRect]);
 
   const handleNext = () => {
-    if (isNavigatingRef.current) return;
-    isNavigatingRef.current = true;
-
     if (isLastStep) {
-      handleFinish();
+      // Mark tutorial complete
+      try {
+        localStorage.setItem(TUTORIAL_STORAGE_KEY, "true");
+      } catch {}
+      setIsOpen(false);
+      if (setActiveTab) setActiveTab("chapter_dashboard");
+      if (onTutorialComplete) onTutorialComplete();
+      // Notify other components (e.g. CadetNamePromptModal)
+      window.dispatchEvent(new CustomEvent("arete:tutorial-finished"));
     } else {
-      setCurrentStepIndex((prev) => Math.min(prev + 1, TUTORIAL_STEPS.length - 1));
-      setTimeout(() => {
-        isNavigatingRef.current = false;
-      }, 250);
+      setCurrentStepIndex((prev) => prev + 1);
     }
   };
 
   const handlePrev = () => {
-    if (isNavigatingRef.current || currentStepIndex === 0) return;
-    isNavigatingRef.current = true;
-    setCurrentStepIndex((prev) => Math.max(prev - 1, 0));
-    setTimeout(() => {
-      isNavigatingRef.current = false;
-    }, 250);
-  };
-
-  const handleFinish = () => {
-    try {
-      localStorage.setItem(TUTORIAL_STORAGE_KEY, "true");
-    } catch {}
-    setIsOpen(false);
-    onTutorialComplete?.();
+    if (currentStepIndex > 0) {
+      setCurrentStepIndex((prev) => prev - 1);
+    }
   };
 
   // Prevent keyboard dismiss via Escape to enforce completion rule
@@ -271,7 +312,6 @@ export default function InteractiveGuidedTutorial({
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        // Disallow escape dismiss per strict prompt requirements
         e.preventDefault();
         e.stopPropagation();
       } else if (e.key === "ArrowRight" || e.key === "Enter") {
@@ -286,13 +326,13 @@ export default function InteractiveGuidedTutorial({
 
   if (!isMounted || !isOpen) return null;
 
-  // Determine popover position
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+  // Determine popover position: ensure it NEVER covers the highlighted element or timer!
+  const isMobile = viewportDims.width < 640;
   let popoverStyle: React.CSSProperties = {};
 
   if (isMobile || !targetRect || currentStep.preferredPlacement === "center") {
-    // Mobile or Center Fallback: Pinned to bottom on mobile, centered on laptop
     if (isMobile) {
+      // On mobile, pin neatly to bottom with comfortable spacing
       popoverStyle = {
         position: "fixed",
         bottom: 16,
@@ -301,45 +341,58 @@ export default function InteractiveGuidedTutorial({
         zIndex: 100005
       };
     } else {
+      // Centered dialog
       popoverStyle = {
         position: "fixed",
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: 440,
+        width: 460,
         maxWidth: "92vw",
         zIndex: 100005
       };
     }
   } else {
-    // Laptop / Desktop: Place smartly above or below target
-    const popoverWidth = 420;
-    const padding = 12;
-    const windowWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
-    const windowHeight = typeof window !== "undefined" ? window.innerHeight : 800;
+    // Laptop / Desktop: Smart above or below placement that NEVER covers the target!
+    const popoverWidth = 430;
+    const padding = 16;
+    const windowWidth = viewportDims.width;
+    const windowHeight = viewportDims.height;
 
-    // Center horizontally relative to targetRect
+    // Horizontal centering relative to target
     let left = targetRect.left + targetRect.width / 2 - popoverWidth / 2;
     if (left < padding) left = padding;
     if (left + popoverWidth > windowWidth - padding) left = windowWidth - popoverWidth - padding;
 
-    // Check vertical space (preferred: below target)
+    // Check space below vs above
     const spaceBelow = windowHeight - targetRect.bottom;
-    const placeBelow = spaceBelow > 260 || targetRect.top < 260;
+    const spaceAbove = targetRect.top;
 
-    if (placeBelow) {
+    if (spaceBelow >= 280) {
+      // Ample space below target
       popoverStyle = {
         position: "fixed",
-        top: Math.min(targetRect.bottom + 14, windowHeight - 270),
+        top: targetRect.bottom + 16,
+        left: left,
+        width: popoverWidth,
+        maxWidth: "92vw",
+        zIndex: 100005
+      };
+    } else if (spaceAbove >= 280) {
+      // Place cleanly ABOVE target so target is never covered
+      popoverStyle = {
+        position: "fixed",
+        bottom: windowHeight - targetRect.top + 16,
         left: left,
         width: popoverWidth,
         maxWidth: "92vw",
         zIndex: 100005
       };
     } else {
+      // Fallback: dock at bottom
       popoverStyle = {
         position: "fixed",
-        bottom: Math.min(windowHeight - targetRect.top + 14, windowHeight - 270),
+        bottom: 16,
         left: left,
         width: popoverWidth,
         maxWidth: "92vw",
@@ -348,54 +401,90 @@ export default function InteractiveGuidedTutorial({
     }
   }
 
+  // Live timer calculation for popover countdown display
+  const octMs = new Date("2026-10-15T10:30:00+05:30").getTime() - Date.now();
+  const febMs = new Date("2027-02-01T09:00:00+05:30").getTime() - Date.now();
+  const octDays = Math.max(0, Math.floor(octMs / (1000 * 60 * 60 * 24)));
+  const febDays = Math.max(0, Math.floor(febMs / (1000 * 60 * 60 * 24)));
+
   return createPortal(
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Website Guided Tutorial"
-      className="fixed inset-0 z-[100000] pointer-events-auto select-none overflow-hidden"
+      aria-label="ARETĒ Interactive Onboarding Tutorial"
+      className="fixed inset-0 select-none"
+      style={{ zIndex: 100000 }}
     >
-      {/* 1. TRANSLUCENT DARK OVERLAY BACKDROP */}
-      <div
-        className="fixed inset-0 bg-black/75 backdrop-blur-[2px] transition-opacity duration-300 pointer-events-auto"
+      {/* 1. CRYSTAL-CLEAR SVG CUTOUT OVERLAY: NO BLUR OVER TARGET HOLE! */}
+      <svg
+        className="fixed inset-0 w-full h-full pointer-events-auto transition-all duration-300"
+        style={{ zIndex: 100001 }}
         onClick={(e) => {
           // Strictly prevent backdrop dismissal
           e.preventDefault();
           e.stopPropagation();
         }}
-      />
+      >
+        <defs>
+          <mask id="tutorial-spotlight-mask">
+            {/* White: overlay shows here */}
+            <rect x="0" y="0" width="100%" height="100%" fill="white" />
+            {/* Black Cutout Hole: Target area is 100% transparent, crisp, unblurred! */}
+            {targetRect && currentStep.preferredPlacement !== "center" && (
+              <rect
+                x={Math.max(0, targetRect.left - 8)}
+                y={Math.max(0, targetRect.top - 8)}
+                width={targetRect.width + 16}
+                height={targetRect.height + 16}
+                rx="20"
+                fill="black"
+              />
+            )}
+          </mask>
+        </defs>
+        {/* Dimmed background layer punched with the crisp transparent cutout */}
+        <rect
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          fill="rgba(0, 0, 0, 0.76)"
+          mask="url(#tutorial-spotlight-mask)"
+        />
+      </svg>
 
-      {/* 2. SPOTLIGHT HIGHLIGHT FRAME (If target element is found) */}
+      {/* 2. GLOWING AMBER SPOTLIGHT FOCUS RING OVER TARGET */}
       {targetRect && currentStep.preferredPlacement !== "center" && (
         <div
           style={{
             position: "fixed",
-            top: targetRect.top - 6,
-            left: targetRect.left - 6,
-            width: targetRect.width + 12,
-            height: targetRect.height + 12,
-            zIndex: 100002
+            top: targetRect.top - 8,
+            left: targetRect.left - 8,
+            width: targetRect.width + 16,
+            height: targetRect.height + 16,
+            zIndex: 100002,
+            pointerEvents: "none"
           }}
-          className="rounded-2xl ring-2 ring-amber-400 border border-amber-300 shadow-[0_0_0_9999px_rgba(0,0,0,0.72),0_0_24px_rgba(245,158,11,0.45)] pointer-events-none transition-all duration-300 ease-out"
+          className="rounded-[20px] ring-2 ring-amber-400 border border-amber-300/80 shadow-[0_0_30px_rgba(245,158,11,0.55),inset_0_0_15px_rgba(245,158,11,0.15)] transition-all duration-300 ease-out"
         />
       )}
 
-      {/* 3. FLOATING EXPLANATORY POPOVER */}
+      {/* 3. FLOATING EXPLANATORY POPOVER CARD */}
       <div
         style={popoverStyle}
         className={`rounded-3xl border shadow-2xl p-5 sm:p-6 space-y-4 transition-all duration-300 ${
           isDark
-            ? "bg-[#0c101d] border-amber-500/40 text-white shadow-[0_16px_50px_rgba(0,0,0,0.85)] ring-1 ring-amber-400/20"
+            ? "bg-[#0c101d] border-amber-500/40 text-white shadow-[0_16px_50px_rgba(0,0,0,0.88)] ring-1 ring-amber-400/20"
             : "bg-white border-amber-300 text-slate-900 shadow-2xl ring-1 ring-amber-500/20"
         }`}
       >
-        {/* HEADER: STEP COUNTER & BADGE */}
-        <div className="flex items-center justify-between gap-2 border-b pb-3 border-white/10">
+        {/* HEADER: BADGE & STEP COUNTER */}
+        <div className="flex items-center justify-between gap-2 border-b pb-3 border-current/10">
           <div className="flex items-center gap-2">
             <div className={`p-2 rounded-xl shrink-0 ${
               isDark ? "bg-amber-500/20 text-amber-300" : "bg-amber-100 text-amber-800"
             }`}>
-              <StepIcon className="w-4 h-4" />
+              <StepIcon className="w-4 h-4 text-amber-400" />
             </div>
             <span className={`text-[11px] font-mono font-black uppercase tracking-wider ${
               isDark ? "text-amber-400" : "text-amber-700 font-extrabold"
@@ -427,8 +516,30 @@ export default function InteractiveGuidedTutorial({
           </p>
         </div>
 
-        {/* PROGRESS DOTS */}
-        <div className="flex items-center gap-1 py-1">
+        {/* LIVE TIME CAPSULE (DIRECTLY IN POPOVER FOR COUNTDOWN STEP SO TIME NEVER HIDES!) */}
+        {currentStep.showLiveTimer && (
+          <div className={`p-3 rounded-2xl border flex items-center justify-around font-mono text-center gap-2 ${
+            isDark ? "bg-black/40 border-amber-500/30 text-amber-300" : "bg-amber-50 border-amber-300 text-amber-950"
+          }`}>
+            <div className="flex flex-col items-center">
+              <span className="text-base sm:text-lg font-black tabular-nums">{octDays}d</span>
+              <span className="text-[9px] uppercase font-bold opacity-75">15 Oct Sprint</span>
+            </div>
+            <div className="h-6 w-px bg-current/20" />
+            <div className="flex flex-col items-center">
+              <span className="text-base sm:text-lg font-black tabular-nums text-cyan-400">{febDays}d</span>
+              <span className="text-[9px] uppercase font-bold opacity-75 text-cyan-400">1 Feb Boards</span>
+            </div>
+            <div className="h-6 w-px bg-current/20" />
+            <div className="flex flex-col items-center text-emerald-400">
+              <span className="text-xs font-black">ACTIVE</span>
+              <span className="text-[9px] uppercase font-bold">Auto-Sync</span>
+            </div>
+          </div>
+        )}
+
+        {/* STEP PROGRESS DOTS */}
+        <div className="flex items-center gap-1.5 pt-1">
           {TUTORIAL_STEPS.map((_, idx) => (
             <div
               key={idx}
@@ -449,7 +560,7 @@ export default function InteractiveGuidedTutorial({
           ))}
         </div>
 
-        {/* ACTION BUTTONS (NO SKIP / NO CLOSE: PREVIOUS & NEXT ONLY) */}
+        {/* ACTION BUTTONS (NO SKIP / NO CLOSE: BACK & NEXT ONLY) */}
         <div className="flex items-center gap-2 pt-1">
           {currentStepIndex > 0 ? (
             <button
@@ -477,7 +588,7 @@ export default function InteractiveGuidedTutorial({
             }`}
             aria-label={isLastStep ? "Finish Tutorial" : "Next Tutorial Step"}
           >
-            <span>{isLastStep ? "Finish Tutorial" : "Next Feature"}</span>
+            <span>{isLastStep ? "Finish Tutorial 🚀" : "Next Feature"}</span>
             {isLastStep ? <Check className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
           </button>
         </div>

@@ -77,6 +77,7 @@ import { appStorage, STORAGE_KEYS } from "@/lib/storage";
 import PracticeTimer from "@/components/PracticeTimer";
 import Class10ExamCountdown from "@/components/Class10ExamCountdown";
 import InteractiveGuidedTutorial from "@/components/InteractiveGuidedTutorial";
+import CadetNamePromptModal from "@/components/CadetNamePromptModal";
 import { SST_CHAPTER_LIST } from "@/data/sstConceptsData";
 
 import {
@@ -795,18 +796,36 @@ export const LiveCountdown = React.memo(function LiveCountdown({
   );
 });
 
-// Dynamic Top Header Countdown: dual-timer featuring upcoming 26 Oct Milestone and Feb 1 Boards
+// Dynamic Top Header Countdown: dual-timer featuring upcoming 15 Oct Milestone and Feb 1 Boards with smart auto-termination
 export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
   isDark
 }: {
   isDark: boolean;
 }) {
+  const [octPassed, setOctPassed] = useState(false);
+
+  useEffect(() => {
+    const check = () => {
+      const ms = new Date("2026-10-15T10:30:00+05:30").getTime() - Date.now();
+      setOctPassed(ms <= 0);
+    };
+    check();
+    const interval = setInterval(check, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] leading-none">
-      <div className="flex items-center gap-1 sm:gap-1.5">
-        <span className={`font-black inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 26 Oct:</span>
-        <LiveCountdown targetDate="2026-10-26" variant="badge" colorScheme="amber" isDark={isDark} />
-      </div>
+    <div className="flex items-center gap-1 sm:gap-2 font-mono text-[10px] sm:text-[11px] leading-none whitespace-nowrap">
+      {!octPassed ? (
+        <div className="flex items-center gap-1 sm:gap-1.5">
+          <span className={`font-black inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 15 Oct:</span>
+          <LiveCountdown targetDate="2026-10-15" variant="badge" colorScheme="amber" isDark={isDark} />
+        </div>
+      ) : (
+        <div className="flex items-center gap-1 text-emerald-400 font-bold">
+          <span>✓ 15 Oct Done</span>
+        </div>
+      )}
       <span className={`hidden sm:inline-flex opacity-25 select-none leading-none ${isDark ? "text-white" : "text-slate-900"}`}>|</span>
       <div className="hidden sm:flex items-center gap-1.5">
         <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>🎯 Boards:</span>
@@ -3088,7 +3107,7 @@ export default function CBSECommandCenter() {
           >
             <AreteLogo size="md" isDark={isDark} showText={true} showMotto={false} />
 
-            <div className="hidden xl:flex items-center gap-1.5 leading-none pl-1">
+            <div className="hidden 2xl:flex items-center gap-1.5 leading-none pl-1">
               <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
                 isDark ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "bg-amber-100 text-amber-900 border border-amber-300"
               }`}>
@@ -3110,7 +3129,7 @@ export default function CBSECommandCenter() {
           </div>
 
           {/* MASTER CATEGORY NAVIGATION TABS (INTEGRATED INSIDE HEADER - ZERO OVERFLOW) */}
-          <div id="tutorial-nav-tabs" className="hidden md:flex items-center min-w-0">
+          <div id="tutorial-nav-tabs" className="hidden xl:flex items-center min-w-0 max-w-fit mx-auto">
             <div className={`p-0.5 sm:p-1 rounded-full border flex items-center gap-0.5 sm:gap-1 backdrop-blur-xl transition-all ${
               isDark
                 ? "bg-white/[0.06] border-white/15 shadow-inner"
@@ -3169,7 +3188,7 @@ export default function CBSECommandCenter() {
                 );
               })}
 
-              {/* ALL MODULES TRIGGER (COMPACT RESPONSIVE PILL) */}
+              {/* ALL MODULES TRIGGER (COMPACT RESPONSIVE PILL ON XL+) */}
               <button
                 id="tutorial-all-modules-btn"
                 type="button"
@@ -3177,7 +3196,7 @@ export default function CBSECommandCenter() {
                   playSound("click");
                   setIsAllModulesModalOpen(true);
                 }}
-                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer hidden md:flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border ${
+                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer hidden xl:flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border ${
                   isDark
                     ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
                     : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200 shadow-xs"
@@ -3200,13 +3219,13 @@ export default function CBSECommandCenter() {
           {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (ZERO-OVERFLOW COMPACT CAPSULES) */}
           <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 shrink-0">
             {/* EXAM COUNTDOWN (VISIBLE ON ALL MOBILE, SMARTPHONE, & WIDESCREEN VIEWPORTS) */}
-            <div id="tutorial-countdown-capsule" className="flex items-center">
+            <div id="tutorial-countdown-capsule" className="flex items-center shrink-0">
               <button
                 onClick={() => {
                   playSound("click");
                   setActiveTab("test_series");
                 }}
-                className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono transition-all cursor-pointer group shadow-sm active:scale-[0.98] tabular-nums leading-none ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono transition-all cursor-pointer group shadow-sm active:scale-[0.98] tabular-nums leading-none shrink-0 ${
                   isDark
                     ? "bg-gradient-to-r from-amber-500/10 via-white/[0.03] to-cyan-500/10 border-white/15 text-zinc-200 hover:border-amber-400/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)]"
                     : "bg-gradient-to-r from-amber-50 via-white to-blue-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:shadow-sm"
@@ -3218,7 +3237,7 @@ export default function CBSECommandCenter() {
             </div>
 
             {/* LEVEL & XP CAPSULE */}
-            <div id="tutorial-xp-capsule" className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-medium shadow-xs leading-none whitespace-nowrap shrink-0 ${
+            <div id="tutorial-xp-capsule" className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 xl:px-3 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-medium shadow-xs leading-none whitespace-nowrap shrink-0 ${
               isDark 
                 ? "bg-gradient-to-r from-amber-500/15 to-amber-600/10 border-amber-500/30 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.15)]" 
                 : "bg-amber-50 border-amber-300 text-amber-950 font-bold"
@@ -3230,7 +3249,7 @@ export default function CBSECommandCenter() {
             </div>
 
             {/* STREAK */}
-            <div className={`flex items-center gap-1 px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 rounded-full border text-[11px] sm:text-xs font-mono font-bold shadow-xs leading-none whitespace-nowrap shrink-0 ${
+            <div className={`hidden xs:flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-bold shadow-xs leading-none whitespace-nowrap shrink-0 ${
               isDark 
                 ? "bg-gradient-to-r from-orange-500/20 to-red-500/10 border-orange-500/40 text-orange-300 shadow-[0_0_12px_rgba(249,115,22,0.15)]" 
                 : "bg-orange-50 border-orange-300 text-orange-900"
@@ -3277,7 +3296,7 @@ export default function CBSECommandCenter() {
               </button>
             </div>
 
-            {/* MOBILE ONLY ALL MODULES ICON (< md screens) */}
+            {/* MOBILE & TABLET ALL MODULES ICON (< xl screens) */}
             <button
               id="tutorial-all-modules-btn-mobile"
               type="button"
@@ -3285,10 +3304,10 @@ export default function CBSECommandCenter() {
                 playSound("click");
                 setIsAllModulesModalOpen(true);
               }}
-              className={`md:hidden p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] touch-manipulation active:scale-95 shrink-0 ${
+              className={`xl:hidden p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
                 isDark
-                  ? "bg-amber-500/15 border-amber-500/35 text-amber-300"
-                  : "bg-amber-100 border-amber-300 text-amber-950"
+                  ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25"
+                  : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200"
               }`}
               title="Open All Modules (⌘K)"
               aria-label="Open All Modules"
@@ -4638,9 +4657,12 @@ export default function CBSECommandCenter() {
         {/* ===================== TAB 4: TRAINING VAULT (PREMIUM) ===================== */}
         {activeTab === "questions" && (
           <div className="space-y-6 animate-fade-in">
-            <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 transition-colors ${
-              isDark ? "apple-surface" : "apple-surface-light"
-            }`}>
+            <div
+              id="tutorial-practice-vault"
+              className={`p-6 sm:p-8 rounded-3xl border space-y-6 transition-colors ${
+                isDark ? "apple-surface" : "apple-surface-light"
+              }`}
+            >
               {/* TOP ROW: TITLE & DESCRIPTIVE BADGES */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="space-y-2">
@@ -6845,14 +6867,14 @@ export default function CBSECommandCenter() {
       )}
 
       {/* FOOTER */}
-      <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-24 md:mb-0 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
+      <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-24 xl:mb-0 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
         Lakshmipat Singhania Academy Bissau • CBSE Class 10 Command Center (2026–2027)
       </footer>
 
       {/* =========================================================================
-          APPLE NATIVE FLOATING BOTTOM DOCK (MOBILE ONLY: < 768px)
+          APPLE NATIVE FLOATING BOTTOM DOCK (MOBILE & TABLET: < 1280px)
           ========================================================================= */}
-      <div id="tutorial-nav-dock-mobile" className="fixed bottom-0 inset-x-0 z-40 md:hidden pointer-events-none flex justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <div id="tutorial-nav-dock-mobile" className="fixed bottom-0 inset-x-0 z-40 xl:hidden pointer-events-none flex justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <div className={`pointer-events-auto w-full max-w-md p-1.5 rounded-3xl border flex items-center justify-around shadow-2xl backdrop-blur-2xl transition-all ${
           isDark
             ? "bg-[#07070a]/85 border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
@@ -7000,7 +7022,24 @@ export default function CBSECommandCenter() {
           MANDATORY INTERACTIVE GUIDED ONBOARDING TUTORIAL (FIRST-VISIT)
           Strict zero-bypass sequential tour highlighting features one by one
           ========================================================================= */}
-      <InteractiveGuidedTutorial isDark={isDark} />
+      <InteractiveGuidedTutorial
+        isDark={isDark}
+        setActiveTab={(tab: any) => setActiveTab(tab)}
+      />
+
+      {/* =========================================================================
+          GENTLE, SKIPPABLE CADET NAME PERSONALIZATION CARD (APPEARS AFTER USAGE)
+          Appears after exploration, allows personalization without being annoying
+          ========================================================================= */}
+      <CadetNamePromptModal
+        isDark={isDark}
+        currentName={studentFullName}
+        onNameSaved={(newName) => {
+          setStudentFullName(newName);
+          window.dispatchEvent(new CustomEvent("arete:name-updated", { detail: newName }));
+        }}
+        playSound={(sound: any) => playSound(sound)}
+      />
 
     </div>
   );

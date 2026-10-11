@@ -207,6 +207,50 @@ export default function CommandCenterHomeView({
     }
   }, []);
 
+  // Listen for cadet name updates dynamically
+  useEffect(() => {
+    const handleNameUpdated = (e: any) => {
+      if (e.detail && typeof e.detail === "string") {
+        setStudentName(e.detail.trim());
+      }
+    };
+    window.addEventListener("arete:name-updated", handleNameUpdated);
+    return () => window.removeEventListener("arete:name-updated", handleNameUpdated);
+  }, []);
+
+  // Overall syllabus completion stats across all CBSE subjects
+  const syllabusStats = useMemo(() => {
+    let totalChapters = 0;
+    let completedChapters = 0;
+    let totalTopics = 0;
+    let completedTopics = 0;
+
+    CBSE_SUBJECTS.forEach((sub) => {
+      (sub.chapters || []).forEach((ch) => {
+        totalChapters++;
+        const topics = ch.topics || [];
+        totalTopics += topics.length;
+        const doneInCh = topics.filter((t) => completedTopicIds[t.id]).length;
+        completedTopics += doneInCh;
+        if (topics.length > 0 && doneInCh === topics.length) {
+          completedChapters++;
+        }
+      });
+    });
+
+    const chapterPercent = totalChapters > 0 ? Math.round((completedChapters / totalChapters) * 100) : 0;
+    const topicPercent = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
+
+    return {
+      totalChapters,
+      completedChapters,
+      chapterPercent,
+      totalTopics,
+      completedTopics,
+      topicPercent
+    };
+  }, [completedTopicIds]);
+
   // Time-aware greeting
   const [greetingText] = useState<string>(() => {
     const hour = new Date().getHours();
@@ -449,22 +493,50 @@ export default function CommandCenterHomeView({
         isDark ? "vision-panel" : "vision-panel-light"
       }`}>
         
-        {/* SPATIAL TOP STATUS BAR */}
-        <div className={`px-5 py-3.5 border-b flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+        {/* SPATIAL TOP STATUS BAR WITH DYNAMIC SYLLABUS CHAPTER PROGRESS */}
+        <div className={`px-5 py-3.5 border-b flex flex-col lg:flex-row lg:items-center justify-between gap-3 ${
           isDark ? "border-white/10 bg-white/[0.02]" : "border-slate-200/80 bg-white/40"
         }`}>
-          <div className="flex items-center gap-2.5 flex-wrap">
-            <span className={`text-sm font-bold truncate ${isDark ? "text-white" : "text-slate-900"}`}>
+          <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+            <span className={`text-sm sm:text-base font-black tracking-tight truncate ${isDark ? "text-white" : "text-slate-900"}`}>
               {greetingText}, {studentName} 👋
             </span>
             <span className="text-slate-400/40">•</span>
-            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md border ${
+
+            {/* DYNAMIC SYLLABUS CHAPTER COMPLETION PROGRESS BAR */}
+            <div
+              id="tutorial-chapter-progress"
+              className={`flex items-center gap-2.5 px-3 py-1.5 rounded-2xl border backdrop-blur-md shadow-xs transition-all ${
+                isDark ? "bg-white/[0.04] border-white/10" : "bg-white border-slate-200"
+              }`}
+              title="Real-time Syllabus Mastery: Updates automatically as you tick chapter topics!"
+            >
+              <div className="flex flex-col gap-1 min-w-[150px] sm:min-w-[190px]">
+                <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono font-bold leading-none">
+                  <span className="flex items-center gap-1 text-amber-500 dark:text-amber-400">
+                    <Sparkles className="w-3 h-3 shrink-0" />
+                    <span>Syllabus:</span>
+                  </span>
+                  <span className="tabular-nums font-black text-xs">
+                    {syllabusStats.completedChapters}/{syllabusStats.totalChapters} Ch ({syllabusStats.chapterPercent}%)
+                  </span>
+                </div>
+                <div className="w-full h-2 rounded-full bg-black/30 overflow-hidden border border-white/5">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-emerald-400 transition-all duration-500 shadow-[0_0_8px_rgba(245,158,11,0.4)]"
+                    style={{ width: `${Math.max(4, syllabusStats.chapterPercent)}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border ${
               isDark ? "bg-amber-500/15 border-amber-500/30 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.15)]" : "bg-amber-50 border-amber-200 text-amber-800"
             }`}>
               <Flame className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-              {studyStreak} Day Streak
+              {studyStreak}d Streak
             </span>
-            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md border ${
+            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border ${
               isDark ? "bg-blue-500/15 border-blue-500/30 text-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.15)]" : "bg-blue-50 border-blue-200 text-blue-800"
             }`}>
               <Target className="w-3.5 h-3.5 text-blue-400" />
@@ -919,7 +991,7 @@ export default function CommandCenterHomeView({
               )}
 
               {/* INTERACTIVE TOPIC RUNWAY */}
-              <div className="space-y-2.5">
+              <div id="tutorial-chapter-checklist" className="space-y-2.5">
                 <div className="flex items-center justify-between pt-1">
                   <span className={`text-xs font-bold uppercase tracking-wider ${
                     isDark ? "text-slate-400" : "text-slate-700"
