@@ -129,5 +129,44 @@ export const SST_CH18_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study analyzing how multi-party coalition dynamics accommodate India's exceptional geographic and cultural diversity.",
     examinerNote: "In part (iii), make sure to give both a distinct advantage and a distinct disadvantage.",
     source: "CBSE Board SQP 2026-27 & Oswaal 2025-26"
+  },
+{
+    id: "sst_q_18_8",
+    chapter: 18,
+    chapterName: "Political Parties",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2019, 2018] 'Political parties perform a series of crucial functions in a representative democracy.' Explain any five vital functions performed by political parties.",
+    options: [],
+    answer: "1. Contesting Elections: Parties contest elections by putting forward candidates selected by top leaders or through primary party votes.\n2. Putting Forward Policies and Programmes: Parties put forward different policies and programmes, and voters choose from them. In a large democracy, parties reduce a vast multitude of public opinions into a few basic policy directions.\n3. Making Laws: Parties play a decisive role in law-making for a country. Formally, laws are debated and passed in the legislature, but since most members belong to a party, they vote according to party whips.\n4. Forming and Running Governments: Parties recruit leaders, train them, and appoint them as ministers to run the government machinery according to their party ideology.\n5. Playing the Role of Opposition: Parties that lose elections play the vital role of the opposition by voicing different views, criticizing government policies, and mobilizing citizens against unpopular legislation.",
+    steps: [
+      "1. Contesting elections and selecting candidates.",
+      "2. Formulating alternative policies and manifestos.",
+      "3. Enacting legislation in Parliament.",
+      "4. Forming and running the executive government.",
+      "5. Serving as the constructive opposition, holding the ruling government accountable."
+    ],
+    explanation: "Without political parties, candidates would be independent, leaving no one accountable for national policymaking.",
+    examinerNote: "Listing five distinct functions with brief explanations yields 1 mark per point in CBSE grading.",
+    source: "CBSE Board Examination 2024 & NCERT Civics p. 73-75"
+  },
+  {
+    id: "sst_q_18_9",
+    chapter: 18,
+    chapterName: "Political Parties",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2017] Explain the four major challenges faced by political parties in India today.",
+    options: [],
+    answer: "1. Lack of Internal Democracy: All over the world, there is a tendency in political parties towards the concentration of power in one or few leaders at the top. Parties do not hold regular organizational elections, do not maintain membership registers, and ordinary workers have no voice in decision-making.\n2. Dynastic Succession: Since most political parties do not practice open and transparent procedures, top positions are invariably controlled by members of one family or their close associates, preventing deserving grassroots workers from rising.\n3. Growing Role of Money and Muscle Power: Since parties are focused solely on winning elections, they nominate candidates who have or can raise vast sums of money. In many cases, parties support candidates with criminal backgrounds to secure votes.\n4. Lack of Meaningful Choice: Very often, parties do not offer a meaningful choice to voters because ideological differences between major parties have narrowed drastically. In recent years, both major alliances often agree on fundamental economic policies, offering voters only personal rivalries.",
+    steps: [
+      "1. Lack of internal democracy and concentration of power at the top.",
+      "2. Dynastic succession excluding talented grassroots workers.",
+      "3. Influence of money and muscle power (criminalization of politics).",
+      "4. Ideological convergence leading to lack of meaningful choices for voters."
+    ],
+    explanation: "These four systemic challenges erode public faith in democratic institutions, necessitating urgent legal and electoral reforms.",
+    examinerNote: "The four NCERT challenges must be stated with headings to secure 5 marks.",
+    source: "CBSE Board Paper 2024 & NCERT Civics p. 83-85"
   }
 ];

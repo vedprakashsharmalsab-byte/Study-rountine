@@ -1,363 +1,479 @@
 // =========================================================================
-// CBSE CLASS 10 — TODDLER STORIES & DRAMA CATALOG FOR TIMELINES
-// Real-world, funny, memorable ELI5 stories and board-trap Q&As for all 56 milestones.
+// CBSE CLASS 10 — NCERT VISUAL SCENARIO NARRATIVES & BOARD TRAP VAULT
+// Authentic, vivid historical scene reconstructions and official CBSE marking rubrics.
+// Zero toddler/kindergarten talk: 100% NCERT depth with high mental visualization.
 // =========================================================================
 
 export interface ToddlerTimelineStory {
   dramaEmoji: string;
-  toddlerStory: string;
-  toddlerQuestion: string;
-  toddlerAnswer: string;
+  toddlerStory: string; // Vivid Scene Narrative
+  toddlerQuestion: string; // High-yield CBSE Board Question
+  toddlerAnswer: string; // Official NCERT Marking Criteria
+  visualSceneNarrative?: string;
+  ncertContext?: string;
 }
 
 export const TODDLER_TIMELINE_STORIES: Record<string, ToddlerTimelineStory> = {
   "eu_1789_french_rev": {
-    "dramaEmoji": "\ud83d\udc51\ud83d\udca5",
-    "toddlerStory": "The King of France was throwing golden parties and eating fancy cakes while ordinary families had zero bread! So regular citizens marched to the Bastille fortress prison, tore down the walls brick by brick, and declared: 'France belongs to the CITIZENS, not just one guy wearing a crown!'",
-    "toddlerQuestion": "Did they throw out the king on Day One?",
-    "toddlerAnswer": "Nope! At first, they kept him as a 'Constitutional Monarch' following a rulebook (1791). It was only in 1792 that they officially declared a Republic!"
+    "dramaEmoji": "👑💥",
+    "toddlerStory": "On 14 July 1789, enraged by soaring bread prices and royal tyranny, the citizens of Paris stormed the medieval fortress-prison of the Bastille. The revolution proclaimed that sovereignty belonged no longer to an absolute monarch, but to the collective body of French citizens. Revolutionaries introduced 'la patrie' (the fatherland), 'le citoyen' (the citizen), the tricolour flag, and uniform laws to forge a united national identity.",
+    "toddlerQuestion": "Did the French Revolution immediately establish a democratic republic in 1789?",
+    "toddlerAnswer": "No! In 1789, it established a Constitutional Monarchy under the Constitution of 1791. France was officially declared a Republic only in September 1792 after the overthrow of the monarchy.",
+    "visualSceneNarrative": "On 14 July 1789, enraged by soaring bread prices and royal tyranny, the citizens of Paris stormed the medieval fortress-prison of the Bastille. The revolution proclaimed that sovereignty belonged no longer to an absolute monarch, but to the collective body of French citizens. Revolutionaries introduced 'la patrie' (the fatherland), 'le citoyen' (the citizen), the tricolour flag, and uniform laws to forge a united national identity.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1797_napoleon_invades": {
-    "dramaEmoji": "\u2694\ufe0f\ud83d\udc0e",
-    "toddlerStory": "Napoleon rode his horse into Italy like a superhero. People in Milan and Holland cheered: 'Yay! The French are here to give us freedom!' But soon, Napoleon smiled and said: 'Now give me your gold and send your teenage sons into my army!' The cheers turned into furious boos.",
-    "toddlerQuestion": "Why did people start hating the French armies?",
-    "toddlerAnswer": "Three reasons: (1) Huge tax hikes, (2) strict censorship, and (3) forcing local youth into the army (forced conscription)!"
+    "dramaEmoji": "⚔️🐎",
+    "toddlerStory": "Young General Napoleon Bonaparte led French revolutionary armies across the Alps into northern Italy, igniting the Napoleonic Wars. Conquered peoples in Holland, Switzerland, Brussels, and Milan initially hailed the French troops as 'harbingers of liberty' who would sweep away feudal serfdom. But this enthusiasm quickly soured when the French military imposed heavy wartime taxes, press censorship, and forced military conscription.",
+    "toddlerQuestion": "Why did initial European enthusiasm for Napoleon turn into bitter hostility?",
+    "toddlerAnswer": "Because administrative efficiency did not accompany political freedom: Napoleon imposed severe censorship, steep tax hikes, and forced military conscription of local youth into the French armies.",
+    "visualSceneNarrative": "Young General Napoleon Bonaparte led French revolutionary armies across the Alps into northern Italy, igniting the Napoleonic Wars. Conquered peoples in Holland, Switzerland, Brussels, and Milan initially hailed the French troops as 'harbingers of liberty' who would sweep away feudal serfdom. But this enthusiasm quickly soured when the French military imposed heavy wartime taxes, press censorship, and forced military conscription.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1804_civil_code": {
-    "dramaEmoji": "\ud83d\udcdc\u2728",
-    "toddlerStory": "Imagine school where rich kids get an 'A+' without studying just because their dads own fancy horses. Napoleon tore that up and wrote ONE clean rulebook: 'Everyone writes the same test!' But wait\u2014he also ruled that women had no legal rights and were subject to their husbands!",
-    "toddlerQuestion": "Did the Napoleonic Code give girls equal rights?",
-    "toddlerAnswer": "Big NO! \u274c It reduced women to the status of a 'minor', legally dependent on fathers and husbands. Remember this trick question!"
+    "dramaEmoji": "📜⚖️",
+    "toddlerStory": "Napoleon consolidated power and promulgated the Civil Code of 1804 (Napoleonic Code). The Code dismantled centuries of feudalism: it abolished all birth-based privileges, established legal equality before the law, and secured the inviolable right to property across France and satellite states. However, it completely disenfranchised women, reducing them to legal dependents of fathers and husbands.",
+    "toddlerQuestion": "Did the Napoleonic Code grant equal citizenship rights to women?",
+    "toddlerAnswer": "No! The Code severely curtailed women's rights, reducing them to the status of a legal 'minor' subject to the absolute authority of fathers and husbands.",
+    "visualSceneNarrative": "Napoleon consolidated power and promulgated the Civil Code of 1804 (Napoleonic Code). The Code dismantled centuries of feudalism: it abolished all birth-based privileges, established legal equality before the law, and secured the inviolable right to property across France and satellite states. However, it completely disenfranchised women, reducing them to legal dependents of fathers and husbands.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1813_leipzig": {
-    "dramaEmoji": "\ud83d\udce6\ud83c\udfc3\u200d\u2642\ufe0f",
-    "toddlerStory": "Napoleon thought he was invincible, but four countries teamed up and gave him a massive defeat at Leipzig! An NCERT cartoon shows him as a letter carrier running away while all his conquered cities fall out of his mail bag like dropped apples!",
-    "toddlerQuestion": "What famous caricature represents the Battle of Leipzig?",
-    "toddlerAnswer": "'The Courier of Rhineland' losing letters from his bag on his flight home!"
+    "dramaEmoji": "📦🏃",
+    "toddlerStory": "In October 1813, at the epic Battle of Leipzig (Battle of the Nations), coalition armies of Prussia, Russia, Austria, and Sweden inflicted a crushing defeat on Napoleon's Grande Armée. Napoleon was forced to retreat across the Rhine. Contemporary caricaturists famously depicted Napoleon as 'The Courier of Rhineland', losing conquered territories represented as letters falling out of his messenger bag.",
+    "toddlerQuestion": "What famous caricature represents Napoleon's flight after the Battle of Leipzig?",
+    "toddlerAnswer": "'The Courier of Rhineland' losing letters from his mailbag as he flees back to France, symbolizing the loss of his annexed territories.",
+    "visualSceneNarrative": "In October 1813, at the epic Battle of Leipzig (Battle of the Nations), coalition armies of Prussia, Russia, Austria, and Sweden inflicted a crushing defeat on Napoleon's Grande Armée. Napoleon was forced to retreat across the Rhine. Contemporary caricaturists famously depicted Napoleon as 'The Courier of Rhineland', losing conquered territories represented as letters falling out of his messenger bag.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1815_vienna": {
-    "dramaEmoji": "\ud83c\udff0\ud83d\udc74",
-    "toddlerStory": "Napoleon was finally defeated at Waterloo. Four grumpy old king cousins (Britain, Russia, Prussia, Austria) met in Vienna for a giant dinner party. Their master plan? 'Let's turn back the clock, pretend Napoleon never happened, and put all the kings back on their thrones!'",
-    "toddlerQuestion": "Did they destroy Napoleon's German union of 39 states?",
-    "toddlerAnswer": "NO! The Treaty of Vienna left the German Confederation of 39 states completely untouched!"
+    "dramaEmoji": "🏰👑",
+    "toddlerStory": "Following Napoleon's final defeat at Waterloo, the four victor powers (Britain, Russia, Prussia, Austria) convened the Congress of Vienna, chaired by Austrian Chancellor Duke Metternich. Driven by conservatism, they sought to reverse the changes of the Napoleonic era, restore the deposed Bourbon dynasty in France, and establish buffer states around French borders, though they left Napoleon's German Confederation of 39 states intact.",
+    "toddlerQuestion": "Did the Congress of Vienna dismantle Napoleon's German Confederation?",
+    "toddlerAnswer": "No! The Congress of Vienna deliberately left Napoleon's German Confederation of 39 states completely untouched.",
+    "visualSceneNarrative": "Following Napoleon's final defeat at Waterloo, the four victor powers (Britain, Russia, Prussia, Austria) convened the Congress of Vienna, chaired by Austrian Chancellor Duke Metternich. Driven by conservatism, they sought to reverse the changes of the Napoleonic era, restore the deposed Bourbon dynasty in France, and establish buffer states around French borders, though they left Napoleon's German Confederation of 39 states intact.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1821_greek_war": {
-    "dramaEmoji": "\ud83c\udfdb\ufe0f\u26f5",
-    "toddlerStory": "Greece was ruled by the Ottoman Sultans for 400 years. Poets cried: 'Greece gave Europe art, democracy, and philosophy! How can we let our grandma of civilization stay in chains?' English poet Lord Byron even spent all his money, bought weapons, and sailed to fight!",
-    "toddlerQuestion": "Which treaty recognized Greece as a free nation?",
-    "toddlerAnswer": "The Treaty of Constantinople of 1832! (Don't confuse it with Vienna 1815)."
+    "dramaEmoji": "🏛️⛵",
+    "toddlerStory": "In 1821, Greeks mobilized for a war of national liberation against four centuries of Ottoman imperial rule. The rebellion captured the imagination of educated elites across Western Europe, who revered ancient Greece as the 'cradle of European civilization'. Intellectuals, poets, and artists rallied international support, viewing the struggle as Christian and cultural emancipation from Muslim imperial dominance.",
+    "toddlerQuestion": "How did European romantic poets view Greece during its independence struggle?",
+    "toddlerAnswer": "They revered Greece as the 'cradle of European civilization' and rallied emotional and financial support against Ottoman imperial rule.",
+    "visualSceneNarrative": "In 1821, Greeks mobilized for a war of national liberation against four centuries of Ottoman imperial rule. The rebellion captured the imagination of educated elites across Western Europe, who revered ancient Greece as the 'cradle of European civilization'. Intellectuals, poets, and artists rallied international support, viewing the struggle as Christian and cultural emancipation from Muslim imperial dominance.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1824_byron_dies": {
-    "dramaEmoji": "\ud83d\udc94\ud83d\udcdc",
-    "toddlerStory": "Lord Byron, the famous British poet, didn't just write rhymes from an armchair. He organized funds and sailed to Greece to fight for Greek independence, but caught a terrible fever at Missolonghi and died. His sacrifice inspired students across Europe to fight for liberty!",
-    "toddlerQuestion": "How did Lord Byron die?",
-    "toddlerAnswer": "He died of fever in 1824 at Missolonghi after mobilizing funds for the Greek war."
+    "dramaEmoji": "✍️💔",
+    "toddlerStory": "Celebrated English Romantic poet Lord Byron did not merely write verses in support of Greece; he used his personal fortune to organize funds, buy weapons, and sail to Greece to join the battlefield. Tragically, before seeing combat, Byron contracted a violent fever at Missolonghi and died in 1824. His death elevated the Greek cause into a pan-European crusade for freedom.",
+    "toddlerQuestion": "What was Lord Byron's contribution to the Greek War of Independence?",
+    "toddlerAnswer": "He raised funds, purchased military supplies, and sailed to Greece to fight, where he tragically died of fever at Missolonghi in 1824.",
+    "visualSceneNarrative": "Celebrated English Romantic poet Lord Byron did not merely write verses in support of Greece; he used his personal fortune to organize funds, buy weapons, and sail to Greece to join the battlefield. Tragically, before seeing combat, Byron contracted a violent fever at Missolonghi and died in 1824. His death elevated the Greek cause into a pan-European crusade for freedom.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1830_july_revolution": {
-    "dramaEmoji": "\ud83d\udca5\ud83c\uddeb\ud83c\uddf7",
-    "toddlerStory": "Remember the old Bourbon kings that Vienna put back in France? In July 1830, the people of Paris said 'Get lost again!' and replaced the king with Louis Philippe under a constitutional monarchy. Metternich famously sighed: 'When France sneezes, the rest of Europe catches cold!'",
-    "toddlerQuestion": "Who said: 'When France sneezes, the rest of Europe catches cold'?",
-    "toddlerAnswer": "Austrian Chancellor Duke Metternich! It means revolutionary sparks in France always spread across Europe."
+    "dramaEmoji": "💥🇫🇷",
+    "toddlerStory": "In July 1830, Parisian citizens revolted against the restored Bourbon monarch Charles X, forcing his abdication and installing Louis Philippe as a constitutional monarch. The revolution in Paris ignited an immediate uprising in Brussels, leading to Belgium declaring independence from the United Kingdom of the Netherlands. This prompted Metternich's famous quip: 'When France sneezes, the rest of Europe catches cold.'",
+    "toddlerQuestion": "Who stated: 'When France sneezes, the rest of Europe catches cold', and what did it mean?",
+    "toddlerAnswer": "Austrian Chancellor Duke Metternich. It meant that revolutionary political upheavals in France inevitably triggered revolutions across the rest of Europe.",
+    "visualSceneNarrative": "In July 1830, Parisian citizens revolted against the restored Bourbon monarch Charles X, forcing his abdication and installing Louis Philippe as a constitutional monarch. The revolution in Paris ignited an immediate uprising in Brussels, leading to Belgium declaring independence from the United Kingdom of the Netherlands. This prompted Metternich's famous quip: 'When France sneezes, the rest of Europe catches cold.'",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1831_young_italy": {
-    "dramaEmoji": "\ud83e\udd2b\ud83d\udd6f\ufe0f",
-    "toddlerStory": "Giuseppe Mazzini, an intense Italian rebel exiled for attempting a revolution, formed a secret club called 'Young Italy' in Marseilles. Young dreamers met by candlelight and swore to unify Italy into one single republic: 'God has made nations to be the natural units of mankind!'",
-    "toddlerQuestion": "What two secret societies did Mazzini found?",
-    "toddlerAnswer": "Young Italy (in Marseilles) and Young Europe (in Berne)!"
+    "dramaEmoji": "🕯️🇮🇹",
+    "toddlerStory": "Exiled in Marseilles following a failed 1831 insurrection in Liguria, Italian nationalist Giuseppe Mazzini founded the secret society 'Young Italy' (Giovine Italia). Mazzini envisioned Italy not as a patchwork of monarchies, but as a united, democratic republic. His passionate belief that 'God has made nations to be the natural units of mankind' terrified autocratic rulers across Europe.",
+    "toddlerQuestion": "How did Austrian Chancellor Duke Metternich describe Giuseppe Mazzini?",
+    "toddlerAnswer": "Metternich described Mazzini as 'the most dangerous enemy of our social order' due to his relentless advocacy for democratic republican nationalism.",
+    "visualSceneNarrative": "Exiled in Marseilles following a failed 1831 insurrection in Liguria, Italian nationalist Giuseppe Mazzini founded the secret society 'Young Italy' (Giovine Italia). Mazzini envisioned Italy not as a patchwork of monarchies, but as a united, democratic republic. His passionate belief that 'God has made nations to be the natural units of mankind' terrified autocratic rulers across Europe.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1831_polish_rebellion": {
-    "dramaEmoji": "\ud83c\uddf5\ud83c\uddf1\u2744\ufe0f",
-    "toddlerStory": "Russia ruled Poland and banned the Polish language. But Polish priests stubbornly gave church sermons in Polish instead of Russian! The Russian Tsar was so angry that he arrested the priests and exiled them to the freezing snow of Siberia as punishment.",
+    "dramaEmoji": "❄️📖",
+    "toddlerStory": "Following an armed Polish uprising against Russian imperial rule in 1831 that was brutally suppressed, the Russian Tsar banned the Polish language from schools and government offices. In response, Polish Catholic priests and bishops weaponized their language as an instrument of national defiance, conducting church services strictly in Polish. The Tsar retaliated by exiling hundreds of clergy to the frozen wastelands of Siberia.",
     "toddlerQuestion": "How was language used as a weapon of national resistance in Poland?",
-    "toddlerAnswer": "Priests used Polish for religious instruction, refusing to use Russian, symbolizing cultural defiance."
+    "toddlerAnswer": "Polish clergy stubbornly used Polish for church sermons and religious instruction, defying compulsory Russian; many were exiled to Siberia as punishment.",
+    "visualSceneNarrative": "Following an armed Polish uprising against Russian imperial rule in 1831 that was brutally suppressed, the Russian Tsar banned the Polish language from schools and government offices. In response, Polish Catholic priests and bishops weaponized their language as an instrument of national defiance, conducting church services strictly in Polish. The Tsar retaliated by exiling hundreds of clergy to the frozen wastelands of Siberia.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1832_constantinople": {
-    "dramaEmoji": "\u270d\ufe0f\ud83c\uddec\ud83c\uddf7",
-    "toddlerStory": "After 11 years of fighting, the European powers and the Ottoman Sultan finally signed the Treaty of Constantinople. The ink dried and Greece was officially recognized by the world as an independent nation-state!",
-    "toddlerQuestion": "What is the year of the Treaty of Constantinople?",
-    "toddlerAnswer": "1832! (Recognized Greece as an independent nation)."
+    "dramaEmoji": "📜🕊️",
+    "toddlerStory": "After eleven years of fierce struggle and international intervention by Britain, France, and Russia, the Ottoman Empire signed the Treaty of Constantinople in July 1832. The treaty officially recognized Greece as a sovereign, independent nation-state, establishing a landmark triumph for national self-determination over multi-ethnic empires.",
+    "toddlerQuestion": "Which treaty recognized Greece as an independent nation-state?",
+    "toddlerAnswer": "The Treaty of Constantinople of 1832 recognized Greece as an independent nation.",
+    "visualSceneNarrative": "After eleven years of fierce struggle and international intervention by Britain, France, and Russia, the Ottoman Empire signed the Treaty of Constantinople in July 1832. The treaty officially recognized Greece as a sovereign, independent nation-state, establishing a landmark triumph for national self-determination over multi-ethnic empires.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1833_young_europe": {
-    "dramaEmoji": "\ud83c\udf0d\ud83d\udd4a\ufe0f",
-    "toddlerStory": "Mazzini didn't stop with Italy; in Berne, Switzerland, he created 'Young Europe' with like-minded young men from Poland, Italy, Germany, and France. Metternich called Mazzini 'the most dangerous enemy of our social order'!",
-    "toddlerQuestion": "Who did Metternich describe as 'the most dangerous enemy of our social order'?",
-    "toddlerAnswer": "Giuseppe Mazzini!"
+    "dramaEmoji": "🤝🌍",
+    "toddlerStory": "Following the success of Young Italy, Giuseppe Mazzini convened young revolutionary exiles from Poland, Italy, Germany, and France in Berne, Switzerland, to establish 'Young Europe' in 1833. Mazzini argued that the liberation of individual nations was part of a larger universal struggle for human freedom, creating a transnational brotherhood of revolutionaries.",
+    "toddlerQuestion": "What two secret societies were founded by Giuseppe Mazzini?",
+    "toddlerAnswer": "Young Italy (founded in Marseilles in 1831) and Young Europe (founded in Berne in 1833).",
+    "visualSceneNarrative": "Following the success of Young Italy, Giuseppe Mazzini convened young revolutionary exiles from Poland, Italy, Germany, and France in Berne, Switzerland, to establish 'Young Europe' in 1833. Mazzini argued that the liberation of individual nations was part of a larger universal struggle for human freedom, creating a transnational brotherhood of revolutionaries.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1834_zollverein": {
-    "dramaEmoji": "\ud83e\ude99\ud83d\ude82",
-    "toddlerStory": "Imagine traveling between German cities and having to stop every 20 km to change your money into 30 different coins and pay 39 different taxes! Prussia said: 'Enough nonsense!' and created Zollverein\u2014one big trade club that smashed tax barriers and cut coins down to TWO!",
-    "toddlerQuestion": "Who initiated the Zollverein customs union in 1834?",
-    "toddlerAnswer": "Prussia, joined by most of the German states."
+    "dramaEmoji": "🚂🪙",
+    "toddlerStory": "To overcome the economic fragmentation of 39 German states—where a merchant travelling between Hamburg and Berlin faced 11 custom barriers and over 30 separate currencies—Prussia initiated the customs union named Zollverein in 1834. Zollverein abolished internal tariff barriers and slashed currencies to just two, using economic integration to lay the bedrock for German political unification.",
+    "toddlerQuestion": "What was the Zollverein and who initiated it in 1834?",
+    "toddlerAnswer": "Zollverein was a customs union initiated by Prussia and joined by most German states; it abolished internal tariff barriers and reduced currencies from over 30 to two.",
+    "visualSceneNarrative": "To overcome the economic fragmentation of 39 German states—where a merchant travelling between Hamburg and Berlin faced 11 custom barriers and over 30 separate currencies—Prussia initiated the customs union named Zollverein in 1834. Zollverein abolished internal tariff barriers and slashed currencies to just two, using economic integration to lay the bedrock for German political unification.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1845_silesian_weavers": {
-    "dramaEmoji": "\ud83e\uddf5\ud83c\udfe0",
-    "toddlerStory": "Greedy contractors cut the wages of poor Silesian weavers who were already starving. Desperate weavers marched to the contractor's fancy mansion chanting for food. When the contractor laughed at them, they smashed his windows, broke his furniture, and tore his expensive porcelain!",
-    "toddlerQuestion": "Who described the 1845 Silesian weavers' revolt in NCERT?",
-    "toddlerAnswer": "Journalist Wilhelm Wolff!"
+    "dramaEmoji": "🏚️⚡",
+    "toddlerStory": "In 1845, Silesian textile weavers suffered brutal wage cuts by wealthy contractors who supplied them raw materials for cloth. Desperate and starving, a crowd of weavers marched to a contractor's mansion demanding fair wages. Met with insults and threats, the weavers stormed the mansion, destroying porcelain, smashing windows, and looting warehouses. Prussian troops intervened, shooting eleven weavers dead.",
+    "toddlerQuestion": "Who documented the 1845 Silesian weavers' uprising in NCERT?",
+    "toddlerAnswer": "Journalist Wilhelm Wolff documented the uprising, highlighting how contractors brutally exploited desperate weavers by slashing prices.",
+    "visualSceneNarrative": "In 1845, Silesian textile weavers suffered brutal wage cuts by wealthy contractors who supplied them raw materials for cloth. Desperate and starving, a crowd of weavers marched to a contractor's mansion demanding fair wages. Met with insults and threats, the weavers stormed the mansion, destroying porcelain, smashing windows, and looting warehouses. Prussian troops intervened, shooting eleven weavers dead.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1848_feb_paris": {
-    "dramaEmoji": "\ud83e\udd56\ud83c\udfc3\u200d\u2642\ufe0f",
-    "toddlerStory": "Food shortages and factory closures made Paris explode in February 1848! Barricades were built in the streets, King Louis Philippe fled in a carriage, and France declared itself a Republic with universal male suffrage (voting rights for all men aged 21+) and guaranteed right to work!",
-    "toddlerQuestion": "What right was granted to all adult males above 21 in France in 1848?",
-    "toddlerAnswer": "Universal adult male suffrage and the statutory right to work (National Workshops)."
+    "dramaEmoji": "🥖🇫🇷",
+    "toddlerStory": "In February 1848, acute food shortages and widespread unemployment brought the working population of Paris out onto the barricades. King Louis Philippe was forced to flee France in disguise. The National Assembly proclaimed a Second French Republic, granting universal adult male suffrage to all men aged 21 and older and guaranteeing the constitutional right to work through national workshops.",
+    "toddlerQuestion": "What significant political right was granted in France in February 1848?",
+    "toddlerAnswer": "Universal adult male suffrage was granted to all men aged 21 and above, alongside the constitutional guarantee of the right to work.",
+    "visualSceneNarrative": "In February 1848, acute food shortages and widespread unemployment brought the working population of Paris out onto the barricades. King Louis Philippe was forced to flee France in disguise. The National Assembly proclaimed a Second French Republic, granting universal adult male suffrage to all men aged 21 and older and guaranteeing the constitutional right to work through national workshops.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1848_frankfurt": {
-    "dramaEmoji": "\u26ea\ud83d\udc54",
-    "toddlerStory": "831 middle-class politicians wore fancy ties, marched into St. Paul's Church, and wrote a constitution. They offered the German crown to the King of Prussia. He laughed: 'I won't take a crown from commoners!' and sent soldiers to disband them. Women were only allowed to watch from the balcony!",
+    "dramaEmoji": "🏛️📜",
+    "toddlerStory": "On 18 May 1848, 831 elected German representatives marched into St. Paul's Church in Frankfurt to draft a constitution for a unified German nation headed by a constitutional monarch. They offered the imperial crown to King Friedrich Wilhelm IV of Prussia. Autocratically rejecting an offer from an elected assembly, the Prussian king allied with other monarchs; Prussian troops disbanded the parliament, leaving women relegated only to the visitors' gallery.",
     "toddlerQuestion": "Why did the Frankfurt Parliament fail in 1848?",
-    "toddlerAnswer": "King Friedrich Wilhelm IV rejected the crown; parliament lost worker support and was disbanded by troops."
+    "toddlerAnswer": "King Friedrich Wilhelm IV of Prussia rejected the crown offered by the assembly; aristocrats and military opposed it, and the parliament lost worker support.",
+    "visualSceneNarrative": "On 18 May 1848, 831 elected German representatives marched into St. Paul's Church in Frankfurt to draft a constitution for a unified German nation headed by a constitutional monarch. They offered the imperial crown to King Friedrich Wilhelm IV of Prussia. Autocratically rejecting an offer from an elected assembly, the Prussian king allied with other monarchs; Prussian troops disbanded the parliament, leaving women relegated only to the visitors' gallery.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1859_sardinia_austria": {
-    "dramaEmoji": "\ud83e\udd3a\ud83e\udd1d",
-    "toddlerStory": "Count Cavour of Sardinia was a master diplomat who spoke French better than Italian! He made a secret military deal with Emperor Napoleon III of France, provoked Austria into a fight, and crushed Austrian troops in Lombardy!",
-    "toddlerQuestion": "Who was the diplomatic architect behind Sardinia-Piedmont's victory over Austria?",
-    "toddlerAnswer": "Chief Minister Count Camillo de Cavour!"
+    "dramaEmoji": "⚔️🏔️",
+    "toddlerStory": "Count Camillo de Cavour, Chief Minister of Piedmont-Sardinia, was neither a revolutionary nor a democrat, but an astute diplomat. Through a shrewd diplomatic alliance engineered with French Emperor Napoleon III, Cavour led Sardinia-Piedmont to defeat the Austrian imperial forces in 1859, liberating Lombardy and unlocking the first crucial phase of Italian unification.",
+    "toddlerQuestion": "How did Cavour engineer the defeat of Austria in 1859?",
+    "toddlerAnswer": "Through a tactful diplomatic alliance with France under Napoleon III, Sardinia-Piedmont defeated Austrian forces in 1859.",
+    "visualSceneNarrative": "Count Camillo de Cavour, Chief Minister of Piedmont-Sardinia, was neither a revolutionary nor a democrat, but an astute diplomat. Through a shrewd diplomatic alliance engineered with French Emperor Napoleon III, Cavour led Sardinia-Piedmont to defeat the Austrian imperial forces in 1859, liberating Lombardy and unlocking the first crucial phase of Italian unification.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1860_garibaldi_thousand": {
-    "dramaEmoji": "\u26f5\ud83d\udd34",
-    "toddlerStory": "Giuseppe Garibaldi set sail with 1,000 volunteers wearing bright Red Shirts! They landed in Sicily, won the hearts of local peasants, drove out the Spanish Bourbon rulers, and handed southern Italy to King Victor Emmanuel II!",
-    "toddlerQuestion": "What was the popular name of Garibaldi's volunteer army?",
-    "toddlerAnswer": "The Red Shirts (The Expedition of the Thousand)!"
+    "dramaEmoji": "🚢🔴",
+    "toddlerStory": "In 1860, Giuseppe Garibaldi led his volunteer army of 'Red Shirts' on the legendary 'Expedition of the Thousand' into the Kingdom of the Two Sicilies in southern Italy. Winning enthusiastic support from local peasants who were eager to overthrow Bourbon feudal oppression, Garibaldi's forces drove out the Spanish ruler and magnanimously handed over southern Italy to King Victor Emmanuel II.",
+    "toddlerQuestion": "What role did Giuseppe Garibaldi play in Italian unification in 1860?",
+    "toddlerAnswer": "He led armed volunteers (Red Shirts) into South Italy and the Kingdom of the Two Sicilies, winning peasant support to drive out the Bourbon rulers.",
+    "visualSceneNarrative": "In 1860, Giuseppe Garibaldi led his volunteer army of 'Red Shirts' on the legendary 'Expedition of the Thousand' into the Kingdom of the Two Sicilies in southern Italy. Winning enthusiastic support from local peasants who were eager to overthrow Bourbon feudal oppression, Garibaldi's forces drove out the Spanish ruler and magnanimously handed over southern Italy to King Victor Emmanuel II.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1861_victor_emmanuel": {
-    "dramaEmoji": "\ud83d\udc51\ud83c\uddee\ud83c\uddf9",
-    "toddlerStory": "Italy was finally united! Victor Emmanuel II was proclaimed King of United Italy. Funny fact: illiterate southern peasants thought 'La Talia' was the King's wife, not their country!",
-    "toddlerQuestion": "Who was proclaimed the first king of unified Italy in 1861?",
-    "toddlerAnswer": "King Victor Emmanuel II!"
+    "dramaEmoji": "👑🇮🇹",
+    "toddlerStory": "In March 1861, Victor Emmanuel II of Sardinia-Piedmont was officially proclaimed King of United Italy. However, much of the illiterate peasant population of the south, who had rallied behind Garibaldi's red-shirted volunteers, had never heard of 'Italia'—many believed that 'La Talia' was the beloved wife of Victor Emmanuel!",
+    "toddlerQuestion": "What amusing historical fact highlights the political innocence of southern Italian peasants in 1861?",
+    "toddlerAnswer": "Illiterate southern peasants believed 'La Talia' was King Victor Emmanuel II's wife, having never heard the abstract political concept of 'Italia'.",
+    "visualSceneNarrative": "In March 1861, Victor Emmanuel II of Sardinia-Piedmont was officially proclaimed King of United Italy. However, much of the illiterate peasant population of the south, who had rallied behind Garibaldi's red-shirted volunteers, had never heard of 'Italia'—many believed that 'La Talia' was the beloved wife of Victor Emmanuel!",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1866_1871_german_wars": {
-    "dramaEmoji": "\u2694\ufe0f\ud83c\udde9\ud83c\uddea",
-    "toddlerStory": "Otto von Bismarck said: 'Speeches change nothing\u2014only Iron and Blood do!' In 7 years, he fought 3 swift wars against Denmark, Austria, and France, winning every single one with the Prussian military machine!",
-    "toddlerQuestion": "Name the three wars fought by Prussia over 7 years to unify Germany.",
-    "toddlerAnswer": "Wars against Denmark (1864), Austria (1866), and France (1870-71)."
+    "dramaEmoji": "⚔️🛡️",
+    "toddlerStory": "Prussian Chief Minister Otto von Bismarck orchestrated the unification of Germany through his doctrine of 'Blood and Iron'. Over seven years, Prussia fought three decisive wars against Denmark (1864), Austria (1866), and France (1870-71). Bismarck's military modernized Prussian artillery and defeated each rival power, culminating in Prussian dominance over Central Europe.",
+    "toddlerQuestion": "Name the three wars fought by Prussia over seven years to achieve German unification.",
+    "toddlerAnswer": "Wars against Denmark (1864), Austria (1866), and France (1870-71), all won by Prussia under Bismarck's leadership.",
+    "visualSceneNarrative": "Prussian Chief Minister Otto von Bismarck orchestrated the unification of Germany through his doctrine of 'Blood and Iron'. Over seven years, Prussia fought three decisive wars against Denmark (1864), Austria (1866), and France (1870-71). Bismarck's military modernized Prussian artillery and defeated each rival power, culminating in Prussian dominance over Central Europe.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1871_kaiser_versailles": {
-    "dramaEmoji": "\ud83c\udfdb\ufe0f\u2744\ufe0f",
-    "toddlerStory": "On a freezing January morning in 1871, German princes gathered in the Hall of Mirrors in France's Versailles Palace. Surrounded by mirrors and military brass, they crowned King William I of Prussia as Kaiser of the new German Empire!",
-    "toddlerQuestion": "Where was Kaiser William I proclaimed German Emperor?",
-    "toddlerAnswer": "In the Hall of Mirrors at the Palace of Versailles!"
+    "dramaEmoji": "❄️👑",
+    "toddlerStory": "On a bitterly cold morning of 18 January 1871, German princes, military commanders, and Otto von Bismarck gathered in the unheated Hall of Mirrors in the Palace of Versailles outside Paris. There, they proclaimed King Wilhelm I of Prussia as Kaiser (Emperor) of the newly unified German Empire, cementing Prussian dominance and modernizing Germany's currency, banking, and legal codes.",
+    "toddlerQuestion": "Where was Prussian King Wilhelm I proclaimed German Emperor in January 1871?",
+    "toddlerAnswer": "In the Hall of Mirrors at the Palace of Versailles, France, on 18 January 1871.",
+    "visualSceneNarrative": "On a bitterly cold morning of 18 January 1871, German princes, military commanders, and Otto von Bismarck gathered in the unheated Hall of Mirrors in the Palace of Versailles outside Paris. There, they proclaimed King Wilhelm I of Prussia as Kaiser (Emperor) of the newly unified German Empire, cementing Prussian dominance and modernizing Germany's currency, banking, and legal codes.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "eu_1871_balkans_conflict": {
-    "dramaEmoji": "\ud83d\udca3\ud83d\udca5",
-    "toddlerStory": "The Balkans were like a box of fireworks waiting for a match. Different ethnic Slavic groups wanted freedom from the crumbling Ottoman Empire, while big superpowers (Russia, Germany, Britain, Austria) played tug-of-war over territory. In 1914, it exploded into World War I!",
-    "toddlerQuestion": "Why were the Balkans called the 'powder keg' of Europe?",
-    "toddlerAnswer": "Explosive mix of intense Slavic rivalries and imperial competition among European superpowers."
+    "dramaEmoji": "💣🌋",
+    "toddlerStory": "After 1871, the Balkans—a multi-ethnic region inhabited by Slavic peoples under decaying Ottoman control—became a geopolitical powder keg. As romantic nationalism spurred Greeks, Serbs, Bulgarians, and Romanians to break away, major imperial powers (Russia, Germany, Britain, and Austria-Hungary) aggressively competed for naval trade and territorial dominance in the region, ultimately exploding into the First World War in 1914.",
+    "toddlerQuestion": "Why did the Balkans become the explosive powder keg that triggered World War I?",
+    "toddlerAnswer": "The decline of the Ottoman Empire spurred intense ethnic rivalries, while major European imperial powers competed fiercely for trade, naval, and colonial control.",
+    "visualSceneNarrative": "After 1871, the Balkans—a multi-ethnic region inhabited by Slavic peoples under decaying Ottoman control—became a geopolitical powder keg. As romantic nationalism spurred Greeks, Serbs, Bulgarians, and Romanians to break away, major imperial powers (Russia, Germany, Britain, and Austria-Hungary) aggressively competed for naval trade and territorial dominance in the region, ultimately exploding into the First World War in 1914.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1915_gandhi_returns": {
-    "dramaEmoji": "\ud83d\udea2\ud83e\uddd8\u200d\u2642\ufe0f",
-    "toddlerStory": "In January 1915, a quiet lawyer wearing simple clothes arrived in Mumbai from South Africa. He carried no swords or guns\u2014only a magical concept called Satyagraha: 'Truth and non-violence can shake any empire!'",
-    "toddlerQuestion": "Where did Gandhiji first test Satyagraha before coming to India?",
-    "toddlerAnswer": "In South Africa, fighting racist apartheid pass laws!"
+    "dramaEmoji": "🚢🇮🇳",
+    "toddlerStory": "In January 1915, Mahatma Gandhi returned to India from South Africa, where he had successfully led Indian immigrants in non-violent resistance against racist laws. He introduced the novel philosophy of 'Satyagraha'—the principle that if the cause is just and the struggle is against untruth, physical violence is unnecessary to prevail over an oppressor.",
+    "toddlerQuestion": "When did Mahatma Gandhi return to India from South Africa?",
+    "toddlerAnswer": "January 1915. He brought with him the novel method of mass agitation called Satyagraha.",
+    "visualSceneNarrative": "In January 1915, Mahatma Gandhi returned to India from South Africa, where he had successfully led Indian immigrants in non-violent resistance against racist laws. He introduced the novel philosophy of 'Satyagraha'—the principle that if the cause is just and the struggle is against untruth, physical violence is unnecessary to prevail over an oppressor.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1917_champaran": {
-    "dramaEmoji": "\ud83c\udf31\u270a",
-    "toddlerStory": "British plantation bosses forced poor Bihar farmers to grow indigo on their best land (Tinkathia system) instead of food crops! Gandhiji visited Champaran, sat with farmers, and forced the British to refund the stolen money!",
-    "toddlerQuestion": "Why was the Champaran Satyagraha of 1917 launched?",
-    "toddlerAnswer": "To fight the oppressive indigo plantation system in Bihar."
+    "dramaEmoji": "🌱✊",
+    "toddlerStory": "In 1917, Gandhiji travelled to Champaran in Bihar to investigate the plight of poor peasants forced under the exploitative 'tinkathia' system to cultivate indigo on 3/20th of their holdings. Organizing a peaceful inquiry and defying colonial deportation orders, Gandhi secured the first major Satyagraha victory on Indian soil, winning commission inquiry and compensation for the peasantry.",
+    "toddlerQuestion": "Why did Mahatma Gandhi organize the Champaran Satyagraha in 1917?",
+    "toddlerAnswer": "To support poor peasants struggling against the oppressive British indigo plantation system in Bihar.",
+    "visualSceneNarrative": "In 1917, Gandhiji travelled to Champaran in Bihar to investigate the plight of poor peasants forced under the exploitative 'tinkathia' system to cultivate indigo on 3/20th of their holdings. Organizing a peaceful inquiry and defying colonial deportation orders, Gandhi secured the first major Satyagraha victory on Indian soil, winning commission inquiry and compensation for the peasantry.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1917_kheda": {
-    "dramaEmoji": "\ud83c\udf3e\ud83c\udf27\ufe0f",
-    "toddlerStory": "Crops failed and plague struck Kheda in Gujarat, but the British tax collectors still demanded full taxes! Gandhiji and Sardar Vallabhbhai Patel said: 'Refuse to pay!' The government blinked and cancelled taxes for poor farmers.",
-    "toddlerQuestion": "What was the demand of Kheda peasants in 1917?",
-    "toddlerAnswer": "Relaxation and remission of revenue due to crop failure and plague epidemic."
+    "dramaEmoji": "🌾 Gujarat",
+    "toddlerStory": "In late 1917, severe crop failure accompanied by a devastating plague epidemic struck Kheda district in Gujarat. Under the colonial land code, peasants were legally entitled to revenue remission if crops fell below 25%, but British authorities ruthlessly demanded full tax collection. Gandhiji and Sardar Vallabhbhai Patel led a peaceful revenue-refusal Satyagraha until authorities conceded.",
+    "toddlerQuestion": "What was the demand of the Kheda peasants during their 1917 Satyagraha?",
+    "toddlerAnswer": "Peasants demanded relaxation/remission of revenue collection due to widespread crop failure and a plague epidemic.",
+    "visualSceneNarrative": "In late 1917, severe crop failure accompanied by a devastating plague epidemic struck Kheda district in Gujarat. Under the colonial land code, peasants were legally entitled to revenue remission if crops fell below 25%, but British authorities ruthlessly demanded full tax collection. Gandhiji and Sardar Vallabhbhai Patel led a peaceful revenue-refusal Satyagraha until authorities conceded.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1918_ahmedabad": {
-    "dramaEmoji": "\ud83c\udfed\ud83e\udd6a",
-    "toddlerStory": "Cotton mill owners in Ahmedabad cancelled plague bonuses while prices skyrocketed! Gandhiji joined the factory workers, went on a hunger strike, and peacefully won them a 35% wage increase!",
-    "toddlerQuestion": "What percentage wage hike did Ahmedabad mill workers win in 1918?",
-    "toddlerAnswer": "A 35% wage increase!"
+    "dramaEmoji": "🏭🧶",
+    "toddlerStory": "In 1918, cotton textile mill owners in Ahmedabad abruptly withdrew the plague bonus, while wartime inflation had doubled the cost of living. Supported by Anasuya Sarabhai and Mahatma Gandhi, mill workers went on strike demanding a 35% wage increase. When negotiations stalled, Gandhiji undertook his first public hunger strike in India, securing the full 35% wage hike from mill owners.",
+    "toddlerQuestion": "What was the core demand of Ahmedabad cotton mill workers in 1918?",
+    "toddlerAnswer": "Workers demanded a 35% wage increase to offset wartime inflation following the withdrawal of the plague bonus.",
+    "visualSceneNarrative": "In 1918, cotton textile mill owners in Ahmedabad abruptly withdrew the plague bonus, while wartime inflation had doubled the cost of living. Supported by Anasuya Sarabhai and Mahatma Gandhi, mill workers went on strike demanding a 35% wage increase. When negotiations stalled, Gandhiji undertook his first public hunger strike in India, securing the full 35% wage hike from mill owners.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1919_march_rowlatt": {
-    "dramaEmoji": "\ud83d\udcdc\ud83d\udea8",
-    "toddlerStory": "The British passed the 'Rowlatt Black Act': police could grab any Indian and throw them into jail for 2 whole years without a trial, judge, or lawyer! Gandhiji called for an all-India strike (Hartal) on April 6.",
-    "toddlerQuestion": "What was the most hated provision of the Rowlatt Act?",
-    "toddlerAnswer": "Detention of political prisoners for up to 2 years without trial."
+    "dramaEmoji": "📜⛓️",
+    "toddlerStory": "In March 1919, despite united opposition from all Indian members of the Imperial Legislative Council, the British government enacted the Anarchical and Revolutionary Crimes Act (Rowlatt Act). The law granted sweeping powers to the colonial state: suspects could be detained without trial for up to two years without legal representation, sparking nationwide indignation.",
+    "toddlerQuestion": "What were the oppressive provisions of the Rowlatt Act of 1919?",
+    "toddlerAnswer": "It empowered the colonial government to repress political activities and detain political prisoners without trial for up to two years.",
+    "visualSceneNarrative": "In March 1919, despite united opposition from all Indian members of the Imperial Legislative Council, the British government enacted the Anarchical and Revolutionary Crimes Act (Rowlatt Act). The law granted sweeping powers to the colonial state: suspects could be detained without trial for up to two years without legal representation, sparking nationwide indignation.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1919_khilafat_committee": {
-    "dramaEmoji": "\ud83e\udd1d\ud83d\udd4c",
-    "toddlerStory": "The Ottoman Sultan (Khalifa) was humiliated after World War I. Two young brothers in Bombay, Muhammad Ali and Shaukat Ali, formed the Khilafat Committee. Gandhiji saw this as a golden bridge to unite Hindus and Muslims!",
-    "toddlerQuestion": "Who founded the Khilafat Committee in Bombay in March 1919?",
-    "toddlerAnswer": "The Ali brothers: Muhammad Ali and Shaukat Ali!"
+    "dramaEmoji": "🕌🤝",
+    "toddlerStory": "In March 1919, young Muslim leaders Muhammad Ali and Shaukat Ali formed the Khilafat Committee in Bombay. Following the defeat of the Ottoman Empire in World War I, rumors spread that a harsh treaty would strip the Ottoman Sultan—revered as the Khalifa (spiritual leader of the Islamic world)—of his temporal powers. Gandhiji saw in Khilafat a once-in-a-century opportunity to unite Hindus and Muslims in common struggle.",
+    "toddlerQuestion": "Why was the Khilafat Committee formed in Bombay in March 1919?",
+    "toddlerAnswer": "To defend the temporal powers and sacred places of the Ottoman Caliph (Khalifa) following Ottoman defeat in World War I.",
+    "visualSceneNarrative": "In March 1919, young Muslim leaders Muhammad Ali and Shaukat Ali formed the Khilafat Committee in Bombay. Following the defeat of the Ottoman Empire in World War I, rumors spread that a harsh treaty would strip the Ottoman Sultan—revered as the Khalifa (spiritual leader of the Islamic world)—of his temporal powers. Gandhiji saw in Khilafat a once-in-a-century opportunity to unite Hindus and Muslims in common struggle.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1919_6april_hartal": {
-    "dramaEmoji": "\ud83d\uded1\ud83c\uddee\ud83c\uddf3",
-    "toddlerStory": "On 6 April 1919, shops closed, trains stopped, and schools were empty across India! It was the first nationwide non-violent strike against the British Rowlatt Act.",
-    "toddlerQuestion": "What happened on 6 April 1919?",
-    "toddlerAnswer": "All-India Rowlatt Satyagraha Hartal (nationwide strike with fast and prayer)."
+    "dramaEmoji": "🛑🇮🇳",
+    "toddlerStory": "Mahatma Gandhi designated 6 April 1919 as a national day of prayer, fasting, and strike (hartal) against the hated Rowlatt Act. Rail workers went on strike, shops shuttered, and massive peaceful processions flooded cities across India, marking the first truly all-India mass demonstration against British rule.",
+    "toddlerQuestion": "What took place across India on 6 April 1919?",
+    "toddlerAnswer": "A nationwide hartal (general strike) called by Mahatma Gandhi with rallies, strikes, and shop closures against the Rowlatt Act.",
+    "visualSceneNarrative": "Mahatma Gandhi designated 6 April 1919 as a national day of prayer, fasting, and strike (hartal) against the hated Rowlatt Act. Rail workers went on strike, shops shuttered, and massive peaceful processions flooded cities across India, marking the first truly all-India mass demonstration against British rule.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1919_10april_amritsar": {
-    "dramaEmoji": "\ud83d\udc6e\u200d\u2642\ufe0f\ud83d\udca5",
-    "toddlerStory": "British police fired on a peaceful procession in Amritsar and arrested popular leaders Dr. Kitchlew and Dr. Satyapal. Protesters attacked post offices and banks. General Dyer was called in and declared Martial Law!",
-    "toddlerQuestion": "Which two Amritsar leaders were arrested on 10 April 1919?",
-    "toddlerAnswer": "Dr. Saifuddin Kitchlew and Dr. Satyapal."
+    "dramaEmoji": "🚨⚡",
+    "toddlerStory": "On 10 April 1919, police in Amritsar fired upon a peaceful procession demanding the release of popular local leaders Dr. Saifuddin Kitchlew and Dr. Satyapal. Enraged crowds attacked banks, post offices, and railway stations. The colonial administration panicked, handed administrative control of Amritsar to Brigadier-General Reginald Dyer, and declared martial law.",
+    "toddlerQuestion": "What provoked violent clashes in Amritsar on 10 April 1919?",
+    "toddlerAnswer": "Police firing on a peaceful procession protesting the arrest of local leaders Dr. Saifuddin Kitchlew and Dr. Satyapal.",
+    "visualSceneNarrative": "On 10 April 1919, police in Amritsar fired upon a peaceful procession demanding the release of popular local leaders Dr. Saifuddin Kitchlew and Dr. Satyapal. Enraged crowds attacked banks, post offices, and railway stations. The colonial administration panicked, handed administrative control of Amritsar to Brigadier-General Reginald Dyer, and declared martial law.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1919_13april_jallianwala": {
-    "dramaEmoji": "\ud83c\udf38\ud83d\udc94",
-    "toddlerStory": "Families dressed in festive clothes gathered inside the walled garden of Jallianwala Bagh for the spring Baisakhi fair. General Dyer blocked the only narrow exit with soldiers and fired without warning. Rabindranath Tagore renounced his British Knighthood in grief.",
-    "toddlerQuestion": "What was General Dyer's declared objective behind the firing?",
-    "toddlerAnswer": "'To produce a moral effect of terror and awe' across Punjab."
+    "dramaEmoji": "💔🩸",
+    "toddlerStory": "On 13 April 1919, thousands of men, women, and children gathered in the enclosed ground of Jallianwala Bagh in Amritsar. Many were peaceful political protesters; many were innocent villagers attending the traditional Baisakhi festival, unaware martial law had been declared. General Dyer entered with armed troops, sealed the narrow exit, and ordered troops to fire continuously into the trapped crowd for ten minutes until ammunition was exhausted.",
+    "toddlerQuestion": "Why did General Dyer order firing on the trapped crowd at Jallianwala Bagh?",
+    "toddlerAnswer": "Dyer stated his objective was to 'produce a moral effect'—to strike terror and awe into the minds of the satyagrahis.",
+    "visualSceneNarrative": "On 13 April 1919, thousands of men, women, and children gathered in the enclosed ground of Jallianwala Bagh in Amritsar. Many were peaceful political protesters; many were innocent villagers attending the traditional Baisakhi festival, unaware martial law had been declared. General Dyer entered with armed troops, sealed the narrow exit, and ordered troops to fire continuously into the trapped crowd for ten minutes until ammunition was exhausted.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1920_sept_calcutta": {
-    "dramaEmoji": "\ud83c\udfdb\ufe0f\ud83d\udce2",
-    "toddlerStory": "At a special Congress session in Calcutta, Gandhiji convinced skeptical leaders that the only answer to Jallianwala Bagh and Khilafat was to launch a nationwide Non-Cooperation Movement for Swaraj!",
-    "toddlerQuestion": "What key resolution was passed at the Calcutta Special Congress Session in Sept 1920?",
-    "toddlerAnswer": "Resolution to start Non-Cooperation in support of Khilafat and Swaraj."
+    "dramaEmoji": "🏛️✋",
+    "toddlerStory": "At a special Congress session in Calcutta in September 1920, Mahatma Gandhi convinced sceptical senior leaders, including C.R. Das, of the urgent necessity of launching a nationwide Non-Cooperation Movement in support of both Khilafat and Swaraj. The resolution called for boycotting legislative councils, government schools, and foreign goods.",
+    "toddlerQuestion": "What historic resolution was passed at the Calcutta Congress session in September 1920?",
+    "toddlerAnswer": "Gandhiji convinced leaders to adopt a resolution launching a Non-Cooperation Movement supporting Khilafat as well as Swaraj.",
+    "visualSceneNarrative": "At a special Congress session in Calcutta in September 1920, Mahatma Gandhi convinced sceptical senior leaders, including C.R. Das, of the urgent necessity of launching a nationwide Non-Cooperation Movement in support of both Khilafat and Swaraj. The resolution called for boycotting legislative councils, government schools, and foreign goods.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1920_oct_oudh_kisan": {
-    "dramaEmoji": "\ud83d\ude9c\ud83c\udf3e",
-    "toddlerStory": "Baba Ramchandra (a sanyasi who had been an indentured laborer in Fiji) and Jawaharlal Nehru formed the Oudh Kisan Sabha. In one month, over 300 village branches formed to fight landlords charging insane rents!",
-    "toddlerQuestion": "Who led the peasant movement in Awadh (Oudh)?",
-    "toddlerAnswer": "Baba Ramchandra (a sanyasi who returned from Fiji)!"
+    "dramaEmoji": "🌾🤝",
+    "toddlerStory": "In Awadh (Oudh), peasants were brutalized by talukdars and landlords demanding exorbitant rents and forced unpaid labor (begar). Baba Ramchandra, a sanyasi who had returned from indentured labor in Fiji, organized the peasantry. In October 1920, Jawaharlal Nehru and Baba Ramchandra established the 'Oudh Kisan Sabha', which within a month mushroomed into over 300 village branches.",
+    "toddlerQuestion": "Who founded the Oudh Kisan Sabha in October 1920?",
+    "toddlerAnswer": "Baba Ramchandra and Jawaharlal Nehru founded it to unite peasants against exploitative landlords and begar.",
+    "visualSceneNarrative": "In Awadh (Oudh), peasants were brutalized by talukdars and landlords demanding exorbitant rents and forced unpaid labor (begar). Baba Ramchandra, a sanyasi who had returned from indentured labor in Fiji, organized the peasantry. In October 1920, Jawaharlal Nehru and Baba Ramchandra established the 'Oudh Kisan Sabha', which within a month mushroomed into over 300 village branches.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1920_dec_nagpur": {
-    "dramaEmoji": "\ud83e\udd1d\ud83d\udcdc",
-    "toddlerStory": "At the Nagpur Congress Session in December 1920, all arguments were settled, hands were shaken, and the official Non-Cooperation program was formally adopted by the whole country!",
-    "toddlerQuestion": "At which session was the Non-Cooperation program formally adopted?",
-    "toddlerAnswer": "The Nagpur Congress Session of December 1920."
+    "dramaEmoji": "📜🎯",
+    "toddlerStory": "At the historic annual Congress session in Nagpur in December 1920, intense debate over boycotting council elections was resolved. A compromise was reached, and the Non-Cooperation programme was unanimously adopted. The Congress Constitution was amended to open membership to any adult paying 4 annas a year, transforming Congress into a mass grassroots organization.",
+    "toddlerQuestion": "What was the significance of the Nagpur Congress session of December 1920?",
+    "toddlerAnswer": "The Non-Cooperation programme was formally adopted, resolving leadership debates and transforming Congress into a mass party.",
+    "visualSceneNarrative": "At the historic annual Congress session in Nagpur in December 1920, intense debate over boycotting council elections was resolved. A compromise was reached, and the Non-Cooperation programme was unanimously adopted. The Congress Constitution was amended to open membership to any adult paying 4 annas a year, transforming Congress into a mass grassroots organization.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1921_jan_ncm_launched": {
-    "dramaEmoji": "\ud83d\udeab\ud83d\udc57",
-    "toddlerStory": "Students boycotted schools, lawyers refused to enter courts, and foreign cloth imports plunged from \u20b9102 crore to \u20b957 crore! People gathered on street corners to burn British clothes in giant bonfires!",
-    "toddlerQuestion": "By how much did foreign cloth imports drop during 1921-1922?",
-    "toddlerAnswer": "Imports halved, dropping from \u20b9102 crore to \u20b957 crore!"
+    "dramaEmoji": "🇮🇳🔥",
+    "toddlerStory": "In January 1921, the Non-Cooperation-Khilafat Movement began in full force. Thousands of students left government schools and colleges; headmasters and teachers resigned; lawyers gave up practice. Foreign cloth imports were halved between 1921 and 1922 (falling from Rs 102 crore to Rs 57 crore) as people built massive bonfires of foreign garments and donned homespun khadi.",
+    "toddlerQuestion": "What was the economic impact of the Non-Cooperation Movement on foreign trade?",
+    "toddlerAnswer": "The import of foreign cloth halved between 1921 and 1922 (Rs 102 crore to Rs 57 crore) as foreign cloth was boycotted and picketed.",
+    "visualSceneNarrative": "In January 1921, the Non-Cooperation-Khilafat Movement began in full force. Thousands of students left government schools and colleges; headmasters and teachers resigned; lawyers gave up practice. Foreign cloth imports were halved between 1921 and 1922 (falling from Rs 102 crore to Rs 57 crore) as people built massive bonfires of foreign garments and donned homespun khadi.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1921_alluri_gudem": {
-    "dramaEmoji": "\ud83c\udff9\ud83c\udf32",
-    "toddlerStory": "In Andhra Pradesh, the British banned tribal people from entering their own forests. Alluri Sitaram Raju, who claimed he had special healing powers and couldn't be killed by bullets, led a guerrilla war using traditional bows and arrows!",
-    "toddlerQuestion": "Who led the tribal guerrilla movement in the Gudem Hills of Andhra Pradesh?",
-    "toddlerAnswer": "Alluri Sitaram Raju!"
+    "dramaEmoji": "🏹🏔️",
+    "toddlerStory": "In the Gudem Hills of Andhra Pradesh, British forest laws stripped tribal peasants of their traditional rights to graze cattle and gather fuel, forcing them into begar for road construction. Alluri Sitaram Raju, claiming spiritual powers and invulnerability to bullets, led a militant guerrilla rebellion. Raju praised Gandhiji and urged tribals to wear khadi and give up alcohol, but maintained that freedom required violent force.",
+    "toddlerQuestion": "Who led the tribal guerrilla uprising in the Gudem Hills of Andhra Pradesh?",
+    "toddlerAnswer": "Alluri Sitaram Raju led the militant guerrilla movement, combining reverence for Gandhi with armed resistance against colonial forest laws.",
+    "visualSceneNarrative": "In the Gudem Hills of Andhra Pradesh, British forest laws stripped tribal peasants of their traditional rights to graze cattle and gather fuel, forcing them into begar for road construction. Alluri Sitaram Raju, claiming spiritual powers and invulnerability to bullets, led a militant guerrilla rebellion. Raju praised Gandhiji and urged tribals to wear khadi and give up alcohol, but maintained that freedom required violent force.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1921_assam_plantations": {
-    "dramaEmoji": "\ud83c\udf75\ud83c\udfc3\u200d\u2640\ufe0f",
-    "toddlerStory": "Under the Inland Emigration Act of 1859, tea plantation workers in Assam were forbidden from leaving tea gardens without permission. Hearing of Gandhi Raj, thousands walked out of plantations, believing Gandhi was giving everyone free village land!",
-    "toddlerQuestion": "Which 1859 British Act trapped tea workers in Assam?",
-    "toddlerAnswer": "The Inland Emigration Act of 1859."
+    "dramaEmoji": "☕🏃",
+    "toddlerStory": "Under the British Inland Emigration Act of 1859, tea plantation workers in Assam were forbidden from leaving tea gardens without permission, which was almost never granted. When news of Non-Cooperation reached the plantations, thousands of workers defied authority, left the gardens, and headed home, believing 'Gandhi Raj' was coming and everyone would receive land. Stranded by railway and steamer strikes, they were caught by police and brutally beaten.",
+    "toddlerQuestion": "Which colonial act restricted the freedom of Assam tea plantation laborers?",
+    "toddlerAnswer": "The Inland Emigration Act of 1859, which prohibited plantation laborers from leaving tea gardens without official permission.",
+    "visualSceneNarrative": "Under the British Inland Emigration Act of 1859, tea plantation workers in Assam were forbidden from leaving tea gardens without permission, which was almost never granted. When news of Non-Cooperation reached the plantations, thousands of workers defied authority, left the gardens, and headed home, believing 'Gandhi Raj' was coming and everyone would receive land. Stranded by railway and steamer strikes, they were caught by police and brutally beaten.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1922_chauri_chaura": {
-    "dramaEmoji": "\ud83d\udd25\ud83d\uded1",
-    "toddlerStory": "Police fired on a peaceful market protest in Chauri Chaura (Gorakhpur, UP). The furious crowd chased the police into the station and set it on fire, killing 22 officers. Heartbroken, Gandhiji halted the whole national movement: 'We are not ready for pure non-violence yet!'",
-    "toddlerQuestion": "On what date did the Chauri Chaura incident occur?",
-    "toddlerAnswer": "5 February 1922! (Movement was withdrawn on 12 February 1922)."
+    "dramaEmoji": "🔥🛑",
+    "toddlerStory": "On 4 February 1922, at Chauri Chaura in Gorakhpur district of Uttar Pradesh, police opened fire on a peaceful procession of peasants protesting high food prices and liquor sales. Enraged protesters surrounded the police station and set it on fire, killing 22 policemen. Hearing the news, Mahatma Gandhi abruptly halted the entire national Non-Cooperation Movement, insisting that satyagrahis required rigorous non-violent training.",
+    "toddlerQuestion": "Why did Mahatma Gandhi call off the Non-Cooperation Movement in February 1922?",
+    "toddlerAnswer": "Due to the violent incident at Chauri Chaura, where a crowd burned down a police station, killing 22 policemen.",
+    "visualSceneNarrative": "On 4 February 1922, at Chauri Chaura in Gorakhpur district of Uttar Pradesh, police opened fire on a peaceful procession of peasants protesting high food prices and liquor sales. Enraged protesters surrounded the police station and set it on fire, killing 22 policemen. Hearing the news, Mahatma Gandhi abruptly halted the entire national Non-Cooperation Movement, insisting that satyagrahis required rigorous non-violent training.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1923_swaraj_party": {
-    "dramaEmoji": "\ud83d\udc54\ud83c\udfdb\ufe0f",
-    "toddlerStory": "After Gandhi stopped the movement, C.R. Das and Motilal Nehru formed the Swaraj Party within Congress. They argued: 'Let's enter the government councils and wreck British policies from the inside!' Younger leaders like Subhas Bose and Nehru wanted direct street action instead.",
-    "toddlerQuestion": "Who founded the Swaraj Party in 1923?",
-    "toddlerAnswer": "Chitta Ranjan (C.R.) Das and Motilal Nehru."
+    "dramaEmoji": "🏛️🗳️",
+    "toddlerStory": "Following the withdrawal of Non-Cooperation, senior Congress leaders split over future strategy. C.R. Das and Motilal Nehru advocated entering colonial legislative councils to expose their undemocratic nature from within, founding the Swaraj Party within Congress in January 1923. In contrast, younger radical leaders like Jawaharlal Nehru and Subhas Chandra Bose pressed for full mass agitation for complete independence.",
+    "toddlerQuestion": "Who founded the Swaraj Party and what was their primary strategy?",
+    "toddlerAnswer": "C.R. Das and Motilal Nehru founded it in 1923 to contest council elections and disrupt colonial governance from within legislative chambers.",
+    "visualSceneNarrative": "Following the withdrawal of Non-Cooperation, senior Congress leaders split over future strategy. C.R. Das and Motilal Nehru advocated entering colonial legislative councils to expose their undemocratic nature from within, founding the Swaraj Party within Congress in January 1923. In contrast, younger radical leaders like Jawaharlal Nehru and Subhas Chandra Bose pressed for full mass agitation for complete independence.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1924_raju_executed": {
-    "dramaEmoji": "\ud83c\udff9\u2b50",
-    "toddlerStory": "Alluri Sitaram Raju was finally tracked down by British forces and executed in 1924. Over time, he became an immortal folk hero and tribal legend across India.",
-    "toddlerQuestion": "When was Alluri Sitaram Raju captured and executed?",
-    "toddlerAnswer": "In May 1924."
+    "dramaEmoji": "⛓️🕊️",
+    "toddlerStory": "After two years of daring guerrilla raids on police stations in the dense forests of the Eastern Ghats, colonial troops captured Alluri Sitaram Raju in May 1924. Raju was executed by firing squad, cementing his enduring legacy as a revered folk hero among Andhra Pradesh's tribal communities.",
+    "toddlerQuestion": "What happened to tribal leader Alluri Sitaram Raju in 1924?",
+    "toddlerAnswer": "He was captured by colonial forces and executed in May 1924, becoming an immortal folk hero of the tribal freedom struggle.",
+    "visualSceneNarrative": "After two years of daring guerrilla raids on police stations in the dense forests of the Eastern Ghats, colonial troops captured Alluri Sitaram Raju in May 1924. Raju was executed by firing squad, cementing his enduring legacy as a revered folk hero among Andhra Pradesh's tribal communities.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1927_simon_appointed": {
-    "dramaEmoji": "\ud83c\uddec\ud83c\udde7\ud83d\udcdc",
-    "toddlerStory": "The British government appointed the Indian Statutory Commission under Sir John Simon to write India's new constitution. Out of 7 members, not a SINGLE Indian was included! Even British-friendly Indian parties felt insulted.",
-    "toddlerQuestion": "Why did all Indian parties boycott the Simon Commission?",
-    "toddlerAnswer": "Because it did not have a single Indian member (all-white commission)."
+    "dramaEmoji": "🇬🇧📋",
+    "toddlerStory": "In November 1927, the conservative British Tory government constituted a Statutory Commission under Sir John Simon to review India's constitutional progress. To the outrage of Indian public opinion, the seven-member commission did not contain a single Indian representative, demonstrating sheer colonial contempt for India's right to self-determination.",
+    "toddlerQuestion": "Why did all Indian political parties oppose the Simon Commission?",
+    "toddlerAnswer": "Because the commission did not have a single Indian member; all seven commissioners were British.",
+    "visualSceneNarrative": "In November 1927, the conservative British Tory government constituted a Statutory Commission under Sir John Simon to review India's constitutional progress. To the outrage of Indian public opinion, the seven-member commission did not contain a single Indian representative, demonstrating sheer colonial contempt for India's right to self-determination.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1927_madras_session": {
-    "dramaEmoji": "\ud83d\udda4\ud83c\udfdb\ufe0f",
-    "toddlerStory": "Under Dr. M.A. Ansari, the Madras Congress session resolved to boycott the upcoming Simon Commission 'at every stage and in every form'!",
-    "toddlerQuestion": "Which Congress session resolved to boycott the Simon Commission?",
-    "toddlerAnswer": "The Madras Congress Session of December 1927."
+    "dramaEmoji": "🚩📜",
+    "toddlerStory": "At the annual session in Madras in December 1927, presided over by Dr. M.A. Ansari, the Indian National Congress formally resolved to boycott the Simon Commission 'at every stage and in every form', while younger radicals successfully passed a resolution adopting complete independence as India's ultimate goal.",
+    "toddlerQuestion": "What historic resolution on the Simon Commission was passed at the Madras Congress in 1927?",
+    "toddlerAnswer": "Congress resolved to boycott the Simon Commission 'at every stage and in every form' across the entire country.",
+    "visualSceneNarrative": "At the annual session in Madras in December 1927, presided over by Dr. M.A. Ansari, the Indian National Congress formally resolved to boycott the Simon Commission 'at every stage and in every form', while younger radicals successfully passed a resolution adopting complete independence as India's ultimate goal.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1928_simon_arrives": {
-    "dramaEmoji": "\ud83d\udda4\ud83d\udce2",
-    "toddlerStory": "When Sir John Simon stepped off his ship in Bombay in Feb 1928, thousands met him with black flags shouting: 'SIMON GO BACK!' In Lahore, senior leader Lala Lajpat Rai was brutally hit with lathis by police and later died of his wounds.",
-    "toddlerQuestion": "Which veteran national leader died following a police lathi-charge during the Simon protests?",
-    "toddlerAnswer": "Lala Lajpat Rai (Punjab Kesari) in Lahore."
+    "dramaEmoji": "🖤🚶",
+    "toddlerStory": "When the Simon Commission landed at Bombay in February 1928, it was greeted by nationwide black-flag demonstrations and thunderous chants of 'Go Back Simon!'. In Lahore, police launched a brutal lathi charge against a peaceful demonstration led by veteran nationalist Lala Lajpat Rai. Severely injured, Rai declared: 'Every blow aimed at me is a nail in the coffin of British imperialism.' He succumbed to his injuries weeks later.",
+    "toddlerQuestion": "What historic slogan greeted the Simon Commission upon its arrival in 1928?",
+    "toddlerAnswer": "'Go Back Simon!', accompanied by nationwide strikes, black flags, and mass public demonstrations.",
+    "visualSceneNarrative": "When the Simon Commission landed at Bombay in February 1928, it was greeted by nationwide black-flag demonstrations and thunderous chants of 'Go Back Simon!'. In Lahore, police launched a brutal lathi charge against a peaceful demonstration led by veteran nationalist Lala Lajpat Rai. Severely injured, Rai declared: 'Every blow aimed at me is a nail in the coffin of British imperialism.' He succumbed to his injuries weeks later.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1929_oct_irwin_offer": {
-    "dramaEmoji": "\ud83c\udf2b\ufe0f\ud83c\udfa9",
-    "toddlerStory": "Viceroy Lord Irwin got nervous about the Simon protests and announced a vague offer of 'Dominion Status' in some unspecified future and a Round Table Conference. Congress leaders rejected it as an empty promise!",
-    "toddlerQuestion": "What vague promise did Viceroy Irwin announce in October 1929?",
-    "toddlerAnswer": "A vague offer of 'Dominion Status' in an unspecified future."
+    "dramaEmoji": "🎭🌫️",
+    "toddlerStory": "To defuse escalating nationalist anger, Viceroy Lord Irwin announced in October 1929 a vague offer of 'dominion status' for India in an unspecified future, along with a Round Table Conference in London. Radical Congress leaders Jawaharlal Nehru and Subhas Chandra Bose immediately rejected the ambiguous offer as an imperial delaying tactic.",
+    "toddlerQuestion": "What vague political concession did Viceroy Lord Irwin announce in October 1929?",
+    "toddlerAnswer": "He announced a vague offer of 'dominion status' in an unspecified future and a Round Table Conference to discuss a constitution.",
+    "visualSceneNarrative": "To defuse escalating nationalist anger, Viceroy Lord Irwin announced in October 1929 a vague offer of 'dominion status' for India in an unspecified future, along with a Round Table Conference in London. Radical Congress leaders Jawaharlal Nehru and Subhas Chandra Bose immediately rejected the ambiguous offer as an imperial delaying tactic.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1929_dec_lahore_purna_swaraj": {
-    "dramaEmoji": "\ud83d\udea9\u2744\ufe0f",
-    "toddlerStory": "On a freezing midnight in Lahore along the Ravi river, 40-year-old Jawaharlal Nehru hoisted the Tricolour flag and passed the historic resolution: 'PURNA SWARAJ' (Complete Independence)! 26 January 1930 was declared India's first Independence Day!",
-    "toddlerQuestion": "Who presided over the December 1929 Lahore Congress Session?",
-    "toddlerAnswer": "Jawaharlal Nehru (Passed the Purna Swaraj resolution)."
+    "dramaEmoji": "🚩❄️",
+    "toddlerStory": "In December 1929, under the presidency of youthful Jawaharlal Nehru on the freezing banks of the Ravi River, the historic Lahore Congress formalized the demand for 'Purna Swaraj' (Complete Independence). Delegates resolved that 26 January 1930 would be celebrated across India as Independence Day, with citizens taking a solemn pledge to sever all ties with British rule.",
+    "toddlerQuestion": "What historic resolution was passed at the Lahore Congress session in December 1929?",
+    "toddlerAnswer": "The resolution demanding 'Purna Swaraj' (Complete Independence) was adopted, and 26 January 1930 declared Independence Day.",
+    "visualSceneNarrative": "In December 1929, under the presidency of youthful Jawaharlal Nehru on the freezing banks of the Ravi River, the historic Lahore Congress formalized the demand for 'Purna Swaraj' (Complete Independence). Delegates resolved that 26 January 1930 would be celebrated across India as Independence Day, with citizens taking a solemn pledge to sever all ties with British rule.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1930_31jan_eleven_demands": {
-    "dramaEmoji": "\u2709\ufe0f\u23f3",
-    "toddlerStory": "Gandhiji sent an ultimatum letter to Viceroy Irwin with 11 demands, from lowering land taxes to abolishing the salt tax. He gave Irwin until March 11: 'If you say no, we march!' Irwin refused to negotiate.",
-    "toddlerQuestion": "What was the most prominent demand among Gandhiji's 11 Demands?",
-    "toddlerAnswer": "The abolition of the oppressive Salt Tax."
+    "dramaEmoji": "✉️⚖️",
+    "toddlerStory": "On 31 January 1930, Mahatma Gandhi sent a historic letter to Viceroy Lord Irwin outlining Eleven Demands, spanning wide interests: reduction of land revenue by 50%, protective tariffs on foreign textiles, release of political prisoners, and abolition of the salt tax. Gandhi gave an ultimatum: if the demands were not met by 11 March, Congress would launch Civil Disobedience.",
+    "toddlerQuestion": "Why did Mahatma Gandhi choose the abolition of the Salt Tax as his central demand?",
+    "toddlerAnswer": "Salt was consumed equally by rich and poor alike; taxing it and maintaining a government monopoly was seen as the most oppressive face of British rule.",
+    "visualSceneNarrative": "On 31 January 1930, Mahatma Gandhi sent a historic letter to Viceroy Lord Irwin outlining Eleven Demands, spanning wide interests: reduction of land revenue by 50%, protective tariffs on foreign textiles, release of political prisoners, and abolition of the salt tax. Gandhi gave an ultimatum: if the demands were not met by 11 March, Congress would launch Civil Disobedience.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1930_dandi_march": {
-    "dramaEmoji": "\ud83e\uddc2\ud83c\udf0a",
-    "toddlerStory": "Gandhiji walked 240 miles on foot with 78 trusted volunteers from Sabarmati to the coastal village of Dandi in 24 days. On 6 April, he picked up a lump of salty mud from the ocean, boiled sea water, and broke the salt monopoly, launching the Civil Disobedience Movement!",
-    "toddlerQuestion": "How many miles and days was the Dandi Salt March?",
-    "toddlerAnswer": "240 miles in 24 days (12 March to 6 April 1930) with 78 volunteers."
+    "dramaEmoji": "🌊🚶‍♂️",
+    "toddlerStory": "On 12 March 1930, after Lord Irwin ignored the ultimatum, Mahatma Gandhi embarked on the historic Salt March from his Sabarmati Ashram with 78 trusted volunteers. Walking 240 miles over 24 days, thousands joined him at every village. On 6 April 1930, Gandhi reached the coastal town of Dandi, picked up a handful of natural salt, and manufactured salt by boiling sea water, breaking the colonial salt law and inaugurating the Civil Disobedience Movement.",
+    "toddlerQuestion": "State the key details of the historic Dandi March of 1930.",
+    "toddlerAnswer": "Gandhiji walked 240 miles in 24 days with 78 volunteers from Sabarmati to Dandi, breaking the salt monopoly on 6 April 1930.",
+    "visualSceneNarrative": "On 12 March 1930, after Lord Irwin ignored the ultimatum, Mahatma Gandhi embarked on the historic Salt March from his Sabarmati Ashram with 78 trusted volunteers. Walking 240 miles over 24 days, thousands joined him at every village. On 6 April 1930, Gandhi reached the coastal town of Dandi, picked up a handful of natural salt, and manufactured salt by boiling sea water, breaking the colonial salt law and inaugurating the Civil Disobedience Movement.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1930_april_ghaffar_khan": {
-    "dramaEmoji": "\ud83d\udee1\ufe0f\ud83d\udc73\u200d\u2642\ufe0f",
-    "toddlerStory": "In Peshawar, Abdul Ghaffar Khan (the Frontier Gandhi) created a non-violent army called the 'Khudai Khidmatgars' (Servants of God). When he was arrested, angry crowds faced armored cars and British gunfire without retreating!",
-    "toddlerQuestion": "Who was known as 'Frontier Gandhi'?",
-    "toddlerAnswer": "Khan Abdul Ghaffar Khan (Founder of Khudai Khidmatgars)."
+    "dramaEmoji": "🏔️✊",
+    "toddlerStory": "In Peshawar in April 1930, Abdul Ghaffar Khan (the 'Frontier Gandhi'), a devout disciple of non-violence who organized the non-violent volunteer corps 'Khudai Khidmatgars', was arrested. Outraged crowds faced down police firing, and soldiers of the Royal Garhwal Rifles refused orders to fire on unarmed demonstrators, demonstrating the deep moral power of non-violence.",
+    "toddlerQuestion": "Who was Abdul Ghaffar Khan and what movement did he lead in the North-West Frontier?",
+    "toddlerAnswer": "Known as 'Frontier Gandhi', he led the disciplined non-violent volunteer corps called the 'Khudai Khidmatgar' (Servants of God).",
+    "visualSceneNarrative": "In Peshawar in April 1930, Abdul Ghaffar Khan (the 'Frontier Gandhi'), a devout disciple of non-violence who organized the non-violent volunteer corps 'Khudai Khidmatgars', was arrested. Outraged crowds faced down police firing, and soldiers of the Royal Garhwal Rifles refused orders to fire on unarmed demonstrators, demonstrating the deep moral power of non-violence.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1930_may_gandhi_arrested": {
-    "dramaEmoji": "\ud83d\udd12\ud83d\udea8",
-    "toddlerStory": "When Gandhiji was arrested in May 1930, industrial workers in Sholapur went wild, attacking British police stations, railway stations, and courts! Over 100,000 peaceful protesters were thrown into colonial prisons.",
-    "toddlerQuestion": "How many people were imprisoned during the Civil Disobedience Movement in 1930?",
-    "toddlerAnswer": "Over 100,000 people were arrested."
+    "dramaEmoji": "🔒⚡",
+    "toddlerStory": "Following Mahatma Gandhi's arrest on 4 May 1930, industrial workers in Sholapur erupted in protest, attacking police stations, municipal buildings, and railway stations. The colonial government unleashed brutal repression: peaceful satyagrahis were beaten with steel-tipped lathis, over 100,000 citizens were jailed, and women and children were assaulted.",
+    "toddlerQuestion": "How did industrial workers in Sholapur react to Mahatma Gandhi's arrest in May 1930?",
+    "toddlerAnswer": "Workers attacked symbols of British colonial authority—police posts, municipal buildings, courts, and railway stations.",
+    "visualSceneNarrative": "Following Mahatma Gandhi's arrest on 4 May 1930, industrial workers in Sholapur erupted in protest, attacking police stations, municipal buildings, and railway stations. The colonial government unleashed brutal repression: peaceful satyagrahis were beaten with steel-tipped lathis, over 100,000 citizens were jailed, and women and children were assaulted.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1931_5march_gandhi_irwin": {
-    "dramaEmoji": "\ud83e\udd1d\ud83d\udd4a\ufe0f",
-    "toddlerStory": "Viceroy Irwin realized he couldn't govern India with Gandhi in prison. They met as equals and signed the Gandhi-Irwin Pact: Gandhi suspended the Civil Disobedience Movement and agreed to travel to London for talks; Irwin agreed to release all non-violent political prisoners!",
-    "toddlerQuestion": "What were the two core terms of the Gandhi-Irwin Pact (March 1931)?",
-    "toddlerAnswer": "Congress suspended Civil Disobedience to attend the 2nd Round Table Conference, and the British released political prisoners."
+    "dramaEmoji": "🤝📜",
+    "toddlerStory": "With widespread civil turmoil and prisons overflowing, Viceroy Lord Irwin sought negotiations. On 5 March 1931, the Gandhi-Irwin Pact was signed: Gandhi agreed to suspend the Civil Disobedience Movement and attend the Second Round Table Conference in London; in return, the colonial government agreed to release non-violent political prisoners and permit coastal villagers to gather salt.",
+    "toddlerQuestion": "What were the key provisions of the Gandhi-Irwin Pact of March 1931?",
+    "toddlerAnswer": "Gandhiji agreed to suspend Civil Disobedience and attend the Second Round Table Conference; the British agreed to release political prisoners.",
+    "visualSceneNarrative": "With widespread civil turmoil and prisons overflowing, Viceroy Lord Irwin sought negotiations. On 5 March 1931, the Gandhi-Irwin Pact was signed: Gandhi agreed to suspend the Civil Disobedience Movement and attend the Second Round Table Conference in London; in return, the colonial government agreed to release non-violent political prisoners and permit coastal villagers to gather salt.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1931_dec_round_table_fails": {
-    "dramaEmoji": "\ud83c\uddec\ud83c\udde7\ud83c\udf27\ufe0f",
-    "toddlerStory": "Gandhiji sailed to London in December 1931 for the Second Round Table Conference. But British politicians plotted with separate community groups to divide India, and negotiations collapsed. Gandhiji sailed back home empty-handed and disappointed.",
-    "toddlerQuestion": "Why did the Second Round Table Conference in London collapse?",
-    "toddlerAnswer": "British insistence on separate electorates for minorities and refusal to concede immediate Dominion Status."
+    "dramaEmoji": "🇬🇧🌧️",
+    "toddlerStory": "In December 1931, Mahatma Gandhi attended the Second Round Table Conference in London as the sole representative of Congress. Negotiations deadlocked over separate electorates demanded by minority representatives and the British government. Disappointed and empty-handed, Gandhi returned to India to find Viceroy Willingdon unleashing ruthless repression: Nehru and Ghaffar Khan were jailed, and Congress was declared illegal.",
+    "toddlerQuestion": "Why did negotiations fail at the Second Round Table Conference in London?",
+    "toddlerAnswer": "British authorities and communal leaders deadlocked over separate electorates; no real constitutional transfer of power was conceded.",
+    "visualSceneNarrative": "In December 1931, Mahatma Gandhi attended the Second Round Table Conference in London as the sole representative of Congress. Negotiations deadlocked over separate electorates demanded by minority representatives and the British government. Disappointed and empty-handed, Gandhi returned to India to find Viceroy Willingdon unleashing ruthless repression: Nehru and Ghaffar Khan were jailed, and Congress was declared illegal.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1932_cdm_relaunched": {
-    "dramaEmoji": "\ud83d\udd04\u2694\ufe0f",
-    "toddlerStory": "Back in India, Gandhi found that the British had banned Congress, jailed Nehru and Ghaffar Khan, and banned all public meetings! He relaunched Civil Disobedience, but after years of struggle, the movement lost its early steam by 1934.",
-    "toddlerQuestion": "Why did Civil Disobedience lose momentum by 1934?",
-    "toddlerAnswer": "Peasants and merchants were exhausted, and rich farmers were disappointed that land was not won back in 1931."
+    "dramaEmoji": "🔁🇮🇳",
+    "toddlerStory": "Faced with government crackdowns and mass arrests, Mahatma Gandhi relaunched the Civil Disobedience Movement in 1932. However, wealthy peasants (like the Patidars and Jats) who were disillusioned after their demands were ignored in 1931 refused to rejoin, and business owners were anxious about prolonged disruption. Over the next two years, the movement gradually lost momentum.",
+    "toddlerQuestion": "Why did the relaunched Civil Disobedience Movement of 1932 lose momentum?",
+    "toddlerAnswer": "Rich peasants who had not achieved revenue remissions in 1931 felt betrayed, while industrialists grew wary of continuous commercial disruption.",
+    "visualSceneNarrative": "Faced with government crackdowns and mass arrests, Mahatma Gandhi relaunched the Civil Disobedience Movement in 1932. However, wealthy peasants (like the Patidars and Jats) who were disillusioned after their demands were ignored in 1931 refused to rejoin, and business owners were anxious about prolonged disruption. Over the next two years, the movement gradually lost momentum.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1932_poona_pact": {
-    "dramaEmoji": "\ud83e\udd1d\ud83d\udcdc",
-    "toddlerStory": "Dr. Ambedkar wanted separate voting boxes for Dalits. Gandhiji fasted in Yerwada Jail, fearing Dalits would be permanently isolated from society. Ambedkar visited him in jail, and they compromised: 'Keep joint voting boxes, but give Dalits MORE reserved seats!'",
-    "toddlerQuestion": "Between whom was the Poona Pact signed in September 1932?",
-    "toddlerAnswer": "Between Mahatma Gandhi and Dr. B.R. Ambedkar (Yerwada Jail, Poona)."
+    "dramaEmoji": "🤝📜",
+    "toddlerStory": "In August 1932, British Prime Minister Ramsay MacDonald announced the Communal Award, granting separate electorates to Dalits ('Depressed Classes'). Fearing this would permanently divide Hindu society, Mahatma Gandhi began a fast-unto-death in Yerwada Jail in Poona. Dr. B.R. Ambedkar met Gandhi, reaching the historic Poona Pact in September 1932: Dalits received reserved seats in general electorates rather than separate electorates.",
+    "toddlerQuestion": "What was the significance of the Poona Pact of September 1932?",
+    "toddlerAnswer": "Signed between Dr. B.R. Ambedkar and Mahatma Gandhi, it gave Depressed Classes reserved seats in provincial and central councils within general electorates.",
+    "visualSceneNarrative": "In August 1932, British Prime Minister Ramsay MacDonald announced the Communal Award, granting separate electorates to Dalits ('Depressed Classes'). Fearing this would permanently divide Hindu society, Mahatma Gandhi began a fast-unto-death in Yerwada Jail in Poona. Dr. B.R. Ambedkar met Gandhi, reaching the historic Poona Pact in September 1932: Dalits received reserved seats in general electorates rather than separate electorates.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1934_cdm_withdrawn": {
-    "dramaEmoji": "\ud83d\udcc9\ud83d\udd4a\ufe0f",
-    "toddlerStory": "By 1934, the Civil Disobedience Movement had run its course and was formally called off. Leaders turned their energy toward constructive rural work, cottage industries, and preparing for future elections.",
-    "toddlerQuestion": "When was the Civil Disobedience Movement officially withdrawn?",
-    "toddlerAnswer": "In 1934."
+    "dramaEmoji": "📉🕊️",
+    "toddlerStory": "By 1934, facing widespread exhaustion, loss of support from prominent commercial classes, and brutal state coercion, Mahatma Gandhi formally withdrew the Civil Disobedience Movement. Congress redirected its energies towards constructive rural programmes and preparing for upcoming provincial legislative elections under the Government of India Act 1935.",
+    "toddlerQuestion": "When was the Civil Disobedience Movement formally called off, and why?",
+    "toddlerAnswer": "In 1934, because popular participation had declined and the movement had lost momentum after years of intense state repression.",
+    "visualSceneNarrative": "By 1934, facing widespread exhaustion, loss of support from prominent commercial classes, and brutal state coercion, Mahatma Gandhi formally withdrew the Civil Disobedience Movement. Congress redirected its energies towards constructive rural programmes and preparing for upcoming provincial legislative elections under the Government of India Act 1935.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1942_quit_india": {
-    "dramaEmoji": "\u270a\ud83c\uddee\ud83c\uddf3",
-    "toddlerStory": "During World War II, Gandhiji climbed the stage at Gowalia Tank in Mumbai and gave India a 3-word mantra: 'DO OR DIE!' (Karo ya Maro). Even though all leaders were arrested the next morning, students, peasants, and railway workers ran the revolution underground!",
-    "toddlerQuestion": "Where and when did Gandhiji give the 'Do or Die' call?",
-    "toddlerAnswer": "At the Gowalia Tank Maidan in Bombay on 8 August 1942."
+    "dramaEmoji": "⚡🇮🇳",
+    "toddlerStory": "On 8 August 1942, in the shadow of World War II and the failure of the Cripps Mission, the All India Congress Committee met at Gowalia Tank Maidan in Bombay. Mahatma Gandhi launched the historic Quit India Movement, delivering his ringing call to the nation: 'Do or Die! We shall either free India or die in the attempt.' The British government arrested the entire top leadership within hours, sparking an unprecedented leaderless mass uprising.",
+    "toddlerQuestion": "What mantra did Mahatma Gandhi give to the nation during the Quit India Movement of 1942?",
+    "toddlerAnswer": "'Do or Die! We shall either free India or die in the attempt.' Passed at Gowalia Tank Maidan, Bombay on 8 August 1942.",
+    "visualSceneNarrative": "On 8 August 1942, in the shadow of World War II and the failure of the Cripps Mission, the All India Congress Committee met at Gowalia Tank Maidan in Bombay. Mahatma Gandhi launched the historic Quit India Movement, delivering his ringing call to the nation: 'Do or Die! We shall either free India or die in the attempt.' The British government arrested the entire top leadership within hours, sparking an unprecedented leaderless mass uprising.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   },
   "in_1947_independence": {
-    "dramaEmoji": "\ud83c\udf89\ud83d\udd4a\ufe0f",
-    "toddlerStory": "At midnight on 15 August 1947, as the world slept, India awoke to life and freedom! The tricolour was hoisted at the Red Fort, ending 200 years of British colonial rule!",
-    "toddlerQuestion": "What famous speech did Jawaharlal Nehru deliver on the eve of Independence?",
-    "toddlerAnswer": "The 'Tryst with Destiny' speech!"
+    "dramaEmoji": "🇮🇳🎆",
+    "toddlerStory": "At the stroke of midnight on 15 August 1947, after nearly two centuries of British colonial exploitation and decades of heroic sacrifice by millions of satyagrahis, peasants, workers, and revolutionaries, India awoke to freedom as an independent sovereign nation, ending British imperial rule in South Asia.",
+    "toddlerQuestion": "What historic milestone was achieved on 15 August 1947?",
+    "toddlerAnswer": "India achieved independence from British colonial rule, establishing a sovereign democratic nation.",
+    "visualSceneNarrative": "At the stroke of midnight on 15 August 1947, after nearly two centuries of British colonial exploitation and decades of heroic sacrifice by millions of satyagrahis, peasants, workers, and revolutionaries, India awoke to freedom as an independent sovereign nation, ending British imperial rule in South Asia.",
+    "ncertContext": "Official NCERT & CBSE Board PYQ Rubric"
   }
 };
 
-export function getToddlerStoryForEvent(eventId: string, defaultEvent: string, defaultSignificance: string): ToddlerTimelineStory {
+export function getToddlerStoryForEvent(eventId: string, eventName?: string, eventSignificance?: string): ToddlerTimelineStory {
   if (TODDLER_TIMELINE_STORIES[eventId]) {
     return TODDLER_TIMELINE_STORIES[eventId];
   }
-
   return {
-    dramaEmoji: "⚡📜",
-    toddlerStory: `Imagine a big moment where ${defaultEvent} completely changed the game! ${defaultSignificance.split(". ")[0]}. In simple terms: people wanted change, they took action, and history moved forward!`,
-    toddlerQuestion: `What is the most important board exam point about ${defaultEvent}?`,
-    toddlerAnswer: defaultSignificance
+    dramaEmoji: '📜',
+    toddlerStory: eventSignificance || `${eventName || 'Historical Event'}: Recorded in NCERT Class 10 as a pivotal milestone in modern history.`,
+    toddlerQuestion: `What is the historical significance of ${eventName || 'this event'} in CBSE examinations?`,
+    toddlerAnswer: eventSignificance || 'Key turning point evaluated for 2-3 marks in CBSE Board papers.',
+    visualSceneNarrative: eventSignificance || 'Historical milestone.',
+    ncertContext: 'NCERT Class 10 Official'
   };
 }

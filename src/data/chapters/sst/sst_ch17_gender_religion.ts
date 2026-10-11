@@ -132,5 +132,43 @@ export const SST_CH17_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study analyzing the structural remedies for women's political marginalization in democratic governance.",
     examinerNote: "State both the 33% reservation figure and the tangible outcome (over 10 lakh elected rural women).",
     source: "CBSE Official Sample Paper 2026-27 & Oswaal 2025-26"
+  },
+{
+    id: "sst_q_17_8",
+    chapter: 17,
+    chapterName: "Gender, Religion and Caste",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2017] 'Communalism was and continues to be one of the major challenges to democracy in India.' State five constitutional provisions that make India a secular state.",
+    options: [],
+    answer: "Five Constitutional Provisions Making India a Secular State:\n1. No Official Religion: There is no official religion for the Indian State. Unlike Sri Lanka (Buddhism), Pakistan (Islam), or England (Christianity), our Constitution does not bestow special status on any religion.\n2. Freedom of Conscience and Practice: The Constitution provides to all individuals and communities the fundamental freedom to profess, practice, and propagate any religion, or not to follow any (Article 25).\n3. Prohibition of Discrimination: The Constitution strictly prohibits discrimination on grounds of religion in matters of state employment, admissions to educational institutions, and public facilities (Articles 15 and 16).\n4. State Intervention for Social Justice: The Constitution authorizes the state to intervene in matters of religion to ensure equality within religious communities—for instance, it constitutionally banned untouchability (Article 17) and protects rights of minority educational institutions.\n5. Equal Citizenship & Secular Law: Universal adult suffrage ensures every citizen has equal voting rights irrespective of religious affiliation, rejecting communal electorates.",
+    steps: [
+      "1. Absence of an official state religion.",
+      "2. Fundamental Right to freedom of religion for all citizens (Article 25).",
+      "3. Strict prohibition of discrimination based on religion (Article 15).",
+      "4. Power of state intervention to ensure equality and eradicate untouchability (Article 17).",
+      "5. Equal citizenship without communal electorates."
+    ],
+    explanation: "Indian secularism is not mere strict separation of church and state; it is principled distance that allows state intervention to protect equality and human dignity.",
+    examinerNote: "Cite constitutional articles (Articles 15, 17, 25) to demonstrate superior academic command.",
+    source: "CBSE Board Examination 2024 & NCERT Civics p. 48-49"
+  },
+  {
+    id: "sst_q_17_9",
+    chapter: 17,
+    chapterName: "Gender, Religion and Caste",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2023, 2020, 2019] 'Caste can take various forms in politics, but politics too influences the caste system.' Explain any three ways in which politics influences caste.",
+    options: [],
+    answer: "1. Widening the Caste Boundary: Each caste group tries to become bigger by incorporating within itself neighboring sub-castes or related caste groups which were previously excluded, broadening its social base.\n2. Coalition Building: Various caste groups are required to enter into a coalition with other castes or community groupings to gain electoral leverage, initiating dialogue and political negotiation.\n3. Emergence of New Political Categories: New kinds of caste-based groupings have entered the political arena, such as 'backward' and 'forward' caste groups, replacing traditional rigid ritual hierarchies with political interest alignments.",
+    steps: [
+      "1. Castes incorporate neighboring sub-castes to increase numerical electoral strength.",
+      "2. Caste groups form political coalitions and alliances with other communities.",
+      "3. Emergence of modern socio-political identities like 'backward' and 'forward' groups."
+    ],
+    explanation: "Politics does not just reflect caste; it politicizes caste, making it fluid and transactional in a democratic electoral system.",
+    examinerNote: "Distinguish between 'Caste in politics' (politicians appealing to caste) and 'Politics in caste' (caste changing due to political competition).",
+    source: "CBSE Board Paper 2024 & NCERT Civics p. 54"
   }
 ];

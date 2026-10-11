@@ -132,5 +132,41 @@ export const SST_CH16_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study evaluating the untapped potential and strategic viability of India's National Waterways network.",
     examinerNote: "Make sure to remember NW-1 (Ganga: Prayagraj to Haldia) and NW-2 (Brahmaputra: Sadiya to Dhubri).",
     source: "CBSE Official SQP 2026-27 & Oswaal CBSE Bank"
+  },
+{
+    id: "sst_q_16_8",
+    chapter: 16,
+    chapterName: "Lifelines of National Economy",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2020, 2017] Explain any three major advantages of Pipeline transport networks over conventional surface transport in India.",
+    options: [],
+    answer: "1. Elimination of Trans-shipment Delays & Losses: Once constructed, pipelines transport liquids (crude oil, petroleum products) and slurry without trans-shipment handling delays, zero vehicular traffic jams, and virtually zero transit evaporation or leakage losses.\n2. Subterranean & Difficult Terrain Viability: Pipelines can be laid through the most challenging geographical terrains—across rugged mountains, deep riverbeds, and dense forests—where railway tracks and roadways are impossible or cost-prohibitive to build.\n3. Minimal Running Operational Costs: Although initial capital expenditure for laying pipelines is high, their ongoing operational running costs are exceptionally low compared to trucks and railway wagons, operating silently with zero greenhouse gas emissions.",
+    steps: [
+      "1. Trans-shipment losses and transit delays are ruled out.",
+      "2. Can be laid through difficult and inaccessible terrain (mountains, swamps, seabed).",
+      "3. High initial installation cost is compensated by near-zero operational maintenance expenses."
+    ],
+    explanation: "Pipelines connect landlocked inland refineries (like Barauni, Mathura, and Panipat) directly with coastal crude oil ports.",
+    examinerNote: "Remember the 3 key pipeline networks: Upper Assam to Kanpur, Salaya (Gujarat) to Jalandhar, and Hazira-Vijaipur-Jagdishpur (HVJ).",
+    source: "CBSE Board Examination 2024 & NCERT Geography p. 80-81"
+  },
+  {
+    id: "sst_q_16_9",
+    chapter: 16,
+    chapterName: "Lifelines of National Economy",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2023, 2019] What is the Golden Quadrilateral Super Highways project? State its objective and describe its two major corridors.",
+    options: [],
+    answer: "1. Definition & Implementing Agency: The Golden Quadrilateral is an ambitious 6-lane super highway project launched by the central government, implemented and maintained by the National Highways Authority of India (NHAI).\n2. Core Objective: To reduce the travel time and distance between India's four mega-metropolises (Delhi, Mumbai, Chennai, and Kolkata), facilitating high-speed economic freight and commerce.\n3. Two Major Corridors:\n   - North-South Corridor: Links Srinagar (Jammu & Kashmir) in the extreme north to Kanyakumari (Tamil Nadu) in the south.\n   - East-West Corridor: Connects Silchar (Assam) in the east to Porbandar (Gujarat) in the west.",
+    steps: [
+      "1. 6-lane super highway connecting Delhi-Mumbai-Chennai-Kolkata managed by NHAI.",
+      "2. Primary objective: Reduce travel time and distance between mega-cities.",
+      "3. Corridors: North-South (Srinagar to Kanyakumari) and East-West (Silchar to Porbandar)."
+    ],
+    explanation: "Super highways form the commercial arteries of national economic integration, bypassing urban gridlock with 6-lane access-controlled corridors.",
+    examinerNote: "Frequently asked map and theory question: Srinagar-Kanyakumari (North-South) and Silchar-Porbandar (East-West).",
+    source: "CBSE Board Paper 2024 & NCERT Geography p. 79-80"
   }
 ];

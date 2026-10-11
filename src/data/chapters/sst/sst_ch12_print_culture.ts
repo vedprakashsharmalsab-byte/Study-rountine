@@ -133,5 +133,41 @@ export const SST_CH12_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study analyzing the European Enlightenment faith in print culture as the destroyer of tyranny.",
     examinerNote: "Ensure the exact phrase 'Tremble, therefore, tyrants of the world!' is mentioned in part (ii).",
     source: "CBSE Board Official Sample Paper & Oswaal 2025-26"
+  },
+{
+    id: "sst_q_12_8",
+    chapter: 12,
+    chapterName: "Print Culture and the Modern World",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2020, 2018, 2016] 'Print culture created the conditions within which the French Revolution occurred.' Support this statement with three suitable arguments.",
+    options: [],
+    answer: "1. Popularization of Enlightenment Ideas: The writings of Enlightenment thinkers like Voltaire and Jean-Jacques Rousseau were printed and read widely. They provided a critical commentary on tradition, superstition, and royal despotism, arguing that everything ought to be judged through reason and rationality rather than blind faith in absolute kings and the Catholic Church.\n2. Creation of a New Culture of Dialogue and Debate: Print created a public sphere where all established institutions, dogmas, and religious norms could be debated and questioned by common citizens. New ideas of social revolution circulated freely in cafes and public squares.\n3. Outpouring of Literature Mocking Royalty: By the 1780s, an outpouring of literature, pamphlets, and cartoons mocked the French royalty, depicting them as pleasure-seeking tyrants indulging in luxury while the common peasantry suffered famine and inflation. This generated widespread moral outrage against the monarchy.",
+    steps: [
+      "1. Enlightenment thinkers (Voltaire, Rousseau) exposed royal despotism and religious superstition to public reason.",
+      "2. Public sphere of debate: citizens questioned age-old dogmas and authority.",
+      "3. Cartoons and pamphlets mocked royal luxury while peasants starved, inciting revolutionary sentiment."
+    ],
+    explanation: "Print did not directly cause the revolution, but it opened people's minds to the possibility of thinking critically and questioning absolute monarchical authority.",
+    examinerNote: "Conclude by mentioning that while print opened minds, people also read conservative monarchist literature; print acted as a catalyst of independent thought.",
+    source: "CBSE Board Examination 2024 & NCERT History p. 116"
+  },
+  {
+    id: "sst_q_12_9",
+    chapter: 12,
+    chapterName: "Print Culture and the Modern World",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2022, 2017] Explain how the Print Revolution in 19th-century Europe catered to the requirements of children, women, and the working class.",
+    options: [],
+    answer: "1. Children: Primary education became compulsory from the late 19th century, creating a massive student reading public. Dedicated children's presses were established (e.g. in France in 1857), publishing fairy tales, traditional folk tales (compiled by the Grimm Brothers in Germany), and pedagogical school textbooks.\n2. Women: Women became important readers as well as writers. Penny magazines were especially published for women, teaching housekeeping and etiquette. Jane Austen, the Bronte sisters, and George Eliot emerged as renowned novelists depicting women with will, personality, and intellectual strength.\n3. Working Class: Lending libraries in England became instruments for educating white-collar clerks, artisans, and lower-middle-class workers. Self-educated working-class people wrote political tracts and autobiographies asserting their rights.",
+    steps: [
+      "Children: Compulsory schooling, Grimm brothers' folk tales, children's press (France 1857).",
+      "Women: Penny magazines, etiquette manuals, rise of feminist novelists (Jane Austen, Bronte sisters).",
+      "Workers: Lending libraries, political pamphlets, self-education, and working-class autobiographies."
+    ],
+    explanation: "Print expanded beyond elite scholarly theological circles to become a mass medium transforming education, gender roles, and labor consciousness.",
+    examinerNote: "Mentioning the Grimm Brothers for children and Jane Austen/George Eliot for women ensures full 3 marks.",
+    source: "CBSE Board Paper 2024 & NCERT History p. 118-119"
   }
 ];

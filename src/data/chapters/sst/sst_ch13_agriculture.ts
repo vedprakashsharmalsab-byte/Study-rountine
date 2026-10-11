@@ -132,5 +132,40 @@ export const SST_CH13_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study evaluating plantation dynamics, climatic prerequisites, and regional geography.",
     examinerNote: "In part (ii), always emphasize 'well-drained soil'—tea roots rot in waterlogged ground.",
     source: "CBSE Sample Question Paper 2026-27"
+  },
+{
+    id: "sst_q_13_8",
+    chapter: 13,
+    chapterName: "Agriculture",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2020, 2018, 2015] Describe the various institutional and technological reforms introduced by the Government of India in the agricultural sector since independence.",
+    options: [],
+    answer: "Institutional Reforms:\n1. Collectivization and Abolition of Zamindari: Immediate post-independence land reforms prioritized collectivization, consolidation of landholdings, and the eradication of the exploitative Zamindari system.\n2. Land Ceiling Acts: Laws were enacted to distribute surplus land from large feudal landlords to landless agricultural laborers.\n3. Kissan Credit Card & Crop Insurance: Introduction of Comprehensive Land Development Programme in 1980s-90s provided crop insurance against drought, flood, cyclone, fire, and disease. Specialized schemes like Kissan Credit Card (KCC) and Personal Accident Insurance Scheme (PAIS) were launched for easy institutional credit.\n\nTechnological Reforms:\n1. Green and White Revolutions: In the 1960s-70s, the Green Revolution (HYV seeds, chemical fertilizers, irrigation) and Operation Flood (White Revolution) modernized farm productivity.\n2. Weather Bulletins & Media Support: Daily weather bulletins and agricultural educational broadcasts on radio and television (Krishi Darshan) keep farmers informed.\n3. Minimum Support Price (MSP): Government announces Minimum Support Prices, remunerative prices, and procurement prices for major crops to protect farmers from exploitation by middlemen and speculative traders.",
+    steps: [
+      "Institutional: Abolition of Zamindari, Consolidation of holdings, Land ceiling, KCC, Crop Insurance.",
+      "Technological: Green Revolution (HYV seeds/fertilizers), White Revolution (Operation Flood), Weather bulletins, MSP."
+    ],
+    explanation: "Agriculture provides livelihood to over 50% of India's population; institutional security and technological modernization are essential pillars of food security.",
+    examinerNote: "Clearly categorize points into 'Institutional Reforms' and 'Technological Reforms' to earn the full 5 marks.",
+    source: "CBSE Board Examination 2024 & NCERT Geography p. 43-45"
+  },
+  {
+    id: "sst_q_13_9",
+    chapter: 13,
+    chapterName: "Agriculture",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2023, 2020, 2017] Compare the geographical requirements for the cultivation of Wheat with that of Rice in India.",
+    options: [],
+    answer: "1. Climate & Cropping Season:\n   - Rice: A Kharif crop requiring high temperature (above 25°C) and high humidity.\n   - Wheat: A Rabi crop requiring a cool growing season and bright sunshine at the time of ripening.\n2. Rainfall Requirement:\n   - Rice: Requires heavy annual rainfall above 100 cm; in areas of less rainfall, it requires intensive canal irrigation (Punjab, Haryana).\n   - Wheat: Requires moderate annual rainfall of 50 to 75 cm evenly distributed over the growing season.\n3. Major Producing States:\n   - Rice: West Bengal, Uttar Pradesh, Punjab, Andhra Pradesh, Odisha, Tamil Nadu.\n   - Wheat: Punjab, Haryana, Uttar Pradesh, Madhya Pradesh, Bihar, Rajasthan.",
+    steps: [
+      "Temperature: Rice needs >25°C with high humidity; Wheat needs cool growing season and bright sunshine at ripening.",
+      "Rainfall: Rice needs >100 cm; Wheat needs 50-75 cm.",
+      "Regions: Rice in eastern and coastal plains; Wheat in north and north-western Ganga-Satluj plains and black soil zone."
+    ],
+    explanation: "Rice is India's principal staple cereal crop; Wheat is the second most important cereal feeding the north and north-west.",
+    examinerNote: "Structured comparative tables for Wheat vs Rice are a guaranteed recurring question.",
+    source: "CBSE Board Paper 2024 & NCERT Geography p. 36-38"
   }
 ];

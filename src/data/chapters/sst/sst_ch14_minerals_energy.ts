@@ -132,5 +132,43 @@ export const SST_CH14_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study evaluating the role of natural gas and pipeline infrastructure in driving clean industrial growth.",
     examinerNote: "Part (iii) must highlight both power generation and chemical fertilizer industries.",
     source: "CBSE Official Sample Paper & Oswaal 2025-26"
+  },
+{
+    id: "sst_q_14_8",
+    chapter: 14,
+    chapterName: "Minerals and Energy Resources",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2018] 'There is a pressing need to use non-conventional sources of energy in India.' Justify this statement with five arguments.",
+    options: [],
+    answer: "1. Depletion of Fossil Fuels: Rising consumption of energy has caused unprecedented dependence on exhaustible fossil fuels (coal, petroleum, natural gas). Known reserves are rapidly depleting and will not last for future generations.\n2. Volatile Prices & Foreign Exchange Drain: Frequent spikes in international oil and gas prices place an immense financial burden on India's foreign exchange reserves.\n3. Severe Environmental Degradation: Burning fossil fuels emits massive greenhouse gases, causing severe air pollution, respiratory disease, acid rain, and accelerated global climate change.\n4. Abundant Natural Endowment: India is uniquely blessed with abundant sunshine, high wind velocities, vast coastal tides, and biomass, possessing enormous potential for solar, wind, and biogas energy.\n5. Decentralized Rural Development: Setting up solar parks and community biogas plants ('Gobar Gas') prevents deforestation for fuelwood, provides organic fertilizer to farmers, and brings reliable clean energy to remote rural villages.",
+    steps: [
+      "1. Exhaustibility of coal and petroleum.",
+      "2. Foreign exchange drain from volatile crude oil imports.",
+      "3. Environmental pollution and climate change from fossil combustion.",
+      "4. India's vast natural potential in solar and wind resources.",
+      "5. Rural empowerment and ecological balance through biogas and decentralized solar power."
+    ],
+    explanation: "Transitioning to non-conventional renewable energy addresses energy security, economic stability, and environmental sustainability simultaneously.",
+    examinerNote: "Contrast finite fossil fuels with infinite renewables and mention India's tropical advantage.",
+    source: "CBSE Board Examination 2024 & NCERT Geography p. 60-63"
+  },
+  {
+    id: "sst_q_14_9",
+    chapter: 14,
+    chapterName: "Minerals and Energy Resources",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2020, 2016] Why is the Chota Nagpur plateau region known as the storehouse of minerals, with the highest concentration of iron and steel industries in India? Explain with three reasons.",
+    options: [],
+    answer: "1. Proximity to High-Grade Iron Ore: The Chota Nagpur plateau (spanning Jharkhand, Odisha, Chhattisgarh, and West Bengal) possesses rich reserves of high-grade hematite iron ore at exceptionally low extraction cost.\n2. Availability of High-Grade Coking Coal: Prime coking coal required for blast furnaces is abundant in the adjoining Jharia, Bokaro, and Raniganj coalfields.\n3. Limestone, Dolomite & Abundant Cheap Labour: Local availability of limestone for flux, nearby manganese deposits, perennial water from the Subarnarekha and Damodar rivers, and dense local tribal populations providing cheap labour make it the ideal industrial belt.",
+    steps: [
+      "1. High-grade iron ore at low mining costs nearby.",
+      "2. Close proximity to coking coal (Jharia, Bokaro) and limestone deposits.",
+      "3. Abundant inexpensive labour from adjoining rural states and water from Damodar/Subarnarekha rivers."
+    ],
+    explanation: "Iron and steel is a heavy, weight-losing industry; locating next to bulk raw materials (iron ore + coal + limestone) minimizes exorbitant freight costs.",
+    examinerNote: "Always identify Iron and Steel as a 'heavy, weight-losing raw material industry'.",
+    source: "CBSE Board Paper 2024 & NCERT p. 53"
   }
 ];

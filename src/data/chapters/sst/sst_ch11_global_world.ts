@@ -131,5 +131,42 @@ export const SST_CH11_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study testing comprehension of the historic transition of economic hegemony.",
     examinerNote: "Be precise in sub-part (iii): explain that silver was Europe's primary trading currency to purchase Asian commodities.",
     source: "CBSE Board 2024 & Educart Digraj Singh Rajput SPQ"
+  },
+{
+    id: "sst_q_11_8",
+    chapter: 11,
+    chapterName: "The Making of a Global World",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2020, 2017, 2014] 'Trade and cultural exchange always went hand in hand in the pre-modern world.' Explain this statement with five examples in the context of the Silk Routes.",
+    options: [],
+    answer: "1. Overland and Maritime Connectivity: Historians have identified several silk routes over land and sea, connecting vast regions of Asia with Europe and North Africa.\n2. Outflow of Asian Goods: Chinese silk cargoes, Chinese pottery, and Indian/Southeast Asian textiles and spices travelled westwards to Europe.\n3. Inflow of Precious Metals: In return for Asian goods, precious metals—gold and silver—flowed from Europe to Asia, creating vibrant commercial exchange.\n4. Travel of World Religions: Early Christian missionaries, Muslim preachers, and Buddhist monks all travelled along these routes. Buddhism emerged from eastern India and spread in several directions through intersecting points on the silk routes.\n5. Culinary Interlinkage: Traders also introduced food crops; noodles travelled from China to become spaghetti, while pasta arrived in Sicily via Arab traders.",
+    steps: [
+      "1. Extensive land and sea routes connecting Asia, Europe, and North Africa.",
+      "2. Commercial exchange: Asian silk, textiles, spices traded for European gold and silver.",
+      "3. Religious and intellectual diffusion: Spread of Buddhism, Christianity, and Islam.",
+      "4. Culinary migration: Noodles to spaghetti, pasta to Sicily, and introduction of new crops."
+    ],
+    explanation: "Silk routes were not merely commercial freight tracks; they were vibrant arteries of cultural, spiritual, and culinary globalization.",
+    examinerNote: "Mention both commercial commodities (silk/silver) and religious/cultural exchanges (Buddhism/Christianity/Islam) for full 5 marks.",
+    source: "CBSE Board Examination 2024 & NCERT History p. 53-55"
+  },
+  {
+    id: "sst_q_11_9",
+    chapter: 11,
+    chapterName: "The Making of a Global World",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2022, 2019] How did the introduction of the potato transform the lives of Europe's poorest peasants? What was the Irish Potato Famine?",
+    options: [],
+    answer: "1. Nutrition & Survival: The introduction of the humble potato from America dramatically improved the diet of Europe's poor. Peasants began to eat better and live longer, becoming heavily dependent on potatoes as their staple food.\n2. Total Dependence in Ireland: In Ireland, the poorest peasants became so completely dependent on potatoes that when a mysterious fungal blight destroyed the potato crop in the mid-1840s (1845–1849), disaster struck.\n3. The Irish Potato Famine: Hundreds of thousands died of starvation, and over a million emigrated overseas (mainly to North America) in search of work, illustrating the peril of monoculture crop dependence.",
+    steps: [
+      "1. Potato dramatically improved nutrition, health, and life expectancy of Europe's poor.",
+      "2. Extreme dependence in Ireland made peasants vulnerable to crop failure.",
+      "3. Fungal blight of 1845-1849 caused 1 million deaths and massive overseas migration."
+    ],
+    explanation: "The Columbian exchange transformed nutrition but extreme monoculture dependence created devastating humanitarian catastrophes.",
+    examinerNote: "Remember the dates of the Irish Potato Famine: 1845 to 1849.",
+    source: "CBSE Board 2024 & NCERT History p. 55"
   }
 ];

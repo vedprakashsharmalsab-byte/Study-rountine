@@ -130,5 +130,41 @@ export const SST_CH15_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study evaluating proactive corporate environmental responsibility in heavy industry.",
     examinerNote: "Mention 'ISO 14001' and fly ash recycling into cement/bricks.",
     source: "CBSE Board 2024 & NCERT Class 10 p. 74"
+  },
+{
+    id: "sst_q_15_8",
+    chapter: 15,
+    chapterName: "Manufacturing Industries",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2016] How do manufacturing industries contribute to water and air pollution? Explain any four proactive measures taken by the National Thermal Power Corporation (NTPC) to preserve the natural environment.",
+    options: [],
+    answer: "Industrial Pollution Mechanisms:\n1. Water Pollution: Caused by discharging untreated organic and inorganic industrial wastes, heavy metals (lead, mercury), dyes, acids, and toxic chemicals into rivers by paper, pulp, textile, chemical, and tannery factories. Thermal pollution occurs when hot water from factories and thermal plants is drained into rivers before cooling.\n2. Air Pollution: Caused by high concentrations of undesirable toxic gases (sulphur dioxide, carbon monoxide) and airborne particulate matter (smoke, dust, mist) emitted from factory smokestacks.\n\nFour Proactive Measures by NTPC (ISO 14001 Certified):\n1. Optimum Equipment Utilization: Utilizing cutting-edge technology and upgrading existing machinery to maximize fuel efficiency and minimize waste generation.\n2. Minimizing Waste Through Ash Utilization: Maximizing ash utilization across power stations and creating dedicated ash ponds.\n3. Green Belts for Ecological Balance: Developing vast green belts and afforestation zones around power plants to nurture local biodiversity.\n4. Online Environmental Monitoring: Real-time ecological monitoring, ecological data collection, and liquid waste management systems across all thermal stations.",
+    steps: [
+      "Water pollution: Chemical discharge, untreated dyes, thermal water shock.",
+      "Air pollution: Carbon monoxide, sulphur dioxide, particulate smokestack emissions.",
+      "NTPC Measures: Optimum equipment modernization, ash utilization, green belts for ecological balance, real-time online monitoring."
+    ],
+    explanation: "Economic industrial growth must be harmonized with environmental stewardship; NTPC serves as the national benchmark for sustainable industrial ecology.",
+    examinerNote: "NTPC environmental measures are a recurring 5-mark question; memorize all 4 ISO 14001 guidelines.",
+    source: "CBSE Board Examination 2024 & NCERT Geography p. 77-79"
+  },
+  {
+    id: "sst_q_15_9",
+    chapter: 15,
+    chapterName: "Manufacturing Industries",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2022, 2018] Why has the sugar industry in India shown a clear tendency to shift and concentrate in the southern and western states, especially Maharashtra? Give three reasons.",
+    options: [],
+    answer: "1. Higher Sucrose Content: The sugarcane grown in Maharashtra and peninsular India has significantly higher sucrose content due to favorable black soil and climate, producing more sugar per ton of cane.\n2. Longer Crushing Season: The cooler maritime climate of southern and western India ensures a substantially longer crushing season (sugarcane does not dry up quickly compared to hot summers in UP).\n3. Success of Cooperative Mills: The cooperative sector is exceptionally well-organized, well-funded, and managed successfully in Maharashtra, ensuring reliable profit-sharing and farmer support.",
+    steps: [
+      "1. Higher sucrose percentage in peninsular cane varieties.",
+      "2. Longer crushing season due to cooler maritime climate.",
+      "3. Flourishing, well-managed sugar cooperatives in Maharashtra."
+    ],
+    explanation: "Sugarcane is a perishable, weight-losing crop whose sucrose content declines rapidly after harvesting; climate and cooperative efficiency make western India superior.",
+    examinerNote: "Three distinct points: Sucrose content, Longer crushing season, and Cooperative model success.",
+    source: "CBSE Board Paper 2024 & NCERT Geography p. 71"
   }
 ];

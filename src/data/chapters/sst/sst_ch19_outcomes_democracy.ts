@@ -130,5 +130,42 @@ export const SST_CH19_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study evaluating the critical gap between political democracy and equitable economic distribution.",
     examinerNote: "Explain the paradox clearly: political equality exists on paper, but economic inequality persists in real life.",
     source: "CBSE Official Sample Paper 2026-27 & Oswaal 2025-26"
+  },
+{
+    id: "sst_q_19_8",
+    chapter: 19,
+    chapterName: "Outcomes of Democracy",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2019] How does democracy produce an accountable, responsive, and legitimate government? Explain with arguments.",
+    options: [],
+    answer: "1. Accountable Government:\n   - In a democracy, citizens have the constitutional right to choose their rulers and participate in decision-making.\n   - A democratic government is accountable to the people through regular, free, and fair elections, open public debate, and legislative questioning.\n   - Transparency ensures citizens can inspect decision-making processes through mechanisms like the Right to Information (RTI).\n2. Responsive Government:\n   - A democratic government is expected to be attentive to the needs and aspirations of the general public and free of corruption.\n   - Even though democracies can be slow due to negotiations, decisions reflect broad consensus rather than arbitrary dictatorial decrees.\n3. Legitimate Government:\n   - A democratic government may be slow, less efficient, and not always very clean, but it is people's own government.\n   - It derives its authority from the consent of the governed through free elections, making democracy overwhelmingly preferred worldwide.",
+    steps: [
+      "Accountable: Rulers answerable through elections, parliamentary oversight, and transparency (RTI).",
+      "Responsive: Attentive to public demands through public debates and civil society scrutiny.",
+      "Legitimate: Governs by the consent of the governed; universally respected as 'people's own government'."
+    ],
+    explanation: "Even when economic performance varies, democracy's moral legitimacy and accountability remain superior to any dictatorship.",
+    examinerNote: "Divide your answer into three distinct headings: 'Accountable', 'Responsive', and 'Legitimate'.",
+    source: "CBSE Board Examination 2024 & NCERT Civics p. 90-92"
+  },
+  {
+    id: "sst_q_19_9",
+    chapter: 19,
+    chapterName: "Outcomes of Democracy",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2019] 'Democracy stands much superior to any other form of government in promoting dignity and freedom of the individual.' Support this statement with suitable arguments.",
+    options: [],
+    answer: "1. Moral and Legal Equality: The passion for respect and freedom is the basis of democracy. Democracies throughout the world have recognized that all individuals are legally equal under the constitution, abolishing hereditary aristocratic privileges.\n2. Dignity of Women: Most societies across the world were historically male-dominated. Long struggles by women have created an understanding that respect and equal treatment are necessary ingredients of a democratic society. Once recognized in principle, women can wage legal and moral battles against discrimination, which is impossible under autocratic regimes.\n3. Dignity of Disadvantaged Castes: In India, democracy has strengthened the claims of historically disadvantaged and discriminated castes for equal status and equal opportunity. Special constitutional protections prohibit untouchability.\n4. Right to Dissent & Public Protest: Democracy provides legitimate legal space for citizens to peacefully protest, criticize governmental failures, and mobilize for policy corrections without fear of arbitrary execution or imprisonment.",
+    steps: [
+      "1. Legal equality and universal human rights recognized in principle.",
+      "2. Dignity of women: Legal grounds to challenge patriarchal oppression.",
+      "3. Dignity of disadvantaged castes: Abolition of untouchability and affirmative action.",
+      "4. Right to dissent and hold power accountable through open public protest."
+    ],
+    explanation: "Even where social inequalities persist in practice, democracy gives citizens the legal and moral weapons to fight for their dignity.",
+    examinerNote: "Cite the dignity of women and marginalized castes as evidence of democracy's transformative moral power.",
+    source: "CBSE Board Paper 2024 & NCERT Civics p. 97-98"
   }
 ];

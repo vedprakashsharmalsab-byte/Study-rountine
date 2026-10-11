@@ -674,8 +674,8 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
 
             <div className="flex items-center gap-1.5 w-full sm:w-auto">
               {[
-                { id: "combo", label: "⚡ Super Combo", desc: "Toddler + CBSE" },
-                { id: "toddler", label: "👶 Toddler ELI5 Drama", desc: "10s Playground Story" },
+                { id: "combo", label: "⚡ Complete Master View", desc: "Scene + CBSE Depth" },
+                { id: "toddler", label: "🎬 Visual Scene Flow", desc: "Immersive NCERT Scenario" },
                 { id: "deep", label: "🎓 CBSE Board Exam", desc: "Causes & Rubric" }
               ].map((m) => {
                 const isSelected = timelineDisplayMode === m.id;
@@ -707,7 +707,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                 <Sparkles className="w-5 h-5 text-amber-400" /> Chronological Event Flow
               </h3>
               <p className="text-xs text-slate-400">
-                Playground toddler analogies + official CBSE marking rubrics and examiner traps.
+                Immersive NCERT visual scene narratives + official CBSE marking rubrics and examiner traps.
               </p>
             </div>
             <span className="text-xs font-mono text-slate-400">
@@ -864,10 +864,10 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                         >
                           <div className="flex items-center justify-between gap-2 mb-2">
                             <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500 text-slate-950 flex items-center gap-1">
-                              👶 Toddler Drama in 10s (ELI5)
+                              🎬 NCERT Visual Scene Reconstruction
                             </span>
                             <span className="text-[10px] font-mono font-semibold text-amber-500/90 hidden sm:inline">
-                              Playground Analogy • 100% NCERT Rigor
+                              Vivid Historical Context • 100% NCERT Rigor
                             </span>
                           </div>
                           <p
@@ -915,10 +915,10 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                           >
                             <div className="flex items-center justify-between mb-1.5 gap-2">
                               <span className="text-[11px] font-mono font-black uppercase text-emerald-400 flex items-center gap-1.5 break-words">
-                                <CheckCircle2 className="w-4 h-4 shrink-0" /> Solved: {toddler.toddlerQuestion}
+                                <CheckCircle2 className="w-4 h-4 shrink-0" /> CBSE Marking Scheme: {toddler.toddlerQuestion}
                               </span>
                               <span className="text-[10px] font-mono font-bold text-emerald-400 px-2 py-0.5 rounded-md bg-emerald-500/20 shrink-0">
-                                +5 XP Earned
+                                Scoring Rubric
                               </span>
                             </div>
                             <p className="text-xs sm:text-sm font-medium leading-relaxed break-words">
@@ -1465,7 +1465,7 @@ export const TimelinesMasterView: React.FC<TimelinesMasterViewProps> = ({
                                 }`}
                               >
                                 <span className="font-bold block text-[10px] uppercase font-mono text-amber-400 mb-0.5">
-                                  👶 Toddler Drama Hook (ELI5):
+                                  🎬 NCERT Visual Scenario Context:
                                 </span>
                                 {toddler.toddlerStory}
                               </div>

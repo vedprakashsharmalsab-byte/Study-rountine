@@ -128,5 +128,41 @@ export const SST_CH20_QUESTIONS: VaultQuestion[] = [
     explanation: "Case study analyzing state strategies, SEZ incentives, and labour flexibilization to court international capital.",
     examinerNote: "Mention '5-year tax holiday' and 'contractual flexible hiring' in parts (ii) and (iii).",
     source: "CBSE Official Sample Paper 2026-27 & Oswaal 2025-26"
+  },
+{
+    id: "sst_q_20_8",
+    chapter: 20,
+    chapterName: "Globalisation and the Indian Economy",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2018] Explain the various ways in which Multinational Corporations (MNCs) set up or control production in countries outside their home base.",
+    options: [],
+    answer: "1. Joint Ventures / Partnerships: MNCs enter into partnerships with local companies. The local company provides production facilities, while the MNC brings capital and advanced technology (e.g. Ford Motors partnering with Mahindra & Mahindra).\n2. Buying Up Local Companies: The most common route for MNC investment is to buy out established domestic companies and expand production. For example, American giant Cargill Foods purchased Indian company Parakh Foods, instantly acquiring its vast edible oil marketing network and four refineries.\n3. Placing Orders with Small Producers: Large MNCs in garments, footwear, and sports equipment place manufacturing orders with thousands of small producers across developing countries. The MNCs then sell these products under their own global brand names, determining prices, quality, delivery, and labor conditions.\n4. Setting Up Independent Green-field Units: MNCs set up their own state-of-the-art factories, design centers, and call centers in Special Economic Zones (SEZs) where host governments provide world-class infrastructure and tax holidays.",
+    steps: [
+      "1. Joint ventures and collaborative partnerships with local firms.",
+      "2. Direct acquisition/buyout of established domestic companies (e.g., Cargill Foods buying Parakh Foods).",
+      "3. Placing bulk contract manufacturing orders with small cottage producers (garments, footwear).",
+      "4. Independent green-field factories and customer support hubs in SEZs."
+    ],
+    explanation: "MNCs interlink production across geographically dispersed locations, leveraging low labor costs and local market access.",
+    examinerNote: "Citing the Cargill Foods-Parakh Foods acquisition example is highly rewarded by CBSE evaluators.",
+    source: "CBSE Board Examination 2024 & NCERT Economics p. 57-59"
+  },
+  {
+    id: "sst_q_20_9",
+    chapter: 20,
+    chapterName: "Globalisation and the Indian Economy",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2019, 2017] What is 'Fair Globalisation'? What role can the government play in ensuring that the benefits of globalisation are shared fairly by all citizens?",
+    options: [],
+    answer: "Concept of Fair Globalisation:\n- Globalisation has created benefits mainly for educated, skilled, and wealthy consumers and big businesses, while small producers (batteries, plastics, toys) and unorganized laborers face closures and job insecurity.\n- Fair Globalisation means creating opportunities for all and ensuring that the benefits of globalization are shared equitably across all sections of society.\n\nRole of the Government in Achieving Fair Globalisation:\n1. Enforcing Labour Laws: The government must ensure that strict labor laws are properly implemented and that workers' rights to fair wages, safe conditions, and job security are respected.\n2. Supporting Small Producers: The government must support small domestic producers with credit, technology, and subsidies until they become strong enough to compete with giant foreign MNCs.\n3. Selective Trade Barriers: If necessary, the government can use protective tariffs and import quotas to prevent predatory dumping of cheap foreign imports that ruin domestic industries.\n4. Negotiating at the WTO: Developing countries can negotiate unitedly at the World Trade Organisation (WTO) for fairer rules, refusing to surrender subsidies while developed nations heavily subsidize their farmers.\n5. Proactive Alliance Building: India can align with other developing nations to fight the dominance of developed countries in international economic forums.",
+    steps: [
+      "Fair Globalisation: Ensuring benefits reach poor workers and small manufacturers, not just elite consumers.",
+      "Government Role: Strict enforcement of labor laws, supporting small enterprises, using protective barriers against dumping, and uniting developing countries at WTO for equitable rules."
+    ],
+    explanation: "Globalisation cannot be left purely to unregulated market forces; government policy is the indispensable equalizer.",
+    examinerNote: "A favorite 5-mark evaluative question in recent CBSE Board exams.",
+    source: "CBSE Board Paper 2024 & NCERT Economics p. 70-71"
   }
 ];

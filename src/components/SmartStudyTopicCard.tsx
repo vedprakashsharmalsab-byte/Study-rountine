@@ -90,7 +90,12 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
             <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold border flex items-center gap-1 ${
               isDark ? "bg-amber-500/15 text-amber-400 border-amber-500/25" : "bg-amber-100 text-amber-800 border-amber-300"
             }`}>
-              <span>👶 Toddler Story + Class 10 Depth</span>
+              <span>🎬 Visual Scenario + Class 9 Bridge</span>
+            </span>
+            <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold border ${
+              isDark ? "bg-rose-500/10 text-rose-300 border-rose-500/20" : "bg-rose-50 text-rose-800 border-rose-200"
+            }`}>
+              🔥 Repeated Board Topic
             </span>
           </div>
 
@@ -204,8 +209,8 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
                   : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-950"
               }`}
             >
-              <Smile className="w-3.5 h-3.5" />
-              <span>👶 Toddler Story (ELI5)</span>
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>🎬 Visual Scenario Narrative</span>
             </button>
 
             <button
@@ -219,8 +224,8 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
                   : isDark ? "text-slate-400 hover:text-white" : "text-slate-600 hover:text-slate-950"
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>🎬 Graphic Storyboard (No Paragraphs)</span>
+              <Layers className="w-3.5 h-3.5" />
+              <span>⚡ 4-Act NCERT Deep Dive</span>
             </button>
 
             <button
@@ -235,7 +240,7 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
               }`}
             >
               <ListOrdered className="w-3.5 h-3.5" />
-              <span>📝 Topper 5-Point Formula</span>
+              <span>🏛️ Class 9 Bridge &amp; 5-Pt Formula</span>
             </button>
 
             <button
@@ -250,16 +255,16 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
               }`}
             >
               <Award className="w-3.5 h-3.5" />
-              <span>🏆 Solved Board Qs ({topic.examples.length})</span>
+              <span>🏆 Solved Board PYQs ({topic.examples.length})</span>
             </button>
           </div>
 
           {/* =========================================================================
-              MODE 1: TODDLER STORY (ELI5 - HILARIOUS & INTUITIVE MENTAL MODEL)
+              MODE 1: NCERT VISUAL SCENARIO NARRATIVE (VIVID MENTAL MODEL)
               ========================================================================= */}
           {activeMode === "toddler" && (
             <div className="space-y-5 animate-fadeIn min-w-0">
-              {/* THE TODDLER SCENARIO HERO */}
+              {/* THE VISUAL SCENARIO HERO CARD */}
               <div
                 className={`p-5 sm:p-6 rounded-3xl border relative overflow-hidden min-w-0 ${
                   isDark
@@ -269,12 +274,12 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
               >
                 <div className="flex items-start gap-4 min-w-0">
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center text-2xl font-black shrink-0 shadow-lg shadow-amber-500/30">
-                    👶
+                    🎬
                   </div>
-                  <div className="space-y-2 flex-1 min-w-0">
+                  <div className="space-y-3 flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500 text-slate-950">
-                        Explain Like I&apos;m 5 • Toddler Mental Model
+                        NCERT Visual Scenario • 100% Mental Picture
                       </span>
                       <span className="text-xs font-mono text-amber-400 font-bold">
                         {toddlerGuide.toddlerAnalogy.hook}
@@ -286,7 +291,7 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
                     </p>
 
                     <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-bold text-amber-400">
-                      <span>💡 The Core Realization:</span>
+                      <span>💡 Core NCERT Law &amp; Takeaway:</span>
                       <span className={`break-words ${isDark ? "text-amber-200" : "text-amber-900"}`}>
                         {toddlerGuide.toddlerAnalogy.moralOrAha}
                       </span>
@@ -295,11 +300,49 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
                 </div>
               </div>
 
-              {/* CAST OF CHARACTERS / KEY PLAYERS */}
+              {/* CLASS 9 FOUNDATIONAL BRIDGE CARD */}
+              {(toddlerGuide.toddlerAnalogy.class9Connection || (topic as any).class9Bridge) && (
+                <div
+                  className={`p-4 sm:p-5 rounded-2xl border flex items-start gap-3.5 ${
+                    isDark
+                      ? "bg-gradient-to-r from-blue-950/30 via-indigo-950/20 to-black border-blue-500/30 text-blue-200"
+                      : "bg-gradient-to-r from-blue-50 to-indigo-50/50 border-blue-200 text-blue-950"
+                  }`}
+                >
+                  <span className="text-2xl shrink-0 mt-0.5">🏛️</span>
+                  <div className="space-y-1 min-w-0 flex-1">
+                    <span className="text-[10px] font-mono font-black uppercase tracking-wider text-blue-400 block">
+                      Connecting from Past • Class 9 NCERT Foundation Bridge
+                    </span>
+                    <p className="text-xs sm:text-sm leading-relaxed font-medium">
+                      {toddlerGuide.toddlerAnalogy.class9Connection || (topic as any).class9Bridge?.connectionExplanation}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* REPEATED BOARD HOTSPOT BANNER */}
+              {toddlerGuide.toddlerAnalogy.boardHotspot && (
+                <div
+                  className={`p-3.5 rounded-2xl border flex items-center gap-3 ${
+                    isDark
+                      ? "bg-rose-950/20 border-rose-500/30 text-rose-200"
+                      : "bg-rose-50 border-rose-200 text-rose-950"
+                  }`}
+                >
+                  <span className="text-xl shrink-0">🔥</span>
+                  <div className="min-w-0 flex-1 text-xs leading-relaxed">
+                    <strong className="font-bold text-rose-400">CBSE Board Trend: </strong>
+                    <span>{toddlerGuide.toddlerAnalogy.boardHotspot}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* CAST OF CHARACTERS / HISTORICAL & ECONOMIC FORCES */}
               {toddlerGuide.toddlerAnalogy.characters.length > 0 && (
                 <div className="space-y-3">
                   <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-                    <span>🎭 The Key Players &amp; What They Stood For</span>
+                    <span>🎭 The Key Historical &amp; Institutional Forces</span>
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {toddlerGuide.toddlerAnalogy.characters.map((char, cIdx) => (
@@ -451,6 +494,27 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
                   Write these 5 structured points directly in your answer sheet for any 5-mark question from this topic to guarantee full marks.
                 </p>
               </div>
+
+              {/* CLASS 9 PRIOR KNOWLEDGE ANCHOR */}
+              {(toddlerGuide.toddlerAnalogy.class9Connection || (topic as any).class9Bridge) && (
+                <div
+                  className={`p-4 rounded-2xl border flex items-start gap-3 ${
+                    isDark
+                      ? "bg-indigo-950/20 border-indigo-500/30 text-indigo-200"
+                      : "bg-indigo-50/70 border-indigo-200 text-indigo-950"
+                  }`}
+                >
+                  <span className="text-xl shrink-0 mt-0.5">🏛️</span>
+                  <div className="space-y-1 min-w-0 flex-1">
+                    <span className="text-[10px] font-mono font-black uppercase text-indigo-400 block tracking-wider">
+                      Class 9 Prior Knowledge Foundation Anchor
+                    </span>
+                    <p className="text-xs sm:text-sm leading-relaxed font-medium">
+                      {toddlerGuide.toddlerAnalogy.class9Connection || (topic as any).class9Bridge?.connectionExplanation}
+                    </p>
+                  </div>
+                </div>
+              )}
 
               <div className="space-y-2.5">
                 {[

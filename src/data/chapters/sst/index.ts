@@ -563,6 +563,65 @@ export const SST_CH3_QUESTIONS: VaultQuestion[] = [
       "Brussels serves as the seat of the European Commission and European Council."
     ],
     "source": "CBSE Sample Paper 2026-27"
+  },
+{
+    id: "sst_q_3_8",
+    chapter: 3,
+    chapterName: "Power Sharing",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2020, 2019] Describe the four major forms of power sharing in modern democracies. Give one suitable example for each.",
+    options: [],
+    answer: "1. Horizontal Power Sharing (Among Organs of Government): Power is shared among the legislature, executive, and judiciary placed at the same level. This ensures a system of 'checks and balances' (e.g., India).\n2. Vertical Power Sharing (Federal Division): Power is shared among governments at different levels: a central government, regional state governments, and local municipalities/panchayats (e.g., Federalism in India and USA).\n3. Power Sharing Among Social Groups: Power is shared among different religious and linguistic groups to give minorities representation (e.g., 'Community Government' in Belgium and reserved constituencies for SC/ST in India).\n4. Power Sharing Among Political Parties & Pressure Groups: In multiparty systems, power is shared through coalition governments and interest groups (trade unions, farmers, business associations) participating in governmental committees.",
+    steps: [
+      "1. Horizontal division among legislature, executive, and judiciary (Checks and Balances).",
+      "2. Vertical division between Central, State, and Local governments (Federalism).",
+      "3. Division among socially diverse linguistic and religious groups (Community Government & Reserved seats).",
+      "4. Division among political coalitions and interest pressure groups influencing policymaking."
+    ],
+    explanation: "Horizontal power sharing exercises checks and balances at the same horizontal plane, whereas vertical power sharing devolves constitutional authority downwards.",
+    examinerNote: "Do not forget to define the 'system of checks and balances' under horizontal distribution—it carries 1 compulsory mark.",
+    source: "CBSE Board Examination 2024 & NCERT Civics p. 8-9"
+  },
+  {
+    id: "sst_q_3_9",
+    chapter: 3,
+    chapterName: "Power Sharing",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2022, 2019] Differentiate between Prudential reasons and Moral reasons for power sharing in a democracy.",
+    options: [],
+    answer: "1. Prudential Reasons (Based on Practical Calculation):\n   - Stresses that power sharing will bring out better outcomes by reducing the possibility of conflict and violence between social groups.\n   - Tyranny of the majority undermines not only the minority but ultimately ruins the majority as well (e.g., Sri Lankan civil war vs Belgian peace).\n2. Moral Reasons (Based on the Spirit of Democracy):\n   - Emphasizes that power sharing is the very spirit of democracy. A democratic rule involves sharing power with those affected by its exercise and who have to live with its effects.\n   - Citizens have a fundamental democratic right to be consulted on how they are to be governed.",
+    steps: [
+      "Prudential reason: Focuses on practical calculation of gains (prevents social conflict, ensures political stability).",
+      "Moral reason: Focuses on intrinsic democratic value (power sharing is the very soul of legitimate governance)."
+    ],
+    explanation: "Prudential reasons emphasize outcome-oriented stability; moral reasons emphasize the inherent democratic legitimacy of citizen participation.",
+    examinerNote: "CBSE examiners strictly check whether the student associates 'stability & conflict reduction' with prudential and 'spirit of democracy' with moral.",
+    source: "CBSE Board Exam 2024 & SQP Authentic"
+  },
+  {
+    id: "sst_q_3_10",
+    chapter: 3,
+    chapterName: "Power Sharing",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2023, 2020] Assertion (A): Power sharing is desirable in a democracy.\nReason (R): It helps to reduce the possibility of conflict between social groups.",
+    options: [
+      "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+      "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
+      "(A) is true but (R) is false",
+      "(A) is false but (R) is true"
+    ],
+    correctOption: 0,
+    answer: "Both (A) and (R) are true and (R) is the correct explanation of (A).",
+    steps: [
+      "Assertion (A) is true: Power sharing maintains democratic cohesion.",
+      "Reason (R) is true and directly explains (A) as the foundational prudential reason for adopting power sharing."
+    ],
+    explanation: "Since social conflict often leads to violence and political instability, power sharing is an effective way to ensure the stability of political order.",
+    examinerNote: "Assertion-Reason questions on Prudential reasons appear almost every alternate year.",
+    source: "CBSE Board Paper 2023"
   }
 ];
 export const SST_CH4_QUESTIONS: VaultQuestion[] = [
@@ -706,6 +765,67 @@ export const SST_CH4_QUESTIONS: VaultQuestion[] = [
       "Police, Agriculture, and Trade are on the State List."
     ],
     "source": "CBSE Board 2024"
+  },
+{
+    id: "sst_q_4_8",
+    chapter: 4,
+    chapterName: "Federalism",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2019] Explain the five major constitutional amendments introduced in 1992 (73rd and 74th Amendments) to make the third tier of democracy (local self-government) more powerful and effective.",
+    options: [],
+    answer: "1. Mandatory Regular Elections: It was made constitutionally mandatory to hold regular elections to local government bodies (Panchayats and Municipalities).\n2. Reservation for Disadvantaged Castes: Seats are constitutionally reserved in elected bodies and executive heads for Scheduled Castes (SC), Scheduled Tribes (ST), and Other Backward Classes (OBC).\n3. One-Third Reservation for Women: At least one-third (33%) of all positions and offices are reserved for women, fostering grassroots female leadership.\n4. Independent State Election Commission: An autonomous constitutional body called the State Election Commission (SEC) was created in each state to conduct panchayat and municipal elections.\n5. Revenue & Power Sharing: State governments are mandated by law to share specified powers and financial revenues with local government bodies, with nature of sharing determined by State Finance Commissions.",
+    steps: [
+      "1. Mandatory periodic local elections.",
+      "2. Constitutional reservation of seats for SC, ST, and OBCs.",
+      "3. Minimum 33% reservation of seats for women.",
+      "4. Creation of State Election Commission in each State.",
+      "5. Mandatory devolution of state revenue and administrative powers."
+    ],
+    explanation: "Before 1992, local bodies were directly controlled by states without dedicated elections or independent revenue. The 1992 amendments gave them constitutional autonomy.",
+    examinerNote: "Listing all 5 specific provisions is required for full 5 marks. Do not omit the State Election Commission.",
+    source: "CBSE Board Exam 2024 (Outside Delhi Set 1) & NCERT p. 24"
+  },
+  {
+    id: "sst_q_4_9",
+    chapter: 4,
+    chapterName: "Federalism",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2022, 2018] How has the language policy of India strengthened federalism and preserved national unity?",
+    options: [],
+    answer: "1. No Single National Language: The Indian Constitution did not grant the status of 'National Language' to any single language. While Hindi was identified as the official language, it is the mother tongue of only about 44% of Indians.\n2. Recognition of 22 Scheduled Languages: Besides Hindi, there are 21 other languages recognized as 'Scheduled Languages' by the Constitution. A candidate in central government examinations can opt to take the examination in any of these languages.\n3. Flexibility with English: According to the Constitution, the use of English for official purposes was to stop in 1965. However, following protests from non-Hindi states (especially Tamil Nadu), the central government agreed to continue English alongside Hindi, preventing the linguistic fragmentation seen in Sri Lanka.",
+    steps: [
+      "1. Refusal to impose Hindi as sole national language (protecting linguistic diversity).",
+      "2. Constitutional recognition of 22 Scheduled Languages in the Eighth Schedule.",
+      "3. Flexible compromise allowing English alongside Hindi for official union purposes."
+    ],
+    explanation: "India's flexible language policy accommodated regional linguistic sentiments, preserving national unity unlike Sri Lanka's forced majoritarian language policy.",
+    examinerNote: "Highlight the contrast with Sri Lanka's 1956 Sinhala Act to score maximum points.",
+    source: "CBSE Board Paper 2024 & NCERT Civics p. 21-22"
+  },
+  {
+    id: "sst_q_4_10",
+    chapter: 4,
+    chapterName: "Federalism",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2024, 2020] Which level of government has the constitutional power to legislate on 'Residuary Subjects' like Computer Software and Cyber Law in India?",
+    options: [
+      "State Governments exclusively",
+      "Union Government exclusively",
+      "Both Union and State Governments jointly",
+      "Local Self-Governments"
+    ],
+    correctOption: 1,
+    answer: "The Union Government exclusively has the legislative authority over Residuary Subjects that came up after the Constitution was framed.",
+    steps: [
+      "Subjects not present in the Union, State, or Concurrent Lists (e.g. computer software) fall under Residuary Powers.",
+      "Article 248 grants exclusive legislative competence over residuary subjects to the Union Parliament."
+    ],
+    explanation: "Subjects that did not exist at the time of drafting the Constitution (like IT, cyber law) are categorized as Residuary Subjects and assigned to the Union Government.",
+    examinerNote: "Do not confuse Residuary Subjects with the Concurrent List.",
+    source: "CBSE Board Paper 2024"
   }
 ];
 export const SST_CH5_QUESTIONS: VaultQuestion[] = [
@@ -825,6 +945,41 @@ export const SST_CH5_QUESTIONS: VaultQuestion[] = [
       "Chambal ravines are classic examples of severe gully erosion in clayey soils."
     ],
     "source": "CBSE Board 2025"
+  },
+{
+    id: "sst_q_5_7",
+    chapter: 5,
+    chapterName: "Resources and Development",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2017] Explain the four major causes of land degradation in India. Suggest any four practical measures to conserve land resources.",
+    options: [],
+    answer: "Major Causes of Land Degradation:\n1. Mining & Quarrying: Unplanned mining leaves deep scars and abandoned open pits; prevalent in Jharkhand, Chhattisgarh, Madhya Pradesh, and Odisha.\n2. Over-Irrigation: Excessive canal irrigation leads to waterlogging, which dramatically increases salinity and alkalinity in soil, ruining fertile agricultural tracts in Punjab, Haryana, and western UP.\n3. Overgrazing: Unregulated livestock grazing strips grasslands and vegetative cover, accelerating wind and water erosion in Gujarat, Rajasthan, and Maharashtra.\n4. Industrial Effluents: Untreated mineral-rich toxic effluents and solid chemical wastes dumped by factories severely pollute land and poison groundwater.\n\nMeasures for Conservation:\n1. Afforestation and proper management of grazing lands.\n2. Planting of shelter belts of trees and stabilization of sand dunes through thorny bushes.\n3. Proper management of wastelands and regulation of mining activities.\n4. Treatment and neutralization of industrial effluents before discharge.",
+    steps: [
+      "Causes: Mining (Jharkhand/Odisha), Over-irrigation & salinization (Punjab/Haryana), Overgrazing (Gujarat/Rajasthan), Industrial effluents.",
+      "Conservation Measures: Afforestation, Shelter belts, Sand dune stabilization with thorny bushes, Industrial effluent treatment."
+    ],
+    explanation: "Land degradation patterns differ by region: irrigation-driven salinization in the northwest, mining scars in central India, and grazing in arid western states.",
+    examinerNote: "CBSE marking scheme gives 2.5 marks for regional causes with state examples and 2.5 marks for four distinct conservation solutions.",
+    source: "CBSE Board 2024 (Set 3) & NCERT Geography p. 5-7"
+  },
+  {
+    id: "sst_q_5_8",
+    chapter: 5,
+    chapterName: "Resources and Development",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2020, 2018] Explain the three complex steps involved in the process of Resource Planning in India.",
+    options: [],
+    answer: "1. Identification and Inventory: Involves surveying, mapping, qualitative and quantitative estimation, and measurement of resources across all regions of the country.\n2. Evolving a Planning Structure: Developing an institutional mechanism endowed with appropriate technology, skill sets, and institutional setups for implementing resource development plans.\n3. Harmonizing with National Plans: Matching and aligning the regional resource development plans with overall national development plans and economic priorities.",
+    steps: [
+      "1. Surveying, mapping, and quantitative measurement of national resources.",
+      "2. Developing technological infrastructure, skills, and institutional setups.",
+      "3. Matching regional resource plans with overall five-year national economic plans."
+    ],
+    explanation: "Resource planning ensures balanced regional development: resource-rich states like Jharkhand lack infrastructure, while Ladakh is isolated despite cultural heritage.",
+    examinerNote: "All three sequential steps must be mentioned in order to receive full 3 marks.",
+    source: "CBSE Board Paper 2024 & NCERT p. 4"
   }
 ];
 export const SST_CH6_QUESTIONS: VaultQuestion[] = [
@@ -927,6 +1082,60 @@ export const SST_CH6_QUESTIONS: VaultQuestion[] = [
       "Corbett = Uttarakhand; Sunderbans = West Bengal; Manas = Assam; Bandhavgarh = MP."
     ],
     "source": "CBSE Board 2024"
+  },
+{
+    id: "sst_q_6_6",
+    chapter: 6,
+    chapterName: "Forest and Wildlife Resources",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2018] Classify the forests of India into three categories as demarcated by the forest department. Explain the features of each category.",
+    options: [],
+    answer: "1. Reserved Forests:\n   - Regarded as the most valuable as far as the conservation of forest and wildlife resources are concerned.\n   - More than half of the total forest land has been declared as reserved forests.\n   - Activities like timber felling, grazing, and human entry are strictly prohibited without special state permission (prevalent in Jammu & Kashmir, Andhra Pradesh, Uttarakhand, Kerala, Tamil Nadu, West Bengal, and Maharashtra).\n2. Protected Forests:\n   - Almost one-third of the total forest area is declared protected forest by the Forest Department.\n   - This forest land is protected from any further depletion; local communities are allowed conditional fuel-wood collection and grazing rights without causing damage to the forest canopy (dominant in Bihar, Haryana, Punjab, Himachal Pradesh, Odisha, and Rajasthan).\n3. Unclassed Forests:\n   - These are other forests and wastelands belonging to both government and private individuals and communities.\n   - Common in all north-eastern states and parts of Gujarat, where forests are managed by local tribal communities.",
+    steps: [
+      "1. Reserved Forests: Over 50% of forest land, most valuable, strict state protection against any exploitation.",
+      "2. Protected Forests: One-third of forest land, protected from further depletion with limited local usage rights.",
+      "3. Unclassed Forests: Wastelands and forests owned by both government and private/tribal communities."
+    ],
+    explanation: "Reserved and Protected forests are collectively referred to as 'Permanent Forest Estates' maintained for timber production and ecological preservation.",
+    examinerNote: "Explicitly mention that Madhya Pradesh has the largest area under permanent forests (constituting 75% of its total forest area).",
+    source: "CBSE Board Examination 2024 & NCERT Geography p. 18-19"
+  },
+  {
+    id: "sst_q_6_7",
+    chapter: 6,
+    chapterName: "Forest and Wildlife Resources",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2023, 2020, 2016] 'In India, traditional local communities have played a pivotal role in conserving and protecting forests and wildlife.' Justify the statement with three concrete historical examples.",
+    options: [],
+    answer: "1. Bhairodev Dakav Sonchuri (Alwar, Rajasthan):\n   - Inhabitants of five villages in the Alwar district of Rajasthan have declared 1,200 hectares of forest as the 'Bhairodev Dakav Sonchuri', framing their own set of rules and regulations which do not allow hunting and protect wildlife against outside encroachments.\n2. The Famous Chipko Movement (Himalayas):\n   - Successfully resisted deforestation in several Himalayan valleys through non-violent tree-hugging, while demonstrating that community afforestation with indigenous species can be enormously successful.\n3. Beej Bachao Andolan & Navdanya (Tehri):\n   - Farmers and citizen groups in Tehri (Uttarakhand) showed that adequate levels of diversified crop production without the use of synthetic chemicals are possible and economically viable.\n4. Sacred Groves (Religious Protection):\n   - Nature worship is an age-old tribal belief; tribal communities revere dedicated virgin patches of forest as 'Sacred Groves' (e.g. Mundas and Santhals revere Mahua and Kadamba trees; Bishnois of Rajasthan protect blackbuck, nilgai, and peacocks).",
+    steps: [
+      "1. Bhairodev Dakav Sonchuri in Alwar (1,200 hectares declared sanctuary by villagers).",
+      "2. Chipko Movement in Himalayas resisting deforestation and restoring indigenous forests.",
+      "3. Beej Bachao Andolan in Tehri and Sacred Groves revered by tribal communities."
+    ],
+    explanation: "Conservation strategies are deeply embedded in indigenous culture and community ownership rather than top-down bureaucratic control.",
+    examinerNote: "Citing specific proper nouns like 'Bhairodev Dakav Sonchuri' or 'Bishnois of Rajasthan' guarantees top band marks.",
+    source: "CBSE Board Paper 2024 & NCERT Geography p. 19-20"
+  },
+  {
+    id: "sst_q_6_8",
+    chapter: 6,
+    chapterName: "Forest and Wildlife Resources",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2022, 2019] Explain the objective and working mechanism of the Joint Forest Management (JFM) programme in India.",
+    options: [],
+    answer: "1. Institutional Partnership: JFM furnishes a good example for involving local rural communities in the management and restoration of degraded forests.\n2. Origin & Resolution: The programme has been in formal existence since 1988 when the state of Odisha passed the first formal resolution for joint forest management.\n3. Working Mechanism: JFM depends on the formation of local village institutions that undertake protection activities mostly on degraded forest land managed by the Forest Department.\n4. Benefits to Community: In return, the members of these community institutions are entitled to intermediary benefits like non-timber forest produce and a share in the timber harvested under successful protection.",
+    steps: [
+      "1. Formal collaboration between state forest department and village community.",
+      "2. First adopted in Odisha in 1988.",
+      "3. Villagers protect degraded forests; in return they receive usufructuary rights to non-timber produce and harvested timber share."
+    ],
+    explanation: "JFM demonstrates that forest conservation is only sustainable when local communities have a tangible economic stake in forest protection.",
+    examinerNote: "Always remember: Odisha passed the first formal resolution for JFM in 1988.",
+    source: "CBSE Board 2024 & NCERT p. 20"
   }
 ];
 export const SST_CH7_QUESTIONS: VaultQuestion[] = [
@@ -1029,6 +1238,44 @@ export const SST_CH7_QUESTIONS: VaultQuestion[] = [
       "Tehri = Bhagirathi; Bhakra Nangal = Satluj; Salal = Chenab; Hirakud = Mahanadi."
     ],
     "source": "CBSE Board 2024"
+  },
+{
+    id: "sst_q_7_6",
+    chapter: 7,
+    chapterName: "Water Resources",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2021, 2019, 2017, 2016] 'Water is available in abundance on Earth, yet acute water scarcity is experienced across vast regions of India.' Explain this paradox with five detailed arguments.",
+    options: [],
+    answer: "1. Population Explosion & Domestic Consumption: A rapidly expanding population requires vastly more water not only for domestic consumption and cooking but also to expand food-grain production.\n2. Commercial & Dry-Season Agriculture: Intensive agriculture relies on private tubewells to irrigate water-intensive cash crops (e.g., paddy, sugarcane) during dry seasons, causing dangerous depletion of groundwater aquifers across Punjab, Haryana, and Tamil Nadu.\n3. Industrial Expansion & Energy Generation: Post-independence industrialization has proliferated water-guzzling manufacturing units (paper, steel, chemicals). Furthermore, hydroelectric power contributes about 22% of India's total electricity.\n4. Urban Lifestyles & Groundwater Over-Exploitation: Expanding housing societies and luxury urban lifestyles extract underground water via personal borewells indiscriminately, plummeting the water table.\n5. Deteriorating Water Quality (Pollution): Even where water is physically abundant, it is rendered unfit for human use due to dumping of untreated industrial effluents, domestic sewage, chemical fertilizers, and toxic pesticides into rivers like the Ganga and Yamuna.",
+    steps: [
+      "1. Expanding population demand for domestic use and food production.",
+      "2. Commercial tubewell-based dry-season irrigation depleting aquifers.",
+      "3. Industrial demands and hydroelectric generation (22% of total power).",
+      "4. Urbanization and housing society borewells over-extracting groundwater.",
+      "5. Chemical, sewage, and industrial pollution ruining water quality."
+    ],
+    explanation: "Water scarcity is both quantitative (insufficient volume) and qualitative (polluted, unusable water despite physical presence).",
+    examinerNote: "Must explain both quantitative shortage and qualitative chemical degradation to secure 5 marks.",
+    source: "CBSE Board 2024 & NCERT Geography p. 25-27"
+  },
+  {
+    id: "sst_q_7_7",
+    chapter: 7,
+    chapterName: "Water Resources",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2023, 2020, 2018] Why have multipurpose river valley projects and large dams faced intense criticism and social opposition in recent decades? Explain with three arguments.",
+    options: [],
+    answer: "1. Ecological Destruction & Reservoir Sedimentation: Damming rivers regulates and fragments natural flow, causing excessive sedimentation at the reservoir bed, starving downstream floodplains of fertile silt, and devastating aquatic migration and breeding habitats.\n2. Submergence of Forests & Soil Salinization: Mega-reservoirs submerge vast tracts of pristine forests and agricultural fields. Intensive canal irrigation also changes cropping patterns towards commercial water-intensive crops, leading to soil salinization.\n3. Displacement of Tribals & Social Injustice: Construction of dams displaces local indigenous communities without adequate rehabilitation, concentrating water benefits among rich landlords and urban factory owners while poor villagers lose ancestral lands (spurring protests like Narmada Bachao Andolan).",
+    steps: [
+      "1. Excessive reservoir bed sedimentation and destruction of aquatic ecosystems.",
+      "2. Submergence of pristine vegetation and canal-induced soil salinization.",
+      "3. Displacement of indigenous populations without rehabilitation (e.g. Narmada Bachao Andolan)."
+    ],
+    explanation: "Large dams transform rivers into ecological hazards while redistributing water unequally between urban elites and displaced rural poor.",
+    examinerNote: "Cite social movements like 'Narmada Bachao Andolan' or 'Tehri Dam Andolan' as concrete evidence.",
+    source: "CBSE Board Paper 2023 & NCERT p. 27-28"
   }
 ];
 export const SST_CH8_QUESTIONS: VaultQuestion[] = [
@@ -1131,6 +1378,42 @@ export const SST_CH8_QUESTIONS: VaultQuestion[] = [
       "A country with high per capita income can still have 90% of its population living in poverty if wealth is monopolized."
     ],
     "source": "CBSE Board 2023"
+  },
+{
+    id: "sst_q_8_6",
+    chapter: 8,
+    chapterName: "Development",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2019, 2018] Why is Per Capita Income considered an inadequate measure of human development? Explain the multidimensional indicators used by the United Nations Development Programme (UNDP) in its Human Development Report.",
+    options: [],
+    answer: "Limitations of Per Capita Income (World Bank Criterion):\n1. Hides Income Inequalities: Per capita income is merely an average (Total National Income / Total Population). It reveals nothing about how income is distributed. A country with a few multi-billionaires and millions of starving citizens can have the same average income as an egalitarian nation.\n2. Ignores Non-Material Welfare: Money cannot directly measure life expectancy, quality of healthcare, access to education, freedom, equality, clean air, or social dignity.\n\nMultidimensional Indicators Used by UNDP (Human Development Report):\n1. Per Capita Gross National Income (GNI in PPP dollars): Evaluates standard of living and purchasing power adjusted for local costs.\n2. Life Expectancy at Birth: Measures longevity and health quality of citizens from infancy.\n3. Education (Mean Years of Schooling & Expected Years of Schooling): Measures literacy, cognitive development, and access to schooling.\nConclusion: UNDP's HDI is far superior because it measures human capabilities and quality of life rather than mere monetary aggregates.",
+    steps: [
+      "Limitations of Per Capita Income: Hides income disparities, ignores health, education, and social equality.",
+      "UNDP HDI Criteria: Per Capita GNI (Purchasing Power Parity), Life Expectancy at Birth (Health), Mean and Expected Years of Schooling (Education)."
+    ],
+    explanation: "World Bank measures economic growth (size of monetary pie); UNDP measures human development (how long, healthy, and educated people's lives are).",
+    examinerNote: "Contrast World Bank (World Development Report - average income) with UNDP (Human Development Report - HDI) explicitly.",
+    source: "CBSE Board Exam 2024 & NCERT Economics p. 11-13"
+  },
+  {
+    id: "sst_q_8_7",
+    chapter: 8,
+    chapterName: "Development",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2023, 2019, 2018] 'Money in your pocket cannot buy all the goods and services that you need to live well.' Justify this statement with three suitable arguments.",
+    options: [],
+    answer: "1. Pollution-Free Environment: Money cannot protect an individual from breathing toxic smog or air pollution unless one can afford to relocate to an isolated sanctuary.\n2. Unadulterated Medicines and Food: Wealth cannot guarantee that the groceries, infant milk, or life-saving medicines purchased in the market are free from dangerous adulteration.\n3. Protection from Infectious Pandemics: An individual's personal wealth cannot protect them from airborne viruses and contagious epidemics (e.g. COVID-19) unless the entire community takes collective preventive health measures.\n4. Non-Material Goods: Money cannot buy true freedom, equal treatment in society, freedom from discrimination, or peace of mind.",
+    steps: [
+      "1. Cannot purchase a pollution-free environment.",
+      "2. Cannot ensure unadulterated medicine and safe food.",
+      "3. Cannot protect against infectious disease epidemics without collective public health.",
+      "4. Cannot purchase social equality, dignity, and non-discrimination."
+    ],
+    explanation: "Quality of life depends on public goods and social conditions that require collective government provision rather than individual private wealth.",
+    examinerNote: "Classic NCERT quote question; student must provide at least 3 concrete non-market factors.",
+    source: "CBSE Board Paper 2024 & NCERT p. 10-11"
   }
 ];
 export const SST_CH9_QUESTIONS: VaultQuestion[] = [
@@ -1272,6 +1555,43 @@ export const SST_CH9_QUESTIONS: VaultQuestion[] = [
       "If govt fails to provide work within 15 days, it pays an unemployment allowance."
     ],
     "source": "CBSE Board 2025"
+  },
+{
+    id: "sst_q_9_8",
+    chapter: 9,
+    chapterName: "Sectors of the Indian Economy",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2019, 2016] Explain the four major reasons why the Tertiary (Service) sector has emerged as the largest producing sector in India over the past forty years.",
+    options: [],
+    answer: "1. Provision of Essential Basic Services: In any developing nation, several services such as hospitals, educational institutions, postal and telegraph services, police stations, courts, village administrative offices, municipal corporations, transport, and defense are considered essential basic services. The government must take institutional responsibility for their provision.\n2. Development of Agriculture and Manufacturing: Expansion of the primary and secondary sectors directly spurs demand for tertiary services. Greater farm harvest and factory production require more trucks for transportation, warehouses for storage, banking for credit, and wholesale trade networks.\n3. Rising Incomes and Lifestyle Demand: As urban income levels rise, prosperous families demand more discretionary lifestyle services: eating out in restaurants, tourism, shopping complexes, private hospitals, private schooling, and professional coaching.\n4. Revolution in Information & Communication Technology (ICT): Over the last two decades, new services based on telecommunications, internet technologies, software development, BPOs, and call centers have experienced exponential growth, earning massive foreign exchange and boosting domestic employment.",
+    steps: [
+      "1. Government provision of essential basic services (health, schools, defense, courts).",
+      "2. Primary and secondary sector growth stimulating transport, storage, and trade.",
+      "3. Rising income levels creating demand for discretionary services (tourism, dining, private healthcare).",
+      "4. Boom in Information and Communication Technology (ICT, software, BPOs)."
+    ],
+    explanation: "Between 1973-74 and 2013-14, tertiary sector contribution to GDP surged past 50%, transforming India into a service-dominated economy.",
+    examinerNote: "Must include the 4 distinct numbered causes from NCERT p. 24-25. Also note that not all tertiary workers are thriving—unorganized service workers remain impoverished.",
+    source: "CBSE Board Examination 2024 & NCERT Economics p. 24-25"
+  },
+  {
+    id: "sst_q_9_9",
+    chapter: 9,
+    chapterName: "Sectors of the Indian Economy",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2024, 2023, 2020, 2019, 2017] What is disguised unemployment? In which sector is it most commonly observed in India? Suggest two concrete measures to eliminate it.",
+    options: [],
+    answer: "Definition of Disguised Unemployment:\n- It is a situation where more people are engaged in a work than are actually required. Even if several workers are pulled out, total production does not fall. Their marginal productivity is effectively zero, meaning they appear to be working but are underemployed.\n- It is predominantly prevalent in the agricultural sector in rural India (e.g. Laxmi's family of 5 working on a 2-hectare plot when 2 people suffice).\n\nTwo Measures to Eliminate It:\n1. Rural Infrastructure & Canal Construction: Government investment in building irrigation canals, check dams, and rural roads creates direct wage employment while enabling farmers to harvest a second crop.\n2. Agro-Processing Industries: Setting up local agro-processing units (dal mills, cold storage, honey collection centers) in rural and semi-urban areas to absorb surplus farm labor.",
+    steps: [
+      "Definition: Workers are visibly employed but their marginal productivity is zero (removing them does not reduce output).",
+      "Sector: Dominates rural smallholder agriculture.",
+      "Solutions: Rural public works (canals, roads) and agro-processing industries (dal mills, cold storage)."
+    ],
+    explanation: "Disguised unemployment is hidden underemployment; workers share work rather than utilizing their full productive capacity.",
+    examinerNote: "Clearly state: 'marginal productivity is zero / output does not fall if some are removed'.",
+    source: "CBSE Board Paper 2024 & NCERT p. 26-27"
   }
 ];
 export const SST_CH10_QUESTIONS: VaultQuestion[] = [
@@ -1413,6 +1733,43 @@ export const SST_CH10_QUESTIONS: VaultQuestion[] = [
       "15-20 members ensures close social familiarity, high peer accountability, and manageable bookkeeping."
     ],
     "source": "CBSE Board 2024"
+  },
+{
+    id: "sst_q_10_8",
+    chapter: 10,
+    chapterName: "Money and Credit",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2017, 2016] Compare formal sources of credit with informal sources of credit in India. Why is it essential that commercial banks and cooperatives expand credit in rural areas?",
+    options: [],
+    answer: "Comparison Between Formal and Informal Credit:\n1. Regulatory Supervision: Formal sources (commercial banks, cooperative societies) are strictly supervised by the Reserve Bank of India (RBI). Informal sources (moneylenders, traders, employers, relatives) operate without any central regulatory oversight.\n2. Interest Rates: Formal lenders charge reasonable, transparent interest rates. Informal lenders charge exorbitant, compounding interest rates (often 36% to 60%+ per annum).\n3. Collateral Demands: Formal banks strictly require collateral (asset security) and formal documentation. Informal lenders lend without formal collateral because they know borrowers personally.\n4. Exploitation & Traps: Informal lenders use physical harassment, debt bonding, and extortion, frequently pushing poor borrowers into inescapable debt-traps.\n\nWhy Formal Credit Must Expand in Rural Areas:\n1. Liberating Poor from Exploitation: Reduces rural dependence on predatory moneylenders who strip peasants of land and dignity.\n2. Stimulating Agricultural Investment: Affordable low-interest loans enable farmers to buy high-yield seeds, fertilizers, and tubewells, dramatically increasing farm productivity.\n3. Fostering Rural Enterprise: Cheap credit encourages rural youth to establish small manufacturing workshops, cottage industries, and transport businesses, creating non-farm jobs.",
+    steps: [
+      "Formal vs Informal: RBI regulation vs none; low interest vs extortionate interest; collateral required vs personal acquaintance; fair recovery vs debt traps.",
+      "Why Expand Formal Credit: Free poor from predatory moneylenders, enable agricultural modernization, and stimulate rural enterprise."
+    ],
+    explanation: "At present, rich urban households receive 85% formal credit, while poor rural households depend 85% on informal credit. Reversing this inequality is vital for inclusive growth.",
+    examinerNote: "Highlight RBI's supervisory role and the social cost of rural debt traps for full 5 marks.",
+    source: "CBSE Board Exam 2024 & NCERT Economics p. 48-50"
+  },
+  {
+    id: "sst_q_10_9",
+    chapter: 10,
+    chapterName: "Money and Credit",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2024, 2023, 2020, 2019, 2018] Explain the organization and functioning of Self-Help Groups (SHGs) for the poor in rural India. How do SHGs foster the social and economic empowerment of women?",
+    options: [],
+    answer: "Organization & Functioning of SHGs:\n1. Composition: A typical SHG consists of 15 to 20 members, usually belonging to one neighbourhood, who meet and pool their small savings regularly (Rs 25 to Rs 100+ per member depending on ability).\n2. Internal Micro-Loans: Members can take small emergency loans from the group's pooled fund at reasonable interest rates set by the group itself, escaping moneylenders.\n3. Bank Linkage Without Collateral: If an SHG saves regularly for 1 to 2 years, it becomes eligible to take loans directly from commercial banks without providing collateral. The loan is sanctioned in the name of the group to create self-employment opportunities (e.g. buying sewing machines, livestock, handlooms).\n4. Joint Liability for Repayment: The entire group is collectively responsible for timely repayment. Because of this peer monitoring, formal banks readily lend to SHGs even in the complete absence of physical collateral.\n\nEmpowerment of Rural Women:\n1. Financial Independence: Provides poor women with access to independent capital and working assets without depending on moneylenders or male relatives.\n2. Social Platform for Community Issues: Regular group meetings serve as an empowering forum where women discuss and act on vital social concerns: domestic violence, child health, sanitation, and nutrition.",
+    steps: [
+      "1. 15-20 members pooling small regular savings (Rs 25-100).",
+      "2. Internal micro-loans at low interest for emergency needs.",
+      "3. Bank linkage without collateral based on group track record.",
+      "4. Joint group liability ensuring high repayment rates.",
+      "5. Dual empowerment: Financial self-reliance + platform to combat domestic violence and health neglect."
+    ],
+    explanation: "SHGs bypass the collateral bottleneck of formal banking through social solidarity and mutual peer accountability.",
+    examinerNote: "Crucial point: Banks lend to SHGs WITHOUT collateral because the entire group guarantees repayment.",
+    source: "CBSE Board Exam 2024 & NCERT Economics p. 51-52"
   }
 ];
 
