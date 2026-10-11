@@ -48,8 +48,8 @@ const TUTORIAL_STEPS: TutorialStep[] = [
     id: "countdown",
     tab: "chapter_dashboard",
     selector: "#tutorial-countdown-banner, #tutorial-countdown-capsule",
-    title: "Dual Milestone Exam Timers (15 Oct Sprint & 1 Feb Boards)",
-    description: "Live real-time dual countdown tracking both your upcoming 15 Oct 2026 Mid-Term Sprint and the Official CBSE Class 10 Board Examinations (1 Feb 2027) with smart auto-termination.",
+    title: "Dual Milestone Exam Timers (26 Oct Phase 1 & 1 Feb Boards)",
+    description: "Live real-time dual countdown tracking both your upcoming 26 Oct 2026 Pre-Board Phase 1 Milestone and the Official CBSE Class 10 Board Examinations (1 Feb 2027) with smart auto-termination.",
     icon: Calendar,
     badgeText: "Dual Exam Timers",
     preferredPlacement: "bottom",
@@ -77,7 +77,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   },
   {
     id: "nav-tabs",
-    selector: "#tutorial-nav-tabs, #tutorial-nav-dock-mobile",
+    selector: "#tutorial-all-modules-btn, #tutorial-nav-tabs, #tutorial-nav-dock-mobile",
     title: "Navigation Hub & Quick Launcher (⌘K)",
     description: "Switch seamlessly across the 4 core workspaces: Command Dashboard, NCERT Concept Hub, CBSE Practice Vault, and Tools & Memory. Press ⌘K or click 'All Modules' anytime to search all 16 tools.",
     icon: Layers,
@@ -136,7 +136,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   }
 ];
 
-export const TUTORIAL_STORAGE_KEY = "cbse10_guided_tutorial_completed_v1";
+export const TUTORIAL_STORAGE_KEY = "cbse10_guided_tutorial_completed_v3";
 
 interface InteractiveGuidedTutorialProps {
   isDark: boolean;
@@ -402,7 +402,7 @@ export default function InteractiveGuidedTutorial({
   }
 
   // Live timer calculation for popover countdown display
-  const octMs = new Date("2026-10-15T10:30:00+05:30").getTime() - Date.now();
+  const octMs = new Date("2026-10-26T10:30:00+05:30").getTime() - Date.now();
   const febMs = new Date("2027-02-01T09:00:00+05:30").getTime() - Date.now();
   const octDays = Math.max(0, Math.floor(octMs / (1000 * 60 * 60 * 24)));
   const febDays = Math.max(0, Math.floor(febMs / (1000 * 60 * 60 * 24)));
@@ -523,7 +523,7 @@ export default function InteractiveGuidedTutorial({
           }`}>
             <div className="flex flex-col items-center">
               <span className="text-base sm:text-lg font-black tabular-nums">{octDays}d</span>
-              <span className="text-[9px] uppercase font-bold opacity-75">15 Oct Sprint</span>
+              <span className="text-[9px] uppercase font-bold opacity-75">26 Oct Phase 1</span>
             </div>
             <div className="h-6 w-px bg-current/20" />
             <div className="flex flex-col items-center">

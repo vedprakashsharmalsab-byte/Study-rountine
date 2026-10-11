@@ -55,6 +55,7 @@ import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import TrigValuesMasterTable from "@/components/TrigValuesMasterTable";
 import { MathDiagramFigure } from "@/components/MathDiagramFigure";
 import ScienceConceptsHubView from "@/components/ScienceConceptsHubView";
+import ChemistryBasicsMasterView from "@/components/ChemistryBasicsMasterView";
 import { MATH_CHAPTER_CONCEPTS, type MathChapterConcept } from "@/data/mathConceptsData";
 import {
   getChapterData,
@@ -3539,20 +3540,27 @@ export default function ConceptsHubView({
       )}
 
       {/* =========================================================================
-          4. SCIENCE CHAPTER CONCEPTS VIEW (Toddler-to-Pro)
+          4. SCIENCE CHAPTER CONCEPTS VIEW (Toddler-to-Pro & Chemistry Basics Foundation)
           ========================================================================= */}
       {activeSubject === "science" && (
-        <ScienceConceptsHubView
-          isDark={isDark}
-          activeChapterNo={activeScienceChapterNo}
-          isEmbeddedInCommand={true}
-          onChapterChange={(chNo) => setActiveScienceChapterNo(chNo)}
-          onOpenQuestionBank={(chNo) => onOpenQuestionBank?.("science", chNo || activeScienceChapterNo)}
-          onOpenActivities={onOpenActivities}
-          onOpenReactions={onOpenReactions}
-          onOpenDiagrams={onOpenDiagrams}
-          onOpenHots={onOpenHots}
-        />
+        activeScienceChapterNo === 0 ? (
+          <ChemistryBasicsMasterView
+            isDark={isDark}
+            onNavigateToChapter={(chNo) => setActiveScienceChapterNo(chNo)}
+          />
+        ) : (
+          <ScienceConceptsHubView
+            isDark={isDark}
+            activeChapterNo={activeScienceChapterNo}
+            isEmbeddedInCommand={true}
+            onChapterChange={(chNo) => setActiveScienceChapterNo(chNo)}
+            onOpenQuestionBank={(chNo) => onOpenQuestionBank?.("science", chNo || activeScienceChapterNo)}
+            onOpenActivities={onOpenActivities}
+            onOpenReactions={onOpenReactions}
+            onOpenDiagrams={onOpenDiagrams}
+            onOpenHots={onOpenHots}
+          />
+        )
       )}
 
       {/* =========================================================================

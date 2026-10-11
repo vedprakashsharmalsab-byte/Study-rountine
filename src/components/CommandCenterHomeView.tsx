@@ -31,7 +31,8 @@ import {
   CHAPTER_WISE_FLASHCARDS,
   FlashcardItem,
   Chapter,
-  Subject
+  Subject,
+  TEST_SERIES_1_CHAPTER_IDS
 } from "@/data/cbseData";
 import AreteLeaderboard from "@/components/AreteLeaderboard";
 import AreteMotivationalBanner from "@/components/AreteMotivationalBanner";
@@ -193,6 +194,10 @@ export default function CommandCenterHomeView({
   const [studentName, setStudentName] = useState<string>("Cadet");
   const [studyStreak, setStudyStreak] = useState<number>(1);
   const [topicFilter, setTopicFilter] = useState<"all" | "pending" | "high_yield">("all");
+  // Syllabus Target Mode: "oct26_target" (Non-repeating untested chapters) vs "full_boards" (100% Century)
+  const [syllabusTargetMode, setSyllabusTargetMode] = useState<"oct26_target" | "full_boards">("oct26_target");
+  // Chapter filter in left drawer: "all" | "oct26_only" | "test1_only"
+  const [chapterTargetFilter, setChapterTargetFilter] = useState<"all" | "oct26_only" | "test1_only">("all");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -218,38 +223,74 @@ export default function CommandCenterHomeView({
     return () => window.removeEventListener("arete:name-updated", handleNameUpdated);
   }, []);
 
-  // Overall syllabus completion stats across all CBSE subjects
+  // Overall syllabus completion stats across all CBSE subjects (supports 26 Oct Sprint Target & Full Boards)
   const syllabusStats = useMemo(() => {
-    let totalChapters = 0;
-    let completedChapters = 0;
-    let totalTopics = 0;
-    let completedTopics = 0;
+    let fullTotalChapters = 0;
+    let fullCompletedChapters = 0;
+    let fullTotalTopics = 0;
+    let fullCompletedTopics = 0;
+
+    let octTargetTotalChapters = 0;
+    let octTargetCompletedChapters = 0;
+    let octTargetTotalTopics = 0;
+    let octTargetCompletedTopics = 0;
 
     CBSE_SUBJECTS.forEach((sub) => {
       (sub.chapters || []).forEach((ch) => {
-        totalChapters++;
+        fullTotalChapters++;
         const topics = ch.topics || [];
-        totalTopics += topics.length;
+        fullTotalTopics += topics.length;
         const doneInCh = topics.filter((t) => completedTopicIds[t.id]).length;
-        completedTopics += doneInCh;
+        fullCompletedTopics += doneInCh;
         if (topics.length > 0 && doneInCh === topics.length) {
-          completedChapters++;
+          fullCompletedChapters++;
+        }
+
+        // Test Series 1 chapters are excluded from the 26 Oct Sprint Target!
+        const isExaminedInTest1 = TEST_SERIES_1_CHAPTER_IDS.has(ch.id);
+        if (!isExaminedInTest1) {
+          octTargetTotalChapters++;
+          octTargetTotalTopics += topics.length;
+          octTargetCompletedTopics += doneInCh;
+          if (topics.length > 0 && doneInCh === topics.length) {
+            octTargetCompletedChapters++;
+          }
         }
       });
     });
 
-    const chapterPercent = totalChapters > 0 ? Math.round((completedChapters / totalChapters) * 100) : 0;
-    const topicPercent = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
+    const fullChapterPercent = fullTotalChapters > 0 ? Math.round((fullCompletedChapters / fullTotalChapters) * 100) : 0;
+    const fullTopicPercent = fullTotalTopics > 0 ? Math.round((fullCompletedTopics / fullTotalTopics) * 100) : 0;
+
+    const targetChapterPercent = octTargetTotalChapters > 0 ? Math.round((octTargetCompletedChapters / octTargetTotalChapters) * 100) : 0;
+    const targetTopicPercent = octTargetTotalTopics > 0 ? Math.round((octTargetCompletedTopics / octTargetTotalTopics) * 100) : 0;
+
+    const isOctTarget = syllabusTargetMode === "oct26_target";
 
     return {
-      totalChapters,
-      completedChapters,
-      chapterPercent,
-      totalTopics,
-      completedTopics,
-      topicPercent
+      // Current active mode stats
+      totalChapters: isOctTarget ? octTargetTotalChapters : fullTotalChapters,
+      completedChapters: isOctTarget ? octTargetCompletedChapters : fullCompletedChapters,
+      chapterPercent: isOctTarget ? targetChapterPercent : fullChapterPercent,
+      totalTopics: isOctTarget ? octTargetTotalTopics : fullTotalTopics,
+      completedTopics: isOctTarget ? octTargetCompletedTopics : fullCompletedTopics,
+      topicPercent: isOctTarget ? targetTopicPercent : fullTopicPercent,
+
+      // Target breakdown (26 Oct Sprint)
+      octTargetTotalChapters,
+      octTargetCompletedChapters,
+      octTargetTotalTopics,
+      octTargetCompletedTopics,
+      targetTopicPercent,
+
+      // Full board breakdown
+      fullTotalChapters,
+      fullCompletedChapters,
+      fullTotalTopics,
+      fullCompletedTopics,
+      fullTopicPercent
     };
-  }, [completedTopicIds]);
+  }, [completedTopicIds, syllabusTargetMode]);
 
   // Time-aware greeting
   const [greetingText] = useState<string>(() => {
@@ -503,28 +544,75 @@ export default function CommandCenterHomeView({
             </span>
             <span className="text-slate-400/40">•</span>
 
-            {/* DYNAMIC SYLLABUS CHAPTER COMPLETION PROGRESS BAR */}
+            {/* DYNAMIC SYLLABUS CHAPTER & TOPIC COMPLETION PROGRESS BAR (STARTS AT 0% ON FRESH SESSIONS) */}
             <div
               id="tutorial-chapter-progress"
-              className={`flex items-center gap-2.5 px-3 py-1.5 rounded-2xl border backdrop-blur-md shadow-xs transition-all ${
+              className={`flex items-center gap-2.5 sm:gap-3 px-3 py-1.5 rounded-2xl border backdrop-blur-md shadow-xs transition-all ${
                 isDark ? "bg-white/[0.04] border-white/10" : "bg-white border-slate-200"
               }`}
               title="Real-time Syllabus Mastery: Updates automatically as you tick chapter topics!"
             >
-              <div className="flex flex-col gap-1 min-w-[150px] sm:min-w-[190px]">
+              {/* Target Mode Toggle */}
+              <div className="flex items-center gap-0.5 p-0.5 rounded-xl bg-black/20 border border-white/5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound("click");
+                    setSyllabusTargetMode("oct26_target");
+                  }}
+                  className={`px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold transition-all cursor-pointer ${
+                    syllabusTargetMode === "oct26_target"
+                      ? isDark
+                        ? "bg-amber-500 text-slate-950 shadow-xs font-black"
+                        : "bg-amber-500 text-white shadow-xs font-black"
+                      : isDark
+                      ? "text-zinc-400 hover:text-white"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                  title="26 Oct 2026 Sprint Target: Tracks remaining untested chapters only (excludes Test 1 units)"
+                >
+                  ⚡ 26 Oct Target
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound("click");
+                    setSyllabusTargetMode("full_boards");
+                  }}
+                  className={`px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold transition-all cursor-pointer ${
+                    syllabusTargetMode === "full_boards"
+                      ? isDark
+                        ? "bg-cyan-500 text-slate-950 shadow-xs font-black"
+                        : "bg-blue-600 text-white shadow-xs font-black"
+                      : isDark
+                      ? "text-zinc-400 hover:text-white"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                  title="Full Board Curriculum: Tracks all Class 10 chapters (100% Century)"
+                >
+                  🎯 Full Board
+                </button>
+              </div>
+
+              {/* Progress Metric & Visual Bar */}
+              <div className="flex flex-col gap-1 min-w-[140px] sm:min-w-[180px]">
                 <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono font-bold leading-none">
                   <span className="flex items-center gap-1 text-amber-500 dark:text-amber-400">
                     <Sparkles className="w-3 h-3 shrink-0" />
-                    <span>Syllabus:</span>
+                    <span>{syllabusTargetMode === "oct26_target" ? "Sprint:" : "Syllabus:"}</span>
                   </span>
                   <span className="tabular-nums font-black text-xs">
-                    {syllabusStats.completedChapters}/{syllabusStats.totalChapters} Ch ({syllabusStats.chapterPercent}%)
+                    {syllabusStats.completedChapters}/{syllabusStats.totalChapters} Ch ({syllabusStats.topicPercent}%)
                   </span>
                 </div>
                 <div className="w-full h-2 rounded-full bg-black/30 overflow-hidden border border-white/5">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-emerald-400 transition-all duration-500 shadow-[0_0_8px_rgba(245,158,11,0.4)]"
-                    style={{ width: `${Math.max(4, syllabusStats.chapterPercent)}%` }}
+                    className={`h-full rounded-full transition-all duration-500 ${
+                      syllabusTargetMode === "oct26_target"
+                        ? "bg-gradient-to-r from-amber-500 via-orange-500 to-emerald-400 shadow-[0_0_8px_rgba(245,158,11,0.4)]"
+                        : "bg-gradient-to-r from-cyan-500 via-blue-500 to-emerald-400 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+                    }`}
+                    style={{ width: `${syllabusStats.topicPercent}%` }}
                   />
                 </div>
               </div>
@@ -627,16 +715,43 @@ export default function CommandCenterHomeView({
               </p>
             </div>
           </div>
+        </div>
+
+        {/* CHEMISTRY ZERO TO HERO FOUNDATION MASTERCLASS (100% CHEMISTRY SCORE SYSTEM) */}
+        <div className={`mx-4 sm:mx-6 mb-4 p-4 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md ${
+          isDark
+            ? "bg-gradient-to-r from-amber-950/80 via-slate-900 to-cyan-950/60 border-amber-500/40 text-white shadow-[0_0_25px_rgba(245,158,11,0.15)]"
+            : "bg-gradient-to-r from-amber-50 via-white to-cyan-50 border-amber-300 text-slate-900 shadow-sm"
+        }`}>
+          <div className="flex items-center gap-3">
+            <div className={`p-2.5 rounded-xl border shrink-0 ${
+              isDark ? "bg-amber-500/20 text-amber-400 border-amber-500/30" : "bg-amber-100 text-amber-700 border-amber-200"
+            }`}>
+              <FlaskConical className="w-5 h-5 text-amber-400" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                  Target: 100% Chemistry Mastery
+                </span>
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                  Zero to Hero Prerequisite
+                </span>
+              </div>
+              <h4 className="text-sm font-bold mt-1">Class 10 Chemistry Zero-to-Hero Foundation Masterclass</h4>
+              <p className={`text-xs ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                Atomic Structure (1–30), Valency Matrix, Polyatomic Radicals (SO₄²⁻, NO₃⁻, CO₃²⁻), Criss-Cross Formula Generator, Law of Conservation of Mass &amp; Reactivity Series to Guarantee 100% in Class 10 Chemistry!
+              </p>
+            </div>
+          </div>
           <button
             onClick={() => {
               playSound("click");
-              setConceptsSubject("math");
-              setConceptsChapterNo(1);
-              setActiveTab("concepts");
+              setActiveTab("chemistry_basics");
             }}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-500 hover:to-emerald-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 shrink-0 transition active:scale-95 cursor-pointer"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs shadow-lg shadow-amber-500/30 flex items-center justify-center gap-2 shrink-0 transition active:scale-95 cursor-pointer"
           >
-            <span>Launch Maths Mastery</span>
+            <span>Launch Chemistry Basics</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -653,106 +768,181 @@ export default function CommandCenterHomeView({
             isDark ? "bg-black/20" : "bg-slate-50/50"
           }`}>
             <div>
-              <div className={`flex items-center justify-between pb-2.5 border-b mb-3 ${
+              <div className={`flex flex-col gap-2 pb-2.5 border-b mb-3 ${
                 isDark ? "border-white/10" : "border-slate-200"
               }`}>
-                <span className={`text-xs font-bold uppercase tracking-wider ${
-                  isDark ? "text-slate-400" : "text-slate-700"
-                }`}>
-                  {currentSubject.name.split("(")[0].trim()} Chapters
-                </span>
-                <span className={`text-xs font-mono font-bold ${
-                  isDark ? "text-slate-400" : "text-slate-700"
-                }`}>
-                  {currentSubject.chapters.length} Units
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className={`text-xs font-bold uppercase tracking-wider ${
+                    isDark ? "text-slate-400" : "text-slate-700"
+                  }`}>
+                    {currentSubject.name.split("(")[0].trim()} Chapters
+                  </span>
+                  <span className={`text-xs font-mono font-bold ${
+                    isDark ? "text-slate-400" : "text-slate-700"
+                  }`}>
+                    {currentSubject.chapters.length} Units
+                  </span>
+                </div>
+
+                {/* 3-WAY FILTER: ALL / 26 OCT SPRINT TARGET / TEST 1 EXAMINED */}
+                <div className="flex items-center gap-1 p-0.5 rounded-xl bg-black/20 border border-white/5 text-[10px] font-mono font-bold">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playSound("click");
+                      setChapterTargetFilter("all");
+                    }}
+                    className={`flex-1 py-1 rounded-lg text-center transition-all cursor-pointer ${
+                      chapterTargetFilter === "all"
+                        ? isDark ? "bg-white/15 text-white shadow-xs font-black" : "bg-white text-slate-900 shadow-xs font-black"
+                        : isDark ? "text-zinc-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    All ({currentSubject.chapters.length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playSound("click");
+                      setChapterTargetFilter("oct26_only");
+                    }}
+                    className={`flex-1 py-1 rounded-lg text-center transition-all cursor-pointer ${
+                      chapterTargetFilter === "oct26_only"
+                        ? "bg-amber-500 text-slate-950 font-black shadow-xs"
+                        : isDark ? "text-amber-400/70 hover:text-amber-300" : "text-amber-800 hover:text-amber-950"
+                    }`}
+                    title="Chapters coming in 26 Oct examination (untested)"
+                  >
+                    ⚡ 26 Oct ({currentSubject.chapters.filter(c => !TEST_SERIES_1_CHAPTER_IDS.has(c.id)).length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playSound("click");
+                      setChapterTargetFilter("test1_only");
+                    }}
+                    className={`flex-1 py-1 rounded-lg text-center transition-all cursor-pointer ${
+                      chapterTargetFilter === "test1_only"
+                        ? isDark ? "bg-slate-700 text-slate-200 font-black shadow-xs" : "bg-slate-200 text-slate-800 font-black shadow-xs"
+                        : isDark ? "text-zinc-400 hover:text-white" : "text-slate-600 hover:text-slate-900"
+                    }`}
+                    title="Chapters already examined in Test Series 1"
+                  >
+                    ✓ Test 1 ({currentSubject.chapters.filter(c => TEST_SERIES_1_CHAPTER_IDS.has(c.id)).length})
+                  </button>
+                </div>
               </div>
 
               {/* Scrollable Chapter List with Radial Progress Rings */}
               <div className="max-h-[460px] overflow-y-auto pr-1 space-y-1.5 custom-scrollbar">
-                {currentSubject.chapters.map((ch, idx) => {
-                  const isSelected = ch.id === commandChapterId;
-                  const chNo = ch.ncertChapterNo || idx + 1;
-                  const chCompleted = (ch.topics || []).filter(t => completedTopicIds[t.id]).length;
-                  const chTotal = (ch.topics || []).length;
-                  const isFinished = chTotal > 0 && chCompleted === chTotal;
-                  const pct = chTotal > 0 ? Math.round((chCompleted / chTotal) * 100) : 0;
+                {currentSubject.chapters
+                  .filter((ch) => {
+                    const isExaminedInTest1 = TEST_SERIES_1_CHAPTER_IDS.has(ch.id);
+                    if (chapterTargetFilter === "oct26_only") return !isExaminedInTest1;
+                    if (chapterTargetFilter === "test1_only") return isExaminedInTest1;
+                    return true;
+                  })
+                  .map((ch, idx) => {
+                    const isSelected = ch.id === commandChapterId;
+                    const chNo = ch.ncertChapterNo || idx + 1;
+                    const chCompleted = (ch.topics || []).filter(t => completedTopicIds[t.id]).length;
+                    const chTotal = (ch.topics || []).length;
+                    const isFinished = chTotal > 0 && chCompleted === chTotal;
+                    const pct = chTotal > 0 ? Math.round((chCompleted / chTotal) * 100) : 0;
+                    const isExaminedInTest1 = TEST_SERIES_1_CHAPTER_IDS.has(ch.id);
 
-                  return (
-                    <button
-                      key={ch.id}
-                      type="button"
-                      onClick={() => handleSelectChapter(ch.id)}
-                      onAuxClick={(e) => {
-                        if (e.button === 1) {
-                          e.preventDefault();
-                          window.open(getTabHref("concepts", activeSubjectKey, chNo), "_blank", "noopener,noreferrer");
-                        }
-                      }}
-                      className={`w-full text-left p-3 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 group active:scale-[0.98] ${
-                        isSelected
-                          ? isDark
-                            ? "bg-white/[0.12] border-white/30 text-white shadow-[0_4px_20px_rgba(0,0,0,0.4)] ring-1 ring-white/30 font-bold"
-                            : "bg-white border-slate-900 text-slate-950 shadow-md ring-1 ring-slate-900 font-bold"
-                          : isFinished
-                          ? isDark
-                            ? "bg-emerald-500/[0.08] border-emerald-500/20 text-emerald-300 hover:bg-emerald-500/[0.12]"
-                            : "bg-emerald-50/70 border-emerald-200 text-emerald-900 hover:bg-emerald-100/70"
-                          : isDark
-                          ? "bg-white/[0.03] border-white/[0.08] text-zinc-300 hover:bg-white/[0.07] hover:border-white/20 hover:text-white"
-                          : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-slate-300"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        {/* Radial Progress Ring Mini */}
-                        <div className="relative w-7 h-7 shrink-0 flex items-center justify-center">
-                          <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                            <circle
-                              cx="18"
-                              cy="18"
-                              r="15.5"
-                              fill="none"
-                              className={isDark ? "stroke-white/10" : "stroke-slate-200"}
-                              strokeWidth="3"
-                            />
-                            <circle
-                              cx="18"
-                              cy="18"
-                              r="15.5"
-                              fill="none"
-                              stroke={isFinished ? "#10b981" : isSelected ? (isDark ? "#38bdf8" : "#0f172a") : "#6366f1"}
-                              strokeWidth="3"
-                              strokeDasharray="100"
-                              strokeDashoffset={100 - pct}
-                              strokeLinecap="round"
-                              className="transition-all duration-500"
-                            />
-                          </svg>
-                          <span className="absolute text-[11px] font-mono font-bold">
-                            {chNo}
-                          </span>
+                    return (
+                      <button
+                        key={ch.id}
+                        type="button"
+                        onClick={() => handleSelectChapter(ch.id)}
+                        onAuxClick={(e) => {
+                          if (e.button === 1) {
+                            e.preventDefault();
+                            window.open(getTabHref("concepts", activeSubjectKey, chNo), "_blank", "noopener,noreferrer");
+                          }
+                        }}
+                        className={`w-full text-left p-2.5 sm:p-3 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-2.5 group active:scale-[0.98] ${
+                          isSelected
+                            ? isDark
+                              ? "bg-white/[0.12] border-white/30 text-white shadow-[0_4px_20px_rgba(0,0,0,0.4)] ring-1 ring-white/30 font-bold"
+                              : "bg-white border-slate-900 text-slate-950 shadow-md ring-1 ring-slate-900 font-bold"
+                            : isFinished
+                            ? isDark
+                              ? "bg-emerald-500/[0.08] border-emerald-500/20 text-emerald-300 hover:bg-emerald-500/[0.12]"
+                              : "bg-emerald-50/70 border-emerald-200 text-emerald-900 hover:bg-emerald-100/70"
+                            : isDark
+                            ? "bg-white/[0.03] border-white/[0.08] text-zinc-300 hover:bg-white/[0.07] hover:border-white/20 hover:text-white"
+                            : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-slate-300"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                          {/* Radial Progress Ring Mini */}
+                          <div className="relative w-7 h-7 shrink-0 flex items-center justify-center">
+                            <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                              <circle
+                                cx="18"
+                                cy="18"
+                                r="15.5"
+                                fill="none"
+                                className={isDark ? "stroke-white/10" : "stroke-slate-200"}
+                                strokeWidth="3"
+                              />
+                              <circle
+                                cx="18"
+                                cy="18"
+                                r="15.5"
+                                fill="none"
+                                stroke={isFinished ? "#10b981" : isSelected ? (isDark ? "#38bdf8" : "#0f172a") : isExaminedInTest1 ? "#64748b" : "#f59e0b"}
+                                strokeWidth="3"
+                                strokeDasharray="100"
+                                strokeDashoffset={100 - pct}
+                                strokeLinecap="round"
+                                className="transition-all duration-500"
+                              />
+                            </svg>
+                            <span className="absolute text-[11px] font-mono font-bold">
+                              {chNo}
+                            </span>
+                          </div>
+
+                          <div className="flex flex-col min-w-0 flex-1">
+                            <span className="text-xs truncate font-medium">
+                              {ch.name}
+                            </span>
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              {isExaminedInTest1 ? (
+                                <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-bold leading-tight inline-flex items-center ${
+                                  isDark ? "bg-slate-800 text-slate-400 border border-slate-700/50" : "bg-slate-100 text-slate-600 border border-slate-200"
+                                }`} title="Examined in Test Series 1 — excluded from 26 Oct Sprint Target">
+                                  ✓ Test 1 Done
+                                </span>
+                              ) : (
+                                <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-black leading-tight inline-flex items-center ${
+                                  isDark ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "bg-amber-100 text-amber-900 border border-amber-300"
+                                }`} title="26 Oct 2026 Examination Target Syllabus">
+                                  ⚡ 26 Oct Target
+                                </span>
+                              )}
+                            </div>
+                          </div>
                         </div>
 
-                        <span className="text-xs truncate font-medium">
-                          {ch.name}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-1 shrink-0 text-xs font-mono">
-                        {isFinished ? (
-                          <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                        ) : (
-                          <span className={isDark ? "text-slate-400" : "text-slate-600"}>
-                            {chCompleted}/{chTotal}
-                          </span>
-                        )}
-                        <ChevronRight className={`w-3.5 h-3.5 transition-transform ${
-                          isSelected ? "text-white translate-x-0.5" : "text-slate-500 group-hover:translate-x-0.5"
-                        }`} />
-                      </div>
-                    </button>
-                  );
-                })}
+                        <div className="flex items-center gap-1 shrink-0 text-xs font-mono">
+                          {isFinished ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                          ) : (
+                            <span className={isDark ? "text-slate-400" : "text-slate-600"}>
+                              {chCompleted}/{chTotal}
+                            </span>
+                          )}
+                          <ChevronRight className={`w-3.5 h-3.5 transition-transform ${
+                            isSelected ? "text-white translate-x-0.5" : "text-slate-500 group-hover:translate-x-0.5"
+                          }`} />
+                        </div>
+                      </button>
+                    );
+                  })}
               </div>
             </div>
 

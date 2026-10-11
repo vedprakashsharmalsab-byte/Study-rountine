@@ -96,6 +96,39 @@ export interface FormulaItem {
 }
 
 // -------------------------------------------------------------
+// EXACT CHAPTERS EXAMINED IN TEST SERIES 1 (EXCLUDED FROM 26 OCT EXAM TARGET)
+// -------------------------------------------------------------
+export const TEST_SERIES_1_CHAPTER_IDS = new Set<string>([
+  // Mathematics (6 chapters examined in Test Series 1)
+  "math_ch6",  // Triangles
+  "math_ch8",  // Introduction to Trigonometry
+  "math_ch9",  // Some Applications of Trigonometry
+  "math_ch10", // Circles
+  "math_ch13", // Statistics
+  "math_ch14", // Probability
+
+  // Science (6 chapters examined in Test Series 1)
+  "sci_ch2",   // Acids, Bases and Salts
+  "sci_ch3",   // Metals and Non-metals
+  "sci_ch5",   // Life Processes
+  "sci_ch11",  // Electricity
+  "sci_ch12",  // Magnetic Effects of Electric Current
+  "sci_ch13",  // Our Environment
+
+  // Social Science (10 units examined in Test Series 1)
+  "sst_his1",  // Rise of Nationalism in Europe
+  "sst_his2",  // Nationalism in India
+  "sst_civ1",  // Power Sharing
+  "sst_civ2",  // Federalism
+  "sst_geo1",  // Resources and Development
+  "sst_geo2",  // Forest and Wildlife Resources
+  "sst_geo3",  // Water Resources
+  "sst_eco1",  // Development
+  "sst_eco2",  // Sectors of the Indian Economy
+  "sst_eco3",  // Money and Credit
+]);
+
+// -------------------------------------------------------------
 // 1. EXACT TEST SERIES I (2026-2027) SCHEDULE & SYLLABUS (LSA BISSAU)
 // -------------------------------------------------------------
 export const TEST_SERIES_I_SCHEDULE: TestSeriesExam[] = [

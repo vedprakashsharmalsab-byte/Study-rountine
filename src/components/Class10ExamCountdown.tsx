@@ -83,12 +83,12 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
   const [showConfig, setShowConfig] = useState<boolean>(false);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
-  // Dual Targets: "oct_milestone" (Oct 15, 2026) vs "feb_boards" (Feb 1, 2027)
+  // Dual Targets: "oct_milestone" (Oct 26, 2026) vs "feb_boards" (Feb 1, 2027)
   const [activeTarget, setActiveTarget] = useState<"oct_milestone" | "feb_boards">("oct_milestone");
 
   // Target ISO strings anchored to Asia/Kolkata (+05:30)
   const octIsoString = useMemo(() => {
-    return `2026-10-15T${selectedExamTime}:00+05:30`;
+    return `2026-10-26T${selectedExamTime}:00+05:30`;
   }, [selectedExamTime]);
 
   const febIsoString = useMemo(() => {
@@ -106,7 +106,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
       setFebCountdown(feb);
 
       // Smart Thinking Power & Auto-Termination:
-      // If October 15 target has passed, automatically roll over focus to Feb 1, 2027 Boards!
+      // If October 26 target has passed, automatically roll over focus to Feb 1, 2027 Boards!
       if (oct.isPassed && activeTarget === "oct_milestone") {
         setActiveTarget("feb_boards");
         if (onTargetReached) onTargetReached();
@@ -121,9 +121,9 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
   const padNumber = (n: number) => (n < 10 ? `0${n}` : `${n}`);
 
   const activeCountdown = activeTarget === "oct_milestone" ? octCountdown : febCountdown;
-  const activeDateTitle = activeTarget === "oct_milestone" ? "15 October 2026" : "1 February 2027";
+  const activeDateTitle = activeTarget === "oct_milestone" ? "26 October 2026" : "1 February 2027";
   const activeMilestoneLabel = activeTarget === "oct_milestone" 
-    ? "Pre-Board Phase 1 • Mid-Term Sprint" 
+    ? "Pre-Board Phase 1 • Test Series II" 
     : "Official CBSE Class 10 Board Exams";
 
   // Preparedness completion estimate relative to start of Class 10 academic session (April 1, 2026)
@@ -149,11 +149,11 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
               ? "bg-amber-500/15 border-amber-500/40 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]"
               : "bg-amber-100 border-amber-300 text-amber-950 shadow-2xs"
           }`}
-          title="Click to toggle between Oct 15 Milestone and Feb 1 Boards"
+          title="Click to toggle between Oct 26 Milestone and Feb 1 Boards"
         >
           <Flame className="w-3.5 h-3.5 text-amber-500 animate-pulse shrink-0" />
           <span className="font-extrabold text-[11px] sm:text-xs">
-            {activeTarget === "oct_milestone" ? "15 Oct:" : "1 Feb Boards:"}
+            {activeTarget === "oct_milestone" ? "26 Oct:" : "1 Feb Boards:"}
           </span>
           <span>
             {activeCountdown.days}d {padNumber(activeCountdown.hours)}h {padNumber(activeCountdown.minutes)}m {padNumber(activeCountdown.seconds)}s
@@ -217,7 +217,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
           
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              {/* TARGET 1: 15 OCT 2026 MILESTONE */}
+              {/* TARGET 1: 26 OCT 2026 MILESTONE */}
               <button
                 type="button"
                 onClick={() => setActiveTarget("oct_milestone")}
@@ -232,7 +232,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
                 }`}
               >
                 <Flame className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                <span>⚡ 15 Oct 2026 (Syllabus Sprint)</span>
+                <span>⚡ 26 Oct 2026 (Pre-Board Phase 1)</span>
                 {octCountdown.isPassed && <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/30 text-emerald-300">Conquered</span>}
               </button>
 
@@ -264,7 +264,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
 
             <div className="flex items-baseline gap-2 sm:gap-3 flex-wrap">
               <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-                {activeTarget === "oct_milestone" ? "Time Left to 15 Oct Milestone" : "Time Left to CBSE Board Exams"}
+                {activeTarget === "oct_milestone" ? "Time Left to 26 Oct Milestone" : "Time Left to CBSE Board Exams"}
               </h2>
               <span className={`text-xs sm:text-sm font-semibold font-mono ${
                 activeTarget === "oct_milestone" ? "text-amber-400" : "text-cyan-400"

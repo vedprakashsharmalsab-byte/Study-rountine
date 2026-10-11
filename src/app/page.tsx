@@ -796,7 +796,7 @@ export const LiveCountdown = React.memo(function LiveCountdown({
   );
 });
 
-// Dynamic Top Header Countdown: dual-timer featuring upcoming 15 Oct Milestone and Feb 1 Boards with smart auto-termination
+// Dynamic Top Header Countdown: dual-timer featuring upcoming 26 Oct Milestone and Feb 1 Boards with smart auto-termination
 export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
   isDark
 }: {
@@ -806,7 +806,7 @@ export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
 
   useEffect(() => {
     const check = () => {
-      const ms = new Date("2026-10-15T10:30:00+05:30").getTime() - Date.now();
+      const ms = new Date("2026-10-26T10:30:00+05:30").getTime() - Date.now();
       setOctPassed(ms <= 0);
     };
     check();
@@ -818,12 +818,12 @@ export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
     <div className="flex items-center gap-1 sm:gap-2 font-mono text-[10px] sm:text-[11px] leading-none whitespace-nowrap">
       {!octPassed ? (
         <div className="flex items-center gap-1 sm:gap-1.5">
-          <span className={`font-black inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 15 Oct:</span>
-          <LiveCountdown targetDate="2026-10-15" variant="badge" colorScheme="amber" isDark={isDark} />
+          <span className={`font-black inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 26 Oct:</span>
+          <LiveCountdown targetDate="2026-10-26" variant="badge" colorScheme="amber" isDark={isDark} />
         </div>
       ) : (
         <div className="flex items-center gap-1 text-emerald-400 font-bold">
-          <span>✓ 15 Oct Done</span>
+          <span>✓ 26 Oct Done</span>
         </div>
       )}
       <span className={`hidden sm:inline-flex opacity-25 select-none leading-none ${isDark ? "text-white" : "text-slate-900"}`}>|</span>
@@ -2599,15 +2599,18 @@ export default function CBSECommandCenter() {
     const timer = setTimeout(() => {
       try {
         // Universal cleanup ensuring fresh 0 XP and 0 progress start for all users (including existing sessions)
-        const isFreshV10Cleared = localStorage.getItem("cbse10_lsa_fresh_zero_v10");
-        if (!isFreshV10Cleared) {
+        const isFreshV12Cleared = localStorage.getItem("cbse10_lsa_fresh_zero_v12");
+        if (!isFreshV12Cleared) {
           Object.keys(localStorage).forEach((key) => {
-            if (key.startsWith("cbse10_lsa_") || key.startsWith("arete_") || key.startsWith("cbse_")) {
+            if (key.startsWith("cbse10_lsa_") || key.startsWith("arete_") || key.startsWith("cbse_") || key.startsWith("cbse10_guided_tutorial_")) {
               if (key === "cbse_admin_auth_session") return;
               localStorage.removeItem(key);
             }
           });
-          localStorage.setItem("cbse10_lsa_fresh_zero_v10", "true");
+          localStorage.removeItem("cbse10_guided_tutorial_completed_v1");
+          localStorage.removeItem("cbse10_guided_tutorial_completed_v2");
+          localStorage.removeItem("cbse10_guided_tutorial_completed_v3");
+          localStorage.setItem("cbse10_lsa_fresh_zero_v12", "true");
           localStorage.setItem("cbse10_lsa_v5_cleared", "true");
           localStorage.setItem("cbse10_lsa_theme_v7_white_default", "true");
           localStorage.setItem("cbse10_lsa_theme_v5", "light");
@@ -3092,43 +3095,71 @@ export default function CBSECommandCenter() {
         }`}>
         <div className="w-full max-w-7xl mx-auto px-2.5 sm:px-4 lg:px-6 py-2 flex items-center justify-between gap-1.5 sm:gap-2.5 min-w-0">
           
-          {/* BRAND EMBLEM & SQUIRCLE: Direct Navigation to Home Dashboard */}
-          <div
-            id="tutorial-brand-header"
-            onClick={() => {
-              playSound("click");
-              setActiveTab("chapter_dashboard");
-              if (typeof window !== "undefined") {
-                window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-              }
-            }}
-            className="flex items-center gap-2 sm:gap-3 shrink-0 cursor-pointer select-none transition-transform active:scale-[0.98]"
-            title="ARETĒ: CBSE Class 10 Command Engine (Home Dashboard)"
-          >
-            <AreteLogo size="md" isDark={isDark} showText={true} showMotto={false} />
+          {/* LEFT: BRAND EMBLEM & ALL MODULES LAUNCHER (ZERO COLLISION WITH TIMER) */}
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            <div
+              id="tutorial-brand-header"
+              onClick={() => {
+                playSound("click");
+                setActiveTab("chapter_dashboard");
+                if (typeof window !== "undefined") {
+                  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+                }
+              }}
+              className="flex items-center gap-2 sm:gap-3 shrink-0 cursor-pointer select-none transition-transform active:scale-[0.98]"
+              title="ARETĒ: CBSE Class 10 Command Engine (Home Dashboard)"
+            >
+              <AreteLogo size="md" isDark={isDark} showText={true} showMotto={false} />
 
-            <div className="hidden 2xl:flex items-center gap-1.5 leading-none pl-1">
-              <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
-                isDark ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "bg-amber-100 text-amber-900 border border-amber-300"
-              }`}>
-                2026–27
-              </span>
+              <div className="hidden 2xl:flex items-center gap-1.5 leading-none pl-1">
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
+                  isDark ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "bg-amber-100 text-amber-900 border border-amber-300"
+                }`}>
+                  2026–27
+                </span>
 
-              <div
-                className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold leading-none inline-flex items-center gap-1.5 transition-all ${
-                  isDark
-                    ? "bg-teal-500/20 text-teal-300 border border-teal-500/40"
-                    : "bg-teal-100 text-teal-900 border border-teal-300"
-                }`}
-                title="Cadet Profile Active"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-                <span className="max-w-[120px] truncate">{studentFullName || "CBSE Scholar"}</span>
+                <div
+                  className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold leading-none inline-flex items-center gap-1.5 transition-all ${
+                    isDark
+                      ? "bg-teal-500/20 text-teal-300 border border-teal-500/40"
+                      : "bg-teal-100 text-teal-900 border border-teal-300"
+                  }`}
+                  title="Cadet Profile Active"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                  <span className="max-w-[120px] truncate">{studentFullName || "CBSE Scholar"}</span>
+                </div>
               </div>
             </div>
+
+            {/* ALL MODULES TRIGGER (ANCHORED DIRECTLY BESIDE BRAND LOGO — IMPOSSIBLE TO OVERLAP TIMER) */}
+            <button
+              id="tutorial-all-modules-btn"
+              type="button"
+              onClick={() => {
+                playSound("click");
+                setIsAllModulesModalOpen(true);
+              }}
+              className={`px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border shadow-xs ${
+                isDark
+                  ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+                  : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200"
+              }`}
+              title="Open All Modules (⌘K)"
+            >
+              <LayoutGrid className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+              <span className="leading-none inline-flex items-center">
+                <span className="hidden md:inline">All </span>Modules
+              </span>
+              <kbd className={`hidden xl:inline-flex text-[9px] font-mono px-1.5 py-0.5 rounded font-black shrink-0 leading-none items-center ${
+                isDark ? "bg-black/40 text-amber-300 border border-amber-500/30" : "bg-white/80 text-amber-900 border border-amber-300"
+              }`}>
+                ⌘K
+              </kbd>
+            </button>
           </div>
 
-          {/* MASTER CATEGORY NAVIGATION TABS (INTEGRATED INSIDE HEADER - ZERO OVERFLOW) */}
+          {/* MASTER CATEGORY NAVIGATION TABS (CENTERED & UNCLUTTERED) */}
           <div id="tutorial-nav-tabs" className="hidden xl:flex items-center min-w-0 max-w-fit mx-auto">
             <div className={`p-0.5 sm:p-1 rounded-full border flex items-center gap-0.5 sm:gap-1 backdrop-blur-xl transition-all ${
               isDark
@@ -3187,32 +3218,6 @@ export default function CBSECommandCenter() {
                   </a>
                 );
               })}
-
-              {/* ALL MODULES TRIGGER (COMPACT RESPONSIVE PILL ON XL+) */}
-              <button
-                id="tutorial-all-modules-btn"
-                type="button"
-                onClick={() => {
-                  playSound("click");
-                  setIsAllModulesModalOpen(true);
-                }}
-                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer hidden xl:flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border ${
-                  isDark
-                    ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
-                    : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200 shadow-xs"
-                }`}
-                title="Open All Modules (⌘K)"
-              >
-                <LayoutGrid className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                <span className="leading-none inline-flex items-center">
-                  <span className="hidden lg:inline">All </span>Modules
-                </span>
-                <kbd className={`hidden xl:inline-flex text-[9px] font-mono px-1.5 py-0.5 rounded font-black shrink-0 leading-none items-center ${
-                  isDark ? "bg-black/40 text-amber-300 border border-amber-500/30" : "bg-white/80 text-amber-900 border border-amber-300"
-                }`}>
-                  ⌘K
-                </kbd>
-              </button>
             </div>
           </div>
 
@@ -3698,17 +3703,19 @@ export default function CBSECommandCenter() {
         })}
 
         {/* =========================================================================
-            PROMINENT GLOBAL HERO COUNTDOWN: 26 OCTOBER 2026 CLASS 10 EXAM COUNTDOWN
-            Permanently visible across ALL views (Questions, Today, Concepts, etc.)
+            PROMINENT HERO COUNTDOWN: 26 OCTOBER 2026 CLASS 10 EXAM COUNTDOWN
+            Permanently visible on Command Center ("add in just command one not other")
             Engineered with dual responsiveness for 9:16 mobile portrait & 16:9 laptop landscape!
             ========================================================================= */}
-        <div id="tutorial-countdown-banner">
-          <Class10ExamCountdown
-            isDark={isDark}
-            variant="hero"
-            className="mb-2 sm:mb-4"
-          />
-        </div>
+        {activeTab === "chapter_dashboard" && (
+          <div id="tutorial-countdown-banner">
+            <Class10ExamCountdown
+              isDark={isDark}
+              variant="hero"
+              className="mb-2 sm:mb-4"
+            />
+          </div>
+        )}
 
         {/* ===================== TAB 0: TEST SERIES I (SEPT 14 - SEPT 26) ===================== */}
         {activeTab === "test_series" && (
