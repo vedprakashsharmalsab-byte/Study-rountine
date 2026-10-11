@@ -819,15 +819,22 @@ export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
       {!octPassed ? (
         <div className="flex items-center gap-1 sm:gap-1.5">
           <span className={`font-black inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 26 Oct:</span>
-          <LiveCountdown targetDate="2026-10-26" variant="badge" colorScheme="amber" isDark={isDark} />
+          {/* Mobile view: concise format so timer never overflows or hides behind */}
+          <span className="sm:hidden font-bold">
+            <LiveCountdown targetDate="2026-10-26" variant="short" colorScheme="amber" isDark={isDark} />
+          </span>
+          {/* Tablet & Desktop view: full live badge */}
+          <span className="hidden sm:inline-flex">
+            <LiveCountdown targetDate="2026-10-26" variant="badge" colorScheme="amber" isDark={isDark} />
+          </span>
         </div>
       ) : (
         <div className="flex items-center gap-1 text-emerald-400 font-bold">
           <span>✓ 26 Oct Done</span>
         </div>
       )}
-      <span className={`hidden sm:inline-flex opacity-25 select-none leading-none ${isDark ? "text-white" : "text-slate-900"}`}>|</span>
-      <div className="hidden sm:flex items-center gap-1.5">
+      <span className={`hidden md:inline-flex opacity-25 select-none leading-none ${isDark ? "text-white" : "text-slate-900"}`}>|</span>
+      <div className="hidden md:flex items-center gap-1.5">
         <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>🎯 Boards:</span>
         <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
       </div>
@@ -1798,6 +1805,7 @@ export default function CBSECommandCenter() {
 
   const [navDropdown, setNavDropdown] = useState<"vaults" | "revision" | "planner" | null>(null);
   const [isAllModulesModalOpen, setIsAllModulesModalOpen] = useState(false);
+  const [isExamMilestonesModalOpen, setIsExamMilestonesModalOpen] = useState(false);
   const [allModulesSearch, setAllModulesSearch] = useState("");
   const navRef = useRef<HTMLElement>(null);
 
@@ -1812,13 +1820,16 @@ export default function CBSECommandCenter() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Body scroll lock and ESC key for All Modules Modal
+  // Body scroll lock and ESC key for All Modules & Exam Milestones Modals
   useEffect(() => {
-    if (isAllModulesModalOpen) {
+    if (isAllModulesModalOpen || isExamMilestonesModalOpen) {
       const orig = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       const onKey = (e: KeyboardEvent) => {
-        if (e.key === "Escape") setIsAllModulesModalOpen(false);
+        if (e.key === "Escape") {
+          setIsAllModulesModalOpen(false);
+          setIsExamMilestonesModalOpen(false);
+        }
       };
       window.addEventListener("keydown", onKey);
       return () => {
@@ -1826,7 +1837,7 @@ export default function CBSECommandCenter() {
         window.removeEventListener("keydown", onKey);
       };
     }
-  }, [isAllModulesModalOpen]);
+  }, [isAllModulesModalOpen, isExamMilestonesModalOpen]);
 
   // Global Ctrl+K / Cmd+K shortcut to toggle All Modules Mega-Launcher
   useEffect(() => {
@@ -3226,16 +3237,17 @@ export default function CBSECommandCenter() {
             {/* EXAM COUNTDOWN (VISIBLE ON ALL MOBILE, SMARTPHONE, & WIDESCREEN VIEWPORTS) */}
             <div id="tutorial-countdown-capsule" className="flex items-center shrink-0">
               <button
+                type="button"
                 onClick={() => {
                   playSound("click");
-                  setActiveTab("test_series");
+                  setIsExamMilestonesModalOpen(true);
                 }}
                 className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono transition-all cursor-pointer group shadow-sm active:scale-[0.98] tabular-nums leading-none shrink-0 ${
                   isDark
                     ? "bg-gradient-to-r from-amber-500/10 via-white/[0.03] to-cyan-500/10 border-white/15 text-zinc-200 hover:border-amber-400/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)]"
                     : "bg-gradient-to-r from-amber-50 via-white to-blue-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:shadow-sm"
                 }`}
-                title="Class 10 Exam Countdown (Click to view schedule)"
+                title="Class 10 Exam Milestones (Tap to view full countdowns & schedule)"
               >
                 <HeaderExamCountdown isDark={isDark} />
               </button>
@@ -3300,25 +3312,6 @@ export default function CBSECommandCenter() {
                 {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
               </button>
             </div>
-
-            {/* MOBILE & TABLET ALL MODULES ICON (< xl screens) */}
-            <button
-              id="tutorial-all-modules-btn-mobile"
-              type="button"
-              onClick={() => {
-                playSound("click");
-                setIsAllModulesModalOpen(true);
-              }}
-              className={`xl:hidden p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
-                isDark
-                  ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25"
-                  : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200"
-              }`}
-              title="Open All Modules (⌘K)"
-              aria-label="Open All Modules"
-            >
-              <LayoutGrid className="w-3.5 h-3.5 shrink-0" />
-            </button>
           </div>
         </div>
       </header>
@@ -3527,7 +3520,7 @@ export default function CBSECommandCenter() {
                 {
                   group: "Exam Planning & Progress Tracking",
                   items: [
-                    { id: "test_series", label: "Test Series I (Sept 14)", sub: "Target Exam Schedules & Cutoffs", icon: Calendar, color: "text-emerald-400 bg-emerald-500/15" },
+                    { id: "test_series", label: "Exam Milestones & Date Sheets", sub: "Oct 26 Benchmark & Feb 1 Boards", icon: Calendar, color: "text-emerald-400 bg-emerald-500/15" },
                     { id: "today", label: "Daily Focus & Tasks", sub: "Real-Time Productivity Checklist", icon: Clock, color: "text-amber-400 bg-amber-500/15" },
                     { id: "syllabus", label: "NCERT Master Syllabus", sub: "Class 10 CBSE 2026-27 Tracker", icon: BookOpen, color: "text-teal-400 bg-teal-500/15" },
                     { id: "roadmap", label: "100% Roadmap", sub: "Milestone-by-Milestone Timeline", icon: Compass, color: "text-cyan-400 bg-cyan-500/15" }
@@ -3632,6 +3625,116 @@ export default function CBSECommandCenter() {
                 className="px-5 py-2 rounded-xl font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-all cursor-pointer min-h-[40px] touch-manipulation"
               >
                 Close Directory
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* =========================================================================
+          EXAM MILESTONES POPUP MODAL (TRIGGERED FROM HEADER COUNTDOWN TAP)
+          Zero unexpected page redirection — student inspects schedule & closes!
+          ========================================================================= */}
+      {mounted && isExamMilestonesModalOpen && createPortal(
+        <div
+          className="fixed inset-0 z-[99999] bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-fade-in"
+          onClick={() => setIsExamMilestonesModalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className={`max-w-3xl w-full max-h-[90vh] flex flex-col rounded-3xl border overflow-hidden shadow-2xl ${
+              isDark ? "bg-[#0b101d] border-white/15 text-white" : "bg-white border-slate-300 text-slate-900"
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* MODAL HEADER */}
+            <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between gap-4 shrink-0">
+              <div className="space-y-0.5 sm:space-y-1">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400">
+                    <Target className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-base sm:text-xl font-black">CBSE Class 10 Board Milestones (2026–2027)</h2>
+                </div>
+                <p className="text-xs text-slate-400">
+                  Target milestones countdown — track remaining time to crucial pre-boards and nationwide board commencement.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsExamMilestonesModalOpen(false)}
+                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-400 hover:text-white transition-all cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center touch-manipulation"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* MODAL BODY */}
+            <div className="p-4 sm:p-6 overflow-y-auto space-y-4 sm:space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* MILESTONE 1: OCT 26 PRE-BOARD PHASE 1 */}
+                <div className={`p-4 sm:p-5 rounded-2xl border ${
+                  isDark ? "bg-amber-950/20 border-amber-500/30" : "bg-amber-50/80 border-amber-300"
+                }`}>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                      ⚡ Phase 1 Benchmark
+                    </span>
+                    <span className="text-xs font-mono font-bold text-amber-400">Oct 26, 2026</span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-black mb-1">Pre-Board Phase 1 (Test Series II)</h3>
+                  <p className="text-xs text-zinc-400 mb-3">Mid-term comprehensive readiness examination across all 5 subjects.</p>
+                  <LiveCountdown targetDate="2026-10-26" variant="card-grid" colorScheme="amber" isDark={isDark} />
+                </div>
+
+                {/* MILESTONE 2: FEB 1 CBSE BOARDS */}
+                <div className={`p-4 sm:p-5 rounded-2xl border ${
+                  isDark ? "bg-cyan-950/20 border-cyan-500/30" : "bg-cyan-50/80 border-cyan-300"
+                }`}>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                      🎯 Central Board Finals
+                    </span>
+                    <span className="text-xs font-mono font-bold text-cyan-400">Feb 1, 2027</span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-black mb-1">CBSE Class 10 Board Examinations</h3>
+                  <p className="text-xs text-zinc-400 mb-3">Nationwide Central Board official examination commencement.</p>
+                  <LiveCountdown targetDate="2027-02-01" variant="card-grid" colorScheme="blue" isDark={isDark} />
+                </div>
+              </div>
+
+              {/* ACTION LINK */}
+              <div className={`p-4 rounded-2xl border flex flex-col sm:flex-row items-center justify-between gap-3 ${
+                isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
+              }`}>
+                <div className="text-xs text-slate-400 text-center sm:text-left">
+                  Need to inspect specific subject schedules & topic checklists?
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsExamMilestonesModalOpen(false);
+                    setActiveTab("test_series");
+                  }}
+                  className="px-4 py-2 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer flex items-center gap-1.5 shrink-0"
+                >
+                  <span>Open Full Date Sheets Tab</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+
+            {/* MODAL FOOTER */}
+            <div className="p-4 sm:p-5 border-t border-white/10 flex justify-end shrink-0">
+              <button
+                type="button"
+                onClick={() => setIsExamMilestonesModalOpen(false)}
+                className="px-5 py-2 rounded-xl font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-all cursor-pointer min-h-[40px] touch-manipulation"
+              >
+                Dismiss (Back to Practice)
               </button>
             </div>
           </div>
@@ -3836,6 +3939,33 @@ export default function CBSECommandCenter() {
 
             {/* LIVE MOCK EXAM & PRACTICE TIMER */}
             <PracticeTimer isDark={isDark} />
+
+            {/* ACADEMIC DATE SHEET & SYLLABUS CHECKLIST HEADER */}
+            <div className={`p-4 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 ${
+              isDark ? "bg-white/[0.03] border-white/10" : "bg-slate-50 border-slate-200"
+            }`}>
+              <div>
+                <h3 className={`text-sm sm:text-base font-black flex items-center gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
+                  <Calendar className="w-4 h-4 text-amber-500 shrink-0" />
+                  <span>Class 10 Examination Schedules & Prescribed Syllabi</span>
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Track completed sub-topics, revision progress, and official CBSE weightage chapter by chapter.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold border ${
+                  isDark ? "bg-amber-500/15 border-amber-500/30 text-amber-300" : "bg-amber-100 border-amber-300 text-amber-900"
+                }`}>
+                  ⚡ Next Benchmark: Oct 26
+                </span>
+                <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold border ${
+                  isDark ? "bg-cyan-500/15 border-cyan-500/30 text-cyan-300" : "bg-cyan-100 border-cyan-300 text-cyan-900"
+                }`}>
+                  🎯 Boards: Feb 1, 2027
+                </span>
+              </div>
+            </div>
 
             {/* TEST SERIES I DATE SHEET TABS */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5">

@@ -5,12 +5,12 @@ export const CH4_DATA: ChapterData = {
   chapterName: 'Quadratic Equations',
   weightageEstimate: '6–9 Marks (CBSE Board Standard/Basic)',
   overview: {
-    about: 'Quadratic Equations is the powerhouse of Class 10 algebra. It covers testing second-degree validity, factoring polynomials with surds/radicals, solving by the quadratic formula, analyzing the discriminant D = b^2 - 4ac to deduce the nature of roots, and modeling non-linear real-world scenarios (pipe filling, train speed increases, delayed flights).',
+    about: 'Quadratic Equations is the powerhouse of Class 10 algebra. It covers testing second-degree validity, factoring polynomials with surds/radicals, solving by the quadratic formula, analyzing the discriminant D = b² - 4ac to deduce the nature of roots, and modeling non-linear real-world scenarios (pipe filling, train speed increases, delayed flights).',
     prerequisites: ['Basic polynomial factorization', 'Square roots and surd arithmetic', 'Solving linear equations'],
     coreIdeas: [
-      'Standard form: ax^2 + bx + c = 0 where a != 0. If a = 0, the equation degenerates into linear.',
-      'Quadratic Formula: x = (-b +- sqrt(b^2 - 4ac)) / (2a).',
-      'Discriminant D = b^2 - 4ac controls the root spectrum:',
+      'Standard form: ax² + bx + c = 0 where a ≠ 0. If a = 0, the equation degenerates into linear.',
+      'Quadratic Formula: x = (-b ± √(b² - 4ac)) / (2a).',
+      'Discriminant D = b² - 4ac controls the root spectrum:',
       '  - D > 0: Two distinct real roots.',
       '  - D = 0: Two equal (coincident) real roots (each root = -b / (2a)).',
       '  - D < 0: No real roots.',
@@ -22,8 +22,8 @@ export const CH4_DATA: ChapterData = {
       'If D is a perfect square (and a, b, c are rational), the roots are rational.'
     ],
     frequentMisunderstandings: [
-      'Writing the discriminant as b^2 - 4ac and forgetting that (-b)^2 is positive, leading to sign errors in 4ac.',
-      'Discarding the denominator 2a or forgetting that the division bar spans the entire numerator: (-b +- sqrt(D)) / (2a).',
+      'Writing the discriminant as b² - 4ac and forgetting that (-b)² is positive, leading to sign errors in 4ac.',
+      'Discarding the denominator 2a or forgetting that the division bar spans the entire numerator: (-b ± √D) / (2a).',
       'Failing to reject non-physical answers (e.g. negative speed, negative dimensions, negative time) in word problems.'
     ],
     examImportanceEvidence: 'One of the highest scoring chapters. Appears in every section: Section A (1 MCQ on D condition), Section B/C (factorising surds or quadratic formula), Section D (5 marks word problem on train speed or water taps).'
@@ -33,34 +33,34 @@ export const CH4_DATA: ChapterData = {
       id: 'ch4_c1',
       title: 'Standard Form & Factorisation with Radicals (Surds)',
       topic: 'Factorisation Technique',
-      simpleExplanation: 'Break down the middle term so that the product of the two split numbers equals a * c, even when square roots are present.',
-      exactMathIdea: 'For ax^2 + bx + c = 0, find two numbers p and q such that p + q = b and p * q = a * c. Group terms and extract binomial common factors.',
-      formulaOrTheorem: 'a x^2 + (p + q)x + c = 0 \\quad \\text{where } pq = ac',
+      simpleExplanation: 'Break down the middle term so that the product of the two split numbers equals ac, even when square roots are present.',
+      exactMathIdea: 'For ax² + bx + c = 0, find two numbers p and q such that p + q = b and pq = ac. Group terms and extract binomial common factors.',
+      formulaOrTheorem: 'a x² + (p + q)x + c = 0 \\quad \\text{where } pq = ac',
       whenToUse: 'When solving quadratic equations with integer or surd coefficients efficiently.',
-      recognitionClues: ['Solve for x by factorisation', 'sqrt(2) x^2 + 7x + 5 sqrt(2) = 0', '4 sqrt(3) x^2 + 5x - 2 sqrt(3) = 0'],
+      recognitionClues: ['Solve for x by factorisation', '√2 x² + 7x + 5 √2 = 0', '4 √3 x² + 5x - 2 √3 = 0'],
       workedExamples: [
         {
           level: 'standard',
           title: 'Solving Quadratic Equation with Surds',
-          question: 'Solve for x by factorisation: sqrt(2) x^2 + 7x + 5 sqrt(2) = 0.',
-          given: 'Equation sqrt(2) x^2 + 7x + 5 sqrt(2) = 0.',
+          question: 'Solve for x by factorisation: √2 x² + 7x + 5 √2 = 0.',
+          given: 'Equation √2 x² + 7x + 5 √2 = 0.',
           toFind: 'Values of x.',
-          methodSelectionReason: 'Product of extremes = sqrt(2) * 5 sqrt(2) = 5 * 2 = 10. Middle term sum = 7. Split 7 into 5 and 2.',
+          methodSelectionReason: 'Product of extremes = √2 × 5 √2 = 5 × 2 = 10. Middle term sum = 7. Split 7 into 5 and 2.',
           stepByStepSolution: [
-            'Product = a * c = sqrt(2) * 5 sqrt(2) = 10.',
+            'Product = ac = √2 × 5 √2 = 10.',
             'Sum = b = 7.',
-            'Numbers are 5 and 2 (5 * 2 = 10, 5 + 2 = 7).',
-            'Rewrite: sqrt(2) x^2 + 2x + 5x + 5 sqrt(2) = 0.',
-            'Note that 2 can be written as sqrt(2) * sqrt(2):',
-            'sqrt(2) x (x + sqrt(2)) + 5 (x + sqrt(2)) = 0.',
-            'Take common factor (x + sqrt(2)):',
-            '(x + sqrt(2))(sqrt(2) x + 5) = 0.',
-            'Either x + sqrt(2) = 0  =>  x = -sqrt(2),',
-            'Or sqrt(2) x + 5 = 0  =>  x = -5 / sqrt(2) = -5 sqrt(2) / 2.'
+            'Numbers are 5 and 2 (5 × 2 = 10, 5 + 2 = 7).',
+            'Rewrite: √2 x² + 2x + 5x + 5 √2 = 0.',
+            'Note that 2 can be written as √2 × √2:',
+            '√2 x (x + √2) + 5 (x + √2) = 0.',
+            'Take common factor (x + √2):',
+            '(x + √2)(√2 x + 5) = 0.',
+            'Either x + √2 = 0  ⇒  x = -√2,',
+            'Or √2 x + 5 = 0  ⇒  x = -5 / √2 = -5 √2 / 2.'
           ],
-          finalAnswer: 'x = -sqrt(2) and x = -5 / sqrt(2)',
-          verificationCheck: 'sqrt(2)(-sqrt(2))^2 + 7(-sqrt(2)) + 5 sqrt(2) = 2 sqrt(2) - 7 sqrt(2) + 5 sqrt(2) = 0. Verified!',
-          commonTrap: 'Failing to see that 2 = sqrt(2) * sqrt(2), which prevents finding the common binomial factor.'
+          finalAnswer: 'x = -√2 and x = -5 / √2',
+          verificationCheck: '√2(-√2)² + 7(-√2) + 5 √2 = 2 √2 - 7 √2 + 5 √2 = 0. Verified!',
+          commonTrap: 'Failing to see that 2 = √2 × √2, which prevents finding the common binomial factor.'
         }
       ],
       commonMisconceptions: ['Thinking radical equations cannot be solved by middle term splitting.'],
@@ -72,36 +72,36 @@ export const CH4_DATA: ChapterData = {
       id: 'ch4_c2',
       title: 'Discriminant and Nature of Roots',
       topic: 'Discriminant Analysis',
-      simpleExplanation: 'The discriminant D = b^2 - 4ac acts like an X-ray. It tells you whether roots are real, equal, or imaginary before you do any solving.',
-      exactMathIdea: 'For ax^2 + bx + c = 0 with a != 0, D = b^2 - 4ac. (1) D > 0: Two distinct real roots. (2) D = 0: Two equal real roots (-b/2a, -b/2a). (3) D < 0: No real roots.',
-      formulaOrTheorem: 'D = b^2 - 4ac',
+      simpleExplanation: 'The discriminant D = b² - 4ac acts like an X-ray. It tells you whether roots are real, equal, or imaginary before you do any solving.',
+      exactMathIdea: 'For ax² + bx + c = 0 with a ≠ 0, D = b² - 4ac. (1) D > 0: Two distinct real roots. (2) D = 0: Two equal real roots (-b/2a, -b/2a). (3) D < 0: No real roots.',
+      formulaOrTheorem: 'D = b² - 4ac',
       whenToUse: 'When asked to determine nature of roots, or find unknown k such that roots are real and equal.',
-      recognitionClues: ['Find the value of k for which the equation has two equal roots', 'Find the nature of the roots of the quadratic equation', 'Has real roots (D >= 0)'],
+      recognitionClues: ['Find the value of k for which the equation has two equal roots', 'Find the nature of the roots of the quadratic equation', 'Has real roots (D ≥ 0)'],
       workedExamples: [
         {
           level: 'standard',
           title: 'Equal Roots Condition (Finding k)',
-          question: 'Find the values of k for which the quadratic equation (k + 4)x^2 + (k + 1)x + 1 = 0 has equal roots.',
-          given: 'Equation (k + 4)x^2 + (k + 1)x + 1 = 0 has equal roots.',
+          question: 'Find the values of k for which the quadratic equation (k + 4)x² + (k + 1)x + 1 = 0 has equal roots.',
+          given: 'Equation (k + 4)x² + (k + 1)x + 1 = 0 has equal roots.',
           toFind: 'Value(s) of k.',
-          methodSelectionReason: 'For equal roots, discriminant D = b^2 - 4ac must equal 0.',
+          methodSelectionReason: 'For equal roots, discriminant D = b² - 4ac must equal 0.',
           stepByStepSolution: [
             'Identify coefficients: a = k + 4, b = k + 1, c = 1.',
-            'Condition for equal roots: D = b^2 - 4ac = 0.',
-            '(k + 1)^2 - 4(k + 4)(1) = 0.',
-            'k^2 + 2k + 1 - 4k - 16 = 0.',
-            'k^2 - 2k - 15 = 0.',
-            'Split middle term: product = -15, sum = -2 => factors are -5 and +3.',
+            'Condition for equal roots: D = b² - 4ac = 0.',
+            '(k + 1)² - 4(k + 4)(1) = 0.',
+            'k² + 2k + 1 - 4k - 16 = 0.',
+            'k² - 2k - 15 = 0.',
+            'Split middle term: product = -15, sum = -2 ⇒ factors are -5 and +3.',
             '(k - 5)(k + 3) = 0.',
             'k = 5 or k = -3.',
-            'Check coefficient a = k + 4: If k = 5, a = 9 != 0. If k = -3, a = 1 != 0. Both are valid!'
+            'Check coefficient a = k + 4: If k = 5, a = 9 ≠ 0. If k = -3, a = 1 ≠ 0. Both are valid!'
           ],
           finalAnswer: 'k = 5 or k = -3',
-          verificationCheck: 'For k = 5: 9x^2 + 6x + 1 = (3x + 1)^2 = 0 (equal roots). For k = -3: x^2 - 2x + 1 = (x - 1)^2 = 0 (equal roots).',
-          commonTrap: 'Forgetting to expand (k + 1)^2 as k^2 + 2k + 1 (missing the 2k term).'
+          verificationCheck: 'For k = 5: 9x² + 6x + 1 = (3x + 1)² = 0 (equal roots). For k = -3: x² - 2x + 1 = (x - 1)² = 0 (equal roots).',
+          commonTrap: 'Forgetting to expand (k + 1)² as k² + 2k + 1 (missing the 2k term).'
         }
       ],
-      commonMisconceptions: ['Writing D > 0 for equal roots instead of D = 0.', 'Confusing "real roots" (D >= 0) with "distinct real roots" (D > 0).'],
+      commonMisconceptions: ['Writing D > 0 for equal roots instead of D = 0.', 'Confusing "real roots" (D ≥ 0) with "distinct real roots" (D > 0).'],
       priority: 'Must Master',
       cbseFrequency: 'Present in 100% of CBSE board papers.',
       sourceTrace: 'NCERT Ch 4 Section 4.4, PYQ Granth 2016-2024'
@@ -131,11 +131,11 @@ export const CH4_DATA: ChapterData = {
             'Given t1 - t2 = 1:',
             '360/x - 360/(x + 5) = 1',
             '360 [ (x + 5 - x) / (x(x + 5)) ] = 1',
-            '360 * 5 / (x^2 + 5x) = 1',
-            '1800 = x^2 + 5x',
-            'x^2 + 5x - 1800 = 0',
-            'Factorise: 1800 = 40 * 45, and 45 - 40 = 5.',
-            'x^2 + 45x - 40x - 1800 = 0',
+            '360 × 5 / (x² + 5x) = 1',
+            '1800 = x² + 5x',
+            'x² + 5x - 1800 = 0',
+            'Factorise: 1800 = 40 × 45, and 45 - 40 = 5.',
+            'x² + 45x - 40x - 1800 = 0',
             '(x + 45)(x - 40) = 0',
             'x = 40 or x = -45.',
             'Since speed cannot be negative, reject x = -45. Thus x = 40 km/h.'
@@ -155,17 +155,17 @@ export const CH4_DATA: ChapterData = {
             'Let the smaller tap take x hours to fill the tank.',
             'Then the larger tap takes (x - 10) hours (x > 10).',
             'Portion of tank filled in 1 hour: 1/x + 1/(x - 10).',
-            'Combined time = 75/8 hours => 1 hour combined rate = 8/75.',
+            'Combined time = 75/8 hours ⇒ 1 hour combined rate = 8/75.',
             '1/x + 1/(x - 10) = 8/75',
             '(x - 10 + x) / (x(x - 10)) = 8/75',
-            '(2x - 10) / (x^2 - 10x) = 8/75',
-            '2(x - 5) / (x^2 - 10x) = 8/75  =>  (x - 5) / (x^2 - 10x) = 4/75',
-            '75(x - 5) = 4(x^2 - 10x)',
-            '75x - 375 = 4x^2 - 40x',
-            '4x^2 - 115x + 375 = 0',
-            'Factorise: 4 * 375 = 1500. Two numbers multiplying to 1500 and adding to 115 are 100 and 15.',
-            '4x^2 - 100x - 15x + 375 = 0',
-            '4x(x - 25) - 15(x - 25) = 0 => (4x - 15)(x - 25) = 0.',
+            '(2x - 10) / (x² - 10x) = 8/75',
+            '2(x - 5) / (x² - 10x) = 8/75  ⇒  (x - 5) / (x² - 10x) = 4/75',
+            '75(x - 5) = 4(x² - 10x)',
+            '75x - 375 = 4x² - 40x',
+            '4x² - 115x + 375 = 0',
+            'Factorise: 4 × 375 = 1500. Two numbers multiplying to 1500 and adding to 115 are 100 and 15.',
+            '4x² - 100x - 15x + 375 = 0',
+            '4x(x - 25) - 15(x - 25) = 0 ⇒ (4x - 15)(x - 25) = 0.',
             'x = 25 or x = 15/4 = 3.75.',
             'If x = 3.75 hours, larger tap time x - 10 = 3.75 - 10 = -6.25 hours (impossible!).',
             'Therefore, x = 25 hours. Larger tap = 25 - 10 = 15 hours.'
@@ -185,40 +185,40 @@ export const CH4_DATA: ChapterData = {
     {
       id: 'ch4_f1',
       name: 'Quadratic Formula (Sridharacharya Formula)',
-      formula: 'x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}',
+      formula: 'x = \\frac{-b \\pm \\sqrt{b² - 4ac}}{2a}',
       symbolMeanings: [
-        { symbol: 'a', meaning: 'Coefficient of x^2 (a != 0)' },
+        { symbol: 'a', meaning: 'Coefficient of x² (a ≠ 0)' },
         { symbol: 'b', meaning: 'Coefficient of x' },
         { symbol: 'c', meaning: 'Constant term' },
-        { symbol: 'b^2 - 4ac', meaning: 'Discriminant D' }
+        { symbol: 'b² - 4ac', meaning: 'Discriminant D' }
       ],
       whenToUse: 'When factorisation is tricky or impossible with rational integers.',
-      conditions: ['D = b^2 - 4ac >= 0 for real roots.'],
-      commonSubstitutions: ['x1 = (-b + sqrt(D))/(2a)', 'x2 = (-b - sqrt(D))/(2a)'],
+      conditions: ['D = b² - 4ac ≥ 0 for real roots.'],
+      commonSubstitutions: ['x1 = (-b + √D)/(2a)', 'x2 = (-b - √D)/(2a)'],
       miniExample: {
-        question: 'Solve 2x^2 - 7x + 3 = 0 using quadratic formula.',
-        substitution: 'a=2, b=-7, c=3; D = (-7)^2 - 4(2)(3) = 49 - 24 = 25. x = (7 +- 5)/4',
+        question: 'Solve 2x² - 7x + 3 = 0 using quadratic formula.',
+        substitution: 'a=2, b=-7, c=3; D = (-7)² - 4(2)(3) = 49 - 24 = 25. x = (7 ± 5)/4',
         result: 'x = 3 or x = 1/2'
       },
       commonMistakes: [
-        'Writing x = -b +- sqrt(D) / 2a where 2a only divides the square root.',
-        'Taking (-b)^2 as negative.'
+        'Writing x = -b ± √D / 2a where 2a only divides the square root.',
+        'Taking (-b)² as negative.'
       ],
       sourceTrace: 'NCERT Ch 4 Section 4.3'
     },
     {
       id: 'ch4_f2',
       name: 'Discriminant Spectrum & Root Nature',
-      formula: 'D = b^2 - 4ac \\quad \\begin{cases} D > 0 & 2 \\text{ distinct real roots} \\\\ D = 0 & 2 \\text{ equal real roots } (x = -b/2a) \\\\ D < 0 & \\text{No real roots} \\end{cases}',
+      formula: 'D = b² - 4ac \\quad \\begin{cases} D > 0 & 2 \\text{ distinct real roots} \\\\ D = 0 & 2 \\text{ equal real roots } (x = -b/2a) \\\\ D < 0 & \\text{No real roots} \\end{cases}',
       symbolMeanings: [
         { symbol: 'D', meaning: 'Discriminant value' }
       ],
       whenToUse: 'To determine root nature or find boundary values of parameters.',
-      conditions: ['a != 0'],
-      commonSubstitutions: ['Equal roots condition: b^2 = 4ac'],
+      conditions: ['a ≠ 0'],
+      commonSubstitutions: ['Equal roots condition: b² = 4ac'],
       miniExample: {
-        question: 'Find nature of roots of 2x^2 - 4x + 3 = 0.',
-        substitution: 'D = (-4)^2 - 4(2)(3) = 16 - 24 = -8 < 0',
+        question: 'Find nature of roots of 2x² - 4x + 3 = 0.',
+        substitution: 'D = (-4)² - 4(2)(3) = 16 - 24 = -8 < 0',
         result: 'No real roots.'
       },
       commonMistakes: ['Thinking D < 0 means roots are zero (they are non-real / complex).'],
@@ -238,15 +238,15 @@ export const CH4_DATA: ChapterData = {
         'Step 1: Let original speed = x km/h (x > 0).',
         'Step 2: Identify slower speed and faster speed.',
         'Step 3: Write: Time(slower) - Time(faster) = Time difference.',
-        'Step 4: Take common distance factor: d [ (fast - slow) / (slow * fast) ] = t.',
-        'Step 5: Simplify to standard quadratic equation ax^2 + bx + c = 0.',
+        'Step 4: Take common distance factor: d [ (fast - slow) / (slow × fast) ] = t.',
+        'Step 5: Simplify to standard quadratic equation ax² + bx + c = 0.',
         'Step 6: Solve for x using factorisation or quadratic formula.',
         'Step 7: Reject negative root with explicit physical reason (speed cannot be negative).'
       ],
       verificationMethod: 'Calculate both times directly and check if their difference matches given hours.',
       commonTrap: 'Reversing the order of fractions and getting a negative speed.',
       exemplarQuestion: 'An express train takes 1 hour less than a passenger train to travel 132 km between Mysore and Bangalore. If the average speed of the express train is 11 km/h more than that of the passenger train, find the average speeds of the two trains.',
-      exemplarAnswer: '132/x - 132/(x + 11) = 1 => x^2 + 11x - 1452 = 0 => (x + 44)(x - 33) = 0 => x = 33 km/h (Passenger) and 44 km/h (Express).'
+      exemplarAnswer: '132/x - 132/(x + 11) = 1 ⇒ x² + 11x - 1452 = 0 ⇒ (x + 44)(x - 33) = 0 ⇒ x = 33 km/h (Passenger) and 44 km/h (Express).'
     }
   ],
   gradedQuestions: [
@@ -257,13 +257,13 @@ export const CH4_DATA: ChapterData = {
       level: 1,
       levelLabel: 'Level 1 — Foundation',
       question: 'Which of the following equations has two distinct real roots?',
-      options: ['2x^2 - 3sqrt(2)x + 9/4 = 0', 'x^2 + x - 5 = 0', 'x^2 + 3x + 2sqrt(2) = 0', '5x^2 - 3x + 1 = 0'],
-      correctAnswer: 'x^2 + x - 5 = 0',
+      options: ['2x² - 3√2x + 9/4 = 0', 'x² + x - 5 = 0', 'x² + 3x + 2√2 = 0', '5x² - 3x + 1 = 0'],
+      correctAnswer: 'x² + x - 5 = 0',
       marks: 1,
-      hints: ['Calculate D = b^2 - 4ac for each equation. Look for D > 0.'],
+      hints: ['Calculate D = b² - 4ac for each equation. Look for D > 0.'],
       solutionSteps: [
-        'For x^2 + x - 5 = 0: a = 1, b = 1, c = -5.',
-        'D = b^2 - 4ac = 1^2 - 4(1)(-5) = 1 + 20 = 21 > 0.',
+        'For x² + x - 5 = 0: a = 1, b = 1, c = -5.',
+        'D = b² - 4ac = 1² - 4(1)(-5) = 1 + 20 = 21 > 0.',
         'Since D > 0, it has two distinct real roots.'
       ],
       commonTrap: 'Calculating 1 - 20 instead of 1 - (-20).',
@@ -277,15 +277,15 @@ export const CH4_DATA: ChapterData = {
       topic: 'Equal Roots Condition',
       level: 2,
       levelLabel: 'Level 2 — Standard',
-      question: 'If the equation 2x^2 + k x + 3 = 0 has two equal real roots, find the value of k.',
-      options: ['k = ±2 sqrt(6)', 'k = ±sqrt(6)', 'k = ±4 sqrt(6)', 'k = 6'],
-      correctAnswer: 'k = ±2 sqrt(6)',
+      question: 'If the equation 2x² + k x + 3 = 0 has two equal real roots, find the value of k.',
+      options: ['k = ±2 √6', 'k = ±√6', 'k = ±4 √6', 'k = 6'],
+      correctAnswer: 'k = ±2 √6',
       marks: 1,
-      hints: ['D = b^2 - 4ac = 0 => k^2 - 4(2)(3) = 0.'],
+      hints: ['D = b² - 4ac = 0 ⇒ k² - 4(2)(3) = 0.'],
       solutionSteps: [
-        'D = k^2 - 4(2)(3) = 0',
-        'k^2 - 24 = 0 => k^2 = 24',
-        'k = ±sqrt(24) = ±2 sqrt(6).'
+        'D = k² - 4(2)(3) = 0',
+        'k² - 24 = 0 ⇒ k² = 24',
+        'k = ±√24 = ±2 √6.'
       ],
       commonTrap: 'Forgetting the ± sign.',
       isOriginalPractice: true,
@@ -298,19 +298,19 @@ export const CH4_DATA: ChapterData = {
       topic: 'Solving by Factorisation with Surds',
       level: 3,
       levelLabel: 'Level 3 — Application',
-      question: 'Solve for x: 4x^2 - 4a x + (a^2 - b^2) = 0.',
+      question: 'Solve for x: 4x² - 4a x + (a² - b²) = 0.',
       correctAnswer: 'x = (a + b)/2 and x = (a - b)/2',
       marks: 3,
-      hints: ['Notice that 4x^2 - 4ax + a^2 = (2x - a)^2. Then apply difference of squares with b^2.'],
+      hints: ['Notice that 4x² - 4ax + a² = (2x - a)². Then apply difference of squares with b².'],
       solutionSteps: [
-        'Rewrite equation as: (4x^2 - 4ax + a^2) - b^2 = 0.',
-        '(2x - a)^2 - b^2 = 0.',
-        'Using identity A^2 - B^2 = (A - B)(A + B):',
+        'Rewrite equation as: (4x² - 4ax + a²) - b² = 0.',
+        '(2x - a)² - b² = 0.',
+        'Using identity A² - B² = (A - B)(A + B):',
         '(2x - a - b)(2x - a + b) = 0.',
-        'Either 2x - a - b = 0 => 2x = a + b => x = (a + b) / 2.',
-        'Or 2x - a + b = 0 => 2x = a - b => x = (a - b) / 2.'
+        'Either 2x - a - b = 0 ⇒ 2x = a + b ⇒ x = (a + b) / 2.',
+        'Or 2x - a + b = 0 ⇒ 2x = a - b ⇒ x = (a - b) / 2.'
       ],
-      commonTrap: 'Trying to expand a^2 - b^2 and getting lost in quadratic formula arithmetic.',
+      commonTrap: 'Trying to expand a² - b² and getting lost in quadratic formula arithmetic.',
       isOriginalPractice: true,
       sourcePdfRef: 'PYQ Granth 2019 / RD Sharma',
       conceptId: 'ch4_c1'
@@ -330,9 +330,9 @@ export const CH4_DATA: ChapterData = {
         'Let usual speed be x km/h. Increased speed = x + 250.',
         '1500/x - 1500/(x + 250) = 1/2',
         '1500 [ 250 / (x(x + 250)) ] = 1/2',
-        '375000 / (x^2 + 250x) = 1/2',
-        'x^2 + 250x - 750000 = 0',
-        'Factorise: 1000 * 750 = 750000 and 1000 - 750 = 250.',
+        '375000 / (x² + 250x) = 1/2',
+        'x² + 250x - 750000 = 0',
+        'Factorise: 1000 × 750 = 750000 and 1000 - 750 = 250.',
         '(x + 1000)(x - 750) = 0.',
         'x = 750 km/h (rejecting negative speed x = -1000).'
       ],
@@ -347,16 +347,16 @@ export const CH4_DATA: ChapterData = {
       topic: 'Quadratic Equation Challenge (Nested Roots)',
       level: 5,
       levelLabel: 'Level 5 — Challenge',
-      question: 'Solve for x: x = sqrt(6 + sqrt(6 + sqrt(6 + ... to infinity))).',
+      question: 'Solve for x: x = √6 + sqrt(6 + sqrt(6 + ... to infinity)).',
       options: ['3', '2', '-2', '6'],
       correctAnswer: '3',
       marks: 2,
-      hints: ['Notice that the expression under the first square root is x itself: x = sqrt(6 + x). Square both sides.'],
+      hints: ['Notice that the expression under the first square root is x itself: x = √6 + x. Square both sides.'],
       solutionSteps: [
-        'Given x = sqrt(6 + sqrt(6 + ...)).',
-        'The infinite nested radical has self-similarity: x = sqrt(6 + x).',
-        'Squaring both sides: x^2 = 6 + x.',
-        'x^2 - x - 6 = 0.',
+        'Given x = √6 + sqrt(6 + ...).',
+        'The infinite nested radical has self-similarity: x = √6 + x.',
+        'Squaring both sides: x² = 6 + x.',
+        'x² - x - 6 = 0.',
         '(x - 3)(x + 2) = 0.',
         'x = 3 or x = -2.',
         'Since the principal square root is non-negative, x cannot be -2.',
@@ -375,14 +375,14 @@ export const CH4_DATA: ChapterData = {
       marks: 3,
       topic: 'Nature of Roots',
       conceptTested: 'Equal roots condition for quadratic equation',
-      question: 'If the quadratic equation (1 + m^2)x^2 + 2mc x + (c^2 - a^2) = 0 has equal roots, prove that c^2 = a^2 (1 + m^2).',
+      question: 'If the quadratic equation (1 + m²)x² + 2mc x + (c² - a²) = 0 has equal roots, prove that c² = a² (1 + m²).',
       markingSchemeBreakdown: [
-        { step: 'Setting D = b^2 - 4ac = 0 with correct substitutions', marks: 1.0 },
-        { step: 'Expanding (2mc)^2 - 4(1 + m^2)(c^2 - a^2) = 0 correctly', marks: 1.0 },
-        { step: 'Simplifying and isolating c^2 to conclude proof', marks: 1.0 }
+        { step: 'Setting D = b² - 4ac = 0 with correct substitutions', marks: 1.0 },
+        { step: 'Expanding (2mc)² - 4(1 + m²)(c² - a²) = 0 correctly', marks: 1.0 },
+        { step: 'Simplifying and isolating c² to conclude proof', marks: 1.0 }
       ],
-      fullSolution: 'For equal roots, D = 0. Here A = 1 + m^2, B = 2mc, C = c^2 - a^2. (2mc)^2 - 4(1 + m^2)(c^2 - a^2) = 0 => 4m^2 c^2 - 4[c^2 - a^2 + m^2 c^2 - m^2 a^2] = 0 => 4m^2 c^2 - 4c^2 + 4a^2 - 4m^2 c^2 + 4m^2 a^2 = 0 => -4c^2 + 4a^2 (1 + m^2) = 0 => 4c^2 = 4a^2 (1 + m^2) => c^2 = a^2 (1 + m^2). Hence proved.',
-      commonMistake: 'Sign errors when expanding -4(1 + m^2)(c^2 - a^2).',
+      fullSolution: 'For equal roots, D = 0. Here A = 1 + m², B = 2mc, C = c² - a². (2mc)² - 4(1 + m²)(c² - a²) = 0 ⇒ 4m² c² - 4[c² - a² + m² c² - m² a²] = 0 ⇒ 4m² c² - 4c² + 4a² - 4m² c² + 4m² a² = 0 ⇒ -4c² + 4a² (1 + m²) = 0 ⇒ 4c² = 4a² (1 + m²) ⇒ c² = a² (1 + m²). Hence proved.',
+      commonMistake: 'Sign errors when expanding -4(1 + m²)(c² - a²).',
       frequencyTrend: 'High-frequency proof question repeated in 2017, 2020, 2024.',
       source: 'CBSE Board 2024 Set 30/3/1'
     }
@@ -392,34 +392,34 @@ export const CH4_DATA: ChapterData = {
       id: 'ch4_m_err1',
       title: 'Fractional Denominator Span in Quadratic Formula',
       mistakeCategory: 'Formula & Substitution',
-      flawedWorking: 'Writing x = -b +- sqrt(D) / 2a and calculating x = -b + (sqrt(D)/2a).',
-      whyItIsWrong: 'The entire quantity (-b +- sqrt(D)) is divided by 2a, not just the square root term.',
-      correctWorking: 'x = (-b +- sqrt(D)) / (2a).',
-      howToAvoid: 'Use brackets around the numerator: [ -b +- sqrt(D) ] / (2a).',
+      flawedWorking: 'Writing x = -b ± √D / 2a and calculating x = -b + (√D/2a).',
+      whyItIsWrong: 'The entire quantity (-b ± √D) is divided by 2a, not just the square root term.',
+      correctWorking: 'x = (-b ± √D) / (2a).',
+      howToAvoid: 'Use brackets around the numerator: [ -b ± √D ] / (2a).',
       retryQuestion: {
-        question: 'Solve x^2 - 4x + 1 = 0 using the quadratic formula.',
-        correctAnswer: 'x = 2 ± sqrt(3)',
-        explanation: 'x = (4 +- sqrt(16 - 4))/2 = (4 +- sqrt(12))/2 = (4 +- 2sqrt(3))/2 = 2 +- sqrt(3).'
+        question: 'Solve x² - 4x + 1 = 0 using the quadratic formula.',
+        correctAnswer: 'x = 2 ± √3',
+        explanation: 'x = (4 ± √16 - 4)/2 = (4 ± √12)/2 = (4 ± 2√3)/2 = 2 ± √3.'
       }
     }
   ],
   revisionSheet: {
     mustRememberPoints: [
-      'Standard form: ax^2 + bx + c = 0 (a != 0).',
-      'Quadratic formula: x = (-b +- sqrt(b^2 - 4ac)) / (2a).',
+      'Standard form: ax² + bx + c = 0 (a ≠ 0).',
+      'Quadratic formula: x = (-b ± √(b² - 4ac)) / (2a).',
       'D > 0: Two distinct real roots.',
       'D = 0: Two equal real roots (-b/2a).',
       'D < 0: No real roots.',
-      'Equal roots condition: b^2 = 4ac.',
+      'Equal roots condition: b² = 4ac.',
       'In time-distance problems: Time(slow) - Time(fast) = Time saved.',
       'Always discard negative values for length, speed, and time.'
     ],
     speedTips: [
-      'If b is even, say 2b\', root can be quickly written as (-b\' +- sqrt(b\'^2 - ac))/a.',
+      'If b is even, say 2b\', root can be quickly written as (-b\' ± √b\'² - ac)/a.',
       'Always factor out common constants from the entire equation before computing D.'
     ],
     lastDayChecklist: [
-      'Did you remember that (-b)^2 is positive?',
+      'Did you remember that (-b)² is positive?',
       'Did you state why you rejected the negative solution in the word problem?'
     ]
   },
@@ -436,17 +436,17 @@ export const CH4_DATA: ChapterData = {
           level: 1,
           levelLabel: 'Level 1 — Foundation',
           question: 'Which of the following is NOT a quadratic equation?',
-          options: ['(x + 2)^2 = 2(x + 3)', 'x^2 + 3x = (-1)(1 - 3x)^2', '(x + 2)(x - 1) = x^2 - 2x - 3', 'x^3 - x^2 = (x - 1)^3'],
-          correctAnswer: '(x + 2)(x - 1) = x^2 - 2x - 3',
+          options: ['(x + 2)² = 2(x + 3)', 'x² + 3x = (-1)(1 - 3x)²', '(x + 2)(x - 1) = x² - 2x - 3', 'x³ - x² = (x - 1)³'],
+          correctAnswer: '(x + 2)(x - 1) = x² - 2x - 3',
           marks: 1,
-          hints: ['Expand and check if the x^2 term cancels out completely.'],
+          hints: ['Expand and check if the x² term cancels out completely.'],
           solutionSteps: [
-            '(x + 2)(x - 1) = x^2 + x - 2.',
-            'x^2 + x - 2 = x^2 - 2x - 3.',
-            'x^2 cancels out on both sides: 3x + 1 = 0 (this is linear, degree 1).',
+            '(x + 2)(x - 1) = x² + x - 2.',
+            'x² + x - 2 = x² - 2x - 3.',
+            'x² cancels out on both sides: 3x + 1 = 0 (this is linear, degree 1).',
             'Therefore, it is NOT a quadratic equation.'
           ],
-          commonTrap: 'Assuming degree 3 in (x - 1)^3 means it is cubic (the x^3 cancels out!).',
+          commonTrap: 'Assuming degree 3 in (x - 1)³ means it is cubic (the x³ cancels out!).',
           isOriginalPractice: true,
           sourcePdfRef: 'Diagnostic Test',
           conceptId: 'ch4_c1'
@@ -467,12 +467,12 @@ export const CH4_DATA: ChapterData = {
           question: 'The altitude of a right triangle is 7 cm less than its base. If the hypotenuse is 13 cm, find the other two sides.',
           correctAnswer: 'Base = 12 cm, Altitude = 5 cm',
           marks: 3,
-          hints: ['Pythagoras theorem: base^2 + altitude^2 = hypotenuse^2. x^2 + (x - 7)^2 = 13^2.'],
+          hints: ['Pythagoras theorem: base² + altitude² = hypotenuse². x² + (x - 7)² = 13².'],
           solutionSteps: [
             'Let base = x cm. Altitude = (x - 7) cm.',
-            'x^2 + (x - 7)^2 = 13^2 = 169.',
-            'x^2 + x^2 - 14x + 49 = 169.',
-            '2x^2 - 14x - 120 = 0  =>  x^2 - 7x - 60 = 0.',
+            'x² + (x - 7)² = 13² = 169.',
+            'x² + x² - 14x + 49 = 169.',
+            '2x² - 14x - 120 = 0  ⇒  x² - 7x - 60 = 0.',
             '(x - 12)(x + 5) = 0.',
             'x = 12 (rejecting x = -5 since length cannot be negative).',
             'Base = 12 cm, Altitude = 12 - 7 = 5 cm.'
@@ -495,7 +495,7 @@ export const CH4_DATA: ChapterData = {
           topic: 'Equal Roots Condition',
           level: 4,
           levelLabel: 'Level 4 — Advanced',
-          question: 'If the roots of the equation (a - b)x^2 + (b - c)x + (c - a) = 0 are equal, prove that 2a = b + c.',
+          question: 'If the roots of the equation (a - b)x² + (b - c)x + (c - a) = 0 are equal, prove that 2a = b + c.',
           correctAnswer: '2a = b + c (b, a, c are in AP)',
           marks: 4,
           hints: ['Notice that x = 1 is obviously a root because sum of coefficients is 0! Since roots are equal, both roots are 1.'],
@@ -504,10 +504,10 @@ export const CH4_DATA: ChapterData = {
             'This means x = 1 is always a root of this equation.',
             'Since the equation is given to have equal roots, the other root must also be 1.',
             'Product of roots = (c - a) / (a - b).',
-            'Since both roots are 1: 1 * 1 = (c - a) / (a - b).',
-            'a - b = c - a => 2a = b + c. Hence proved!'
+            'Since both roots are 1: 1 × 1 = (c - a) / (a - b).',
+            'a - b = c - a ⇒ 2a = b + c. Hence proved!'
           ],
-          commonTrap: 'Trying to expand D = (b - c)^2 - 4(a - b)(c - a) = 0, which takes 20 minutes of tedious algebra.',
+          commonTrap: 'Trying to expand D = (b - c)² - 4(a - b)(c - a) = 0, which takes 20 minutes of tedious algebra.',
           isOriginalPractice: true,
           sourcePdfRef: 'RD Sharma Class 10 Ch 4 Higher Order Thinking',
           conceptId: 'ch4_c2'
@@ -534,10 +534,10 @@ export const CH4_DATA: ChapterData = {
             'Let speed of stream = x km/h (x < 18).',
             'Upstream speed = 18 - x; Downstream speed = 18 + x.',
             '24/(18 - x) - 24/(18 + x) = 1.',
-            '24 [ (18 + x - (18 - x)) / (18^2 - x^2) ] = 1.',
-            '24(2x) = 324 - x^2.',
-            '48x = 324 - x^2 => x^2 + 48x - 324 = 0.',
-            'Factorise: 54 * 6 = 324 and 54 - 6 = 48.',
+            '24 [ (18 + x - (18 - x)) / (18² - x²) ] = 1.',
+            '24(2x) = 324 - x².',
+            '48x = 324 - x² ⇒ x² + 48x - 324 = 0.',
+            'Factorise: 54 × 6 = 324 and 54 - 6 = 48.',
             '(x + 54)(x - 6) = 0.',
             'x = 6 km/h (rejecting negative speed x = -54).'
           ],

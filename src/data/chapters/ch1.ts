@@ -29,7 +29,7 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
       "Step 6: Compute the required sum of exponents:\nSum = 4 + 2 = 6"
     ],
     explanation: "Fundamental Theorem of Arithmetic states that every composite number can be uniquely expressed as a product of powers of primes. Expressing 144 = 2⁴ × 3², the sum of exponents is 4 + 2 = 6.",
-    formula: "Composite Number N = p_1^{a_1} * p_2^{a_2} * ... => Sum = a_1 + a_2 + ...",
+    formula: "Composite Number N = p₁^{a₁} × p₂^{a₂} × ... ⇒ Sum = a₁ + a₂ + ...",
     examinerNote: "Do not just state the exponent of 2 (which is 4). The question asks for the SUM of all prime factor exponents (4 + 2 = 6).",
     source: "CBSE Board 2020 Standard (Set 30/1/1)"
   },
@@ -39,17 +39,17 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 1,
     type: "MCQ",
-    question: "[CBSE 2024 Set-1] If HCF(a, b) = 12 and a * b = 1800, then LCM(a, b) is:",
+    question: "[CBSE 2024 Set-1] If HCF(a, b) = 12 and a × b = 1800, then LCM(a, b) is:",
     options: ["1800", "150", "900", "600"],
     correctOption: 1,
     answer: "150",
     steps: [
-      "Step 1: Use fundamental relation: HCF(a, b) * LCM(a, b) = a * b.",
-      "Step 2: Substitute given values: 12 * LCM(a, b) = 1800.",
+      "Step 1: Use fundamental relation: HCF(a, b) × LCM(a, b) = a × b.",
+      "Step 2: Substitute given values: 12 × LCM(a, b) = 1800.",
       "Step 3: LCM(a, b) = 1800 / 12 = 150."
     ],
     explanation: "For any two positive integers a and b, the product of their HCF and LCM is strictly equal to the product of the numbers.",
-    formula: "HCF(a, b) * LCM(a, b) = a * b",
+    formula: "HCF(a, b) × LCM(a, b) = a × b",
     examinerNote: "Remember this formula is strictly valid for TWO numbers only. It does not hold for three numbers.",
     source: "CBSE Board 2024 Standard (Set 30/2/1)"
   },
@@ -59,19 +59,19 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 1,
     type: "MCQ",
-    question: "[CBSE 2019, 2023 Standard] If two positive integers p and q can be expressed as p = a * b^2 and q = a^3 * b, where a and b are prime numbers, then LCM(p, q) is:",
-    options: ["ab", "a^2 * b^2", "a^3 * b^2", "a^3 * b^3"],
+    question: "[CBSE 2019, 2023 Standard] If two positive integers p and q can be expressed as p = ab² and q = a³b, where a and b are prime numbers, then LCM(p, q) is:",
+    options: ["ab", "a²b²", "a³b²", "a³b³"],
     correctOption: 2,
-    answer: "a^3 * b^2",
+    answer: "a³b²",
     steps: [
-      "Step 1: Given p = a^1 * b^2 and q = a^3 * b^1.",
+      "Step 1: Given p = ab² and q = a³b.",
       "Step 2: LCM is the product of the highest power of each prime factor involved in the numbers.",
-      "Step 3: Highest power of a = a^3; Highest power of b = b^2.",
-      "Step 4: Therefore, LCM(p, q) = a^3 * b^2."
+      "Step 3: Highest power of a = a³; Highest power of b = b².",
+      "Step 4: Therefore, LCM(p, q) = a³b²."
     ],
-    explanation: "LCM takes the maximum exponent of each prime factor: max(1, 3) = 3 and max(2, 1) = 2 => a^3 * b^2. (HCF would take min powers: a * b).",
+    explanation: "LCM takes the maximum exponent of each prime factor: max(1, 3) = 3 and max(2, 1) = 2 ⇒ a³b². (HCF would take min powers: ab).",
     formula: "LCM = Product of greatest power of each prime factor",
-    examinerNote: "Students frequently confuse HCF with LCM. HCF takes lowest powers (ab), LCM takes highest powers (a^3 b^2).",
+    examinerNote: "Students frequently confuse HCF with LCM. HCF takes lowest powers (ab), LCM takes highest powers (a³b²).",
     source: "CBSE Board 2019 Delhi & 2023 All India"
   },
   {
@@ -87,8 +87,8 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     steps: [
       "Step 1: Smallest prime number is 2.",
       "Step 2: Smallest composite number is 4 (1 is neither prime nor composite).",
-      "Step 3: Prime factorisation: 2 = 2^1; 4 = 2^2.",
-      "Step 4: HCF(2, 4) = 2^1 = 2."
+      "Step 3: Prime factorisation: 2 = 2¹; 4 = 2².",
+      "Step 4: HCF(2, 4) = 2¹ = 2."
     ],
     explanation: "1 is neither prime nor composite. The smallest prime is 2, and the smallest composite is 4. HCF(2, 4) = 2.",
     formula: "HCF = Product of smallest power of common prime factors",
@@ -101,7 +101,7 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 1,
     type: "MCQ",
-    question: "[CBSE 2023 Standard] Assertion (A): The number 6^n cannot end with the digit 0 for any natural number n.\nReason (R): For a number to end with digit 0, its prime factorisation must contain both 2 and 5.",
+    question: "[CBSE 2023 Standard] Assertion (A): The number 6ⁿ cannot end with the digit 0 for any natural number n.\nReason (R): For a number to end with digit 0, its prime factorisation must contain both 2 and 5.",
     options: [
       "Both (A) and (R) are true and (R) is the correct explanation of (A)",
       "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
@@ -111,13 +111,13 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     correctOption: 0,
     answer: "Both (A) and (R) are true and (R) is the correct explanation of (A)",
     steps: [
-      "Step 1: 6^n = (2 * 3)^n = 2^n * 3^n. The only prime factors of 6 are 2 and 3.",
+      "Step 1: 6ⁿ = (2 × 3)ⁿ = 2ⁿ × 3ⁿ. The only prime factors of 6 are 2 and 3.",
       "Step 2: By the Fundamental Theorem of Arithmetic, this prime factorisation is unique.",
-      "Step 3: 5 is not a factor of 6^n, so 6^n can never end with the digit 0. Assertion (A) is true.",
-      "Step 4: Any number ending in 0 is divisible by 10 = 2 * 5, hence Reason (R) is true and correctly explains (A)."
+      "Step 3: 5 is not a factor of 6ⁿ, so 6ⁿ can never end with the digit 0. Assertion (A) is true.",
+      "Step 4: Any number ending in 0 is divisible by 10 = 2 × 5, hence Reason (R) is true and correctly explains (A)."
     ],
-    explanation: "Divisibility by 10 requires both prime factors 2 and 5. Since 6^n has only 2 and 3 as prime factors, it cannot end with 0.",
-    formula: "Ending in digit 0 <=> 10 | N <=> 2 | N and 5 | N",
+    explanation: "Divisibility by 10 requires both prime factors 2 and 5. Since 6ⁿ has only 2 and 3 as prime factors, it cannot end with 0.",
+    formula: "Ending in digit 0 <⇒ 10 | N <⇒ 2 | N and 5 | N",
     examinerNote: "Must cite the uniqueness of the Fundamental Theorem of Arithmetic.",
     source: "CBSE Sample Paper 2023-24 & Board Exam 2023"
   },
@@ -138,7 +138,7 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     answer: "No, because HCF must always be a factor of LCM",
     steps: [
       "Step 1: Check if LCM is completely divisible by HCF: 175 / 15.",
-      "Step 2: 175 = 15 * 11 + 10 (leaves remainder 10 != 0).",
+      "Step 2: 175 = 15 × 11 + 10 (leaves remainder 10 ≠ 0).",
       "Step 3: Since HCF is not a divisor of LCM, no two numbers can have HCF = 15 and LCM = 175."
     ],
     explanation: "HCF is the product of common prime factors with lowest powers, while LCM contains all prime factors with highest powers. Therefore, HCF must always divide LCM completely.",
@@ -156,16 +156,16 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 2,
     type: "VSA",
-    question: "[CBSE 2018, 2024] Find the HCF and LCM of 404 and 96 by prime factorisation method, and verify that HCF * LCM = Product of the two numbers.",
+    question: "[CBSE 2018, 2024] Find the HCF and LCM of 404 and 96 by prime factorisation method, and verify that HCF × LCM = Product of the two numbers.",
     answer: "HCF = 4, LCM = 9696; Product = 38784 (Verified)",
     steps: [
-      "Step 1: Prime factorise both numbers:\n404 = 2^2 * 101\n96 = 2^5 * 3",
-      "Step 2: Calculate HCF: Lowest common power of 2 is 2^2 = 4. HCF(404, 96) = 4.",
-      "Step 3: Calculate LCM: Product of highest powers = 2^5 * 3 * 101 = 32 * 3 * 101 = 9696.",
-      "Step 4: Verification:\nHCF * LCM = 4 * 9696 = 38784\nProduct of numbers = 404 * 96 = 38784\nSince HCF * LCM = 404 * 96, the relationship is verified."
+      "Step 1: Prime factorise both numbers:\n404 = 2² × 101\n96 = 2⁵ × 3",
+      "Step 2: Calculate HCF: Lowest common power of 2 is 2² = 4. HCF(404, 96) = 4.",
+      "Step 3: Calculate LCM: Product of highest powers = 2⁵ × 3 × 101 = 32 × 3 × 101 = 9696.",
+      "Step 4: Verification:\nHCF × LCM = 4 × 9696 = 38784\nProduct of numbers = 404 × 96 = 38784\nSince HCF × LCM = 404 × 96, the relationship is verified."
     ],
     explanation: "Using the Fundamental Theorem of Arithmetic, factorising into prime powers gives exact values of HCF and LCM. The verification step confirms 38784 = 38784.",
-    formula: "HCF * LCM = a * b",
+    formula: "HCF × LCM = a × b",
     examinerNote: "Showing both prime factor trees/chains and the explicit verification step carries 1 full mark.",
     source: "CBSE Board 2018 (Set 30/1)"
   },
@@ -175,17 +175,17 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 2,
     type: "VSA",
-    question: "[CBSE 2012, 2016, 2020] Explain why 7 * 11 * 13 + 13 and 7 * 6 * 5 * 4 * 3 * 2 * 1 + 5 are composite numbers.",
+    question: "[CBSE 2012, 2016, 2020] Explain why 7 × 11 × 13 + 13 and 7 × 6 × 5 × 4 × 3 × 2 × 1 + 5 are composite numbers.",
     answer: "Both numbers have factors other than 1 and themselves, hence composite.",
     steps: [
-      "Step 1: Evaluate the first expression by factoring out 13:\n7 * 11 * 13 + 13 = 13 * (7 * 11 + 1) = 13 * (77 + 1) = 13 * 78 = 13 * (2 * 3 * 13) = 2 * 3 * 13^2.",
+      "Step 1: Evaluate the first expression by factoring out 13:\n7 × 11 × 13 + 13 = 13 × (7 × 11 + 1) = 13 × (77 + 1) = 13 × 78 = 13 × (2 × 3 × 13) = 2 × 3 × 13².",
       "Step 2: Since it can be written as a product of more than two prime factors (2, 3, 13), it is a composite number.",
-      "Step 3: Evaluate the second expression by factoring out 5:\n7 * 6 * 5 * 4 * 3 * 2 * 1 + 5 = 5 * (7 * 6 * 4 * 3 * 2 * 1 + 1) = 5 * (1008 + 1) = 5 * 1009.",
+      "Step 3: Evaluate the second expression by factoring out 5:\n7 × 6 × 5 × 4 × 3 × 2 × 1 + 5 = 5 × (7 × 6 × 4 × 3 × 2 × 1 + 1) = 5 × (1008 + 1) = 5 × 1009.",
       "Step 4: Since 1009 is a prime number, the expression has 5 and 1009 as prime factors besides 1 and itself. Hence, it is composite."
     ],
     explanation: "A composite number is defined as a positive integer that has at least one divisor other than 1 and itself. Factoring out common integers proves compositeness without large multiplications.",
-    formula: "Composite Number: N = a * b (where a, b > 1)",
-    examinerNote: "Do not calculate 7 * 11 * 13 + 13 = 1014 and then divide. Taking out the common factor 13 is the standard topper method.",
+    formula: "Composite Number: N = a × b (where a, b > 1)",
+    examinerNote: "Do not calculate 7 × 11 × 13 + 13 = 1014 and then divide. Taking out the common factor 13 is the standard topper method.",
     source: "CBSE Board 2020 (Set 30/3/1)"
   },
   {
@@ -194,19 +194,19 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 2,
     type: "VSA",
-    question: "[CBSE 2020, 2023 Standard] Given that sqrt(3) is an irrational number, prove that (5 - 2*sqrt(3)) is an irrational number.",
-    answer: "5 - 2*sqrt(3) is irrational by contradiction.",
+    question: "[CBSE 2020, 2023 Standard] Given that √3 is an irrational number, prove that (5 - 2√3) is an irrational number.",
+    answer: "5 - 2√3 is irrational by contradiction.",
     steps: [
-      "Step 1: Assume on the contrary that 5 - 2*sqrt(3) is rational.",
-      "Step 2: Therefore, there exist coprime integers a and b (b != 0) such that:\n5 - 2*sqrt(3) = a / b.",
-      "Step 3: Rearrange to isolate sqrt(3):\n2*sqrt(3) = 5 - a / b = (5b - a) / b\nsqrt(3) = (5b - a) / (2b).",
+      "Step 1: Assume on the contrary that 5 - 2√3 is rational.",
+      "Step 2: Therefore, there exist coprime integers a and b (b ≠ 0) such that:\n5 - 2√3 = a / b.",
+      "Step 3: Rearrange to isolate √3:\n2√3 = 5 - a / b = (5b - a) / b\n√3 = (5b - a) / (2b).",
       "Step 4: Since a and b are integers, (5b - a) and 2b are integers, meaning (5b - a)/(2b) is rational.",
-      "Step 5: This implies sqrt(3) is rational, which contradicts the given fact that sqrt(3) is irrational.",
-      "Step 6: Hence, our assumption is false, and 5 - 2*sqrt(3) is irrational."
+      "Step 5: This implies √3 is rational, which contradicts the given fact that √3 is irrational.",
+      "Step 6: Hence, our assumption is false, and 5 - 2√3 is irrational."
     ],
     explanation: "Difference and quotient of rational numbers is always rational. Equating that to a known irrational produces an impossible contradiction.",
-    formula: "Rational - Rational = Rational != Irrational",
-    examinerNote: "Do NOT reprove sqrt(3) is irrational from scratch. Use the given fact and isolate sqrt(3).",
+    formula: "Rational - Rational = Rational ≠ Irrational",
+    examinerNote: "Do NOT reprove √3 is irrational from scratch. Use the given fact and isolate √3.",
     source: "CBSE Board 2023 Standard (Set 30/1/2)"
   },
 
@@ -219,20 +219,20 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 3,
     type: "Proof",
-    question: "[CBSE 2010, 2016, 2019, 2024] Prove that sqrt(5) is an irrational number.",
-    answer: "sqrt(5) is irrational (Proof by Contradiction).",
+    question: "[CBSE 2010, 2016, 2019, 2024] Prove that √5 is an irrational number.",
+    answer: "√5 is irrational (Proof by Contradiction).",
     steps: [
-      "Step 1: Assume to the contrary that sqrt(5) is a rational number.",
-      "Step 2: Then sqrt(5) = a / b, where a and b are coprime integers (HCF(a, b) = 1) and b != 0.",
-      "Step 3: Squaring both sides: 5 = a^2 / b^2 => a^2 = 5 * b^2  --- (Equation 1).",
-      "Step 4: Since 5 divides a^2, by Fundamental Theorem, 5 must divide a (Theorem: if prime p | a^2, then p | a).",
-      "Step 5: Let a = 5c for some integer c. Substitute in (1):\n(5c)^2 = 5 * b^2 => 25c^2 = 5 * b^2 => b^2 = 5 * c^2.",
-      "Step 6: This means 5 divides b^2, so 5 divides b.",
+      "Step 1: Assume to the contrary that √5 is a rational number.",
+      "Step 2: Then √5 = a / b, where a and b are coprime integers (HCF(a, b) = 1) and b ≠ 0.",
+      "Step 3: Squaring both sides: 5 = a²/b² ⇒ a² = 5b²  --- (Equation 1).",
+      "Step 4: Since 5 divides a², by Fundamental Theorem, 5 must divide a (Theorem: if prime p | a², then p | a).",
+      "Step 5: Let a = 5c for some integer c. Substitute in (1):\n(5c)² = 5b² ⇒ 25c² = 5b² ⇒ b² = 5c².",
+      "Step 6: This means 5 divides b², so 5 divides b.",
       "Step 7: From Steps 4 and 6, 5 is a common factor of both a and b. This contradicts our initial premise that a and b are coprime integers (HCF = 1).",
-      "Step 8: This contradiction arose because of our incorrect assumption. Hence, sqrt(5) is irrational."
+      "Step 8: This contradiction arose because of our incorrect assumption. Hence, √5 is irrational."
     ],
     explanation: "Classic Euclidean proof by contradiction using the Fundamental Theorem of Arithmetic lemma: if a prime divides a square, it must divide the base integer.",
-    formula: "p | a^2 => p | a (where p is prime)",
+    formula: "p | a² ⇒ p | a (where p is prime)",
     examinerNote: "Mandatory: Must explicitly write 'where a and b are coprime integers'. Omission loses 1/2 mark.",
     source: "CBSE Board 2024 (Set 30/4/1) — Appeared 8 times in last 20 years"
   },
@@ -246,8 +246,8 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     answer: "7:00 AM (after 60 minutes)",
     steps: [
       "Step 1: The time interval after which the clocks ring together is the Lowest Common Multiple (LCM) of 4, 12, and 20 minutes.",
-      "Step 2: Prime factorise each interval:\n4 = 2^2\n12 = 2^2 * 3\n20 = 2^2 * 5",
-      "Step 3: Find LCM:\nLCM(4, 12, 20) = 2^2 * 3 * 5 = 4 * 15 = 60 minutes.",
+      "Step 2: Prime factorise each interval:\n4 = 2²\n12 = 2² × 3\n20 = 2² × 5",
+      "Step 3: Find LCM:\nLCM(4, 12, 20) = 2² × 3 × 5 = 4 × 15 = 60 minutes.",
       "Step 4: Convert minutes to hours: 60 minutes = 1 hour.",
       "Step 5: Add interval to initial time: 6:00 AM + 1 hour = 7:00 AM.",
       "Step 6: Therefore, the clocks will next ring together at 7:00 AM."
@@ -269,9 +269,9 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
       "Step 1: If a number divides 2053 leaving remainder 5, it must divide (2053 - 5) = 2048 exactly.",
       "Step 2: If it divides 367 leaving remainder 7, it must divide (367 - 7) = 360 exactly.",
       "Step 3: The largest such number is the HCF of 2048 and 360.",
-      "Step 4: Prime factorise 2048 and 360:\n2048 = 2^11\n360 = 36 * 10 = (2^2 * 3^2) * (2 * 5) = 2^3 * 3^2 * 5",
-      "Step 5: HCF(2048, 360) = 2^3 = 8... Wait: verify 2053 and 367 or standard numbers 2053 - 5 = 2048, 367 - 7 = 360.",
-      "Step 6: Let's check: 2048 = 360 * 5 + 248; 360 = 248 * 1 + 112; 248 = 112 * 2 + 24; 112 = 24 * 4 + 16; 24 = 16 * 1 + 8; 16 = 8 * 2 + 0 => HCF = 64 for 2053 - 5 = 2048 and standard board problem: 2053 - 5 = 2048, 367 - 7 = 360 gives 8. If numbers are 2053 and 367, HCF is 8. For standard 64: 2053 - 5 = 2048 and 967 - 7 = 960 (960 = 64 * 15). Here HCF(2048, 360) = 8."
+      "Step 4: Prime factorise 2048 and 360:\n2048 = 2¹¹\n360 = 36 × 10 = (2² × 3²) × (2 × 5) = 2³ × 3² × 5",
+      "Step 5: HCF(2048, 360) = 2³ = 8... Wait: verify 2053 and 367 or standard numbers 2053 - 5 = 2048, 367 - 7 = 360.",
+      "Step 6: Let's check: 2048 = 360 × 5 + 248; 360 = 248 × 1 + 112; 248 = 112 × 2 + 24; 112 = 24 × 4 + 16; 24 = 16 × 1 + 8; 16 = 8 × 2 + 0 ⇒ HCF = 64 for 2053 - 5 = 2048 and standard board problem: 2053 - 5 = 2048, 367 - 7 = 360 gives 8. If numbers are 2053 and 367, HCF is 8. For standard 64: 2053 - 5 = 2048 and 967 - 7 = 960 (960 = 64 × 15). Here HCF(2048, 360) = 8."
     ],
     explanation: "Subtract respective remainders first: (Number - Remainder) must be divisible. Then find the HCF of the resulting values.",
     formula: "Required Number = HCF(N1 - R1, N2 - R2)",
@@ -284,18 +284,18 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 3,
     type: "Proof",
-    question: "[CBSE 2014, 2018, 2023] Prove that (sqrt(2) + sqrt(3)) is an irrational number.",
-    answer: "sqrt(2) + sqrt(3) is irrational by contradiction.",
+    question: "[CBSE 2014, 2018, 2023] Prove that (√2 + √3) is an irrational number.",
+    answer: "√2 + √3 is irrational by contradiction.",
     steps: [
-      "Step 1: Assume on the contrary that x = sqrt(2) + sqrt(3) is rational.",
-      "Step 2: Squaring both sides:\nx^2 = (sqrt(2) + sqrt(3))^2 = (sqrt(2))^2 + (sqrt(3))^2 + 2*sqrt(2)*sqrt(3)\nx^2 = 2 + 3 + 2*sqrt(6) = 5 + 2*sqrt(6).",
-      "Step 3: Rearrange to isolate sqrt(6):\n2*sqrt(6) = x^2 - 5 => sqrt(6) = (x^2 - 5) / 2.",
-      "Step 4: Since x is rational, x^2 is rational, and (x^2 - 5)/2 is also rational.",
-      "Step 5: This implies sqrt(6) is rational. But 6 = 2 * 3 is not a perfect square, so sqrt(6) is irrational.",
-      "Step 6: A rational number cannot equal an irrational number. This contradiction proves our assumption false. Therefore, sqrt(2) + sqrt(3) is irrational."
+      "Step 1: Assume on the contrary that x = √2 + √3 is rational.",
+      "Step 2: Squaring both sides:\nx² = (√2 + √3)² = (√2)² + (√3)² + 2√2 × √3\nx² = 2 + 3 + 2√6 = 5 + 2√6.",
+      "Step 3: Rearrange to isolate √6:\n2√6 = x² - 5 ⇒ √6 = (x² - 5) / 2.",
+      "Step 4: Since x is rational, x² is rational, and (x² - 5)/2 is also rational.",
+      "Step 5: This implies √6 is rational. But 6 = 2 × 3 is not a perfect square, so √6 is irrational.",
+      "Step 6: A rational number cannot equal an irrational number. This contradiction proves our assumption false. Therefore, √2 + √3 is irrational."
     ],
-    explanation: "Squaring converts the sum of two radicals into an expression containing a single radical sqrt(6), which is easily shown to cause a contradiction.",
-    formula: "(sqrt(a) + sqrt(b))^2 = a + b + 2*sqrt(ab)",
+    explanation: "Squaring converts the sum of two radicals into an expression containing a single radical √6, which is easily shown to cause a contradiction.",
+    formula: "(√a + √b)² = a + b + 2√(ab)",
     examinerNote: "Squaring both sides first is the cleanest topper method for sum of two radicals.",
     source: "CBSE Board 2018 (Series AJM)"
   },
@@ -335,10 +335,10 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     answer: "999720",
     steps: [
       "Step 1: A number divisible by 15, 24, and 36 must be a multiple of their LCM.",
-      "Step 2: Prime factorise each number:\n15 = 3 * 5\n24 = 2^3 * 3\n36 = 2^2 * 3^2",
-      "Step 3: LCM(15, 24, 36) = 2^3 * 3^2 * 5 = 8 * 9 * 5 = 360.",
+      "Step 2: Prime factorise each number:\n15 = 3 × 5\n24 = 2³ × 3\n36 = 2² × 3²",
+      "Step 3: LCM(15, 24, 36) = 2³ × 3² × 5 = 8 × 9 × 5 = 360.",
       "Step 4: The greatest 6-digit number is 999999.",
-      "Step 5: Divide 999999 by 360 to find the remainder:\n999999 = 360 * 2777 + 279.",
+      "Step 5: Divide 999999 by 360 to find the remainder:\n999999 = 360 × 2777 + 279.",
       "Step 6: Remainder = 279.",
       "Step 7: Subtract remainder from 999999:\nRequired number = 999999 - 279 = 999720.",
       "Step 8: Verification: 999720 / 360 = 2777 (exact integer). Thus 999720 is exactly divisible by 15, 24, and 36."
@@ -358,13 +358,13 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 4,
     type: "Case Study",
-    question: "[CBSE 2024 Competency Case Study] A sweet seller has 420 Kaju barfis and 130 Badam barfis. She wants to stack them in trays such that each stack has the same number of barfis, and they take up the least surface area of the tray.\n\nBased on this situation, answer the following questions:\n(i) What mathematical concept is used to find the maximum number of barfis in each stack? (1 Mark)\n(ii) Find the maximum number of barfis that can be put in each stack. (1 Mark)\n(iii) (a) Find the total number of stacks formed in the tray. (2 Marks)\nOR\n(iii) (b) If each stack of Kaju barfi occupies 15 cm^2 area and each stack of Badam barfi occupies 12 cm^2 area, find the total area occupied by all stacks on the tray. (2 Marks)",
-    answer: "(i) HCF; (ii) 10 barfis per stack; (iii)(a) 55 stacks; (iii)(b) Total area = 786 cm^2",
+    question: "[CBSE 2024 Competency Case Study] A sweet seller has 420 Kaju barfis and 130 Badam barfis. She wants to stack them in trays such that each stack has the same number of barfis, and they take up the least surface area of the tray.\n\nBased on this situation, answer the following questions:\n(i) What mathematical concept is used to find the maximum number of barfis in each stack? (1 Mark)\n(ii) Find the maximum number of barfis that can be put in each stack. (1 Mark)\n(iii) (a) Find the total number of stacks formed in the tray. (2 Marks)\nOR\n(iii) (b) If each stack of Kaju barfi occupies 15 cm² area and each stack of Badam barfi occupies 12 cm² area, find the total area occupied by all stacks on the tray. (2 Marks)",
+    answer: "(i) HCF; (ii) 10 barfis per stack; (iii)(a) 55 stacks; (iii)(b) Total area = 786 cm²",
     steps: [
       "Part (i): To take up the least surface area, the number of barfis in each stack must be the MAXIMUM possible. Therefore, the concept used is Highest Common Factor (HCF).",
-      "Part (ii): Find HCF(420, 130):\n420 = 2^2 * 3 * 5 * 7\n130 = 2 * 5 * 13\nCommon factors with lowest powers = 2^1 * 5^1 = 10.\nMaximum number of barfis per stack = 10 barfis.",
+      "Part (ii): Find HCF(420, 130):\n420 = 2² × 3 × 5 × 7\n130 = 2 × 5 × 13\nCommon factors with lowest powers = 2 × 5 = 10.\nMaximum number of barfis per stack = 10 barfis.",
       "Part (iii)(a): Stacks of Kaju barfi = 420 / 10 = 42 stacks.\nStacks of Badam barfi = 130 / 10 = 13 stacks.\nTotal number of stacks = 42 + 13 = 55 stacks.",
-      "Part (iii)(b) Alternative: Area of Kaju stacks = 42 * 15 cm^2 = 630 cm^2.\nArea of Badam stacks = 13 * 12 cm^2 = 156 cm^2.\nTotal area occupied = 630 + 156 = 786 cm^2."
+      "Part (iii)(b) Alternative: Area of Kaju stacks = 42 × 15 cm² = 630 cm².\nArea of Badam stacks = 13 × 12 cm² = 156 cm².\nTotal area occupied = 630 + 156 = 786 cm²."
     ],
     explanation: "Minimizing tray area means maximizing stack size (HCF). Then division yields the count of stacks for area computation.",
     formula: "HCF(420, 130) = 10; Stacks = Total / HCF",
@@ -377,7 +377,7 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 1,
     type: "MCQ",
-    question: "[CBSE 2024 Standard] Assertion (A): The HCF of two numbers is 5 and their product is 150, then their LCM is 30.\nReason (R): For any two positive integers a and b, HCF(a, b) * LCM(a, b) = a * b.",
+    question: "[CBSE 2024 Standard] Assertion (A): The HCF of two numbers is 5 and their product is 150, then their LCM is 30.\nReason (R): For any two positive integers a and b, HCF(a, b) × LCM(a, b) = a × b.",
     options: [
       "Both (A) and (R) are true and (R) is the correct explanation of (A)",
       "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
@@ -387,12 +387,12 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     correctOption: 0,
     answer: "Both (A) and (R) are true and (R) is the correct explanation of (A)",
     steps: [
-      "Step 1: Reason formula is standard theorem: HCF(a, b) * LCM(a, b) = a * b. Reason is True.",
-      "Step 2: Check Assertion: 5 * LCM = 150 => LCM = 150 / 5 = 30. Assertion is True.",
+      "Step 1: Reason formula is standard theorem: HCF(a, b) × LCM(a, b) = a × b. Reason is True.",
+      "Step 2: Check Assertion: 5 × LCM = 150 ⇒ LCM = 150 / 5 = 30. Assertion is True.",
       "Step 3: Reason is the exact mathematical principle that justifies the calculation in Assertion."
     ],
-    explanation: "Since HCF * LCM = Product of two numbers, 5 * 30 = 150, which matches.",
-    formula: "HCF(a, b) * LCM(a, b) = a * b",
+    explanation: "Since HCF × LCM = Product of two numbers, 5 × 30 = 150, which matches.",
+    formula: "HCF(a, b) × LCM(a, b) = a × b",
     examinerNote: "Assertion-Reason questions are compulsory Section A items in CBSE 2024-2026. Verify both calculation and causality.",
     source: "CBSE 2024 Standard Board Examination"
   },
@@ -402,7 +402,7 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 1,
     type: "MCQ",
-    question: "[CBSE 2023 Standard] If a = 2^3 * 3, b = 2 * 3 * 5, c = 3^n * 5 and LCM(a, b, c) = 2^3 * 3^2 * 5, then the value of n is:",
+    question: "[CBSE 2023 Standard] If a = 2³ × 3, b = 2 × 3 × 5, c = 3ⁿ × 5 and LCM(a, b, c) = 2³ × 3² × 5, then the value of n is:",
     options: ["1", "2", "3", "4"],
     correctOption: 1,
     answer: "2",
@@ -410,7 +410,7 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
       "Step 1: LCM contains the highest power of each prime factor involved in the numbers.",
       "Step 2: Prime factors involved are 2, 3, and 5.",
       "Step 3: In LCM, the power of 3 is 2. The powers of 3 in a, b, c are 1, 1, and n respectively.",
-      "Step 4: Therefore, max(1, 1, n) = 2 => n = 2."
+      "Step 4: Therefore, max(1, 1, n) = 2 ⇒ n = 2."
     ],
     explanation: "LCM takes the greatest exponent of each prime factor across all numbers.",
     formula: "Exponent in LCM = max(exponents of that prime in given numbers)",
@@ -442,16 +442,16 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     marks: 2,
     type: "VSA",
     question: "[CBSE 2021] Write the prime factorisation of 2058 and hence state the number of distinct prime factors.",
-    answer: "2058 = 2 * 3 * 7^3; Distinct prime factors = 3 (namely 2, 3, and 7)",
+    answer: "2058 = 2 × 3 × 7³; Distinct prime factors = 3 (namely 2, 3, and 7)",
     steps: [
       "Step 1: 2058 / 2 = 1029.",
       "Step 2: 1029 / 3 = 343.",
-      "Step 3: 343 = 7^3.",
-      "Step 4: Prime factorisation = 2^1 * 3^1 * 7^3.",
+      "Step 3: 343 = 7³.",
+      "Step 4: Prime factorisation = 2¹ × 3¹ × 7³.",
       "Step 5: Distinct prime factors are 2, 3, and 7, so there are 3 distinct primes."
     ],
     explanation: "Do not count powers when asked for distinct prime factors: 2, 3, and 7 are 3 unique primes.",
-    formula: "N = 2 * 3 * 7^3",
+    formula: "N = 2 × 3 × 7³",
     examinerNote: "Students often write 5 (1 + 1 + 3) instead of 3. 'Distinct' means unique primes.",
     source: "CBSE Term-1 Board Exam"
   },
@@ -465,8 +465,8 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     answer: "3 hours (180 minutes)",
     steps: [
       "Step 1: The time interval when all three bells toll together again is the LCM of their individual intervals.",
-      "Step 2: Prime factorise each interval:\n9 = 3^2\n12 = 2^2 * 3\n15 = 3 * 5",
-      "Step 3: LCM(9, 12, 15) = 2^2 * 3^2 * 5 = 4 * 9 * 5 = 180 minutes.",
+      "Step 2: Prime factorise each interval:\n9 = 3²\n12 = 2² × 3\n15 = 3 × 5",
+      "Step 3: LCM(9, 12, 15) = 2² × 3² × 5 = 4 × 9 × 5 = 180 minutes.",
       "Step 4: Convert minutes to hours: 180 / 60 = 3 hours.",
       "Step 5: Therefore, the bells will toll together again after 3 hours."
     ],
@@ -485,16 +485,16 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     answer: "Proof by contradiction showing 2 - 3√5 cannot be expressed as p/q.",
     steps: [
       "Step 1: Let us assume to the contrary that 2 - 3√5 is a rational number.",
-      "Step 2: Then there exist co-prime integers a and b (b != 0) such that:\n2 - 3√5 = a/b.",
-      "Step 3: Rearranging to isolate √5:\n3√5 = 2 - a/b = (2b - a)/b\n=> √5 = (2b - a) / (3b).",
-      "Step 4: Since a and b are integers, 2b - a and 3b are integers, and 3b != 0.",
+      "Step 2: Then there exist co-prime integers a and b (b ≠ 0) such that:\n2 - 3√5 = a/b.",
+      "Step 3: Rearranging to isolate √5:\n3√5 = 2 - a/b = (2b - a)/b\n⇒ √5 = (2b - a) / (3b).",
+      "Step 4: Since a and b are integers, 2b - a and 3b are integers, and 3b ≠ 0.",
       "Step 5: Therefore, (2b - a)/(3b) is a rational number.",
       "Step 6: This implies that √5 is rational. But this contradicts the given fact that √5 is irrational.",
       "Step 7: Hence, our assumption was incorrect, and 2 - 3√5 is irrational."
     ],
     explanation: "Linear rearrangement isolates the known irrational on one side and an integer ratio on the other, creating the desired contradiction.",
     formula: "√5 = (2b - a) / (3b)",
-    examinerNote: "Since √5 is already given as irrational, do NOT re-prove √5 from p^2/q^2. Only 5 lines of algebraic isolation are required.",
+    examinerNote: "Since √5 is already given as irrational, do NOT re-prove √5 from p²/q². Only 5 lines of algebraic isolation are required.",
     source: "CBSE Board 2023 Standard (Set 30/2/2)"
   },
   {
@@ -506,9 +506,9 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     question: "[CBSE 2024 Sample Paper] A circular track has a circumference of 360 m. Two cyclists start together from the same point at speeds of 18 km/h and 24 km/h in the same direction. Find:\n(i) Time taken by each cyclist to complete one round.\n(ii) After how much time will they meet again at the starting point?\n(iii) How many rounds will each cyclist have completed when they meet?",
     answer: "(i) A = 72 s, B = 54 s; (ii) 216 seconds (3 min 36 s); (iii) A = 3 rounds, B = 4 rounds",
     steps: [
-      "Step 1: Convert speeds from km/h to m/s:\nSpeed of A = 18 * (5/18) = 5 m/s.\nSpeed of B = 24 * (5/18) = 20/3 m/s.",
-      "Step 2: Time for one complete lap (360 m):\nTime for A = 360 / 5 = 72 seconds.\nTime for B = 360 / (20/3) = 360 * 3 / 20 = 54 seconds.",
-      "Step 3: They will meet at starting point after a time equal to LCM(72, 54):\n72 = 2^3 * 3^2\n54 = 2 * 3^3\nLCM(72, 54) = 2^3 * 3^3 = 8 * 27 = 216 seconds = 3 minutes 36 seconds.",
+      "Step 1: Convert speeds from km/h to m/s:\nSpeed of A = 18 × (5/18) = 5 m/s.\nSpeed of B = 24 × (5/18) = 20/3 m/s.",
+      "Step 2: Time for one complete lap (360 m):\nTime for A = 360 / 5 = 72 seconds.\nTime for B = 360 / (20/3) = (360 × 3) / 20 = 54 seconds.",
+      "Step 3: They will meet at starting point after a time equal to LCM(72, 54):\n72 = 2³ × 3²\n54 = 2 × 3³\nLCM(72, 54) = 2³ × 3³ = 8 × 27 = 216 seconds = 3 minutes 36 seconds.",
       "Step 4: Number of rounds completed by A:\n216 / 72 = 3 rounds.",
       "Step 5: Number of rounds completed by B:\n216 / 54 = 4 rounds."
     ],
@@ -526,10 +526,10 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     question: "[CBSE 2025 Official Sample Paper Case Study] In a national conference, participants in Mathematics, Science, and Social Science are 60, 84, and 108 respectively. The organizing committee wants to accommodate them in minimum number of rooms such that each room has the same number of participants and all participants in a room belong to the same subject.\n\nAnswer the following:\n(i) What is the maximum capacity of participants that can be seated in each room? (1 Mark)\n(ii) Find the minimum number of rooms required for Mathematics participants. (1 Mark)\n(iii) (a) Find the total minimum number of rooms required for the entire conference. (2 Marks)\nOR\n(iii) (b) If each room requires 12 desks and 2 sanitizers, find total desks and sanitizers needed for all rooms. (2 Marks)",
     answer: "(i) 12 participants per room; (ii) 5 rooms; (iii)(a) 21 rooms; (iii)(b) 252 desks and 42 sanitizers",
     steps: [
-      "Part (i): To minimize rooms, room capacity must be the MAXIMUM possible equal divisor of 60, 84, and 108.\n60 = 2^2 * 3 * 5\n84 = 2^2 * 3 * 7\n108 = 2^2 * 3^3\nHCF(60, 84, 108) = 2^2 * 3 = 12 participants per room.",
+      "Part (i): To minimize rooms, room capacity must be the MAXIMUM possible equal divisor of 60, 84, and 108.\n60 = 2² × 3 × 5\n84 = 2² × 3 × 7\n108 = 2² × 3³\nHCF(60, 84, 108) = 2² × 3 = 12 participants per room.",
       "Part (ii): Rooms for Mathematics = 60 / 12 = 5 rooms.",
       "Part (iii)(a): Rooms for Science = 84 / 12 = 7 rooms.\nRooms for Social Science = 108 / 12 = 9 rooms.\nTotal minimum rooms = 5 + 7 + 9 = 21 rooms.",
-      "Part (iii)(b) Alternative: Total desks = 21 * 12 = 252 desks.\nTotal sanitizers = 21 * 2 = 42 sanitizers."
+      "Part (iii)(b) Alternative: Total desks = 21 × 12 = 252 desks.\nTotal sanitizers = 21 × 2 = 42 sanitizers."
     ],
     explanation: "Minimizing total rooms requires maximizing individual room capacity, which is the HCF of all participant counts.",
     formula: "Capacity = HCF(60, 84, 108) = 12; Total Rooms = Sum of quotients",
@@ -543,10 +543,10 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     marks: 4,
     type: "Case Study",
     question: "[CBSE 2024 Competency Case Study] Traffic light signals at three consecutive junctions on an arterial highway change their lights after every 48 seconds, 72 seconds, and 108 seconds respectively. If all three signals change simultaneously at 8:00:00 AM:\n\n(i) Find the prime factorisation of 48, 72, and 108. (1 Mark)\n(ii) After how many seconds will all three signals change simultaneously again? (1 Mark)\n(iii) (a) At what exact time on the clock will they change simultaneously next? (2 Marks)\nOR\n(iii) (b) How many times will they change simultaneously between 8:00 AM and 9:00 AM (inclusive)? (2 Marks)",
-    answer: "(i) 48=2^4*3, 72=2^3*3^2, 108=2^2*3^3; (ii) 432 seconds; (iii)(a) 8:07:12 AM; (iii)(b) 9 times",
+    answer: "(i) 48 = 2⁴ × 3, 72 = 2³ × 3², 108 = 2² × 3³; (ii) 432 seconds; (iii)(a) 8:07:12 AM; (iii)(b) 9 times",
     steps: [
-      "Part (i): 48 = 2^4 * 3; 72 = 2^3 * 3^2; 108 = 2^2 * 3^3.",
-      "Part (ii): LCM(48, 72, 108) = 2^4 * 3^3 = 16 * 27 = 432 seconds.",
+      "Part (i): 48 = 2⁴ × 3; 72 = 2³ × 3²; 108 = 2² × 3³.",
+      "Part (ii): LCM(48, 72, 108) = 2⁴ × 3³ = 16 × 27 = 432 seconds.",
       "Part (iii)(a): Convert 432 seconds to minutes and seconds:\n432 / 60 = 7 minutes with a remainder of 12 seconds.\nTime on clock = 8:00:00 AM + 7 min 12 s = 8:07:12 AM.",
       "Part (iii)(b) Alternative: 1 hour = 3600 seconds.\nNumber of intervals = floor(3600 / 432) = 8.\nIncluding the starting change at 8:00:00 AM, total times = 8 + 1 = 9 times."
     ],

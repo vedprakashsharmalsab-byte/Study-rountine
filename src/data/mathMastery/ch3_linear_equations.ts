@@ -9,15 +9,15 @@ export const CH3_DATA: ChapterData = {
     prerequisites: ['Plotting linear graphs ax + by + c = 0', 'Solving single-variable linear equations', 'Coordinate geometry quadrants and intercepts'],
     coreIdeas: [
       'Two linear equations represent two straight lines on the Cartesian plane.',
-      'Consistency Condition: Unique solution (intersecting) <=> a1/a2 != b1/b2.',
-      'Infinitely many solutions (coincident) <=> a1/a2 = b1/b2 = c1/c2.',
-      'Inconsistent / No solution (parallel) <=> a1/a2 = b1/b2 != c1/c2.',
+      'Consistency Condition: Unique solution (intersecting) <⇒ a1/a2 ≠ b1/b2.',
+      'Infinitely many solutions (coincident) <⇒ a1/a2 = b1/b2 = c1/c2.',
+      'Inconsistent / No solution (parallel) <⇒ a1/a2 = b1/b2 ≠ c1/c2.',
       'Elimination method: Multiply equations by suitable constants to make the coefficients of one variable numerically equal, then add or subtract.',
       'Upstream speed = (x - y) km/h, Downstream speed = (x + y) km/h, where x is speed of boat in still water and y is stream speed.',
       'Two-digit number: 10x + y (x = tens digit, y = units digit). Reversing digits produces 10y + x.'
     ],
     keyRelationships: [
-      'For parallel lines, slopes are identical (a1/a2 = b1/b2), but y-intercepts differ (!= c1/c2).',
+      'For parallel lines, slopes are identical (a1/a2 = b1/b2), but y-intercepts differ (≠ c1/c2).',
       'For coincident lines, one equation is simply a non-zero scalar multiple of the other.'
     ],
     frequentMisunderstandings: [
@@ -33,8 +33,8 @@ export const CH3_DATA: ChapterData = {
       title: 'Consistency Conditions and Ratio Test',
       topic: 'Line Relationships and Solvability',
       simpleExplanation: 'By comparing the ratios of x-coefficients, y-coefficients, and constant terms, you can instantly tell if lines cross once, never cross, or lie on top of each other.',
-      exactMathIdea: 'For a1 x + b1 y + c1 = 0 and a2 x + b2 y + c2 = 0: (1) Intersecting lines / Unique solution: a1/a2 != b1/b2 (Consistent). (2) Coincident lines / Infinitely many solutions: a1/a2 = b1/b2 = c1/c2 (Consistent & Dependent). (3) Parallel lines / No solution: a1/a2 = b1/b2 != c1/c2 (Inconsistent).',
-      formulaOrTheorem: '\\frac{a_1}{a_2} \\neq \\frac{b_1}{b_2} \\implies 1 \\text{ sol}, \\quad \\frac{a_1}{a_2} = \\frac{b_1}{b_2} = \\frac{c_1}{c_2} \\implies \\infty \\text{ sol}, \\quad \\frac{a_1}{a_2} = \\frac{b_1}{b_2} \\neq \\frac{c_1}{c_2} \\implies 0 \\text{ sol}',
+      exactMathIdea: 'For a1 x + b1 y + c1 = 0 and a2 x + b2 y + c2 = 0: (1) Intersecting lines / Unique solution: a1/a2 ≠ b1/b2 (Consistent). (2) Coincident lines / Infinitely many solutions: a1/a2 = b1/b2 = c1/c2 (Consistent & Dependent). (3) Parallel lines / No solution: a1/a2 = b1/b2 ≠ c1/c2 (Inconsistent).',
+      formulaOrTheorem: '\\frac{a_{1}}{a_{2}} \\neq \\frac{b_1}{b_2} \\implies 1 \\text{ sol}, \\quad \\frac{a_{1}}{a_{2}} = \\frac{b_1}{b_2} = \\frac{c_1}{c_2} \\implies \\infty \\text{ sol}, \\quad \\frac{a_{1}}{a_{2}} = \\frac{b_1}{b_2} \\neq \\frac{c_1}{c_2} \\implies 0 \\text{ sol}',
       whenToUse: 'When asked to determine consistency, nature of lines, or find unknown parameter k for no solution or infinite solutions.',
       recognitionClues: ['For what value of k will the system have no solution?', 'Check whether the pair of equations is consistent', 'Lines represent parallel lines'],
       workedExamples: [
@@ -47,17 +47,17 @@ export const CH3_DATA: ChapterData = {
           methodSelectionReason: 'Infinitely many solutions requires a1/a2 = b1/b2 = c1/c2.',
           stepByStepSolution: [
             'Write equations in standard form:',
-            '2x + 3y - 7 = 0  =>  a1 = 2, b1 = 3, c1 = -7',
-            '(a - b)x + (a + b)y - (3a + b - 2) = 0  =>  a2 = a - b, b2 = a + b, c2 = -(3a + b - 2)',
+            '2x + 3y - 7 = 0  ⇒  a1 = 2, b1 = 3, c1 = -7',
+            '(a - b)x + (a + b)y - (3a + b - 2) = 0  ⇒  a2 = a - b, b2 = a + b, c2 = -(3a + b - 2)',
             'Condition: a1/a2 = b1/b2 = c1/c2',
             '2 / (a - b) = 3 / (a + b) = 7 / (3a + b - 2)',
-            'Equating 1st and 2nd: 2(a + b) = 3(a - b) => 2a + 2b = 3a - 3b => a = 5b  --- (1)',
-            'Equating 2nd and 3rd: 3(3a + b - 2) = 7(a + b) => 9a + 3b - 6 = 7a + 7b => 2a - 4b = 6 => a - 2b = 3  --- (2)',
-            'Substitute (1) into (2): 5b - 2b = 3 => 3b = 3 => b = 1.',
+            'Equating 1st and 2nd: 2(a + b) = 3(a - b) ⇒ 2a + 2b = 3a - 3b ⇒ a = 5b  --- (1)',
+            'Equating 2nd and 3rd: 3(3a + b - 2) = 7(a + b) ⇒ 9a + 3b - 6 = 7a + 7b ⇒ 2a - 4b = 6 ⇒ a - 2b = 3  --- (2)',
+            'Substitute (1) into (2): 5b - 2b = 3 ⇒ 3b = 3 ⇒ b = 1.',
             'Then a = 5(1) = 5.'
           ],
           finalAnswer: 'a = 5, b = 1',
-          verificationCheck: 'Check ratios: 2/(5-1) = 2/4 = 1/2. 3/(5+1) = 3/6 = 1/2. 7/(3*5+1-2) = 7/14 = 1/2. All equal 1/2. Correct!',
+          verificationCheck: 'Check ratios: 2/(5-1) = 2/4 = 1/2. 3/(5+1) = 3/6 = 1/2. 7/(3 × 5+1-2) = 7/14 = 1/2. All equal 1/2. Correct!',
           commonTrap: 'Forgetting to check the second equality (using only 2/(a-b) = 3/(a+b) which yields a single relation a = 5b, not unique numbers).'
         }
       ],
@@ -72,7 +72,7 @@ export const CH3_DATA: ChapterData = {
       topic: 'Algebraic Solving Techniques',
       simpleExplanation: 'Multiply one or both equations by numbers so that the coefficients of x (or y) match. Then add or subtract to eliminate that variable.',
       exactMathIdea: 'Given a1 x + b1 y = c1 and a2 x + b2 y = c2: Multiply eq 1 by a2 and eq 2 by a1. Subtract the resulting equations to eliminate x and obtain a single linear equation in y.',
-      formulaOrTheorem: 'a_2(a_1 x + b_1 y) - a_1(a_2 x + b_2 y) = a_2 c_1 - a_1 c_2 \\implies (a_2 b_1 - a_1 b_2)y = a_2 c_1 - a_1 c_2',
+      formulaOrTheorem: 'a_{2}(a_{1} x + b_1 y) - a_{1}(a_{2} x + b_2 y) = a_{2} c_1 - a_{1} c_2 \\implies (a_{2} b_1 - a_{1} b_2)y = a_{2} c_1 - a_{1} c_2',
       whenToUse: 'Fastest and least error-prone method for any system of linear equations in board exams.',
       recognitionClues: ['Solve the pair of equations', 'Solve for x and y'],
       workedExamples: [
@@ -86,9 +86,9 @@ export const CH3_DATA: ChapterData = {
           stepByStepSolution: [
             'Eq 1: 49x + 51y = 499',
             'Eq 2: 51x + 49y = 501',
-            'Step 1 (Add Eq 1 and Eq 2): (49+51)x + (51+49)y = 499 + 501  =>  100x + 100y = 1000  =>  x + y = 10  --- (3)',
-            'Step 2 (Subtract Eq 1 from Eq 2): (51-49)x + (49-51)y = 501 - 499  =>  2x - 2y = 2  =>  x - y = 1  --- (4)',
-            'Step 3 (Add Eq 3 and Eq 4): 2x = 11  =>  x = 11/2 = 5.5 (or if standard integer: check sum).',
+            'Step 1 (Add Eq 1 and Eq 2): (49+51)x + (51+49)y = 499 + 501  ⇒  100x + 100y = 1000  ⇒  x + y = 10  --- (3)',
+            'Step 2 (Subtract Eq 1 from Eq 2): (51-49)x + (49-51)y = 501 - 499  ⇒  2x - 2y = 2  ⇒  x - y = 1  --- (4)',
+            'Step 3 (Add Eq 3 and Eq 4): 2x = 11  ⇒  x = 11/2 = 5.5 (or if standard integer: check sum).',
             'Let us re-verify: x = 11/2, y = 9/2.'
           ],
           finalAnswer: 'x = 11/2, y = 9/2 (or 5.5 and 4.5)',
@@ -124,17 +124,17 @@ export const CH3_DATA: ChapterData = {
             '30/(x - y) + 44/(x + y) = 10  --- (1)',
             '40/(x - y) + 55/(x + y) = 13  --- (2)',
             'Let u = 1/(x - y) and v = 1/(x + y):',
-            '30u + 44v = 10  =>  15u + 22v = 5  --- (3)',
+            '30u + 44v = 10  ⇒  15u + 22v = 5  --- (3)',
             '40u + 55v = 13  --- (4)',
             'Multiply (3) by 8 and (4) by 3 to eliminate u:',
             '120u + 176v = 40',
             '120u + 165v = 39',
-            'Subtracting: 11v = 1  =>  v = 1/11.',
-            'Substitute v = 1/11 into (3): 15u + 22(1/11) = 5  =>  15u + 2 = 5  =>  15u = 3  =>  u = 1/5.',
-            'Now substitute back: 1/(x - y) = 1/5  =>  x - y = 5  --- (5)',
-            '1/(x + y) = 1/11  =>  x + y = 11  --- (6)',
-            'Adding (5) and (6): 2x = 16  =>  x = 8 km/h.',
-            'Subtracting: 2y = 6  =>  y = 3 km/h.'
+            'Subtracting: 11v = 1  ⇒  v = 1/11.',
+            'Substitute v = 1/11 into (3): 15u + 22(1/11) = 5  ⇒  15u + 2 = 5  ⇒  15u = 3  ⇒  u = 1/5.',
+            'Now substitute back: 1/(x - y) = 1/5  ⇒  x - y = 5  --- (5)',
+            '1/(x + y) = 1/11  ⇒  x + y = 11  --- (6)',
+            'Adding (5) and (6): 2x = 16  ⇒  x = 8 km/h.',
+            'Subtracting: 2y = 6  ⇒  y = 3 km/h.'
           ],
           finalAnswer: 'Speed of boat in still water = 8 km/h; Speed of stream = 3 km/h.',
           verificationCheck: 'Upstream = 8-3 = 5 km/h. Downstream = 8+3 = 11 km/h. Time 1: 30/5 + 44/11 = 6 + 4 = 10 hrs. Time 2: 40/5 + 55/11 = 8 + 5 = 13 hrs. Verified!',
@@ -151,7 +151,7 @@ export const CH3_DATA: ChapterData = {
     {
       id: 'ch3_f1',
       name: 'Consistency Ratio Matrix',
-      formula: '\\frac{a_1}{a_2} \\neq \\frac{b_1}{b_2} \\quad \\text{vs} \\quad \\frac{a_1}{a_2} = \\frac{b_1}{b_2} = \\frac{c_1}{c_2} \\quad \\text{vs} \\quad \\frac{a_1}{a_2} = \\frac{b_1}{b_2} \\neq \\frac{c_1}{c_2}',
+      formula: '\\frac{a_{1}}{a_{2}} \\neq \\frac{b_1}{b_2} \\quad \\text{vs} \\quad \\frac{a_{1}}{a_{2}} = \\frac{b_1}{b_2} = \\frac{c_1}{c_2} \\quad \\text{vs} \\quad \\frac{a_{1}}{a_{2}} = \\frac{b_1}{b_2} \\neq \\frac{c_1}{c_2}',
       symbolMeanings: [
         { symbol: 'a1, a2', meaning: 'Coefficients of x in eq 1 and eq 2' },
         { symbol: 'b1, b2', meaning: 'Coefficients of y in eq 1 and eq 2' },
@@ -159,13 +159,13 @@ export const CH3_DATA: ChapterData = {
       ],
       whenToUse: 'For any question asking for unique solution, no solution, or infinitely many solutions.',
       conditions: ['Both equations must have constants on the SAME side (both LHS or both RHS).'],
-      commonSubstitutions: ['No solution: a1/a2 = b1/b2 != c1/c2'],
+      commonSubstitutions: ['No solution: a1/a2 = b1/b2 ≠ c1/c2'],
       miniExample: {
         question: 'For what k does 2x + ky = 1 and 3x - 5y = 7 have a unique solution?',
-        substitution: 'a1/a2 != b1/b2 => 2/3 != k/(-5) => k != -10/3',
-        result: 'k != -10/3'
+        substitution: 'a1/a2 ≠ b1/b2 ⇒ 2/3 ≠ k/(-5) ⇒ k ≠ -10/3',
+        result: 'k ≠ -10/3'
       },
-      commonMistakes: ['Writing k = -10/3 instead of k != -10/3 for UNIQUE solution.'],
+      commonMistakes: ['Writing k = -10/3 instead of k ≠ -10/3 for UNIQUE solution.'],
       sourceTrace: 'NCERT Table 3.1'
     }
   ],
@@ -190,7 +190,7 @@ export const CH3_DATA: ChapterData = {
       verificationMethod: 'Sum the digits of the final number and test the reversal condition.',
       commonTrap: 'Writing the final answer as x=3, y=6 and forgetting to write the actual number "36".',
       exemplarQuestion: 'The sum of the digits of a two digit number is 9. Also, nine times this number is twice the number obtained by reversing the order of the digits. Find the number.',
-      exemplarAnswer: 'x + y = 9; 9(10x + y) = 2(10y + x) => 90x + 9y = 20y + 2x => 88x - 11y = 0 => 8x = y. Substituting into x + y = 9: x + 8x = 9 => 9x = 9 => x = 1, y = 8. Number = 18.'
+      exemplarAnswer: 'x + y = 9; 9(10x + y) = 2(10y + x) ⇒ 90x + 9y = 20y + 2x ⇒ 88x - 11y = 0 ⇒ 8x = y. Substituting into x + y = 9: x + 8x = 9 ⇒ 9x = 9 ⇒ x = 1, y = 8. Number = 18.'
     }
   ],
   gradedQuestions: [
@@ -209,7 +209,7 @@ export const CH3_DATA: ChapterData = {
         'a1/a2 = 1 / (-3) = -1/3',
         'b1/b2 = 2 / (-6) = -1/3',
         'c1/c2 = 5 / 1 = 5',
-        'Since a1/a2 = b1/b2 != c1/c2, the lines are parallel and have no solution.'
+        'Since a1/a2 = b1/b2 ≠ c1/c2, the lines are parallel and have no solution.'
       ],
       commonTrap: 'Ignoring the signs of -3 and -6.',
       isOriginalPractice: true,
@@ -228,10 +228,10 @@ export const CH3_DATA: ChapterData = {
       marks: 2,
       hints: ['Subtract the two equations to eliminate 2x directly.'],
       solutionSteps: [
-        '(2x + 3y) - (2x - 4y) = 11 - (-24)  =>  7y = 35  =>  y = 5.',
-        '2x + 3(5) = 11  =>  2x = 11 - 15 = -4  =>  x = -2.',
+        '(2x + 3y) - (2x - 4y) = 11 - (-24)  ⇒  7y = 35  ⇒  y = 5.',
+        '2x + 3(5) = 11  ⇒  2x = 11 - 15 = -4  ⇒  x = -2.',
         'Now substitute x = -2 and y = 5 into y = mx + 3:',
-        '5 = m(-2) + 3  =>  2 = -2m  =>  m = -1.'
+        '5 = m(-2) + 3  ⇒  2 = -2m  ⇒  m = -1.'
       ],
       commonTrap: 'Calculation mistake with double negative 11 - (-24).',
       isOriginalPractice: true,
@@ -252,8 +252,8 @@ export const CH3_DATA: ChapterData = {
       solutionSteps: [
         'x + 10y = 105  --- (1)',
         'x + 15y = 155  --- (2)',
-        'Subtracting (1) from (2): 5y = 50 => y = 10.',
-        'x + 10(10) = 105 => x = 105 - 100 = 5.',
+        'Subtracting (1) from (2): 5y = 50 ⇒ y = 10.',
+        'x + 10(10) = 105 ⇒ x = 105 - 100 = 5.',
         'Fixed charge = Rs 5, Charge per km = Rs 10.'
       ],
       commonTrap: 'Multiplying fixed charge by distance.',
@@ -273,13 +273,13 @@ export const CH3_DATA: ChapterData = {
       marks: 3,
       hints: ['Let fraction be x/y. (x+2)/(y+2) = 9/11 and (x+3)/(y+3) = 5/6.'],
       solutionSteps: [
-        '11(x + 2) = 9(y + 2) => 11x + 22 = 9y + 18 => 11x - 9y = -4  --- (1)',
-        '6(x + 3) = 5(y + 3) => 6x + 18 = 5y + 15 => 6x - 5y = -3  --- (2)',
+        '11(x + 2) = 9(y + 2) ⇒ 11x + 22 = 9y + 18 ⇒ 11x - 9y = -4  --- (1)',
+        '6(x + 3) = 5(y + 3) ⇒ 6x + 18 = 5y + 15 ⇒ 6x - 5y = -3  --- (2)',
         'Multiply (1) by 5 and (2) by 9:',
         '55x - 45y = -20',
         '54x - 45y = -27',
         'Subtracting: x = 7.',
-        'Substitute in (2): 6(7) - 5y = -3 => 42 + 3 = 5y => 5y = 45 => y = 9.',
+        'Substitute in (2): 6(7) - 5y = -3 ⇒ 42 + 3 = 5y ⇒ 5y = 45 ⇒ y = 9.',
         'Fraction is x/y = 7/9.'
       ],
       commonTrap: 'Inverting numerator and denominator when cross multiplying.',
@@ -303,13 +303,13 @@ export const CH3_DATA: ChapterData = {
         '2/x + 5/y = 1/4  --- (1)',
         '3/x + 6/y = 1/3  --- (2)',
         'Let u = 1/x and v = 1/y:',
-        '2u + 5v = 1/4  =>  8u + 20v = 1',
-        '3u + 6v = 1/3  =>  9u + 18v = 1',
+        '2u + 5v = 1/4  ⇒  8u + 20v = 1',
+        '3u + 6v = 1/3  ⇒  9u + 18v = 1',
         'Multiply first by 9 and second by 8:',
         '72u + 180v = 9',
         '72u + 144v = 8',
-        'Subtracting: 36v = 1 => v = 1/36 => y = 36 days.',
-        'Substitute v = 1/36 into 2u + 5(1/36) = 1/4 => 2u = 9/36 - 5/36 = 4/36 = 1/9 => u = 1/18 => x = 18 days.'
+        'Subtracting: 36v = 1 ⇒ v = 1/36 ⇒ y = 36 days.',
+        'Substitute v = 1/36 into 2u + 5(1/36) = 1/4 ⇒ 2u = 9/36 - 5/36 = 4/36 = 1/9 ⇒ u = 1/18 ⇒ x = 18 days.'
       ],
       commonTrap: 'Writing 2x + 5y = 4 (work is inversely proportional to time!).',
       isOriginalPractice: true,
@@ -326,10 +326,10 @@ export const CH3_DATA: ChapterData = {
       conceptTested: 'Parallel lines / No solution',
       question: 'If the lines given by 3x + 2ky = 2 and 2x + 5y + 1 = 0 are parallel, then the value of k is:',
       markingSchemeBreakdown: [
-        { step: 'Equating a1/a2 = b1/b2 != c1/c2', marks: 0.5 },
+        { step: 'Equating a1/a2 = b1/b2 ≠ c1/c2', marks: 0.5 },
         { step: 'Solving 3/2 = 2k/5 to find k = 15/4', marks: 0.5 }
       ],
-      fullSolution: 'For parallel lines, a1/a2 = b1/b2 != c1/c2. Here a1 = 3, b1 = 2k, c1 = -2; a2 = 2, b2 = 5, c2 = 1. 3/2 = 2k/5 => 4k = 15 => k = 15/4. Check: c1/c2 = -2/1 = -2 != 3/2. Hence k = 15/4.',
+      fullSolution: 'For parallel lines, a1/a2 = b1/b2 ≠ c1/c2. Here a1 = 3, b1 = 2k, c1 = -2; a2 = 2, b2 = 5, c2 = 1. 3/2 = 2k/5 ⇒ 4k = 15 ⇒ k = 15/4. Check: c1/c2 = -2/1 = -2 ≠ 3/2. Hence k = 15/4.',
       commonMistake: 'Writing k = 5/4 due to division errors.',
       frequencyTrend: 'Guaranteed 1-mark question in almost every board set.',
       source: 'CBSE Board 2024 Set 30/1/2'
@@ -347,21 +347,21 @@ export const CH3_DATA: ChapterData = {
       retryQuestion: {
         question: 'Are 3x - 4y = 5 and 6x - 8y + 10 = 0 coincident or parallel?',
         correctAnswer: 'Parallel (no solution)',
-        explanation: '3x - 4y - 5 = 0 and 6x - 8y + 10 = 0. a1/a2 = 3/6 = 1/2, b1/b2 = -4/(-8) = 1/2, c1/c2 = -5/10 = -1/2. a1/a2 = b1/b2 != c1/c2.'
+        explanation: '3x - 4y - 5 = 0 and 6x - 8y + 10 = 0. a1/a2 = 3/6 = 1/2, b1/b2 = -4/(-8) = 1/2, c1/c2 = -5/10 = -1/2. a1/a2 = b1/b2 ≠ c1/c2.'
       }
     }
   ],
   revisionSheet: {
     mustRememberPoints: [
-      'Unique solution: a1/a2 != b1/b2 (Intersecting lines).',
+      'Unique solution: a1/a2 ≠ b1/b2 (Intersecting lines).',
       'Infinitely many solutions: a1/a2 = b1/b2 = c1/c2 (Coincident lines).',
-      'No solution: a1/a2 = b1/b2 != c1/c2 (Parallel lines).',
+      'No solution: a1/a2 = b1/b2 ≠ c1/c2 (Parallel lines).',
       'Upstream speed = (x - y), Downstream speed = (x + y).',
       'Two digit number = 10x + y; reversed = 10y + x.',
       'Symmetric coefficients (ax + by = c, bx + ay = d): Add once, subtract once.'
     ],
     speedTips: [
-      'In ratio test MCQs: Check if cross-multiplication a1*b2 == a2*b1 holds first.',
+      'In ratio test MCQs: Check if cross-multiplication a₁b₂ = a₂b₁ holds first.',
       'In speed-distance word problems, check units (km/h vs m/s, hours vs minutes).'
     ],
     lastDayChecklist: [
@@ -409,13 +409,13 @@ export const CH3_DATA: ChapterData = {
           question: 'Points A and B are 100 km apart on a highway. One car starts from A and another from B at the same time. If the cars travel in the same direction at different speeds, they meet in 5 hours. If they travel towards each other, they meet in 1 hour. What are the speeds of the two cars?',
           correctAnswer: 'Speed of car A = 60 km/h, Speed of car B = 40 km/h',
           marks: 4,
-          hints: ['Relative speed in same direction is (x - y). Relative speed towards each other is (x + y). Distance = Speed * Time.'],
+          hints: ['Relative speed in same direction is (x - y). Relative speed towards each other is (x + y). Distance = Speed × Time.'],
           solutionSteps: [
             'Let speed of car A = x km/h, car B = y km/h (x > y).',
-            'Same direction: Relative speed = x - y. In 5 hours: 5(x - y) = 100 => x - y = 20  --- (1)',
-            'Opposite direction (towards each other): Relative speed = x + y. In 1 hour: 1(x + y) = 100 => x + y = 100  --- (2)',
-            'Adding (1) and (2): 2x = 120 => x = 60 km/h.',
-            'Subtracting: 2y = 80 => y = 40 km/h.'
+            'Same direction: Relative speed = x - y. In 5 hours: 5(x - y) = 100 ⇒ x - y = 20  --- (1)',
+            'Opposite direction (towards each other): Relative speed = x + y. In 1 hour: 1(x + y) = 100 ⇒ x + y = 100  --- (2)',
+            'Adding (1) and (2): 2x = 120 ⇒ x = 60 km/h.',
+            'Subtracting: 2y = 80 ⇒ y = 40 km/h.'
           ],
           commonTrap: 'Formulating 5x + 5y = 100 for the same direction instead of 5(x - y) = 100.',
           isOriginalPractice: true,
@@ -440,9 +440,9 @@ export const CH3_DATA: ChapterData = {
           marks: 4,
           hints: ['Opposite angles of a cyclic quadrilateral sum to 180°: A + C = 180° and B + D = 180°.'],
           solutionSteps: [
-            'A + C = 180 => (4y + 20) + (-4x) = 180 => -4x + 4y = 160 => -x + y = 40  --- (1)',
-            'B + D = 180 => (3y - 5) + (-7x + 5) = 180 => -7x + 3y = 180  --- (2)',
-            'From (1), y = x + 40. Substitute in (2): -7x + 3(x + 40) = 180 => -4x + 120 = 180 => -4x = 60 => x = -15.',
+            'A + C = 180 ⇒ (4y + 20) + (-4x) = 180 ⇒ -4x + 4y = 160 ⇒ -x + y = 40  --- (1)',
+            'B + D = 180 ⇒ (3y - 5) + (-7x + 5) = 180 ⇒ -7x + 3y = 180  --- (2)',
+            'From (1), y = x + 40. Substitute in (2): -7x + 3(x + 40) = 180 ⇒ -4x + 120 = 180 ⇒ -4x = 60 ⇒ x = -15.',
             'Then y = -15 + 40 = 25.',
             'Angles: A = 4(25)+20 = 120°; B = 3(25)-5 = 70°; C = -4(-15) = 60°; D = -7(-15)+5 = 110°.'
           ],
@@ -471,10 +471,10 @@ export const CH3_DATA: ChapterData = {
           solutionSteps: [
             'Let full fare = x, reservation charge = y.',
             'One full ticket: x + y = 2530  --- (1)',
-            'One full and one half ticket: (x + y) + (x/2 + y) = 3810  =>  3x/2 + 2y = 3810  =>  3x + 4y = 7620  --- (2)',
+            'One full and one half ticket: (x + y) + (x/2 + y) = 3810  ⇒  3x/2 + 2y = 3810  ⇒  3x + 4y = 7620  --- (2)',
             'Multiply (1) by 3: 3x + 3y = 7590  --- (3)',
             'Subtract (3) from (2): y = 7620 - 7590 = 30.',
-            'Substitute into (1): x + 30 = 2530 => x = 2500.'
+            'Substitute into (1): x + 30 = 2530 ⇒ x = 2500.'
           ],
           commonTrap: 'Halving the reservation charge as well as the fare on the half ticket.',
           isOriginalPractice: true,
