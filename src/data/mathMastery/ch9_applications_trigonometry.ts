@@ -21,7 +21,7 @@ export const CH9_DATA: ChapterData = {
       'The 30°-60° Complementary Ratio: tan 30° = 1/√3 and tan 60° = √3. If angle changes from 30° to 60° as you walk closer, the distance walked relates directly to the height.'
     ],
     keyRelationships: [
-      'If two angles of elevation from points at distances a and b from the base of a tower are complementary (alpha + beta = 90°), the height of the tower is ALWAYS h = sqrt(a * b).',
+      'If two angles of elevation from points at distances a and b from the base of a tower are complementary (α + β = 90°), the height of the tower is ALWAYS h = √(ab).',
       'In a 30°-60°-90° right triangle, the sides are in the fixed ratio: opposite to 30° is 1, opposite to 60° is √3, and hypotenuse is 2.',
       'In a 45°-45°-90° right triangle, the legs are equal (1 : 1) and hypotenuse is √2.'
     ],
@@ -62,7 +62,7 @@ export const CH9_DATA: ChapterData = {
             '1 / √3 = h / 30',
             'h = 30 / √3',
             'Rationalize the denominator by multiplying numerator and denominator by √3:',
-            'h = (30 * √3) / 3 = 10√3 m.'
+            'h = (30√3) / 3 = 10√3 m.'
           ],
           finalAnswer: 'Height of tower = 10√3 m (approx 17.32 m)',
           verificationCheck: 'h / d = 10√3 / 30 = √3 / 3 = 1 / √3 = tan 30°. Exact match!',
@@ -81,10 +81,10 @@ export const CH9_DATA: ChapterData = {
             'tan 30° = AB / BC ⟹ 1 / √3 = AB / 8 ⟹ AB = 8 / √3 m.',
             'cos 30° = BC / AC ⟹ √3 / 2 = 8 / AC ⟹ AC = 16 / √3 m.',
             'Total height of tree = AB + AC = 8 / √3 + 16 / √3 = 24 / √3 m.',
-            'Rationalize: (24 * √3) / 3 = 8√3 m.'
+            'Rationalize: (24 × √3) / 3 = 8√3 m.'
           ],
           finalAnswer: 'Total height of tree = 8√3 m',
-          verificationCheck: 'AB^2 + BC^2 = (8/√3)^2 + 8^2 = 64/3 + 64 = 256/3 = (16/√3)^2 = AC^2. Pythagorean theorem holds!',
+          verificationCheck: 'AB² + BC² = (8/√3)² + 8² = 64/3 + 64 = 256/3 = (16/√3)² = AC². Pythagorean theorem holds!',
           commonTrap: 'Finding only AB = 8/√3 m and forgetting to add the broken hypotenuse part AC.'
         }
       ],
@@ -176,10 +176,10 @@ export const CH9_DATA: ChapterData = {
       ],
       whenToUse: 'When the angles of elevation from two points are given as complementary (sum = 90°).',
       conditions: ['Points are on the same straight line with the foot of the tower', 'Angles α and β satisfy α + β = 90°'],
-      commonSubstitutions: ['tan α = h/a and tan β = tan(90° - α) = cot α = h/b. Multiply: tan α * cot α = (h/a)(h/b) ⟹ 1 = h^2 / (ab) ⟹ h = sqrt(ab).'],
+      commonSubstitutions: ['tan α = h/a and tan β = tan(90° - α) = cot α = h/b. Multiply: tan α · cot α = (h/a)(h/b) ⟹ 1 = h² / (ab) ⟹ h = √(ab).'],
       miniExample: {
         question: 'The angles of elevation from points at distances 4 m and 9 m from the base of a tower are complementary. Find tower height.',
-        substitution: 'h = sqrt(4 * 9) = sqrt(36) = 6 m',
+        substitution: 'h = √(4 × 9) = √(36) = 6 m',
         result: 'h = 6 m'
       },
       commonMistakes: ['Adding the distances instead of multiplying them under the square root.'],
@@ -246,8 +246,8 @@ export const CH9_DATA: ChapterData = {
       solutionSteps: [
         'sin 60° = Perpendicular / Hypotenuse = 60 / L',
         '√3 / 2 = 60 / L',
-        'L = (60 * 2) / √3 = 120 / √3',
-        'Rationalize: L = (120 * √3) / 3 = 40√3 m.'
+        'L = (60 × 2) / √3 = 120 / √3',
+        'Rationalize: L = (120√3) / 3 = 40√3 m.'
       ],
       commonTrap: 'Using tan 60° instead of sin 60° (string length is the hypotenuse, not the base).',
       isOriginalPractice: true,
@@ -295,9 +295,9 @@ export const CH9_DATA: ChapterData = {
         'In right Triangle ABC: tan θ = AB / BC = h / 4 ... (1).',
         'In right Triangle ABD: tan(90° - θ) = AB / BD ⟹ cot θ = h / 9 ... (2).',
         'Multiply equations (1) and (2):',
-        'tan θ * cot θ = (h / 4) * (h / 9)',
-        '1 = h^2 / 36',
-        'h^2 = 36 ⟹ h = 6 m (height cannot be negative). Hence Proved!'
+        'tan θ · cot θ = (h / 4) × (h / 9)',
+        '1 = h² / 36',
+        'h² = 36 ⟹ h = 6 m (height cannot be negative). Hence Proved!'
       ],
       commonTrap: 'Taking -6 as a solution for height.',
       isOriginalPractice: true,
@@ -380,11 +380,11 @@ export const CH9_DATA: ChapterData = {
       'Angle of depression = Looking DOWN from horizontal = Angle of elevation from object.',
       'tan 45° = 1 ⟹ Height = Base (Instant calculation pivot!).',
       'tan 30° = 1/√3 (approx 0.577), tan 60° = √3 (approx 1.732).',
-      'For complementary angles from distances a and b: h = sqrt(ab).',
+      'For complementary angles from distances a and b: h = √(ab).',
       'In cloud problems: distance of reflection below water surface = height of cloud above water surface.'
     ],
     speedTips: [
-      'If angle of elevation increases from 30° to 60° as you move distance d towards tower: h = d * (√3 / 2).',
+      'If angle of elevation increases from 30° to 60° as you move distance d towards tower: h = d(√3/2).',
       'Always rationalize denominators: multiply by √3 / √3.',
       'Always include units (m, cm) in the final answer.'
     ],
@@ -428,11 +428,11 @@ export const CH9_DATA: ChapterData = {
           question: 'A ladder 15 m long reaches a window which is 9 m above the ground. How far is the foot of the ladder from the base of the wall?',
           correctAnswer: '12 m',
           marks: 2,
-          hints: ['Pythagorean triplet: 9^2 + b^2 = 15^2.'],
+          hints: ['Pythagorean triplet: 9² + b² = 15².'],
           solutionSteps: [
-            'Base = sqrt(15^2 - 9^2) = sqrt(225 - 81) = sqrt(144) = 12 m.'
+            'Base = √(15² - 9²) = √(225 - 81) = √(144) = 12 m.'
           ],
-          commonTrap: 'Adding 15^2 and 9^2.',
+          commonTrap: 'Adding 15² and 9².',
           isOriginalPractice: true,
           sourcePdfRef: 'CBSE Standard Board',
           conceptId: 'ch9_c1'
@@ -516,10 +516,10 @@ export const CH9_DATA: ChapterData = {
           solutionSteps: [
             'Constant height h = 3000√3 m.',
             'In first position: tan 60° = h / d1 ⟹ √3 = 3000√3 / d1 ⟹ d1 = 3000 m.',
-            'In second position: tan 30° = h / d2 ⟹ 1 / √3 = 3000√3 / d2 ⟹ d2 = 3000√3 * √3 = 9000 m.',
+            'In second position: tan 30° = h / d2 ⟹ 1 / √3 = 3000√3 / d2 ⟹ d2 = 3000√3 × √3 = 9000 m.',
             'Distance travelled by plane in 30 seconds = d2 - d1 = 9000 - 3000 = 6000 m.',
             'Speed = Distance / Time = 6000 m / 30 s = 200 m/s.',
-            'Convert to km/h: 200 * (18 / 5) = 40 * 18 = 720 km/h.'
+            'Convert to km/h: 200 × (18/5) = 40 × 18 = 720 km/h.'
           ],
           commonTrap: 'Leaving the speed in m/s (200 m/s) when question asks for km/h.',
           isOriginalPractice: true,

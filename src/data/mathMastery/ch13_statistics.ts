@@ -13,16 +13,16 @@ export const CH13_DATA: ChapterData = {
     ],
     coreIdeas: [
       'Class Mark (Mid-value): x_i = (Upper class limit + Lower class limit) / 2.',
-      'Mean (Direct Method): x̄ = Σ(f_i * x_i) / Σ(f_i).',
-      'Mean (Assumed Mean Method): x̄ = a + [Σ(f_i * d_i) / Σ(f_i)], where d_i = x_i - a.',
+      'Mean (Direct Method): x̄ = Σ(fᵢxᵢ) / Σ(f_i).',
+      'Mean (Assumed Mean Method): x̄ = a + [Σ(fᵢdᵢ) / Σ(f_i)], where d_i = x_i - a.',
       'Modal Class: The class interval with the HIGHEST frequency (f1).',
-      'Mode Formula: Mode = l + [(f1 - f0) / (2f1 - f0 - f2)] * h, where l is lower limit, f0 is preceding frequency, f2 is succeeding frequency, and h is class size.',
+      'Mode Formula: Mode = l + [(f1 - f0) / (2f1 - f0 - f2)] × h, where l is lower limit, f0 is preceding frequency, f2 is succeeding frequency, and h is class size.',
       'Median Class: The class interval whose cumulative frequency (cf) is greater than or equal to N/2 (where N = Σf_i).',
-      'Median Formula: Median = l + [((N/2) - cf) / f] * h, where cf is from the PRECEDING class and f is the frequency of the median class itself.',
-      'Empirical Relationship: 3 * Median = Mode + 2 * Mean. (Mnemonic: 3M = M + 2M, with Median being longest word matching 3!).'
+      'Median Formula: Median = l + [((N/2) - cf) / f] × h, where cf is from the PRECEDING class and f is the frequency of the median class itself.',
+      'Empirical Relationship: 3 × Median = Mode + 2 × Mean. (Mnemonic: 3M = M + 2M, with Median being longest word matching 3!).'
     ],
     keyRelationships: [
-      'If any two measures of central tendency are known, the third can be estimated using 3 * Median = Mode + 2 * Mean.',
+      'If any two measures of central tendency are known, the third can be estimated using 3 × Median = Mode + 2 × Mean.',
       'In Mode formula: denominator 2f1 - f0 - f2 can be remembered as (f1 - f0) + (f1 - f2).',
       'In Median formula: cf is always taken from the PRECEDING class interval, NEVER from the median class itself.'
     ],
@@ -39,7 +39,7 @@ export const CH13_DATA: ChapterData = {
       title: 'Mean of Grouped Data (Direct & Assumed Mean)',
       topic: 'Arithmetic Mean',
       simpleExplanation: 'Mean is the balanced average center. Find the middle point of each interval, multiply by its frequency, and divide by the total count!',
-      exactMathIdea: 'For a grouped frequency distribution with class marks x_i and frequencies f_i: Direct Mean x̄ = Σ(f_i * x_i) / Σ(f_i). Assumed Mean Method x̄ = a + [Σ(f_i * d_i) / Σ(f_i)] reduces arithmetic by subtracting an assumed central value a.',
+      exactMathIdea: 'For a grouped frequency distribution with class marks x_i and frequencies f_i: Direct Mean x̄ = Σ(fᵢxᵢ) / Σ(f_i). Assumed Mean Method x̄ = a + [Σ(fᵢdᵢ) / Σ(f_i)] reduces arithmetic by subtracting an assumed central value a.',
       formulaOrTheorem: '\\bar{x} = \\frac{\\sum f_i x_i}{\\sum f_i} = a + \\frac{\\sum f_i d_i}{\\sum f_i}',
       whenToUse: 'When calculating average daily wages, marks, temperatures, or finding missing frequency when mean is given.',
       recognitionClues: [
@@ -54,14 +54,14 @@ export const CH13_DATA: ChapterData = {
           question: 'Find the mean of the data: Class: 0-10 (freq 3), 10-20 (freq 4), 20-30 (freq 3).',
           given: '3 intervals with frequencies 3, 4, 3.',
           toFind: 'Mean value x̄.',
-          methodSelectionReason: 'Direct method with small numbers: find midpoints x_i, multiply f_i * x_i, sum and divide.',
+          methodSelectionReason: 'Direct method with small numbers: find midpoints x_i, multiply fᵢxᵢ, sum and divide.',
           stepByStepSolution: [
             'Class marks x_i: for 0-10, x1 = 5; for 10-20, x2 = 15; for 20-30, x3 = 25.',
-            'Calculate f_i * x_i:',
-            '3 * 5 = 15',
-            '4 * 15 = 60',
-            '3 * 25 = 75',
-            'Sum of products Σ(f_i * x_i) = 15 + 60 + 75 = 150.',
+            'Calculate fᵢxᵢ:',
+            '3 × 5 = 15',
+            '4 × 15 = 60',
+            '3 × 25 = 75',
+            'Sum of products Σ(fᵢxᵢ) = 15 + 60 + 75 = 150.',
             'Total frequency Σf_i = 3 + 4 + 3 = 10.',
             'Mean x̄ = 150 / 10 = 15.'
           ],
@@ -80,7 +80,7 @@ export const CH13_DATA: ChapterData = {
       title: 'Mode & Median of Grouped Data',
       topic: 'Mode & Median Formulas',
       simpleExplanation: 'Mode is the peak crowd favorite (highest frequency). Median is the exact midpoint dividing the crowd into equal halves!',
-      exactMathIdea: 'Mode = l + [(f1 - f0) / (2f1 - f0 - f2)] * h, where f1 is the modal frequency. Median = l + [((N/2) - cf) / f] * h, where cf is cumulative frequency of preceding class.',
+      exactMathIdea: 'Mode = l + [(f1 - f0) / (2f1 - f0 - f2)] × h, where f1 is the modal frequency. Median = l + [((N/2) - cf) / f] × h, where cf is cumulative frequency of preceding class.',
       formulaOrTheorem: '\\text{Mode} = l + \\left(\\frac{f_1 - f_0}{2f_1 - f_0 - f_2}\\right)h, \\quad \\text{Median} = l + \\left(\\frac{\\frac{N}{2} - cf}{f}\\right)h',
       whenToUse: 'When asked to find mode or median, or find two missing frequencies x and y when median is known.',
       recognitionClues: [
@@ -101,14 +101,14 @@ export const CH13_DATA: ChapterData = {
             'Therefore, Modal Class = 30-40.',
             'Lower limit l = 30, class size h = 10.',
             'Modal frequency f1 = 10, preceding frequency f0 = 8, succeeding frequency f2 = 6.',
-            'Mode = l + [(f1 - f0) / (2f1 - f0 - f2)] * h',
-            '= 30 + [(10 - 8) / (2(10) - 8 - 6)] * 10',
-            '= 30 + [2 / (20 - 14)] * 10',
-            '= 30 + (2 / 6) * 10 = 30 + (1 / 3) * 10 = 30 + 3.33 = 33.33.'
+            'Mode = l + [(f1 - f0) / (2f1 - f0 - f2)] × h',
+            '= 30 + [(10 - 8) / (2(10) - 8 - 6)] × 10',
+            '= 30 + [2 / (20 - 14)] × 10',
+            '= 30 + (2 / 6) × 10 = 30 + (1 / 3) × 10 = 30 + 3.33 = 33.33.'
           ],
           finalAnswer: 'Mode = 33.33',
           verificationCheck: 'Mode (33.33) lies strictly inside the modal class 30-40. Verified!',
-          commonTrap: 'Writing 2f1 as f1^2 or confusing f0 and f2.'
+          commonTrap: 'Writing 2f1 as f1² or confusing f0 and f2.'
         }
       ],
       commonMisconceptions: ['Taking cf from the median class instead of the preceding class.'],
@@ -154,8 +154,8 @@ export const CH13_DATA: ChapterData = {
         'Step 2: Equate the last cumulative frequency to total frequency N to get Equation (1): e.g. 45 + x + y = 60 ⟹ x + y = 15.',
         'Step 3: Crucial Step: The median is 28.5. Since 28.5 lies between 20 and 30, the Median Class is STRICTLY 20-30! (Do NOT use N/2 to guess median class when median is already given!).',
         'Step 4: For median class 20-30: lower limit l = 20, class size h = 10, frequency f = 20, preceding cf = 5 + x.',
-        'Step 5: Substitute into Median formula: Median = l + [((N/2) - cf) / f] * h.',
-        '28.5 = 20 + [(30 - (5 + x)) / 20] * 10.',
+        'Step 5: Substitute into Median formula: Median = l + [((N/2) - cf) / f] × h.',
+        '28.5 = 20 + [(30 - (5 + x)) / 20] × 10.',
         'Step 6: Simplify: 8.5 = (25 - x) / 2 ⟹ 17 = 25 - x ⟹ x = 8.',
         'Step 7: Substitute x = 8 into Equation (1): 8 + y = 15 ⟹ y = 7.'
       ],
@@ -216,9 +216,9 @@ export const CH13_DATA: ChapterData = {
       hints: ['Modal class is 3-5. l = 3, f1 = 8, f0 = 7, f2 = 2, h = 2.'],
       solutionSteps: [
         'Modal class = 3-5. l = 3, f1 = 8, f0 = 7, f2 = 2, h = 2.',
-        'Mode = l + [(f1 - f0) / (2f1 - f0 - f2)] * h',
-        '= 3 + [(8 - 7) / (2(8) - 7 - 2)] * 2',
-        '= 3 + [1 / (16 - 9)] * 2 = 3 + 2 / 7 = 3 + 0.286 = 3.286.'
+        'Mode = l + [(f1 - f0) / (2f1 - f0 - f2)] × h',
+        '= 3 + [(8 - 7) / (2(8) - 7 - 2)] × 2',
+        '= 3 + [1 / (16 - 9)] × 2 = 3 + 2 / 7 = 3 + 0.286 = 3.286.'
       ],
       commonTrap: 'Using class size h = 3 instead of h = 5 - 3 = 2.',
       isOriginalPractice: true,
@@ -234,15 +234,15 @@ export const CH13_DATA: ChapterData = {
       question: 'The mean of the following distribution is 18. Find the missing frequency f: 11-13 (3), 13-15 (6), 15-17 (9), 17-19 (13), 19-21 (f), 21-23 (5), 23-25 (4).',
       correctAnswer: 'f = 20',
       marks: 3,
-      hints: ['Find midpoints x_i. Express Σf_i*x_i and Σf_i in terms of f. Set (Σf_i*x_i)/(Σf_i) = 18.'],
+      hints: ['Find midpoints x_i. Express Σfᵢxᵢ and Σf_i in terms of f. Set (Σfᵢxᵢ)/(Σf_i) = 18.'],
       solutionSteps: [
         'Midpoints x_i: 12, 14, 16, 18, 20, 22, 24.',
-        'Products f_i*x_i: 3*12=36, 6*14=84, 9*16=144, 13*18=234, f*20=20f, 5*22=110, 4*24=96.',
-        'Σ(f_i * x_i) = 36 + 84 + 144 + 234 + 110 + 96 + 20f = 704 + 20f.',
+        'Products fᵢxᵢ: 3 × 12 = 36, 6 × 14 = 84, 9 × 16 = 144, 13 × 18 = 234, f × 20 = 20f, 5 × 22 = 110, 4 × 24 = 96.',
+        'Σ(fᵢxᵢ) = 36 + 84 + 144 + 234 + 110 + 96 + 20f = 704 + 20f.',
         'Total frequency Σf_i = 3 + 6 + 9 + 13 + f + 5 + 4 = 40 + f.',
         'Mean x̄ = (704 + 20f) / (40 + f) = 18',
         '704 + 20f = 18(40 + f) = 720 + 18f',
-        '20f - 18f = 720 - 704 ⟹ 2f = 16 ⟹ f = 20 wait: 11-13 freq is 7 in NCERT: 7*12=84, 6*14=84, 9*16=144, 13*18=234, 20f, 110, 96 gives 752+20f; 752+20f = 18(44+f) = 792+18f ⟹ 2f = 40 ⟹ f = 20.'
+        '20f - 18f = 720 - 704 ⟹ 2f = 16 ⟹ f = 20 wait: 11-13 freq is 7 in NCERT: 7 × 12 = 84, 6 × 14 = 84, 9 × 16 = 144, 13 × 18 = 234, 20f, 110, 96 gives 752+20f; 752+20f = 18(44+f) = 792+18f ⟹ 2f = 40 ⟹ f = 20.'
       ],
       commonTrap: 'Multiplying 18 only with 40 and forgetting to multiply with f.',
       isOriginalPractice: true,
@@ -263,8 +263,8 @@ export const CH13_DATA: ChapterData = {
         'Total frequency: 5 + x + 20 + 15 + y + 5 = 60 ⟹ 45 + x + y = 60 ⟹ x + y = 15 ... (1).',
         'Given Median = 28.5, which lies in interval 20-30. Hence Median Class is 20-30.',
         'Lower limit l = 20, class size h = 10, frequency f = 20, preceding cumulative frequency cf = 5 + x, N/2 = 30.',
-        'Median = l + [((N/2) - cf) / f] * h',
-        '28.5 = 20 + [(30 - (5 + x)) / 20] * 10',
+        'Median = l + [((N/2) - cf) / f] × h',
+        '28.5 = 20 + [(30 - (5 + x)) / 20] × 10',
         '8.5 = (25 - x) / 2',
         '17 = 25 - x ⟹ x = 8.',
         'Substitute x = 8 into (1): 8 + y = 15 ⟹ y = 7.'
@@ -289,7 +289,7 @@ export const CH13_DATA: ChapterData = {
         { step: 'Applying median formula and calculating x = 8', marks: 2 },
         { step: 'Calculating y = 7', marks: 1 }
       ],
-      fullSolution: 'Cumulative Frequencies:\n0-10: 5\n10-20: 5 + x\n20-30: 25 + x\n30-40: 40 + x\n40-50: 40 + x + y\n50-60: 45 + x + y\n\nTotal frequency = 60 ⟹ 45 + x + y = 60 ⟹ x + y = 15 ... (1)\nSince Median = 28.5, Median Class = 20-30.\nl = 20, f = 20, cf = 5 + x, h = 10, N/2 = 30.\n\nMedian = l + [((N/2) - cf) / f] * h\n28.5 = 20 + [(30 - (5 + x)) / 20] * 10\n8.5 = (25 - x) / 2\n17 = 25 - x ⟹ x = 8.\n\nFrom (1): 8 + y = 15 ⟹ y = 7.\n\nHence, x = 8 and y = 7.',
+      fullSolution: 'Cumulative Frequencies:\n0-10: 5\n10-20: 5 + x\n20-30: 25 + x\n30-40: 40 + x\n40-50: 40 + x + y\n50-60: 45 + x + y\n\nTotal frequency = 60 ⟹ 45 + x + y = 60 ⟹ x + y = 15 ... (1)\nSince Median = 28.5, Median Class = 20-30.\nl = 20, f = 20, cf = 5 + x, h = 10, N/2 = 30.\n\nMedian = l + [((N/2) - cf) / f] × h\n28.5 = 20 + [(30 - (5 + x)) / 20] × 10\n8.5 = (25 - x) / 2\n17 = 25 - x ⟹ x = 8.\n\nFrom (1): 8 + y = 15 ⟹ y = 7.\n\nHence, x = 8 and y = 7.',
       commonMistake: 'Writing cf = 25 + x (taking cf of median class instead of preceding class).',
       frequencyTrend: 'The single most asked 5-mark question in Class 10 statistics.',
       source: 'CBSE Official Board Examination'
@@ -300,7 +300,7 @@ export const CH13_DATA: ChapterData = {
       id: 'ch13_err1',
       title: 'Taking Cumulative Frequency of Median Class instead of Preceding Class',
       mistakeCategory: 'Formula & Substitution',
-      flawedWorking: 'Student substitutes cf of median class into Median = l + [((N/2) - cf)/f]*h.',
+      flawedWorking: 'Student substitutes cf of median class into Median = l + [((N/2) - cf)/f] × h.',
       whyItIsWrong: 'The formula requires the cumulative frequency accumulated BEFORE the median class, so cf must come from the PRECEDING class.',
       correctWorking: 'Always draw an arrow from the median class up one row to pick the preceding cf.',
       howToAvoid: 'Remember: cf is the count already passed BEFORE entering the median class.',
@@ -313,9 +313,9 @@ export const CH13_DATA: ChapterData = {
   ],
   revisionSheet: {
     mustRememberPoints: [
-      'Mean: x̄ = Σ(f_i * x_i) / Σf_i = a + [Σ(f_i * d_i) / Σf_i].',
-      'Mode: Modal class has highest frequency. Mode = l + [(f1 - f0)/(2f1 - f0 - f2)] * h.',
-      'Median: Find N/2. Median class is where cf ≥ N/2. Median = l + [((N/2) - cf)/f] * h.',
+      'Mean: x̄ = Σ(fᵢxᵢ) / Σf_i = a + [Σ(fᵢdᵢ) / Σf_i].',
+      'Mode: Modal class has highest frequency. Mode = l + [(f1 - f0)/(2f1 - f0 - f2)] × h.',
+      'Median: Find N/2. Median class is where cf ≥ N/2. Median = l + [((N/2) - cf)/f] × h.',
       'cf in median formula is ALWAYS from the PRECEDING class.',
       'Empirical formula: 3 Median = Mode + 2 Mean.'
     ],
@@ -406,7 +406,7 @@ export const CH13_DATA: ChapterData = {
           hints: ['Modal class 20-30. l = 20, f1 = 10, f0 = 8, f2 = 6, h = 10.'],
           solutionSteps: [
             'Modal class = 20-30. l = 20, f1 = 10, f0 = 8, f2 = 6, h = 10.',
-            'Mode = 20 + [(10 - 8) / (20 - 8 - 6)] * 10 = 20 + (2 / 6) * 10 = 20 + 3.33 = 23.33.'
+            'Mode = 20 + [(10 - 8) / (20 - 8 - 6)] × 10 = 20 + (2 / 6) × 10 = 20 + 3.33 = 23.33.'
           ],
           commonTrap: 'Arithmetic division error.',
           isOriginalPractice: true,
@@ -427,7 +427,7 @@ export const CH13_DATA: ChapterData = {
             'Total N = 50 ⟹ N/2 = 25.',
             'cf: 6, 14, 24, 36, 42, 50.',
             'Median class is 60-80. l = 60, cf = 24, f = 12, h = 20.',
-            'Median = 60 + [(25 - 24) / 12] * 20 = 60 + (1 / 12) * 20 = 60 + 1.67 = 61.67.'
+            'Median = 60 + [(25 - 24) / 12] × 20 = 60 + (1 / 12) × 20 = 60 + 1.67 = 61.67.'
           ],
           commonTrap: 'Taking cf = 36 instead of preceding cf = 24.',
           isOriginalPractice: true,
@@ -446,7 +446,7 @@ export const CH13_DATA: ChapterData = {
           hints: ['x + y = 15. Median class 20-30. l = 20, f = 20, cf = 5 + x, h = 10.'],
           solutionSteps: [
             '45 + x + y = 60 ⟹ x + y = 15.',
-            '28.5 = 20 + [(30 - (5 + x)) / 20] * 10 ⟹ 8.5 = (25 - x) / 2 ⟹ 17 = 25 - x ⟹ x = 8.',
+            '28.5 = 20 + [(30 - (5 + x)) / 20] × 10 ⟹ 8.5 = (25 - x) / 2 ⟹ 17 = 25 - x ⟹ x = 8.',
             'y = 15 - 8 = 7.'
           ],
           commonTrap: 'Negative sign error on x.',

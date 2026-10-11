@@ -7,8 +7,8 @@ export const CH8_DATA: ChapterData = {
   overview: {
     about: 'Introduction to Trigonometry is one of the most powerful and high-yielding branches of mathematics in Class 10. It establishes the mathematical language of right-angled triangles through ratios (sine, cosine, tangent, cosecant, secant, cotangent), special standard angle values (0°, 30°, 45°, 60°, 90°), and the three fundamental Pythagorean identities used to prove algebraic-trigonometric equivalence.',
     prerequisites: [
-      'Pythagoras theorem: Hypotenuse^2 = Perpendicular^2 + Base^2',
-      'Basic algebraic identities: (a+b)^2, (a-b)^2, a^2 - b^2, a^3 + b^3',
+      'Pythagoras theorem: Hypotenuse² = Perpendicular² + Base²',
+      'Basic algebraic identities: (a+b)², (a-b)², a² - b², a³ + b³',
       'Fraction simplification and rationalizing denominators'
     ],
     coreIdeas: [
@@ -17,18 +17,18 @@ export const CH8_DATA: ChapterData = {
       'Reciprocal Ratios: cosec = 1/sin = H/P, sec = 1/cos = H/B, cot = 1/tan = B/P.',
       'Quotient Ratios: tan = sin/cos, cot = cos/sin.',
       'Special Angle Values: Memorize via the 0-1-2-3-4 rule over 4 under square root. sin(0)=0, sin(30)=1/2, sin(45)=1/√2, sin(60)=√3/2, sin(90)=1. Cosine is Sine in exact reverse order!',
-      'The Three Core Identities: (1) sin^2(theta) + cos^2(theta) = 1; (2) 1 + tan^2(theta) = sec^2(theta); (3) 1 + cot^2(theta) = cosec^2(theta).',
-      'The Conjugate Reciprocal Secret: sec^2(theta) - tan^2(theta) = 1 ⟹ (sec(theta) - tan(theta))(sec(theta) + tan(theta)) = 1. If sec(theta) + tan(theta) = p, then sec(theta) - tan(theta) = 1/p instantly!'
+      'The Three Core Identities: (1) sin²(theta) + cos²(theta) = 1; (2) 1 + tan²(theta) = sec²(theta); (3) 1 + cot²(theta) = cosec²(theta).',
+      'The Conjugate Reciprocal Secret: sec²(theta) - tan²(theta) = 1 ⟹ (sec(theta) - tan(theta))(sec(theta) + tan(theta)) = 1. If sec(theta) + tan(theta) = p, then sec(theta) - tan(theta) = 1/p instantly!'
     ],
     keyRelationships: [
       'sin(theta) and cos(theta) are always between 0 and 1 for acute angles (since P < H and B < H).',
-      'sec(theta) and cosec(theta) are always >= 1.',
+      'sec(theta) and cosec(theta) are always ≥ 1.',
       'tan(45) = 1, sin(30) = cos(60) = 1/2, sin(45) = cos(45) = 1/√2, sin(60) = cos(30) = √3/2.',
       'tan(90), sec(90), cosec(0), cot(0) are NOT DEFINED (division by zero).'
     ],
     frequentMisunderstandings: [
       'Assuming the bottom horizontal side is always the base! (If angle is at the top vertex C, the vertical side AB becomes the Perpendicular and BC becomes the Base).',
-      'Writing sin^2(theta) as (sin theta)^2 = sin(theta^2) (sin^2 theta is the square of the ratio, NEVER square the angle theta!).',
+      'Writing sin²(theta) as (sin theta)² = sin(theta²) (sin² theta is the square of the ratio, NEVER square the angle theta!).',
       'Writing tan(A + B) = tan A + tan B (Trigonometric functions DO NOT distribute over addition!).',
       'Trying to cancel terms across fractions without factoring.'
     ],
@@ -59,15 +59,15 @@ export const CH8_DATA: ChapterData = {
           stepByStepSolution: [
             '15 cot A = 8 ⟹ cot A = 8 / 15.',
             'Since cot A = Base / Perpendicular = AB / BC, let Base = 8k and Perpendicular = 15k for some positive k.',
-            'By Pythagoras Theorem: AC^2 = AB^2 + BC^2',
-            'AC^2 = (8k)^2 + (15k)^2 = 64k^2 + 225k^2 = 289k^2',
-            'AC = sqrt(289k^2) = 17k (Hypotenuse = 17k).',
+            'By Pythagoras Theorem: AC² = AB² + BC²',
+            'AC² = (8k)² + (15k)² = 64k² + 225k² = 289k²',
+            'AC = √(289k²) = 17k (Hypotenuse = 17k).',
             'Now calculate required ratios:',
             'sin A = Perpendicular / Hypotenuse = 15k / 17k = 15 / 17.',
             'sec A = Hypotenuse / Base = 17k / 8k = 17 / 8.'
           ],
           finalAnswer: 'sin A = 15/17, sec A = 17/8',
-          verificationCheck: '1 + cot^2 A = 1 + (8/15)^2 = 1 + 64/225 = 289/225 = (17/15)^2 = cosec^2 A. Matches perfectly!',
+          verificationCheck: '1 + cot² A = 1 + (8/15)² = 1 + 64/225 = 289/225 = (17/15)² = cosec² A. Matches perfectly!',
           commonTrap: 'Forgetting to introduce the constant k when setting sides (Base = 8k, Perpendicular = 15k) can lose 0.5 mark in subjective board papers.'
         },
         {
@@ -79,11 +79,11 @@ export const CH8_DATA: ChapterData = {
           methodSelectionReason: 'For angle A: P = BC = 1, B = AB = √3, H = 2. For angle C: P = AB = √3, B = BC = 1, H = 2.',
           stepByStepSolution: [
             'tan A = BC / AB = 1 / √3. Let BC = 1k, AB = √3 k.',
-            'AC = sqrt((1k)^2 + (√3 k)^2) = sqrt(k^2 + 3k^2) = sqrt(4k^2) = 2k.',
+            'AC = √((1k)² + (√3 k)²) = √(k² + 3k²) = √(4k²) = 2k.',
             'For angle A: sin A = BC/AC = 1/2, cos A = AB/AC = √3/2.',
             'For angle C: side opposite to C is AB, so sin C = AB/AC = √3/2, cos C = BC/AC = 1/2.',
             'Substitute into expression: sin A cos C + cos A sin C',
-            '= (1/2) * (1/2) + (√3/2) * (√3/2)',
+            '= ½ ×  (1/2) + (√3/2) × (√3/2)',
             '= 1/4 + 3/4 = 4/4 = 1.'
           ],
           finalAnswer: 'Value = 1',
@@ -103,41 +103,41 @@ export const CH8_DATA: ChapterData = {
       title: 'Fundamental Trigonometric Identities',
       topic: 'Proving Trigonometric Identities',
       simpleExplanation: 'Identities are mathematical universal truths that work for ANY angle! Convert messy terms to simple sin and cos to unlock them like magic.',
-      exactMathIdea: 'The three fundamental identities derived from Pythagoras theorem: (1) sin^2(theta) + cos^2(theta) = 1; (2) sec^2(theta) - tan^2(theta) = 1; (3) cosec^2(theta) - cot^2(theta) = 1. Valid for all acute angles 0 <= theta <= 90.',
-      formulaOrTheorem: '\\sin^2\\theta + \\cos^2\\theta = 1, \\quad \\sec^2\\theta - \\tan^2\\theta = 1, \\quad \\csc^2\\theta - \\cot^2\\theta = 1',
+      exactMathIdea: 'The three fundamental identities derived from Pythagoras theorem: (1) sin²(theta) + cos²(theta) = 1; (2) sec²(theta) - tan²(theta) = 1; (3) cosec²(theta) - cot²(theta) = 1. Valid for all acute angles 0 ≤ theta ≤ 90.',
+      formulaOrTheorem: '\\sin²\\theta + \\cos²\\theta = 1, \\quad \\sec²\\theta - \\tan²\\theta = 1, \\quad \\csc²\\theta - \\cot²\\theta = 1',
       whenToUse: 'Whenever asked to prove LHS = RHS in trigonometric expressions, or simplify complex trigonometric fractions.',
       recognitionClues: [
-        'Prove that (cosec theta - cot theta)^2 = (1 - cos theta)/(1 + cos theta)',
+        'Prove that (cosec theta - cot theta)² = (1 - cos theta)/(1 + cos theta)',
         'Prove that sin theta / (1 + cos theta) + (1 + cos theta) / sin theta = 2 cosec theta',
         'If sec theta + tan theta = p, find the value of sin theta'
       ],
       workedExamples: [
         {
           level: 'application',
-          title: 'Classic Identity Proof: (cosec - cot)^2',
-          question: 'Prove that: (cosec θ - cot θ)^2 = (1 - cos θ) / (1 + cos θ).',
-          given: 'LHS = (cosec θ - cot θ)^2.',
+          title: 'Classic Identity Proof: (cosec - cot)²',
+          question: 'Prove that: (cosec θ - cot θ)² = (1 - cos θ) / (1 + cos θ).',
+          given: 'LHS = (cosec θ - cot θ)².',
           toFind: 'Proof that LHS = (1 - cos θ) / (1 + cos θ).',
-          methodSelectionReason: 'Convert cosec and cot into fundamental ratios (sin and cos), combine terms, and use sin^2 = 1 - cos^2 = (1-cos)(1+cos).',
+          methodSelectionReason: 'Convert cosec and cot into fundamental ratios (sin and cos), combine terms, and use sin² = 1 - cos² = (1-cos)(1+cos).',
           stepByStepSolution: [
-            'LHS = (cosec θ - cot θ)^2',
-            'Convert to sin and cos: = (1 / sin θ - cos θ / sin θ)^2',
-            '= [(1 - cos θ) / sin θ]^2',
-            '= (1 - cos θ)^2 / sin^2 θ',
-            'Using the identity sin^2 θ = 1 - cos^2 θ:',
-            '= (1 - cos θ)^2 / (1 - cos^2 θ)',
-            'Factorize denominator using a^2 - b^2 = (a - b)(a + b):',
+            'LHS = (cosec θ - cot θ)²',
+            'Convert to sin and cos: = (1 / sin θ - cos θ / sin θ)²',
+            '= [(1 - cos θ) / sin θ]²',
+            '= (1 - cos θ)² / sin² θ',
+            'Using the identity sin² θ = 1 - cos² θ:',
+            '= (1 - cos θ)² / (1 - cos² θ)',
+            'Factorize denominator using a² - b² = (a - b)(a + b):',
             '= (1 - cos θ)(1 - cos θ) / [(1 - cos θ)(1 + cos θ)]',
             'Cancel common factor (1 - cos θ):',
             '= (1 - cos θ) / (1 + cos θ) = RHS. Hence Proved!'
           ],
           finalAnswer: 'Hence Proved: LHS = RHS',
-          verificationCheck: 'Test with θ = 60°: cosec 60 = 2/√3, cot 60 = 1/√3; LHS = (1/√3)^2 = 1/3. RHS = (1 - 1/2)/(1 + 1/2) = (1/2)/(3/2) = 1/3. Identical!',
-          commonTrap: 'Expanding (1 - cos θ)^2 into 1 - 2 cos θ + cos^2 θ early, making cancellation difficult.'
+          verificationCheck: 'Test with θ = 60°: cosec 60 = 2/√3, cot 60 = 1/√3; LHS = (1/√3)² = 1/3. RHS = (1 - 1/2)/(1 + 1/2) = (1/2)/(3/2) = 1/3. Identical!',
+          commonTrap: 'Expanding (1 - cos θ)² into 1 - 2 cos θ + cos² θ early, making cancellation difficult.'
         }
       ],
       commonMisconceptions: [
-        'Writing 1 + tan^2 θ = cot^2 θ (confusing tan with cot; 1 + tan^2 θ = sec^2 θ, while 1 + cot^2 θ = cosec^2 θ).'
+        'Writing 1 + tan² θ = cot² θ (confusing tan with cot; 1 + tan² θ = sec² θ, while 1 + cot² θ = cosec² θ).'
       ],
       priority: 'Must Master',
       cbseFrequency: 'Guaranteed 4 or 5-mark question in Section D of every CBSE board paper.',
@@ -148,7 +148,7 @@ export const CH8_DATA: ChapterData = {
     {
       id: 'ch8_f1',
       name: 'Pythagorean Trigonometric Identities',
-      formula: '\\sin^2\\theta + \\cos^2\\theta = 1, \\quad \\sec^2\\theta - \\tan^2\\theta = 1, \\quad \\csc^2\\theta - \\cot^2\\theta = 1',
+      formula: '\\sin²\\theta + \\cos²\\theta = 1, \\quad \\sec²\\theta - \\tan²\\theta = 1, \\quad \\csc²\\theta - \\cot²\\theta = 1',
       symbolMeanings: [
         { symbol: 'θ', meaning: 'Acute angle in right triangle (0° ≤ θ ≤ 90°)' },
         { symbol: 'sin, cos, tan, sec, csc, cot', meaning: 'Standard trigonometric ratio functions' }
@@ -156,18 +156,18 @@ export const CH8_DATA: ChapterData = {
       whenToUse: 'In identity simplification, evaluating squared terms, and expressing one ratio in terms of another.',
       conditions: ['Angle θ within domain where functions are defined (θ ≠ 90° for tan/sec, θ ≠ 0° for cot/cosec)'],
       commonSubstitutions: [
-        'sin^2 θ = 1 - cos^2 θ',
-        'cos^2 θ = 1 - sin^2 θ',
-        'sec^2 θ = 1 + tan^2 θ',
-        'tan^2 θ = sec^2 θ - 1',
-        'cosec^2 θ = 1 + cot^2 θ'
+        'sin² θ = 1 - cos² θ',
+        'cos² θ = 1 - sin² θ',
+        'sec² θ = 1 + tan² θ',
+        'tan² θ = sec² θ - 1',
+        'cosec² θ = 1 + cot² θ'
       ],
       miniExample: {
-        question: 'Evaluate (1 + tan^2 θ)(1 - sin θ)(1 + sin θ).',
-        substitution: '(1 + tan^2 θ)(1 - sin^2 θ) = (sec^2 θ)(cos^2 θ) = (1 / cos^2 θ)(cos^2 θ)',
+        question: 'Evaluate (1 + tan² θ)(1 - sin θ)(1 + sin θ).',
+        substitution: '(1 + tan² θ)(1 - sin² θ) = (sec² θ)(cos² θ) = (1 / cos² θ)(cos² θ)',
         result: '1'
       },
-      commonMistakes: ['Writing sec^2 θ + tan^2 θ = 1 instead of sec^2 θ - tan^2 θ = 1.'],
+      commonMistakes: ['Writing sec² θ + tan² θ = 1 instead of sec² θ - tan² θ = 1.'],
       memoryTrick: 'Sin-Cos ADD to 1; Sec-Tan and Csc-Cot SUBTRACT to 1!',
       sourceTrace: 'NCERT Section 8.4'
     },
@@ -204,16 +204,16 @@ export const CH8_DATA: ChapterData = {
         'Step 1: Write LHS clearly.',
         'Step 2: Replace every tan θ with (sin θ / cos θ) and cot θ with (cos θ / sin θ).',
         'Step 3: Simplify individual fractions by finding common denominators in numerators and denominators.',
-        'Step 4: Invert and multiply fractions: (A/B) / (C/D) = (A * D) / (B * C).',
+        'Step 4: Invert and multiply fractions: (A/B) / (C/D) = (A × D) / (B × C).',
         'Step 5: Factor out common terms or negative signs (e.g. cos θ - sin θ = -(sin θ - cos θ)).',
-        'Step 6: Combine over common denominator: use identity a^3 - b^3 = (a - b)(a^2 + ab + b^2).',
-        'Step 7: Replace sin^2 θ + cos^2 θ with 1.',
+        'Step 6: Combine over common denominator: use identity a³ - b³ = (a - b)(a² + ab + b²).',
+        'Step 7: Replace sin² θ + cos² θ with 1.',
         'Step 8: Split the terms to match RHS. Conclude with "Hence Proved".'
       ],
       verificationMethod: 'Substitute θ = 30° or 45° to check numerical equality of LHS and RHS.',
       commonTrap: 'Forgetting the negative sign when converting (cos θ - sin θ) to (sin θ - cos θ).',
       exemplarQuestion: 'Prove that: tan θ / (1 - cot θ) + cot θ / (1 - tan θ) = 1 + sec θ cosec θ.',
-      exemplarAnswer: 'Convert to sin and cos: LHS = (sin/cos)/(1 - cos/sin) + (cos/sin)/(1 - sin/cos) = sin^2 / [cos(sin - cos)] - cos^2 / [sin(sin - cos)] = (sin^3 - cos^3) / [sin cos (sin - cos)] = [(sin - cos)(sin^2 + sin cos + cos^2)] / [sin cos (sin - cos)] = (1 + sin cos) / (sin cos) = 1/(sin cos) + 1 = 1 + sec θ cosec θ = RHS. Hence Proved.'
+      exemplarAnswer: 'Convert to sin and cos: LHS = (sin/cos)/(1 - cos/sin) + (cos/sin)/(1 - sin/cos) = sin² / [cos(sin - cos)] - cos² / [sin(sin - cos)] = (sin³ - cos³) / [sin cos (sin - cos)] = [(sin - cos)(sin² + sin cos + cos²)] / [sin cos (sin - cos)] = (1 + sin cos) / (sin cos) = 1/(sin cos) + 1 = 1 + sec θ cosec θ = RHS. Hence Proved.'
     }
   ],
   gradedQuestions: [
@@ -223,15 +223,15 @@ export const CH8_DATA: ChapterData = {
       topic: 'Standard Angle Evaluation',
       level: 1,
       levelLabel: 'Level 1 — Foundation',
-      question: 'Evaluate: 2 tan^2 45° + cos^2 30° - sin^2 60°.',
+      question: 'Evaluate: 2 tan² 45° + cos² 30° - sin² 60°.',
       options: ['1', '2', '√3', '0'],
       correctAnswer: '2',
       marks: 1,
       hints: ['tan 45° = 1, cos 30° = √3/2, sin 60° = √3/2.'],
       solutionSteps: [
-        'tan 45° = 1 ⟹ 2 tan^2 45° = 2(1)^2 = 2',
-        'cos 30° = √3/2 ⟹ cos^2 30° = (√3/2)^2 = 3/4',
-        'sin 60° = √3/2 ⟹ sin^2 60° = (√3/2)^2 = 3/4',
+        'tan 45° = 1 ⟹ 2 tan² 45° = 21² = 2',
+        'cos 30° = √3/2 ⟹ cos² 30° = (√3/2)² = 3/4',
+        'sin 60° = √3/2 ⟹ sin² 60° = (√3/2)² = 3/4',
         'Expression = 2 + 3/4 - 3/4 = 2.'
       ],
       commonTrap: 'Forgetting to square the values (writing 2(1) + √3/2 - √3/2).',
@@ -249,11 +249,11 @@ export const CH8_DATA: ChapterData = {
       options: ['7', '-7', '1/7', '0'],
       correctAnswer: '1/7',
       marks: 1,
-      hints: ['Recall sec^2 θ - tan^2 θ = 1 ⟹ (sec θ - tan θ)(sec θ + tan θ) = 1.'],
+      hints: ['Recall sec² θ - tan² θ = 1 ⟹ (sec θ - tan θ)(sec θ + tan θ) = 1.'],
       solutionSteps: [
-        'We know that sec^2 θ - tan^2 θ = 1',
+        'We know that sec² θ - tan² θ = 1',
         '(sec θ - tan θ)(sec θ + tan θ) = 1',
-        '(sec θ - tan θ) * 7 = 1',
+        '7(sec θ - tan θ) = 1',
         'sec θ - tan θ = 1/7.'
       ],
       commonTrap: 'Thinking sec θ - tan θ = -7.',
@@ -299,9 +299,9 @@ export const CH8_DATA: ChapterData = {
         'LHS = √[(1 + sin A) / (1 - sin A)]',
         'Multiply numerator and denominator by (1 + sin A):',
         '= √[ (1 + sin A)(1 + sin A) / ((1 - sin A)(1 + sin A)) ]',
-        '= √[ (1 + sin A)^2 / (1 - sin^2 A) ]',
-        'Using identity 1 - sin^2 A = cos^2 A:',
-        '= √[ (1 + sin A)^2 / cos^2 A ]',
+        '= √[ (1 + sin A)² / (1 - sin² A) ]',
+        'Using identity 1 - sin² A = cos² A:',
+        '= √[ (1 + sin A)² / cos² A ]',
         '= (1 + sin A) / cos A',
         'Split the fraction: = 1 / cos A + sin A / cos A = sec A + tan A = RHS. Hence Proved!'
       ],
@@ -316,17 +316,17 @@ export const CH8_DATA: ChapterData = {
       topic: '5-Mark Board Proof Challenge',
       level: 5,
       levelLabel: 'Level 5 — Challenge',
-      question: 'Prove that: (sin θ - cos θ + 1) / (sin θ + cos θ - 1) = 1 / (sec θ - tan θ), using the identity sec^2 θ = 1 + tan^2 θ.',
+      question: 'Prove that: (sin θ - cos θ + 1) / (sin θ + cos θ - 1) = 1 / (sec θ - tan θ), using the identity sec² θ = 1 + tan² θ.',
       correctAnswer: 'Hence Proved: LHS = 1 / (sec θ - tan θ)',
       marks: 5,
-      hints: ['Divide numerator and denominator by cos θ to convert into tan θ and sec θ. Then replace 1 in numerator with (sec^2 θ - tan^2 θ).'],
+      hints: ['Divide numerator and denominator by cos θ to convert into tan θ and sec θ. Then replace 1 in numerator with (sec² θ - tan² θ).'],
       solutionSteps: [
         'Divide numerator and denominator of LHS by cos θ:',
         '= [(sin θ / cos θ) - (cos θ / cos θ) + (1 / cos θ)] / [(sin θ / cos θ) + (cos θ / cos θ) - (1 / cos θ)]',
         '= (tan θ - 1 + sec θ) / (tan θ + 1 - sec θ)',
         '= [(tan θ + sec θ) - 1] / [tan θ - sec θ + 1]',
-        'Substitute 1 = (sec^2 θ - tan^2 θ) in the NUMERATOR only:',
-        '= [(sec θ + tan θ) - (sec^2 θ - tan^2 θ)] / [tan θ - sec θ + 1]',
+        'Substitute 1 = (sec² θ - tan² θ) in the NUMERATOR only:',
+        '= [(sec θ + tan θ) - (sec² θ - tan² θ)] / [tan θ - sec θ + 1]',
         '= [(sec θ + tan θ) - (sec θ - tan θ)(sec θ + tan θ)] / [tan θ - sec θ + 1]',
         'Factor out (sec θ + tan θ) in numerator:',
         '= (sec θ + tan θ)[1 - (sec θ - tan θ)] / [tan θ - sec θ + 1]',
@@ -334,9 +334,9 @@ export const CH8_DATA: ChapterData = {
         'Since [1 - sec θ + tan θ] = [tan θ - sec θ + 1], they cancel completely!',
         '= sec θ + tan θ',
         'Multiply and divide by (sec θ - tan θ):',
-        '= (sec^2 θ - tan^2 θ) / (sec θ - tan θ) = 1 / (sec θ - tan θ) = RHS. Hence Proved!'
+        '= (sec² θ - tan² θ) / (sec θ - tan θ) = 1 / (sec θ - tan θ) = RHS. Hence Proved!'
       ],
-      commonTrap: 'Substituting 1 = sec^2 θ - tan^2 θ in BOTH numerator and denominator, which creates an endless loop.',
+      commonTrap: 'Substituting 1 = sec² θ - tan² θ in BOTH numerator and denominator, which creates an endless loop.',
       isOriginalPractice: true,
       sourcePdfRef: 'NCERT Ch 8 Example 15',
       conceptId: 'ch8_c2'
@@ -353,10 +353,10 @@ export const CH8_DATA: ChapterData = {
       markingSchemeBreakdown: [
         { step: 'Dividing numerator and denominator by sin A to get cot A and cosec A', marks: 1 },
         { step: 'Grouping terms: (cot A + cosec A - 1) / (cot A - cosec A + 1)', marks: 1 },
-        { step: 'Substituting 1 = cosec^2 A - cot^2 A in numerator and factoring', marks: 1 },
+        { step: 'Substituting 1 = cosec² A - cot² A in numerator and factoring', marks: 1 },
         { step: 'Cancelling common bracket and reaching cosec A + cot A', marks: 1 }
       ],
-      fullSolution: 'Divide numerator and denominator by sin A:\nLHS = [(cos A / sin A) - (sin A / sin A) + (1 / sin A)] / [(cos A / sin A) + (sin A / sin A) - (1 / sin A)]\n= (cot A - 1 + cosec A) / (cot A + 1 - cosec A)\n= [(cosec A + cot A) - 1] / [cot A - cosec A + 1]\n\nUsing identity 1 = cosec^2 A - cot^2 A in numerator:\n= [(cosec A + cot A) - (cosec^2 A - cot^2 A)] / [cot A - cosec A + 1]\n= [(cosec A + cot A) - (cosec A - cot A)(cosec A + cot A)] / [cot A - cosec A + 1]\n= (cosec A + cot A)[1 - (cosec A - cot A)] / [cot A - cosec A + 1]\n= (cosec A + cot A)[1 - cosec A + cot A] / [cot A - cosec A + 1]\n\nCancelling the identical factor [1 - cosec A + cot A]:\n= cosec A + cot A = RHS. Hence Proved.',
+      fullSolution: 'Divide numerator and denominator by sin A:\nLHS = [(cos A / sin A) - (sin A / sin A) + (1 / sin A)] / [(cos A / sin A) + (sin A / sin A) - (1 / sin A)]\n= (cot A - 1 + cosec A) / (cot A + 1 - cosec A)\n= [(cosec A + cot A) - 1] / [cot A - cosec A + 1]\n\nUsing identity 1 = cosec² A - cot² A in numerator:\n= [(cosec A + cot A) - (cosec² A - cot² A)] / [cot A - cosec A + 1]\n= [(cosec A + cot A) - (cosec A - cot A)(cosec A + cot A)] / [cot A - cosec A + 1]\n= (cosec A + cot A)[1 - (cosec A - cot A)] / [cot A - cosec A + 1]\n= (cosec A + cot A)[1 - cosec A + cot A] / [cot A - cosec A + 1]\n\nCancelling the identical factor [1 - cosec A + cot A]:\n= cosec A + cot A = RHS. Hence Proved.',
       commonMistake: 'Dividing by cos A instead of sin A (which gives sec and tan instead of cosec and cot).',
       frequencyTrend: 'Repeated 7 times across standard board papers in last 12 years.',
       source: 'CBSE Official Board Examination'
@@ -367,13 +367,13 @@ export const CH8_DATA: ChapterData = {
       marks: 3,
       topic: 'Elimination of Trigonometric Variables',
       conceptTested: 'Pythagorean Identity Substitution',
-      question: 'If x = a sin θ and y = b tan θ, prove that: a^2 / x^2 - b^2 / y^2 = 1.',
+      question: 'If x = a sin θ and y = b tan θ, prove that: a² / x² - b² / y² = 1.',
       markingSchemeBreakdown: [
         { step: 'Finding a/x = 1/sin θ = cosec θ', marks: 1.0 },
         { step: 'Finding b/y = 1/tan θ = cot θ', marks: 1.0 },
-        { step: 'Squaring and subtracting: cosec^2 θ - cot^2 θ = 1', marks: 1.0 }
+        { step: 'Squaring and subtracting: cosec² θ - cot² θ = 1', marks: 1.0 }
       ],
-      fullSolution: 'Given x = a sin θ ⟹ a / x = 1 / sin θ = cosec θ.\nGiven y = b tan θ ⟹ b / y = 1 / tan θ = cot θ.\n\nNow substitute into LHS:\nLHS = (a / x)^2 - (b / y)^2\n= cosec^2 θ - cot^2 θ\nUsing the fundamental identity cosec^2 θ - cot^2 θ = 1:\n= 1 = RHS. Hence Proved.',
+      fullSolution: 'Given x = a sin θ ⟹ a / x = 1 / sin θ = cosec θ.\nGiven y = b tan θ ⟹ b / y = 1 / tan θ = cot θ.\n\nNow substitute into LHS:\nLHS = (a / x)² - (b / y)²\n= cosec² θ - cot² θ\nUsing the fundamental identity cosec² θ - cot² θ = 1:\n= 1 = RHS. Hence Proved.',
       commonMistake: 'Squaring x and y first and getting lost in cross-multiplications instead of taking reciprocal ratios a/x and b/y.',
       frequencyTrend: 'Classic 3-mark algebra-trig fusion problem.',
       source: 'CBSE Official Board Examination'
@@ -400,7 +400,7 @@ export const CH8_DATA: ChapterData = {
       'P-B-P / H-H-B: sin = P/H, cos = B/H, tan = P/B.',
       'Side opposite to angle θ is ALWAYS the Perpendicular. When switching angle from A to C, P and B swap!',
       '0-1-2-3-4 trick for Sine: 0, 1/2, 1/√2, √3/2, 1. Cosine is reversed.',
-      'sin^2 θ + cos^2 θ = 1; sec^2 θ - tan^2 θ = 1; cosec^2 θ - cot^2 θ = 1.',
+      'sin² θ + cos² θ = 1; sec² θ - tan² θ = 1; cosec² θ - cot² θ = 1.',
       'If sec θ + tan θ = p ⟹ sec θ - tan θ = 1/p.',
       'To prove identities: Convert all non-sin/cos terms to sin θ and cos θ.'
     ],
@@ -410,7 +410,7 @@ export const CH8_DATA: ChapterData = {
       'In identity proofs with (1 ± sin θ) in denominator: multiply numerator and denominator by conjugate (1 ∓ sin θ).'
     ],
     lastDayChecklist: [
-      'Did you remember that sec^2 θ - tan^2 θ = 1 has a MINUS sign (not a plus sign)?',
+      'Did you remember that sec² θ - tan² θ = 1 has a MINUS sign (not a plus sign)?',
       'Can you write out the values for 0°, 30°, 45°, 60°, 90° in under 30 seconds?',
       'In identity proof, did you only replace "1" in the numerator?'
     ]
@@ -427,11 +427,11 @@ export const CH8_DATA: ChapterData = {
           topic: 'Identity Basics',
           level: 1,
           levelLabel: 'Level 1 — Foundation',
-          question: 'The value of 9 sec^2 A - 9 tan^2 A is:',
+          question: 'The value of 9 sec² A - 9 tan² A is:',
           correctAnswer: '9',
           marks: 1,
-          hints: ['Factor out 9: 9(sec^2 A - tan^2 A).'],
-          solutionSteps: ['9(sec^2 A - tan^2 A) = 9(1) = 9.'],
+          hints: ['Factor out 9: 9(sec² A - tan² A).'],
+          solutionSteps: ['9(sec² A - tan² A) = 9(1) = 9.'],
           commonTrap: 'Writing 1 or -9.',
           isOriginalPractice: true,
           sourcePdfRef: 'NCERT Ch 8 Ex 8.3 Q4(i)',
@@ -443,14 +443,14 @@ export const CH8_DATA: ChapterData = {
           topic: 'Standard Angle Ratio',
           level: 2,
           levelLabel: 'Level 2 — Standard',
-          question: 'If sin θ = cos θ for an acute angle θ, what is the value of 2 tan^2 θ + sin^2 θ - 1?',
+          question: 'If sin θ = cos θ for an acute angle θ, what is the value of 2 tan² θ + sin² θ - 1?',
           correctAnswer: '3/2',
           marks: 2,
           hints: ['sin θ = cos θ ⟹ tan θ = 1 ⟹ θ = 45°.'],
           solutionSteps: [
             'sin θ = cos θ ⟹ sin θ / cos θ = 1 ⟹ tan θ = 1 ⟹ θ = 45°.',
-            'sin 45° = 1/√2 ⟹ sin^2 45° = 1/2.',
-            'Expression = 2(1)^2 + 1/2 - 1 = 2 + 1/2 - 1 = 1 + 1/2 = 3/2.'
+            'sin 45° = 1/√2 ⟹ sin² 45° = 1/2.',
+            'Expression = 21² + 1/2 - 1 = 2 + 1/2 - 1 = 1 + 1/2 = 3/2.'
           ],
           commonTrap: 'Forgetting that tan θ = 1 implies θ = 45°.',
           isOriginalPractice: true,
@@ -513,14 +513,14 @@ export const CH8_DATA: ChapterData = {
           question: 'Prove that: (1 + cot A - cosec A)(1 + tan A + sec A) = 2.',
           correctAnswer: 'Hence Proved: LHS = 2',
           marks: 3,
-          hints: ['Convert to sin A and cos A. Combine fractions, use (a+b)(a-b) = a^2 - b^2.'],
+          hints: ['Convert to sin A and cos A. Combine fractions, use (a+b)(a-b) = a² - b².'],
           solutionSteps: [
             'LHS = (1 + cos/sin - 1/sin)(1 + sin/cos + 1/cos)',
-            '= [(sin + cos - 1) / sin] * [(cos + sin + 1) / cos]',
+            '= [(sin + cos - 1) / sin] × [(cos + sin + 1) / cos]',
             '= [((sin + cos) - 1)((sin + cos) + 1)] / (sin cos)',
-            'Using (a - 1)(a + 1) = a^2 - 1 with a = sin + cos:',
-            '= [(sin + cos)^2 - 1] / (sin cos)',
-            '= [sin^2 + cos^2 + 2 sin cos - 1] / (sin cos)',
+            'Using (a - 1)(a + 1) = a² - 1 with a = sin + cos:',
+            '= [(sin + cos)² - 1] / (sin cos)',
+            '= [sin² + cos² + 2 sin cos - 1] / (sin cos)',
             '= [1 + 2 sin cos - 1] / (sin cos)',
             '= 2 sin cos / (sin cos) = 2 = RHS. Hence Proved!'
           ],
@@ -535,21 +535,21 @@ export const CH8_DATA: ChapterData = {
           topic: 'Challenge Algebraic Identity',
           level: 5,
           levelLabel: 'Level 5 — Challenge',
-          question: 'If cosec θ - sin θ = l and sec θ - cos θ = m, prove that: l^2 m^2 (l^2 + m^2 + 3) = 1.',
-          correctAnswer: 'Hence Proved: l^2 m^2 (l^2 + m^2 + 3) = 1',
+          question: 'If cosec θ - sin θ = l and sec θ - cos θ = m, prove that: l² m² (l² + m² + 3) = 1.',
+          correctAnswer: 'Hence Proved: l² m² (l² + m² + 3) = 1',
           marks: 4,
-          hints: ['l = 1/sin - sin = cos^2/sin. m = 1/cos - cos = sin^2/cos. Substitute into the expression.'],
+          hints: ['l = 1/sin - sin = cos²/sin. m = 1/cos - cos = sin²/cos. Substitute into the expression.'],
           solutionSteps: [
-            'l = (1 - sin^2 θ) / sin θ = cos^2 θ / sin θ',
-            'm = (1 - cos^2 θ) / cos θ = sin^2 θ / cos θ',
-            'l * m = (cos^2 θ / sin θ) * (sin^2 θ / cos θ) = sin θ cos θ',
-            'l^2 m^2 = sin^2 θ cos^2 θ',
-            'l^2 + m^2 = cos^4 θ / sin^2 θ + sin^4 θ / cos^2 θ = (cos^6 θ + sin^6 θ) / (sin^2 θ cos^2 θ)',
-            'Note that sin^6 θ + cos^6 θ = (sin^2 θ + cos^2 θ)^3 - 3 sin^2 θ cos^2 θ (sin^2 θ + cos^2 θ) = 1 - 3 sin^2 θ cos^2 θ',
-            'So l^2 + m^2 + 3 = (1 - 3 sin^2 θ cos^2 θ)/(sin^2 θ cos^2 θ) + 3 = 1 / (sin^2 θ cos^2 θ)',
-            'Therefore: l^2 m^2 (l^2 + m^2 + 3) = (sin^2 θ cos^2 θ) * [1 / (sin^2 θ cos^2 θ)] = 1. Hence Proved!'
+            'l = (1 - sin² θ) / sin θ = cos² θ / sin θ',
+            'm = (1 - cos² θ) / cos θ = sin² θ / cos θ',
+            'l · m = (cos² θ / sin θ) × (sin² θ / cos θ) = sin θ cos θ',
+            'l² m² = sin² θ cos² θ',
+            'l² + m² = cos⁴ θ / sin² θ + sin⁴ θ / cos² θ = (cos^6 θ + sin^6 θ) / (sin² θ cos² θ)',
+            'Note that sin^6 θ + cos^6 θ = (sin² θ + cos² θ)³ - 3 sin² θ cos² θ (sin² θ + cos² θ) = 1 - 3 sin² θ cos² θ',
+            'So l² + m² + 3 = (1 - 3 sin² θ cos² θ)/(sin² θ cos² θ) + 3 = 1 / (sin² θ cos² θ)',
+            'Therefore: l² m² (l² + m² + 3) = (sin² θ cos² θ) × [1 / (sin² θ cos² θ)] = 1. Hence Proved!'
           ],
-          commonTrap: 'Expanding into massive powers without using identity a^3 + b^3 = (a+b)^3 - 3ab(a+b).',
+          commonTrap: 'Expanding into massive powers without using identity a³ + b³ = (a+b)³ - 3ab(a+b).',
           isOriginalPractice: true,
           sourcePdfRef: 'CBSE Board HOTS Challenge',
           conceptId: 'ch8_c2'

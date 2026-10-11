@@ -19,7 +19,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Area = πr² = π(a/2)² = πa²/4"
     ],
     explanation: "When a circle is inscribed in a square, the diameter equals the side of the square.",
-    formula: "r = a/2, \\quad A = \\pi r^2 = \\pi a^2/4",
+    formula: "r = a/2, \\quad A = \\pi r² = \\pi a²/4",
     examinerNote: "Inscribed circle: diameter = side. Circumscribed circle: diameter = diagonal.",
     source: "NCERT Exemplar"
   },
@@ -44,7 +44,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Area of sector = (θ/360) × πr²"
     ],
     explanation: "A sector with central angle θ is (θ/360)th part of the full circle.",
-    formula: "\\text{Area of sector} = \\frac{\\theta}{360} \\times \\pi r^2",
+    formula: "\\text{Area of sector} = \\frac{\\theta}{360} \\times \\pi r²",
     examinerNote: "Option (c) is arc length, not area. Confusing area and arc length is the most common error here.",
     source: "NCERT Section 12.2"
   },
@@ -110,7 +110,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Area = ½ × base × height = ½ × 2r × r = r²"
     ],
     explanation: "The largest inscribed triangle has base = diameter and height = radius, giving Area = r².",
-    formula: "A = \\frac{1}{2} \\times 2r \\times r = r^2",
+    formula: "A = \\frac{1}{2} \\times 2r \\times r = r²",
     examinerNote: "Classic NCERT concept. Area of this triangle = r², NOT πr²/2 (which is the semicircle area).",
     source: "NCERT Exemplar"
   },
@@ -131,7 +131,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Diameter = 2r = 4 units"
     ],
     explanation: "Setting 2πr = πr² gives r = 2, so diameter = 4.",
-    formula: "2\\pi r = \\pi r^2 \\implies r = 2, \\text{ diameter} = 4",
+    formula: "2\\pi r = \\pi r² \\implies r = 2, \\text{ diameter} = 4",
     examinerNote: "Very common 1-mark trap. Answer is diameter (4), not radius (2).",
     source: "NCERT Exemplar / Board PYQ"
   },
@@ -154,7 +154,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "= 50.24/12 ≈ 4.19 cm²"
     ],
     explanation: "Direct application of sector area formula.",
-    formula: "A = \\frac{30}{360} \\times \\pi r^2",
+    formula: "A = \\frac{30}{360} \\times \\pi r²",
     examinerNote: "Use π = 3.14 only if specified. Otherwise leave answer in terms of π.",
     source: "NCERT Exercise 12.1 Q4"
   },
@@ -193,7 +193,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Area of minor segment = 78.5 − 50 = 28.5 cm²"
     ],
     explanation: "Segment area = Sector area − Triangle area. For 90°, triangle area = ½r².",
-    formula: "A_{seg} = A_{sector} - A_{triangle} = \\frac{\\theta}{360}\\pi r^2 - \\frac{1}{2}r^2\\sin\\theta",
+    formula: "A_{seg} = A_{sector} - A_{triangle} = \\frac{\\theta}{360}\\pi r² - \\frac{1}{2}r²\\sin\\theta",
     examinerNote: "This is the most tested problem type in Chapter 12. Practice all angles: 30°, 60°, 90°, 120°.",
     source: "NCERT Exercise 12.2 Q5"
   },
@@ -219,7 +219,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Total shaded area (2 segments) = 2 × (231 − 441√3/4) = 462 − 441√3/2 cm²"
     ],
     explanation: "When chord = radius, the triangle formed is equilateral (all sides = r), so central angle = 60°.",
-    formula: "A_{shaded} = 2 \\times \\left(\\frac{60}{360}\\pi r^2 - \\frac{\\sqrt{3}}{4}r^2\\right)",
+    formula: "A_{shaded} = 2 \\times \\left(\\frac{60}{360}\\pi r² - \\frac{\\sqrt{3}}{4}r²\\right)",
     examinerNote: "CBSE frequently tests 'chord = radius ⟹ equilateral triangle ⟹ 60° sector'. Memorize this.",
     source: "NCERT Exemplar / Board PYQ 2021"
   },
@@ -239,7 +239,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Area of segment = 231 - 441√3/4 cm²"
     ],
     explanation: "Three-part question testing arc length, sector area, and segment area for a 60° sector.",
-    formula: "l = \\frac{\\theta}{360} \\cdot 2\\pi r, \\quad A_{sector} = \\frac{\\theta}{360}\\pi r^2, \\quad A_{seg} = A_{sector} - A_{\\triangle}",
+    formula: "l = \\frac{\\theta}{360} \\cdot 2\\pi r, \\quad A_{sector} = \\frac{\\theta}{360}\\pi r², \\quad A_{seg} = A_{sector} - A_{\\triangle}",
     examinerNote: "This 3-part question is the most classic example in Chapter 12. All three formulas must be memorized.",
     source: "NCERT Exercise 12.2 Q4"
   },
@@ -259,7 +259,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "= (22 × 306.25)/(70) = 6737.5/70 = 96.25 mm²"
     ],
     explanation: "10 equal sectors each have 36°. Apply sector area formula for each.",
-    formula: "A = \\frac{36}{360} \\times \\pi r^2",
+    formula: "A = \\frac{36}{360} \\times \\pi r²",
     examinerNote: "Calculate r correctly: diameter = 35 mm, so r = 17.5 mm (not 35 mm).",
     source: "NCERT Exercise 12.1 Q6"
   },
@@ -284,7 +284,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "= 196 − 154 = 42 cm²"
     ],
     explanation: "The four quarter circles together form one full circle. Shaded area = Square − Full circle area.",
-    formula: "A_{shaded} = a^2 - 4 \\times \\frac{1}{4}\\pi r^2 = a^2 - \\pi r^2",
+    formula: "A_{shaded} = a² - 4 \\times \\frac{1}{4}\\pi r² = a² - \\pi r²",
     examinerNote: "Extremely common 5-mark question. 4 × (1/4 circle) = 1 full circle. State this clearly.",
     source: "NCERT Exercise 12.3 Q4 / Board 2023"
   },
@@ -305,7 +305,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Area of minor segment = 3850/3 - 1225√3/4 cm²"
     ],
     explanation: "For 120° sector, triangle OAB uses sin(120°) = √3/2. Area of segment = sector − triangle.",
-    formula: "A_{\\triangle} = \\frac{1}{2}r^2 \\sin\\theta",
+    formula: "A_{\\triangle} = \\frac{1}{2}r² \\sin\\theta",
     examinerNote: "For 120° case, sin(120°) = √3/2. For 60°, sin(60°) = √3/2. For 90°, sin(90°) = 1.",
     source: "NCERT Exemplar / Board 2022"
   },
@@ -328,7 +328,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Area the horse cannot graze = 441 − 154 = 287 m²"
     ],
     explanation: "Horse tied at corner of square: grazing area = 90° sector (quarter circle).",
-    formula: "A_{graze} = \\frac{90}{360}\\pi r^2 = \\frac{\\pi r^2}{4}",
+    formula: "A_{graze} = \\frac{90}{360}\\pi r² = \\frac{\\pi r²}{4}",
     examinerNote: "Very common real-life application of sectors. Always confirm the angle is 90° for a square corner.",
     source: "NCERT Exercise 12.2 Q7 / Board 2022"
   },
@@ -369,7 +369,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "This equals one full circle area, and the shaded region = 2 semicircles = 154 cm²."
     ],
     explanation: "Two semicircles with diameter = side of square together make one full circle.",
-    formula: "A_{shaded} = 2 \\times \\frac{1}{2}\\pi r^2 = \\pi r^2",
+    formula: "A_{shaded} = 2 \\times \\frac{1}{2}\\pi r² = \\pi r²",
     source: "NCERT Exemplar / Board PYQ"
   },
   {
@@ -387,7 +387,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "= (22 × 49)/(7 × 16) = 1078/112 = 77/8 cm²"
     ],
     explanation: "Find r from circumference, then apply (1/4)πr² for quadrant (90° sector).",
-    formula: "r = \\frac{C}{2\\pi}, \\quad A = \\frac{1}{4}\\pi r^2",
+    formula: "r = \\frac{C}{2\\pi}, \\quad A = \\frac{1}{4}\\pi r²",
     examinerNote: "Common 2-mark question. Quadrant = ¼ circle = sector with 90°.",
     source: "NCERT Exercise 12.1 Q5"
   },
@@ -445,7 +445,7 @@ export const CH11_QUESTIONS: VaultQuestion[] = [
       "Area of minor segment = 462 − 190.6 ≈ 271.4 cm²"
     ],
     explanation: "For 120° chord, use sin(120°) = √3/2 for the triangle area.",
-    formula: "A_{seg} = \\frac{120}{360}\\pi r^2 - \\frac{1}{2}r^2\\sin 120°",
+    formula: "A_{seg} = \\frac{120}{360}\\pi r² - \\frac{1}{2}r²\\sin 120°",
     examinerNote: "sin(120°) = sin(180° - 60°) = sin(60°) = √3/2. Board examiners check this correctly.",
     source: "NCERT Exercise 12.2 Q9"
   }

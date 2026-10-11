@@ -24,7 +24,7 @@ export const CH10_DATA: ChapterData = {
     keyRelationships: [
       'Right triangle inradius formula: For a right triangle with legs a and b and hypotenuse c, the inradius is r = (a + b - c) / 2.',
       'Angle bisector: The center of the circle lies on the bisector of the angle between the two tangents (∠APO = ∠BPO).',
-      'Chord length in concentric circles: If R is outer radius and r is inner radius, chord length L = 2 * sqrt(R^2 - r^2).'
+      'Chord length in concentric circles: If R is outer radius and r is inner radius, chord length L = 2 × √(R² - r²).'
     ],
     frequentMisunderstandings: [
       'Forgetting that tangent is perpendicular ONLY to the radius drawn to the point of contact, not to arbitrary chords.',
@@ -58,15 +58,15 @@ export const CH10_DATA: ChapterData = {
           stepByStepSolution: [
             'By Theorem 10.1, the radius through the point of contact is perpendicular to the tangent.',
             'Therefore, ∠OPQ = 90° in Triangle OPQ.',
-            'By Pythagoras Theorem: OQ^2 = OP^2 + PQ^2',
-            '12^2 = 5^2 + PQ^2',
-            '144 = 25 + PQ^2',
-            'PQ^2 = 144 - 25 = 119',
+            'By Pythagoras Theorem: OQ² = OP² + PQ²',
+            '12² = 5² + PQ²',
+            '144 = 25 + PQ²',
+            'PQ² = 144 - 25 = 119',
             'PQ = √119 cm.'
           ],
           finalAnswer: 'Length of PQ = √119 cm',
           verificationCheck: 'Hypotenuse OQ (12) must be greater than both legs OP (5) and PQ (√119 ≈ 10.9). 12 > 10.9 > 5. Verified!',
-          commonTrap: 'Mistaking PQ as the hypotenuse and writing PQ = sqrt(12^2 + 5^2) = 13 cm! OQ is the hypotenuse opposite to 90°.'
+          commonTrap: 'Mistaking PQ as the hypotenuse and writing PQ = √(12² + 5²) = 13 cm! OQ is the hypotenuse opposite to 90°.'
         }
       ],
       commonMisconceptions: [
@@ -100,7 +100,7 @@ export const CH10_DATA: ChapterData = {
           stepByStepSolution: [
             'By Theorem 10.1, OA ⟂ PA ⟹ ∠OAP = 90°.',
             'The line joining the external point P to center O bisects the angle between the tangents:',
-            '∠APO = (1/2) * ∠APB = (1/2) * 80° = 40°.',
+            '∠APO = ½ ×  ∠APB = ½ ×  80° = 40°.',
             'In right-angled Triangle OAP:',
             '∠POA + ∠APO + ∠OAP = 180°',
             '∠POA + 40° + 90° = 180°',
@@ -171,7 +171,7 @@ export const CH10_DATA: ChapterData = {
     {
       id: 'ch10_f2',
       name: 'Chord Length in Concentric Circles',
-      formula: 'L = 2\\sqrt{R^2 - r^2}',
+      formula: 'L = 2\\sqrt{R² - r²}',
       symbolMeanings: [
         { symbol: 'L', meaning: 'Length of chord of larger circle touching smaller circle' },
         { symbol: 'R', meaning: 'Radius of larger circle' },
@@ -179,10 +179,10 @@ export const CH10_DATA: ChapterData = {
       ],
       whenToUse: 'When two concentric circles are given and a chord of the outer circle touches the inner circle.',
       conditions: ['Concentric circles (same center O), R > r'],
-      commonSubstitutions: ['Perpendicular from center bisects the chord: half chord = sqrt(R^2 - r^2)'],
+      commonSubstitutions: ['Perpendicular from center bisects the chord: half chord = √(R² - r²)'],
       miniExample: {
         question: 'Two concentric circles have radii 5 cm and 3 cm. Find length of chord of larger circle touching smaller circle.',
-        substitution: 'L = 2 * sqrt(5^2 - 3^2) = 2 * sqrt(25 - 9) = 2 * sqrt(16) = 2 * 4 = 8 cm',
+        substitution: 'L = 2 × √(5² - 3²) = 2 × √(25 - 9) = 2 × √(16) = 2 × 4 = 8 cm',
         result: 'L = 8 cm'
       },
       commonMistakes: ['Forgetting to double the half-chord length (giving 4 cm instead of 8 cm).'],
@@ -250,11 +250,11 @@ export const CH10_DATA: ChapterData = {
       options: ['7 cm', '12 cm', '15 cm', '24.5 cm'],
       correctAnswer: '7 cm',
       marks: 1,
-      hints: ['By Pythagoras theorem in right triangle: r^2 + 24^2 = 25^2.'],
+      hints: ['By Pythagoras theorem in right triangle: r² + 24² = 25².'],
       solutionSteps: [
-        'r = sqrt(25^2 - 24^2) = sqrt(625 - 576) = sqrt(49) = 7 cm.'
+        'r = √(25² - 24²) = √(625 - 576) = √(49) = 7 cm.'
       ],
-      commonTrap: 'Adding 25^2 and 24^2.',
+      commonTrap: 'Adding 25² and 24².',
       isOriginalPractice: true,
       sourcePdfRef: 'NCERT Ch 10 Ex 10.2 Q1',
       conceptId: 'ch10_c1'
@@ -269,12 +269,12 @@ export const CH10_DATA: ChapterData = {
       options: ['4 cm', '8 cm', '6 cm', '10 cm'],
       correctAnswer: '8 cm',
       marks: 2,
-      hints: ['Half chord = sqrt(5^2 - 3^2) = 4 cm. Full chord = 2 * 4 = 8 cm.'],
+      hints: ['Half chord = √(5² - 3²) = 4 cm. Full chord = 2 × 4 = 8 cm.'],
       solutionSteps: [
         'Let O be the common center and AB be the chord of the outer circle touching the inner circle at P.',
         'OP is perpendicular to AB and OP = 3 cm, OA = 5 cm.',
-        'In right Triangle OPA: AP = sqrt(OA^2 - OP^2) = sqrt(25 - 9) = sqrt(16) = 4 cm.',
-        'Since perpendicular from center bisects the chord: AB = 2 * AP = 2 * 4 = 8 cm.'
+        'In right Triangle OPA: AP = √(OA² - OP²) = √(25 - 9) = √(16) = 4 cm.',
+        'Since perpendicular from center bisects the chord: AB = 2 × AP = 2 × 4 = 8 cm.'
       ],
       commonTrap: 'Stopping at AP = 4 cm without doubling to find the full chord AB.',
       isOriginalPractice: true,
@@ -315,17 +315,17 @@ export const CH10_DATA: ChapterData = {
       question: 'A triangle ABC is drawn to circumscribe a circle of radius 4 cm such that the segments BD and DC into which BC is divided by the point of contact D are of lengths 8 cm and 6 cm respectively. Find the sides AB and AC.',
       correctAnswer: 'AB = 15 cm, AC = 13 cm',
       marks: 4,
-      hints: ['Let AF = AE = x. Sides are a = 14, b = x + 6, c = x + 8. Equate Area by Heron formula to sum of areas of 3 triangles (1/2 * r * perimeter).'],
+      hints: ['Let AF = AE = x. Sides are a = 14, b = x + 6, c = x + 8. Equate Area by Heron formula to sum of areas of 3 triangles (½ × r × perimeter).'],
       solutionSteps: [
         'Let circle touch AB at F and AC at E. By Theorem 10.2: BD = BF = 8 cm, CD = CE = 6 cm. Let AF = AE = x.',
         'Sides of triangle: BC = 8 + 6 = 14 cm, AB = x + 8, AC = x + 6.',
         'Semi-perimeter s = (14 + x + 8 + x + 6) / 2 = (28 + 2x) / 2 = 14 + x.',
-        'Area using Heron Formula: ar(ABC) = sqrt(s(s - a)(s - b)(s - c))',
-        '= sqrt((14 + x)(x)(6)(8)) = sqrt(48x(14 + x)).',
-        'Also, Area = ar(OBC) + ar(OAB) + ar(OAC) = (1/2)*4*(14) + (1/2)*4*(x + 8) + (1/2)*4*(x + 6)',
-        '= 2 * [14 + x + 8 + x + 6] = 2 * (28 + 2x) = 4(14 + x).',
-        'Equate both areas: sqrt(48x(14 + x)) = 4(14 + x).',
-        'Square both sides: 48x(14 + x) = 16(14 + x)^2.',
+        'Area using Heron Formula: ar(ABC) = √(s(s - a)(s - b)(s - c))',
+        '= √((14 + x)(x)(6)(8)) = √(48x(14 + x)).',
+        'Also, Area = ar(OBC) + ar(OAB) + ar(OAC) = ½ × 4 × 14 + ½ × 4 × (x + 8) + ½ × 4 × (x + 6)',
+        '= 2 × [14 + x + 8 + x + 6] = 2(28 + 2x) = 4(14 + x).',
+        'Equate both areas: √(48x(14 + x)) = 4(14 + x).',
+        'Square both sides: 48x(14 + x) = 16(14 + x)².',
         'Since 14 + x ≠ 0: 48x = 16(14 + x) ⟹ 3x = 14 + x ⟹ 2x = 14 ⟹ x = 7 cm.',
         'Therefore: AB = x + 8 = 7 + 8 = 15 cm; AC = x + 6 = 7 + 6 = 13 cm.'
       ],
@@ -398,14 +398,14 @@ export const CH10_DATA: ChapterData = {
       id: 'ch10_err1',
       title: 'Applying Pythagoras Theorem with Wrong Hypotenuse',
       mistakeCategory: 'Formula & Substitution',
-      flawedWorking: 'Given OP = 5 cm (radius) and OQ = 13 cm (distance to external point), student writes PQ = sqrt(13^2 + 5^2).',
+      flawedWorking: 'Given OP = 5 cm (radius) and OQ = 13 cm (distance to external point), student writes PQ = √(13² + 5²).',
       whyItIsWrong: 'The 90° angle is at P (point of contact). Therefore, OQ is the hypotenuse, NOT PQ.',
-      correctWorking: 'PQ = sqrt(OQ^2 - OP^2) = sqrt(13^2 - 5^2) = sqrt(169 - 25) = sqrt(144) = 12 cm.',
+      correctWorking: 'PQ = √(OQ² - OP²) = √(13² - 5²) = √(169 - 25) = √(144) = 12 cm.',
       howToAvoid: 'Always draw the 90° box at the point of contact on the circumference. The side opposite to 90° (line to center O) is ALWAYS the hypotenuse.',
       retryQuestion: {
         question: 'If radius is 6 cm and distance from center to external point is 10 cm, find tangent length.',
         correctAnswer: '8 cm',
-        explanation: 'PQ = sqrt(10^2 - 6^2) = sqrt(64) = 8 cm.'
+        explanation: 'PQ = √(10² - 6²) = √(64) = 8 cm.'
       }
     }
   ],
@@ -416,7 +416,7 @@ export const CH10_DATA: ChapterData = {
       'Angle between tangents and angle at center are supplementary: ∠APB + ∠AOB = 180°.',
       'Circumscribed quadrilateral: AB + CD = AD + BC.',
       'Circumscribed parallelogram is ALWAYS a rhombus.',
-      'Concentric circles chord length: L = 2 * sqrt(R^2 - r^2).'
+      'Concentric circles chord length: L = 2 × √(R² - r²).'
     ],
     speedTips: [
       'If angle between tangents is 60°, Triangle PAB is equilateral (all sides equal)!',
@@ -480,10 +480,10 @@ export const CH10_DATA: ChapterData = {
           question: 'The radii of two concentric circles are 13 cm and 5 cm. Find the length of each chord of one circle which touches the other circle.',
           correctAnswer: '24 cm',
           marks: 2,
-          hints: ['Half chord = sqrt(13^2 - 5^2) = 12 cm. Full chord = 24 cm.'],
+          hints: ['Half chord = √(13² - 5²) = 12 cm. Full chord = 24 cm.'],
           solutionSteps: [
-            'Half chord = sqrt(13^2 - 5^2) = sqrt(169 - 25) = sqrt(144) = 12 cm.',
-            'Full chord = 2 * 12 = 24 cm.'
+            'Half chord = √(13² - 5²) = √(169 - 25) = √(144) = 12 cm.',
+            'Full chord = 2 × 12 = 24 cm.'
           ],
           commonTrap: 'Stopping at 12 cm.',
           isOriginalPractice: true,
@@ -546,9 +546,9 @@ export const CH10_DATA: ChapterData = {
           question: 'In a right-angled triangle ABC, ∠B = 90°, a circle is inscribed with center O and radius r touching sides AB, BC, CA at P, Q, R. If AB = 8 cm and BC = 6 cm, find the inradius r.',
           correctAnswer: '2 cm',
           marks: 4,
-          hints: ['Hypotenuse AC = sqrt(8^2 + 6^2) = 10 cm. Inradius r = (AB + BC - AC) / 2.'],
+          hints: ['Hypotenuse AC = √(8² + 6²) = 10 cm. Inradius r = (AB + BC - AC) / 2.'],
           solutionSteps: [
-            'In right Triangle ABC: AC = sqrt(AB^2 + BC^2) = sqrt(8^2 + 6^2) = sqrt(64 + 36) = sqrt(100) = 10 cm.',
+            'In right Triangle ABC: AC = √(AB² + BC²) = √(8² + 6²) = √(64 + 36) = √(100) = 10 cm.',
             'Note that OPBQ is a square of side r (since ∠B = 90°, ∠OPB = 90°, ∠OQB = 90° and OP = OQ = r).',
             'Therefore, BP = BQ = r.',
             'By Theorem 10.2: AP = AR = AB - BP = 8 - r.',

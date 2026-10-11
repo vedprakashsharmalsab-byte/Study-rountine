@@ -75,12 +75,12 @@ export const CH6_DATA: ChapterData = {
             'By BPT: AD / DB = AE / EC',
             'x / (x - 2) = (x + 2) / (x - 1)',
             'Cross-multiply: x(x - 1) = (x - 2)(x + 2)',
-            'Expand both sides: x^2 - x = x^2 - 4',
-            'Subtract x^2 from both sides: -x = -4 ⟹ x = 4.'
+            'Expand both sides: x² - x = x² - 4',
+            'Subtract x² from both sides: -x = -4 ⟹ x = 4.'
           ],
           finalAnswer: 'x = 4',
           verificationCheck: 'AD = 4, DB = 2 (ratio 4/2 = 2); AE = 6, EC = 3 (ratio 6/3 = 2). Correct!',
-          commonTrap: 'Expanding (x - 2)(x + 2) incorrectly as x^2 - 4x + 4 instead of difference of squares x^2 - 4.'
+          commonTrap: 'Expanding (x - 2)(x + 2) incorrectly as x² - 4x + 4 instead of difference of squares x² - 4.'
         }
       ],
       commonMisconceptions: [
@@ -120,7 +120,7 @@ export const CH6_DATA: ChapterData = {
             'Therefore, Triangle ABC ~ Triangle PQR (by AA similarity criterion).',
             'Since corresponding sides of similar triangles are proportional:',
             'AB / PQ = BC / QR ⟹ 6 / h = 4 / 28',
-            'Simplify: 6 / h = 1 / 7 ⟹ h = 6 * 7 = 42 m.'
+            'Simplify: 6 / h = 1 / 7 ⟹ h = 6 × 7 = 42 m.'
           ],
           finalAnswer: 'Height of the tower = 42 m',
           verificationCheck: 'Ratio of height to shadow = 6/4 = 1.5. Tower: 42/28 = 1.5. Perfect match!',
@@ -150,7 +150,7 @@ export const CH6_DATA: ChapterData = {
       commonSubstitutions: ['If DB = AB - AD, write AD / (AB - AD) = AE / (AC - AE)'],
       miniExample: {
         question: 'If AD/DB = 3/4 and AC = 14 cm, find AE.',
-        substitution: 'AE / AC = AD / AB = 3 / (3 + 4) = 3/7 ⟹ AE = (3/7) * 14',
+        substitution: 'AE / AC = AD / AB = 3 / (3 + 4) = 3/7 ⟹ AE = (3/7) × 14',
         result: 'AE = 6 cm'
       },
       commonMistakes: ['Equating DE/BC to AD/DB instead of AD/AB.'],
@@ -190,9 +190,9 @@ export const CH6_DATA: ChapterData = {
       executionSteps: [
         'Step 1: State "Given" and "To Prove: AD/DB = AE/EC".',
         'Step 2: "Construction": Join BE and CD. Draw DM perpendicular to AC and EN perpendicular to AB.',
-        'Step 3: Area of Triangle ADE = (1/2) * AD * EN. Area of Triangle BDE = (1/2) * DB * EN.',
-        'Step 4: Ratio: ar(ADE) / ar(BDE) = [(1/2) * AD * EN] / [(1/2) * DB * EN] = AD / DB ... (Equation 1).',
-        'Step 5: Similarly, taking base AE and height DM: ar(ADE) = (1/2) * AE * DM, ar(DEC) = (1/2) * EC * DM.',
+        'Step 3: Area of Triangle ADE = ½ ×  AD × EN. Area of Triangle BDE = ½ ×  DB × EN.',
+        'Step 4: Ratio: ar(ADE) / ar(BDE) = [½ ×  AD × EN] / [½ ×  DB × EN] = AD / DB ... (Equation 1).',
+        'Step 5: Similarly, taking base AE and height DM: ar(ADE) = ½ ×  AE × DM, ar(DEC) = ½ ×  EC × DM.',
         'Step 6: Ratio: ar(ADE) / ar(DEC) = AE / EC ... (Equation 2).',
         'Step 7: Note that Triangle BDE and Triangle DEC are on the same base DE and between the same parallels DE and BC. Therefore, ar(BDE) = ar(DEC) ... (Equation 3).',
         'Step 8: From (1), (2), and (3), LHS are equal, hence AD/DB = AE/EC. Hence Proved!'
@@ -208,19 +208,19 @@ export const CH6_DATA: ChapterData = {
       recognitionClues: ['In figure, angle 1 = angle 2, prove that...', 'D is a point on side BC such that angle ADC = angle BAC'],
       requiredConcept: 'AA similarity criterion (two matching angles are sufficient).',
       whatIsGiven: 'Two triangles with common or vertically opposite angles, or alternate interior angles.',
-      whatMustBeFound: 'Similarity proof and subsequent side ratio deduction (e.g. CA^2 = CB * CD).',
+      whatMustBeFound: 'Similarity proof and subsequent side ratio deduction (e.g. CA² = CB × CD).',
       chosenMethod: 'Identify 2 pairs of equal angles, write similarity statement in strict vertex order, deduce ratio.',
       executionSteps: [
         'Step 1: In the two triangles to be compared, identify the first pair of equal angles (often given or right angles).',
         'Step 2: Identify the second pair of equal angles (often a shared common angle or vertically opposite angles).',
         'Step 3: Write: "Therefore, Triangle [XYZ] ~ Triangle [PQR] (by AA similarity criterion)".',
         'Step 4: Form the side ratio: XY/PQ = YZ/QR = XZ/PR.',
-        'Step 5: Cross-multiply the relevant pair to obtain the required identity (e.g. CA * CA = CB * CD ⟹ CA^2 = CB * CD).'
+        'Step 5: Cross-multiply the relevant pair to obtain the required identity (e.g. CA × CA = CB × CD ⟹ CA² = CB × CD).'
       ],
       verificationMethod: 'Ensure vertices in the numerator and denominator match corresponding angles.',
       commonTrap: 'Failing to mention the common angle clearly with full 3-letter notation (e.g. angle C = angle C or angle ACD = angle BCA).',
-      exemplarQuestion: 'D is a point on the side BC of a triangle ABC such that angle ADC = angle BAC. Prove that CA^2 = CB * CD.',
-      exemplarAnswer: 'In Triangle ADC and Triangle BAC: angle ADC = angle BAC (Given), angle ACD = angle BCA (Common angle C). By AA criterion, Triangle ADC ~ Triangle BAC. Therefore, CA / CB = CD / CA ⟹ CA^2 = CB * CD. Hence Proved.'
+      exemplarQuestion: 'D is a point on the side BC of a triangle ABC such that angle ADC = angle BAC. Prove that CA² = CB × CD.',
+      exemplarAnswer: 'In Triangle ADC and Triangle BAC: angle ADC = angle BAC (Given), angle ACD = angle BCA (Common angle C). By AA criterion, Triangle ADC ~ Triangle BAC. Therefore, CA / CB = CD / CA ⟹ CA² = CB × CD. Hence Proved.'
     }
   ],
   gradedQuestions: [
@@ -237,7 +237,7 @@ export const CH6_DATA: ChapterData = {
       hints: ['By BPT: AD/DB = AE/EC. Find EC first, then AC = AE + EC.'],
       solutionSteps: [
         'By BPT: AD / DB = AE / EC',
-        '3 / 5 = 6 / EC ⟹ EC = (6 * 5) / 3 = 10 cm',
+        '3 / 5 = 6 / EC ⟹ EC = (6 × 5) / 3 = 10 cm',
         'Total length AC = AE + EC = 6 + 10 = 16 cm.'
       ],
       commonTrap: 'Picking 10 cm directly without adding AE = 6 to get total AC!',
@@ -284,12 +284,12 @@ export const CH6_DATA: ChapterData = {
       marks: 3,
       hints: [
         'Convert height to metres: 90 cm = 0.9 m.',
-        'Distance walked in 4 s = 1.2 * 4 = 4.8 m.',
+        'Distance walked in 4 s = 1.2 × 4 = 4.8 m.',
         'Use similarity of the girl-shadow triangle with the lamp-ground triangle.'
       ],
       solutionSteps: [
         'Let AB be the lamp-post = 3.6 m, CD be the girl = 0.9 m.',
-        'Distance walked BD = speed * time = 1.2 m/s * 4 s = 4.8 m.',
+        'Distance walked BD = speed × time = 1.2 m/s × 4 s = 4.8 m.',
         'Let length of shadow DE = x metres.',
         'In Triangle ABE and Triangle CDE:',
         'angle B = angle D = 90 degrees (both perpendicular to ground)',
@@ -334,8 +334,8 @@ export const CH6_DATA: ChapterData = {
       topic: 'Challenge Similarity Proof',
       level: 5,
       levelLabel: 'Level 5 — Challenge',
-      question: 'In Triangle ABC, AD is an altitude and AE is the diameter of circumcircle of Triangle ABC. Prove that AB * AC = AE * AD.',
-      correctAnswer: 'Hence Proved: AB * AC = AE * AD',
+      question: 'In Triangle ABC, AD is an altitude and AE is the diameter of circumcircle of Triangle ABC. Prove that AB × AC = AE × AD.',
+      correctAnswer: 'Hence Proved: AB × AC = AE × AD',
       marks: 5,
       hints: ['Join EC. Use the theorem that angle in a semi-circle is 90 degrees (angle ACE = 90 degrees). Use AA similarity between Triangle ABD and Triangle AEC.'],
       solutionSteps: [
@@ -347,7 +347,7 @@ export const CH6_DATA: ChapterData = {
         'angle ABD = angle AEC (angles subtended by the same arc AC of circumcircle are equal)',
         'By AA similarity criterion: Triangle ABD ~ Triangle AEC.',
         'Corresponding sides are proportional: AB / AE = AD / AC.',
-        'Cross-multiply: AB * AC = AE * AD. Hence Proved!'
+        'Cross-multiply: AB × AC = AE × AD. Hence Proved!'
       ],
       commonTrap: 'Forgetting that angles subtended by the same arc in the same segment of a circle are equal.',
       isOriginalPractice: true,
@@ -369,7 +369,7 @@ export const CH6_DATA: ChapterData = {
         { step: 'Ratios of areas of triangles with altitude EN', marks: 1.5 },
         { step: 'Equality of areas on same base and final conclusion AD/DB = AE/EC', marks: 1.5 }
       ],
-      fullSolution: 'Statement: If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, the other two sides are divided in the same ratio.\n\nGiven: In Triangle ABC, DE || BC intersecting AB at D and AC at E.\nTo Prove: AD/DB = AE/EC.\nConstruction: Join BE and CD. Draw DM perpendicular to AC and EN perpendicular to AB.\n\nProof:\nar(ADE) = 1/2 * AD * EN\nar(BDE) = 1/2 * DB * EN\nar(ADE) / ar(BDE) = AD / DB ... (1)\n\nar(ADE) = 1/2 * AE * DM\nar(DEC) = 1/2 * EC * DM\nar(ADE) / ar(DEC) = AE / EC ... (2)\n\nTriangle BDE and Triangle DEC lie on the same base DE and between the same parallel lines DE and BC.\nTherefore, ar(BDE) = ar(DEC) ... (3)\n\nFrom (1), (2), and (3): AD / DB = AE / EC. Hence Proved.',
+      fullSolution: 'Statement: If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, the other two sides are divided in the same ratio.\n\nGiven: In Triangle ABC, DE || BC intersecting AB at D and AC at E.\nTo Prove: AD/DB = AE/EC.\nConstruction: Join BE and CD. Draw DM perpendicular to AC and EN perpendicular to AB.\n\nProof:\nar(ADE) = ½ × AD × EN\nar(BDE) = ½ × DB × EN\nar(ADE) / ar(BDE) = AD / DB ... (1)\n\nar(ADE) = ½ × AE × DM\nar(DEC) = ½ × EC × DM\nar(ADE) / ar(DEC) = AE / EC ... (2)\n\nTriangle BDE and Triangle DEC lie on the same base DE and between the same parallel lines DE and BC.\nTherefore, ar(BDE) = ar(DEC) ... (3)\n\nFrom (1), (2), and (3): AD / DB = AE / EC. Hence Proved.',
       commonMistake: 'Writing formula without declaring altitudes EN and DM or omitting reason (3) for equality of triangle areas.',
       frequencyTrend: 'Repeated 6 times in past 10 years (Standard & Basic sets).',
       source: 'CBSE Official Board Examination'
@@ -418,7 +418,7 @@ export const CH6_DATA: ChapterData = {
       'In trapezium ABCD with AB || CD: Diagonals satisfy AO/CO = BO/DO.'
     ],
     speedTips: [
-      'Ratio shortcut: If AD : DB = 2 : 3, then AD : AB = 2 : 5 and area ratio of ADE to ABC is 2^2 : 5^2 = 4 : 25.',
+      'Ratio shortcut: If AD : DB = 2 : 3, then AD : AB = 2 : 5 and area ratio of ADE to ABC is 2² : 5² = 4 : 25.',
       'Shadow problems: Height / Shadow = constant for all objects at the same time.',
       'To prove parallel: show AD/DB = AE/EC (Converse of BPT).'
     ],
@@ -508,7 +508,7 @@ export const CH6_DATA: ChapterData = {
           hints: ['Stick: 20/15 = 4/3. Tower: h / 45 = 4/3.'],
           solutionSteps: [
             'By AA similarity: Height1 / Shadow1 = Height2 / Shadow2',
-            '20 / 15 = h / 45 ⟹ 4 / 3 = h / 45 ⟹ h = 4 * 15 = 60 m.'
+            '20 / 15 = h / 45 ⟹ 4 / 3 = h / 45 ⟹ h = 4 × 15 = 60 m.'
           ],
           commonTrap: 'Forgetting to check units (ratio is unitless if both in cm).',
           isOriginalPractice: true,
@@ -528,9 +528,9 @@ export const CH6_DATA: ChapterData = {
           solutionSteps: [
             '(5x - 7) / (2x + 1) = (7x - 5) / (7x + 1)',
             '(5x - 7)(7x + 1) = (2x + 1)(7x - 5)',
-            '35x^2 + 5x - 49x - 7 = 14x^2 - 10x + 7x - 5',
-            '35x^2 - 44x - 7 = 14x^2 - 3x - 5',
-            '21x^2 - 41x - 2 = 0',
+            '35x² + 5x - 49x - 7 = 14x² - 10x + 7x - 5',
+            '35x² - 44x - 7 = 14x² - 3x - 5',
+            '21x² - 41x - 2 = 0',
             'Factorize: (x - 2)(21x + 1) = 0',
             'Since segment length must be positive, x = 2.'
           ],
@@ -554,7 +554,7 @@ export const CH6_DATA: ChapterData = {
             'Line DE is parallel to AB and passes through midpoint D of BC.',
             'By the Converse of Midpoint Theorem (or BPT where CD/DB = CE/EA = 1/1):',
             'E is the midpoint of AC.',
-            'Therefore, AE = (1/2) * AC = (1/2) * 12 = 6 cm.'
+            'Therefore, AE = ½ ×  AC = ½ ×  12 = 6 cm.'
           ],
           commonTrap: 'Confusing median with altitude.',
           isOriginalPractice: true,

@@ -9,12 +9,12 @@ export const CH7_DATA: ChapterData = {
     prerequisites: [
       'Cartesian plane, origin (0, 0), axes, and quadrants',
       'Plotting points (x, y)',
-      'Pythagorean theorem (a^2 + b^2 = c^2)',
+      'Pythagorean theorem (a² + b² = c²)',
       'Solving linear equations in one and two variables'
     ],
     coreIdeas: [
-      'Distance Formula: The distance between P(x1, y1) and Q(x2, y2) is derived directly from the Pythagorean theorem: PQ = sqrt((x2 - x1)^2 + (y2 - y1)^2). Distance from origin is simply sqrt(x^2 + y^2).',
-      'Section Formula (Internal Division): The coordinates of point P(x, y) dividing segment AB in ratio m1 : m2 are ((m1*x2 + m2*x1)/(m1 + m2), (m1*y2 + m2*y1)/(m1 + m2)).',
+      'Distance Formula: The distance between P(x1, y1) and Q(x2, y2) is derived directly from the Pythagorean theorem: PQ = √((x₂ - x₁)² + (y₂ - y₁)²). Distance from origin is simply √(x² + y²).',
+      'Section Formula (Internal Division): The coordinates of point P(x, y) dividing segment AB in ratio m1 : m2 are ((m₁x₂ + m₂x₁)/(m1 + m2), (m₁y₂ + m₂y₁)/(m1 + m2)).',
       'The k : 1 Ratio Hack: When the dividing ratio is unknown, ALWAYS assume ratio k : 1 instead of m : n. It reduces two variables to one single variable k.',
       'Midpoint Formula: Special case of section formula with ratio 1 : 1: M = ((x1 + x2)/2, (y1 + y2)/2).',
       'Parallelogram Diagonals Property: Diagonals of a parallelogram bisect each other. Therefore, Midpoint of diagonal AC = Midpoint of diagonal BD. This is the fastest method to find the unknown fourth vertex without using distance formula!',
@@ -27,7 +27,7 @@ export const CH7_DATA: ChapterData = {
       'Trisection of line segment AB: Two points P and Q such that P divides AB in 1 : 2 and Q divides AB in 2 : 1 (or Q is the midpoint of PB).'
     ],
     frequentMisunderstandings: [
-      'Sign errors inside the distance formula: e.g., (x2 - (-x1))^2 becomes (x2 + x1)^2, but students frequently miss the double negative.',
+      'Sign errors inside the distance formula: e.g., (x2 - (-x1))² becomes (x2 + x1)², but students frequently miss the double negative.',
       'Swapping m1 and m2 in the section formula: m1 multiplies the FAR coordinate (x2), and m2 multiplies the NEAR coordinate (x1).',
       'Using distance formula to find the 4th vertex of a parallelogram (which creates messy simultaneous quadratic equations) instead of using the midpoint equality of diagonals (which is instant and linear).'
     ],
@@ -39,8 +39,8 @@ export const CH7_DATA: ChapterData = {
       title: 'Distance Formula & Applications',
       topic: 'Distance Formula',
       simpleExplanation: 'Imagine walking along the grid: the straight line distance between any two points is just the hypotenuse of a right-angled triangle formed by the horizontal and vertical differences!',
-      exactMathIdea: 'The distance d between two points P(x1, y1) and Q(x2, y2) in the Cartesian plane is given by d = sqrt((x2 - x1)^2 + (y2 - y1)^2). Distance of point P(x, y) from origin O(0, 0) is sqrt(x^2 + y^2).',
-      formulaOrTheorem: 'd = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}, \\quad \\text{Distance from origin } = \\sqrt{x^2 + y^2}',
+      exactMathIdea: 'The distance d between two points P(x1, y1) and Q(x2, y2) in the Cartesian plane is given by d = √((x₂ - x₁)² + (y₂ - y₁)²). Distance of point P(x, y) from origin O(0, 0) is √(x² + y²).',
+      formulaOrTheorem: 'd = \\sqrt{(x₂ - x₁)² + (y₂ - y₁)²}, \\quad \\text{Distance from origin } = \\sqrt{x² + y²}',
       whenToUse: 'When finding lengths of sides, testing for right/isosceles/equilateral triangles, proving collinearity, or finding points equidistant from two given points.',
       recognitionClues: [
         'Find the distance between points',
@@ -57,13 +57,13 @@ export const CH7_DATA: ChapterData = {
           methodSelectionReason: 'Direct application of the standard distance formula.',
           stepByStepSolution: [
             'Let (x1, y1) = (-5, 7) and (x2, y2) = (-1, 3).',
-            'AB = sqrt((x2 - x1)^2 + (y2 - y1)^2)',
-            'Substitute coordinates: AB = sqrt((-1 - (-5))^2 + (3 - 7)^2)',
-            'AB = sqrt((-1 + 5)^2 + (-4)^2) = sqrt(4^2 + 16)',
-            'AB = sqrt(16 + 16) = sqrt(32) = 4 * sqrt(2) units.'
+            'AB = √((x₂ - x₁)² + (y₂ - y₁)²)',
+            'Substitute coordinates: AB = √((-1 - (-5))² + (3 - 7)²)',
+            'AB = √((-1 + 5)² + (-4)²) = √(4² + 16)',
+            'AB = √(16 + 16) = √(32) = 4 × √2 units.'
           ],
           finalAnswer: 'Distance = 4√2 units',
-          verificationCheck: 'Difference in x = 4, difference in y = 4. Hypotenuse = sqrt(16 + 16) = 4√2. Correct.',
+          verificationCheck: 'Difference in x = 4, difference in y = 4. Hypotenuse = √(16 + 16) = 4√2. Correct.',
           commonTrap: 'Writing (-1 - (-5)) as -6 instead of +4 (double negative sign mistake).'
         },
         {
@@ -72,22 +72,22 @@ export const CH7_DATA: ChapterData = {
           question: 'Find a point on the x-axis which is equidistant from (2, -5) and (-2, 9).',
           given: 'Point P lies on x-axis, equidistant from A(2, -5) and B(-2, 9).',
           toFind: 'Coordinates of point P.',
-          methodSelectionReason: 'Any point on the x-axis has y-coordinate 0, so let P = (x, 0). Condition PA = PB implies PA^2 = PB^2.',
+          methodSelectionReason: 'Any point on the x-axis has y-coordinate 0, so let P = (x, 0). Condition PA = PB implies PA² = PB².',
           stepByStepSolution: [
             'Let the point on the x-axis be P(x, 0).',
-            'Since P is equidistant from A(2, -5) and B(-2, 9), PA = PB ⟹ PA^2 = PB^2.',
-            'PA^2 = (x - 2)^2 + (0 - (-5))^2 = (x - 2)^2 + 25 = x^2 - 4x + 4 + 25 = x^2 - 4x + 29.',
-            'PB^2 = (x - (-2))^2 + (0 - 9)^2 = (x + 2)^2 + 81 = x^2 + 4x + 4 + 81 = x^2 + 4x + 85.',
-            'Equating PA^2 = PB^2: x^2 - 4x + 29 = x^2 + 4x + 85.',
-            'Subtract x^2: -4x + 29 = 4x + 85 ⟹ -8x = 56 ⟹ x = -7.'
+            'Since P is equidistant from A(2, -5) and B(-2, 9), PA = PB ⟹ PA² = PB².',
+            'PA² = (x - 2)² + (0 - (-5))² = (x - 2)² + 25 = x² - 4x + 4 + 25 = x² - 4x + 29.',
+            'PB² = (x - (-2))² + (0 - 9)² = (x + 2)² + 81 = x² + 4x + 4 + 81 = x² + 4x + 85.',
+            'Equating PA² = PB²: x² - 4x + 29 = x² + 4x + 85.',
+            'Subtract x²: -4x + 29 = 4x + 85 ⟹ -8x = 56 ⟹ x = -7.'
           ],
           finalAnswer: 'The required point is (-7, 0)',
-          verificationCheck: 'PA = sqrt((-7 - 2)^2 + 5^2) = sqrt(81 + 25) = sqrt(106). PB = sqrt((-7 + 2)^2 + (-9)^2) = sqrt(25 + 81) = sqrt(106). Both equal!',
-          commonTrap: 'Squaring the square root at the very end instead of working directly with PA^2 = PB^2 to avoid radical signs.'
+          verificationCheck: 'PA = √((-7 - 2)² + 5²) = √(81 + 25) = √(106). PB = √((-7 + 2)² + (-9)²) = √(25 + 81) = √(106). Both equal!',
+          commonTrap: 'Squaring the square root at the very end instead of working directly with PA² = PB² to avoid radical signs.'
         }
       ],
       commonMisconceptions: [
-        'Writing distance as negative (distance is always non-negative: d >= 0).'
+        'Writing distance as negative (distance is always non-negative: d ≥ 0).'
       ],
       priority: 'Must Master',
       cbseFrequency: 'Appears in 100% of CBSE board papers as 1-mark or 2-mark question.',
@@ -98,8 +98,8 @@ export const CH7_DATA: ChapterData = {
       title: 'Section Formula & Midpoint Formula',
       topic: 'Internal Division of Line Segment',
       simpleExplanation: 'If you stand on a straight rope between two friends at a ratio of 2 steps to 3 steps, the section formula gives your exact GPS coordinate!',
-      exactMathIdea: 'The coordinates of the point P(x, y) which divides the line segment joining A(x1, y1) and B(x2, y2) internally in the ratio m1 : m2 are given by P = ((m1*x2 + m2*x1)/(m1 + m2), (m1*y2 + m2*y1)/(m1 + m2)). When ratio is unknown, use ratio k : 1.',
-      formulaOrTheorem: 'P(x, y) = \\left( \\frac{m_1 x_2 + m_2 x_1}{m_1 + m_2}, \\; \\frac{m_1 y_2 + m_2 y_1}{m_1 + m_2} \\right), \\quad M = \\left( \\frac{x_1 + x_2}{2}, \\; \\frac{y_1 + y_2}{2} \\right)',
+      exactMathIdea: 'The coordinates of the point P(x, y) which divides the line segment joining A(x1, y1) and B(x2, y2) internally in the ratio m1 : m2 are given by P = ((m₁x₂ + m₂x₁)/(m1 + m2), (m₁y₂ + m₂y₁)/(m1 + m2)). When ratio is unknown, use ratio k : 1.',
+      formulaOrTheorem: 'P(x, y) = \\left( \\frac{m₁ x₂ + m₂ x₁}{m₁ + m₂}, \\; \\frac{m₁ y₂ + m₂ y₁}{m₁ + m₂} \\right), \\quad M = \\left( \\frac{x₁ + x₂}{2}, \\; \\frac{y₁ + y₂}{2} \\right)',
       whenToUse: 'When a point divides a segment in a given ratio, finding ratio of division by axes, points of trisection, or centroid of a triangle.',
       recognitionClues: [
         'Find the ratio in which the line segment is divided by the y-axis',
@@ -118,11 +118,11 @@ export const CH7_DATA: ChapterData = {
             'Let the y-axis divide the segment AB in the ratio k : 1 at point P.',
             'Since P lies on the y-axis, its coordinates are of the form (0, y).',
             'By Section Formula, x-coordinate of P is:',
-            'x = (k * (-1) + 1 * 5) / (k + 1) = (-k + 5) / (k + 1).',
+            'x = (k(-1) + 1(5)) / (k + 1) = (-k + 5) / (k + 1).',
             'Since x = 0: (-k + 5) / (k + 1) = 0 ⟹ -k + 5 = 0 ⟹ k = 5.',
             'Thus, the ratio is 5 : 1.',
             'Now find the y-coordinate of P with k = 5:',
-            'y = (5 * (-4) + 1 * (-6)) / (5 + 1) = (-20 - 6) / 6 = -26 / 6 = -13 / 3.'
+            'y = (5(-4) + 1(-6)) / (5 + 1) = (-20 - 6) / 6 = -26 / 6 = -13 / 3.'
           ],
           finalAnswer: 'Ratio = 5 : 1, Point of intersection = (0, -13/3)',
           verificationCheck: 'x = 0 confirms point lies on y-axis. 5(-1) + 5 = 0. Matches.',
@@ -141,34 +141,34 @@ export const CH7_DATA: ChapterData = {
     {
       id: 'ch7_f1',
       name: 'Distance Formula',
-      formula: 'd = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}',
+      formula: 'd = \\sqrt{(x₂ - x₁)² + (y₂ - y₁)²}',
       symbolMeanings: [
         { symbol: '(x1, y1), (x2, y2)', meaning: 'Coordinates of endpoints P and Q' },
         { symbol: 'd', meaning: 'Straight line Euclidean distance' }
       ],
       whenToUse: 'Calculating length of a side, testing collinearity, finding radius from center and point on circle.',
       conditions: ['Real Cartesian coordinates'],
-      commonSubstitutions: ['Distance from origin: d = sqrt(x^2 + y^2)'],
+      commonSubstitutions: ['Distance from origin: d = √(x² + y²)'],
       miniExample: {
         question: 'Find the distance of point P(3, -4) from the origin.',
-        substitution: 'd = sqrt(3^2 + (-4)^2) = sqrt(9 + 16) = sqrt(25)',
+        substitution: 'd = √(3² + (-4)²) = √(9 + 16) = √25',
         result: 'd = 5 units'
       },
-      commonMistakes: ['Writing (-4)^2 as -16 instead of +16.'],
+      commonMistakes: ['Writing (-4)² as -16 instead of +16.'],
       memoryTrick: 'Square the dx, square the dy, add them up and root the pie!',
       sourceTrace: 'NCERT Formula 7.1'
     },
     {
       id: 'ch7_f2',
       name: 'Section Formula (Internal Division)',
-      formula: 'P(x, y) = \\left( \\frac{m_1 x_2 + m_2 x_1}{m_1 + m_2}, \\; \\frac{m_1 y_2 + m_2 y_1}{m_1 + m_2} \\right)',
+      formula: 'P(x, y) = \\left( \\frac{m₁ x₂ + m₂ x₁}{m₁ + m₂}, \\; \\frac{m₁ y₂ + m₂ y₁}{m₁ + m₂} \\right)',
       symbolMeanings: [
         { symbol: 'm1 : m2', meaning: 'Ratio in which point P divides segment AB internally' },
         { symbol: '(x1, y1), (x2, y2)', meaning: 'Coordinates of point A and point B respectively' }
       ],
       whenToUse: 'When a point divides a segment into parts, or determining ratio.',
-      conditions: ['m1 + m2 != 0, internal division'],
-      commonSubstitutions: ['Let m1 : m2 = k : 1, then P = ((k*x2 + x1)/(k + 1), (k*y2 + y1)/(k + 1))'],
+      conditions: ['m1 + m2 ≠ 0, internal division'],
+      commonSubstitutions: ['Let m1 : m2 = k : 1, then P = ((kx₂ + x₁)/(k + 1), (ky₂ + y₁)/(k + 1))'],
       miniExample: {
         question: 'Find the midpoint of A(4, 6) and B(2, -2).',
         substitution: 'M = ((4 + 2)/2, (6 + (-2))/2) = (6/2, 4/2)',
@@ -211,7 +211,7 @@ export const CH7_DATA: ChapterData = {
       chosenMethod: 'P divides AB in 1 : 2. Q is then simply the midpoint of PB (or divides AB in 2 : 1).',
       executionSteps: [
         'Step 1: Point P divides segment AB internally in ratio 1 : 2.',
-        'Step 2: Use section formula for P: P = ((1*x2 + 2*x1)/(1 + 2), (1*y2 + 2*y1)/(1 + 2)).',
+        'Step 2: Use section formula for P: P = ((1x₂ + 2x₁)/(1 + 2), (1y₂ + 2y₁)/(1 + 2)).',
         'Step 3: Point Q divides segment AB internally in ratio 2 : 1 (or easier: Q is midpoint of PB).',
         'Step 4: Use midpoint formula for Q between P and B: Q = ((x_P + x2)/2, (y_P + y2)/2).',
         'Step 5: State coordinates of both points clearly.'
@@ -233,12 +233,12 @@ export const CH7_DATA: ChapterData = {
       options: ['8 units', '2√7 units', '10 units', '6 units'],
       correctAnswer: '10 units',
       marks: 1,
-      hints: ['Distance from origin = sqrt(x^2 + y^2).'],
+      hints: ['Distance from origin = √(x² + y²).'],
       solutionSteps: [
-        'd = sqrt((-6)^2 + 8^2)',
-        'd = sqrt(36 + 64) = sqrt(100) = 10 units.'
+        'd = √((-6)² + 8²)',
+        'd = √(36 + 64) = √(100) = 10 units.'
       ],
-      commonTrap: 'Confusing distance with coordinates or taking sqrt(8^2 - (-6)^2).',
+      commonTrap: 'Confusing distance with coordinates or taking √(8² - (-6)²).',
       isOriginalPractice: true,
       sourcePdfRef: 'CBSE 2023 MCQ',
       conceptId: 'ch7_c1'
@@ -276,9 +276,9 @@ export const CH7_DATA: ChapterData = {
       hints: ['On the x-axis, y = 0. Set (k(5) + 1(-5))/(k + 1) = 0 to find k.'],
       solutionSteps: [
         'Let the ratio be k : 1 and point on x-axis be P(x, 0).',
-        'y-coordinate of P: (k * 5 + 1 * (-5)) / (k + 1) = 0',
+        'y-coordinate of P: (k(5) + 1(-5)) / (k + 1) = 0',
         '5k - 5 = 0 ⟹ k = 1. So ratio is 1 : 1 (P is the midpoint!).',
-        'x-coordinate of P: (1 * (-4) + 1 * 1) / (1 + 1) = (-4 + 1) / 2 = -3/2.',
+        'x-coordinate of P: (1(-4) + 1(1)) / (1 + 1) = (-4 + 1) / 2 = -3/2.',
         'Therefore, the point of division is (-3/2, 0).'
       ],
       commonTrap: 'Setting x = 0 instead of y = 0 for point on x-axis.',
@@ -298,13 +298,13 @@ export const CH7_DATA: ChapterData = {
       hints: ['Find distances AB, BC, AC using distance formula. Check if the sum of any two equals the third.'],
       solutionSteps: [
         'Let A(1, 5), B(2, 3), and C(-2, -11).',
-        'AB = sqrt((2 - 1)^2 + (3 - 5)^2) = sqrt(1 + 4) = sqrt(5) units.',
-        'BC = sqrt((-2 - 2)^2 + (-11 - 3)^2) = sqrt((-4)^2 + (-14)^2) = sqrt(16 + 196) = sqrt(212) = 2 * sqrt(53) units.',
-        'AC = sqrt((-2 - 1)^2 + (-11 - 5)^2) = sqrt((-3)^2 + (-16)^2) = sqrt(9 + 256) = sqrt(265) units.',
-        'Since sqrt(5) + 2*sqrt(53) != sqrt(265), the sum of any two distances is not equal to the third distance.',
+        'AB = √((2 - 1)² + (3 - 5)²) = √(1 + 4) = √5 units.',
+        'BC = √((-2 - 2)² + (-11 - 3)²) = √((-4)² + (-14)²) = √(16 + 196) = √(212) = 2 × √(53) units.',
+        'AC = √((-2 - 1)² + (-11 - 5)²) = √((-3)² + (-16)²) = √(9 + 256) = √(265) units.',
+        'Since √5 + 2 × √(53) ≠ √(265), the sum of any two distances is not equal to the third distance.',
         'Therefore, the points A, B, and C are not collinear.'
       ],
-      commonTrap: 'Adding square roots directly: sqrt(5) + sqrt(212) != sqrt(217).',
+      commonTrap: 'Adding square roots directly: √5 + √(212) ≠ √(217).',
       isOriginalPractice: true,
       sourcePdfRef: 'NCERT Ch 7 Ex 7.1 Q3',
       conceptId: 'ch7_c1'
@@ -315,8 +315,8 @@ export const CH7_DATA: ChapterData = {
       topic: 'Challenge Centroid & Trisection Problem',
       level: 5,
       levelLabel: 'Level 5 — Challenge',
-      question: 'If the vertices of a triangle are (1, a), (2, b) and (c^2, 3), and its centroid is at the origin (0, 0), find the values of a, b, and c.',
-      correctAnswer: 'a + b = -3, c = ±√3 (imaginary c not allowed, so c^2 = -3 gives no real c, thus x-sum: 1 + 2 + c^2 = 0 => c^2 = -3. If first point is (-1, a), 1+2+c^2=3 gives c=0)',
+      question: 'If the vertices of a triangle are (1, a), (2, b) and (c², 3), and its centroid is at the origin (0, 0), find the values of a, b, and c.',
+      correctAnswer: 'a + b = -3, c = ±√3 (imaginary c not allowed, so c² = -3 gives no real c, thus x-sum: 1 + 2 + c² = 0 ⇒ c² = -3. If first point is (-1, a), 1+2+c²=3 gives c=0)',
       marks: 5,
       hints: ['Centroid G = ((x1 + x2 + x3)/3, (y1 + y2 + y3)/3) = (0, 0). Equate both x and y sums to 0.'],
       solutionSteps: [
@@ -340,11 +340,11 @@ export const CH7_DATA: ChapterData = {
       question: 'Find a point on the x-axis which is equidistant from the points A(2, -5) and B(-2, 9).',
       markingSchemeBreakdown: [
         { step: 'Assuming point P(x, 0) on x-axis', marks: 0.5 },
-        { step: 'Equating PA^2 = PB^2 and substituting coordinates', marks: 1.0 },
+        { step: 'Equating PA² = PB² and substituting coordinates', marks: 1.0 },
         { step: 'Expanding and simplifying algebraic equation', marks: 1.0 },
         { step: 'Final value x = -7 and writing point (-7, 0)', marks: 0.5 }
       ],
-      fullSolution: 'Let the required point on the x-axis be P(x, 0).\nGiven PA = PB ⟹ PA^2 = PB^2.\n\n(x - 2)^2 + (0 - (-5))^2 = (x - (-2))^2 + (0 - 9)^2\n(x - 2)^2 + 25 = (x + 2)^2 + 81\nx^2 - 4x + 4 + 25 = x^2 + 4x + 4 + 81\nx^2 - 4x + 29 = x^2 + 4x + 85\n-4x - 4x = 85 - 29\n-8x = 56 ⟹ x = -7.\n\nTherefore, the point on the x-axis is (-7, 0).',
+      fullSolution: 'Let the required point on the x-axis be P(x, 0).\nGiven PA = PB ⟹ PA² = PB².\n\n(x - 2)² + (0 - (-5))² = (x - (-2))² + (0 - 9)²\n(x - 2)² + 25 = (x + 2)² + 81\nx² - 4x + 4 + 25 = x² + 4x + 4 + 81\nx² - 4x + 29 = x² + 4x + 85\n-4x - 4x = 85 - 29\n-8x = 56 ⟹ x = -7.\n\nTherefore, the point on the x-axis is (-7, 0).',
       commonMistake: 'Forgetting to write the final answer as a coordinate pair (-7, 0) and leaving it as x = -7.',
       frequencyTrend: 'Appeared 5 times in the last 7 years across all Delhi and Outside Delhi sets.',
       source: 'CBSE Official Board Examination'
@@ -373,9 +373,9 @@ export const CH7_DATA: ChapterData = {
       id: 'ch7_err1',
       title: 'Mixing up x and y in Section Formula',
       mistakeCategory: 'Formula & Substitution',
-      flawedWorking: 'Student writes x = (m1*y2 + m2*y1)/(m1 + m2).',
+      flawedWorking: 'Student writes x = (m₁y₂ + m₂y₁)/(m1 + m2).',
       whyItIsWrong: 'x-coordinates are calculated exclusively from x1 and x2. y-coordinates are calculated exclusively from y1 and y2.',
-      correctWorking: 'x = (m1*x2 + m2*x1)/(m1 + m2) and y = (m1*y2 + m2*y1)/(m1 + m2).',
+      correctWorking: 'x = (m₁x₂ + m₂x₁)/(m1 + m2) and y = (m₁y₂ + m₂y₁)/(m1 + m2).',
       howToAvoid: 'Always separate your work into two distinct columns: one for x, one for y.',
       retryQuestion: {
         question: 'Find the midpoint of (2, 8) and (6, 4).',
@@ -386,9 +386,9 @@ export const CH7_DATA: ChapterData = {
   ],
   revisionSheet: {
     mustRememberPoints: [
-      'Distance formula: d = sqrt((x2 - x1)^2 + (y2 - y1)^2). Distance from origin = sqrt(x^2 + y^2).',
+      'Distance formula: d = √((x₂ - x₁)² + (y₂ - y₁)²). Distance from origin = √(x² + y²).',
       'On x-axis, y = 0. On y-axis, x = 0.',
-      'Section formula: P = ((m1*x2 + m2*x1)/(m1 + m2), (m1*y2 + m2*y1)/(m1 + m2)). Always use ratio k : 1 when ratio is unknown.',
+      'Section formula: P = ((m₁x₂ + m₂x₁)/(m1 + m2), (m₁y₂ + m₂y₁)/(m1 + m2)). Always use ratio k : 1 when ratio is unknown.',
       'Midpoint: M = ((x1 + x2)/2, (y1 + y2)/2).',
       'Parallelogram 4th vertex shortcut: Midpoint of AC = Midpoint of BD (x_A + x_C = x_B + x_D).',
       'Centroid of triangle: G = ((x1 + x2 + x3)/3, (y1 + y2 + y3)/3).'
@@ -399,7 +399,7 @@ export const CH7_DATA: ChapterData = {
       'Fourth vertex of parallelogram: D = A + C - B.'
     ],
     lastDayChecklist: [
-      'Are you working with PA^2 = PB^2 to eliminate the square root right away in equidistant problems?',
+      'Are you working with PA² = PB² to eliminate the square root right away in equidistant problems?',
       'Did you remember that m1 multiplies the FAR coordinate (x2) in section formula?',
       'Are you using the midpoint shortcut for parallelogram fourth vertex?'
     ]
@@ -455,10 +455,10 @@ export const CH7_DATA: ChapterData = {
           question: 'A point P divides the line segment AB in the ratio 1 : 2. If A is (2, 1) and B is (5, -8), find the coordinates of P.',
           correctAnswer: '(3, -2)',
           marks: 2,
-          hints: ['P = ((1*5 + 2*2)/3, (1*(-8) + 2*1)/3).'],
+          hints: ['P = ((1(5) + 2(2))/3, (1(-8) + 2(1))/3).'],
           solutionSteps: [
-            'x = (1 * 5 + 2 * 2) / (1 + 2) = (5 + 4) / 3 = 9 / 3 = 3',
-            'y = (1 * (-8) + 2 * 1) / (1 + 2) = (-8 + 2) / 3 = -6 / 3 = -2',
+            'x = (1(5) + 2(2)) / (1 + 2) = (5 + 4) / 3 = 9 / 3 = 3',
+            'y = (1(-8) + 2(1)) / (1 + 2) = (-8 + 2) / 3 = -6 / 3 = -2',
             'P = (3, -2).'
           ],
           commonTrap: 'Multiplying 1 with 2 and 2 with 5.',
@@ -482,12 +482,12 @@ export const CH7_DATA: ChapterData = {
           question: 'Find the value of y for which the distance between the points P(2, -3) and Q(10, y) is 10 units.',
           correctAnswer: '3 or -9',
           marks: 3,
-          hints: ['PQ^2 = (10 - 2)^2 + (y - (-3))^2 = 10^2 = 100.'],
+          hints: ['PQ² = (10 - 2)² + (y - (-3))² = 10² = 100.'],
           solutionSteps: [
-            '(10 - 2)^2 + (y + 3)^2 = 10^2',
-            '8^2 + (y + 3)^2 = 100',
-            '64 + (y + 3)^2 = 100',
-            '(y + 3)^2 = 36 ⟹ y + 3 = ±6',
+            '(10 - 2)² + (y + 3)² = 10²',
+            '8² + (y + 3)² = 100',
+            '64 + (y + 3)² = 100',
+            '(y + 3)² = 36 ⟹ y + 3 = ±6',
             'Case 1: y + 3 = 6 ⟹ y = 3',
             'Case 2: y + 3 = -6 ⟹ y = -9',
             'Values of y are 3 or -9.'
@@ -510,7 +510,7 @@ export const CH7_DATA: ChapterData = {
           solutionSteps: [
             'Let the ratio be k : 1. Point of division P = ((3k + 2)/(k + 1), (7k - 2)/(k + 1)).',
             'Since P lies on line 2x + y - 4 = 0:',
-            '2 * [(3k + 2)/(k + 1)] + [(7k - 2)/(k + 1)] - 4 = 0',
+            '2[(3k + 2)/(k + 1)] + [(7k - 2)/(k + 1)] - 4 = 0',
             'Multiply entire equation by (k + 1):',
             '2(3k + 2) + (7k - 2) - 4(k + 1) = 0',
             '6k + 4 + 7k - 2 - 4k - 4 = 0',

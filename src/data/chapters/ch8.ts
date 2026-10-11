@@ -2,7 +2,7 @@ import type { VaultQuestion } from "@/data/vaultQuestions";
 
 export const CH8_QUESTIONS: VaultQuestion[] = [
   {
-    "id": "vq_8_1m_1",
+    "id": "vq_8_1m₁",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 1,
@@ -28,7 +28,7 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "formula": "sin 30° = cos 60° = 1/2, sin 60° = cos 30° = √3/2"
   },
   {
-    "id": "vq_8_1m_2",
+    "id": "vq_8_1m₂",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 1,
@@ -196,7 +196,7 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "formula": "cosec θ = 1/sin θ, sec θ = 1/cos θ"
   },
   {
-    "id": "vq_8_2m_1",
+    "id": "vq_8_2m₁",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 2,
@@ -221,7 +221,7 @@ Step 3: Step 3: Expression = 1 + 1 − 2×(1/√2) = 2 − √2. [Final Result w
     "formula": "sin²θ + cos²θ = 1, tan θ = sin θ / cos θ"
   },
   {
-    "id": "vq_8_2m_2",
+    "id": "vq_8_2m₂",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 2,
@@ -279,19 +279,19 @@ Step 3: Step 3: tan A = P/B = 5/12. [Trigonometric Definition/Identity]
     "question": "Prove that: (sin θ − 2 sin³θ) / (2 cos³θ − cos θ) = tan θ.",
     "answer": `CBSE Topper Answer Sheet
 Section B (2M Short Answer)
-Governing Formula: \\sin^2\\theta + \\cos^2\\theta = 1
+Governing Formula: \\sin²\\theta + \\cos²\\theta = 1
 Full Score: 2 / 2 Marks
 
 Step 1: Factor out \\sin\\theta from the numerator and \\cos\\theta from the denominator.
-LHS = (\\sin\\theta - 2\\sin^3\\theta) / (2\\cos^3\\theta - \\cos\\theta)
-LHS = [\\sin\\theta (1 - 2\\sin^2\\theta)] / [\\cos\\theta (2\\cos^2\\theta - 1)]
+LHS = (\\sin\\theta - 2\\sin³\\theta) / (2\\cos³\\theta - \\cos\\theta)
+LHS = [\\sin\\theta (1 - 2\\sin²\\theta)] / [\\cos\\theta (2\\cos²\\theta - 1)]
 
-Step 2: Use the identity \\sin^2\\theta + \\cos^2\\theta = 1.
-LHS = [\\sin\\theta (\\sin^2\\theta + \\cos^2\\theta - 2\\sin^2\\theta)] / [\\cos\\theta (2\\cos^2\\theta - (\\sin^2\\theta + \\cos^2\\theta))]
-LHS = [\\sin\\theta (\\cos^2\\theta - \\sin^2\\theta)] / [\\cos\\theta (\\cos^2\\theta - \\sin^2\\theta)]
+Step 2: Use the identity \\sin²\\theta + \\cos²\\theta = 1.
+LHS = [\\sin\\theta (\\sin²\\theta + \\cos²\\theta - 2\\sin²\\theta)] / [\\cos\\theta (2\\cos²\\theta - (\\sin²\\theta + \\cos²\\theta))]
+LHS = [\\sin\\theta (\\cos²\\theta - \\sin²\\theta)] / [\\cos\\theta (\\cos²\\theta - \\sin²\\theta)]
 
 Step 3: Cancel common terms and simplify.
-The term (\\cos^2\\theta - \\sin^2\\theta) cancels out.
+The term (\\cos²\\theta - \\sin²\\theta) cancels out.
 LHS = \\sin\\theta / \\cos\\theta
 LHS = \\tan\\theta = RHS. ∎
 
@@ -353,7 +353,7 @@ Step 2: Step 2: Replace cos A with sin²A in the LHS to get the given condition.
     "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
   },
   {
-    "id": "vq_8_3m_1",
+    "id": "vq_8_3m₁",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 3,
@@ -379,7 +379,7 @@ Step 3: Step 3: Take square root to get (1+sinA)/cosA. [Trigonometric Definition
     "formula": "sin²θ + cos²θ = 1, tan θ = sin θ / cos θ"
   },
   {
-    "id": "vq_8_3m_2",
+    "id": "vq_8_3m₂",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 3,
@@ -387,7 +387,7 @@ Step 3: Step 3: Take square root to get (1+sinA)/cosA. [Trigonometric Definition
     "question": "Prove: (sin θ − cos θ + 1)/(sin θ + cos θ − 1) = 1/(sec θ − tan θ).",
     "answer": `CBSE Topper Answer Sheet
 Section C (3M Short Answer)
-Governing Formula: \\sec^2\\theta - \\tan^2\\theta = 1
+Governing Formula: \\sec²\\theta - \\tan²\\theta = 1
 Full Score: 3 / 3 Marks
 
 Step 1: Divide numerator and denominator by \\cos\\theta.
@@ -395,8 +395,8 @@ LHS = (\\sin\\theta - \\cos\\theta + 1) / (\\sin\\theta + \\cos\\theta - 1)
 LHS = (\\tan\\theta - 1 + \\sec\\theta) / (\\tan\\theta + 1 - \\sec\\theta)
 LHS = (\\tan\\theta + \\sec\\theta - 1) / (\\tan\\theta - \\sec\\theta + 1)
 
-Step 2: Replace 1 in the numerator with \\sec^2\\theta - \\tan^2\\theta.
-LHS = [ (\\sec\\theta + \\tan\\theta) - (\\sec^2\\theta - \\tan^2\\theta) ] / (\\tan\\theta - \\sec\\theta + 1)
+Step 2: Replace 1 in the numerator with \\sec²\\theta - \\tan²\\theta.
+LHS = [ (\\sec\\theta + \\tan\\theta) - (\\sec²\\theta - \\tan²\\theta) ] / (\\tan\\theta - \\sec\\theta + 1)
 
 Step 3: Factorize the substituted term.
 LHS = [ (\\sec\\theta + \\tan\\theta) - (\\sec\\theta - \\tan\\theta)(\\sec\\theta + \\tan\\theta) ] / (\\tan\\theta - \\sec\\theta + 1)
@@ -410,7 +410,7 @@ The term (1 - \\sec\\theta + \\tan\\theta) cancels out perfectly.
 LHS = \\sec\\theta + \\tan\\theta
 Multiply and divide by (\\sec\\theta - \\tan\\theta):
 LHS = (\\sec\\theta + \\tan\\theta)(\\sec\\theta - \\tan\\theta) / (\\sec\\theta - \\tan\\theta)
-LHS = (\\sec^2\\theta - \\tan^2\\theta) / (\\sec\\theta - \\tan\\theta)
+LHS = (\\sec²\\theta - \\tan²\\theta) / (\\sec\\theta - \\tan\\theta)
 LHS = 1 / (\\sec\\theta - \\tan\\theta) = RHS. ∎
 
 (Hence Proved)`,
@@ -431,27 +431,27 @@ LHS = 1 / (\\sec\\theta - \\tan\\theta) = RHS. ∎
     "question": "Prove: (tan A + sec A − 1)/(tan A − sec A + 1) = (1 + sin A)/cos A.",
     "answer": `CBSE Topper Answer Sheet
 Section C (3M Short Answer)
-Governing Formula: \\sec^2 A - \\tan^2 A = 1
+Governing Formula: \\sec² A - \\tan² A = 1
 Full Score: 3 / 3 Marks
 
-Step 1: Replace 1 in the numerator with \\sec^2 A - \\tan^2 A.
-LHS = (\\tan A + \\sec A - 1) / (\\tan A - \\sec A + 1)
-LHS = [ (\\tan A + \\sec A) - (\\sec^2 A - \\tan^2 A) ] / (\\tan A - \\sec A + 1)
+Step 1: Replace 1 in the numerator with \\sec² A - \\tan² A.
+LHS = (\tan A + \sec A - 1) / (\tan A - \sec A + 1)
+LHS = [ (\tan A + \sec A) - (\\sec² A - \\tan² A) ] / (\tan A - \sec A + 1)
 
 Step 2: Factorize the substituted term.
-LHS = [ (\\sec A + \\tan A) - (\\sec A - \\tan A)(\\sec A + \\tan A) ] / (\\tan A - \\sec A + 1)
+LHS = [ (\sec A + \tan A) - (\sec A - \tan A)(\sec A + \tan A) ] / (\tan A - \sec A + 1)
 
-Step 3: Factor out (\\sec A + \\tan A).
-LHS = (\\sec A + \\tan A) [ 1 - (\\sec A - \\tan A) ] / (\\tan A - \\sec A + 1)
-LHS = (\\sec A + \\tan A) (1 - \\sec A + \\tan A) / (\\tan A - \\sec A + 1)
+Step 3: Factor out (\sec A + \tan A).
+LHS = (\sec A + \tan A) [ 1 - (\sec A - \tan A) ] / (\tan A - \sec A + 1)
+LHS = (\sec A + \tan A) (1 - \sec A + \tan A) / (\tan A - \sec A + 1)
 
 Step 4: Cancel common terms.
-The term (1 - \\sec A + \\tan A) cancels out.
-LHS = \\sec A + \\tan A
+The term (1 - \sec A + \tan A) cancels out.
+LHS = \sec A + \tan A
 
 Step 5: Convert to sine and cosine.
-LHS = 1/\\cos A + \\sin A/\\cos A
-LHS = (1 + \\sin A) / \\cos A = RHS. ∎
+LHS = 1/\cos A + \sin A/\cos A
+LHS = (1 + \sin A) / \cos A = RHS. ∎
 
 (Hence Proved)`,
     "explanation": "Factor 1 as (sec+tan)(sec−tan) in both numerator and denominator, then cancel the common factor.",
@@ -472,29 +472,29 @@ LHS = (1 + \\sin A) / \\cos A = RHS. ∎
     "question": "If sin A + cos A = p and sec A + cosec A = q, show that q(p²−1) = 2p.",
     "answer": `CBSE Topper Answer Sheet
 Section C (3M Short Answer)
-Governing Formula: \\sin^2 A + \\cos^2 A = 1
+Governing Formula: \\sin² A + \\cos² A = 1
 Full Score: 3 / 3 Marks
 
-Step 1: Expand the LHS expression q(p^2 - 1).
-Given: p = \\sin A + \\cos A, q = \\sec A + \\text{cosec} A
-q(p^2 - 1) = (\\sec A + \\text{cosec} A) [ (\\sin A + \\cos A)^2 - 1 ]
+Step 1: Expand the LHS expression q(p² - 1).
+Given: p = \sin A + \cos A, q = \sec A + \cosec A
+q(p² - 1) = (\sec A + \cosec A) [ (\sin A + \cos A)^2 - 1 ]
 
 Step 2: Convert q to sine and cosine.
-q = 1/\\cos A + 1/\\sin A = (\\sin A + \\cos A) / (\\sin A \\cos A)
+q = 1/\cos A + 1/\sin A = (\sin A + \cos A) / (\sin A \cos A)
 
 Step 3: Expand the square inside the bracket.
-(\\sin A + \\cos A)^2 = \\sin^2 A + \\cos^2 A + 2\\sin A\\cos A
-(\\sin A + \\cos A)^2 = 1 + 2\\sin A\\cos A
+(\sin A + \cos A)^2 = \\sin² A + \\cos² A + 2\sin A\cos A
+(\sin A + \cos A)^2 = 1 + 2\sin A\cos A
 
 Step 4: Substitute back into the expression.
-q(p^2 - 1) = [ (\\sin A + \\cos A) / (\\sin A \\cos A) ] \times [ (1 + 2\\sin A\\cos A) - 1 ]
-q(p^2 - 1) = [ (\\sin A + \\cos A) / (\\sin A \\cos A) ] \times [ 2\\sin A\\cos A ]
+q(p² - 1) = [ (\sin A + \cos A) / (\sin A \cos A) ] \times [ (1 + 2\sin A\cos A) - 1 ]
+q(p² - 1) = [ (\sin A + \cos A) / (\sin A \cos A) ] \times [ 2\sin A\cos A ]
 
 Step 5: Cancel common terms.
-The (\\sin A \\cos A) cancels out.
-q(p^2 - 1) = 2(\\sin A + \\cos A)
-Since p = \\sin A + \\cos A,
-q(p^2 - 1) = 2p. ∎
+The (\sin A \cos A) cancels out.
+q(p² - 1) = 2(\sin A + \cos A)
+Since p = \sin A + \cos A,
+q(p² - 1) = 2p. ∎
 
 (Hence Proved)`,
     "explanation": "Replace secA+cscA = (sinA+cosA)/(sinAcosA). Replace p²−1 = (sinA+cosA)²−1 = 2sinAcosA. Multiply and simplify.",
@@ -536,7 +536,7 @@ Step 5: Step 5: Total = 1 + 1 = 2. [Final Result with Units]
     "formula": "sin²θ + cos²θ = 1, tan θ = sin θ / cos θ"
   },
   {
-    "id": "vq_8_5m_1",
+    "id": "vq_8_5m₁",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 5,
@@ -544,30 +544,30 @@ Step 5: Step 5: Total = 1 + 1 = 2. [Final Result with Units]
     "question": "Prove that: (sin A + cosec A)² + (cos A + sec A)² = 7 + tan²A + cot²A.",
     "answer": `CBSE Topper Answer Sheet
 Section D (5M Long Answer)
-Governing Formula: \\sin^2 A + \\cos^2 A = 1, 1 + \\tan^2 A = \\sec^2 A, 1 + \\cot^2 A = \\text{cosec}^2 A
+Governing Formula: \\sin² A + \\cos² A = 1, 1 + \\tan² A = \\sec² A, 1 + \\cot² A = \cosec² A
 Full Score: 5 / 5 Marks
 
 Step 1: Expand the squares on the LHS.
-LHS = (\\sin A + \\text{cosec} A)^2 + (\\cos A + \\sec A)^2
-LHS = (\\sin^2 A + \\text{cosec}^2 A + 2\\sin A \\text{cosec} A) + (\\cos^2 A + \\sec^2 A + 2\\cos A \\sec A)
+LHS = (\sin A + \cosec A)^2 + (\cos A + \sec A)^2
+LHS = (\\sin² A + \cosec² A + 2\sin A \cosec A) + (\\cos² A + \\sec² A + 2\cos A \sec A)
 
 Step 2: Apply inverse trigonometric properties.
-\\sin A \times \\text{cosec} A = 1 and \\cos A \times \\sec A = 1
-LHS = (\\sin^2 A + \\text{cosec}^2 A + 2(1)) + (\\cos^2 A + \\sec^2 A + 2(1))
-LHS = \\sin^2 A + \\cos^2 A + \\text{cosec}^2 A + \\sec^2 A + 4
+\sin A \times \cosec A = 1 and \cos A \times \sec A = 1
+LHS = (\\sin² A + \cosec² A + 2(1)) + (\\cos² A + \\sec² A + 2(1))
+LHS = \\sin² A + \\cos² A + \cosec² A + \\sec² A + 4
 
 Step 3: Use the primary Pythagorean identity.
-\\sin^2 A + \\cos^2 A = 1
-LHS = 1 + \\text{cosec}^2 A + \\sec^2 A + 4
-LHS = 5 + \\text{cosec}^2 A + \\sec^2 A
+\\sin² A + \\cos² A = 1
+LHS = 1 + \cosec² A + \\sec² A + 4
+LHS = 5 + \cosec² A + \\sec² A
 
 Step 4: Convert \\text{cosec} and \\sec into \\cot and \\tan.
-\\text{cosec}^2 A = 1 + \\cot^2 A and \\sec^2 A = 1 + \\tan^2 A
-LHS = 5 + (1 + \\cot^2 A) + (1 + \\tan^2 A)
+\cosec² A = 1 + \\cot² A and \\sec² A = 1 + \\tan² A
+LHS = 5 + (1 + \\cot² A) + (1 + \\tan² A)
 
 Step 5: Simplify to arrive at the final result.
-LHS = 5 + 1 + 1 + \\tan^2 A + \\cot^2 A
-LHS = 7 + \\tan^2 A + \\cot^2 A = RHS. ∎
+LHS = 5 + 1 + 1 + \\tan² A + \\cot² A
+LHS = 7 + \\tan² A + \\cot² A = RHS. ∎
 
 (Hence Proved)`,
     "explanation": "Expand the squares. Use sin·csc = 1 and cos·sec = 1. Group sin²+cos²=1 and apply identities csc²=1+cot² and sec²=1+tan².",
@@ -580,7 +580,7 @@ LHS = 7 + \\tan^2 A + \\cot^2 A = RHS. ∎
     "examinerNote": "Always write the theorem name and bracketed geometric justification on every line. Board examiners deduct 1 mark if reasons are omitted."
   },
   {
-    "id": "vq_8_5m_2",
+    "id": "vq_8_5m₂",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 5,
@@ -588,21 +588,21 @@ LHS = 7 + \\tan^2 A + \\cot^2 A = RHS. ∎
     "question": "Prove: (cot A − cos A)/(cot A + cos A) = (cosec A − 1)/(cosec A + 1).",
     "answer": `CBSE Topper Answer Sheet
 Section D (5M Long Answer)
-Governing Formula: \\cot A = \\cos A / \\sin A
+Governing Formula: \\cot A = \cos A / \sin A
 Full Score: 5 / 5 Marks
 
 Step 1: Convert \\cot A into sine and cosine.
-LHS = (\\cot A - \\cos A) / (\\cot A + \\cos A)
-LHS = [ (\\cos A / \\sin A) - \\cos A ] / [ (\\cos A / \\sin A) + \\cos A ]
+LHS = (\\cot A - \cos A) / (\\cot A + \cos A)
+LHS = [ (\cos A / \sin A) - \cos A ] / [ (\cos A / \sin A) + \cos A ]
 
-Step 2: Factor out \\cos A from both numerator and denominator.
-LHS = \\cos A [ (1 / \\sin A) - 1 ] / \\cos A [ (1 / \\sin A) + 1 ]
+Step 2: Factor out \cos A from both numerator and denominator.
+LHS = \cos A [ (1 / \sin A) - 1 ] / \cos A [ (1 / \sin A) + 1 ]
 
-Step 3: Cancel \\cos A.
-LHS = [ (1 / \\sin A) - 1 ] / [ (1 / \\sin A) + 1 ]
+Step 3: Cancel \cos A.
+LHS = [ (1 / \sin A) - 1 ] / [ (1 / \sin A) + 1 ]
 
-Step 4: Convert 1/\\sin A to \\text{cosec} A.
-LHS = (\\text{cosec} A - 1) / (\\text{cosec} A + 1) = RHS. ∎
+Step 4: Convert 1/\sin A to \cosec A.
+LHS = (\cosec A - 1) / (\cosec A + 1) = RHS. ∎
 
 (Hence Proved)`,
     "explanation": "Factor cosA from numerator and denominator. Replace cotA = cosA/sinA. 1/sinA = cscA. The cosA cancels perfectly.",
@@ -1697,7 +1697,7 @@ Step 3: Expression = 2/5 + 4/5 = 6/5. [Compute]
     "examinerNote": "Revision of board_40. For tan = 1/2: H = √5, answer = 6/5. Memorise this as a standard result."
   },
   {
-    "id": "vq_8_4m_1",
+    "id": "vq_8_4m₁",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 4,
@@ -1727,7 +1727,7 @@ Part (iii): By Pythagorean identity, sec² θ - tan² θ = 1 for all angles. [Pa
     "examinerNote": "4-Mark Competency Scenario: Answer each sub-part clearly with formula and units."
   },
   {
-    "id": "vq_8_4m_2",
+    "id": "vq_8_4m₂",
     "chapter": 8,
     "chapterName": "Introduction to Trigonometry",
     "marks": 4,

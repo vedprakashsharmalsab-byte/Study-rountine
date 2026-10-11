@@ -19,7 +19,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "= √((-6)² + 8²) = √(36 + 64) = √100 = 10"
     ],
     explanation: "Apply the distance formula with origin (0, 0): d = √(x² + y²).",
-    formula: "d = \\sqrt{x^2 + y^2}",
+    formula: "d = \\sqrt{x² + y²}",
     examinerNote: "(-6)² = +36, not -36. Students often sign-error negative coordinates.",
     source: "CBSE Board 2024 / NCERT Exemplar"
   },
@@ -40,7 +40,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "CORRECTION: Answer is option (d): a=2, b=2."
     ],
     explanation: "Using the midpoint formula: ((2a-2)/2, (4+3b)/2) = (1, 2a+1). From x: a=2. From y: (4+6)/2 = 5 = 2(2)+1 = 5 ✓",
-    formula: "M = \\left(\\frac{x_1+x_2}{2}, \\frac{y_1+y_2}{2}\\right)",
+    formula: "M = \\left(\\frac{x₁+x₂}{2}, \\frac{y₁+y₂}{2}\\right)",
     examinerNote: "Always substitute back to verify both conditions are satisfied.",
     source: "CBSE Sample Paper 2025"
   },
@@ -59,7 +59,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "Distance = |y₂ - y₁| = |-2 - 6| = |-8| = 8 units."
     ],
     explanation: "When two points share the same x-coordinate, distance = |y₂ - y₁|.",
-    formula: "d = |y_2 - y_1|",
+    formula: "d = |y₂ - y₁|",
     examinerNote: "For points on the same axis, direct subtraction of the varying coordinate works.",
     source: "NCERT Exercise 7.1"
   },
@@ -102,7 +102,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "x = (2×4 + 1×1)/(2+1) = (8 + 1)/3 = 9/3 = 3"
     ],
     explanation: "The section formula for internal division: P = ((mx₂ + nx₁)/(m+n), (my₂ + ny₁)/(m+n)).",
-    formula: "x = \\frac{mx_2 + nx_1}{m + n}",
+    formula: "x = \\frac{mx₂ + nx₁}{m + n}",
     examinerNote: "m is the ratio corresponding to the point nearest to B, n to A. Never swap m and n.",
     source: "NCERT Exercise 7.2"
   },
@@ -145,7 +145,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "= ½|-12 + 28| = ½ × 16 = 8 sq units"
     ],
     explanation: "Standard area formula using determinant method with three vertices.",
-    formula: "A = \\frac{1}{2}|x_1(y_2 - y_3) + x_2(y_3 - y_1) + x_3(y_1 - y_2)|",
+    formula: "A = \\frac{1}{2}|x₁(y₂ - y_3) + x₂(y_3 - y₁) + x_3(y₁ - y₂)|",
     examinerNote: "Maintain strict cyclic order. Write ½ × |...| to avoid sign errors.",
     source: "CBSE Board 2023"
   },
@@ -164,7 +164,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "k = (-7 + 4)/3 = -3/3 = -1"
     ],
     explanation: "Apply internal division formula. Note: m:n = 1:2, point nearer to B gets ratio m = 1.",
-    formula: "k = \\frac{mx_2 + nx_1}{m+n}",
+    formula: "k = \\frac{mx₂ + nx₁}{m+n}",
     examinerNote: "Common trap: confusing which end gets m and which gets n in the ratio m:n from A to B.",
     source: "NCERT Exemplar"
   },
@@ -186,7 +186,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "= √(4 + 4) = √8 = 2√2 units"
     ],
     explanation: "Euclidean distance formula is directly applied with P(2,3) and Q(4,1).",
-    formula: "PQ = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}",
+    formula: "PQ = \\sqrt{(x₂-x₁)^2 + (y₂-y₁)^2}",
     examinerNote: "Always simplify the surd to simplest radical form for full marks.",
     source: "NCERT Exercise 7.1 Q1"
   },
@@ -205,7 +205,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "∴ P = (1, 3)"
     ],
     explanation: "Section formula for internal division with m:n = 2:3.",
-    formula: "P = \\left(\\frac{mx_2 + nx_1}{m+n}, \\frac{my_2 + ny_1}{m+n}\\right)",
+    formula: "P = \\left(\\frac{mx₂ + nx₁}{m+n}, \\frac{my₂ + ny₁}{m+n}\\right)",
     examinerNote: "Very common board question — memorize this formula perfectly.",
     source: "NCERT Exercise 7.2 Q1"
   },
@@ -271,7 +271,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "∴ Point = (0, -13/3)"
     ],
     explanation: "When the y-axis divides a segment, x = 0. Use section formula to find ratio from this condition.",
-    formula: "\\frac{k \\cdot x_2 + 1 \\cdot x_1}{k+1} = 0",
+    formula: "\\frac{k \\cdot x₂ + 1 \\cdot x₁}{k+1} = 0",
     examinerNote: "This 'axis divides a segment' pattern is extremely frequent. Remember: x-axis sets y=0, y-axis sets x=0.",
     source: "CBSE Board 2022, 2024 / NCERT Ex 7.2"
   },
@@ -436,7 +436,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "= ½|12 + 12| = ½ × 24 = 12 sq units"
     ],
     explanation: "Real-life application of distance formula, midpoint, and area in coordinate geometry.",
-    formula: "d = \\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}, \\quad A = \\frac{1}{2}|...|",
+    formula: "d = \\sqrt{(x₂-x₁)^2+(y₂-y₁)^2}, \\quad A = \\frac{1}{2}|...|",
     examinerNote: "Case studies always award partial marks. Attempt all sub-parts even if unsure.",
     source: "CBSE Sample Paper 2025 / Board 2024"
   },
@@ -497,7 +497,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "Ratio = 2/7 : 1 = 2:7"
     ],
     explanation: "Let ratio be k:1, apply section formula on x-coordinate and solve for k.",
-    formula: "x = \\frac{kx_2 + x_1}{k+1}",
+    formula: "x = \\frac{kx₂ + x₁}{k+1}",
     examinerNote: "Always verify using y-coordinate after finding k.",
     source: "NCERT Exercise 7.2 Q10"
   },
@@ -544,7 +544,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "OR using formula: Area = ½|2(1-2) + (-2)(2-(-2)) + 5((-2)-1)| = ½|-2-8-15| = ½×25 = 12.5 sq units"
     ],
     explanation: "Verify right angle using Pythagoras theorem: AB² + CA² = BC². Then use legs for area.",
-    formula: "c^2 = a^2 + b^2 \\implies \\text{Right triangle}",
+    formula: "c² = a² + b² \\implies \\text{Right triangle}",
     examinerNote: "State which angle is 90°: 'Since AB² + CA² = BC², right angle is at vertex A.'",
     source: "NCERT Exemplar / Board 2020"
   },
@@ -564,7 +564,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "= √(4a² + 4b²) = 2√(a² + b²)"
     ],
     explanation: "The two points are symmetric about the origin. Distance = 2 × distance from origin.",
-    formula: "d = 2\\sqrt{a^2 + b^2}",
+    formula: "d = 2\\sqrt{a² + b²}",
     examinerNote: "Recognize symmetry about origin for faster computation.",
     source: "NCERT Exemplar"
   },
@@ -585,7 +585,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "(t+2)/(-3) = -1 ⟹ t + 2 = 3 ⟹ t = 1"
     ],
     explanation: "Use the perpendicularity condition: m₁ × m₂ = -1 for slopes of two perpendicular lines.",
-    formula: "m_1 \\times m_2 = -1 \\text{ (perpendicular lines)}",
+    formula: "m₁ \\times m₂ = -1 \\text{ (perpendicular lines)}",
     examinerNote: "Alternative: use BA² + BC² = AC² (Pythagoras). Both methods give t = 1.",
     source: "CBSE Board 2023 / Exemplar"
   }

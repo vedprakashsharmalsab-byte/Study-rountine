@@ -13,7 +13,7 @@ export const CH14_DATA: ChapterData = {
     ],
     coreIdeas: [
       'Theoretical Probability: P(E) = (Number of outcomes favorable to E) / (Total number of possible outcomes).',
-      'Universal Probability Bounds: 0 <= P(E) <= 1. Probability can NEVER be negative and can NEVER exceed 1 (or 100%).',
+      'Universal Probability Bounds: 0 ≤ P(E) ≤ 1. Probability can NEVER be negative and can NEVER exceed 1 (or 100%).',
       'Complementary Event Rule: P(E) + P(not E) = 1 ⟹ P(not E) = 1 - P(E).',
       'Coin Tosses: 1 coin has 2 outcomes {H, T}; 2 coins have 4 outcomes {HH, HT, TH, TT}; 3 coins have 8 outcomes {HHH, HHT, HTH, THH, HTT, THT, TTH, TTT}.',
       'Dice Outcomes: 1 die has 6 outcomes {1, 2, 3, 4, 5, 6}. Primes are {2, 3, 5} (1 is neither prime nor composite!). 2 dice thrown together have 6 x 6 = 36 outcomes.',
@@ -38,7 +38,7 @@ export const CH14_DATA: ChapterData = {
       title: 'Classical Probability & Complementary Events',
       topic: 'Theoretical Probability Axioms',
       simpleExplanation: 'Probability is just a fraction: Put what you want (favorable outcomes) on top, and put all possible outcomes on the bottom!',
-      exactMathIdea: 'For an experiment where all elementary outcomes are equally likely, the probability of an event E is P(E) = n(E) / n(S). For any event E: 0 <= P(E) <= 1, P(Impossible) = 0, P(Sure) = 1, and P(E) + P(Ē) = 1.',
+      exactMathIdea: 'For an experiment where all elementary outcomes are equally likely, the probability of an event E is P(E) = n(E) / n(S). For any event E: 0 ≤ P(E) ≤ 1, P(Impossible) = 0, P(Sure) = 1, and P(E) + P(Ē) = 1.',
       formulaOrTheorem: 'P(E) = \\frac{\\text{Favorable Outcomes}}{\\text{Total Outcomes}}, \\quad P(\\bar{E}) = 1 - P(E)',
       whenToUse: 'Whenever calculating chances of drawing colored balls, defectives, or calculating P(not E) given P(E).',
       recognitionClues: [
@@ -68,7 +68,7 @@ export const CH14_DATA: ChapterData = {
           level: 'standard',
           title: 'Two Dice 36 Outcomes',
           question: 'Two dice are thrown at the same time. What is the probability that the sum of the two numbers appearing on the top of the dice is: (i) 8, (ii) 13, (iii) less than or equal to 12?',
-          given: 'Two dice thrown simultaneously ⟹ Total possible outcomes = 6 * 6 = 36.',
+          given: 'Two dice thrown simultaneously ⟹ Total possible outcomes = 6 × 6 = 36.',
           toFind: 'Probabilities of sum 8, 13, and ≤ 12.',
           methodSelectionReason: 'List favorable ordered pairs (x, y) from the 36-outcome sample space.',
           stepByStepSolution: [
@@ -81,7 +81,7 @@ export const CH14_DATA: ChapterData = {
             'P(Sum ≤ 12) = 36 / 36 = 1.'
           ],
           finalAnswer: '(i) 5/36, (ii) 0, (iii) 1',
-          verificationCheck: 'All values satisfy 0 <= P <= 1. Impossible is 0, sure is 1.',
+          verificationCheck: 'All values satisfy 0 ≤ P ≤ 1. Impossible is 0, sure is 1.',
           commonTrap: 'Forgetting that (2, 6) and (6, 2) are two distinct outcomes on two distinct dice.'
         }
       ],
@@ -95,7 +95,7 @@ export const CH14_DATA: ChapterData = {
       title: '52-Card Deck Probability Blueprint',
       topic: 'Card Deck Probabilities',
       simpleExplanation: '52 cards split cleanly into 26 Red and 26 Black across 4 suits of 13 cards. Face cards are strictly the 12 royal royals: Kings, Queens, and Jacks!',
-      exactMathIdea: 'A standard deck of 52 cards consists of 4 suits of 13 cards: Spades ♠, Clubs ♣ (Black); Hearts ♥, Diamonds ♦ (Red). Each suit has Ace, 2-10, Jack, Queen, King. Total face cards = 3 * 4 = 12. Total Aces = 4. Number cards = 36.',
+      exactMathIdea: 'A standard deck of 52 cards consists of 4 suits of 13 cards: Spades ♠, Clubs ♣ (Black); Hearts ♥, Diamonds ♦ (Red). Each suit has Ace, 2-10, Jack, Queen, King. Total face cards = 3 × 4 = 12. Total Aces = 4. Number cards = 36.',
       formulaOrTheorem: 'P(\\text{Card Event}) = \\frac{\\text{Favorable Cards}}{52}',
       whenToUse: 'When drawing one or more cards from a well-shuffled deck of 52 cards.',
       recognitionClues: [
@@ -168,7 +168,7 @@ export const CH14_DATA: ChapterData = {
       requiredConcept: 'Sample space of multiple coin tosses and inequality interpretations.',
       whatIsGiven: 'Number of coins tossed (e.g. 2 or 3 coins).',
       whatMustBeFound: 'Probability of "at least k" or "at most k" heads/tails.',
-      chosenMethod: '1) Write out all outcomes explicitly. 2) "At least k" means >= k. 3) "At most k" means <= k.',
+      chosenMethod: '1) Write out all outcomes explicitly. 2) "At least k" means ≥ k. 3) "At most k" means ≤ k.',
       executionSteps: [
         'Step 1: Write sample space for 2 coins: {HH, HT, TH, TT} (Total = 4). Or for 3 coins: {HHH, HHT, HTH, THH, HTT, THT, TTH, TTT} (Total = 8).',
         'Step 2: If question says "at least 1 head", favorable outcomes have 1, 2, (or 3) heads. Exclude only zero heads (TT or TTT). Favorable = 3/4 (for 2 coins) or 7/8 (for 3 coins).',
@@ -176,7 +176,7 @@ export const CH14_DATA: ChapterData = {
         'Step 4: Form the fraction P = Favorable / Total and simplify.'
       ],
       verificationMethod: 'P(at least 1) + P(zero) must equal 1.',
-      commonTrap: 'Confusing "at least" (>=) with "at most" (<=).',
+      commonTrap: 'Confusing "at least" (≥) with "at most" (≤).',
       exemplarQuestion: 'Three coins are tossed together. Find the probability of getting: (i) at least 2 heads, (ii) at most 2 heads.',
       exemplarAnswer: 'Total outcomes = 8. (i) At least 2 heads: {HHT, HTH, THH, HHH} ⟹ 4 outcomes ⟹ P = 4/8 = 1/2. (ii) At most 2 heads: all except HHH ⟹ 7 outcomes ⟹ P = 7/8.'
     }
@@ -237,7 +237,7 @@ export const CH14_DATA: ChapterData = {
         '(ii) Perfect square numbers from 1 to 90: {1, 4, 9, 16, 25, 36, 49, 64, 81} = 9 numbers.',
         'P(Perfect square) = 9 / 90 = 1 / 10.'
       ],
-      commonTrap: 'Forgetting that 1 is a perfect square (1^2 = 1).',
+      commonTrap: 'Forgetting that 1 is a perfect square (1² = 1).',
       isOriginalPractice: true,
       sourcePdfRef: 'NCERT Ch 14 Ex 14.1 Q19',
       conceptId: 'ch14_c1'
@@ -420,10 +420,10 @@ export const CH14_DATA: ChapterData = {
           question: 'A jar contains 24 marbles, some are green and others are blue. If a marble is drawn at random from the jar, the probability that it is green is 2/3. Find the number of blue marbles in the jar.',
           correctAnswer: '8',
           marks: 3,
-          hints: ['P(Green) = 2/3 ⟹ Green marbles = (2/3) * 24 = 16. Blue = 24 - 16 = 8.'],
+          hints: ['P(Green) = 2/3 ⟹ Green marbles = (2/3) × 24 = 16. Blue = 24 - 16 = 8.'],
           solutionSteps: [
             'Total marbles = 24.',
-            'Number of green marbles = (2/3) * 24 = 16.',
+            'Number of green marbles = (2/3) × 24 = 16.',
             'Number of blue marbles = Total - Green = 24 - 16 = 8.'
           ],
           commonTrap: 'Reporting 16 (which is green marbles) instead of blue marbles.',
