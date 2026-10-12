@@ -26,7 +26,7 @@ export default function OnboardingModal({ isOpen, onComplete, isDark }: Onboardi
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
       <div 
-        className={`w-full max-w-md rounded-3xl border shadow-2xl p-6 sm:p-8 space-y-6 ${
+        className={`w-full max-w-md rounded-3xl border shadow-2xl p-5 sm:p-8 space-y-5 sm:space-y-6 max-h-[calc(100dvh-2rem)] overflow-y-auto ${
           isDark ? "bg-[#0c101d] border-white/15 text-white" : "bg-white border-slate-200 text-slate-900"
         }`}
       >

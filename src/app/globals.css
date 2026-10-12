@@ -566,7 +566,7 @@ summary,
   padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
   .main-content-area {
     padding-bottom: 2.5rem !important;
   }
@@ -575,17 +575,38 @@ summary,
 /* Mobile Phone Landscape Orientation (Height <= 520px) */
 @media (max-height: 520px) and (orientation: landscape) {
   header {
-    padding-top: 0.35rem !important;
-    padding-bottom: 0.35rem !important;
-  }
-  .countdown-ticker-strip {
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
+  }
+  .countdown-ticker-strip {
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
   }
   .countdown-ticker-strip .max-w-6xl {
     flex-direction: row !important;
     align-items: center !important;
     justify-content: space-between !important;
+  }
+  /* Sleek compact bottom dock in phone landscape to preserve screen real estate */
+  #tutorial-nav-dock-mobile > div {
+    padding: 0.25rem 0.5rem !important;
+  }
+  #tutorial-nav-dock-mobile a {
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+  }
+  #tutorial-nav-dock-mobile a svg {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+  #tutorial-nav-dock-mobile a span {
+    font-size: 8px !important;
+  }
+  /* Safe horizontal insets away from notch/camera in landscape */
+  main.main-content-area {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(1rem, env(safe-area-inset-right, 0px)) !important;
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
 

@@ -37,7 +37,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   {
     id: "welcome",
     tab: "chapter_dashboard",
-    selector: "#tutorial-brand-header",
+    selector: "#tutorial-brand-header, #tutorial-brand-logo",
     title: "ARETĒ CBSE Command Engine (Class 10 2026–2027)",
     description: "Welcome Cadet! This unified cockpit powers your entire Class 10 preparation with NCERT-aligned theory, authentic CBSE board vault questions, formula sheets, and real-time progress tracking.",
     icon: GraduationCap,
@@ -58,7 +58,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   {
     id: "chapter-progress",
     tab: "chapter_dashboard",
-    selector: "#tutorial-chapter-progress",
+    selector: "#tutorial-chapter-progress, #tutorial-chapter-progress-fallback",
     title: "Dynamic Syllabus Mastery & Real-Time Progress Bar",
     description: "Right next to your greeting, this live progress bar tracks your syllabus completion across all chapters. As you tick off topics, it updates in real time with instant percentage and XP rewards.",
     icon: Sparkles,
@@ -68,51 +68,51 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   {
     id: "chapter-checklist",
     tab: "chapter_dashboard",
-    selector: "#tutorial-chapter-checklist",
+    selector: "#tutorial-chapter-checklist, #tutorial-chapter-checklist-fallback",
     title: "NCERT Topic Checklist Runway (+25 XP per Topic)",
     description: "Mark concepts and chapter topics as completed. Each completed topic awards +25 XP directly to your Cadet rank and immediately recalculates your chapter mastery.",
     icon: Zap,
     badgeText: "Topic Runway",
-    preferredPlacement: "bottom"
+    preferredPlacement: "top"
   },
   {
     id: "nav-tabs",
-    selector: "#tutorial-all-modules-btn, #tutorial-nav-tabs, #tutorial-nav-dock-mobile",
+    selector: "#tutorial-nav-dock-mobile, #tutorial-nav-tabs, #tutorial-all-modules-btn",
     title: "Navigation Hub & Quick Launcher (⌘K)",
     description: "Switch seamlessly across the 4 core workspaces: Command Dashboard, NCERT Concept Hub, CBSE Practice Vault, and Tools & Memory. Press ⌘K or click 'All Modules' anytime to search all 16 tools.",
     icon: Layers,
     badgeText: "Navigation Hub",
-    preferredPlacement: "bottom"
+    preferredPlacement: "top"
   },
   {
     id: "concepts",
     tab: "concepts",
-    selector: "#tutorial-sst-discipline, #tutorial-concepts-tab",
+    selector: "#tutorial-concepts-tab-mobile, #tutorial-concepts-tab, #tutorial-sst-discipline, #tutorial-concepts-container",
     title: "NCERT Concept Hub — Theory & SST 20 Chapters",
     description: "In-depth chapter notes across Mathematics (14 Ch), Science (13 Ch), and Social Science (20 Chapters arranged by Geography, History, Civics, and Economics). Includes core theory, board trap alerts, and solved examples.",
     icon: BookOpen,
     badgeText: "Concepts & Theory",
-    preferredPlacement: "bottom"
+    preferredPlacement: "top"
   },
   {
     id: "questions",
     tab: "questions",
-    selector: "#tutorial-practice-vault, #tutorial-questions-tab",
+    selector: "#tutorial-questions-tab-mobile, #tutorial-practice-vault, #tutorial-questions-tab",
     title: "CBSE Leveled Practice Vault & Self-Test Timer",
     description: "1,200+ authentic board questions leveled into 1-Mark MCQs, 2M/3M Short Answers, 5M Long Proofs, and 4M Case Studies. Features instant answer check, model rubrics, and mistake logging.",
     icon: Target,
     badgeText: "Practice Vault",
-    preferredPlacement: "bottom"
+    preferredPlacement: "top"
   },
   {
     id: "tools",
     tab: "timelines",
-    selector: "#tutorial-tools-vault, #tutorial-nav-tabs",
+    selector: "#tutorial-tools-tab-mobile, #tutorial-tools-vault, #tutorial-tools-tab, #tutorial-nav-tabs",
     title: "Tools, Timelines & Memory Vaults",
     description: "Access 56 dated chronological SST historical events, 25 Geometry Theorem proofs, 56 Chemistry reaction equations, science lab activities, and your personal Mistakes Notebook for laser revision.",
     icon: Compass,
     badgeText: "Tools & Memory",
-    preferredPlacement: "bottom"
+    preferredPlacement: "top"
   },
   {
     id: "xp-capsule",
@@ -144,6 +144,142 @@ interface InteractiveGuidedTutorialProps {
   setActiveTab?: (tab: any) => void;
 }
 
+/**
+ * Universal Dual-Orientation Popover Positioning Engine
+ * Accurately prevents popup from covering the highlighted target,
+ * handles phone landscape left/right docking, and mobile portrait top/bottom splitting.
+ */
+function calculatePopoverPosition(
+  targetRect: DOMRect | null,
+  viewport: { width: number; height: number },
+  preferredPlacement?: "bottom" | "top" | "center" | "beside"
+): React.CSSProperties {
+  // Case 1: Centered Dialog / Fallback when no target is present
+  if (!targetRect || preferredPlacement === "center") {
+    return {
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: "min(460px, calc(100vw - 24px))",
+      maxHeight: "calc(100dvh - 28px)",
+      overflowY: "auto",
+      zIndex: 100005
+    };
+  }
+
+  // Case 2: Phone Landscape Mode (Short vertical space, wide horizontal space)
+  const isPhoneLandscape = viewport.height <= 520 && viewport.width > viewport.height;
+  if (isPhoneLandscape) {
+    const popoverWidth = Math.min(360, Math.max(290, Math.floor(viewport.width * 0.44)));
+    const spaceRight = viewport.width - targetRect.right;
+    const spaceLeft = targetRect.left;
+    const dockRight = spaceRight >= 280 || spaceRight >= spaceLeft;
+
+    return {
+      position: "fixed",
+      top: "max(10px, env(safe-area-inset-top, 10px))",
+      bottom: "max(10px, env(safe-area-inset-bottom, 10px))",
+      ...(dockRight
+        ? { right: "max(12px, env(safe-area-inset-right, 12px))" }
+        : { left: "max(12px, env(safe-area-inset-left, 12px))" }),
+      width: `${popoverWidth}px`,
+      maxHeight: "calc(100dvh - 20px)",
+      overflowY: "auto",
+      zIndex: 100005
+    };
+  }
+
+  // Case 3: Mobile Portrait (< 640px wide)
+  const isMobilePortrait = viewport.width < 640;
+  if (isMobilePortrait) {
+    const targetCenterY = targetRect.top + targetRect.height / 2;
+    const screenCenterY = viewport.height / 2;
+
+    // If target is in the lower half of screen, popover floats at TOP so target is unobstructed
+    if (targetCenterY > screenCenterY) {
+      return {
+        position: "fixed",
+        top: "calc(12px + env(safe-area-inset-top, 0px))",
+        left: "max(12px, env(safe-area-inset-left, 12px))",
+        right: "max(12px, env(safe-area-inset-right, 12px))",
+        maxHeight: "calc(52dvh - env(safe-area-inset-top, 0px))",
+        overflowY: "auto",
+        zIndex: 100005
+      };
+    } else {
+      // If target is in the upper half of screen, popover floats at BOTTOM so target is unobstructed
+      return {
+        position: "fixed",
+        bottom: "calc(12px + env(safe-area-inset-bottom, 0px))",
+        left: "max(12px, env(safe-area-inset-left, 12px))",
+        right: "max(12px, env(safe-area-inset-right, 12px))",
+        maxHeight: "calc(52dvh - env(safe-area-inset-bottom, 0px))",
+        overflowY: "auto",
+        zIndex: 100005
+      };
+    }
+  }
+
+  // Case 4: Desktop & Large Tablet (>= 640px wide and > 520px tall)
+  const popoverWidth = 430;
+  const padding = 16;
+  let left = targetRect.left + targetRect.width / 2 - popoverWidth / 2;
+  if (left < padding) left = padding;
+  if (left + popoverWidth > viewport.width - padding) {
+    left = viewport.width - popoverWidth - padding;
+  }
+
+  const spaceBelow = viewport.height - targetRect.bottom;
+  const spaceAbove = targetRect.top;
+
+  if (preferredPlacement === "top" && spaceAbove >= 260) {
+    return {
+      position: "fixed",
+      bottom: `${viewport.height - targetRect.top + 16}px`,
+      left: `${left}px`,
+      width: `${popoverWidth}px`,
+      maxWidth: "92vw",
+      maxHeight: "calc(100dvh - 32px)",
+      overflowY: "auto",
+      zIndex: 100005
+    };
+  } else if (spaceBelow >= 260) {
+    return {
+      position: "fixed",
+      top: `${targetRect.bottom + 16}px`,
+      left: `${left}px`,
+      width: `${popoverWidth}px`,
+      maxWidth: "92vw",
+      maxHeight: "calc(100dvh - 32px)",
+      overflowY: "auto",
+      zIndex: 100005
+    };
+  } else if (spaceAbove >= 260) {
+    return {
+      position: "fixed",
+      bottom: `${viewport.height - targetRect.top + 16}px`,
+      left: `${left}px`,
+      width: `${popoverWidth}px`,
+      maxWidth: "92vw",
+      maxHeight: "calc(100dvh - 32px)",
+      overflowY: "auto",
+      zIndex: 100005
+    };
+  } else {
+    return {
+      position: "fixed",
+      bottom: "16px",
+      left: `${left}px`,
+      width: `${popoverWidth}px`,
+      maxWidth: "92vw",
+      maxHeight: "calc(100dvh - 32px)",
+      overflowY: "auto",
+      zIndex: 100005
+    };
+  }
+}
+
 export default function InteractiveGuidedTutorial({
   isDark,
   onTutorialComplete,
@@ -166,7 +302,9 @@ export default function InteractiveGuidedTutorial({
   useEffect(() => {
     setIsMounted(true);
     if (typeof window !== "undefined") {
-      setViewportDims({ width: window.innerWidth, height: window.innerHeight });
+      const w = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+      const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      setViewportDims({ width: w, height: h });
     }
 
     const checkTutorialTrigger = () => {
@@ -233,7 +371,7 @@ export default function InteractiveGuidedTutorial({
     }
   }, [isOpen, currentStep]);
 
-  // Route to the appropriate tab when step changes and scroll into view
+  // Route to the appropriate tab when step changes and scroll into view gently
   useEffect(() => {
     if (!isOpen) return;
 
@@ -248,53 +386,98 @@ export default function InteractiveGuidedTutorial({
       for (const sel of selectors) {
         const el = document.querySelector(sel);
         if (el) {
-          element = el;
-          break;
+          const r = el.getBoundingClientRect();
+          if (r.width > 0 && r.height > 0) {
+            element = el;
+            break;
+          }
         }
       }
 
       if (element && currentStep.preferredPlacement !== "center") {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "nearest"
-        });
+        const computedPos = window.getComputedStyle(element).position;
+        const isFixed = computedPos === "fixed" || 
+                        element.closest("#tutorial-nav-dock-mobile") !== null || 
+                        element.closest("header") !== null;
+        if (!isFixed) {
+          const r = element.getBoundingClientRect();
+          if (r.top < 70 || r.bottom > window.innerHeight - 70) {
+            element.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+              inline: "nearest"
+            });
+          }
+        }
       }
 
-      // Re-measure after scroll settling
-      setTimeout(updateTargetRect, 250);
+      // Re-measure after scroll settling with multiple passes for CSS transitions
+      updateTargetRect();
+      const settle1 = setTimeout(updateTargetRect, 140);
+      const settle2 = setTimeout(updateTargetRect, 320);
+      return () => {
+        clearTimeout(settle1);
+        clearTimeout(settle2);
+      };
     }, 180);
 
     return () => clearTimeout(timer);
   }, [isOpen, currentStepIndex, currentStep, setActiveTab, updateTargetRect]);
 
-  // Window resize & scroll listeners
+  // Comprehensive multi-stage window resize, orientation change & visual viewport listeners
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleResize = () => {
-      setViewportDims({ width: window.innerWidth, height: window.innerHeight });
+    const handleViewportUpdate = () => {
+      const w = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+      const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      setViewportDims({ width: w, height: h });
       updateTargetRect();
     };
 
-    window.addEventListener("resize", handleResize);
+    const handleOrientation = () => {
+      handleViewportUpdate();
+      const t1 = setTimeout(handleViewportUpdate, 80);
+      const t2 = setTimeout(handleViewportUpdate, 220);
+      const t3 = setTimeout(handleViewportUpdate, 450);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+      };
+    };
+
+    window.addEventListener("resize", handleViewportUpdate);
+    window.addEventListener("orientationchange", handleOrientation);
+    if (window.screen?.orientation) {
+      window.screen.orientation.addEventListener("change", handleOrientation);
+    }
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", handleViewportUpdate);
+    }
     window.addEventListener("scroll", updateTargetRect, { passive: true });
+
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleViewportUpdate);
+      window.removeEventListener("orientationchange", handleOrientation);
+      if (window.screen?.orientation) {
+        window.screen.orientation.removeEventListener("change", handleOrientation);
+      }
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", handleViewportUpdate);
+      }
       window.removeEventListener("scroll", updateTargetRect);
     };
   }, [isOpen, updateTargetRect]);
 
   const handleNext = () => {
     if (isLastStep) {
-      // Mark tutorial complete
       try {
         localStorage.setItem(TUTORIAL_STORAGE_KEY, "true");
       } catch {}
       setIsOpen(false);
       if (setActiveTab) setActiveTab("chapter_dashboard");
       if (onTutorialComplete) onTutorialComplete();
-      // Notify other components (e.g. CadetNamePromptModal)
       window.dispatchEvent(new CustomEvent("arete:tutorial-finished"));
     } else {
       setCurrentStepIndex((prev) => prev + 1);
@@ -307,7 +490,7 @@ export default function InteractiveGuidedTutorial({
     }
   };
 
-  // Prevent keyboard dismiss via Escape to enforce completion rule
+  // Keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -326,80 +509,8 @@ export default function InteractiveGuidedTutorial({
 
   if (!isMounted || !isOpen) return null;
 
-  // Determine popover position: ensure it NEVER covers the highlighted element or timer!
-  const isMobile = viewportDims.width < 640;
-  let popoverStyle: React.CSSProperties = {};
-
-  if (isMobile || !targetRect || currentStep.preferredPlacement === "center") {
-    if (isMobile) {
-      // On mobile, pin neatly to bottom with comfortable spacing
-      popoverStyle = {
-        position: "fixed",
-        bottom: 16,
-        left: 12,
-        right: 12,
-        zIndex: 100005
-      };
-    } else {
-      // Centered dialog
-      popoverStyle = {
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: 460,
-        maxWidth: "92vw",
-        zIndex: 100005
-      };
-    }
-  } else {
-    // Laptop / Desktop: Smart above or below placement that NEVER covers the target!
-    const popoverWidth = 430;
-    const padding = 16;
-    const windowWidth = viewportDims.width;
-    const windowHeight = viewportDims.height;
-
-    // Horizontal centering relative to target
-    let left = targetRect.left + targetRect.width / 2 - popoverWidth / 2;
-    if (left < padding) left = padding;
-    if (left + popoverWidth > windowWidth - padding) left = windowWidth - popoverWidth - padding;
-
-    // Check space below vs above
-    const spaceBelow = windowHeight - targetRect.bottom;
-    const spaceAbove = targetRect.top;
-
-    if (spaceBelow >= 280) {
-      // Ample space below target
-      popoverStyle = {
-        position: "fixed",
-        top: targetRect.bottom + 16,
-        left: left,
-        width: popoverWidth,
-        maxWidth: "92vw",
-        zIndex: 100005
-      };
-    } else if (spaceAbove >= 280) {
-      // Place cleanly ABOVE target so target is never covered
-      popoverStyle = {
-        position: "fixed",
-        bottom: windowHeight - targetRect.top + 16,
-        left: left,
-        width: popoverWidth,
-        maxWidth: "92vw",
-        zIndex: 100005
-      };
-    } else {
-      // Fallback: dock at bottom
-      popoverStyle = {
-        position: "fixed",
-        bottom: 16,
-        left: left,
-        width: popoverWidth,
-        maxWidth: "92vw",
-        zIndex: 100005
-      };
-    }
-  }
+  const isPhoneLandscape = viewportDims.height <= 520 && viewportDims.width > viewportDims.height;
+  const popoverStyle = calculatePopoverPosition(targetRect, viewportDims, currentStep.preferredPlacement);
 
   // Live timer calculation for popover countdown display
   const octMs = new Date("2026-10-26T10:30:00+05:30").getTime() - Date.now();
@@ -420,29 +531,25 @@ export default function InteractiveGuidedTutorial({
         className="fixed inset-0 w-full h-full pointer-events-auto transition-all duration-300"
         style={{ zIndex: 100001 }}
         onClick={(e) => {
-          // Strictly prevent backdrop dismissal
           e.preventDefault();
           e.stopPropagation();
         }}
       >
         <defs>
           <mask id="tutorial-spotlight-mask">
-            {/* White: overlay shows here */}
             <rect x="0" y="0" width="100%" height="100%" fill="white" />
-            {/* Black Cutout Hole: Target area is 100% transparent, crisp, unblurred! */}
             {targetRect && currentStep.preferredPlacement !== "center" && (
               <rect
-                x={Math.max(0, targetRect.left - 8)}
-                y={Math.max(0, targetRect.top - 8)}
-                width={targetRect.width + 16}
-                height={targetRect.height + 16}
-                rx="20"
+                x={Math.max(0, targetRect.left - 6)}
+                y={Math.max(0, targetRect.top - 6)}
+                width={Math.min(viewportDims.width, targetRect.width + 12)}
+                height={Math.min(viewportDims.height, targetRect.height + 12)}
+                rx={viewportDims.width < 640 ? "16" : "20"}
                 fill="black"
               />
             )}
           </mask>
         </defs>
-        {/* Dimmed background layer punched with the crisp transparent cutout */}
         <rect
           x="0"
           y="0"
@@ -458,43 +565,43 @@ export default function InteractiveGuidedTutorial({
         <div
           style={{
             position: "fixed",
-            top: targetRect.top - 8,
-            left: targetRect.left - 8,
-            width: targetRect.width + 16,
-            height: targetRect.height + 16,
+            top: Math.max(0, targetRect.top - 6),
+            left: Math.max(0, targetRect.left - 6),
+            width: Math.min(viewportDims.width, targetRect.width + 12),
+            height: Math.min(viewportDims.height, targetRect.height + 12),
             zIndex: 100002,
             pointerEvents: "none"
           }}
-          className="rounded-[20px] ring-2 ring-amber-400 border border-amber-300/80 shadow-[0_0_30px_rgba(245,158,11,0.55),inset_0_0_15px_rgba(245,158,11,0.15)] transition-all duration-300 ease-out"
+          className="rounded-[16px] sm:rounded-[20px] ring-2 ring-amber-400 border border-amber-300/80 shadow-[0_0_30px_rgba(245,158,11,0.55),inset_0_0_15px_rgba(245,158,11,0.15)] transition-all duration-300 ease-out"
         />
       )}
 
       {/* 3. FLOATING EXPLANATORY POPOVER CARD */}
       <div
         style={popoverStyle}
-        className={`rounded-3xl border shadow-2xl p-5 sm:p-6 space-y-4 transition-all duration-300 ${
+        className={`rounded-3xl border shadow-2xl p-4 sm:p-6 space-y-3 sm:space-y-4 transition-all duration-300 ${
           isDark
             ? "bg-[#0c101d] border-amber-500/40 text-white shadow-[0_16px_50px_rgba(0,0,0,0.88)] ring-1 ring-amber-400/20"
             : "bg-white border-amber-300 text-slate-900 shadow-2xl ring-1 ring-amber-500/20"
         }`}
       >
         {/* HEADER: BADGE & STEP COUNTER */}
-        <div className="flex items-center justify-between gap-2 border-b pb-3 border-current/10">
-          <div className="flex items-center gap-2">
-            <div className={`p-2 rounded-xl shrink-0 ${
+        <div className="flex items-center justify-between gap-2 border-b pb-2.5 sm:pb-3 border-current/10">
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <div className={`p-1.5 sm:p-2 rounded-xl shrink-0 ${
               isDark ? "bg-amber-500/20 text-amber-300" : "bg-amber-100 text-amber-800"
             }`}>
-              <StepIcon className="w-4 h-4 text-amber-400" />
+              <StepIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
             </div>
-            <span className={`text-[11px] font-mono font-black uppercase tracking-wider ${
+            <span className={`text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider truncate ${
               isDark ? "text-amber-400" : "text-amber-700 font-extrabold"
             }`}>
               {currentStep.badgeText}
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
-            <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ${
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className={`text-[11px] sm:text-xs font-mono font-bold px-2 sm:px-2.5 py-0.5 rounded-full border ${
               isDark ? "bg-white/5 border-white/10 text-zinc-300" : "bg-slate-100 border-slate-200 text-slate-700"
             }`}>
               Step {currentStepIndex + 1} of {TUTORIAL_STEPS.length}
@@ -503,8 +610,8 @@ export default function InteractiveGuidedTutorial({
         </div>
 
         {/* FEATURE TITLE & EXPLANATION */}
-        <div className="space-y-1.5">
-          <h3 className={`text-base sm:text-lg font-black tracking-tight leading-snug ${
+        <div className="space-y-1">
+          <h3 className={`text-sm sm:text-base md:text-lg font-black tracking-tight leading-snug ${
             isDark ? "text-white" : "text-slate-900"
           }`}>
             {currentStep.title}
@@ -516,45 +623,45 @@ export default function InteractiveGuidedTutorial({
           </p>
         </div>
 
-        {/* LIVE TIME CAPSULE (DIRECTLY IN POPOVER FOR COUNTDOWN STEP SO TIME NEVER HIDES!) */}
+        {/* LIVE TIME CAPSULE (DIRECTLY IN POPOVER FOR COUNTDOWN STEP) */}
         {currentStep.showLiveTimer && (
-          <div className={`p-3 rounded-2xl border flex items-center justify-around font-mono text-center gap-2 ${
+          <div className={`p-2.5 sm:p-3 rounded-2xl border flex items-center justify-around font-mono text-center gap-1.5 sm:gap-2 ${
             isDark ? "bg-black/40 border-amber-500/30 text-amber-300" : "bg-amber-50 border-amber-300 text-amber-950"
           }`}>
             <div className="flex flex-col items-center">
-              <span className="text-base sm:text-lg font-black tabular-nums">{octDays}d</span>
-              <span className="text-[9px] uppercase font-bold opacity-75">26 Oct Phase 1</span>
+              <span className="text-sm sm:text-lg font-black tabular-nums">{octDays}d</span>
+              <span className="text-[8px] sm:text-[9px] uppercase font-bold opacity-75">26 Oct Phase 1</span>
             </div>
-            <div className="h-6 w-px bg-current/20" />
+            <div className="h-5 sm:h-6 w-px bg-current/20" />
             <div className="flex flex-col items-center">
-              <span className="text-base sm:text-lg font-black tabular-nums text-cyan-400">{febDays}d</span>
-              <span className="text-[9px] uppercase font-bold opacity-75 text-cyan-400">1 Feb Boards</span>
+              <span className="text-sm sm:text-lg font-black tabular-nums text-cyan-400">{febDays}d</span>
+              <span className="text-[8px] sm:text-[9px] uppercase font-bold opacity-75 text-cyan-400">1 Feb Boards</span>
             </div>
-            <div className="h-6 w-px bg-current/20" />
+            <div className="h-5 sm:h-6 w-px bg-current/20" />
             <div className="flex flex-col items-center text-emerald-400">
-              <span className="text-xs font-black">ACTIVE</span>
-              <span className="text-[9px] uppercase font-bold">Auto-Sync</span>
+              <span className="text-[11px] sm:text-xs font-black">ACTIVE</span>
+              <span className="text-[8px] sm:text-[9px] uppercase font-bold">Auto-Sync</span>
             </div>
           </div>
         )}
 
         {/* STEP PROGRESS DOTS */}
-        <div className="flex items-center gap-1.5 pt-1">
+        <div className="flex items-center gap-1 sm:gap-1.5 pt-0.5">
           {TUTORIAL_STEPS.map((_, idx) => (
             <div
               key={idx}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 ${
                 idx === currentStepIndex
                   ? isDark
-                    ? "w-6 bg-amber-400"
-                    : "w-6 bg-amber-600"
+                    ? "w-5 sm:w-6 bg-amber-400"
+                    : "w-5 sm:w-6 bg-amber-600"
                   : idx < currentStepIndex
                   ? isDark
-                    ? "w-2 bg-amber-400/40"
-                    : "w-2 bg-amber-400"
+                    ? "w-1.5 sm:w-2 bg-amber-400/40"
+                    : "w-1.5 sm:w-2 bg-amber-400"
                   : isDark
-                  ? "w-2 bg-white/10"
-                  : "w-2 bg-slate-200"
+                  ? "w-1.5 sm:w-2 bg-white/10"
+                  : "w-1.5 sm:w-2 bg-slate-200"
               }`}
             />
           ))}
@@ -566,7 +673,7 @@ export default function InteractiveGuidedTutorial({
             <button
               type="button"
               onClick={handlePrev}
-              className={`px-3.5 py-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-95 ${
+              className={`px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 touch-manipulation active:scale-95 ${
                 isDark
                   ? "bg-white/5 border-white/10 text-zinc-300 hover:text-white hover:bg-white/10"
                   : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-950 hover:bg-slate-200"
@@ -581,7 +688,7 @@ export default function InteractiveGuidedTutorial({
           <button
             type="button"
             onClick={handleNext}
-            className={`flex-1 py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md transition-all touch-manipulation active:scale-[0.98] ${
+            className={`flex-1 py-2 sm:py-2.5 px-3.5 sm:px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer shadow-md transition-all touch-manipulation active:scale-[0.98] ${
               isLastStep
                 ? "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 shadow-emerald-500/20"
                 : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-amber-500/20"

@@ -94,7 +94,7 @@ export default function CadetNamePromptModal({
     <div
       role="dialog"
       aria-labelledby="cadet-prompt-title"
-      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-sm w-[calc(100vw-2rem)] animate-slide-up"
+      className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom,0px))] xl:bottom-6 right-4 sm:right-6 z-50 max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100dvh-6rem)] overflow-y-auto animate-slide-up"
     >
       <div
         className={`rounded-3xl border shadow-2xl p-4 sm:p-5 transition-all duration-300 relative overflow-hidden ${

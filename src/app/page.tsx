@@ -3182,7 +3182,7 @@ export default function CBSECommandCenter() {
                 return (
                   <a
                     key={cat.id}
-                    id={cat.id === "concepts" ? "tutorial-concepts-tab" : cat.id === "practice" ? "tutorial-questions-tab" : undefined}
+                    id={cat.id === "concepts" ? "tutorial-concepts-tab" : cat.id === "practice" ? "tutorial-questions-tab" : cat.id === "tools" ? "tutorial-tools-tab" : undefined}
                     href={getTabHref(cat.defaultTab)}
                     onClick={(e) => {
                       handleNavClick(e, cat.defaultTab, {
@@ -4643,6 +4643,7 @@ export default function CBSECommandCenter() {
 
         {/* ===================== TAB: CONCEPTS HUB (MATH + SCIENCE ALL 27 CHAPTERS) ===================== */}
         {activeTab === "concepts" && (
+          <div id="tutorial-concepts-container" className="w-full">
           <ConceptsHubView
             isDark={isDark}
             initialSubject={conceptsSubject}
@@ -4702,6 +4703,7 @@ export default function CBSECommandCenter() {
               setActiveTab("questions");
             }}
           />
+          </div>
         )}
 
         {/* ===================== TAB: CHEMISTRY BASICS & FOUNDATION MASTERCLASS ===================== */}
@@ -4724,6 +4726,7 @@ export default function CBSECommandCenter() {
 
         {/* ===================== TAB: SST TIMELINES MASTER & CHRONOLOGY GAME ===================== */}
         {activeTab === "timelines" && (
+          <div id="tutorial-tools-vault" className="w-full">
           <TimelinesMasterView
             isDark={isDark}
             initialChapterKey={timelinesChapterKey}
@@ -4742,6 +4745,7 @@ export default function CBSECommandCenter() {
               showXpToast(amt, reason);
             }}
           />
+          </div>
         )}
 
         {/* ===================== TAB: ENGLISH MASTER VIEW (CBSE CODE 184) ===================== */}
@@ -7022,7 +7026,7 @@ export default function CBSECommandCenter() {
             return (
               <a
                 key={cat.id}
-                id={cat.id === "concepts" ? "tutorial-concepts-tab-mobile" : cat.id === "practice" ? "tutorial-questions-tab-mobile" : undefined}
+                id={cat.id === "concepts" ? "tutorial-concepts-tab-mobile" : cat.id === "practice" ? "tutorial-questions-tab-mobile" : cat.id === "tools" ? "tutorial-tools-tab-mobile" : undefined}
                 href={getTabHref(cat.defaultTab)}
                 onClick={(e) => {
                   handleNavClick(e, cat.defaultTab, {
