@@ -75,6 +75,7 @@ import AreteLogo from "@/components/AreteLogo";
 import { areteAudio } from "@/lib/audio";
 import { appStorage, STORAGE_KEYS } from "@/lib/storage";
 import PracticeTimer from "@/components/PracticeTimer";
+import { TopHeaderStudyTimer } from "@/components/TopHeaderStudyTimer";
 import Class10ExamCountdown from "@/components/Class10ExamCountdown";
 import InteractiveGuidedTutorial from "@/components/InteractiveGuidedTutorial";
 import CadetNamePromptModal from "@/components/CadetNamePromptModal";
@@ -3095,8 +3096,9 @@ export default function CBSECommandCenter() {
       <div className="aurora-mesh" aria-hidden="true" />
 
       {/* =========================================================================
-          RIGID FROSTED TOP APP BAR (HEADER + SECONDARY SUB-TOOLBAR)
+          RIGID FROSTED TOP APP BAR (HEADER + UNIVERSAL NAVIGATION STRIP)
           Combined into one pinned sticky top block so it NEVER drifts or moves!
+          Guarantees ZERO TAB OVERLAPPING, LIVE STUDY FOCUS TIMER, and FULL MOBILE ORIENTATION VISIBILITY!
           ========================================================================= */}
       <div className="sticky top-0 z-40 transform-gpu">
         <header className={`border-b transition-colors backdrop-blur-md ${
@@ -3104,85 +3106,250 @@ export default function CBSECommandCenter() {
             ? "border-white/10 bg-[#080b14]/92 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
             : "border-slate-200/80 bg-white/95 text-slate-900 shadow-xs"
         }`}>
-        <div className="w-full max-w-7xl mx-auto px-2.5 sm:px-4 lg:px-6 py-2 flex items-center justify-between gap-1.5 sm:gap-2.5 min-w-0">
-          
-          {/* LEFT: BRAND EMBLEM & ALL MODULES LAUNCHER (ZERO COLLISION WITH TIMER) */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-            <div
-              id="tutorial-brand-header"
-              onClick={() => {
-                playSound("click");
-                setActiveTab("chapter_dashboard");
-                if (typeof window !== "undefined") {
-                  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-                }
-              }}
-              className="flex items-center gap-2 sm:gap-3 shrink-0 cursor-pointer select-none transition-transform active:scale-[0.98]"
-              title="ARETĒ: CBSE Class 10 Command Engine (Home Dashboard)"
-            >
-              <AreteLogo size="md" isDark={isDark} showText={true} showMotto={false} />
+          <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 py-2 flex items-center justify-between gap-1.5 sm:gap-2.5 min-w-0">
+            
+            {/* LEFT: BRAND EMBLEM & ALL MODULES LAUNCHER */}
+            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+              <div
+                id="tutorial-brand-header"
+                onClick={() => {
+                  playSound("click");
+                  setActiveTab("chapter_dashboard");
+                  if (typeof window !== "undefined") {
+                    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+                  }
+                }}
+                className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 cursor-pointer select-none transition-transform active:scale-[0.98]"
+                title="ARETĒ: CBSE Class 10 Command Engine (Home Dashboard)"
+              >
+                <AreteLogo size="md" isDark={isDark} showText={true} showMotto={false} />
 
-              <div className="hidden 2xl:flex items-center gap-1.5 leading-none pl-1">
-                <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
-                  isDark ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "bg-amber-100 text-amber-900 border border-amber-300"
-                }`}>
-                  2026–27
-                </span>
+                <div className="hidden 2xl:flex items-center gap-1.5 leading-none pl-1">
+                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold leading-none inline-flex items-center ${
+                    isDark ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "bg-amber-100 text-amber-900 border border-amber-300"
+                  }`}>
+                    2026–27
+                  </span>
 
-                <div
-                  className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold leading-none inline-flex items-center gap-1.5 transition-all ${
-                    isDark
-                      ? "bg-teal-500/20 text-teal-300 border border-teal-500/40"
-                      : "bg-teal-100 text-teal-900 border border-teal-300"
-                  }`}
-                  title="Cadet Profile Active"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-                  <span className="max-w-[120px] truncate">{studentFullName || "CBSE Scholar"}</span>
+                  <div
+                    className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold leading-none inline-flex items-center gap-1.5 transition-all ${
+                      isDark
+                        ? "bg-teal-500/20 text-teal-300 border border-teal-500/40"
+                        : "bg-teal-100 text-teal-900 border border-teal-300"
+                    }`}
+                    title="Cadet Profile Active"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                    <span className="max-w-[120px] truncate">{studentFullName || "CBSE Scholar"}</span>
+                  </div>
                 </div>
+              </div>
+
+              {/* ALL MODULES TRIGGER */}
+              <button
+                id="tutorial-all-modules-btn"
+                type="button"
+                onClick={() => {
+                  playSound("click");
+                  setIsAllModulesModalOpen(true);
+                }}
+                className={`px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border shadow-xs ${
+                  isDark
+                    ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+                    : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200"
+                }`}
+                title="Open All Modules (⌘K)"
+              >
+                <LayoutGrid className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                <span className="leading-none inline-flex items-center">
+                  <span className="hidden md:inline">All </span>Modules
+                </span>
+                <kbd className={`hidden xl:inline-flex text-[9px] font-mono px-1.5 py-0.5 rounded font-black shrink-0 leading-none items-center ${
+                  isDark ? "bg-black/40 text-amber-300 border border-amber-500/30" : "bg-white/80 text-amber-900 border border-amber-300"
+                }`}>
+                  ⌘K
+                </kbd>
+              </button>
+            </div>
+
+            {/* MASTER CATEGORY NAVIGATION TABS (DESKTOP CENTER) */}
+            <div id="tutorial-nav-tabs" className="hidden xl:flex items-center min-w-0 max-w-fit mx-auto">
+              <div className={`p-0.5 sm:p-1 rounded-full border flex items-center gap-0.5 sm:gap-1 backdrop-blur-xl transition-all ${
+                isDark
+                  ? "bg-white/[0.06] border-white/15 shadow-inner"
+                  : "bg-slate-100 border-slate-200"
+              }`}>
+                {CATEGORY_DEFINITIONS.map((cat) => {
+                  const isCatActive = activeCategory === cat.id;
+                  return (
+                    <a
+                      key={cat.id}
+                      id={cat.id === "concepts" ? "tutorial-concepts-tab" : cat.id === "practice" ? "tutorial-questions-tab" : cat.id === "tools" ? "tutorial-tools-tab" : undefined}
+                      href={getTabHref(cat.defaultTab)}
+                      onClick={(e) => {
+                        handleNavClick(e, cat.defaultTab, {
+                          customAction: () => {
+                            if (cat.id === "concepts") {
+                              if (commandSubjectId === "sst") {
+                                setConceptsSubject("sst");
+                                setConceptsChapterNo(1);
+                              } else if (commandSubjectId === "science") {
+                                setConceptsSubject("science");
+                                setConceptsChapterNo(1);
+                              } else {
+                                setConceptsSubject("math");
+                              }
+                            }
+                          }
+                        });
+                      }}
+                      className={`px-2.5 sm:px-3 lg:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] ${
+                        isCatActive
+                          ? isDark
+                            ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/25 ring-1 ring-amber-400 font-extrabold"
+                            : "bg-slate-900 text-white shadow-sm ring-1 ring-slate-950 font-extrabold"
+                          : isDark
+                          ? "text-zinc-300 hover:text-white hover:bg-white/[0.08]"
+                          : "text-slate-600 hover:text-slate-900 hover:bg-black/[0.05]"
+                      }`}
+                    >
+                      <cat.icon className={`w-3.5 h-3.5 ${isCatActive ? (isDark ? "text-slate-950" : "text-amber-400") : "text-zinc-400"} shrink-0`} />
+                      <span className="leading-none inline-flex items-center">{cat.label}</span>
+                      {cat.badge && (
+                        <span className={`hidden xl:inline-flex text-[10px] font-mono px-1.5 py-0.5 rounded-full font-black shrink-0 leading-none items-center ${
+                          isCatActive
+                            ? isDark
+                              ? "bg-slate-950/30 text-slate-950"
+                              : "bg-white/20 text-white"
+                            : isDark
+                            ? "bg-white/10 text-zinc-300"
+                            : "bg-slate-200 text-slate-700"
+                        }`}>
+                          {cat.badge}
+                        </span>
+                      )}
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
-            {/* ALL MODULES TRIGGER (ANCHORED DIRECTLY BESIDE BRAND LOGO — IMPOSSIBLE TO OVERLAP TIMER) */}
-            <button
-              id="tutorial-all-modules-btn"
-              type="button"
-              onClick={() => {
-                playSound("click");
-                setIsAllModulesModalOpen(true);
-              }}
-              className={`px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] border shadow-xs ${
-                isDark
-                  ? "bg-amber-500/15 border-amber-500/35 text-amber-300 hover:bg-amber-500/25 hover:border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
-                  : "bg-amber-100 border-amber-300 text-amber-950 hover:bg-amber-200"
-              }`}
-              title="Open All Modules (⌘K)"
-            >
-              <LayoutGrid className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-              <span className="leading-none inline-flex items-center">
-                <span className="hidden md:inline">All </span>Modules
-              </span>
-              <kbd className={`hidden xl:inline-flex text-[9px] font-mono px-1.5 py-0.5 rounded font-black shrink-0 leading-none items-center ${
-                isDark ? "bg-black/40 text-amber-300 border border-amber-500/30" : "bg-white/80 text-amber-900 border border-amber-300"
-              }`}>
-                ⌘K
-              </kbd>
-            </button>
-          </div>
+            {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (TOP TIMER + EXAM COUNTDOWN + XP + STREAK + CONTROLS) */}
+            <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 shrink-0">
+              {/* TOP HEADER STUDY FOCUS TIMER */}
+              <TopHeaderStudyTimer
+                isDark={isDark}
+                onAddXp={(amount, reason) => {
+                  setTotalFocusMins((m) => m + 25);
+                  showXpToast(amount, reason);
+                }}
+                onPlaySound={(s) => {
+                  if (!isSoundMuted) playSound(s);
+                }}
+                onTriggerConfetti={triggerConfetti}
+              />
 
-          {/* MASTER CATEGORY NAVIGATION TABS (CENTERED & UNCLUTTERED) */}
-          <div id="tutorial-nav-tabs" className="hidden xl:flex items-center min-w-0 max-w-fit mx-auto">
-            <div className={`p-0.5 sm:p-1 rounded-full border flex items-center gap-0.5 sm:gap-1 backdrop-blur-xl transition-all ${
-              isDark
-                ? "bg-white/[0.06] border-white/15 shadow-inner"
-                : "bg-slate-100 border-slate-200"
-            }`}>
+              {/* EXAM COUNTDOWN (COMPACT ON MOBILE SO ZERO OVERFLOW) */}
+              <div id="tutorial-countdown-capsule" className="flex items-center shrink-0">
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound("click");
+                    setIsExamMilestonesModalOpen(true);
+                  }}
+                  className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono transition-all cursor-pointer group shadow-xs active:scale-[0.98] tabular-nums leading-none shrink-0 ${
+                    isDark
+                      ? "bg-gradient-to-r from-amber-500/10 via-white/[0.03] to-cyan-500/10 border-white/15 text-zinc-200 hover:border-amber-400/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+                      : "bg-gradient-to-r from-amber-50 via-white to-blue-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:shadow-xs"
+                  }`}
+                  title="Class 10 Exam Milestones (Tap to view full countdowns and schedule)"
+                >
+                  <HeaderExamCountdown isDark={isDark} />
+                </button>
+              </div>
+
+              {/* LEVEL & XP CAPSULE */}
+              <div id="tutorial-xp-capsule" className={`flex items-center gap-1 px-1.5 sm:px-2 xl:px-2.5 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-medium shadow-xs leading-none whitespace-nowrap shrink-0 ${
+                isDark 
+                  ? "bg-gradient-to-r from-amber-500/15 to-amber-600/10 border-amber-500/30 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.15)]" 
+                  : "bg-amber-50 border-amber-300 text-amber-950 font-bold"
+              }`}>
+                <span className="hidden sm:inline-flex text-xs leading-none items-center">{currentLevelInfo.badge}</span>
+                <span className="font-black text-amber-400 leading-none inline-flex items-center">L{currentLevelInfo.level}</span>
+                <span className={`${isDark ? "text-amber-500/40" : "text-amber-300"} select-none leading-none inline-flex items-center`}>•</span>
+                <span className="font-bold leading-none inline-flex items-center tabular-nums">{totalXp} XP</span>
+              </div>
+
+              {/* STREAK (Hidden on very small screens to guarantee zero overlap) */}
+              <div className={`hidden md:flex items-center gap-1 px-2 py-1 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-bold shadow-xs leading-none whitespace-nowrap shrink-0 ${
+                isDark 
+                  ? "bg-gradient-to-r from-orange-500/20 to-red-500/10 border-orange-500/40 text-orange-300 shadow-[0_0_12px_rgba(249,115,22,0.15)]" 
+                  : "bg-orange-50 border-orange-300 text-orange-900"
+              }`}>
+                <Flame className="w-3.5 h-3.5 text-orange-400 shrink-0" />
+                <span className="leading-none inline-flex items-center tabular-nums">{streak}d</span>
+              </div>
+
+              {/* SOUND & THEME CONTROLS */}
+              <div id="tutorial-theme-controls" className="flex items-center gap-1 shrink-0">
+                {/* SOUND */}
+                <button
+                  onClick={() => {
+                    const nextMute = !isSoundMuted;
+                    setIsSoundMuted(nextMute);
+                    if (!nextMute) playSound("click");
+                  }}
+                  className={`p-1.5 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[28px] min-h-[28px] sm:min-w-[32px] sm:min-h-[32px] touch-manipulation active:scale-95 shrink-0 ${
+                    isDark 
+                      ? isSoundMuted ? "bg-white/5 border-white/10 text-zinc-500" : "bg-white/10 border-white/20 text-zinc-200 hover:text-white"
+                      : isSoundMuted ? "bg-slate-100 border-slate-200 text-slate-400" : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
+                  }`}
+                  title={isSoundMuted ? "Audio muted" : "Audio enabled"}
+                  aria-label={isSoundMuted ? "Unmute Audio" : "Mute Audio"}
+                >
+                  {isSoundMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+                </button>
+
+                {/* THEME TOGGLE */}
+                <button
+                  onClick={() => {
+                    playSound("click");
+                    setTheme(isDark ? "light" : "dark");
+                  }}
+                  className={`p-1.5 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[28px] min-h-[28px] sm:min-w-[32px] sm:min-h-[32px] touch-manipulation active:scale-95 shrink-0 ${
+                    isDark 
+                      ? "bg-white/10 border-white/20 text-amber-400 hover:text-amber-300"
+                      : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
+                  }`}
+                  title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
+                  aria-label={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
+                >
+                  {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* =========================================================================
+            UNIVERSAL TOP NAVIGATION STRIP (RESPONSIVE IN ALL ORIENTATIONS & VIEWPORTS)
+            - Tier 1: Master Category Tabs (visible on mobile portrait, mobile landscape, tablet)
+            - Tier 2: Active Sub-Tabs Pill Strip (single-row horizontal scroll, ZERO WRAPPING, ZERO OVERLAPPING)
+            ========================================================================= */}
+        <div className={`border-b transition-colors backdrop-blur-2xl ${
+          isDark ? "border-white/10 bg-[#070a14]/95" : "border-slate-200/90 bg-white/95"
+        }`}>
+          <div className="max-w-7xl mx-auto px-2.5 sm:px-4 lg:px-6 py-1.5 flex flex-col gap-1.5">
+            
+            {/* TIER 1: MOBILE & TABLET MASTER CATEGORY TABS (< xl)
+                On mobile portrait & landscape, this ensures ALL 4 Master Categories are 100% visible, touchable, and never overlapping! */}
+            <div className="xl:hidden flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar scroll-smooth flex-nowrap gap-1 pb-0.5">
               {CATEGORY_DEFINITIONS.map((cat) => {
                 const isCatActive = activeCategory === cat.id;
                 return (
                   <a
                     key={cat.id}
-                    id={cat.id === "concepts" ? "tutorial-concepts-tab" : cat.id === "practice" ? "tutorial-questions-tab" : cat.id === "tools" ? "tutorial-tools-tab" : undefined}
+                    id={cat.id === "concepts" ? "tutorial-concepts-tab-top-mobile" : cat.id === "practice" ? "tutorial-questions-tab-top-mobile" : cat.id === "tools" ? "tutorial-tools-tab-top-mobile" : undefined}
                     href={getTabHref(cat.defaultTab)}
                     onClick={(e) => {
                       handleNavClick(e, cat.defaultTab, {
@@ -3201,179 +3368,30 @@ export default function CBSECommandCenter() {
                         }
                       });
                     }}
-                    className={`px-2.5 sm:px-3 lg:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] ${
+                    className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 whitespace-nowrap touch-manipulation active:scale-95 ${
                       isCatActive
                         ? isDark
-                          ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/25 ring-1 ring-amber-400 font-extrabold"
-                          : "bg-slate-900 text-white shadow-sm ring-1 ring-slate-950 font-extrabold"
+                          ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black shadow-sm ring-1 ring-amber-400"
+                          : "bg-slate-900 text-white font-black shadow-sm ring-1 ring-slate-950"
                         : isDark
-                        ? "text-zinc-300 hover:text-white hover:bg-white/[0.08]"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-black/[0.05]"
+                        ? "text-zinc-300 hover:text-white bg-white/[0.04] border border-white/[0.08]"
+                        : "text-slate-600 hover:text-slate-900 bg-slate-100 border border-slate-200"
                     }`}
                   >
                     <cat.icon className={`w-3.5 h-3.5 ${isCatActive ? (isDark ? "text-slate-950" : "text-amber-400") : "text-zinc-400"} shrink-0`} />
-                    <span className="leading-none inline-flex items-center">{cat.label}</span>
-                    {cat.badge && (
-                      <span className={`hidden xl:inline-flex text-[10px] font-mono px-1.5 py-0.5 rounded-full font-black shrink-0 leading-none items-center ${
-                        isCatActive
-                          ? isDark
-                            ? "bg-slate-950/30 text-slate-950"
-                            : "bg-white/20 text-white"
-                          : isDark
-                          ? "bg-white/10 text-zinc-300"
-                          : "bg-slate-200 text-slate-700"
-                      }`}>
-                        {cat.badge}
-                      </span>
-                    )}
+                    <span className="leading-none">{cat.label}</span>
                   </a>
                 );
               })}
             </div>
-          </div>
 
-          {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (ZERO-OVERFLOW COMPACT CAPSULES) */}
-          <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 shrink-0">
-            {/* EXAM COUNTDOWN (VISIBLE ON ALL MOBILE, SMARTPHONE, & WIDESCREEN VIEWPORTS) */}
-            <div id="tutorial-countdown-capsule" className="flex items-center shrink-0">
-              <button
-                type="button"
-                onClick={() => {
-                  playSound("click");
-                  setIsExamMilestonesModalOpen(true);
-                }}
-                className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono transition-all cursor-pointer group shadow-sm active:scale-[0.98] tabular-nums leading-none shrink-0 ${
-                  isDark
-                    ? "bg-gradient-to-r from-amber-500/10 via-white/[0.03] to-cyan-500/10 border-white/15 text-zinc-200 hover:border-amber-400/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)]"
-                    : "bg-gradient-to-r from-amber-50 via-white to-blue-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:shadow-sm"
-                }`}
-                title="Class 10 Exam Milestones (Tap to view full countdowns & schedule)"
-              >
-                <HeaderExamCountdown isDark={isDark} />
-              </button>
-            </div>
-
-            {/* LEVEL & XP CAPSULE */}
-            <div id="tutorial-xp-capsule" className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 xl:px-3 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-medium shadow-xs leading-none whitespace-nowrap shrink-0 ${
-              isDark 
-                ? "bg-gradient-to-r from-amber-500/15 to-amber-600/10 border-amber-500/30 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.15)]" 
-                : "bg-amber-50 border-amber-300 text-amber-950 font-bold"
-            }`}>
-              <span className="hidden sm:inline-flex text-xs leading-none items-center">{currentLevelInfo.badge}</span>
-              <span className="font-black text-amber-400 leading-none inline-flex items-center">L{currentLevelInfo.level}</span>
-              <span className={`${isDark ? "text-amber-500/40" : "text-amber-300"} select-none leading-none inline-flex items-center`}>•</span>
-              <span className="font-bold leading-none inline-flex items-center tabular-nums">{totalXp} XP</span>
-            </div>
-
-            {/* STREAK */}
-            <div className={`hidden xs:flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-bold shadow-xs leading-none whitespace-nowrap shrink-0 ${
-              isDark 
-                ? "bg-gradient-to-r from-orange-500/20 to-red-500/10 border-orange-500/40 text-orange-300 shadow-[0_0_12px_rgba(249,115,22,0.15)]" 
-                : "bg-orange-50 border-orange-300 text-orange-900"
-            }`}>
-              <Flame className="w-3.5 h-3.5 text-orange-400 shrink-0" />
-              <span className="leading-none inline-flex items-center tabular-nums">{streak}d</span>
-            </div>
-
-            {/* SOUND & THEME CONTROLS */}
-            <div id="tutorial-theme-controls" className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-              {/* SOUND */}
-              <button
-                onClick={() => {
-                  const nextMute = !isSoundMuted;
-                  setIsSoundMuted(nextMute);
-                  if (!nextMute) playSound("click");
-                }}
-                className={`p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
-                  isDark 
-                    ? isSoundMuted ? "bg-white/5 border-white/10 text-zinc-500" : "bg-white/10 border-white/20 text-zinc-200 hover:text-white"
-                    : isSoundMuted ? "bg-slate-100 border-slate-200 text-slate-400" : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
-                }`}
-                title={isSoundMuted ? "Audio muted (Click to enable sound)" : "Audio enabled (Click to mute)"}
-                aria-label={isSoundMuted ? "Unmute Audio" : "Mute Audio"}
-              >
-                {isSoundMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-              </button>
-
-              {/* THEME TOGGLE */}
-              <button
-                onClick={() => {
-                  playSound("click");
-                  setTheme(isDark ? "light" : "dark");
-                }}
-                className={`p-1.5 sm:p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center min-w-[30px] min-h-[30px] sm:min-w-[34px] sm:min-h-[34px] touch-manipulation active:scale-95 shrink-0 ${
-                  isDark 
-                    ? "bg-white/10 border-white/20 text-amber-400 hover:text-amber-300"
-                    : "bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900"
-                }`}
-                title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
-                aria-label={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
-              >
-                {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* =========================================================================
-          SECONDARY SUB-TOOLBAR (FOCUSED ACTIVE WORKSPACE - HIDDEN ON COMMAND)
-          Integrated cleanly inside the fixed top wrapper so it never collides or moves!
-          ========================================================================= */}
-      {activeCategory !== "command" && (
-        <div className={`border-b transition-colors backdrop-blur-2xl ${
-          isDark ? "border-white/10 bg-[#070a14]/95" : "border-slate-200/90 bg-white/95"
-        }`}>
-          <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-2">
-          {(() => {
-            const currentCat = CATEGORY_DEFINITIONS.find((c) => c.id === activeCategory) || CATEGORY_DEFINITIONS[0];
-            return (
-              <>
-                {/* Mobile Dropdown (< md): Zero horizontal scroll, perfectly ergonomic! */}
-                <div className="md:hidden flex items-center gap-2">
-                  <div className="fabulous-select-wrapper flex-1">
-                    <select
-                      aria-label="Select Active Section"
-                      value={activeTab}
-                      onChange={(e) => {
-                        playSound("click");
-                        const tabId = e.target.value;
-                        if (tabId === "concepts") {
-                          if (commandSubjectId === "sst") {
-                            setConceptsSubject("sst");
-                            setConceptsChapterNo(1);
-                          } else if (commandSubjectId === "science") {
-                            setConceptsSubject("science");
-                            setConceptsChapterNo(1);
-                          } else {
-                            setConceptsSubject("math");
-                          }
-                        }
-                        React.startTransition(() => {
-                          setActiveTab(tabId as any);
-                        });
-                        if (typeof window !== "undefined") {
-                          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-                        }
-                      }}
-                      className={`fabulous-select ${
-                        isDark ? "fabulous-select-dark" : "fabulous-select-light"
-                      }`}
-                    >
-                      {currentCat.items.map((subItem) => (
-                        <option key={subItem.id} value={subItem.id}>
-                          {subItem.label} {subItem.count !== undefined ? `(${subItem.count})` : ""}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="fabulous-select-icon text-zinc-400">
-                      <ChevronDown className="w-4 h-4" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Tablet / Desktop Pills (>= md): Styled with high-contrast active state */}
-                <div className="hidden md:flex items-center gap-1.5 flex-wrap">
+            {/* TIER 2: ACTIVE CATEGORY SUB-TABS PILL STRIP (Concepts, Practice, Tools, Command)
+                Horizontally scrollable on mobile and landscape, single tight row, ZERO WRAPPING, ZERO OVERLAPPING! */}
+            {(() => {
+              const currentCat = CATEGORY_DEFINITIONS.find((c) => c.id === activeCategory) || CATEGORY_DEFINITIONS[0];
+              if (!currentCat || currentCat.items.length <= 1) return null;
+              return (
+                <div className="flex items-center overflow-x-auto no-scrollbar scroll-smooth flex-nowrap gap-1.5 sm:gap-2 pb-0.5">
                   {currentCat.items.map((subItem) => {
                     const isSubActive = activeTab === subItem.id;
                     return (
@@ -3397,18 +3415,18 @@ export default function CBSECommandCenter() {
                             }
                           });
                         }}
-                        className={`px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shrink-0 transition-all cursor-pointer touch-manipulation min-h-[32px] active:scale-95 ${
+                        className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 shrink-0 whitespace-nowrap transition-all cursor-pointer touch-manipulation min-h-[30px] active:scale-95 ${
                           isSubActive
                             ? isDark
-                              ? "bg-amber-500/20 border border-amber-500/50 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]"
-                              : "bg-amber-100 border border-amber-400 text-amber-950 shadow-xs"
+                              ? "bg-amber-500/20 border border-amber-500/50 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)] font-black"
+                              : "bg-amber-100 border border-amber-400 text-amber-950 shadow-xs font-black"
                             : isDark
                             ? "bg-white/[0.03] border border-white/[0.08] text-zinc-400 hover:text-white hover:bg-white/[0.07]"
                             : "bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200"
                         }`}
                       >
                         <subItem.icon className="w-3.5 h-3.5 shrink-0" />
-                        <span className="leading-none inline-flex items-center">{subItem.label}</span>
+                        <span className="leading-none">{subItem.label}</span>
                         {subItem.count !== undefined && (
                           <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded-full font-black leading-none inline-flex items-center ${
                             isSubActive ? "bg-amber-500 text-slate-950" : "bg-white/10 text-zinc-400"
@@ -3420,12 +3438,10 @@ export default function CBSECommandCenter() {
                     );
                   })}
                 </div>
-              </>
-            );
-          })()}
+              );
+            })()}
           </div>
         </div>
-      )}
       </div>
 
       {/* =========================================================================
@@ -7008,14 +7024,14 @@ export default function CBSECommandCenter() {
       )}
 
       {/* FOOTER */}
-      <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-24 xl:mb-0 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
+      <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-24 xl:mb-0 landscape:mb-4 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
         Lakshmipat Singhania Academy Bissau • CBSE Class 10 Command Center (2026–2027)
       </footer>
 
       {/* =========================================================================
           APPLE NATIVE FLOATING BOTTOM DOCK (MOBILE & TABLET: < 1280px)
           ========================================================================= */}
-      <div id="tutorial-nav-dock-mobile" className="fixed bottom-0 inset-x-0 z-40 xl:hidden pointer-events-none flex justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <div id="tutorial-nav-dock-mobile" className="fixed bottom-0 inset-x-0 z-40 xl:hidden landscape:hidden pointer-events-none flex justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <div className={`pointer-events-auto w-full max-w-md p-1.5 rounded-3xl border flex items-center justify-around shadow-2xl backdrop-blur-2xl transition-all ${
           isDark
             ? "bg-[#07070a]/85 border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.8)]"

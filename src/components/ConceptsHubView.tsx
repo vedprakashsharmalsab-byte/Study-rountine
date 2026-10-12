@@ -582,7 +582,7 @@ export default function ConceptsHubView({
           </div>
 
           {/* Subject Switcher */}
-          <div className={`p-1.5 rounded-2xl border flex items-center gap-1.5 w-full sm:w-auto justify-center ${
+          <div className={`p-1.5 rounded-2xl border flex items-center gap-1.5 w-full sm:w-auto justify-start sm:justify-center overflow-x-auto no-scrollbar flex-nowrap scroll-smooth ${
             isDark ? "bg-black/40 border-white/10" : "bg-slate-100 border-slate-200"
           }`}>
             <Link
@@ -594,7 +594,7 @@ export default function ConceptsHubView({
                   setIsChapterGridOpen(false);
                 }
               }}
-              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 whitespace-nowrap ${
                 activeSubject === "math"
                   ? isDark
                     ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md font-black"
@@ -615,7 +615,7 @@ export default function ConceptsHubView({
                   setIsChapterGridOpen(false);
                 }
               }}
-              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 whitespace-nowrap ${
                 activeSubject === "science"
                   ? isDark
                     ? "bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-md font-black"
@@ -637,7 +637,7 @@ export default function ConceptsHubView({
                   setIsChapterGridOpen(false);
                 }
               }}
-              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+              className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0 whitespace-nowrap ${
                 activeSubject === "sst"
                   ? isDark
                     ? "bg-gradient-to-r from-rose-500 to-amber-500 text-slate-950 shadow-md font-black"
@@ -657,7 +657,7 @@ export default function ConceptsHubView({
                   setActiveScienceChapterNo(0);
                   setIsChapterGridOpen(false);
                 }}
-                className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 border ${
+                className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 border shrink-0 whitespace-nowrap ${
                   activeScienceChapterNo === 0
                     ? isDark
                       ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 border-amber-300 shadow-md font-black ring-1 ring-amber-400"
@@ -2637,7 +2637,7 @@ export default function ConceptsHubView({
               </div>
 
               {/* Level Filter Tabs */}
-              <div className="flex flex-wrap gap-2.5">
+              <div className="overflow-x-auto no-scrollbar flex items-center gap-2.5 flex-nowrap pb-1 scroll-smooth">
                 {[
                   { level: 1, label: "L1: Foundation", count: activeMathMasteryData.gradedQuestions.filter(q => q.level === 1).length },
                   { level: 2, label: "L2: Standard", count: activeMathMasteryData.gradedQuestions.filter(q => q.level === 2).length },
@@ -2650,7 +2650,7 @@ export default function ConceptsHubView({
                     <button
                       key={lvl.level}
                       onClick={() => setMathSelectedLevel(lvl.level)}
-                      className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                      className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 whitespace-nowrap ${
                         isActive
                           ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 scale-[1.02]"
                           : isDark
@@ -3736,10 +3736,10 @@ export default function ConceptsHubView({
             )}
 
             {/* SST View Tabs Navigation */}
-            <div className="flex flex-wrap items-center gap-2 pt-6 mt-6 border-t border-white/10">
+            <div className="overflow-x-auto no-scrollbar flex items-center gap-2 flex-nowrap pt-4 mt-4 border-t border-white/10 pb-1 scroll-smooth">
               <button
                 onClick={() => setActiveSSTViewTab("concepts")}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border shrink-0 whitespace-nowrap ${
                   activeSSTViewTab === "concepts"
                     ? isDark
                       ? "bg-rose-500 text-slate-950 border-rose-400 font-black shadow-md"
@@ -3756,7 +3756,7 @@ export default function ConceptsHubView({
               {activeSSTMeta.timelineAvailable && (
                 <button
                   onClick={() => setActiveSSTViewTab("timeline")}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border shrink-0 whitespace-nowrap ${
                     activeSSTViewTab === "timeline"
                       ? isDark
                         ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md"
@@ -3774,7 +3774,7 @@ export default function ConceptsHubView({
               {activeSSTMeta.mapWorkAvailable && activeSSTMapWork && (
                 <button
                   onClick={() => setActiveSSTViewTab("mapwork")}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border shrink-0 whitespace-nowrap ${
                     activeSSTViewTab === "mapwork"
                       ? isDark
                         ? "bg-teal-500 text-slate-950 border-teal-400 font-black shadow-md"
@@ -3791,7 +3791,7 @@ export default function ConceptsHubView({
 
               <button
                 onClick={() => setActiveSSTViewTab("mnemonics")}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 border shrink-0 whitespace-nowrap ${
                   activeSSTViewTab === "mnemonics"
                     ? isDark
                       ? "bg-purple-500 text-white border-purple-400 font-black shadow-md"
