@@ -687,6 +687,179 @@ export const SST_OFFICIAL_BLUEPRINTS: Record<number, ChapterBlueprint> = {
     examinerPenalties: [
       "-0.5 Mark for omitting the supervisory role of RBI in formal credit (RBI monitors Cash Reserve Ratio and loan targets)."
     ]
+  },
+  11: {
+    chapterNo: 11,
+    chapterName: "The Making of a Global World",
+    unitName: "Unit I: India and the Contemporary World - II (History: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "2–4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "Silk Routes linking Asia with Europe & North Africa (Pre-modern trade & cultural exchange)", marks: "1.0 Mark", rubricNote: "Carried silk, pottery, spices, precious metals" },
+      { step: "Food Travels: Spaghetti and Potato (Introduction of common foods from the Americas by Columbus)", marks: "1.0 Mark", rubricNote: "Irish Potato Famine (1845-1849)" },
+      { step: "Conquest, Disease and Trade: Smallpox as a biological weapon in America's colonization", marks: "1.5 Marks", rubricNote: "Original inhabitants had zero immunity" },
+      { step: "Role of precious metals (Silver from Peru & Mexico/Potosi) financing European trade", marks: "1.0 Mark", rubricNote: "Shift of world trade centre westward" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for writing topics beyond Sub-topics 1 to 1.3 (Only Sub-topics 1 to 1.3 are evaluated in Board exam)."
+    ]
+  },
+  12: {
+    chapterNo: 12,
+    chapterName: "Print Culture and the Modern World",
+    unitName: "Unit I: India and the Contemporary World - II (History: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "First printed books in China, Japan & Korea (Woodblock printing & Accordion book format)", marks: "1.0 Mark", rubricNote: "Edo/Ukiyo visual culture, Kitagawa Utamaro" },
+      { step: "Gutenberg's movable metal type printing press (1430s-1448) & First printed Bible", marks: "1.5 Marks", rubricNote: "Olive press inspiration; lead-tin-bismuth alloy" },
+      { step: "Print Revolution & Protestant Reformation (Martin Luther's 95 Theses 1517)", marks: "1.5 Marks", rubricNote: "'Print is the ultimate gift of God'" },
+      { step: "Print in 19th-century India: Vernacular Press, Raja Rammohun Roy (Sambad Kaumudi) & Vernacular Press Act 1878", marks: "1.5 Marks", rubricNote: "Censorship modelled on Irish Press Laws" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing Sambad Kaumudi (Rammohun Roy) with Samachar Chandrika (orthodox Hindu opposition)."
+    ]
+  },
+  13: {
+    chapterNo: 13,
+    chapterName: "Agriculture",
+    unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "5–6 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0, mapSkill: 1 },
+    markingSchemeRubric: [
+      { step: "Types of Farming: Primitive Subsistence (Jhumming/Slash-and-burn) vs Intensive Subsistence vs Commercial/Plantation", marks: "1.5 Marks", rubricNote: "Regional names of Jhumming (Milpa, Roca, Bewar)" },
+      { step: "Cropping Seasons: Rabi (Winter/Oct-Dec, harvested Apr-Jun, Wheat/Gram/Mustard), Kharif (Monsoon/Jun-Jul, Rice/Maize/Cotton), Zaid (Summer/Mar-Jun, Watermelon)", marks: "1.5 Marks", rubricNote: "Precise months and temperature/rainfall criteria" },
+      { step: "Major Crops: Geographical requirements for Rice (high temp >25°C, high humidity, rainfall >100 cm), Wheat (cool growing season, bright sunshine, 50-75 cm rainfall), and Sugarcane", marks: "1.5 Marks", rubricNote: "Top producer states mandatory" },
+      { step: "Institutional & Technological Reforms: Green Revolution, White Revolution (Operation Flood), Land Ceiling, Kissan Credit Card (KCC), PAIS, MSP, Bhoodan-Gramdan (Vinoba Bhave)", marks: "1.5 Marks", rubricNote: "Bloodless revolution concept" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing Rabi crops with Kharif crops.",
+      "-0.5 Mark for omitting Vinoba Bhave in Bhoodan-Gramdan questions."
+    ]
+  },
+  14: {
+    chapterNo: 14,
+    chapterName: "Minerals and Energy Resources",
+    unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "5–6 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0, mapSkill: 1 },
+    markingSchemeRubric: [
+      { step: "Modes of Occurrence of Minerals: Veins & Lodes (Igneous/Metamorphic), Beds/Layers (Sedimentary), Weathered residual mass (Bauxite), Placer deposits (Gold in valley sands), Ocean beds", marks: "1.5 Marks", rubricNote: "Examples for each mode mandatory" },
+      { step: "Ferrous Minerals: Iron ore (Magnetite 70% iron, Hematite 50-60%) & 4 Major Iron Ore Belts (Odisha-Jharkhand, Durg-Bastar-Chandrapur/Bailadila, Ballari-Chitradurga-Chikkamagaluru-Kudremukh, Maharashtra-Goa)", marks: "1.5 Marks", rubricNote: "Kudremukh slurry pipeline to New Mangalore" },
+      { step: "Non-Ferrous (Bauxite in Amarkantak/Katni/Koraput; Copper in Balaghat/Khetri) & Non-Metallic (Mica in Koderma)", marks: "1.0 Mark", rubricNote: "Mica properties: di-electric strength, insulating" },
+      { step: "Energy Resources: Conventional (Coal - Gondwana vs Tertiary; Petroleum - Mumbai High, Digboi; Natural Gas) vs Non-Conventional (Solar, Wind, Biogas, Nuclear, Tidal, Geothermal)", marks: "1.5 Marks", rubricNote: "Energy saved is energy produced conservation" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing Magnetite (highest magnetic, 70%) with Hematite (most industrial, 50-60%).",
+      "-0.5 Mark for wrong location of Kudremukh (Karnataka, 100% export unit)."
+    ]
+  },
+  15: {
+    chapterNo: 15,
+    chapterName: "Manufacturing Industries",
+    unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "5–6 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 1, case4M: 0, mapSkill: 1 },
+    markingSchemeRubric: [
+      { step: "Importance of Manufacturing: Backbone of economic development, modernizes agriculture, creates secondary/tertiary employment, earns foreign exchange", marks: "1.5 Marks", rubricNote: "Agro-industry interdependence" },
+      { step: "Factors of Industrial Location & Agglomeration Economies; Classification of Industries (Raw material, role, capital, ownership, weight)", marks: "1.5 Marks", rubricNote: "Basic/Key vs Consumer industries" },
+      { step: "Core Industry Case Studies: Cotton textiles (Mumbai-Gujarat), Jute textiles (Hooghly river basin factors), Sugar industry (Shift to Maharashtra cooperatives), Iron & Steel (Chhota Nagpur plateau concentration)", marks: "2.0 Marks", rubricNote: "Raw material weight losing nature" },
+      { step: "Industrial Pollution & Environmental Degradation: Air, Water, Thermal, Noise pollution; 3-Stage Effluent Treatment & NTPC proactive ISO 14001 framework", marks: "1.5 Marks", rubricNote: "Primary mechanical, Secondary biological, Tertiary recycling" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for omitting the 3 stages of industrial effluent treatment (Primary, Secondary, Tertiary).",
+      "-0.5 Mark for failing to mention higher sucrose content and cooler climate when explaining the sugar industry's southward shift."
+    ]
+  },
+  16: {
+    chapterNo: 16,
+    chapterName: "Lifelines of National Economy",
+    unitName: "Unit II: Contemporary India - II (Geography: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "2–3 Marks (Map & Interdisciplinary)",
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 0, la5M: 0, case4M: 0, mapSkill: 1 },
+    markingSchemeRubric: [
+      { step: "Roadways vs Railways: Advantages of roadways (Lower capital cost, door-to-door service, negotiates undulating topography, feeder to other transport modes)", marks: "1.5 Marks", rubricNote: "Road classification: Golden Quadrilateral, National, State, District, Rural/PMGSY, Border/BRO" },
+      { step: "Border Roads Organisation (BRO 1960) & Strategic Infrastructure: Atal Tunnel (9.02 km, connecting Manali to Lahaul-Spiti above 10,000 ft)", marks: "1.0 Mark", rubricNote: "Year-round all-weather strategic access" },
+      { step: "Pipelines (Crude oil, petroleum, gas, and slurry) & Inland Waterways (NW-1 Ganga Prayagraj-Haldia 1620 km, NW-2 Brahmaputra)", marks: "1.5 Marks", rubricNote: "Zero transit delay, low operating costs" },
+      { step: "Major Sea Ports (Kandla/Deendayal tidal, Mumbai, Marmagao, New Mangalore, Kochi, Chennai, Visakhapatnam, Paradip, Kolkata riverine, Haldia) & International Airports", marks: "1.5 Marks", rubricNote: "95% foreign trade volume by sea" },
+      { step: "International Trade as Economic Barometer & Tourism as a flourishing invisible export trade (15M+ direct employment)", marks: "1.0 Mark", rubricNote: "Favourable vs Unfavourable trade balance" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing National Waterway 1 (Ganga: Prayagraj to Haldia) with NW 2 (Brahmaputra: Sadiya to Dhubri)."
+    ]
+  },
+  17: {
+    chapterNo: 17,
+    chapterName: "Gender, Religion and Caste",
+    unitName: "Unit III: Democratic Politics - II (Political Science: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 1, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "Gender and Politics: Sexual division of labour, Feminist movements, Low political representation of women (Panchayati Raj 1/3rd constitutional reservation vs Lok Sabha/Nari Shakti Vandan Adhiniyam)", marks: "1.5 Marks", rubricNote: "Public vs private division" },
+      { step: "Religion, Communalism and Politics: Communal politics definition (religion as principal basis of community), Forms of communalism in politics, Secular state constitutional provisions (Articles 14, 15, 25-28)", marks: "1.5 Marks", rubricNote: "No official religion in India" },
+      { step: "Caste and Politics: Caste inequalities, Social reformers (Jyotirao Phule, Gandhiji, Dr. B.R. Ambedkar, Periyar), Caste in politics (mobilization, vote banks) vs Politics in caste (sub-castes coalition, forward/backward bargaining)", marks: "1.5 Marks", rubricNote: "Two-way interaction between caste & politics" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for stating that caste is the ONLY factor in Indian elections (Voters consider candidate performance, party loyalties, economic interests alongside caste)."
+    ]
+  },
+  18: {
+    chapterNo: 18,
+    chapterName: "Political Parties",
+    unitName: "Unit III: Democratic Politics - II (Political Science: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "5–6 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 0, la5M: 1, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "What is a Political Party? Three components: The Leaders, The Active Members, The Followers; Seven core functions (Contest elections, formulate policies, make laws, form government, play opposition, shape public opinion, provide welfare access)", marks: "2.0 Marks", rubricNote: "Necessity in representative democracies" },
+      { step: "Party Systems: One-Party (China), Two-Party (USA, UK), Multi-Party (India); Coalition government dynamics and national alliances (NDA, UPA, Left Front in 2004)", marks: "1.5 Marks", rubricNote: "Evolution based on social diversity" },
+      { step: "National Parties (6% valid votes in Lok Sabha/4 states + 4 Lok Sabha seats) vs State Parties (6% in State Assembly + 2 Assembly seats)", marks: "1.5 Marks", rubricNote: "ECI criteria precise numbers" },
+      { step: "Four Major Challenges facing Political Parties: Lack of internal democracy, Dynastic succession, Money and muscle power, Meaningful choice deficit; Legal and suggested reforms (Anti-Defection Law, Affidavit of criminal cases/assets, Mandatory organizational elections)", marks: "2.0 Marks", rubricNote: "52nd Amendment Anti-Defection" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for omitting the exact percentage threshold (6% votes) for National and State parties."
+    ]
+  },
+  19: {
+    chapterNo: 19,
+    chapterName: "Outcomes of Democracy",
+    unitName: "Unit III: Democratic Politics - II (Political Science: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "3–4 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "Assessment of Democracy: Promotes equality among citizens, enhances dignity of the individual, improves decision-making quality, resolves conflicts, allows room to correct mistakes", marks: "1.5 Marks", rubricNote: "Democracy is a principle of governance, not a magic cure" },
+      { step: "Accountable, Responsive, and Legitimate Government: Free and fair regular elections, open public debate, Right to Information (RTI 2005); Legitimacy makes democracy superior even if slower than dictatorship", marks: "1.5 Marks", rubricNote: "Legitimate because it is the people's own government" },
+      { step: "Economic Growth, Inequality, and Poverty: Dictatorships historically had slightly higher rates of economic growth, but difference is negligible when comparing poor democracies with poor dictatorships", marks: "1.5 Marks", rubricNote: "Democracy guarantees political equality, not equal wealth" },
+      { step: "Accommodation of Social Diversity & Dignity of Citizens (Women and Disadvantaged Castes): Majority must always work with minority; Rule of majority is not rule of majority community", marks: "1.5 Marks", rubricNote: "Democracy remains democracy only as long as every citizen has a chance of being in majority" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for claiming that democracy alone produces higher economic development than dictatorship."
+    ]
+  },
+  20: {
+    chapterNo: 20,
+    chapterName: "Globalisation and the Indian Economy",
+    unitName: "Unit IV: Understanding Economic Development (Economics: 20 Marks)",
+    unitTotalMarks: 20,
+    expectedMarks: "4–5 Marks",
+    questionPattern: { mcq1M: 1, vsa2M: 0, sa3M: 1, la5M: 0, case4M: 0 },
+    markingSchemeRubric: [
+      { step: "What is Globalisation? Rapid integration or interconnection between countries; Movement of goods, services, investments, technology, and people", marks: "1.5 Marks", rubricNote: "MNCs as primary drivers" },
+      { step: "Multinational Corporations (MNCs) Production Strategies: Setting up production jointly with local companies (e.g., Ford Motors with Mahindra), Buying local companies (e.g., Cargill Foods buying Parakh Foods), Placing orders with small producers (garments, footwear, sports goods)", marks: "2.0 Marks", rubricNote: "Locating near markets, cheap skilled/unskilled labour" },
+      { step: "Factors Enabling Globalisation: Telecommunications & Internet revolution; Containerization in transport (drastic cost reduction); Trade Liberalisation & Removal of Trade Barriers in 1991 New Economic Policy", marks: "1.5 Marks", rubricNote: "Role of WTO (World Trade Organisation) & unequal agricultural subsidies debate" },
+      { step: "Impact of Globalisation on India & The Struggle for Fair Globalisation: Benefits to consumers (greater choice, lower prices) and large Indian MNCs (Tata Motors, Infosys, Ranbaxy, Asian Paints) vs Hardships for small manufacturers (batteries, plastics, toys) and unorganised workers; Government role in ensuring fair labor laws and protecting small producers", marks: "2.0 Marks", rubricNote: "Globalisation must create opportunities for all" }
+    ],
+    examinerPenalties: [
+      "-0.5 Mark for confusing Liberalisation (removal of state trade barriers) with Privatisation."
+    ]
   }
 };
 

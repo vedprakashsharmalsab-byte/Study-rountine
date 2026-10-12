@@ -5,219 +5,262 @@ export const SCI_CH1_CONCEPT: ScienceChapterConcept = {
   title: "Chemical Reactions and Equations",
   discipline: "Chemistry",
   weightage: "6–8 Marks (Board Mandatory)",
-  oneLiner: "A chemical reaction makes NEW substances; balancing keeps atoms perfectly counted on both sides; state symbols tell us the physical form.",
-  analogyTitle: "The 'Recipe' & 'Recipe Checker' of Chemistry",
-  analogyContent: `Imagine you are baking cookies 🍪. The **ingredients** (flour, sugar, butter) are the **reactants**, and the **finished cookies** are the **products**. A **balanced equation** is like a recipe where the baker guarantees: "Every gram of ingredient I add is accounted for in the cookies that come out — nothing disappears!" This is the **Law of Conservation of Mass**.
+  oneLiner: "A chemical reaction rearranges chemical bonds to form new substances with distinct identities; balancing enforces the Law of Conservation of Mass; state symbols define physical reality.",
+  analogyTitle: "The Precision Molecular Assembly Line",
+  analogyContent: `Imagine an automated **automotive assembly line**. Individual raw components (chassis, engine, wheels) are your **reactants**. When mechanical and electrical connections are forged, a fully integrated **vehicle** emerges as the **product** — possessing entirely new properties that none of the separate parts had alone.
 
-A chef's kitchen has rules: you write the state of each ingredient — is the butter solid 🧈, liquid 🫗, or melted? Similarly in chemistry: (s) solid, (l) liquid, (g) gas, (aq) dissolved in water.`,
+Under the universal **Law of Conservation of Mass**, no steel bolt or copper wire magically appears or vanishes during assembly: every single atom entering the factory floor on the left must be strictly accounted for in the finished vehicles driving off on the right. In chemical shorthand, we specify the exact physical state of every material: (s) for solid components, (l) for pure liquids, (g) for gases, and (aq) for aqueous solutions dissolved in water.`,
   sections: [
     {
       id: "chemical_reactions",
-      label: "1. What is a Chemical Reaction?",
-      heading: "From Boring Ingredients to Brand New Substances",
-      subheading: "Evidence of Chemical Change + Law of Conservation of Mass",
-      explanation: `A **chemical reaction** is a process in which one or more substances (reactants) are converted into one or more entirely new substances (products) with **different chemical properties**.
+      label: "1. Chemical Reactions & The Balancing Algorithm",
+      heading: "Bond Reorganization, Evidence of Reaction & Stoichiometry",
+      subheading: "4 Observable Characteristics + Law of Conservation of Mass + Hit-and-Trial Balancing",
+      explanation: `A **chemical reaction** is a process in which one or more starting substances (**reactants**) undergo bond cleavage and atom rearrangement to produce one or more entirely new substances (**products**) with **distinct chemical identities and properties**.
 
-**How do we know a chemical reaction has occurred?** Look for these 4 signs:
-1. 🟡 **Change in colour** — Iron turns reddish-brown when it rusts (white to blue in blue litmus).
-2. 💨 **Evolution of gas** — Zinc + H₂SO₄ produces bubbles of hydrogen gas.
-3. 🔥 **Change in temperature** — Hand-warmer packs get hot (exothermic); melting ammonium nitrate feels cold (endothermic).
-4. 🧊 **Change in state** — Candle wax (solid) burns to produce CO₂ gas and liquid water.
-5. 🌫️ **Formation of precipitate** — Mixing lead nitrate + potassium iodide → yellow solid (PbI₂) settles out.
+**How do we definitively identify a chemical reaction? (NCERT 4 Core Observations):**
+1. 🟡 **Change in colour:** 
+   - Iron nail in blue CuSO₄(aq) ⟶ Solution turns pale green FeSO₄(aq); nail gets reddish-brown Cu coating.
+   - White AgCl turns grey in sunlight.
+2. 💨 **Evolution of a gas:** 
+   - Zinc granules + dilute H₂SO₄ ⟶ Colorless Hydrogen gas (H₂) bubbling out with characteristic 'pop' sound.
+   - Lead nitrate thermal decomposition ⟶ Pungent reddish-brown Nitrogen dioxide (NO₂) fumes.
+3. 🔥 **Change in temperature:** 
+   - Quicklime (CaO) + Water ⟶ Slaked lime Ca(OH)₂ with vigorous hissing and intense heat evolution (Exothermic).
+   - Barium hydroxide + Ammonium chloride ⟶ Reaction vessel turns ice-cold (Endothermic).
+4. 🌫️ **Formation of a precipitate (insoluble solid):** 
+   - Lead nitrate + Potassium iodide ⟶ Brilliant yellow precipitate of Lead iodide (PbI₂↓).
+   - Sodium sulphate + Barium chloride ⟶ Dense white precipitate of Barium sulphate (BaSO₄↓).
 
-**Law of Conservation of Mass (Lavoisier, 1789):**
-*"In a chemical reaction, the total mass of reactants always equals the total mass of products."*
-This means atoms are **never created or destroyed** — they are simply rearranged into new combinations!
-
-**Writing Chemical Equations:**
-- **Word equation:** Magnesium + Oxygen → Magnesium oxide
-- **Unbalanced equation:** Mg + O₂ → MgO ← ❌ (Oxygen count doesn't match!)
-- **Balanced equation:** 2Mg(s) + O₂(g) → 2MgO(s) ✅`,
+**Law of Conservation of Mass (Antoine Lavoisier, 1789):**
+*"Matter can neither be created nor destroyed in a chemical reaction. The total mass of reactants must equal the total mass of products, and the number of atoms of each element must remain strictly identical on both sides of a balanced equation."*`,
       formulasOrKeyPoints: [
         {
           title: "Structure of a Balanced Chemical Equation",
-          content: `$$\\underbrace{\\text{Reactants}}_{\\text{Left side}} \\xrightarrow{\\text{Conditions}} \\underbrace{\\text{Products}}_{\\text{Right side}}$$
+          content: `$$\\underbrace{\\text{Reactants}}_{\\text{Left side}} \\xrightarrow{\\text{Conditions (}\\Delta, h\\nu, \\text{Catalyst, Pressure)}} \\underbrace{\\text{Products}}_{\\text{Right side}}$$
 
-**State Symbols:**
+**Standard Physical State Notation (CBSE 0.5-Mark Criterion):**
 | Symbol | Meaning | Example |
 |--------|---------|---------|
-| (s) | Solid | Fe(s) |
-| (l) | Liquid | H₂O(l) |
-| (g) | Gas | O₂(g) |
-| (aq) | Aqueous (in water) | NaCl(aq) |
-| ↑ | Gas evolved | H₂(g)↑ |
-| ↓ | Precipitate formed | PbI₂(s)↓ |`,
-          note: "Conditions above/below the arrow: Δ = heat, hν = light, catalyst name = e.g. MnO₂. These must be shown in 3M and 5M Board answers."
+| (s) | Solid substance | $\\text{Fe(s)}, \\text{CaCO}_3\\text{(s)}$ |
+| (l) | Pure liquid | $\\text{H}_2\\text{O(l)}, \\text{Br}_2\\text{(l)}$ |
+| (g) | Gaseous state | $\\text{O}_2\\text{(g)}, \\text{CO}_2\\text{(g)}$ |
+| (aq) | Aqueous solution (dissolved in water) | $\\text{NaCl(aq)}, \\text{HCl(aq)}$ |
+| $\\uparrow$ | Gas evolved into atmosphere | $\\text{H}_2\\text{(g)}\\uparrow, \\text{NO}_2\\text{(g)}\\uparrow$ |
+| $\\downarrow$ | Insoluble precipitate settling out | $\\text{BaSO}_4\\text{(s)}\\downarrow, \\text{PbI}_2\\text{(s)}\\downarrow$ |`,
+          note: "Reaction conditions (temperature Δ, pressure e.g. 340 atm, sunlight hν, catalyst e.g. MnO₂ or chlorophyll) MUST be written above or below the arrow."
         },
         {
-          title: "How to Balance ANY Equation — The Hit-and-Trial Method",
-          content: `**Golden Rule:** You may ONLY change the **coefficients** (numbers in front of formulas). NEVER change the subscripts inside a formula!
+          title: "The Systematic 4-Step Balancing Algorithm",
+          content: `**Core Rule:** NEVER alter the subscript inside a molecular formula (e.g. changing $\\text{H}_2\\text{O}$ to $\\text{H}_2\\text{O}_2$ changes water into toxic hydrogen peroxide!). You may ONLY adjust the **stoichiometric coefficients** placed in front of formulas.
 
-**Example: Balance** $\\text{Fe} + \\text{H}_2\\text{O} \\to \\text{Fe}_3\\text{O}_4 + \\text{H}_2$
+**Example: Balance the reaction between red-hot iron and steam:**
+$$\\text{Fe} + \\text{H}_2\\text{O} \\to \\text{Fe}_3\\text{O}_4 + \\text{H}_2$$
 
-| Step | Equation | Fe | H | O |
-|------|----------|----|---|---|
-| Start | Fe + H₂O → Fe₃O₄ + H₂ | 1≠3 | 2=2 | 1≠4 |
-| Fix O | Fe + 4H₂O → Fe₃O₄ + H₂ | 1≠3 | 8≠2 | 4=4 |
-| Fix H | Fe + 4H₂O → Fe₃O₄ + 4H₂ | 1≠3 | 8=8 | 4=4 |
-| Fix Fe | **3Fe(s) + 4H₂O(g) → Fe₃O₄(s) + 4H₂(g)** | 3=3 ✅ | 8=8 ✅ | 4=4 ✅ |`,
-          note: "Water is in gaseous state (steam) because red-hot iron reacts only with steam, not liquid water. This is a classic Board trap!"
+| Step | Operation | Equation | Fe (L/R) | H (L/R) | O (L/R) |
+|---|---|---|---|---|---|
+| 1 | Initial atom count | $\\text{Fe} + \\text{H}_2\\text{O} \\to \\text{Fe}_3\\text{O}_4 + \\text{H}_2$ | 1 / 3 | 2 / 2 | 1 / 4 |
+| 2 | Balance O (most complex molecule $\\text{Fe}_3\\text{O}_4$) | $\\text{Fe} + 4\\text{H}_2\\text{O} \\to \\text{Fe}_3\\text{O}_4 + \\text{H}_2$ | 1 / 3 | 8 / 2 | 4 / 4 ✅ |
+| 3 | Balance H | $\\text{Fe} + 4\\text{H}_2\\text{O} \\to \\text{Fe}_3\\text{O}_4 + 4\\text{H}_2$ | 1 / 3 | 8 / 8 ✅ | 4 / 4 ✅ |
+| 4 | Balance Fe and insert state symbols | $3\\text{Fe(s)} + 4\\text{H}_2\\text{O(g)} \\to \\text{Fe}_3\\text{O}_4\\text{(s)} + 4\\text{H}_2\\text{(g)}$ | 3 / 3 ✅ | 8 / 8 ✅ | 4 / 4 ✅ |`,
+          note: "Board Examiner Alert: Red-hot iron reacts ONLY with steam (gaseous water), NOT liquid water. Writing H₂O(l) instead of H₂O(g) loses 0.5 mark."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Count atoms on both sides",
-          action: "List every element present and count atoms of each element on left side and right side separately.",
-          proTip: "Use a table — Examiners love structured presentation and it helps you spot imbalances instantly."
+          title: "Construct an Element Inventory Table",
+          action: "List each unique element and tally the exact number of atoms on the reactant side vs product side before writing any numbers.",
+          proTip: "Keep polyatomic ions that remain intact (like SO₄²⁻ or NO₃⁻) as a single unit to save balancing time."
         },
         {
           stepNo: 2,
-          title: "Start balancing with the most complex molecule",
-          action: "Pick the compound with the most atoms first (usually a metal oxide or an organic compound). Balance it by adjusting its coefficient.",
-          proTip: "Leave H₂ and O₂ (pure elemental gases) for last — they're easiest to adjust at the end."
+          title: "Target the Largest Compound First",
+          action: "Select the compound containing the highest number of atoms (often a metal oxide or salt). Balance its oxygen or polyatomic groups first.",
+          proTip: "Leave elemental gases (O₂, H₂, N₂) for the final step — adjusting their coefficient never disrupts other elements."
         },
         {
           stepNo: 3,
-          title: "Verify and add state symbols",
-          action: "Re-count every element after adding coefficients. Once balanced, add (s), (l), (g), (aq) to each species.",
-          proTip: "In Board exams, state symbols can cost 0.5 mark each in 3M+ questions. Never skip them!"
+          title: "Verify Equality and Affix State Symbols",
+          action: "Multiply out every coefficient across all terms to ensure absolute equality. Append (s), (l), (g), (aq).",
+          proTip: "In CBSE marking schemes, 3M equation questions carry 1 mark for balancing and 0.5 mark strictly for correct state symbols."
         }
       ],
       examinerTraps: [
         {
-          trap: "Changing the subscript to balance — e.g. writing H₂O₂ instead of 2H₂O.",
-          correction: "NEVER change subscripts! H₂O₂ is a completely different substance (hydrogen peroxide) from H₂O (water). Only change the coefficient (the big number in front)."
+          trap: "Altering chemical subscripts during balancing (e.g. writing Na₂Cl₂ instead of 2NaCl).",
+          correction: "Subscripts define chemical identity and valency. Only alter coefficients in front of formulas."
         },
         {
-          trap: "Forgetting to write state symbols like (g) or (aq) in board answers.",
-          correction: "State symbols are compulsory in 3M and 5M answers. Missing them costs 0.5 mark per species. In the Fe + steam reaction, writing H₂O(l) instead of H₂O(g) is a half-mark deduction."
+          trap: "Omitting the state symbol (g) for steam in iron oxidation.",
+          correction: "Always specify 4H₂O(g) because iron does not react with liquid water at room temperature."
         }
       ]
     },
     {
       id: "types_of_reactions",
-      label: "2. Types of Chemical Reactions",
-      heading: "The 5 Reaction Families — with Everyday Analogies",
-      subheading: "Combination · Decomposition · Displacement · Double Displacement · Redox",
-      explanation: `Think of chemical reactions as **relationship status updates** between atoms!
+      label: "2. The 5 Reaction Classes & NCERT Benchmark Activities",
+      heading: "Combination, Decomposition, Displacement, Double Displacement & Redox",
+      subheading: "Complete Equations, Colors, Observations & Industrial Applications",
+      explanation: `Every chemical transformation falls into one of five fundamental reaction archetypes:
 
-**1. COMBINATION (like a Marriage 💍):**
-Two or more substances combine to form ONE new substance.
-$$\\text{A} + \\text{B} \\to \\text{AB}$$
-*Example:* $\\text{CaO(s) + H}_2\\text{O(l)} \\to \\text{Ca(OH)}_2\\text{(aq) + Heat}$ (Quicklime + Water → Slaked lime)
+### 1. COMBINATION REACTION ($A + B \\to AB$)
+Two or more reactants combine to yield a **single product**. Usually highly exothermic.
+- **NCERT Activity 1.1 (Magnesium ribbon burning):**
+  $$2\\text{Mg(s)} + \\text{O}_2\\text{(g)} \\to 2\\text{MgO(s)} + \\text{Dazzling White Flame}$$
+  *Key Fact:* Ribbon must be rubbed with sandpaper before ignition to scrape off the protective basic magnesium oxide/carbonate film that prevents contact with oxygen. White ash formed (MgO) turns red litmus paper blue in aqueous suspension (basic oxide).
+- **NCERT Activity 1.4 (Quicklime with water):**
+  $$\\text{CaO(s)} [\\text{Quicklime}] + \\text{H}_2\\text{O(l)} \\to \\text{Ca(OH)}_2\\text{(aq)} [\\text{Slaked lime}] + \\text{Vigorous Heat}$$
+  *Whitewashing Chemistry (Board Classic):*
+  Slaked lime $\\text{Ca(OH)}_2$ applied to walls reacts slowly with atmospheric $\\text{CO}_2$ over 2–3 days:
+  $$\\text{Ca(OH)}_2\\text{(aq)} + \\text{CO}_2\\text{(g)} \\to \\text{CaCO}_3\\text{(s)} [\\text{Limestone/Marble shiny layer}] + \\text{H}_2\\text{O(l)}$$
 
-**2. DECOMPOSITION (like a Divorce 💔):**
-ONE substance breaks down into two or more simpler substances. Requires energy input (heat, light, or electricity).
-$$\\text{AB} \\to \\text{A} + \\text{B}$$
-*Three types:*
-- **Thermal:** $2\\text{Pb(NO}_3)_2\\text{(s)} \\xrightarrow{\\Delta} 2\\text{PbO(s) + 4NO}_2\\text{(g)}\\uparrow + \\text{O}_2\\text{(g)}\\uparrow$
-- **Photolytic:** $2\\text{AgCl(s)} \\xrightarrow{h\\nu} 2\\text{Ag(s) + Cl}_2\\text{(g)}\\uparrow$ (used in black-and-white photography!)
-- **Electrolytic:** $2\\text{H}_2\\text{O(l)} \\xrightarrow{\\text{electricity}} 2\\text{H}_2\\text{(g)}\\uparrow + \\text{O}_2\\text{(g)}\\uparrow$
+---
 
-**3. DISPLACEMENT (like a Job Replacement 🏢):**
-A more reactive element pushes out (displaces) a less reactive element from its salt solution.
-$$\\text{A} + \\text{BC} \\to \\text{AC} + \\text{B}$$
-*Example:* $\\text{Zn(s) + CuSO}_4\\text{(aq)} \\to \\text{ZnSO}_4\\text{(aq) + Cu(s)}$ — Zinc is more reactive than copper!
+### 2. DECOMPOSITION REACTION ($AB \\to A + B$)
+A single compound breaks down into two or more simpler substances. **Always endothermic** (requires energy input as heat, electricity, or light).
+- **A. Thermal Decomposition (Heat Energy $\\Delta$):**
+  - **NCERT Activity 1.5 (Ferrous sulphate crystals):**
+    $$2\\text{FeSO}_4 \\cdot 7\\text{H}_2\\text{O(s)} [\\text{Pale green}] \\xrightarrow{\\Delta} 2\\text{FeSO}_4\\text{(s)} [\\text{Dirty white}] + 7\\text{H}_2\\text{O(g)}$$
+    $$2\\text{FeSO}_4\\text{(s)} \\xrightarrow{\\Delta} \\text{Fe}_2\\text{O}_3\\text{(s)} [\\text{Reddish-brown ferric oxide}] + \\text{SO}_2\\text{(g)}\\uparrow + \\text{SO}_3\\text{(g)}\\uparrow$$
+    *Observations:* Green crystals turn white, then reddish-brown. Choking, pungent smell of burning sulphur due to gaseous $\\text{SO}_2$ and $\\text{SO}_3$.
+  - **NCERT Activity 1.6 (Lead nitrate crystals):**
+    $$2\\text{Pb(NO}_3)_2\\text{(s)} [\\text{White}] \\xrightarrow{\\Delta} 2\\text{PbO(s)} [\\text{Yellow residue}] + 4\\text{NO}_2\\text{(g)}\\uparrow [\\text{Reddish-brown fumes}] + \\text{O}_2\\text{(g)}\\uparrow [\\text{Colorless}]$$
+- **B. Electrolytic Decomposition (Electric Current):**
+  - **NCERT Activity 1.7 (Electrolysis of acidified water):**
+    $$2\\text{H}_2\\text{O(l)} \\xrightarrow{\\text{Electric current}} 2\\text{H}_2\\text{(g)}\\uparrow [\\text{Cathode (-)}] + \\text{O}_2\\text{(g)}\\uparrow [\\text{Anode (+)}]$$
+    *Crucial 2:1 Ratio:* Volume of $\\text{H}_2$ gas collected at the cathode is exactly **double** the volume of $\\text{O}_2$ gas at the anode because each water molecule comprises two hydrogen atoms per one oxygen atom. Dilute $\\text{H}_2\\text{SO}_4$ is added to make pure water conduct electricity.
+- **C. Photolytic Decomposition (Light Energy $h\\nu$):**
+  - **NCERT Activity 1.8 (Silver halides):**
+    $$2\\text{AgCl(s)} [\\text{White}] \\xrightarrow{\\text{Sunlight}} 2\\text{Ag(s)} [\\text{Grey metal}] + \\text{Cl}_2\\text{(g)}\\uparrow [\\text{Yellowish-green gas}]$$
+    $$2\\text{AgBr(s)} [\\text{Pale yellow}] \\xrightarrow{\\text{Sunlight}} 2\\text{Ag(s)} [\\text{Grey}] + \\text{Br}_2\\text{(g)}\\uparrow$$
+    *Application:* Used in black-and-white photography. Stored in dark amber bottles to block light penetration.
 
-**4. DOUBLE DISPLACEMENT (like an Arranged Marriage Swap 💑):**
-Two compounds exchange their ions (partners). Usually forms a precipitate or water.
-$$\\text{AB} + \\text{CD} \\to \\text{AD} + \\text{CB}$$
-*Example:* $\\text{Na}_2\\text{SO}_4\\text{(aq) + BaCl}_2\\text{(aq)} \\to \\text{BaSO}_4\\text{(s)}\\downarrow + 2\\text{NaCl(aq)}$ (White precipitate of BaSO₄)
+---
 
-**5. OXIDATION-REDUCTION / REDOX (like a Trading Game ⚡):**
-One substance GAINS oxygen (or LOSES hydrogen) = **Oxidised**
-One substance LOSES oxygen (or GAINS hydrogen) = **Reduced**
-These always happen TOGETHER — you can't have one without the other!
-$$\\text{CuO(s) + H}_2\\text{(g)} \\xrightarrow{\\Delta} \\text{Cu(s) + H}_2\\text{O(l)}$$
-CuO → Cu: LOSES oxygen → **Reduced** | H₂ → H₂O: GAINS oxygen → **Oxidised**`,
+### 3. DISPLACEMENT REACTION ($A + BC \\to AC + B$)
+A more reactive element displaces a less reactive element from its aqueous salt solution.
+- **NCERT Activity 1.9 (Iron nail in copper sulphate):**
+  $$\\text{Fe(s)} + \\text{CuSO}_4\\text{(aq)} [\\text{Blue}] \\to \\text{FeSO}_4\\text{(aq)} [\\text{Pale green}] + \\text{Cu(s)} [\\text{Reddish-brown coating on nail}]$$
+  *Reactivity check:* Fe is above Cu in the activity series, so Fe displaces Cu. If Cu is placed in $\\text{FeSO}_4$, no reaction occurs!
+
+---
+
+### 4. DOUBLE DISPLACEMENT / PRECIPITATION ($AB + CD \\to AD + CB$)
+Exchange of ions between two ionic compounds in aqueous solution. An insoluble solid (**precipitate**) forms.
+- **NCERT Activity 1.10:**
+  $$\\text{Na}_2\\text{SO}_4\\text{(aq)} + \\text{BaCl}_2\\text{(aq)} \\to \\text{BaSO}_4\\text{(s)}\\downarrow [\\text{White precipitate}] + 2\\text{NaCl(aq)}$$
+- **NCERT Activity 1.2:**
+  $$\\text{Pb(NO}_3)_2\\text{(aq)} + 2\\text{KI(aq)} \\to \\text{PbI}_2\\text{(s)}\\downarrow [\\text{Yellow precipitate}] + 2\\text{KNO}_3\\text{(aq)}$$
+
+---
+
+### 5. OXIDATION-REDUCTION (REDOX) REACTIONS
+Oxidation and reduction ALWAYS occur simultaneously:
+- **Oxidation:** Gain of Oxygen OR Loss of Hydrogen OR Loss of Electrons ($LEO$).
+- **Reduction:** Loss of Oxygen OR Gain of Hydrogen OR Gain of Electrons ($GER$).
+- **Oxidizing Agent:** The reactant that provides oxygen / accepts electrons (itself gets **reduced**).
+- **Reducing Agent:** The reactant that removes oxygen / donates electrons (itself gets **oxidized**).
+
+$$\\text{CuO(s)} [\\text{Black}] + \\text{H}_2\\text{(g)} \\xrightarrow{\\Delta} \\text{Cu(s)} [\\text{Brown}] + \\text{H}_2\\text{O(l)}$$
+- $\\text{CuO} \\to \\text{Cu}$: Loses oxygen $\\to$ **Reduced** (acts as **Oxidizing Agent**)
+- $\\text{H}_2 \\to \\text{H}_2\\text{O}$: Gains oxygen $\\to$ **Oxidized** (acts as **Reducing Agent**)
+
+$$\\text{MnO}_2 + 4\\text{HCl} \\to \\text{MnCl}_2 + 2\\text{H}_2\\text{O} + \\text{Cl}_2$$
+- $\\text{HCl} \\to \\text{Cl}_2$: Loses hydrogen $\\to$ **Oxidized** (Reducing Agent: $\\text{HCl}$)
+- $\\text{MnO}_2 \\to \\text{MnCl}_2$: Loses oxygen $\\to$ **Reduced** (Oxidizing Agent: $\\text{MnO}_2$)`,
       formulasOrKeyPoints: [
         {
-          title: "Memory Trick: OIL RIG",
-          content: `**OIL RIG** (Oxidation Is Loss, Reduction Is Gain) — of electrons!
+          title: "Corrosion & Rancidity — Everyday Oxidation Phenomena",
+          content: `**1. Corrosion of Metals:**
+- **Rusting of Iron:** Requires **both** oxygen and moisture:
+  $$4\\text{Fe(s)} + 3\\text{O}_2\\text{(g)} + 2x\\text{H}_2\\text{O(l)} \\to 2\\text{Fe}_2\\text{O}_3 \\cdot x\\text{H}_2\\text{O(s)} [\\text{Hydrated Ferric Oxide / Rust}]$$
+- **Tarnishing of Silver:** Reacts with atmospheric hydrogen sulphide:
+  $$2\\text{Ag(s)} + \\text{H}_2\\text{S(g)} \\to \\text{Ag}_2\\text{S(s)} [\\text{Black silver sulphide layer}] + \\text{H}_2\\text{(g)}$$
+- **Green Patina on Copper:** Reacts with moist $\\text{CO}_2$:
+  $$2\\text{Cu} + \\text{H}_2\\text{O} + \\text{CO}_2 + \\text{O}_2 \\to \\text{CuCO}_3 \\cdot \\text{Cu(OH)}_2 [\\text{Basic Copper Carbonate, Green}]$$
 
-But for Class 10 (NCERT), use the **oxygen/hydrogen definition:**
-
-| Term | Old Definition (NCERT Class 10) | What Happens |
-|------|--------------------------------|--------------|
-| **Oxidation** | Gain of oxygen OR loss of hydrogen | Substance loses electrons |
-| **Reduction** | Loss of oxygen OR gain of hydrogen | Substance gains electrons |
-| **Oxidising agent** | Provides oxygen / accepts electrons | Gets REDUCED itself |
-| **Reducing agent** | Removes oxygen / donates electrons | Gets OXIDISED itself |`,
-          note: "The AGENT undergoes the OPPOSITE reaction. CuO is the oxidising agent and it gets REDUCED. H₂ is the reducing agent and it gets OXIDISED."
-        },
-        {
-          title: "Corrosion & Rancidity — Slow Oxidation in Daily Life",
-          content: `**Corrosion:** Slow oxidation of metals by oxygen, moisture, and acids in the environment.
-- Iron rusting: $4\\text{Fe(s)} + 3\\text{O}_2\\text{(g)} + x\\text{H}_2\\text{O(l)} \\to 2\\text{Fe}_2\\text{O}_3 \\cdot x\\text{H}_2\\text{O}$ (Rust, hydrated iron oxide, reddish-brown)
-- Silver tarnishing: $4\\text{Ag + O}_2 + 2\\text{H}_2\\text{S} \\to 2\\text{Ag}_2\\text{S + 2H}_2\\text{O}$ (Black silver sulphide layer)
-
-**Rancidity:** Oxidation of fats and oils in food, making them smell/taste bad.
-- **Prevention methods:** Antioxidants (BHA), vacuum sealing, nitrogen gas flushing in crisp packets, refrigeration, airtight containers.`,
-          note: "Antioxidants like Vitamin C and E are reducing agents — they get oxidised instead of the food! Adding antioxidant chips/packets to food preserves freshness."
+**2. Rancidity of Foods:**
+Slow aerial oxidation of fats and oils producing foul odor, sour taste, and harmful peroxides.
+**Prevention Strategies:**
+1. Flushing food packages with unreactive **Nitrogen gas (N₂)**.
+2. Adding synthetic antioxidants (BHA — Butylated Hydroxyanisole, BHT).
+3. Vacuum packaging and airtight storage.
+4. Refrigeration (slows reaction rate).`,
+          note: "Antioxidants are reducing agents that get preferentially oxidized, protecting food lipids from oxidation."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Identify reaction type from the equation",
-          action: "Count reactants and products. 2 reactants → 1 product = Combination. 1 reactant → 2+ products = Decomposition. Both sides have 2 compounds with ion-swapping = Double Displacement.",
-          proTip: "Check for precipitate (↓) — it always signals Double Displacement. Check for colour change in solution — likely Displacement."
+          title: "Identify Redox Pairs",
+          action: "Trace the oxygen and hydrogen atoms from reactants to products. Identify which reactant gained oxygen (oxidized) and which lost oxygen (reduced).",
+          proTip: "Remember: The substance that gets oxidized is the REDUCING AGENT. The substance that gets reduced is the OXIDIZING AGENT."
         },
         {
           stepNo: 2,
-          title: "Identify oxidising and reducing agents in Redox",
-          action: "Find what GAINS oxygen → that substance is OXIDISED; the substance that provided that oxygen is the OXIDISING AGENT (and gets reduced). The other substance is the REDUCING AGENT.",
-          proTip: "Write 'Oxidised' and 'Reduced' with arrows directly on the equation in board answers for full marks. This shows the examiner you understand what's happening."
+          title: "Always Choose Agents from Reactants",
+          action: "Never pick a product as an oxidizing or reducing agent. Agents must always be species on the left side of the equation.",
+          proTip: "In CuO + H₂ → Cu + H₂O, the oxidizing agent is CuO, NEVER Cu."
         }
       ],
       examinerTraps: [
         {
-          trap: "Saying 'the oxidising agent is oxidised' — this is the #1 misconception.",
-          correction: "The OXIDISING agent gets REDUCED (it takes in electrons/oxygen). The REDUCING agent gets OXIDISED. Think of it as: the agent that 'causes' something to happen is itself doing the opposite!"
+          trap: "Confusing the color changes in heating Ferrous Sulphate crystals.",
+          correction: "FeSO₄·7H₂O is PALE GREEN. On heating, it first loses water to form DIRTY WHITE FeSO₄, and then decomposes into REDDISH-BROWN Fe₂O₃ solid, with pungent smelling SO₂ and SO₃ gases."
         },
         {
-          trap: "Confusing photolytic decomposition examples — using AgCl vs AgBr.",
-          correction: "AgCl (silver chloride) is used in the NCERT example for photolytic decomposition. AgBr is used in photography (black-and-white film). Both are correct but specify which one you mean."
+          trap: "Stating that the 2:1 volume ratio in electrolysis of water is Oxygen : Hydrogen.",
+          correction: "Hydrogen is 2 parts, collected at the cathode (-). Oxygen is 1 part, collected at the anode (+). Ratio of H₂ to O₂ is 2 : 1."
         }
       ]
     },
     {
       id: "exothermic_endothermic",
-      label: "3. Exothermic vs Endothermic Reactions",
-      heading: "Hot Chemistry vs Cold Chemistry",
-      subheading: "Heat Released (Exothermic) vs Heat Absorbed (Endothermic)",
-      explanation: `**EXOTHERMIC reactions** release energy (as heat, light, or sound) into the surroundings. The products have **LESS energy** than the reactants.
+      label: "3. Energetics: Exothermic vs Endothermic Reactions",
+      heading: "Energy Enthalpy, Thermochemistry & Biological Energetics",
+      subheading: "Heat Released vs Heat Absorbed + Respiration & Photosynthesis Classifications",
+      explanation: `Chemical transformations involve breaking bonds in reactants (requiring energy input) and forming new bonds in products (releasing energy).
 
-🔥 **Daily Examples:**
-- Burning of natural gas (LPG): $\\text{CH}_4 + 2\\text{O}_2 \\to \\text{CO}_2 + 2\\text{H}_2\\text{O} + \\text{Heat}$
-- Respiration: $\\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 \\to 6\\text{CO}_2 + 6\\text{H}_2\\text{O} + \\text{Energy (ATP)}$
-- Explosion of crackers
-- Formation of slaked lime: $\\text{CaO + H}_2\\text{O} \\to \\text{Ca(OH)}_2 + \\text{Heat}$
+### EXOTHERMIC REACTIONS ($\\Delta H < 0$)
+Reactions in which energy is **liberated** into the surroundings as heat, light, or sound. Temperature of the reaction mixture **rises**.
+- **Respiration:** Glucose oxidation in living cells:
+  $$\\text{C}_6\\text{H}_{12}\\text{O}_6\\text{(aq)} + 6\\text{O}_2\\text{(g)} \\to 6\\text{CO}_2\\text{(g)} + 6\\text{H}_2\\text{O(l)} + \\text{Energy (38 ATP)}$$
+- **Burning of Natural Gas (Methane):**
+  $$\\text{CH}_4\\text{(g)} + 2\\text{O}_2\\text{(g)} \\to \\text{CO}_2\\text{(g)} + 2\\text{H}_2\\text{O(g)} + \\text{Heat + Light}$$
+- **Dissolution of Quicklime:** $\\text{CaO} + \\text{H}_2\\text{O} \\to \\text{Ca(OH)}_2 + \\text{Heat}$
+- **Decomposition of Vegetable Matter into Compost** (Microbial decomposition releases thermal energy).
+- **Dissolution of strong bases/acids in water** (e.g. NaOH pellets in water).
 
-**ENDOTHERMIC reactions** absorb energy from the surroundings. The products have **MORE energy** than the reactants. The surroundings feel cold!
+---
 
-❄️ **Daily Examples:**
-- Photosynthesis: $6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\xrightarrow{\\text{Sunlight}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2$
-- Decomposition of calcium carbonate: $\\text{CaCO}_3\\text{(s)} \\xrightarrow{\\Delta} \\text{CaO(s) + CO}_2\\text{(g)}$ (needs 1000°C!)
-- Dissolving ammonium chloride in water (hand coolers)
-- Electrolysis of water`,
+### ENDOTHERMIC REACTIONS ($\\Delta H > 0$)
+Reactions in which energy is **absorbed** from the surroundings in the form of heat, light, or electricity. Temperature of the surroundings **drops**.
+- **Photosynthesis:** 
+  $$6\\text{CO}_2\\text{(g)} + 6\\text{H}_2\\text{O(l)} \\xrightarrow{\\text{Sunlight/Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6\\text{(aq)} + 6\\text{O}_2\\text{(g)}$$
+- **All thermal decomposition reactions:**
+  $$\\text{CaCO}_3\\text{(s)} \\xrightarrow{\\Delta (1000^\\circ\\text{C})} \\text{CaO(s)} + \\text{CO}_2\\text{(g)}$$
+- **Photolytic reactions:** $2\\text{AgCl} \\xrightarrow{h\\nu} 2\\text{Ag} + \\text{Cl}_2$
+- **Reaction of Barium hydroxide with Ammonium chloride:**
+  $$\\text{Ba(OH)}_2 \\cdot 8\\text{H}_2\\text{O} + 2\\text{NH}_4\\text{Cl} \\to \\text{BaCl}_2 + 2\\text{NH}_3 + 10\\text{H}_2\\text{O} \\quad (\\text{Vessel turns sub-zero!})$$`,
       formulasOrKeyPoints: [
         {
-          title: "Quick Comparison Table",
-          content: `| Feature | Exothermic | Endothermic |
-|---------|-----------|-------------|
-| Energy | Released into surroundings | Absorbed from surroundings |
-| Temperature | Surroundings HEAT UP | Surroundings COOL DOWN |
-| Energy of products | Lower than reactants | Higher than reactants |
-| NCERT Examples | Burning, respiration, neutralisation, CaO + H₂O | Photosynthesis, CaCO₃ decomposition, electrolysis |`,
-          note: "Dissolution of sodium hydroxide (NaOH) in water is highly exothermic — the flask becomes very hot! This is a favourite Board practical question."
+          title: "Comprehensive Master Comparison Table",
+          content: `| Feature | Exothermic Reaction | Endothermic Reaction |
+|---|---|---|
+| Heat Exchange | Released to surroundings | Absorbed from surroundings |
+| Enthalpy Change | $\\Delta H < 0$ (Negative) | $\\Delta H > 0$ (Positive) |
+| System Temperature | Reaction vessel gets HOT | Reaction vessel gets COLD |
+| Product Energy Level | Lower than reactants | Higher than reactants |
+| Bond Energetics | Energy released forming bonds > Energy needed to break bonds | Energy needed to break bonds > Energy released forming bonds |
+| NCERT Examples | Respiration, Coal combustion, CaO + H₂O, Compost decay | Photosynthesis, Electrolysis, CaCO₃ heating, AgCl photolysis |`,
+          note: "CBSE Exam Question: 'Is decomposition of vegetable matter into compost exothermic or endothermic?' Answer: Exothermic, because microbes release metabolic heat during decomposition."
         }
       ],
       examinerTraps: [
         {
-          trap: "Thinking respiration is endothermic because 'it uses energy'.",
-          correction: "Respiration RELEASES energy (ATP) from glucose — it is EXOTHERMIC. Plants capture this energy in photosynthesis, which is ENDOTHERMIC. The exam will ask you to classify respiration — always answer: Exothermic."
+          trap: "Classifying respiration as endothermic because it is a metabolic process.",
+          correction: "Respiration breaks down glucose to RELEASE energy in the form of ATP. It is strictly EXOTHERMIC. Photosynthesis is the reverse process that absorbs solar energy and is ENDOTHERMIC."
         }
       ]
     }

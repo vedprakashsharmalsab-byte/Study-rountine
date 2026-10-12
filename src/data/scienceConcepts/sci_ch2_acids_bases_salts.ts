@@ -5,278 +5,276 @@ export const SCI_CH2_CONCEPT: ScienceChapterConcept = {
   title: "Acids, Bases and Salts",
   discipline: "Chemistry",
   weightage: "6–8 Marks (Board Mandatory)",
-  oneLiner: "Acids donate H⁺ ions; Bases donate OH⁻; they neutralise each other forming salt + water; pH 0–6 = acid, 7 = neutral, 8–14 = base.",
-  analogyTitle: "The 'Sour Lemon vs Soapy Feeling' Story",
-  analogyContent: `Imagine licking a **lemon** 🍋 — it tastes sour and makes your mouth pucker. That sourness is due to **citric acid**. Now rub **soap** on your hands — it feels slippery and slightly bitter. That slippery feel is due to a **base** (sodium hydroxide or potassium hydroxide).
+  oneLiner: "Acids generate H⁺ (aq) / H₃O⁺ ions in water; Bases generate OH⁻ (aq) ions; Neutralization forms salt + water; pH measures hydronium concentration on a logarithmic 0–14 scale.",
+  analogyTitle: "The Proton Donors & Proton Acceptors Balance",
+  analogyContent: `Imagine an electrochemical battery system where two contrasting forces govern chemical equilibria. **Acids** are aggressive **proton ($H^+$) donors**, eager to release hydronium ions into aqueous media, giving them their sour taste and corrosive power. **Bases** are **proton acceptors / hydroxide ($OH^-$) providers**, presenting a slippery alkaline texture and neutralizing acids on contact.
 
-When you mix the acid (lemon juice) and base (soap) together, they fight each other and **cancel out** — forming something neutral, like salt water. This "neutralisation" is like two opponents shaking hands and making peace! 🤝
-
-In chemistry, **pH** is the number that tells us who's winning — a small number (0–6) means the acid is winning, 7 means perfect tie (neutral), and a big number (8–14) means the base is winning.`,
+When an acid meets a base in equal proportions, an atomic handshake occurs: $H^+ + OH^- \\to H_2O$. The acidic and alkaline characters extinguish each other, creating a **neutral salt solution**. The **pH scale** operates as the universal diagnostic meter — registering the exact concentration of hydronium ions from 0 (ultra-acidic) to 7 (neutral) to 14 (ultra-basic).`,
   sections: [
     {
       id: "acids_properties",
-      label: "1. Acids — Properties & Chemical Reactions",
-      heading: "What Makes an Acid an Acid?",
-      subheading: "Arrhenius Definition + 5 Key Chemical Reactions of Acids",
-      explanation: `**Definition (Arrhenius):** An acid is a substance that produces **hydrogen ions (H⁺)** when dissolved in water.
-$$\\text{HCl (aq)} \\to \\text{H}^+ \\text{(aq)} + \\text{Cl}^- \\text{(aq)}$$
+      label: "1. Acids: Properties, Ionization & Core Reactions",
+      heading: "Arrhenius Ionization, Chemical Properties & Crucial Activities",
+      subheading: "Hydronium Ion Formation + Activity 2.8 (Conduction) + Activity 2.9 (Dry HCl) + Dilution Safety",
+      explanation: `**Definition (Arrhenius Model):**
+An acid is a substance that dissociates in aqueous solution to produce **hydrogen ions ($H^+$)**. Because a bare hydrogen ion ($H^+$) is a single proton with high charge density, it cannot exist independently in water. It immediately combines with a polar water molecule to form a stable **hydronium ion ($H_3O^+$)**:
+$$\\text{HCl(aq)} + \\text{H}_2\\text{O(l)} \\to \\text{H}_3\\text{O}^+\\text{(aq)} + \\text{Cl}^-\\text{(aq)}$$
 
-But H⁺ is just a bare proton — it doesn't exist alone in water! It immediately bonds with a water molecule to form a **hydronium ion (H₃O⁺)**:
-$$\\text{H}^+ + \\text{H}_2\\text{O} \\to \\text{H}_3\\text{O}^+$$
+### Crucial NCERT Activities (Top Board Tested):
+1. **NCERT Activity 2.8 — Electrical Conduction of Acids vs Glucose/Alcohol:**
+   - Solutions of $\\text{HCl}$, $\\text{H}_2\\text{SO}_4$, and $\\text{HNO}_3$ conduct electric current in an electrolytic cell, causing the bulb to glow brightly. This proves that acids **ionize into free mobile ions** ($H^+$ cations and acid anions) in water.
+   - In stark contrast, aqueous solutions of **glucose ($\text{C}_6\text{H}_{12}\text{O}_6$)** and **ethyl alcohol ($\text{C}_2\text{H}_5\text{OH}$)** do NOT conduct electricity; the bulb does not glow.
+   - *Board Conclusion:* Even though glucose and alcohol contain hydrogen atoms in their formulas, they do NOT dissociate into $H^+$ ions in water. Therefore, they are **not classified as acids**.
 
-**Properties of Acids:**
-- Sour taste (🚫 NEVER taste in lab — it's dangerous!)
-- Turn blue litmus **red**
-- Conduct electricity (ions in solution)
-- pH < 7
-- Corrosive to metals and organic tissue
+2. **NCERT Activity 2.9 — Dry HCl Gas vs Moist Litmus Paper:**
+   - When dry $\\text{HCl}$ gas prepared by reacting $\\text{NaCl}$ with concentrated $\\text{H}_2\\text{SO}_4$ is tested with **dry blue litmus paper**, NO color change occurs!
+   - When tested with **moist blue litmus paper**, the paper immediately turns **red**.
+   - *Guard Tube Role:* In humid weather, the gas is passed through a calcium chloride ($\text{CaCl}_2$) guard tube to absorb atmospheric moisture and keep the gas strictly dry.
+   - *Board Conclusion:* Acids exhibit acidic behavior **only in the presence of water**. In the absence of water, $\text{HCl}$ cannot ionize into $\text{H}_3\text{O}^+$ ions.
 
-**5 Important Chemical Reactions of Acids:**
+3. **Dilution of Concentrated Acids (Safety Golden Rule):**
+   - Diluting a concentrated acid ($\text{H}_2\text{SO}_4$, $\text{HNO}_3$) is an intensely **exothermic process**.
+   - **MANDATORY PROCEDURE:** Always add **acid slowly to water** with constant stirring.
+   - **DANGER:** If water is poured into concentrated acid, the sudden concentrated heat generated may cause the acid to boil violently, spatter onto the face and clothes, and shatter the glass container due to excessive local thermal shock.
 
-1. **Acid + Metal** → Salt + Hydrogen gas ↑
-   $$\\text{Zn(s) + H}_2\\text{SO}_4\\text{(dil)} \\to \\text{ZnSO}_4\\text{(aq) + H}_2\\text{(g)}\\uparrow$$
-   *Test for H₂: burning splint produces a 'pop' sound!*
+---
 
-2. **Acid + Metal Carbonate** → Salt + Water + CO₂ ↑
-   $$\\text{CaCO}_3\\text{(s) + 2HCl(aq)} \\to \\text{CaCl}_2\\text{(aq) + H}_2\\text{O(l) + CO}_2\\text{(g)}\\uparrow$$
-   *CO₂ turns lime water milky!*
-
-3. **Acid + Metal Hydrogen Carbonate** → Salt + Water + CO₂ ↑
-   $$\\text{NaHCO}_3\\text{(s) + HCl(aq)} \\to \\text{NaCl(aq) + H}_2\\text{O(l) + CO}_2\\text{(g)}\\uparrow$$
-   *Baking soda (NaHCO₃) neutralises excess acid in stomach antacids!*
-
-4. **Acid + Base** → Salt + Water (NEUTRALISATION)
-   $$\\text{NaOH(aq) + HCl(aq)} \\to \\text{NaCl(aq) + H}_2\\text{O(l)}$$
-
-5. **Acid + Metal Oxide** → Salt + Water
-   $$\\text{CuO(s) + H}_2\\text{SO}_4\\text{(dil)} \\to \\text{CuSO}_4\\text{(aq) + H}_2\\text{O(l)}$$
-   *Blue copper sulphate solution forms — colour change is a key observation!*`,
+### The 5 Essential Chemical Reactions of Acids:
+1. **Acid + Active Metal $\\to$ Salt + $\\text{H}_2\\text{(g)}\\uparrow$:**
+   $$\\text{Zn(s)} + \\text{H}_2\\text{SO}_4\\text{(aq)} \\to \\text{ZnSO}_4\\text{(aq)} + \\text{H}_2\\text{(g)}\\uparrow$$
+   *Test for $H_2$:* Collect gas and bring a burning splinter near mouth of tube $\\to$ burns with a distinct **'pop' sound**.
+2. **Acid + Metal Carbonate $\\to$ Salt + $\\text{H}_2\\text{O} + \\text{CO}_2\\text{(g)}\\uparrow$:**
+   $$\\text{Na}_2\\text{CO}_3\\text{(s)} + 2\\text{HCl(aq)} \\to 2\\text{NaCl(aq)} + \\text{H}_2\\text{O(l)} + \\text{CO}_2\\text{(g)}\\uparrow$$
+3. **Acid + Metal Hydrogen Carbonate $\\to$ Salt + $\\text{H}_2\\text{O} + \\text{CO}_2\\text{(g)}\\uparrow$:**
+   $$\\text{NaHCO}_3\\text{(s)} + \\text{HCl(aq)} \\to \\text{NaCl(aq)} + \\text{H}_2\\text{O(l)} + \\text{CO}_2\\text{(g)}\\uparrow$$
+   *Lime Water Test for $\text{CO}_2$ (NCERT Activity 2.5):*
+   $$\\text{Ca(OH)}_2\\text{(aq)} [\\text{Lime water}] + \\text{CO}_2\\text{(g)} \\to \\text{CaCO}_3\\text{(s)}\\downarrow [\\text{Milky white ppt}] + \\text{H}_2\\text{O(l)}$$
+   *Excess $\text{CO}_2$ Effect (Board Classic Trap):*
+   When excess $\text{CO}_2$ is bubbled, the milky solution turns completely **clear and colorless** because insoluble $\text{CaCO}_3$ converts into soluble calcium hydrogen carbonate:
+   $$\\text{CaCO}_3\\text{(s)} + \\text{H}_2\\text{O(l)} + \\text{CO}_2\\text{(g)} \\to \\text{Ca(HCO}_3)_2\\text{(aq)} [\\text{Soluble in water}]$$
+4. **Acid + Base $\\to$ Salt + Water (Neutralization):**
+   $$\\text{HCl(aq)} + \\text{NaOH(aq)} \\to \\text{NaCl(aq)} + \\text{H}_2\\text{O(l)}$$
+5. **Acid + Metallic Oxide (Basic Oxide) $\\to$ Salt + Water:**
+   $$\\text{CuO(s)} [\\text{Black}] + 2\\text{HCl(aq)} \\to \\text{CuCl}_2\\text{(aq)} [\\text{Blue-green solution}] + \\text{H}_2\\text{O(l)}$$
+   *Conclusion:* Metal oxides are **basic in nature** because they neutralize acids to form salt and water.`,
       formulasOrKeyPoints: [
         {
-          title: "Diluting Acid — The 'Acid into Water' Rule",
-          content: `**ALWAYS add acid to water, never water to acid!**
-$$\\text{Acid} + \\text{Water} \\to \\text{Dilute Acid (Safe)}$$
-$$\\underbrace{\\text{Water} + \\text{Acid}}_{\\text{DANGER!}} \\to \\text{Violent boiling, spattering (Unsafe)}$$
-
-Adding water to concentrated acid causes a sudden violent exothermic reaction — the solution can spatter and cause severe burns.
-
-**Mnemonic: "Do As You Oughta — Add Acid to Water"**`,
-          note: "This safety rule is asked in almost every Board exam. Remember: ADD ACID TO WATER (A→W). The dilution is safe because the large volume of water absorbs the heat gradually."
-        }
-      ],
-      examinerTraps: [
-        {
-          trap: "Saying marble chips (CaCO₃) react with HCl to form CO gas.",
-          correction: "The gas produced is CO₂ (carbon dioxide), NOT CO (carbon monoxide). CO₂ turns lime water milky — this is the confirmation test. CO is toxic and produced in incomplete combustion, not in this reaction."
-        },
-        {
-          trap: "Thinking all metals react with dilute HCl.",
-          correction: "Only metals more reactive than hydrogen in the activity series react with dilute acids to produce H₂ gas. Copper (Cu), Silver (Ag), Gold (Au) do NOT react with dilute acids. This is a frequent 1M MCQ."
-        }
-      ]
-    },
-    {
-      id: "bases_properties",
-      label: "2. Bases & Alkalis — Properties & Reactions",
-      heading: "The Slippery Opposites of Acids",
-      subheading: "OH⁻ Ions + 4 Key Reactions + Alkali vs Base Distinction",
-      explanation: `**Definition (Arrhenius):** A base is a substance that produces **hydroxide ions (OH⁻)** when dissolved in water.
-$$\\text{NaOH(s)} \\xrightarrow{\\text{H}_2\\text{O}} \\text{Na}^+\\text{(aq) + OH}^-\\text{(aq)}$$
-
-**Alkali:** A base that is **soluble in water** is called an alkali. All alkalis are bases, but NOT all bases are alkalis!
-- NaOH: base AND alkali ✅ (soluble)
-- Cu(OH)₂: base but NOT alkali ❌ (insoluble in water)
-
-**Properties of Bases (Alkalis):**
-- Bitter taste, soapy/slippery feel
-- Turn red litmus **blue**
-- pH > 7
-- React with fats to form soap (Saponification)
-
-**4 Important Reactions of Bases:**
-
-1. **Base + Acid** → Salt + Water (Neutralisation)
-   $$\\text{KOH(aq) + HNO}_3\\text{(aq)} \\to \\text{KNO}_3\\text{(aq) + H}_2\\text{O(l)}$$
-
-2. **Base + Metal** → Salt + Hydrogen gas (only reactive bases like NaOH, KOH)
-   $$\\text{2NaOH(aq) + Zn(s)} \\to \\text{Na}_2\\text{ZnO}_2\\text{(aq) + H}_2\\text{(g)}\\uparrow$$
-   *(Sodium zincate formed — Zinc is amphoteric, reacts with both acids AND bases!)*
-
-3. **Base + Non-Metal Oxide** → Salt + Water
-   $$\\text{Ca(OH)}_2\\text{(aq) + CO}_2\\text{(g)} \\to \\text{CaCO}_3\\text{(s)↓ + H}_2\\text{O(l)}$$
-   *(Lime water turns milky — the standard CO₂ test!)*
-
-4. **Strong Base + Ammonium Salt** → Salt + Water + Ammonia gas
-   $$\\text{Ca(OH)}_2\\text{(aq) + 2NH}_4\\text{Cl(aq)} \\to \\text{CaCl}_2\\text{(aq) + 2H}_2\\text{O(l) + 2NH}_3\\text{(g)}\\uparrow$$`,
-      formulasOrKeyPoints: [
-        {
-          title: "Important Bases and Their Uses",
-          content: `| Base | Common Name | Important Use |
-|------|------------|---------------|
-| NaOH | Caustic soda / Lye | Soap making, paper industry, drain cleaners |
-| Ca(OH)₂ | Slaked lime / Lime water | Whitewashing, water treatment, CO₂ test |
-| Mg(OH)₂ | Milk of magnesia | Antacid for acidity/heartburn |
-| NH₄OH | Ammonium hydroxide | Fertilisers, cleaning agent |
-| KOH | Caustic potash | Soft soap, batteries |`,
-          note: "Milk of magnesia [Mg(OH)₂] is a classic Board question — it is used as an antacid because it neutralises excess HCl in the stomach without side effects."
-        }
-      ],
-      examinerTraps: [
-        {
-          trap: "Confusing Alkali and Base — treating them as identical.",
-          correction: "All alkalis are bases, but not all bases are alkalis. An alkali must be SOLUBLE in water. NaOH is a base and alkali. Cu(OH)₂ is only a base (insoluble). Examiners test this distinction in 1M MCQs."
-        }
-      ]
-    },
-    {
-      id: "ph_scale",
-      label: "3. The pH Scale — Measuring Acidity & Basicity",
-      heading: "The Universal 0–14 Dial of Chemistry",
-      subheading: "pH Definition + Indicators + Universal Indicator Colours",
-      explanation: `**pH** stands for **'potential of Hydrogen'** (or 'power of Hydrogen'). It is a scale from **0 to 14** that measures how acidic or basic a solution is.
-
-$$\\text{pH} = -\\log[\\text{H}^+]$$
-*(You don't need the logarithm formula for Class 10 — just know the scale!)*
-
-**The Golden Rules of pH:**
-- pH < 7 → **Acidic** (more H⁺ ions than OH⁻)
-- pH = 7 → **Neutral** (equal H⁺ and OH⁻, like pure water)
-- pH > 7 → **Basic/Alkaline** (more OH⁻ ions than H⁺)
-- Lower pH = **stronger** acid (pH 1 is 10× more acidic than pH 2!)
-- Higher pH = **stronger** base
-
-**Indicators and Their Colour Changes:**
-
-| Indicator | In Acid | In Neutral | In Base |
-|-----------|---------|-----------|---------|
-| Litmus (Red) | Red (stays) | — | Turns Blue |
-| Litmus (Blue) | Turns Red | — | Blue (stays) |
-| Methyl Orange | Red/Orange | Orange | Yellow |
-| Phenolphthalein | Colourless | Colourless | Pink/Magenta |
-| Universal Indicator | Red (1–3) → Orange (4–5) | Green (7) | Blue (8–10) → Violet (11–14) |
-
-**Natural Indicators:**
-- **Turmeric:** Yellow in acid, Red-brown in base
-- **Red cabbage juice:** Red in acid, Green in base
-- **Olfactory indicators:** Onion (smell disappears in base), Clove oil (smell disappears in base)
-
-**pH in Daily Life:**
-- Human blood: pH 7.35–7.45 (slightly alkaline — any deviation = health crisis!)
-- Stomach acid (HCl): pH 1–2
-- Tooth decay starts below pH 5.5 (acids from bacteria attack enamel)
-- Soil pH: Optimal for crops is 6.5–7.5; acidic soil is treated with **lime (CaO)** or slaked lime`,
-      formulasOrKeyPoints: [
-        {
-          title: "Universal Indicator Colour Chart — Board Favourite",
-          content: `| pH Range | Colour | Nature |
-|---------|--------|--------|
-| 0–1 | Deep Red | Very Strong Acid |
-| 2–3 | Red/Orange | Strong Acid |
-| 4–5 | Orange | Weak Acid |
-| 6 | Yellow | Very Weak Acid |
-| 7 | Green | Neutral |
-| 8–9 | Blue | Weak Base |
-| 10–11 | Indigo/Blue | Strong Base |
-| 12–14 | Violet/Purple | Very Strong Base |`,
-          note: "MNEMONIC for Universal Indicator: 'Roy G. BIV reversed then forward' — Red (acid) → Orange → Yellow → Green (neutral) → Blue → Indigo → Violet (strong base)."
-        }
-      ],
-      examinerTraps: [
-        {
-          trap: "Saying lower pH means less acidic.",
-          correction: "LOWER pH = MORE acidic! Battery acid (pH ~1) is far more acidic than lemon juice (pH ~3). The scale is inverse — pH 1 has 100x more H⁺ ions than pH 3."
-        }
-      ]
-    },
-    {
-      id: "salts",
-      label: "4. Salts — Formation, Family & Important Compounds",
-      heading: "The Neutral Children of Acid-Base Marriages",
-      subheading: "Salt Families + Common Salt + Washing Soda + Baking Soda + Bleaching Powder + Plaster of Paris",
-      explanation: `A **salt** is formed when an acid reacts with a base (neutralisation). Salts are **ionic compounds** — they can be acidic, basic, or neutral depending on the parent acid and base.
-
-**Salt Families & Nature of Salts:**
-| Parent Acid | Parent Base | Nature of Salt | pH Range | Representative Example |
-|------------|-------------|----------------|----------|------------------------|
-| Strong Acid (HCl, H₂SO₄) | Strong Base (NaOH, KOH) | Neutral | pH = 7 | NaCl, Na₂SO₄, KNO₃ |
-| Strong Acid (HCl, H₂SO₄) | Weak Base (NH₄OH, Cu(OH)₂) | Acidic | pH < 7 | NH₄Cl, CuSO₄ |
-| Weak Acid (CH₃COOH, H₂CO₃) | Strong Base (NaOH, KOH) | Basic | pH > 7 | CH₃COONa, Na₂CO₃, NaHCO₃ |
-| Weak Acid (CH₃COOH) | Weak Base (NH₄OH) | Almost Neutral | pH ≈ 7 | CH₃COONH₄ |
-
-**THE BIG 5 IMPORTANT COMPOUNDS FROM SODIUM CHLORIDE (NaCl):**
-
-**1. Common Salt (NaCl):** Mined from sea water or rock salt mines (brown due to impurities). Used in everyday cooking, food preservation, and as raw material for making NaOH, NaHCO₃, Na₂CO₃, and CaOCl₂.
-
-**2. Sodium Hydroxide / Caustic Soda (NaOH):**
-$$2\\text{NaCl(aq)} + 2\\text{H}_2\\text{O(l)} \\xrightarrow{\\text{Electricity}} 2\\text{NaOH(aq)} + \\text{Cl}_2\\text{(g)}\\uparrow [\\text{Anode}] + \\text{H}_2\\text{(g)}\\uparrow [\\text{Cathode}]$$
-This is the **Chlor-alkali process** — co-products are Cl₂ (bleaching agent, PVC, disinfectant) and H₂ (clean fuel, margarine, NH₃ for fertilisers), while NaOH solution forms near the cathode (used in soap, paper, degreasing).
-
-**3. Baking Soda / Sodium Hydrogen Carbonate (NaHCO₃):**
-$$\\text{NaCl} + \\text{H}_2\\text{O} + \\text{CO}_2 + \\text{NH}_3 \\to \\text{NaHCO}_3\\downarrow + \\text{NH}_4\\text{Cl}$$
-Prepared by Solvay process. It is a mild, non-corrosive basic salt.
-*Uses:* Baking powder (mixed with mild edible acid like tartaric acid to prevent bitterness), antacid (neutralises stomach acidity), soda-acid fire extinguishers.
-
-**4. Washing Soda / Sodium Carbonate Decahydrate (Na₂CO₃ · 10H₂O):**
-*Step 1 (Thermal Decomposition of Baking Soda):*
-$$2\\text{NaHCO}_3\\text{(s)} \\xrightarrow{\\Delta} \\text{Na}_2\\text{CO}_3\\text{(s)} + \\text{H}_2\\text{O(g)} + \\text{CO}_2\\text{(g)}\\uparrow$$
-*Step 2 (Recrystallisation from Water):*
-$$\\text{Na}_2\\text{CO}_3\\text{(s)} + 10\\text{H}_2\\text{O(l)} \\to \\text{Na}_2\\text{CO}_3 \\cdot 10\\text{H}_2\\text{O(s)}$$
-*Uses:* Removing permanent hardness of water, glass, soap, and paper manufacturing, domestic cleaning agent.
-
-**5. Bleaching Powder (CaOCl₂):** 
-Prepared by the action of chlorine gas on **dry slaked lime**:
-$$\\text{Ca(OH)}_2\\text{(s)} + \\text{Cl}_2\\text{(g)} \\to \\text{CaOCl}_2\\text{(s)} + \\text{H}_2\\text{O(l)}$$
-*Uses:* Disinfecting drinking water (kills germs), bleaching cotton and linen in textile industry, oxidising agent in chemical synthesis.
-
-**6. Plaster of Paris (CaSO₄ · ½H₂O):**
-$$\\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O(s)} \\xrightarrow{373\\text{ K } (100^\\circ\\text{C})} \\text{CaSO}_4 \\cdot \\tfrac{1}{2}\\text{H}_2\\text{O(s)} + 1\\tfrac{1}{2}\\text{H}_2\\text{O(g)}$$
-$$\\underbrace{\\text{Gypsum}}_\\text{} \\xrightarrow{373\\text{ K}} \\underbrace{\\text{Plaster of Paris}}_\\text{}$$
-*Uses:* Making casts for supporting fractured bones, dental casts, decorative ceilings, statues, fire-proofing.
-*Setting reaction:* $\\text{CaSO}_4 \\cdot \\tfrac{1}{2}\\text{H}_2\\text{O} + 1\\tfrac{1}{2}\\text{H}_2\\text{O} \\to \\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O}$ (re-hydrates into a hard solid mass in 15–30 min!)`,
-      formulasOrKeyPoints: [
-        {
-          title: "Water of Crystallisation",
-          content: `Some salts have water molecules trapped inside their crystal structure. These are called **hydrated salts** and the water is called **water of crystallisation**.
-
-| Salt | Formula | Water Molecules | Common Name |
-|------|---------|-----------------|-------------|
-| Blue vitriol | CuSO₄ · 5H₂O | 5 | Copper sulphate pentahydrate |
-| Green vitriol | FeSO₄ · 7H₂O | 7 | Ferrous sulphate heptahydrate |
-| White vitriol | ZnSO₄ · 7H₂O | 7 | Zinc sulphate heptahydrate |
-| Washing soda | Na₂CO₃ · 10H₂O | 10 | Sodium carbonate decahydrate |
-| Gypsum | CaSO₄ · 2H₂O | 2 | Calcium sulphate dihydrate |
-| Plaster of Paris | CaSO₄ · ½H₂O | ½ | Calcium sulphate hemihydrate |
-
-When CuSO₄ · 5H₂O is heated, it loses water and becomes **anhydrous CuSO₄** (white powder). Add water back → it turns blue again!`,
-          note: "The Plaster of Paris formula with ½ H₂O (hemihydrate) confuses students. Remember: 1 formula unit of CaSO₄ shares ONE water molecule between TWO formula units [2CaSO₄ · H₂O]. That's why it is written as CaSO₄ · ½H₂O."
+          title: "Natural Organic Acids & Their Sources (1-Mark CBSE Vault)",
+          content: `| Natural Source | Organic Acid Present |
+|---|---|
+| Vinegar | Acetic acid / Ethanoic acid ($\text{CH}_3\text{COOH}$) |
+| Orange | Citric acid |
+| Lemon | Citric acid |
+| Tamarind | Tartaric acid |
+| Tomato | Oxalic acid |
+| Sour milk / Curd | Lactic acid |
+| Ant sting | Methanoic acid / Formic acid ($\text{HCOOH}$) |
+| Nettle leaf sting | Methanoic acid / Formic acid ($\text{HCOOH}$) |`,
+          note: "NCERT Remind: Nettle sting injects methanoic acid causing acute burning pain. Nature provides a neutralizer in the dock plant growing alongside, whose leaves contain mildly alkaline sap that soothes the sting when rubbed."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Identify salt name from acid + base",
-          action: "Replace H in acid with the metal from the base. Name = metal name + acid root name (-ate for -ic acids, -ite for -ous acids).",
-          proTip: "HCl → Chloride, H₂SO₄ → Sulphate, HNO₃ → Nitrate, H₃PO₄ → Phosphate, CH₃COOH → Acetate. Memorise these five acid radicals."
-        },
-        {
-          stepNo: 2,
-          title: "Determine salt pH without testing",
-          action: "Check parent acid and base strength. Strong acid + Strong base = Neutral (pH≈7). Strong acid + Weak base = Acidic (pH<7). Weak acid + Strong base = Basic (pH>7).",
-          proTip: "NH₄Cl is acidic (strong HCl + weak NH₄OH). Na₂CO₃ is basic (strong NaOH + weak H₂CO₃). This logic appears in 1M MCQs."
+          title: "Safe Acid Dilution Procedure",
+          action: "Measure required volume of distilled water in a pyrex beaker. Add concentrated acid dropwise along the inner wall of the beaker while stirring continuously with a glass rod.",
+          proTip: "Water has a very high specific heat capacity; its large volume absorbs the liberated heat safely."
         }
       ],
       examinerTraps: [
         {
-          trap: "Confusing Baking Soda (NaHCO₃) with Washing Soda (Na₂CO₃·10H₂O).",
-          correction: "Baking Soda = NaHCO₃ (sodium hydrogen carbonate / sodium bicarbonate) — used in cooking and as antacid. Washing Soda = Na₂CO₃·10H₂O (sodium carbonate decahydrate) — used in cleaning and water softening. They are chemically different compounds with different uses."
+          trap: "Assuming glucose and alcohol are acidic because they contain hydrogen atoms.",
+          correction: "Hydrogen must be released as free H⁺/H₃O⁺ ions in water to confer acidity. Covalent bonds in glucose and alcohol do not ionize in water."
         },
         {
-          trap: "Heating gypsum above 373 K (100°C) during Plaster of Paris preparation.",
-          correction: "If gypsum is heated above 373 K (100°C), it loses ALL its water of crystallisation and forms ANHYDROUS calcium sulphate (CaSO₄), also known as 'Dead Burnt Plaster'. Dead burnt plaster loses the property of setting with water!"
+          trap: "Writing that lime water remains milky indefinitely when CO₂ is bubbled.",
+          correction: "Excess CO₂ converts insoluble CaCO₃ into soluble Ca(HCO₃)₂, causing the milkiness to completely disappear."
+        }
+      ]
+    },
+    {
+      id: "bases_properties",
+      label: "2. Bases & Alkalis: Chemistry, Amphoterism & Reactions",
+      heading: "Hydroxide Ion Generation, Alkali Distinction & Amphoteric Metals",
+      subheading: "Base Definition + Alkali vs Base + Reaction with Zn/Al + Non-metallic Oxides",
+      explanation: `**Definition of Base:**
+A substance that furnishes **hydroxide ions ($OH^-$)** in aqueous solution, tastes bitter, feels slippery/soapy, and turns red litmus paper **blue**.
+$$\\text{NaOH(s)} \\xrightarrow{\\text{H}_2\\text{O}} \\text{Na}^+\\text{(aq)} + \\text{OH}^-\\text{(aq)}$$
+
+**Alkali vs Base Distinction (Crucial Board Definition):**
+- An **alkali** is a base that is **soluble in water**.
+- *Rule:* **All alkalis are bases, but all bases are NOT alkalis.**
+- Examples of Alkalis: $\\text{NaOH}$ (Caustic soda), $\\text{KOH}$ (Caustic potash), $\\text{Ca(OH)}_2$ (Slaked lime).
+- Insoluble bases (NOT alkalis): $\\text{Cu(OH)}_2$, $\\text{Fe(OH)}_3$, $\\text{Al(OH)}_3$.
+
+---
+
+### Chemical Reactions of Bases:
+1. **Base + Amphoteric Metal $\\to$ Salt + Hydrogen Gas (Top Board Question):**
+   Bases generally do NOT react with all metals. However, amphoteric metals like **Zinc (Zn)** and **Aluminium (Al)** react with strong bases to liberate $\text{H}_2$ gas:
+   $$2\\text{NaOH(aq)} + \\text{Zn(s)} \\xrightarrow{\\Delta} \\text{Na}_2\\text{ZnO}_2\\text{(aq)} [\\text{Sodium zincate}] + \\text{H}_2\\text{(g)}\\uparrow$$
+   $$2\\text{NaOH(aq)} + 2\\text{Al(s)} + 2\\text{H}_2\\text{O(l)} \\to 2\\text{NaAlO}_2\\text{(aq)} [\\text{Sodium aluminate}] + 3\\text{H}_2\\text{(g)}\\uparrow$$
+2. **Base + Non-Metallic Oxide (Acidic Oxide) $\\to$ Salt + Water:**
+   $$\\text{Ca(OH)}_2\\text{(aq)} + \\text{CO}_2\\text{(g)} \\to \\text{CaCO}_3\\text{(s)}\\downarrow + \\text{H}_2\\text{O(l)}$$
+   *Conclusion:* Non-metal oxides ($\text{CO}_2$, $\text{SO}_2$, $\text{SO}_3$, $\text{NO}_2$) are **acidic in nature** because they react with bases to form salt and water.`,
+      formulasOrKeyPoints: [
+        {
+          title: "Chemical Indicators Comparison Matrix",
+          content: `| Indicator Type | Indicator Name | Color in Acid | Color in Neutral | Color in Base |
+|---|---|---|---|---|
+| Natural | Red Litmus | Red | Red | **Blue** |
+| Natural | Blue Litmus | **Red** | Blue | Blue |
+| Natural | Turmeric paste | Yellow | Yellow | **Reddish-brown** |
+| Natural | Red Cabbage extract | **Red/Pink** | Purple | **Green/Yellow** |
+| Synthetic | Methyl Orange | **Red** | Orange | **Yellow** |
+| Synthetic | Phenolphthalein | **Colorless** | Colorless | **Deep Pink** |
+| Olfactory | Onion juice | Pungent smell retained | Pungent smell | **Smell destroyed** |
+| Olfactory | Vanilla essence | Pleasant scent retained | Pleasant scent | **Scent destroyed** |
+| Olfactory | Clove oil | Characteristic odor retained | Characteristic odor | **Odor destroyed** |`,
+          note: "Olfactory indicators change their smell in acidic vs basic media. They are indispensable for visually challenged students to test acidity/alkalinity."
+        }
+      ],
+      examinerTraps: [
+        {
+          trap: "Writing the formula of sodium zincate incorrectly as NaZnO or Na₂ZnO.",
+          correction: "Sodium zincate is Na₂ZnO₂ (Zinc has valency 2 in the zincate ion ZnO₂²⁻)."
+        }
+      ]
+    },
+    {
+      id: "ph_scale",
+      label: "3. The pH Scale & Real-World Biological Importance",
+      heading: "Logarithmic Hydronium Concentration & Every Day Applications",
+      subheading: "0 to 14 Scale + Acid Rain + Digestive Acidity + Tooth Enamel Decay + Soil pH",
+      explanation: `**Concept of pH:**
+Introduced by Sørensen (1909), 'p' stands for the German *potenz* (power), and 'H' represents hydrogen ion concentration:
+$$\\text{pH} = -\\log_{10}[\\text{H}^+] = -\\log_{10}[\\text{H}_3\\text{O}^+]$$
+- **Neutral Solution:** $[H^+] = [OH^-] = 10^{-7} \\text{ M} \\implies \\text{pH} = 7$ (Pure distilled water at 25°C).
+- **Acidic Solution:** $[H^+] > 10^{-7} \\text{ M} \\implies \\text{pH} < 7$ (Lower pH = higher acidity; pH 1 has 100× more $H^+$ ions than pH 3).
+- **Basic Solution:** $[H^+] < 10^{-7} \\text{ M} \\implies \\text{pH} > 7$ (Higher pH = higher alkalinity; pH 14 = concentrated NaOH).
+
+---
+
+### Importance of pH in Everyday Life (CBSE 3-Mark/5-Mark Hotspot):
+1. **Biological pH Range:**
+   - Human physiological processes function in a narrow homeostatic pH window of **7.0 to 7.8**.
+   - **Acid Rain:** When atmospheric pollutants ($\text{SO}_2, \text{NO}_2$) lower rainwater pH below **5.6**, it is called acid rain. When it flows into rivers, it drastically lowers river pH, threatening survival of aquatic life.
+2. **Soil pH and Crop Agriculture:**
+   - Most agricultural crops require an optimum soil pH between **6.5 and 7.5**.
+   - If soil becomes excessively acidic, farmers treat it with basic materials: Quicklime ($\text{CaO}$), Slaked lime ($\text{Ca(OH)}_2$), or Chalk ($\text{CaCO}_3$).
+3. **pH in Human Digestive System:**
+   - Stomach parietal cells produce hydrochloric acid ($\text{HCl}$, pH ~ 1.2 to 2.0) to activate pepsin without damaging stomach tissue (shielded by gastric mucus).
+   - During indigestion, excess acid causes acute pain and irritation. Patients take **Antacids** (mild basic salts):
+     * **Milk of Magnesia [$\\text{Mg(OH)}_2$]**
+     * **Baking Soda [$\\text{NaHCO}_3$]**
+4. **pH Change as the Cause of Tooth Decay:**
+   - Tooth enamel is composed of **Calcium hydroxyapatite** [$\\text{Ca}_5(\\text{PO}_4)_3(\\text{OH})$], the hardest substance in the human body. It is insoluble in water.
+   - However, when mouth pH falls below **5.5**, tooth enamel begins to corrode.
+   - *Mechanism:* Bacteria in dental plaque ferment trapped sugar and food residues, producing organic acids.
+   - *Remedy:* Brushing teeth with **alkaline toothpastes** neutralizes acids and halts decay.`,
+      formulasOrKeyPoints: [
+        {
+          title: "Universal Indicator Colour Progression",
+          content: `| pH Range | Universal Indicator Color | Qualitative Strength |
+|---|---|---|
+| 0 – 2 | Dark Red / Scarlet | Very Strong Acid (Conc. HCl, Stomach acid) |
+| 3 – 4 | Orange-Red | Moderate Acid (Lemon juice, Vinegar) |
+| 5 – 6 | Yellow | Weak Acid (Coffee, Rainwater, Milk) |
+| 7 | Pure Green | Neutral (Pure Water, Blood is ~7.4) |
+| 8 – 9 | Blue / Teal | Weak Base (Baking soda, Sea water) |
+| 10 – 11 | Indigo / Deep Blue | Moderate Base (Milk of magnesia) |
+| 12 – 14 | Violet / Purple | Very Strong Base (NaOH, Bleach) |`,
+          note: "Universal indicator is a mixture of several organic dyes that exhibits a gradual color gradient across the complete pH spectrum."
+        }
+      ],
+      examinerTraps: [
+        {
+          trap: "Thinking a higher pH value represents a stronger acid.",
+          correction: "Lower pH = Higher [H⁺] concentration = Stronger acid. Higher pH = Stronger base."
+        }
+      ]
+    },
+    {
+      id: "salts",
+      label: "4. Chemistry of Commercial Salts & Chlor-Alkali Process",
+      heading: "Parent Acids/Bases, Chlor-Alkali & The Big 5 Commercial Salts",
+      subheading: "Chlor-Alkali (NaOH) + Bleaching Powder + Baking Soda + Washing Soda + Plaster of Paris",
+      explanation: `Salts are ionic compounds formed by neutralization. The pH of a salt solution depends on the relative dissociation strengths of its parent acid and parent base:
+
+| Parent Acid | Parent Base | Nature of Salt | Aqueous pH | Representative Example |
+|---|---|---|---|---|
+| Strong ($\text{HCl}, \text{H}_2\text{SO}_4$) | Strong ($\text{NaOH}, \text{KOH}$) | Neutral | $\text{pH} = 7$ | $\text{NaCl}, \text{K}_2\text{SO}_4, \text{KNO}_3$ |
+| Strong ($\text{HCl}, \text{HNO}_3$) | Weak ($\text{NH}_4\text{OH}, \text{Cu(OH)}_2$) | Acidic | $\text{pH} < 7$ | $\text{NH}_4\text{Cl}, \text{CuSO}_4, \text{FeCl}_3$ |
+| Weak ($\text{CH}_3\text{COOH}, \text{H}_2\text{CO}_3$) | Strong ($\text{NaOH}, \text{KOH}$) | Basic | $\text{pH} > 7$ | $\text{CH}_3\text{COONa}, \text{Na}_2\text{CO}_3, \text{NaHCO}_3$ |
+
+---
+
+### The Big 5 Industrial Chemicals from Common Salt (NaCl):
+
+#### 1. The Chlor-Alkali Process (Manufacture of NaOH):
+Electrolysis of cold saturated aqueous sodium chloride solution (**brine**):
+$$2\\text{NaCl(aq)} + 2\\text{H}_2\\text{O(l)} \\xrightarrow{\\text{Electricity}} 2\\text{NaOH(aq)} + \\text{Cl}_2\\text{(g)}\\uparrow [\\text{Anode}] + \\text{H}_2\\text{(g)}\\uparrow [\\text{Cathode}]$$
+- **At Anode (+):** Chlorine gas ($\\text{Cl}_2$) evolved (disinfectant, PVC, CFCs, water treatment).
+- **At Cathode (-):** Hydrogen gas ($\\text{H}_2$) evolved (fuels, margarine, ammonia for fertilizers).
+- **Near Cathode:** Sodium hydroxide ($\\text{NaOH}$) solution forms (degreasing metals, soaps, detergents, paper).
+
+#### 2. Bleaching Powder ($\\text{CaOCl}_2$ — Calcium Oxychloride):
+Action of chlorine gas on dry slaked lime:
+$$\\text{Ca(OH)}_2\\text{(s)} [\\text{Dry slaked lime}] + \\text{Cl}_2\\text{(g)} \\to \\text{CaOCl}_2\\text{(s)} [\\text{Bleaching powder}] + \\text{H}_2\\text{O(l)}$$
+- *Uses:* Disinfecting drinking water (kills pathogens), bleaching cotton and linen in textile mills, wood pulp in paper factories, oxidizing agent in chemical synthesis.
+
+#### 3. Baking Soda ($\\text{NaHCO}_3$ — Sodium Hydrogen Carbonate):
+Synthesized by Solvay Process:
+$$\\text{NaCl} + \\text{H}_2\\text{O} + \\text{CO}_2 + \\text{NH}_3 \\to \\text{NH}_4\\text{Cl(aq)} [\\text{Ammonium chloride}] + \\text{NaHCO}_3\\text{(s)}\\downarrow$$
+- *Action of Heat on Baking Soda:*
+  $$2\\text{NaHCO}_3\\text{(s)} \\xrightarrow{\\Delta} \\text{Na}_2\\text{CO}_3\\text{(s)} + \\text{H}_2\\text{O(g)} + \\text{CO}_2\\text{(g)}\\uparrow$$
+- *Difference between Baking Soda & Baking Powder (Board Favorite):*
+  * Baking soda is pure $\text{NaHCO}_3$. If used alone in cakes, thermal decomposition produces $\text{Na}_2\text{CO}_3$, which imparts a bitter taste.
+  * **Baking powder** is a mixture of baking soda ($\text{NaHCO}_3$) and a mild edible organic acid such as **tartaric acid**.
+  * When heated or mixed with water, tartaric acid reacts with $\text{NaHCO}_3$, releasing $\text{CO}_2$ (making cakes soft and spongy) and neutralizing $\text{Na}_2\text{CO}_3$ to sodium tartrate (pleasant taste).
+
+#### 4. Washing Soda ($\\text{Na}_2\\text{CO}_3 \\cdot 10\\text{H}_2\\text{O}$ — Sodium Carbonate Decahydrate):
+Obtained by recrystallization of sodium carbonate in water:
+$$\\text{Na}_2\\text{CO}_3\\text{(s)} + 10\\text{H}_2\\text{O(l)} \\to \\text{Na}_2\\text{CO}_3 \\cdot 10\\text{H}_2\\text{O(s)}$$
+- *Uses:* Removing **permanent hardness** of water, glass, soap, and paper industries, domestic cleansing agent.
+
+#### 5. Plaster of Paris ($\\text{CaSO}_4 \\cdot \\frac{1}{2}\\text{H}_2\\text{O}$ — Calcium Sulphate Hemihydrate):
+Heating gypsum ($\text{CaSO}_4 \\cdot 2\text{H}_2\text{O}$) at carefully controlled temperature of **373 K (100°C)**:
+$$\\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O(s)} \\xrightarrow{373\\text{ K}} \\text{CaSO}_4 \\cdot \\tfrac{1}{2}\\text{H}_2\\text{O(s)} + 1\\tfrac{1}{2}\\text{H}_2\\text{O(g)}$$
+- *Setting Reaction:* On mixing with water, it rehydrates into a rigid crystalline solid in 15–20 minutes:
+  $$\\text{CaSO}_4 \\cdot \\tfrac{1}{2}\\text{H}_2\\text{O} + 1\\tfrac{1}{2}\\text{H}_2\\text{O} \\to \\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O} [\\text{Gypsum, hard solid}]$$
+- *Dead Burnt Plaster:* If gypsum is heated **above 373 K**, it loses all water of crystallization, yielding anhydrous $\text{CaSO}_4$ ('dead burnt plaster'), which completely loses the property of setting with water!`,
+      formulasOrKeyPoints: [
+        {
+          title: "Water of Crystallisation Master Reference",
+          content: `**Water of Crystallisation:** The fixed number of water molecules chemically bound in one formula unit of a salt in crystalline form.
+
+| Hydrated Salt Name | Chemical Formula | Moles of Water | Color Change on Heating |
+|---|---|---|---|
+| Copper sulphate (Blue vitriol) | $\\text{CuSO}_4 \\cdot 5\\text{H}_2\\text{O}$ | 5 | Deep Blue $\\to$ Anhydrous White powder |
+| Ferrous sulphate (Green vitriol) | $\\text{FeSO}_4 \\cdot 7\\text{H}_2\\text{O}$ | 7 | Pale Green $\\to$ Dirty White $\\to$ Reddish-brown |
+| Washing soda | $\\text{Na}_2\\text{CO}_3 \\cdot 10\\text{H}_2\\text{O}$ | 10 | Effloresces in dry air to monohydrate |
+| Gypsum | $\\text{CaSO}_4 \\cdot 2\\text{H}_2\\text{O}$ | 2 | Converts to POP at 373 K |
+| Plaster of Paris | $\\text{CaSO}_4 \\cdot \\frac{1}{2}\\text{H}_2\\text{O}$ | 1/2 | Two $\\text{CaSO}_4$ units share one $\\text{H}_2\\text{O}$ |`,
+          note: "Reversible hydration: Adding drops of water to anhydrous white CuSO₄ restores its vivid blue color immediately."
+        }
+      ],
+      stepByStepGuide: [
+        {
+          stepNo: 1,
+          title: "Identify Salt Parentage and Hydrolysis pH",
+          action: "Split the salt formula into cation and anion. Add OH⁻ to cation to get parent base; add H⁺ to anion to get parent acid. Judge relative strengths to determine whether solution is acidic, basic, or neutral.",
+          proTip: "NH₄Cl → NH₄OH (weak base) + HCl (strong acid) → Acidic solution (pH < 7)."
+        }
+      ],
+      examinerTraps: [
+        {
+          trap: "Writing the formula of Plaster of Paris with 1 full molecule of water: CaSO₄·H₂O.",
+          correction: "POP is Calcium sulphate HEMI-hydrate: CaSO₄·½H₂O (or 2CaSO₄·H₂O)."
         },
         {
-          trap: "Writing Plaster of Paris as CaSO₄ · H₂O (1 full water) instead of CaSO₄ · ½H₂O.",
-          correction: "Plaster of Paris is calcium sulphate HEMI-hydrate: CaSO₄ · ½H₂O. Gypsum is the dihydrate: CaSO₄ · 2H₂O. Heating gypsum at exactly 373 K gives Plaster of Paris."
+          trap: "Heating gypsum above 373 K (100°C) during Plaster of Paris synthesis.",
+          correction: "Above 373 K, all water is driven off, forming anhydrous CaSO₄ (dead burnt plaster), which will NOT set upon adding water."
         }
       ]
     }

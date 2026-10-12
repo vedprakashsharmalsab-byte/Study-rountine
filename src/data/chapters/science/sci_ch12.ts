@@ -67,7 +67,7 @@ export const SCI_CH12_QUESTIONS: VaultQuestion[] = [
     chapter: 12,
     chapterName: "Magnetic Effects of Electric Current",
     marks: 2,
-    type: "SA",
+    type: "VSA",
     question: "State Maxwell's Right-Hand Thumb Rule. How is it used to determine the direction of the magnetic field around a straight current-carrying conductor?",
     answer: "Right-Hand Thumb Rule: Imagine that you are holding a current-carrying straight conductor in your right hand such that your outstretched thumb points in the direction of the electric current. Then, the fingers of your right hand wrapped around the conductor indicate the direction of the concentric magnetic field lines.",
     steps: [
@@ -84,7 +84,7 @@ export const SCI_CH12_QUESTIONS: VaultQuestion[] = [
     chapter: 12,
     chapterName: "Magnetic Effects of Electric Current",
     marks: 2,
-    type: "SA",
+    type: "VSA",
     question: "What is an electromagnet? Name two factors upon which the magnetic field strength of an electromagnet depends.",
     answer: "An electromagnet is a temporary magnet consisting of a coil of insulated wire (solenoid) wrapped around a core of soft iron, which behaves as a strong magnet ONLY as long as electric current flows through the coil.\nTwo factors affecting strength:\n(1) Number of turns per unit length (n) of the coil.\n(2) Magnitude of the electric current (I) passing through the coil.",
     steps: [
@@ -396,7 +396,7 @@ export const SCI_CH12_QUESTIONS: VaultQuestion[] = [
     "chapter": 12,
     "chapterName": "Magnetic Effects of Electric Current",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "List four key characteristics of magnetic field lines produced by a magnet.",
     "answer": "1. Direction: Field lines emerge from the North pole and merge into the South pole outside the magnet; inside the magnet, they run from South to North, forming continuous closed loops.\n\n2. Field Strength: The degree of closeness (density) of field lines indicates the strength of the magnetic field (stronger near poles where lines are crowded).\n\n3. Non-Intersection: Two magnetic field lines never cross or intersect each other.\n\n4. Tangent: The tangent drawn at any point on a field line gives the direction of resultant magnetic field at that point.",
     "source": "NCERT Class 10 Page 225"
@@ -406,7 +406,7 @@ export const SCI_CH12_QUESTIONS: VaultQuestion[] = [
     "chapter": 12,
     "chapterName": "Magnetic Effects of Electric Current",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "Why do two magnetic field lines never intersect each other? Explain with a diagram description.",
     "answer": "(1) Reason: The direction of the magnetic field at any point is given by the direction in which a compass needle points (tangent to the field line).\n\n(2) Consequence of Intersection: If two field lines crossed at a point P, a magnetic compass placed at that intersection coordinate would have to point in two different directions simultaneously. Since a physical compass needle can point in only one unique resultant direction in space, intersection of magnetic field lines is physically impossible.",
     "examinerNote": "State compass pointing in two directions simultaneously.",
@@ -417,7 +417,7 @@ export const SCI_CH12_QUESTIONS: VaultQuestion[] = [
     "chapter": 12,
     "chapterName": "Magnetic Effects of Electric Current",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "What is a solenoid? Compare the magnetic field produced by a current-carrying solenoid with that of a bar magnet.",
     "answer": "(1) Definition: A solenoid is a long cylindrical coil containing many circular turns of insulated copper wire wrapped closely in the shape of a cylinder.\n\n(2) Comparison with Bar Magnet:\n- The pattern of magnetic field lines outside a current-carrying solenoid is identical to that of a bar magnet.\n- One end of the solenoid behaves as a magnetic North pole and the opposite end behaves as a South pole.\n- Inside the core, field lines are straight and parallel, indicating a uniform magnetic field.",
     "source": "NCERT Class 10 Page 229"
@@ -427,7 +427,7 @@ export const SCI_CH12_QUESTIONS: VaultQuestion[] = [
     "chapter": 12,
     "chapterName": "Magnetic Effects of Electric Current",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "Differentiate between an Electromagnet and a Permanent Magnet on the basis of core material, magnetic retentivity, and polarity reversibility.",
     "answer": "(1) Core Material:\n- Electromagnet: Soft iron core wrapped with insulated wire.\n- Permanent Magnet: High retentivity alloys like Steel, Alnico, or Nipermag.\n\n(2) Retentivity & Control:\n- Electromagnet: Temporary magnet; magnetism can be switched on and off instantly by controlling electric current.\n- Permanent Magnet: Permanent; cannot be easily demagnetized by switching.\n\n(3) Polarity Control:\n- Electromagnet: North and South poles can be interchanged simply by reversing current direction.\n- Permanent Magnet: Polarity is permanently fixed and cannot be changed.",
     "source": "CBSE 2024 Board Question"
@@ -437,7 +437,7 @@ export const SCI_CH12_QUESTIONS: VaultQuestion[] = [
     "chapter": 12,
     "chapterName": "Magnetic Effects of Electric Current",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "What is the function of an earth wire in domestic electrical appliances having metallic bodies (e.g., refrigerator, washing machine)?",
     "answer": "(1) Electrical Safety Mechanism: Metallic-bodied appliances are connected to the earth wire (green insulation), which terminates in a copper plate buried deep in moist ground.\n\n(2) Prevention of Shocks: If live wire insulation wears out and touches the metallic casing, current flows safely through the low-resistance earth wire to the ground rather than through a human user's body. This sudden large leakage current blows the fuse or trips the MCB, cutting off supply.",
     "source": "NCERT Class 10 Page 237"
@@ -447,7 +447,7 @@ export const SCI_CH12_QUESTIONS: VaultQuestion[] = [
     "chapter": 12,
     "chapterName": "Magnetic Effects of Electric Current",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "What is the difference between Direct Current (DC) and Alternating Current (AC)? Name one source for each.",
     "answer": "(1) Direct Current (DC): An electric current whose magnitude and direction remain constant and unidirectional over time.\nSource: Chemical dry cell, automobile lead-acid battery, or solar cell.\n\n(2) Alternating Current (AC): An electric current that reverses its direction periodically at regular intervals of time.\nSource: AC generators in thermal/hydroelectric power stations, or household AC mains (220 V, 50 Hz).",
     "source": "NCERT Class 10 Page 236"

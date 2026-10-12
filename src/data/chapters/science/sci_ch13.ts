@@ -66,7 +66,7 @@ export const SCI_CH13_QUESTIONS: VaultQuestion[] = [
     chapter: 13,
     chapterName: "Our Environment",
     marks: 2,
-    type: "SA",
+    type: "VSA",
     question: "What is the role of decomposers in an ecosystem? What would happen if all decomposers were eliminated?",
     answer: "(1) Role of Decomposers: Decomposers (bacteria and saprophytic fungi) break down complex organic matter from dead plants and animal excreta into simple inorganic mineral nutrients, returning them to the soil, air, and water for re-absorption by producers.\n\n(2) Consequence of Elimination: Dead bodies of plants and animals would pile up in heaps, the natural biogeochemical nutrient cycles would completely halt, soil fertility would be depleted, and life would eventually collapse due to lack of recyclable nutrients.",
     steps: [
@@ -82,7 +82,7 @@ export const SCI_CH13_QUESTIONS: VaultQuestion[] = [
     chapter: 13,
     chapterName: "Our Environment",
     marks: 2,
-    type: "SA",
+    type: "VSA",
     question: "Why are food chains in nature generally limited to only 3 to 4 trophic levels?",
     answer: "According to Lindeman's 10% Law, only 10% of the energy available at a given trophic level is converted into biomass and transferred to the next higher trophic level; the remaining 90% is dissipated as metabolic heat and life processes. By the time energy reaches the 4th or 5th trophic level, the amount of available energy becomes so minuscule that it is insufficient to support and sustain another viable population of top carnivores.",
     steps: [
@@ -391,7 +391,7 @@ export const SCI_CH13_QUESTIONS: VaultQuestion[] = [
     "chapter": 13,
     "chapterName": "Our Environment",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "What is an Ecosystem? Name its two primary structural components with two examples of each.",
     "answer": "(1) Definition: An ecosystem is a self-sustaining structural and functional unit of the biosphere comprising a community of living organisms interacting with their physical, chemical non-living environment.\n\n(2) Two Components:\n- Biotic Components (Living): Producers (green plants, algae) and Consumers (herbivores, carnivores, decomposers).\n- Abiotic Components (Non-living physical factors): Temperature, rainfall, sunlight, soil, humidity, and minerals.",
     "source": "NCERT Class 10 Page 256"
@@ -401,7 +401,7 @@ export const SCI_CH13_QUESTIONS: VaultQuestion[] = [
     "chapter": 13,
     "chapterName": "Our Environment",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "What are Decomposers? State two critical ecological roles played by decomposers in maintaining equilibrium in the biosphere.",
     "answer": "(1) Definition: Microorganisms (saprophytic bacteria and fungi) that break down complex organic remains of dead plants and animal waste into simple inorganic nutrients.\n\n(2) Two Ecological Roles:\n- Natural Scavengers: Clean the earth's surface by decomposing dead carcasses and organic waste, preventing foul odors, disease outbreaks, and waste accumulation.\n- Nutrient Recycling: Replenish essential minerals (carbon, nitrogen, phosphorus) back into soil and air, making them available for autotrophic absorption by producers.",
     "source": "NCERT Class 10 Page 257"
@@ -411,7 +411,7 @@ export const SCI_CH13_QUESTIONS: VaultQuestion[] = [
     "chapter": 13,
     "chapterName": "Our Environment",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "Differentiate between Biodegradable and Non-biodegradable waste substances with two examples of each.",
     "answer": "(1) Biodegradable Substances: Waste materials that can be broken down into simpler non-toxic substances by the biological enzymatic action of saprophytic bacteria and fungi over time.\nExamples: Fruit/vegetable peels, cow dung, paper, cotton.\n\n(2) Non-biodegradable Substances: Waste materials that cannot be broken down by biological microorganisms and persist unchanged in the biosphere for decades or centuries, polluting soil and water.\nExamples: Plastic bags, glass bottles, polythene, DDT.",
     "source": "NCERT Class 10 Page 256"
@@ -421,7 +421,7 @@ export const SCI_CH13_QUESTIONS: VaultQuestion[] = [
     "chapter": 13,
     "chapterName": "Our Environment",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "What is the Ozone Layer? Why is it considered vital for the survival of life on Earth?",
     "answer": "(1) Ozone Layer: A protective gaseous shield of triatomic oxygen molecules ($O_3$) located in the stratosphere (15 to 30 km above Earth's surface).\n\n(2) Biological Vitality: It absorbs nearly 99% of lethal high-energy ultraviolet radiation (specifically UV-B and UV-C) emitted by the Sun. Unfiltered UV radiation causes skin cancer, cataract, suppression of the human immune system, and destroys photosynthetic phytoplankton in oceanic food chains.",
     "formula": "\\text{O}_3 + \\text{UV} ⟶ \\text{O}_2 + \\text{O}",
@@ -432,7 +432,7 @@ export const SCI_CH13_QUESTIONS: VaultQuestion[] = [
     "chapter": 13,
     "chapterName": "Our Environment",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "What is a Food Web? Why is a food web more realistic and stable than an isolated food chain in nature?",
     "answer": "(1) Definition: A complex network of interconnected and cross-linked food chains operating within an ecological community.\n\n(2) Ecological Stability: In nature, an organism rarely feeds on just one single species. If a drought or disease wipes out one herbivore prey (e.g., rabbits), predators (e.g., foxes) can switch to alternative prey (mice, birds). This web-like redundancy prevents the collapse of the entire trophic community.",
     "source": "NCERT Class 10 Page 259"
@@ -442,7 +442,7 @@ export const SCI_CH13_QUESTIONS: VaultQuestion[] = [
     "chapter": 13,
     "chapterName": "Our Environment",
     "marks": 2,
-    "type": "SA",
+    "type": "VSA",
     "question": "State Lindeman's 10 Percent Law. If 20,000 J of energy is available at the producer level in a food chain: Plants ⟶ Deer ⟶ Lion, calculate the energy transferred to the lion.",
     "answer": "(1) 10 Percent Law: In a food chain, only about 10% of the organic energy entering a trophic level is stored as biomass and transferred to the next trophic level; 90% is dissipated as metabolic heat during respiration or lost in excretion.\n\n(2) Numerical Calculation:\n- Producer (Plants) = 20,000 J\n- Primary Consumer (Deer) = $10\\% \\text{ of } 20,000\\text{ J} = 2,000\\text{ J}$\n- Secondary Consumer (Lion) = $10\\% \\text{ of } 2,000\\text{ J} = 200\\text{ J}$.\nTherefore, the lion receives 200 Joules of energy.",
     "formula": "E_{\\text{next}} = 0.10 \\times E_{\\text{current}}",

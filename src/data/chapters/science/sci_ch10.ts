@@ -2,7 +2,7 @@ import type { VaultQuestion } from "@/data/vaultQuestions";
 
 export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
   // ==========================================
-  // SECTION A: 1-MARK MCQs & ASSERTION-REASON
+  // SECTION A: 1-MARK MCQs & ASSERTION-REASON (9 Questions)
   // ==========================================
   {
     id: "sci_c10_q1",
@@ -10,20 +10,24 @@ export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
     chapterName: "The Human Eye and Colourful World",
     marks: 1,
     type: "MCQ",
-    question: "The ability of the eye to focus on both near and distant objects by changing the curvature of the lens is called:\n(a) Binocular vision\n(b) Accommodation\n(c) Persistence of vision\n(d) Adaptation",
-    options: ["Binocular vision", "Accommodation", "Persistence of vision", "Adaptation"],
-    correctOption: 1,
-    answer: "Option (b): Accommodation",
-    steps: [
-      "Accommodation: the ability of the eye lens to adjust its focal length to focus objects at different distances.",
-      "Ciliary muscles control the curvature of the eye lens.",
-      "Near objects: ciliary muscles contract → lens becomes thicker (more curved) → shorter focal length.",
-      "Distant objects: ciliary muscles relax → lens becomes thinner (flatter) → longer focal length."
+    question: "The ability of the human eye to focus on both nearby and distant objects by altering the focal length of the crystalline lens is called:\n(a) Binocular vision\n(b) Power of accommodation\n(c) Persistence of vision\n(d) Visual adaptation",
+    options: [
+      "Binocular vision",
+      "Power of accommodation",
+      "Persistence of vision",
+      "Visual adaptation"
     ],
-    explanation: "Accommodation = power of adjustment. Ciliary muscles change lens curvature to maintain sharp focus.",
-    formula: "\\text{Near objects: ciliary contract, lens fat} \\quad \\text{Far objects: ciliary relax, lens thin}",
-    examinerNote: "Accommodation ≠ persistence of vision. Accommodation is about focusing; persistence is about retention of image.",
-    source: "NCERT Section 11.1 / Board 2023"
+    correctOption: 1,
+    answer: "Option (b) is correct: Power of accommodation.",
+    steps: [
+      "Power of accommodation is the ability of the eye lens to adjust its curvature and focal length via the ciliary muscles.",
+      "For distant objects: Ciliary muscles relax → lens becomes thin → focal length increases.",
+      "For nearby objects: Ciliary muscles contract → lens becomes thicker/more convex → focal length decreases."
+    ],
+    explanation: "Accommodation allows the human eye to bring images of objects situated at varying distances into sharp focus precisely on the retina.",
+    formula: "\\text{Accommodation: Ciliary muscles alter lens curvature}",
+    examinerNote: "Do not confuse accommodation (focus adjustment) with persistence of vision (1/16th second image retention).",
+    source: "NCERT Class 10 Section 11.1 / Board 2023"
   },
   {
     id: "sci_c10_q2",
@@ -31,25 +35,25 @@ export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
     chapterName: "The Human Eye and Colourful World",
     marks: 1,
     type: "MCQ",
-    question: "A person cannot see objects clearly beyond 2 m. The defect of vision and the type of corrective lens needed are:\n(a) Hypermetropia; convex lens\n(b) Myopia; concave lens\n(c) Myopia; convex lens\n(d) Presbyopia; bifocal lens",
+    question: "A student sitting on the last bench cannot read the writing on the blackboard distinctly, but can read their textbook easily. The defect of vision and the type of corrective lens required are:\n(a) Hypermetropia; convex lens\n(b) Myopia; concave lens\n(c) Presbyopia; bifocal lens\n(d) Astigmatism; cylindrical lens",
     options: [
       "Hypermetropia; convex lens",
       "Myopia; concave lens",
-      "Myopia; convex lens",
-      "Presbyopia; bifocal lens"
+      "Presbyopia; bifocal lens",
+      "Astigmatism; cylindrical lens"
     ],
     correctOption: 1,
-    answer: "Option (b): Myopia; concave lens",
+    answer: "Option (b) is correct: Myopia; concave lens.",
     steps: [
-      "Cannot see beyond 2 m = near point is normal but FAR POINT is 2 m (should be infinity).",
-      "This is MYOPIA (short-sightedness).",
-      "Cause: eyeball too long OR lens too thick → image forms in front of retina.",
-      "Correction: CONCAVE (diverging) lens → diverges rays before they enter eye → image shifts back to retina."
+      "The student can see nearby objects (textbook) clearly, but distant objects (blackboard) are blurred.",
+      "This condition is Myopia (near-sightedness / short-sightedness).",
+      "In a myopic eye, the image of distant objects is focused in front of the retina.",
+      "A concave (diverging) lens of suitable power diverges incoming parallel rays so they focus sharply on the retina."
     ],
-    explanation: "Myopia = can't see far. Corrected by concave (diverging) lens.",
-    formula: "\\text{Myopia} \\to \\text{Concave lens}, \\quad \\text{Hypermetropia} \\to \\text{Convex lens}",
-    examinerNote: "Myopia = near-sighted (sees near, not far) = concave. Hypermetropia = far-sighted (sees far, not near) = convex.",
-    source: "NCERT Section 11.3 / Board 2022, 2024"
+    explanation: "Myopia is corrected using a concave lens that shifts the image back onto the retina.",
+    formula: "\\text{Myopia} \\implies \\text{Concave lens of power } P = -\\frac{1}{d(\\text{m})}",
+    examinerNote: "Myopia = can see near, cannot see far = concave lens (negative power).",
+    source: "NCERT Class 10 Section 11.2 / Board 2024"
   },
   {
     id: "sci_c10_q3",
@@ -57,24 +61,25 @@ export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
     chapterName: "The Human Eye and Colourful World",
     marks: 1,
     type: "MCQ",
-    question: "Assertion (A): The sky appears blue because of scattering of sunlight.\nReason (R): Smaller particles scatter light of shorter wavelengths (blue) more than longer wavelengths (red).\n(a) Both A and R are true and R is correct explanation\n(b) Both A and R are true but R is NOT correct explanation\n(c) A is true but R is false\n(d) A is false but R is true",
+    question: "Assertion (A): The clear sky appears blue during the daytime.\nReason (R): Atmospheric gas molecules and fine particles scatter shorter wavelength blue light much more strongly than longer wavelength red light.\n(a) Both (A) and (R) are true and (R) is the correct explanation of (A).\n(b) Both (A) and (R) are true but (R) is NOT the correct explanation of (A).\n(c) (A) is true but (R) is false.\n(d) (A) is false but (R) is true.",
     options: [
-      "Both A and R are true and R is correct explanation",
-      "Both A and R are true but R is NOT correct explanation",
-      "A is true but R is false",
-      "A is false but R is true"
+      "Both (A) and (R) are true and (R) is the correct explanation of (A).",
+      "Both (A) and (R) are true but (R) is NOT the correct explanation of (A).",
+      "(A) is true but (R) is false.",
+      "(A) is false but (R) is true."
     ],
     correctOption: 0,
-    answer: "Option (a): Both true, R is correct explanation",
+    answer: "Option (a) is correct.",
     steps: [
-      "A: Sky appears blue = TRUE (due to atmospheric light scattering).",
-      "R: Rayleigh scattering: intensity ∝ 1/λ⁴. Smaller wavelength (blue ≈ 450nm) scattered MUCH more than red (700nm). ✓ TRUE",
-      "R directly explains why sky is blue (scattered blue light reaches our eyes from all directions)."
+      "Assertion (A) is true: The sky appears blue.",
+      "Reason (R) is true: According to Rayleigh's law of scattering, intensity of scattering is inversely proportional to fourth power of wavelength ($I \\propto 1/\\lambda^4$).",
+      "Blue light ($\\lambda \\approx 450\\text{ nm}$) scatters nearly 5.5 times more than red light ($\\lambda \\approx 700\\text{ nm}$).",
+      "Reason correctly explains why scattered blue light enters our eyes from all directions in the daytime sky."
     ],
-    explanation: "Tyndall effect/Rayleigh scattering: blue light (shorter λ) scattered more → sky looks blue from all directions.",
-    formula: "I_{scatter} \\propto \\frac{1}{\\lambda^4} \\implies \\text{blue scattered most}",
-    examinerNote: "This is the most frequently tested phenomenon in Chapter 11. Blue sky + red sunset are both Rayleigh scattering.",
-    source: "NCERT Section 11.5 / Board 2022, 2024"
+    explanation: "Rayleigh scattering causes shorter wavelengths (blue/violet) to scatter far more intensely than longer wavelengths (red).",
+    formula: "I_{\\text{scatter}} \\propto \\frac{1}{\\lambda^4}",
+    examinerNote: "Although violet has an even shorter wavelength, the sun emits less violet and human eyes are much more sensitive to blue.",
+    source: "NCERT Class 10 Section 11.6 / Board 2022, 2024"
   },
   {
     id: "sci_c10_q4",
@@ -82,19 +87,18 @@ export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
     chapterName: "The Human Eye and Colourful World",
     marks: 1,
     type: "MCQ",
-    question: "The minimum distance of clear vision for a normal human eye is:\n(a) 2.5 cm\n(b) 10 cm\n(c) 25 cm\n(d) 100 cm",
-    options: ["2.5 cm", "10 cm", "25 cm", "100 cm"],
+    question: "The least distance of distinct vision (near point) for a normal young adult eye is:\n(a) 2.5 cm\n(b) 25 mm\n(c) 25 cm\n(d) Infinity",
+    options: ["2.5 cm", "25 mm", "25 cm", "Infinity"],
     correctOption: 2,
-    answer: "Option (c): 25 cm",
+    answer: "Option (c) is correct: 25 cm.",
     steps: [
-      "The near point of a normal human eye = 25 cm (minimum distance at which objects can be seen clearly).",
-      "This is also called the 'least distance of distinct vision'.",
-      "Objects closer than 25 cm cannot be focused clearly without strain."
+      "The minimum distance at which an object can be seen most distinctly without strain is 25 cm.",
+      "The far point of a normal eye is infinity ($\\infty$)."
     ],
-    explanation: "Normal near point = 25 cm. Normal far point = infinity. Any deviation = refractive error.",
-    formula: "D = 25 \\text{ cm (near point of normal eye)}",
-    examinerNote: "25 cm = least distance of distinct vision. Used in magnification formula: M = 1 + D/f for simple microscope.",
-    source: "NCERT Section 11.1"
+    explanation: "For a normal human eye, the near point (least distance of distinct vision) is 25 cm, and the far point is infinity.",
+    formula: "d = 25\\text{ cm}",
+    examinerNote: "Take note of units: 25 cm, NOT 25 mm or 2.5 cm.",
+    source: "NCERT Class 10 Section 11.1"
   },
   {
     id: "sci_c10_q5",
@@ -102,19 +106,19 @@ export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
     chapterName: "The Human Eye and Colourful World",
     marks: 1,
     type: "MCQ",
-    question: "When white light passes through a prism, it splits into its constituent colours. This phenomenon is called:\n(a) Reflection\n(b) Refraction\n(c) Dispersion\n(d) Scattering",
-    options: ["Reflection", "Refraction", "Dispersion", "Scattering"],
-    correctOption: 2,
-    answer: "Option (c): Dispersion",
+    question: "When a narrow beam of white light passes through a glass prism, it splits into a spectrum of constituent colours. Which colour suffers the maximum deviation?\n(a) Red\n(b) Yellow\n(c) Green\n(d) Violet",
+    options: ["Red", "Yellow", "Green", "Violet"],
+    correctOption: 3,
+    answer: "Option (d) is correct: Violet.",
     steps: [
-      "Dispersion: splitting of white light into its component colours (VIBGYOR) by a prism.",
-      "Cause: Different colours have slightly different refractive indices in glass → different bending → they separate.",
-      "Violet light bends most (highest n), Red bends least (lowest n)."
+      "Refractive index of glass is highest for violet light (shortest wavelength in visible spectrum).",
+      "Angle of deviation $\\delta \\approx (n - 1)A$.",
+      "Since $n_{\\text{violet}} > n_{\\text{red}}$, violet light bends (deviates) the most, and red deviates the least."
     ],
-    explanation: "Dispersion = splitting white light into spectrum. Violet deviates most, red least. Newton discovered this.",
-    formula: "\\text{White light} \\to \\text{Prism} \\to \\text{VIBGYOR spectrum}",
-    examinerNote: "Order: Violet, Indigo, Blue, Green, Yellow, Orange, Red (VIBGYOR). Violet = most deviation, Red = least.",
-    source: "NCERT Section 11.4 / Board 2022"
+    explanation: "Violet light has the shortest wavelength and slowest speed in glass, resulting in the highest refractive index and maximum deviation.",
+    formula: "\\delta_{\\text{violet}} > \\delta_{\\text{indigo}} > \\dots > \\delta_{\\text{red}}",
+    examinerNote: "In VIBGYOR, Violet deviates most (at the base of the prism); Red deviates least.",
+    source: "NCERT Class 10 Section 11.3 / Board 2022"
   },
   {
     id: "sci_c10_q6",
@@ -122,171 +126,165 @@ export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
     chapterName: "The Human Eye and Colourful World",
     marks: 1,
     type: "MCQ",
-    question: "The power of a myopic patient's corrective lens is -4 D. The far point of this person's eye is:\n(a) 4 m\n(b) 25 cm\n(c) 0.25 m\n(d) 100 cm",
-    options: ["4 m", "25 cm", "0.25 m", "100 cm"],
-    correctOption: 2,
-    answer: "Option (c): 0.25 m (25 cm)",
-    steps: [
-      "P = -4 D (concave/myopic correction lens)",
-      "f = 1/P = 1/(-4) = -0.25 m = -25 cm",
-      "The lens must diverge rays from infinity to appear as if coming from the far point.",
-      "For concave lens: virtual image at far point: v = f = -25 cm.",
-      "Far point = 25 cm = 0.25 m"
+    question: "A doctor prescribes a corrective lens of power -2.5 D for a patient. The focal length of the lens and the defect of vision are:\n(a) -40 cm; Myopia\n(b) +40 cm; Hypermetropia\n(c) -25 cm; Myopia\n(d) +25 cm; Presbyopia",
+    options: [
+      "-40 cm; Myopia",
+      "+40 cm; Hypermetropia",
+      "-25 cm; Myopia",
+      "+25 cm; Presbyopia"
     ],
-    explanation: "Power of corrective lens for myopia = -1/(far point in meters). Far point = |f| = 0.25 m.",
-    formula: "f = 1/P = 1/(-4) = -0.25 \\text{ m}; \\text{Far point} = 25 \\text{ cm}",
-    examinerNote: "Myopic far point = |f of concave lens|. This is the maximum distance the myope can see clearly.",
-    source: "NCERT Section 11.3 / Board 2023"
+    correctOption: 0,
+    answer: "Option (a) is correct: -40 cm; Myopia.",
+    steps: [
+      "Power $P = \\frac{1}{f(\\text{in metres})} \\implies f = \\frac{1}{P} = \\frac{1}{-2.5} = -0.4\\text{ m} = -40\\text{ cm}$.",
+      "A negative focal length indicates a concave lens.",
+      "Concave lenses are prescribed to correct Myopia."
+    ],
+    explanation: "Focal length $f = 1/P = 1/(-2.5) = -0.4\\text{ m} = -40\\text{ cm}$. Negative focal length signifies a diverging (concave) lens used for myopia.",
+    formula: "f = \\frac{1}{P} = \\frac{1}{-2.5\\text{ D}} = -0.4\\text{ m} = -40\\text{ cm}",
+    examinerNote: "Negative power always corresponds to a concave lens and myopia.",
+    source: "NCERT Class 10 Section 11.2 / Board 2023"
   },
-
-  // ==========================================
-  // SECTION B: 2-MARK VSA
-  // ==========================================
   {
     id: "sci_c10_q7",
     chapter: 10,
     chapterName: "The Human Eye and Colourful World",
-    marks: 2,
-    type: "VSA",
-    question: "Explain why the sun appears red at sunrise and sunset.",
-    answer: "Sun appears red because blue light is scattered away by the thick atmosphere layer at horizon. Red light (longer λ) reaches the eye.",
-    steps: [
-      "At sunrise/sunset, sunlight travels a LONGER path through the atmosphere than at noon.",
-      "This longer path means more atmospheric particles scatter light.",
-      "Blue light (shorter wavelength) is scattered away in multiple directions.",
-      "Red light (longer wavelength, λ ≈ 700 nm) is scattered much less.",
-      "Therefore, mostly RED light (and orange) reaches the observer's eye → sun appears red/orange."
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): Stars twinkle at night, but planets do not twinkle.\nReason (R): Stars are point-sized sources of light far away whose light rays continuously undergo atmospheric refraction, whereas planets are closer and act as extended sources of light.\n(a) Both (A) and (R) are true and (R) is the correct explanation of (A).\n(b) Both (A) and (R) are true but (R) is NOT the correct explanation of (A).\n(c) (A) is true but (R) is false.\n(d) (A) is false but (R) is true.",
+    options: [
+      "Both (A) and (R) are true and (R) is the correct explanation of (A).",
+      "Both (A) and (R) are true but (R) is NOT the correct explanation of (A).",
+      "(A) is true but (R) is false.",
+      "(A) is false but (R) is true."
     ],
-    explanation: "Sunrise/sunset red color = blue scattered away → red transmitted. Same physics as blue sky, different geometry.",
-    formula: "\\text{Long path at horizon} \\to \\text{Blue scattered away} \\to \\text{Red reaches eye}",
-    examinerNote: "Two processes to know: (1) Blue sky (scattered blue comes to eye), (2) Red sun (scattered blue leaves, red remains).",
-    source: "NCERT Section 11.5 / Board 2022, 2024"
+    correctOption: 0,
+    answer: "Option (a) is correct.",
+    steps: [
+      "Assertion (A) is true: Stars twinkle; planets shine steadily.",
+      "Reason (R) is true: Stars are extremely distant, effectively acting as point sources. Atmospheric turbulence shifts the apparent position and intensity of rays arriving at the eye.",
+      "Planets are much closer, subtending a finite angle (extended source comprising millions of point sources); individual brightness fluctuations cancel out on average.",
+      "Reason correctly explains Assertion."
+    ],
+    explanation: "Atmospheric refraction causes twinkling of point-sized star light. Extended planetary discs average out fluctuations.",
+    formula: "\\text{Atmospheric fluctuations average out to zero for extended planetary discs}",
+    examinerNote: "Key distinction: point source vs extended collection of point sources.",
+    source: "NCERT Class 10 Section 11.5 / Board 2021"
   },
   {
     id: "sci_c10_q8",
     chapter: 10,
     chapterName: "The Human Eye and Colourful World",
-    marks: 2,
-    type: "VSA",
-    question: "A person suffering from hypermetropia has a near point of 1 m. What should be the focal length of the corrective lens?",
-    answer: "f = 100/3 cm ≈ 33.33 cm (convex lens)",
-    steps: [
-      "Normal near point = 25 cm = 0.25 m. Hypermetropic near point = 1 m = 100 cm.",
-      "The corrective lens should form a virtual image at 100 cm (far near point) when the object is at 25 cm.",
-      "Object distance u = -25 cm (in front of lens).",
-      "Image distance v = -100 cm (virtual image, same side as object).",
-      "Lens formula: 1/f = 1/v - 1/u = 1/(-100) - 1/(-25) = -1/100 + 4/100 = 3/100",
-      "f = 100/3 cm ≈ +33.33 cm (positive → convex lens)"
+    marks: 1,
+    type: "MCQ",
+    question: "Due to atmospheric refraction, the sun is visible to an observer on Earth about:\n(a) 2 minutes before actual sunrise and 2 minutes after actual sunset\n(b) 4 minutes before actual sunrise and 4 minutes after actual sunset\n(c) 1 minute before actual sunrise and 1 minute after actual sunset\n(d) 5 minutes before actual sunrise and 5 minutes after actual sunset",
+    options: [
+      "2 minutes before actual sunrise and 2 minutes after actual sunset",
+      "4 minutes before actual sunrise and 4 minutes after actual sunset",
+      "1 minute before actual sunrise and 1 minute after actual sunset",
+      "5 minutes before actual sunrise and 5 minutes after actual sunset"
     ],
-    explanation: "Hypermetropia: object at 25 cm must form image at 100 cm (actual near point). Convex lens used.",
-    formula: "\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u} = \\frac{1}{-100} - \\frac{1}{-25} = \\frac{3}{100}",
-    examinerNote: "Image is virtual and on same side as object → v is negative. Object is at standard 25 cm.",
-    source: "NCERT Exercise 11.3 / Board 2022"
+    correctOption: 0,
+    answer: "Option (a) is correct: 2 minutes before actual sunrise and 2 minutes after actual sunset.",
+    steps: [
+      "Atmospheric refraction bends sunlight towards the normal as it enters progressively denser atmospheric layers.",
+      "The sun appears above the horizon about 2 minutes before it physically crosses the horizon at sunrise.",
+      "Similarly, it remains visible for about 2 minutes after actual sunset.",
+      "The total apparent duration of daylight is extended by approximately 4 minutes."
+    ],
+    explanation: "Because of continuous atmospheric refraction near the horizon, we see the apparent position of the sun raised by about 0.5 degrees, giving 2 minutes early sunrise and 2 minutes delayed sunset.",
+    formula: "\\Delta t_{\\text{total}} = 2\\text{ min (sunrise)} + 2\\text{ min (sunset)} = 4\\text{ min}",
+    examinerNote: "Per event is 2 minutes; total day elongation is 4 minutes.",
+    source: "NCERT Class 10 Section 11.5 / Board 2023"
   },
-
-  // ==========================================
-  // SECTION C: 3-MARK SA
-  // ==========================================
   {
     id: "sci_c10_q9",
     chapter: 10,
     chapterName: "The Human Eye and Colourful World",
-    marks: 3,
-    type: "SA",
-    question: "What is dispersion of light? How does a glass prism produce a spectrum of white light? Which colour deviates the most and the least?",
-    answer: "Dispersion = splitting white light into VIBGYOR. Prism refracts each colour differently. Violet most, red least.",
-    steps: [
-      "Dispersion: the splitting of white light into its component spectrum of colours when passing through a prism or another medium.",
-      "Mechanism in a prism:",
-      "1. White light enters prism and undergoes REFRACTION at the first surface.",
-      "2. Different colours have different refractive indices in glass.",
-      "3. Violet light (λ ≈ 400 nm): highest n in glass → bends most → deviates most.",
-      "4. Red light (λ ≈ 700 nm): lowest n in glass → bends least → deviates least.",
-      "5. At second surface, further refraction separates the colours more.",
-      "Result: VIBGYOR spectrum (Violet, Indigo, Blue, Green, Yellow, Orange, Red).",
-      "Violet deviates MOST. Red deviates LEAST."
+    marks: 1,
+    type: "MCQ",
+    question: "Sir Isaac Newton demonstrated that white light consists of seven colours by placing an inverted second identical prism behind the first prism. The beam emerging from the second prism was:\n(a) A more intense spectrum\n(b) A beam of pure white light\n(c) Divided into 14 distinct colours\n(d) Completely absorbed",
+    options: [
+      "A more intense spectrum",
+      "A beam of pure white light",
+      "Divided into 14 distinct colours",
+      "Completely absorbed"
     ],
-    explanation: "Dispersion occurs because refractive index varies with wavelength (color). n is highest for violet, lowest for red.",
-    formula: "n_{violet} > n_{red} \\implies \\delta_{violet} > \\delta_{red}",
-    examinerNote: "VIBGYOR order from most to least deviated: V-I-B-G-Y-O-R. Red deviates least → at bottom in spectrum.",
-    source: "NCERT Section 11.4 / Board 2022, 2023"
+    correctOption: 1,
+    answer: "Option (b) is correct: A beam of pure white light.",
+    steps: [
+      "The first upright prism dispersed white light into its seven constituent spectral colors (VIBGYOR).",
+      "The second identical prism was placed in an inverted position relative to the first.",
+      "The inverted prism recombined all the separated colors, and a beam of white light emerged from its opposite face.",
+      "This proved that white light is a combination of the spectrum colors, rather than colors being created by the glass."
+    ],
+    explanation: "Newton's double-prism recombination experiment proved that white light is composed of the seven colors of the spectrum.",
+    formula: "\\text{White light} \\xrightarrow{\\text{Prism 1}} \\text{VIBGYOR} \\xrightarrow{\\text{Inverted Prism 2}} \\text{White light}",
+    examinerNote: "Historic experiment frequently tested to explain spectrum recombination.",
+    source: "NCERT Class 10 Section 11.4"
   },
+
+  // ==========================================
+  // SECTION B: 2-MARK VSA (5 Questions)
+  // ==========================================
   {
     id: "sci_c10_q10",
     chapter: 10,
     chapterName: "The Human Eye and Colourful World",
-    marks: 3,
-    type: "SA",
-    question: "Compare myopia and hypermetropia: causes, symptoms, and correction.",
-    answer: "Myopia: can't see far, image forms before retina, corrected by concave lens. Hypermetropia: can't see near, image forms behind retina, corrected by convex lens.",
+    marks: 2,
+    type: "VSA",
+    question: "Explain why the Sun appears reddish early in the morning at sunrise and late in the evening at sunset.",
+    answer: "At sunrise and sunset, sunlight travels a much longer distance through the thickest layers of Earth's atmosphere. Shorter wavelengths (blue and violet) are mostly scattered away by atmospheric molecules, while longer wavelengths (red and orange) suffer the least scattering and reach our eyes.",
     steps: [
-      "MYOPIA (Short-sightedness):",
-      "- Cause: Eyeball too long OR lens too convex (too curved).",
-      "- Image of distant objects forms IN FRONT of retina.",
-      "- Symptom: Cannot see distant objects clearly.",
-      "- Correction: Concave (diverging) lens of appropriate focal length.",
-      "HYPERMETROPIA (Long-sightedness):",
-      "- Cause: Eyeball too short OR lens too flat.",
-      "- Image of nearby objects would form BEHIND the retina.",
-      "- Symptom: Cannot see close objects clearly.",
-      "- Correction: Convex (converging) lens."
+      "1. Near the horizon, sunlight traverses a substantially thicker atmospheric path compared to overhead at noon.",
+      "2. By Rayleigh's law ($I \\propto 1/\\lambda^4$), short-wavelength blue and violet rays are scattered out of the line of sight in all directions.",
+      "3. Red light has the longest wavelength in the visible spectrum ($\\approx 700\\text{ nm}$) and scatters least.",
+      "4. Hence, the light that reaches our eyes directly from the sun is predominantly rich in red wavelengths."
     ],
-    explanation: "Myopia: too much convergence → image before retina → concave lens diverges rays. Hypermetropia: too little → image behind → convex helps.",
-    formula: "\\text{Myopia: concave} \\quad \\text{Hypermetropia: convex}",
-    examinerNote: "Draw ray diagrams for each defect showing correction. CBSE awards 1.5 marks for each part.",
-    source: "NCERT Section 11.3 / Board 2021, 2023"
+    explanation: "The scattering of short wavelengths over a long path leaves only the transmitted red light to enter the observer's eye.",
+    formula: "I_{\\text{scatter}} \\propto \\frac{1}{\\lambda^4} \\implies \\lambda_{\\text{red}} > \\lambda_{\\text{blue}} \\implies \\text{Red scatters least}",
+    examinerNote: "Must explain the longer path through the atmosphere and the Rayleigh wavelength relationship.",
+    source: "NCERT Class 10 Section 11.6 / Board 2022, 2024"
   },
-
-  // ==========================================
-  // SECTION D: 5-MARK LA
-  // ==========================================
   {
     id: "sci_c10_q11",
     chapter: 10,
     chapterName: "The Human Eye and Colourful World",
-    marks: 5,
-    type: "LA",
-    question: "Explain the structure of the human eye with a labeled diagram. Describe the function of the following parts: cornea, iris, pupil, lens, retina, and optic nerve.",
-    answer: "Complete structure of human eye with six key components and their functions.",
+    marks: 2,
+    type: "VSA",
+    question: "A hypermetropic person has a near point of 1.0 m. What is the focal length and power of the corrective lens required to enable them to read comfortably at 25 cm?",
+    answer: "Focal length $f = +33.33\\text{ cm} = +1/3\\text{ m}$; Power $P = +3.0\\text{ D}$ (convex lens).",
     steps: [
-      "Structure of Human Eye (Draw oval eye diagram with all parts labeled):",
-      "1. Cornea: Transparent front surface. Refracts light as it enters the eye. Does most of the eye's total focusing (about 2/3 of total).",
-      "2. Iris: Circular, colored disc of muscle around the pupil. Controls pupil size to regulate light intake.",
-      "3. Pupil: Black circular opening in center of iris. Size varies: dilates in dim light (more light in), constricts in bright light (less light in).",
-      "4. Eye Lens (Crystalline Lens): Biconvex transparent lens behind iris. Fine-focuses light onto retina. Changes shape for accommodation (ciliary muscles).",
-      "5. Retina: Light-sensitive inner layer at back of eye. Contains rods (dim light, black-white) and cones (color, bright light). Converts light to electrical signals.",
-      "6. Optic Nerve: Bundle of nerve fibers. Transmits electrical signals from retina to brain's visual cortex for interpretation.",
-      "7. Vitreous Humor: Jelly-like fluid filling eyeball, maintains eye shape.",
-      "8. Aqueous Humor: Watery fluid in front of lens, supplies nutrients to cornea and lens."
+      "Step 1: Near point of normal eye $u = -25\\text{ cm} = -0.25\\text{ m}$.",
+      "Step 2: Near point of defective eye $v = -1.0\\text{ m} = -100\\text{ cm}$ (virtual image).",
+      "Step 3: Lens Formula: $\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u}$.",
+      "$\\frac{1}{f} = \\frac{1}{-100} - \\frac{1}{-25} = -\\frac{1}{100} + \\frac{4}{100} = +\\frac{3}{100}\\text{ cm}^{-1}$.",
+      "$f = +\\frac{100}{3}\\text{ cm} \\approx +33.33\\text{ cm} = +\\frac{1}{3}\\text{ m}$.",
+      "Step 4: Power $P = \\frac{1}{f(\\text{in m})} = \\frac{1}{+1/3} = +3.0\\text{ D}$ (convex lens)."
     ],
-    explanation: "Eye = complex optical instrument. Cornea (rough focus) + lens (fine focus) together project image on retina.",
-    formula: "\\text{Cornea} + \\text{Lens} \\to \\text{Focused image on Retina} \\to \\text{Optic Nerve} \\to \\text{Brain}",
-    examinerNote: "5-mark: draw labeled diagram + 6 part functions. One point per structure. No label = loss of marks.",
-    source: "NCERT Section 11.1 / Board 2021, 2022"
+    explanation: "A convex lens provides additional converging power to focus light from 25 cm onto the retina as if it originated from the person's actual near point of 1.0 m.",
+    formula: "\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u}, \\quad P = \\frac{1}{f(\\text{m})}",
+    examinerNote: "Convex lens with positive focal length and positive power is required.",
+    source: "NCERT Class 10 Exercise 11.2 / Board 2022"
   },
-
-  // ==========================================
-  // CASE STUDY & ADDITIONAL PYQs
-  // ==========================================
   {
     id: "sci_c10_q12",
     chapter: 10,
     chapterName: "The Human Eye and Colourful World",
-    marks: 4,
-    type: "Case Study",
-    question: "Priya noticed that her grandmother could not read newspapers clearly unless she held them at arm's length, but had no difficulty seeing distant objects. The doctor prescribed glasses with +3.5 D lenses.\n\n(i) [1M] What type of visual defect does the grandmother have?\n(ii) [1M] Name the type of lens in the glasses.\n(iii) [2M] Find the focal length of the glasses and explain how they help correct the grandmother's vision.",
-    answer: "(i) Hypermetropia. (ii) Convex lens. (iii) f = 1/P = 1/3.5 ≈ 28.6 cm. Convex lens converges rays to help form image on retina.",
+    marks: 2,
+    type: "VSA",
+    question: "What is the Tyndall effect? Mention any two instances where this phenomenon is observed in our daily surroundings.",
+    answer: "The Tyndall effect is the phenomenon of scattering of light by colloidal particles or fine suspended particles in a medium, rendering the path of the light beam visible.\nInstances: (1) When a fine beam of sunlight enters a dusty, smoke-filled room through a small hole or ventilator. (2) When sunlight passes through the dense canopy of a tropical forest where tiny water droplets in mist scatter light.",
     steps: [
-      "(i) Cannot see near objects clearly (reads at arm's length) but sees distant objects fine → HYPERMETROPIA.",
-      "(ii) Corrective lens for hypermetropia = CONVEX (converging) lens.",
-      "(iii) Focal length: P = +3.5 D. f = 1/P = 1/3.5 ≈ 0.286 m ≈ 28.6 cm",
-      "Mechanism: The hypermetropic eye is too short OR lens too flat → image of nearby object would form behind retina.",
-      "Convex lens converges the diverging rays from near objects → effectively moves near point to a comfortable distance → image now falls on retina."
+      "1. Definition: Scattering of light by colloidal/suspended particles that illuminates the beam trajectory.",
+      "2. Example 1: Sunlight streaming into a darkened room containing dust or smoke.",
+      "3. Example 2: Light rays filtering through mist/fog under the canopy of trees in a forest.",
+      "4. Example 3: Vehicle headlights slicing through fog/mist at night."
     ],
-    explanation: "Hypermetropia: convex lens increases total converging power of eye system to compensate for short eyeball.",
-    formula: "P = +3.5 \\text{ D}, \\quad f = \\frac{1}{P} \\approx 28.6 \\text{ cm (convex)}",
-    examinerNote: "Positive power → convex lens → hypermetropia. Negative power → concave lens → myopia.",
-    source: "CBSE Board 2024 Practice"
+    explanation: "Particles with dimensions comparable to or slightly larger than the wavelength of light scatter photons in all directions, illuminating the beam path.",
+    formula: "\\text{Colloidal particles} + \\text{Light} \\to \\text{Illuminated beam path (Tyndall Effect)}",
+    examinerNote: "Both definition and two valid practical examples are required for 2 marks.",
+    source: "NCERT Class 10 Section 11.6"
   },
   {
     id: "sci_c10_q13",
@@ -294,42 +292,227 @@ export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
     chapterName: "The Human Eye and Colourful World",
     marks: 2,
     type: "VSA",
-    question: "What is the Tyndall effect? Give one example from daily life.",
-    answer: "Tyndall effect: scattering of light by colloidal particles in a medium. Example: sunlight visible through forest trees.",
+    question: "Why does the sky appear dark and black to an astronaut orbiting Earth in space or standing on the Moon, instead of blue?",
+    answer: "In outer space and on the Moon, there is no atmosphere containing air molecules or dust particles. In the absence of atmospheric particles, no scattering of sunlight takes place. Since no scattered light enters the astronaut's eyes from the surrounding space, the sky appears completely dark and black.",
     steps: [
-      "Tyndall Effect: When a beam of light passes through a colloidal solution or fine particles suspended in a medium, the particles scatter the light in all directions → beam becomes visible.",
-      "Named after John Tyndall (1869).",
-      "Examples:",
-      "1. Beam of sunlight visible in a dark forest or dusty room (particles scatter light).",
-      "2. Headlights of cars visible in foggy weather.",
-      "3. Blue colour of sky (scattering by atmosphere particles).",
-      "4. White-looking colloid solutions (milk looks white)."
+      "1. Earth's blue sky is solely due to the scattering of sunlight by gas molecules in the atmosphere.",
+      "2. Space and the Moon lack an atmosphere (vacuum).",
+      "3. Without particles, sunlight travels uninterrupted without undergoing scattering.",
+      "4. Because no scattered light reaches the astronaut's eyes, the sky looks black even when the sun is shining."
     ],
-    explanation: "Tyndall effect shows colloidal/fine particle presence by making light beam visible from the side.",
-    formula: "\\text{Fine particles} + \\text{Light beam} \\to \\text{Scattering} \\to \\text{Visible beam (Tyndall)}",
-    examinerNote: "Tyndall = scattering in colloids/atmosphere. Distinguish from Rayleigh scattering (atmospheric, wavelength-dependent).",
-    source: "NCERT Section 11.5 / Board 2022"
+    explanation: "Light is visible only when it enters the observer's eye. Without atmospheric scattering, outer space appears black.",
+    formula: "\\text{No atmosphere} \\implies \\text{No scattering} \\implies \\text{Dark/black sky}",
+    examinerNote: "State clearly: no atmosphere means no scattering of sunlight.",
+    source: "NCERT Class 10 Section 11.6 / Board 2023"
   },
   {
     id: "sci_c10_q14",
     chapter: 10,
     chapterName: "The Human Eye and Colourful World",
+    marks: 2,
+    type: "VSA",
+    question: "What is Presbyopia? State its primary cause and how it can be corrected in a person who also suffers from myopia.",
+    answer: "Presbyopia is the age-related gradual loss of the eye's power of accommodation, causing the near point to recede beyond 25 cm. Cause: Gradual weakening of the ciliary muscles and diminishing flexibility (hardening) of the crystalline lens with age. Correction: When accompanied by myopia, it is corrected using bifocal lenses where the upper portion contains a concave lens (for distant vision) and the lower portion contains a convex lens (for reading/near vision).",
+    steps: [
+      "Definition: Aging defect where near point recedes, making close work difficult.",
+      "Causes: (i) Weakening of ciliary muscles, (ii) Loss of crystalline lens elasticity.",
+      "Correction: Bifocal lenses (upper concave for distant sight, lower convex for reading)."
+    ],
+    explanation: "Presbyopia is caused by aging and is corrected with bifocal or progressive lenses.",
+    formula: "\\text{Bifocal lens: Upper = Concave (far), Lower = Convex (near)}",
+    examinerNote: "Mentioning both causes (ciliary muscles + lens flexibility) and bifocal composition is required.",
+    source: "NCERT Class 10 Section 11.2"
+  },
+
+  // ==========================================
+  // SECTION C: 3-MARK SA (6 Questions)
+  // ==========================================
+  {
+    id: "sci_c10_q15",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
     marks: 3,
     type: "SA",
-    question: "Explain the phenomenon of rainbow formation. Why does a rainbow form only after rain?",
-    answer: "Rainbow = dispersion + internal reflection of sunlight in water droplets. Forms opposite the sun when droplets are present.",
+    question: "Explain the phenomenon of dispersion of white light through a triangular glass prism. Define angle of deviation (D) and state the relationship between angle of prism (A), angle of deviation (D), angle of incidence (i), and angle of emergence (e).",
+    answer: "Dispersion is the splitting of white light into its constituent spectrum of seven colours (VIBGYOR) when passing through a prism, caused by different wavelengths traveling at different speeds in glass. The angle of deviation (D) is the angle between the incident ray's original direction and the emergent ray. Relation: $A + D = i + e$.",
     steps: [
-      "Rainbow formation involves TWO processes inside each water droplet:",
-      "1. DISPERSION (Refraction): White sunlight enters a water droplet → splits into VIBGYOR spectrum.",
-      "2. TOTAL INTERNAL REFLECTION: Light reflects off the inner back surface of the droplet.",
-      "3. DISPERSION AGAIN (Second refraction): Light exits the droplet → colours spread out further.",
-      "4. Observer sees red on outside (higher angle ~42°) and violet on inside (lower angle ~40°).",
-      "Why only after rain: Water droplets in the air act as tiny prisms. Without rain droplets, no rainbow is possible.",
-      "Why observer must have sun behind: The droplets must be OPPOSITE the sun to reflect light back toward the observer."
+      "1. Dispersion explanation:\n- White light consists of seven colors with wavelengths ranging from ~400 nm (violet) to ~700 nm (red).\n- In glass, red light travels fastest and has the lowest refractive index ($n_{\\text{red}}$), bending the least.\n- Violet light travels slowest and has the highest refractive index ($n_{\\text{violet}}$), bending the most.\n- Hence, the colors separate upon refraction at the two prism faces.",
+      "2. Angle of Deviation (D): The angle through which a ray of light turns away from its original path upon passing through the prism.",
+      "3. Formula: $A + D = i + e$, where $A$ = Angle of prism, $D$ = Angle of deviation, $i$ = Angle of incidence, $e$ = Angle of emergence."
     ],
-    explanation: "Rainbow = dispersion + internal reflection in spherical water droplets. A complete circle if seen from airplane.",
-    formula: "\\text{Sunlight} \\to \\text{Droplet} \\xrightarrow{\\text{refraction + reflection + refraction}} \\text{VIBGYOR}",
-    examinerNote: "Both processes (dispersion + total internal reflection) must be mentioned. Red is always on outside of rainbow.",
-    source: "NCERT Section 11.4 / Board 2022, 2023"
+    explanation: "The triangular geometry of the prism ensures that refractions at the two inclined non-parallel surfaces compound the angular separation of different wavelengths.",
+    formula: "A + D = i + e, \\quad n_{\\text{violet}} > n_{\\text{red}} \\implies D_{\\text{violet}} > D_{\\text{red}}",
+    examinerNote: "Write the relation $A + D = i + e$ clearly; it is frequently tested in 3-mark questions.",
+    source: "NCERT Class 10 Section 11.3 / Board 2023"
+  },
+  {
+    id: "sci_c10_q16",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
+    marks: 3,
+    type: "SA",
+    question: "Compare Myopia and Hypermetropia across three fundamental parameters:\n(a) Causes of the defect\n(b) Position of image formation relative to retina\n(c) Corrective lens used and its optical action",
+    answer: "Comparison Table:\n1. Causes:\n- Myopia: Excessive curvature of the eye lens (too powerful) OR elongation of the eyeball.\n- Hypermetropia: Focal length of the eye lens is too long (too flat) OR eyeball is too short.\n2. Position of Image:\n- Myopia: In front of the retina for distant objects.\n- Hypermetropia: Behind the retina for nearby objects.\n3. Corrective Lens & Action:\n- Myopia: Concave (diverging) lens; diverges parallel rays so they appear to come from the person's far point, focusing on the retina.\n- Hypermetropia: Convex (converging) lens; provides additional convergence so rays from 25 cm appear to diverge from the person's near point, focusing on the retina.",
+    steps: [
+      "Tabulate comparison clearly covering causes, image location, and lens function.",
+      "Ensure optical terminology (diverging vs converging, far point vs near point) is precise."
+    ],
+    explanation: "Myopia involves an over-converging optical system requiring a concave lens; hypermetropia involves an under-converging system requiring a convex lens.",
+    formula: "\\text{Myopia: } P < 0 \\text{ (concave)}; \\quad \\text{Hypermetropia: } P > 0 \\text{ (convex)}",
+    examinerNote: "Award 1 mark each for causes, image positions, and corrective mechanisms.",
+    source: "NCERT Class 10 Section 11.2 / Board 2022, 2023"
+  },
+  {
+    id: "sci_c10_q17",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
+    marks: 3,
+    type: "SA",
+    question: "Explain the three-step optical mechanism of rainbow formation in the atmosphere. Why can a rainbow only be observed when standing with your back towards the Sun?",
+    answer: "A rainbow is a natural spectrum produced by the dispersion of sunlight by tiny spherical raindrops suspended in the atmosphere. Mechanism: (1) Refraction and dispersion at entry into the raindrop, (2) Total internal reflection at the inner back surface of the drop, (3) Refraction upon exiting the drop. An observer must stand with their back towards the Sun because raindrops reflect sunlight backward toward the observer's eyes at angles between 40° (violet) and 42° (red).",
+    steps: [
+      "Step 1: Raindrops act as tiny prisms. When sunlight enters a raindrop, it refracts and disperses into its constituent colors (violet bends most, red least).",
+      "Step 2: The separated light rays strike the inner curved back wall of the water droplet and undergo internal reflection.",
+      "Step 3: As the light rays exit the droplet back into air, they refract again, widening the angular separation between colors.",
+      "Why observer's back must face Sun: Because the light is reflected internally backward from the droplets, the observer must stand between the Sun and the rain shower with the Sun behind them."
+    ],
+    explanation: "The combined action of dispersion, internal reflection, and refraction inside millions of raindrops creates the concentric circular arc of the rainbow.",
+    formula: "\\text{Sunlight} \\to \\text{Refraction + Dispersion} \\to \\text{Internal Reflection} \\to \\text{Refraction out} \\to \\text{Observer}",
+    examinerNote: "Mention all three processes: refraction, dispersion, and internal reflection.",
+    source: "NCERT Class 10 Section 11.4 / Board 2021, 2023"
+  },
+  {
+    id: "sci_c10_q18",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
+    marks: 3,
+    type: "SA",
+    question: "Describe how atmospheric refraction explains the following two natural phenomena:\n(a) Twinkling of stars\n(b) Apparent early sunrise and delayed sunset",
+    answer: "(a) Twinkling of stars: Stars are distant point-sources of light. As starlight passes through the continuously moving and fluctuating density layers of Earth's atmosphere, its path is refracted irregularly. The amount of light entering the observer's eye fluctuates rapidly, making the star appear to twinkle in brightness and position.\n(b) Early sunrise and delayed sunset: Near the horizon, sunlight enters progressively denser air layers and bends towards the normal. When the sun is just below the horizon, its rays are bent downwards, so the apparent position of the sun is raised above the horizon by ~0.5°. This makes the sun visible ~2 minutes before actual sunrise and ~2 minutes after actual sunset, lengthening daylight by ~4 minutes.",
+    steps: [
+      "Part (a): Explain point-source nature of stars, changing refractive index of turbulent atmospheric layers, and resulting rapid fluctuations in brightness.",
+      "Part (b): Explain curvature of rays towards normal in denser low-altitude air, apparent elevation by 0.5 degrees, and 2 minutes gain each at dawn and dusk."
+    ],
+    explanation: "Continuously varying atmospheric density bends light rays toward the denser medium (downward), creating apparent displacement and fluctuations.",
+    formula: "\\text{Daylight duration increases by } 2\\text{ min} + 2\\text{ min} = 4\\text{ min}",
+    examinerNote: "Both phenomena are caused by atmospheric refraction. Distinguish from scattering.",
+    source: "NCERT Class 10 Section 11.5 / Board 2022"
+  },
+  {
+    id: "sci_c10_q19",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
+    marks: 3,
+    type: "SA",
+    question: "A person with a myopic eye cannot see objects distinctly placed beyond 80 cm. Determine:\n(a) The nature and focal length of the corrective lens required.\n(b) The power of this lens.\n(c) Draw a ray diagram showing how the corrective lens restores clear vision for distant objects.",
+    answer: "(a) Nature: Concave lens; Focal length $f = -80\\text{ cm} = -0.8\\text{ m}$.\n(b) Power $P = -1.25\\text{ D}$.\n(c) The concave lens diverges incoming parallel rays from infinity so they appear to originate from the person's far point (80 cm), allowing the crystalline lens to focus them sharply on the retina.",
+    steps: [
+      "Part (a): For clear vision of distant objects, the object distance $u = -\\infty$.\nImage distance $v = -80\\text{ cm}$ (the person's far point).\nBy lens formula: $\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u} = \\frac{1}{-80} - \\frac{1}{-\\infty} = -\\frac{1}{80} - 0 = -\\frac{1}{80}\\text{ cm}^{-1}$.\n$\\implies f = -80\\text{ cm} = -0.8\\text{ m}$.\nNature: Concave (diverging) lens.",
+      "Part (b): Power $P = \\frac{1}{f(\\text{in m})} = \\frac{1}{-0.8\\text{ m}} = -1.25\\text{ D}$.",
+      "Part (c): Ray diagram explanation:\n1. Incoming parallel rays strike the concave lens in front of the eye.\n2. The concave lens diverges them slightly.\n3. The diverged rays appear to originate from the far point (80 cm).\n4. The eye lens then focuses these rays precisely onto the retina."
+    ],
+    explanation: "For a myopic eye, the corrective focal length equals the negative of the far point ($f = -d$). Hence $P = -1/0.8 = -1.25\\text{ D}$.",
+    formula: "\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u} \\implies f = v = -0.8\\text{ m}, \\quad P = \\frac{1}{f} = -1.25\\text{ D}",
+    examinerNote: "Standard board numerical: $u = -\\infty$, $v = -\\text{far point}$. Show full formula substitution.",
+    source: "NCERT Class 10 In-text Example 11.1 / Board 2024"
+  },
+  {
+    id: "sci_c10_q20",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
+    marks: 3,
+    type: "SA",
+    question: "Describe Sir Isaac Newton's classic experiment that proved that white light is composed of seven colours. Explain why the second prism must be placed in an inverted position.",
+    answer: "Newton allowed a narrow beam of sunlight to pass through a glass prism, obtaining a spectrum of seven colours (VIBGYOR). When he placed a second identical prism in an inverted position with respect to the first, all the dispersed colours recombined, emerging as a beam of pure white light. This proved that the prism does not create colours, but merely separates the colours already present in white sunlight.",
+    steps: [
+      "1. Setup: Two identical triangular glass prisms $P_1$ and $P_2$.\n- $P_1$ placed in normal upright position.\n- $P_2$ placed in an inverted orientation adjacent to $P_1$.",
+      "2. Observation: White light enters $P_1$ and disperses into VIBGYOR colors. These separated rays enter $P_2$. The inverted geometry of $P_2$ bends the rays in the opposite direction, recombining them into a single beam of white light.",
+      "3. Conclusion: White light is a mixture of seven constituent colors of different wavelengths; the prism acts only as a dispersing medium.",
+      "4. Necessity of inversion: An upright second prism would disperse the light even further. The inverted prism provides an equal and opposite angular deviation, cancelling the dispersion."
+    ],
+    explanation: "Recombination proves that colors are inherent properties of white light, and dispersion is reversible.",
+    formula: "\\text{Dispersion by } P_1 + \\text{Recombination by inverted } P_2 = \\text{White light}",
+    examinerNote: "Mention that an upright second prism would increase dispersion, so inversion is essential.",
+    source: "NCERT Class 10 Section 11.4 / Board 2022"
+  },
+
+  // ==========================================
+  // SECTION D: 5-MARK LA (2 Questions)
+  // ==========================================
+  {
+    id: "sci_c10_q21",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
+    marks: 5,
+    type: "LA",
+    question: "(a) Draw a labeled diagram of the human eye and describe the functions of: (i) Cornea, (ii) Iris, (iii) Ciliary muscles, (iv) Retina.\n(b) With the help of neat ray diagrams, illustrate: (i) A myopic eye viewing a distant object, (ii) Correction of myopia using a suitable concave lens.\n(c) What is cataract? How can vision be restored in a person suffering from cataract?",
+    answer: "(a) Cornea: Transparent outer layer providing ~70% of optical refraction. Iris: Pigmented muscular diaphragm controlling pupil size and light entry. Ciliary muscles: Contract/relax to alter eye lens curvature for accommodation. Retina: Light-sensitive membrane with photoreceptor rods and cones converting light into nerve impulses.\n(b) Diagrams: (i) In myopic eye, parallel rays focus in front of the retina. (ii) Corrective concave lens diverges parallel rays so they focus sharply on the retina.\n(c) Cataract is the development of a cloudy, opaque membrane on the crystalline lens in elderly persons. Vision is restored through cataract surgery where the opaque lens is removed and replaced by an artificial intraocular lens (IOL).",
+    steps: [
+      "Part (a): Description of 4 eye components and their specific optical/physiological functions.",
+      "Part (b) Ray Diagrams:\n- Diagram 1: Distant rays converging in front of retina (myopic eye).\n- Diagram 2: Concave lens placed in front; diverged rays focus precisely on retina.",
+      "Part (c) Cataract Explanation:\n- Cause: Protein clumping makes crystalline lens cloudy and opaque, causing partial or complete vision loss.\n- Treatment: Surgical removal and replacement with an artificial Intraocular Lens (IOL)."
+    ],
+    explanation: "Comprehensive coverage of eye anatomy, refractive defect mechanics with ray tracing, and medical pathology (cataract).",
+    formula: "\\text{Cataract: Milky crystalline lens} \\xrightarrow{\\text{Surgery}} \\text{Intraocular lens (IOL)}",
+    examinerNote: "Neat ray diagrams with proper arrow directions on rays are mandatory for full marks in part (b).",
+    source: "CBSE Board 2024 / 2023 Sample Paper"
+  },
+  {
+    id: "sci_c10_q22",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
+    marks: 5,
+    type: "LA",
+    question: "(a) State Rayleigh's Law of Scattering. How does the size of scattering particles determine the colour of scattered light?\n(b) Give scientific reasons for the following observations:\n    (i) Danger signal lights installed on towers and traffic poles are always red.\n    (ii) Clouds generally appear white.\n(c) Draw a neat labeled diagram illustrating atmospheric refraction during sunrise, explaining why the sun is visible 2 minutes before actual sunrise.",
+    answer: "(a) Rayleigh's Law: The intensity of scattered light is inversely proportional to the fourth power of wavelength ($I \\propto 1/\\lambda^4$), provided particle size $a \\ll \\lambda$. When particles are very fine (air molecules), short wavelengths (blue) are scattered most. When particles are large (dust, water droplets), all wavelengths are scattered equally, making scattered light appear white.\n(b) (i) Red light has the longest wavelength in the visible spectrum. According to Rayleigh's law, red light scatters the least by atmospheric particles and fog, allowing it to travel the greatest distance and remain visible from afar.\n(ii) Clouds consist of water droplets and ice crystals whose size is much larger than the wavelength of visible light. All colors of sunlight are scattered equally, so the scattered light reaching our eyes appears white.\n(c) Rays from the sun below the horizon travel through air layers of increasing optical density, bending continuously towards the normal. The eye perceives the rays along the tangent to their path at entry, projecting an apparent image of the sun ~0.5° above the horizon ~2 minutes early.",
+    steps: [
+      "Part (a): Rayleigh formula $I \\propto 1/\\lambda^4$; effect of particle size ($a \\ll \\lambda$ vs $a \\gg \\lambda$).",
+      "Part (b): Scientific justifications for red danger signals (minimum scattering) and white clouds (equal scattering of all $\\lambda$).",
+      "Part (c): Step-by-step description of atmospheric refraction diagram showing horizon, observer, true position, and apparent position of sun."
+    ],
+    explanation: "Particle size relative to wavelength determines whether scattering is wavelength-dependent (Rayleigh) or non-selective (Mie scattering).",
+    formula: "I \\propto \\frac{1}{\\lambda^4} \\quad (\\text{for } a \\ll \\lambda)",
+    examinerNote: "Make sure to state that clouds have large water droplets ($a \\gg \\lambda$) that scatter all wavelengths equally.",
+    source: "CBSE Board 2023 / NCERT Section 11.6"
+  },
+
+  // ==========================================
+  // SECTION E: 4-MARK CASE STUDY (2 Questions)
+  // ==========================================
+  {
+    id: "sci_c10_q23",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
+    marks: 4,
+    type: "Case Study",
+    question: "Case Study: In an eye clinic, two patients undergo visual examination. Patient A, a 14-year-old student, cannot read letters written on the board beyond 1.5 m, but can read books placed at 25 cm easily. Patient B, a 65-year-old retired teacher, holds the newspaper at arm's length (about 75 cm) to read comfortably, but views distant scenery without any difficulty. The optometrist prescribes corrective spectacle lenses for both patients.\n\n(a) [1M] Identify the defects of vision diagnosed in Patient A and Patient B.\n(b) [1M] Why does Patient B require glasses for reading? Name the defect and state why it occurs in elderly people.\n(c) [2M] Calculate the power of the corrective lens required by Patient A to view distant objects with normal vision.",
+    answer: "(a) Patient A suffers from Myopia (near-sightedness); Patient B suffers from Presbyopia / Hypermetropia.\n(b) Patient B has Presbyopia (old-age far-sightedness), caused by weakening of the ciliary muscles and diminishing elasticity of the crystalline lens, shifting the near point away from 25 cm to 75 cm.\n(c) For Patient A: Far point $d = 1.5\\text{ m}$. Lens focal length $f = -1.5\\text{ m}$. Power $P = \\frac{1}{f} = \\frac{1}{-1.5} = -0.67\\text{ D}$ (concave lens).",
+    steps: [
+      "Part (a): Patient A cannot see beyond 1.5 m → Myopia. Patient B cannot see near objects at 25 cm → Presbyopia / Hypermetropia.",
+      "Part (b): Explain Presbyopia: aging causes weakening of ciliary muscles and hardening of eye lens, moving near point to 75 cm.",
+      "Part (c) Calculation for Patient A:\nObject distance $u = -\\infty$, Image distance $v = -1.5\\text{ m}$.\n$\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u} = \\frac{1}{-1.5} - 0 \\implies f = -1.5\\text{ m}$.\nPower $P = \\frac{1}{f} = \\frac{1}{-1.5\\text{ m}} = -\\frac{2}{3}\\text{ D} \\approx -0.67\\text{ D}$ (concave lens)."
+    ],
+    explanation: "Myopia requires a concave lens of power $-1/d$; presbyopia requires convex reading glasses to shift the near point back to 25 cm.",
+    formula: "P = \\frac{1}{f(\\text{m})} = -\\frac{1}{1.5} = -0.67\\text{ D}",
+    examinerNote: "Show step-by-step substitution for Part (c) calculation to secure both marks.",
+    source: "CBSE Board 2024 Practice / Educart Class 10"
+  },
+  {
+    id: "sci_c10_q24",
+    chapter: 10,
+    chapterName: "The Human Eye and Colourful World",
+    marks: 4,
+    type: "Case Study",
+    question: "Case Study: In an optical physics practical, students investigated refraction through a triangular glass prism. A student measured the angle of the prism to be A = 60°. When a ray of monochromatic light was incident at an angle i = 48°, it emerged from the opposite face at an angle e = 48°. In a follow-up experiment, white light was passed through the prism, producing a colorful dispersion pattern on a white screen.\n\n(a) [1M] What is the angle of deviation (D) produced by the prism for the monochromatic ray?\n(b) [1M] In the white light experiment, why do different colors deviate by different angles upon passing through the prism?\n(c) [2M] How can the dispersed spectrum of seven colors be recombined to produce white light again? Describe the experimental arrangement and state who first performed it.",
+    answer: "(a) Angle of deviation $D = 36^\\circ$.\n(b) Different colours have different wavelengths and hence travel at different speeds in glass. Consequently, the glass prism has a different refractive index for each colour ($n_{\\text{violet}} > n_{\\text{red}}$), causing each colour to bend by a different angle.\n(c) The spectrum can be recombined by placing an identical second glass prism in an inverted position adjacent to the first prism. The second prism reverses the dispersion, merging all colors back into a single beam of white light. This was first performed by Sir Isaac Newton.",
+    steps: [
+      "Part (a) Calculation:\nFormula: $A + D = i + e$.\nGiven: $A = 60^\\circ$, $i = 48^\\circ$, $e = 48^\\circ$.\n$60^\\circ + D = 48^\\circ + 48^\\circ = 96^\\circ$.\n$D = 96^\\circ - 60^\\circ = 36^\\circ$.",
+      "Part (b): Explain that refractive index varies inversely with wavelength, so violet bends most and red bends least.",
+      "Part (c): Describe Newton's inverted second prism experiment and name Sir Isaac Newton."
+    ],
+    explanation: "The relation $A + D = i + e$ holds for any triangular prism. The inverted prism geometry cancels the dispersion produced by the first prism.",
+    formula: "A + D = i + e \\implies D = i + e - A = 48^\\circ + 48^\\circ - 60^\\circ = 36^\\circ",
+    examinerNote: "Part (a) formula $A + D = i + e$ must be written explicitly.",
+    source: "CBSE Board 2023 / 2024 Sample Paper"
   }
 ];

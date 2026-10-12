@@ -4,242 +4,247 @@ export const SCI_CH11_CONCEPT: ScienceChapterConcept = {
   chapterNo: 11,
   title: "Electricity",
   discipline: "Physics",
-  weightage: "7–8 Marks (Board Highest Priority for Physics)",
-  oneLiner: "Electric current = charge flow; Ohm's Law V=IR; series (same current, add resistance) vs parallel (same voltage, add reciprocal resistance); Power P=VI=I²R=V²/R.",
-  analogyTitle: "Electricity = Water in a Pipe Network 🚰",
-  analogyContent: `Imagine electricity as **water flowing through pipes**:
+  weightage: "7–9 Marks (Highest Physics Weightage)",
+  oneLiner: "Current is the rate of charge flow (I = Q/t); potential difference drives charge (V = W/Q); Ohm's Law relates them (V = IR); resistance depends on length, area, and material (R = ρl/A); resistors combine in series (Rs = ΣR) and parallel (1/Rp = Σ1/R); Joule's heating dissipated as power (P = VI = I²R = V²/R; 1 kWh = 3.6 × 10⁶ J).",
+  analogyTitle: "The Hydrodynamic Circuit — Pressure, Flow & Friction 🚰⚡",
+  analogyContent: `Imagine an electric circuit as a **closed water pumping network**:
 
-🔋 **Battery = Water Pump** — pushes water (electrons) around the circuit
-💧 **Current = Flow rate** — how much water flows per second (litres/sec = Amperes)
-💪 **Voltage = Water Pressure** — how hard the pump pushes (like water pressure in a pipe)
-🪨 **Resistance = Narrow pipe** — a narrow section slows down the flow
-
-**Ohm's Law: V = IR** is like: Pressure = Flow rate × Resistance of pipe!
-
-**Series circuit** = all pipes connected end-to-end in one long line. If one pipe blocks, ALL water stops (all bulbs go out if one fuses!).
-
-**Parallel circuit** = multiple pipes branching side by side. If one pipe blocks, water still flows through the others (like home wiring — one bulb going off doesn't affect others!).`,
+- **Battery / Cell = Water Pump:** Creates a pressure difference (Potential Difference $V$ in Volts). Without the pump, water sits still; with the pump, water circulates.
+- **Electric Current ($I$) = Flow Rate:** The number of litres (Coulombs of charge) passing a flow meter per second ($1\\text{ A} = 1\\text{ C/s}$).
+- **Resistor ($R$) = Narrow, Constricted Pipe:** Friction that opposes flow. Narrower pipes ($A$) or longer pipes ($l$) restrict the flow ($R = \\rho l / A$).
+- **Ohm's Law ($V = IR$):** More pressure ($V$) drives more water flow ($I$), while higher pipe friction ($R$) chokes the flow!`,
   sections: [
     {
-      id: "electric_current",
-      label: "1. Electric Current, Potential Difference & Ohm's Law",
-      heading: "The Flow of Charge, Pressure to Flow, and Their Relationship",
-      subheading: "Charge, Current, Voltage, Resistance + Ohm's Law + V-I Graph",
-      explanation: `**ELECTRIC CHARGE (Q):**
-- Fundamental property of matter. Protons (+), Electrons (−)
-- Unit: **Coulomb (C)**
-- $1\\text{ electron} = 1.6 \\times 10^{-19}\\text{ C}$
+      id: "electric_current_potential_ohm",
+      label: "1. Current, Potential Difference & Ohm's Law",
+      heading: "Electric Charge, Current, Voltage, Ohm's Law & V-I Graph Analysis",
+      subheading: "I = Q/t + V = W/Q + Factors Affecting Resistance + Wire Stretching + V-I Slope",
+      explanation: `**1. ELECTRIC CHARGE ($Q$) & ELECTRIC CURRENT ($I$):**
+- **Electric Charge ($Q$):** Fundamental property of matter. SI unit: **Coulomb (C)**.
+  - Charge on one electron: $e = 1.6 \\times 10^{-19}\\text{ C}$.
+  - Number of electrons in $1\\text{ C}$ of charge:
+    $$n = \\frac{Q}{e} = \\frac{1}{1.6 \\times 10^{-19}} = 6.25 \\times 10^{18}\\text{ electrons}$$
+- **Electric Current ($I$):** The rate of flow of electric charge across a cross-section of a conductor:
+  $$\\mathbf{I = \\frac{Q}{t} = \\frac{ne}{t}}$$
+  - **SI Unit:** **Ampere (A)** ($1\\text{ A} = 1\\text{ C/s}$).
+  - **Definition of 1 Ampere:** Current flowing through a conductor when 1 Coulomb of charge passes through any cross-section in 1 second.
+  - **Measurement:** Measured by an **Ammeter** (connected strictly in **SERIES**; has low resistance).
+  - **Direction:** Conventional current flows from **Positive (+) to Negative (-)** terminal externally (opposite to the actual flow of electrons, which travel from - to +).
 
-**ELECTRIC CURRENT (I):**
-Rate of flow of electric charge through a conductor.
-$$I = \\dfrac{Q}{t}$$
-Where Q = charge (Coulombs), t = time (seconds)
-Unit: **Ampere (A)** → $1\\text{ A} = 1\\text{ C/s}$
+---
 
-**Conventional Current vs Electron Flow:**
-- **Conventional current** flows from + terminal to − terminal (positive to negative) — the HISTORICAL convention
-- **Electrons actually flow** from − terminal to + terminal (opposite to conventional!)
-- Both are correct ways to describe the same thing. Board uses conventional current direction.
+**2. ELECTRIC POTENTIAL & POTENTIAL DIFFERENCE ($V$):**
+- **Potential Difference ($V$):** The work done in moving a unit positive charge from one point to another in an electric circuit:
+  $$\\mathbf{V = \\frac{W}{Q}}$$
+  - **SI Unit:** **Volt (V)** ($1\\text{ V} = 1\\text{ J/C}$).
+  - **Definition of 1 Volt:** The potential difference between two points if 1 Joule of work is done in moving 1 Coulomb of charge from one point to the other.
+  - **Measurement:** Measured by a **Voltmeter** (connected strictly in **PARALLEL** across the component; has high resistance).
 
-**POTENTIAL DIFFERENCE / VOLTAGE (V):**
-Work done to move a unit positive charge from one point to another.
-$$V = \\dfrac{W}{Q}$$
-Where W = work done (Joules), Q = charge (Coulombs)
-Unit: **Volt (V)** → $1\\text{ V} = 1\\text{ J/C}$
+---
 
-**EMF vs Terminal Voltage:**
-- EMF (electromotive force) = total voltage of battery (no current flowing)
-- Terminal voltage = voltage across battery when current flows (always < EMF due to internal resistance)
+**3. OHM'S LAW:**
+At constant temperature, the electric current ($I$) flowing through a metallic conductor is directly proportional to the potential difference ($V$) applied across its ends:
+$$V \\propto I \\iff \\mathbf{V = IR} \\iff I = \\frac{V}{R} \\iff R = \\frac{V}{I}$$
 
-**RESISTANCE (R):**
-Opposition offered by a conductor to the flow of current.
-Unit: **Ohm (Ω)** → $1\\text{ Ω} = 1\\text{ V/A}$
+- **V-I Graph Analysis (Board Exam Crucial):**
+  - For an ohmic metallic conductor at constant temperature, the V-I graph is a **straight line passing through the origin**.
+  - **Slope of V vs I Graph (V on y-axis, I on x-axis):**
+    $$\\text{Slope} = \\frac{\\Delta V}{\\Delta I} = R \\quad (\\text{Resistance})$$
+    *Steeper line = Higher Resistance.*
+  - **Slope of I vs V Graph (I on y-axis, V on x-axis):**
+    $$\\text{Slope} = \\frac{\\Delta I}{\\Delta V} = \\frac{1}{R} \\quad (\\text{Conductance})$$
+    *Steeper line = Lower Resistance!*
+  - **Temperature Effect on Metals:** Resistance of pure metals increases with temperature ($R \\propto T$). Therefore, on a V-I graph, the curve with a steeper slope corresponds to the **higher temperature** ($T_2 > T_1$).
 
-**OHM'S LAW:**
-At constant temperature, the current through a conductor is directly proportional to the potential difference across it.
-$$V \\propto I \\implies V = IR \\implies I = \\dfrac{V}{R} \\implies R = \\dfrac{V}{I}$$
+---
 
-**V-I Graph:** A straight line through the origin → slope = R (resistance) = constant
-- **Ohmic conductors:** Follow Ohm's law (straight line) — metal wires at constant temperature
-- **Non-ohmic conductors:** Do NOT follow Ohm's law — filament bulb (resistance increases with temperature), LED, diode
+**4. FACTORS ON WHICH RESISTANCE DEPENDS:**
+The resistance of a uniform metallic conductor depends on:
+1. **Length ($l$):** Directly proportional ($R \\propto l$). Doubling length doubles resistance.
+2. **Area of Cross-Section ($A$):** Inversely proportional ($R \\propto 1/A$). Thicker wire has less resistance.
+3. **Nature of the Material:** Represented by **Resistivity ($\\rho$)**.
+4. **Temperature:** For metals, resistance increases with temperature.
 
-**FACTORS AFFECTING RESISTANCE:**
-$$R = \\dfrac{\\rho L}{A}$$
-Where $\\rho$ = resistivity (material property), L = length of wire, A = cross-sectional area
+$$\\mathbf{R = \\rho \\frac{l}{A}}$$
 
-| Factor | Effect on R |
-|--------|-----------|
-| Length (L) | R ∝ L (longer → more resistance) |
-| Area (A) | R ∝ 1/A (thicker → less resistance) |
-| Material (ρ) | Different materials have different resistivity |
-| Temperature | For metals: ↑ temp → ↑ R; For semiconductors: ↑ temp → ↓ R |
+- **Electrical Resistivity ($\\rho$):**
+  $$\\rho = \\frac{RA}{l}$$
+  - **SI Unit:** **Ohm-metre ($\\Omega\\cdot\\text{m}$)**.
+  - Resistivity is a characteristic intrinsic property of the **material**; it depends on temperature and material, but is **INDEPENDENT of the wire's length or cross-sectional area**!
+  - Conductors (Silver, Copper): $\\rho \\sim 10^{-8}\\;\\Omega\\cdot\\text{m}$ (Silver is best conductor: $1.6 \\times 10^{-8}\\;\\Omega\\cdot\\text{m}$).
+  - Alloys (Nichrome, Constantan): $\\rho \\sim 10^{-6}\\;\\Omega\\cdot\\text{m}$ (60× higher than copper).
+  - Insulators (Glass, Rubber): $\\rho \\sim 10^{12} \\text{ to } 10^{17}\\;\\Omega\\cdot\\text{m}$.
 
-**Resistivity values to remember:**
-- Silver (best conductor): $\\rho = 1.6 \\times 10^{-8}$ Ω·m
-- Copper: $\\rho = 1.7 \\times 10^{-8}$ Ω·m  
-- Nichrome (used in heaters): $\\rho = 100 \\times 10^{-8}$ Ω·m
-- Silicon (semiconductor): ~$10^3$ Ω·m`,
+---
+
+**5. THE CLASSIC WIRE-STRETCHING PROBLEM (Guaranteed Numerical):**
+When a wire of length $l$, area $A$, and resistance $R$ is **stretched to $n$ times its original length** ($l' = n l$):
+- Its mass and volume remain constant:
+  $$\\text{Volume } V = A \\cdot l = A' \\cdot l' \\implies A' \\cdot (n l) = A l \\implies A' = \\frac{A}{n}$$
+- The new resistance $R'$ is:
+  $$R' = \\rho \\frac{l'}{A'} = \\rho \\frac{n l}{A / n} = n^2 \\left(\\rho \\frac{l}{A}\\right) = \\mathbf{n^2 R}$$
+- *Example:* If stretched to double its length ($n = 2$), its new resistance becomes $2^2 R = \\mathbf{4R}$. Its percentage increase is $300\\%$. (Note: Resistivity $\\rho$ remains unchanged!).`,
       formulasOrKeyPoints: [
         {
-          title: "Ohm's Law Triangle & Quick Calculations",
-          content: `**The V-I-R Triangle:**
-
-$$\\boxed{\\dfrac{V}{I \\times R}}$$
-
-Cover what you want to find:
-- Cover V → $V = I \\times R$
-- Cover I → $I = \\dfrac{V}{R}$  
-- Cover R → $R = \\dfrac{V}{I}$
-
-**Example 1:** A bulb with resistance 200 Ω is connected to 220 V. Find current.
-$$I = \\dfrac{V}{R} = \\dfrac{220}{200} = 1.1 \\text{ A}$$
-
-**Example 2:** A current of 2 A flows when voltage is 12 V. Find resistance.
-$$R = \\dfrac{V}{I} = \\dfrac{12}{2} = 6 \\text{ Ω}$$
-
-**Example 3:** A 5 Ω resistor carries 3 A. Find voltage across it.
-$$V = IR = 3 \\times 5 = 15 \\text{ V}$$`,
-          note: "OHM'S LAW holds only at CONSTANT TEMPERATURE. A metallic conductor heats up when current flows → resistance changes → no longer Ohm's law. That's why a light bulb filament (tungsten) is non-ohmic — its resistance changes drastically from cold to hot."
-        }
-      ],
-      stepByStepGuide: [
-        {
-          stepNo: 1,
-          title: "Identify what's given and what's required",
-          action: "List V, I, R values. Check if it's Ohm's law (V=IR), Power formula (P=VI or P=I²R), or charge/current (I=Q/t).",
-          proTip: "Always write the formula FIRST, then substitution. This earns method marks even if you make an arithmetic error."
+          title: "Current & Resistance Master Equations",
+          content: `$$I = \\frac{Q}{t} = \\frac{ne}{t} \\qquad V = \\frac{W}{Q} \\qquad V = IR$$
+$$R = \\rho \\frac{l}{A} \\qquad \\text{Wire stretched by factor } n: R' = n^2 R$$
+$$\\text{Unit of } \\rho = \\Omega\\cdot\\text{m} \\quad (\\text{independent of length and area})$$`,
+          note: "Ammeter is connected in series (low R); Voltmeter is connected in parallel (high R)."
         }
       ],
       examinerTraps: [
         {
-          trap: "Saying conventional current flows from negative to positive terminal.",
-          correction: "CONVENTIONAL CURRENT flows from POSITIVE (+) to NEGATIVE (−) terminal OUTSIDE the battery (through the external circuit). ELECTRONS flow from − to + (opposite). This is a 1M MCQ favourite. Remember: conventional current = + to − externally."
+          trap: "Saying resistivity doubles when a wire is cut in half.",
+          correction: "Resistance (R) will halve, but RESISTIVITY (ρ) remains COMPLETELY UNCHANGED! Resistivity is a material constant independent of physical dimensions. Only temperature or material change can alter ρ."
         }
       ]
     },
     {
-      id: "circuits",
-      label: "2. Resistors in Series & Parallel",
-      heading: "Combining Resistors — and Why Homes Use Parallel Wiring",
-      subheading: "Series Formula + Parallel Formula + Current & Voltage Sharing + Real-world Applications",
-      explanation: `**SERIES CONNECTION:**
-Resistors connected end-to-end in a single path — current has NO CHOICE but to flow through each one.
+      id: "combination_of_resistors",
+      label: "2. Combination of Resistors — Series & Parallel",
+      heading: "Formal Board Derivations, Branch Currents & Household Wiring",
+      subheading: "Series Derivation (Rs = ΣR) + Parallel Derivation (1/Rp = Σ1/R) + Domestic Advantages",
+      explanation: `**1. FORMAL BOARD DERIVATION — RESISTORS IN SERIES:**
+Consider three resistors $R_1$, $R_2$, and $R_3$ connected end-to-end in series across a battery of voltage $V$.
+1. **Current is Identical:** In a series circuit, there is only one continuous path for charge flow, so the electric current $I$ passing through each resistor is the same:
+   $$I_1 = I_2 = I_3 = I$$
+2. **Potential Difference Divides:** The total potential difference $V$ across the combination equals the sum of potential differences across individual resistors:
+   $$V = V_1 + V_2 + V_3$$
+3. By Ohm's Law applied to each resistor:
+   $$V_1 = I R_1, \\quad V_2 = I R_2, \\quad V_3 = I R_3$$
+4. If $R_s$ is the equivalent resistance of the series combination:
+   $$V = I R_s$$
+5. Substituting into the voltage sum:
+   $$I R_s = I R_1 + I R_2 + I R_3 \\implies I R_s = I (R_1 + R_2 + R_3)$$
+6. Canceling the common current $I$:
+   $$\\mathbf{R_s = R_1 + R_2 + R_3} \\quad \\text{[Hence Derived]}$$
+- *Key Takeaway:* Equivalent resistance in series is always **greater than the largest individual resistance**.
 
-Key rules:
-- **Same current** through each resistor: $I = I_1 = I_2 = I_3$
-- **Voltages ADD up:** $V = V_1 + V_2 + V_3$
-- **Equivalent resistance ADDS up:** $R_{\\text{eq}} = R_1 + R_2 + R_3$
-  (Total resistance > any individual resistance → always LARGER!)
+---
 
-**PARALLEL CONNECTION:**
-Resistors connected side by side, sharing the same two terminals — current can choose which path to take.
+**2. FORMAL BOARD DERIVATION — RESISTORS IN PARALLEL:**
+Consider three resistors $R_1$, $R_2$, and $R_3$ connected in parallel between two common nodes $X$ and $Y$ across a battery of voltage $V$.
+1. **Potential Difference is Identical:** Each resistor is connected directly across the same two terminal nodes, so the voltage $V$ across each resistor is identical:
+   $$V_1 = V_2 = V_3 = V$$
+2. **Current Divides:** The total current $I$ entering the junction splits into branch currents:
+   $$I = I_1 + I_2 + I_3$$
+3. By Ohm's Law applied to each branch:
+   $$I_1 = \\frac{V}{R_1}, \\quad I_2 = \\frac{V}{R_2}, \\quad I_3 = \\frac{V}{R_3}$$
+4. If $R_p$ is the equivalent resistance of the parallel combination:
+   $$I = \\frac{V}{R_p}$$
+5. Substituting into the current sum:
+   $$\\frac{V}{R_p} = \\frac{V}{R_1} + \\frac{V}{R_2} + \\frac{V}{R_3} \\implies \\frac{V}{R_p} = V \\left(\\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3}\\right)$$
+6. Dividing by the common voltage $V$:
+   $$\\mathbf{\\frac{1}{R_p} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3}} \\quad \\text{[Hence Derived]}$$
+- **Special Case for Two Resistors:**
+  $$R_p = \\frac{R_1 R_2}{R_1 + R_2} \\quad \\left(\\frac{\\text{Product}}{\\text{Sum}}\\right)$$
+- *Key Takeaway:* Equivalent resistance in parallel is always **smaller than the smallest individual resistance**.
 
-Key rules:
-- **Same voltage** across each resistor: $V = V_1 = V_2 = V_3$
-- **Currents ADD up:** $I = I_1 + I_2 + I_3$
-- **Reciprocal of equivalent resistance = sum of reciprocals:**
-  $$\\dfrac{1}{R_{\\text{eq}}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\dfrac{1}{R_3}$$
-  (Total resistance < any individual resistance → always SMALLER!)
-  
-**Special case — 2 resistors in parallel:**
-$$R_{\\text{eq}} = \\dfrac{R_1 \\times R_2}{R_1 + R_2}$$
+---
 
-**WHY ARE HOME APPLIANCES CONNECTED IN PARALLEL?**
-1. Each appliance gets the **FULL supply voltage** (220 V) — operates at rated power
-2. **Independent control** — one appliance can be switched off without affecting others
-3. **Overall resistance DECREASES** — more current can be drawn from supply
-4. **Safer** — if one appliance fails (fuse blows), others continue working
-
-**Why NOT series for homes?**
-- Voltage divided between appliances → each gets less than required → dim bulbs
-- If one device fails, entire circuit breaks — ALL devices go off!
-- Different devices need different voltages and currents`,
+**3. WHY IS PARALLEL CONNECTION USED IN DOMESTIC WIRING? (Guaranteed 3M Board Question):**
+1. **Constant Voltage:** Each household appliance receives the full rated mains voltage (**220 V**), enabling each appliance to operate at its rated power.
+2. **Independent Operation:** Each appliance has its own dedicated switch. Turning one appliance on or off does not affect others.
+3. **No Total Circuit Failure:** If one appliance develops a fault, blows a fuse, or is disconnected, all other appliances continue functioning uninterrupted (unlike series where a single blown bulb shuts off the entire circuit).
+4. **Low Total Resistance:** Connecting appliances in parallel decreases the overall circuit resistance, allowing adequate current to be drawn from the supply to run heavy loads.
+5. **Different Current Needs:** Different appliances require vastly different currents (e.g., bulb needs ~0.2 A; geyser needs ~10 A). Parallel wiring provides separate branch currents tailored to each device.`,
       formulasOrKeyPoints: [
         {
-          title: "Series vs Parallel Comparison Table",
-          content: `| Feature | Series | Parallel |
-|---------|--------|---------|
-| Current | Same through all (I₁ = I₂ = I₃) | Divides (I = I₁ + I₂ + I₃) |
-| Voltage | Divides (V = V₁ + V₂ + V₃) | Same across all (V₁ = V₂ = V₃) |
-| Equivalent R | R_eq = R₁ + R₂ + R₃ (increases) | 1/R_eq = 1/R₁ + 1/R₂ + 1/R₃ (decreases) |
-| If one fails | All fail (circuit broken) | Others continue working |
-| Home use | ❌ No | ✅ Yes |
-| Battery cells | To increase EMF, use series | To increase current capacity |
-
-**Worked Example:**
-3 resistors: R₁ = 3Ω, R₂ = 6Ω, R₃ = 2Ω
-
-**In Series:** $R_{\\text{eq}} = 3 + 6 + 2 = 11\\text{ Ω}$
-
-**In Parallel:**
-$$\\dfrac{1}{R_{\\text{eq}}} = \\dfrac{1}{3} + \\dfrac{1}{6} + \\dfrac{1}{2} = \\dfrac{2+1+3}{6} = \\dfrac{6}{6} = 1$$
-$$R_{\\text{eq}} = 1\\text{ Ω}$$`,
-          note: "For N equal resistors R in parallel: R_eq = R/N. This shortcut saves time: three 6Ω resistors in parallel = 6/3 = 2Ω. Works ONLY when all values are EQUAL."
+          title: "Series vs Parallel Quick Comparison",
+          content: `$$\\begin{aligned}
+\\textbf{Series:} & \\quad I = \\text{constant}, \\; V = V_1 + V_2 + V_3 \\implies \\mathbf{R_s = R_1 + R_2 + R_3} \\\\
+\\textbf{Parallel:} & \\quad V = \\text{constant}, \\; I = I_1 + I_2 + I_3 \\implies \\mathbf{\\frac{1}{R_p} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3}} \\\\
+\\text{For } N \\text{ equal resistors } R: & \\quad R_s = n R, \\quad R_p = \\frac{R}{n} \\implies \\frac{R_s}{R_p} = n^2
+\\end{aligned}$$`,
+          note: "Ratio of maximum to minimum resistance using n identical resistors is always n²."
         }
       ],
       examinerTraps: [
         {
-          trap: "Adding resistances directly when they are in parallel.",
-          correction: "In PARALLEL, you add RECIPROCALS: 1/R_eq = 1/R₁ + 1/R₂. The equivalent resistance is always LESS than the smallest individual resistance. Direct addition (R_eq = R₁ + R₂) is the formula for SERIES — the most common Board mistake."
+          trap: "Forgetting to take the reciprocal at the end of a parallel calculation.",
+          correction: "After computing 1/Rp = 1/6 + 1/3 = 3/6 = 1/2, students often forget to invert and mistakenly write Rp = 1/2 Ω! You must invert: Rp = 2 Ω."
         }
       ]
     },
     {
-      id: "electric_power",
-      label: "3. Electric Power & Energy",
-      heading: "How Much Electricity Does an Appliance Consume?",
-      subheading: "Power Formula + Unit of Energy (kWh) + Heating Effect + Fuses",
-      explanation: `**ELECTRIC POWER:**
-Rate at which electrical energy is consumed or converted.
-$$P = \\dfrac{W}{t} = VI = I^2R = \\dfrac{V^2}{R}$$
+      id: "joule_heating_and_power",
+      label: "3. Heating Effect of Current & Electric Power",
+      heading: "Joule's Law of Heating, Electric Power, Commercial kWh & Safety Devices",
+      subheading: "H = I²Rt + P = VI = I²R = V²/R + 1 kWh = 3.6 × 10⁶ J + Tungsten vs Nichrome + Fuse Wire",
+      explanation: `**1. JOULE'S LAW OF HEATING (Derivation & Statement):**
+When an electric current $I$ flows through a resistor $R$ for time $t$:
+- Work done in moving charge $Q$ across potential difference $V$:
+  $$W = V \\times Q$$
+- Since $Q = I \\times t$:
+  $$W = V \\times I \\times t$$
+- By Ohm's Law, $V = I \\times R$:
+  $$W = (I R) \\times I \\times t = \\mathbf{I^2 R t}$$
+- Assuming all electrical work is converted into thermal energy:
+  $$\\mathbf{H = I^2 R t}$$
 
-Where: P = Power (Watts, W), V = Voltage (V), I = Current (A), R = Resistance (Ω)
+- **Formal Statement of Joule's Law:** The heat ($H$) produced in a resistor is:
+  1. Directly proportional to the **square of electric current** ($H \\propto I^2$) for a given resistance.
+  2. Directly proportional to the **resistance of the conductor** ($H \\propto R$) for a given current.
+  3. Directly proportional to the **time** for which current flows ($H \\propto t$).
 
-| Formula | When to use |
-|---------|-----------|
-| $P = VI$ | When V and I are given |
-| $P = I^2 R$ | When I and R are given (useful for calculating HEAT in resistors) |
-| $P = V^2/R$ | When V and R are given |
+---
 
-**Unit of Power:** Watt (W) = Joule/second
-- 1 kW (kilowatt) = 1000 W
+**2. PRACTICAL APPLICATIONS OF THE HEATING EFFECT:**
+- **Electric Heating Appliances (Geyser, Iron, Toaster, Heater):**
+  - Use heating elements made of **Nichrome** (alloy of Nickel, Chromium, Manganese, and Iron).
+  - *Why alloys instead of pure metals?*
+    1. Alloys have significantly **higher resistivity** than pure metals, generating high heat.
+    2. Alloys do **not oxidize (burn) readily at high temperatures** (even up to 1000°C).
+- **Incandescent Electric Bulb:**
+  - Filament is made of **Tungsten**.
+  - *Why Tungsten?*
+    1. Extremely high melting point (**$3380^\\circ\\text{C}$**), so it does not melt when glowing white-hot at $2500^\\circ\\text{C}$.
+    2. High resistivity and high flexibility (ductility to draw into thin coiled filaments).
+  - Bulbs are filled with chemically inactive gases (**Argon or Nitrogen**) to prevent oxidation of the tungsten filament and prolong bulb lifespan.
+- **Electric Fuse (Safety Device):**
+  - Placed strictly in **SERIES with the LIVE wire**.
+  - Made of an alloy of **Lead and Tin (Solder)** with a **low melting point** and appropriate resistance.
+  - When excessive current flows due to short-circuiting or overloading, Joule heating melts the fuse wire, breaking the circuit and protecting expensive appliances and house wiring from fire.
 
-**COMMERCIAL UNIT OF ENERGY — the UNIT (kWh):**
-$$1 \\text{ kWh (kilowatt-hour)} = 1000 \\text{ W} \\times 3600 \\text{ s} = 3.6 \\times 10^6 \\text{ J}$$
-This is what the electricity meter in your house measures! Each "unit" on your bill = 1 kWh.
+---
 
-**Electricity bill calculation:**
-$$\\text{Units consumed} = \\dfrac{\\text{Power (kW)} \\times \\text{Time (hours)}}{1} = P \\times t \\text{ (in kWh)}$$
-$$\\text{Bill} = \\text{Units} \\times \\text{Rate per unit (₹)}$$
+**3. ELECTRIC POWER ($P$):**
+The rate at which electrical energy is consumed or dissipated in an electric circuit:
+$$\\mathbf{P = \\frac{W}{t} = V I = I^2 R = \\frac{V^2}{R}}$$
 
-*Example:* A 1500W AC runs 8 hours/day for 30 days. Units = 1.5 × 8 × 30 = 360 units. At ₹6/unit, bill = ₹2160.
+- **SI Unit:** **Watt (W)** ($1\\text{ W} = 1\\text{ J/s} = 1\\text{ V}\\cdot\\text{A}$).
+  - **Definition of 1 Watt:** Power consumed by a device that carries 1 A of current when operated at a potential difference of 1 V.
+  - $1\\text{ kW} = 1000\\text{ W}$, $1\\text{ MW} = 10^6\\text{ W}$.
 
-**HEATING EFFECT OF ELECTRIC CURRENT (Joule's Law):**
-When current flows through a resistor, electrical energy is converted to heat energy.
-$$H = I^2 R t$$
-Where H = heat produced (Joules), I = current, R = resistance, t = time
+- **Which Bulb is Brighter? (Guaranteed Board Trap!):**
+  - Two bulbs rated $40\\text{ W}$ and $100\\text{ W}$ on $220\\text{ V}$:
+    - Resistance $R = V^2 / P$. Since $V$ is fixed, **$R_{40} > R_{100}$** (the 40W bulb has higher resistance!).
+  - **Connected in PARALLEL:** Voltage is identical. $P = V^2 / R$. The **$100\\text{ W}$ bulb glows brighter** because it has lower resistance and draws more current.
+  - **Connected in SERIES:** Current is identical. $P = I^2 R$. Because $R_{40} > R_{100}$, the **$40\\text{ W}$ bulb glows brighter**!
 
-This is called **Joule's Law of Heating.**
+---
 
-**Applications of Heating Effect:**
-- **Electric iron, toaster, geyser:** Nichrome wire (high resistivity, high melting point, not oxidised by air)
-- **Incandescent bulb:** Tungsten filament (melting point ~3380°C, becomes white-hot at 2500°C)
-- **Fuse:** Thin wire of tin-lead alloy (low melting point). Melts and breaks circuit when EXCESS current flows → protects expensive appliances!
-- **MCB (Miniature Circuit Breaker):** Modern safety device that trips (switches off) automatically at excess current — reusable unlike a fuse.
-
-**Why is Tungsten used in bulb filaments?**
-1. Very high melting point (3380°C) — doesn't melt at 2500°C operating temperature
-2. High resistivity → high heat/light at relatively low currents
-3. Can be drawn into very thin wires (ductile)
-4. Surrounded by inert gas (argon/nitrogen) to prevent oxidation`,
+**4. COMMERCIAL UNIT OF ELECTRICAL ENERGY — THE 'UNIT' (kWh):**
+The SI unit Joule (J) is too tiny for practical electricity billing. Hence, the commercial unit is the **Kilowatt-hour (kWh)**, colloquially called '1 Unit'.
+- **Derivation of Joule Equivalent:**
+  $$1\\text{ kWh} = 1\\text{ kW} \\times 1\\text{ hour} = 1000\\text{ W} \\times 3600\\text{ seconds} = \\mathbf{3.6 \\times 10^6\\text{ Joules}}$$
+- **Electricity Bill Calculation Formula:**
+  $$\\text{Energy Consumed (in kWh)} = \\frac{\\text{Power (Watts)} \\times \\text{Time (hours/day)} \\times \\text{Days}}{1000}$$
+  $$\\text{Total Cost} = \\text{Total Units (kWh)} \\times \\text{Cost per unit (₹)}$$`,
+      formulasOrKeyPoints: [
+        {
+          title: "Power & Energy Master Relations",
+          content: `$$P = VI = I^2 R = \\frac{V^2}{R} \\qquad H = I^2 R t$$
+$$1\\text{ kWh} = 3.6 \\times 10^6\\text{ J} = 1\\text{ Unit}$$
+$$\\text{Units (kWh)} = \\frac{P(\\text{W}) \\times t(\\text{h})}{1000}$$`,
+          note: "Remember: In series, P = I²R (higher R glows brighter). In parallel, P = V²/R (lower R glows brighter)."
+        }
+      ],
       examinerTraps: [
         {
-          trap: "Saying the commercial unit of electrical energy is the Watt.",
-          correction: "The Watt (W) is the unit of POWER, not energy. The commercial unit of ENERGY is the kilowatt-hour (kWh), also called 1 UNIT (on electricity bills). Energy in SI unit is Joule (J), but 1 kWh = 3.6 × 10⁶ J is far more practical for household use."
-        },
-        {
-          trap: "Saying a higher wattage bulb glows brighter regardless of the circuit connection.",
-          correction: "In PARALLEL (same voltage): Higher wattage bulb draws more current → glows brighter. In SERIES (same current): Higher wattage bulb has LOWER resistance (P=V²/R, more P needs less R) → smaller voltage drop across it → glows DIMMER! The 40W bulb glows brighter than 100W in series."
+          trap: "Confusing Watt (Power) with Watt-hour / Kilowatt-hour (Energy).",
+          correction: "Watt is the unit of POWER (rate of energy consumption). Kilowatt-hour (kWh) is the unit of ENERGY (total work done over time). When electricity meters record 'units', they record ENERGY in kWh, not power."
         }
       ]
     }
