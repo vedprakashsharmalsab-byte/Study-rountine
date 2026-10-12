@@ -464,9 +464,478 @@ export const TODDLER_CONCEPT_CATALOG: Record<string, ToddlerConceptGuide> = {
       examinerTip: "Contrast formal credit (supervised by RBI, lower interest rates, requires collateral) with informal credit (unsupervised, extortionate interest, risk of debt-trap)."
     }
   }
+,
+  "sst_pol_c1_t2": {
+    id: "sst_pol_c1_t2",
+    topicTitle: "3.2 Majoritarianism in Sri Lanka & The Catastrophic Civil War",
+    discipline: "Political Science",
+    chapterNo: 3,
+    toddlerAnalogy: {
+      hook: "When 74% Decided to Treat 18% as Strangers: The Sri Lankan Tragedy",
+      scenario: "Picture the island of Sri Lanka gaining independence in 1948. The Sinhala-speaking Buddhist community makes up 74% of the population, while Tamil speakers (18%) live primarily in the north and east. Instead of crafting an inclusive shared government, the democratically elected Sinhala leaders decided that winning an election meant complete supremacy.\n\nIn 1956, they passed an Act recognizing Sinhala as the sole official language, completely disregarding Tamil. They formulated preferential policies favouring Sinhala applicants for university admissions and government jobs. Furthermore, a new constitution mandated that the state foster and protect Buddhism, sidelining Hindu and Christian Tamils.\n\nThe result was devastating: feeling alienated and deprived of equal political rights, Sri Lankan Tamils launched parties demanding Tamil as an official language, regional autonomy, and equal opportunity. When their peaceful demands were repeatedly crushed, militant organizations like the LTTE emerged, demanding an independent state (Tamil Eelam). A catastrophic civil war erupted, killing thousands of people, tearing communities apart, and ruining Sri Lanka's booming economy.",
+      moralOrAha: "Majoritarian rule is not true democracy. When a demographic majority uses state power to oppress a minority, it does not achieve stability; it destroys the very unity of the nation.",
+      characters: [
+        { name: "Sinhala Majority Leaders", role: "Enacted the 1956 Majoritarian Act and preferential policies", emoji: "\ud83c\udfdb\ufe0f" },
+        { name: "Sri Lankan Tamils", role: "Demanded linguistic equality, regional autonomy, and dignity", emoji: "\ud83d\udc65" },
+        { name: "The Fractured Nation", role: "Suffered decades of economic ruin and violent civil war", emoji: "\ud83d\udc94" },
+      ],
+      class9Connection: "Class 9 Democratic Rights: A democracy cannot survive without protecting fundamental rights of minority groups against majority encroachment.",
+      boardHotspot: "CBSE 2024, 2023, 2020: 3 majoritarian measures taken by the Sri Lankan government in 1956 (3M/5M).",
+    },
+    storyScenes: [
+      {
+        sceneNo: 1,
+        actTitle: "Act I: Independence and Majority Rule",
+        badge: "1948 Independence",
+        emoji: "\ud83c\uddf1\ud83c\uddf0",
+        accentColor: "from-blue-500/20 to-cyan-500/20 border-blue-500/30",
+        headline: "Democratic Majority Seeks Ethnic Supremacy",
+        narrative: "Sri Lanka gained freedom in 1948. Sinhala leaders equated winning majority votes with the right to dominate all minority communities.",
+        boardKeyword: "Majoritarianism"
+      },
+      {
+        sceneNo: 2,
+        actTitle: "Act II: The Discriminatory 1956 Act",
+        badge: "Official Subjugation",
+        emoji: "\ud83d\udcdc",
+        accentColor: "from-amber-500/20 to-orange-500/20 border-amber-500/30",
+        headline: "Linguistic, Educational and Religious Monopoly",
+        narrative: "The 1956 Act made Sinhala the sole language. Preferential university quotas and state protection for Buddhism followed.",
+        boardKeyword: "1956 Sinhala Only Act"
+      },
+      {
+        sceneNo: 3,
+        actTitle: "Act III: The Tamil Alienation",
+        badge: "Broken Trust",
+        emoji: "\u26a1",
+        accentColor: "from-rose-500/20 to-red-500/20 border-rose-500/30",
+        headline: "Peaceful Petitions Rejected",
+        narrative: "Tamils launched peaceful protests for autonomy and equality. Every demand was rejected, radicalizing Tamil youth.",
+        boardKeyword: "Tamil Eelam Demand"
+      },
+      {
+        sceneNo: 4,
+        actTitle: "Act IV: Catastrophic Civil War",
+        badge: "Devastating Cost",
+        emoji: "\ud83d\udca5",
+        accentColor: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
+        headline: "The Ultimate Lesson on Power Sharing",
+        narrative: "Decades of civil war killed thousands, created waves of refugees, and destroyed the nation's social and economic fabric.",
+        boardKeyword: "Civil War & Economic Ruin"
+      },
+    ],
+    truthOrTrap: {
+      question: "Did the 1956 Sri Lankan Act grant special official status to Tamil in the northern provinces?",
+      trapStatement: "The 1956 Act recognized Tamil as a regional language while keeping Sinhala for central administration.",
+      isTruth: false,
+      revealExplanation: "EXAMINER TRAP! \u274c The 1956 Act completely disregarded Tamil and made Sinhala the SOLE official language of the country.",
+      examinerTip: "Always state that Sinhala was declared the 'sole official language', disregarding Tamil completely."
+    }
+  },
+  "sst_pol_c1_t3": {
+    id: "sst_pol_c1_t3",
+    topicTitle: "3.3 Accommodation in Belgium: The Four Constitutional Amendments (1970\u20131993)",
+    discipline: "Political Science",
+    chapterNo: 3,
+    toddlerAnalogy: {
+      hook: "The Masterclass in Peace: How 4 Amendments Saved Belgium from Splitting",
+      scenario: "Imagine a country where the Dutch-speaking majority (59%) lives in the north, but in the capital city Brussels, the French-speaking minority makes up 80%. In the 1950s and 60s, riots erupted and the country was on the brink of partitioning along linguistic lines.\n\nInstead of suppressing either group, Belgian political leaders recognized cultural diversity. Between 1970 and 1993, they amended their constitution four times to invent an unprecedented accommodation model:\n1. Equal Central Ministers: The central government mandates that the number of Dutch and French-speaking ministers shall be equal. No single community can make decisions unilaterally.\n2. Independent State Governments: Many powers of the central government were transferred to the state governments of the two regions. The states are not subordinate to the central government.\n3. Equal Brussels Government: In Brussels, where French speakers were 80%, they accepted equal representation because Dutch speakers had accepted equal representation in the central government.\n4. Community Government: A unique third tier elected by people belonging to one language community (Dutch, French, German), handling culture, education, and language issues.",
+      moralOrAha: "Power sharing does not weaken a nation; by making every community feel respected and secure, it cements national unity so strongly that Brussels became the capital of the European Union.",
+      characters: [
+        { name: "Belgian Constitutional Framers", role: "Engineered four constitutional amendments between 1970 and 1993", emoji: "\ud83c\udde7\ud83c\uddea" },
+        { name: "Flemish (Dutch) & Walloon (French) Citizens", role: "Agreed to mutual equality at center and capital", emoji: "\ud83e\udd1d" },
+        { name: "Community Government", role: "Handles linguistic, educational, and cultural affairs independently", emoji: "\ud83c\udfeb" },
+      ],
+      class9Connection: "Class 9 Constitutional Design: A constitution must balance institutional checks and guarantee mutual equality to prevent ethnic hegemony.",
+      boardHotspot: "CBSE 2024, 2023, 2022, 2019: 4 elements of the Belgian Model of Power Sharing (5M).",
+    },
+    storyScenes: [
+      {
+        sceneNo: 1,
+        actTitle: "Act I: Tensions in the Heart of Europe",
+        badge: "Linguistic Friction",
+        emoji: "\ud83c\udde7\ud83c\uddea",
+        accentColor: "from-blue-500/20 to-cyan-500/20 border-blue-500/30",
+        headline: "Dutch Countryside vs French Capital",
+        narrative: "Dutch were 59% in the nation but 20% in Brussels. French were rich and dominant, causing intense friction.",
+        boardKeyword: "Ethnic Composition"
+      },
+      {
+        sceneNo: 2,
+        actTitle: "Act II: Four Constitutional Amendments",
+        badge: "1970\u20131993 Reforms",
+        emoji: "\u2696\ufe0f",
+        accentColor: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
+        headline: "Equal Central Power & Regional Autonomy",
+        narrative: "Ministers equalized in central cabinet. State governments made autonomous, not subordinate to the center.",
+        boardKeyword: "Equal Ministers & Independent States"
+      },
+      {
+        sceneNo: 3,
+        actTitle: "Act III: The Brussels Compromise & Community Tier",
+        badge: "Cultural Safeguard",
+        emoji: "\ud83c\udfdb\ufe0f",
+        accentColor: "from-amber-500/20 to-orange-500/20 border-amber-500/30",
+        headline: "Mutual Respect across Levels",
+        narrative: "French accepted equal parity in Brussels. A third 'Community Government' was created for language and schools.",
+        boardKeyword: "Community Government"
+      },
+      {
+        sceneNo: 4,
+        actTitle: "Act IV: Global Showcase of Democracy",
+        badge: "EU Headquarters",
+        emoji: "\ud83c\uddea\ud83c\uddfa",
+        accentColor: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
+        headline: "Brussels Chosen by Europe",
+        narrative: "When European nations formed the European Union, Brussels was chosen as headquarters due to its peaceful harmony.",
+        boardKeyword: "European Union HQ"
+      },
+    ],
+    truthOrTrap: {
+      question: "Is the Belgian Community Government elected by all residents living in a particular geographical district?",
+      trapStatement: "The Community Government is elected by everyone residing within the district borders regardless of language.",
+      isTruth: false,
+      revealExplanation: "EXAMINER TRAP! \u274c The Community Government is elected by people belonging to ONE language community (Dutch, French, or German) NO MATTER where they live.",
+      examinerTip: "Community government is based on LANGUAGE allegiance, not geographical territory."
+    }
+  },
+  "sst_pol_c2_t3": {
+    id: "sst_pol_c2_t3",
+    topicTitle: "4.3 What Makes India Federal? The Three-Fold Legislative Distribution & Residuary Powers",
+    discipline: "Political Science",
+    chapterNo: 4,
+    toddlerAnalogy: {
+      hook: "The Master Rulebook: Who Gets to Make Which Law in India?",
+      scenario: "Imagine a giant joint family living in a three-story house. If there were no clear division of chores, everyone would fight over who pays the electric bill, who cooks dinner, and who locks the front gate.\n\nThe Indian Constitution did something brilliant: in the Seventh Schedule, it created a crystal-clear Three-Fold Distribution of legislative powers between the Union (Central) Government and State Governments:\n\n1. Union List (97+ subjects): Matters of national importance where uniform laws are essential across the entire country\u2014Defence, Atomic Energy, Foreign Affairs, Banking, Railways, and Currency. Only Parliament can make laws on these.\n2. State List (66 subjects): Matters of local and regional concern\u2014Police, Trade, Commerce, Agriculture, and Irrigation. Only State Legislative Assemblies can make laws on these.\n3. Concurrent List (47 subjects): Matters of common interest to both Center and States\u2014Education, Forests, Trade Unions, Marriage, Adoption, and Succession. Both Parliament and State Assemblies can make laws. But if their laws conflict, the Central Union law prevails!\n4. Residuary Subjects: What about subjects that did not exist in 1950, like Cyber Law, Artificial Intelligence, and Software? The Constitution gave all Residuary Powers exclusively to the Union Parliament.",
+      moralOrAha: "Federal harmony depends on clear boundaries: the Union List protects national integrity, the State List safeguards local priorities, and the Concurrent List ensures coordinated progress.",
+      characters: [
+        { name: "Union Parliament", role: "Exclusive lawmaker for Union List & Residuary Powers like Cyber Law", emoji: "\ud83c\udfdb\ufe0f" },
+        { name: "State Legislative Assemblies", role: "Exclusive lawmakers for State List subjects like Police & Agriculture", emoji: "\ud83c\udfe2" },
+        { name: "The Supreme Court of India", role: "The impartial constitutional umpire resolving legislative disputes", emoji: "\u2696\ufe0f" },
+      ],
+      class9Connection: "Class 9 Working of Institutions: Parliament and State Legislatures exercise authority strictly delimited by constitutional schedules.",
+      boardHotspot: "CBSE 2024, 2023, 2020, 2018: Explain the three-fold legislative distribution between Union and States (5M).",
+    },
+    storyScenes: [
+      {
+        sceneNo: 1,
+        actTitle: "Act I: Union of States",
+        badge: "Article 1",
+        emoji: "\ud83c\uddee\ud83c\uddf3",
+        accentColor: "from-blue-500/20 to-cyan-500/20 border-blue-500/30",
+        headline: "Constitutional Federal Architecture",
+        narrative: "Although the word 'federation' is not in Article 1, the Indian Union is based on deep federal power sharing.",
+        boardKeyword: "Union of States"
+      },
+      {
+        sceneNo: 2,
+        actTitle: "Act II: Union & State Lists",
+        badge: "Clear Demarcation",
+        emoji: "\ud83d\udcdc",
+        accentColor: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
+        headline: "National Defense vs Local Police",
+        narrative: "Union controls Defence, Foreign Affairs, Currency. States control Police, Agriculture, and Local Trade.",
+        boardKeyword: "Union & State Lists"
+      },
+      {
+        sceneNo: 3,
+        actTitle: "Act III: The Concurrent Conflict Rule",
+        badge: "Overriding Clause",
+        emoji: "\u26a1",
+        accentColor: "from-amber-500/20 to-orange-500/20 border-amber-500/30",
+        headline: "Shared Subjects & Union Supremacy",
+        narrative: "Education, Forests, Marriage can be legislated by both. In case of dispute, the Central Union statute prevails.",
+        boardKeyword: "Concurrent Supremacy"
+      },
+      {
+        sceneNo: 4,
+        actTitle: "Act IV: The Digital Era (Residuary Powers)",
+        badge: "Article 248",
+        emoji: "\ud83d\udcbb",
+        accentColor: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
+        headline: "Cyber Law & Emerging Frontiers",
+        narrative: "Subjects that emerged post-independence belong automatically to the Union Parliament as Residuary Subjects.",
+        boardKeyword: "Residuary Powers"
+      },
+    ],
+    truthOrTrap: {
+      question: "If a State law and a Union law conflict on a Concurrent List subject, does the State law prevail within its own territory?",
+      trapStatement: "A State law on education overrides the central law inside that specific state.",
+      isTruth: false,
+      revealExplanation: "EXAMINER TRAP! \u274c Under Article 254, in case of any conflict on a Concurrent List subject, the Union (Central) law strictly prevails over the State law.",
+      examinerTip: "Remember: Concurrent list conflict = Union law automatically prevails."
+    }
+  },
+  "sst_pol_c2_t5": {
+    id: "sst_pol_c2_t5",
+    topicTitle: "4.5 Decentralisation in India: 73rd & 74th Amendments (1992)",
+    discipline: "Political Science",
+    chapterNo: 4,
+    toddlerAnalogy: {
+      hook: "Why Delhi Can't Fix a Broken Handpump in Kerala: The 1992 Revolution",
+      scenario: "India is so massive that Uttar Pradesh has more people than Russia, and Maharashtra is bigger than Germany. How can ministers sitting in New Delhi or state capitals understand whether a village school roof is leaking or where a local canal should be dug?\n\nBefore 1992, local panchayats existed only on paper: elections were rarely held, and state governments gave them zero money or powers. A major constitutional breakthrough occurred in 1992 with the 73rd (Rural Panchayats) and 74th (Urban Municipalities) Constitutional Amendments.\n\nFive Mandatory Pillars of the 1992 Decentralisation Act:\n1. Mandatory Regular Elections: Constitutionally compulsory to hold elections every five years.\n2. Independent State Election Commission: Created in every state to conduct free and fair panchayat and municipal polls.\n3. Reservation for SC, ST, and OBC: Seats reserved to ensure marginalized communities have leadership representation.\n4. 33% (One-Third) Reservation for Women: At least one-third of all seats reserved exclusively for female representatives, creating over 10 lakh women leaders.\n5. State Finance Commission & Revenue Sharing: State governments must legally share powers and tax revenues with local government bodies.",
+      moralOrAha: "Decentralisation brings democracy to the doorstep: problems are best solved by the local people who actually live with them.",
+      characters: [
+        { name: "Gram Panchayat & Sarpanch", role: "Grassroots village council directly accountable to the Gram Sabha", emoji: "\ud83c\udf3e" },
+        { name: "State Election Commission", role: "Autonomous constitutional watchdog conducting local polls every 5 years", emoji: "\ud83d\uddf3\ufe0f" },
+        { name: "36 Lakh Elected Representatives", role: "World's largest grassroots democratic leadership cadre (over 10L women)", emoji: "\ud83d\udc65" },
+      ],
+      class9Connection: "Class 9 Electoral Politics: Local elections give every citizen direct participatory voice in grassroot governance.",
+      boardHotspot: "CBSE 2024, 2023, 2022, 2020: 5 provisions of the 73rd/74th Constitutional Amendment Act of 1992 (5M).",
+    },
+    storyScenes: [
+      {
+        sceneNo: 1,
+        actTitle: "Act I: The Need for Third Tier",
+        badge: "Continental Scale",
+        emoji: "\ud83c\uddee\ud83c\uddf3",
+        accentColor: "from-blue-500/20 to-cyan-500/20 border-blue-500/30",
+        headline: "Why Two Tiers Were Not Enough",
+        narrative: "States bigger than European nations required local decision-making for local issues and grievances.",
+        boardKeyword: "Decentralisation Rationale"
+      },
+      {
+        sceneNo: 2,
+        actTitle: "Act II: The Pre-1992 Failure",
+        badge: "Paper Panchayats",
+        emoji: "\ud83d\udcc4",
+        accentColor: "from-amber-500/20 to-orange-500/20 border-amber-500/30",
+        headline: "Irregular Polls and Zero Resources",
+        narrative: "Before 1992, panchayats had no independent funds, no fixed election schedules, and no constitutional teeth.",
+        boardKeyword: "Pre-1992 Stagnation"
+      },
+      {
+        sceneNo: 3,
+        actTitle: "Act III: The 1992 Constitutional Revolution",
+        badge: "73rd & 74th Amendments",
+        emoji: "\ud83d\udcdc",
+        accentColor: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
+        headline: "Mandatory Polls, Quotas & State Election Commission",
+        narrative: "Regular 5-year elections, 33% women quota, SC/ST reservations, and State Finance Commissions enacted.",
+        boardKeyword: "1992 Constitutional Provisions"
+      },
+      {
+        sceneNo: 4,
+        actTitle: "Act IV: World's Largest Grassroots Cadre",
+        badge: "Deepest Democracy",
+        emoji: "\ud83c\udf1f",
+        accentColor: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
+        headline: "36 Lakh Representatives in Action",
+        narrative: "Today over 36 lakh leaders (including over 10 lakh women) govern local schools, water, and sanitation.",
+        boardKeyword: "Grassroots Deepening"
+      },
+    ],
+    truthOrTrap: {
+      question: "Are local body elections in India conducted by the Central Election Commission of India (ECI)?",
+      trapStatement: "The Election Commission of India in New Delhi conducts all Panchayat and Municipal elections.",
+      isTruth: false,
+      revealExplanation: "EXAMINER TRAP! \u274c Local Panchayat and Municipal elections are conducted by an independent STATE Election Commission created in each state.",
+      examinerTip: "Central ECI conducts Lok Sabha, Rajya Sabha & Assembly elections; State EC conducts Panchayat & Municipal elections."
+    }
+  },
+  "sst_pol_c17_t1": {
+    id: "sst_pol_c17_t1",
+    topicTitle: "3.1 Gender and Politics: Sexual Division of Labour & Feminist Movements",
+    discipline: "Political Science",
+    chapterNo: 17,
+    toddlerAnalogy: {
+      hook: "The Invisible Engine: Why Cooking at Home is 'Free' but Cooking in Hotels is 'Paid'",
+      scenario: "Look around your own home: who cooks the food, washes the utensils, launders the clothes, cleans the rooms, and takes care of younger siblings? In almost every household, women do this work.\n\nIs this because men are biologically incapable of cooking or washing? Absolutely not! When these exact same tasks are attached to a paycheck\u2014such as male chefs in 5-star hotels or male tailors in fashion boutiques\u2014men happily take them up. This reveals the Sexual Division of Labour: work inside the private home is assigned to women without money or recognition, while paid work outside is captured by men.\n\nIn rural India, women work in fields, fetch water from kilometers away, and gather firewood, working an average of one hour more than men every day. Yet because their household labour doesn't generate cash, it remains invisible. Feminist movements arose to break this unfair boundary: demanding voting rights, equal education, equal wages under the Equal Remuneration Act 1976, and sharing of domestic responsibilities.",
+      moralOrAha: "Gender inequality is a social construct, not a biological rule. Society assigned domestic work to women for free, and feminist movements struggle to turn women from domestic dependents into equal sovereign citizens.",
+      characters: [
+        { name: "The Unpaid Home Caregiver", role: "Performs invisible domestic labour working 1+ hours more daily than men", emoji: "\ud83d\udc69" },
+        { name: "The Feminist Movement", role: "Advocates equal educational, economic, and political rights for all genders", emoji: "\ud83d\udce2" },
+        { name: "Patriarchal Mindset", role: "Traditional cultural bias valuing male authority and devaluing female labour", emoji: "\ud83c\udfdb\ufe0f" },
+      ],
+      class9Connection: "Class 9 Democratic Rights: Right to Equality (Article 14-18) prohibits discrimination on grounds of sex.",
+      boardHotspot: "CBSE 2024, 2023, 2020: Define sexual division of labour and give 3 indicators of women's disadvantage in India (3M/5M).",
+    },
+    storyScenes: [
+      {
+        sceneNo: 1,
+        actTitle: "Act I: The Social Division",
+        badge: "Not Biology",
+        emoji: "\ud83c\udfe1",
+        accentColor: "from-blue-500/20 to-cyan-500/20 border-blue-500/30",
+        headline: "Home vs Public Sphere",
+        narrative: "Unpaid household chores are stereotyped as women's work; paid public work is dominated by men.",
+        boardKeyword: "Sexual Division of Labour"
+      },
+      {
+        sceneNo: 2,
+        actTitle: "Act II: The Disadvantage Reality",
+        badge: "Hard Data",
+        emoji: "\ud83d\udcca",
+        accentColor: "from-amber-500/20 to-orange-500/20 border-amber-500/30",
+        headline: "Literacy Gap (54% vs 76%) & Unpaid Work",
+        narrative: "Indian women work 1 hour more daily, face lower literacy, wage gaps, and child sex ratio deficits.",
+        boardKeyword: "Literacy & Wage Gaps"
+      },
+      {
+        sceneNo: 3,
+        actTitle: "Act III: The Feminist Awakening",
+        badge: "Demanding Equality",
+        emoji: "\u270a",
+        accentColor: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
+        headline: "Suffrage, Careers & Family Laws",
+        narrative: "Feminists agitated for voting rights, higher education, career access, and equal family law rights.",
+        boardKeyword: "Feminist Agitations"
+      },
+      {
+        sceneNo: 4,
+        actTitle: "Act IV: Global Transformation",
+        badge: "Scandinavian Standard",
+        emoji: "\ud83c\udf0d",
+        accentColor: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
+        headline: "Women in Public Leadership",
+        narrative: "Scandinavian countries lead the world in female public participation due to political mobilization.",
+        boardKeyword: "Public Participation"
+      },
+    ],
+    truthOrTrap: {
+      question: "Is the sexual division of labour an unchangeable biological reality of human genetics?",
+      trapStatement: "The sexual division of labour is biologically predetermined by nature.",
+      isTruth: false,
+      revealExplanation: "EXAMINER TRAP! \u274c NCERT explicitly defines it as a social expectation and stereotype, not a biological division.",
+      examinerTip: "Always state that gender division is socio-cultural, whereas sex is biological."
+    }
+  },
+  "sst_pol_c18_t1": {
+    id: "sst_pol_c18_t1",
+    topicTitle: "4.1 Meaning, Three Core Components & The Necessity of Political Parties",
+    discipline: "Political Science",
+    chapterNo: 18,
+    toddlerAnalogy: {
+      hook: "The Island of 543 Strangers: What Happens If You Ban All Political Parties?",
+      scenario: "Imagine tomorrow the government bans all political parties. Now, 543 independent individuals contest elections across India with no party symbols or manifestos. What happens on day one after the election?\n\nFirst, no candidate could promise any national policy change, because each independent MP only cares about their own hometown. Second, a government might somehow be cobbled together, but its life would remain uncertain and fragile every single morning. Third, MPs would be accountable only to their village or city constituency, but absolutely nobody would be responsible for running India as a whole!\n\nThis thought experiment proves why political parties are an indispensable necessity for modern representative democracies. A political party is a collective organisation of citizens who agree on core programmes, contest elections, and govern to implement those programmes. It has three core components: the Leaders (policy thinkers), the Active Members (cadres and campaign organizers), and the Followers (voters who endorse the vision).",
+      moralOrAha: "Parties are the glue that holds a continental democracy together: they bundle millions of diverse voices into clear national policies that citizens can vote for or against.",
+      characters: [
+        { name: "Party Leaders", role: "Formulate ideologies, steer legislative bills, and form cabinet ministries", emoji: "\ud83e\udde0" },
+        { name: "Active Cadres", role: "Grassroots workers running party booths, rallies, and outreach", emoji: "\ud83c\udfc3" },
+        { name: "Followers / Electors", role: "Voters who endorse the party's manifesto and vote on election day", emoji: "\ud83d\uddf3\ufe0f" },
+      ],
+      class9Connection: "Class 9 Electoral Politics: Elections cannot offer meaningful competition without organized political parties.",
+      boardHotspot: "CBSE 2024, 2023, 2022, 2019: Three components of a political party & why parties are necessary in democracy (3M/5M).",
+    },
+    storyScenes: [
+      {
+        sceneNo: 1,
+        actTitle: "Act I: Defining the Party",
+        badge: "Core Definition",
+        emoji: "\ud83d\udea9",
+        accentColor: "from-blue-500/20 to-cyan-500/20 border-blue-500/30",
+        headline: "Coming Together for Governance",
+        narrative: "A political party contests elections and holds government power to implement collective policies.",
+        boardKeyword: "Political Party Definition"
+      },
+      {
+        sceneNo: 2,
+        actTitle: "Act II: The Three Pillars",
+        badge: "Tripartite Structure",
+        emoji: "\ud83c\udfdb\ufe0f",
+        accentColor: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
+        headline: "Leaders, Active Members & Followers",
+        narrative: "Leaders decide policy; active members run campaigns; followers provide the electoral mandate.",
+        boardKeyword: "Three Components"
+      },
+      {
+        sceneNo: 3,
+        actTitle: "Act III: The Chaos of No Parties",
+        badge: "Thought Experiment",
+        emoji: "\ud83c\udf2a\ufe0f",
+        accentColor: "from-amber-500/20 to-orange-500/20 border-amber-500/30",
+        headline: "543 Independent Voices",
+        narrative: "Without parties, no national policy can be promised, and no one is accountable for the country as a whole.",
+        boardKeyword: "Party-less Election Scenario"
+      },
+      {
+        sceneNo: 4,
+        actTitle: "Act IV: The Representative Agency",
+        badge: "Democracy Engine",
+        emoji: "\ud83c\udfaf",
+        accentColor: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
+        headline: "Indispensable Democratic Instrument",
+        narrative: "Large societies need an agency to aggregate opinions and bring stability to governance.",
+        boardKeyword: "Indispensable Condition"
+      },
+    ],
+    truthOrTrap: {
+      question: "Can a modern representative democracy with 140 crore citizens function efficiently without any political parties?",
+      trapStatement: "A democracy without political parties would be cleaner, more stable, and perfectly accountable.",
+      isTruth: false,
+      revealExplanation: "EXAMINER TRAP! \u274c Without parties, every MP is independent; no national policy can be formed, and no one is accountable for running the country.",
+      examinerTip: "Always cite the NCERT 'hypothetical party-less election' to prove parties are indispensable."
+    }
+  },
+  "sst_pol_c19_t2": {
+    id: "sst_pol_c19_t2",
+    topicTitle: "5.2 Accountable, Responsive and Legitimate Government",
+    discipline: "Political Science",
+    chapterNo: 19,
+    toddlerAnalogy: {
+      hook: "Why a Slow Democratic Government Beats a Speedy Dictator Every Single Time",
+      scenario: "A dictator can snap his fingers at 9:00 AM and pass a new tax by 9:05 AM. No debates, no opposition shouting, no committee hearings. It looks amazingly 'fast and efficient', doesn't it?\n\nNow look at a democracy: a bill is drafted, published for public feedback, debated in parliament for weeks, scrutinized by opposition MPs, and passed through voting. It takes months. Is democracy therefore 'inefficient'?\n\nNCERT delivers a masterclass in political philosophy: because the democratic government followed procedures and consultation, the decision is far more acceptable to the people and far more effective in practice! A dictator's hasty decision may provoke instant rebellion. Furthermore, democracy guarantees Transparency: under the Right to Information (RTI) Act, any citizen has the legal right to inspect exactly how decisions were made.\n\nMost importantly, democracy produces a Legitimate Government. It may be slow, it may be noisy, it may suffer from corruption, but it is people's own government. That is why throughout South Asia, people overwhelmingly choose democracy over military regimes.",
+      moralOrAha: "Speed is not the measure of good governance; legitimacy, transparency, and accountability are. A slow decision accepted by all citizens is infinitely superior to a swift decree enforced by gunpoint.",
+      characters: [
+        { name: "The Democratic Citizen with RTI", role: "Exercises constitutional transparency to inspect administrative files", emoji: "\ud83d\udd0d" },
+        { name: "The Deliberating Parliament", role: "Debates and amends laws through multi-party consensus and procedures", emoji: "\ud83c\udfdb\ufe0f" },
+        { name: "The Authoritarian Dictator", role: "Passes swift decrees without public consent, sparking hidden revolt", emoji: "\ud83d\udc51" },
+      ],
+      class9Connection: "Class 9 Working of Institutions: Deliberation and procedural debate protect citizens from arbitrary executive tyranny.",
+      boardHotspot: "CBSE 2024, 2023, 2020: Why is democratic government considered legitimate and transparent? (3M/5M).",
+    },
+    storyScenes: [
+      {
+        sceneNo: 1,
+        actTitle: "Act I: The Efficiency Myth",
+        badge: "Haste vs Consent",
+        emoji: "\u23f1\ufe0f",
+        accentColor: "from-blue-500/20 to-cyan-500/20 border-blue-500/30",
+        headline: "Why Democratic Delay is Worth It",
+        narrative: "Non-democratic regimes act swiftly without consultation, while democracies deliberate to ensure widespread acceptance.",
+        boardKeyword: "Deliberation & Negotiation"
+      },
+      {
+        sceneNo: 2,
+        actTitle: "Act II: The Glass House (Transparency)",
+        badge: "Procedural Inspection",
+        emoji: "\ud83d\udd0e",
+        accentColor: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
+        headline: "Right to Examine Decisions",
+        narrative: "Citizens have the legal tools (like RTI) to check if correct procedures were followed. This is transparency.",
+        boardKeyword: "Transparency & RTI"
+      },
+      {
+        sceneNo: 3,
+        actTitle: "Act III: The Mixed Responsiveness",
+        badge: "Room for Improvement",
+        emoji: "\ud83d\udc42",
+        accentColor: "from-amber-500/20 to-orange-500/20 border-amber-500/30",
+        headline: "Corruption and Bureaucratic Delay",
+        narrative: "Democracies are not free of corruption or apathy, but autocracies offer zero recourse for citizen complaints.",
+        boardKeyword: "Responsiveness Record"
+      },
+      {
+        sceneNo: 4,
+        actTitle: "Act IV: Supreme Legitimacy",
+        badge: "People's Choice",
+        emoji: "\ud83d\udc51",
+        accentColor: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
+        headline: "People's Own Government",
+        narrative: "A democratic government is legitimate because it is elected by the people themselves, commanding voluntary loyalty.",
+        boardKeyword: "Legitimate Government"
+      },
+    ],
+    truthOrTrap: {
+      question: "Is non-democratic dictatorship proven by historical records to be less corrupt than democracy?",
+      trapStatement: "Military dictatorships have zero corruption compared to democratic regimes.",
+      isTruth: false,
+      revealExplanation: "EXAMINER TRAP! \u274c There is zero evidence that non-democracies are less corrupt; dictatorships simply censor corruption stories and jail journalists.",
+      examinerTip: "Both suffer from corruption, but democracy allows exposure, investigative journalism, and electoral punishment."
+    }
+  }
 };
 
-// Robust, academic heuristic generator for any topic without dedicated catalog entry
 export function getToddlerGuideForTopic(
   topicId: string,
   topicTitle: string,
@@ -484,8 +953,19 @@ export function getToddlerGuideForTopic(
   const paragraphs = ncertSummary.split("\n\n").filter(p => p.trim().length > 0);
   const p1 = paragraphs[0] || ncertSummary;
   const p2 = paragraphs[1] || corePrinciples[0] || "Foundational NCERT conceptual framework.";
-  const p3 = paragraphs[2] || corePrinciples[1] || "Socio-economic impact and real-world mechanisms.";
+  const p3 = paragraphs[2] || corePrinciples[1] || "Socio-economic impact and institutional mechanisms.";
   const p4 = corePrinciples[2] || commonMistakesWarning || "Official CBSE board scoring criteria.";
+
+  // Build a rich multi-stage intuitive mental model
+  const sceneP1 = `To picture ${cleanTitle} clearly, visualize the concrete real-world setting: ${p1}`;
+  const sceneP2 = paragraphs.length > 1
+    ? `Under these circumstances, the system operates through precise institutional mechanisms: ${p2}`
+    : `Notice how each constitutional rule or economic factor interacts: when one part moves, it triggers a chain reaction across the entire nation.`;
+  const sceneP3 = paragraphs.length > 2
+    ? `The real-world consequence is transformative: ${p3}`
+    : `Understanding this principle allows you to analyze any CBSE board problem by tracing cause, mechanism, and societal outcome.`;
+
+  const fullScenario = `${sceneP1}\n\n${sceneP2}\n\n${sceneP3}`;
 
   return {
     id: topicId,
@@ -493,13 +973,27 @@ export function getToddlerGuideForTopic(
     discipline,
     chapterNo,
     toddlerAnalogy: {
-      hook: `NCERT Visual Scene: ${cleanTitle}`,
-      scenario: `${p1}\n\nTo clearly visualize this: imagine the exact physical and institutional setting described in NCERT. When institutions or economic factors interact under these conditions, the chain of cause-and-effect unfolds systematically: ${p2.split(". ")[0]}.`,
-      moralOrAha: `Understanding ${cleanTitle} requires analyzing how institutional structures, resource constraints, and human motivations align to shape societal outcomes.`,
+      hook: `Mental Picture: ${cleanTitle}`,
+      scenario: fullScenario,
+      moralOrAha: corePrinciples[0]
+        ? `The Core Takeaway: ${corePrinciples[0]}`
+        : `Understanding ${cleanTitle} requires analyzing how institutional structures, constitutional rules, and human motivations align to shape outcomes.`,
       characters: [
-        { name: "Key Historical/Economic Agents", role: "Initiated the policy or historical transformation", emoji: "🏛️" },
-        { name: "The Citizenry / Producers", role: "Directly experienced the socio-economic impact", emoji: "👥" },
-        { name: "CBSE Board Evaluator", role: "Assesses precise NCERT keywords and structured arguments", emoji: "🎯" }
+        {
+          name: corePrinciples[0] ? corePrinciples[0].split(":")[0] : "Primary Institutional Actor",
+          role: "Governing agency or core constitutional force",
+          emoji: "🏛️"
+        },
+        {
+          name: corePrinciples[1] ? corePrinciples[1].split(":")[0] : "The Citizenry & Social Groups",
+          role: "Directly affected stakeholders exercising democratic rights",
+          emoji: "👥"
+        },
+        {
+          name: "CBSE Board Evaluator",
+          role: "Awards full marks for precise NCERT keywords and structured arguments",
+          emoji: "🎯"
+        }
       ],
       class9Connection: "Foundational concepts from Class 9 NCERT provide the structural background for understanding this topic in Class 10.",
       boardHotspot: "Frequently evaluated in CBSE Board papers across 1M, 3M, and 5M sections with strict adherence to NCERT keywords."
@@ -507,43 +1001,43 @@ export function getToddlerGuideForTopic(
     storyScenes: [
       {
         sceneNo: 1,
-        actTitle: "Act I: Context & Catalyst",
-        badge: "The Problem",
+        actTitle: "Act I: Context & Genesis",
+        badge: "The Problem Setting",
         emoji: "🌟",
         accentColor: "from-blue-500/20 to-cyan-500/20 border-blue-500/30",
-        headline: `Historical & Economic Origins of ${cleanTitle}`,
+        headline: `Origins of ${cleanTitle}`,
         narrative: p1,
         boardKeyword: corePrinciples[0] ? corePrinciples[0].split(":")[0] : "Foundational Concept"
       },
       {
         sceneNo: 2,
         actTitle: "Act II: Operating Mechanism",
-        badge: "Core Mechanism",
+        badge: "System in Action",
         emoji: "⚙️",
         accentColor: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
-        headline: "How the System Operates in NCERT",
+        headline: "How the Structure Functions in NCERT",
         narrative: p2,
         boardKeyword: corePrinciples[1] ? corePrinciples[1].split(":")[0] : "Operating Principle"
       },
       {
         sceneNo: 3,
-        actTitle: "Act III: Socio-Economic Impact",
-        badge: "Real-World Impact",
+        actTitle: "Act III: Real-World Transformation",
+        badge: "Societal Impact",
         emoji: "🌪️",
         accentColor: "from-amber-500/20 to-orange-500/20 border-amber-500/30",
-        headline: "Real-World Conflicts and Transformations",
+        headline: "Impact on Society and Institutions",
         narrative: p3,
         boardKeyword: "Socio-Economic & Institutional Transformation"
       },
       {
         sceneNo: 4,
         actTitle: "Act IV: CBSE Board Examination Key",
-        badge: "Marking Criteria",
+        badge: "Topper Marking Criteria",
         emoji: "🎯",
         accentColor: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
-        headline: "Official NCERT Marking Point",
+        headline: "Guaranteed Board Marking Scheme Point",
         narrative: p4,
-        boardKeyword: "Guaranteed Board Marking Scheme Keyword"
+        boardKeyword: "Board Technical Terminology"
       }
     ],
     truthOrTrap: {

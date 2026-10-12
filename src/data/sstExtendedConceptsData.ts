@@ -1976,7 +1976,7 @@ export const SST_EXTENDED_CONCEPTS: SSTConceptTopic[] = [
   ]
 },
   // =========================================================================
-  // CHAPTER 17: Gender, Religion and Caste (Political Science Ch 3)
+  // CHAPTER 17: Gender, Religion and Caste (Democratic Politics - II Ch 3/4)
   // =========================================================================
   {
     id: "sst_pol_c17_t1",
@@ -1984,73 +1984,436 @@ export const SST_EXTENDED_CONCEPTS: SSTConceptTopic[] = [
     disciplineChapterNo: 3,
     chapterName: "Gender, Religion and Caste",
     discipline: "Political Science",
-    unit: "Unit III: Democratic Politics - II",
-    topicTitle: "3.1 Gender Empowerment, Secularism & Caste Dynamics",
-    ncertSection: "NCERT Civics Chapter 3, Sections 1–3 (Pages 39–54)",
-    ncertSummary: "Gender and Politics:\nSexual division of labour is not based on biology but on social expectations and stereotypes. Women do all household work or unpaid domestic drudgery. Feminist movements demanded equality in personal, family, and public life. In India, women's political representation in Parliament has remained low (<15%), and in state assemblies less than 5%. Panchayati Raj instituted one-third (33%) reservation in local bodies, empowering over 10 lakh elected women. Recently, Parliament passed the historic Nari Shakti Vandan Adhiniyam (106th Constitutional Amendment Act, 2023) reserving 33% seats for women in Lok Sabha and state assemblies.\n\nReligion and Communalism:\nCommunalism begins when religion is expressed in politics in exclusive and partisan terms: when beliefs of one religion are presented as superior to others, demands of one religious group are framed in opposition to another, and state power is mobilized to establish majority dominance. Forms of communalism: everyday prejudices, quest for political dominance, religious mobilization with sacred symbols, and communal riots.\n\nSecular State:\nIndia has no official state religion (unlike Buddhism in Sri Lanka, Islam in Pakistan, Christianity in England). Article 25 guarantees freedom of conscience and religious propagation. Article 15 prohibits discrimination on grounds of religion. The state can intervene to ensure equality within religious communities (e.g., banning untouchability).\n\nCaste and Politics:\nCaste inequalities are breaking down due to economic growth, urbanization, literacy, and occupational mobility. Yet caste remains politicized. Parties choose candidates keeping caste composition of constituencies in mind. But caste alone cannot determine elections: no constituency has an exclusive caste majority, no party wins all votes of a caste, and ruling MPs/MLAs frequently lose elections. Politics also influences caste: caste groups expand by incorporating sub-castes, form inter-caste coalitions, and create new categories like 'backward' and 'forward' caste groups.",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "3.1 Gender and Politics: Sexual Division of Labour & Feminist Movements",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 3/4, Section 'Gender and Politics' (Pages 39-44)",
+    ncertSummary: "Gender division is not based on biology but on social expectations and stereotypes. The sexual division of labour is a system in which all work inside the home is either done by the women of the family, or organised by them through domestic helpers. Cooking, cleaning, washing clothes, tailoring, and looking after children are treated as natural responsibilities of women, while men do work outside the house to earn money.\n\nThis division does not mean men cannot do domestic work: when these jobs are paid (e.g., male chefs in hotels, male tailors), men take them up willingly. Similarly, women in rural areas collect firewood, fetch water, and work in agricultural fields alongside household chores. In urban areas, poor women work as domestic domestic workers while middle-class women work in offices. Yet, their domestic labour remains unpaid, unrecognised, and economically undervalued.\n\nFeminist Movements: In the past, only men were allowed to participate in public affairs, vote, and contest elections. Gradually, women organised agitations and movements demanding voting rights (suffrage), equal educational opportunities, career prospects, and radical improvements in personal and family life. Movements aimed at establishing equality in personal, social, and political life are called feminist movements. Political mobilisation on gender lines transformed women's public visibility: in Scandinavian countries (Sweden, Norway, Finland), women's participation in public life is exceptionally high.",
     corePrinciples: [
-      "Social Stratification in Politics: Gender, religious faith, and caste hierarchies do not operate in a vacuum; they interact dynamically with democratic electoral institutions.",
-      "Constitutional Secularism: The Indian state maintains principled neutrality by refusing an official state religion while intervening to uphold fundamental rights and gender justice within religious communities.",
-      "Limitations of Identity Politics: Demographics prevent single-caste hegemony; candidates must construct multi-caste alliances to secure parliamentary majorities.",
-      "Institutional Affirmative Action: Constitutional reservations (Panchayati Raj 33%, Nari Shakti Vandan Adhiniyam) dismantle historical exclusion in legislative bodies."
+      "Social Division, Not Biological: Gender inequality is a social construct perpetuated by patriarchal norms, not innate biological capability.",
+      "Sexual Division of Labour: Unpaid domestic care work is privatized onto women, while public and paid spheres are dominated by men.",
+      "Feminism Definition: A woman or man who believes in equal rights and opportunities for women and men across political, economic, and family domains.",
+      "Patriarchy Reality: A social system that values men more and gives them power over women, resulting in widespread disadvantages in literacy, employment, and safety.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Sexual Division of Labour",
+        definition: "A social arrangement where domestic chores and care work inside the home are performed exclusively by women, while income-generating work outside is done by men."
+      },
+      {
+        term: "Feminist",
+        definition: "A person (woman or man) who actively advocates for equal rights, opportunities, and treatment for women and men in political, social, and economic spheres."
+      },
+      {
+        term: "Patriarchy",
+        definition: "Literally rule by the father; a social system that values men over women and grants men power and authority over women in family and society."
+      },
+    ],
+    commonMistakesWarning: "Do not confuse biological sex (natural biological distinction) with gender (socially constructed roles and expectations). The sexual division of labour is entirely social, not biological.",
+    mnemonicImages: [
+      {
+        title: "Sexual Division of Labour Matrix",
+        src: "/mnemonics/sst/civics_ch17_gender_labour.jpeg",
+        description: "Unpaid Home Care vs Paid Outside Work -> Shift through Feminist Mobilisation."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c17_t1_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "What is meant by the 'Sexual Division of Labour'?",
+        options: [
+          "Division between male and female workers in government offices",
+          "A system where all unpaid domestic work inside the home is done by women and paid work outside is done by men",
+          "Biological differences determining the intellectual capabilities of men and women",
+          "Constitutional classification of jobs reserved for female workers",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Sexual division of labour refers to the socio-cultural system where domestic household chores are assigned to women without monetary compensation, while men perform economic activities outside.",
+        ],
+        examinerTrap: "Selecting option C by assuming the division is biological; NCERT explicitly establishes it as a social construct.",
+        keyTakeaway: "Sexual division of labour is a socio-cultural convention, not a biological inevitability."
+      },
+      {
+        id: "ex_c17_t1_2",
+        level: "Level 2 (2M-3M Board Standard)",
+        marks: 3,
+        type: "Short Answer (3M)",
+        question: "Explain three indicators showing that women in India still lag much behind men despite certain post-independence improvements.",
+        solutionPoints: [
+          "1. Literacy Rate Gap: The literacy rate among women is only 54% compared to 76% among men; a smaller proportion of girl students pursue higher studies as parents prefer spending resources on boys.",
+          "2. Unpaid & Unequal Labour: On average, an Indian woman works one hour more than an average man every day, yet much of her domestic labour remains unpaid and invisible.",
+          "3. Disproportionate Wage Gap & Equal Wages Act Violation: Under the Equal Remuneration Act 1976, equal wages should be paid for equal work, but in sports, cinema, agriculture, and factories, women are consistently paid less than men.",
+        ],
+        examinerTrap: "Giving vague cultural opinions instead of concrete NCERT indicators (literacy rates 54% vs 76%, sex ratio, wage disparity under the Equal Remuneration Act 1976).",
+        keyTakeaway: "Cite specific statistical data and legislative references (54% literacy, Equal Remuneration Act 1976) for full 3 marks."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c17_t2",
+    chapterNo: 17,
+    disciplineChapterNo: 3,
+    chapterName: "Gender, Religion and Caste",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "3.2 Women's Political Representation & The Nari Shakti Vandan Adhiniyam",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 3/4, Section 'Women's Political Representation' (Pages 43-45)",
+    ncertSummary: "Feminists and women's rights advocates argue that unless women control political power, their problems will not receive adequate governmental attention. In India, the proportion of women in the legislature has historically remained dismally low.\n\nIn the Lok Sabha, the percentage of elected women MPs touched 14.36% for the first time in the 17th Lok Sabha (2019), while their representation in State Legislative Assemblies remains below 5%. This places India behind several developing nations in Latin America and Sub-Saharan Africa. Even at the cabinet level, women ministers constitute a small minority.\n\nInstitutional Remedies:\n1. Local Government Reservation (73rd and 74th Amendments, 1992): The Constitution mandates that one-third (33%) of seats in local government bodies\u2014Panchayats and Municipalities\u2014are legally reserved for women. Today, more than 10 lakh elected women representatives serve in rural and urban local bodies across India.\n2. The Nari Shakti Vandan Adhiniyam (106th Constitutional Amendment Act, 2023): Following decades of advocacy, the Indian Parliament passed this landmark constitutional amendment reserving 33% (one-third) of seats for women in the Lok Sabha and State Legislative Assemblies, ensuring legally guaranteed political empowerment at the national and state levels.",
+    corePrinciples: [
+      "Political Representation as Core Remedy: Social disadvantages cannot be dismantled without institutional access to law-making power.",
+      "Panchayati Raj Empowerment: 33% reservation at the local level has brought over 10 lakh women into active governance and decision-making.",
+      "106th Constitutional Amendment Act (2023): The historic Nari Shakti Vandan Adhiniyam constitutionally guarantees 33% reservation for women in Lok Sabha and State Legislative Assemblies.",
+      "Global Comparative Lag: Despite being the world's largest democracy, India's proportion of female parliamentarians historically trailed behind the global average.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Nari Shakti Vandan Adhiniyam",
+        definition: "The 106th Constitutional Amendment Act (2023) enacted by the Indian Parliament, providing 33% reservation for women in the Lok Sabha and State Legislative Assemblies."
+      },
+      {
+        term: "Affirmative Action / Quota Representation",
+        definition: "A legally mandated policy reserving a designated proportion of legislative seats or public offices for historically disadvantaged or underrepresented groups."
+      },
+    ],
+    commonMistakesWarning: "Do not state that women have 33% reservation only in Panchayats; explicitly mention the recent 106th Constitutional Amendment Act (Nari Shakti Vandan Adhiniyam) for Lok Sabha and State Assemblies to earn high-bracket evaluation marks.",
+    mnemonicImages: [
+      {
+        title: "Women in Governance Timeline",
+        src: "/mnemonics/sst/civics_ch17_women_governance.jpeg",
+        description: "73rd/74th Amendments (10 Lakh+ in Panchayats) -> 106th Amendment (33% in Parliament & Assemblies)."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c17_t2_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "What proportion of seats is legally reserved for women in Panchayats and Municipalities under the 73rd and 74th Constitutional Amendments?",
+        options: [
+          "One-fourth (25%)",
+          "One-third (33%)",
+          "One-half (50%)",
+          "Two-thirds (66%)",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Under the 73rd and 74th Amendments of 1992, one-third (33%) of all seats in local self-government institutions are legally reserved for women.",
+        ],
+        examinerTrap: "Confusing central/state reservation demands with local body constitutional mandate (one-third).",
+        keyTakeaway: "Local self-government reserves 33% seats, putting over 10 lakh women in leadership."
+      },
+      {
+        id: "ex_c17_t2_2",
+        level: "Level 3 (4M-5M Master / Case Study)",
+        marks: 5,
+        type: "Long Answer (5M)",
+        question: "Examine the status of women's political representation in India. How do legal reservations address this gender disparity?",
+        solutionPoints: [
+          "1. Historical Under-representation: Despite constituting roughly half the electorate, women's representation in Parliament barely touched 14.36% (2019 Lok Sabha) and remains below 5% in State Assemblies.",
+          "2. Global Standing: India ranks lower than several developing African and Latin American countries in women's parliamentary share.",
+          "3. Local Level Breakthrough: The 73rd and 74th Constitutional Amendments (1992) legally reserved 33% of seats in Panchayati Raj and urban local bodies, creating over 10 lakh elected women grassroot leaders.",
+          "4. Historic National Milestone: The passage of the 106th Constitutional Amendment Act (Nari Shakti Vandan Adhiniyam, 2023) mandates 33% reservation in the Lok Sabha and State Assemblies.",
+          "5. Transformative Impact: Legal reservations guarantee that women participate directly in drafting policies concerning health, safety, education, and economic security.",
+        ],
+        examinerTrap: "Omitting the 106th Constitutional Amendment Act and failing to contrast local body reservation success with national parliament lag.",
+        keyTakeaway: "Contrast the 10 lakh women in local bodies with the <15% parliamentary figure, then highlight the 106th Amendment."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c17_t3",
+    chapterNo: 17,
+    disciplineChapterNo: 3,
+    chapterName: "Gender, Religion and Caste",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "3.3 Religion, Politics & Communalism: Divergent Perspectives",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 3/4, Section 'Religion, Communalism and Politics' (Pages 45-47)",
+    ncertSummary: "Division based on religious differences is universal and takes many forms in politics. Unlike gender, religious differences are often expressed in the field of politics through moral values, legal reforms, and group demands.\n\nThree Major Perspectives on Religion in Politics:\n1. Mahatma Gandhi: Gandhi believed that religion can never be separated from politics. What he meant by religion was not any particular institutional religion like Hinduism or Islam, but universal moral values that inform all religions. He insisted that politics must be guided by ethics drawn from religion.\n2. Human Rights Groups: Human rights organizations in India point out that victims of communal riots are predominantly people from religious minorities. They demand that the government take special protective steps to safeguard minority lives, dignity, and livelihoods.\n3. Women's Movements & Family Laws: Women's rights groups argue that Family Laws of all religions discriminate against women in inheritance, marriage, and divorce. They demand that the state reform all family laws to ensure gender justice.\n\nWhen Religion Turns Destructive: Religion in politics is beneficial when it introduces ethical values and protects vulnerable groups. However, it becomes hazardous when religion is seen as the exclusive basis of nationhood and civic identity\u2014a condition termed communalism.",
+    corePrinciples: [
+      "Ethical Religion vs Institutional Dogma: Gandhi advocated that universal ethical and moral values must guide political governance.",
+      "Minority Vulnerability: Communal strife disproportionately harms minority communities, necessitating affirmative state protection.",
+      "Family Law Injustices: Traditional religious personal laws frequently perpetuate gender discrimination regarding inheritance and marriage.",
+      "Communalism Genesis: Emerges when religion is weaponized as the primary identifier of political and national loyalty.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Family Laws",
+        definition: "Those laws that deal with family-related matters such as marriage, divorce, adoption, inheritance, and succession; in India, different personal laws apply to followers of different religions."
+      },
+      {
+        term: "Communal Politics",
+        definition: "A form of politics based on the belief that religion is the principal basis of social community and political allegiance."
+      },
+    ],
+    commonMistakesWarning: "Do not misquote Mahatma Gandhi. Gandhi did not advocate for a theocratic state or Hindu Rashtra; he stated that politics must be guided by the moral and ethical principles common to all religions.",
+    mnemonicImages: [
+      {
+        title: "Three Perspectives on Religion & Politics",
+        src: "/mnemonics/sst/civics_ch17_religion_politics.jpeg",
+        description: "Gandhi (Moral Ethics) | Human Rights (Minority Protection) | Women's Movement (Family Law Reform)."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c17_t3_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "What did Mahatma Gandhi mean when he stated that 'politics cannot be separated from religion'?",
+        options: [
+          "Politics must be controlled exclusively by Hindu priests",
+          "Politics must be guided by universal moral and ethical values drawn from all religions",
+          "The state should establish a single national religion",
+          "Religious scriptures should replace constitutional law",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Gandhi did not mean institutional religion; he meant universal ethical principles and moral discipline that underpin all faiths.",
+        ],
+        examinerTrap: "Selecting option A or C by confusing moral ethics with sectarian state religion.",
+        keyTakeaway: "Gandhi's concept of religion in politics was purely ethical, universal, and non-sectarian."
+      },
+      {
+        id: "ex_c17_t3_2",
+        level: "Level 2 (2M-3M Board Standard)",
+        marks: 3,
+        type: "Short Answer (3M)",
+        question: "Explain how religion can be positively expressed in democratic politics according to NCERT.",
+        solutionPoints: [
+          "1. Moral Foundation: As argued by Gandhi, politics guided by the universal moral values of religion holds rulers accountable to truth, justice, and compassion.",
+          "2. Protection of Minorities: Religious groups can demand state protection against discrimination and communal persecution as highlighted by human rights organisations.",
+          "3. Gender Justice in Family Laws: Citizens can demand that the state intervene to reform discriminatory family laws to ensure equal property and inheritance rights for women.",
+        ],
+        examinerTrap: "Writing only about communal riots and negative aspects; question asks for positive expressions.",
+        keyTakeaway: "Positive expression: ethical guidance, minority protection, and reforming gender-biased family laws."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c17_t4",
+    chapterNo: 17,
+    disciplineChapterNo: 3,
+    chapterName: "Gender, Religion and Caste",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "3.4 Forms of Communalism in Indian Politics",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 3/4, Section 'Communalism' (Pages 47-49)",
+    ncertSummary: "Communalism is a situation where a particular community promotes its own religious interests at the expense of other communities. The foundational belief of communal politics is that religion is the principal basis of social community: followers of a particular religion belong to one community, their fundamental interests are identical, and people belonging to different religions can never share common interests.\n\nFour Major Expressions of Communalism in Politics:\n1. Everyday Prejudices: The most common expression is in everyday beliefs\u2014routine religious prejudices, stereotypes of religious communities, and belief in the inherent superiority of one's own religion over others. These are so commonplace that people often fail to notice them.\n2. Quest for Political Dominance: A communal mind often seeks political hegemony for its own religious community. For those belonging to the majority community, this takes the form of majoritarian dominance. For those belonging to minority communities, it can take the form of a desire to form a separate political unit or state.\n3. Political Mobilisation on Religious Lines: This involves the strategic use of sacred symbols, religious leaders, emotional appeals, and plain fear in order to bring the followers of one religion together in the electoral arena. In election campaigns, speeches are designed to polarize voters along religious lines.\n4. Communal Violence, Riots, and Massacre: The most extreme and ugly manifestation of communalism is communal violence, mass rioting, and genocide. India and Pakistan suffered some of the worst communal massacres during Partition, and communal violence continues to erupt periodically in post-independence India.",
+    corePrinciples: [
+      "Flawed Assumption: Communalism falsely assumes that all people of one religion have identical interests and cannot live as equal citizens with other faiths.",
+      "Spectrum of Communalism: Spans from subconscious everyday stereotypes up to violent street riots and pogroms.",
+      "Majoritarian vs Separatist Tendencies: Majority communalism strives for state domination; minority communalism often seeks political separation.",
+      "Electoral Exploitation: Political parties weaponize sacred religious imagery and manufactured fear for vote polarization.",
     ],
     keyDefinitions: [
       {
         term: "Communalism",
-        definition: "A political ideology based on the belief that religion is the principal basis of social community, and that followers of different religions possess divergent, hostile interests that cannot coexist equitably."
+        definition: "An ideology asserting that religion is the sole basis of social identity and political allegiance, leading to antagonism against people of different religions."
       },
       {
-        term: "Nari Shakti Vandan Adhiniyam",
-        definition: "The 106th Constitutional Amendment Act (2023) reserving one-third (33%) of seats in the Lok Sabha and State Legislative Assemblies for women."
-      }
+        term: "Majoritarian Dominance",
+        definition: "The political stance where a demographic religious majority seeks to rule a country according to its own preferences, disregarding minority rights."
+      },
     ],
-    commonMistakesWarning: "Students mistakenly claim that Gandhiji wanted religious orthodoxy in politics. Gandhiji stated that religion can never be separated from politics because he meant moral values drawn from all religions must guide political action.",
+    commonMistakesWarning: "Do not describe only communal riots when asked for 'forms of communalism'. NCERT lists 4 distinct forms: everyday prejudices, quest for dominance, political mobilization with religious symbols, and riots. Mentioning all 4 is mandatory for full marks.",
     mnemonicImages: [
       {
-        title: "Pillars of Indian Secularism",
-        src: "/mnemonics/sst/pol_ch3_gender_religion_1.jpeg",
-        description: "No State Religion -> Freedom of Conscience (Art 25) -> Non-Discrimination (Art 15) -> State Intervention for Equality."
+        title: "Four Faces of Communalism",
+        src: "/mnemonics/sst/civics_ch17_communalism_forms.jpeg",
+        description: "Prejudice -> Hegemony Quest -> Electoral Mobilization -> Riots & Violence."
       },
-      {
-        title: "Gender Empowerment & Reservation",
-        src: "/mnemonics/sst/pol_ch3_gender_religion_2.jpeg",
-        description: "Panchayati Raj 1/3 reservation, Nari Shakti Vandan Adhiniyam, and overcoming caste biases."
-      }
     ],
     examples: [
       {
-        id: "ex_gr_1",
+        id: "ex_c17_t4_1",
         level: "Level 1 (1M Foundation / MCQ)",
         marks: 1,
         type: "MCQ",
-        question: "Which of the following countries has an official state religion recognized in its constitution?",
-        options: ["India", "United States", "Sri Lanka", "France"],
+        question: "Which of the following is the most extreme and violent form of communalism?",
+        options: [
+          "Stereotyping religious neighbours",
+          "Using sacred symbols in election banners",
+          "Communal riots, massacres, and targeted violence",
+          "Demanding family law reform",
+        ],
         correctOption: 2,
         solutionPoints: [
-          "Sri Lanka constitutionally fosters and protects Buddhism as the state religion, whereas India is a secular state."
+          "Communal violence, massacres, and riots represent the most severe and destructive manifestation of communalism.",
         ],
-        examinerTrap: "Picking India; the Indian Constitution explicitly rejects an official state religion.",
-        keyTakeaway: "Unlike Sri Lanka or Pakistan, India gives no special constitutional status to any single religion."
+        examinerTrap: "Overlooking the word 'extreme'; stereotyping is everyday communalism, while riots are the extreme manifestation.",
+        keyTakeaway: "Spectrum ends in communal violence and pogroms."
       },
       {
-        id: "ex_gr_2",
+        id: "ex_c17_t4_2",
+        level: "Level 3 (4M-5M Master / Case Study)",
+        marks: 5,
+        type: "Long Answer (5M)",
+        question: "Examine the various forms that communalism takes in Indian politics. Why is communal ideology fundamentally flawed?",
+        solutionPoints: [
+          "1. Everyday Beliefs & Prejudices: Stereotypes of religious communities and subconscious assumptions of religious superiority in daily interactions.",
+          "2. Quest for Political Dominance: Majority community seeking majoritarian hegemony over the state; minority communities developing a desire for separate political autonomy.",
+          "3. Political Mobilisation on Religious Lines: Exploiting sacred religious symbols, priests/clerics, emotional appeals, and communal anxiety to consolidate vote banks.",
+          "4. Communal Violence & Riots: Extreme outbreaks of physical violence, arson, and mass killings, such as during Partition and post-independence riots.",
+          "5. Fundamental Flaw in Communal Ideology: People of the same religion do not share identical economic or political interests; they have diverse class, gender, occupational, and linguistic identities. Suppressing these internal voices is undemocratic.",
+        ],
+        examinerTrap: "Listing only 2 forms instead of all 4 NCERT stages, and omitting the analytical refutation of communal ideology.",
+        keyTakeaway: "All 4 forms must be detailed plus the refutation that multi-dimensional citizens cannot be compressed into a single faith."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c17_t5",
+    chapterNo: 17,
+    disciplineChapterNo: 3,
+    chapterName: "Gender, Religion and Caste",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "3.5 The Secular State: Constitutional Architecture of India",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 3/4, Section 'Secular State' (Pages 48-50)",
+    ncertSummary: "Communalism was one of the greatest challenges that the makers of our Constitution faced in the backdrop of Partition's bloody massacres. Consequently, India's founding leaders deliberately chose the model of a secular state instead of declaring a state religion.\n\nFour Key Constitutional Provisions of Indian Secularism:\n1. No Official Religion: There is no official religion for the Indian state. Unlike Sri Lanka (Buddhism), Pakistan (Islam), or England (Christianity), our Constitution does not grant special status to any single religion.\n2. Fundamental Freedom to Practise Religion (Articles 25\u201328): The Constitution provides to all individuals and communities the freedom to profess, practise, and propagate any religion, or not to follow any religion at all.\n3. Prohibition of Discrimination (Article 15): The Constitution prohibits discrimination against any citizen on grounds of religion in matters of public employment, access to public facilities, and educational admissions.\n4. Principled State Intervention for Social Reform: Indian secularism is not strict separation of church and state (like Western secularism). The Constitution empowers the state to intervene in religious affairs to ensure equality\u2014for example, Article 17 bans untouchability, and the state can reform discriminatory family personal laws.\n\nSecularism is not merely an ideology of some parties or individuals; it is part of the basic structure of the Indian Constitution, essential for preserving national unity in a multi-religious country.",
+    corePrinciples: [
+      "Rejection of Theocracy: India has no official state religion, contrasting with neighbouring theocratic regimes.",
+      "Individual & Collective Religious Freedom: Guaranteed under Articles 25-28 to profess, practice, and propagate faith freely.",
+      "Constitutional Non-Discrimination: Article 15 guarantees civic equality regardless of faith.",
+      "Principled Intervention: The Indian state retains the authority to intervene in religious practices to uphold human dignity (Article 17: Abolition of Untouchability).",
+    ],
+    keyDefinitions: [
+      {
+        term: "Secular State",
+        definition: "A state that does not establish or endorse any religion as its official state religion and treats all religions with equal neutrality and respect."
+      },
+      {
+        term: "Principled Intervention",
+        definition: "The constitutional doctrine in India where the state maintains equal distance from all religions while retaining authority to intervene to eradicate social evils and ensure equality."
+      },
+    ],
+    commonMistakesWarning: "Do not confuse Indian secularism with Western secularism. Western secularism demands strict, mutual exclusion between state and religion. Indian secularism allows principled state intervention to end social evils like untouchability and child marriage.",
+    mnemonicImages: [
+      {
+        title: "Four Pillars of Indian Secularism",
+        src: "/mnemonics/sst/civics_ch17_secularism_pillars.jpeg",
+        description: "No Official Religion | Freedom Articles 25-28 | Anti-Discrimination Article 15 | Social Reform Article 17."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c17_t5_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "Which of the following constitutional provisions reflects the secular character of the Indian state?",
+        options: [
+          "The state provides financial grants to religious shrines of the majority community",
+          "The Constitution prohibits discrimination on grounds of religion under Article 15",
+          "Sanskrit is declared the mandatory constitutional language",
+          "Only members of the majority religion can contest the office of the President",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Article 15 explicitly prohibits state discrimination against any citizen on grounds of religion, race, caste, sex, or place of birth.",
+        ],
+        examinerTrap: "Confusing cultural heritage with state constitutional mandates; Article 15 guarantees non-discrimination.",
+        keyTakeaway: "Article 15 guarantees complete civic non-discrimination on grounds of religion."
+      },
+      {
+        id: "ex_c17_t5_2",
         level: "Level 2 (2M-3M Board Standard)",
         marks: 3,
         type: "Short Answer (3M)",
-        question: "Explain three reasons why caste alone cannot determine election results in India.",
+        question: "Describe any three constitutional provisions that make India a secular state.",
         solutionPoints: [
-          "1. No Exclusive Caste Majorities: No parliamentary constituency in India possesses a clear single-caste majority; winning candidates must secure votes across multiple communities.",
-          "2. No Monolithic Vote Banks: No political party wins 100% of the votes of any single caste or community; votes are invariably divided among rival parties.",
-          "3. High Turnover of Incumbents: Sitting MPs and MLAs regularly lose elections, proving that governance, inflation, and development override static caste affiliations."
+          "1. No Official Religion: Unlike Sri Lanka (Buddhism) or Pakistan (Islam), the Indian Constitution grants no special status to any religion.",
+          "2. Freedom of Conscience (Articles 25\u201328): All individuals and communities have the constitutional freedom to profess, practise, and propagate any religion or follow none.",
+          "3. Reformative State Intervention: The state has constitutional authority to intervene in religious affairs to enforce equality, such as banning untouchability under Article 17.",
         ],
-        examinerTrap: "Arguing that caste plays no role at all; caste is an important factor, but cannot determine elections in isolation.",
-        keyTakeaway: "Electoral arithmetic necessitates broad cross-caste consensus building."
-      }
+        examinerTrap: "Writing vague sentences like 'everyone is happy and free' without citing constitutional provisions (No official religion, Articles 25-28, Article 17).",
+        keyTakeaway: "Always mention: 1) No state religion, 2) Articles 25-28 freedom, 3) Reformative intervention like Article 17."
+      },
     ]
   },
-
+  {
+    id: "sst_pol_c17_t6",
+    chapterNo: 17,
+    disciplineChapterNo: 3,
+    chapterName: "Gender, Religion and Caste",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "3.6 Caste and Politics: Caste in Politics vs Politics in Caste",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 3/4, Section 'Caste and Politics' (Pages 50-54)",
+    ncertSummary: "Caste division is unique to India. In traditional caste society, hereditary occupational division was sanctioned by rituals, and members of the same caste practiced endogamy and avoided dining with other castes. The system was founded on hierarchical exclusion and the practice of untouchability.\n\nSocio-Economic Changes: Through socio-economic shifts, urbanization, literacy expansion, occupational mobility, and the weakening of landlordism, old caste hierarchies are breaking down. Political leaders and social reformers like Jyotirao Phule, Mahatma Gandhi, Dr. B.R. Ambedkar, and Periyar Ramasami advocated a casteless society. The Constitution prohibited caste-based discrimination and outlawed untouchability (Article 17).\n\n1. Caste in Politics (How caste influences politics):\n- Candidate Selection: Political parties select candidates keeping in mind the caste composition of the electorate to win elections.\n- Ministry Formation: When governments are formed, parties ensure representatives of different castes find cabinet berths.\n- Emotional Appeals: Parties appeal to caste sentiments, and some parties become known as champions of particular caste groups.\n- Universal Adult Franchise: By giving one vote to every adult, democracy compelled political leaders to mobilize disadvantaged castes.\n\n2. Why Caste Alone Does NOT Determine Election Outcomes:\n- No parliamentary constituency in India has a clear single-caste majority; candidates must win the confidence of multiple castes.\n- No party wins 100% of votes from any single caste ('vote bank' only means a large fraction votes for a party).\n- Parties often field candidates from the same dominant caste, dividing the community's votes.\n- Sitting MPs and MLAs frequently lose elections, which would be impossible if caste loyalty were fixed and absolute.\n\n3. Politics in Caste (How politics reshapes caste):\n- Expansion of Scope: Each caste group tries to become bigger by incorporating neighbouring sub-castes.\n- Coalition Building: Different caste groups enter into dialogue and coalitions with other castes.\n- New Political Groupings: Fresh classifications like 'backward' and 'forward' caste groups have emerged in the political arena.",
+    corePrinciples: [
+      "Dual Dynamics: Caste influences politics (candidate choice, mobilization), but politics also transforms caste (coalitions, modern identities).",
+      "Constitutional Abolition: Article 17 permanently outlaws untouchability; Article 15 bars caste discrimination.",
+      "Electoral Multi-Caste Reality: No constituency has a single-caste monopoly; victorious politicians must forge broad social coalitions.",
+      "Vote Bank Reality: A vote bank never means all voters of a caste vote uniformly; it only indicates a substantial plurality.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Occupational Mobility",
+        definition: "Shift from one occupation to another, usually when a new generation takes up occupations not practiced by their ancestors."
+      },
+      {
+        term: "Caste Hierarchy",
+        definition: "A social ladder in which all caste groups are placed from the 'highest' to the 'lowest' in terms of ritual status and social power."
+      },
+      {
+        term: "Vote Bank",
+        definition: "A loyal bloc of voters from a specific demographic or caste community who consistently support a particular political party."
+      },
+    ],
+    commonMistakesWarning: "Do not argue that caste is the ONLY factor in Indian elections. If caste were the sole factor, ruling MPs and MLAs would never lose elections, and parties fielding the same caste candidates would split the vote.",
+    mnemonicImages: [
+      {
+        title: "Caste-Politics Interplay",
+        src: "/mnemonics/sst/civics_ch17_caste_politics.jpeg",
+        description: "Caste in Politics (Selection, Appeals) <---> Politics in Caste (Sub-castes merge, Backward/Forward coalitions)."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c17_t6_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "Which of the following statements proves that caste alone cannot determine election results in India?",
+        options: [
+          "Parties never field candidates belonging to dominant castes",
+          "No single parliamentary constituency has a clear majority of one single caste",
+          "Caste groups never enter into coalitions with other communities",
+          "The Election Commission bans candidates from mentioning their surnames",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Every constituency in India is heterogeneous; every winning candidate must appeal across multiple caste lines.",
+        ],
+        examinerTrap: "Believing constituencies are ethnically homogeneous; India's constituencies are multi-caste.",
+        keyTakeaway: "No constituency is single-caste; winning requires multi-caste alliances."
+      },
+      {
+        id: "ex_c17_t6_2",
+        level: "Level 3 (4M-5M Master / Case Study)",
+        marks: 5,
+        type: "Long Answer (5M)",
+        question: "'Politics too influences the caste system and caste identities by bringing them into the political arena.' Justify this statement with three arguments.",
+        solutionPoints: [
+          "1. Inclusion of Sub-castes: Each caste group tries to become larger and more powerful by incorporating neighbouring sub-castes or related occupational groups that were previously excluded.",
+          "2. Coalition Building: Caste groups are compelled to enter into political dialogue, negotiations, and power-sharing coalitions with other castes and communities.",
+          "3. New Political Categories: Modern electoral politics has created new macro-categories such as 'backward caste groups' and 'forward caste groups', fundamentally altering traditional ritual hierarchies.",
+          "4. Empowerment of Oppressed Groups: Universal adult franchise gave disadvantaged castes bargaining power, compelling political parties to address discrimination in land, education, and dignities.",
+          "5. De-ritualisation of Caste: Political assertion has shifted the focus of caste from religious ritual purity to secular political representation and economic resource distribution.",
+        ],
+        examinerTrap: "Writing how caste influences politics (candidate selection) instead of how politics influences caste (sub-castes merging, backward/forward coalitions). Read the direction of causality carefully!",
+        keyTakeaway: "Highlight: Sub-castes merge, coalitions form, backward/forward macro-identities emerge."
+      },
+    ]
+  },
   // =========================================================================
-  // CHAPTER 18: Political Parties (Political Science Ch 4)
+  // CHAPTER 18: Political Parties (Democratic Politics - II Ch 4/6)
   // =========================================================================
   {
     id: "sst_pol_c18_t1",
@@ -2058,80 +2421,455 @@ export const SST_EXTENDED_CONCEPTS: SSTConceptTopic[] = [
     disciplineChapterNo: 4,
     chapterName: "Political Parties",
     discipline: "Political Science",
-    unit: "Unit III: Democratic Politics - II",
-    topicTitle: "4.1 Functions, Party Systems, Challenges & Institutional Reforms",
-    ncertSection: "NCERT Civics Chapter 4, Sections 1–4 (Pages 71–88)",
-    ncertSummary: "A political party is a group of people who come together to contest elections and hold power in government. Three components: The Leaders, The Active Members, and The Followers.\n\nSeven Functions of Political Parties:\n1. Contest elections by nominating candidates.\n2. Put forward policies and programmes for voters to choose.\n3. Play a decisive role in making laws in the legislature.\n4. Form and run governments by recruiting and training ministers.\n5. Play the role of opposition, voicing alternate views and checking executive excesses.\n6. Shape public opinion through awareness campaigns and mass movements.\n7. Provide citizens access to government machinery and welfare schemes.\n\nParty Systems:\n- One-Party System: Only one party is permitted to control power (e.g., China - Communist Party). Not democratic.\n- Two-Party System: Power alternates primarily between two major parties (e.g., USA, UK).\n- Multi-Party System: Several parties have a reasonable chance of winning power on their own or through coalitions (e.g., India). Suited for geographically and socially diverse societies.\n\nNational vs State Party Criteria:\n- National Party: Secures >=6% votes in Lok Sabha or Assembly elections in 4 states AND wins >=4 Lok Sabha seats.\n- State Party: Secures >=6% votes in State Assembly election AND wins >=2 assembly seats.\n\nFour Challenges to Political Parties:\n1. Lack of internal democracy (power concentrated in top leaders, no organizational elections).\n2. Dynastic succession (top posts reserved for family members).\n3. Money and muscle power (wealthy donors and criminal candidates dominate).\n4. Meaningful choice absence (ideological convergence between rival parties).\n\nReforms Enacted & Proposed:\nAnti-Defection Law (52nd & 91st Amendments prevent switching parties), Supreme Court affidavit of assets and criminal records, Election Commission mandatory organizational elections, and proposed state funding of elections.",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "4.1 Meaning, Three Core Components & The Necessity of Political Parties",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 4/6, Section 'Why do we need Political Parties?' (Pages 71-74)",
+    ncertSummary: "A political party is a group of people who come together to contest elections and hold power in the government. They agree on some policies and programmes for the society with a view to promote the collective good. Since there can be different views on what is good for all, parties try to persuade people why their policies are better than others and seek to implement these policies by winning popular support through elections.\n\nA political party reflects fundamental political divisions in a society. Parties are about a part of the society and thus involve partisanship.\n\nThree Core Components of a Political Party:\n1. The Leaders: Those who take policy decisions, plan election strategies, and hold high public offices if elected.\n2. The Active Members: Dedicated cadres who run party offices, mobilize voters, organize rallies, and execute party campaigns at the grassroot level.\n3. The Followers: The general supporters and sympathizers who vote for the party and endorse its ideology during elections.\n\nWhy Are Political Parties a Necessity? (The Hypothetical Party-less Election Scenario):\nImagine a situation without political parties: every candidate in the elections would be independent. Consequently:\n- No candidate would be able to make any promises to the people about any major policy changes.\n- The government may be formed, but its utility will remain ever uncertain.\n- Elected representatives will be accountable only to their local constituency for what they do in the locality, but no one will be responsible for how the country will be run as a whole.\n- Modern representative democracies require an agency to gather different views on various issues and present them to the government. Hence, political parties are an indispensable condition for a democracy.",
     corePrinciples: [
-      "Democratic Aggregation: Political parties structure public debate, aggregating millions of conflicting citizen desires into coherent national policy platforms.",
-      "Constitutional Opposition: Losing parties are as vital to democracy as the ruling government by questioning executive abuse and defending civil liberties.",
-      "Coalition Imperative: A multi-party system accommodates India's linguistic, regional, and social diversity through pre-poll alliances and power sharing.",
-      "Internal Governance Crisis: Parties face deep institutional deficiencies (dynastic control, illicit campaign financing) requiring statutory electoral reforms."
+      "Definition: A structured group seeking constitutional power through competitive electoral processes to execute public policy.",
+      "Partisanship: An inherent political tendency to strongly commit to one party, policy, or ideology over others.",
+      "Tripartite Structure: Composed of Leaders (decision-makers), Active Members (organisational machinery), and Followers (electoral base).",
+      "Indispensable Agency: Aggregates disparate societal viewpoints into coherent policy agendas; without them, national governance fragments into isolated local interests.",
     ],
     keyDefinitions: [
       {
-        term: "Anti-Defection Law",
-        definition: "A constitutional measure ensuring that any elected legislator (MP or MLA) who leaves the political party on whose ticket they were elected forfeits their seat in the legislature."
+        term: "Political Party",
+        definition: "A voluntary organisation of citizens who share a common political ideology, contest elections, and seek to govern a state to implement collective programmes."
       },
       {
-        term: "National Party",
-        definition: "A political party recognized by the Election Commission of India that has secured at least 6% of total votes in 4 states and won at least 4 Lok Sabha seats."
-      }
+        term: "Partisanship",
+        definition: "A person who is strongly committed to a party, group or faction; marked by an inability to take a balanced or neutral view on an issue."
+      },
+      {
+        term: "Representative Democracy",
+        definition: "A democratic governance model where citizens elect representatives who assemble periodically to form government, debate laws, and manage the state."
+      },
     ],
-    commonMistakesWarning: "Students often forget the double criteria for National Parties: it is 6% votes in 4 states PLUS at least 4 seats in the Lok Sabha. Mentioning only votes or only seats loses half marks.",
+    commonMistakesWarning: "Do not omit the 'Hypothetical Party-less Election' argument when asked why parties are necessary. Explaining why independent candidates cannot run a national government earns full marks.",
     mnemonicImages: [
       {
-        title: "4 Challenges to Political Parties",
-        src: "/mnemonics/sst/pol_ch4_political_parties_1.jpeg",
-        description: "1. Lack of Internal Democracy -> 2. Dynastic Succession -> 3. Money & Muscle Power -> 4. No Meaningful Choice."
+        title: "Party Anatomy & The Party-less Chaos",
+        src: "/mnemonics/sst/civics_ch18_party_necessity.jpeg",
+        description: "3 Pillars (Leaders, Active Members, Followers) vs Chaos of 543 Disconnected Independent MPs."
       },
-      {
-        title: "Functions of Political Parties & Reforms",
-        src: "/mnemonics/sst/pol_ch4_political_parties_2.jpeg",
-        description: "Forming government, shaping public opinion, Anti-Defection Law and internal elections."
-      }
     ],
     examples: [
       {
-        id: "ex_pp_1",
+        id: "ex_c18_t1_1",
         level: "Level 1 (1M Foundation / MCQ)",
         marks: 1,
         type: "MCQ",
-        question: "What punishment does the Anti-Defection Law impose on an elected MP or MLA who changes parties after winning an election?",
+        question: "What would happen if elections were held without any political parties and all candidates contested as independents?",
         options: [
-          "They must pay a financial fine of 10 lakh rupees",
-          "They lose their elected seat in the legislature",
-          "They are barred from voting in elections for life",
-          "They are placed under temporary house arrest"
+          "The government would become twice as efficient and corruption-free",
+          "No one would be responsible or accountable for how the country is run as a whole",
+          "The Supreme Court would automatically take over legislative duties",
+          "The President would govern without the aid of any council of ministers",
         ],
         correctOption: 1,
         solutionPoints: [
-          "The law states that any MLA or MP who defects from their elected party forfeits their legislative seat."
+          "In an independent-only election, representatives are accountable only to their local constituency; no one is responsible for national policy or coherence.",
         ],
-        examinerTrap: "Believing it is only a financial fine; defection results in immediate loss of the legislative seat.",
-        keyTakeaway: "Defection disqualifies the legislator from parliament or the assembly."
+        examinerTrap: "Assuming independent governance is ideal; NCERT demonstrates that national policy coherence collapses without parties.",
+        keyTakeaway: "Without parties, there is no collective national accountability for running the country."
       },
       {
-        id: "ex_pp_2",
+        id: "ex_c18_t1_2",
+        level: "Level 2 (2M-3M Board Standard)",
+        marks: 3,
+        type: "Short Answer (3M)",
+        question: "Name and describe the three core components of a political party.",
+        solutionPoints: [
+          "1. The Leaders: Key figures who formulate ideologies, decide electoral tickets, guide legislative debates, and lead the government upon winning.",
+          "2. The Active Members: Dedicated party workers and cadres who organize rallies, coordinate grassroot outreach, run local offices, and mobilize electors.",
+          "3. The Followers: The general electorate and sympathizers who endorse the party's principles, attend campaigns, and cast votes in its favour.",
+        ],
+        examinerTrap: "Listing only voters and ministers; the official NCERT triad is precisely Leaders, Active Members, and Followers.",
+        keyTakeaway: "Leaders (brains/policy), Active Members (hands/cadre), Followers (electoral base)."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c18_t2",
+    chapterNo: 18,
+    disciplineChapterNo: 4,
+    chapterName: "Political Parties",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "4.2 Seven Core Functions of Political Parties in Modern Democracy",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 4/6, Section 'Functions of Political Parties' (Pages 72-74)",
+    ncertSummary: "Political parties fill political offices and exercise political power. They perform a series of foundational functions that keep democratic institutions functioning:\n\n1. Contest Elections: In most democracies, elections are fought mainly among the candidates put up by political parties. Parties choose candidates in different ways: in the USA, party members and supporters choose candidates; in India, top party leaders choose candidates for contesting elections.\n2. Put Forward Policies and Programmes: Parties put forward different policies and programmes and the voters choose from them. In a large society, a vast multitude of opinions must be reduced into a few basic directions which the government can support. A government is expected to base its policies on the line taken by the ruling party.\n3. Making Laws: Parties play a decisive role in making laws for a country. Formally, laws are debated and passed in the legislature. But since most legislators belong to a party, they go by the direction of the party leadership, irrespective of their personal opinions.\n4. Form and Run Government: Parties recruit leaders, train them, and make them ministers to run the government in the way they want.\n5. Role of Opposition: Those parties that lose in the elections play the role of opposition to the parties in power, by voicing different views and criticising government for its failures or wrong policies. Opposition parties also mobilise opposition to the government.\n6. Shaping Public Opinion: Parties raise and highlight issues. They have lakhs of members and activists spread all over the country. Many of the pressure groups are the extensions of political parties among different sections of society. Parties sometimes launch movements for the resolution of problems faced by people.\n7. Access to Government Machinery and Welfare Schemes: For an ordinary citizen it is easy to approach a local party leader than a government officer. That is why they feel close to parties even when they do not fully trust them. Parties must be responsive to people's needs and demands, otherwise people can reject them in the next elections.",
+    corePrinciples: [
+      "Comprehensive Governance Pipeline: From contesting polls to enacting legislation and executing policies.",
+      "Policy Synthesis: Compressing millions of individual opinions into manageable, coherent policy alternatives.",
+      "Vigilant Opposition: Checking governmental authoritarianism by scrutinizing administrative actions and exposing policy flaws.",
+      "Citizen-State Bridge: Acting as an approachable intermediary between ordinary citizens and complex bureaucratic machinery.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Ruling Party",
+        definition: "A political party that runs the government after securing a majority or leading a majority coalition in the legislature."
+      },
+      {
+        term: "Opposition Party",
+        definition: "A party or group of parties that do not form part of the government and perform the constitutional duty of questioning, scrutinizing, and holding the ruling regime accountable."
+      },
+    ],
+    commonMistakesWarning: "Do not list only 3 or 4 functions when a 5-mark question asks to 'Examine the functions of political parties'. You should state at least 5 of the 7 NCERT functions with clear headings.",
+    mnemonicImages: [
+      {
+        title: "7 Gears of Democratic Governance",
+        src: "/mnemonics/sst/civics_ch18_seven_functions.jpeg",
+        description: "Contest -> Policies -> Lawmaking -> Government -> Opposition -> Public Opinion -> Welfare Access."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c18_t2_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "Which crucial democratic role is performed by political parties that fail to secure a majority in elections?",
+        options: [
+          "Dissolving the Parliament and calling fresh elections",
+          "Role of Opposition: scrutinizing policies, voicing alternative views, and checking arbitrary power",
+          "Appointing judges to the Supreme Court",
+          "Auditing the national budget through private agencies",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Losing parties form the official Opposition, checking executive excesses and criticizing government failures.",
+        ],
+        examinerTrap: "Assuming losing parties have no constitutional function; the Opposition is a cornerstone of democracy.",
+        keyTakeaway: "Opposition acts as the democratic watchdog, checking the ruling party."
+      },
+      {
+        id: "ex_c18_t2_2",
         level: "Level 3 (4M-5M Master / Case Study)",
         marks: 5,
         type: "Long Answer (5M)",
-        question: "Explain the four major challenges faced by political parties in India, and suggest two measures to reform them.",
+        question: "'Political parties are a necessary condition for a democracy.' Justify this statement by analyzing any five functions they perform.",
         solutionPoints: [
-          "1. Lack of Internal Democracy: Decisions are monopolized by one or two top leaders; parties do not maintain member registers or conduct regular internal ballots.",
-          "2. Dynastic Succession: Family connections determine leadership promotions, denying committed grassroots workers any path to senior office.",
-          "3. Role of Money and Muscle Power: Parties nominate affluent candidates or individuals with criminal records to secure winnability through financial and physical intimidation.",
-          "4. Absence of Meaningful Choice: Major parties often share similar economic philosophies, limiting voters to choosing between identical policies with different party symbols.",
-          "5. Suggested Reforms: Statutory regulation requiring verified membership rolls and internal elections; State funding of election campaign expenditures."
+          "1. Contesting Elections: Parties provide the platform and nominated candidates for free, competitive elections, offering voters distinct leadership choices.",
+          "2. Formulating Policies & Programmes: They aggregate diverse citizens' viewpoints into coherent policy platforms that guide state governance.",
+          "3. Decisive Role in Law-Making: Legislative bills are debated, drafted, and passed by legislators who coordinate under party whips and party direction.",
+          "4. Forming & Running Government: Parties train political executives and appoint cabinet ministers who administer state departments.",
+          "5. Playing the Role of Opposition: Opposition parties prevent authoritarianism by holding the ruling government accountable and mobilizing public debate.",
+          "6. Public Opinion & Welfare Bridge: Parties highlight citizens' grievances and serve as approachable conduits to bureaucratic welfare schemes.",
         ],
-        examinerTrap: "Writing vague criticisms like 'politicians are corrupt' without naming the four specific NCERT challenges.",
-        keyTakeaway: "Reforming political parties requires mandatory internal democracy and transparent campaign finance."
-      }
+        examinerTrap: "Writing rambling paragraphs without sub-headings. CBSE examiners allocate 1 mark per distinct headed function.",
+        keyTakeaway: "Provide 5 clearly labeled headings with NCERT terminology for full 5 marks."
+      },
     ]
   },
-
+  {
+    id: "sst_pol_c18_t3",
+    chapterNo: 18,
+    disciplineChapterNo: 4,
+    chapterName: "Political Parties",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "4.3 Party Systems & Coalitions: One-Party, Two-Party & Multi-Party Models",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 4/6, Section 'How many parties should we have?' (Pages 74-76)",
+    ncertSummary: "More than 750 parties are registered with the Election Commission of India. But not all these parties are serious contenders in the elections. Democracies around the world exhibit different party systems:\n\n1. One-Party System: In some countries, only one party is allowed to control and run the government. Example: China, where only the Communist Party of China is permitted to rule. Although legally people are free to form parties, the electoral system does not permit free competition. We cannot consider a one-party system as a good democratic option because any democratic system must allow at least two parties a fair chance to compete and gain power.\n2. Two-Party System: In some countries, power usually changes between two major parties. Several other parties may exist, contest, and win a few seats, but only the two main parties have a serious chance of winning a majority and forming government. Examples: The United States of America (Democrats and Republicans) and the United Kingdom (Labour and Conservatives).\n3. Multi-Party System: If several parties compete for power, and more than two parties have a reasonable chance of coming to power either on their own strength or in alliance with others, it is called a multi-party system. Example: India. In India, government is formed by multi-party coalitions when no single party secures an absolute majority.\n\nAlliances / Fronts in India: When several parties in a multi-party system join hands for contesting elections and winning power, it is called an alliance or front. In the 2004 parliamentary elections, there were three major alliances: the National Democratic Alliance (NDA), the United Progressive Alliance (UPA), and the Left Front.\n\nWhy Party Systems Cannot Be Chosen at Will: A party system is not something any country can choose. It evolves over a long time, depending on the nature of society, its social and regional divisions, its history of politics, and its system of elections. India has evolved a multi-party system because the immense social and geographical diversity of a continent-sized nation cannot be easily absorbed by two or three parties.",
+    corePrinciples: [
+      "Electoral Typology: Categorized into One-Party (undemocratic monopoly), Two-Party (duopoly stability), and Multi-Party (representative diversity).",
+      "Organic Evolution: A party system cannot be chosen artificially; it is an organic outgrowth of a nation's historical, social, and regional landscape.",
+      "Coalition Governance: In multi-party systems, ideologically compatible parties form pre-poll alliances or post-poll coalitions.",
+      "Indian Imperative: India's continental diversity necessitates a multi-party framework to avoid alienation of regional, linguistic, and cultural groups.",
+    ],
+    keyDefinitions: [
+      {
+        term: "One-Party System",
+        definition: "A political framework where only a single political party is constitutionally authorized to contest elections and hold state power (e.g., China)."
+      },
+      {
+        term: "Two-Party System",
+        definition: "A political system where two dominant parties hold virtually all legislative power and alternate in forming the government (e.g., USA, UK)."
+      },
+      {
+        term: "Multi-Party System",
+        definition: "A system where more than two political parties compete and have realistic opportunities to form government independently or via coalition (e.g., India)."
+      },
+      {
+        term: "Coalition / Alliance",
+        definition: "A pact between multiple political parties who pool their electoral strength to fight elections together or form a joint cabinet."
+      },
+    ],
+    commonMistakesWarning: "Do not claim that the multi-party system is inherently chaotic or that a country can simply 'choose' a two-party system. Emphasize that party systems evolve organically from societal diversity.",
+    mnemonicImages: [
+      {
+        title: "Three Party System Models",
+        src: "/mnemonics/sst/civics_ch18_party_systems.jpeg",
+        description: "One-Party (Monopoly/China) | Two-Party (Duopoly/USA-UK) | Multi-Party (Pluralist/India)."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c18_t3_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "Why is a one-party system NOT considered a healthy democratic option?",
+        options: [
+          "It makes decision-making too slow and bureaucratic",
+          "It does not provide voters a fair, meaningful choice or democratic competition for power",
+          "It forces candidates to spend too much money on campaigns",
+          "It violates the United Nations charter on international trade",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "A democracy requires genuine political competition with realistic opportunities for alternative parties to attain power.",
+        ],
+        examinerTrap: "Thinking one-party is democratic because 'elections are still held'; without competition, elections are meaningless.",
+        keyTakeaway: "Democracy fundamentally requires competitive choice; one-party denies this."
+      },
+      {
+        id: "ex_c18_t3_2",
+        level: "Level 2 (2M-3M Board Standard)",
+        marks: 3,
+        type: "Short Answer (3M)",
+        question: "'A party system is not something any country can choose.' Justify this statement with reference to India's multi-party system.",
+        solutionPoints: [
+          "1. Deep Social and Regional Diversity: India is a continent-sized nation with immense linguistic, religious, and cultural diversity that cannot be represented by just two or three parties.",
+          "2. Historical Evolution: India's party system evolved organically over decades through anti-colonial struggles and post-independence regional identity movements.",
+          "3. Electoral System Dynamics: First-past-the-post parliamentary elections in diverse states naturally encouraged regional parties to emerge and address localized aspirations.",
+        ],
+        examinerTrap: "Attributing multi-party systems merely to legal constitutional choice; it is an organic sociological evolution.",
+        keyTakeaway: "Societal diversity + historical evolution + electoral dynamics = party system outcome."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c18_t4",
+    chapterNo: 18,
+    disciplineChapterNo: 4,
+    chapterName: "Political Parties",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "4.4 National Parties vs State Parties: Election Commission Criteria",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 4/6, Section 'National Parties & State Parties' (Pages 76-80)",
+    ncertSummary: "Democracies that follow a federal system all over the world tend to have two kinds of parties: parties that are present in only one of the federal units and parties that are present in several or all units of the federation. In India, every party has to register with the Election Commission of India (ECI). The ECI offers special facilities to large, established parties, including a unique election symbol, and recognizes them as 'Recognised Political Parties'.\n\nOfficial Election Commission Criteria:\n1. State Party (Regional Party) Criteria:\n- A party that secures at least 6% of the total votes in an election to the Legislative Assembly of a State,\n- AND wins at least 2 seats in that State Assembly,\n- is recognized as a State Party.\n\n2. National Party Criteria:\n- A party that secures at least 6% of the total votes in Lok Sabha elections OR Assembly elections in 4 States,\n- AND wins at least 4 seats in the Lok Sabha,\n- is recognized as a National Party.\n\nMajor Recognized National Parties in India:\n- Bharatiya Janata Party (BJP): Founded in 1980 by reviving the Bharatiya Jana Sangh (formed by Syama Prasad Mookerjee in 1951). Ideology: Integral humanism, Antyodaya, cultural nationalism (Hindutva), uniform civil code, full integration of Jammu & Kashmir.\n- Indian National Congress (INC): Founded in 1885. Centrist party; advocates secularism, welfare of weaker sections and minorities, economic reforms with a human face.\n- Bahujan Samaj Party (BSP): Formed in 1984 under Kanshi Ram. Represents the Bahujan Samaj (Dalits, Adivasis, OBCs, religious minorities); inspired by Babasaheb Ambedkar, Jyotirao Phule, Periyar.\n- Communist Party of India (Marxist) [CPI-M]: Founded in 1964. Believes in Marxism-Leninism, socialism, secularism; opposes imperialism and communalism; strong in Kerala, West Bengal, Tripura.\n- Aam Aadmi Party (AAP): Formed in 2012 following anti-corruption movement; recognized as National Party after electoral success in Delhi, Punjab, Goa, and Gujarat. Focused on clean governance, public education, healthcare.\n- National People's Party (NPP): Formed by P.A. Sangma; dominant in North-East states.",
+    corePrinciples: [
+      "Two-Tier Classification: ECI categorizes parties into State (Regional) Parties and National Parties based on rigorous quantitative thresholds.",
+      "State Party Benchmark: Minimum 6% valid votes in State Legislative Assembly + minimum 2 Assembly seats.",
+      "National Party Benchmark: Minimum 6% valid votes in Lok Sabha OR across 4 States' Assemblies + minimum 4 Lok Sabha seats.",
+      "Recognised Status Privilege: Exclusive reservation of unique election symbols and broadcast time on public media.",
+    ],
+    keyDefinitions: [
+      {
+        term: "National Party",
+        definition: "A political party recognized by the Election Commission of India having significant electoral presence across multiple states, fulfilling the 6% vote share and 4 Lok Sabha seats criteria."
+      },
+      {
+        term: "State / Regional Party",
+        definition: "A political party recognized within one or a few specific states, fulfilling the 6% state vote share and 2 legislative assembly seats criteria."
+      },
+      {
+        term: "Election Symbol",
+        definition: "A standardized visual emblem officially allotted by the Election Commission of India to a recognized party for exclusive candidate use."
+      },
+    ],
+    commonMistakesWarning: "Do not swap the criteria for State vs National parties. Memorize: State = 6% votes in State Assembly + 2 MLA seats; National = 6% votes in Lok Sabha/4 states + 4 MP seats in Lok Sabha.",
+    mnemonicImages: [
+      {
+        title: "ECI Recognition Formula",
+        src: "/mnemonics/sst/civics_ch18_party_criteria.jpeg",
+        description: "State: 6% Assembly Votes + 2 MLAs | National: 6% LS/4-State Votes + 4 MPs."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c18_t4_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "What is the minimum condition required for a party to be recognized as a State Party by the Election Commission of India?",
+        options: [
+          "Winning 10% votes in national Lok Sabha elections",
+          "Securing at least 6% of total votes in the State Assembly election and winning at least 2 seats",
+          "Securing 50% seats in municipal corporation elections",
+          "Collecting 5 lakh registered party members in the state",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "ECI mandates at least 6% vote share in the State Legislative Assembly election plus winning at least 2 Assembly seats.",
+        ],
+        examinerTrap: "Confusing State Party criteria (6% + 2 MLAs) with National Party criteria (6% + 4 MPs).",
+        keyTakeaway: "State party threshold = 6% Assembly vote share + 2 Assembly seats."
+      },
+      {
+        id: "ex_c18_t4_2",
+        level: "Level 2 (2M-3M Board Standard)",
+        marks: 3,
+        type: "Short Answer (3M)",
+        question: "Differentiate between a National Party and a State Party based on the Election Commission of India criteria.",
+        solutionPoints: [
+          "1. Geographic Scope: A State Party operates predominantly within one or few states; a National Party exercises nationwide presence across multiple states.",
+          "2. Vote Share Criteria: A State Party must secure at least 6% of total votes in a State Legislative Assembly election. A National Party must secure at least 6% of total votes in Lok Sabha elections OR in Assembly elections across four states.",
+          "3. Seat Criteria: A State Party must win at least 2 Assembly seats in that state. A National Party must win at least 4 seats in the Lok Sabha.",
+        ],
+        examinerTrap: "Giving generic explanations without quoting the exact quantitative percentages (6%) and seat thresholds (2 MLAs vs 4 MPs).",
+        keyTakeaway: "Contrast: State (6% in Assembly + 2 MLAs) vs National (6% in Lok Sabha/4 states + 4 MPs)."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c18_t5",
+    chapterNo: 18,
+    disciplineChapterNo: 4,
+    chapterName: "Political Parties",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "4.5 Four Major Challenges Faced by Political Parties",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 4/6, Section 'Challenges to Political Parties' (Pages 80-83)",
+    ncertSummary: "Popular dissatisfaction and criticism have focused on four problem areas in the working of political parties worldwide and in India. Political parties must overcome these challenges to remain effective instruments of democratic governance:\n\n1. Lack of Internal Democracy:\n- Concentration of power in one or few top leaders at the top.\n- Parties do not keep membership registers, do not hold regular organizational elections, and do not conduct internal consultations.\n- Ordinary workers do not have access to information or power to influence decisions; loyalty to the top leader becomes more important than loyalty to party ideology.\n\n2. Dynastic Succession:\n- Top positions in many parties are controlled by members of one family or their close coterie.\n- Leaders at the top take unfair advantage to favour people close to them or family members, denying hardworking, experienced cadres the opportunity to lead.\n- This is bad for democracy because people without adequate grassroots experience or popular backing occupy positions of power.\n\n3. Growing Role of Money and Muscle Power:\n- Parties focus excessively on winning elections at all costs, frequently using shortcuts.\n- They tend to nominate candidates who have or can raise large amounts of money.\n- Rich individuals and corporate companies who donate funds to parties exert undue influence on party policies.\n- In many cases, parties support criminals or candidates with serious criminal records because they can secure votes through coercion.\n\n4. Lack of a Meaningful Choice to Voters:\n- In order to offer a meaningful choice, parties must be significantly different in ideology and policy.\n- In recent years, there has been a global decline in ideological differences among parties (e.g., in Britain, the Labour Party and Conservative Party agree on fundamental economic policies and differ only on minor details).\n- In India, major parties share substantial consensus on economic policies. Moreover, because the same leaders keep shifting from one party to another, voters cannot even elect different leaders.",
+    corePrinciples: [
+      "Democratic Deficit Within: Absence of regular organizational polls turns parties into autocratic fiefdoms.",
+      "Nepotism / Dynastic Privilege: Hereditary control undermines meritocracy and violates democratic equality.",
+      "Oligarchic Corruption: Excessive campaign costs empower corporate lobbies and criminal elements with muscle power.",
+      "Ideological Homogenization: Policy convergence deprives citizens of genuine alternative governing philosophies.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Internal Democracy",
+        definition: "A practice wherein intra-party decisions are taken through transparent elections, open debate, and consultation among all registered members."
+      },
+      {
+        term: "Dynastic Succession",
+        definition: "The hereditary transmission of political authority, leadership posts, and electoral tickets within a single family dynasty."
+      },
+      {
+        term: "Criminalisation of Politics",
+        definition: "The infiltration of individuals with pending criminal charges into legislative bodies through party tickets due to their coercive muscle power and financial resources."
+      },
+    ],
+    commonMistakesWarning: "Do not write generic complaints like 'leaders are corrupt'. NCERT explicitly specifies 4 structural challenges: 1) Lack of internal democracy, 2) Dynastic succession, 3) Money and muscle power, 4) Lack of meaningful choice. Use these exact headings.",
+    mnemonicImages: [
+      {
+        title: "Four Maladies of Political Parties",
+        src: "/mnemonics/sst/civics_ch18_four_challenges.jpeg",
+        description: "Autocracy Inside -> Family Dynasties -> Money/Criminals -> Copycat Ideologies."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c18_t5_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "Which of the following describes the challenge of 'Dynastic Succession' in political parties?",
+        options: [
+          "Conducting party presidential elections every six months",
+          "Top leadership positions being monopolised and passed down within a single family",
+          "Banning relatives from joining the party as ordinary members",
+          "Distributing tickets based purely on university educational degrees",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Dynastic succession refers to hereditary monopolization of top party offices by a single family.",
+        ],
+        examinerTrap: "Confusing family legacy with transparent democratic election.",
+        keyTakeaway: "Dynastic succession = top posts reserved for one family, denying grassroots talent."
+      },
+      {
+        id: "ex_c18_t5_2",
+        level: "Level 3 (4M-5M Master / Case Study)",
+        marks: 5,
+        type: "Long Answer (5M)",
+        question: "Analyze the four major challenges faced by political parties in modern democracies.",
+        solutionPoints: [
+          "1. Lack of Internal Democracy: Tendency towards centralisation of power; absence of membership registers, organizational elections, or genuine internal debate.",
+          "2. Dynastic Succession: Top leadership posts are treated as family heirlooms, denying ordinary workers advancement regardless of competence.",
+          "3. Money and Muscle Power: Excessive dependence on wealthy donors and criminals who can intimidate opponents and finance multi-crore campaigns.",
+          "4. Lack of Meaningful Choice: Shrinking ideological differences between major parties leaves voters without real policy alternatives.",
+          "5. Impact on Democratic Faith: These systemic shortcomings erode citizen trust in democratic institutions, demanding comprehensive institutional reforms.",
+        ],
+        examinerTrap: "Listing only 2 or 3 challenges. CBSE 5-mark marking schemes allocate 1 mark per distinct challenge with elaboration.",
+        keyTakeaway: "Cover all 4 NCERT challenges: Internal Democracy, Dynasties, Money/Muscle, and Meaningful Choice."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c18_t6",
+    chapterNo: 18,
+    disciplineChapterNo: 4,
+    chapterName: "Political Parties",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "4.6 Reforming Political Parties: Institutional Reforms & Public Solutions",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 4/6, Section 'How can parties be reformed?' (Pages 83-86)",
+    ncertSummary: "In order to face these challenges, political parties need to be reformed. Several institutional steps have already been taken, while others remain proposed:\n\nRecent Institutional Reforms Implemented in India:\n1. Anti-Defection Law: The Constitution was amended (52nd Amendment Act 1985, strengthened by 91st Amendment Act 2003) to prevent elected MLAs and MPs from changing parties. Defection was rampant as legislators switched loyalties to become ministers or accept cash bribes. Under the law, if any elected MP or MLA leaves their party, they lose their seat in the legislature. This has helped curb horse-trading, though it makes dissent within parties difficult.\n2. Supreme Court Affidavit Mandate: To reduce the influence of money and criminals, the Supreme Court of India passed an order making it mandatory for every candidate contesting elections to file an Affidavit giving details of their property/assets and criminal cases pending against them. This provides public transparency, though there is no system to verify whether the disclosures are true.\n3. Election Commission Organisational Order: The Election Commission passed an order making it mandatory for political parties to hold their organizational elections and file their income tax returns.\n\nFurther Reform Proposals Suggested by Experts:\n1. State Regulation of Internal Affairs: A law should be made to regulate internal affairs of political parties, making it mandatory to maintain membership registers, follow constitutions, and hold open secret-ballot elections for top posts.\n2. Mandatory Reservation for Women: It should be made legally mandatory for political parties to give a minimum quota of tickets (about one-third) to women candidates.\n3. State Funding of Elections: The government should give parties money to support their election expenses in cash or in kind (petrol, paper, telephone, broadcasting time).\n\nTwo Ways Citizens Can Force Reform:\n- People can put pressure on political parties through petitions, publicity, media, and public agitations.\n- Political parties can improve if people who want reform join political parties themselves: the quality of democracy depends on the degree of public participation.",
+    corePrinciples: [
+      "Constitutional Anti-Defection Safeguard: Forfeiture of legislative seat prevents horse-trading and unprincipled party switching.",
+      "Judicial Transparency Mandate: Compulsory sworn affidavits disclose criminal records and personal wealth.",
+      "Electoral Commission Accountability: Enforcing regular organizational ballots and fiscal transparency via IT returns.",
+      "Democratic Participatory Remedy: The ultimate check on political decay is active citizen participation and public scrutiny.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Defection",
+        definition: "Changing party allegiance from the party on whose ticket a person was elected to a different party, usually for ministerial berths or monetary incentives."
+      },
+      {
+        term: "Affidavit",
+        definition: "A signed legal document submitted to an officer or court, where a person makes a sworn statement regarding their personal financial assets and criminal antecedents."
+      },
+      {
+        term: "State Funding of Elections",
+        definition: "A proposed system where the state finances election campaign expenses of registered political parties to eliminate corporate and illicit funding."
+      },
+    ],
+    commonMistakesWarning: "Do not mix up reforms that HAVE ALREADY BEEN MADE (Anti-Defection Law, SC Affidavits, EC IT returns) with reforms that ARE ONLY PROPOSED (State funding, mandatory women tickets, state law regulating parties). Distinguish both clearly.",
+    mnemonicImages: [
+      {
+        title: "Three Enacted Reforms & Three Proposed Reforms",
+        src: "/mnemonics/sst/civics_ch18_reforms_matrix.jpeg",
+        description: "Enacted (Anti-Defection, SC Affidavit, EC Audits) vs Proposed (State Funding, Women Quota, Internal Law)."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c18_t6_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "What is the primary objective of the Anti-Defection Law passed in India?",
+        options: [
+          "To prevent corrupt party presidents from taking election funds",
+          "To stop elected MPs and MLAs from changing political parties after elections for personal gain",
+          "To ban independent candidates from contesting parliamentary elections",
+          "To force state governments to conduct panchayat elections on time",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "The Anti-Defection Law disqualifies legislators from their seat if they defect to another party after winning an election.",
+        ],
+        examinerTrap: "Selecting option A or C; Anti-defection specifically targets floor-crossing by elected legislators.",
+        keyTakeaway: "Anti-Defection Law stops elected legislators from switching parties."
+      },
+      {
+        id: "ex_c18_t6_2",
+        level: "Level 3 (4M-5M Master / Case Study)",
+        marks: 5,
+        type: "Long Answer (5M)",
+        question: "Examine three institutional reforms recently carried out in India to strengthen political parties, and mention two proposals that are still suggested.",
+        solutionPoints: [
+          "Implemented Reforms:",
+          "1. Anti-Defection Law: The Constitution was amended to ensure that any elected MLA or MP who defects to another party forfeits their legislative seat.",
+          "2. Supreme Court Affidavit Order: Mandatory filing of sworn affidavits detailing financial assets and criminal records for all election candidates.",
+          "3. Election Commission Organisational Mandate: Compulsory regular internal elections and statutory filing of audited income tax returns.",
+          "Proposed Reforms Still Needed:",
+          "4. Mandatory Women's Quota: A legal requirement for parties to allocate at least one-third of election tickets to female candidates.",
+          "5. State Funding of Elections: Public funding of election campaign expenditures (in cash or kind) to eliminate black money and corporate patronage.",
+        ],
+        examinerTrap: "Failing to classify points into 'Implemented' vs 'Proposed'. CBSE marking schemes explicitly separate the two categories.",
+        keyTakeaway: "Classify: 3 Implemented (Defection, Affidavit, EC) + 2 Proposed (Women quota, State funding)."
+      },
+    ]
+  },
   // =========================================================================
-  // CHAPTER 19: Outcomes of Democracy (Political Science Ch 5)
+  // CHAPTER 19: Outcomes of Democracy (Democratic Politics - II Ch 5/7)
   // =========================================================================
   {
     id: "sst_pol_c19_t1",
@@ -2139,75 +2877,364 @@ export const SST_EXTENDED_CONCEPTS: SSTConceptTopic[] = [
     disciplineChapterNo: 5,
     chapterName: "Outcomes of Democracy",
     discipline: "Political Science",
-    unit: "Unit III: Democratic Politics - II",
-    topicTitle: "5.1 Accountable, Legitimate Governance & Social Accommodation",
-    ncertSection: "NCERT Civics Chapter 5, Sections 1–4 (Pages 89–98)",
-    ncertSummary: "Democracy is universally judged superior to authoritarianism because it: promotes equality, enhances individual dignity, improves decision quality through consultation, provides methods to resolve social conflicts, and allows room to correct mistakes.\n\nAccountable, Responsive, and Legitimate Government:\n- Accountable: Rulers are elected by and answerable to citizens through periodic, free, and fair elections.\n- Transparent: Decisions follow legal norms and procedures; citizens have the right and institutional means (Right to Information) to examine how decisions are made.\n- Responsive: Attentive to public needs and grievances (though actual democracies often fall short).\n- Legitimate: Democracy may be slower and less efficient than dictatorships, but it is the people's own government. That explains why overwhelming majorities in South Asia and globally prefer democracy.\n\nEconomic Outcomes:\nDictatorships historically posted marginally higher economic growth rates (1950–2000), but the difference is negligible when factoring in population, resources, and global cooperation. Democracy cannot guarantee instant economic parity, but it guarantees political equality (one person, one vote, one value).\n\nAccommodating Social Diversity:\nTwo essential conditions: (1) Democracy is not simply rule by majority opinion; the majority must always negotiate and accommodate the minority view. (2) Rule by majority must not become permanent rule by a majority community based on religion, race, or language.\n\nDignity and Freedom of Citizens:\nDemocracy provides the moral and legal bedrock for marginalized groups (women, lower castes) to wage struggles for equality. Its most distinctive feature is that its examination never ends: when citizens express dissatisfaction, it proves that democracy has transformed passive subjects into conscious, demanding citizens.",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "5.1 Assessing Democracy's Outcomes: Principle vs Practice & Core Strengths",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 5/7, Section 'How do we assess democracy's outcomes?' (Pages 89-91)",
+    ncertSummary: "Democracy is a better form of government when compared with dictatorship or any other alternative. Most people support democracy against alternative systems because democracy is based on universal ethical values. Yet, when we observe actual democracies around us, many citizens feel that democracy is good in principle, but not so good in practice. This dilemma invites us to think deeply about the outcomes of democracy.\n\nFive Foundational Reasons Why Democracy is Better:\n1. Promotes Equality Among Citizens: Every adult citizen has one vote with equal political weight, regardless of social status, gender, or wealth.\n2. Enhances the Dignity of the Individual: Democracy recognizes every individual as a sovereign bearer of rights rather than a subject of a king.\n3. Improves the Quality of Decision-Making: Democratic decisions are arrived at through debate, deliberation, and consensus, minimizing arbitrary mistakes.\n4. Provides a Method to Resolve Conflicts: Through dialogue, negotiation, and constitutional safeguards, divergent social interests are mediated peacefully.\n5. Allows Room to Correct Mistakes: Since decisions are taken publicly, errors cannot stay hidden for long, and leaders must either rectify mistakes or be voted out.\n\nDemocracy is an Enabler, Not a Magician: Democracy cannot automatically solve every socio-economic ill. Democracy is just a form of government. It can only create conditions for achieving something. The citizens have to take advantage of those conditions and achieve those goals. Examining democracy means assessing what democracy can reasonably be expected to produce.",
     corePrinciples: [
-      "Institutional Legitimacy: A democratic regime derives uncontested authority from the consent of the governed, making decisions durable and respected.",
-      "Procedural Deliberation: Democratic decisions take longer due to debate and consultation, but avoid the violent popular backlashes caused by autocratic fiats.",
-      "Non-Majoritarian Pluralism: True democracy accommodates minorities, preventing majority rule from devolving into ethnic or religious tyranny.",
-      "Perpetual Democratic Evolution: Complaints and public criticism are symptoms of democratic vitality and citizen consciousness, not institutional breakdown."
+      "Normative Superiority: Principled preference for democracy rests on human dignity, fundamental equality, and accountable rule of law.",
+      "Deliberative Resilience: Institutional debate prevents whimsical, tyrannical decisions common in autocracies.",
+      "Self-Correcting Mechanism: Democratic transparency ensures policy mistakes are acknowledged, debated, and corrected.",
+      "Conditional Enabler: Democracy provides the institutional framework and civil liberties; societal transformation depends on active citizen engagement.",
     ],
     keyDefinitions: [
       {
-        term: "Transparency",
-        definition: "The constitutional mechanism ensuring that citizens have both the legal right and institutional means to examine and verify the process of government decision-making."
+        term: "Deliberation",
+        definition: "The democratic practice of careful consideration, thorough discussion, and collective consultation before arriving at a legislative or executive policy decision."
       },
       {
-        term: "Legitimate Government",
-        definition: "A government that operates under established constitutional laws and derives its mandate directly from periodic, free, and fair elections by the sovereign public."
-      }
+        term: "Self-Correction in Democracy",
+        definition: "The constitutional capacity of a democratic system to openly identify governance blunders, revise flawed laws, and replace failing leaders via popular elections."
+      },
     ],
-    commonMistakesWarning: "Students frequently assume democracies should guarantee economic equality. Political equality (one vote, one value) is guaranteed, but economic inequality persists in market democracies.",
+    commonMistakesWarning: "Do not treat democracy as a magical solution to all human suffering. NCERT emphasizes that democracy is merely a form of government that creates favourable conditions; citizens must actively mobilize to solve problems.",
     mnemonicImages: [
       {
-        title: "Democracy's Core Virtues",
-        src: "/mnemonics/sst/pol_ch5_outcomes_democracy_1.jpeg",
-        description: "Accountability -> Transparency -> Legitimacy -> Social Harmony -> Dignity of All."
+        title: "Five Pillars of Democratic Superiority",
+        src: "/mnemonics/sst/civics_ch19_five_strengths.jpeg",
+        description: "Equality -> Dignity -> Better Decisions -> Conflict Resolution -> Room for Correction."
       },
-      {
-        title: "Social Accommodation & Citizen Dignity",
-        src: "/mnemonics/sst/pol_ch5_outcomes_democracy_2.jpeg",
-        description: "Accommodating diversity without majoritarianism and empowering marginalized citizens."
-      }
     ],
     examples: [
       {
-        id: "ex_od_1",
+        id: "ex_c19_t1_1",
         level: "Level 1 (1M Foundation / MCQ)",
         marks: 1,
         type: "MCQ",
-        question: "Which of the following is an outcome that democracy uniquely and decisively produces better than any non-democratic regime?",
+        question: "Which of the following is an inherent self-correcting strength of a democratic government?",
         options: [
-          "Instant economic equality for all classes",
-          "Rapid autocratic decree without legislative delay",
-          "Legitimate government accountable to the citizenry",
-          "Zero corruption in public bureaucracy"
+          "Decisions are taken in complete military secrecy",
+          "Mistakes cannot remain hidden for long, and there is space for public discussion and correction",
+          "The prime minister can overrule all judicial pronouncements",
+          "Elections are permanently suspended during economic recessions",
         ],
-        correctOption: 2,
+        correctOption: 1,
         solutionPoints: [
-          "Democracy may be slow, but it is legitimate and accountable because it is the people's own chosen government."
+          "Public scrutiny and open debate ensure mistakes are exposed and corrected, either by the rulers or by the electorate.",
         ],
-        examinerTrap: "Selecting rapid decrees or zero corruption; neither is guaranteed by democracy.",
-        keyTakeaway: "Legitimacy is democracy's greatest structural strength."
+        examinerTrap: "Assuming democracies make no mistakes; democracies make mistakes, but offer the unique mechanism to correct them.",
+        keyTakeaway: "Democracy allows open public scrutiny, ensuring room for correction."
       },
       {
-        id: "ex_od_2",
+        id: "ex_c19_t1_2",
         level: "Level 2 (2M-3M Board Standard)",
         marks: 3,
         type: "Short Answer (3M)",
-        question: "State the two mandatory conditions necessary for a democracy to successfully accommodate social diversity.",
+        question: "'Democracy is seen to be good in principle, but felt to be not so good in practice.' Explain this paradox.",
         solutionPoints: [
-          "1. Majority Must Work with Minority: Majority opinion must continuously consult and reflect the interests of minority communities so governance serves the common public good.",
-          "2. Majority Rule Must Not Mean Majority Community: Rule by majority must never transform into rule by a majority religious, racial, or linguistic community; in every decision, different groups must be capable of forming a majority."
+          "1. Ideal vs Reality: In principle, democracy promises equality, individual dignity, and rapid public welfare; in practice, many democracies suffer from corruption, delays, and persistent inequality.",
+          "2. Overburdened Expectations: Citizens often expect democracy to eradicate all socio-economic miseries automatically, treating it as a magical cure-all.",
+          "3. Enabler Doctrine: Democracy is only a system of governance that creates favorable conditions; achieving prosperity and social justice requires continuous citizen struggle and civic participation.",
         ],
-        examinerTrap: "Conflating majority rule with permanent religious majoritarianism (like Sinhala majoritarianism in Sri Lanka).",
-        keyTakeaway: "Democracy requires fluid political majorities, not fixed ethnic or religious majorities."
-      }
+        examinerTrap: "Simply concluding that democracy is bad; emphasize that our expectations are elevated precisely because democracy empowers us.",
+        keyTakeaway: "Democracy creates the arena and tools; citizens must use them to achieve goals."
+      },
     ]
   },
-
+  {
+    id: "sst_pol_c19_t2",
+    chapterNo: 19,
+    disciplineChapterNo: 5,
+    chapterName: "Outcomes of Democracy",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "5.2 Accountable, Responsive and Legitimate Government",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 5/7, Section 'Accountable, responsive and legitimate government' (Pages 91-93)",
+    ncertSummary: "There are some things that democracy must provide without fail. In a democracy, we are most concerned with ensuring that people will have the right to choose their rulers and people will have control over the rulers. Whenever possible and necessary, citizens should be able to participate in decision-making that affects them all.\n\n1. Accountable Government:\n- A democratic government is answerable to its citizens. It produces a government that is accountable to the citizens, and responsive to the needs and expectations of the citizens.\n- Non-democratic rulers do not have to bother about deliberation in assemblies or worry about majorities and public opinion. So, they can be very quick and efficient in decision-making and implementation.\n- But democracy is based on the idea of deliberation and negotiation. So, some delay is bound to take place. Does that make democratic government inefficient? No! Because a democratic government followed procedures, its decisions may be both more acceptable to the people and more effective.\n- Transparency: A citizen who wants to know if a decision was taken through the correct procedures can find this out. She has the right and the means to examine the process of decision-making. This is known as transparency (e.g., Right to Information Act).\n\n2. Responsive Government:\n- A democratic government is expected to be attentive to the needs and demands of the people and largely free of corruption.\n- On this score, the record of democracies is not impressive: democracies often frustrate the needs of the people and ignore the demands of a majority of its population. The routine tales of corruption are enough to convince us that democracy is not free of this evil. But at the same time, there is nothing to show that non-democracies are less corrupt or more sensitive to the people.\n\n3. Legitimate Government:\n- This is one area where democratic government is certainly much better than any alternative: a democratic government is a legitimate government.\n- It may be slow, less efficient, not always very responsive or clean. But a democratic government is people's own government. That is why there is an overwhelming support for the idea of democracy all over the world\u2014in South Asia, Bangladesh, India, Nepal, Pakistan, and Sri Lanka.",
+    corePrinciples: [
+      "Democratic Transparency: Citizens possess the legal right and institutional tools (RTI) to inspect how state decisions are made.",
+      "Deliberation vs Haste: Democratic decisions may take longer due to consultations, but achieve greater public legitimacy and compliance.",
+      "Imperfection in Responsiveness: Democracies frequently struggle with bureaucratic inertia and corruption, yet autocracies offer zero recourse.",
+      "Unmatched Legitimacy: A democratic regime derives sovereign authority directly from the consent of the governed, making it universally preferred.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Accountability",
+        definition: "The constitutional obligation of elected governors to explain, justify, and answer for their actions and policies to the citizens and parliament."
+      },
+      {
+        term: "Transparency",
+        definition: "The right and institutional means available to citizens to inspect, scrutinize, and verify the procedures through which government decisions were taken."
+      },
+      {
+        term: "Legitimate Government",
+        definition: "A government that rules by constitutional law and derives its moral and legal authority from the free, democratic mandate of its citizens."
+      },
+    ],
+    commonMistakesWarning: "Do not confuse 'accountable' with 'legitimate'. Accountable means answerable for actions and open to inspection; legitimate means legally valid and recognized as people's own government.",
+    mnemonicImages: [
+      {
+        title: "The Democratic Triad",
+        src: "/mnemonics/sst/civics_ch19_accountable_legitimate.jpeg",
+        description: "Accountable (Transparent Procedures) | Responsive (People's Needs) | Legitimate (People's Own Choice)."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c19_t2_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "What is meant by 'transparency' in a democratic governance system?",
+        options: [
+          "Government officials wearing clear identification badges",
+          "The right and institutional means of citizens to inspect whether decisions followed proper legal procedures",
+          "The government broadcasting all cabinet meetings live on social media",
+          "Banning secret diplomatic meetings with foreign nations",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Transparency means citizens can examine and verify the decision-making process through statutory mechanisms like the RTI Act.",
+        ],
+        examinerTrap: "Picking literal or trivial visual meanings; transparency is an institutional, procedural legal right.",
+        keyTakeaway: "Transparency = right to examine the process of decision-making."
+      },
+      {
+        id: "ex_c19_t2_2",
+        level: "Level 3 (4M-5M Master / Case Study)",
+        marks: 5,
+        type: "Long Answer (5M)",
+        question: "'Democratic government is legitimate government.' Support this statement with suitable arguments.",
+        solutionPoints: [
+          "1. People's Own Government: A democratic government is elected by the citizens themselves, giving it moral authority and voluntary compliance that no dictator can command.",
+          "2. Overwhelming Global Preference: Survey data across South Asia (India, Bangladesh, Nepal, Sri Lanka, Pakistan) proves an overwhelming majority prefer democracy over military rule.",
+          "3. Broad Social Acceptance: Even when a democracy is slow, less efficient, or imperfectly responsive, citizens accept decisions because they were formulated through elected representatives.",
+          "4. Constitutional Rule of Law: Democratic governments function under a written constitution and are bound by institutional checks and balances.",
+          "5. Ability to Generate its Own Support: Democracy's unique strength is that it generates its own popular legitimacy through free, regular, and competitive elections.",
+        ],
+        examinerTrap: "Focusing only on economic performance; legitimacy is about moral authority, constitutional consent, and popular mandate.",
+        keyTakeaway: "Democracy may be slow, but it is people's own government, creating unmatched legitimacy."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c19_t3",
+    chapterNo: 19,
+    disciplineChapterNo: 5,
+    chapterName: "Outcomes of Democracy",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "5.3 Economic Growth and Development: Democracies vs Dictatorships",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 5/7, Section 'Economic growth and development' (Pages 93-94)",
+    ncertSummary: "If democracies are expected to produce good governments, should we not also expect them to produce economic development? Evidence shows that in practice many democracies did not fulfill this expectation.\n\nEmpirical Comparative Record (1950 to 2000):\n- If we consider all democracies and all dictatorships for the fifty years between 1950 and 2000, dictatorships have slightly higher rate of economic growth.\n- The inability of democracy to achieve higher economic development worries us. But this alone cannot be reason to reject democracy.\n\nWhy Economic Growth Varies: Economic development depends on several interrelated factors:\n1. Country's population size and demographic pressures,\n2. Global economic environment and trade relations,\n3. Cooperation from other countries and international investments,\n4. Economic priorities adopted by the governing regime.\n\nComparing Poor Countries: The difference in the rates of economic development between less developed countries with dictatorships and democracies is negligible. Overall, we cannot say that democracy is a guarantee of economic development. But we can expect democracy not to lag behind dictatorships in this respect.\n\nWhen we see that there is only a negligible difference in economic growth, but democracy offers immense positive outcomes in human dignity, civil liberties, rule of law, and peaceful social coexistence, democracy is unequivocally the superior choice.",
+    corePrinciples: [
+      "Marginal Growth Differential: Dictatorships exhibited a marginally higher statistical GDP growth between 1950-2000, but negligible difference among poor nations.",
+      "Multi-Factorial Economic Reality: Growth is determined by population, global markets, technology, and geopolitical alliances\u2014not regime type alone.",
+      "Holistic Human Development: Economic growth under dictatorship often comes at the catastrophic cost of forced labour, censored rights, and violent purges.",
+      "Comprehensive Value Proposition: Democracy balances economic progress with fundamental human freedoms and equitable social security.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Economic Development",
+        definition: "A comprehensive process encompassing sustained per capita income growth, poverty reduction, improved healthcare, educational access, and enhanced quality of life."
+      },
+      {
+        term: "Regime Type",
+        definition: "The institutional form of political governance in a nation, primarily categorised as democratic or non-democratic (authoritarian/dictatorial)."
+      },
+    ],
+    commonMistakesWarning: "Do not state that democracies always have higher economic growth than dictatorships. Acknowledge NCERT's empirical fact (dictatorships had a slightly higher rate 1950-2000), but explain why democracy remains superior due to human rights, liberties, and dignity.",
+    mnemonicImages: [
+      {
+        title: "Economic Growth vs Human Freedom",
+        src: "/mnemonics/sst/civics_ch19_economic_growth.jpeg",
+        description: "Marginal GDP Lead of Dictatorships < Massive Superiority of Democracy in Human Dignity & Freedoms."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c19_t3_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "What does historical evidence (1950\u20132000) reveal regarding economic growth in democracies compared to dictatorships?",
+        options: [
+          "Democracies grew at ten times the rate of dictatorships",
+          "Dictatorships had a slightly higher rate of economic growth overall",
+          "Both systems experienced completely identical economic growth every year",
+          "All democracies collapsed into bankruptcy",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Between 1950 and 2000, dictatorships recorded a slightly higher statistical rate of economic growth.",
+        ],
+        examinerTrap: "Refusing to accept the historical data due to ideological bias; NCERT clearly records this nuance.",
+        keyTakeaway: "Dictatorships had slightly higher growth (1950-2000), but negligible difference in poor nations."
+      },
+      {
+        id: "ex_c19_t3_2",
+        level: "Level 2 (2M-3M Board Standard)",
+        marks: 3,
+        type: "Short Answer (3M)",
+        question: "Mention any three factors on which the economic development of a country depends, irrespective of whether it is a democracy or dictatorship.",
+        solutionPoints: [
+          "1. Population Size: Large population burdens national infrastructure and requires higher social spending.",
+          "2. Global Economic Situation: Global market demand, international commodity prices, and foreign direct investment flows.",
+          "3. Cooperation from Other Countries & Economic Priorities: Geopolitical trade treaties and whether state revenue is prioritized for human capital vs military arms.",
+        ],
+        examinerTrap: "Claiming regime type is the ONLY factor; NCERT lists 4 macroeconomic and geopolitical factors.",
+        keyTakeaway: "Population size, global economic climate, foreign cooperation, and regime economic priorities."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c19_t4",
+    chapterNo: 19,
+    disciplineChapterNo: 5,
+    chapterName: "Outcomes of Democracy",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "5.4 Reduction of Inequality & Poverty: Political Equality vs Economic Disparity",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 5/7, Section 'Reduction of inequality and poverty' (Pages 94-96)",
+    ncertSummary: "Perhaps more than development, it is reasonable to expect democracies to reduce economic disparities. Even when a country achieves economic growth, will wealth be distributed in such a way that all citizens share it and lead a better life? Is economic growth accompanied by increased inequalities?\n\nThe Glaring Paradox of Democracy:\n- Democracies are based on political equality: all individuals have equal weight in electing representatives (one person, one vote, one value).\n- Parallel to the process of bringing individuals into the political arena on an equal footing, we find growing economic inequalities.\n- A small number of ultra-rich individuals enjoy a highly disproportionate share of national wealth and total income. Not only that, their share in the total income of the country has been steadily increasing.\n- Those at the bottom of the society have very little to depend upon. Their incomes have been declining. Sometimes they find it difficult to meet their basic needs of life, such as food, clothing, house, education, and health.\n\nDemocracy's Mixed Track Record:\n- In actual life, democracies do not appear to be very successful in reducing economic inequalities.\n- The poor constitute a large proportion of our voters and no party will like to lose their votes. Yet democratically elected governments do not appear to be as keen to address the question of poverty as you would expect them to.\n- In several developing nations, the situation is even more precarious: in Bangladesh, more than half of the population lives in poverty. People in several poor countries are now dependent on rich countries even for food supplies.",
+    corePrinciples: [
+      "Constitutional Asymmetry: Absolute political equality (franchise) coexists with widening economic inequality (income distribution).",
+      "Wealth Concentration: Disproportionate capital gains accrue to the elite top 1-2%, while bottom deciles struggle for survival.",
+      "Electoral Contradiction: Although the poor form the demographic majority of voters, elected governments often hesitate to enact radical redistributive reforms.",
+      "Realistic Appraisal: Democracy guarantees political voice, but eliminating economic inequality requires dedicated fiscal and welfare intervention.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Political Equality",
+        definition: "The constitutional principle where every adult citizen possesses an equal right to participate in elections, casting one vote of identical value."
+      },
+      {
+        term: "Economic Inequality",
+        definition: "The unequal distribution of income, wealth, and economic opportunities across different individuals and social strata within an economy."
+      },
+    ],
+    commonMistakesWarning: "Do not claim that democracy automatically eliminates poverty. NCERT explicitly warns that democracies have had a disappointing record in reducing economic inequality despite guaranteeing political equality.",
+    mnemonicImages: [
+      {
+        title: "The Democracy Paradox",
+        src: "/mnemonics/sst/civics_ch19_inequality_paradox.jpeg",
+        description: "Equal Political Vote (1 Person = 1 Vote) vs Unequal Economic Scale (Top 1% owns 50%+ Wealth)."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c19_t4_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "What is the primary paradox regarding economic outcomes in modern democracies?",
+        options: [
+          "Citizens lose their right to vote when national GDP falls",
+          "Full political equality coexists alongside widening economic inequality and wealth concentration",
+          "All private businesses are nationalized within five years",
+          "Rich citizens are legally barred from standing in legislative elections",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Democracy guarantees political equality (one person, one vote), yet allows significant economic disparity to persist.",
+        ],
+        examinerTrap: "Believing political equality automatically produces economic equality; they operate on distinct mechanisms.",
+        keyTakeaway: "Political equality does not automatically translate into equal wealth distribution."
+      },
+      {
+        id: "ex_c19_t4_2",
+        level: "Level 3 (4M-5M Master / Case Study)",
+        marks: 5,
+        type: "Long Answer (5M)",
+        question: "'Democracies are based on political equality, yet growing economic disparities remain a reality.' Analyze this statement with examples.",
+        solutionPoints: [
+          "1. Universal Franchise vs Wealth Gaps: Every citizen holds one equal vote, but the top 10% of the population commands over 50% of national income and assets.",
+          "2. Plight of the Bottom Strata: The poorest sections struggle for basic human needs (clean water, nutrition, schooling, healthcare) while their real incomes stagnate.",
+          "3. The Electoral Dilemma: Even though poor citizens constitute the largest bloc of voters, elected governments frequently drag their feet on progressive taxation and aggressive anti-poverty measures.",
+          "4. Global Vulnerability: In countries like Bangladesh, over 50% of the population lives in extreme poverty, relying on external international aid.",
+          "5. Critical Conclusion: While democracy provides the political freedom to protest and mobilize, it does not guarantee automatic economic equality without targeted socialist or welfare policies.",
+        ],
+        examinerTrap: "Writing general essays without mentioning the core NCERT tension between 'political equality' and 'economic inequality'.",
+        keyTakeaway: "Emphasize: One person one vote is guaranteed, but wealth concentration remains democracy's glaring weakness."
+      },
+    ]
+  },
+  {
+    id: "sst_pol_c19_t5",
+    chapterNo: 19,
+    disciplineChapterNo: 5,
+    chapterName: "Outcomes of Democracy",
+    discipline: "Political Science",
+    unit: "Unit II: Democratic Politics - II",
+    topicTitle: "5.5 Accommodation of Social Diversity, Dignity & Freedom of Citizens",
+    ncertSection: "NCERT Democratic Politics - II, Chapter 5/7, Section 'Accommodation of social diversity & Dignity and freedom of the citizens' (Pages 96-98)",
+    ncertSummary: "Democracies usually develop a procedure to conduct their competition. This reduces the possibility of these tensions becoming explosive or violent. No society can fully and permanently resolve conflicts among different groups. But we can certainly learn to respect these differences and we can also evolve mechanisms to negotiate the differences. Democracy is best suited to produce this outcome. Non-democratic regimes often turn a blind eye to or suppress internal social differences.\n\nTwo Mandatory Conditions for Accommodating Diversity in Democracy:\n1. Majority Must Work with Minority: Democracy is not simply rule by majority opinion. The majority always needs to work with the minority so that governments function to represent the general view. Majority and minority opinions are not permanent.\n2. Rule by Majority is NOT Rule by Majority Community: Rule by majority must not become rule by majority community in terms of religion, race, or linguistic group. Rule by majority means that in case of every decision or election, different persons and groups may and can form a majority. Democracy remains democracy only as long as every citizen has a chance of being in majority at some point of time.\n\nDignity and Freedom of Citizens:\n- Democracy stands much superior to any other form of government in promoting dignity and freedom of the individual. The passion for respect and freedom are the basis of democracy.\n- Dignity of Women: Most societies across the world were historically male-dominated. Long struggles by women have created some sensitivity today that respect and equal treatment are necessary ingredients of a democratic society. Once the principle is recognized, it becomes easier for women to wage legal and moral struggles against discrimination.\n- Dignity of Disadvantaged Castes: Democracy in India has strengthened the claims of the disadvantaged and discriminated castes for equal status and equal opportunity.\n\nDemocracy's Unique Hallmark: Examination Never Gets Over!\nAs democracy passes one test, it produces another test. As people get some benefits of democracy, they ask for more and want to make democracy even better. That is why when we ask people about the way democracy functions, they will always come up with more expectations and many complaints. The fact that people are complaining is itself a testimony to the success of democracy: it shows that people have developed awareness and the ability to expect and to look critically at power holders and the high and the mighty.",
+    corePrinciples: [
+      "Two Cardinal Conditions: Rule of majority != Rule of majority community; Majority must govern collaboratively with minority.",
+      "Conflict Negotiation Engine: Democracy provides constitutional forums to peacefully negotiate social, ethnic, and linguistic tensions.",
+      "Moral & Legal Empowerment: Constitutional recognition of dignity provides marginalized groups the legal standing to challenge oppression.",
+      "Perpetual Evaluation: Public dissatisfaction and widespread complaints are not signs of democratic failure, but proof of democratic maturity and civic vigilance.",
+    ],
+    keyDefinitions: [
+      {
+        term: "Accommodation of Diversity",
+        definition: "The constitutional and political arrangement wherein divergent ethnic, religious, and linguistic groups coexist peacefully through power-sharing and mutual respect."
+      },
+      {
+        term: "Majoritarian Tyranny",
+        definition: "The oppressive domination of a permanent demographic majority (religious or linguistic) over political institutions, subjugating minority groups."
+      },
+      {
+        term: "Civic Vigilance",
+        definition: "The ongoing active oversight and critical evaluation of government officials and policies by conscious, informed citizens."
+      },
+    ],
+    commonMistakesWarning: "Do not confuse 'Rule by Majority' with 'Rule by Majority Community'. Rule by majority is legitimate (whoever gets more than 50% votes in an election); Rule by majority community (e.g. religious majority permanent rule) is Majoritarianism and destroys democracy.",
+    mnemonicImages: [
+      {
+        title: "Two Conditions for Peaceful Accommodation",
+        src: "/mnemonics/sst/civics_ch19_social_diversity.jpeg",
+        description: "Majority + Minority Collaboration | Majority Rule != Religious Community Dominance."
+      },
+    ],
+    examples: [
+      {
+        id: "ex_c19_t5_1",
+        level: "Level 1 (1M Foundation / MCQ)",
+        marks: 1,
+        type: "MCQ",
+        question: "Under what condition does democracy CEASE to be a democracy according to NCERT?",
+        options: [
+          "When the state budget has a fiscal deficit",
+          "When someone is barred from being in the majority on the basis of birth, religion, or caste",
+          "When an election is held using electronic voting machines",
+          "When the supreme court strikes down an unconstitutional statute",
+        ],
+        correctOption: 1,
+        solutionPoints: [
+          "Democracy collapses into tyranny if any citizen is permanently excluded from forming a political majority purely due to their birth, race, or religion.",
+        ],
+        examinerTrap: "Confusing technical economic issues with foundational democratic criteria.",
+        keyTakeaway: "Excluding anyone based on birth or religion destroys the essence of democracy."
+      },
+      {
+        id: "ex_c19_t5_2",
+        level: "Level 3 (4M-5M Master / Case Study)",
+        marks: 5,
+        type: "Long Answer (5M)",
+        question: "'A public expression of dissatisfaction with democracy shows that the test of democracy is never over.' Explain this statement with reference to dignity and freedom.",
+        solutionPoints: [
+          "1. Rising Expectations: As citizens experience the benefits of democracy, their expectations expand; fulfilling one demand generates fresh aspirations for greater justice.",
+          "2. Transforming Subjects into Citizens: Widespread public criticism proves that individuals no longer view themselves as passive subjects of a king, but as sovereign citizens whose vote determines governance.",
+          "3. Moral and Legal Armour: Long struggles by women and marginalized castes (SC/ST/OBC) have established equality as a recognized constitutional principle, enabling sustained moral and legal assertion.",
+          "4. Critical Scrutiny of Power: The ability of ordinary citizens to fearlessly criticize politicians and bureaucrats is living proof that freedom of expression is thriving.",
+          "5. Highest Testimony of Success: Continuous public complaints are not evidence of democratic failure, but the ultimate testimony of a conscious, vigilant, and mature democratic electorate.",
+        ],
+        examinerTrap: "Interpreting complaints as failure of democracy; NCERT explicitly asserts that complaints are a trophy and testimony to democratic success.",
+        keyTakeaway: "Complaints prove citizens are alert, critical, and sovereign\u2014the ultimate hallmark of democratic success."
+      },
+    ]
+  },
   // =========================================================================
   // CHAPTER 20: Globalisation and the Indian Economy (Economics Ch 4)
   // =========================================================================

@@ -263,101 +263,199 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
               MODE 1: NCERT VISUAL SCENARIO NARRATIVE (VIVID MENTAL MODEL)
               ========================================================================= */}
           {activeMode === "toddler" && (
-            <div className="space-y-5 animate-fadeIn min-w-0">
-              {/* THE VISUAL SCENARIO HERO CARD */}
+            <div className="space-y-6 sm:space-y-8 animate-fadeIn min-w-0">
+              {/* 1. CINEMATIC SCENE ANCHOR (BREATHABLE, SPACIOUS, MULTI-BEAT) */}
               <div
-                className={`p-5 sm:p-6 rounded-3xl border relative overflow-hidden min-w-0 ${
+                className={`p-6 sm:p-8 rounded-3xl border relative overflow-hidden min-w-0 shadow-xl transition-all ${
                   isDark
-                    ? "bg-gradient-to-br from-amber-950/40 via-[#0d1424] to-black border-amber-500/30 shadow-xl"
-                    : "bg-gradient-to-br from-amber-50 via-orange-50/40 to-yellow-50/60 border-amber-200 shadow-md"
+                    ? "bg-gradient-to-br from-amber-950/30 via-[#0d1424] to-black border-amber-500/30"
+                    : "bg-gradient-to-br from-amber-50/80 via-orange-50/30 to-yellow-50/50 border-amber-200/80"
                 }`}
               >
-                <div className="flex items-start gap-4 min-w-0">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center text-2xl font-black shrink-0 shadow-lg shadow-amber-500/30">
-                    🎬
-                  </div>
-                  <div className="space-y-3 flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500 text-slate-950">
-                        NCERT Visual Scenario • 100% Mental Picture
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-amber-500/20">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center text-xl font-black shrink-0 shadow-lg shadow-amber-500/20">
+                      🎬
+                    </div>
+                    <div>
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500 text-slate-950 inline-block">
+                        Visual Scenario Anchor • Mental Model
                       </span>
-                      <span className="text-xs font-mono text-amber-400 font-bold">
+                      <h4 className={`text-base sm:text-lg font-black tracking-tight mt-1 ${isDark ? "text-white" : "text-slate-950"}`}>
                         {toddlerGuide.toddlerAnalogy.hook}
+                      </h4>
+                    </div>
+                  </div>
+                  {topic.ncertSection && (
+                    <span className={`text-[11px] font-mono font-bold px-3 py-1 rounded-xl self-start sm:self-auto ${
+                      isDark ? "bg-white/5 text-amber-300 border border-white/10" : "bg-white text-amber-900 border border-amber-200"
+                    }`}>
+                      📖 {topic.ncertSection.split("(")[0].trim()}
+                    </span>
+                  )}
+                </div>
+
+                {/* MULTI-PARAGRAPH NARRATIVE BEATS */}
+                <div className="pt-6 space-y-4">
+                  {toddlerGuide.toddlerAnalogy.scenario.split("\n\n").filter(p => p.trim().length > 0).map((para, pIdx) => (
+                    <div
+                      key={pIdx}
+                      className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                        isDark
+                          ? "bg-white/[0.02] border-white/5 hover:border-amber-500/20"
+                          : "bg-white/80 border-amber-100 hover:border-amber-300"
+                      }`}
+                    >
+                      <div className="flex items-start gap-3.5">
+                        <span className="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-mono font-black shrink-0 mt-0.5">
+                          {pIdx + 1}
+                        </span>
+                        <p className={`text-sm sm:text-base leading-relaxed sm:leading-loose font-medium break-words flex-1 ${
+                          isDark ? "text-slate-200" : "text-slate-800"
+                        }`}>
+                          {para}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 2. THE CORE INTUITIVE MENTAL MODEL ("IN PLAIN ENGLISH") */}
+              <div
+                className={`p-6 sm:p-7 rounded-3xl border relative overflow-hidden transition-all shadow-lg ${
+                  isDark
+                    ? "bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-transparent border-amber-500/40"
+                    : "bg-gradient-to-r from-amber-100/70 via-orange-50 to-white border-amber-300"
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center text-2xl shrink-0">
+                    💡
+                  </div>
+                  <div className="space-y-2 flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-mono font-black uppercase tracking-wider text-amber-400">
+                        The Intuitive Mental Model • In Plain English
                       </span>
                     </div>
-
-                    <p className={`text-sm sm:text-base leading-relaxed font-medium break-words ${isDark ? "text-slate-100" : "text-slate-800"}`}>
-                      {toddlerGuide.toddlerAnalogy.scenario}
+                    <p className={`text-sm sm:text-base font-bold leading-relaxed ${isDark ? "text-amber-100" : "text-amber-950"}`}>
+                      {toddlerGuide.toddlerAnalogy.moralOrAha}
                     </p>
-
-                    <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-bold text-amber-400">
-                      <span>💡 Core NCERT Law &amp; Takeaway:</span>
-                      <span className={`break-words ${isDark ? "text-amber-200" : "text-amber-900"}`}>
-                        {toddlerGuide.toddlerAnalogy.moralOrAha}
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* CLASS 9 FOUNDATIONAL BRIDGE CARD */}
-              {(toddlerGuide.toddlerAnalogy.class9Connection || (topic as any).class9Bridge) && (
-                <div
-                  className={`p-4 sm:p-5 rounded-2xl border flex items-start gap-3.5 ${
-                    isDark
-                      ? "bg-gradient-to-r from-blue-950/30 via-indigo-950/20 to-black border-blue-500/30 text-blue-200"
-                      : "bg-gradient-to-r from-blue-50 to-indigo-50/50 border-blue-200 text-blue-950"
-                  }`}
-                >
-                  <span className="text-2xl shrink-0 mt-0.5">🏛️</span>
-                  <div className="space-y-1 min-w-0 flex-1">
-                    <span className="text-[10px] font-mono font-black uppercase tracking-wider text-blue-400 block">
-                      Connecting from Past • Class 9 NCERT Foundation Bridge
+              {/* 3. FULL TOPIC DEEP-DIVE: CORE NCERT PRINCIPLES */}
+              {topic.corePrinciples && topic.corePrinciples.length > 0 && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-8 h-8 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-base">
+                        📖
+                      </span>
+                      <div>
+                        <h4 className={`text-sm sm:text-base font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                          Full Topic Deep-Dive: Core NCERT Principles
+                        </h4>
+                        <p className={`text-xs ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                          Every foundational law, constitutional article & factual cause explained with zero skipped details.
+                        </p>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                      {topic.corePrinciples.length} Principles
                     </span>
-                    <p className="text-xs sm:text-sm leading-relaxed font-medium">
-                      {toddlerGuide.toddlerAnalogy.class9Connection || (topic as any).class9Bridge?.connectionExplanation}
-                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-3.5">
+                    {topic.corePrinciples.map((principle, prIdx) => {
+                      const hasColon = principle.includes(":");
+                      const titlePart = hasColon ? principle.split(":")[0].trim() : `Key Principle ${prIdx + 1}`;
+                      const bodyPart = hasColon ? principle.substring(principle.indexOf(":") + 1).trim() : principle;
+
+                      return (
+                        <div
+                          key={prIdx}
+                          className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                            isDark
+                              ? "bg-white/[0.02] border-white/10 hover:border-blue-500/30"
+                              : "bg-slate-50/80 border-slate-200 hover:border-blue-300"
+                          }`}
+                        >
+                          <div className="flex items-start gap-3.5">
+                            <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-400 border border-blue-500/30 flex items-center justify-center font-mono font-black text-xs shrink-0 mt-0.5">
+                              {String(prIdx + 1).padStart(2, "0")}
+                            </div>
+                            <div className="space-y-1 flex-1 min-w-0">
+                              <span className={`text-xs sm:text-sm font-black block tracking-tight ${isDark ? "text-blue-300" : "text-blue-950"}`}>
+                                {titlePart}
+                              </span>
+                              <p className={`text-xs sm:text-sm leading-relaxed font-medium break-words ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                                {bodyPart}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
 
-              {/* REPEATED BOARD HOTSPOT BANNER */}
-              {toddlerGuide.toddlerAnalogy.boardHotspot && (
-                <div
-                  className={`p-3.5 rounded-2xl border flex items-center gap-3 ${
-                    isDark
-                      ? "bg-rose-950/20 border-rose-500/30 text-rose-200"
-                      : "bg-rose-50 border-rose-200 text-rose-950"
-                  }`}
-                >
-                  <span className="text-xl shrink-0">🔥</span>
-                  <div className="min-w-0 flex-1 text-xs leading-relaxed">
-                    <strong className="font-bold text-rose-400">CBSE Board Trend: </strong>
-                    <span>{toddlerGuide.toddlerAnalogy.boardHotspot}</span>
+              {/* 4. ESSENTIAL NCERT TECHNICAL DEFINITIONS (IF AVAILABLE) */}
+              {topic.keyDefinitions && topic.keyDefinitions.length > 0 && (
+                <div className="space-y-3.5">
+                  <div className="flex items-center gap-2">
+                    <span className="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
+                      📚
+                    </span>
+                    <h4 className={`text-xs sm:text-sm font-black tracking-tight uppercase tracking-wider ${isDark ? "text-emerald-300" : "text-emerald-950"}`}>
+                      Essential NCERT Technical Vocabulary
+                    </h4>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {topic.keyDefinitions.map((def, defIdx) => (
+                      <div
+                        key={defIdx}
+                        className={`p-4 rounded-2xl border transition-all ${
+                          isDark
+                            ? "bg-emerald-950/10 border-emerald-500/20 hover:border-emerald-500/40"
+                            : "bg-emerald-50/50 border-emerald-200 hover:border-emerald-300"
+                        }`}
+                      >
+                        <span className="px-2.5 py-0.5 rounded-lg text-xs font-black font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 inline-block mb-2">
+                          {def.term}
+                        </span>
+                        <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                          {def.definition}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
 
-              {/* CAST OF CHARACTERS / HISTORICAL & ECONOMIC FORCES */}
+              {/* 5. CAST OF CHARACTERS / HISTORICAL & INSTITUTIONAL FORCES */}
               {toddlerGuide.toddlerAnalogy.characters.length > 0 && (
                 <div className="space-y-3">
-                  <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                  <span className={`text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                     <span>🎭 The Key Historical &amp; Institutional Forces</span>
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {toddlerGuide.toddlerAnalogy.characters.map((char, cIdx) => (
                       <div
                         key={cIdx}
-                        className={`p-3.5 rounded-2xl border flex items-start gap-3 transition-all ${
+                        className={`p-4 rounded-2xl border flex items-start gap-3.5 transition-all ${
                           isDark ? "bg-white/[0.02] border-white/10 hover:border-amber-500/30" : "bg-slate-50 border-slate-200 hover:border-amber-300"
                         }`}
                       >
-                        <span className="text-2xl shrink-0 mt-0.5">{char.emoji}</span>
+                        <span className="text-3xl shrink-0 mt-0.5">{char.emoji}</span>
                         <div className="min-w-0">
-                          <span className={`text-xs font-black block truncate ${isDark ? "text-white" : "text-slate-900"}`}>
+                          <span className={`text-xs sm:text-sm font-black block truncate ${isDark ? "text-white" : "text-slate-900"}`}>
                             {char.name}
                           </span>
-                          <p className={`text-[11px] leading-tight mt-0.5 ${isDark ? "text-slate-400" : "text-slate-600 font-medium"}`}>
+                          <p className={`text-xs leading-relaxed mt-1 ${isDark ? "text-slate-400" : "text-slate-600 font-medium"}`}>
                             {char.role}
                           </p>
                         </div>
@@ -366,6 +464,93 @@ const SmartStudyTopicCard = React.memo(function SmartStudyTopicCard({
                   </div>
                 </div>
               )}
+
+              {/* 6. FOUNDATIONAL BRIDGE & BOARD HOTSPOT (TWO DISTINCT CARDS) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* CLASS 9 FOUNDATIONAL BRIDGE */}
+                {(toddlerGuide.toddlerAnalogy.class9Connection || (topic as any).class9Bridge) && (
+                  <div
+                    className={`p-4 sm:p-5 rounded-2xl border flex items-start gap-3.5 ${
+                      isDark
+                        ? "bg-gradient-to-r from-blue-950/30 via-indigo-950/20 to-black border-blue-500/30 text-blue-200"
+                        : "bg-gradient-to-r from-blue-50 to-indigo-50/50 border-blue-200 text-blue-950"
+                    }`}
+                  >
+                    <span className="text-2xl shrink-0 mt-0.5">🏛️</span>
+                    <div className="space-y-1 min-w-0 flex-1">
+                      <span className="text-[10px] font-mono font-black uppercase tracking-wider text-blue-400 block">
+                        Connecting from Past • Class 9 NCERT Foundation Bridge
+                      </span>
+                      <p className="text-xs sm:text-sm leading-relaxed font-medium">
+                        {toddlerGuide.toddlerAnalogy.class9Connection || (topic as any).class9Bridge?.connectionExplanation}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* REPEATED BOARD HOTSPOT BANNER */}
+                {toddlerGuide.toddlerAnalogy.boardHotspot && (
+                  <div
+                    className={`p-4 sm:p-5 rounded-2xl border flex items-start gap-3.5 ${
+                      isDark
+                        ? "bg-rose-950/20 border-rose-500/30 text-rose-200"
+                        : "bg-rose-50 border-rose-200 text-rose-950"
+                    }`}
+                  >
+                    <span className="text-2xl shrink-0 mt-0.5">🔥</span>
+                    <div className="space-y-1 min-w-0 flex-1">
+                      <span className="text-[10px] font-mono font-black uppercase tracking-wider text-rose-400 block">
+                        CBSE Board Examination Trend
+                      </span>
+                      <p className="text-xs sm:text-sm leading-relaxed font-medium">
+                        {toddlerGuide.toddlerAnalogy.boardHotspot}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 7. HIGH-RISK EXAMINER TRAP & WARNING CARD */}
+              {topic.commonMistakesWarning && (
+                <div
+                  className={`p-5 rounded-2xl border relative overflow-hidden transition-all ${
+                    isDark
+                      ? "bg-rose-950/20 border-rose-500/40 text-rose-200"
+                      : "bg-rose-50 border-rose-300 text-rose-950"
+                  }`}
+                >
+                  <div className="flex items-start gap-3.5">
+                    <ShieldAlert className="w-6 h-6 text-rose-400 shrink-0 mt-0.5" />
+                    <div className="space-y-1.5 flex-1 min-w-0">
+                      <span className="text-[10px] font-mono font-black uppercase tracking-wider text-rose-400 block">
+                        High-Risk Board Examiner Trap • Avoid Mark Deduction
+                      </span>
+                      <p className="text-xs sm:text-sm leading-relaxed font-medium">
+                        {topic.commonMistakesWarning}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 8. THE GOLDEN TAKEAWAY FORMULA CARD */}
+              <div
+                className={`p-5 sm:p-6 rounded-3xl border text-center relative overflow-hidden shadow-md transition-all ${
+                  isDark
+                    ? "bg-gradient-to-r from-amber-950/40 via-yellow-950/30 to-amber-950/40 border-amber-500/40"
+                    : "bg-gradient-to-r from-amber-100 via-yellow-50 to-amber-100 border-amber-300"
+                }`}
+              >
+                <span className="text-2xl block mb-2">🏆</span>
+                <span className="text-[10px] font-mono font-black uppercase tracking-wider text-amber-500 block mb-1">
+                  The Golden Takeaway Formula
+                </span>
+                <p className={`text-sm sm:text-base font-black max-w-2xl mx-auto leading-relaxed ${
+                  isDark ? "text-amber-200" : "text-amber-950"
+                }`}>
+                  {toddlerGuide.toddlerAnalogy.moralOrAha}
+                </p>
+              </div>
             </div>
           )}
 
