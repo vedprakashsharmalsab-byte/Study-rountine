@@ -6,6 +6,7 @@
 // =========================================================================
 
 import { SST_EXTENDED_CONCEPTS } from "./sstExtendedConceptsData";
+import { SST_HISTORY_EXTENDED_TOPICS } from "./sstHistoryTopicsData";
 
 export interface SSTTimelineEvent {
   year: string;
@@ -749,7 +750,179 @@ export const SST_TIMELINES: Record<string, SSTTimelineEvent[]> = {
       "significance": "British colonial rule ended after nearly two centuries of struggle, sacrifice, and mass mobilization.",
       "ncertReference": "NCERT History Ch 2, p. 46"
     }
-  ]
+  ],
+  "ch11_global": [
+    {
+      "year": "3000 BCE",
+      "event": "Cowrie shells used as currency in coastal trade",
+      "significance": "Cowries from the Maldives traveled to China and West Africa, demonstrating ancient long-distance commercial links.",
+      "ncertReference": "NCERT History Ch 3, p. 53"
+    },
+    {
+      "year": "Pre-Modern Era",
+      "event": "Vibrant Silk Routes thrive across Asia, Europe and Africa",
+      "significance": "Chinese silk, Indian spices, and Southeast Asian textiles exchanged for European gold and silver; Buddhism, Christianity, and Islam spread along trade routes.",
+      "ncertReference": "NCERT History Ch 3, p. 54"
+    },
+    {
+      "year": "1492",
+      "event": "Christopher Columbus discovers America",
+      "significance": "Initiated the Columbian Exchange; common foods like potato, maize, tomato, chillies introduced to Europe and Asia.",
+      "ncertReference": "NCERT History Ch 3, p. 55"
+    },
+    {
+      "year": "Mid-16th Century",
+      "event": "Spanish conquest of the Americas via Smallpox",
+      "significance": "European conquerors used deadly biological weapon (smallpox microbes); native Americans had no immunity, decimating entire communities without firing a shot.",
+      "ncertReference": "NCERT History Ch 3, p. 56"
+    },
+    {
+      "year": "1845-1849",
+      "event": "Great Irish Potato Famine",
+      "significance": "Potato blight destroyed the crop; nearly 1,000,000 poor Irish starved to death because they were utterly dependent on potatoes for basic survival.",
+      "ncertReference": "NCERT History Ch 3, p. 56"
+    },
+    {
+      "year": "Late 1840s",
+      "event": "Abolition of British Corn Laws",
+      "significance": "British government scrapped import duties on food grains under industrialist pressure; cheap agricultural imports forced British farmers off land into cities.",
+      "ncertReference": "NCERT History Ch 3, p. 58"
+    },
+    {
+      "year": "1885",
+      "event": "Berlin Conference (Partition of Africa)",
+      "significance": "Major European colonial powers met in Berlin with rulers and maps to draw straight border lines and carve up the African continent.",
+      "ncertReference": "NCERT History Ch 3, p. 61"
+    },
+    {
+      "year": "1890s",
+      "event": "Rinderpest (Cattle Plague) ravages Africa",
+      "significance": "Cattle disease brought by infected British cattle wiped out 90% of African cattle, destroying the pastoral livelihood and forcing Africans into wage labour in mines.",
+      "ncertReference": "NCERT History Ch 3, p. 62"
+    },
+    {
+      "year": "1914-1918",
+      "event": "First World War transforms global economic balance",
+      "significance": "First industrial war using tanks, aircraft, and poison gas; Britain incurred massive debt, turning USA from international debtor to largest creditor nation.",
+      "ncertReference": "NCERT History Ch 3, p. 67"
+    },
+    {
+      "year": "1929-1939",
+      "event": "The Great Depression strikes worldwide",
+      "significance": "Triggered by agricultural overproduction and US Wall Street crash; collapse in commodity prices, widespread bank failures, and catastrophic unemployment across the globe.",
+      "ncertReference": "NCERT History Ch 3, p. 70"
+    },
+    {
+      "year": "July 1944",
+      "event": "Bretton Woods Conference (New Hampshire, USA)",
+      "significance": "Established the International Monetary Fund (IMF) and International Bank for Reconstruction and Development (World Bank) to ensure global economic stability and full employment.",
+      "ncertReference": "NCERT History Ch 3, p. 73"
+    },
+    {
+      "year": "1970s",
+      "event": "Breakdown of Bretton Woods & Rise of G-77 / NIEO",
+      "significance": "Collapse of fixed exchange rates; developing nations formed Group of 77 (G-77) demanding a New International Economic Order (NIEO) for control over their natural resources.",
+      "ncertReference": "NCERT History Ch 3, p. 75"
+    }
+  ],
+  "ch12_print": [
+    {
+      "year": "AD 594",
+      "event": "Woodblock printing developed in China",
+      "significance": "Earliest printed books produced by rubbing paper against inked woodblocks; China became major producer of printed material for civil service examinations.",
+      "ncertReference": "NCERT History Ch 5, p. 105"
+    },
+    {
+      "year": "AD 768-770",
+      "event": "Hand printing introduced into Japan",
+      "significance": "Buddhist missionaries from China introduced hand printing into Japan.",
+      "ncertReference": "NCERT History Ch 5, p. 106"
+    },
+    {
+      "year": "AD 868",
+      "event": "Japan prints the Buddhist Diamond Sutra",
+      "significance": "The oldest surviving Japanese printed book, containing six sheets of text and woodcut illustrations.",
+      "ncertReference": "NCERT History Ch 5, p. 106"
+    },
+    {
+      "year": "1295",
+      "event": "Marco Polo returns to Italy from China",
+      "significance": "Brought back knowledge of woodblock printing technology to Europe; Italians began producing books with woodblocks.",
+      "ncertReference": "NCERT History Ch 5, p. 107"
+    },
+    {
+      "year": "1448",
+      "event": "Johann Gutenberg perfects the mechanical printing press",
+      "significance": "Developed movable metal type press at Mainz, Germany; printed 180 copies of the Gutenberg Bible, launching the European Print Revolution.",
+      "ncertReference": "NCERT History Ch 5, p. 108"
+    },
+    {
+      "year": "1517",
+      "event": "Martin Luther writes the Ninety-Five Theses",
+      "significance": "Criticised corrupt practices of Roman Catholic Church; widely printed and distributed within weeks, sparking the Protestant Reformation ('Print is the ultimate gift of God').",
+      "ncertReference": "NCERT History Ch 5, p. 112"
+    },
+    {
+      "year": "1558",
+      "event": "Roman Catholic Church establishes Index of Prohibited Books",
+      "significance": "Inquisition tried Italian miller Menocchio for heretical reinterpretation of Bible; church imposed strict censorship and index of banned books to curb dissent.",
+      "ncertReference": "NCERT History Ch 5, p. 113"
+    },
+    {
+      "year": "18th Century",
+      "event": "Reading Mania & Enlightenment Thinkers",
+      "significance": "Spread of chapbooks, penny periodicals, and works of Voltaire and Rousseau created a critical public sphere that eroded the sacred legitimacy of the monarchy.",
+      "ncertReference": "NCERT History Ch 5, p. 114"
+    },
+    {
+      "year": "Mid-19th Century",
+      "event": "Richard M. Hoe invents rotary cylindrical press",
+      "significance": "Press capable of printing 8,000 sheets per hour; transformed mass newspaper circulation.",
+      "ncertReference": "NCERT History Ch 5, p. 118"
+    },
+    {
+      "year": "1556",
+      "event": "First printing press brought to Goa, India by Portuguese Jesuits",
+      "significance": "Jesuit priests printed tracts in Konkani and Kannada; first Tamil book printed in Cochin in 1579.",
+      "ncertReference": "NCERT History Ch 5, p. 119"
+    },
+    {
+      "year": "1780",
+      "event": "James Augustus Hickey publishes Bengal Gazette",
+      "significance": "First weekly commercial newspaper in India; described as 'a commercial paper open to all, but influenced by none'.",
+      "ncertReference": "NCERT History Ch 5, p. 120"
+    },
+    {
+      "year": "1821",
+      "event": "Raja Rammohun Roy starts Sambad Kaumudi",
+      "significance": "Pioneered vernacular social reform, campaigning against Sati and religious orthodoxy; Hindu conservatives countered with Samachar Chandrika.",
+      "ncertReference": "NCERT History Ch 5, p. 121"
+    },
+    {
+      "year": "1867",
+      "event": "Deoband Seminary founded in Uttar Pradesh",
+      "significance": "Published thousands of fatwas in Urdu guiding Muslim everyday life and resisting British colonial cultural hegemony.",
+      "ncertReference": "NCERT History Ch 5, p. 122"
+    },
+    {
+      "year": "1876",
+      "event": "Rashsundari Debi writes Amar Jiban",
+      "significance": "First full-length autobiography published in the Bengali language by a woman, recounting her secret struggle to learn to read in orthodox seclusion.",
+      "ncertReference": "NCERT History Ch 5, p. 123"
+    },
+    {
+      "year": "1878",
+      "event": "Lord Lytton passes the Vernacular Press Act",
+      "significance": "Modelled on Irish press laws, empowered colonial government to censor vernacular reports, seize printing machinery, and demand security deposits for seditious articles.",
+      "ncertReference": "NCERT History Ch 5, p. 126"
+    },
+    {
+      "year": "1908",
+      "event": "Bal Gangadhar Tilak imprisoned for writing in Kesari",
+      "significance": "Tilak defended revolutionaries in his Marathi newspaper Kesari; sentenced to 6 years imprisonment in Mandalay, triggering nationwide protests.",
+      "ncertReference": "NCERT History Ch 5, p. 127"
+    }
+  ],
 };
 
 export const SST_MAP_WORK: SSTMapWorkChapter[] = [
@@ -5209,8 +5382,38 @@ const SST_BASE_CONCEPTS: SSTConceptTopic[] = [
   }
 ];
 
-export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
-  ...SST_BASE_CONCEPTS,
-  ...SST_EXTENDED_CONCEPTS
+// Assemble complete, in-depth Class 10 Social Science concepts:
+// Includes all 49 comprehensively crafted History topics across Chapters 1, 2, 11 & 12
+const sorrieuTopic = SST_HISTORY_EXTENDED_TOPICS.find((t) => t.id === "sst_his_c1_t0");
+const weaversTopic = SST_HISTORY_EXTENDED_TOPICS.find((t) => t.id === "sst_his_c1_t7b");
+const quitIndiaTopic = SST_HISTORY_EXTENDED_TOPICS.find((t) => t.id === "sst_his_c2_t17");
+const globalWorldTopics = SST_HISTORY_EXTENDED_TOPICS.filter((t) => t.chapterNo === 11);
+const printCultureTopics = SST_HISTORY_EXTENDED_TOPICS.filter((t) => t.chapterNo === 12);
+
+// Reconstruct Chapter 1 with Sorrieu (intro) and Silesian Weavers (1845) in exact chronological order
+const ch1Base = SST_BASE_CONCEPTS.filter((t) => t.chapterNo === 1);
+const ch1Ordered: SSTConceptTopic[] = [
+  ...(sorrieuTopic ? [sorrieuTopic] : []),
+  ...ch1Base.slice(0, 7),
+  ...(weaversTopic ? [weaversTopic] : []),
+  ...ch1Base.slice(7)
 ];
 
+// Reconstruct Chapter 2 with Quit India Movement (1942)
+const ch2Base = SST_BASE_CONCEPTS.filter((t) => t.chapterNo === 2);
+const ch2Ordered: SSTConceptTopic[] = [
+  ...ch2Base,
+  ...(quitIndiaTopic ? [quitIndiaTopic] : [])
+];
+
+const otherBaseConcepts = SST_BASE_CONCEPTS.filter((t) => t.chapterNo !== 1 && t.chapterNo !== 2);
+const otherExtendedConcepts = SST_EXTENDED_CONCEPTS.filter((t) => t.chapterNo !== 11 && t.chapterNo !== 12);
+
+export const SST_CONCEPTS_AND_EXAMPLES: SSTConceptTopic[] = [
+  ...ch1Ordered,
+  ...ch2Ordered,
+  ...otherBaseConcepts,
+  ...globalWorldTopics,
+  ...printCultureTopics,
+  ...otherExtendedConcepts
+];

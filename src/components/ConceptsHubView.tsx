@@ -218,7 +218,7 @@ export default function ConceptsHubView({
       const saved = localStorage.getItem("cbse_last_sst_chapter");
       if (saved) {
         const p = parseInt(saved);
-        if (!isNaN(p) && p >= 1 && p <= 10) return p;
+        if (!isNaN(p) && p >= 1 && p <= 20) return p;
       }
     }
     return 1; // Default to Chapter 1: Nationalism in Europe
@@ -457,6 +457,8 @@ export default function ConceptsHubView({
   const activeSSTTimeline = useMemo(() => {
     if (activeSSTChapterNo === 1) return SST_TIMELINES["ch1_europe"] || [];
     if (activeSSTChapterNo === 2) return SST_TIMELINES["ch2_india"] || [];
+    if (activeSSTChapterNo === 11) return SST_TIMELINES["ch11_global"] || [];
+    if (activeSSTChapterNo === 12) return SST_TIMELINES["ch12_print"] || [];
     return [];
   }, [activeSSTChapterNo]);
 
