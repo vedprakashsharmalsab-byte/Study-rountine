@@ -3211,7 +3211,7 @@ export default function CBSECommandCenter() {
             </div>
 
             {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (MILESTONES + TIMER + XP + CONTROLS - ZERO OVERLAPPING) */}
-            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <div className="flex items-center gap-1 sm:gap-2 shrink-0 whitespace-nowrap">
               {/* 1. CBSE CLASS 10 BOARD MILESTONES (2026–2027) CAPSULE */}
               <div id="tutorial-countdown-capsule" className="flex items-center shrink-0">
                 <button
@@ -3235,7 +3235,7 @@ export default function CBSECommandCenter() {
               <TopHeaderStudyTimer
                 isDark={isDark}
                 onAddXp={(amount, reason) => {
-                  setTotalFocusMins((m) => m + 25);
+                  setTotalFocusMins((m) => m + 22);
                   showXpToast(amount, reason);
                 }}
                 onPlaySound={(s) => {

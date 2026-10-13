@@ -37,7 +37,8 @@ interface ZenStudyTimerModalProps {
 
 const PRESETS = [
   { label: "15m Sprint", minutes: 15, desc: "Formula & Recall" },
-  { label: "25m Pomodoro", minutes: 25, desc: "Standard Focus" },
+  { label: "22m Focus", minutes: 22, desc: "Optimal Deep Flow" },
+  { label: "25m Classic", minutes: 25, desc: "Standard Pomodoro" },
   { label: "45m Deep Study", minutes: 45, desc: "NCERT Mastery" },
   { label: "60m Mock Sprint", minutes: 60, desc: "Board Exam Section" },
   { label: "90m Marathon", minutes: 90, desc: "Full Length Mock" }

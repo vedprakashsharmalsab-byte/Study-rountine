@@ -4301,6 +4301,452 @@ export default function BiologyVisualSchematic({
           </svg>
         );
 
+      // =====================================================================
+      // 12. CHEMISTRY CH 1: ELECTROLYSIS OF WATER (2:1 VOLUME RATIO)
+      // =====================================================================
+      case "chem_electrolysis":
+        return (
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
+            <defs>
+              <linearGradient id="elecWaterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor={isDark ? "#0284c7" : "#38bdf8"} stopOpacity="0.35" />
+                <stop offset="100%" stopColor={isDark ? "#0369a1" : "#0284c7"} stopOpacity="0.65" />
+              </linearGradient>
+              <linearGradient id="elecCarbonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#334155" />
+                <stop offset="50%" stopColor="#64748b" />
+                <stop offset="100%" stopColor="#1e293b" />
+              </linearGradient>
+            </defs>
+
+            {/* Background Grid & Title */}
+            <rect width="1000" height="650" fill={isDark ? "#090d16" : "#f8fafc"} />
+            <text x="500" y="42" textAnchor="middle" fill={textAccent} fontSize="20" fontWeight="900" letterSpacing="0.5">
+              ACTIVITY 1.7: ELECTROLYTIC DECOMPOSITION OF ACIDIFIED WATER
+            </text>
+            <text x="500" y="68" textAnchor="middle" fill={textMuted} fontSize="13" fontWeight="600">
+              NCERT Class 10 Science Chapter 1  Demonstration of 2:1 Stoichiometric Volume Ratio [2H?O ? 2H? + O?]
+            </text>
+
+            {/* Plastic Mug / Beaker Outer Wall */}
+            <path d="M 220 120 L 250 500 Q 250 530 280 530 L 720 530 Q 750 530 750 500 L 780 120 Z" 
+                  fill={isDark ? "#111827" : "#f1f5f9"} stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="3" />
+            
+            {/* Acidified Water Solution */}
+            <path d="M 235 200 Q 500 210 765 200 L 745 490 Q 745 515 720 515 L 280 515 Q 255 515 255 490 Z" 
+                  fill="url(#elecWaterGrad)" />
+
+            {/* Rubber Stoppers at Base */}
+            <rect x="330" y="490" width="80" height="40" rx="6" fill="#1e293b" stroke="#64748b" strokeWidth="2" />
+            <rect x="590" y="490" width="80" height="40" rx="6" fill="#1e293b" stroke="#64748b" strokeWidth="2" />
+
+            {/* Left Carbon (Graphite) Electrode - CATHODE */}
+            <rect x="360" y="270" width="20" height="230" rx="4" fill="url(#elecCarbonGrad)" stroke="#0f172a" strokeWidth="2" />
+            {/* Right Carbon (Graphite) Electrode - ANODE */}
+            <rect x="620" y="270" width="20" height="230" rx="4" fill="url(#elecCarbonGrad)" stroke="#0f172a" strokeWidth="2" />
+
+            {/* Left Inverted Test Tube (Cathode - HYDROGEN Gas Tube: 2X Gas Space) */}
+            <path d="M 345 500 L 345 150 Q 345 130 370 130 Q 395 130 395 150 L 395 500" 
+                  fill={isDark ? "rgba(16, 185, 129, 0.15)" : "rgba(16, 185, 129, 0.1)"} 
+                  stroke={isDark ? "#34d399" : "#059669"} strokeWidth="2.5" />
+            {/* Water level inside Cathode tube: Depressed significantly down to y=250 */}
+            <rect x="347" y="250" width="46" height="250" fill={isDark ? "#0284c7" : "#38bdf8"} fillOpacity="0.4" />
+            {/* Hydrogen Gas Bubbles */}
+            <circle cx="370" cy="220" r="5" fill="#34d399" opacity="0.8" />
+            <circle cx="360" cy="190" r="7" fill="#34d399" opacity="0.8" />
+            <circle cx="378" cy="170" r="6" fill="#34d399" opacity="0.8" />
+            <circle cx="368" cy="148" r="8" fill="#34d399" opacity="0.8" />
+
+            {/* Right Inverted Test Tube (Anode - OXYGEN Gas Tube: 1X Gas Space) */}
+            <path d="M 605 500 L 605 150 Q 605 130 630 130 Q 655 130 655 150 L 655 500" 
+                  fill={isDark ? "rgba(244, 63, 94, 0.15)" : "rgba(244, 63, 94, 0.1)"} 
+                  stroke={isDark ? "#fb7185" : "#e11d48"} strokeWidth="2.5" />
+            {/* Water level inside Anode tube: Depressed only to y=190 (half as much gas space) */}
+            <rect x="607" y="190" width="46" height="310" fill={isDark ? "#0284c7" : "#38bdf8"} fillOpacity="0.4" />
+            {/* Oxygen Gas Bubbles */}
+            <circle cx="630" cy="170" r="5" fill="#fb7185" opacity="0.8" />
+            <circle cx="625" cy="150" r="6" fill="#fb7185" opacity="0.8" />
+
+            {/* Electrical Wiring to 6V Battery */}
+            <path d="M 370 530 L 370 590 L 460 590" fill="none" stroke="#10b981" strokeWidth="3" />
+            <path d="M 630 530 L 630 590 L 540 590" fill="none" stroke="#f43f5e" strokeWidth="3" />
+            {/* Battery Symbol & Switch */}
+            <rect x="460" y="575" width="80" height="30" rx="6" fill={labelBg} stroke={labelBorder} strokeWidth="2" />
+            <text x="500" y="595" textAnchor="middle" fill="#f59e0b" fontSize="12" fontWeight="900">
+              6V BATTERY
+            </text>
+            <circle cx="475" cy="590" r="4" fill="#10b981" />
+            <text x="475" y="618" textAnchor="middle" fill="#10b981" fontSize="11" fontWeight="800">(-) Cathode</text>
+            <circle cx="525" cy="590" r="4" fill="#f43f5e" />
+            <text x="525" y="618" textAnchor="middle" fill="#f43f5e" fontSize="11" fontWeight="800">(+) Anode</text>
+
+            {/* Annotations & Callout Boxes */}
+            {/* Left Cathode Card */}
+            <g transform="translate(40, 150)">
+              <rect width="260" height="135" rx="12" fill={labelBg} stroke="#10b981" strokeWidth="2" />
+              <text x="15" y="26" fill="#10b981" fontSize="13" fontWeight="900">? CATHODE (-): HYDROGEN (H?)</text>
+              <text x="15" y="50" fill={textPrimary} fontSize="11" fontWeight="700">Volume Ratio: 2 VOLUMES</text>
+              <text x="15" y="70" fill={textMuted} fontSize="10.5">Reaction: 2H? + 2e? ? H?(g)?</text>
+              <text x="15" y="92" fill={textMuted} fontSize="10.5">Test: Burns with distinct POP sound</text>
+              <text x="15" y="115" fill="#f59e0b" fontSize="10" fontWeight="700">? Gas volume is exactly DOUBLE of O?</text>
+            </g>
+
+            {/* Right Anode Card */}
+            <g transform="translate(700, 150)">
+              <rect width="260" height="135" rx="12" fill={labelBg} stroke="#f43f5e" strokeWidth="2" />
+              <text x="15" y="26" fill="#f43f5e" fontSize="13" fontWeight="900">? ANODE (+): OXYGEN (O?)</text>
+              <text x="15" y="50" fill={textPrimary} fontSize="11" fontWeight="700">Volume Ratio: 1 VOLUME</text>
+              <text x="15" y="70" fill={textMuted} fontSize="10.5">Reaction: 2O??? ? O?(g)? + 4e?</text>
+              <text x="15" y="92" fill={textMuted} fontSize="10.5">Test: Rekindles a glowing splint</text>
+              <text x="15" y="115" fill="#f59e0b" fontSize="10" fontWeight="700">? Water formula H?O dictates 2:1 ratio</text>
+            </g>
+
+            {/* Acidified Water Callout */}
+            <g transform="translate(40, 320)">
+              <rect width="230" height="85" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="15" y="24" fill="#38bdf8" fontSize="12" fontWeight="800">WHY ACIDIFY THE WATER?</text>
+              <text x="15" y="45" fill={textMuted} fontSize="10">Pure distilled water has very few ions</text>
+              <text x="15" y="62" fill={textMuted} fontSize="10">and is an electrical insulator.</text>
+              <text x="15" y="78" fill={textPrimary} fontSize="10" fontWeight="700">Dilute H?SO? supplies mobile ions.</text>
+            </g>
+          </svg>
+        );
+
+      // =====================================================================
+      // 13. CHEMISTRY CH 2: ZINC + DILUTE ACID & POP TEST
+      // =====================================================================
+      case "chem_acid_zinc":
+        return (
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
+            <defs>
+              <radialGradient id="sparkGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#fef08a" />
+                <stop offset="60%" stopColor="#f97316" />
+                <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+
+            <rect width="1000" height="650" fill={isDark ? "#090d16" : "#f8fafc"} />
+            <text x="500" y="42" textAnchor="middle" fill={textAccent} fontSize="20" fontWeight="900" letterSpacing="0.5">
+              ACTIVITY 2.1: REACTION OF ZINC WITH DILUTE ACID &amp; HYDROGEN POP TEST
+            </text>
+            <text x="500" y="68" textAnchor="middle" fill={textMuted} fontSize="13" fontWeight="600">
+              NCERT Class 10 Science Chapter 2  Zn(s) + H?SO?(aq) ? ZnSO?(aq) + H?(g)?
+            </text>
+
+            {/* Retort Stand */}
+            <rect x="80" y="600" width="160" height="15" rx="3" fill="#475569" />
+            <rect x="150" y="100" width="10" height="500" fill="#64748b" />
+            <rect x="155" y="240" width="70" height="12" fill="#475569" />
+
+            {/* Boiling Tube with Reaction */}
+            <path d="M 210 180 L 210 440 Q 210 470 235 470 Q 260 470 260 440 L 260 180 Z" 
+                  fill={isDark ? "rgba(56, 189, 248, 0.15)" : "rgba(56, 189, 248, 0.2)"} 
+                  stroke={isDark ? "#38bdf8" : "#0284c7"} strokeWidth="2.5" />
+            
+            {/* Dilute H2SO4 Liquid Level */}
+            <path d="M 212 330 L 212 440 Q 212 468 235 468 Q 258 468 258 440 L 258 330 Z" 
+                  fill={isDark ? "#0284c7" : "#38bdf8"} fillOpacity="0.4" />
+
+            {/* Granulated Zinc Pieces at bottom */}
+            <polygon points="220,455 228,445 235,455 226,462" fill="#94a3b8" stroke="#475569" strokeWidth="1" />
+            <polygon points="232,448 242,442 248,452 238,460" fill="#94a3b8" stroke="#475569" strokeWidth="1" />
+            <polygon points="225,438 234,432 240,440 230,446" fill="#cbd5e1" stroke="#475569" strokeWidth="1" />
+
+            {/* H2 Gas Bubbles in Tube */}
+            <circle cx="230" cy="410" r="4" fill="#38bdf8" opacity="0.8" />
+            <circle cx="240" cy="380" r="5" fill="#38bdf8" opacity="0.8" />
+            <circle cx="225" cy="350" r="4" fill="#38bdf8" opacity="0.8" />
+            <circle cx="235" cy="310" r="5" fill="#38bdf8" opacity="0.8" />
+
+            {/* Rubber Cork */}
+            <polygon points="208,180 262,180 256,155 214,155" fill="#334155" stroke="#475569" strokeWidth="1.5" />
+
+            {/* Delivery Tube Passing into Soap Trough */}
+            <path d="M 235 155 L 235 130 Q 235 110 255 110 L 450 110 Q 470 110 470 130 L 470 480 Q 470 500 490 500 L 580 500" 
+                  fill="none" stroke="#94a3b8" strokeWidth="5" strokeLinecap="round" />
+
+            {/* Glass Trough with Soap Solution */}
+            <path d="M 520 460 L 540 560 Q 540 575 565 575 L 755 575 Q 780 575 780 560 L 800 460 Z" 
+                  fill={isDark ? "rgba(244, 63, 94, 0.15)" : "rgba(244, 63, 94, 0.1)"} 
+                  stroke={isDark ? "#fb7185" : "#e11d48"} strokeWidth="2.5" />
+            <path d="M 530 490 L 545 555 Q 545 565 565 565 L 755 565 Q 775 565 775 555 L 790 490 Z" 
+                  fill="#f43f5e" fillOpacity="0.25" />
+
+            {/* Soap Bubbles Filled with Hydrogen Gas */}
+            <circle cx="640" cy="460" r="16" fill="none" stroke="#38bdf8" strokeWidth="2" opacity="0.85" />
+            <circle cx="670" cy="410" r="20" fill="none" stroke="#38bdf8" strokeWidth="2" opacity="0.85" />
+            <circle cx="650" cy="340" r="24" fill="none" stroke="#38bdf8" strokeWidth="2.5" opacity="0.9" />
+            <circle cx="680" cy="260" r="26" fill="none" stroke="#38bdf8" strokeWidth="2.5" opacity="0.9" />
+
+            {/* Bursting Bubble at Top with Candle & Pop Sound */}
+            <circle cx="690" cy="180" r="45" fill="url(#sparkGrad)" />
+            {/* Candle */}
+            <rect x="760" y="210" width="22" height="90" rx="3" fill="#f8fafc" stroke="#94a3b8" strokeWidth="1.5" />
+            <polygon points="771,210 765,185 771,170 777,185" fill="#f59e0b" />
+            <circle cx="771" cy="185" r="5" fill="#ef4444" />
+
+            {/* Pop Sound Explosion Badge */}
+            <g transform="translate(680, 110)">
+              <rect x="-60" y="-22" width="160" height="44" rx="10" fill="#ef4444" stroke="#fef08a" strokeWidth="2" />
+              <text x="20" y="6" textAnchor="middle" fill="#ffffff" fontSize="16" fontWeight="900" letterSpacing="1">
+                BURSTS WITH 'POP'!
+              </text>
+            </g>
+
+            {/* Explanatory Cards */}
+            <g transform="translate(30, 200)">
+              <rect width="170" height="110" rx="10" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="12" y="24" fill="#38bdf8" fontSize="11.5" fontWeight="800">REACTION IN TUBE</text>
+              <text x="12" y="45" fill={textPrimary} fontSize="10" fontWeight="700">Zn + H?SO? ?</text>
+              <text x="12" y="62" fill={textPrimary} fontSize="10" fontWeight="700">ZnSO? + H?(g)?</text>
+              <text x="12" y="85" fill={textMuted} fontSize="9.5">Displacement reaction;</text>
+              <text x="12" y="100" fill={textMuted} fontSize="9.5">exothermic (tube warms).</text>
+            </g>
+
+            <g transform="translate(350, 520)">
+              <rect width="400" height="85" rx="12" fill={labelBg} stroke="#f59e0b" strokeWidth="2" />
+              <text x="20" y="25" fill="#f59e0b" fontSize="12.5" fontWeight="900">
+                WHY USE SOAP SOLUTION INSTEAD OF WATER?
+              </text>
+              <text x="20" y="47" fill={textPrimary} fontSize="10.5">
+                ? Hydrogen gas does not dissolve easily in water.
+              </text>
+              <text x="20" y="65" fill={textMuted} fontSize="10.5">
+                ? Soap forms lightweight film bubbles that rise in air, isolating H? for testing.
+              </text>
+            </g>
+          </svg>
+        );
+
+      // =====================================================================
+      // 14. CHEMISTRY CH 3: ELECTROLYTIC REFINING & RUSTING CONDITIONS
+      // =====================================================================
+      case "chem_refining_copper":
+        return (
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
+            <rect width="1000" height="650" fill={isDark ? "#090d16" : "#f8fafc"} />
+            <text x="500" y="38" textAnchor="middle" fill={textAccent} fontSize="19" fontWeight="900" letterSpacing="0.5">
+              CHAPTER 3: ELECTROLYTIC REFINING OF COPPER &amp; ACTIVITY 3.14 RUSTING CONDITIONS
+            </text>
+
+            {/* ================= LEFT PANEL: COPPER REFINING ================= */}
+            <g transform="translate(40, 65)">
+              <rect width="430" height="540" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="215" y="32" textAnchor="middle" fill="#f59e0b" fontSize="14" fontWeight="900">
+                PANEL A: ELECTROLYTIC REFINING OF COPPER
+              </text>
+
+              {/* Tank */}
+              <rect x="50" y="90" width="330" height="320" rx="8" fill={isDark ? "#1e293b" : "#f1f5f9"} stroke="#64748b" strokeWidth="2" />
+              {/* Blue Acidified CuSO4 Solution */}
+              <rect x="55" y="140" width="320" height="265" rx="4" fill="#0284c7" fillOpacity="0.35" />
+
+              {/* Impure Anode (Thick Block) */}
+              <rect x="110" y="110" width="40" height="250" rx="3" fill="#b45309" stroke="#78350f" strokeWidth="2" />
+              <text x="130" y="100" textAnchor="middle" fill="#f59e0b" fontSize="12" fontWeight="800">ANODE (+)</text>
+              <text x="130" y="380" textAnchor="middle" fill="#fef08a" fontSize="10" fontWeight="700">Impure Cu</text>
+
+              {/* Pure Cathode (Thin Strip) */}
+              <rect x="280" y="110" width="16" height="250" rx="2" fill="#f97316" stroke="#c2410c" strokeWidth="2" />
+              <text x="288" y="100" textAnchor="middle" fill="#38bdf8" fontSize="12" fontWeight="800">CATHODE (-)</text>
+              <text x="288" y="380" textAnchor="middle" fill="#fed7aa" fontSize="10" fontWeight="700">Pure Cu Strip</text>
+
+              {/* Cu2+ Cations Moving Across */}
+              <path d="M 165 220 L 265 220" fill="none" stroke="#38bdf8" strokeWidth="3" markerEnd="url(#arrow)" strokeDasharray="5,3" />
+              <text x="215" y="210" textAnchor="middle" fill="#38bdf8" fontSize="12" fontWeight="900">Cu??? Ions</text>
+
+              {/* Anode Mud at bottom */}
+              <polygon points="100,400 160,400 150,390 110,390" fill="#64748b" stroke="#334155" strokeWidth="1" />
+              <text x="130" y="420" textAnchor="middle" fill="#ef4444" fontSize="11" fontWeight="800">ANODE MUD</text>
+              <text x="130" y="435" textAnchor="middle" fill={textMuted} fontSize="9.5">(Au, Ag, Pt impurities)</text>
+
+              {/* Bottom Equations Box */}
+              <g transform="translate(30, 445)">
+                <rect width="370" height="75" rx="10" fill={isDark ? "#0f172a" : "#ffffff"} stroke={labelBorder} strokeWidth="1" />
+                <text x="15" y="25" fill="#f59e0b" fontSize="11" fontWeight="800">ANODE OXIDATION: Cu(s) ? Cu???(aq) + 2e?</text>
+                <text x="15" y="46" fill="#38bdf8" fontSize="11" fontWeight="800">CATHODE REDUCTION: Cu???(aq) + 2e? ? Cu(s)</text>
+                <text x="15" y="65" fill={textMuted} fontSize="10">Pure copper deposits; cathode strip continuously thickens.</text>
+              </g>
+            </g>
+
+            {/* ================= RIGHT PANEL: ACTIVITY 3.14 RUSTING ================= */}
+            <g transform="translate(510, 65)">
+              <rect width="450" height="540" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="225" y="32" textAnchor="middle" fill="#38bdf8" fontSize="14" fontWeight="900">
+                PANEL B: ACTIVITY 3.14  CONDITIONS FOR RUSTING
+              </text>
+
+              {/* 3 Test Tubes */}
+              {/* Test Tube A */}
+              <g transform="translate(35, 60)">
+                <rect x="0" y="0" width="105" height="340" rx="10" fill={isDark ? "#1e293b" : "#f1f5f9"} stroke="#64748b" strokeWidth="1.5" />
+                <rect x="5" y="160" width="95" height="175" rx="6" fill="#0284c7" fillOpacity="0.3" />
+                {/* Rusty Nail */}
+                <rect x="45" y="130" width="14" height="180" rx="2" fill="#b45309" stroke="#78350f" strokeWidth="1.5" />
+                <circle cx="52" cy="180" r="4" fill="#dc2626" />
+                <circle cx="54" cy="220" r="5" fill="#dc2626" />
+                <circle cx="50" cy="260" r="4" fill="#dc2626" />
+                <text x="52" y="320" textAnchor="middle" fill="#ef4444" fontSize="12" fontWeight="900">RUSTS!</text>
+                <text x="52" y="360" textAnchor="middle" fill={textPrimary} fontSize="11" fontWeight="800">TUBE A</text>
+                <text x="52" y="378" textAnchor="middle" fill={textMuted} fontSize="9.5">Water + Air</text>
+              </g>
+
+              {/* Test Tube B */}
+              <g transform="translate(170, 60)">
+                <rect x="0" y="0" width="105" height="340" rx="10" fill={isDark ? "#1e293b" : "#f1f5f9"} stroke="#64748b" strokeWidth="1.5" />
+                <rect x="5" y="150" width="95" height="185" rx="6" fill="#0284c7" fillOpacity="0.25" />
+                {/* Oil Layer */}
+                <rect x="5" y="135" width="95" height="20" fill="#facc15" fillOpacity="0.75" />
+                <text x="52" y="149" textAnchor="middle" fill="#713f12" fontSize="9" fontWeight="900">OIL LAYER</text>
+                {/* Clean Shiny Nail */}
+                <rect x="45" y="145" width="14" height="170" rx="2" fill="#94a3b8" stroke="#475569" strokeWidth="1.5" />
+                <text x="52" y="320" textAnchor="middle" fill="#10b981" fontSize="12" fontWeight="900">NO RUST</text>
+                <text x="52" y="360" textAnchor="middle" fill={textPrimary} fontSize="11" fontWeight="800">TUBE B</text>
+                <text x="52" y="378" textAnchor="middle" fill={textMuted} fontSize="9.5">Boiled H?O (No O?)</text>
+              </g>
+
+              {/* Test Tube C */}
+              <g transform="translate(305, 60)">
+                <rect x="0" y="0" width="105" height="340" rx="10" fill={isDark ? "#1e293b" : "#f1f5f9"} stroke="#64748b" strokeWidth="1.5" />
+                {/* Rubber cork on top */}
+                <rect x="10" y="5" width="85" height="25" fill="#334155" rx="4" />
+                {/* Anhydrous CaCl2 at bottom */}
+                <polygon points="15,330 90,330 80,310 25,310" fill="#e2e8f0" stroke="#94a3b8" strokeWidth="1" />
+                <text x="52" y="325" textAnchor="middle" fill="#0f172a" fontSize="8" fontWeight="800">CaCl? DRY</text>
+                {/* Clean Shiny Nail */}
+                <rect x="45" y="100" width="14" height="190" rx="2" fill="#94a3b8" stroke="#475569" strokeWidth="1.5" />
+                <text x="52" y="300" textAnchor="middle" fill="#10b981" fontSize="12" fontWeight="900">NO RUST</text>
+                <text x="52" y="360" textAnchor="middle" fill={textPrimary} fontSize="11" fontWeight="800">TUBE C</text>
+                <text x="52" y="378" textAnchor="middle" fill={textMuted} fontSize="9.5">Dry Air (No H?O)</text>
+              </g>
+
+              {/* Bottom Rule Card */}
+              <g transform="translate(25, 455)">
+                <rect width="400" height="65" rx="10" fill={isDark ? "#0f172a" : "#ffffff"} stroke="#10b981" strokeWidth="1.5" />
+                <text x="20" y="25" fill="#10b981" fontSize="12" fontWeight="900">SCIENTIFIC CONCLUSION FOR CBSE:</text>
+                <text x="20" y="48" fill={textPrimary} fontSize="10.5">
+                  Rusting requires BOTH oxygen and moisture simultaneously.
+                </text>
+              </g>
+            </g>
+          </svg>
+        );
+
+      // =====================================================================
+      // 15. CHEMISTRY CH 4: SOAP MICELLE & CARBON ALLOTROPES
+      // =====================================================================
+      case "chem_soap_micelle":
+        return (
+          <svg viewBox="0 0 1000 650" className="w-full h-auto select-none">
+            <rect width="1000" height="650" fill={isDark ? "#090d16" : "#f8fafc"} />
+            <text x="500" y="38" textAnchor="middle" fill={textAccent} fontSize="19" fontWeight="900" letterSpacing="0.5">
+              CHAPTER 4: SOAP MICELLE CLEANSING ACTION &amp; CARBON ALLOTROPES
+            </text>
+
+            {/* ================= LEFT PANEL: SOAP MICELLE CLEANSING ================= */}
+            <g transform="translate(40, 65)">
+              <rect width="450" height="540" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="225" y="32" textAnchor="middle" fill="#38bdf8" fontSize="14" fontWeight="900">
+                PANEL A: STRUCTURE OF A SOAP MICELLE
+              </text>
+
+              {/* Central Dirt / Grease Droplet */}
+              <circle cx="225" cy="240" r="48" fill="#451a03" stroke="#78350f" strokeWidth="2.5" />
+              <text x="225" y="235" textAnchor="middle" fill="#fef08a" fontSize="11" fontWeight="900">OILY DIRT</text>
+              <text x="225" y="252" textAnchor="middle" fill="#fed7aa" fontSize="9.5">DROPLET</text>
+
+              {/* 12 Radially Arranged Soap Molecules */}
+              {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, idx) => {
+                const rad = (angle * Math.PI) / 180;
+                const innerX = 225 + Math.cos(rad) * 48;
+                const innerY = 240 + Math.sin(rad) * 48;
+                const outerX = 225 + Math.cos(rad) * 125;
+                const outerY = 240 + Math.sin(rad) * 125;
+                const headX = 225 + Math.cos(rad) * 138;
+                const headY = 240 + Math.sin(rad) * 138;
+                return (
+                  <g key={idx}>
+                    {/* Hydrophobic zigzag tail */}
+                    <line x1={innerX} y1={innerY} x2={outerX} y2={outerY} stroke="#f59e0b" strokeWidth="3" strokeDasharray="6,3" />
+                    {/* Hydrophilic Ionic Head */}
+                    <circle cx={headX} cy={headY} r="10" fill="#0284c7" stroke="#38bdf8" strokeWidth="2" />
+                    <text x={headX} y={headY + 3.5} textAnchor="middle" fill="#ffffff" fontSize="8" fontWeight="900">-</text>
+                  </g>
+                );
+              })}
+
+              {/* Legend & Explanation */}
+              <g transform="translate(25, 410)">
+                <rect width="400" height="110" rx="10" fill={isDark ? "#0f172a" : "#ffffff"} stroke={labelBorder} strokeWidth="1" />
+                <circle cx="25" cy="25" r="8" fill="#0284c7" stroke="#38bdf8" strokeWidth="2" />
+                <text x="45" y="29" fill="#38bdf8" fontSize="11.5" fontWeight="800">
+                  Hydrophilic Ionic Head (-COO? Na?): Faces outward in water
+                </text>
+                <line x1="15" y1="55" x2="35" y2="55" stroke="#f59e0b" strokeWidth="3" strokeDasharray="5,2" />
+                <text x="45" y="59" fill="#f59e0b" fontSize="11.5" fontWeight="800">
+                  Hydrophobic Hydrocarbon Tail: Embeds in oil/grease droplet
+                </text>
+                <text x="15" y="88" fill={textMuted} fontSize="10">
+                  ? Like-charge repulsion between heads keeps emulsion dispersed; rinsing washes dirt away!
+                </text>
+              </g>
+            </g>
+
+            {/* ================= RIGHT PANEL: DIAMOND VS GRAPHITE ================= */}
+            <g transform="translate(510, 65)">
+              <rect width="450" height="540" rx="16" fill={labelBg} stroke={labelBorder} strokeWidth="1.5" />
+              <text x="225" y="32" textAnchor="middle" fill="#f59e0b" fontSize="14" fontWeight="900">
+                PANEL B: CARBON ALLOTROPES (DIAMOND VS GRAPHITE)
+              </text>
+
+              {/* Diamond Sub-Box */}
+              <g transform="translate(25, 60)">
+                <rect width="400" height="200" rx="12" fill={isDark ? "#0f172a" : "#f1f5f9"} stroke="#38bdf8" strokeWidth="1.5" />
+                <text x="20" y="26" fill="#38bdf8" fontSize="13" fontWeight="900">DIAMOND: 3D RIGID TETRAHEDRAL LATTICE</text>
+                
+                {/* Tetrahedral Cluster */}
+                <circle cx="90" cy="110" r="14" fill="#38bdf8" stroke="#0284c7" strokeWidth="2" />
+                <circle cx="50" cy="165" r="11" fill="#38bdf8" />
+                <circle cx="130" cy="165" r="11" fill="#38bdf8" />
+                <circle cx="90" cy="55" r="11" fill="#38bdf8" />
+                <line x1="90" y1="110" x2="50" y2="165" stroke="#94a3b8" strokeWidth="3" />
+                <line x1="90" y1="110" x2="130" y2="165" stroke="#94a3b8" strokeWidth="3" />
+                <line x1="90" y1="110" x2="90" y2="55" stroke="#94a3b8" strokeWidth="3" />
+
+                <g transform="translate(160, 50)">
+                  <text x="0" y="18" fill={textPrimary} fontSize="11" fontWeight="700">? Each carbon bonded to 4 carbons</text>
+                  <text x="0" y="38" fill={textPrimary} fontSize="11" fontWeight="700">? 0 free valence electrons ? INSULATOR</text>
+                  <text x="0" y="58" fill={textMuted} fontSize="10.5">? Hardest known natural substance</text>
+                  <text x="0" y="78" fill={textMuted} fontSize="10.5">? Uses: Glass cutters, rock drills, gems</text>
+                </g>
+              </g>
+
+              {/* Graphite Sub-Box */}
+              <g transform="translate(25, 290)">
+                <rect width="400" height="230" rx="12" fill={isDark ? "#0f172a" : "#f1f5f9"} stroke="#10b981" strokeWidth="1.5" />
+                <text x="20" y="26" fill="#10b981" fontSize="13" fontWeight="900">GRAPHITE: 2D HEXAGONAL PLANAR LAYERS</text>
+                
+                {/* Two Hexagonal Layers with Van der Waals Gap */}
+                {/* Layer 1 */}
+                <polygon points="60,65 95,65 112,90 95,115 60,115 42,90" fill="none" stroke="#10b981" strokeWidth="2.5" />
+                {/* Layer 2 */}
+                <polygon points="60,150 95,150 112,175 95,200 60,200 42,175" fill="none" stroke="#10b981" strokeWidth="2.5" />
+                {/* Dotted weak forces */}
+                <line x1="77" y1="115" x2="77" y2="150" stroke="#f59e0b" strokeWidth="2" strokeDasharray="3,3" />
+                <text x="85" y="135" fill="#f59e0b" fontSize="8" fontWeight="800">van der Waals</text>
+
+                <g transform="translate(160, 50)">
+                  <text x="0" y="18" fill={textPrimary} fontSize="11" fontWeight="700">? Each carbon bonded to 3 carbons</text>
+                  <text x="0" y="38" fill={textPrimary} fontSize="11" fontWeight="700">? 1 delocalized e?/carbon ? CONDUCTOR</text>
+                  <text x="0" y="58" fill={textMuted} fontSize="10.5">? Layers slide past ? Slippery lubricant</text>
+                  <text x="0" y="78" fill={textMuted} fontSize="10.5">? Uses: Battery electrodes, pencils</text>
+                </g>
+              </g>
+            </g>
+          </svg>
+        );
+
       default:
         return (
           <div className="p-8 text-center text-slate-400">

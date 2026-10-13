@@ -200,6 +200,10 @@ function getSectionDiagramAssets(chapterNo: number, sectionId: string, heading: 
 
 function getBioSchematicId(diagId: string): string {
   switch (diagId) {
+    case "diag_chem_electrolysis_water": return "chem_electrolysis";
+    case "diag_chem_acid_zinc_h2": return "chem_acid_zinc";
+    case "diag_chem_electrolytic_refining_rusting": return "chem_refining_copper";
+    case "diag_chem_carbon_micelle_allotropes": return "chem_soap_micelle";
     case "diag_bio_digestive_system": return "bio_alimentary_canal";
     case "diag_bio_respiratory_system": return "bio_respiratory_system";
     case "diag_bio_heart_circulation": return "bio_heart_double_circulation";
@@ -214,6 +218,19 @@ function getBioSchematicId(diagId: string): string {
 function getSectionMasterDiagram(chapterNo: number, sectionId: string, heading: string): ScienceDiagram | undefined {
   const h = heading.toLowerCase();
   const s = sectionId.toLowerCase();
+
+  if (chapterNo === 1) {
+    return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_chem_electrolysis_water");
+  }
+  if (chapterNo === 2) {
+    return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_chem_acid_zinc_h2");
+  }
+  if (chapterNo === 3) {
+    return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_chem_electrolytic_refining_rusting");
+  }
+  if (chapterNo === 4) {
+    return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_chem_carbon_micelle_allotropes");
+  }
 
   if (chapterNo === 5) {
     if (s.includes("digest") || s.includes("nutrit") || h.includes("digest") || h.includes("nutrit") || h.includes("alimentary")) {

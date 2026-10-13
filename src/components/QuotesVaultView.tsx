@@ -37,6 +37,21 @@ export default function QuotesVaultView({ isDark }: QuotesVaultViewProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [featuredIdx, setFeaturedIdx] = useState<number>(0);
+  const [secondsUntilFeaturedNext, setSecondsUntilFeaturedNext] = useState<number>(60);
+
+  // Auto-rotate featured daily quote every 60 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSecondsUntilFeaturedNext((prev) => {
+        if (prev <= 1) {
+          setFeaturedIdx(Math.floor(Math.random() * VERIFIED_QUOTES.length));
+          return 60;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
   const [favorites, setFavorites] = useState<string[]>([]);
 
   // Load favorites from localStorage
@@ -183,17 +198,25 @@ export default function QuotesVaultView({ isDark }: QuotesVaultViewProps) {
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <button
-              onClick={handleShuffleFeatured}
-              className={`px-4 py-2.5 rounded-2xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-2 ${
-                isDark
-                  ? "bg-purple-500/20 text-purple-200 border-purple-500/40 hover:bg-purple-500/30"
-                  : "bg-purple-100 text-purple-900 border-purple-300 hover:bg-purple-200 shadow-sm"
-              }`}
-            >
-              <Shuffle className="w-4 h-4 text-purple-400" />
-              <span>Inspire Me Randomly</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <span className={`text-[10px] font-mono font-bold px-2 py-1 rounded-xl border tabular-nums ${
+                isDark ? "bg-purple-500/10 border-purple-500/30 text-purple-300" : "bg-purple-50 border-purple-200 text-purple-900"
+              }`} title="Automatically rotates to a new featured quote every 60 seconds">
+                ⏱️ 1-min rotation: {secondsUntilFeaturedNext}s
+              </span>
+              <button
+                onClick={handleShuffleFeatured}
+                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-2 active:scale-95 ${
+                  isDark
+                    ? "bg-purple-500/20 text-purple-200 border-purple-500/40 hover:bg-purple-500/30"
+                    : "bg-purple-100 text-purple-900 border-purple-300 hover:bg-purple-200 shadow-sm"
+                }`}
+                title="Reset 60s timer and inspire with a fresh scholarly quote"
+              >
+                <Shuffle className="w-3.5 h-3.5 text-purple-400" />
+                <span>Reset &amp; Shuffle</span>
+              </button>
+            </div>
           </div>
         </div>
 

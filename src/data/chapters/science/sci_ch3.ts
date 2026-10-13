@@ -1,630 +1,413 @@
 import type { VaultQuestion } from "@/data/vaultQuestions";
 
 export const SCI_CH3_QUESTIONS: VaultQuestion[] = [
+  // =========================================================================
   // 1-MARK MCQs & ASSERTION-REASON
+  // =========================================================================
   {
     id: "sci_c3_q1",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
+    chapterName: "Metals and Non-Metals",
     marks: 1,
     type: "MCQ",
-    question: "Which of the following metals melts when kept on the palm of your hand due to an exceptionally low melting point?\n(a) Magnesium\n(b) Aluminium\n(c) Gallium\n(d) Sodium",
-    options: [
-      "Magnesium",
-      "Aluminium",
-      "Gallium",
-      "Sodium"
-    ],
-    correctOption: 2,
-    answer: "Option (c) is correct: Gallium (and Cesium).",
-    explanation: "Gallium (Ga) and Cesium (Cs) have very low melting points (around 30°C / 303 K). The normal human body temperature (~37°C) supplies sufficient heat to melt them into liquid state in the palm.",
-    examinerNote: "Mercury is liquid at room temperature (25°C), while Gallium and Cesium are solids that melt at body temperature.",
-    source: "NCERT Class 10 Page 40"
+    question: "Which of the following metals does NOT react with cold as well as hot water, but reacts with steam?\n(a) Sodium\n(b) Calcium\n(c) Magnesium\n(d) Iron",
+    options: ["Sodium", "Calcium", "Magnesium", "Iron"],
+    correctOption: 3,
+    answer: "Option (d) is correct: Iron.",
+    explanation: "Sodium and Calcium react vigorously with cold water. Magnesium does not react with cold water but reacts with hot water. Iron, Zinc, and Aluminium react only with steam: 3Fe(s) + 4H2O(g) -> Fe3O4(s) + 4H2(g).",
+    formula: "3Fe(s) + 4H2O(g) -> Fe3O4(s) + 4H2(g)",
+    examinerNote: "NCERT Chapter 3 Activity 3.5 benchmark question.",
+    source: "CBSE 2024 / NCERT Exemplar Q1"
   },
   {
     id: "sci_c3_q2",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
+    chapterName: "Metals and Non-Metals",
     marks: 1,
     type: "MCQ",
-    question: "An element reacts with oxygen to give a compound with a high melting point. This compound is also highly soluble in water. The element is likely to be:\n(a) Calcium\n(b) Carbon\n(c) Silicon\n(d) Iron",
-    options: [
-      "Calcium",
-      "Carbon",
-      "Silicon",
-      "Iron"
-    ],
-    correctOption: 0,
-    answer: "Option (a) is correct: Calcium.",
-    explanation: "Calcium reacts with oxygen to form calcium oxide (CaO), which is an ionic compound with a high melting point (2613°C) and dissolves vigorously in water to form calcium hydroxide [Ca(OH)₂]. Carbon forms CO₂ (gas), Silicon forms SiO₂ (insoluble), and Iron forms insoluble oxides.",
-    formula: "2Ca + O₂ ⟶ 2CaO;  CaO + H₂O ⟶ Ca(OH)₂",
-    examinerNote: "Classic NCERT textbook question. High MP + Water solubility points specifically to CaO.",
-    source: "NCERT Chapter 3 Exercise Question 1"
+    question: "Generally, non-metals are not lustrous. Which of the following non-metal is lustrous?\n(a) Sulphur\n(b) Oxygen\n(c) Nitrogen\n(d) Iodine",
+    options: ["Sulphur", "Oxygen", "Nitrogen", "Iodine"],
+    correctOption: 3,
+    answer: "Option (d) is correct: Iodine.",
+    explanation: "Iodine is a non-metal that possesses a natural metallic lustre (shiny crystalline appearance), which is an exception to the general property that non-metals are dull.",
+    formula: "Exception: Iodine (Non-metal with metallic lustre)",
+    examinerNote: "NCERT Section 3.1.1 physical exceptions.",
+    source: "NCERT Exemplar Q3 / CBSE 2023"
   },
   {
     id: "sci_c3_q3",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
+    chapterName: "Metals and Non-Metals",
     marks: 1,
     type: "MCQ",
-    question: "Food cans are coated with tin and not with zinc because:\n(a) Zinc is costlier than tin\n(b) Zinc has a higher melting point than tin\n(c) Zinc is more reactive than tin\n(d) Zinc is less reactive than tin",
-    options: [
-      "Zinc is costlier than tin",
-      "Zinc has a higher melting point than tin",
-      "Zinc is more reactive than tin",
-      "Zinc is less reactive than tin"
-    ],
+    question: "Which of the following oxide(s) of iron would be obtained on prolonged reaction of iron with steam?\n(a) FeO\n(b) Fe2O3\n(c) Fe3O4\n(d) Fe2O3 and Fe3O4",
+    options: ["FeO", "Fe2O3", "Fe3O4", "Fe2O3 and Fe3O4"],
     correctOption: 2,
-    answer: "Option (c) is correct: Zinc is more reactive than tin.",
-    explanation: "Zinc lies above tin in the metal reactivity series. If zinc were used to coat food cans, it would readily react with organic food acids (like citric and acetic acids) to produce toxic, poisonous zinc salts. Tin is much less reactive and food-safe.",
-    examinerNote: "Reactivity hierarchy is the scientific explanation; cost is not the chemical reason.",
-    source: "CBSE 2023 Board Question"
+    answer: "Option (c) is correct: Fe3O4 (Iron(II,III) oxide / Magnetic iron oxide).",
+    explanation: "Prolonged heating of iron in steam yields magnetic iron oxide (Fe3O4, also known as triiron tetroxide, a mixed oxide of FeO and Fe2O3): 3Fe(s) + 4H2O(g) -> Fe3O4(s) + 4H2(g).",
+    formula: "3Fe + 4H2O(g) -> Fe3O4 + 4H2",
+    examinerNote: "Common error: Students pick Fe2O3. The correct product is Fe3O4.",
+    source: "NCERT Exemplar Q4 / CBSE 2024"
   },
   {
     id: "sci_c3_q4",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
+    chapterName: "Metals and Non-Metals",
     marks: 1,
     type: "MCQ",
-    question: "Assertion (A): Magnesium metal reacts with very dilute nitric acid (HNO₃) to liberate hydrogen gas.\nReason (R): Nitric acid is a strong oxidizing agent that oxidizes hydrogen to water in most metals, but magnesium and manganese are exceptions.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is NOT the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
+    question: "What happens when calcium is treated with water?\n(i) It does not react with water.\n(ii) It reacts violently with water.\n(iii) It reacts less violently with water.\n(iv) Bubbles of hydrogen gas formed stick to the surface of calcium.\n(a) (i) and (iv)\n(b) (ii) and (iii)\n(c) (i) and (ii)\n(d) (iii) and (iv)",
     options: [
-      "Both A and R are true and R is the correct explanation of A.",
-      "Both A and R are true but R is NOT the correct explanation of A.",
-      "A is true but R is false.",
-      "A is false but R is true."
+      "(i) and (iv)",
+      "(ii) and (iii)",
+      "(i) and (ii)",
+      "(iii) and (iv)"
     ],
-    correctOption: 0,
-    answer: "Option (a) is correct.",
-    explanation: "Dilute HNO₃ oxidizes H₂ to H₂O with most metals. Only very dilute (~1%) HNO₃ reacts with Magnesium (Mg) and Manganese (Mn) to liberate H₂ gas because of their powerful electropositive reducing strength.",
-    formula: "Mg(s) + 2HNO₃(aq) [Very Dilute] ⟶ Mg(NO₃)₂(aq) + H₂(g)↑",
-    examinerNote: "High recurrence board question. Remember the twin exceptions: Mg and Mn.",
-    source: "Arihant All-In-One Chapter 3"
+    correctOption: 3,
+    answer: "Option (d) is correct: (iii) and (iv).",
+    explanation: "Calcium reacts less violently with water compared to sodium. The heat evolved is insufficient for hydrogen to catch fire. Bubbles of liberated hydrogen gas adhere to the calcium pieces, causing them to float on the surface of the water.",
+    formula: "Ca(s) + 2H2O(l) -> Ca(OH)2(aq) + H2(g)",
+    examinerNote: "Both Calcium and Magnesium float on water due to hydrogen gas bubbles sticking to their surfaces.",
+    source: "NCERT Exemplar Q5 / CBSE 2023"
   },
-
-  // 2-MARK SHORT ANSWER QUESTIONS
   {
     id: "sci_c3_q5",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
-    marks: 2,
-    type: "VSA",
-    question: "What are amphoteric oxides? Give two examples of amphoteric oxides and write a balanced equation for the reaction of one of them with sodium hydroxide.",
-    answer: "Amphoteric oxides are metal oxides that exhibit both acidic and basic characteristics, reacting with acids as well as bases to produce salt and water. Examples: Aluminium oxide (Al₂O₃) and Zinc oxide (ZnO).\nEquation with NaOH:\nAl₂O₃(s) + 2NaOH(aq) ⟶ 2NaAlO₂(aq) [Sodium Aluminate] + H₂O(l).",
-    steps: [
-      "Step 1: Define amphoteric oxide.",
-      "Step 2: Name two examples (Al₂O₃, ZnO).",
-      "Step 3: Write balanced chemical equation with sodium hydroxide forming sodium aluminate."
+    chapterName: "Metals and Non-Metals",
+    marks: 1,
+    type: "MCQ",
+    question: "Which of the following pairs of metals will give hydrogen gas on reaction with very dilute nitric acid (HNO3)?\n(a) Magnesium and Manganese\n(b) Copper and Iron\n(c) Zinc and Lead\n(d) Aluminium and Mercury",
+    options: [
+      "Magnesium and Manganese",
+      "Copper and Iron",
+      "Zinc and Lead",
+      "Aluminium and Mercury"
     ],
-    explanation: "Al₂O₃ behaves as an acid when reacting with strong base NaOH, yielding sodium aluminate.",
-    formula: "Al₂O₃ + 2NaOH ⟶ 2NaAlO₂ + H₂O",
-    examinerNote: "Ensure formula for sodium aluminate is written as NaAlO₂ (not Na₂AlO₃).",
-    source: "NCERT Class 10 Page 41"
+    correctOption: 0,
+    answer: "Option (a) is correct: Magnesium (Mg) and Manganese (Mn).",
+    explanation: "Nitric acid (HNO3) is a powerful oxidising agent. It oxidises liberated H2 to H2O and itself gets reduced to nitrogen oxides (N2O, NO, NO2). However, very dilute (1%) HNO3 reacts with Magnesium and Manganese to evolve hydrogen gas.",
+    formula: "Mg(s) + 2HNO3(very dil.) -> Mg(NO3)2(aq) + H2(g); Mn(s) + 2HNO3(very dil.) -> Mn(NO3)2(aq) + H2(g)",
+    examinerNote: "Exceptional reaction heavily tested in CBSE board exams.",
+    source: "NCERT Intext Question / CBSE 2024"
   },
   {
     id: "sci_c3_q6",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
-    marks: 2,
-    type: "VSA",
-    question: "Give reasons for the following:\n(a) Sodium, potassium, and lithium are stored under kerosene oil.\n(b) Aluminium is a highly reactive metal, yet it is used to make cooking utensils.",
-    answer: "(a) Sodium, potassium, and lithium are highly electropositive alkali metals that react vigorously with atmospheric oxygen and moisture at room temperature, releasing flammable H₂ that ignites explosively. Storing them under kerosene seals them from air and moisture.\n\n(b) Freshly exposed aluminium quickly reacts with atmospheric oxygen to form a thin, tenacious, and impermeable protective layer of aluminium oxide (Al₂O₃) on its surface. This passive oxide film protects the underlying metal from further corrosion. Moreover, aluminium is lightweight and an excellent conductor of heat.",
-    steps: [
-      "Part (a): High reactivity with ambient moisture/oxygen + kerosene insulation.",
-      "Part (b): Self-protecting passive Al₂O₃ oxide layer + high thermal conductivity."
-    ],
-    explanation: "The passive Al₂O₃ film makes aluminium chemically stable under cooking conditions.",
-    examinerNote: "In part (b), must mention the 'impermeable protective oxide layer of Al₂O₃'.",
-    source: "CBSE Board PYQ"
+    chapterName: "Metals and Non-Metals",
+    marks: 1,
+    type: "MCQ",
+    question: "Aqua regia is a freshly prepared mixture of concentrated hydrochloric acid and concentrated nitric acid in the ratio of:\n(a) 1 : 3\n(b) 3 : 1\n(c) 2 : 3\n(d) 3 : 2",
+    options: ["1 : 3", "3 : 1", "2 : 3", "3 : 2"],
+    correctOption: 1,
+    answer: "Option (b) is correct: 3 : 1 (Conc. HCl : Conc. HNO3).",
+    explanation: "Aqua regia (royal water) is a freshly prepared fuming mixture of 3 parts concentrated hydrochloric acid to 1 part concentrated nitric acid by volume. It can dissolve noble metals such as gold and platinum.",
+    formula: "3 Conc. HCl : 1 Conc. HNO3",
+    examinerNote: "Pay attention to the order: Conc. HCl is 3, Conc. HNO3 is 1.",
+    source: "NCERT Section 3.2.3 / CBSE 2024"
   },
   {
     id: "sci_c3_q7",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
-    marks: 2,
-    type: "VSA",
-    question: "What is an alloy? Name the constituent metals of:\n(a) Brass\n(b) Bronze\n(c) Solder\nState one special property of solder.",
-    answer: "An alloy is a homogeneous mixture of two or more metals, or a metal and a non-metal.\n(a) Brass: Copper (Cu ~70%) + Zinc (Zn ~30%)\n(b) Bronze: Copper (Cu ~90%) + Tin (Sn ~10%)\n(c) Solder: Lead (Pb 50%) + Tin (Sn 50%)\nSpecial property of solder: Exceptionally low melting point, making it ideal for welding electrical wires.",
-    steps: [
-      "Step 1: Define alloy as homogeneous metallic mixture.",
-      "Step 2: List constituent elements for Brass (Cu+Zn), Bronze (Cu+Sn), and Solder (Pb+Sn).",
-      "Step 3: State low melting point property of solder."
-    ],
-    explanation: "Alloying lowers electrical conductivity and melting point while enhancing tensile strength and corrosion resistance.",
-    examinerNote: "Common error: confusing Brass (Cu+Zn) with Bronze (Cu+Sn). Remember Bronze has Tin (Sn).",
-    source: "NCERT Class 10 Page 54"
+    chapterName: "Metals and Non-Metals",
+    marks: 1,
+    type: "MCQ",
+    question: "An alloy of copper and zinc is known as:\n(a) Bronze\n(b) Brass\n(c) Solder\n(d) Stainless steel",
+    options: ["Bronze", "Brass", "Solder", "Stainless steel"],
+    correctOption: 1,
+    answer: "Option (b) is correct: Brass.",
+    explanation: "Brass is an alloy of copper and zinc (Cu + Zn). Bronze is an alloy of copper and tin (Cu + Sn). Solder is an alloy of lead and tin (Pb + Sn). Stainless steel is an alloy of iron, nickel, chromium, and carbon.",
+    formula: "Brass = Cu + Zn; Bronze = Cu + Sn; Solder = Pb + Sn",
+    examinerNote: "Mnemonic: Brass has Zinc (ends in s/z sound). Bronze has Tin.",
+    source: "CBSE 2023"
   },
-
-  // 3-MARK SHORT ANSWER QUESTIONS
   {
     id: "sci_c3_q8",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
-    marks: 3,
-    type: "SA",
-    question: "Explain the Thermite reaction:\n(a) What is the chemical equation for the reaction?\n(b) Why is this reaction called highly exothermic?\n(c) State one major real-world industrial application of this reaction.",
-    answer: "(a) Chemical Equation:\nFe₂O₃(s) + 2Al(s) ⟶ 2Fe(l) + Al₂O₃(s) + Enormous Heat.\n\n(b) It is classified as highly exothermic because the displacement of iron by aluminium releases an extraordinary amount of heat energy, causing the iron produced to be in the molten (liquid) state.\n\n(c) Application: The molten iron produced in-situ is poured directly into the gap between broken railway tracks or cracked heavy machine frames to weld them together on-site.",
-    steps: [
-      "Part (a): Balanced equation of iron(III) oxide with aluminium powder.",
-      "Part (b): Note that heat evolved is sufficient to produce iron in liquid state Fe(l).",
-      "Part (c): Application: Thermite welding of railway tracks and machine castings."
+    chapterName: "Metals and Non-Metals",
+    marks: 1,
+    type: "MCQ",
+    question: "Aluminium is used for making cooking utensils. Which of the following properties of aluminium are responsible for the same?\n(i) Good thermal conductivity\n(ii) Good electrical conductivity\n(iii) Ductility\n(iv) High melting point\n(a) (i) and (ii)\n(b) (i) and (iii)\n(c) (ii) and (iii)\n(d) (i) and (iv)",
+    options: [
+      "(i) and (ii)",
+      "(i) and (iii)",
+      "(ii) and (iii)",
+      "(i) and (iv)"
     ],
-    explanation: "Aluminium has a stronger affinity for oxygen than iron, driving a powerful displacement.",
-    formula: "Fe₂O₃ + 2Al ⟶ 2Fe + Al₂O₃ + Heat",
-    examinerNote: "State Fe(l) as liquid iron; this confirms understanding of the thermite temperature.",
-    source: "Educart Science Class 10"
+    correctOption: 3,
+    answer: "Option (d) is correct: (i) and (iv).",
+    explanation: "For cooking utensils, good thermal conductivity (for rapid, uniform heat distribution) and high melting point (so the vessel does not melt on high cooking flames) are the two mandatory properties. Electrical conductivity and ductility are irrelevant to cooking function.",
+    formula: "Cooking Utensil Requirement: High Thermal Conductivity + High Melting Point",
+    examinerNote: "NCERT Exemplar Q2.",
+    source: "NCERT Exemplar / CBSE 2022"
   },
   {
     id: "sci_c3_q9",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
-    marks: 3,
-    type: "SA",
-    question: "Draw the electron dot structure to show the formation of Sodium Oxide (Na₂O) and Calcium Oxide (CaO). Mention the ions present in each compound.",
-    answer: "1. Formation of Sodium Oxide (Na₂O):\n- Na (Z=11): 2, 8, 1 ⟶ Na⁺ + e⁻ (each of two Na atoms loses 1 electron).\n- O (Z=8): 2, 6 + 2e⁻ ⟶ O²⁻ [2, 8] (oxygen gains 2 electrons).\n- Electron Dot Structure: 2 [Na]⁺ [ :Ö: ]²⁻ ⟹ Na₂O.\n- Ions present: Sodium cations (Na⁺) and Oxide anions (O²⁻).\n\n2. Formation of Calcium Oxide (CaO):\n- Ca (Z=20): 2, 8, 8, 2 ⟶ Ca²⁺ + 2e⁻ (calcium loses 2 electrons).\n- O (Z=8): 2, 6 + 2e⁻ ⟶ O²⁻ [2, 8] (oxygen gains 2 electrons).\n- Electron Dot Structure: [Ca]²⁺ [ :Ö: ]²⁻ ⟹ CaO.\n- Ions present: Calcium cations (Ca²⁺) and Oxide anions (O²⁻).",
-    steps: [
-      "Step 1: Write electronic configurations for Na, Ca, and O.",
-      "Step 2: Show electron transfer arrows from metals to oxygen.",
-      "Step 3: Write bracketed ionic representations with charges.",
-      "Step 4: Explicitly identify the cations and anions."
+    chapterName: "Metals and Non-Metals",
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): Aluminium oxide (Al2O3) is an amphoteric oxide.\nReason (R): Aluminium oxide reacts with both acids as well as bases to produce salt and water.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is not the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
+    options: [
+      "Both A and R are true and R is the correct explanation of A.",
+      "Both A and R are true but R is not the correct explanation of A.",
+      "A is true but R is false.",
+      "A is false but R is true."
     ],
-    explanation: "Both are ionic electrovalent compounds formed by complete valence electron transfer.",
-    examinerNote: "1.5 marks for Na₂O; 1.5 marks for CaO. Always show 8 dots on the oxide anion.",
-    source: "CBSE 2024 Board Question"
+    correctOption: 0,
+    answer: "Option (a) is correct: Both Assertion and Reason are true and Reason is the correct explanation of Assertion.",
+    explanation: "Amphoteric oxides are metallic oxides that show both acidic as well as basic behaviour. Al2O3 reacts with acids like HCl (acting as a base) and with bases like NaOH (acting as an acid) to form salt and water.",
+    formula: "Al2O3 + 6HCl -> 2AlCl3 + 3H2O; Al2O3 + 2NaOH -> 2NaAlO2 + H2O",
+    examinerNote: "NCERT Section 3.2.1. ZnO is also an amphoteric oxide.",
+    source: "CBSE Official Sample Paper 2025"
   },
-
-  // 5-MARK LONG ANSWER & CASE STUDIES
   {
     id: "sci_c3_q10",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
-    marks: 5,
-    type: "LA",
-    question: "Explain the electrolytic refining of copper with the help of a neat labeled diagram description:\n(a) What substances are used as Anode, Cathode, and Electrolyte?\n(b) Write the chemical reactions taking place at the Anode and Cathode.\n(c) What is 'anode mud' and where does it collect?\n(d) Why does the concentration of copper sulphate in the electrolyte remain constant throughout the process?",
-    answer: "(a) Setup:\n- Anode (+ electrode): Thick block of impure blister copper.\n- Cathode (- electrode): Thin strip of pure copper metal.\n- Electrolyte: Acidified aqueous solution of Copper Sulphate (CuSO₄ + a few drops of dil. H₂SO₄).\n\n(b) Electrode Reactions:\n- At Anode (+): Cu(s) [Impure] ⟶ Cu²⁺(aq) + 2e⁻ (Oxidation of copper metal into solution).\n- At Cathode (-): Cu²⁺(aq) + 2e⁻ ⟶ Cu(s) [Pure] (Reduction of copper ions deposited as pure metal).\n\n(c) Anode Mud: The insoluble impurities present in the blister copper (such as gold, silver, platinum) do not dissolve in the electrolyte and settle down at the bottom beneath the anode as an insoluble sludge called 'anode mud'.\n\n(d) Constant Concentration: For every Cu²⁺ ion deposited onto the cathode from the electrolyte, exactly one equivalent Cu²⁺ ion dissolves into the electrolyte from the impure copper anode. Thus, the rate of dissolution equals the rate of deposition, keeping the copper sulphate concentration unchanged.",
-    steps: [
-      "Step 1: Define Anode (impure), Cathode (pure), and Electrolyte (acidified CuSO₄).",
-      "Step 2: Write half-cell reactions at anode and cathode.",
-      "Step 3: Define anode mud and identify precious insoluble impurities (Au, Ag).",
-      "Step 4: Explain mass-action rate equality that maintains electrolyte concentration."
+    chapterName: "Metals and Non-Metals",
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): Ionic compounds conduct electricity in the molten state and aqueous solution, but not in the solid state.\nReason (R): In the solid state, electrostatic attractions hold ions rigidly in fixed lattice positions, whereas in molten or aqueous states, ions are free to move.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is not the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
+    options: [
+      "Both A and R are true and R is the correct explanation of A.",
+      "Both A and R are true but R is not the correct explanation of A.",
+      "A is true but R is false.",
+      "A is false but R is true."
     ],
-    explanation: "Electrolytic refining produces 99.99% pure electrolytic grade copper suitable for electrical wiring.",
-    formula: "Anode: Cu ⟶ Cu²⁺ + 2e⁻;  Cathode: Cu²⁺ + 2e⁻ ⟶ Cu",
-    examinerNote: "Cathode gains weight; anode decreases in weight. Anode mud collects under anode.",
-    source: "CBSE 2023 Board 5-Mark Question"
+    correctOption: 0,
+    answer: "Option (a) is correct: Both Assertion and Reason are true and Reason is the correct explanation of Assertion.",
+    explanation: "Electrical conduction requires mobile charge carriers. In solid ionic compounds, strong electrostatic forces of attraction bind ions in rigid 3D crystal lattices. Upon melting or dissolving in water, these electrostatic forces weaken, freeing mobile cations and anions to conduct electric current.",
+    formula: "Solid: Rigid Lattice (Insulator); Molten/Aqueous: Mobile Ions (Conductor)",
+    examinerNote: "NCERT Section 3.3.4. Crucial property of ionic compounds.",
+    source: "CBSE Board 2024"
   },
   {
     id: "sci_c3_q11",
     chapter: 3,
-    chapterName: "Metals and Non-metals",
-    marks: 4,
-    type: "Case Study",
-    question: "Case Study: In an experiment to extract zinc from its ores, a metallurgical engineer obtained two samples:\n- Ore A: Zinc Blende (ZnS)\n- Ore B: Calamine (ZnCO₃)\nBoth ores are converted to zinc oxide prior to reduction with coke (carbon).\n\n(a) Name the thermal processes used to convert Ore A and Ore B into Zinc Oxide.\n(b) Write balanced chemical equations for the conversion of both Ore A and Ore B.\n(c) Write the reduction equation where zinc oxide is converted into zinc metal using coke.\n(d) Why is it easier to obtain metals from their oxides than from their sulphides or carbonates?",
-    answer: "(a) Ore A (ZnS, sulphide) is converted by Roasting (heating in excess air).\nOre B (ZnCO₃, carbonate) is converted by Calcination (heating in limited/absence of air).\n\n(b) Roasting equation for Ore A:\n2ZnS(s) + 3O₂(g) —[Heat]⟶ 2ZnO(s) + 2SO₂(g)↑.\nCalcination equation for Ore B:\nZnCO₃(s) —[Heat]⟶ ZnO(s) + CO₂(g)↑.\n\n(c) Reduction equation:\nZnO(s) + C(s) [Coke] —[Heat]⟶ Zn(s) + CO(g)↑.\n\n(d) Reduction of metal oxides using carbon (coke) or other reducing agents is thermodynamically much easier, more spontaneous, and cheaper compared to reducing sulphides or carbonates directly. Therefore, ores are always first converted to oxides.",
-    steps: [
-      "Part (a): Identify Roasting for sulphide and Calcination for carbonate.",
-      "Part (b): Write balanced roasting and calcination equations.",
-      "Part (c): Write carbon reduction reaction producing Zn and CO.",
-      "Part (d): Explain thermodynamic ease of reducing oxides compared to sulphides."
-    ],
-    explanation: "Roasting + Calcination ⟶ Oxide ⟶ Carbon reduction is the classical pyrometallurgy flow.",
-    formula: "2ZnS + 3O₂ ⟶ 2ZnO + 2SO₂;  ZnCO₃ ⟶ ZnO + CO₂;  ZnO + C ⟶ Zn + CO",
-    examinerNote: "1 mark per sub-part. Ensure state symbols are balanced.",
-    source: "PW Sample Paper 2026 / CBSE Case Study"
-  },
-  {"id": "sci_c3_q12",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Which of the following non-metals is a liquid at room temperature?\n(a) Carbon\n(b) Bromine\n(c) Iodine\n(d) Phosphorus",
-    "options": [
-      "Carbon",
-      "Bromine",
-      "Iodine",
-      "Phosphorus"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: Bromine.",
-    "explanation": "Bromine (Br₂) is the only non-metal that exists as a reddish-brown liquid at room temperature. Mercury is the only liquid metal.",
-    "examinerNote": "Classic exception question in Class 10 board exam.",
-    "source": "NCERT Class 10 Page 38"
-  },
-  {
-    "id": "sci_c3_q13",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Which of the following metals catches fire vigorously when exposed to room air or dropped in cold water?\n(a) Iron\n(b) Copper\n(c) Sodium\n(d) Magnesium",
-    "options": [
-      "Iron",
-      "Copper",
-      "Sodium",
-      "Magnesium"
-    ],
-    "correctOption": 2,
-    "answer": "Option (c) is correct: Sodium (Na).",
-    "explanation": "Sodium and potassium have very low ionization energies and react violently with cold water, producing H₂ gas which immediately catches fire due to large exothermic heat.",
-    "formula": "2Na(s) + 2H₂O(l) ⟶ 2NaOH(aq) + H₂(g) + \\text{Heat}",
-    "source": "NCERT Class 10 Page 41"
-  },
-  {
-    "id": "sci_c3_q14",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "An alloy is a homogeneous mixture of:\n(a) Two or more metals, or a metal and a non-metal\n(b) Two non-metals only\n(c) A metal and a metalloid only\n(d) Ionic compounds only",
-    "options": [
-      "Two or more metals, or a metal and a non-metal",
-      "Two non-metals only",
-      "A metal and a metalloid only",
-      "Ionic compounds only"
-    ],
-    "correctOption": 0,
-    "answer": "Option (a) is correct: Two or more metals, or a metal and a non-metal.",
-    "explanation": "An alloy is a solid homogeneous solution prepared by melting the primary metal and dissolving other elements in definite proportions. Example: Steel (Fe + C), Brass (Cu + Zn).",
-    "source": "NCERT Class 10 Page 54"
-  },
-  {
-    "id": "sci_c3_q15",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Amalgam is an alloy in which one of the component metals is always:\n(a) Gold\n(b) Silver\n(c) Mercury\n(d) Lead",
-    "options": [
-      "Gold",
-      "Silver",
-      "Mercury",
-      "Lead"
-    ],
-    "correctOption": 2,
-    "answer": "Option (c) is correct: Mercury.",
-    "explanation": "An alloy of any metal with mercury (Hg) is known as an amalgam (e.g., sodium amalgam, dental silver amalgam).",
-    "source": "NCERT Class 10 Page 55"
-  },
-  {
-    "id": "sci_c3_q16",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Assertion (A): Ionic compounds generally have high melting and boiling points.\nReason (R): A considerable amount of energy is required to break the strong inter-ionic electrostatic forces of attraction.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is NOT the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
-    "options": [
+    chapterName: "Metals and Non-Metals",
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): Galvanised iron articles do not rust even if the zinc coating is broken or scratched.\nReason (R): Zinc is more reactive than iron and oxidises preferentially, providing sacrificial protection.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is not the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
+    options: [
       "Both A and R are true and R is the correct explanation of A.",
-      "Both A and R are true but R is NOT the correct explanation of A.",
+      "Both A and R are true but R is not the correct explanation of A.",
       "A is true but R is false.",
       "A is false but R is true."
     ],
-    "correctOption": 0,
-    "answer": "Option (a) is correct.",
-    "explanation": "Oppositely charged cations and anions form a dense three-dimensional ionic lattice held by strong Coulombic attractions, demanding large thermal energy to melt.",
-    "source": "CBSE 2024 Board Question"
+    correctOption: 0,
+    answer: "Option (a) is correct: Both Assertion and Reason are true and Reason is the correct explanation of Assertion.",
+    explanation: "Zinc lies above iron in the reactivity series. Even when the protective zinc layer is scratched, zinc corrodes sacrificially before iron by releasing electrons (Zn -> Zn(2+) + 2e-), preventing iron atoms from losing electrons and rusting.",
+    formula: "Sacrificial Protection: Zn -> Zn(2+) + 2e- (Protects Fe)",
+    examinerNote: "Contrast with tin coating: if tin (less reactive than iron) is scratched, iron rusts more rapidly.",
+    source: "CBSE Board 2023"
+  },
+
+  // =========================================================================
+  // 2-MARK VERY SHORT ANSWER (VSA)
+  // =========================================================================
+  {
+    id: "sci_c3_q12",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 2,
+    type: "VSA",
+    question: "What are amphoteric oxides? Choose the amphoteric oxides from amongst the following:\nNa2O, ZnO, Al2O3, CO2, H2O",
+    answer: "Amphoteric oxides are metallic oxides that react with both acids as well as bases to form salt and water, exhibiting dual acidic and basic properties.\nFrom the given list, the amphoteric oxides are:\n1. Zinc oxide (ZnO)\n2. Aluminium oxide (Al2O3)\n(Na2O is basic, CO2 is acidic, and H2O is neutral).",
+    explanation: "Amphoteric oxides neutralize both hydrochloric acid and sodium hydroxide.",
+    formula: "ZnO and Al2O3",
+    examinerNote: "1 mark for definition; 1 mark for identifying both ZnO and Al2O3.",
+    source: "CBSE 2024 / NCERT Intext"
   },
   {
-    "id": "sci_c3_q17",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "During electrolytic refining of blister copper, the anode is made of:\n(a) Thin strip of pure copper\n(b) Thick slab of impure copper\n(c) Platinum wire\n(d) Graphite rod",
-    "options": [
-      "Thin strip of pure copper",
-      "Thick slab of impure copper",
-      "Platinum wire",
-      "Graphite rod"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: Thick slab of impure copper.",
-    "explanation": "In electrolytic refining, the impure metal slab serves as the anode (+ve electrode) which dissolves into the electrolyte, while a thin pure metal sheet acts as cathode (-ve electrode).",
-    "source": "NCERT Class 10 Page 52"
+    id: "sci_c3_q13",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 2,
+    type: "VSA",
+    question: "Why are sodium and potassium kept immersed in kerosene oil?",
+    answer: "Sodium and potassium are highly reactive alkali metals. If exposed to open air at room temperature, they react vigorously with atmospheric oxygen and moisture, releasing immense heat that causes liberated hydrogen gas to catch fire and explode.\nTo prevent accidental fires and cut off contact with air and moisture, they are stored safely immersed in kerosene oil.",
+    explanation: "4Na + O2 -> 2Na2O; 2Na + 2H2O -> 2NaOH + H2 + Enormous Heat.",
+    formula: "2Na(s) + 2H2O(l) -> 2NaOH(aq) + H2(g) + Heat (Catches Fire)",
+    examinerNote: "NCERT Intext Question. Key keywords: 'reacts vigorously with air and moisture', 'exothermic', 'prevent accidental fires'.",
+    source: "NCERT Intext / CBSE 2023"
   },
   {
-    "id": "sci_c3_q18",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Which of the following oxides is an amphoteric oxide?\n(a) Na₂O\n(b) SO₂\n(c) Al₂O₃\n(d) CO₂",
-    "options": [
-      "Na₂O",
-      "SO₂",
-      "Al₂O₃",
-      "CO₂"
-    ],
-    "correctOption": 2,
-    "answer": "Option (c) is correct: Al₂O₃ (Aluminium oxide).",
-    "explanation": "Aluminium oxide and zinc oxide (ZnO) react with both acids and bases to produce salt and water, exhibiting amphoteric properties.",
-    "formula": "\\text{Al}_2\\text{O}_3 + 6\\text{HCl} ⟶ 2\\text{AlCl}_3 + 3\\text{H}_2\\text{O}",
-    "source": "NCERT Class 10 Page 41"
+    id: "sci_c3_q14",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 2,
+    type: "VSA",
+    question: "Write balanced chemical equations for the reactions of aluminium oxide (Al2O3) with:\n(a) Dilute Hydrochloric acid (HCl)\n(b) Aqueous Sodium hydroxide (NaOH)",
+    answer: "(a) Reaction with Acid (Al2O3 acts as a base):\n    Al2O3(s) + 6HCl(aq) -> 2AlCl3(aq) [Aluminium chloride] + 3H2O(l)\n\n(b) Reaction with Base (Al2O3 acts as an acid):\n    Al2O3(s) + 2NaOH(aq) -> 2NaAlO2(aq) [Sodium aluminate] + H2O(l)",
+    explanation: "Demonstrates the amphoteric nature of aluminium oxide.",
+    formula: "Al2O3 + 6HCl -> 2AlCl3 + 3H2O; Al2O3 + 2NaOH -> 2NaAlO2 + H2O",
+    examinerNote: "1 mark for each balanced equation. The formula of sodium aluminate is NaAlO2.",
+    source: "CBSE 2024"
   },
   {
-    "id": "sci_c3_q19",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Aqua regia is a freshly prepared corrosive mixture of concentrated hydrochloric acid and concentrated nitric acid in the volumetric ratio of:\n(a) 1 : 3\n(b) 3 : 1\n(c) 2 : 1\n(d) 3 : 2",
-    "options": [
-      "1 : 3",
-      "3 : 1",
-      "2 : 1",
-      "3 : 2"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: 3 : 1 (Conc. HCl : Conc. HNO₃).",
-    "explanation": "Aqua regia (royal water) consists of 3 parts conc. HCl and 1 part conc. HNO₃ by volume. It dissolves noble metals like gold and platinum by generating nascent chlorine.",
-    "examinerNote": "Common trap: Remember ratio is HCl : HNO₃ = 3 : 1 (not 1 : 3).",
-    "source": "NCERT Class 10 Page 44"
+    id: "sci_c3_q15",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 2,
+    type: "VSA",
+    question: "Differentiate between Roasting and Calcination with one balanced chemical equation for each process.",
+    answer: "1. Roasting: The process of heating a sulphide ore strongly in the PRESENCE of excess air to convert it into a metal oxide.\n   Example: 2ZnS(s) [Zinc blende] + 3O2(g) -> 2ZnO(s) + 2SO2(g)\n\n2. Calcination: The process of heating a carbonate ore strongly in the ABSENCE or limited supply of air to convert it into a metal oxide.\n   Example: ZnCO3(s) [Calamine] -> ZnO(s) + CO2(g)",
+    explanation: "Roasting produces SO2 gas; calcination produces CO2 gas.",
+    formula: "Roasting: 2ZnS + 3O2 -> 2ZnO + 2SO2; Calcination: ZnCO3 -> ZnO + CO2",
+    examinerNote: "1 mark for roasting (definition + equation); 1 mark for calcination (definition + equation).",
+    source: "CBSE 2023 / NCERT Section 3.4.3"
   },
   {
-    "id": "sci_c3_q20",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "The major ore of mercury is Cinnabar. Its chemical formula is:\n(a) HgO\n(b) HgS\n(c) HgCl₂\n(d) HgSO₄",
-    "options": [
-      "HgO",
-      "HgS",
-      "HgCl₂",
-      "HgSO₄"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: HgS (Mercuric sulphide).",
-    "explanation": "Cinnabar is HgS. When roasted in air, it first oxidizes to mercuric oxide (HgO), which on further heating decomposes into liquid mercury and oxygen.",
-    "formula": "2HgS + 3O₂ ⟶ 2HgO + 2SO₂",
-    "source": "NCERT Class 10 Page 50"
+    id: "sci_c3_q16",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 2,
+    type: "VSA",
+    question: "What is an amalgam? Give an example and state why 24-carat gold is not used for making jewellery.",
+    answer: "An amalgam is an alloy in which one of the constituent metals is Mercury (Hg).\nExample: Dental amalgam (alloy of mercury with silver, tin, and copper) or Sodium amalgam (Na-Hg).\n\n24-carat gold is pure gold, which is extremely soft, ductile, and easily bends or loses its shape under slight stress. To make durable jewellery, it is alloyed with 2 parts of copper or silver (22-carat gold = 22 parts gold + 2 parts Cu/Ag) to impart structural hardness.",
+    explanation: "Interstitial alloying of copper/silver atoms distorts the gold crystal lattice, preventing slippage.",
+    formula: "Amalgam = Metal + Hg; 22-carat Gold = 22/24 Au + 2/24 (Cu or Ag)",
+    examinerNote: "1 mark for amalgam definition and example; 1 mark for 24-carat gold softness explanation.",
+    source: "NCERT Section 3.5 / CBSE 2024"
+  },
+
+  // =========================================================================
+  // 3-MARK SHORT ANSWER (SA)
+  // =========================================================================
+  {
+    id: "sci_c3_q17",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 3,
+    type: "SA",
+    question: "(a) What is the Thermite reaction? Write its balanced chemical equation.\n(b) State the practical application of the Thermite reaction.\n(c) Why does the iron produced in this reaction exist in the liquid state?",
+    answer: "(a) The Thermite reaction is a highly exothermic displacement reaction in which iron(III) oxide is reduced by aluminium powder:\n    Fe2O3(s) + 2Al(s) -> 2Fe(l) + Al2O3(s) + Enormous Heat\n\n(b) Practical Application: Used for welding broken railway tracks or cracked heavy machine frames on site without requiring a furnace.\n\n(c) The amount of heat liberated during this reaction is so immense that the temperature exceeds the melting point of iron (1538 deg C), causing the liberated iron metal to form directly in the molten (liquid) state, which flows into and seals the rail crack.",
+    explanation: "Aluminium has a higher affinity for oxygen than iron, driving this violent displacement.",
+    formula: "Fe2O3(s) + 2Al(s) -> 2Fe(l) + Al2O3(s) + Heat",
+    examinerNote: "1 mark for balanced equation; 1 mark for application (railway track welding); 1 mark for explaining why iron is liquid.",
+    source: "CBSE 2024 / NCERT Section 3.4.3"
   },
   {
-    "id": "sci_c3_q21",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Galvanization is a method of protecting iron from rusting by coating it with a thin layer of:\n(a) Gallium\n(b) Aluminium\n(c) Zinc\n(d) Silver",
-    "options": [
-      "Gallium",
-      "Aluminium",
-      "Zinc",
-      "Silver"
-    ],
-    "correctOption": 2,
-    "answer": "Option (c) is correct: Zinc.",
-    "explanation": "Iron sheets are dipped in molten zinc. Zinc is more reactive than iron and preferentially oxidizes (sacrificial protection), even if the surface coating is scratched.",
-    "source": "CBSE 2021, 2023"
+    id: "sci_c3_q18",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 3,
+    type: "SA",
+    question: "Explain the electrolytic refining of copper with the help of chemical equations:\n(a) What are used as the anode, cathode, and electrolyte?\n(b) Write the chemical reactions occurring at the cathode and anode.\n(c) What happens to soluble and insoluble impurities during this process?",
+    answer: "(a) Apparatus Components:\n    - Anode (+): A thick block of impure blister copper.\n    - Cathode (-): A thin strip of high-purity copper.\n    - Electrolyte: Acidified copper sulphate (CuSO4 + dilute H2SO4) solution.\n\n(b) Electrode Reactions:\n    - At Anode (Oxidation): Cu(s) -> Cu(2+)(aq) + 2e(-)\n    - At Cathode (Reduction): Cu(2+)(aq) + 2e(-) -> Cu(s)\n\n(c) Fate of Impurities:\n    - Soluble impurities go into the electrolyte solution.\n    - Insoluble impurities (such as precious metals gold, silver, and platinum) settle at the bottom below the anode as ANODE MUD.",
+    explanation: "Electrolytic refining yields copper of 99.99% purity suitable for electrical wiring.",
+    formula: "Anode: Cu -> Cu(2+) + 2e(-); Cathode: Cu(2+) + 2e(-) -> Cu",
+    examinerNote: "1 mark for anode/cathode/electrolyte; 1 mark for reactions; 1 mark for fate of impurities and anode mud.",
+    source: "CBSE 2024 / NCERT Figure 3.12"
   },
   {
-    "id": "sci_c3_q22",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 2,
-    "type": "VSA",
-    "question": "What are amphoteric oxides? Choose the amphoteric oxides from: Na₂O, ZnO, CO₂, Al₂O₃, and SO₂. Write one balanced equation showing amphoteric nature.",
-    "answer": "(1) Definition: Metal oxides that react with both acids as well as bases to produce salt and water are called amphoteric oxides.\n\n(2) Selected Amphoteric Oxides: ZnO and Al₂O₃.\n\n(3) Chemical Equations for Al₂O₃:\n- Reacting with Acid: Al₂O₃ + 6HCl ⟶ 2AlCl₃ + 3H₂O\n- Reacting with Base: Al₂O₃ + 2NaOH ⟶ 2NaAlO₂ [Sodium aluminate] + H₂O",
-    "formula": "\\text{Al}_2\\text{O}_3 + 2\\text{NaOH} ⟶ 2\\text{NaAlO}_2 + \\text{H}_2\\text{O}",
-    "source": "CBSE 2024 Board Question"
+    id: "sci_c3_q19",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 3,
+    type: "SA",
+    question: "Describe Activity 3.14 to investigate the conditions under which iron rusts:\n(a) Describe the setup of the three test tubes A, B, and C.\n(b) State the observation for each test tube after a few days.\n(c) What scientific conclusion is drawn from this activity?",
+    answer: "(a) Setup of Test Tubes:\n  - Test Tube A: Clean iron nails placed in tap water exposed to open air (both air and water present).\n  - Test Tube B: Clean iron nails placed in boiled distilled water with a layer of oil on top (water present, air excluded by oil).\n  - Test Tube C: Clean iron nails placed in dry air containing anhydrous calcium chloride (CaCl2) with a tight rubber cork (air present, moisture absorbed by CaCl2).\n\n(b) Observations:\n  - Test Tube A: Iron nails rust heavily (reddish-brown flaky coating).\n  - Test Tube B: Iron nails do NOT rust at all.\n  - Test Tube C: Iron nails do NOT rust at all.\n\n(c) Scientific Conclusion: Rusting of iron requires the SIMULTANEOUS presence of BOTH air (oxygen) and water (moisture). Neither air alone nor water alone can cause rusting.",
+    explanation: "Boiling removes dissolved oxygen; anhydrous CaCl2 absorbs all atmospheric humidity.",
+    formula: "Rusting Condition: Fe + O2 + H2O -> Fe2O3.xH2O (Both O2 and H2O mandatory)",
+    examinerNote: "1 mark for setup description; 1 mark for observations; 1 mark for conclusion.",
+    source: "NCERT Activity 3.14 / CBSE 2023"
   },
   {
-    "id": "sci_c3_q23",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 2,
-    "type": "VSA",
-    "question": "Why do ionic compounds conduct electricity in molten state and in aqueous solution, but not in solid state?",
-    "answer": "(1) In Solid State: Ions are held firmly in fixed crystallographic positions by powerful electrostatic forces of attraction. Because ions cannot move, no electrical charge transport occurs, and they act as insulators.\n\n(2) In Molten & Aqueous States: High heat breaks the crystal lattice (molten) or polar water molecules hydrate and separate the ions (aqueous), freeing cations and anions to migrate freely toward opposite electrodes under an electric field.",
-    "examinerNote": "Key phrase required: 'free mobile ions are absent in solid state'.",
-    "source": "NCERT Class 10 Page 49"
+    id: "sci_c3_q20",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 3,
+    type: "SA",
+    question: "Write the constituents and one special property / application for each of the following alloys:\n(a) Brass\n(b) Bronze\n(c) Solder",
+    answer: "(a) Brass:\n    - Constituents: Copper (Cu, ~70%) and Zinc (Zn, ~30%).\n    - Property/Application: Malleable, corrosion resistant, acoustic resonance. Used for musical instruments, decorative hardware, plumbing fittings.\n\n(b) Bronze:\n    - Constituents: Copper (Cu, ~90%) and Tin (Sn, ~10%).\n    - Property/Application: Hard, tough, resistant to saltwater corrosion. Used for statues, coins, medals, and marine hardware.\n\n(c) Solder:\n    - Constituents: Lead (Pb, ~50%) and Tin (Sn, ~50%).\n    - Property/Application: Has a very low melting point (~183 deg C). Indispensable for welding electrical wires and soldering electronic circuit boards.",
+    explanation: "Alloying lowers electrical conductivity and melting point while increasing hardness.",
+    formula: "Brass: Cu+Zn; Bronze: Cu+Sn; Solder: Pb+Sn (Low MP)",
+    examinerNote: "1 mark each for (a), (b), and (c). Low melting point of solder is a mandatory board point.",
+    source: "CBSE 2024 / NCERT Section 3.5"
   },
   {
-    "id": "sci_c3_q24",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 2,
-    "type": "VSA",
-    "question": "Differentiate between Roasting and Calcination with one balanced chemical equation for each.",
-    "answer": "(1) Roasting: Heating a sulphide ore strongly below its melting point in the PRESENCE OF EXCESS AIR to convert it into metal oxide.\nExample: Zinc blende ore:\n2ZnS(s) + 3O₂(g) —[Heat]⟶ 2ZnO(s) + 2SO₂(g)↑\n\n(2) Calcination: Heating a carbonate or hydrated ore strongly below its melting point in the ABSENCE OR LIMITED SUPPLY OF AIR to convert it into metal oxide.\nExample: Calamine ore:\nZnCO₃(s) —[Heat]⟶ ZnO(s) + CO₂(g)↑",
-    "formula": "2\\text{ZnS} + 3\\text{O}_2 ⟶ 2\\text{ZnO} + 2\\text{SO}_2",
-    "source": "NCERT Class 10 Page 51"
+    id: "sci_c3_q21",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 3,
+    type: "SA",
+    question: "Show the formation of Magnesium chloride (MgCl2) by the transfer of electrons:\n(a) Write the electronic configuration of Magnesium (atomic number 12) and Chlorine (atomic number 17).\n(b) Draw the electron dot representation of the bond formation.\n(c) Name the ions present in MgCl2 and state why it has a high melting point.",
+    answer: "(a) Electronic Configurations:\n    - Magnesium (Mg, Z = 12): 2, 8, 2 (Valence electrons = 2)\n    - Chlorine (Cl, Z = 17): 2, 8, 7 (Valence electrons = 7)\n\n(b) Electron Transfer:\n    Mg atom loses 2 valence electrons to achieve stable octet (2, 8):\n    Mg -> Mg(2+) + 2e(-)\n    Two Chlorine atoms each accept 1 electron to achieve stable octet (2, 8, 8):\n    2Cl + 2e(-) -> 2Cl(-)\n    Representation: [Mg](2+) 2[:Cl:](-)\n\n(c) Ions present: Magnesium cation (Mg(2+)) and Chloride anion (Cl(-)).\n    High Melting Point Reason: Mg(2+) and Cl(-) are held together by exceptionally strong electrostatic forces of attraction in a 3D crystal lattice. A large amount of thermal energy is required to break these strong ionic bonds.",
+    explanation: "Ionic bonds are formed by complete transfer of electrons from metal to non-metal.",
+    formula: "Mg(2+) + 2Cl(-) -> MgCl2",
+    examinerNote: "1 mark for configurations; 1 mark for electron dot diagram; 1 mark for ions and high MP justification.",
+    source: "CBSE Board 2024"
+  },
+
+  // =========================================================================
+  // 5-MARK LONG ANSWER (LA)
+  // =========================================================================
+  {
+    id: "sci_c3_q22",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 5,
+    type: "LA",
+    question: "(a) How are metals in the middle of the reactivity series extracted from their carbonate and sulphide ores? Give balanced chemical equations using Zinc as an example.\n(b) How is a metal at the top of the reactivity series (such as sodium) extracted from its molten chloride? Why can sodium not be obtained by reduction with carbon?\n(c) How is a metal at the bottom of the reactivity series (such as mercury) extracted from its sulphide ore cinnabar (HgS)? Write the balanced chemical equations.",
+    answer: "(a) Metals in Middle of Reactivity Series (Zn, Fe, Pb):\n    Step 1: Convert ore to oxide:\n    - From Sulphide ore by Roasting (excess air):\n      2ZnS(s) + 3O2(g) -> 2ZnO(s) + 2SO2(g)\n    - From Carbonate ore by Calcination (limited air):\n      ZnCO3(s) -> ZnO(s) + CO2(g)\n    Step 2: Reduction of metal oxide using carbon (coke):\n      ZnO(s) + C(s) -> Zn(s) + CO(g)\n\n(b) Metals at Top of Reactivity Series (Na, Ca, Mg, Al):\n    - Extracted by electrolytic reduction of their molten chlorides:\n      Molten NaCl is electrolysed: 2NaCl(l) -> 2Na(s) [at cathode] + Cl2(g) [at anode]\n      Cathode: Na+ + e- -> Na; Anode: 2Cl- -> Cl2 + 2e-\n    - Why Carbon cannot reduce sodium: Sodium has a much greater affinity for oxygen than carbon does; carbon cannot overcome the strong ionic bonding of sodium compounds.\n\n(c) Metals at Bottom of Reactivity Series (Hg):\n    Cinnabar (HgS) is heated strongly in air:\n    Stage 1: 2HgS(s) + 3O2(g) -> 2HgO(s) + 2SO2(g)\n    Stage 2: 2HgO(s) -> 2Hg(l) + O2(g) (Thermal reduction without any reducing agent).",
+    explanation: "Reactivity series dictates metallurgy: low reactivity = thermal reduction; medium = roasting/calcination + carbon; high = electrolytic reduction.",
+    formula: "Low: HgS->HgO->Hg; Medium: ZnS/ZnCO3->ZnO->Zn; High: Molten NaCl electrolysis",
+    examinerNote: "2 marks for part (a); 2 marks for part (b); 1 mark for part (c).",
+    source: "CBSE Board 2024 (Set 31/1/1)"
   },
   {
-    "id": "sci_c3_q25",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 2,
-    "type": "VSA",
-    "question": "Explain why aluminium is a highly reactive metal, yet it is widely used to make cooking utensils and food packaging foil.",
-    "answer": "(1) Reason: Aluminium instantly reacts with atmospheric oxygen to form an ultra-thin, highly adherent, and non-porous protective surface film of Aluminium Oxide ($Al_2O_3$).\n\n(2) Protection: This oxide layer is chemically unreactive and acts as an impenetrable shield preventing oxygen, moisture, and food ingredients from contacting the metal underneath. Additionally, aluminium has high thermal conductivity and light weight.",
-    "formula": "4Al + 3O₂ ⟶ 2Al₂O₃",
-    "source": "NCERT Exercises Ch 3"
+    id: "sci_c3_q23",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 5,
+    type: "LA",
+    question: "(a) What are ionic compounds? List any four general physical properties of ionic compounds and justify each property scientifically.\n(b) By electron transfer, show the formation of Sodium oxide (Na2O) from sodium (Z = 11) and oxygen (Z = 8).",
+    answer: "(a) Ionic compounds are compounds composed of positively charged cations and negatively charged anions held together by strong electrostatic forces of attraction.\nGeneral Properties:\n1. Physical State & Hardness: Solids and hard/brittle because strong electrostatic forces bind ions tightly in a rigid crystal lattice. Brittle because pressure shifts like-charged ions into alignment, causing repulsive cleavage.\n2. High Melting & Boiling Points: A very large amount of thermal energy is needed to break the immense electrostatic forces between oppositely charged ions.\n3. Solubility: Highly soluble in polar solvents like water (water solvates ions), but insoluble in non-polar organic solvents like kerosene and petrol.\n4. Electrical Conductivity: Insulators in solid state (ions locked in lattice); excellent electrical conductors in molten state and aqueous solution because ions become mobile charge carriers.\n\n(b) Formation of Sodium Oxide (Na2O):\n- Na (2, 8, 1) loses 1 electron: 2Na -> 2Na(+) + 2e(-)\n- O (2, 6) accepts 2 electrons: O + 2e(-) -> O(2-)\n- Electron Dot Structure: 2[Na](+) [:O:](2-)\n- Formula: Na2O.",
+    explanation: "Complete ionic lattice justification required for full 5 marks.",
+    formula: "2Na+ + O(2-) -> Na2O",
+    examinerNote: "3 marks for properties with scientific justifications; 2 marks for electron dot formation of Na2O.",
+    source: "CBSE Board 2023 / NCERT Section 3.3"
   },
   {
-    "id": "sci_c3_q26",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 2,
-    "type": "VSA",
-    "question": "Give reasons for the following observations:\n(a) Platinum, gold, and silver are used to make jewelry.\n(b) Sodium and potassium are stored immersed under kerosene oil.",
-    "answer": "(a) Platinum, gold, and silver are noble metals situated at the bottom of the reactivity series. They possess brilliant metallic lustre, high malleability and ductility, and do not corrode, tarnish, or react with air and moisture even after centuries.\n\n(b) Sodium and potassium are exceptionally reactive alkali metals with very low activation energy. In open air, they react vigorously with atmospheric oxygen and moisture, generating sufficient heat to ignite hydrogen gas. Kerosene oil cuts off air and water contact.",
-    "source": "CBSE 2021 Board Paper"
+    id: "sci_c3_q24",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 5,
+    type: "LA",
+    question: "A metal 'M' found in nature as its sulphide ore 'MS' is used extensively in galvanisation of iron articles.\n(a) Identify metal 'M' and write the name and formula of its sulphide ore.\n(b) Explain with balanced chemical equations how metal 'M' is extracted from this sulphide ore.\n(c) Name one carbonate ore of metal 'M' and describe how the metal is extracted from it.\n(d) Explain what happens when a strip of metal 'M' is dipped into an aqueous solution of copper sulphate. Write the balanced chemical equation and state the observation.\n(e) What happens when metal 'M' is heated with concentrated sodium hydroxide solution?",
+    answer: "(a) Metal 'M' is Zinc (Zn).\n    Sulphide ore: Zinc blende. Formula: ZnS.\n\n(b) Extraction from Sulphide Ore:\n    1. Roasting: 2ZnS(s) + 3O2(g) -> 2ZnO(s) + 2SO2(g)\n    2. Reduction with Carbon: ZnO(s) + C(s) -> Zn(s) + CO(g)\n\n(c) Carbonate Ore: Calamine (ZnCO3).\n    Calcination: ZnCO3(s) -> ZnO(s) + CO2(g)\n    Followed by reduction: ZnO(s) + C(s) -> Zn(s) + CO(g)\n\n(d) Zinc in Copper Sulphate Solution:\n    Zinc displaces copper because zinc is more reactive than copper:\n    Zn(s) + CuSO4(aq) [Blue] -> ZnSO4(aq) [Colourless] + Cu(s) [Reddish-brown deposit]\n    Observation: The blue colour of the solution fades and turns completely colourless, and reddish-brown copper metal coats the zinc strip.\n\n(e) Reaction with Sodium Hydroxide (Amphoteric Behavior):\n    Zinc reacts with hot concentrated NaOH to produce sodium zincate and hydrogen gas:\n    Zn(s) + 2NaOH(aq) -> Na2ZnO2(aq) [Sodium zincate] + H2(g)",
+    explanation: "Deductive metallurgical synthesis question testing entire Zinc chemistry in CBSE Class 10.",
+    formula: "ZnS -> ZnO -> Zn; Zn + CuSO4 -> ZnSO4 + Cu; Zn + 2NaOH -> Na2ZnO2 + H2",
+    examinerNote: "1 mark each for parts (a), (b), (c), (d), and (e).",
+    source: "CBSE Board 2024"
+  },
+
+  // =========================================================================
+  // 4-MARK CASE-BASED / COMPETENCY QUESTIONS
+  // =========================================================================
+  {
+    id: "sci_c3_q25",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 4,
+    type: "Case Study",
+    question: "Read the passage and answer the questions that follow:\n\nCopper is one of the oldest metals known to human civilization, prized for its exceptional electrical conductivity and thermal properties. In nature, copper occurs both in native state and combined state as copper pyrites (CuFeS2) or copper glance (Cu2S). When extracted by smelting, blister copper is obtained which contains approximately 1-2% impurities including iron, zinc, lead, silver, and gold. For electrical wiring and telecommunications, copper must be refined to 99.99% purity through electrolytic refining in a specialized chemical tank.\n\n(a) Identify the materials used as the cathode, anode, and electrolyte in the electrolytic refining of copper. [1.5M]\n(b) Write the electrode reactions taking place at the anode and cathode during refining. [1.5M]\n(c) What happens to the precious metals (gold, silver, platinum) present as impurities in blister copper? [1M]",
+    answer: "(a) Apparatus Setup:\n    - Anode (+): Impure blister copper block.\n    - Cathode (-): Thin strip of pure copper.\n    - Electrolyte: Acidified copper sulphate (CuSO4 + dilute H2SO4) solution.\n\n(b) Electrode Reactions:\n    - At Anode: Cu(s) -> Cu(2+)(aq) + 2e(-) [Copper oxidises and dissolves]\n    - At Cathode: Cu(2+)(aq) + 2e(-) -> Cu(s) [Pure copper deposits]\n\n(c) Precious metals (gold, silver, platinum) are chemically less reactive and insoluble in the electrolyte. They fall to the bottom of the electrolytic tank directly beneath the anode, forming a sediment known as ANODE MUD, which is recovered and refined as a valuable commercial byproduct.",
+    explanation: "Electrolytic refining exploits standard reduction potentials: active impurities dissolve; noble impurities drop as anode mud.",
+    formula: "Anode: Cu -> Cu(2+) + 2e-; Cathode: Cu(2+) + 2e- -> Cu",
+    examinerNote: "1.5 marks for setup; 1.5 marks for reactions; 1 mark for anode mud explanation.",
+    source: "CBSE Class 10 Board 2024"
   },
   {
-    "id": "sci_c3_q27",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 2,
-    "type": "VSA",
-    "question": "What is an alloy? Name the constituent metals in: (a) Brass, (b) Bronze, (c) Solder, (d) Stainless Steel.",
-    "answer": "Definition: An alloy is a homogeneous metallic mixture of two or more metals, or a metal and a non-metal, synthesized to enhance mechanical properties.\n\n(a) Brass: Copper (Cu, ~70%) + Zinc (Zn, ~30%)\n(b) Bronze: Copper (Cu, ~90%) + Tin (Sn, ~10%)\n(c) Solder: Lead (Pb, ~50%) + Tin (Sn, ~50%) [Low melting point]\n(d) Stainless Steel: Iron (Fe, ~74%) + Chromium (Cr, ~18%) + Nickel (Ni, ~8%) + Carbon (C, ~0.1–0.5%)",
-    "examinerNote": "Solder's low melting point makes it ideal for joining electrical wires.",
-    "source": "NCERT Class 10 Page 55"
-  },
-  {
-    "id": "sci_c3_q28",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 3,
-    "type": "SA",
-    "question": "Show the formation of Magnesium Chloride (MgCl₂) by electron transfer between magnesium and chlorine atoms. State the nature of bonding and write two physical properties of the compound formed.",
-    "answer": "(1) Electron Transfer:\n- Magnesium (Z = 12): Electronic configuration = 2, 8, 2. It loses 2 valence electrons to achieve stable octet:\nMg ⟶ Mg²⁺ + 2e⁻\n- Chlorine (Z = 17): Electronic configuration = 2, 8, 7. Two chlorine atoms each gain 1 electron:\n2Cl + 2e⁻ ⟶ 2Cl⁻\n- Ionic Assembly:\nMg²⁺ + 2[ :Cl̈: ]⁻ ⟶ MgCl₂\n\n(2) Nature of Bonding: Electrovalent (Ionic) bond formed by complete electrostatic transfer of electrons from metal to non-metal.\n\n(3) Two Physical Properties:\n- High melting and boiling points due to strong Coulombic inter-ionic forces.\n- Soluble in polar solvents like water, but insoluble in organic solvents (kerosene, petrol).",
-    "formula": "\\text{Mg}^{2+} + 2\\text{Cl}^- ⟶ \\text{MgCl}_2",
-    "source": "CBSE 2023 Board Paper"
-  },
-  {
-    "id": "sci_c3_q29",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 3,
-    "type": "SA",
-    "question": "Explain the Thermit process:\n(a) What is the Thermit reaction? Write the balanced chemical equation.\n(b) Which substance acts as the reducing agent?\n(c) State one major engineering application of this reaction and explain why the metal is obtained in molten liquid state.",
-    "answer": "(a) Thermit Reaction: The reduction of a metal oxide (ferric oxide) by aluminium powder through a highly exothermic displacement reaction:\nFe₂O₃(s) + 2Al(s) —[Ignition]⟶ 2Fe(l) + Al₂O₃(s) + Enormous Heat\n\n(b) Reducing Agent: Aluminium powder (Al), which has an exceptionally high affinity for oxygen.\n\n(c) Engineering Application & Molten State:\n- Application: Used to weld broken railway tracks and repair cracked heavy machinery parts in-situ.\n- Reason for Molten State: The enthalpy of reaction is so massive that the temperature rises above 2500°C (well exceeding the 1538°C melting point of iron), causing pure iron to be produced as a molten white-hot liquid that flows into the crack, welding it permanently upon cooling.",
-    "formula": "\\text{Fe}_2\\text{O}_3 + 2\\text{Al} ⟶ 2\\text{Fe}(l) + \\text{Al}_2\\text{O}_3 + \\text{Heat}",
-    "examinerNote": "Mention molten iron state Fe(l) due to massive exothermic heat.",
-    "source": "NCERT Class 10 Page 51"
-  },
-  {
-    "id": "sci_c3_q30",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 3,
-    "type": "SA",
-    "question": "Metals positioned in the middle of the reactivity series (like iron, zinc, lead, copper) are usually present as sulphides or carbonates in nature:\n(a) Why is it necessary to convert these sulphide and carbonate ores into metal oxides before reduction?\n(b) Name the two processes used for this conversion and write one balanced equation for each using zinc ores.\n(c) Name a common commercial reducing agent used to reduce zinc oxide to metallic zinc.",
-    "answer": "(a) Reason for Oxide Conversion: It is thermodynamically far easier and energy-efficient to reduce a metal oxide to free metal using common reducing agents (like carbon/CO) than it is to reduce metal sulphides or carbonates directly.\n\n(b) Two Processes & Equations:\n- Roasting (for Zinc sulphide ore, Sphalerite):\n2ZnS(s) + 3O₂(g) —[Heat in excess air]⟶ 2ZnO(s) + 2SO₂(g)↑\n- Calcination (for Zinc carbonate ore, Calamine):\nZnCO₃(s) —[Heat in limited air]⟶ ZnO(s) + CO₂(g)↑\n\n(c) Commercial Reducing Agent: Carbon (Coke). Heating zinc oxide with crushed coke reduces it to zinc:\nZnO(s) + C(s) —[1400°C]⟶ Zn(g) + CO(g)↑",
-    "formula": "\\text{ZnO} + \\text{C} ⟶ \\text{Zn} + \\text{CO}",
-    "source": "NCERT Class 10 Pages 50–51"
-  },
-  {
-    "id": "sci_c3_q31",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 3,
-    "type": "SA",
-    "question": "Samples of four metals A, B, C, and D were added to the following solutions one by one:\n- Metal A displaces iron from FeSO₄ solution.\n- Metal B does not displace iron from FeSO₄, but displaces copper from CuSO₄.\n- Metal C displaces zinc from ZnSO₄ solution.\n- Metal D does not react with any of ZnSO₄, FeSO₄, CuSO₄, or AgNO₃ solutions.\n(a) Which is the most reactive metal?\n(b) What would you observe if B is added to a solution of CuSO₄?\n(c) Arrange the metals A, B, C, and D in the order of decreasing reactivity.",
-    "answer": "(a) Most reactive metal: Metal C, because it displaces zinc (which is situated highest in the reactivity series among the tested ions).\n\n(b) Observation with B in CuSO₄: Metal B displaces copper; therefore, the blue color of copper sulphate solution fades and a reddish-brown deposit of copper metal appears on metal B.\n\n(c) Decreasing order of reactivity:\nC > A > B > D\n- C displaces Zn (highest).\n- A displaces Fe (below Zn but above Cu).\n- B displaces Cu (below Fe).\n- D displaces none (least reactive, below Ag).",
-    "source": "NCERT Class 10 Page 45 Question 3"
-  },
-  {
-    "id": "sci_c3_q32",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 3,
-    "type": "SA",
-    "question": "Explain the extraction of copper from its sulphide ore (copper glance, Cu₂S) through self-reduction (auto-reduction) with balanced chemical equations.",
-    "answer": "(1) Stage 1: Partial Roasting in Air:\nCrushed copper glance (Cu₂S) is heated strongly in a reverberatory furnace with air. Part of the cuprous sulphide is converted into cuprous oxide:\n2Cu₂S(s) + 3O₂(g) —[Heat]⟶ 2Cu₂O(s) + 2SO₂(g)↑\n\n(2) Stage 2: Self-Reduction (Auto-reduction):\nThe supply of air is turned off, and the temperature is raised. The newly formed cuprous oxide reacts with the remaining unreacted cuprous sulphide without requiring any external reducing agent:\n2Cu₂O(s) + Cu₂S(s) —[High Heat]⟶ 6Cu(l) + SO₂(g)↑\n\n(3) Resulting Metal: The molten copper solidifies with escaping bubbles of SO₂ gas, creating a rough, blistered surface known as 'Blister Copper' (~98% pure).",
-    "formula": "2\\text{Cu}_2\\text{O} + \\text{Cu}_2\\text{S} ⟶ 6\\text{Cu} + \\text{SO}_2",
-    "examinerNote": "Highlight self-reduction mechanism and the formation of blister copper.",
-    "source": "NCERT Class 10 Page 50"
-  },
-  {
-    "id": "sci_c3_q33",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 3,
-    "type": "SA",
-    "question": "Why cannot sodium, magnesium, and calcium be obtained from their oxides by reduction with carbon? How are these highly reactive metals extracted?",
-    "answer": "(1) Why Carbon Reduction Fails: Sodium, magnesium, and calcium are positioned at the very top of the reactivity series. These electropositive metals have a much higher affinity for oxygen than carbon does. Hence, carbon is incapable of stripping oxygen from their stable oxides ($Na_2O$, $MgO$, $CaO$).\n\n(2) Extraction Method: They are extracted by Electrolytic Reduction of their molten chlorides.\n\n(3) Example - Extraction of Sodium from Molten NaCl:\n- At Cathode (reduction): Na⁺ + e⁻ ⟶ Na(s) [Sodium metal deposits]\n- At Anode (oxidation): 2Cl⁻ ⟶ Cl₂(g)↑ + 2e⁻ [Chlorine gas liberates]",
-    "formula": "\\text{Na}^+ + e^- ⟶ \\text{Na}",
-    "source": "CBSE 2022, 2024"
-  },
-  {
-    "id": "sci_c3_q34",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 3,
-    "type": "SA",
-    "question": "Compare metals and non-metals on the basis of their chemical properties with respect to:\n(a) Nature of oxides formed.\n(b) Reaction with dilute acids.\n(c) Reducing/oxidizing behavior.",
-    "answer": "(a) Nature of Oxides:\n- Metals: Form basic oxides (e.g., Na₂O, CaO) or amphoteric oxides (Al₂O₃, ZnO) which dissolve in water to form alkaline solutions.\n- Non-metals: Form acidic oxides (e.g., SO₂, CO₂, NO₂) which dissolve in water to form acids, or neutral oxides (CO, H₂O, N₂O).\n\n(b) Reaction with Dilute Acids:\n- Metals: Reactive metals (above H in reactivity series) displace hydrogen gas from dilute HCl/H₂SO₄:\nMg + 2HCl ⟶ MgCl₂ + H₂↑\n- Non-metals: Do not react with dilute acids to evolve hydrogen gas because non-metals cannot donate electrons to H⁺ ions.\n\n(c) Redox Behavior:\n- Metals: Act as Reducing Agents because they readily lose valence electrons (electropositive).\n- Non-metals: Act as Oxidizing Agents because they readily gain electrons to complete their octet (electronegative).",
-    "source": "NCERT Class 10 Chapter 3 Summary"
-  },
-  {
-    "id": "sci_c3_q35",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 4,
-    "type": "Case Study",
-    "question": "Case Study: In an industrial copper refinery, electrolytic refining of blister copper is carried out in large electrolytic tanks.\n\n(a) Name the materials used as the anode, the cathode, and the electrolyte.\n(b) Write the electrochemical reactions occurring at the cathode and anode.\n(c) What is 'anode mud'? Which valuable elements are recovered from it?\n(d) Why does the concentration of copper sulphate in the electrolyte remain virtually constant throughout the refining process?",
-    "answer": "(a) Cell Components:\n- Anode (+ve terminal): Thick plate of impure blister copper.\n- Cathode (-ve terminal): Thin sheet of high-purity refined copper.\n- Electrolyte: Acidified copper sulphate solution (aqueous CuSO₄ + dilute H₂SO₄).\n\n(b) Electrode Reactions:\n- At Anode (Oxidation): Cu(s) [impure] ⟶ Cu²⁺(aq) + 2e⁻\n- At Cathode (Reduction): Cu²⁺(aq) + 2e⁻ ⟶ Cu(s) [99.99% pure]\n\n(c) Anode Mud: Insoluble impurities (such as gold, silver, and platinum) that do not dissolve into the electrolyte settle down at the bottom of the cell below the anode as a rich residue known as 'anode mud'. Precious metals are economically recovered from this mud.\n\n(d) Constant Concentration: For every copper atom that dissolves as Cu²⁺ from the impure anode into solution, exactly one Cu²⁺ ion from solution discharges and deposits as metallic copper onto the cathode.",
-    "formula": "\\text{Cu}^{2+} + 2e^- ⟶ \\text{Cu}",
-    "examinerNote": "Anode mud composition (noble metals Ag, Au, Pt) is a frequent question.",
-    "source": "CBSE 2023 Case-Based Question"
-  },
-  {
-    "id": "sci_c3_q36",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 4,
-    "type": "Case Study",
-    "question": "Case Study: In an engineering workshop, railway maintenance workers prepared an ignition mixture of barium peroxide and magnesium ribbon over a crucible containing ferric oxide and aluminium powder to weld a fissure on a high-speed train track.\n\n(a) Identify the chemical reaction utilized for welding tracks. Write its balanced equation.\n(b) Why is a magnesium ribbon used as a fuse to ignite the mixture?\n(c) Explain why this reaction is preferred over traditional electric arc welding in remote railway tracks.\n(d) How is the aluminium acting as a reducing agent in this reaction in terms of electron transfer?",
-    "answer": "(a) Reaction: Thermit Reaction (aluminothermic reduction of iron(III) oxide):\nFe₂O₃(s) + 2Al(s) ⟶ 2Fe(l) + Al₂O₃(s) + Enormous Heat\n\n(b) Function of Magnesium Ribbon: The thermit mixture requires a very high ignition activation temperature (~1000°C) to initiate. Burning magnesium ribbon provides this initial flash of intense activation heat.\n\n(c) Advantage in Remote Sites: The Thermit reaction is completely self-sustaining and chemically generates its own extreme heat (over 2500°C) without needing electrical power generators, high-voltage lines, or heavy welding machinery in remote field locations.\n\n(d) Electron Transfer Mechanism: Neutral aluminium atoms ($Al^0$) lose 3 electrons each to form $Al^{3+}$ ions (oxidation), transferring electrons to $Fe^{3+}$ ions in $Fe_2O_3$ which gain 3 electrons each to form neutral molten iron atoms ($Fe^0$, reduction).",
-    "formula": "\\text{Fe}_2\\text{O}_3 + 2\\text{Al} ⟶ 2\\text{Fe} + \\text{Al}_2\\text{O}_3",
-    "source": "CBSE Official Sample Paper 2025"
-  },
-  {
-    "id": "sci_c3_q37",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 4,
-    "type": "Case Study",
-    "question": "Case Study: Corrosion scientists investigated the preservation of the ancient Iron Pillar at Mehrauli, Delhi, which has stood for over 1600 years without rusting. In modern construction, iron rebars are rust-prevented through several advanced metallurgical techniques.\n\n(a) Why has the Delhi Iron Pillar not rusted despite centuries of exposure to monsoon rains and heat?\n(b) Explain the chemical principle of 'Galvanization'. Why does galvanized iron not rust even when the surface zinc coating is scratched?\n(c) What is 'Anodising'? How does it protect aluminium articles?\n(d) Why is iron never used in its pure elemental state for structural construction?",
-    "answer": "(a) Delhi Pillar Mystery: Ancient Indian metallurgists forged high-phosphorus wrought iron, which formed an ultra-thin, continuous protective surface passivation film of crystalline iron hydrogen phosphate hydrate ($FePO_4\\cdot H_3PO_4\\cdot 4H_2O$, 'misawite') that hermetically seals the iron core from oxygen and moisture.\n\n(b) Galvanization & Scratched Protection: Iron is coated with a thin layer of molten Zinc. Even if scratched, zinc is higher than iron in the reactivity series ($E^\\circ_{Zn^{2+}/Zn} = -0.76\\text{ V}$ vs $E^\\circ_{Fe^{2+}/Fe} = -0.44\\text{ V}$). Zinc preferentially oxidizes sacrificially ($Zn ⟶ Zn^{2+} + 2e^-$), supplying electrons to iron and preserving it from corrosion.\n\n(c) Anodising: An electrochemical process where aluminium is made the anode in an electrolytic bath of dilute sulphuric acid. Oxygen evolved reacts with the aluminium anode to form a uniform, thick, impermeable layer of aluminium oxide ($Al_2O_3$) that resists corrosion and can be dyed in bright colors.\n\n(d) Pure Iron Weakness: Pure iron is exceptionally soft and stretches easily when warm. Alloying it with just 0.05% carbon converts it into steel, which is intensely hard, tough, and mechanically strong.",
-    "examinerNote": "Sacrificial protection of zinc is a must-include concept.",
-    "source": "NCERT Class 10 Pages 53–55"
-  },
-  {
-    "id": "sci_c3_q38",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 4,
-    "type": "Case Study",
-    "question": "Case Study: In an inorganic chemistry laboratory, students investigated the physical and electrical properties of ionic compound Sodium Chloride (NaCl) compared to covalent compound Carbon Tetrachloride (CCl₄).\n\n(a) Explain why NaCl is a hard crystalline solid with a melting point of 1074 K, whereas CCl₄ is a volatile liquid.\n(b) A student places two electrodes connected to a bulb in solid dry NaCl powder and switches on the current. The bulb does not glow. When distilled water is added to dissolve the powder, the bulb glows brightly. Explain.\n(c) Why are ionic compounds brittle and shatter into pieces when struck with a hammer?\n(d) Predict whether NaCl will dissolve in petrol or kerosene. State the scientific rule governing this.",
-    "answer": "(a) Melting Point Difference:\n- NaCl: Composed of $Na^+$ cations and $Cl^-$ anions packed in a rigid 3D lattice held by strong omnidirectional Coulombic electrostatic attractions, requiring massive thermal energy (1074 K) to break.\n- CCl₄: Composed of discrete covalent molecules held only by weak intermolecular van der Waals forces, requiring very little heat to vaporize.\n\n(b) Electrical Conductivity:\n- Solid NaCl: Ions are locked rigidly in crystallographic lattice positions with zero mobile charge carriers; hence the bulb does not glow.\n- Aqueous NaCl: Water has high dielectric constant (~80) which shields ionic charges, dissolving the lattice into free mobile $Na^+(aq)$ and $Cl^-(aq)$ ions that carry current across the solution.\n\n(c) Brittleness: When a mechanical shear stress or hammer blow hits an ionic crystal, one layer of ions slips over another. Like charges come opposite to each other ($+$ against $+$, $-$ against $-$). Massive electrostatic repulsion causes the crystal lattice to fracture and shatter.\n\n(d) Non-polar Solubility: Insoluble in petrol/kerosene. Governed by the rule 'Like dissolves like': non-polar organic solvents cannot solvate or overcome the powerful electrostatic forces binding ionic lattices.",
-    "examinerNote": "The shear plane repulsion explanation for brittleness demonstrates master-level understanding.",
-    "source": "NCERT Class 10 Pages 48–49"
-  },
-  {
-    "id": "sci_c3_q39",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 5,
-    "type": "LA",
-    "question": "Comprehensive Metallurgy of Metals:\n(a) Differentiate between a Mineral and an Ore. Give one example of an ore of aluminium and an ore of iron.\n(b) Outline the flow of extraction steps for metals in the three reactivity zones:\n(i) Metals of high reactivity\n(ii) Metals of medium reactivity\n(iii) Metals of low reactivity\n(c) Name the process used to enrich ores by removing gangue (matrix) based on magnetic properties.",
-    "answer": "(a) Mineral vs Ore:\n- Mineral: A naturally occurring inorganic substance containing metals and compounds found in the earth's crust.\n- Ore: A mineral from which a metal can be extracted profitably, economically, and conveniently on a commercial scale.\n- Examples: Aluminium ore = Bauxite ($Al_2O_3\\cdot 2H_2O$); Iron ore = Haematite ($Fe_2O_3$).\n\n(b) Extraction Flows by Reactivity:\n(i) Metals of High Reactivity (K, Na, Ca, Mg, Al):\n- Cannot be reduced with carbon.\n- Extracted exclusively by Electrolytic reduction of their molten chlorides or oxides.\n\n(ii) Metals of Medium Reactivity (Zn, Fe, Pb, Cu):\n- Exist primarily as Carbonates or Sulphides.\n- Step 1: Concentration of ore.\n- Step 2: Conversion to oxide by Calcination (for carbonates) or Roasting (for sulphides).\n- Step 3: Chemical reduction to metal using Carbon (Coke) or reactive metal displacement (Aluminothermy).\n- Step 4: Refining of impure metal.\n\n(iii) Metals of Low Reactivity (Hg, Cu, Ag, Au):\n- Often exist as sulphides or in native free state.\n- Step 1: Roasting in air converts sulphide directly to oxide or metal (e.g., cinnabar HgS roasted to HgO, then decomposes to Hg on further heating).\n- Step 2: Refining.\n\n(c) Magnetic Separation: Uses a magnetic roller to separate magnetic minerals (like magnetite $Fe_3O_4$) from non-magnetic rocky gangue.",
-    "examinerNote": "All ores are minerals, but all minerals are not ores. Standard 5M board question.",
-    "source": "NCERT Class 10 Pages 49–52"
-  },
-  {
-    "id": "sci_c3_q40",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 5,
-    "type": "LA",
-    "question": "Chemical properties of metals with oxygen, water, and acids:\n(a) How do the following metals react with cold water, hot water, and steam respectively: (i) Sodium, (ii) Magnesium, (iii) Iron? Write balanced equations.\n(b) Why do gold and silver not react with water even at high temperatures?\n(c) Why is hydrogen gas usually not evolved when a metal reacts with dilute nitric acid ($HNO_3$)? Name two metals that can evolve hydrogen gas with very dilute $HNO_3$.",
-    "answer": "(a) Reactions with Water:\n(i) Sodium (with Cold Water):\nReacts violently with cold water, liberating hydrogen which catches fire immediately:\n2Na(s) + 2H₂O(l) ⟶ 2NaOH(aq) + H₂(g)↑ + Heat\n\n(ii) Magnesium (with Hot Water):\nDoes not react with cold water. Reacts with boiling hot water to form magnesium hydroxide and hydrogen gas; the metal floats due to bubbles of H₂ sticking to its surface:\nMg(s) + 2H₂O(l) [Hot] ⟶ Mg(OH)₂(aq) + H₂(g)↑\n\n(iii) Iron (with Steam):\nDoes not react with cold or hot liquid water; reacts only with steam (water vapor) to form magnetic iron oxide:\n3Fe(s) + 4H₂O(g) [Steam] ⟶ Fe₃O₄(s) + 4H₂(g)↑\n\n(b) Gold & Silver Inertness: Gold and silver are situated at the very bottom of the electrochemical reactivity series. Their standard reduction potentials are highly positive, meaning they have no thermodynamic tendency to reduce $H^+$ ions to $H_2$.\n\n(c) Reaction with Nitric Acid:\n- Reason: Dilute nitric acid ($HNO_3$) is a powerful oxidizing agent. As soon as hydrogen gas ($H_2$) is liberated, $HNO_3$ immediately oxidizes it to water ($H_2O$), while itself getting reduced to nitrogen oxides ($NO_2$, $NO$, or $N_2O$).\n- Two Exceptional Metals: Magnesium (Mg) and Manganese (Mn) react with extremely dilute (~1%) nitric acid to evolve hydrogen gas:\nMg + 2HNO₃(dilute) ⟶ Mg(NO₃)₂ + H₂↑",
-    "formula": "\\text{Mg} + 2\\text{HNO}_3 ⟶ \\text{Mg}(\\text{NO}_3)_2 + \\text{H}_2",
-    "examinerNote": "Mg and Mn reacting with dilute HNO₃ is one of the most tested exceptions in CBSE.",
-    "source": "NCERT Class 10 Pages 41–43"
-  },
-  {
-    "id": "sci_c3_q41",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 5,
-    "type": "LA",
-    "question": "Structure, properties, and formation of electrovalent compounds:\n(a) With the help of electron dot structures, show the transfer of electrons in the formation of:\n(i) Sodium Oxide (Na₂O)\n(ii) Calcium Oxide (CaO)\n(b) State the ions present in each of these compounds.\n(c) List three general properties of ionic compounds and justify each on the basis of their bonding structure.",
-    "answer": "(a) Electron Dot Structures:\n(i) Formation of Na₂O:\n- Sodium atom (Z=11, 2,8,1) has 1 valence electron: $\\text{Na}^\\bullet$.\n- Oxygen atom (Z=8, 2,6) has 6 valence electrons: :Ö:.\n- Two sodium atoms donate 1 electron each to one oxygen atom:\n2Na ⟶ 2Na⁺ + 2e⁻\nO + 2e⁻ ⟶ O²⁻ (2,8)\nCompound representation: [Na⁺]₂ [ :Ö: ]²⁻ ⟹ Na₂O.\n\n(ii) Formation of CaO:\n- Calcium atom (Z=20, 2,8,8,2) loses 2 valence electrons: Ca ⟶ Ca²⁺ + 2e⁻.\n- Oxygen atom gains 2 electrons: O + 2e⁻ ⟶ O²⁻.\nCompound representation: [Ca²⁺] [ :Ö: ]²⁻ ⟹ CaO.\n\n(b) Ions Present:\n- In Na₂O: Sodium cation ($Na^+$) and Oxide anion ($O^{2-}$).\n- In CaO: Calcium cation ($Ca^{2+}$) and Oxide anion ($O^{2-}$).\n\n(c) Three Properties Justified:\n1. High Melting & Boiling Points: Omnidirectional Coulombic attractions across the 3D crystal lattice require enormous thermal energy to disrupt.\n2. Electrical Conductivity in Solution/Melt: Mobile ions are free to migrate to opposite electrodes under electric fields.\n3. Solubility: Polar water molecules hydrate cations and anions, releasing hydration energy that overcomes the crystal lattice energy.",
-    "source": "CBSE Board 2023 Long Answer"
-  },
-  {
-    "id": "sci_c3_q42",
-    "chapter": 3,
-    "chapterName": "Metals and Non-metals",
-    "marks": 5,
-    "type": "LA",
-    "question": "Corrosion and its prevention in modern civil engineering:\n(a) What is Rusting? Write its chemical equation and name the chemical product.\n(b) Describe an activity with three test tubes to demonstrate that both air and moisture are essential for the rusting of iron.\n(c) Explain four distinct metallurgical methods used to protect iron from rusting:\n(i) Galvanization\n(ii) Alloying\n(iii) Electroplating\n(iv) Cathodic sacrificial protection",
-    "answer": "(a) Rusting Definition & Equation:\n- Definition: The slow destructive oxidation of iron metal when exposed to both atmospheric oxygen and moisture.\n- Equation: 4Fe(s) + 3O₂(g) + 2xH₂O(l) ⟶ 2Fe₂O₃·xH₂O(s)\n- Product: Hydrated Ferric Oxide (Rust), a reddish-brown flaky substance.\n\n(b) Three Test-Tubes Activity:\n- Test Tube A (Air + Water): Contains clean iron nails half-submerged in tap water. The nails rust heavily after a few days (both air and water present).\n- Test Tube B (Water only, No Air): Contains boiled distilled water (boiling expels dissolved air) with a layer of oil poured on top to seal off atmospheric air. The nails do not rust (water present, but oxygen absent).\n- Test Tube C (Air only, No Water): Contains dry air with anhydrous calcium chloride ($CaCl_2$) pellets to absorb all moisture, tightly stoppered. The nails do not rust (oxygen present, but water absent).\n- Conclusion: Both oxygen (air) and moisture (water) are simultaneously essential for rusting.\n\n(c) Four Prevention Methods:\n(i) Galvanization: Dipping cleaned steel/iron in molten zinc (450°C), forming a protective sacrificial zinc skin.\n(ii) Alloying: Mixing molten iron with chromium (18%) and nickel (8%) to produce stainless steel, which never rusts.\n(iii) Electroplating: Electrolytically coating iron with less reactive metals like nickel or chromium.\n(iv) Cathodic Protection: Connecting underground iron gas/oil pipelines to blocks of more reactive sacrificial magnesium or zinc via a wire, which corrodes preferentially.",
-    "formula": "4\\text{Fe} + 3\\text{O}_2 + 2x\\text{H}_2\\text{O} ⟶ 2\\text{Fe}_2\\text{O}_3\\cdot x\\text{H}_2\\text{O}",
-    "examinerNote": "The 3 test tube experiment is an NCERT cornerstone activity with guaranteed diagram/question appearances.",
-    "source": "NCERT Class 10 Activity 3.14"
-  },
+    id: "sci_c3_q26",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 4,
+    type: "Case Study",
+    question: "Read the passage and answer the following questions:\n\nPure metals often lack the mechanical strength, corrosion resistance, or specialized thermal properties required for modern engineering. To overcome these limitations, metallurgists synthesize alloys by combining metals with other elements. For example, pure iron is soft and deforms easily when heated, but mixing it with just 0.05% carbon increases its tensile strength dramatically. Adding chromium and nickel produces stainless steel, which resists rusting entirely. Similarly, electrical solder has a lower melting point than either of its pure constituents, making it ideal for joining electrical circuits.\n\n(a) Define an alloy and explain how alloys are prepared. [1.5M]\n(b) State the composition of solder and explain why it is chosen for welding electrical wires over pure copper or pure lead. [1.5M]\n(c) Why is stainless steel preferred over pure iron for making surgical instruments and kitchen cookware? [1M]",
+    answer: "(a) Definition: An alloy is a homogeneous mixture of two or more metals, or a metal and a non-metal.\n    Preparation: The primary metal is melted first in a furnace, and the alloying elements are dissolved into it in definite proportions, followed by cooling to room temperature.\n\n(b) Solder Composition: Lead (Pb, ~50%) and Tin (Sn, ~50%).\n    Why chosen: Solder has a very low melting point (~183 deg C), significantly lower than pure copper (~1085 deg C) or pure lead (~327 deg C). It melts easily with a soldering iron, wetting the copper wire joints without melting or damaging adjacent sensitive electronic components.\n\n(c) Pure iron rusts rapidly in the presence of air and moisture and is easily corroded by acids in food. Stainless steel (alloyed with chromium and nickel) forms a permanent, self-healing chromium oxide film that makes it completely rust-free, chemically non-reactive, and structurally hard.",
+    explanation: "Alloying modifies lattice bonding, resulting in lower melting points and enhanced chemical passivity.",
+    formula: "Solder: Pb + Sn (Low MP); Stainless Steel: Fe + Cr + Ni + C (Rust-Free)",
+    examinerNote: "1.5 marks for part (a); 1.5 marks for part (b); 1 mark for part (c).",
+    source: "CBSE Competency-Based Sample Paper 2025"
+  }
 ];

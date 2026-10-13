@@ -1,26 +1,28 @@
 import type { VaultQuestion } from "@/data/vaultQuestions";
 
 export const SCI_CH5_QUESTIONS: VaultQuestion[] = [
+  // =========================================================================
   // 1-MARK MCQs & ASSERTION-REASON
+  // =========================================================================
   {
     id: "sci_c5_q1",
     chapter: 5,
     chapterName: "Life Processes",
     marks: 1,
     type: "MCQ",
-    question: "Which of the following events does NOT occur during the light-dependent stage of photosynthesis in green plants?\n(a) Absorption of light energy by chlorophyll\n(b) Photolysis of water into hydrogen and oxygen\n(c) Reduction of carbon dioxide into carbohydrates\n(d) Conversion of light energy into chemical energy",
+    question: "Which of the following events does NOT occur during the light reactions of photosynthesis?\n(a) Absorption of light energy by chlorophyll\n(b) Splitting of water molecules into hydrogen and oxygen\n(c) Reduction of carbon dioxide to carbohydrates\n(d) Conversion of light energy into chemical energy",
     options: [
       "Absorption of light energy by chlorophyll",
-      "Photolysis of water into hydrogen and oxygen",
-      "Reduction of carbon dioxide into carbohydrates",
+      "Splitting of water molecules into hydrogen and oxygen",
+      "Reduction of carbon dioxide to carbohydrates",
       "Conversion of light energy into chemical energy"
     ],
     correctOption: 2,
-    answer: "Option (c) is correct: Reduction of carbon dioxide into carbohydrates.",
-    explanation: "Reduction of CO₂ to carbohydrates is a dark (light-independent / Calvin cycle) reaction that does not require direct light. The light-dependent reactions comprise chlorophyll absorption, energy transduction to ATP/NADPH, and photolytic splitting of water.",
-    formula: "6CO₂ + 12H₂O ⟶ C₆H₁₂O₆ + 6O₂ + 6H₂O",
-    examinerNote: "NCERT textbook explicitly separates the 3 steps of photosynthesis. Reduction of CO₂ does not require direct photon absorption.",
-    source: "NCERT Class 10 Page 82"
+    answer: "Option (c) is correct: Reduction of carbon dioxide to carbohydrates.",
+    explanation: "NCERT lists 3 events during photosynthesis: 1. Absorption of light energy by chlorophyll, 2. Conversion of light energy to chemical energy and splitting of water into hydrogen and oxygen (photolysis), and 3. Reduction of CO2 to carbohydrates. The reduction of carbon dioxide is a dark reaction (light-independent phase), which does not strictly require light and can occur in desert plants at night.",
+    formula: "Photosynthesis: 6CO2 + 12H2O -> C6H12O6 + 6O2 + 6H2O",
+    examinerNote: "NCERT Section 5.2.1. In desert plants, stomata open at night to take up CO2 and store it as an intermediate, which is reduced during the day.",
+    source: "CBSE 2024 / NCERT Exemplar Q1"
   },
   {
     id: "sci_c5_q2",
@@ -28,19 +30,19 @@ export const SCI_CH5_QUESTIONS: VaultQuestion[] = [
     chapterName: "Life Processes",
     marks: 1,
     type: "MCQ",
-    question: "The correct sequence of anaerobic breakdown of glucose in human muscle tissue during strenuous exercise is:\n(a) Glucose —[Cytoplasm]⟶ Pyruvate —[Mitochondria]⟶ Lactic acid + Energy\n(b) Glucose —[Cytoplasm]⟶ Pyruvate —[Cytoplasm]⟶ Lactic acid + Energy\n(c) Glucose —[Cytoplasm]⟶ Pyruvate —[Mitochondria]⟶ Ethanol + CO₂ + Energy\n(d) Glucose —[Cytoplasm]⟶ Pyruvate —[Cytoplasm]⟶ Ethanol + CO₂ + Energy",
+    question: "The opening and closing of the stomatal pore depends upon:\n(a) Atmospheric temperature\n(b) Atmospheric oxygen concentration\n(c) Water content in guard cells\n(d) Concentration of carbon dioxide in stomata",
     options: [
-      "Glucose —[Cytoplasm]⟶ Pyruvate —[Mitochondria]⟶ Lactic acid + Energy",
-      "Glucose —[Cytoplasm]⟶ Pyruvate —[Cytoplasm]⟶ Lactic acid + Energy",
-      "Glucose —[Cytoplasm]⟶ Pyruvate —[Mitochondria]⟶ Ethanol + CO₂ + Energy",
-      "Glucose —[Cytoplasm]⟶ Pyruvate —[Cytoplasm]⟶ Ethanol + CO₂ + Energy"
+      "Atmospheric temperature",
+      "Atmospheric oxygen concentration",
+      "Water content in guard cells",
+      "Concentration of carbon dioxide in stomata"
     ],
-    correctOption: 1,
-    answer: "Option (b) is correct: Glucose —[Cytoplasm]⟶ Pyruvate —[Cytoplasm]⟶ Lactic acid + Energy.",
-    explanation: "Both glycolysis (glucose to pyruvate) and the subsequent anaerobic conversion of pyruvate into 3-carbon Lactic Acid take place entirely in the cytoplasm of muscle cells without involving mitochondria.",
-    formula: "C₆H₁₂O₆ ⟶ 2 Pyruvate ⟶ 2 Lactic Acid + 2 ATP",
-    examinerNote: "Mitochondria are strictly reserved for aerobic respiration. Anaerobic fermentation occurs entirely in the cytoplasm.",
-    source: "CBSE 2024 Board Question"
+    correctOption: 2,
+    answer: "Option (c) is correct: Water content in guard cells.",
+    explanation: "Guard cells swell when water flows into them from adjacent epidermal cells, causing the curved outer walls to bulge and opening the stomatal pore. Conversely, when guard cells lose water, they become flaccid and shrink, causing the stomatal pore to close.",
+    formula: "Turgid Guard Cells -> Stoma Opens; Flaccid Guard Cells -> Stoma Closes",
+    examinerNote: "NCERT Section 5.2.1 benchmark conceptual question.",
+    source: "NCERT Exemplar Q2 / CBSE 2023"
   },
   {
     id: "sci_c5_q3",
@@ -48,18 +50,14 @@ export const SCI_CH5_QUESTIONS: VaultQuestion[] = [
     chapterName: "Life Processes",
     marks: 1,
     type: "MCQ",
-    question: "Which of the following components of blood is responsible for clotting of blood at the site of an injury?\n(a) Red Blood Corpuscles (RBCs)\n(b) White Blood Corpuscles (WBCs)\n(c) Blood Platelets\n(d) Blood Plasma",
-    options: [
-      "Red Blood Corpuscles (RBCs)",
-      "White Blood Corpuscles (WBCs)",
-      "Blood Platelets",
-      "Blood Plasma"
-    ],
-    correctOption: 2,
-    answer: "Option (c) is correct: Blood Platelets.",
-    explanation: "Platelets (thrombocytes) circulate in the blood and release thromboplastin at injury sites to form a fibrin mesh plug, preventing hemorrhage and excessive blood loss.",
-    examinerNote: "RBCs carry oxygen via hemoglobin; WBCs provide immune defence; Platelets clot blood.",
-    source: "NCERT Class 10 Page 97"
+    question: "During deficiency of oxygen in human skeletal muscle cells, pyruvate is converted into lactic acid in the:\n(a) Mitochondria\n(b) Cytoplasm\n(c) Chloroplast\n(d) Nucleus",
+    options: ["Mitochondria", "Cytoplasm", "Chloroplast", "Nucleus"],
+    correctOption: 1,
+    answer: "Option (b) is correct: Cytoplasm.",
+    explanation: "Both glycolysis (glucose -> pyruvate) and anaerobic conversion of pyruvate into lactic acid during strenuous exercise occur strictly in the CYTOPLASM of human skeletal muscle cells. Mitochondria are involved exclusively in aerobic respiration in the presence of oxygen.",
+    formula: "Pyruvate (3-Carbon) -> Lactic Acid (3-Carbon) + 2 ATP (In Cytoplasm)",
+    examinerNote: "Common trap: Students pick mitochondria because it is the 'powerhouse'. Anaerobic fermentation happens in the cytoplasm!",
+    source: "CBSE 2024 / NCERT Figure 5.8"
   },
   {
     id: "sci_c5_q4",
@@ -67,550 +65,354 @@ export const SCI_CH5_QUESTIONS: VaultQuestion[] = [
     chapterName: "Life Processes",
     marks: 1,
     type: "MCQ",
-    question: "Assertion (A): The inner lining of the small intestine possesses millions of finger-like projections called villi.\nReason (R): Villi dramatically increase the surface area for the rapid absorption of digested food.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is NOT the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
+    question: "Which of the following statement(s) is/are true about the human heart?\n(i) Left atrium receives oxygenated blood from lungs through pulmonary veins.\n(ii) Left ventricle pumps oxygenated blood to different body parts through aorta.\n(iii) Right atrium receives oxygenated blood from body organs through vena cava.\n(iv) Right ventricle pumps deoxygenated blood to lungs through pulmonary artery.\n(a) (i) and (ii)\n(b) (ii) and (iii)\n(c) (i), (ii) and (iv)\n(d) (ii) and (iv)",
     options: [
-      "Both A and R are true and R is the correct explanation of A.",
-      "Both A and R are true but R is NOT the correct explanation of A.",
-      "A is true but R is false.",
-      "A is false but R is true."
+      "(i) and (ii)",
+      "(ii) and (iii)",
+      "(i), (ii) and (iv)",
+      "(ii) and (iv)"
     ],
-    correctOption: 0,
-    answer: "Option (a) is correct.",
-    explanation: "The functional evolutionary purpose of villi is to maximize the absorptive surface area, and they are richly supplied with blood capillaries and lacteals to facilitate rapid nutrient diffusion into the bloodstream.",
-    examinerNote: "Both statements are true and Reason provides the exact physiological purpose of the assertion.",
-    source: "KVS Support Material 2026-27"
+    correctOption: 2,
+    answer: "Option (c) is correct: (i), (ii) and (iv).",
+    explanation: "Left atrium receives oxygenated blood from lungs (pulmonary veins). Left ventricle pumps oxygenated blood to the body (aorta). Right ventricle pumps deoxygenated blood to lungs (pulmonary artery). Statement (iii) is FALSE because right atrium receives DEOXYGENATED blood from body tissues through vena cava.",
+    formula: "Left Side = Oxygenated; Right Side = Deoxygenated",
+    examinerNote: "NCERT Exemplar Q11. Memorize that Pulmonary Veins carry oxygenated blood and Pulmonary Arteries carry deoxygenated blood.",
+    source: "NCERT Exemplar / CBSE 2023"
   },
-
-  // 2-MARK SHORT ANSWER QUESTIONS
   {
     id: "sci_c5_q5",
     chapter: 5,
     chapterName: "Life Processes",
-    marks: 2,
-    type: "VSA",
-    question: "Why do aquatic organisms exhibit a much faster rate of breathing than terrestrial organisms?",
-    answer: "Aquatic organisms (like fishes) absorb oxygen dissolved in water, whereas terrestrial organisms inhale oxygen from the atmospheric air. The concentration of dissolved oxygen in water is fairly low compared to the high concentration of oxygen in atmospheric air (~21%). Consequently, aquatic organisms must pump water across their gills much more rapidly to procure sufficient oxygen for cellular respiration.",
-    steps: [
-      "Step 1: Compare oxygen concentration: Dissolved O₂ in water is very low; Atmospheric O₂ in air is high (~21%).",
-      "Step 2: Conclude: Fish breathe much faster to extract adequate oxygen per unit time."
-    ],
-    explanation: "1 liter of air contains ~210 mL of oxygen, whereas 1 liter of freshwater contains only ~5–8 mL of dissolved oxygen.",
-    examinerNote: "Must contrast 'low concentration of dissolved oxygen in water' with 'high concentration in air'.",
-    source: "NCERT Class 10 Page 93"
+    marks: 1,
+    type: "MCQ",
+    question: "The filtration units of kidneys are called:\n(a) Ureter\n(b) Urethra\n(c) Neurons\n(d) Nephrons",
+    options: ["Ureter", "Urethra", "Neurons", "Nephrons"],
+    correctOption: 3,
+    answer: "Option (d) is correct: Nephrons.",
+    explanation: "Each kidney contains approximately 1 to 1.2 million microscopic functional filtration units called nephrons. Neurons are the functional units of the nervous system.",
+    formula: "Nephron = Bowman's Capsule + Glomerulus + Renal Tubule + Collecting Duct",
+    examinerNote: "Examiners trap students with the visual similarity between 'Nephron' and 'Neuron'.",
+    source: "NCERT Section 5.5.1 / CBSE 2024"
   },
   {
     id: "sci_c5_q6",
     chapter: 5,
     chapterName: "Life Processes",
-    marks: 2,
-    type: "VSA",
-    question: "What is the function of valves in the human heart? What would happen if valves were absent in veins?",
-    answer: "Functions:\n(1) Heart Valves (tricuspid, bicuspid/mitral, semilunar) ensure that blood flows in only ONE direction (from atria to ventricles, and from ventricles into pulmonary artery/aorta) and prevent backflow during ventricular contraction (systole).\n(2) If veins lacked valves, blood under low pressure returning from the lower limbs would backflow and pool in the legs due to gravity, leading to circulatory failure and severe edema.",
-    steps: [
-      "Part 1: State function of heart valves: prevents backflow of blood.",
-      "Part 2: Explain consequence in veins: backflow of low-pressure blood due to gravity."
-    ],
-    explanation: "Arteries do not require valves because blood flows under high pumping pressure from the ventricles.",
-    examinerNote: "1 mark for heart valve function; 1 mark for consequence in veins.",
-    source: "CBSE 2023 Board Paper"
+    marks: 1,
+    type: "MCQ",
+    question: "Oxygen liberated during photosynthesis comes from:\n(a) Water\n(b) Chlorophyll\n(c) Carbon dioxide\n(d) Glucose",
+    options: ["Water", "Chlorophyll", "Carbon dioxide", "Glucose"],
+    correctOption: 0,
+    answer: "Option (a) is correct: Water (H2O).",
+    explanation: "Ruben and Kamen proved using oxygen isotope O-18 that the oxygen gas released during photosynthesis originates entirely from the photolytic splitting of water (H2O -> 2H+ + 2e- + 1/2 O2), NOT from carbon dioxide.",
+    formula: "Photolysis: 2H2O -> 4H+ + 4e- + O2",
+    examinerNote: "Very frequent CBSE question: CO2 is reduced to glucose; H2O is oxidised to O2.",
+    source: "NCERT Exemplar Q13 / CBSE 2023"
   },
   {
     id: "sci_c5_q7",
     chapter: 5,
     chapterName: "Life Processes",
-    marks: 2,
-    type: "VSA",
-    question: "Differentiate between Xylem and Phloem transport in plants based on the materials transported and the energy mechanism involved.",
-    answer: "1. Material Transported:\n- Xylem transports water and dissolved mineral salts unidirectionally upwards from roots to leaves.\n- Phloem translocates soluble organic products of photosynthesis (sucrose, amino acids) bidirectionally from leaves (source) to storage and growing tissues (sink).\n\n2. Energy Mechanism:\n- Xylem transport relies on passive physical forces: Transpiration pull and root pressure, requiring zero metabolic energy (no ATP).\n- Phloem translocation is an active physiological process requiring metabolic energy in the form of ATP to create osmotic pressure.",
-    steps: [
-      "Step 1: Contrast substances transported (water/minerals vs sucrose/amino acids).",
-      "Step 2: Contrast direction (unidirectional upward vs bidirectional).",
-      "Step 3: Contrast energy involvement (passive physical suction vs active ATP expenditure)."
+    marks: 1,
+    type: "MCQ",
+    question: "Which of the following is the correct sequence of air passage during human inhalation?\n(a) Nostrils -> Larynx -> Pharynx -> Trachea -> Lungs\n(b) Nasal passage -> Trachea -> Pharynx -> Larynx -> Alveoli\n(c) Larynx -> Nostrils -> Pharynx -> Lungs\n(d) Nostrils -> Pharynx -> Larynx -> Trachea -> Alveoli",
+    options: [
+      "Nostrils -> Larynx -> Pharynx -> Trachea -> Lungs",
+      "Nasal passage -> Trachea -> Pharynx -> Larynx -> Alveoli",
+      "Larynx -> Nostrils -> Pharynx -> Lungs",
+      "Nostrils -> Pharynx -> Larynx -> Trachea -> Alveoli"
     ],
-    explanation: "Phloem utilizes ATP to load sucrose into sieve tubes, drawing water by osmosis to build high hydrostatic pressure.",
-    examinerNote: "Must highlight that phloem translocation utilizes ATP, whereas xylem does not consume ATP.",
-    source: "Educart Science Class 10"
+    correctOption: 3,
+    answer: "Option (d) is correct: Nostrils -> Pharynx -> Larynx -> Trachea -> Alveoli.",
+    explanation: "Inhaled air passes from external nostrils into the nasal cavity, then into the pharynx (throat), through the larynx (voice box), down the trachea (windpipe), which divides into bronchi, bronchioles, and terminates in the alveoli.",
+    formula: "Nostrils -> Pharynx -> Larynx -> Trachea -> Bronchi -> Bronchioles -> Alveoli",
+    examinerNote: "Pharynx comes before Larynx (P comes before L in alphabet).",
+    source: "NCERT Exemplar Q9 / CBSE 2024"
   },
-
-  // 3-MARK SHORT ANSWER QUESTIONS
   {
     id: "sci_c5_q8",
     chapter: 5,
     chapterName: "Life Processes",
-    marks: 3,
-    type: "SA",
-    question: "Explain the three different pathways of breakdown of glucose in living organisms with the help of a schematic flowchart.",
-    answer: "All three pathways share a common initial step: In the cell cytoplasm, 1 molecule of 6-carbon Glucose is broken down into 2 molecules of 3-carbon Pyruvate, releasing 2 ATP (Glycolysis).\n\n1. Pathway 1 (Absence of Oxygen / Anaerobic in Yeast Fermentation):\nPyruvate —[In Yeast]⟶ Ethanol (2-Carbon) + Carbon Dioxide (CO₂) + 2 ATP.\n\n2. Pathway 2 (Lack of Oxygen / Anaerobic in Human Muscle Cells):\nPyruvate —[Muscle Tissue]⟶ Lactic Acid (3-Carbon) + 2 ATP. (Causes muscle fatigue and cramps).\n\n3. Pathway 3 (Presence of Oxygen / Aerobic in Mitochondria):\nPyruvate + O₂ —[Mitochondria]⟶ 6CO₂ + 6H₂O + 38 ATP. (High energy yield for active metabolism).",
-    steps: [
-      "Step 1: State common cytoplasmic glycolysis (Glucose ⟶ Pyruvate).",
-      "Step 2: Detail yeast fermentation pathway (Ethanol + CO₂ + 2 ATP).",
-      "Step 3: Detail muscle anaerobic pathway (Lactic Acid + 2 ATP).",
-      "Step 4: Detail aerobic mitochondrial pathway (CO₂ + H₂O + 38 ATP)."
-    ],
-    explanation: "Aerobic respiration generates 19 times more ATP per glucose molecule than anaerobic pathways.",
-    examinerNote: "Full 3 marks require specifying: (1) cellular location, (2) end products, (3) relative ATP energy yield.",
-    source: "NCERT Class 10 Page 91 / CBSE Benchmark Question"
+    marks: 1,
+    type: "MCQ",
+    question: "Which component of blood is responsible for clotting of blood at the site of an injury?\n(a) RBCs\n(b) WBCs\n(c) Blood Platelets\n(d) Blood Plasma",
+    options: ["RBCs", "WBCs", "Blood Platelets", "Blood Plasma"],
+    correctOption: 2,
+    answer: "Option (c) is correct: Blood Platelets (Thrombocytes).",
+    explanation: "Blood platelets circulate in blood and release thromboplastin at injury sites, initiating the enzyme cascade that converts soluble fibrinogen into insoluble fibrin mesh threads, plugging leaks and forming a blood clot to prevent hemorrhage.",
+    formula: "Platelets -> Thromboplastin -> Prothrombin to Thrombin -> Fibrinogen to Fibrin Clot",
+    examinerNote: "NCERT Section 5.4.1 'Maintenance by Platelets'.",
+    source: "CBSE 2023"
   },
   {
     id: "sci_c5_q9",
     chapter: 5,
     chapterName: "Life Processes",
-    marks: 3,
-    type: "SA",
-    question: "What is bile juice? Where is it produced and stored? Explain two important functions of bile in the human digestive system.",
-    answer: "(a) Source and Storage: Bile is a yellowish-green alkaline fluid produced continuously by the Liver and stored in a concentrated form inside the Gall bladder.\n\n(b) Functions of Bile:\n(1) Neutralization and Alkalinization: The food entering the small intestine from the stomach is highly acidic due to HCl. Bile contains sodium bicarbonate and bile salts that neutralize gastric acid, establishing an alkaline medium (pH ~8) essential for pancreatic and intestinal enzymes (trypsin, lipase) to function.\n(2) Emulsification of Fats: Fats are present in food as large, insoluble globules that offer minimal surface area for enzyme action. Bile salts break down large fat globules into microscopic droplets (micelles), dramatically increasing surface area so that pancreatic lipase can rapidly digest them into fatty acids and glycerol.",
-    steps: [
-      "Part 1: Liver produces bile; Gall bladder stores and concentrates it.",
-      "Part 2: Function 1: Neutralizes acidic chyme to provide alkaline pH for pancreatic enzymes.",
-      "Part 3: Function 2: Emulsifies large fat globules into tiny micelles for lipase action."
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): Rings of cartilage are present in the human trachea (windpipe).\nReason (R): Rings of cartilage prevent the air passage from collapsing when there is less air in it.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is not the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
+    options: [
+      "Both A and R are true and R is the correct explanation of A.",
+      "Both A and R are true but R is not the correct explanation of A.",
+      "A is true but R is false.",
+      "A is false but R is true."
     ],
-    explanation: "Bile contains NO digestive enzymes; its action is purely physicochemical and mechanical.",
-    examinerNote: "1 mark for source/storage; 1 mark for alkaline medium; 1 mark for fat emulsification.",
-    source: "Arihant All-In-One Chapter 5"
+    correctOption: 0,
+    answer: "Option (a) is correct: Both Assertion and Reason are true and Reason is the correct explanation of Assertion.",
+    explanation: "The trachea is reinforced with 16 to 20 C-shaped rings of hyaline cartilage. These structural rings provide rigidity and prevent the trachea from collapsing under negative pressure during rapid inhalation or when the air pressure inside the trachea drops.",
+    formula: "Tracheal Cartilage = Structural support against collapsing",
+    examinerNote: "NCERT Section 5.3.1. Full 1 mark for linking cartilage rings to prevention of collapse.",
+    source: "CBSE Official Sample Paper 2025"
   },
-
-  // 5-MARK LONG ANSWER & CASE STUDIES
   {
     id: "sci_c5_q10",
     chapter: 5,
     chapterName: "Life Processes",
-    marks: 5,
-    type: "LA",
-    question: "Explain the structure of the human heart and the flow of blood through its chambers. Why is the human circulatory system called 'Double Circulation'? What is its biological advantage?",
-    answer: "1. Structure of Heart:\nThe human heart is a muscular organ divided into 4 chambers:\n- Upper receiving chambers: Right Atrium and Left Atrium.\n- Lower pumping chambers: Right Ventricle and Left Ventricle.\n- A thick muscular wall called the Septum separates the right side from the left side, completely preventing mixing of oxygenated and deoxygenated blood.\n\n2. Blood Flow Cycle:\n(a) Pulmonary Circulation: Deoxygenated blood from body tissues enters Right Atrium via Vena Cava ⟶ Right Ventricle ⟶ pumped via Pulmonary Artery to Lungs for oxygenation ⟶ returns as oxygenated blood via Pulmonary Veins into Left Atrium.\n(b) Systemic Circulation: Oxygenated blood enters Left Atrium ⟶ passes to Left Ventricle ⟶ pumped under high pressure via Aorta to all organs and body tissues.\n\n3. Why 'Double Circulation'?\nBecause blood passes through the heart TWICE during each complete circuit of the body: once through the pulmonary circuit (to lungs) and once through the systemic circuit (to body organs).\n\n4. Biological Advantage:\nDouble circulation maintains complete physical separation of oxygen-rich blood from carbon-dioxide-rich blood. This ensures maximum efficiency in oxygen delivery to tissues, which is essential for homeothermic (warm-blooded) birds and mammals that require large amounts of energy to maintain a constant internal body temperature.",
-    steps: [
-      "Step 1: Describe 4 chambers and the septum.",
-      "Step 2: Trace pulmonary circuit (Right side ⟶ Lungs ⟶ Left side).",
-      "Step 3: Trace systemic circuit (Left side ⟶ Body ⟶ Right side).",
-      "Step 4: Define double circulation.",
-      "Step 5: Explain physiological advantage (high oxygen delivery for constant body temperature)."
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): The small intestine is the site of the complete digestion of carbohydrates, proteins, and fats.\nReason (R): The small intestine receives bile juice from the liver and pancreatic juice from the pancreas, and secretes intestinal enzymes.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is not the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
+    options: [
+      "Both A and R are true and R is the correct explanation of A.",
+      "Both A and R are true but R is not the correct explanation of A.",
+      "A is true but R is false.",
+      "A is false but R is true."
     ],
-    explanation: "Ventricles have thicker muscular walls than atria because they have to pump blood across long distances against gravity.",
-    examinerNote: "Ensure pulmonary artery (carries deoxygenated blood) and pulmonary veins (carry oxygenated blood) are correctly described.",
-    source: "CBSE 2024 Board 5-Mark Question"
+    correctOption: 0,
+    answer: "Option (a) is correct: Both Assertion and Reason are true and Reason is the correct explanation of Assertion.",
+    explanation: "The small intestine (ileum) contains bile salts to emulsify fats, pancreatic enzymes (amylase, trypsin, lipase) to hydrolyse macromolecular chyme, and succus entericus (intestinal juice) containing terminal peptidases, maltase, and lipases to break food into monomeric glucose, amino acids, and fatty acids.",
+    formula: "Small Intestine = Complete Digestion (Carbs -> Glucose, Proteins -> Amino Acids, Fats -> Fatty Acids)",
+    examinerNote: "NCERT Section 5.2.3. Emphasize that digestion terminates in the small intestine; large intestine only absorbs water.",
+    source: "CBSE Board 2024"
   },
   {
     id: "sci_c5_q11",
     chapter: 5,
     chapterName: "Life Processes",
-    marks: 4,
-    type: "Case Study",
-    question: "Case Study: In an intensive care unit, a patient suffering from total renal failure was placed on an artificial kidney (Hemodialysis) machine. The machine consists of a tank filled with dialyzing fluid and coiled semi-permeable cellophane tubes.\n\n(a) Name the nitrogenous waste product removed from blood by the dialyzer.\n(b) What is the fundamental difference between the dialyzing fluid and normal blood plasma?\n(c) How does artificial hemodialysis differ from natural filtration in healthy kidneys regarding reabsorption?\n(d) Why is heparin added to blood before passing it through the dialysis machine?",
-    answer: "(a) Urea (and uric acid / creatinine).\n\n(b) The dialyzing fluid has the exact same osmotic pressure and concentration of glucose, amino acids, and vital electrolytes as normal blood plasma, EXCEPT that it contains ZERO nitrogenous waste (no urea). This allows urea to passively diffuse out of blood across the cellophane membrane down its concentration gradient.\n\n(c) In a healthy kidney, the initial glomerular filtrate is approx. 180 liters per day, out of which 99% of water and all useful nutrients are selectively reabsorbed by renal tubules, leaving only 1.5–2 liters of urine. In an artificial dialysis machine, there is NO tubular selective reabsorption; waste is eliminated directly without reabsorption.\n\n(d) Heparin is an anticoagulant added to prevent blood from clotting as it flows through the synthetic foreign plastic tubes outside the patient's body.",
-    steps: [
-      "Part (a): Identify urea as the primary nitrogenous excretory product.",
-      "Part (b): Note identical composition to plasma except absence of urea.",
-      "Part (c): Contrast: Natural kidneys reabsorb 99% of filtrate; dialysis has no tubular reabsorption.",
-      "Part (d): Heparin acts as an anticoagulant preventing thrombosis in tubing."
-    ],
-    explanation: "Hemodialysis operates strictly by passive concentration gradient diffusion across semi-permeable membranes.",
-    examinerNote: "1 mark per sub-part. Part (c) tests deeper understanding of kidney vs dialysis physiology.",
-    source: "PW Sample Paper 2026 / CBSE Case Study"
-  },
-  {"id": "sci_c5_q12",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "During cellular respiration in yeast under anaerobic conditions, pyruvate is converted into:\n(a) Lactic acid + Energy\n(b) Ethanol + Carbon dioxide + Energy\n(c) Carbon dioxide + Water + Energy\n(d) Pyruvic acid + Energy",
-    "options": [
-      "Lactic acid + Energy",
-      "Ethanol + Carbon dioxide + Energy",
-      "Carbon dioxide + Water + Energy",
-      "Pyruvic acid + Energy"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: Ethanol + Carbon dioxide + Energy.",
-    "explanation": "In yeast during fermentation (anaerobic respiration), 3-carbon pyruvate is decarboxylated into 2-carbon ethanol (C₂H₅OH) and carbon dioxide, releasing 2 ATP molecules.",
-    "formula": "\\text{Pyruvate} ⟶ \\text{Ethanol} + \\text{CO}_2 + 2\\text{ATP}",
-    "source": "NCERT Class 10 Page 102"
-  },
-  {
-    "id": "sci_c5_q13",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Which of the following events does not occur in rough endoplasmic reticulum or during light reactions of photosynthesis?\n(a) Absorption of light energy by chlorophyll\n(b) Splitting of water molecules into hydrogen and oxygen\n(c) Conversion of light energy to chemical energy\n(d) Reduction of carbon dioxide directly in thylakoid lumen",
-    "options": [
-      "Absorption of light energy by chlorophyll",
-      "Splitting of water molecules into hydrogen and oxygen",
-      "Conversion of light energy to chemical energy",
-      "Reduction of carbon dioxide directly in thylakoid lumen"
-    ],
-    "correctOption": 3,
-    "answer": "Option (d) is correct: Reduction of carbon dioxide directly in thylakoid lumen.",
-    "explanation": "Reduction of carbon dioxide to carbohydrates occurs during dark reactions (Calvin cycle) in the stroma of chloroplasts, not in the thylakoid lumen.",
-    "source": "NCERT Class 10 Page 96"
-  },
-  {
-    "id": "sci_c5_q14",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Bile juice contains no digestive enzymes, yet it is essential for digestion because:\n(a) It activates pepsin in the stomach\n(b) It emulsifies large fat globules into tiny droplets and provides an alkaline medium for pancreatic enzymes\n(c) It hydrolyzes proteins into peptones\n(d) It breaks down starch into maltose",
-    "options": [
-      "It activates pepsin in the stomach",
-      "It emulsifies large fat globules into tiny droplets and provides an alkaline medium for pancreatic enzymes",
-      "It hydrolyzes proteins into peptones",
-      "It breaks down starch into maltose"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: It emulsifies large fat globules into tiny droplets and provides an alkaline medium for pancreatic enzymes.",
-    "explanation": "Bile salts lower the surface tension of fats, emulsifying them to increase surface area for pancreatic lipase. Bile also neutralizes acidic chyme from the stomach, creating optimal alkaline pH (~8) for pancreatic enzymes.",
-    "source": "NCERT Class 10 Page 99"
-  },
-  {
-    "id": "sci_c5_q15",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "The inner lining of the small intestine possesses millions of finger-like projections called villi. Their primary function is to:\n(a) Secrete hydrochloric acid\n(b) Increase the surface area for rapid absorption of digested food\n(c) Store bile pigments\n(d) Prevent reverse peristalsis",
-    "options": [
-      "Secrete hydrochloric acid",
-      "Increase the surface area for rapid absorption of digested food",
-      "Store bile pigments",
-      "Prevent reverse peristalsis"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: Increase the surface area for rapid absorption of digested food.",
-    "explanation": "Villi vastly expand the luminal surface area and are richly supplied with blood capillaries and lacteals to absorb amino acids, glucose, and fatty acids.",
-    "source": "NCERT Class 10 Page 100"
-  },
-  {
-    "id": "sci_c5_q16",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Assertion (A): The walls of ventricles are substantially thicker than the walls of atria in the human heart.\nReason (R): Ventricles have to pump blood into various distant organs with high pressure.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is NOT the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
-    "options": [
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): Transpiration creates a powerful suction force that pulls water upwards from roots in tall trees.\nReason (R): Continuous evaporation of water molecules from stomatal pore cells creates a continuous tension/transpiration pull in the xylem vessels.\n(a) Both A and R are true and R is the correct explanation of A.\n(b) Both A and R are true but R is not the correct explanation of A.\n(c) A is true but R is false.\n(d) A is false but R is true.",
+    options: [
       "Both A and R are true and R is the correct explanation of A.",
-      "Both A and R are true but R is NOT the correct explanation of A.",
+      "Both A and R are true but R is not the correct explanation of A.",
       "A is true but R is false.",
       "A is false but R is true."
     ],
-    "correctOption": 0,
-    "answer": "Option (a) is correct.",
-    "explanation": "Atria only pump blood down into adjacent ventricles, whereas ventricles (especially the thick left ventricle) pump oxygenated blood throughout the systemic circulation under high systolic pressure.",
-    "source": "CBSE 2024 Board Question"
+    correctOption: 0,
+    answer: "Option (a) is correct: Both Assertion and Reason are true and Reason is the correct explanation of Assertion.",
+    explanation: "Loss of water in the form of vapour from the aerial parts of a plant (transpiration) reduces water potential in mesophyll cells. Water is pulled from adjacent xylem vessels, establishing a continuous negative pressure gradient (transpiration pull) from roots through stems to leaves that lifts water up to heights of over 100 meters.",
+    formula: "Transpiration Pull = Primary driving force for xylem sap ascent during daytime",
+    examinerNote: "At night, root pressure is primary; during daytime, transpiration pull dominates.",
+    source: "CBSE Board 2023"
+  },
+
+  // =========================================================================
+  // 2-MARK VERY SHORT ANSWER (VSA)
+  // =========================================================================
+  {
+    id: "sci_c5_q12",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 2,
+    type: "VSA",
+    question: "State the role of hydrochloric acid (HCl) and mucus secreted by the gastric glands of the human stomach.",
+    answer: "1. Hydrochloric Acid (HCl):\n   - Creates an acidic medium (pH ~1.5 to 2.0) that activates the inactive pro-enzyme pepsinogen into active pepsin for protein digestion.\n   - Destroys ingested food-borne bacteria and microorganisms.\n\n2. Mucus:\n   - Forms a thick protective barrier lining the inner wall of the stomach, shielding it from the corrosive action of concentrated hydrochloric acid and preventing the formation of peptic ulcers.",
+    explanation: "Gastric glands secrete HCl, pepsinogen, and mucus in gastric juice.",
+    formula: "HCl: Activates Pepsinogen + Kills Microbes; Mucus: Protects Stomach Wall",
+    examinerNote: "1 mark for HCl functions; 1 mark for mucus protective function.",
+    source: "NCERT Section 5.2.3 / CBSE 2024"
   },
   {
-    "id": "sci_c5_q17",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "In the human excretory system, the basic structural and functional filtration unit of the kidney is the:\n(a) Neuron\n(b) Nephron\n(c) Ureter\n(d) Glomerulus alone",
-    "options": [
-      "Neuron",
-      "Nephron",
-      "Ureter",
-      "Glomerulus alone"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: Nephron.",
-    "explanation": "Each kidney contains approximately 1 to 1.2 million microscopic filtering units called nephrons, consisting of Bowman's capsule, glomerulus, and renal tubules.",
-    "examinerNote": "Common confusion: Neuron = nerve cell; Nephron = kidney excretory unit.",
-    "source": "NCERT Class 10 Page 110"
+    id: "sci_c5_q13",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 2,
+    type: "VSA",
+    question: "Why do aquatic organisms have a much faster breathing rate than terrestrial organisms?",
+    answer: "Aquatic organisms (such as fishes) obtain oxygen dissolved in water, whereas terrestrial organisms breathe atmospheric oxygen.\nThe concentration of dissolved oxygen in water is extremely low (less than 1% by volume) compared to the abundant concentration of oxygen in atmospheric air (~21%). Therefore, to intake sufficient oxygen to meet their metabolic demands, aquatic organisms must breathe much faster than terrestrial organisms.",
+    explanation: "NCERT Section 5.3. Aquatic animals pump large volumes of water across gills per minute.",
+    formula: "Dissolved O2 in Water (~0.7%) << O2 in Atmospheric Air (21%)",
+    examinerNote: "Key phrase required: 'amount of dissolved oxygen in water is fairly low compared to amount of oxygen in the air'.",
+    source: "NCERT Intext Question / CBSE 2023"
   },
   {
-    "id": "sci_c5_q18",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Normal systolic and diastolic blood pressures in a healthy adult human are respectively:\n(a) 80 mm Hg and 120 mm Hg\n(b) 120 mm Hg and 80 mm Hg\n(c) 140 mm Hg and 90 mm Hg\n(d) 100 mm Hg and 60 mm Hg",
-    "options": [
-      "80 mm Hg and 120 mm Hg",
-      "120 mm Hg and 80 mm Hg",
-      "140 mm Hg and 90 mm Hg",
-      "100 mm Hg and 60 mm Hg"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: 120 mm Hg (systolic) and 80 mm Hg (diastolic).",
-    "explanation": "Measured using a sphygmomanometer: systolic pressure during ventricular contraction is ~120 mm Hg, and diastolic pressure during ventricular relaxation is ~80 mm Hg.",
-    "source": "NCERT Class 10 Page 107"
+    id: "sci_c5_q14",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 2,
+    type: "VSA",
+    question: "Why are the muscular walls of the ventricles of the human heart much thicker than the walls of the atria?",
+    answer: "Atria only pump blood into the adjacent ventricles situated right below them, which requires minimal muscular pressure.\nIn contrast, ventricles must generate tremendous pressure to pump blood out of the heart across long distances: the right ventricle pumps blood to the lungs, while the left ventricle must pump blood throughout the entire systemic body to reach distant tissues against high peripheral resistance. Hence, ventricles possess much thicker muscular walls.",
+    explanation: "Left ventricle myocardium is approximately 3 times thicker than right ventricle myocardium.",
+    formula: "Ventricular Wall Thickness > Atrial Wall Thickness (High Pressure Generation)",
+    examinerNote: "Award 1 mark for stating distance/pressure requirements; 1 mark for comparing atria vs ventricles.",
+    source: "NCERT Section 5.4 / CBSE 2024"
   },
   {
-    "id": "sci_c5_q19",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "Transport of soluble products of photosynthesis (sucrose, amino acids) in plants occurs through phloem and requires:\n(a) Simple passive diffusion\n(b) Energy in the form of ATP\n(c) Transpiration pull only\n(d) Osmosis without energy",
-    "options": [
-      "Simple passive diffusion",
-      "Energy in the form of ATP",
-      "Transpiration pull only",
-      "Osmosis without energy"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: Energy in the form of ATP.",
-    "explanation": "Translocation of sucrose into sieve tubes is an active transport mechanism powered by ATP, which raises osmotic pressure and moves sap to low-pressure tissues.",
-    "source": "NCERT Class 10 Page 110"
+    id: "sci_c5_q15",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 2,
+    type: "VSA",
+    question: "What is bile juice? Why is it considered biologically essential in digestion even though it contains no digestive enzymes?",
+    answer: "Bile juice is a greenish-yellow alkaline fluid secreted by the liver and stored in the gall bladder.\nIt is biologically essential because of two vital functions:\n1. Emulsification of Fats: Bile salts break large, insoluble fat globules into microscopic droplets, greatly increasing their surface area for pancreatic lipase to act upon.\n2. Neutralisation: It neutralises the acidic gastric chyme entering from the stomach, converting the medium into an alkaline state (pH ~7.8 to 8.0) necessary for pancreatic and intestinal enzymes to function.",
+    explanation: "Bile contains bile pigments (bilirubin, biliverdin) and bile salts (sodium glycocholate/taurocholate).",
+    formula: "Bile Functions: (1) Physical Emulsification of Fats + (2) Alkaline Medium for Lipase",
+    examinerNote: "Crucial clarification: Bile performs PHYSICAL emulsification, not chemical enzymatic breakdown.",
+    source: "CBSE Board 2023"
   },
   {
-    "id": "sci_c5_q20",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "When sudden severe muscle cramps occur during heavy athletic sprinting, it is caused by the accumulation of:\n(a) Ethanol\n(b) Carbon dioxide\n(c) Lactic acid\n(d) Pyruvate",
-    "options": [
-      "Ethanol",
-      "Carbon dioxide",
-      "Lactic acid",
-      "Pyruvate"
-    ],
-    "correctOption": 2,
-    "answer": "Option (c) is correct: Lactic acid.",
-    "explanation": "Under acute oxygen debt, muscle cells undergo anaerobic respiration where pyruvate is converted into 3-carbon lactic acid, causing cramps.",
-    "formula": "\\text{Glucose} ⟶ \\text{Pyruvate} \\xrightarrow{\\text{Lack of } O_2} \\text{Lactic Acid} + \\text{Energy}",
-    "source": "NCERT Class 10 Page 102"
+    id: "sci_c5_q16",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 2,
+    type: "VSA",
+    question: "How do plants excrete their metabolic waste products? List any four methods.",
+    answer: "Plants eliminate metabolic wastes through the following methods:\n1. Gaseous wastes: Oxygen (produced during photosynthesis) and carbon dioxide (produced during respiration) are eliminated through stomata in leaves and lenticels in stems.\n2. Excess water: Removed via transpiration through stomata.\n3. Waste storage in cellular vacuoles: Stored in older leaves that subsequently turn yellow and fall off (leaf abscission).\n4. Resins and Gums: Insoluble metabolic wastes are stored in non-functional old xylem vessels.\n5. Root excretion: Some waste substances are excreted directly into the surrounding soil.",
+    explanation: "Plants lack specialized excretory organs and rely on passive accumulation and shedding.",
+    formula: "Plant Excretion: Stomata Transpiration + Old Leaves Falling + Resins/Gums in Old Xylem",
+    examinerNote: "0.5 marks for each of four valid points.",
+    source: "NCERT Section 5.5.2 / CBSE 2024"
+  },
+
+  // =========================================================================
+  // 3-MARK SHORT ANSWER (SA)
+  // =========================================================================
+  {
+    id: "sci_c5_q17",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 3,
+    type: "SA",
+    question: "Explain the three different metabolic pathways of breakdown of glucose in living organisms with the help of a schematic chart.",
+    answer: "All three respiratory pathways initiate with the conversion of Glucose (a 6-carbon molecule) into Pyruvate (a 3-carbon molecule) + energy in the CYTOPLASM (Glycolysis).\n\n1. Pathway 1 - Absence of Oxygen (Yeast / Anaerobic Fermentation):\n   Pyruvate -> Ethanol (2-carbon) + CO2 + Energy (2 ATP)\n   (Used in brewing and baking).\n\n2. Pathway 2 - Lack of Oxygen (Human Muscle Cells during strenuous exercise):\n   Pyruvate -> Lactic acid (3-carbon) + Energy (2 ATP)\n   (Accumulation of lactic acid causes painful muscle cramps).\n\n3. Pathway 3 - Presence of Oxygen (Mitochondria / Aerobic Respiration):\n   Pyruvate + O2 -> 6CO2 + 6H2O + Energy (36-38 ATP)\n   (Produces immense energy for cellular metabolic activities).",
+    explanation: "Complete oxidation in mitochondria yields ~18-19 times more ATP than anaerobic pathways.",
+    formula: "Glucose (6C) -> Pyruvate (3C) -> (1) Ethanol+CO2 / (2) Lactic Acid / (3) CO2+H2O+38 ATP",
+    examinerNote: "NCERT Figure 5.8. 1 mark per pathway with location (cytoplasm vs mitochondria) and carbon counts.",
+    source: "CBSE 2024 / NCERT Figure 5.8"
   },
   {
-    "id": "sci_c5_q21",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "The respiratory pigment in human blood that has high affinity for oxygen is:\n(a) Chlorophyll\n(b) Haemoglobin\n(c) Melanin\n(d) Myoglobin",
-    "options": [
-      "Chlorophyll",
-      "Haemoglobin",
-      "Melanin",
-      "Myoglobin"
-    ],
-    "correctOption": 1,
-    "answer": "Option (b) is correct: Haemoglobin.",
-    "explanation": "Haemoglobin in red blood cells binds 4 oxygen molecules reversibly to form oxyhaemoglobin, transporting oxygen from alveoli to all body tissues.",
-    "source": "NCERT Class 10 Page 104"
+    id: "sci_c5_q18",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 3,
+    type: "SA",
+    question: "(a) What is meant by 'double circulation'?\n(b) Differentiate between pulmonary circulation and systemic circulation.\n(c) Why is double circulation necessary in birds and mammals?",
+    answer: "(a) Double circulation is a circulatory mechanism in which blood travels through the heart twice during one complete cycle through the body.\n\n(b) Components of Double Circulation:\n  1. Pulmonary Circulation: Deoxygenated blood is pumped from the right ventricle to the lungs via the pulmonary artery, where it is oxygenated, and returned to the left atrium via pulmonary veins.\n  2. Systemic Circulation: Oxygenated blood is pumped from the left ventricle through the aorta to all body tissues, and deoxygenated blood is collected via vena cava and returned to the right atrium.\n\n(c) Significance: Double circulation completely separates oxygenated and deoxygenated blood. This ensures highly efficient oxygen supply to body tissues, which is essential for birds and mammals because they are warm-blooded (homeothermic) animals with high metabolic energy requirements to constantly maintain a stable body temperature.",
+    explanation: "Complete 4-chambered heart prevents mixing of high-O2 and low-O2 blood streams.",
+    formula: "Double Circulation = Pulmonary (Heart-Lungs-Heart) + Systemic (Heart-Body-Heart)",
+    examinerNote: "1 mark for definition; 1 mark for pulmonary vs systemic; 1 mark for homeothermic energy justification.",
+    source: "CBSE Board 2024 (Set 31/1/2)"
   },
   {
-    "id": "sci_c5_q22",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 2,
-    "type": "VSA",
-    "question": "Why do aquatic animals breathe much faster than terrestrial animals?",
-    "answer": "(1) Dissolved Oxygen Level: Aquatic organisms utilize oxygen dissolved in water, while terrestrial animals breathe atmospheric air. Atmospheric air contains ~21% oxygen by volume, whereas water contains a very low concentration (< 1% dissolved oxygen).\n\n(2) Consequence on Breathing: Because the availability of dissolved oxygen in water is relatively low, aquatic animals (like fishes) must pump water across their gills at a much faster rate to obtain sufficient oxygen for cellular respiration.",
-    "examinerNote": "Key contrast: low concentration of dissolved oxygen in water vs rich oxygen in air.",
-    "source": "NCERT Class 10 Page 103"
+    id: "sci_c5_q19",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 3,
+    type: "SA",
+    question: "Tabulate three structural and functional differences between Arteries, Veins, and Capillaries.",
+    answer: "| Feature | Arteries | Veins | Capillaries |\n| :--- | :--- | :--- | :--- |\n| Direction of Blood Flow | Carry blood AWAY from heart to body organs | Carry blood TOWARDS heart from body organs | Connect arterioles to venules in tissues |\n| Wall Thickness & Elasticity | Thick, highly muscular, and elastic walls | Thin, less muscular, less elastic walls | Ultra-thin walls made of a single endothelial cell layer |\n| Internal Valves | Valves absent (blood flows under high pressure) | Internal semilunar valves present (prevent backflow) | Valves absent |\n| Internal Pressure | Blood flows under high, pulsatile pressure | Blood flows under low, steady pressure | Extremely low pressure facilitating diffusion |\n| Blood Carried | Oxygenated blood (except Pulmonary Artery) | Deoxygenated blood (except Pulmonary Vein) | Site of nutrient, gas, and metabolic waste exchange |",
+    explanation: "Capillaries provide the intimate cellular interface where oxygen and glucose diffuse into tissues.",
+    formula: "Arteries: Thick, High Pressure, No Valves; Veins: Thin, Low Pressure, Valves Present",
+    examinerNote: "Award 1 mark per well-differentiated parameter across all three vessel types.",
+    source: "NCERT Section 5.4.1 / CBSE 2023"
   },
   {
-    "id": "sci_c5_q23",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 2,
-    "type": "VSA",
-    "question": "What is the function of the mucus and hydrochloric acid secreted by gastric glands in the human stomach?",
-    "answer": "(1) Hydrochloric Acid (HCl):\n- Creates an acidic medium (pH ~1.8) essential to activate inactive proenzyme pepsinogen into active enzyme pepsin.\n- Destroys ingested harmful bacteria and pathogens swallowed with food.\n\n(2) Mucus:\n- Coats the inner epithelial mucosal lining of the stomach wall, protecting it from self-digestion and excoriation by corrosive concentrated HCl and pepsin.",
-    "examinerNote": "Mention gastric ulcer formation when mucus secretion fails.",
-    "source": "NCERT Class 10 Page 98"
+    id: "sci_c5_q20",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 3,
+    type: "SA",
+    question: "Differentiate between the transport of water and minerals in Xylem and the transport of food in Phloem.",
+    answer: "| Parameter | Transport in Xylem | Transport in Phloem (Translocation) |\n| :--- | :--- | :--- |\n| Substance Transported | Water and dissolved mineral salts | Soluble photosynthetic products (sucrose, amino acids, hormones) |\n| Direction of Transport | Strictly Unidirectional (upwards from roots to leaves) | Multidirectional / Bidirectional (from source leaves to storage sinks) |\n| Conducting Elements | Tracheids and xylem vessels (non-living / dead cells) | Sieve tubes and companion cells (living cells) |\n| Driving Mechanism | Driven by physical forces: Transpiration pull (day) & Root pressure (night) | Active transport: Sucrose loaded into phloem using metabolic energy (ATP), creating osmotic pressure |\n| Expenditure of ATP | Passive process; does not require ATP | Active process; consumes ATP energy |",
+    explanation: "Translocation in phloem moves nutrients based on plant seasonal needs (e.g. from roots to buds in spring).",
+    formula: "Xylem: Physical Transpiration Pull (Passive); Phloem: Sucrose + ATP Osmotic Flow (Active)",
+    examinerNote: "1 mark each for substance/direction, tissue living status, and ATP expenditure.",
+    source: "CBSE 2024 / NCERT Section 5.4.2"
   },
   {
-    "id": "sci_c5_q24",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 2,
-    "type": "VSA",
-    "question": "Differentiate between Xylem and Phloem transport in plants with respect to direction of flow and driving energy mechanism.",
-    "answer": "(1) Direction of Flow:\n- Xylem: Unidirectional transport strictly upwards from roots to leaves.\n- Phloem: Bidirectional transport (upwards and downwards) from source (leaves/storage roots) to sinks.\n\n(2) Driving Energy Mechanism:\n- Xylem: Driven by passive physical forces (transpiration suction pull and root pressure); does not require metabolic ATP.\n- Phloem: Driven by active transport requiring metabolic energy in the form of ATP to build osmotic pressure.",
-    "source": "NCERT Class 10 Pages 108–110"
+    id: "sci_c5_q21",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 3,
+    type: "SA",
+    question: "Explain the three-step mechanism of urine formation in the human nephron:\n(a) Glomerular Ultrafiltration\n(b) Selective Reabsorption\n(c) Tubular Secretion",
+    answer: "(a) Glomerular Ultrafiltration:\n    Blood enters the glomerulus under high hydrostatic pressure via the wide afferent arteriole. Water, glucose, amino acids, mineral salts, and nitrogenous wastes (urea, uric acid) are forced through the filtration slits of the glomerulus into Bowman's capsule as the initial nephric filtrate (approx. 180 L/day in an adult). Blood cells and large plasma proteins are retained in the blood.\n\n(b) Selective Reabsorption:\n    As the initial filtrate flows through the proximal convoluted tubule (PCT) and Loop of Henle, essential nutrients required by the body (100% of glucose, amino acids, major electrolytes like Na+, and a regulated volume of water) are selectively reabsorbed back into the surrounding peritubular capillaries.\n\n(c) Tubular Secretion:\n    Cells of the renal tubule actively secrete surplus ions (H+, K+, and ammonia) and drug residues from peritubular capillary blood into the tubular lumen. The resulting concentrated fluid (approx. 1 to 2 L/day) is urine, which passes into the collecting duct.",
+    explanation: "Selective reabsorption reduces ~180 L of initial filtrate into only ~1-2 L of excreted urine per day.",
+    formula: "Urine = Ultrafiltration - Selective Reabsorption + Tubular Secretion",
+    examinerNote: "1 mark per step with accurate physiological details.",
+    source: "CBSE 2024 / NCERT Section 5.5.1"
+  },
+
+  // =========================================================================
+  // 5-MARK LONG ANSWER (LA)
+  // =========================================================================
+  {
+    id: "sci_c5_q22",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 5,
+    type: "LA",
+    question: "Describe the complete digestive cascade of food in the human alimentary canal from mouth to small intestine:\n(a) Digestion in the Mouth\n(b) Movement through the Oesophagus\n(c) Digestion in the Stomach\n(d) Role of Liver and Pancreas secretions in the Small Intestine\n(e) Final digestion and absorption in the Small Intestine",
+    answer: "(a) Mouth (Oral Cavity):\n    - Teeth masticate and grind food mechanically; tongue mixes it with saliva.\n    - Saliva secreted by salivary glands contains the enzyme Salivary Amylase, which hydrolyses complex starch into maltose at pH ~6.8:\n      Starch + Salivary Amylase -> Maltose\n\n(b) Oesophagus (Food Pipe):\n    - No digestion takes place. Food (bolus) is propelled smoothly downwards by rhythmic, coordinated contractions and relaxations of gut muscular walls called Peristalsis.\n\n(c) Stomach:\n    - Gastric glands in the stomach wall secrete gastric juice containing:\n      1. Hydrochloric Acid (HCl): Creates acidic medium (pH 1.5-2.0), activates pepsinogen into pepsin, kills bacteria.\n      2. Pepsin: Breaks down proteins into soluble peptones and proteoses.\n      3. Mucus: Protects stomach lining from corrosive HCl.\n\n(d) Role of Liver and Pancreas:\n    - Liver secretes Bile Juice: Bile salts emulsify large fat globules into microscopic droplets, and create an alkaline medium (pH ~7.8).\n    - Pancreas secretes Pancreatic Juice containing:\n      1. Pancreatic Amylase: Digests remaining starch into maltose.\n      2. Trypsin: Cleaves peptones into peptides.\n      3. Pancreatic Lipase: Hydrolyses emulsified fats into fatty acids and glycerol.\n\n(e) Terminal Digestion & Absorption (Small Intestine):\n    - Intestinal glands secrete Succus Entericus, containing enzymes that completely convert:\n      Carbohydrates -> Glucose; Proteins -> Amino acids; Fats -> Fatty acids + Glycerol.\n    - Millions of microscopic finger-like projections called Villi lining the ileum increase internal surface area. Villi are richly supplied with blood capillaries (absorb glucose and amino acids) and central lymphatic vessels called lacteals (absorb digested fats).",
+    explanation: "Master digestive cascade covering all 4 glandular secretions and nutrient transformations.",
+    formula: "Starch -> Maltose -> Glucose; Protein -> Peptone -> Amino Acids; Fat -> Emulsified Fat -> Fatty Acids + Glycerol",
+    examinerNote: "1 mark each for parts (a), (b), (c), (d), and (e). Mentioning villi and lacteals earns full credit.",
+    source: "CBSE Board 2024 / NCERT Section 5.2.3"
   },
   {
-    "id": "sci_c5_q25",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 2,
-    "type": "VSA",
-    "question": "How do guard cells regulate the opening and closing of stomatal pores in plant leaves?",
-    "answer": "(1) Stomatal Opening: When water enters guard cells from surrounding epidermal cells by osmosis, guard cells swell, become turgid, and curve outward due to thicker inner walls, causing the stomatal pore to open.\n\n(2) Stomatal Closing: When guard cells lose water, they become flaccid and shrink, their straight inner walls come close together, and the stomatal aperture closes, conserving water during drought.",
-    "examinerNote": "Turgid = open; Flaccid = closed.",
-    "source": "NCERT Class 10 Page 97"
+    id: "sci_c5_q23",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 5,
+    type: "LA",
+    question: "(a) Trace the complete pathway of blood flow through the human heart with the help of a schematic flow chart.\n(b) What prevents the backflow of blood inside the heart during ventricular contraction?\n(c) What is blood pressure? Name the medical instrument used to measure blood pressure and give normal human systolic and diastolic pressure values.\n(d) What is lymph (tissue fluid)? How does it differ from blood plasma and what are its two main functions?",
+    answer: "(a) Pathway of Blood Flow through Human Heart:\n    1. Deoxygenated blood from body tissues -> Superior & Inferior Vena Cava -> Right Atrium.\n    2. Right Atrium contracts -> passes blood through Tricuspid Valve -> Right Ventricle.\n    3. Right Ventricle contracts -> pumps blood through Pulmonary Artery -> Lungs (oxygenated).\n    4. Oxygenated blood from lungs -> Pulmonary Veins -> Left Atrium.\n    5. Left Atrium contracts -> passes blood through Bicuspid/Mitral Valve -> Left Ventricle.\n    6. Left Ventricle contracts -> pumps oxygenated blood under high pressure through Aorta -> Body Tissues.\n\n(b) Prevention of Backflow: Atrioventricular valves (Tricuspid and Bicuspid/Mitral valves) and Semilunar valves (Aortic and Pulmonary valves) ensure that blood flows strictly unidirectionally, closing tightly during contraction to prevent regurgitation.\n\n(c) Blood Pressure:\n    - Blood pressure is the force that circulating blood exerts against the wall of a blood vessel.\n    - Measured using an instrument called a Sphygmomanometer.\n    - Normal systolic pressure (during ventricular contraction): ~120 mm Hg.\n    - Normal diastolic pressure (during ventricular relaxation): ~80 mm Hg.\n\n(d) Lymph (Tissue Fluid):\n    - Fluid that leaks out through capillary pores into intercellular spaces of tissues.\n    - Difference: Contains much less protein than blood plasma and completely lacks RBCs (pale yellow fluid).\n    - Functions: 1. Carries absorbed and digested fats from small intestine via lacteals; 2. Drains excess intercellular fluid back into the blood circulatory system and contains lymphocytes that fight infection.",
+    explanation: "Complete cardiovascular integration: double circulation, valve mechanics, pressure hemodynamics, and lymphatic physiology.",
+    formula: "Normal BP: 120/80 mm Hg; Systolic = 120, Diastolic = 80",
+    examinerNote: "Award 1.5 marks for flow path; 1 mark for valves; 1.5 marks for blood pressure; 1 mark for lymph.",
+    source: "CBSE Board 2024 / NCERT Section 5.4.1"
   },
   {
-    "id": "sci_c5_q26",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 2,
-    "type": "VSA",
-    "question": "What are the two major stages of urine formation in the human nephron? Name two substances selectively reabsorbed.",
-    "answer": "(1) Two Stages:\n- Ultrafiltration: Blood flows under high pressure through glomerular capillaries into Bowman's capsule, filtering water, glucose, salts, and nitrogenous wastes into the nephric tubule.\n- Selective Reabsorption: As filtrate moves along the convoluted tubule, essential substances are reabsorbed into peritubular capillaries.\n\n(2) Selectively Reabsorbed Substances: Glucose, amino acids, salts ($Na^+, Cl^-$), and major volume of water.",
-    "source": "CBSE 2023 Board Paper"
+    id: "sci_c5_q24",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 5,
+    type: "LA",
+    question: "(a) Draw a neat diagrammatic description of a nephron and label:\n  (i) Glomerulus, (ii) Bowman's capsule, (iii) Renal tubule, (iv) Collecting duct.\n(b) Explain why the volume of initial filtrate produced in kidneys is 180 L per day, but the volume of urine excreted is only 1 to 2 L per day.\n(c) What is hemodialysis (artificial kidney)? How does hemodialysis differ from the natural functioning of healthy human kidneys?",
+    answer: "(a) Structural Description of Nephron:\n  (i) Glomerulus: A tuft of high-pressure capillaries branching from afferent renal arteriole, enclosed inside Bowman's capsule.\n  (ii) Bowman's capsule: A cup-shaped double-walled epithelial sac that receives the initial filtrate.\n  (iii) Renal tubule: Long coiled tubular structure (PCT, Loop of Henle, DCT) lined with microvilli for extensive reabsorption.\n  (iv) Collecting duct: Terminal straight tube collecting concentrated urine from multiple nephrons, leading into the ureter.\n\n(b) Difference between Filtrate Volume (180 L) and Urine (1-2 L):\n  Healthy human kidneys filter approximately 180 litres of initial filtrate every day through glomeruli. However, nearly 99% of this filtrate is selectively reabsorbed as it travels through the renal tubules. Water, all glucose, amino acids, and essential salts are reabsorbed back into peritubular capillaries, leaving only 1 to 2 litres of concentrated metabolic waste (urine) to be excreted daily.\n\n(c) Hemodialysis (Artificial Kidney):\n  - A medical procedure used for patients experiencing severe renal failure to remove toxic nitrogenous wastes (urea) from blood.\n  - Patient's blood is passed through cellophane dialysing tubes with semi-permeable membranes suspended in a dialysing fluid that has the same osmotic pressure as blood plasma, but lacks nitrogenous waste. Urea diffuses across into the dialysing fluid by simple diffusion.\n  - Key Difference from Natural Kidney: Hemodialysis involves NO selective reabsorption! In healthy kidneys, selective reabsorption actively reclaims nutrients and water; in hemodialysis, only waste diffusion occurs.",
+    explanation: "Hemodialysis saves lives by clearing urea without restoring endocrine or reabsorptive functions.",
+    formula: "Filtrate (180 L) - 99% Reabsorption = Excreted Urine (1.5 L)",
+    examinerNote: "Award 1.5 marks for nephron parts; 1.5 marks for 180 L vs 1.5 L reabsorption; 2 marks for hemodialysis mechanism and contrast.",
+    source: "CBSE Board 2024 / NCERT Section 5.5.1"
+  },
+
+  // =========================================================================
+  // 4-MARK CASE-BASED / COMPETENCY QUESTIONS
+  // =========================================================================
+  {
+    id: "sci_c5_q25",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 4,
+    type: "Case Study",
+    question: "Read the experimental passage and answer the questions that follow:\n\nIn an activity to test whether chlorophyll is essential for photosynthesis, a potted plant with variegated leaves (such as money plant or croton) was kept in a completely dark room for three days so that all starch in its leaves was completely consumed. The plant was then placed in bright sunlight for six hours. A variegated leaf was plucked, and its green and non-green patches were traced accurately onto a sheet of paper. The leaf was first immersed in boiling water for a few minutes, then transferred into a beaker containing ethanol, which was heated in a water bath until the leaf was completely decolourised. The pale white leaf was washed with warm water and dipped into a dilute iodine solution for two minutes.\n\n(a) Why was the leaf boiled in ethanol in a water bath rather than over an open flame? [1M]\n(b) What was the observation when iodine solution was poured onto the leaf? Correlate this with the traced green and white patches. [2M]\n(c) What scientific conclusion is established by this experiment? [1M]",
+    answer: "(a) Boiling in ethanol dissolves and extracts the green pigment chlorophyll, decolourising the leaf into a pale white color so that subsequent color changes with iodine can be seen clearly. Ethanol is heated in a water bath because ethanol is highly volatile and flammable; direct heating over a naked flame would cause it to catch fire.\n(b) Observation:\n    - Only the patches of the leaf that were originally green turned blue-black upon adding iodine solution, confirming the presence of starch.\n    - The originally white / pale yellow non-green patches did not turn blue-black and remained brown/colourless, indicating the absence of starch.\n(c) Scientific Conclusion: Chlorophyll is strictly essential for photosynthesis; starch synthesis occurs exclusively in green chloroplast-containing regions where light is captured.",
+    explanation: "NCERT Activity 5.1. Iodine reacts with starch to produce a characteristic deep blue-black complex.",
+    formula: "Starch + Iodine -> Blue-Black Complex (Present only in green chlorophyll zones)",
+    examinerNote: "1 mark for ethanol flammability; 2 marks for patch correlation; 1 mark for conclusion.",
+    source: "NCERT Activity 5.1 / CBSE 2024"
   },
   {
-    "id": "sci_c5_q27",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 2,
-    "type": "VSA",
-    "question": "Why is double circulation necessary in human beings and mammals?",
-    "answer": "(1) Separation of Blood: Double circulation completely separates oxygenated blood (left side of heart) from deoxygenated blood (right side of heart) by a muscular septum, preventing any mixing.\n\n(2) Thermoregulation: Mammals and birds are endothermic (warm-blooded) animals that require a continuous, highly efficient supply of oxygen to maintain constant body temperature regardless of external weather.",
-    "examinerNote": "Must link high energy/oxygen needs with maintaining warm-blooded body temperature.",
-    "source": "NCERT Class 10 Page 107"
-  },
-  {
-    "id": "sci_c5_q28",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 3,
-    "type": "SA",
-    "question": "Describe the three metabolic pathways of breakdown of glucose in living organisms:\n(a) In the presence of oxygen (Aerobic respiration).\n(b) In the absence of oxygen in yeast (Fermentation).\n(c) In the lack of oxygen in human muscle cells.",
-    "answer": "Common Step (Glycolysis): In cytoplasm of all cells, 6-carbon Glucose breaks down into two molecules of 3-carbon Pyruvate + Energy.\n\n(a) In Presence of Oxygen (Mitochondria):\nPyruvate undergoes complete oxidation into carbon dioxide, water, and large amount of energy (~38 ATP):\nPyruvate + O₂ ⟶ CO₂ + H₂O + 38 ATP\n\n(b) In Absence of Oxygen (Yeast, Fermentation):\nPyruvate is converted anaerobically into ethanol, carbon dioxide, and small energy (2 ATP):\nPyruvate ⟶ Ethanol (C₂H₅OH) + CO₂ + 2 ATP\n\n(c) In Lack of Oxygen (Human Muscle Cells during Sprinting):\nPyruvate is converted into lactic acid and small energy (2 ATP), causing muscle fatigue and cramps:\nPyruvate ⟶ Lactic Acid (3-carbon) + 2 ATP",
-    "formula": "\\text{Glucose (6C)} \\xrightarrow{\\text{Cytoplasm}} 2\\text{ Pyruvate (3C)}",
-    "examinerNote": "A flow diagram or clear 3-pathway breakdown is guaranteed full 3 marks.",
-    "source": "NCERT Class 10 Page 102 Diagram"
-  },
-  {
-    "id": "sci_c5_q29",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 3,
-    "type": "SA",
-    "question": "Explain the digestion of carbohydrates, proteins, and fats in the human alimentary canal by specifying the enzyme, its source gland, and the final end product.",
-    "answer": "(a) Carbohydrates (Starch):\n- Enzyme & Source: Salivary amylase (salivary glands in mouth) and Pancreatic amylase (pancreas in small intestine).\n- Final Product: Glucose.\n\n(b) Proteins:\n- Enzyme & Source: Pepsin (gastric glands in stomach, active at acidic pH) and Trypsin (pancreas in small intestine, active at alkaline pH).\n- Final Product: Amino acids.\n\n(c) Fats (Lipids):\n- Enzyme & Source: Pancreatic lipase (pancreas) and intestinal lipase acting on bile-emulsified fat droplets.\n- Final Product: Fatty acids and Glycerol.",
-    "source": "NCERT Class 10 Pages 98–100"
-  },
-  {
-    "id": "sci_c5_q30",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 3,
-    "type": "SA",
-    "question": "How are the human lungs designed to maximize the area for exchange of gases? Explain alveolar structure and the role of respiratory pigments.",
-    "answer": "(1) Extensive Surface Area of Alveoli: The trachea branches into bronchi, then bronchioles, terminating in balloon-like structures called alveoli. There are ~300 million alveoli in each human lung, providing a massive surface area of nearly 80 m² (equivalent to a tennis court) for rapid gas diffusion.\n\n(2) Structural Adaptations: Alveolar walls are ultra-thin (one-cell thick squamous epithelium) and enveloped by an extensive network of blood capillaries, minimizing diffusion distance.\n\n(3) Respiratory Pigment: Oxygen has poor solubility in aqueous plasma. Haemoglobin in red blood cells binds oxygen with high affinity, rapidly transporting 98.5% of oxygen to billions of cells.",
-    "source": "CBSE 2022, 2024"
-  },
-  {
-    "id": "sci_c5_q31",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 3,
-    "type": "SA",
-    "question": "Differentiate between an Artery and a Vein on the basis of:\n(a) Thickness of walls.\n(b) Presence of valves.\n(c) Direction of blood flow and pressure.",
-    "answer": "(a) Thickness of Walls:\n- Artery: Has thick, muscular, and highly elastic walls to withstand high systolic pumping pressure.\n- Vein: Has thin, non-elastic walls because blood flows under low pressure.\n\n(b) Presence of Internal Valves:\n- Artery: No internal valves (except semilunar valves at exits of aorta and pulmonary artery).\n- Vein: Possesses numerous pocket-like semilunar valves to prevent backward flow of blood against gravity.\n\n(c) Direction & Pressure:\n- Artery: Carries blood AWAY from the heart to tissues under high, pulsating pressure.\n- Vein: Carries blood TOWARDS the heart from tissues under steady, low pressure.",
-    "examinerNote": "Pulmonary artery carries deoxygenated blood; pulmonary vein carries oxygenated blood.",
-    "source": "NCERT Class 10 Page 107"
-  },
-  {
-    "id": "sci_c5_q32",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 3,
-    "type": "SA",
-    "question": "What is Lymph? How is it formed? State two major physiological functions of the lymphatic system.",
-    "answer": "(1) Formation of Lymph: As blood flows under pressure through capillary beds, some fluid along with dissolved small proteins and white blood cells leaks through endothelial pores into intercellular tissue spaces, forming tissue fluid. Most fluid drains into lymphatic capillaries, where it is called Lymph.\n\n(2) Composition: Lymph is similar to blood plasma but is pale yellowish, has far lower protein content, and lacks red blood cells and platelets.\n\n(3) Two Functions:\n- Absorption & Transport of Fats: Specialized lymphatic vessels (lacteals) in intestinal villi absorb and transport long-chain digested fats.\n- Immune Defense: Lymph nodes contain large populations of lymphocytes that filter and destroy bacteria, viruses, and cellular debris.",
-    "source": "NCERT Class 10 Page 108"
-  },
-  {
-    "id": "sci_c5_q33",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 3,
-    "type": "SA",
-    "question": "Explain the mechanism of transport of water and dissolved minerals in tall trees:\n(a) What is the Transpiration Pull?\n(b) What is Root Pressure?\n(c) Which force dominates during the day and which during the night?",
-    "answer": "(a) Transpiration Pull: Evaporation of water vapor through stomata of leaves creates negative hydrostatic pressure (suction) in leaf mesophyll cells. Due to cohesive forces between water molecules and adhesive forces with xylem vessel walls, a continuous unbroken water column is pulled upward from roots to the canopy.\n\n(b) Root Pressure: Active ion uptake by root cortical cells from soil creates an osmotic gradient, drawing water into root xylem and generating positive hydrostatic pressure pushing sap upward.\n\n(c) Dominant Forces:\n- During Day: Stomata are open, transpiration rates are high, so Transpiration Pull is the major driving force.\n- During Night: Stomata are closed, transpiration is negligible, so Root Pressure is the primary force moving water.",
-    "source": "NCERT Class 10 Page 109"
-  },
-  {
-    "id": "sci_c5_q34",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 3,
-    "type": "SA",
-    "question": "State the role of the following organs and structures in human excretion:\n(a) Glomerulus and Bowman's capsule\n(b) Tubular reabsorption in Henle's loop and collecting duct\n(c) Urinary bladder and Urethra",
-    "answer": "(a) Glomerulus & Bowman's Capsule: Perform ultrafiltration. Blood entering via afferent arteriole is filtered under high hydrostatic pressure across the glomerular membrane, producing ~180 L of protein-free initial filtrate daily.\n\n(b) Tubular Reabsorption: As filtrate traverses the renal tubules, 99% of filtered water, all glucose, and amino acids are selectively reabsorbed back into peritubular capillaries, concentrating toxic urea and uric acid into ~1.5 L of urine.\n\n(c) Urinary Bladder & Urethra: The muscular, distensible bladder temporarily stores concentrated urine under nervous control until stretch receptors trigger voluntary urination (micturition) through the urethra.",
-    "source": "CBSE 2024 Board Question"
-  },
-  {
-    "id": "sci_c5_q35",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 4,
-    "type": "Case Study",
-    "question": "Case Study: A cardiologist evaluated a patient complaining of persistent fatigue and breathlessness upon climbing stairs. A blood test revealed haemoglobin of 7.2 g/dL (normal: 13–16 g/dL). An echocardiogram traced the double circulation flow through the heart.\n\n(a) Why does low haemoglobin cause breathlessness and extreme fatigue?\n(b) Trace the path of deoxygenated blood from body tissues back to the lungs.\n(c) Trace the path of oxygenated blood from the lungs to the aorta.\n(d) Name the blood vessel that carries oxygenated blood from lungs to the left atrium.",
-    "answer": "(a) Physiological Cause: Haemoglobin is the primary respiratory carrier of oxygen. With low haemoglobin (anaemia), blood oxygen-carrying capacity drops by more than 50%. Body cells receive inadequate oxygen, impairing aerobic ATP production in mitochondria, producing fatigue. Respiratory rate increases to compensate, producing breathlessness.\n\n(b) Path of Deoxygenated Blood:\nBody Tissues ⟶ Vena Cava (Superior & Inferior) ⟶ Right Atrium ⟶ Tricuspid Valve ⟶ Right Ventricle ⟶ Pulmonary Semilunar Valve ⟶ Pulmonary Artery ⟶ Lungs (for oxygenation).\n\n(c) Path of Oxygenated Blood:\nLungs ⟶ Pulmonary Veins ⟶ Left Atrium ⟶ Bicuspid (Mitral) Valve ⟶ Left Ventricle ⟶ Aortic Semilunar Valve ⟶ Aorta ⟶ Systemic Body Circulation.\n\n(d) Pulmonary Vein carries oxygenated blood from the lungs into the left atrium of the heart.",
-    "examinerNote": "Trace the 4 heart chambers clearly with valve names.",
-    "source": "CBSE Sample Paper 2025"
-  },
-  {
-    "id": "sci_c5_q36",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 4,
-    "type": "Case Study",
-    "question": "Case Study: In an intensive care nephrology unit, a patient suffering from acute renal failure was placed on an artificial kidney (haemodialyzer) to remove toxic nitrogenous metabolic wastes.\n\n(a) What is haemodialysis? Name the main nitrogenous waste extracted from blood.\n(b) Describe how the dialyzing fluid differs from human blood plasma.\n(c) Why is heparin added before passing blood into the dialyzer, and what is done before returning blood to the patient?\n(d) In what fundamental way does haemodialysis differ from a natural functioning kidney?",
-    "answer": "(a) Haemodialysis: An artificial clinical procedure for filtering metabolic wastes (primarily toxic urea, uric acid, and excess creatinine) from the blood of patients with kidney failure.\n\n(b) Dialyzing Fluid Composition: Dialyzing fluid has the exact same osmotic pressure and mineral composition as normal blood plasma, but contains ZERO nitrogenous wastes (zero urea). Hence, urea diffuses passively down its concentration gradient across cellophane tubes into the dialyzer fluid.\n\n(c) Heparin Management:\n- Heparin (anticoagulant) is added as blood leaves the patient's radial artery to prevent blood from clotting inside dialysis tubes.\n- Anti-heparin is mixed with blood before returning it safely through a vein to restore normal clotting ability.\n\n(d) Difference from Natural Kidney: The artificial dialyzer does NOT perform selective tubular reabsorption. While a natural kidney filters 180 L of filtrate and reabsorbs 178.5 L, haemodialysis removes wastes strictly by diffusion.",
-    "examinerNote": "Lack of reabsorption in dialyzer is the key conceptual difference.",
-    "source": "NCERT Class 10 Page 111"
-  },
-  {
-    "id": "sci_c5_q37",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 4,
-    "type": "Case Study",
-    "question": "Case Study: An athlete was running a 400 m hurdles sprint. In the first 50 meters, she felt full of energy, but by the final 100 meters, her legs suffered agonizing muscle cramps. After 30 minutes of rest and light massage, the cramps completely resolved.\n\n(a) Why did muscle cramps develop during the high-speed sprint?\n(b) Write the chemical equation for the anaerobic breakdown of glucose in muscle tissue.\n(c) Why did the cramps disappear after resting and massage?\n(d) How does anaerobic respiration in muscle cells differ from anaerobic fermentation in yeast?",
-    "answer": "(a) Cause of Cramps: During intense sprinting, skeletal muscle energy demands skyrocket, outstripping the circulatory supply of oxygen (oxygen debt). Muscle fibers switch to anaerobic respiration, converting pyruvate into lactic acid. Accumulation of lactic acid in muscle tissue causes stiffness, soreness, and cramps.\n\n(b) Chemical Equation:\nGlucose ⟶ Pyruvate —[Lack of Oxygen in Muscle]⟶ Lactic Acid (3-carbon) + 2 ATP\n\n(c) Resolution by Rest: Rest and massage improve blood circulation, delivering fresh oxygen to fatigued muscles. Lactic acid is washed into the bloodstream and carried to the liver, where oxygen breaks it down aerobically into CO₂ and H₂O.\n\n(d) Muscle vs Yeast Anaerobic Breakdown:\n- Human Muscle: Yields 3-carbon Lactic Acid; no carbon dioxide ($CO_2$) is liberated.\n- Yeast Fermentation: Yields 2-carbon Ethanol ($C_2H_5OH$) and liberates Carbon Dioxide ($CO_2$) gas.",
-    "formula": "\\text{Glucose} ⟶ 2\\text{ Lactic Acid} + 2\\text{ATP}",
-    "source": "CBSE 2023 Case-Based Question"
-  },
-  {
-    "id": "sci_c5_q38",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 4,
-    "type": "Case Study",
-    "question": "Case Study: In a plant physiology experiment, a potted variegated money plant was destarched by keeping it in complete darkness for 72 hours. It was then placed in bright sunlight for 6 hours. A leaf was plucked, mapped, boiled in alcohol, and tested with iodine solution.\n\n(a) Why was the plant kept in darkness for 72 hours before the experiment?\n(b) Why is the leaf boiled in alcohol over a water bath, and why is an open flame not used?\n(c) Which parts of the variegated leaf turn blue-black with iodine, and which parts turn brown? Justify.\n(d) What fundamental conclusion about photosynthesis is proven by this activity?",
-    "answer": "(a) Destarching: Keeping the plant in darkness for 3 days deprives it of light for photosynthesis. The plant consumes all preexisting starch stored in leaves for cellular respiration, ensuring baseline zero starch.\n\n(b) Boiling in Alcohol:\n- Function: Boiling in alcohol dissolves and extracts green chlorophyll pigment from leaf cells, decolourising the leaf so that the blue-black starch-iodine color change can be clearly viewed.\n- Water Bath Precaution: Alcohol is highly flammable with a low boiling point. Direct heating over an open flame would ignite alcohol vapors. A water bath ensures safe, indirect heating.\n\n(c) Iodine Test Observations:\n- Green parts (chlorophyll-bearing): Turn deep Blue-Black, proving active starch synthesis.\n- White/yellow variegated parts: Turn yellowish-Brown (iodine color), indicating no starch was produced.\n\n(d) Scientific Conclusion: Proves conclusively that Chlorophyll is strictly essential for photosynthesis.",
-    "examinerNote": "NCERT Activity 6.1. Essential board practical case-study.",
-    "source": "NCERT Class 10 Activity 6.1"
-  },
-  {
-    "id": "sci_c5_q39",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 5,
-    "type": "LA",
-    "question": "Human Circulatory System and Cardiac Cycle:\n(a) Draw a labeled flow schematic of the human heart showing all four chambers, major blood vessels, and valves.\n(b) Explain the sequence of events during a single cardiac cycle (atrial systole, ventricular systole, and joint diastole).\n(c) Why is blood circulation in humans described as 'Double Circulation'? Differentiate between Systemic Circulation and Pulmonary Circulation.\n(d) What is the function of the septum dividing the heart into right and left halves?",
-    "answer": "(a) Cardiac Flow Schematic:\n- Superior & Inferior Vena Cava ⟶ Right Atrium ⟶ Tricuspid Valve ⟶ Right Ventricle ⟶ Pulmonary Artery ⟶ Lungs.\n- Pulmonary Veins ⟶ Left Atrium ⟶ Bicuspid (Mitral) Valve ⟶ Left Ventricle ⟶ Aorta ⟶ Systemic Body Tissues.\n\n(b) Cardiac Cycle Phases:\n1. Joint Diastole: All 4 chambers are relaxed. Deoxygenated blood from vena cava fills right atrium; oxygenated blood from pulmonary veins fills left atrium. AV valves open, blood flows into ventricles.\n2. Atrial Systole: Both atria contract simultaneously, pumping remaining blood into ventricles.\n3. Ventricular Systole: Both ventricles contract forcefully. AV valves snap shut (producing 1st heart sound, 'LUBB'). Blood is ejected into pulmonary artery and systemic aorta. Semilunar valves close at end of systole (producing 2nd heart sound, 'DUPP').\n\n(c) Double Circulation:\nBlood passes through the heart twice during each complete circuit of the body:\n- Pulmonary Circulation: Deoxygenated blood flows from Right Ventricle ⟶ Pulmonary Artery ⟶ Lungs (oxygenation) ⟶ Pulmonary Veins ⟶ Left Atrium.\n- Systemic Circulation: Oxygenated blood flows from Left Ventricle ⟶ Aorta ⟶ All Body Organs ⟶ Vena Cava ⟶ Right Atrium.\n\n(d) Role of Septum: A thick muscular wall completely segregates oxygen-rich blood on the left side from oxygen-poor blood on the right side, maintaining high metabolic efficiency required for warm-blooded thermoregulation.",
-    "source": "CBSE 2024 Long Answer"
-  },
-  {
-    "id": "sci_c5_q40",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 5,
-    "type": "LA",
-    "question": "Nephron structure and urine formation in humans:\n(a) Describe the structure of a nephron with reference to Bowman's capsule, glomerulus, Henle's loop, and collecting duct.\n(b) Explain the three successive physiological steps involved in urine formation:\n(i) Ultrafiltration (Glomerular filtration)\n(ii) Selective Tubular Reabsorption\n(iii) Tubular Secretion\n(c) How is the volume of urine produced regulated in response to hydration levels?",
-    "answer": "(a) Structural Architecture of Nephron:\n- Malpighian Body: Comprises the cup-shaped Bowman's capsule enclosing a tight capillary tuft called the Glomerulus.\n- Renal Tubule: Extends from Bowman's capsule into Proximal Convoluted Tubule (PCT), hairpin-shaped Henle's Loop, and Distal Convoluted Tubule (DCT), terminating in a Collecting Duct.\n\n(b) Three Steps of Urine Formation:\n(i) Ultrafiltration: Blood enters under high hydrostatic pressure via wide afferent arteriole. Glomerular capillary pores act as fine micro-filters, squeezing out water, urea, glucose, salts, and amino acids into Bowman's space (~180 L/day initial filtrate). Blood cells and large proteins cannot pass and remain in circulation.\n(ii) Selective Reabsorption: Along PCT and Henle's loop, 100% of glucose and amino acids, 85% of salts, and 99% of water are actively/passively reabsorbed back into peritubular capillaries.\n(iii) Tubular Secretion: Active secretion of extra $K^+$, $H^+$, and drug residues from peritubular capillaries into tubular fluid, regulating blood pH and electrolyte balance.\n\n(c) Urine Volume Regulation: Regulated by antidiuretic hormone (ADH/Vasopressin) secreted by pituitary:\n- Dehydration (water deficit): ADH levels rise, making collecting ducts highly permeable to water. Maximum water is reabsorbed into blood, producing small volume of dark concentrated urine.\n- Excess Hydration: ADH secretion is suppressed, ducts remain impermeable, and large volumes of dilute urine are voided.",
-    "examinerNote": "Ultrafiltration, selective reabsorption, and tubular secretion must all 3 be described.",
-    "source": "NCERT Class 10 Pages 110–111"
-  },
-  {
-    "id": "sci_c5_q41",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 5,
-    "type": "LA",
-    "question": "Human Alimentary System and Chemical Digestion:\n(a) Describe the complete pathway of food through the human gastrointestinal tract from mouth to rectum.\n(b) Specify the exact chemical digestive actions that take place in:\n(i) Buccal Cavity (Mouth)\n(ii) Stomach\n(iii) Duodenum and Small Intestine\n(c) What are the dual functions of bile juice?\n(d) How does the small intestine absorb digested nutrients and transport them to body tissues?",
-    "answer": "(a) Gastrointestinal Pathway:\nMouth ⟶ Pharynx ⟶ Oesophagus (Peristalsis) ⟶ Stomach ⟶ Small Intestine (Duodenum, Jejunum, Ileum) ⟶ Large Intestine (Colon) ⟶ Rectum ⟶ Anus.\n\n(b) Chemical Digestion Stages:\n(i) Mouth: Saliva contains salivary amylase (ptyalin) which converts ~30% of starch into maltose disaccharide:\n$\\text{Starch} \\xrightarrow{\\text{Amylase, pH 6.8}} \\text{Maltose}$\n(ii) Stomach: Gastric juice contains HCl (activates pepsinogen) and Pepsin, which hydrolyzes proteins into peptones and proteoses:\n$\\text{Proteins} \\xrightarrow{\\text{Pepsin, pH 1.8}} \\text{Peptones} + \\text{Proteoses}$\n(iii) Small Intestine (Duodenum):\n- Pancreatic amylase converts remaining starch to maltose.\n- Trypsin hydrolyzes peptones into peptides.\n- Pancreatic lipase breaks down emulsified triglycerides into fatty acids and glycerol.\n- Intestinal brush-border peptidases, maltase, and sucrase complete digestion into free amino acids and monosaccharides.\n\n(c) Dual Functions of Bile:\n- Emulsification: Bile salts physically break down large lipid globules into microscopic micelles, vastly multiplying surface area for lipase action.\n- Alkaline Buffer: Alkaline bile salts neutralize acidic gastric chyme, creating optimal alkaline pH (~8.0) necessary for pancreatic enzymes.\n\n(d) Absorption Mechanism: Millions of vascularized villi and microvilli absorb glucose and amino acids directly into bloodstream via hepatic portal vein, while fatty acids and glycerol are packaged into chylomicrons and absorbed into central lacteals of the lymphatic system.",
-    "source": "CBSE Board 2022 Long Answer"
-  },
-  {
-    "id": "sci_c5_q42",
-    "chapter": 5,
-    "chapterName": "Life Processes",
-    "marks": 5,
-    "type": "LA",
-    "question": "Photosynthesis and Plant Translocation Mechanisms:\n(a) Write the balanced chemical equation for photosynthesis and describe the three sequential events occurring during this photochemical process.\n(b) Differentiate between Autotrophic and Heterotrophic nutrition with two examples of each.\n(c) Explain the Pressure Flow Hypothesis (Münch hypothesis) for the translocation of food in phloem sieve tubes.\n(d) Why do desert plants (xerophytes) keep stomata closed during the day, and how do they perform photosynthesis?",
-    "answer": "(a) Photosynthesis Equation & Three Events:\n$6\\text{CO}_2 + 12\\text{H}_2\\text{O} \\xrightarrow[\\text{Chlorophyll}]{\\text{Sunlight}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 + 6\\text{H}_2\\text{O}$\n1. Absorption of solar light energy by chlorophyll pigments.\n2. Photolysis: Conversion of light energy into chemical energy (ATP, NADPH) and splitting of water ($H_2O$) into hydrogen and oxygen gas.\n3. Reduction of carbon dioxide ($CO_2$) to carbohydrates (glucose) by chemical energy.\n\n(b) Autotrophic vs Heterotrophic:\n- Autotrophic: Organisms synthesize organic food from inorganic raw materials ($CO_2$, $H_2O$) using sunlight (e.g., green plants, cyanobacteria).\n- Heterotrophic: Organisms cannot synthesize food and depend directly or indirectly on autotrophs (e.g., humans, amoeba, fungi).\n\n(c) Phloem Translocation (Pressure Flow Mechanism):\n1. Sucrose produced in photosynthetic source leaves is actively loaded into companion cells and sieve tube elements using ATP energy.\n2. High solute concentration draws water from adjacent xylem vessels by osmosis, generating high hydrostatic turgor pressure inside sieve tubes.\n3. High pressure forces the sap to flow bulk-wise along sieve tubes toward low-pressure sink tissues (roots, fruits, buds).\n4. At sinks, sucrose is unloaded actively, water returns to xylem, and osmotic pressure drops.\n\n(d) Desert Xerophytes Adaptation (CAM Pathway):\nDesert plants (like cacti) keep stomata closed during the day to prevent fatal transpirational water loss. At night, stomata open; they absorb $CO_2$ and store it as intermediate malic acid. During daytime, light reactions generate ATP and NADPH, which reduce the stored intermediate to glucose.",
-    "formula": "6\\text{CO}_2 + 12\\text{H}_2\\text{O} ⟶ \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 + 6\\text{H}_2\\text{O}",
-    "examinerNote": "CAM adaptation in desert plants is a modern high-order thinking board question.",
-    "source": "NCERT Class 10 Page 96 & 110"
-  },
+    id: "sci_c5_q26",
+    chapter: 5,
+    chapterName: "Life Processes",
+    marks: 4,
+    type: "Case Study",
+    question: "Read the case text regarding human gas exchange and answer the following questions:\n\nIn humans, the respiratory system is adapted to maximize the efficiency of oxygen uptake and carbon dioxide release. The trachea branches into bronchi, which repeatedly subdivide into microscopic bronchioles, terminating in millions of balloon-like structures called alveoli. If all alveoli from both human lungs were spread out flat, their combined surface area would cover approximately 80 square meters — roughly the size of a tennis court! The alveolar walls are lined with a dense network of blood capillaries separated from air by an ultra-thin barrier just one cell thick. Blood arriving at alveoli contains red blood cells filled with hemoglobin, a specialized respiratory pigment.\n\n(a) What are the structural adaptations of alveoli that make them ideal for rapid gaseous exchange? [1.5M]\n(b) Why is diffusion alone insufficient to deliver oxygen to all body cells in large multicellular animals like humans? [1.5M]\n(c) Why is carbon monoxide (CO) gas extremely hazardous to human respiration? [1M]",
+    answer: "(a) Alveolar Adaptations:\n    1. Enormous Surface Area: Combined area of ~80 m2 provides vast interface for gas exchange.\n    2. Ultra-Thin Walls: Alveolar epithelium and capillary endothelium are each only one cell thick, minimising diffusion distance.\n    3. Rich Capillary Vascularisation: Surrounded by an extensive network of blood capillaries, maintaining steep partial pressure gradients for continuous O2 and CO2 diffusion.\n\n(b) Multicellular Scale Limitations: In large animals, body size is vast and diffusion distance between skin/lungs and internal tissues is immense. Calculations show that if oxygen were to move by simple diffusion alone, it would take estimated 3 years for an oxygen molecule to travel from lungs to the human toes! Therefore, respiratory pigments (hemoglobin in RBCs) and a high-pressure pumping heart are indispensable for rapid systemic oxygen delivery.\n\n(c) Carbon Monoxide Hazard: Hemoglobin has an affinity for carbon monoxide that is over 200 times higher than its affinity for oxygen. Inhaled CO binds irreversibly with hemoglobin to form carboxyhemoglobin, preventing hemoglobin from binding oxygen and causing cellular asphyxiation and death.",
+    explanation: "Alveolar histology and hemoglobin biochemistry maximize oxygenation in warm-blooded organisms.",
+    formula: "Alveoli Surface Area ~80 m2; Hemoglobin-CO affinity ~200x greater than Hemoglobin-O2",
+    examinerNote: "1.5 marks for alveolar adaptations; 1.5 marks for diffusion calculation/limits; 1 mark for CO affinity.",
+    source: "CBSE Competency-Based Sample Paper 2025"
+  }
 ];

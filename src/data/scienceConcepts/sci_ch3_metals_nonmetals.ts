@@ -409,6 +409,100 @@ Iron + O₂ + H₂O → Fe₂O₃·xH₂O (Rust, reddish-brown)
           correction: "Gold and silver are so unreactive that they occur in FREE STATE (native state) in nature. They don't need chemical reduction — just physical separation (panning, crushing). Only moderately and highly reactive metals need chemical extraction from ores."
         }
       ]
+    },
+    {
+      id: "corrosion_alloys",
+      label: "5. Corrosion of Metals, Rusting Setup & Industrial Alloys",
+      heading: "Activity 3.14 (3 Test-Tubes Rusting Setup), Galvanisation & Engineered Alloys",
+      subheading: "Conditions for Corrosion + Sacrificial Zinc Protection + Brass, Bronze, Solder, Stainless Steel, Amalgam & 22-Carat Gold",
+      explanation: `### Part A: Conditions for Corrosion & Activity 3.14 (3 Test-Tubes Experiment)
+Corrosion of iron (rusting) requires the **simultaneous presence of both air (oxygen) and water (moisture)**.
+In NCERT **Activity 3.14**, clean iron nails are placed in three separate test tubes:
+
+| Test Tube | Contents & Experimental Environment | Observation after Several Days | Scientific Inference |
+| :--- | :--- | :--- | :--- |
+| **Test Tube A** | Clean iron nails half-submerged in tap water with air in the upper space. | Nails **rust heavily**, covered in reddish-brown flaky hydrated iron(III) oxide ($Fe_2O_3 \\cdot xH_2O$). | **Both air and water are present** $\\rightarrow$ Ideal conditions for rusting. |
+| **Test Tube B** | Boiled distilled water (boiling removes dissolved air) + a layer of **oil** poured on top. | Nails **do NOT rust** at all; stay completely shiny. | Oil barrier prevents atmospheric oxygen from dissolving into boiled water. **Water alone without oxygen cannot cause rust.** |
+| **Test Tube C** | Completely dry air + a lump of **anhydrous calcium chloride ($CaCl_2$)** with a tight rubber cork. | Nails **do NOT rust** at all; stay completely shiny. | Anhydrous $CaCl_2$ absorbs all ambient moisture/humidity. **Oxygen alone without water cannot cause rust.** |
+
+---
+
+### Part B: Prevention of Corrosion
+1. **Barrier Protection:** Coating surface with paint, enamel, oil, or grease to prevent contact with air and moisture.
+2. **Galvanisation:**
+   - The process of coating iron and steel articles with a thin protective layer of **molten Zinc ($Zn$)**.
+   - **Why Galvanised Iron Does Not Rust Even When Scratched:**
+     - Zinc has a higher standard oxidation potential than iron (Zinc is more reactive).
+     - When the surface is scratched or exposed, zinc oxidizes sacrificially to form zinc oxide/carbonate:
+$$Zn \\rightarrow Zn^{2+} + 2e^-$$
+     - These electrons flow to the iron, preventing $Fe$ atoms from losing electrons and oxidizing into $Fe^{2+}$. This is known as **Sacrificial Anodic Protection**.
+3. **Anodising:** Electrolytically forming a thick, dense, corrosion-resistant oxide layer on aluminium ($Al_2O_3$).
+4. **Electroplating / Tinning / Chrome Plating:** Depositing thin layers of non-corrosive metals like tin or chromium onto steel.
+
+---
+
+### Part C: The Science of Alloys & Intermetallic Engineering
+An **alloy** is a **homogeneous mixture** of two or more metals, or a metal and a non-metal.
+- **Preparation Method:** The primary metal is melted first, and other constituent elements are dissolved into it in definite stoichiometric proportions, followed by controlled cooling to room temperature.
+- **Why Alloy Metals?** Pure iron is soft and stretches easily when hot. When mixed with a small amount of carbon (about **0.05%**), it becomes immensely hard and strong.
+
+#### Benchmark CBSE Industrial Alloys:
+1. **Stainless Steel:**
+   - **Composition:** Iron ($Fe$) + Nickel ($Ni$) + Chromium ($Cr$) + Carbon ($C \\sim 0.1\\%–0.5\\%$).
+   - **Properties:** Extremely hard, resilient, and **does NOT rust at all**. Used in surgical instruments, utensils, industrial reaction vessels.
+2. **Brass:**
+   - **Composition:** Copper ($Cu$, ~70%) + Zinc ($Zn$, ~30%).
+   - **Properties:** Malleable, acoustic resonance, low electrical conductivity compared to pure copper. Used in musical instruments, decorative hardware, plumbing fittings.
+3. **Bronze:**
+   - **Composition:** Copper ($Cu$, ~90%) + Tin ($Sn$, ~10%).
+   - **Properties:** Tough, highly resistant to saltwater corrosion, does not conduct electricity as well as pure copper. Used in statues, coins, medals, ship propellers.
+4. **Solder:**
+   - **Composition:** Lead ($Pb$, ~50%) + Tin ($Sn$, ~50%).
+   - **Properties:** Has a **very low melting point** (~183°C).
+   - **Application:** Indispensable in electrical engineering for **welding electrical wires and circuit board components**.
+5. **Amalgam:**
+   - An alloy in which **one of the constituent metals is Mercury ($Hg$)**.
+   - E.g. Dental amalgam ($Hg + Ag + Sn + Cu$) for tooth fillings; Sodium amalgam ($Na-Hg$) as a reducing agent.
+6. **Purity of Gold (24-Carat vs 22-Carat):**
+   - **Pure Gold (24-carat):** Extremely soft, ductile, and easily deforms under slight pressure. Unsuitable for crafting fine jewellery.
+   - **22-Carat Gold:** 22 parts by mass of pure gold alloyed with **2 parts of either Copper ($Cu$) or Silver ($Ag$)**.
+   - The addition of copper or silver hardens the crystal lattice by interstitial distortion, preventing deformation and making it ideal for durable ornaments.`,
+      formulasOrKeyPoints: [
+        {
+          title: "CBSE Master Alloy Composition Table",
+          content: "$$\\begin{aligned} \\text{Brass:} &\\quad Cu (\\text{Copper}) + Zn (\\text{Zinc}) \\\\ \\text{Bronze:} &\\quad Cu (\\text{Copper}) + Sn (\\text{Tin}) \\\\ \\text{Solder:} &\\quad Pb (\\text{Lead}) + Sn (\\text{Tin}) \quad [\\text{Low Melting Point}] \\\\ \\text{Stainless Steel:} &\\quad Fe (\\text{Iron}) + Ni (\\text{Nickel}) + Cr (\\text{Chromium}) + C \\\\ \\text{Amalgam:} &\\quad \\text{Any Metal} + Hg (\\text{Mercury}) \\\\ \\text{22-Carat Gold:} &\\quad 22/24 \\text{ Gold} + 2/24 (Cu \\text{ or } Ag) \\end{aligned}$$",
+          note: "Questions frequently ask to state constituents of Brass, Bronze, and Solder, and explain why Solder is used for welding."
+        },
+        {
+          title: "Rusting Condition Audit Formula",
+          content: "$$4Fe(s) + 3O_2(g) + 2xH_2O(l) \\rightarrow 2Fe_2O_3 \\cdot xH_2O(s) \quad [\\text{Rust}]$$",
+          note: "Rusting is an electrochemical oxidation; absence of either water or oxygen brings reaction rate to zero."
+        }
+      ],
+      stepByStepGuide: [
+        {
+          stepNo: 1,
+          title: "Explain Activity 3.14 Observations",
+          action: "Point out Test Tube A (water + air = rusts), Test Tube B (boiled water + oil layer = no rust, oxygen absent), Test Tube C (dry air + anhydrous CaCl2 = no rust, moisture absent).",
+          proTip: "Mention the role of anhydrous $CaCl_2$ as a drying agent that absorbs atmospheric moisture."
+        },
+        {
+          stepNo: 2,
+          title: "Explain Why Galvanised Iron Resists Rust Even After Scratches",
+          action: "State clearly: Zinc is more electropositive than iron. Zinc oxidizes preferentially, providing sacrificial protection to the underlying steel by transferring electrons.",
+          proTip: "Contrast with tin plating: if tin (less reactive than iron) is scratched, iron corrodes even faster."
+        }
+      ],
+      examinerTraps: [
+        {
+          trap: "Confusing the compositions of Brass and Bronze.",
+          correction: "Remember: **B**rass has **Z**inc ($Cu + Zn$). **B**ronze has **T**in ($Cu + Sn$)."
+        },
+        {
+          trap: "Stating that pure 24-carat gold is used for making fine jewellery.",
+          correction: "24-carat gold is too soft and malleable. It must be alloyed with 2 parts copper or silver (22-carat gold) to impart hardness and structural strength."
+        }
+      ]
     }
   ]
 };

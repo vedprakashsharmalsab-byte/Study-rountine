@@ -38,8 +38,9 @@ export default function AreteMotivationalBanner({
   onLaunchFlashcards
 }: AreteMotivationalBannerProps) {
   const [quoteIdx, setQuoteIdx] = useState(0);
+  const [secondsUntilNext, setSecondsUntilNext] = useState<number>(60);
 
-  // Advance to a fresh quote on every visit/mount
+  // Initial load from storage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = parseInt(localStorage.getItem("arete_last_quote_idx") || "-1", 10);
@@ -49,12 +50,33 @@ export default function AreteMotivationalBanner({
     }
   }, []);
 
+  // Auto-rotate quote every 1 minute (60 seconds) with countdown
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSecondsUntilNext((prev) => {
+        if (prev <= 1) {
+          setQuoteIdx((cur) => {
+            const next = Math.floor(Math.random() * ARETE_WISDOM_VAULT.length);
+            if (typeof window !== "undefined") {
+              localStorage.setItem("arete_last_quote_idx", next.toString());
+            }
+            return next;
+          });
+          return 60;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   const activeQuote: WisdomQuote = useMemo(() => {
     return ARETE_WISDOM_VAULT[quoteIdx % ARETE_WISDOM_VAULT.length] || ARETE_WISDOM_VAULT[0];
   }, [quoteIdx]);
 
-  const handleNextQuote = () => {
+  const handleResetAndNext = () => {
     areteAudio.play("pop");
+    setSecondsUntilNext(60);
     const nextIdx = Math.floor(Math.random() * ARETE_WISDOM_VAULT.length);
     setQuoteIdx(nextIdx);
     if (typeof window !== "undefined") {
@@ -116,19 +138,26 @@ export default function AreteMotivationalBanner({
               <span className={`text-xs font-mono font-bold ${isDark ? "text-amber-400" : "text-amber-800"}`}>
                 — {activeQuote.author} <span className="opacity-75 font-normal">({activeQuote.source})</span>
               </span>
-              <button
-                type="button"
-                onClick={handleNextQuote}
-                className={`text-[11px] font-mono font-bold flex items-center gap-1.5 px-2.5 py-1 rounded-xl border transition-all cursor-pointer ${
-                  isDark
-                    ? "bg-white/5 hover:bg-white/10 border-white/10 text-slate-300 hover:text-white"
-                    : "bg-white hover:bg-slate-50 border-slate-200 text-slate-700"
-                }`}
-                title="Shuffle next insight from 800+ quotes"
-              >
-                <RefreshCw className="w-3 h-3" />
-                <span>Next Insight (800+ Vault)</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-lg border tabular-nums ${
+                  isDark ? "bg-amber-500/10 border-amber-500/30 text-amber-300" : "bg-amber-50 border-amber-200 text-amber-800"
+                }`} title="Automatically rotates to a new quote every 60 seconds">
+                  ⏱️ Auto-changes: {secondsUntilNext}s
+                </span>
+                <button
+                  type="button"
+                  onClick={handleResetAndNext}
+                  className={`text-[11px] font-mono font-bold flex items-center gap-1.5 px-2.5 py-1 rounded-xl border transition-all cursor-pointer active:scale-95 ${
+                    isDark
+                      ? "bg-white/5 hover:bg-white/10 border-white/10 text-slate-300 hover:text-white"
+                      : "bg-white hover:bg-slate-50 border-slate-200 text-slate-700"
+                  }`}
+                  title="Reset 60s timer and shuffle to next wisdom quote immediately"
+                >
+                  <RefreshCw className="w-3 h-3 text-amber-400" />
+                  <span>Reset &amp; Next Quote</span>
+                </button>
+              </div>
             </div>
           </div>
 

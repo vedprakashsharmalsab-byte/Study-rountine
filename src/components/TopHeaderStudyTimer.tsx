@@ -28,9 +28,10 @@ interface TopHeaderStudyTimerProps {
 
 const PRESETS = [
   { label: "15m Sprint", minutes: 15, icon: "⚡", desc: "Formula & Recall Sprint" },
-  { label: "25m Focus", minutes: 25, icon: "🍅", desc: "Standard Pomodoro Focus" },
-  { label: "45m Deep Study", minutes: 45, icon: "🎯", desc: "NCERT Chapter Mastery" },
-  { label: "60m Mock Sprint", minutes: 60, icon: "📝", desc: "Timed Board Exam Drill" },
+  { label: "22m Focus", minutes: 22, icon: "🎯", desc: "Optimal 22m Deep Flow" },
+  { label: "25m Classic", minutes: 25, icon: "🍅", desc: "Standard Pomodoro Focus" },
+  { label: "45m Deep Study", minutes: 45, icon: "📖", desc: "NCERT Chapter Mastery" },
+  { label: "60m Mock Sprint", minutes: 60, icon: "⏱️", desc: "Timed Board Exam Drill" },
   { label: "90m Marathon", minutes: 90, icon: "🏆", desc: "Full Exam Simulation" }
 ];
 
@@ -41,8 +42,8 @@ export const TopHeaderStudyTimer = memo(function TopHeaderStudyTimer({
   onPlaySound,
   onTriggerConfetti,
 }: TopHeaderStudyTimerProps) {
-  const [selectedMinutes, setSelectedMinutes] = useState<number>(25);
-  const [secondsRemaining, setSecondsRemaining] = useState<number>(25 * 60);
+  const [selectedMinutes, setSelectedMinutes] = useState<number>(22);
+  const [secondsRemaining, setSecondsRemaining] = useState<number>(22 * 60);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isZenModalOpen, setIsZenModalOpen] = useState<boolean>(false);
@@ -237,7 +238,7 @@ export const TopHeaderStudyTimer = memo(function TopHeaderStudyTimer({
         {/* POPOVER PRESET & CONTROLS MENU */}
         {isMenuOpen && (
           <div
-            className={`absolute right-0 sm:right-auto sm:left-0 top-full mt-2 w-80 sm:w-96 rounded-2xl border p-4 shadow-2xl backdrop-blur-2xl z-50 animate-in fade-in zoom-in-95 duration-150 ${
+            className={`fixed inset-x-2 top-16 sm:inset-x-auto sm:absolute sm:right-0 sm:left-auto sm:top-full mt-2 w-[calc(100vw-16px)] sm:w-96 max-h-[85vh] overflow-y-auto rounded-2xl border p-4 shadow-2xl backdrop-blur-2xl z-50 animate-in fade-in zoom-in-95 duration-150 ${
               isDark
                 ? "bg-[#0b0f19]/95 border-white/15 text-white shadow-[0_15px_40px_rgba(0,0,0,0.8)]"
                 : "bg-white/95 border-slate-200 text-slate-900 shadow-xl"

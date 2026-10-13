@@ -4,7 +4,7 @@
 // Covers EVERY single Physics & Biology diagram, Ray tracing case, and Mixed Circuit
 // =========================================================================
 
-export type DiagramCategory = "Physics Optics" | "Physics Human Eye" | "Physics Electricity & Circuits" | "Physics Magnetism" | "Biology Life Processes" | "Biology Control & Coordination" | "Biology Reproduction" | "Biology Heredity";
+export type DiagramCategory = "Physics Optics" | "Physics Human Eye" | "Physics Electricity & Circuits" | "Physics Magnetism" | "Biology Life Processes" | "Biology Control & Coordination" | "Biology Reproduction" | "Biology Heredity" | "Chemistry Reactions" | "Chemistry Acids Bases" | "Chemistry Metals" | "Chemistry Carbon";
 
 export interface DiagramLabel {
   id: string;
@@ -56,6 +56,135 @@ export interface ScienceDiagram {
 }
 
 export const SCIENCE_DIAGRAMS_MASTER: ScienceDiagram[] = [
+  // ==========================================
+  // CHEMISTRY CHAPTER 1: ELECTROLYSIS OF WATER
+  // ==========================================
+  {
+    id: "diag_chem_electrolysis_water",
+    title: "Electrolysis of Acidified Water (2:1 Stoichiometric Ratio)",
+    chapterNo: 1,
+    chapterName: "Chemical Reactions and Equations",
+    category: "Chemistry Reactions",
+    boardMarks: 3,
+    boardFrequency: "96% Recurrence",
+    ncertFigureRef: "NCERT Fig 1.6, Page 9",
+    description: "Electrolytic decomposition of water: plastic mug with rubber stoppers, carbon (graphite) electrodes connected to a 6V DC battery. Shows 2:1 volume ratio between hydrogen gas collected at the cathode (negative electrode) and oxygen gas collected at the anode (positive electrode).",
+    diagramType: "svg_biological_anatomy",
+    labels: [
+      { id: "lbl_cathode", name: "Cathode (-)", description: "Negative electrode where hydrogen cations (H+) receive electrons", boardSignificance: "H2 gas evolves here (twice volume of O2)", cx: 35, cy: 60 },
+      { id: "lbl_anode", name: "Anode (+)", description: "Positive electrode where oxide ions lose electrons", boardSignificance: "O2 gas evolves here (single volume)", cx: 65, cy: 60 },
+      { id: "lbl_h2_gas", name: "Hydrogen Gas (H2)", description: "Colorless gas that bursts with a sharp pop sound", boardSignificance: "Volume is double due to stoichiometry 2H2O -> 2H2 + O2", cx: 35, cy: 25 },
+      { id: "lbl_o2_gas", name: "Oxygen Gas (O2)", description: "Colorless gas that rekindles a glowing wooden splint", boardSignificance: "One volume of O2 per two volumes of H2", cx: 65, cy: 32 },
+      { id: "lbl_acidified_water", name: "Acidified Water", description: "Water with a few drops of dilute H2SO4", boardSignificance: "Pure water is a poor conductor; acid provides mobile ions", cx: 50, cy: 50 },
+      { id: "lbl_battery", name: "6V DC Battery", description: "External electrical power source driving non-spontaneous decomposition", boardSignificance: "Must use DC, not AC, to separate cathode and anode", cx: 50, cy: 88 }
+    ],
+    markingPoints: [
+      "Gas collected at cathode is Hydrogen (H2); gas at anode is Oxygen (O2) [1M]",
+      "Volume ratio of H2 : O2 is exactly 2 : 1 because each water molecule (H2O) has 2 hydrogen atoms to 1 oxygen atom [1M]",
+      "Few drops of dilute H2SO4 are added to make distilled water conduct electricity by providing mobile H+ and SO4(2-) ions [1M]"
+    ],
+    examinerTraps: [
+      "Inverting electrodes: Hydrogen collects at negative cathode; Oxygen collects at positive anode",
+      "Stating volume ratio is 1:2 instead of 2:1 (H2 is double of O2)"
+    ]
+  },
+
+  // ==========================================
+  // CHEMISTRY CHAPTER 2: REACTION OF ZINC WITH DILUTE ACID & POP TEST
+  // ==========================================
+  {
+    id: "diag_chem_acid_zinc_h2",
+    title: "Reaction of Zinc with Dilute Acid & Hydrogen Pop Sound Test",
+    chapterNo: 2,
+    chapterName: "Acids, Bases and Salts",
+    category: "Chemistry Acids Bases",
+    boardMarks: 3,
+    boardFrequency: "94% Recurrence",
+    ncertFigureRef: "NCERT Fig 2.1, Page 19",
+    description: "Laboratory apparatus setup showing a boiling tube with granulated zinc in dilute sulphuric acid, fitted with a delivery tube leading into a soap solution trough. Hydrogen gas forms bubbles that rise and burn with a sharp pop sound when tested with a burning candle.",
+    diagramType: "svg_biological_anatomy",
+    labels: [
+      { id: "lbl_zinc_granules", name: "Granulated Zinc", description: "Active amphoteric metal reacting with acid", boardSignificance: "Provides large surface area for rapid reaction", cx: 30, cy: 68 },
+      { id: "lbl_dil_acid", name: "Dilute Sulphuric Acid", description: "Supplies hydronium ions for displacement", boardSignificance: "Zn + H2SO4 -> ZnSO4 + H2(g)", cx: 30, cy: 55 },
+      { id: "lbl_delivery_tube", name: "Glass Delivery Tube", description: "Transfers liberated hydrogen gas safely into soap solution", boardSignificance: "Airtight cork prevents gas leakage", cx: 48, cy: 35 },
+      { id: "lbl_soap_solution", name: "Soap Solution Trough", description: "Traps hydrogen gas into buoyant bubbles", boardSignificance: "Hydrogen is lighter than air; soap bubbles float upwards", cx: 72, cy: 75 },
+      { id: "lbl_burning_candle", name: "Burning Candle / Pop Sound", description: "Brings flame to rising hydrogen bubble", boardSignificance: "Hydrogen burns explosively with a characteristic 'pop' sound", cx: 80, cy: 38 }
+    ],
+    markingPoints: [
+      "Balanced chemical equation: Zn(s) + H2SO4(aq) -> ZnSO4(aq) + H2(g) [1M]",
+      "Hydrogen gas does not dissolve easily in water; bubbles trapped in soap solution rise because H2 is less dense than air [1M]",
+      "Confirmation test: Burning candle held near the bubble causes it to burst with a sharp 'pop' sound [1M]"
+    ],
+    examinerTraps: [
+      "Saying the pop sound is caused by carbon dioxide (CO2 extinguishes flame without pop)",
+      "Writing wrong valency for zinc sulphate (it is ZnSO4, not Zn2SO4)"
+    ]
+  },
+
+  // ==========================================
+  // CHEMISTRY CHAPTER 3: ELECTROLYTIC REFINING & RUSTING CONDITIONS
+  // ==========================================
+  {
+    id: "diag_chem_electrolytic_refining_rusting",
+    title: "Electrolytic Refining of Copper & 3-Test-Tubes Rusting Setup",
+    chapterNo: 3,
+    chapterName: "Metals and Non-Metals",
+    category: "Chemistry Metals",
+    boardMarks: 5,
+    boardFrequency: "98% Recurrence",
+    ncertFigureRef: "NCERT Fig 3.12 & Fig 3.13, Pages 52-54",
+    description: "Dual scientific visual: Panel A displays electrolytic refining of blister copper in acidified CuSO4 solution showing pure copper depositing on the cathode and anode mud settling below the impure anode; Panel B displays the 3 test tubes experiment proving that iron rusts ONLY when both air and water are simultaneously present.",
+    diagramType: "svg_biological_anatomy",
+    labels: [
+      { id: "lbl_anode_impure", name: "Anode (Impure Cu)", description: "Thick block of impure blister copper that dissolves into solution", boardSignificance: "Cu -> Cu(2+) + 2e(-)", cx: 25, cy: 50 },
+      { id: "lbl_cathode_pure", name: "Cathode (Pure Cu Strip)", description: "Thin strip of pure copper where copper cations deposit", boardSignificance: "Cu(2+) + 2e(-) -> Cu (Grows thicker)", cx: 45, cy: 50 },
+      { id: "lbl_anode_mud", name: "Anode Mud", description: "Insoluble impurities (gold, silver, platinum) settled below the anode", boardSignificance: "Valuable byproduct covering refining costs", cx: 25, cy: 75 },
+      { id: "lbl_tube_a", name: "Test Tube A (Water + Air)", description: "Nails in tap water exposed to air", boardSignificance: "RUSTS heavily (Both air and water present)", cx: 65, cy: 50 },
+      { id: "lbl_tube_b", name: "Test Tube B (Boiled Water + Oil)", description: "Boiled distilled water covered with oil layer to exclude oxygen", boardSignificance: "NO RUST (Water present, air absent)", cx: 78, cy: 50 },
+      { id: "lbl_tube_c", name: "Test Tube C (Dry Air + CaCl2)", description: "Dry air with anhydrous calcium chloride absorbing all moisture", boardSignificance: "NO RUST (Air present, water absent)", cx: 90, cy: 50 }
+    ],
+    markingPoints: [
+      "Electrolytic refining reactions: Anode: Cu -> Cu(2+) + 2e(-); Cathode: Cu(2+) + 2e(-) -> Cu [2M]",
+      "Soluble impurities go into solution; insoluble impurities settle below anode as anode mud containing noble metals [1M]",
+      "Rusting conditions: Both oxygen and water are mandatory; Test Tubes B and C prove neither alone causes rust [2M]"
+    ],
+    examinerTraps: [
+      "Reversing cathode and anode in copper refining: Impure metal is ALWAYS the Anode (+), Pure strip is Cathode (-)",
+      "Forgetting the oil layer in Test Tube B: Oil prevents oxygen from dissolving in boiled water"
+    ]
+  },
+
+  // ==========================================
+  // CHEMISTRY CHAPTER 4: SOAP MICELLE & ALLOTROPES
+  // ==========================================
+  {
+    id: "diag_chem_carbon_micelle_allotropes",
+    title: "Structure of Soap Micelle & Carbon Allotropes (Diamond vs Graphite)",
+    chapterNo: 4,
+    chapterName: "Carbon and its Compounds",
+    category: "Chemistry Carbon",
+    boardMarks: 5,
+    boardFrequency: "95% Recurrence",
+    ncertFigureRef: "NCERT Fig 4.12 & Fig 4.3, Pages 61-75",
+    description: "Dual structural diagram: Panel A depicts a spherical soap micelle trapping central oily dirt with hydrophobic hydrocarbon tails pointing inward and hydrophilic ionic heads (COO- Na+) pointing outward into water; Panel B shows the rigid 3D tetrahedral network of diamond vs the 2D layered hexagonal planar sheets of graphite.",
+    diagramType: "svg_biological_anatomy",
+    labels: [
+      { id: "lbl_grease_droplet", name: "Central Oil/Grease Droplet", description: "Non-polar dirt on fabric trapped at micelle core", boardSignificance: "Hydrophobic tails dissolve in the oil", cx: 25, cy: 45 },
+      { id: "lbl_hydrophobic_tail", name: "Hydrophobic Tail (R)", description: "Long non-polar hydrocarbon chain (water-hating, oil-loving)", boardSignificance: "Points inward away from water", cx: 20, cy: 35 },
+      { id: "lbl_hydrophilic_head", name: "Hydrophilic Head (-COO- Na+)", description: "Polar ionic carboxylate group (water-loving)", boardSignificance: "Points outward into polar water; prevents coalescence", cx: 35, cy: 25 },
+      { id: "lbl_diamond_lattice", name: "Diamond 3D Tetrahedral Lattice", description: "Each carbon atom bonded to 4 others in rigid 3D framework", boardSignificance: "Zero free electrons -> Extremely hard insulator", cx: 65, cy: 40 },
+      { id: "lbl_graphite_layers", name: "Graphite Hexagonal Planar Sheets", description: "Each carbon bonded to 3 others in flat hexagonal rings", boardSignificance: "1 delocalized electron per carbon -> Conductor & lubricant", cx: 85, cy: 45 }
+    ],
+    markingPoints: [
+      "Soap micelle orientation: Hydrophobic tail dissolves in oil droplet; hydrophilic ionic head faces outward in water [2M]",
+      "Like-charge repulsion between ionic heads keeps micelles dispersed as a colloidal emulsion that rinses away [1M]",
+      "Diamond has 4 covalent bonds per carbon (rigid 3D insulator); Graphite has 3 bonds per carbon with free delocalized electrons that conduct electricity [2M]"
+    ],
+    examinerTraps: [
+      "Drawing hydrophobic tails pointing towards water and ionic heads pointing into oil (FATAL ERROR)",
+      "Stating graphite is an insulator because it is made of non-metallic carbon"
+    ]
+  },
   // ==========================================
   // 1. PHYSICS OPTICS: CONCAVE MIRROR (ALL 6 CASES)
   // ==========================================
