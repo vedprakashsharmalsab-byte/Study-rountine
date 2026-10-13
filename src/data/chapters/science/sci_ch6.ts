@@ -550,5 +550,36 @@ export const SCI_CH6_QUESTIONS: VaultQuestion[] = [
     formula: "\\text{High Thyroxine} \\to \\downarrow \\text{TSH} \\to \\downarrow \\text{Thyroxine} \\to \\uparrow \\text{TSH} \\to \\cdots",
     examinerNote: "Use insulin-blood glucose OR thyroxine-TSH as examples. Explain the 'cycle' — it is negative feedback.",
     source: "NCERT Section 7.4 / Board 2022, 2024"
+  },
+  {
+    id: "sci_c6_q25",
+    chapter: 6,
+    chapterName: "Control and Coordination",
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): In a synapse, the electrical impulse is converted into chemical neurotransmitters that cross the synaptic cleft.\nReason (R): Synaptic transmission is bidirectional because chemical neurotransmitter receptors are present equally on axon endings and dendrites.\n(a) Both A and R are true and R is the correct explanation of A\n(b) Both A and R are true but R is not the correct explanation of A\n(c) A is true but R is false\n(d) A is false but R is true",
+    options: [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is not the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correctOption: 2,
+    answer: "Option (c) is correct: A is true but R is false.",
+    explanation: "Assertion is TRUE: At the axon terminal, the electrical impulse triggers release of neurotransmitter vesicles (acetylcholine) that diffuse across the synaptic cleft (~20 nm).\nReason is FALSE: Synaptic transmission is strictly UNIDIRECTIONAL because neurotransmitter vesicles are synthesized and released only at axon terminals, and specific protein receptors are present exclusively on postsynaptic dendrites.",
+    examinerNote: "Classic board trap: Nerve transmission across a synapse is strictly one-way due to the anatomical polarization of vesicle release vs receptor distribution.",
+    source: "CBSE Sample Question Paper 2026 / NCERT Exemplar"
+  },
+  {
+    id: "sci_c6_q26",
+    chapter: 6,
+    chapterName: "Control and Coordination",
+    marks: 5,
+    type: "LA",
+    question: "(a) Differentiate between tropic movements and nastic movements in plants with two distinct examples for each.\n(b) Describe how auxin induces phototropic curvature in a growing shoot tip illuminated unilaterally.\n(c) Name the specific phytohormone responsible for each of the following:\n  (i) Promotion of rapid cell division in fruits and seeds\n  (ii) Wilting and shedding of leaves during environmental drought stress\n  (iii) Internodal stem elongation and overcoming genetic dwarfism",
+    answer: "(a) Tropic vs Nastic Movements:\n1. Tropic Movements: Directional, growth-dependent movements where direction of response is determined strictly by stimulus direction (e.g. Stem phototropism bending towards light, root geotropism growing towards gravity).\n2. Nastic Movements: Non-directional, immediate, non-growth movements caused by turgor pressure changes independent of stimulus direction (e.g. Folding of Mimosa pudica leaves on touch, opening/closing of flower petals in response to light).\n\n(b) Phototropic Curvature Mechanism:\n1. Auxin is synthesised at the shoot apex.\n2. When unilateral light shines on one side of the shoot, auxin diffuses away from the illuminated side toward the shaded side.\n3. Higher auxin concentration on the shaded side causes the cells on that side to elongate much faster than cells on the illuminated side.\n4. This differential growth causes the shoot to bend towards the light source.\n\n(c) Phytohormone Identification:\n(i) Cytokinins\n(ii) Abscisic Acid (ABA)\n(iii) Gibberellins",
+    explanation: "NCERT Chapter 6 comprehensive 5-marker integrating plant movements, auxin phototropism mechanisms, and phytohormone roles.",
+    examinerNote: "Award 2 marks for tropic vs nastic contrast, 2 marks for auxin shaded diffusion, and 1 mark for hormone identification.",
+    source: "CBSE Board Previous Years (5 Marks)"
   }
 ];

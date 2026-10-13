@@ -211,6 +211,12 @@ function getBioSchematicId(diagId: string): string {
     case "diag_bio_neuron_reflex_arc": return "bio_neuron_reflex_arc";
     case "diag_bio_flower_pollen": return "bio_flower_anatomy";
     case "diag_bio_mendel_crosses": return "bio_mendel_crosses";
+    case "bio_human_brain": return "bio_human_brain";
+    case "bio_pollen_germination": return "bio_pollen_germination";
+    case "bio_human_reproduction": return "bio_human_reproduction";
+    case "bio_flower_anatomy": return "bio_flower_anatomy";
+    case "bio_neuron_reflex_arc": return "bio_neuron_reflex_arc";
+    case "bio_mendel_crosses": return "bio_mendel_crosses";
     default: return diagId;
   }
 }
@@ -248,21 +254,24 @@ function getSectionMasterDiagram(chapterNo: number, sectionId: string, heading: 
   }
 
   if (chapterNo === 6) {
-    if (s.includes("neuron") || s.includes("reflex") || s.includes("nerve") || h.includes("neuron") || h.includes("reflex") || h.includes("nervous")) {
-      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_neuron_reflex_arc");
+    if (s.includes("brain") || h.includes("brain") || s.includes("protect") || h.includes("protect")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "bio_human_brain");
     }
+    return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_neuron_reflex_arc" || d.id === "bio_neuron_reflex_arc");
   }
 
   if (chapterNo === 7) {
-    if (s.includes("flower") || s.includes("plant") || s.includes("pollin") || h.includes("flower") || h.includes("plant") || h.includes("pollin")) {
-      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_flower_pollen");
+    if (s.includes("human") || s.includes("reproduct") || h.includes("human") || h.includes("reproduct") || h.includes("menstruat") || h.includes("contracept")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "bio_human_reproduction");
     }
+    if (s.includes("pollen") || h.includes("pollen") || s.includes("fertil") || h.includes("fertil") || s.includes("seed") || h.includes("seed")) {
+      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "bio_pollen_germination");
+    }
+    return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "bio_flower_anatomy" || d.id === "diag_bio_flower_pollen");
   }
 
   if (chapterNo === 8) {
-    if (s.includes("mendel") || s.includes("monohybrid") || s.includes("dihybrid") || h.includes("mendel") || h.includes("cross")) {
-      return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "diag_bio_mendel_crosses");
-    }
+    return SCIENCE_DIAGRAMS_MASTER.find((d) => d.id === "bio_mendel_crosses" || d.id === "diag_bio_mendel_crosses");
   }
 
   if (chapterNo === 12) {

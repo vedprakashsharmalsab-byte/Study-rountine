@@ -498,5 +498,36 @@ export const SCI_CH7_QUESTIONS: VaultQuestion[] = [
     explanation: "Reproductive health encompasses physical contraception, STI defense, and legislative ethics against gender-biased sex selection.",
     examinerNote: "Mention PCPNDT Act specifically for the statutory measure in part (c).",
     source: "NCERT Section 7.3.3 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c7_q25",
+    chapter: 7,
+    chapterName: "How do Organisms Reproduce?",
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): In human males, the testes are situated outside the abdominal cavity within the scrotum.\nReason (R): Scrotum provides an optimal temperature that is 2 to 2.5°C lower than normal core body temperature, which is essential for viable spermatogenesis.\n(a) Both A and R are true and R is the correct explanation of A\n(b) Both A and R are true but R is not the correct explanation of A\n(c) A is true but R is false\n(d) A is false but R is true",
+    options: [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is not the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correctOption: 0,
+    answer: "Option (a) is correct: Both A and R are true and R is the correct explanation of A.",
+    explanation: "Both Assertion and Reason are true, and R correctly explains A. The production of mature viable sperms (spermatogenesis) cannot occur at internal body temperature (37°C) as high temperatures cause germ cell degeneration. The external scrotum maintains a temperature 2–2.5°C lower.",
+    examinerNote: "Scrotal thermoregulation is frequently asked in both Assertion-Reason and 2-mark VSA questions.",
+    source: "CBSE Board Question Bank / NCERT Line-by-Line"
+  },
+  {
+    id: "sci_c7_q26",
+    chapter: 7,
+    chapterName: "How do Organisms Reproduce?",
+    marks: 5,
+    type: "LA",
+    question: "(a) Trace the events that occur after a compatible pollen grain lands on the receptive stigma of a flower until double fertilisation is accomplished.\n(b) Mention the post-fertilisation fate of the following floral parts:\n  (i) Ovary\n  (ii) Ovule\n  (iii) Zygote\n  (iv) Petals, stamens, and style\n(c) State two distinct reasons why vegetative propagation is widely preferred for growing ornamental plants like rose and jasmine.",
+    answer: "(a) Pollen Germination & Double Fertilisation:\n1. Compatible pollen grain on the stigma absorbs fluid and germinates, forming a pollen tube.\n2. The pollen tube grows down through the style toward the ovary via chemotropism, carrying two male gametes.\n3. It enters the ovule through the micropyle and penetrates the embryo sac.\n4. Syngamy: One male gamete (n) fuses with the egg cell (n) to form the diploid zygote (2n).\n5. Triple Fusion: The second male gamete (n) fuses with the two polar nuclei (n+n) to form the triploid primary endosperm nucleus (3n).\n\n(b) Post-Fertilisation Fates:\n(i) Ovary → Develops into the Fruit.\n(ii) Ovule → Develops into the Seed (with seed coat and food storage).\n(iii) Zygote → Divides repeatedly to develop into the Embryo.\n(iv) Petals, stamens, and style → Wither, shrivel, and fall off.\n\n(c) Advantages of Vegetative Propagation:\n1. Enables propagation of plants that have lost the capacity to produce viable seeds (e.g. rose, jasmine, seedless banana).\n2. All offspring are genetically identical to the parent (clones), preserving desirable parental traits and yielding flowers/fruits much earlier.",
+    explanation: "NCERT Chapter 7 comprehensive 5-marker on double fertilisation, seed formation, and economic benefits of vegetative propagation.",
+    examinerNote: "Ensure both syngamy (n+n=2n) and triple fusion (n+2n=3n) are explicitly identified for full 5 marks.",
+    source: "CBSE Board Examination (5 Marks) / NCERT"
   }
 ];

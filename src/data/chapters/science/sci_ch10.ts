@@ -514,5 +514,36 @@ export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
     formula: "A + D = i + e \\implies D = i + e - A = 48^\\circ + 48^\\circ - 60^\\circ = 36^\\circ",
     examinerNote: "Part (a) formula $A + D = i + e$ must be written explicitly.",
     source: "CBSE Board 2023 / 2024 Sample Paper"
+  },
+  {
+    id: "sci_c10_q25",
+    chapter: 10,
+    chapterName: "The Human Eye and the Colourful World",
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): Danger signal lights installed at traffic intersections and tall communications towers are always red.\nReason (R): According to Rayleigh's law of scattering, red light has the longest wavelength in the visible spectrum and is scattered the least by smoke and fog particles.\n(a) Both A and R are true and R is the correct explanation of A\n(b) Both A and R are true but R is not the correct explanation of A\n(c) A is true but R is false\n(d) A is false but R is true",
+    options: [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is not the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correctOption: 0,
+    answer: "Option (a) is correct: Both A and R are true and R is the correct explanation of A.",
+    explanation: "Both Assertion and Reason are true, and R correctly explains A. By Rayleigh's scattering law (I proportional to 1/lambda^4), red light with its long wavelength (~700 nm) suffers minimum scattering and can penetrate through dense fog and smoke over maximum distance without loss.",
+    examinerNote: "Rayleigh scattering intensity is inversely proportional to fourth power of wavelength.",
+    source: "CBSE Sample Paper 2026 / NCERT"
+  },
+  {
+    id: "sci_c10_q26",
+    chapter: 10,
+    chapterName: "The Human Eye and the Colourful World",
+    marks: 5,
+    type: "LA",
+    question: "(a) A person with a myopic eye cannot see objects beyond 1.2 m distinctly. Calculate the focal length and power of the corrective lens required to restore normal distant vision.\n(b) The near point of a hypermetropic eye is 1 m. Find the power of the lens required to read a book held at 25 cm.\n(c) With the aid of a neat labeled ray diagram, explain the three sequential optical phenomena responsible for the formation of a rainbow in the sky after a rain shower.",
+    answer: "(a) Myopia Correction Numerical:\nFor a myopic eye to view distant objects at infinity (u = -infinity), the corrective concave lens must form a virtual image at the person's far point (v = -1.2 m = -120 cm).\nLens formula: 1/f = 1/v - 1/u = 1/(-1.2) - 1/(-infinity) = -1/1.2 ⇒ f = -1.2 m.\nPower: P = 1 / f(m) = 1 / (-1.2) = -10/12 = -0.83 D (or -5/6 D).\nCorrective lens required is a Concave lens of power -0.83 D.\n\n(b) Hypermetropia Correction Numerical:\nGiven: Normal near point u = -25 cm = -0.25 m, defective near point v = -1 m = -100 cm.\nLens formula: 1/f = 1/v - 1/u = 1/(-100) - 1/(-25) = -1/100 + 4/100 = +3/100 cm^-1 ⇒ f = +100/3 cm = +1/3 m.\nPower: P = 1 / f(m) = 1 / (+1/3) = +3.0 D.\nCorrective lens required is a Convex lens of power +3.0 D.\n\n(c) Rainbow Formation Mechanics:\nWater droplets act as small prisms. The 3 sequential optical events are:\n1. Refraction and Dispersion: Sunlight enters the droplet at its front surface, slows down, and disperses into VIBGYOR colors.\n2. Internal Reflection: Dispersed light reflects off the inner rear surface of the water droplet.\n3. Refraction: Light refracts again as it emerges from the droplet into air toward the observer's eye (Red emerges at ~42°, Violet at ~40°).",
+    explanation: "NCERT Chapter 10 core 5-marker combining vision defect numericals with atmospheric rainbow physics.",
+    examinerNote: "Convex lens power is always positive (+3.0 D) and concave lens power is always negative (-0.83 D).",
+    source: "CBSE Board Examination (5 Marks) / NCERT"
   }
 ];

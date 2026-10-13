@@ -505,5 +505,36 @@ export const SCI_CH8_QUESTIONS: VaultQuestion[] = [
     explanation: "Chromosomal segregation in human meiosis ensures a baseline 1:1 probability for male vs female offspring.",
     examinerNote: "Specify 44 autosomes + 2 sex chromosomes = 46 total.",
     source: "NCERT Section 8.2 / CBSE Board 2023"
+  },
+  {
+    id: "sci_c8_q25",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): The sex of a human child is determined genetically strictly by the father's gamete, not the mother's.\nReason (R): Human females produce only X-bearing ova (homogametic), while human males produce 50% X-bearing and 50% Y-bearing sperms (heterogametic).\n(a) Both A and R are true and R is the correct explanation of A\n(b) Both A and R are true but R is not the correct explanation of A\n(c) A is true but R is false\n(d) A is false but R is true",
+    options: [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is not the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correctOption: 0,
+    answer: "Option (a) is correct: Both A and R are true and R is the correct explanation of A.",
+    explanation: "Both Assertion and Reason are true, and R correctly explains A. The mother always donates an X chromosome. If the father donates an X chromosome, the child is female (XX); if the father donates a Y chromosome, the child is male (XY). Hence paternal sperm determines the child's sex.",
+    examinerNote: "Emphasize that the mother is homogametic (XX) and father is heterogametic (XY).",
+    source: "CBSE Sample Paper 2026 / NCERT"
+  },
+  {
+    id: "sci_c8_q26",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 5,
+    type: "LA",
+    question: "(a) A pure-breeding pea plant with round yellow seeds (RRYY) is crossed with a pure-breeding pea plant with wrinkled green seeds (rryy).\n  (i) What phenotype and genotype will appear in the F1 generation?\n  (ii) Write all four types of gametes produced by the F1 plants.\n  (iii) Using a 16-box Punnett square representation, state the phenotypic ratio of the F2 generation obtained by selfing the F1 plants.\n(b) State the fundamental biological law deduced by Mendel from this cross.\n(c) How does this cross prove that traits are inherited independently?",
+    answer: "(a) Dihybrid Cross Analysis:\n(i) F1 Generation: All offspring have genotype RrYy and phenotype 100% Round Yellow seeds.\n(ii) F1 Gametes: RY, Ry, rY, ry (in equal proportions: 25% each).\n(iii) F2 Phenotypic Ratio: 9 Round Yellow : 3 Round Green : 3 Wrinkled Yellow : 1 Wrinkled Green (9:3:3:1 ratio across 16 boxes).\n\n(b) Mendel's Law of Independent Assortment:\nWhen two pairs of traits are combined in a hybrid, segregation of one pair of characters is completely independent of the segregation of the other pair of characters during gamete formation.\n\n(c) Proof of Independent Inheritance:\nThe appearance of two completely novel recombinant phenotypes (Round Green and Wrinkled Yellow) in the F2 generation, which were absent in the parental generation, proves that seed shape alleles assort completely independently from seed colour alleles.",
+    explanation: "NCERT Chapter 8 classic 5-marker dihybrid cross derivation and Law of Independent Assortment.",
+    examinerNote: "State both parental phenotypes (Round Yellow, Wrinkled Green) and recombinants (Round Green, Wrinkled Yellow).",
+    source: "CBSE Board Examination (5 Marks) / KVS Support"
   }
 ];

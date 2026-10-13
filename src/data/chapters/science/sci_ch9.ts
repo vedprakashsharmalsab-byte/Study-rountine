@@ -511,5 +511,36 @@ export const SCI_CH9_QUESTIONS: VaultQuestion[] = [
     formula: "P = P_1 + P_2, \\quad \\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f}, \\quad m = \\frac{v}{u} = \\frac{h'}{h}",
     examinerNote: "Converting focal length to metres before calculating dioptre power is essential.",
     source: "CBSE Board 2023 / 2024 Case Study Sample"
+  },
+  {
+    id: "sci_c9_q25",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 1,
+    type: "MCQ",
+    question: "Assertion (A): A convex mirror is always installed as a driver's rear-view mirror in vehicles.\nReason (R): A convex mirror always forms an erect and diminished image and provides a much wider field of view than a plane mirror.\n(a) Both A and R are true and R is the correct explanation of A\n(b) Both A and R are true but R is not the correct explanation of A\n(c) A is true but R is false\n(d) A is false but R is true",
+    options: [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is not the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correctOption: 0,
+    answer: "Option (a) is correct: Both A and R are true and R is the correct explanation of A.",
+    explanation: "Both Assertion and Reason are true, and R correctly explains A. Because convex mirrors curve outwards, they provide a substantially wider field of view than plane mirrors and always produce an erect, though diminished, virtual image of rearward traffic.",
+    examinerNote: "Convex mirrors cannot form inverted images for real objects; m is always positive and less than 1.",
+    source: "CBSE Sample Paper 2026 / NCERT"
+  },
+  {
+    id: "sci_c9_q26",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 5,
+    type: "LA",
+    question: "(a) An object 4 cm in height is placed at a distance of 20 cm in front of a convex lens of focal length 10 cm. Find the image distance, nature, and height of the image formed. Draw a ray diagram to justify your answer.\n(b) A concave mirror produces a three times magnified real image of an object placed at 10 cm in front of it. Calculate the image distance and focal length of the mirror.\n(c) Find the focal length of a lens of power -2.0 D. What type of lens is this?",
+    answer: "(a) Convex Lens Numerical & Ray Diagram:\nGiven: h = +4 cm, u = -20 cm, f = +10 cm.\nLens formula: 1/v - 1/u = 1/f ⇒ 1/v = 1/f + 1/u = 1/10 - 1/20 = 1/20 ⇒ v = +20 cm.\nNature: Since v is positive, the image is Real and Inverted, formed at 20 cm on the other side of the lens (at 2F2).\nHeight: m = v/u = +20 / -20 = -1. Since m = h'/h ⇒ h' = m * h = -1 * 4 = -4 cm.\nRay Diagram: Object at 2F1 (20 cm) forms real, inverted image of same size at 2F2 (20 cm).\n\n(b) Concave Mirror Numerical:\nGiven: u = -10 cm, Real image ⇒ m = -3.\nMagnification formula: m = -v/u ⇒ -3 = -v / (-10) ⇒ v = -30 cm (30 cm in front of mirror).\nMirror formula: 1/f = 1/v + 1/u = 1/(-30) + 1/(-10) = (-1 - 3)/30 = -4/30 = -2/15 ⇒ f = -7.5 cm.\n\n(c) Power Numerical:\nP = -2.0 D ⇒ f = 1/P = 1 / (-2.0) = -0.5 m = -50 cm.\nSince focal length and power are negative, it is a Concave (Diverging) lens.",
+    explanation: "Complete 5-mark numericals test covering lens formula, magnification, concave mirror, and lens power.",
+    examinerNote: "Check sign conventions: u is always negative; for real image in mirror v is negative; in lens v is positive.",
+    source: "CBSE Board Examination (5 Marks) / KVS Support"
   }
 ];
