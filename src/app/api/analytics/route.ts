@@ -587,7 +587,43 @@ export async function GET(req: Request) {
       else if (daysSinceFirst >= 7 || activeDaysCount >= 3) retentionBadge = "7-Day Regular";
 
       return {
-        ...s,
+        // Identity
+        visitorId:        s.visitorId,
+        studentName:      s.studentName,
+        studentXp:        s.studentXp,
+        studentStreak:    s.studentStreak,
+        studentLevel:     s.studentLevel,
+        // Device
+        deviceType:       s.deviceType,
+        operatingSystem:  s.operatingSystem,
+        browser:          s.browser,
+        screenResolution: s.screenResolution,
+        hardwareSpecs:    s.hardwareSpecs,
+        networkType:      s.networkType,
+        timezone:         s.timezone,
+        ipAddress:        s.ipAddress,
+        language:         s.language,
+        gpuRenderer:      s.gpuRenderer,
+        // Location
+        cityRegion:       s.cityRegion,
+        city:             s.city,
+        state:            s.state,
+        country:          s.country,
+        accuracyRadius:   s.accuracyRadius,
+        latitude:         s.latitude,
+        longitude:        s.longitude,
+        accuracy:         s.accuracy,
+        locationSource:   s.locationSource,
+        pincode:          s.pincode,
+        mapsUrl:          s.mapsUrl,
+        // Activity
+        visitsToday:      s.visitsToday,
+        totalVisits:      s.totalVisits,
+        firstSeen:        s.firstSeen,
+        lastActive:       s.lastActive,
+        isOnlineNow:      s.isOnlineNow,
+        totalDurationSeconds: s.totalDurationSeconds,
+        // Computed — convert Sets to serializable arrays
         subjectsStudied:  Array.from(s.subjectsStudied),
         chaptersStudied:  Array.from(s.chaptersStudied),
         totalStudyMinutes: Math.max(0, Math.round(s.totalDurationSeconds / 60)),
@@ -762,8 +798,8 @@ function mapRecord(r: any) {
     state:           r.state           || null,
     country:         r.country         || null,
     accuracyRadius:  r.accuracyRadius  || r.accuracy_radius   || null,
-    visitStartedAt:  r.visitStartedAt  || r.visit_started_at  ? new Date(r.visitStartedAt || r.visit_started_at).toISOString() : null,
-    lastSeenAt:      r.lastSeenAt      || r.last_seen_at       ? new Date(r.lastSeenAt || r.last_seen_at).toISOString() : null,
-    createdAt:       r.createdAt       ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
+    visitStartedAt:  (r.visitStartedAt || r.visit_started_at) ? new Date(r.visitStartedAt || r.visit_started_at).toISOString() : null,
+    lastSeenAt:      (r.lastSeenAt || r.last_seen_at) ? new Date(r.lastSeenAt || r.last_seen_at).toISOString() : null,
+    createdAt:       r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
   };
 }

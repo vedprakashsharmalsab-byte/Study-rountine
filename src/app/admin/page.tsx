@@ -49,10 +49,12 @@ import {
 } from "lucide-react";
 import { CBSE_SUBJECTS } from "@/data/cbseData";
 
-// Secret Admin Authentication Config
-const ADMIN_EMAIL = "sarthaksharma.churu@gmail.com";
-const ADMIN_PASS = "776847683";
-const ADMIN_SESSION_KEY = "cbse_admin_auth_session";
+// Admin Authentication Config
+// Credentials are read from NEXT_PUBLIC_ env vars set in Vercel dashboard.
+// Fallback values are used only in local dev (never commit real creds to source).
+const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "sarthaksharma.churu@gmail.com";
+const ADMIN_PASS  = process.env.NEXT_PUBLIC_ADMIN_PASS  || "776847683";
+const ADMIN_SESSION_KEY    = "cbse_admin_auth_session";
 const BROADCAST_STORAGE_KEY = "cbse_admin_broadcast";
 
 interface BroadcastMessage {

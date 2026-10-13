@@ -399,22 +399,7 @@ body,
   margin-bottom: 0.35rem;
 }
 
-/* Authentic Plain Paper Sheet (No grids, no lines) */
-.plain-paper-sheet {
-  background-color: #ffffff;
-  color: #0f172a;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 20px 35px -10px rgba(0, 0, 0, 0.07), 0 0 0 1px rgba(0, 0, 0, 0.06);
-  line-height: 1.85;
-  word-break: break-word;
-}
 
-.plain-paper-sheet-dark {
-  background-color: #090e1a;
-  color: #f8fafc;
-  box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  line-height: 1.85;
-  word-break: break-word;
-}
 
 /* =========================================================================
    PHONE & TABLET ORIENTATION & TOUCH RESPONSIVENESS OPTIMIZATIONS
@@ -778,6 +763,9 @@ summary,
   background-size: 100% 2.25rem;
   border: 1px solid rgba(203, 213, 225, 0.8);
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.07), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+  color: #0f172a;
+  line-height: 1.85;
+  word-break: break-word;
 }
 
 .plain-paper-sheet-dark {
@@ -786,6 +774,9 @@ summary,
   background-size: 100% 2.25rem;
   border: 1px solid rgba(255, 255, 255, 0.09);
   box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  color: #f8fafc;
+  line-height: 1.85;
+  word-break: break-word;
 }
 
 /* =========================================================================

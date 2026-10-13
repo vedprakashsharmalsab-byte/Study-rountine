@@ -239,7 +239,7 @@ export async function getFallbackLocation(): Promise<ResolvedLocation> {
   }
 
   // If user previously enrolled or entered their location (e.g. "Bissu, Churu" or "Churu, Rajasthan")
-  if (!cachedVillage && cachedLocation.toLowerCase().includes("b issu") || cachedLocation.toLowerCase().includes("bissau") || cachedLocation.toLowerCase().includes("bissu")) {
+  if (!cachedVillage && (cachedLocation.toLowerCase().includes("b issu") || cachedLocation.toLowerCase().includes("bissau") || cachedLocation.toLowerCase().includes("bissu"))) {
     cachedVillage = "Bissu";
   }
   if (!cachedDistrict && cachedLocation.toLowerCase().includes("churu")) {
