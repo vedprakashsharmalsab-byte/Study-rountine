@@ -797,48 +797,24 @@ export const LiveCountdown = React.memo(function LiveCountdown({
   );
 });
 
-// Dynamic Top Header Countdown: dual-timer featuring upcoming 26 Oct Milestone and Feb 1 Boards with smart auto-termination
+// CBSE Class 10 Board Milestones (2026–2027) Dynamic Top Header Countdown
+// Engineered with responsive labels so it never collides or overlaps with the Study Timer
 export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
   isDark
 }: {
   isDark: boolean;
 }) {
-  const [octPassed, setOctPassed] = useState(false);
-
-  useEffect(() => {
-    const check = () => {
-      const ms = new Date("2026-10-26T10:30:00+05:30").getTime() - Date.now();
-      setOctPassed(ms <= 0);
-    };
-    check();
-    const interval = setInterval(check, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="flex items-center gap-1 sm:gap-2 font-mono text-[10px] sm:text-[11px] leading-none whitespace-nowrap">
-      {!octPassed ? (
-        <div className="flex items-center gap-1 sm:gap-1.5">
-          <span className={`font-black inline-flex items-center leading-none ${isDark ? "text-amber-400" : "text-amber-700"}`}>⚡ 26 Oct:</span>
-          {/* Mobile view: concise format so timer never overflows or hides behind */}
-          <span className="sm:hidden font-bold">
-            <LiveCountdown targetDate="2026-10-26" variant="short" colorScheme="amber" isDark={isDark} />
-          </span>
-          {/* Tablet & Desktop view: full live badge */}
-          <span className="hidden sm:inline-flex">
-            <LiveCountdown targetDate="2026-10-26" variant="badge" colorScheme="amber" isDark={isDark} />
-          </span>
-        </div>
-      ) : (
-        <div className="flex items-center gap-1 text-emerald-400 font-bold">
-          <span>✓ 26 Oct Done</span>
-        </div>
-      )}
-      <span className={`hidden md:inline-flex opacity-25 select-none leading-none ${isDark ? "text-white" : "text-slate-900"}`}>|</span>
-      <div className="hidden md:flex items-center gap-1.5">
-        <span className={`font-bold inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>🎯 Boards:</span>
+    <div className="flex items-center gap-1 sm:gap-1.5 font-mono text-[10px] sm:text-[11px] leading-none whitespace-nowrap">
+      <span className={`font-black inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>
+        🎯 <span className="hidden sm:inline">CBSE </span>Boards<span className="hidden md:inline"> (2026–27)</span>:
+      </span>
+      <span className="sm:hidden font-bold">
+        <LiveCountdown targetDate="2027-02-01" variant="short" colorScheme="blue" isDark={isDark} />
+      </span>
+      <span className="hidden sm:inline-flex">
         <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
-      </div>
+      </span>
     </div>
   );
 });
@@ -3234,9 +3210,28 @@ export default function CBSECommandCenter() {
               </div>
             </div>
 
-            {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (TOP TIMER + EXAM COUNTDOWN + XP + STREAK + CONTROLS) */}
-            <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 shrink-0">
-              {/* TOP HEADER STUDY FOCUS TIMER */}
+            {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (MILESTONES + TIMER + XP + CONTROLS - ZERO OVERLAPPING) */}
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              {/* 1. CBSE CLASS 10 BOARD MILESTONES (2026–2027) CAPSULE */}
+              <div id="tutorial-countdown-capsule" className="flex items-center shrink-0">
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound("click");
+                    setIsExamMilestonesModalOpen(true);
+                  }}
+                  className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono transition-all cursor-pointer group shadow-xs active:scale-[0.98] tabular-nums leading-none shrink-0 ${
+                    isDark
+                      ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-300 hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_12px_rgba(6,182,212,0.2)]"
+                      : "bg-cyan-50 border-cyan-300 text-cyan-950 hover:bg-cyan-100"
+                  }`}
+                  title="CBSE Class 10 Board Milestones (2026–2027) — Tap for full schedule"
+                >
+                  <HeaderExamCountdown isDark={isDark} />
+                </button>
+              </div>
+
+              {/* 2. ADJUSTABLE STUDY FOCUS TIMER (WITH 30 SOUNDS & FULLSCREEN BLACK ZEN THEATER) */}
               <TopHeaderStudyTimer
                 isDark={isDark}
                 onAddXp={(amount, reason) => {
@@ -3248,25 +3243,6 @@ export default function CBSECommandCenter() {
                 }}
                 onTriggerConfetti={triggerConfetti}
               />
-
-              {/* EXAM COUNTDOWN (COMPACT ON MOBILE SO ZERO OVERFLOW) */}
-              <div id="tutorial-countdown-capsule" className="flex items-center shrink-0">
-                <button
-                  type="button"
-                  onClick={() => {
-                    playSound("click");
-                    setIsExamMilestonesModalOpen(true);
-                  }}
-                  className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono transition-all cursor-pointer group shadow-xs active:scale-[0.98] tabular-nums leading-none shrink-0 ${
-                    isDark
-                      ? "bg-gradient-to-r from-amber-500/10 via-white/[0.03] to-cyan-500/10 border-white/15 text-zinc-200 hover:border-amber-400/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)]"
-                      : "bg-gradient-to-r from-amber-50 via-white to-blue-50 border-slate-200 text-slate-800 hover:border-amber-400 hover:shadow-xs"
-                  }`}
-                  title="Class 10 Exam Milestones (Tap to view full countdowns and schedule)"
-                >
-                  <HeaderExamCountdown isDark={isDark} />
-                </button>
-              </div>
 
               {/* LEVEL & XP CAPSULE */}
               <div id="tutorial-xp-capsule" className={`flex items-center gap-1 px-1.5 sm:px-2 xl:px-2.5 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-medium shadow-xs leading-none whitespace-nowrap shrink-0 ${
