@@ -7,7 +7,27 @@ export interface ZenSoundDef {
   icon: string;
   category: "nature" | "noise" | "binaural" | "ambient" | "melodic";
   desc: string;
+  scienceBacking?: string;
+  evidenceBadge?: string;
 }
+
+export interface StopAlarmOption {
+  id: string;
+  name: string;
+  icon: string;
+  desc: string;
+  frequencyDesc: string;
+}
+
+export const STOP_ALARM_OPTIONS: StopAlarmOption[] = [
+  { id: "tibetan_bowl", name: "Tibetan Singing Bowl", icon: "🔔", desc: "432 Hz resonant bronze bell with warm meditative decay", frequencyDesc: "432 Hz Healing Resonance" },
+  { id: "zen_gong", name: "Zen Bronze Gong", icon: "🏮", desc: "Deep 110 Hz mindful strike with harmonic overtones", frequencyDesc: "110 Hz Deep Fundamental" },
+  { id: "digital_chime", name: "Crystal Chime", icon: "✨", desc: "Crisp two-tone alert chime (D5 to A5)", frequencyDesc: "587 Hz → 880 Hz Double Tone" },
+  { id: "temple_bell", name: "Temple Bell", icon: "🏛️", desc: "528 Hz pure Solfeggio transformation tone", frequencyDesc: "528 Hz Solfeggio Scale" },
+  { id: "academic_fanfare", name: "Academic Triumph", icon: "🎺", desc: "Bright triad fanfare celebrating completed study session", frequencyDesc: "C5-E5-G5 Triad" },
+  { id: "gentle_harp", name: "Gentle Harp Flourish", icon: "🎵", desc: "Soft arpeggiated acoustic harp chord", frequencyDesc: "Pentatonic Flourish" },
+  { id: "none", name: "Silent (Visual Flash)", icon: "🔕", desc: "No audio chime, discreet visual pulse only", frequencyDesc: "Muted" },
+];
 
 export const ZEN_SOUNDS: ZenSoundDef[] = [
   // NATURE (1-7)
@@ -20,14 +40,14 @@ export const ZEN_SOUNDS: ZenSoundDef[] = [
   { id: "crickets", name: "Midnight Crickets", icon: "🦗", category: "nature", desc: "Nocturnal summer evening calm" },
 
   // NOISE COLORS (8-10)
-  { id: "brown_noise", name: "Brown Noise (Deep)", icon: "🟤", category: "noise", desc: "Deep 1/f² warm concentration" },
-  { id: "pink_noise", name: "Pink Noise (Flow)", icon: "🌸", category: "noise", desc: "Balanced 1/f memory retention" },
+  { id: "brown_noise", name: "Brown Noise (Deep)", icon: "🟤", category: "noise", desc: "Deep 1/f² warm concentration", scienceBacking: "1/f² power drop dampens distracting sharp sounds, highly effective for ADHD and executive focus", evidenceBadge: "ADHD Focus" },
+  { id: "pink_noise", name: "Pink Noise (Flow)", icon: "🌸", category: "noise", desc: "Balanced 1/f memory retention", scienceBacking: "1/f pink spectrum mimics natural biological rhythms, proven to boost memory consolidation", evidenceBadge: "Memory Boost" },
   { id: "white_noise", name: "White Noise (Focus)", icon: "🤍", category: "noise", desc: "Uniform noise for distraction blocking" },
 
   // BINAURAL BRAINWAVE ENTRAINMENT (11-13)
   { id: "binaural_alpha", name: "Alpha Beats (10 Hz)", icon: "🧠", category: "binaural", desc: "Alert calm & relaxed focus" },
   { id: "binaural_theta", name: "Theta Beats (6 Hz)", icon: "🧘", category: "binaural", desc: "Deep conceptual absorption" },
-  { id: "binaural_gamma", name: "Gamma Beats (40 Hz)", icon: "⚡", category: "binaural", desc: "Peak cognition & math solving" },
+  { id: "binaural_gamma", name: "Gamma Beats (40 Hz)", icon: "⚡", category: "binaural", desc: "Peak cognition & math solving", scienceBacking: "MIT neuroscience research shows 40 Hz gamma oscillations enhance working memory, logic & complex math solving", evidenceBadge: "Peak Logic" },
 
   // AMBIENT & ASMR (14-22)
   { id: "cafe", name: "Cafe Ambience", icon: "☕", category: "ambient", desc: "Warm coffeehouse background murmur" },
@@ -861,6 +881,139 @@ class ZenSoundEngine {
         });
       }
     });
+  }
+
+  // Timer Stop / Completion Alarm Synthesizer (Science-backed Chimes & Bowls)
+  public playCompletionAlarm(alarmId?: string, overrideVolume?: number) {
+    let id = alarmId;
+    if (!id && typeof window !== "undefined") {
+      id = localStorage.getItem("arete_study_alarm_sound") || "tibetan_bowl";
+    }
+    if (!id) id = "tibetan_bowl";
+    if (id === "none") return;
+
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    const alarmGain = ctx.createGain();
+    const vol = overrideVolume ?? this.volume ?? 0.6;
+    alarmGain.gain.setValueAtTime(vol, ctx.currentTime);
+    alarmGain.connect(ctx.destination);
+
+    const now = ctx.currentTime;
+
+    if (id === "tibetan_bowl") {
+      const o1 = ctx.createOscillator();
+      const o2 = ctx.createOscillator();
+      const g = ctx.createGain();
+
+      o1.type = "sine";
+      o1.frequency.setValueAtTime(432, now);
+      o2.type = "sine";
+      o2.frequency.setValueAtTime(864, now);
+
+      g.gain.setValueAtTime(0, now);
+      g.gain.linearRampToValueAtTime(0.5, now + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 3.2);
+
+      o1.connect(g);
+      o2.connect(g);
+      g.connect(alarmGain);
+
+      o1.start(now);
+      o2.start(now);
+      o1.stop(now + 3.3);
+      o2.stop(now + 3.3);
+    } else if (id === "zen_gong") {
+      const o1 = ctx.createOscillator();
+      const o2 = ctx.createOscillator();
+      const g = ctx.createGain();
+
+      o1.type = "sine";
+      o1.frequency.setValueAtTime(110, now);
+      o2.type = "triangle";
+      o2.frequency.setValueAtTime(330, now);
+
+      g.gain.setValueAtTime(0.7, now);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 3.8);
+
+      o1.connect(g);
+      o2.connect(g);
+      g.connect(alarmGain);
+
+      o1.start(now);
+      o2.start(now);
+      o1.stop(now + 4.0);
+      o2.stop(now + 4.0);
+    } else if (id === "digital_chime") {
+      [
+        { f: 587.33, t: 0, dur: 0.8 },
+        { f: 880.00, t: 0.25, dur: 1.2 }
+      ].forEach((note) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "sine";
+        o.frequency.setValueAtTime(note.f, now + note.t);
+
+        g.gain.setValueAtTime(0, now + note.t);
+        g.gain.linearRampToValueAtTime(0.4, now + note.t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, now + note.t + note.dur);
+
+        o.connect(g);
+        g.connect(alarmGain);
+        o.start(now + note.t);
+        o.stop(now + note.t + note.dur + 0.1);
+      });
+    } else if (id === "temple_bell") {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = "sine";
+      o.frequency.setValueAtTime(528, now);
+
+      g.gain.setValueAtTime(0.6, now);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 2.8);
+
+      o.connect(g);
+      g.connect(alarmGain);
+      o.start(now);
+      o.stop(now + 3.0);
+    } else if (id === "academic_fanfare") {
+      [
+        { f: 523.25, t: 0, dur: 0.3 },
+        { f: 659.25, t: 0.25, dur: 0.3 },
+        { f: 783.99, t: 0.5, dur: 1.2 }
+      ].forEach((n) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "triangle";
+        o.frequency.setValueAtTime(n.f, now + n.t);
+
+        g.gain.setValueAtTime(0, now + n.t);
+        g.gain.linearRampToValueAtTime(0.4, now + n.t + 0.03);
+        g.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.dur);
+
+        o.connect(g);
+        g.connect(alarmGain);
+        o.start(now + n.t);
+        o.stop(now + n.t + n.dur + 0.1);
+      });
+    } else if (id === "gentle_harp") {
+      [440, 554.37, 659.25, 880].forEach((f, idx) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "sine";
+        o.frequency.setValueAtTime(f, now + idx * 0.12);
+
+        g.gain.setValueAtTime(0, now + idx * 0.12);
+        g.gain.linearRampToValueAtTime(0.3, now + idx * 0.12 + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + 1.2);
+
+        o.connect(g);
+        g.connect(alarmGain);
+        o.start(now + idx * 0.12);
+        o.stop(now + idx * 0.12 + 1.3);
+      });
+    }
   }
 }
 

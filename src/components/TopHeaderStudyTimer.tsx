@@ -16,7 +16,8 @@ import {
   Square
 } from "lucide-react";
 import { ZenStudyTimerModal } from "./ZenStudyTimerModal";
-import { ZEN_SOUNDS, zenSoundEngine } from "@/lib/zenSoundEngine";
+import { ZEN_SOUNDS, zenSoundEngine, STOP_ALARM_OPTIONS, type StopAlarmOption } from "@/lib/zenSoundEngine";
+import { Bell, Volume1 } from "lucide-react";
 
 interface TopHeaderStudyTimerProps {
   isDark: boolean;
@@ -49,7 +50,33 @@ export const TopHeaderStudyTimer = memo(function TopHeaderStudyTimer({
   const [isZenModalOpen, setIsZenModalOpen] = useState<boolean>(false);
   const [activeSoundId, setActiveSoundId] = useState<string | null>(null);
   const [isSoundEnabled, setIsSoundEnabled] = useState<boolean>(true);
+  const [selectedStopAlarm, setSelectedStopAlarm] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("arete_study_alarm_sound") || "tibetan_bowl";
+    }
+    return "tibetan_bowl";
+  });
+  const [soundVolume, setSoundVolume] = useState<number>(() => zenSoundEngine.getVolume());
+  const [soundTab, setSoundTab] = useState<"all" | "binaural" | "noise" | "nature" | "ambient">("binaural");
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const handleSelectStopAlarm = useCallback((alarmId: string) => {
+    setSelectedStopAlarm(alarmId);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("arete_study_alarm_sound", alarmId);
+    }
+  }, []);
+
+  const handleTestStopAlarm = useCallback((e: React.MouseEvent, alarmId: string) => {
+    e.stopPropagation();
+    zenSoundEngine.playCompletionAlarm(alarmId, soundVolume);
+  }, [soundVolume]);
+
+  const handleVolumeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = parseFloat(e.target.value);
+    setSoundVolume(val);
+    zenSoundEngine.setVolume(val);
+  }, []);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -84,8 +111,10 @@ export const TopHeaderStudyTimer = memo(function TopHeaderStudyTimer({
             setIsRunning(false);
 
             if (onTriggerConfetti) onTriggerConfetti();
-            if (isSoundEnabled && onPlaySound) {
-              try { onPlaySound("levelup"); } catch {}
+            if (isSoundEnabled) {
+              try {
+                zenSoundEngine.playCompletionAlarm(selectedStopAlarm, soundVolume);
+              } catch {}
             }
             if (onAddXp) {
               onAddXp(50, `Study Focus (${selectedMinutes}m) Completed! (+50 XP)`);
@@ -238,7 +267,7 @@ export const TopHeaderStudyTimer = memo(function TopHeaderStudyTimer({
         {/* POPOVER PRESET & CONTROLS MENU */}
         {isMenuOpen && (
           <div
-            className={`fixed inset-x-2 top-16 sm:inset-x-auto sm:absolute sm:right-0 sm:left-auto sm:top-full mt-2 w-[calc(100vw-16px)] sm:w-96 max-h-[85vh] overflow-y-auto rounded-2xl border p-4 shadow-2xl backdrop-blur-2xl z-50 animate-in fade-in zoom-in-95 duration-150 ${
+            className={`fixed inset-x-2 top-16 sm:inset-x-auto sm:absolute sm:right-0 sm:left-auto sm:top-full mt-2 w-[calc(100vw-16px)] sm:w-[410px] max-h-[85vh] overflow-y-auto rounded-2xl border p-4 shadow-2xl backdrop-blur-2xl z-[80] animate-in fade-in zoom-in-95 duration-150 ${
               isDark
                 ? "bg-[#0b0f19]/95 border-white/15 text-white shadow-[0_15px_40px_rgba(0,0,0,0.8)]"
                 : "bg-white/95 border-slate-200 text-slate-900 shadow-xl"
@@ -352,39 +381,136 @@ export const TopHeaderStudyTimer = memo(function TopHeaderStudyTimer({
               })}
             </div>
 
-            {/* QUICK 30 AMBIENT SOUNDS SELECTOR */}
-            <div className="pt-2.5 pb-2 border-t border-white/10">
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[10px] font-mono uppercase font-bold text-zinc-400">
-                  Ambient Study Sounds (30)
+            {/* STOP SOUND SELECTION (COMPLETION ALARM) */}
+            <div className="mb-3 p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/5 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono uppercase font-black text-amber-400 flex items-center gap-1.5">
+                  <Bell className="w-3 h-3 text-amber-400" />
+                  Timer Stop / Completion Alarm:
                 </span>
-                {activeSoundId && (
-                  <button
-                    type="button"
-                    onClick={handleStopAllSounds}
-                    className="text-[10px] font-mono text-rose-400 hover:text-rose-300 flex items-center gap-1 font-bold cursor-pointer"
-                  >
-                    <Square className="w-2.5 h-2.5 fill-current" />
-                    <span>Stop Sound</span>
-                  </button>
-                )}
+                <span className="text-[9px] font-mono text-zinc-400">
+                  {STOP_ALARM_OPTIONS.find((a) => a.id === selectedStopAlarm)?.frequencyDesc}
+                </span>
               </div>
+              <div className="grid grid-cols-2 gap-1.5">
+                {STOP_ALARM_OPTIONS.map((opt) => {
+                  const isSelected = selectedStopAlarm === opt.id;
+                  return (
+                    <div
+                      key={opt.id}
+                      onClick={() => handleSelectStopAlarm(opt.id)}
+                      className={`p-1.5 rounded-lg border text-[10px] font-mono flex items-center justify-between cursor-pointer transition-all ${
+                        isSelected
+                          ? "bg-amber-500/25 border-amber-400 text-amber-300 font-bold ring-1 ring-amber-400"
+                          : "bg-white/[0.04] border-white/10 text-zinc-300 hover:bg-white/[0.08]"
+                      }`}
+                    >
+                      <span className="truncate leading-none">{opt.icon} {opt.name}</span>
+                      {opt.id !== "none" && (
+                        <button
+                          type="button"
+                          onClick={(e) => handleTestStopAlarm(e, opt.id)}
+                          className="px-1 py-0.5 rounded text-zinc-400 hover:text-amber-300 hover:bg-white/10 text-[9px] shrink-0 ml-1 font-bold"
+                          title="Preview sound"
+                        >
+                          ▶ Test
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* SCIENCE-BACKED AMBIENT SOUNDS & AUDIO CONTROLS */}
+            <div className="pt-2.5 pb-2 border-t border-white/10 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono uppercase font-black text-zinc-300 flex items-center gap-1">
+                  <Volume2 className="w-3 h-3 text-cyan-400" />
+                  Science-Backed Study Sounds
+                </span>
+                <div className="flex items-center gap-2">
+                  {activeSoundId && (
+                    <button
+                      type="button"
+                      onClick={handleStopAllSounds}
+                      className="text-[10px] font-mono text-rose-400 hover:text-rose-300 flex items-center gap-1 font-bold cursor-pointer"
+                    >
+                      <Square className="w-2.5 h-2.5 fill-current" />
+                      <span>Stop Sound</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Volume Slider */}
+              <div className="flex items-center justify-between gap-2 p-1.5 rounded-lg bg-white/[0.03] border border-white/5">
+                <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400">
+                  <Volume1 className="w-3 h-3 text-zinc-400" />
+                  <span>Volume:</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={soundVolume}
+                  onChange={handleVolumeChange}
+                  className="flex-1 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                  aria-label="Study sound volume"
+                />
+                <span className="text-[10px] font-mono text-zinc-400 w-8 text-right font-bold">
+                  {Math.round(soundVolume * 100)}%
+                </span>
+              </div>
+
+              {/* Category Filter Chips */}
+              <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pb-0.5">
+                {[
+                  { id: "all", label: "All (30)" },
+                  { id: "binaural", label: "🧠 Brainwaves (40Hz/10Hz)" },
+                  { id: "noise", label: "🟤 Noise (ADHD/Flow)" },
+                  { id: "nature", label: "🌿 Nature" },
+                  { id: "ambient", label: "☕ Study Room" },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setSoundTab(tab.id as any)}
+                    className={`px-2 py-0.5 rounded-md text-[9px] font-mono font-bold shrink-0 border transition-all cursor-pointer ${
+                      soundTab === tab.id
+                        ? "bg-cyan-500/20 border-cyan-400 text-cyan-300"
+                        : "bg-white/[0.03] border-white/10 text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Filtered Sounds Grid / Strip */}
               <div className="overflow-x-auto no-scrollbar flex items-center gap-1.5 pb-1">
-                {ZEN_SOUNDS.slice(0, 10).map((s) => {
+                {ZEN_SOUNDS.filter((s) => soundTab === "all" || s.category === soundTab).map((s) => {
                   const isPlaying = activeSoundId === s.id;
                   return (
                     <button
                       key={s.id}
                       type="button"
                       onClick={() => handleSelectSound(s.id)}
-                      className={`px-2 py-1 rounded-lg text-[10px] font-mono font-bold shrink-0 whitespace-nowrap border flex items-center gap-1 cursor-pointer ${
+                      className={`px-2 py-1 rounded-lg text-[10px] font-mono font-bold shrink-0 whitespace-nowrap border flex items-center gap-1 cursor-pointer transition-all ${
                         isPlaying
                           ? "bg-emerald-500/20 border-emerald-400 text-emerald-300 ring-1 ring-emerald-400"
                           : "bg-white/[0.04] border-white/10 text-zinc-300 hover:bg-white/[0.08]"
                       }`}
+                      title={s.scienceBacking || s.desc}
                     >
                       <span>{s.icon}</span>
                       <span>{s.name}</span>
+                      {s.evidenceBadge && (
+                        <span className="text-[8px] px-1 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-normal">
+                          {s.evidenceBadge}
+                        </span>
+                      )}
                     </button>
                   );
                 })}

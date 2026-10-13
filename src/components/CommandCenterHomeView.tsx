@@ -247,7 +247,7 @@ export default function CommandCenterHomeView({
         }
 
         // Test Series 1 chapters are excluded from the 26 Oct Sprint Target!
-        const isExaminedInTest1 = TEST_SERIES_1_CHAPTER_IDS.has(ch.id);
+        const isExaminedInTest1 = TEST_SERIES_1_CHAPTER_IDS?.has ? TEST_SERIES_1_CHAPTER_IDS.has(ch.id) : false;
         if (!isExaminedInTest1) {
           octTargetTotalChapters++;
           octTargetTotalTopics += topics.length;
@@ -837,7 +837,7 @@ export default function CommandCenterHomeView({
               <div className="max-h-[460px] overflow-y-auto pr-1 space-y-1.5 custom-scrollbar">
                 {currentSubject.chapters
                   .filter((ch) => {
-                    const isExaminedInTest1 = TEST_SERIES_1_CHAPTER_IDS.has(ch.id);
+                    const isExaminedInTest1 = TEST_SERIES_1_CHAPTER_IDS?.has ? TEST_SERIES_1_CHAPTER_IDS.has(ch.id) : false;
                     if (chapterTargetFilter === "oct26_only") return !isExaminedInTest1;
                     if (chapterTargetFilter === "test1_only") return isExaminedInTest1;
                     return true;
@@ -849,7 +849,7 @@ export default function CommandCenterHomeView({
                     const chTotal = (ch.topics || []).length;
                     const isFinished = chTotal > 0 && chCompleted === chTotal;
                     const pct = chTotal > 0 ? Math.round((chCompleted / chTotal) * 100) : 0;
-                    const isExaminedInTest1 = TEST_SERIES_1_CHAPTER_IDS.has(ch.id);
+                    const isExaminedInTest1 = TEST_SERIES_1_CHAPTER_IDS?.has ? TEST_SERIES_1_CHAPTER_IDS.has(ch.id) : false;
 
                     return (
                       <button

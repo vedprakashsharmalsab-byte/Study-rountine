@@ -75,13 +75,16 @@ import AreteLogo from "@/components/AreteLogo";
 import { areteAudio } from "@/lib/audio";
 import { appStorage, STORAGE_KEYS } from "@/lib/storage";
 import PracticeTimer from "@/components/PracticeTimer";
-import { TopHeaderStudyTimer } from "@/components/TopHeaderStudyTimer";
+import { FloatingStudyTimerDock } from "@/components/FloatingStudyTimerDock";
+import { TargetExamEditModal } from "@/components/TargetExamEditModal";
+import { getSavedTargetExam, DEFAULT_TARGET_EXAM } from "@/lib/targetExamStorage";
 import Class10ExamCountdown from "@/components/Class10ExamCountdown";
 import InteractiveGuidedTutorial from "@/components/InteractiveGuidedTutorial";
 import CadetNamePromptModal from "@/components/CadetNamePromptModal";
 import { SST_CHAPTER_LIST } from "@/data/sstConceptsData";
 
 import {
+  Timer,
   Atom,
   ArrowRight,
   Award,
@@ -800,21 +803,40 @@ export const LiveCountdown = React.memo(function LiveCountdown({
 // CBSE Class 10 Board Milestones (2026–2027) Dynamic Top Header Countdown
 // Engineered with responsive labels so it never collides or overlaps with the Study Timer
 export const HeaderExamCountdown = React.memo(function HeaderExamCountdown({
-  isDark
+  isDark,
+  targetDate,
+  targetLabel,
+  onEditDate
 }: {
   isDark: boolean;
+  targetDate?: string;
+  targetLabel?: string;
+  onEditDate?: () => void;
 }) {
+  const displayDate = targetDate || "2026-10-26";
+  const displayLabel = targetLabel || "26 Oct";
+
   return (
-    <div className="flex items-center gap-1 sm:gap-1.5 font-mono text-[10px] sm:text-[11px] leading-none whitespace-nowrap">
-      <span className={`font-black inline-flex items-center leading-none ${isDark ? "text-cyan-400" : "text-cyan-800"}`}>
-        🎯 <span className="hidden sm:inline">CBSE </span>Boards<span className="hidden md:inline"> (2026–27)</span>:
+    <div className="flex items-center gap-1.5 font-mono text-xs leading-none whitespace-nowrap">
+      <span className={`font-black inline-flex items-center gap-1 leading-none ${isDark ? "text-amber-400" : "text-amber-800"}`}>
+        <span>🎯</span>
+        <span>{displayLabel}:</span>
       </span>
-      <span className="sm:hidden font-bold">
-        <LiveCountdown targetDate="2027-02-01" variant="short" colorScheme="blue" isDark={isDark} />
+      <span className={`font-black tabular-nums ${isDark ? "text-amber-300" : "text-amber-900"}`}>
+        <LiveCountdown targetDate={displayDate} variant="short" colorScheme="amber" isDark={isDark} />
       </span>
-      <span className="hidden sm:inline-flex">
-        <LiveCountdown targetDate="2027-02-01" variant="badge" colorScheme="blue" isDark={isDark} />
-      </span>
+      {onEditDate && (
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+            onEditDate();
+          }}
+          className="text-[11px] p-0.5 rounded hover:bg-amber-500/20 text-amber-400 transition-colors cursor-pointer"
+          title="Edit Target Milestone Date"
+        >
+          ✏️
+        </span>
+      )}
     </div>
   );
 });
@@ -1575,6 +1597,42 @@ export default function CBSECommandCenter() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Hardcoded Mouse Scroll Wheel Button (Middle Click / button === 1 / auxclick)
+  // Dedicated event listener: Clicking any navigation link, tab, or chapter card with mouse scroll wheel opens multiple tabs!
+  useEffect(() => {
+    const handleScrollButtonAuxClick = (e: MouseEvent) => {
+      if (e.button === 1) { // 1 = Mouse Scroll Wheel Button
+        const target = (e.target as HTMLElement | null)?.closest("a, button, [data-href], [data-tab], [data-chapter]");
+        if (!target) return;
+
+        let targetHref = target.getAttribute("href") || target.getAttribute("data-href");
+        if (!targetHref) {
+          const tab = target.getAttribute("data-tab");
+          if (tab) {
+            const sub = target.getAttribute("data-subject");
+            const ch = target.getAttribute("data-chapter");
+            const p = new URLSearchParams();
+            p.set("tab", tab);
+            if (sub) p.set("subject", sub);
+            if (ch) p.set("chapter", ch);
+            targetHref = `${window.location.pathname}?${p.toString()}`;
+          }
+        }
+
+        if (targetHref && !targetHref.startsWith("javascript:")) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.open(targetHref, "_blank", "noopener,noreferrer");
+        }
+      }
+    };
+
+    window.addEventListener("auxclick", handleScrollButtonAuxClick, { capture: true });
+    return () => {
+      window.removeEventListener("auxclick", handleScrollButtonAuxClick, { capture: true });
+    };
+  }, []);
+
   // Silent Visitor Analytics Beacon (Background telemetry for Admin)
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -1783,6 +1841,23 @@ export default function CBSECommandCenter() {
   const [navDropdown, setNavDropdown] = useState<"vaults" | "revision" | "planner" | null>(null);
   const [isAllModulesModalOpen, setIsAllModulesModalOpen] = useState(false);
   const [isExamMilestonesModalOpen, setIsExamMilestonesModalOpen] = useState(false);
+  const [targetExamState, setTargetExamState] = useState(() => getSavedTargetExam());
+  const [isTargetDateModalOpen, setIsTargetDateModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleTargetUpdated = (e: any) => {
+      if (e?.detail) {
+        setTargetExamState({
+          date: e.detail.date || DEFAULT_TARGET_EXAM.date,
+          time: e.detail.time || DEFAULT_TARGET_EXAM.time,
+          label: e.detail.label || DEFAULT_TARGET_EXAM.label,
+          title: e.detail.title || DEFAULT_TARGET_EXAM.title,
+        });
+      }
+    };
+    window.addEventListener("arete_target_exam_updated", handleTargetUpdated);
+    return () => window.removeEventListener("arete_target_exam_updated", handleTargetUpdated);
+  }, []);
   const [allModulesSearch, setAllModulesSearch] = useState("");
   const navRef = useRef<HTMLElement>(null);
 
@@ -3082,7 +3157,7 @@ export default function CBSECommandCenter() {
             ? "border-white/10 bg-[#080b14]/92 text-white shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
             : "border-slate-200/80 bg-white/95 text-slate-900 shadow-xs"
         }`}>
-          <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 py-2 flex items-center justify-between gap-1.5 sm:gap-2.5 min-w-0">
+          <div className="w-full max-w-[1780px] mx-auto px-2.5 sm:px-5 lg:px-7 py-2 flex items-center justify-between gap-2 sm:gap-3 min-w-0">
             
             {/* LEFT: BRAND EMBLEM & ALL MODULES LAUNCHER */}
             <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
@@ -3148,101 +3223,53 @@ export default function CBSECommandCenter() {
               </button>
             </div>
 
-            {/* MASTER CATEGORY NAVIGATION TABS (DESKTOP CENTER) */}
-            <div id="tutorial-nav-tabs" className="hidden xl:flex items-center min-w-0 max-w-fit mx-auto">
-              <div className={`p-0.5 sm:p-1 rounded-full border flex items-center gap-0.5 sm:gap-1 backdrop-blur-xl transition-all ${
-                isDark
-                  ? "bg-white/[0.06] border-white/15 shadow-inner"
-                  : "bg-slate-100 border-slate-200"
-              }`}>
-                {CATEGORY_DEFINITIONS.map((cat) => {
-                  const isCatActive = activeCategory === cat.id;
-                  return (
-                    <a
-                      key={cat.id}
-                      id={cat.id === "concepts" ? "tutorial-concepts-tab" : cat.id === "practice" ? "tutorial-questions-tab" : cat.id === "tools" ? "tutorial-tools-tab" : undefined}
-                      href={getTabHref(cat.defaultTab)}
-                      onClick={(e) => {
-                        handleNavClick(e, cat.defaultTab, {
-                          customAction: () => {
-                            if (cat.id === "concepts") {
-                              if (commandSubjectId === "sst") {
-                                setConceptsSubject("sst");
-                                setConceptsChapterNo(1);
-                              } else if (commandSubjectId === "science") {
-                                setConceptsSubject("science");
-                                setConceptsChapterNo(1);
-                              } else {
-                                setConceptsSubject("math");
-                              }
-                            }
-                          }
-                        });
-                      }}
-                      className={`px-2.5 sm:px-3 lg:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 shrink-0 touch-manipulation active:scale-[0.97] ${
-                        isCatActive
-                          ? isDark
-                            ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md shadow-amber-500/25 ring-1 ring-amber-400 font-extrabold"
-                            : "bg-slate-900 text-white shadow-sm ring-1 ring-slate-950 font-extrabold"
-                          : isDark
-                          ? "text-zinc-300 hover:text-white hover:bg-white/[0.08]"
-                          : "text-slate-600 hover:text-slate-900 hover:bg-black/[0.05]"
-                      }`}
-                    >
-                      <cat.icon className={`w-3.5 h-3.5 ${isCatActive ? (isDark ? "text-slate-950" : "text-amber-400") : "text-zinc-400"} shrink-0`} />
-                      <span className="leading-none inline-flex items-center">{cat.label}</span>
-                      {cat.badge && (
-                        <span className={`hidden xl:inline-flex text-[10px] font-mono px-1.5 py-0.5 rounded-full font-black shrink-0 leading-none items-center ${
-                          isCatActive
-                            ? isDark
-                              ? "bg-slate-950/30 text-slate-950"
-                              : "bg-white/20 text-white"
-                            : isDark
-                            ? "bg-white/10 text-zinc-300"
-                            : "bg-slate-200 text-slate-700"
-                        }`}>
-                          {cat.badge}
-                        </span>
-                      )}
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-
             {/* RIGHT: GAME CENTER METRICS & QUICK ACTIONS (MILESTONES + TIMER + XP + CONTROLS - ZERO OVERLAPPING) */}
             <div className="flex items-center gap-1 sm:gap-2 shrink-0 whitespace-nowrap">
-              {/* 1. CBSE CLASS 10 BOARD MILESTONES (2026–2027) CAPSULE */}
+              {/* 1. EDITABLE CBSE TARGET COUNTDOWN CAPSULE */}
               <div id="tutorial-countdown-capsule" className="flex items-center shrink-0">
                 <button
                   type="button"
                   onClick={() => {
                     playSound("click");
-                    setIsExamMilestonesModalOpen(true);
+                    setIsTargetDateModalOpen(true);
                   }}
-                  className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono transition-all cursor-pointer group shadow-xs active:scale-[0.98] tabular-nums leading-none shrink-0 ${
+                  className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono transition-all cursor-pointer group shadow-xs active:scale-[0.98] tabular-nums leading-none shrink-0 ${
                     isDark
-                      ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-300 hover:border-cyan-400/60 hover:bg-cyan-500/20 hover:shadow-[0_0_12px_rgba(6,182,212,0.2)]"
-                      : "bg-cyan-50 border-cyan-300 text-cyan-950 hover:bg-cyan-100"
+                      ? "bg-amber-500/10 border-amber-500/30 text-amber-300 hover:border-amber-400/60 hover:bg-amber-500/20 hover:shadow-[0_0_12px_rgba(245,158,11,0.2)]"
+                      : "bg-amber-50 border-amber-300 text-amber-950 hover:bg-amber-100"
                   }`}
-                  title="CBSE Class 10 Board Milestones (2026–2027) — Tap for full schedule"
+                  title={`Target Milestone: ${targetExamState.label} (${targetExamState.title}) — Click to edit date & time`}
                 >
-                  <HeaderExamCountdown isDark={isDark} />
+                  <HeaderExamCountdown
+                    isDark={isDark}
+                    targetDate={targetExamState.date}
+                    targetLabel={targetExamState.label}
+                    onEditDate={() => setIsTargetDateModalOpen(true)}
+                  />
                 </button>
               </div>
 
-              {/* 2. ADJUSTABLE STUDY FOCUS TIMER (WITH 30 SOUNDS & FULLSCREEN BLACK ZEN THEATER) */}
-              <TopHeaderStudyTimer
-                isDark={isDark}
-                onAddXp={(amount, reason) => {
-                  setTotalFocusMins((m) => m + 22);
-                  showXpToast(amount, reason);
+              {/* 2. COMPACT FOCUS TIMER QUICK TRIGGER (ZERO TAB OVERLAP) */}
+              <button
+                type="button"
+                onClick={() => {
+                  playSound("click");
+                  const dock = document.getElementById("floating-study-timer-dock");
+                  if (dock) {
+                    dock.classList.add("ring-4", "ring-amber-400");
+                    setTimeout(() => dock.classList.remove("ring-4", "ring-amber-400"), 1200);
+                  }
                 }}
-                onPlaySound={(s) => {
-                  if (!isSoundMuted) playSound(s);
-                }}
-                onTriggerConfetti={triggerConfetti}
-              />
+                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-bold transition-all cursor-pointer shadow-xs leading-none whitespace-nowrap active:scale-[0.98] ${
+                  isDark
+                    ? "bg-white/[0.04] border-white/15 text-zinc-200 hover:border-amber-400/50 hover:bg-white/[0.08]"
+                    : "bg-slate-50 border-slate-300 text-slate-800 hover:bg-slate-100"
+                }`}
+                title="Focus Study Timer & 30 Ambient Sounds (Fixed at bottom-right dock)"
+              >
+                <Timer className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span className="hidden sm:inline">Focus</span>
+              </button>
 
               {/* LEVEL & XP CAPSULE */}
               <div id="tutorial-xp-capsule" className={`flex items-center gap-1 px-1.5 sm:px-2 xl:px-2.5 py-1 sm:py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-medium shadow-xs leading-none whitespace-nowrap shrink-0 ${
@@ -3319,7 +3346,7 @@ export default function CBSECommandCenter() {
             
             {/* TIER 1: MOBILE & TABLET MASTER CATEGORY TABS (< xl)
                 On mobile portrait & landscape, this ensures ALL 4 Master Categories are 100% visible, touchable, and never overlapping! */}
-            <div className="xl:hidden flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar scroll-smooth flex-nowrap gap-1 pb-0.5">
+            <div className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar scroll-smooth flex-nowrap gap-2 py-1">
               {CATEGORY_DEFINITIONS.map((cat) => {
                 const isCatActive = activeCategory === cat.id;
                 return (
@@ -3327,6 +3354,23 @@ export default function CBSECommandCenter() {
                     key={cat.id}
                     id={cat.id === "concepts" ? "tutorial-concepts-tab-top-mobile" : cat.id === "practice" ? "tutorial-questions-tab-top-mobile" : cat.id === "tools" ? "tutorial-tools-tab-top-mobile" : undefined}
                     href={getTabHref(cat.defaultTab)}
+                    onAuxClick={(e) => {
+                      handleNavClick(e, cat.defaultTab, {
+                        customAction: () => {
+                          if (cat.id === "concepts") {
+                            if (commandSubjectId === "sst") {
+                              setConceptsSubject("sst");
+                              setConceptsChapterNo(1);
+                            } else if (commandSubjectId === "science") {
+                              setConceptsSubject("science");
+                              setConceptsChapterNo(1);
+                            } else {
+                              setConceptsSubject("math");
+                            }
+                          }
+                        }
+                      });
+                    }}
                     onClick={(e) => {
                       handleNavClick(e, cat.defaultTab, {
                         customAction: () => {
@@ -3667,19 +3711,27 @@ export default function CBSECommandCenter() {
             {/* MODAL BODY */}
             <div className="p-4 sm:p-6 overflow-y-auto space-y-4 sm:space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* MILESTONE 1: OCT 26 PRE-BOARD PHASE 1 */}
+                {/* MILESTONE 1: TARGET MILESTONE (EDITABLE) */}
                 <div className={`p-4 sm:p-5 rounded-2xl border ${
                   isDark ? "bg-amber-950/20 border-amber-500/30" : "bg-amber-50/80 border-amber-300"
                 }`}>
                   <div className="flex items-center justify-between gap-2 mb-2">
                     <span className="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                      ⚡ Phase 1 Benchmark
+                      ⚡ {targetExamState.title}
                     </span>
-                    <span className="text-xs font-mono font-bold text-amber-400">Oct 26, 2026</span>
+                    <button
+                      type="button"
+                      onClick={() => setIsTargetDateModalOpen(true)}
+                      className="text-xs font-mono font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 px-2 py-0.5 rounded-lg bg-amber-500/10 border border-amber-500/30 transition-all cursor-pointer"
+                      title="Click to change target exam date"
+                    >
+                      <span>{targetExamState.label}</span>
+                      <span>✏️</span>
+                    </button>
                   </div>
-                  <h3 className="text-base sm:text-lg font-black mb-1">Pre-Board Phase 1 (Test Series II)</h3>
-                  <p className="text-xs text-zinc-400 mb-3">Mid-term comprehensive readiness examination across all 5 subjects.</p>
-                  <LiveCountdown targetDate="2026-10-26" variant="card-grid" colorScheme="amber" isDark={isDark} />
+                  <h3 className="text-base sm:text-lg font-black mb-1">{targetExamState.title}</h3>
+                  <p className="text-xs text-zinc-400 mb-3">Customized target readiness examination across all 5 subjects.</p>
+                  <LiveCountdown targetDate={targetExamState.date} variant="card-grid" colorScheme="amber" isDark={isDark} />
                 </div>
 
                 {/* MILESTONE 2: FEB 1 CBSE BOARDS */}
@@ -3819,7 +3871,7 @@ export default function CBSECommandCenter() {
             {/* HERO DUAL COUNTDOWN CARDS: 26 OCT 2026 BENCHMARK & 1 FEB 2027 CBSE BOARDS */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
 
-              {/* CARD 1: 26 OCT 2026 PRE-BOARD PHASE 1 / TEST SERIES II */}
+              {/* CARD 1: DYNAMIC TARGET MILESTONE / PRE-BOARD PHASE 1 */}
               <div className={`relative p-5 sm:p-7 rounded-3xl border transition-all overflow-hidden apple-card-hover ${
                 isDark
                   ? "bg-gradient-to-br from-[#1c1203] via-[#161006] to-[#0a0a0d] border-amber-500/40 shadow-[0_12px_40px_rgba(245,158,11,0.15)]"
@@ -3834,28 +3886,30 @@ export default function CBSECommandCenter() {
                       ? "bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]" 
                       : "bg-amber-100 text-amber-950 border-amber-400 font-bold"
                   }`}>
-                    ⚡ PRE-BOARD PHASE 1 • OCT 26, 2026
+                    ⚡ TARGET MILESTONE • {targetExamState.label.toUpperCase()}
                   </span>
-                  <span className={`text-xs font-mono font-black flex items-center gap-1.5 leading-none ${
-                    isDark ? "text-amber-400" : "text-amber-800"
-                  }`}>
-                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0"></span>
-                    <span>Test Series II Kickoff</span>
-                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setIsTargetDateModalOpen(true)}
+                    className="text-xs font-mono font-black flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500/30 transition-all cursor-pointer"
+                    title="Click to edit exam date & time"
+                  >
+                    <span>✏️ Edit Target Date</span>
+                  </button>
                 </div>
 
                 <h3 className={`text-xl sm:text-2xl font-black tracking-tight mb-1 relative z-10 flex flex-wrap items-baseline gap-2 ${isDark ? "text-white" : "text-slate-900"}`}>
-                  <span>Phase 1 Milestone:</span>
-                  <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Oct 26, 2026</span>
+                  <span>{targetExamState.title}:</span>
+                  <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">{targetExamState.label}</span>
                 </h3>
 
                 <p className={`text-xs mb-4 relative z-10 ${isDark ? "text-zinc-400" : "text-slate-600"}`}>
-                  Intensive Pre-Board Assessment & Comprehensive Mid-Term Benchmark
+                  Intensive Assessment & Comprehensive Benchmark Tracking
                 </p>
 
                 {/* 4-BLOCK COUNTDOWN TIMER */}
                 <div className="relative z-10 mb-4">
-                  <LiveCountdown targetDate="2026-10-26" variant="card-grid" colorScheme="amber" isDark={isDark} />
+                  <LiveCountdown targetDate={targetExamState.date} variant="card-grid" colorScheme="amber" isDark={isDark} />
                 </div>
 
                 {/* PROGRESS / READINESS BAR */}
@@ -7155,6 +7209,30 @@ export default function CBSECommandCenter() {
           MANDATORY INTERACTIVE GUIDED ONBOARDING TUTORIAL (FIRST-VISIT)
           Strict zero-bypass sequential tour highlighting features one by one
           ========================================================================= */}
+      {/* FLOATING FOCUS STUDY DOCK (FIXED AT BOTTOM RIGHT - ZERO COLLISION WITH TOP NAVIGATION TABS) */}
+      <FloatingStudyTimerDock
+        isDark={isDark}
+        onAddXp={(amount, reason) => {
+          setTotalFocusMins((m) => m + 22);
+          showXpToast(amount, reason);
+        }}
+        onPlaySound={(s) => {
+          if (!isSoundMuted) playSound(s);
+        }}
+        onTriggerConfetti={triggerConfetti}
+      />
+
+      {/* TARGET EXAM DATE & TIME EDIT MODAL */}
+      <TargetExamEditModal
+        isOpen={isTargetDateModalOpen}
+        onClose={() => setIsTargetDateModalOpen(false)}
+        isDark={isDark}
+        onPlaySound={(s) => {
+          if (!isSoundMuted) playSound(s);
+        }}
+        onTriggerConfetti={triggerConfetti}
+      />
+
       <InteractiveGuidedTutorial
         isDark={isDark}
         setActiveTab={(tab: any) => setActiveTab(tab)}

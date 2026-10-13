@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import React, { useState, useEffect, useMemo, memo } from "react";
+import React, { useState, useEffect, useMemo, useCallback, memo } from "react";
 import {
   Calendar,
   Clock,
@@ -25,7 +25,7 @@ interface Class10ExamCountdownProps {
   collapsible?: boolean;
 }
 
-const TIMEZONE_LABEL = "Asia/Kolkata (IST • UTC+05:30)";
+const TIMEZONE_LABEL = "Asia/Kolkata (IST â€¢ UTC+05:30)";
 
 export interface CountdownBreakdown {
   days: number;
@@ -78,18 +78,91 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
   onTargetReached,
   collapsible = true
 }: Class10ExamCountdownProps) {
-  // Configurable Exam Start Time: 10:30 AM IST (default), 10:00 AM, 09:00 AM
-  const [selectedExamTime, setSelectedExamTime] = useState<string>("10:30");
+  // Configurable Exam Start Time + Editable Date with LocalStorage Persistence
+  const [selectedExamTime, setSelectedExamTime] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("arete_countdown_target_time");
+      if (saved) return saved;
+    }
+    return "10:30";
+  });
+  const [selectedOctDate, setSelectedOctDate] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("arete_countdown_target_date");
+      if (saved) return saved;
+    }
+    return "2026-10-26";
+  });
+  const [octLabel, setOctLabel] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("arete_countdown_target_label");
+      if (saved) return saved;
+    }
+    return "26 Oct 2026";
+  });
   const [showConfig, setShowConfig] = useState<boolean>(false);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+
+  const updateTargetDate = useCallback((date: string, label?: string) => {
+    setSelectedOctDate(date);
+    let finalLabel = label;
+    if (!finalLabel) {
+      try {
+        const d = new Date(date + "T00:00:00");
+        finalLabel = d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+      } catch {
+        finalLabel = date;
+      }
+    }
+    setOctLabel(finalLabel);
+
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("arete_countdown_target_date", date);
+        localStorage.setItem("arete_countdown_target_label", finalLabel);
+        window.dispatchEvent(
+          new CustomEvent("arete_target_exam_updated", {
+            detail: { date, label: finalLabel, time: selectedExamTime }
+          })
+        );
+      } catch {}
+    }
+  }, [selectedExamTime]);
+
+  // Sync when changed elsewhere
+  useEffect(() => {
+    const handleTargetUpdated = (e: any) => {
+      if (e?.detail) {
+        if (e.detail.date) setSelectedOctDate(e.detail.date);
+        if (e.detail.label) setOctLabel(e.detail.label);
+        if (e.detail.time) setSelectedExamTime(e.detail.time);
+      }
+    };
+    window.addEventListener("arete_target_exam_updated", handleTargetUpdated);
+    return () => window.removeEventListener("arete_target_exam_updated", handleTargetUpdated);
+  }, []);
+
+  const updateTargetTime = useCallback((time: string) => {
+    setSelectedExamTime(time);
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("arete_countdown_target_time", time);
+        window.dispatchEvent(
+          new CustomEvent("arete_target_exam_updated", {
+            detail: { date: selectedOctDate, label: octLabel, time }
+          })
+        );
+      } catch {}
+    }
+  }, [selectedOctDate, octLabel]);
 
   // Dual Targets: "oct_milestone" (Oct 26, 2026) vs "feb_boards" (Feb 1, 2027)
   const [activeTarget, setActiveTarget] = useState<"oct_milestone" | "feb_boards">("oct_milestone");
 
   // Target ISO strings anchored to Asia/Kolkata (+05:30)
   const octIsoString = useMemo(() => {
-    return `2026-10-26T${selectedExamTime}:00+05:30`;
-  }, [selectedExamTime]);
+    return `${selectedOctDate}T${selectedExamTime}:00+05:30`;
+  }, [selectedOctDate, selectedExamTime]);
 
   const febIsoString = useMemo(() => {
     return `2027-02-01T09:00:00+05:30`;
@@ -121,9 +194,9 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
   const padNumber = (n: number) => (n < 10 ? `0${n}` : `${n}`);
 
   const activeCountdown = activeTarget === "oct_milestone" ? octCountdown : febCountdown;
-  const activeDateTitle = activeTarget === "oct_milestone" ? "26 October 2026" : "1 February 2027";
+  const activeDateTitle = activeTarget === "oct_milestone" ? octLabel : "1 February 2027";
   const activeMilestoneLabel = activeTarget === "oct_milestone" 
-    ? "Pre-Board Phase 1 • Test Series II" 
+    ? "Pre-Board Phase 1 â€¢ Test Series II" 
     : "Official CBSE Class 10 Board Exams";
 
   // Preparedness completion estimate relative to start of Class 10 academic session (April 1, 2026)
@@ -153,7 +226,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
         >
           <Flame className="w-3.5 h-3.5 text-amber-500 animate-pulse shrink-0" />
           <span className="font-extrabold text-[11px] sm:text-xs">
-            {activeTarget === "oct_milestone" ? "26 Oct:" : "1 Feb Boards:"}
+            {activeTarget === "oct_milestone" ? `${octLabel}:` : "1 Feb Boards:"}
           </span>
           <span>
             {activeCountdown.days}d {padNumber(activeCountdown.hours)}h {padNumber(activeCountdown.minutes)}m {padNumber(activeCountdown.seconds)}s
@@ -196,7 +269,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
     );
   }
 
-  // HERO COUNTDOWN VIEW — DUAL TARGETS WITH SMART THINKING & REAL-TIME PROGRESS
+  // HERO COUNTDOWN VIEW â€” DUAL TARGETS WITH SMART THINKING & REAL-TIME PROGRESS
   return (
     <section
       aria-label="Class 10 Dual Exam Countdown"
@@ -232,7 +305,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
                 }`}
               >
                 <Flame className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                <span>⚡ 26 Oct 2026 (Pre-Board Phase 1)</span>
+                <span>⚡ {octLabel}</span>
                 {octCountdown.isPassed && <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/30 text-emerald-300">Conquered</span>}
               </button>
 
@@ -264,7 +337,7 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
 
             <div className="flex items-baseline gap-2 sm:gap-3 flex-wrap">
               <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-                {activeTarget === "oct_milestone" ? "Time Left to 26 Oct Milestone" : "Time Left to CBSE Board Exams"}
+                {activeTarget === "oct_milestone" ? `Time Left to ${octLabel} Milestone` : "Time Left to CBSE Board Exams"}
               </h2>
               <span className={`text-xs sm:text-sm font-semibold font-mono ${
                 activeTarget === "oct_milestone" ? "text-amber-400" : "text-cyan-400"
@@ -320,35 +393,81 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
           </div>
         </div>
 
-        {/* TIME CONFIGURATION DRAWER */}
+        {/* DATE + TIME CONFIGURATION DRAWER */}
         {showConfig && activeTarget === "oct_milestone" && (
-          <div className={`p-3.5 sm:p-4 rounded-2xl border animate-fade-in ${
-            isDark ? "bg-black/60 border-amber-500/30 text-zinc-200" : "bg-white/95 border-amber-200 text-slate-800 shadow-sm"
+          <div className={`p-4 rounded-2xl border space-y-4 ${
+            isDark ? "bg-black/70 border-amber-500/35 text-zinc-200" : "bg-white/95 border-amber-200 text-slate-800 shadow-md"
           }`}>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
-              <div className="space-y-0.5">
-                <span className="text-xs font-bold block">Configurable Examination Session Start Time:</span>
-                <span className="text-[11px] opacity-75">
-                  Select your specific batch session time if different:
-                </span>
+            {/* DATE PICKER */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-black text-amber-400">📅 Set Custom Target Date:</span>
+                <span className="text-[10px] opacity-60">(Click calendar icon or type date)</span>
               </div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <input
+                  type="date"
+                  value={selectedOctDate}
+                  min={new Date().toISOString().split("T")[0]}
+                  max="2030-12-31"
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      updateTargetDate(e.target.value);
+                    }
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-sm font-mono font-bold border transition-all cursor-pointer ${
+                    isDark
+                      ? "bg-zinc-900 border-amber-500/40 text-amber-300 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400/40"
+                      : "bg-white border-amber-300 text-slate-800 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-300"
+                  }`}
+                />
+                <div className="flex items-center gap-1 flex-wrap">
+                  {[
+                    { label: "26 Oct", date: "2026-10-26" },
+                    { label: "15 Nov", date: "2026-11-15" },
+                    { label: "1 Dec",  date: "2026-12-01" },
+                    { label: "15 Jan", date: "2027-01-15" },
+                    { label: "1 Feb",  date: "2027-02-01" },
+                  ].map((preset) => (
+                    <button
+                      key={preset.date}
+                      onClick={() => {
+                        updateTargetDate(preset.date, preset.label + " " + preset.date.split("-")[0]);
+                      }}
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all cursor-pointer ${
+                        selectedOctDate === preset.date
+                          ? "bg-amber-500 text-slate-950 border-amber-400 font-black"
+                          : isDark
+                          ? "bg-white/5 border-white/10 text-zinc-400 hover:text-amber-300 hover:border-amber-500/40"
+                          : "bg-slate-100 border-slate-200 text-slate-600 hover:bg-amber-50 hover:border-amber-200"
+                      }`}
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* TIME PICKER */}
+            <div className="border-t border-white/10 pt-3 space-y-2">
+              <span className="text-xs font-bold block">⏰ Session Start Time (IST):</span>
               <div className="flex items-center gap-1.5 flex-wrap">
                 {[
+                  { time: "08:00", label: "08:00 AM" },
                   { time: "09:00", label: "09:00 AM" },
                   { time: "10:00", label: "10:00 AM" },
-                  { time: "10:30", label: "10:30 AM (CBSE Default)" }
+                  { time: "10:30", label: "10:30 AM ✓" },
+                  { time: "11:00", label: "11:00 AM" },
                 ].map((opt) => (
                   <button
                     key={opt.time}
-                    onClick={() => {
-                      setSelectedExamTime(opt.time);
-                      setShowConfig(false);
-                    }}
+                    onClick={() => updateTargetTime(opt.time)}
                     className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                       selectedExamTime === opt.time
                         ? isDark
                           ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-md"
-                          : "bg-amber-600 text-white border-amber-700 font-black shadow-xs"
+                          : "bg-amber-600 text-white border-amber-700 font-black"
                         : isDark
                         ? "bg-white/5 border-white/10 text-zinc-400 hover:text-white"
                         : "bg-slate-100 border-slate-200 text-slate-700 hover:bg-white"
@@ -358,6 +477,19 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* APPLY BUTTON */}
+            <div className="flex items-center justify-between pt-1 border-t border-white/10">
+              <span className="text-[10px] opacity-60 font-mono">
+                Target: {selectedOctDate} @ {selectedExamTime} IST
+              </span>
+              <button
+                onClick={() => setShowConfig(false)}
+                className="px-4 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 text-xs font-black transition-all cursor-pointer shadow-md"
+              >
+                ✓ Apply & Close
+              </button>
             </div>
           </div>
         )}
@@ -508,3 +640,6 @@ export const Class10ExamCountdown = memo(function Class10ExamCountdown({
 });
 
 export default Class10ExamCountdown;
+
+
+
