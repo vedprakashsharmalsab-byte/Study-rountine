@@ -27,7 +27,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 4: 4k = 16 ⇒ k = 4."
     ],
     explanation: "Equal roots occur when the parabola's vertex touches the x-axis, corresponding to D = b² - 4ac = 0.",
-    formula: "D = b² - 4ac = 0 <⇒ Real & Equal Roots",
+    formula: "D = b^2 - 4ac = 0 <⇒ Real & Equal Roots",
     examinerNote: "Do not forget to square b correctly: 4² = 16, not 8.",
     source: "CBSE Board 2024 Standard (Set 30/1/1)"
   },
@@ -49,7 +49,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 5: But if k = 0, the equation reduces to 6 = 0, which is not quadratic. Therefore, k ≠ 0, leaving k = 6."
     ],
     explanation: "A quadratic equation ax² + bx + c = 0 requires a ≠ 0 by definition. Therefore k = 0 must be rejected.",
-    formula: "D = b² - 4ac = 0 with constraint a ≠ 0",
+    formula: "D = b^2 - 4ac = 0 with constraint a ≠ 0",
     examinerNote: "CRITICAL BOARD TRAP: Choosing 'k = 0 or 6' is the most common blunder! If k = 0, the equation is no longer quadratic.",
     source: "CBSE Board 2020 Standard (Set 30/3/1)"
   },
@@ -95,7 +95,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 3: 2 + 2k = 0 ⇒ 2k = -2 ⇒ k = -1."
     ],
     explanation: "Substituting the given root x = 2 directly into the equation allows immediate solution for k.",
-    formula: "a(root)² + b(root) + c = 0",
+    formula: "a(root)^2 + b(root) + c = 0",
     examinerNote: "A root of an equation always satisfies the equation when substituted.",
     source: "CBSE Board 2019 Delhi"
   },
@@ -130,7 +130,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 6: Conclusion: Only Option B, (x - 2)² + 1 = 2x - 3, simplifies to a valid quadratic equation."
     ],
     explanation: "Always expand both sides completely and collect all terms on one side. If the x² terms cancel out, the equation is not quadratic.",
-    formula: "Standard Form: ax² + bx + c = 0 \\quad (a \\neq 0)",
+    formula: "Standard Form: ax^2 + bx + c = 0 \\quad (a \\neq 0)",
     examinerNote: "Don't be fooled by appearances! An equation may look quadratic because it has x², but if x² cancels out on both sides, it becomes linear.",
     source: "CBSE Board 2020 Standard"
   },
@@ -193,7 +193,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 4: 28k = 49 ⇒ k = 49 / 28 = 7 / 4."
     ],
     explanation: "Two-stage question: First substitute x = -5 to determine p, then apply the D = 0 condition to the second equation to solve for k.",
-    formula: "Stage 1: Root substitution; Stage 2: D = b² - 4ac = 0",
+    formula: "Stage 1: Root substitution; Stage 2: D = b^2 - 4ac = 0",
     examinerNote: "Simplify fraction: write k = 7/4, not 49/28.",
     source: "CBSE Board 2022 Standard & 2016 All India"
   },
@@ -240,7 +240,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 7: Roots are x = 5 or x = 5/2. Both roots are valid."
     ],
     explanation: "Expanding, grouping, and simplifying by common factor 2 reduces the degree-2 rational equation into a standard quadratic 2x² - 15x + 25 = 0.",
-    formula: "Quadratic Factorisation: 2x² - 15x + 25 = (x - 5)(2x - 5)",
+    formula: "Quadratic Factorisation: 2x^2 - 15x + 25 = (x - 5)(2x - 5)",
     examinerNote: "Dividing by 2 at Step 4 prevents dealing with 10(x² - 6x + 8) and saves time.",
     source: "CBSE Board 2019 (Set 30/1/2)"
   },
@@ -286,7 +286,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 8: Factor out a²: c² = a²(1 + m²). Hence proved!"
     ],
     explanation: "This is the algebraic condition of tangency for the line y = mx + c to the circle x² + y² = a². Canceling 4 early avoids arithmetic errors.",
-    formula: "D = B² - 4AC = 0",
+    formula: "D = B^2 - 4AC = 0",
     examinerNote: "Divide by 4 at Step 5 immediately to keep numbers simple.",
     source: "CBSE Board 2023 Standard (Set 30/1/3)"
   },
@@ -359,7 +359,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Part (iii): Volume of reservoir = Length × Breadth × Depth = 16 m × 6 m × 2 m = 192 m³.\nCapacity in liters = 192 × 1000 = 192,000 liters."
     ],
     explanation: "Area formulation leading to a quadratic equation. Rejecting the negative root x = -8 gives physical dimensions, and volume conversion yields capacity.",
-    formula: "Area = L × B; Volume = L × B × H",
+    formula: "\text{Area} = L × B; Volume = L × B × H",
     examinerNote: "Divide equation by 2 for simplest form: x² + 2x - 48 = 0. Show rejection of x = -8.",
     source: "CBSE Official CFPQ 2024 & Sample Paper 2024-25"
   },
@@ -384,7 +384,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 3: Reason is the exact criterion proving Assertion."
     ],
     explanation: "D = 0 guarantees that the quadratic expression is a perfect square (2x - 3)² = 0, giving double root x = 3/2.",
-    formula: "D = b² - 4ac = 0 ⇒ real and equal roots",
+    formula: "D = b^2 - 4ac = 0 ⇒ real and equal roots",
     examinerNote: "Standard Section A question. Calculating D = 0 directly verifies both assertion and reason.",
     source: "CBSE 2024 Standard Board Examination"
   },
@@ -410,7 +410,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 4: This is a linear equation (degree 1), NOT quadratic (degree 2)."
     ],
     explanation: "When x² cancels out completely on both sides, the equation reduces to degree 1.",
-    formula: "Quadratic requires coefficient of x² to be non-zero (a ≠ 0)",
+    formula: "Quadratic requires coefficient of x^2 to be non-zero (a ≠ 0)",
     examinerNote: "Notice that in option (d), x³ cancels out on expansion, leaving a quadratic equation 6x² + 12x + 12 = 0.",
     source: "CBSE 2023 Standard (Set 30/2/1)"
   },
@@ -428,7 +428,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 3: Since D < 0 (negative), the given quadratic equation has no real roots (two distinct complex roots)."
     ],
     explanation: "Negative discriminant indicates that the parabola does not intersect the x-axis, so no real roots exist.",
-    formula: "D = b² - 4ac; D < 0 ⇒ No real roots",
+    formula: "D = b^2 - 4ac; D < 0 ⇒ No real roots",
     examinerNote: "Write both the numerical value (-8) and the verbal nature ('no real roots') to get full 2 marks.",
     source: "CBSE Board 2023 Standard"
   },
@@ -449,7 +449,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 6: Therefore, p = 4."
     ],
     explanation: "Factor out 9p and reject p = 0 because a quadratic equation requires non-zero leading coefficient.",
-    formula: "D = b² - 4ac = 0; a ≠ 0",
+    formula: "D = b^2 - 4ac = 0; a ≠ 0",
     examinerNote: "Failing to reject p = 0 loses 0.5 marks. Always state that p = 0 destroys the quadratic nature.",
     source: "CBSE Term-2 Board Examination"
   },
@@ -491,7 +491,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Step 6: Check: 90² + 120² = 8100 + 14400 = 22500 = 150² = (90 + 60)². Verified!"
     ],
     explanation: "Right triangle geometry with algebraic sides modeled via Pythagoras theorem, yielding a solvable quadratic.",
-    formula: "a² + b² = c²; (x+30)² + x² = (x+60)²",
+    formula: "a^2 + b^2 = c^2; (x+30)^2 + x^2 = (x+60)^2",
     examinerNote: "Explicitly reject the negative root x = -30 with physical reason.",
     source: "CBSE Board 2020 Standard & NCERT Ex 4.3"
   },
@@ -554,7 +554,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Part (iii)(b) Alternative: Reduced speed = 750 - 100 = 650 km/h.\nTime at 650 km/h = 1500 / 650 = 30 / 13 = 2.3077 hours = 2 hours 18.46 minutes.\nAdditional time = 18.5 minutes."
     ],
     explanation: "Aviation navigation problem where delay recovery requires increasing airspeed to balance fixed arrival deadlines.",
-    formula: "Delta t = d/v_usual - d/v_fast; x² + 250x - 750000 = 0",
+    formula: "Delta t = d/v_usual - d/v_fast; x^2 + 250x - 750000 = 0",
     examinerNote: "Convert 30 minutes to 1/2 hour before setting up the equation.",
     source: "CBSE Official Sample Paper 2024"
   },
@@ -573,7 +573,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
       "Part (iii)(b) Alternative: Area = 176 m².\nDaily generation = 176 m² × 1.5 kWh/m² = 264 kWh."
     ],
     explanation: "Border of uniform width x subtracts 2x from both length and breadth. Physical constraints reject root exceeding half-breadth.",
-    formula: "Inner Area = (L - 2x)(B - 2x) = 176",
+    formula: "Inner \text{Area} = (L - 2x)(B - 2x) = 176",
     examinerNote: "Reject x = 15.5 because the total roof width is only 15 meters!",
     source: "CBSE Competency Assessment Framework 2025"
   }

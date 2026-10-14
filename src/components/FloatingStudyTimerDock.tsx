@@ -135,6 +135,25 @@ export const FloatingStudyTimerDock = memo(function FloatingStudyTimerDock({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Listen for global toggle/unhide event from top header clock button
+  useEffect(() => {
+    const handleToggle = () => {
+      setIsDockHidden(false);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("arete_study_dock_hidden", "false");
+      }
+      setTimeout(() => {
+        const dock = document.getElementById("floating-study-timer-dock");
+        if (dock) {
+          dock.classList.add("ring-4", "ring-amber-400");
+          setTimeout(() => dock.classList.remove("ring-4", "ring-amber-400"), 1500);
+        }
+      }, 50);
+    };
+    window.addEventListener("arete_toggle_study_timer", handleToggle);
+    return () => window.removeEventListener("arete_toggle_study_timer", handleToggle);
+  }, []);
+
   // Timer Tick Engine
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -354,57 +373,23 @@ export const FloatingStudyTimerDock = memo(function FloatingStudyTimerDock({
   // Determine if drawer opens downward (if dock is placed high up) or upward
   const isDockNearTop = dockPosition !== null && dockPosition.y < 380;
 
-  // Render minimal reopen pill when dock is closed / hidden by user
+  // When dock is closed / hidden by user, completely remove floating dock from screen.
+  // Clicking the top header clock icon triggers 'arete_toggle_study_timer' to restore it.
   if (isDockHidden) {
-    return (
-      <>
-        <aside
-          aria-label="Reopen Focus Study Timer"
-          className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 select-none transition-all duration-300 font-sans"
-          style={
-            dockPosition
-              ? { left: `${dockPosition.x}px`, top: `${dockPosition.y}px`, right: "auto", bottom: "auto" }
-              : undefined
-          }
-        >
-          <button
-            type="button"
-            onClick={reopenDock}
-            className={`px-3.5 py-2 rounded-full border shadow-2xl backdrop-blur-2xl flex items-center gap-2 cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 animate-fade-in ${
-              isRunning
-                ? "bg-emerald-500/20 border-emerald-400 text-emerald-300 ring-2 ring-emerald-400/50 shadow-emerald-500/20"
-                : isDark
-                ? "bg-[#090d18]/95 border-amber-500/40 text-amber-300 hover:bg-[#11192e] shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
-                : "bg-white/95 border-amber-300 text-slate-800 shadow-[0_10px_30px_rgba(0,0,0,0.14)] hover:bg-amber-50"
-            }`}
-            title="Reopen Focus Timer Dock"
-          >
-            <Timer className={`w-4 h-4 ${isRunning ? "text-emerald-400 animate-pulse" : "text-amber-400"}`} />
-            <span className="font-mono font-black text-xs sm:text-sm tabular-nums tracking-tight">
-              {timeFormatted}
-            </span>
-            {isRunning && <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />}
-            <span className="text-[10px] font-bold text-zinc-400 border-l border-white/20 pl-2">
-              Focus Timer
-            </span>
-          </button>
-        </aside>
-
-        {/* ZEN MODAL (Always available even if dock was hidden) */}
-        <ZenStudyTimerModal
-          isOpen={isZenModalOpen}
-          onClose={() => setIsZenModalOpen(false)}
-          isDark={isDark}
-          selectedMinutes={selectedMinutes}
-          secondsRemaining={secondsRemaining}
-          isRunning={isRunning}
-          onToggleTimer={toggleTimer}
-          onResetTimer={resetTimer}
-          onSelectPreset={selectPreset}
-          onAdjustMinutes={adjustMinutes}
-        />
-      </>
-    );
+    return isZenModalOpen ? (
+      <ZenStudyTimerModal
+        isOpen={isZenModalOpen}
+        onClose={() => setIsZenModalOpen(false)}
+        isDark={isDark}
+        selectedMinutes={selectedMinutes}
+        secondsRemaining={secondsRemaining}
+        isRunning={isRunning}
+        onToggleTimer={toggleTimer}
+        onResetTimer={resetTimer}
+        onSelectPreset={selectPreset}
+        onAdjustMinutes={adjustMinutes}
+      />
+    ) : null;
   }
 
   return (

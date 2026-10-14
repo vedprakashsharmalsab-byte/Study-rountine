@@ -19,7 +19,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Total surface area = 2πr² + πr² = 3πr²"
     ],
     explanation: "Solid hemisphere has both curved surface and one circular base. Don't forget the base!",
-    formula: "TSA = 2\\pi r² + \\pi r² = 3\\pi r²",
+    formula: "\\text{TSA} = 2\\pi r^2 + \\pi r^2 = 3\\pi r^2",
     examinerNote: "Hollow hemisphere (bowl) has TSA = 3πr² + πr² (outer) = but no base exposed. Solid hemisphere TSA = 3πr².",
     source: "NCERT Exemplar"
   },
@@ -38,7 +38,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "= 2πr × h = 2πrh"
     ],
     explanation: "LSA = 2πrh. Total SA = 2πr(r + h) which includes both circular bases.",
-    formula: "LSA = 2\\pi rh, \\quad TSA = 2\\pi r(r+h)",
+    formula: "\\text{LSA} = 2\\pi rh, \\quad \\text{TSA} = 2\\pi r(r+h)",
     examinerNote: "Lateral = curved surface only. Total = curved + 2 × base circles.",
     source: "NCERT Section 13.1"
   },
@@ -60,7 +60,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "R = ∛216 = 6 cm"
     ],
     explanation: "When shape is remodeled, volume is conserved. Equate volumes and solve for new radius.",
-    formula: "\\frac{1}{3}\\pi r² h = \\frac{4}{3}\\pi R³",
+    formula: "\\frac{1}{3}\\pi r^2 h = \\frac{4}{3}\\pi R^3",
     examinerNote: "Volume conservation (not surface area) is used for remodeling problems. Very common board question.",
     source: "NCERT Exercise 13.3 Q2"
   },
@@ -104,7 +104,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Ratio = (1/3)πr²h : πr²h = 1:3"
     ],
     explanation: "For same base radius and height: V(cone) : V(cylinder) = 1:3 always.",
-    formula: "V_{cone} : V_{cylinder} = \\frac{1}{3}\\pi r²h : \\pi r²h = 1:3",
+    formula: "V_{\\text{cone}} : V_{\\text{cylinder}} = \\frac{1}{3}\\pi r^2h : \\pi r^2h = 1:3",
     examinerNote: "This ratio is a fundamental fact to memorize. Cone is always 1/3 of the enclosing cylinder.",
     source: "NCERT Section 13.2"
   },
@@ -124,7 +124,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Number of bottles = 486π / 9π = 54"
     ],
     explanation: "Equate total liquid volume with (number × bottle volume).",
-    formula: "n = \\frac{V_{hemisphere}}{V_{cylinder}} = \\frac{486\\pi}{9\\pi} = 54",
+    formula: "n = \\frac{V_{\\text{hemisphere}}}{V_{\\text{cylinder}}} = \\frac{486\\pi}{9\\pi} = 54",
     examinerNote: "Hemisphere volume = (2/3)πr³. Do NOT use sphere formula (4/3)πr³ for a half-sphere.",
     source: "NCERT Exemplar / Board 2022"
   },
@@ -149,7 +149,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Ratio h(cone) : h(hemisphere) = 2r : r = 2:1"
     ],
     explanation: "For equal bases, equate volumes to find ratio of heights.",
-    formula: "\\frac{1}{3}\\pi r² h = \\frac{2}{3}\\pi r³ \\implies h = 2r",
+    formula: "\\frac{1}{3}\\pi r^2 h = \\frac{2}{3}\\pi r^3 \\implies h = 2r",
     examinerNote: "Height of hemisphere = its radius. This is the key insight for this problem.",
     source: "NCERT Exemplar"
   },
@@ -169,7 +169,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Total volume = 385 + 2156/3 = 1155/3 + 2156/3 = 3311/3 ≈ 1103.67 cm³"
     ],
     explanation: "Composite volume = V(cone) + V(hemisphere). Find cone height = total height − hemisphere height.",
-    formula: "V = \\frac{1}{3}\\pi r² h_{cone} + \\frac{2}{3}\\pi r³",
+    formula: "V = \\frac{1}{3}\\pi r^2 h_{\\text{cone}} + \\frac{2}{3}\\pi r^3",
     examinerNote: "Height of cone ≠ total height! Subtract the hemisphere height (= r) first.",
     source: "NCERT Exercise 13.2 Q1"
   },
@@ -232,7 +232,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "H = 176 × 7/(22 × 32) = 1232/704 = 1.75 m"
     ],
     explanation: "Volume dug out = Volume of ring-shaped embankment around the well.",
-    formula: "V_{earth} = \\pi(R² - r²)H",
+    formula: "V_{\\text{earth}} = \\pi(R^2 - r^2)H",
     examinerNote: "Embankment volume uses the RING formula: π(R²-r²)H. Remember outer R = inner r + width.",
     source: "NCERT Exercise 13.3 Q7 / Board 2021"
   },
@@ -252,7 +252,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Total canvas = CSA(cylinder) + CSA(cone) = No flat base needed for tent."
     ],
     explanation: "A tent has no base (floor), so only curved surfaces matter: CSA of cylinder + CSA of cone.",
-    formula: "A = 2\\pi r h + \\pi r l, \\quad l = \\sqrt{r² + h_{cone}^2}",
+    formula: "A = 2\\pi r h + \\pi r l, \\quad l = \\sqrt{r^2 + h_{\\text{cone}}^2}",
     examinerNote: "No base for tents! Include slant height formula for cone: l = √(r² + h²).",
     source: "NCERT Exercise 13.2 Q4 / Board 2023"
   },
@@ -281,7 +281,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Volume of syrup = 30% of 1127.25 = 0.3 × 1127.25 ≈ 338.2 cm³"
     ],
     explanation: "Gulab jamun = cylinder + 2 hemispheres = cylinder + 1 sphere effectively.",
-    formula: "V = \\pi r² h + \\frac{4}{3}\\pi r³",
+    formula: "V = \\pi r^2 h + \\frac{4}{3}\\pi r^3",
     examinerNote: "The cylindrical height = total length - 2r (subtract both hemispherical caps). This is the most common composite solid mistake.",
     source: "NCERT Exercise 13.2 Q6 / Board 2020"
   },
@@ -309,7 +309,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Convert to m³ (since 1 m³ = 10⁶ cm³): 1,131,428.57 / 1,000,000 ≈ 1.131 m³"
     ],
     explanation: "Water displaced equals the volume of the submerged solid. Water remaining in cylinder = Volume of cylinder − (Volume of cone + Volume of hemisphere).",
-    formula: "V_{water} = V_{cylinder} - (V_{cone} + V_{hemisphere})",
+    formula: "V_{water} = V_{\\text{cylinder}} - (V_{\\text{cone}} + V_{\\text{hemisphere}})",
     examinerNote: "5-mark classic. List all three volumes separately then subtract. Show all computations.",
     source: "NCERT Exercise 13.3 Q5 / Board 2019"
   },
@@ -332,7 +332,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "For 12 students: 12 × 333.67 ≈ 4004 cm³"
     ],
     explanation: "Composite volume = cone + sphere. Multiply by number of units for total.",
-    formula: "V_{total} = n \\times (V_{cone} + V_{sphere})",
+    formula: "V_{\\text{total}} = n \\times (V_{\\text{cone}} + V_{\\text{sphere}})",
     examinerNote: "Radius 3.5 = 7/2. Use this fraction form with 22/7 to avoid decimal errors.",
     source: "CBSE Sample Paper 2025"
   },
@@ -352,7 +352,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Total exposed SA = CSA(cone) + CSA(cylinder) + base = 220/7 + 528/7 + 88/7 = 836/7 ≈ 119.43 cm²"
     ],
     explanation: "Rocket = cone on top of cylinder. Slant height l, h = √(l²-r²). Exposed faces exclude junction between cone and cylinder.",
-    formula: "l = \\sqrt{r² + h²}, \\quad TSA = \\pi r l + 2\\pi r h + \\pi r²",
+    formula: "l = \\sqrt{r^2 + h^2}, \\quad \\text{TSA} = \\pi r l + 2\\pi r h + \\pi r^2",
     examinerNote: "The junction between cone and cylinder is NOT an exposed surface. The base circle at bottom IS exposed.",
     source: "CBSE Board 2024 Practice Set"
   },
@@ -379,7 +379,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Step 5: Number of cones formed = V(sphere) / V(cone) = 4,851 / 38.5 = 126 cones"
     ],
     explanation: "Law of conservation of volume: Melting and recasting does not alter the total volume of metal. Total cones = Sphere volume ÷ Cone volume.",
-    formula: "n = \\frac{V_{sphere}}{V_{cone}} = \\frac{\\frac{4}{3}\\pi R³}{\\frac{1}{3}\\pi r² h}",
+    formula: "n = \\frac{V_{\\text{sphere}}}{V_{\\text{cone}}} = \\frac{\\frac{4}{3}\\pi R^3}{\\frac{1}{3}\\pi r^2 h}",
     examinerNote: "Very popular remodeling question. Always compute volumes separately and divide. 126 is the exact answer.",
     source: "NCERT Exemplar / Board 2022, 2024"
   },
@@ -397,7 +397,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "V = (1/3) × (22/7) × 49 × 14 = (22 × 49 × 14)/(21) = (22 × 49 × 2)/3 = 2156/3 cm³"
     ],
     explanation: "Largest cone in cube has radius = half the side and height = side of the cube.",
-    formula: "r = a/2, h = a, \\quad V = \\frac{1}{3}\\pi r² h",
+    formula: "r = a/2, h = a, \\quad V = \\frac{1}{3}\\pi r^2 h",
     examinerNote: "The base diameter of cone equals the cube's side. Height of cone = side of cube.",
     source: "NCERT Exemplar"
   },
@@ -418,7 +418,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Total SA = 27.72 + 158.4 + 48.19 ≈ 234.31 cm²"
     ],
     explanation: "Three-part composite toy. Add curved surfaces of all three parts (no flat circular ends are exposed).",
-    formula: "TSA = 2\\pi r² + 2\\pi r h_{cyl} + \\pi r l_{cone}",
+    formula: "\\text{TSA} = 2\\pi r^2 + 2\\pi r h_{\\text{cyl}} + \\pi r l_{\\text{cone}}",
     examinerNote: "No base circles are exposed in this toy (hemisphere caps one end, cone caps other). Only curved surfaces.",
     source: "NCERT Exercise 13.2 Q5 / Board 2023"
   },
@@ -457,7 +457,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
       "Since bucket is open at top, TSA = CSA + base area only = 4950 + 154 = 5104 cm²"
     ],
     explanation: "A bucket is an open frustum (no top). TSA = π(R+r)l + πr² (curved + bottom only).",
-    formula: "TSA_{bucket} = \\pi(R+r)l + \\pi r²",
+    formula: "TSA_{bucket} = \\pi(R+r)l + \\pi r^2",
     examinerNote: "Bucket is open at the top (larger circle). Only add the BOTTOM (smaller) circular base. Note: Frustums are deleted in current NCERT, but this tests composite surface reasoning.",
     source: "NCERT Exercise 13.4 Q4 / Board 2022"
   },

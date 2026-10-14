@@ -3249,15 +3249,13 @@ export default function CBSECommandCenter() {
                 </button>
               </div>
 
-              {/* 2. COMPACT FOCUS TIMER QUICK TRIGGER (ZERO TAB OVERLAP) */}
+              {/* 2. COMPACT FOCUS TIMER QUICK TRIGGER (RESTORES / HIGHLIGHTS DOCK) */}
               <button
                 type="button"
                 onClick={() => {
                   playSound("click");
-                  const dock = document.getElementById("floating-study-timer-dock");
-                  if (dock) {
-                    dock.classList.add("ring-4", "ring-amber-400");
-                    setTimeout(() => dock.classList.remove("ring-4", "ring-amber-400"), 1200);
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new CustomEvent("arete_toggle_study_timer"));
                   }
                 }}
                 className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 rounded-full border text-[10px] sm:text-[11px] xl:text-xs font-mono font-bold transition-all cursor-pointer shadow-xs leading-none whitespace-nowrap active:scale-[0.98] ${
@@ -3265,7 +3263,7 @@ export default function CBSECommandCenter() {
                     ? "bg-white/[0.04] border-white/15 text-zinc-200 hover:border-amber-400/50 hover:bg-white/[0.08]"
                     : "bg-slate-50 border-slate-300 text-slate-800 hover:bg-slate-100"
                 }`}
-                title="Focus Study Timer & 30 Ambient Sounds (Fixed at bottom-right dock)"
+                title="Focus Study Timer & 30 Ambient Sounds (Click to restore or highlight timer dock)"
               >
                 <Timer className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <span className="hidden sm:inline">Focus</span>
@@ -3335,13 +3333,9 @@ export default function CBSECommandCenter() {
         </header>
 
         {/* =========================================================================
-            UNIVERSAL TOP NAVIGATION STRIP (RESPONSIVE IN ALL ORIENTATIONS & VIEWPORTS)
-            - Tier 1: Master Category Tabs (visible on mobile portrait, mobile landscape, tablet)
-            - Tier 2: Active Sub-Tabs Pill Strip (single-row horizontal scroll, ZERO WRAPPING, ZERO OVERLAPPING)
+            TOP NAVIGATION STRIP (HIDDEN: Main navigation unified on bottom dock)
             ========================================================================= */}
-        <div className={`border-b transition-colors backdrop-blur-2xl ${
-          isDark ? "border-white/10 bg-[#070a14]/95" : "border-slate-200/90 bg-white/95"
-        }`}>
+        <div className="hidden">
           <div className="max-w-7xl mx-auto px-2.5 sm:px-4 lg:px-6 py-1.5 flex flex-col gap-1.5">
             
             {/* TIER 1: MOBILE & TABLET MASTER CATEGORY TABS (< xl)
@@ -7057,14 +7051,14 @@ export default function CBSECommandCenter() {
       )}
 
       {/* FOOTER */}
-      <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-24 xl:mb-0 landscape:mb-4 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
+      <footer className={`border-t py-4 text-center text-xs font-mono px-4 mb-24 ${isDark ? "border-white/10 text-slate-500" : "border-slate-200 text-slate-500"}`}>
         Lakshmipat Singhania Academy Bissau • CBSE Class 10 Command Center (2026–2027)
       </footer>
 
       {/* =========================================================================
-          APPLE NATIVE FLOATING BOTTOM DOCK (MOBILE & TABLET: < 1280px)
+          APPLE NATIVE FLOATING BOTTOM NAVIGATION DOCK (UNIFIED ACROSS ALL SCREENS)
           ========================================================================= */}
-      <div id="tutorial-nav-dock-mobile" className="fixed bottom-0 inset-x-0 z-40 xl:hidden landscape:hidden pointer-events-none flex justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <div id="tutorial-nav-dock-mobile" className="fixed bottom-0 inset-x-0 z-40 pointer-events-none flex justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <div className={`pointer-events-auto w-full max-w-md p-1.5 rounded-3xl border flex items-center justify-around shadow-2xl backdrop-blur-2xl transition-all ${
           isDark
             ? "bg-[#07070a]/85 border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.8)]"

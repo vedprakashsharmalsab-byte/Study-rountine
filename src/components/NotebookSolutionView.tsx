@@ -30,7 +30,10 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
     if (isPureMathDerivation) return null;
     if (!question.answer) return [];
 
-    const answer = question.answer.trim();
+    const answer = question.answer
+      .replace(/^CBSE Topper Answer Sheet[\s\S]*?Full Score:[^\n]*\n+/i, "")
+      .replace(/^Governing Formula:[^\n]*\n+/i, "")
+      .trim();
 
     // Helper to format sub-points inside a part (e.g., (1)... (2)... or bullets)
     const formatSubItems = (text: string) => {
@@ -106,7 +109,7 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
         }`}
       >
         {/* Top Margin Header */}
-        <div className="flex items-center justify-between px-5 sm:px-8 pt-4 pb-3 border-b border-current/10">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-4 sm:px-8 pt-4 pb-3 border-b border-current/10">
           <div className="flex items-center gap-2.5">
             <span className={`px-2.5 py-0.5 rounded-md text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider ${
               isDark ? "bg-red-500/20 text-red-400 border border-red-500/30" : "bg-red-50 text-red-700 border border-red-300"
@@ -118,13 +121,16 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
             </span>
           </div>
 
-          <div className="flex items-center gap-3 text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono">
             {question.formula && (
-              <span className={`text-[11px] font-semibold hidden md:inline ${isDark ? "text-cyan-400" : "text-blue-800"}`}>
-                Governing Formula: {question.formula}
-              </span>
+              <div className={`text-[11px] font-semibold inline-flex items-center gap-1.5 ${isDark ? "text-cyan-400" : "text-blue-800"}`}>
+                <span className="shrink-0 opacity-80">Governing Formula:</span>
+                <span className="font-sans font-medium text-xs">
+                  <PremiumMathRenderer inline content={question.formula} isDark={isDark} />
+                </span>
+              </div>
             )}
-            <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${
+            <span className={`text-[11px] font-bold px-2 py-0.5 rounded border shrink-0 ${
               isDark ? "bg-emerald-950/40 text-emerald-400 border-emerald-500/30" : "bg-emerald-50 text-emerald-800 border-emerald-300"
             }`}>
               Full Score: {question.marks} / {question.marks} Marks

@@ -19,7 +19,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "= √((-6)² + 8²) = √(36 + 64) = √100 = 10"
     ],
     explanation: "Apply the distance formula with origin (0, 0): d = √(x² + y²).",
-    formula: "d = \\sqrt{x² + y²}",
+    formula: "d = \\sqrt{x^2 + y^2}",
     examinerNote: "(-6)² = +36, not -36. Students often sign-error negative coordinates.",
     source: "CBSE Board 2024 / NCERT Exemplar"
   },
@@ -522,7 +522,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "Area of quadrilateral = 14 + 14 = 28 sq units"
     ],
     explanation: "Divide any quadrilateral along a diagonal into two triangles, compute areas separately, and add.",
-    formula: "\\text{Area(ABCD)} = \\text{Area}(\\triangle ABC) + \\text{Area}(\\triangle ACD)",
+    formula: "\\text{Area}(ABCD) = \\text{Area}(\\triangle ABC) + \\text{Area}(\\triangle ACD)",
     examinerNote: "Split using the diagonal AC. Always check that both triangle areas add up to a reasonable value.",
     source: "NCERT Exemplar / Board 2021"
   },
@@ -544,7 +544,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "OR using formula: Area = ½|2(1-2) + (-2)(2-(-2)) + 5((-2)-1)| = ½|-2-8-15| = ½×25 = 12.5 sq units"
     ],
     explanation: "Verify right angle using Pythagoras theorem: AB² + CA² = BC². Then use legs for area.",
-    formula: "c² = a² + b² \\implies \\text{Right triangle}",
+    formula: "c^2 = a^2 + b^2 \\implies \\text{Right triangle}",
     examinerNote: "State which angle is 90°: 'Since AB² + CA² = BC², right angle is at vertex A.'",
     source: "NCERT Exemplar / Board 2020"
   },
@@ -564,7 +564,7 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
       "= √(4a² + 4b²) = 2√(a² + b²)"
     ],
     explanation: "The two points are symmetric about the origin. Distance = 2 × distance from origin.",
-    formula: "d = 2\\sqrt{a² + b²}",
+    formula: "d = 2\\sqrt{a^2 + b^2}",
     examinerNote: "Recognize symmetry about origin for faster computation.",
     source: "NCERT Exemplar"
   },

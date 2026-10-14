@@ -63,6 +63,17 @@ function convertPlainMathToLatex(text: string): string {
     // Convert degrees
     result = result.replace(/°/g, '^\\circ');
 
+    // Normalize Unicode superscripts to standard LaTeX exponents (^2, ^3, etc.)
+    result = result.replace(/([A-Za-z0-9\)\]\}])²/g, '$1^2');
+    result = result.replace(/([A-Za-z0-9\)\]\}])³/g, '$1^3');
+    result = result.replace(/([A-Za-z0-9\)\]\}])⁴/g, '$1^4');
+    result = result.replace(/([A-Za-z0-9\)\]\}])⁵/g, '$1^5');
+    result = result.replace(/([A-Za-z0-9\)\]\}])⁶/g, '$1^6');
+    result = result.replace(/([A-Za-z0-9\)\]\}])⁷/g, '$1^7');
+    result = result.replace(/([A-Za-z0-9\)\]\}])⁸/g, '$1^8');
+    result = result.replace(/([A-Za-z0-9\)\]\}])⁹/g, '$1^9');
+    result = result.replace(/([A-Za-z0-9\)\]\}])⁰/g, '$1^0');
+
     // Fractions
     function extractOperandLeft(str: string, index: number): { text: string, start: number } {
         let start = index - 1;
@@ -199,6 +210,12 @@ function convertPlainMathToLatex(text: string): string {
         }
     }
     
+    // Merge numbers, variables, and operators directly adjacent to math delimiters,
+    // e.g. 2$\pi$ r^2 -> $2\pi r^2$ and $2\pi r^2$ + $\pi r^2$ -> $2\pi r^2 + \pi r^2$
+    out = out.replace(/([0-9A-Za-z]+)\s*\$([^\$]+)\$/g, '$$$1 $2$$');
+    out = out.replace(/\$([^\$]+)\$\s*([0-9A-Za-z\^\{\}]+)/g, '$$$1 $2$$');
+    out = out.replace(/\$([^\$]+)\$\s*([\+\-\=\<\>\*\/])\s*\$([^\$]+)\$/g, '$$$1 $2 $3$$');
+
     // Clean up overlapping $ 
     out = out.replace(/\$([^\$]+)\$\s*\$([^\$]+)\$/g, '$$$1 $2$$');
     out = out.replace(/\$\s*\$/g, ' ');
@@ -220,6 +237,24 @@ function preprocessMathContent(raw: string): string {
   // Safely convert escaped newlines (\n) to actual newlines, preserving LaTeX commands that start with \n (like \neq, \nabla, \nu)
   let text = raw.replace(/\\n(?!(?:eq|abla|u|ot|eg|otin|parallel|Rightarrow)\b)/g, '\n').trim();
   text = text.replace(/\\{2,}([a-zA-Z]+)/g, '\\$1');
+
+  // Standalone formula detection: If the raw text is a standalone mathematical expression
+  // containing '=' or LaTeX commands like \pi, \frac, \sqrt, etc., wrap it in $...$
+  const isStandaloneFormula = !text.includes('\n') && !text.includes('$') &&
+    (/^[A-Za-z0-9_\{\}\s\+\-\*\/\^\(\)\\,=:\.<>~\|\u0370-\u03FF\\]+$/.test(text)) &&
+    (/[=<>~]|\\(?:pi|frac|sqrt|text|rho|theta|alpha|beta|gamma|lambda|Delta|Omega|times|implies|pm)\b/.test(text)) &&
+    !/\b(the|and|or|is|are|was|were|find|calculate|prove|which|when|where|what|how|show|that|given|let)\b/i.test(text);
+
+  if (isStandaloneFormula) {
+    let cleanFormula = text
+      .replace(/([A-Za-z0-9\)\]\}])²/g, '$1^2')
+      .replace(/([A-Za-z0-9\)\]\}])³/g, '$1^3')
+      .replace(/\bTSA\b/g, '\\text{TSA}')
+      .replace(/\bLSA\b/g, '\\text{LSA}')
+      .replace(/\bCSA\b/g, '\\text{CSA}')
+      .trim();
+    text = `$${cleanFormula}$`;
+  }
 
   if (/^\$\$[\s\S]*\$\$$/.test(text) || (/^\$[^\$]+\$$/.test(text) && !text.slice(1, -1).includes('$'))) {
     if (mathCache.size >= MAX_MATH_CACHE_SIZE) {

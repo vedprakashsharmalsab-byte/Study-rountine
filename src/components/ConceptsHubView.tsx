@@ -1404,10 +1404,10 @@ export default function ConceptsHubView({
                   isDark ? "border-white/10" : "border-slate-200"
                 }`}>
                   {/* Mode Tabs */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <button
                       onClick={() => setMathMasterySubTab("all")}
-                      className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                      className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 ${
                         mathMasterySubTab === "all"
                           ? "bg-blue-600 text-white shadow-md shadow-blue-600/30 scale-[1.02]"
                           : isDark
@@ -1416,14 +1416,14 @@ export default function ConceptsHubView({
                       }`}
                     >
                       <Sparkles className={`w-4 h-4 ${isDark ? "text-amber-300" : "text-amber-400"}`} />
-                      <span>🌟 Complete Masterclass (All 9 Stages in Sequence)</span>
+                      <span>🌟 Complete Masterclass (All 9 Stages)</span>
                     </button>
 
                     <button
                       onClick={() => {
                         if (mathMasterySubTab === "all") setMathMasterySubTab("theory");
                       }}
-                      className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                      className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 ${
                         mathMasterySubTab !== "all"
                           ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30 scale-[1.02]"
                           : isDark

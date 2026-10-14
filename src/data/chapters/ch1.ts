@@ -232,7 +232,7 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
       "Step 8: This contradiction arose because of our incorrect assumption. Hence, √5 is irrational."
     ],
     explanation: "Classic Euclidean proof by contradiction using the Fundamental Theorem of Arithmetic lemma: if a prime divides a square, it must divide the base integer.",
-    formula: "p | a² ⇒ p | a (where p is prime)",
+    formula: "p | a^2 ⇒ p | a (where p is prime)",
     examinerNote: "Mandatory: Must explicitly write 'where a and b are coprime integers'. Omission loses 1/2 mark.",
     source: "CBSE Board 2024 (Set 30/4/1) — Appeared 8 times in last 20 years"
   },
@@ -298,7 +298,7 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
       "Step 6: A rational number cannot equal an irrational number. This contradiction proves our assumption false. Therefore, √2 + √3 is irrational."
     ],
     explanation: "Squaring converts the sum of two radicals into an expression containing a single radical √6, which is easily shown to cause a contradiction.",
-    formula: "(√a + √b)² = a + b + 2√(ab)",
+    formula: "(√a + √b)^2 = a + b + 2√(ab)",
     examinerNote: "Squaring both sides first is the cleanest topper method for sum of two radicals.",
     source: "CBSE Board 2018 (Series AJM)"
   },
@@ -454,7 +454,7 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
       "Step 5: Distinct prime factors are 2, 3, and 7, so there are 3 distinct primes."
     ],
     explanation: "Do not count powers when asked for distinct prime factors: 2, 3, and 7 are 3 unique primes.",
-    formula: "N = 2 × 3 × 7³",
+    formula: "N = 2 × 3 × 7^3",
     examinerNote: "Students often write 5 (1 + 1 + 3) instead of 3. 'Distinct' means unique primes.",
     source: "CBSE Term-1 Board Exam"
   },

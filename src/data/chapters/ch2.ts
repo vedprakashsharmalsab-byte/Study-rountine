@@ -53,7 +53,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 4: Standard form: p(x) = k[x² - Sx + P] = k[x² - (1)x + (-12)] = x² - x - 12 (taking k = 1)."
     ],
     explanation: "Any quadratic polynomial with zeroes α and β is given by k[x² - (α + β)x + αβ].",
-    formula: "p(x) = k[x² - Sx + P]",
+    formula: "p(x) = k[x^2 - Sx + P]",
     examinerNote: "Remember the minus sign before the sum term: x² - Sx + P, NOT x² + Sx + P.",
     source: "CBSE Board 2023 Standard (Set 30/2/1)"
   },
@@ -127,7 +127,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 4: D = 0 implies real and coincident (equal) zeroes. Reason (R) is true and correctly explains (A)."
     ],
     explanation: "When a parabola touches the x-axis at exactly one point, D = 0, giving two equal roots (one distinct value).",
-    formula: "D = b² - 4ac = 0 ⇒ Coincident Zeroes",
+    formula: "D = b^2 - 4ac = 0 ⇒ Coincident Zeroes",
     examinerNote: "Geometrically, the vertex of the parabola touches the x-axis at (2, 0).",
     source: "CBSE Board 2023 All India"
   },
@@ -170,7 +170,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 5: Solve for k:\nk / 2 = 25 / 4 - 21 / 4 = 4 / 4 = 1 ⇒ k = 2."
     ],
     explanation: "Rewrite symmetric expressions in terms of fundamental sum (α + β) and product (αβ) before substituting.",
-    formula: "α² + β² = (α + β)² - 2αβ",
+    formula: "α^2 + β^2 = (α + β)^2 - 2αβ",
     examinerNote: "Be careful when squaring -5/2: (-5/2)² = +25/4.",
     source: "CBSE Board 2023 Standard (Set 30/3/1)"
   },
@@ -189,7 +189,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 4: Quadratic polynomial = k[x² - Sx + P] = k[x² - 6x + 4]. Taking k = 1: x² - 6x + 4."
     ],
     explanation: "Irrational roots of polynomials with rational coefficients always occur in conjugate pairs. Product uses (a+b)(a-b) = a² - b².",
-    formula: "p(x) = k[x² - (α + β)x + αβ]",
+    formula: "p(x) = k[x^2 - (α + β)x + αβ]",
     examinerNote: "Any constant multiple k(x² - 6x + 4) is valid. Taking k = 1 is standard.",
     source: "CBSE Board 2020 Delhi"
   },
@@ -233,7 +233,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 4: Part (iii): α/β + β/α = (α² + β²) / (αβ) = (-3/4) / (7/2) = (-3/4) × (2/7) = -3 / 14."
     ],
     explanation: "Every symmetric rational function of roots can be systematically expressed using only (α + β) and (αβ).",
-    formula: "α/β + β/α = (α² + β²)/(αβ)",
+    formula: "α/β + β/α = (α^2 + β^2)/(αβ)",
     examinerNote: "A negative value for α² + β² indicates that the zeroes are complex (since D = 25 - 56 = -31 < 0), but the algebraic evaluation is 100% correct.",
     source: "CBSE Board 2017 All India & 2024 Standard"
   },
@@ -252,7 +252,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 4: Verification:\nSum of zeroes: α + β = 3/2 + (-1/3) = (9 - 2) / 6 = 7 / 6.\nFormula: -b / a = -(-7) / 6 = 7 / 6. (Sum verified).\nProduct of zeroes: αβ = (3/2) × (-1/3) = -1/2.\nFormula: c / a = -3 / 6 = -1 / 2. (Product verified)."
     ],
     explanation: "Standard form ax² + bx + c must be written first to avoid misidentifying b as -3 and c as -7.",
-    formula: "Standard Form: ax² + bx + c = 0",
+    formula: "Standard Form: ax^2 + bx + c = 0",
     examinerNote: "Classic trap: Students take b = -3 and c = -7 because of the original question ordering.",
     source: "CBSE Board 2020 (Set 30/2/2)"
   },
@@ -277,7 +277,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 6: Alternative Direct Verification:\nSolve x² - 2x - 8 = 0 ⇒ (x - 4)(x + 2) = 0 ⇒ α = 4, β = -2.\nThen 2α + 1 = 2(4) + 1 = 9; 2β + 1 = 2(-2) + 1 = -3.\nNew polynomial zeroes are 9 and -3 ⇒ (x - 9)(x + 3) = x² - 6x - 27. Fully verified!"
     ],
     explanation: "Two valid approaches exist: algebraic symmetric transformation or directly finding α and β when easily factorisable. Both give x² - 6x - 27.",
-    formula: "New Polynomial = k[x² - (Sum_new)x + (Product_new)]",
+    formula: "New Polynomial = k[x^2 - (Sum_new)x + (Product_new)]",
     examinerNote: "Providing the direct factorisation check along with the algebraic method guarantees full 5 marks.",
     source: "CBSE Board 2022 Standard & 2016 All India"
   },
@@ -325,7 +325,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 3: However, (R) explains why it cannot have 3 zeroes, NOT why it has zero zeroes (which is due to D < 0). Hence, (R) is not the correct explanation of (A)."
     ],
     explanation: "Both statements are factually true, but the absence of real zeroes is explained by the negative discriminant (D < 0), not by the upper bound on zeroes.",
-    formula: "D = b² - 4ac; Real zeroes exist iff D ≥ 0",
+    formula: "D = b^2 - 4ac; Real zeroes exist iff D ≥ 0",
     examinerNote: "Very common board trap in Assertion-Reason questions: students confuse two independently true facts with a causal explanation.",
     source: "CBSE 2024 Standard Board Examination"
   },
@@ -425,7 +425,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 6: Verification: For k = 6, x² - 5x + 6 = (x - 3)(x - 2) = 0 ⇒ zeroes are 3 and 2. 3 - 2 = 1. Verified!"
     ],
     explanation: "The golden identity (α - β)² = (α + β)² - 4αβ connects difference of zeroes to their sum and product.",
-    formula: "(α - β)² = (α + β)² - 4αβ",
+    formula: "(α - β)^2 = (α + β)^2 - 4αβ",
     examinerNote: "Always write the verification step: checking that 3 - 2 = 1 confirms k = 6 is 100% correct.",
     source: "CBSE Board 2023 Standard (Set 30/1/2)"
   },
@@ -446,7 +446,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 6: Taking k = c (to clear fraction): q(x) = cx² + bx + a."
     ],
     explanation: "Reversing the coefficients of a polynomial inverts its roots: the reciprocal polynomial of ax² + bx + c is cx² + bx + a.",
-    formula: "Reciprocal polynomial of ax² + bx + c is cx² + bx + a",
+    formula: "Reciprocal polynomial of ax^2 + bx + c is cx^2 + bx + a",
     examinerNote: "This is a recurring 3-mark theoretical derivation. Writing both k[x² + (b/c)x + a/c] and cx² + bx + a gets full marks.",
     source: "CBSE Board 2024 Standard"
   },
@@ -468,7 +468,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 7: Verification: x² - 8x + 12 = (x - 6)(x - 2) = 0 ⇒ zeroes are 6 and 2. 6² + 2² = 36 + 4 = 40. Verified!"
     ],
     explanation: "Express α² + β² as (α + β)² - 2αβ and solve the linear equation in k.",
-    formula: "α² + β² = (α + β)² - 2αβ",
+    formula: "α^2 + β^2 = (α + β)^2 - 2αβ",
     examinerNote: "Do not write (α + β)² = α² + β². The cross term 2αβ must be subtracted.",
     source: "CBSE All India Board 2018"
   },
@@ -520,7 +520,7 @@ export const CH2_QUESTIONS: VaultQuestion[] = [
       "Step 7: The required polynomial is:\nq(x) = k[x² - (28/9)x + 1/3] = k[(9x² - 28x + 3)/9]. Taking k = 9: 9x² - 28x + 3."
     ],
     explanation: "Product of new zeroes simplifies neatly: (α²/β) × (β²/α) = αβ = 1/3. Sum requires the cubic identity.",
-    formula: "z₁ · z₂ = αβ; z₁ + z₂ = (α³ + β³) / (αβ)",
+    formula: "z₁ · z₂ = αβ; z₁ + z₂ = (α^3 + β^3) / (αβ)",
     examinerNote: "Notice how the product simplifies directly to αβ without any messy fractions.",
     source: "CBSE Board 2023 Standard (Set 30/2/1)"
   },
