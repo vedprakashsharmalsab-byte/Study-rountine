@@ -626,41 +626,28 @@ summary,
 
 /* Base Fraction Alignment & Generous "Upon" Spacing */
 .math-renderer .katex .mfrac {
-  vertical-align: middle !important;
-  padding: 0 0.25em !important;
-  margin: 0 0.15em !important;
+  padding: 0 0.2em !important;
 }
 
-/* Explicit Fraction Line Thickness & Clear Contrast */
+/* Explicit Fraction Line Thickness & Clear Contrast without vertical displacement */
 .math-renderer .katex .mfrac .frac-line {
-  border-bottom-width: 1.75px !important;
-  min-height: 1.75px !important;
   border-bottom-color: currentColor !important;
-  margin: 0.15em 0 !important;
 }
 
-/* Generous vertical clearance for numerator & denominator */
+/* Maintain KaTeX internal vertical geometry for numerator & denominator */
 .math-renderer .katex .mfrac .vlist-t {
-  line-height: 1.55;
-  margin-top: 0.18em;
-  margin-bottom: 0.18em;
+  line-height: normal;
 }
 
-/* Compound fractions (nested fractions) breathing room */
+/* Compound fractions (nested fractions) horizontal breathing room */
 .math-renderer .katex .mfrac .mfrac {
-  margin: 0.25em 0.2em !important;
-  vertical-align: middle !important;
-}
-
-.math-renderer .katex .mfrac .mfrac .frac-line {
-  border-bottom-width: 1.5px !important;
-  min-height: 1.5px !important;
+  padding: 0 0.15em !important;
 }
 
 .math-renderer span.katex {
-  line-height: 1.45;
+  line-height: normal;
   vertical-align: -0.06em;
-  padding: 0 0.15em;
+  padding: 0 0.1em;
 }
 
 .math-renderer-inline p {

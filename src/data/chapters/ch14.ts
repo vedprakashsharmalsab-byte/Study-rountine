@@ -545,13 +545,13 @@ Step 4: ∴ P(not white) = 11/17. [Using P(E) = Number of favourable outcomes / 
     "id": "vq_14_board_23",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 6 red balls, 7 black balls, and 7 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 6 (red) + 7 (black) + 7 (white) = 20. ∴ n(S) = 20. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 6. ∴ P(red) = 6/20. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -597,13 +597,13 @@ Step 4: ∴ P(not white) = 11/16. [Using P(E) = Number of favourable outcomes / 
     "id": "vq_14_board_25",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 4 red balls, 4 black balls, and 6 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 4 (red) + 4 (black) + 6 (white) = 14. ∴ n(S) = 14. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 4. ∴ P(red) = 4/14. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -701,13 +701,13 @@ Step 4: ∴ P(not white) = 10/16. [Using P(E) = Number of favourable outcomes / 
     "id": "vq_14_board_29",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 4 red balls, 8 black balls, and 7 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 4 (red) + 8 (black) + 7 (white) = 19. ∴ n(S) = 19. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 4. ∴ P(red) = 4/19. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -753,13 +753,13 @@ Step 4: ∴ P(not white) = 9/14. [Using P(E) = Number of favourable outcomes / T
     "id": "vq_14_board_31",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 6 red balls, 5 black balls, and 6 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 6 (red) + 5 (black) + 6 (white) = 17. ∴ n(S) = 17. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 6. ∴ P(red) = 6/17. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -857,13 +857,13 @@ Step 4: ∴ P(not white) = 13/19. [Using P(E) = Number of favourable outcomes / 
     "id": "vq_14_board_35",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 6 red balls, 4 black balls, and 7 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 6 (red) + 4 (black) + 7 (white) = 17. ∴ n(S) = 17. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 6. ∴ P(red) = 6/17. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -909,13 +909,13 @@ Step 4: ∴ P(not white) = 8/13. [Using P(E) = Number of favourable outcomes / T
     "id": "vq_14_board_37",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 4 red balls, 6 black balls, and 6 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 4 (red) + 6 (black) + 6 (white) = 16. ∴ n(S) = 16. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 4. ∴ P(red) = 4/16. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -1013,13 +1013,13 @@ Step 4: ∴ P(not white) = 7/13. [Using P(E) = Number of favourable outcomes / T
     "id": "vq_14_board_41",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 4 red balls, 5 black balls, and 7 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 4 (red) + 5 (black) + 7 (white) = 16. ∴ n(S) = 16. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 4. ∴ P(red) = 4/16. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -1065,13 +1065,13 @@ Step 4: ∴ P(not white) = 11/16. [Using P(E) = Number of favourable outcomes / 
     "id": "vq_14_board_43",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 6 red balls, 7 black balls, and 6 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 6 (red) + 7 (black) + 6 (white) = 19. ∴ n(S) = 19. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 6. ∴ P(red) = 6/19. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -1169,13 +1169,13 @@ Step 4: ∴ P(not white) = 10/16. [Using P(E) = Number of favourable outcomes / 
     "id": "vq_14_board_47",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 6 red balls, 6 black balls, and 7 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 6 (red) + 6 (black) + 7 (white) = 19. ∴ n(S) = 19. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 6. ∴ P(red) = 6/19. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -1221,13 +1221,13 @@ Step 4: ∴ P(not white) = 10/15. [Using P(E) = Number of favourable outcomes / 
     "id": "vq_14_board_49",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 4 red balls, 8 black balls, and 6 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 4 (red) + 8 (black) + 6 (white) = 18. ∴ n(S) = 18. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 4. ∴ P(red) = 4/18. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -1325,13 +1325,13 @@ Step 4: ∴ P(not white) = 9/15. [Using P(E) = Number of favourable outcomes / T
     "id": "vq_14_board_53",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 4 red balls, 7 black balls, and 7 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 4 (red) + 7 (black) + 7 (white) = 18. ∴ n(S) = 18. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 4. ∴ P(red) = 4/18. [Using P(E) = Number of favourable outcomes / Total outcomes]
@@ -1377,13 +1377,13 @@ Step 4: ∴ P(not white) = 13/18. [Using P(E) = Number of favourable outcomes / 
     "id": "vq_14_board_55",
     "chapter": 14,
     "chapterName": "Probability",
-    "marks": 1,
-    "type": "MCQ",
+    "marks": 2,
+    "type": "SA",
     "question": "A bag contains 6 red balls, 4 black balls, and 6 white balls. A ball is drawn at random from the bag. What is the probability that the ball drawn is (i) red, (ii) not white?",
     "answer": `CBSE Topper Answer Sheet
-Section D (1M MCQ)
+Section B (2M SA)
 Governing Formula: P(E) = n(E) / n(S)
-Full Score: 1 / 1 Marks
+Full Score: 2 / 2 Marks
 
 Step 1: Total number of balls = 6 (red) + 4 (black) + 6 (white) = 16. ∴ n(S) = 16. [Given in Problem]
 Step 2: (i) Let E be event of drawing red ball. Number of favourable outcomes = 6. ∴ P(red) = 6/16. [Using P(E) = Number of favourable outcomes / Total outcomes]

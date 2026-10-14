@@ -299,6 +299,48 @@ export const VAULT_CHAPTER_INFO: VaultChapterInfo[] = [
     ]
   },
   {
+    chapter: 7,
+    chapterName: "Coordinate Geometry",
+    emoji: "🗺️",
+    accentColor: "teal",
+    theoryBlocks: [
+      {
+        title: "Distance Formula & Distance from Origin",
+        content: "Distance between P(x₁, y₁) and Q(x₂, y₂) is given by PQ = √[(x₂ − x₁)² + (y₂ − y₁)²]. Distance from origin (0, 0) to any point (x, y) simplifies to d = √(x² + y²). Remember that distance is always non-negative: √[(-k)²] = k.",
+        formula: "d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}"
+      },
+      {
+        title: "Section Formula (Internal Division)",
+        content: "Point P(x, y) dividing the line segment joining A(x₁, y₁) and B(x₂, y₂) internally in the ratio m₁ : m₂ is P = ((m₁x₂ + m₂x₁) / (m₁ + m₂), (m₁y₂ + m₂y₁) / (m₁ + m₂)). For unknown ratio, always assume k : 1, which reduces the problem to one single variable k.",
+        formula: "P(x, y) = \\left( \\frac{m_1 x_2 + m_2 x_1}{m_1 + m_2}, \\frac{m_1 y_2 + m_2 y_1}{m_1 + m_2} \\right)"
+      },
+      {
+        title: "Mid-point Formula & Centroid of Triangle",
+        content: "When m₁ : m₂ = 1 : 1, the section formula yields the Mid-point: M = ((x₁ + x₂)/2, (y₁ + y₂)/2). For a triangle with vertices (x₁, y₁), (x₂, y₂), (x₃, y₃), the Centroid G (point of concurrency of medians) is G = ((x₁ + x₂ + x₃)/3, (y₁ + y₂ + y₃)/3).",
+        formula: "M = \\left( \\frac{x_1 + x_2}{2}, \\frac{y_1 + y_2}{2} \\right), \\quad G = \\left( \\frac{x_1 + x_2 + x_3}{3}, \\frac{y_1 + y_2 + y_3}{3} \\right)"
+      },
+      {
+        title: "Collinearity & Quadrilateral Geometrical Proofs",
+        content: "Three points A, B, C are collinear if the sum of any two distances equals the third (e.g. AB + BC = AC). For quadrilaterals: Parallelogram (diagonals bisect each other using midpoint formula); Rectangle (parallelogram with equal diagonals); Rhombus (all 4 sides equal, diagonals perpendicular); Square (rhombus with equal diagonals). Note: Area of triangle formula is deleted from current syllabus.",
+        formula: "AB + BC = AC \\implies A, B, C \\text{ are collinear}"
+      }
+    ],
+    topTraps: [
+      "Mixing up coordinates: substituting x₂ into y₁ or vice versa in distance or section formula.",
+      "Assuming ratio m₁:m₂ with two variables instead of k:1 — k:1 is twice as fast and avoids algebra errors.",
+      "Forgetting that points on the x-axis have y = 0, and points on the y-axis have x = 0.",
+      "Negative squaring error: (-5)² = +25, not -25! Sign errors inside the square root lose full marks.",
+      "Using the deleted Area of Triangle = 0 formula instead of distance AB + BC = AC or section formula for collinearity."
+    ],
+    keyFormulas: [
+      { name: "Distance Formula", expr: "d = √[(x₂ - x₁)² + (y₂ - y₁)²]" },
+      { name: "Distance from Origin", expr: "d = √(x² + y²)" },
+      { name: "Section Formula", expr: "((m₁x₂ + m₂x₁)/(m₁ + m₂), (m₁y₂ + m₂y₁)/(m₁ + m₂))" },
+      { name: "Midpoint Formula", expr: "((x₁ + x₂)/2, (y₁ + y₂)/2)" },
+      { name: "Centroid", expr: "((x₁ + x₂ + x₃)/3, (y₁ + y₂ + y₃)/3)" }
+    ]
+  },
+  {
     chapter: 8,
     chapterName: "Introduction to Trigonometry",
     emoji: "📊",
@@ -427,6 +469,90 @@ export const VAULT_CHAPTER_INFO: VaultChapterInfo[] = [
       { name: "Supplementary", expr: "∠APB + ∠AOB = 180°" },
       { name: "Circumscribed quad", expr: "AB + CD = BC + DA" },
       { name: "Concentric circles", expr: "Half-chord = √(R²−r²)" },
+    ]
+  },
+  {
+    chapter: 11,
+    chapterName: "Areas Related to Circles",
+    emoji: "🎯",
+    accentColor: "amber",
+    theoryBlocks: [
+      {
+        title: "Area and Perimeter of Circle Essentials",
+        content: "For a circle of radius r: Circumference = 2πr, Area = πr². For a semi-circle: Area = (1/2)πr², Perimeter = πr + 2r (do not forget the diameter base!). For a circular ring of outer radius R and inner radius r: Area = π(R² - r²) = π(R + r)(R - r).",
+        formula: "\\text{Area} = \\pi r^2, \\quad \\text{Circumference} = 2\\pi r, \\quad \\text{Ring Area} = \\pi(R^2 - r^2)"
+      },
+      {
+        title: "Sector of a Circle & Arc Length",
+        content: "A sector is the region bounded by two radii and the arc. For central angle θ: Arc Length l = (θ / 360°) × 2πr. Area of Sector = (θ / 360°) × πr². Alternative relation connecting arc length and area: Area = (1/2) × l × r.",
+        formula: "l = \\frac{\\theta}{360^\\circ} \\times 2\\pi r, \\quad \\text{Area of Sector} = \\frac{\\theta}{360^\\circ} \\times \\pi r^2 = \\frac{1}{2}lr"
+      },
+      {
+        title: "Segment of a Circle (Minor vs Major)",
+        content: "A segment is the region bounded by a chord and its corresponding arc. Area of Minor Segment = Area of Minor Sector − Area of △OAB. For θ = 60°: Area of equilateral △OAB = (√3 / 4)r². For θ = 90°: Area of right △OAB = (1/2)r². Area of Major Segment = Area of Circle − Area of Minor Segment.",
+        formula: "\\text{Area of Minor Segment} = \\frac{\\theta}{360^\\circ}\\pi r^2 - \\text{Area}(\\triangle OAB)"
+      },
+      {
+        title: "Clock Face Problems (Minute Hand & Hour Hand)",
+        content: "A clock dial is 360° divided into 60 minutes or 12 hours. Minute hand moves 360° / 60 = 6° per minute. In 5 minutes, minute hand sweeps 5 × 6° = 30°. In t minutes, θ = 6t°. Hour hand moves 360° / (12 × 60) = 0.5° per minute (30° per hour).",
+        formula: "\\theta_{\\text{minute hand}} = 6^\\circ \\times t \\text{ minutes}"
+      }
+    ],
+    topTraps: [
+      "Using diameter instead of radius in πr² without dividing by 2.",
+      "Forgetting the diameter base (2r) when calculating perimeter of a semicircle or protractor: Perimeter = πr + 2r.",
+      "Confusing sector (pie slice) with segment (region between chord and arc).",
+      "Calculating area of triangle with θ = 120°: remember that the rationalized Class 10 syllabus restricts central angles to 60° and 90°.",
+      "Forgetting to check whether the question specifies π = 3.14 or π = 22/7."
+    ],
+    keyFormulas: [
+      { name: "Sector Area", expr: "Area = (θ/360°) × πr²" },
+      { name: "Arc Length", expr: "l = (θ/360°) × 2πr" },
+      { name: "Sector via Arc", expr: "Area = (1/2) × l × r" },
+      { name: "Minor Segment", expr: "Sector Area - Area of △OAB" },
+      { name: "Ring Area", expr: "π(R² - r²) = π(R + r)(R - r)" }
+    ]
+  },
+  {
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    emoji: "📦",
+    accentColor: "blue",
+    theoryBlocks: [
+      {
+        title: "Master 3D Solids Formulas",
+        content: "Cube: V = a³, LSA = 4a², TSA = 6a². Cuboid: V = lbh, LSA = 2h(l + b), TSA = 2(lb + bh + hl). Cylinder: V = πr²h, CSA = 2πrh, TSA = 2πr(r + h). Cone: l = √(r² + h²), V = (1/3)πr²h, CSA = πrl, TSA = πr(r + l). Sphere: V = (4/3)πr³, TSA = 4πr². Hemisphere: V = (2/3)πr³, CSA = 2πr², TSA = 3πr².",
+        formula: "l = \\sqrt{r^2 + h^2}, \\quad V_{\\text{cone}} = \\frac{1}{3}\\pi r^2 h, \\quad \\text{TSA}_{\\text{hemisphere}} = 3\\pi r^2"
+      },
+      {
+        title: "Combination of Solids Exposed Surfaces Rule",
+        content: "TSA of a combined solid is the sum of the CURVED (exposed) surface areas only: NEVER blindly add total surface areas! When two shapes are glued, the touching boundary faces are hidden inside and disappear from the surface area. For example, Toy (Cone on Hemisphere): TSA = CSA(cone) + CSA(hemisphere) = πrl + 2πr² = πr(l + 2r). Volumes always add directly.",
+        formula: "\\text{TSA}_{\\text{combined}} = \\sum (\\text{Curved Surface Areas of Exposed Faces})"
+      },
+      {
+        title: "Scooping Out (Depression) Principle",
+        content: "Scooping out cavities (e.g. hemispherical or conical depression from a cylinder or cube) INCREASES the surface area because new inner walls are created and exposed to paint: TSA = Original Outer Area + Cavity Surface Area − Removed Flat Base Area. Volume, however, always DECREASES: Remaining Volume = Original Volume − Scooped Volume.",
+        formula: "\\text{Remaining Volume} = V_{\\text{original}} - V_{\\text{cavity}}"
+      },
+      {
+        title: "Conversion of Solids (Melting & Recasting) and Water Flow",
+        content: "When metal is melted and recast into smaller objects: Volume of Big Solid = n × Volume of One Small Solid. pi usually cancels on both sides — never multiply out decimals prematurely! Water Flow Rate: In time t at speed v, water forms a cylinder of length H = v × t. Volume of water discharged = Cross-sectional area × speed × time = πr² × (v · t). Always convert all dimensions to uniform units (meters) first.",
+        formula: "n = \\frac{V_{\\text{original}}}{V_{\\text{recast}}}, \\quad \\text{Volume of Flow} = \\pi r^2 \\times (v \\cdot t)"
+      }
+    ],
+    topTraps: [
+      "Adding base circular areas that are glued inside a combined solid — only paintable exposed surfaces count for TSA!",
+      "Confusing vertical height h with slant height l in cone CSA = πrl — always use l = √(r² + h²).",
+      "Using diameter instead of radius in hemisphere and cylinder formulas.",
+      "Writing TSA of hemisphere as 2πr² instead of 3πr² for a solid hemisphere.",
+      "Mixed units in water flow problems: mixing km/h with cm pipe radius. Convert everything to meters and seconds/hours first!"
+    ],
+    keyFormulas: [
+      { name: "Cone Slant Height", expr: "l = √(r² + h²)" },
+      { name: "Cone CSA & Volume", expr: "CSA = πrl,  V = (1/3)πr²h" },
+      { name: "Hemisphere TSA", expr: "TSA = 3πr² (Solid)" },
+      { name: "Recasting Count", expr: "n = V(big) / V(small)" },
+      { name: "Water Flow Volume", expr: "V = Area × Speed × Time" }
     ]
   },
   {

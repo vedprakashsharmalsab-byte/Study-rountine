@@ -31,16 +31,16 @@ export const CH7_QUESTIONS: VaultQuestion[] = [
     type: "MCQ",
     question: "The mid-point of the segment joining A(2a, 4) and B(-2, 3b) is M(1, 2a + 1). The values of a and b are:\n(a) a = 1, b = 1\n(b) a = 2, b = 1\n(c) a = 1, b = 2\n(d) a = 2, b = 2",
     options: ["a = 1, b = 1", "a = 2, b = 1", "a = 1, b = 2", "a = 2, b = 2"],
-    correctOption: 0,
-    answer: "Option (a): a = 1, b = 1",
+    correctOption: 3,
+    answer: "Option (d): a = 2, b = 2",
     steps: [
-      "Mid-point formula: M = ((2a + (-2))/2, (4 + 3b)/2)",
-      "x-coordinate: (2a - 2)/2 = 1 ⟹ 2a - 2 = 2 ⟹ a = 2... Wait, let's check again.",
-      "x: (2a - 2)/2 = 1 ⟹ 2a - 2 = 2 ⟹ a = 2. But y: (4 + 3b)/2 = 2(2) + 1 = 5 ⟹ 4 + 3b = 10 ⟹ 3b = 6 ⟹ b = 2. So a=2, b=2 → option (d). Let us reverify: a=2, b=2, M = ((4-2)/2, (4+6)/2) = (1, 5). 2a+1 = 5. ✓ Option (d) is correct.",
-      "CORRECTION: Answer is option (d): a=2, b=2."
+      "Mid-point formula: M = ((2a + (-2))/2, (4 + 3b)/2) = (1, 2a + 1)",
+      "Equating x-coordinates: (2a - 2)/2 = 1 ⟹ 2a - 2 = 2 ⟹ 2a = 4 ⟹ a = 2",
+      "Equating y-coordinates: (4 + 3b)/2 = 2a + 1 = 2(2) + 1 = 5 ⟹ 4 + 3b = 10 ⟹ 3b = 6 ⟹ b = 2",
+      "Therefore, a = 2 and b = 2, which corresponds to Option (d)."
     ],
     explanation: "Using the midpoint formula: ((2a-2)/2, (4+3b)/2) = (1, 2a+1). From x: a=2. From y: (4+6)/2 = 5 = 2(2)+1 = 5 ✓",
-    formula: "M = \\left(\\frac{x₁+x₂}{2}, \\frac{y₁+y₂}{2}\\right)",
+    formula: "M = \\left(\\frac{x_1+x_2}{2}, \\frac{y_1+y_2}{2}\\right)",
     examinerNote: "Always substitute back to verify both conditions are satisfied.",
     source: "CBSE Sample Paper 2025"
   },

@@ -26,11 +26,16 @@ interface PremiumMathRendererProps {
  */
 function convertPlainMathToLatex(text: string): string {
     // Fast path: if token doesn't contain operators, symbols, or math keywords, return as-is
-    if (!/[°\/\\=\+\-\*^]|\b(sqrt|sin|cos|tan|cosec|sec|cot|theta|pi|alpha|beta|gamma)\b/i.test(text)) {
+    if (!/[°\/\\=\+\-\*^]|\b(sqrt|sin|cos|tan|cosec|sec|cot|theta|pi|alpha|beta|gamma|upon)\b/i.test(text)) {
         return text;
     }
 
     let result = text;
+
+    // Convert plain text "upon" (e.g. "AD upon DB", "P upon B", "1 upon 2") to LaTeX fractions
+    result = result.replace(/\b([A-Za-z0-9_]+)\s+upon\s+([A-Za-z0-9_]+)\b/gi, (match, num, den) => {
+        return `$\\displaystyle \\frac{${num}}{${den}}$`;
+    });
 
     // Convert degrees
     result = result.replace(/°/g, '^\\circ');
@@ -210,8 +215,13 @@ function preprocessMathContent(raw: string): string {
     
     let out = convertPlainMathToLatex(token);
 
-    out = out.replace(/(?<!\$)((\\(?:d?frac)\{[^{}]+\}\{[^{}]+\}))(?!\$)/g, '$$$1$$');
-    out = out.replace(/(?<!\$)(\\sqrt(?:\[[0-9]+\])?\{[^{}]+\})(?!\$)/g, '$$$1$$');
+    // Support nested braces up to 3 levels deep for \frac, \dfrac, and \sqrt
+    const balancedBraces = '\\{(?:[^{}]*|\\{(?:[^{}]*|\\{[^{}]*\\})*\\})*\\}';
+    const fracRegex = new RegExp(`(?<!\\$)(\\\\(?:d?frac)${balancedBraces}${balancedBraces})(?!\\$)`, 'g');
+    const sqrtRegex = new RegExp(`(?<!\\$)(\\\\sqrt(?:\\[[0-9]+\\])?${balancedBraces})(?!\\$)`, 'g');
+
+    out = out.replace(fracRegex, '$$$1$$');
+    out = out.replace(sqrtRegex, '$$$1$$');
     
     out = out.replace(/([^\n])\n([^\n])/g, '$1  \n$2');
     return out;

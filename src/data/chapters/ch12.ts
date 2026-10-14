@@ -400,7 +400,7 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
     marks: 3,
     type: "SA",
     question: "A solid toy is in the form of a right circular cylinder with a hemispherical shape at one end and a cone at the other end. Their common diameter is 4.2 cm. The height of the cylindrical and conical portions are 12 cm and 7 cm respectively. Find the total surface area of the toy. (Use π = 22/7)",
-    answer: "TSA ≈ 214.5 cm²",
+    answer: "TSA ≈ 234.31 cm²",
     steps: [
       "r = 2.1 cm, h_cyl = 12 cm, h_cone = 7 cm",
       "Slant height of cone: l = √(r² + h²) = √(4.41 + 49) = √53.41 ≈ 7.31 cm",
@@ -441,17 +441,310 @@ export const CH12_QUESTIONS: VaultQuestion[] = [
     marks: 2,
     type: "VSA",
     question: "The radii of the top and bottom of a bucket of slant height 45 cm are 28 cm and 7 cm respectively. Find the total surface area of the bucket. (Use π = 22/7)",
-    answer: "TSA = 8614.5 cm²",
+    answer: "TSA = 5104 cm²",
     steps: [
-      "Bucket is a frustum. R = 28, r = 7, l = 45",
+      "Bucket is an open frustum. R = 28 cm, r = 7 cm, l = 45 cm",
       "CSA of frustum = π(R + r)l = (22/7)(28 + 7)(45) = (22/7) × 35 × 45 = 22 × 5 × 45 = 4950 cm²",
-      "Area of base (smaller circle) = πr² = (22/7) × 49 = 154 cm²",
-      "Area of top (larger circle) = πR² = (22/7) × 784 = 2464 cm²",
-      "But bucket is open at top! TSA = CSA + base only = 4950 + 154 = 5104 cm²"
+      "Area of bottom circular base = πr² = (22/7) × 7² = 154 cm²",
+      "Since bucket is open at top, TSA = CSA + base area only = 4950 + 154 = 5104 cm²"
     ],
     explanation: "A bucket is an open frustum (no top). TSA = π(R+r)l + πr² (curved + bottom only).",
     formula: "TSA_{bucket} = \\pi(R+r)l + \\pi r²",
-    examinerNote: "Bucket is open at the top (larger circle). Only add the BOTTOM (smaller) circular base.",
+    examinerNote: "Bucket is open at the top (larger circle). Only add the BOTTOM (smaller) circular base. Note: Frustums are deleted in current NCERT, but this tests composite surface reasoning.",
     source: "NCERT Exercise 13.4 Q4 / Board 2022"
+  },
+  {
+    id: "ch12_q22",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 5,
+    type: "LA",
+    question: "An exhibition tent is in the form of a cylinder surmounted by a cone. The height of the tent above the ground is 85 m and the height of the cylindrical part is 50 m. If the diameter of the base is 168 m, find the quantity of canvas required to make the tent. Allow 20% extra for folds and for stitching. Give your answer to the nearest m². (Use π = 22/7)",
+    answer: "Total canvas required = 60,509 m²",
+    steps: [
+      "Base radius r = 168 / 2 = 84 m",
+      "Height of cylindrical part H = 50 m",
+      "Height of conical part h = 85 - 50 = 35 m",
+      "Slant height of cone: l = √(r² + h²) = √(84² + 35²) = √(7056 + 1225) = √8281 = 91 m",
+      "Curved surface area of tent = CSA(cylinder) + CSA(cone) = 2πrH + πrl = πr(2H + l)",
+      "CSA = (22/7) × 84 × [2(50) + 91] = 22 × 12 × (100 + 91) = 264 × 191 = 50,424 m²",
+      "Allowance for folds and stitching = 20% of 50,424 = (20/100) × 50,424 = 10,084.8 m²",
+      "Total canvas required = 50,424 + 10,084.8 = 60,508.8 m² ≈ 60,509 m²"
+    ],
+    explanation: "The tent has canvas only on the curved cylindrical wall and conical roof (no canvas on ground). Calculate total CSA then add the 20% stitching margin.",
+    formula: "\\text{CSA} = 2\\pi r H + \\pi r l = \\pi r(2H + l), \\quad l = \\sqrt{r^2 + h^2}",
+    examinerNote: "Do not add the base circle of the cylinder (ground has no canvas) or the touching circle between cylinder and cone (interior).",
+    source: "Training Material Notes / CBSE Board Exemplar"
+  },
+  {
+    id: "ch12_q23",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 3,
+    type: "SA",
+    question: "A solid decorative tank is made in the shape of a cylinder with a hemispherical depression at one end and open at the other end. The height of the cylinder is 1.45 m and its radius is 30 cm. Find the total surface area of the tank in m². (Use π = 22/7)",
+    answer: "TSA = 3.3 m²",
+    steps: [
+      "Radius r = 30 cm = 0.3 m, Height of cylinder h = 1.45 m",
+      "Curved surface area of cylinder = 2πrh",
+      "Surface area of hemispherical depression = 2πr²",
+      "Total surface area = CSA(cylinder) + CSA(hemisphere) = 2πrh + 2πr² = 2πr(h + r)",
+      "TSA = 2 × (22/7) × 0.30 × (1.45 + 0.30) = 2 × (22/7) × 0.30 × 1.75",
+      "Since 1.75 / 7 = 0.25: TSA = 2 × 22 × 0.30 × 0.25 = 44 × 0.075 = 3.3 m²"
+    ],
+    explanation: "Depression carves out an inner hemispherical curved face, adding 2πr² to the outer cylindrical surface area.",
+    formula: "\\text{TSA} = 2\\pi r h + 2\\pi r^2 = 2\\pi r(h + r)",
+    examinerNote: "Unit consistency is critical: convert 30 cm to 0.3 m before calculating, or calculate in cm² (33,000 cm²) and divide by 10,000.",
+    source: "Training Material Notes / NCERT Exemplar"
+  },
+  {
+    id: "ch12_q24",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 5,
+    type: "LA",
+    question: "A solid is in the form of a solid cylinder mounted on a solid hemisphere with the same radius. The diameter of the hemisphere is 21 cm and the total height of the solid is 24.5 cm. Determine the weight of the solid if the weight of 1 cm³ of the material is 6 gm. (Use π = 22/7)",
+    answer: "Weight = 43.659 kg",
+    steps: [
+      "Radius of hemisphere and cylinder: r = 21 / 2 = 10.5 cm",
+      "Total height = 24.5 cm ⟹ Height of cylinder h = 24.5 - r = 24.5 - 10.5 = 14 cm",
+      "Volume of hemispherical part = (2/3)πr³ = (2/3) × (22/7) × (10.5)³ = 2425.5 cm³",
+      "Volume of cylindrical part = πr²h = (22/7) × (10.5)² × 14 = 44 × 110.25 = 4851 cm³",
+      "Total volume of solid = 2425.5 + 4851 = 7276.5 cm³",
+      "Weight of solid = Volume × Density = 7276.5 × 6 g = 43,659 g = 43.659 kg"
+    ],
+    explanation: "Volumes of compound solids always add directly. Find the cylinder height by subtracting the hemisphere radius from the total height.",
+    formula: "V_{\\text{total}} = \\frac{2}{3}\\pi r^3 + \\pi r^2 h, \\quad \\text{Weight} = V \\times \\rho",
+    examinerNote: "Subtracting radius from total height to get cylinder height is the most common student pitfall in composite solid problems.",
+    source: "Training Material Notes / CBSE Board PYQ"
+  },
+  {
+    id: "ch12_q25",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 3,
+    type: "SA",
+    question: "A solid is in the form of a cone mounted on a hemisphere such that the center of the base of the cone coincides with the center of the base of the hemisphere. The slant height of the cone is l and the radius of the base of the cone is r/2, where r is the radius of the hemisphere. Prove that the surface area of the solid is (π/4)(11r + 2l)r sq. units.",
+    answer: "Surface Area = (π/4)(11r + 2l)r sq. units (Proved)",
+    steps: [
+      "Curved surface area of the hemisphere = 2πr²",
+      "Curved surface area of the cone = π × (r/2) × l = (1/2)πrl",
+      "Area of exposed flat annular ring on top of hemisphere = πr² - π(r/2)² = πr² - (1/4)πr² = (3/4)πr²",
+      "Total surface area = CSA(hemisphere) + CSA(cone) + Area of exposed ring",
+      "TSA = 2πr² + (1/2)πrl + (3/4)πr² = (11/4)πr² + (1/2)πrl",
+      "Factoring out (π/4)r: TSA = (π/4)r(11r + 2l) sq. units. Hence Proved!"
+    ],
+    explanation: "Because the cone's base is smaller than the hemisphere's top (radius r/2 vs r), an annular ring of the flat base remains exposed and must be included in the surface area.",
+    formula: "\\text{TSA} = 2\\pi r^2 + \\pi\\left(\\frac{r}{2}\\right)l + \\left[\\pi r^2 - \\pi\\left(\\frac{r}{2}\\right)^2\\right] = \\frac{\\pi r}{4}(11r + 2l)",
+    examinerNote: "Do not forget the exposed ring on top of the hemisphere! Many students omit πr² - π(r/2)².",
+    source: "Training Material Notes / NCERT Exemplar"
+  },
+  {
+    id: "ch12_q26",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 3,
+    type: "SA",
+    question: "A conical vessel of internal radius 12 cm and height 50 cm is full of water. The water is emptied into a cylindrical vessel with internal radius 10 cm. Find the height to which the liquid rises in the cylindrical vessel.",
+    answer: "Height of water rise = 24 cm",
+    steps: [
+      "Volume of water in cone = (1/3)πr₁²h₁ = (1/3) × π × 12² × 50 = (1/3) × π × 144 × 50 = 2400π cm³",
+      "Let h₂ be the height of water rise in the cylinder of radius r₂ = 10 cm",
+      "Volume of water in cylinder = πr₂²h₂ = π × 10² × h₂ = 100πh₂ cm³",
+      "Since volume of water is conserved: 100πh₂ = 2400π",
+      "Dividing both sides by 100π: h₂ = 24 cm"
+    ],
+    explanation: "When liquid is poured between vessels, the volume remains constant. Canceling π avoids unnecessary multiplications.",
+    formula: "\\frac{1}{3}\\pi r_1^2 h_1 = \\pi r_2^2 h_2",
+    examinerNote: "Never substitute π = 22/7 or 3.14 when equating volumes! π cancels cleanly on both sides.",
+    source: "Training Material Notes / CBSE Board 2023"
+  },
+  {
+    id: "ch12_q27",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 3,
+    type: "SA",
+    question: "A cubical block of side 7 cm is surmounted by a hemisphere. What is the greatest diameter the hemisphere can have? Find the surface area of the solid. (Use π = 22/7)",
+    answer: "Greatest diameter = 7 cm, Surface Area = 332.5 cm²",
+    steps: [
+      "The greatest diameter of the hemisphere that can fit on the 7 cm × 7 cm face equals the side of the cube = 7 cm.",
+      "Radius of hemisphere r = 7 / 2 = 3.5 cm",
+      "Total surface area = Total surface area of cube + Curved surface area of hemisphere - Base area of hemisphere",
+      "TSA = 6a² + 2πr² - πr² = 6a² + πr²",
+      "TSA = 6(7)² + (22/7) × (3.5)² = 6 × 49 + (22/7) × (7/2) × (7/2)",
+      "TSA = 294 + 77 / 2 = 294 + 38.5 = 332.5 cm²"
+    ],
+    explanation: "Mounting the hemisphere covers a circular region πr² on the top face of the cube, but exposes the curved dome 2πr², giving a net increase of +πr².",
+    formula: "\\text{TSA} = 6a^2 + \\pi r^2",
+    examinerNote: "Formula is 6a² + πr² (not 6a² + 2πr²). The circular base of the hemisphere hides that portion of the cube's top face.",
+    source: "Training Material Notes / NCERT Exercise 12.1 Q4"
+  },
+  {
+    id: "ch12_q28",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 3,
+    type: "SA",
+    question: "A hemispherical depression is cut out from one face of a cubical wooden block such that the diameter l of the hemisphere is equal to the edge of the cube. Determine the surface area of the remaining solid.",
+    answer: "Surface area = (l²/4)(24 + π) sq. units",
+    steps: [
+      "Edge of the cube = l ⟹ Surface area of 6 faces of cube = 6l²",
+      "Diameter of hemisphere = l ⟹ Radius r = l / 2",
+      "Curved surface area of scooped hemispherical cavity = 2πr² = 2π(l/2)² = (πl²)/2",
+      "Area of top circular opening removed from cube face = πr² = π(l/2)² = (πl²)/4",
+      "Surface area of remaining solid = 6l² + 2πr² - πr² = 6l² + πr²",
+      "TSA = 6l² + (πl²)/4 = (24l² + πl²)/4 = (l²/4)(24 + π) sq. units"
+    ],
+    explanation: "Cutting out a cavity increases the paintable surface area by substituting the removed flat circle with a curved bowl.",
+    formula: "\\text{TSA} = 6l^2 + \\pi\\left(\\frac{l}{2}\\right)^2 = \\frac{l^2}{4}(24 + \\pi)",
+    examinerNote: "Notice that both surmounting a hemisphere and scooping out a hemisphere yield the exact same total surface area formula: 6a² + πr²!",
+    source: "Training Material Notes / NCERT Exercise 12.1 Q5"
+  },
+  {
+    id: "ch12_q29",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 3,
+    type: "SA",
+    question: "A medicine capsule is in the shape of a cylinder with two hemispheres stuck to each of its ends. The length of the entire capsule is 14 mm and the diameter of the capsule is 5 mm. Find its surface area. (Use π = 22/7)",
+    answer: "Surface Area = 220 mm²",
+    steps: [
+      "Diameter = 5 mm ⟹ Radius r = 5 / 2 = 2.5 mm",
+      "Length of cylindrical portion h = Total length - 2r = 14 - 2(2.5) = 14 - 5 = 9 mm",
+      "Curved surface area of cylindrical part = 2πrh = 2 × π × 2.5 × 9 = 45π mm²",
+      "Curved surface area of two hemispherical ends = 2 × (2πr²) = 4πr² = 4 × π × (2.5)² = 25π mm²",
+      "Total surface area = CSA(cylinder) + 2 × CSA(hemisphere) = 45π + 25π = 70π mm²",
+      "TSA = 70 × (22/7) = 10 × 22 = 220 mm²"
+    ],
+    explanation: "The capsule consists of a cylinder plus two hemispherical caps that together form a complete sphere of surface area 4πr².",
+    formula: "\\text{TSA} = 2\\pi rh + 4\\pi r^2 = 2\\pi r(h + 2r)",
+    examinerNote: "Do not forget to subtract 2r (both hemispherical ends) to find cylinder height: h = 14 - 5 = 9 mm.",
+    source: "Training Material Notes / NCERT Exercise 12.1 Q6"
+  },
+  {
+    id: "ch12_q30",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 4,
+    type: "Case Study",
+    question: "A tent is in the shape of a cylinder surmounted by a conical top. If the height and diameter of the cylindrical part are 2.1 m and 4 m respectively, and the slant height of the conical top is 2.8 m, find the area of the canvas used for making the tent. Also, find the cost of the canvas of the tent at the rate of ₹500 per m². (Note: The base of the tent is not covered with canvas).",
+    answer: "Canvas Area = 44 m², Total Cost = ₹22,000",
+    steps: [
+      "Radius of cylinder and cone: r = 4 / 2 = 2 m",
+      "Height of cylinder h = 2.1 m, Slant height of cone l = 2.8 m",
+      "Curved surface area of cylindrical part = 2πrh = 2 × (22/7) × 2 × 2.1 = 4 × (22/7) × 2.1 = 26.4 m²",
+      "Curved surface area of conical part = πrl = (22/7) × 2 × 2.8 = 17.6 m²",
+      "Total area of canvas = CSA(cylinder) + CSA(cone) = 26.4 + 17.6 = 44 m²",
+      "Total cost of canvas = Area × Rate = 44 × 500 = ₹22,000"
+    ],
+    explanation: "Area of canvas is simply πr(2h + l) since the floor is bare ground. Cost equals area multiplied by rate per square meter.",
+    formula: "\\text{Area} = 2\\pi rh + \\pi rl = \\pi r(2h + l), \\quad \\text{Cost} = \\text{Area} \\times \\text{Rate}",
+    examinerNote: "Examiners check that base area πr² is NOT included in the canvas calculation.",
+    source: "Training Material Notes / NCERT Exercise 12.1 Q7"
+  },
+  {
+    id: "ch12_q31",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 3,
+    type: "SA",
+    question: "From a solid cylinder whose height is 2.4 cm and diameter 1.4 cm, a conical cavity of the same height and same diameter is hollowed out. Find the total surface area of the remaining solid to the nearest cm². (Use π = 22/7)",
+    answer: "Total surface area ≈ 18 cm²",
+    steps: [
+      "Radius r = 1.4 / 2 = 0.7 cm, Height h = 2.4 cm",
+      "Slant height of conical cavity: l = √(r² + h²) = √(0.7² + 2.4²) = √(0.49 + 5.76) = √6.25 = 2.5 cm",
+      "Total surface area of remaining solid = CSA(cylinder) + Base area of cylinder + CSA(conical cavity)",
+      "TSA = 2πrh + πr² + πrl = πr(2h + r + l)",
+      "TSA = (22/7) × 0.7 × [2(2.4) + 0.7 + 2.5] = 2.2 × [4.8 + 0.7 + 2.5] = 2.2 × 8.0 = 17.6 cm²",
+      "To the nearest cm², TSA ≈ 18 cm²"
+    ],
+    explanation: "Hollowing out the cone leaves: (1) outer cylindrical curved wall (2πrh), (2) flat circular bottom base (πr²), and (3) interior conical wall (πrl).",
+    formula: "\\text{TSA} = 2\\pi rh + \\pi r^2 + \\pi rl = \\pi r(2h + r + l)",
+    examinerNote: "Do not add the top base circle because that is where the conical cavity was hollowed out and is open.",
+    source: "Training Material Notes / NCERT Exercise 12.1 Q8"
+  },
+  {
+    id: "ch12_q32",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 3,
+    type: "SA",
+    question: "A wooden article was made by scooping out a hemisphere from each end of a solid cylinder. If the height of the cylinder is 10 cm and its base is of radius 3.5 cm, find the total surface area of the article. (Use π = 22/7)",
+    answer: "Total surface area = 374 cm²",
+    steps: [
+      "Radius r = 3.5 cm = 7/2 cm, Height h = 10 cm",
+      "Curved surface area of cylinder = 2πrh = 2 × (22/7) × 3.5 × 10 = 220 cm²",
+      "Curved surface area of two scooped hemispheres = 2 × (2πr²) = 4πr²",
+      "CSA(hemispheres) = 4 × (22/7) × 3.5 × 3.5 = 4 × (22/7) × (7/2) × (7/2) = 154 cm²",
+      "Total surface area of article = CSA(cylinder) + 2 × CSA(hemisphere) = 220 + 154 = 374 cm²"
+    ],
+    explanation: "Scooping removes the flat circular ends but replaces each with an internal curved hemispherical surface.",
+    formula: "\\text{TSA} = 2\\pi rh + 4\\pi r^2 = 2\\pi r(h + 2r)",
+    examinerNote: "Both end faces are scooped, so TSA is simply 2πr(h + 2r).",
+    source: "Training Material Notes / NCERT Exercise 12.1 Q9"
+  },
+  {
+    id: "ch12_q33",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 5,
+    type: "LA",
+    question: "A gulab jamun contains sugar syrup up to about 30% of its volume. Find approximately how much syrup would be found in 45 gulab jamuns, each shaped like a cylinder with two hemispherical ends with total length 5 cm and diameter 2.8 cm. (Use π = 22/7)",
+    answer: "Syrup volume ≈ 338 cm³",
+    steps: [
+      "Diameter = 2.8 cm ⟹ Radius r = 1.4 cm",
+      "Length of cylindrical portion h = 5 - 2r = 5 - 2(1.4) = 5 - 2.8 = 2.2 cm",
+      "Volume of 1 gulab jamun = Volume of cylinder + Volume of 2 hemispheres = πr²h + (4/3)πr³ = πr²(h + 4r/3)",
+      "V₁ = (22/7) × (1.4)² × [2.2 + (4 × 1.4)/3] = 6.16 × [2.2 + 1.867] = 6.16 × 4.067 ≈ 25.05 cm³",
+      "Total volume of 45 gulab jamuns = 45 × 25.05 ≈ 1127.28 cm³",
+      "Volume of sugar syrup (30% of total volume) = (30/100) × 1127.28 ≈ 338.18 cm³ ≈ 338 cm³"
+    ],
+    explanation: "A classic 5-mark board question combining cylinder and sphere volume formulas with percentage syrup calculation.",
+    formula: "V = \\pi r^2\\left(h + \\frac{4}{3}r\\right), \\quad V_{\\text{syrup}} = 0.30 \\times (45 \\times V)",
+    examinerNote: "Expressing (h + 4r/3) as a single bracketed factor before multiplying reduces calculation errors by 80%.",
+    source: "Training Material Notes / NCERT Exercise 12.2 Q3"
+  },
+  {
+    id: "ch12_q34",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 3,
+    type: "SA",
+    question: "A pen stand made of wood is in the shape of a cuboid with four conical depressions to hold pens. The dimensions of the cuboid are 15 cm by 10 cm by 3.5 cm. The radius of each of the depressions is 0.5 cm and the depth is 1.4 cm. Find the volume of wood in the entire stand. (Use π = 22/7)",
+    answer: "Volume of wood ≈ 523.53 cm³",
+    steps: [
+      "Volume of cuboid = l × b × h = 15 × 10 × 3.5 = 525 cm³",
+      "Radius of conical depression r = 0.5 cm, depth h = 1.4 cm",
+      "Volume of 1 conical depression = (1/3)πr²h = (1/3) × (22/7) × (0.5)² × 1.4 = (1/3) × (22/7) × 0.25 × 1.4 = 11/30 cm³ ≈ 0.367 cm³",
+      "Volume of 4 conical depressions = 4 × (11/30) = 44/30 ≈ 1.47 cm³",
+      "Volume of wood in pen stand = Volume of cuboid - Volume of 4 depressions = 525 - 1.47 = 523.53 cm³"
+    ],
+    explanation: "When cavities are drilled or scooped out of a solid, the volume of the scooped cavities is subtracted from the original solid volume.",
+    formula: "V_{\\text{remaining}} = V_{\\text{cuboid}} - 4 \\times V_{\\text{cone}} = lbh - 4\\left(\\frac{1}{3}\\pi r^2 h_c\\right)",
+    examinerNote: "Students often forget to multiply the cone volume by 4 for the 4 pen slots.",
+    source: "Training Material Notes / NCERT Exercise 12.2 Q4"
+  },
+  {
+    id: "ch12_q35",
+    chapter: 12,
+    chapterName: "Surface Areas and Volumes",
+    marks: 5,
+    type: "LA",
+    question: "A vessel is in the form of an inverted cone. Its height is 8 cm and the radius of its top, which is open, is 5 cm. It is filled with water up to the brim. When lead shots, each of which is a sphere of radius 0.5 cm, are dropped into the vessel, one-fourth of the water flows out. Find the number of lead shots dropped into the vessel.",
+    answer: "Number of lead shots = 100",
+    steps: [
+      "Height of cone h = 8 cm, radius r = 5 cm",
+      "Volume of water in conical vessel = (1/3)πr²h = (1/3) × π × 5² × 8 = (200π)/3 cm³",
+      "Volume of water displaced = (1/4) × (200π/3) = (50π)/3 cm³",
+      "Radius of spherical lead shot R = 0.5 cm = 1/2 cm",
+      "Volume of 1 lead shot = (4/3)πR³ = (4/3) × π × (1/2)³ = (4/3) × π × (1/8) = π/6 cm³",
+      "Number of lead shots n = (Volume of water displaced) / (Volume of 1 lead shot)",
+      "n = [(50π)/3] / [π/6] = (50/3) × (6/1) = 50 × 2 = 100"
+    ],
+    explanation: "By Archimedes' principle, the volume of water displaced equals the total volume of all submerged lead shots.",
+    formula: "n = \\frac{\\frac{1}{4} V_{\\text{cone}}}{V_{\\text{sphere}}} = \\frac{\\frac{1}{4}\\left(\\frac{1}{3}\\pi r^2 h\\right)}{\\frac{4}{3}\\pi R^3}",
+    examinerNote: "Keep π as a symbol throughout! It cancels out completely, saving time and preventing rounding errors.",
+    source: "Training Material Notes / NCERT Exercise 12.2 Q5"
   }
 ];

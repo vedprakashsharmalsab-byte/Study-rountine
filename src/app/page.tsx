@@ -5029,11 +5029,14 @@ export default function CBSECommandCenter() {
                         <option value="4">Ch 4: Quadratic Equations (25 Questions)</option>
                         <option value="5">Ch 5: Arithmetic Progressions (25 Questions)</option>
                         <option value="6">Ch 6: Triangles (60 Questions)</option>
-                        <option value="8">Ch 8: Introduction to Trigonometry (60 Questions)</option>
-                        <option value="9">Ch 9: Some Applications of Trig (55 Questions)</option>
-                        <option value="10">Ch 10: Circles (55 Questions)</option>
-                        <option value="13">Ch 13: Statistics (55 Questions)</option>
-                        <option value="14">Ch 14: Probability (55 Questions)</option>
+                        <option value="7">Ch 7: Coordinate Geometry (27 Questions)</option>
+                        <option value="8">Ch 8: Introduction to Trigonometry (62 Questions)</option>
+                        <option value="9">Ch 9: Some Applications of Trig (56 Questions)</option>
+                        <option value="10">Ch 10: Circles (57 Questions)</option>
+                        <option value="11">Ch 11: Areas Related to Circles (21 Questions)</option>
+                        <option value="12">Ch 12: Surface Areas and Volumes (35 Questions)</option>
+                        <option value="13">Ch 13: Statistics (56 Questions)</option>
+                        <option value="14">Ch 14: Probability (56 Questions)</option>
                       </>
                     ) : activeVaultSubject === "science" ? (
                       <>
