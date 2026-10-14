@@ -536,5 +536,124 @@ export const SCI_CH8_QUESTIONS: VaultQuestion[] = [
     explanation: "NCERT Chapter 8 classic 5-marker dihybrid cross derivation and Law of Independent Assortment.",
     examinerNote: "State both parental phenotypes (Round Yellow, Wrinkled Green) and recombinants (Round Green, Wrinkled Yellow).",
     source: "CBSE Board Examination (5 Marks) / KVS Support"
+  },
+  {
+    id: "sci_c8_q27",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 1,
+    type: "MCQ",
+    question: "The total number of chromosomes present in a human zygote and in a human sperm cell are respectively:\n(a) 46 and 23\n(b) 23 and 46\n(c) 46 and 46\n(d) 23 and 23",
+    options: [
+      "46 and 23",
+      "23 and 46",
+      "46 and 46",
+      "23 and 23"
+    ],
+    correctOption: 0,
+    answer: "(a) 46 and 23",
+    explanation: "A human zygote is a diploid somatic cell (2n = 46 chromosomes or 23 pairs) formed by the fusion of male and female gametes. A sperm cell is a haploid gamete (n = 23 chromosomes) produced by reductional division (meiosis).",
+    formula: "Zygote = Diploid (2n = 46); Sperm = Haploid (n = 23)",
+    examinerNote: "Frequently tested board MCQ. Do not confuse chromosome pairs (23 pairs) with total count (46).",
+    source: "CBSE Board 2024"
+  },
+  {
+    id: "sci_c8_q28",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 1,
+    type: "MCQ",
+    question: "A cross between pea plants produced 50% tall and 50% dwarf offspring. The genotypes of the parent plants were:\n(a) TT and tt\n(b) Tt and tt\n(c) Tt and Tt\n(d) TT and Tt",
+    options: [
+      "TT and tt",
+      "Tt and tt",
+      "Tt and Tt",
+      "TT and Tt"
+    ],
+    correctOption: 1,
+    answer: "(b) Tt and tt",
+    explanation: "This is a Mendelian test cross: Tt (heterozygous tall) × tt (homozygous dwarf). Gametes from Tt are T and t; gametes from tt are t. Punnett square gives 1 Tt (tall) : 1 tt (dwarf), yielding exactly a 1:1 ratio (50% tall and 50% dwarf).",
+    formula: "Tt × tt -> 50% Tt (Tall) + 50% tt (Dwarf) (Ratio 1:1)",
+    examinerNote: "Standard genetics test cross deduction.",
+    source: "CBSE Board 2023"
+  },
+  {
+    id: "sci_c8_q29",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 2,
+    type: "VSA",
+    question: "In a monohybrid cross between a garden pea plant with homozygous violet flowers (VV) and one with homozygous white flowers (vv):\n(a) What will be the phenotype and genotype of the F1 progeny?\n(b) If F1 plants are allowed to self-pollinate, what percentage of the F2 progeny will bear white flowers? Show the calculation.",
+    answer: "(a) F1 Generation:\n  - Genotype: Heterozygous **Vv** (100%)\n  - Phenotype: 100% Violet flowers (since violet allele 'V' is dominant over white allele 'v').\n\n(b) F2 Generation Calculation:\n  - Selfing of F1 (Vv × Vv):\n    Punnett square gives: 1 VV (violet) : 2 Vv (violet) : 1 vv (white).\n  - Phenotypic ratio = 3 Violet : 1 White (out of 4).\n  - Percentage of white-flowered plants = (1 / 4) × 100 = **25%**.",
+    explanation: "Monohybrid inheritance following Mendel's Law of Dominance and Law of Segregation.",
+    formula: "F1: 100% Vv (Violet); F2: 1 VV : 2 Vv : 1 vv -> White = 1/4 = 25%",
+    examinerNote: "1 mark for F1 phenotype and genotype; 1 mark for F2 selfing and 25% white calculation.",
+    source: "NCERT Chapter 8 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c8_q30",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 2,
+    type: "VSA",
+    question: "How is the equal genetic contribution of male and female parents ensured in sexually reproducing offspring without doubling the chromosome number in each successive generation?",
+    answer: "Mechanism of Equal Genetic Contribution & Chromosome Conservation:\n1. Reduction Division (Meiosis): Specialised reproductive cells in gonads undergo meiotic division, halving the chromosome number from diploid (2n = 46) to haploid (n = 23). Hence, both sperm and ovum carry exactly half the genetic complement.\n2. Syngamy (Fertilisation): During fertilisation, the haploid sperm nucleus (n = 23, father's contribution) fuses with the haploid ovum nucleus (n = 23, mother's contribution). This accurately restores the original diploid chromosome number (2n = 46) in the zygote, ensuring 50% genetic contribution from each parent while keeping species chromosome count strictly constant.",
+    explanation: "Alternation of meiosis and syngamy maintains genomic stability across generations.",
+    formula: "Sperm (n=23) + Ovum (n=23) --Fertilisation--> Zygote (2n=46)",
+    examinerNote: "1 mark for meiotic halving into haploid gametes; 1 mark for fertilisation restoring diploid status.",
+    source: "NCERT Section 8.1 / CBSE Board 2023"
+  },
+  {
+    id: "sci_c8_q31",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 3,
+    type: "SA",
+    question: "A man with blood group A marries a woman with blood group O, and their daughter has blood group O.\n(a) Is this information alone sufficient to conclude whether blood group A or blood group O is dominant? Justify your answer.\n(b) Determine the exact genotypes of the father, mother, and daughter.\n(c) What other blood group could future children of this couple inherit, and with what probability?",
+    answer: "(a) Yes, this information is sufficient to prove dominance:\n    - Blood group O is expressed only in homozygous condition (genotype I(O)I(O) or ii) because it is a recessive trait.\n    - For the daughter to have blood group O, she must receive one recessive allele (I(O)) from the mother and one recessive allele (I(O)) from the father.\n    - Since the father has blood group A and possesses the recessive allele I(O), his phenotype shows that allele I(A) masks allele I(O). Hence, blood group A is dominant and blood group O is recessive.\n\n(b) Genotypes:\n    - Father: Heterozygous **I(A)I(O)**\n    - Mother: Homozygous recessive **I(O)I(O)**\n    - Daughter: Homozygous recessive **I(O)I(O)**\n\n(c) Future Offspring Possibility:\n    - Cross: I(A)I(O) × I(O)I(O)\n    - Offspring can inherit either Blood Group A (genotype I(A)I(O)) with probability 50% (1/2), or Blood Group O (genotype I(O)I(O)) with probability 50% (1/2).",
+    explanation: "Classic NCERT in-text question on multiple allelism and codominance / dominance of ABO blood group system.",
+    formula: "Father: I(A)I(O); Mother: I(O)I(O); Daughter: I(O)I(O); Offspring: 50% A, 50% O",
+    examinerNote: "1 mark for dominance deduction with justification; 1 mark for three genotypes; 1 mark for 50% probability of group A.",
+    source: "NCERT In-text Question / CBSE Board 2024"
+  },
+  {
+    id: "sci_c8_q32",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 3,
+    type: "SA",
+    question: "Sex determination is not genetically controlled in all animal species. Explain how sex is determined in:\n(a) Certain reptiles (e.g., turtles, lizards, and alligators)\n(b) Snails (Gastropods)\n(c) Human beings",
+    answer: "(a) Reptiles (Environmental Sex Determination):\n  - In many reptiles, sex determination is environmental and dependent upon incubation temperature of fertilized eggs.\n  - For example, in green sea turtles, eggs incubated at high temperatures (above 31 °C) develop into females, while eggs incubated at cooler temperatures (below 27.7 °C) develop into males. In alligators, the pattern is reversed.\n\n(b) Snails (Circumstantial Sex Plasticity):\n  - In snails, sex is not genetically fixed for life. Individual snails can alter their sex from male to female or vice versa in response to environmental conditions and social population dynamics, indicating complete absence of chromosomal sex determination.\n\n(c) Human Beings (Genetic / Chromosomal Determination):\n  - Sex is strictly genetically determined at the exact moment of fertilisation by sex chromosomes.\n  - Females have two homologous X chromosomes (XX), producing identical X-bearing ova. Males have two heterologous chromosomes (XY), producing 50% X-bearing and 50% Y-bearing sperms. Fertilisation by an X-sperm produces a female child (XX); fertilisation by a Y-sperm produces a male child (XY).",
+    explanation: "NCERT Section 8.2. Highlights environmental plasticity versus strict genetic chromosomal sex determination.",
+    formula: "Reptiles: Temperature-dependent; Snails: Sex change plasticity; Humans: Genetic XY/XX mechanism",
+    examinerNote: "1 mark each for reptiles, snails, and humans with specific mechanisms.",
+    source: "NCERT Section 8.2 / CBSE Board 2023"
+  },
+  {
+    id: "sci_c8_q33",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 5,
+    type: "LA",
+    question: "A cross was conducted between homozygous garden pea plants with round yellow seeds (RRYY) and green wrinkled seeds (rryy). The F1 progeny were self-pollinated to yield an F2 population consisting of 3,200 plants.\n(a) State the theoretical fraction and calculate the exact expected number of plants in F2 showing:\n  (i) Round yellow seeds\n  (ii) Round green seeds\n  (iii) Wrinkled yellow seeds\n  (iv) Wrinkled green seeds [2.5M]\n(b) Classify the four phenotypes into Parental phenotypes and Recombinant phenotypes. [1M]\n(c) State Mendel's Law of Independent Assortment and explain how this quantitative result confirms the law. [1.5M]",
+    answer: "(a) Calculation for F2 Population (Total = 3,200 plants):\n  According to Mendel's dihybrid ratio (9 : 3 : 3 : 1 out of 16 total parts):\n  (i) Round Yellow = (9 / 16) × 3,200 = 9 × 200 = **1,800 plants**\n  (ii) Round Green = (3 / 16) × 3,200 = 3 × 200 = **600 plants**\n  (iii) Wrinkled Yellow = (3 / 16) × 3,200 = 3 × 200 = **600 plants**\n  (iv) Wrinkled Green = (1 / 16) × 3,200 = 1 × 200 = **200 plants**\n  [Verification: 1800 + 600 + 600 + 200 = 3,200 total]\n\n(b) Classification:\n  - Parental Phenotypes (resembling original grandparents): (1) Round Yellow and (2) Wrinkled Green.\n  - Recombinant Phenotypes (novel trait combinations): (1) Round Green and (2) Wrinkled Yellow.\n\n(c) Mendel's Law of Independent Assortment:\n  - Statement: 'When two pairs of contrasting characters are combined in a hybrid, the segregation of one pair of alleles is completely independent of the segregation of the other pair of alleles during gamete formation.'\n  - Justification: The occurrence of 1,200 recombinant plants (600 Round Green + 600 Wrinkled Yellow) proves that the allele for round shape (R) does not stay permanently tied to the yellow allele (Y), assorting independently to form all possible combinations in gametes.",
+    explanation: "Quantitative genetics problem testing dihybrid ratios, recombination fractions, and theoretical population analysis.",
+    formula: "Expected Count = (Phenotypic Fraction / 16) × Total Progeny",
+    examinerNote: "2.5 marks for four mathematical calculations; 1 mark for parental vs recombinant; 1.5 marks for Law statement & justification.",
+    source: "CBSE Sample Paper 2025 / Exemplar HOTS"
+  },
+  {
+    id: "sci_c8_q34",
+    chapter: 8,
+    chapterName: "Heredity",
+    marks: 4,
+    type: "Case Study",
+    question: "Read the case text regarding cellular gene expression and answer the questions below:\n\nIn living organisms, physical characteristics or traits are controlled by genes located on chromosomes. Cellular DNA serves as the master informational storehouse for making proteins. A specific segment of DNA that provides instructions for a single protein is called a gene. For instance, plant height depends on the quantity of a growth hormone synthesized by plant cells. The amount of plant hormone produced is governed by the catalytic efficiency of a specific enzyme. If the gene coding for that enzyme functions efficiently, ample hormone is produced, resulting in a tall plant. If an alteration occurs in the gene, an inefficient enzyme is synthesized, lesser hormone is produced, and the plant remains dwarf.\n\n(a) Where in a plant cell are genes physically located, and what chemical macromolecule forms their structural basis? [1M]\n(b) Explain step-by-step how an alteration in the sequence of a gene leads to the dwarf phenotype in garden pea plants. [1.5M]\n(c) In a heterozygous tall plant (genotype Tt), why is the tall phenotype expressed even though the recessive allele 't' is present? [1.5M]",
+    answer: "(a) Location & Chemical Basis: Genes are physically located at specific loci on chromosomes inside the cell nucleus. The chemical macromolecule forming their structural basis is Deoxyribonucleic Acid (DNA).\n\n(b) Step-by-Step Sequence to Dwarfism:\n    1. Mutation in Gene: A change occurs in the nucleotide base sequence of the gene coding for the growth hormone synthesizing enzyme.\n    2. Altered Protein: The cellular protein synthesis machinery reads the altered mRNA code and produces an enzyme with altered amino acid sequence and lowered catalytic efficiency.\n    3. Reduced Hormone Synthesis: The sub-functional enzyme produces significantly lower quantities of the growth hormone (gibberellin).\n    4. Phenotype Outcome: Due to hormone deficiency, stem internodes fail to elongate normally, and the plant expresses the dwarf phenotype.\n\n(c) Expression in Heterozygote (Tt):\n    - In a heterozygous cell (Tt), the dominant allele 'T' is normal and fully functional, synthesizing sufficient quantity of efficient enzyme to produce the threshold amount of growth hormone required for full stem elongation.\n    - Even though the recessive allele 't' makes a defective or non-functional enzyme, the single functional 'T' copy compensates completely, making the tall phenotype dominant.",
+    explanation: "NCERT Section 8.1.1. Molecular mechanism of dominant and recessive gene action via enzyme dosage.",
+    formula: "Gene (DNA) -> mRNA -> Enzyme (Protein) -> Plant Hormone -> Trait Expression (Height)",
+    examinerNote: "1 mark for chromosomes & DNA; 1.5 marks for four-step sequence; 1.5 marks for dominant allele compensation.",
+    source: "NCERT Section 8.1.1 / CBSE Competency Bank 2025"
   }
 ];
+

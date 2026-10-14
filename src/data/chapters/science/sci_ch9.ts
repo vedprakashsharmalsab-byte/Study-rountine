@@ -542,5 +542,198 @@ export const SCI_CH9_QUESTIONS: VaultQuestion[] = [
     explanation: "Complete 5-mark numericals test covering lens formula, magnification, concave mirror, and lens power.",
     examinerNote: "Check sign conventions: u is always negative; for real image in mirror v is negative; in lens v is positive.",
     source: "CBSE Board Examination (5 Marks) / KVS Support"
+  },
+  {
+    id: "sci_c9_q27",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 1,
+    type: "MCQ",
+    question: "If the linear magnification produced by a spherical mirror is exactly -1 for all positions of a real object, the object must be positioned at:\n(a) The Principal Focus (F)\n(b) Between Pole (P) and Focus (F)\n(c) The Centre of Curvature (C) of a concave mirror\n(d) Beyond the Centre of Curvature (C)",
+    options: [
+      "The Principal Focus (F)",
+      "Between Pole (P) and Focus (F)",
+      "The Centre of Curvature (C) of a concave mirror",
+      "Beyond the Centre of Curvature (C)"
+    ],
+    correctOption: 2,
+    answer: "Option (c) is correct: The Centre of Curvature (C) of a concave mirror.",
+    explanation: "Magnification $m = -1$ indicates two crucial facts: (1) The negative sign indicates a Real and Inverted image. (2) The magnitude $|m| = 1$ indicates that the image size equals the object size ($h' = h$). For a concave mirror, when an object is placed at $C$, the image is formed at $C$, real, inverted, and of the same size.",
+    formula: "m = -\\frac{v}{u} = -1 \\implies v = u = -2f",
+    examinerNote: "Convex mirrors can never have negative magnification; they always produce virtual, erect images ($m > 0$).",
+    source: "CBSE Sample Paper 2026 / Educart Science"
+  },
+  {
+    id: "sci_c9_q28",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 1,
+    type: "MCQ",
+    question: "A student determines the focal length of an optical device 'X' by focusing the sharp image of a distant tree on a white screen placed on the same side as the tree. The optical device 'X' is a:\n(a) Concave lens\n(b) Convex lens\n(c) Concave mirror\n(d) Convex mirror",
+    options: [
+      "Concave lens",
+      "Convex lens",
+      "Concave mirror",
+      "Convex mirror"
+    ],
+    correctOption: 2,
+    answer: "Option (c) is correct: Concave mirror.",
+    explanation: "Because the image is formed on a screen, it must be a Real Image. Lenses form real images on the opposite side of the incident light (transmission). Spherical mirrors form real images on the same side as the object by reflection. A concave mirror is the only spherical mirror capable of converging distant parallel light into a real image on a screen.",
+    formula: "\\text{Distant Object } (u \\to -\\infty) \\implies v = -f \\text{ (In front of concave mirror)}",
+    examinerNote: "Classic laboratory experiment question. Pay close attention to 'same side as the tree' (mirror) vs 'opposite side' (lens).",
+    source: "CBSE Class 10 Board Practical / NCERT"
+  },
+  {
+    id: "sci_c9_q29",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 2,
+    type: "VSA",
+    question: "Under what specific condition does a convex lens form a virtual, erect, and magnified image? State the position of the object and name two optical instruments that exploit this condition.",
+    answer: "Condition: The object must be placed between the Optical Centre (O) and the Principal Focus (F₁) of the convex lens ($u < f$).\nTwo Instruments: (1) Simple Microscope (Magnifying Glass used by watchmakers and jewellers), (2) Eyepiece of a compound microscope or astronomical telescope.",
+    steps: [
+      "State condition: Object distance $u < f$ (between optical centre O and focus F₁).",
+      "Describe image: Virtual, erect, magnified, formed on the same side as the object.",
+      "List applications: Simple magnifying glass, watchmaker's eye loupe."
+    ],
+    explanation: "When $u < f$, the refracted rays diverge on the transmission side. When produced backwards, they appear to intersect behind the object, forming an erect and magnified virtual image ($m > +1$).",
+    formula: "u < f \\implies m > +1 \\text{ (Virtual and Magnified)}",
+    examinerNote: "This is the ONLY case where a convex lens behaves as a magnifier for direct human vision.",
+    source: "NCERT Class 10 Section 10.3.5 / Board 2024"
+  },
+  {
+    id: "sci_c9_q30",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 2,
+    type: "VSA",
+    question: "A ray of light enters from air into a transparent liquid medium of absolute refractive index 1.50. If the speed of light in vacuum is 3 × 10⁸ m/s, calculate the speed of light in the liquid. State whether the ray bends towards or away from the normal upon entry.",
+    answer: "Speed of light in liquid $v = 2.0 \\times 10^8\\text{ m/s}$. The ray bends towards the normal.",
+    steps: [
+      "Given: Absolute refractive index $n = 1.50 = 3/2$, speed in air $c = 3 \\times 10^8\\text{ m/s}$.",
+      "Formula: $n = \\frac{c}{v} \\implies v = \\frac{c}{n} = \\frac{3 \\times 10^8}{1.50} = 2.0 \\times 10^8\\text{ m/s}$.",
+      "Bending direction: Since the liquid medium is optically denser than air ($n > 1$), light slows down, causing the ray to bend TOWARDS the normal ($r < i$)."
+    ],
+    explanation: "Refractive index represents the ratio of the speed of light in vacuum to that in the medium. Moving into an optically denser medium reduces velocity and bends the path towards the normal.",
+    formula: "n = \\frac{c}{v} \\implies v = \\frac{c}{n}, \\quad r < i",
+    examinerNote: "Ensure the unit 'm/s' is written with the final numerical value.",
+    source: "CBSE Board 2023 / NCERT In-Text Q2"
+  },
+  {
+    id: "sci_c9_q31",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 3,
+    type: "SA",
+    question: "An object 5.0 cm in height is placed at a distance of 30 cm in front of a convex mirror of radius of curvature 40 cm. Find the position of the image, its nature, and its height. (Show complete step-by-step calculations with Cartesian signs).",
+    answer: "Image distance $v = +12.0\\text{ cm}$ (formed behind the mirror). Nature: Virtual and erect. Image height $h' = +2.0\\text{ cm}$ (diminished).",
+    steps: [
+      "Given: Object height $h = +5.0\\text{ cm}$, Object distance $u = -30\\text{ cm}$.",
+      "Radius of curvature $R = +40\\text{ cm} \\implies$ Focal length $f = +\\frac{R}{2} = +\\frac{40}{2} = +20\\text{ cm}$.",
+      "Mirror formula: $\\frac{1}{v} + \\frac{1}{u} = \\frac{1}{f} \\implies \\frac{1}{v} = \\frac{1}{f} - \\frac{1}{u}$.",
+      "$\\frac{1}{v} = \\frac{1}{+20} - \\frac{1}{-30} = \\frac{1}{20} + \\frac{1}{30} = \\frac{3 + 2}{60} = \\frac{5}{60} = \\frac{1}{12}$.",
+      "$\\implies v = +12.0\\text{ cm}$. The image is formed 12 cm behind the convex mirror.",
+      "Magnification: $m = -\\frac{v}{u} = -\\frac{+12}{-30} = +\\frac{2}{5} = +0.4$.",
+      "Height of image: $h' = m \\times h = (+0.4) \\times 5.0\\text{ cm} = +2.0\\text{ cm}$.",
+      "Conclusion: The image is virtual, erect, and diminished ($h' = 2\\text{ cm}$)."
+    ],
+    explanation: "Convex mirrors always have positive focal lengths and always produce virtual, erect images behind the mirror ($v > 0$) with magnification $0 < m < 1$.",
+    formula: "f = \\frac{R}{2}, \\quad \\frac{1}{v} + \\frac{1}{u} = \\frac{1}{f}, \\quad m = -\\frac{v}{u} = \\frac{h'}{h}",
+    examinerNote: "Common error: Giving f a negative sign. Convex mirrors always have positive focal length (+20 cm).",
+    source: "CBSE Board Examination (3 Marks) / NCERT Exercise Q14"
+  },
+  {
+    id: "sci_c9_q32",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 3,
+    type: "SA",
+    question: "A concave lens has a focal length of 15 cm. At what distance should an object be placed from the lens so that it forms an image at 10 cm from the lens? Also, calculate the linear magnification produced by the lens.",
+    answer: "Object distance $u = -30\\text{ cm}$ (placed 30 cm in front of the concave lens). Linear magnification $m = +\\frac{1}{3} \\approx +0.33$.",
+    steps: [
+      "Given: Concave lens has negative focal length: $f = -15\\text{ cm}$.",
+      "A concave lens always forms a virtual image on the same side as the object: $v = -10\\text{ cm}$.",
+      "Lens formula: $\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f} \\implies \\frac{1}{u} = \\frac{1}{v} - \\frac{1}{f}$.",
+      "$\\frac{1}{u} = \\frac{1}{-10} - \\frac{1}{-15} = -\\frac{1}{10} + \\frac{1}{15} = \\frac{-3 + 2}{30} = -\\frac{1}{30}$.",
+      "$\\implies u = -30\\text{ cm}$. The object must be placed 30 cm in front of the lens.",
+      "Magnification for lens: $m = \\frac{v}{u} = \\frac{-10}{-30} = +\\frac{1}{3} \\approx +0.33$.",
+      "The positive sign confirms the image is virtual and erect, diminished to one-third of the object's size."
+    ],
+    explanation: "For a concave lens, both focal length ($f$) and image distance ($v$) are always negative according to New Cartesian Sign Convention.",
+    formula: "\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f}, \\quad m = \\frac{v}{u}",
+    examinerNote: "Students often forget that concave lenses have $v = -10\\text{ cm}$. Using $+10\\text{ cm}$ leads to incorrect calculation.",
+    source: "NCERT Chapter 10 Solved Example 10.4 / CBSE Board PYQ"
+  },
+  {
+    id: "sci_c9_q33",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 3,
+    type: "SA",
+    question: "A straight pencil partially immersed in a glass tumbler of water appears bent and displaced at the water surface when viewed obliquely. (a) Explain this phenomenon using the principles of refraction. (b) If water is replaced with a liquid of higher optical density like turpentine oil (refractive index 1.47), will the apparent bend increase or decrease? Explain.",
+    answer: "(a) Light rays from the immersed tip of the pencil travel from optically denser water into optically rarer air, bending away from the normal. To the observer's eye, the refracted rays appear to diverge from a higher virtual position, creating the optical illusion of an elevated, bent pencil.\n(b) In turpentine oil (n = 1.47 > n_water = 1.33), the apparent bend will INCREASE. A higher refractive index causes a greater velocity decrease, resulting in greater angular deviation away from the normal upon emergence.",
+    steps: [
+      "Part (a): Explain refraction from denser water into rarer air bending away from the normal, elevating the virtual image of the submerged tip.",
+      "Part (b): Compare optical densities: $n_{\\text{turpentine}} = 1.47 > n_{\\text{water}} = 1.33$.",
+      "Greater refractive index means larger speed change, causing greater refraction and increased apparent displacement."
+    ],
+    explanation: "The degree of bending depends directly on the optical density difference between the two media.",
+    formula: "n = \\frac{\\sin i}{\\sin r} = \\frac{c}{v}",
+    examinerNote: "Make sure to state that rays bend 'away from the normal' when leaving the liquid into air.",
+    source: "CBSE Board 2024 / NCERT Activity 10.7"
+  },
+  {
+    id: "sci_c9_q34",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 5,
+    type: "LA",
+    question: "(a) State Snell's law of refraction. Under what condition does a ray of light undergo refraction without any change in direction?\n(b) A convex lens forms a real and inverted image of a needle at a distance of 50 cm from it. Where is the needle placed in front of the convex lens if the image is equal in size to the needle? Also, calculate the optical power of this lens.\n(c) A student cannot read the blackboard clearly and is prescribed a corrective lens of power -2.5 D. Calculate the focal length of this lens and name the eye defect.",
+    answer: "(a) Snell's Law: The ratio of the sine of angle of incidence to the sine of angle of refraction is constant for a given pair of media: $\\frac{\\sin i}{\\sin r} = n_{21}$. No change in direction occurs when light strikes normally at $\\angle i = 0^\\circ$, or when two media have identical refractive indices ($n_1 = n_2$).\n(b) Object distance $u = -50\\text{ cm}$ (at $2F_1$). Focal length $f = +25\\text{ cm} = +0.25\\text{ m}$. Power $P = +4.0\\text{ D}$.\n(c) Focal length $f = -0.40\\text{ m} = -40\\text{ cm}$. The lens is a concave lens; the defect is Myopia (near-sightedness).",
+    steps: [
+      "Part (a): State Snell's law formula $\\frac{\\sin i}{\\sin r} = \\text{constant} = n_{21}$. State conditions for zero deviation: normal incidence ($\\angle i = 0^\\circ$) or identical refractive indices ($n_1 = n_2$).",
+      "Part (b) Convex Lens Analysis:\nReal image of same size implies magnification $m = -1$.\nSince $m = \\frac{v}{u} = -1 \\implies u = -v$.\nGiven: Real image distance $v = +50\\text{ cm} \\implies u = -50\\text{ cm}$. The needle is placed 50 cm in front of the lens (at $2F_1$).\nLens formula: $\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f} \\implies \\frac{1}{50} - \\frac{1}{-50} = \\frac{2}{50} = \\frac{1}{25} \\implies f = +25\\text{ cm} = +0.25\\text{ m}$.\nPower $P = \\frac{1}{f(\\text{m})} = \\frac{1}{+0.25} = +4.0\\text{ D}$.",
+      "Part (c) Corrective Lens Calculation:\nGiven: $P = -2.5\\text{ D}$.\n$f = \\frac{1}{P} = \\frac{1}{-2.5} = -0.40\\text{ m} = -40\\text{ cm}$.\nNegative focal length indicates a Concave lens used to correct Myopia (near-sightedness)."
+    ],
+    explanation: "At $2F$, convex lenses produce real, inverted images of identical dimensions ($m=-1$). Power in dioptres requires focal length in metres.",
+    formula: "\\frac{\\sin i}{\\sin r} = n, \\quad \\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f}, \\quad P = \\frac{1}{f(\\text{m})}",
+    examinerNote: "Convert 25 cm to 0.25 m before computing power. $1/25 = 0.04$ is a common calculation blunder.",
+    source: "CBSE Board 2024 (Set 31/1/2) / NCERT Exercise Q12"
+  },
+  {
+    id: "sci_c9_q35",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 4,
+    type: "Case Study",
+    question: "Case Study: When a narrow beam of light passes through a rectangular glass slab with parallel faces, it undergoes refraction twice—first at the air-glass boundary and then at the glass-air boundary. The ray shifts laterally without changing its original angular direction.\n\n(a) [1M] State the mathematical relation proving that the emergent ray is parallel to the incident ray.\n(b) [1M] What is meant by 'lateral displacement' of light through a glass slab?\n(c) [2M] State any three physical factors on which the magnitude of lateral displacement depends.",
+    answer: "(a) At first surface: $\\sin i / \\sin r = n_g / n_a$. At second surface: $\\sin r / \\sin e = n_a / n_g$. Multiplying yields $\\sin i / \\sin e = 1 \\implies \\angle i = \\angle e$. Hence incident and emergent rays are strictly parallel.\n(b) Lateral displacement is the perpendicular distance between the original path of the incident ray and the emergent ray.\n(c) Factors affecting lateral displacement:\n1. Thickness of the glass slab (directly proportional; thicker slab = greater displacement).\n2. Angle of incidence (larger $\\angle i$ = greater lateral displacement).\n3. Refractive index of glass (higher optical density = greater refraction and displacement).",
+    steps: [
+      "Part (a): Derive $\\angle i = \\angle e$ using Snell's law at both parallel interfaces.",
+      "Part (b): Define lateral displacement as the perpendicular separation between incident path and emergent ray.",
+      "Part (c): List three factors: slab thickness, incident angle, refractive index of glass."
+    ],
+    explanation: "Because opposing faces are parallel, the bending towards the normal upon entering glass is exactly counteracted by the bending away from the normal upon exiting into air.",
+    formula: "\\angle i = \\angle e, \\quad \\text{Lateral Shift } d = \\frac{t \\sin(i - r)}{\\cos r}",
+    examinerNote: "Ensure 'perpendicular distance' is explicitly used when defining lateral displacement.",
+    source: "CBSE Sample Paper 2026 / Arihant All In One"
+  },
+  {
+    id: "sci_c9_q36",
+    chapter: 9,
+    chapterName: "Light — Reflection and Refraction",
+    marks: 5,
+    type: "LA",
+    question: "An illuminated object is placed at the 10 cm mark of an optical bench. A convex lens is mounted at the 50 cm mark, and a sharp inverted image is captured on a screen placed at the 90 cm mark.\n(a) [2M] Calculate the focal length of the convex lens.\n(b) [1.5M] If the object is shifted to the 30 cm mark while the lens remains at 50 cm, determine the new position, nature, and magnification of the image.\n(c) [1.5M] What will happen to the image on the screen if the lower half of the convex lens is covered with opaque black paper? Explain your reasoning.",
+    answer: "(a) Focal length $f = +20\\text{ cm} = +0.20\\text{ m}$.\n(b) Image forms at $v = +∞$ (at infinity); real, inverted, highly enlarged.\n(c) A complete, full image of the object is still formed on the screen, but its brightness (intensity) is reduced by half. Light from every point of the object still passes through the uncovered upper half of the lens to form the complete image.",
+    steps: [
+      "Part (a) Focal Length Calculation:\nObject position = 10 cm, Lens position = 50 cm $\\implies u = 10 - 50 = -40\\text{ cm}$.\nScreen position = 90 cm, Lens position = 50 cm $\\implies v = 90 - 50 = +40\\text{ cm}$.\nLens formula: $\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f} \\implies \\frac{1}{f} = \\frac{1}{40} - \\frac{1}{-40} = \\frac{2}{40} = \\frac{1}{20}$.\n$\\implies f = +20\\text{ cm}$.",
+      "Part (b) Shifted Object:\nNew object position = 30 cm, Lens = 50 cm $\\implies u' = 30 - 50 = -20\\text{ cm}$.\nSince $u' = -f = -20\\text{ cm}$, the object is now placed exactly at the Principal Focus ($F_1$).\nLens formula: $\\frac{1}{v'} = \\frac{1}{f} + \\frac{1}{u'} = \\frac{1}{20} - \\frac{1}{20} = 0 \\implies v' \\to \\infty$.\nThe image is formed at infinity; real, inverted, highly magnified.",
+      "Part (c) Covering Half of Lens (Classic HOTS):\nEvery section of the lens forms the entire image. Covering the lower half blocks half of the incident light rays, reducing the intensity/brightness of the image by half, but the full image remains visible on the screen without any truncation."
+    ],
+    explanation: "Optical bench problems require subtracting positions to find u and v. Covering half the lens reduces brightness, not the completeness of the image.",
+    formula: "\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f}, \\quad \\text{Intensity } \\propto \\text{Aperture Area}",
+    examinerNote: "HOTS trap in part (c): Many students incorrectly claim 'only half the image will be formed'. The full image is formed, only dimmer!",
+    source: "CBSE Board 2024 / NCERT Exemplar HOTS"
   }
 ];

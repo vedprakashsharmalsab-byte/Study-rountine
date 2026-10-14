@@ -5041,22 +5041,22 @@ export default function CBSECommandCenter() {
                     ) : activeVaultSubject === "science" ? (
                       <>
                         <optgroup label="🧪 CHEMISTRY (25 MARKS)">
-                          <option value="1">Ch 1: Chemical Reactions & Equations (42 Questions)</option>
-                          <option value="2">Ch 2: Acids, Bases and Salts (42 Questions)</option>
-                          <option value="3">Ch 3: Metals and Non-Metals (42 Questions)</option>
-                          <option value="4">Ch 4: Carbon and its Compounds (24 Questions)</option>
+                          <option value="1">Ch 1: Chemical Reactions & Equations (36 Questions)</option>
+                          <option value="2">Ch 2: Acids, Bases and Salts (32 Questions)</option>
+                          <option value="3">Ch 3: Metals and Non-Metals (32 Questions)</option>
+                          <option value="4">Ch 4: Carbon and its Compounds (36 Questions)</option>
                         </optgroup>
                         <optgroup label="🧬 BIOLOGY (30 MARKS)">
-                          <option value="5">Ch 5: Life Processes — Nutrition, Respiration, Transport, Excretion (42 Qs)</option>
-                          <option value="6">Ch 6: Control and Coordination (24 Questions)</option>
-                          <option value="7">Ch 7: How do Organisms Reproduce? (13 Questions)</option>
-                          <option value="8">Ch 8: Heredity and Evolution (13 Questions)</option>
+                          <option value="5">Ch 5: Life Processes — Nutrition, Respiration, Transport, Excretion (36 Questions)</option>
+                          <option value="6">Ch 6: Control and Coordination (32 Questions)</option>
+                          <option value="7">Ch 7: How do Organisms Reproduce? (36 Questions)</option>
+                          <option value="8">Ch 8: Heredity (34 Questions)</option>
                         </optgroup>
                         <optgroup label="⚡ PHYSICS (25 MARKS)">
-                          <option value="9">Ch 9: Light — Reflection and Refraction (13 Questions)</option>
-                          <option value="10">Ch 10: The Human Eye and Colourful World (14 Questions)</option>
+                          <option value="9">Ch 9: Light — Reflection and Refraction (36 Questions)</option>
+                          <option value="10">Ch 10: The Human Eye and Colourful World (32 Questions)</option>
                           <option value="11">Ch 11: Electricity (44 Questions)</option>
-                          <option value="12">Ch 12: Magnetic Effects of Current (42 Questions)</option>
+                          <option value="12">Ch 12: Magnetic Effects of Electric Current (42 Questions)</option>
                         </optgroup>
                         <optgroup label="🌿 NATURAL RESOURCES (5 MARKS)">
                           <option value="13">Ch 13: Our Environment (43 Questions)</option>

@@ -581,5 +581,98 @@ export const SCI_CH6_QUESTIONS: VaultQuestion[] = [
     explanation: "NCERT Chapter 6 comprehensive 5-marker integrating plant movements, auxin phototropism mechanisms, and phytohormone roles.",
     examinerNote: "Award 2 marks for tropic vs nastic contrast, 2 marks for auxin shaded diffusion, and 1 mark for hormone identification.",
     source: "CBSE Board Previous Years (5 Marks)"
+  },
+  {
+    id: "sci_c6_q27",
+    chapter: 6,
+    chapterName: "Control and Coordination",
+    marks: 1,
+    type: "MCQ",
+    question: "Involuntary actions such as blood pressure, salivation, swallowing, and vomiting are regulated and controlled by which part of the human brain?\n(a) Cerebrum in forebrain\n(b) Cerebellum in hindbrain\n(c) Medulla in hindbrain\n(d) Pons in hindbrain",
+    options: [
+      "Cerebrum in forebrain",
+      "Cerebellum in hindbrain",
+      "Medulla in hindbrain",
+      "Pons in hindbrain"
+    ],
+    correctOption: 2,
+    answer: "(c) Medulla in hindbrain",
+    explanation: "The medulla oblongata located in the hindbrain contains vital reflex centres that control all involuntary visceral actions including heartbeat, blood pressure, peristalsis, salivation, coughing, and vomiting.",
+    formula: "Medulla (Hindbrain) -> Controls Involuntary Visceral Functions (BP, Salivation, Vomiting)",
+    examinerNote: "Direct NCERT Section 6.1.2 question. Cerebellum controls posture/balance; Medulla controls involuntary reflexes.",
+    source: "NCERT Class 10 Section 6.1.2 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c6_q28",
+    chapter: 6,
+    chapterName: "Control and Coordination",
+    marks: 1,
+    type: "MCQ",
+    question: "The rapid drooping and folding of leaves in the sensitive plant (Mimosa pudica) upon touching is caused by:\n(a) Rapid cell elongation on the lower surface of petiole\n(b) Sudden loss of water and turgor pressure changes in swollen leaf bases (pulvini)\n(c) Directional secretion of auxin towards shaded tissues\n(d) Irreversible cell division in stem vascular bundles",
+    options: [
+      "Rapid cell elongation on the lower surface of petiole",
+      "Sudden loss of water and turgor pressure changes in swollen leaf bases (pulvini)",
+      "Directional secretion of auxin towards shaded tissues",
+      "Irreversible cell division in stem vascular bundles"
+    ],
+    correctOption: 1,
+    answer: "(b) Sudden loss of water and turgor pressure changes in swollen leaf bases (pulvini).",
+    explanation: "Plant cells change shape by altering the amount of water in them (turgidity). Touching Mimosa pudica stimulates electro-chemical signals that cause cells in the swollen leaf bases (pulvini) to rapidly lose water to surrounding intercellular spaces, resulting in flaccidity and leaf drooping.",
+    formula: "Touch Stimulus -> Efflux of Water from Pulvini Cells -> Loss of Turgor -> Leaf Drooping",
+    examinerNote: "NCERT Section 6.2. Emphasize that this is a non-growth, turgor-driven nastic movement.",
+    source: "NCERT Section 6.2 / CBSE Board 2023"
+  },
+  {
+    id: "sci_c6_q29",
+    chapter: 6,
+    chapterName: "Control and Coordination",
+    marks: 2,
+    type: "VSA",
+    question: "Differentiate between an Involuntary Action and a Reflex Action on the basis of: (i) Primary controlling organ in the central nervous system, and (ii) Speed and conscious awareness.",
+    answer: "Involuntary Action vs Reflex Action:\n1. Controlling Organ:\n   - Involuntary Action: Controlled primarily by the Hindbrain (Medulla oblongata) and Midbrain (e.g., heartbeat, peristalsis, digestion).\n   - Reflex Action: Controlled primarily at the level of the Spinal Cord, bypassing conscious brain intervention (e.g., withdrawing hand on touching a hot object).\n\n2. Speed & Consciousness:\n   - Involuntary Action: Continuous, slow, smooth physiological rhythms that operate automatically without conscious awareness or interruption.\n   - Reflex Action: Extremely rapid, instantaneous emergency survival response to an acute external sensory stimulus, occurring automatically before conscious awareness of pain registers in the brain.",
+    explanation: "NCERT Section 6.1. Reflex arcs are dedicated emergency spinal loops distinct from autonomic brainstem rhythms.",
+    formula: "Involuntary: Brain (Medulla); Reflex: Spinal Cord (Emergency Reflex Arc)",
+    examinerNote: "1 mark for controlling organ distinction; 1 mark for speed/emergency conscious difference.",
+    source: "NCERT Section 6.1.1 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c6_q30",
+    chapter: 6,
+    chapterName: "Control and Coordination",
+    marks: 2,
+    type: "VSA",
+    question: "Why is the use of iodised salt strongly recommended in daily human diet? Name the endocrine gland involved, the hormone it synthesizes, and describe the clinical condition resulting from iodine deficiency.",
+    answer: "Iodised Salt & Thyroid Physiology:\n1. Biological Rationale: Iodine is a strictly essential trace micronutrient required by the **Thyroid Gland** to synthesize the hormone **Thyroxin**.\n2. Role of Thyroxin: Thyroxin regulates carbohydrate, protein, and fat metabolism in the body to provide the optimum balance for physical and mental growth.\n3. Clinical Condition of Deficiency:\n   - Insufficient dietary iodine leads to deficiency of thyroxin, resulting in **Goitre**.\n   - Visible Clinical Symptom: The thyroid gland hypertrophies (enlarges) abnormally in an effort to trap trace iodine from blood, causing a prominently swollen neck.",
+    explanation: "NCERT Section 6.3. Iodine deficiency disrupts endocrine metabolic feedback.",
+    formula: "Dietary Iodine -> Thyroid Gland -> Thyroxin (Metabolism); Deficiency -> Swollen Neck (Goitre)",
+    examinerNote: "1 mark for thyroid gland and thyroxin hormone; 1 mark for Goitre and swollen neck symptom.",
+    source: "NCERT Section 6.3 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c6_q31",
+    chapter: 6,
+    chapterName: "Control and Coordination",
+    marks: 3,
+    type: "SA",
+    question: "(a) Name the endocrine gland and hormone responsible for reducing elevated blood glucose levels after a carbohydrate-rich meal.\n(b) Describe step-by-step how the negative feedback mechanism controls the timing and quantity of hormone release in a healthy human.\n(c) What disease occurs when this feedback regulation fails to produce adequate hormone, and how is it medically managed?",
+    answer: "(a) Gland & Hormone:\n    - Endocrine Gland: Pancreas (specifically, beta cells of Islets of Langerhans).\n    - Hormone: Insulin.\n\n(b) Negative Feedback Mechanism:\n    1. Trigger: Ingestion of food elevates blood glucose concentration above the normal baseline (~80–120 mg/dL).\n    2. Detection & Secretion: The elevated glucose levels are detected directly by pancreatic islet cells, which respond by secreting insulin into the bloodstream.\n    3. Cellular Action: Insulin stimulates body cells to absorb glucose from blood and accelerates conversion of glucose into glycogen in liver and muscle cells (glycogenesis).\n    4. Negative Feedback Loop: As blood glucose levels fall back toward the normal set-point, pancreatic cells sense the decrease and down-regulate insulin secretion, preventing hypoglycemia.\n\n(c) Disease & Management:\n    - Disease: Diabetes Mellitus.\n    - Medical Management: Managed through strict dietary control, physical exercise, and regular subcutaneous injections of insulin to maintain physiological glucose clearance.",
+    explanation: "NCERT Section 6.3. Hormonal feedback homeostasis maintains precise internal chemical equilibrium.",
+    formula: "High Blood Glucose -> Pancreas -> Insulin -> Glucose into Glycogen -> Normal Blood Glucose",
+    examinerNote: "1 mark for Pancreas and Insulin; 1.5 marks for four-step feedback mechanism; 0.5 mark for Diabetes & insulin injections.",
+    source: "NCERT Section 6.3 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c6_q32",
+    chapter: 6,
+    chapterName: "Control and Coordination",
+    marks: 5,
+    type: "LA",
+    question: "(a) Trace the complete path of an electrical nerve impulse through a neuron from its generation at the sensory receptor to its passage across a chemical synapse to the next neuron. [2.5M]\n(b) Why can nerve impulses travel in only one direction across a chemical synapse? [1M]\n(c) How does a muscle cell execute physical movement and contraction when an electrical impulse arrives at a Neuromuscular Junction (NMJ)? [1.5M]",
+    answer: "(a) Pathway of Nerve Impulse:\n    1. Generation: Sensory stimulus acts on receptor ending, triggering a chemical reaction that creates an electrical impulse at the dendritic tip of the neuron.\n    2. Intra-neuronal Transmission: The electrical impulse travels rapidly from Dendrite -> Cyton (cell body) -> along the Axon to the Axon Terminals.\n    3. Synaptic Transmission: At the axon terminal, the electrical impulse stimulates synaptic vesicles to fuse with the presynaptic membrane, releasing chemical neurotransmitters (acetylcholine) into the microscopic fluid-filled gap called the Synaptic Cleft.\n    4. Reception: Neurotransmitter molecules diffuse across the synapse and bind to specific receptor proteins on the dendrite of the adjacent neuron, generating a fresh electrical impulse that continues down the next neuron.\n\n(b) Unidirectional Nature of Synapse:\n    - Chemical synapses are anatomically and functionally polarized.\n    - Neurotransmitter storage vesicles are located exclusively inside the axon terminals of the presynaptic neuron, and specific neurotransmitter receptor sites are located exclusively on the dendritic membrane of the postsynaptic neuron.\n    - Hence, transmission can strictly occur only from axon terminal to dendrite, never in reverse.\n\n(c) Muscle Cell Contraction at NMJ:\n    - When an action potential reaches the neuromuscular junction, acetylcholine release triggers depolarization of the muscle cell membrane.\n    - This causes the release of calcium ions inside the muscle fiber cytoplasm, causing specialised contractile proteins (actin and myosin filaments) to slide over one another, rearranging their cellular geometry and causing the muscle cell to shorten (contract), generating physical movement.",
+    explanation: "NCERT Section 6.1. Cellular neurophysiology of action potential propagation, synaptic transmission, and muscle actuation.",
+    formula: "Dendrite -> Cyton -> Axon -> Axon Terminal --Neurotransmitter--> Synapse -> Next Dendrite",
+    examinerNote: "2.5 marks for complete sequence with neurotransmitter release; 1 mark for synaptic polarization; 1.5 marks for actin-myosin contraction at NMJ.",
+    source: "CBSE Class 10 Board 2024 / Exemplar HOTS"
   }
 ];
+

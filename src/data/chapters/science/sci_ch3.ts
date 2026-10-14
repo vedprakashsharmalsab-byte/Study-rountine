@@ -409,5 +409,98 @@ export const SCI_CH3_QUESTIONS: VaultQuestion[] = [
     formula: "Solder: Pb + Sn (Low MP); Stainless Steel: Fe + Cr + Ni + C (Rust-Free)",
     examinerNote: "1.5 marks for part (a); 1.5 marks for part (b); 1 mark for part (c).",
     source: "CBSE Competency-Based Sample Paper 2025"
+  },
+  {
+    id: "sci_c3_q27",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 1,
+    type: "MCQ",
+    question: "Which of the following non-metals exists as a liquid at room temperature?\n(a) Chlorine\n(b) Carbon\n(c) Bromine\n(d) Iodine",
+    options: [
+      "Chlorine",
+      "Carbon",
+      "Bromine",
+      "Iodine"
+    ],
+    correctOption: 2,
+    answer: "(c) Bromine",
+    explanation: "Bromine (Br2) is the only non-metal that exists in the liquid state at standard room temperature. In contrast, Mercury (Hg) is the only metal that is a liquid at room temperature.",
+    formula: "Liquid Non-metal: Bromine (Br2); Liquid Metal: Mercury (Hg)",
+    examinerNote: "Direct NCERT Section 3.1 exception question.",
+    source: "NCERT Class 10 Section 3.1 / CBSE Board 2023"
+  },
+  {
+    id: "sci_c3_q28",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 1,
+    type: "MCQ",
+    question: "Which pair of metals have such low melting points that they melt when placed on the palm of your hand?\n(a) Sodium and Potassium\n(b) Gallium and Caesium\n(c) Copper and Silver\n(d) Lead and Tin",
+    options: [
+      "Sodium and Potassium",
+      "Gallium and Caesium",
+      "Copper and Silver",
+      "Lead and Tin"
+    ],
+    correctOption: 1,
+    answer: "(b) Gallium and Caesium",
+    explanation: "Gallium (melting point ~30 °C / 303 K) and Caesium (melting point ~28.5 °C / 301.5 K) have exceptionally low melting points. Since normal human body temperature is ~37 °C (310 K), these metals melt simply by absorbing heat from the palm of your hand.",
+    formula: "Gallium (MP = 303 K) and Caesium (MP = 301.5 K) < Human Body Temp (310 K)",
+    examinerNote: "Frequently tested NCERT exception in Section 3.1.",
+    source: "NCERT Section 3.1 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c3_q29",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 2,
+    type: "VSA",
+    question: "Why is hydrogen gas NOT evolved when most metals react with nitric acid (HNO3)? Which two metals are exceptions to this rule, and under what specific conditions do they evolve hydrogen?",
+    answer: "Nitric Acid Oxidising Action & Exceptions:\n1. Why H2 is Not Evolved: Nitric acid (HNO3) is a strong oxidising agent. As soon as hydrogen gas is produced during the metal-acid interaction, HNO3 immediately oxidises the hydrogen into water (H2O), while being itself reduced to any of the nitrogen oxides (such as N2O, NO, or NO2).\n2. Exceptions: Magnesium (Mg) and Manganese (Mn) are the only two metals that react with extremely dilute nitric acid (~1% dilute HNO3) to liberate hydrogen gas:\n   Mg(s) + 2HNO3(very dilute) -> Mg(NO3)2(aq) + H2(g)↑\n   Mn(s) + 2HNO3(very dilute) -> Mn(NO3)2(aq) + H2(g)↑",
+    explanation: "High reduction potential of nitrate ion makes HNO3 an oxidising acid rather than a typical displacing acid.",
+    formula: "HNO3 oxidises H2 -> H2O; Exceptions: Mg and Mn with very dilute (~1%) HNO3",
+    examinerNote: "1 mark for HNO3 oxidising H2 to water and self-reducing to nitrogen oxides; 1 mark for Mg and Mn with very dilute acid.",
+    source: "NCERT Section 3.2.3 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c3_q30",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 2,
+    type: "VSA",
+    question: "What is Anodising? Describe how anodising enhances the corrosion resistance of aluminium articles and state one decorative advantage.",
+    answer: "Anodising:\n- Definition: An electrochemical process of forming a thick, uniform protective oxide layer of aluminium oxide (Al2O3) on the surface of aluminium articles.\n- Mechanism: The clean aluminium article is made the anode (+) in an electrolytic cell containing dilute sulphuric acid. During electrolysis, oxygen gas evolved at the anode reacts with the aluminium surface to form an impervious, scratch-resistant oxide coating that protects the underlying metal from further atmospheric corrosion.\n- Decorative Advantage: The anodised aluminium oxide layer is porous when freshly formed, allowing it to readily absorb organic dyes and colour pigments before sealing, yielding lustrous, scratch-resistant coloured metallic finishes (used in cookware and smartphones).",
+    explanation: "NCERT Section 3.2.1 Box item. Anodising creates an engineered passivation barrier.",
+    formula: "Anode: 2Al + 3O(2-) -> Al2O3 + 6e(-); Impervious corrosion-resistant coat",
+    examinerNote: "1 mark for definition and electrolytic mechanism; 1 mark for corrosion resistance and dye absorption.",
+    source: "NCERT Section 3.2.1 (Box) / CBSE Board 2023"
+  },
+  {
+    id: "sci_c3_q31",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 3,
+    type: "SA",
+    question: "(a) Why cannot reactive metals like Sodium, Magnesium, and Aluminium be extracted from their respective oxides by chemical reduction with carbon (coke)?\n(b) Describe the extraction of sodium metal from molten sodium chloride by electrolytic reduction, writing the balanced electrode reactions at the cathode and anode.",
+    answer: "(a) Why Carbon Reduction Fails:\n    - Highly electropositive metals (Na, Mg, Ca, Al) sit at the top of the reactivity series and have an immensely high chemical affinity for oxygen—much higher than carbon has for oxygen.\n    - Therefore, carbon cannot reduce these metallic oxides to free metal, no matter how strongly they are heated.\n\n(b) Electrolytic Reduction of Molten NaCl:\n    - Molten sodium chloride (NaCl) is electrolysed in a specialized electrolytic cell.\n    - At Cathode (-ve electrode): Positively charged sodium ions (Na+) migrate to the cathode, gain electrons (reduction), and deposit as liquid sodium metal:\n      Na(+) + e(-) -> Na(l) [Reduction at Cathode]\n    - At Anode (+ve electrode): Negatively charged chloride ions (Cl-) migrate to the anode, lose electrons (oxidation), and form chlorine gas:\n      2Cl(-) -> Cl2(g) + 2e(-) [Oxidation at Anode]",
+    explanation: "Electrolytic reduction provides the extreme thermodynamic driving potential required to discharge strongly electropositive cations.",
+    formula: "Cathode (-): Na(+) + e(-) -> Na; Anode (+): 2Cl(-) -> Cl2 + 2e(-)",
+    examinerNote: "1.5 marks for carbon affinity argument; 1.5 marks for electrolytic cell and both electrode half-equations.",
+    source: "NCERT Section 3.4.4 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c3_q32",
+    chapter: 3,
+    chapterName: "Metals and Non-Metals",
+    marks: 5,
+    type: "LA",
+    question: "A metallurgist receives two ores, Ore 'X' and Ore 'Y', of the same divalent metal 'M'.\nWhen Ore 'X' is treated with dilute HCl, brisk effervescence of a gas that turns lime water milky is observed.\nWhen Ore 'Y' is heated strongly in air, it produces a choking gas with the characteristic smell of burning sulphur.\n(a) Identify the type of ore represented by 'X' and 'Y'. [1M]\n(b) Name the thermal processes used to convert Ore 'X' and Ore 'Y' into the metal oxide. Write balanced chemical equations for both processes assuming metal 'M' is Zinc (Zn). [2M]\n(c) How is the metal oxide reduced to free zinc metal? Write the balanced chemical equation. [1M]\n(d) What is Galvanisation? Explain why galvanised iron articles do not rust even when the surface zinc coating is deeply scratched. [1M]",
+    answer: "(a) Ore Identification:\n    - Ore 'X': Carbonate Ore (Calamine, ZnCO3), since effervescence of CO2 gas turns lime water milky.\n    - Ore 'Y': Sulphide Ore (Zinc Blende, ZnS), since choking gas is sulphur dioxide (SO2).\n\n(b) Conversion to Metal Oxide:\n    1. For Carbonate Ore 'X' -> **Calcination** (heating strongly in limited/absence of air):\n       ZnCO3(s) --Heat--> ZnO(s) + CO2(g)↑\n    2. For Sulphide Ore 'Y' -> **Roasting** (heating strongly in excess of air):\n       2ZnS(s) + 3O2(g) --Heat--> 2ZnO(s) + 2SO2(g)↑\n\n(c) Reduction to Free Zinc Metal:\n    Zinc oxide is reduced to zinc metal by heating with carbon (coke) as the reducing agent:\n    ZnO(s) + C(s) --Heat--> Zn(s) + CO(g)↑\n\n(d) Galvanisation & Cathodic Protection:\n    - Galvanisation: The process of coating iron or steel articles with a thin protective layer of zinc to prevent rusting.\n    - Why Scratching Does Not Cause Rusting: Zinc is electrochemically more reactive than iron (higher in the reactivity series). When the surface is scratched, zinc acts as a sacrificial anode, corroding preferentially and supplying electrons to the exposed iron, thereby preventing iron from oxidising to rust.",
+    explanation: "Comprehensive metallurgy 5-marker integrating calcination, roasting, carbon reduction, and sacrificial protection.",
+    formula: "Calcination: ZnCO3 -> ZnO + CO2; Roasting: 2ZnS + 3O2 -> 2ZnO + 2SO2; Reduction: ZnO + C -> Zn + CO",
+    examinerNote: "1 mark for identifying ores; 2 marks for Calcination and Roasting equations; 1 mark for carbon reduction; 1 mark for sacrificial protection.",
+    source: "CBSE Class 10 Board 2024 / Exemplar HOTS"
   }
 ];
+

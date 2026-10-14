@@ -545,5 +545,98 @@ export const SCI_CH10_QUESTIONS: VaultQuestion[] = [
     explanation: "NCERT Chapter 10 core 5-marker combining vision defect numericals with atmospheric rainbow physics.",
     examinerNote: "Convex lens power is always positive (+3.0 D) and concave lens power is always negative (-0.83 D).",
     source: "CBSE Board Examination (5 Marks) / NCERT"
+  },
+  {
+    id: "sci_c10_q27",
+    chapter: 10,
+    chapterName: "The Human Eye and the Colourful World",
+    marks: 1,
+    type: "MCQ",
+    question: "The accommodation of the human eye to focus distinctly on both distant and nearby objects is accomplished by changing the focal length of the crystalline lens through the action of:\n(a) Pupil\n(b) Retina\n(c) Ciliary muscles\n(d) Iris",
+    options: [
+      "Pupil",
+      "Retina",
+      "Ciliary muscles",
+      "Iris"
+    ],
+    correctOption: 2,
+    answer: "(c) Ciliary muscles",
+    explanation: "Ciliary muscles modify the curvature of the crystalline eye lens. When ciliary muscles relax, the lens becomes thin and its focal length increases, enabling distant vision. When ciliary muscles contract, the lens becomes thicker and its focal length decreases, enabling nearby vision.",
+    formula: "Power of Accommodation: Ciliary Muscles Relax -> Thin Lens (Far); Ciliary Muscles Contract -> Thick Lens (Near)",
+    examinerNote: "NCERT Section 10.1.1. Frequently tested 1M board question.",
+    source: "NCERT Class 10 Section 10.1.1 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c10_q28",
+    chapter: 10,
+    chapterName: "The Human Eye and the Colourful World",
+    marks: 1,
+    type: "MCQ",
+    question: "Which component of the human eye acts as a variable diaphragm to regulate and control the amount of light entering the pupil?\n(a) Cornea\n(b) Iris\n(c) Crystalline lens\n(d) Sclera",
+    options: [
+      "Cornea",
+      "Iris",
+      "Crystalline lens",
+      "Sclera"
+    ],
+    correctOption: 1,
+    answer: "(b) Iris",
+    explanation: "The iris is a dark muscular diaphragm behind the cornea that controls the size of the pupil. In bright light, the iris contracts the pupil to reduce light entry; in dim light, the iris relaxes and dilates the pupil to allow maximum light entry onto the retina.",
+    formula: "Iris -> Regulates Pupil Aperture Size -> Controls Retinal Illuminance",
+    examinerNote: "Direct NCERT Section 10.1 definition.",
+    source: "NCERT Section 10.1 / CBSE Board 2023"
+  },
+  {
+    id: "sci_c10_q29",
+    chapter: 10,
+    chapterName: "The Human Eye and the Colourful World",
+    marks: 2,
+    type: "VSA",
+    question: "What is a Cataract? State its primary cause, why it causes partial or total vision loss, and how it is surgically corrected.",
+    answer: "Cataract Pathology and Treatment:\n1. Definition & Cause: A condition commonly occurring in old age where the crystalline eye lens becomes hazy, cloudy, or completely opaque due to the denaturation and aggregation of lens proteins.\n2. Vision Loss: Because the lens is milky and opaque, light rays cannot transmit through it to reach the photoreceptors of the retina, resulting in blurred, milky vision or complete blindness.\n3. Surgical Correction: Cataract cannot be cured with glasses or eye drops. It is corrected by cataract surgery, in which the clouded natural lens is surgically removed (via phacoemulsification) and replaced with an artificial plastic/silicone Intraocular Lens (IOL).",
+    explanation: "NCERT Section 10.1.1 Box item on cataract pathology and intraocular replacement.",
+    formula: "Cloudy Crystalline Lens -> Loss of Transparency -> Cataract Surgery (IOL Replacement)",
+    examinerNote: "1 mark for definition and protein clouding; 1 mark for vision loss and surgical IOL replacement.",
+    source: "NCERT Section 10.1.1 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c10_q30",
+    chapter: 10,
+    chapterName: "The Human Eye and the Colourful World",
+    marks: 2,
+    type: "VSA",
+    question: "Why does the air above a campfire, hearth, or hot asphalt road appear to flicker and shimmer waveringly?",
+    answer: "Atmospheric Refraction & Convective Turbulence:\n1. The air directly above a hot fire or radiator becomes intensely heated, expands, and becomes less dense (optically rarer) than the cooler, denser air situated higher up.\n2. Since the refractive index of hot air is slightly lower than that of cool air, light rays passing through this boundary undergo continuous refraction.\n3. The physical conditions of the refracting medium (air density and temperature) are not stationary due to convective turbulent air currents rising rapidly. As a result, the apparent position of objects seen through the hot turbulent air fluctuates randomly from instant to instant, producing the wavering shimmering effect.",
+    explanation: "NCERT Section 10.2. Dynamic fluctuations in the optical refractive index of turbulent heated air cause shimmering.",
+    formula: "Hot Air (Lower Density, Lower n) + Cool Air (Higher Density, Higher n) + Convection -> Shimmering",
+    examinerNote: "1 mark for temperature-density gradient altering refractive index; 1 mark for convection currents causing apparent position fluctuation.",
+    source: "NCERT Section 10.2 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c10_q31",
+    chapter: 10,
+    chapterName: "The Human Eye and the Colourful World",
+    marks: 3,
+    type: "SA",
+    question: "A 14-year-old student sitting in the last row of a classroom cannot read the letters written on the blackboard distinctly, though she can read her textbook comfortably at a distance of 25 cm.\n(a) Name the visual defect the student is suffering from.\n(b) State two anatomical causes that give rise to this defect.\n(c) What type of corrective lens is prescribed to restore her distant blackboard vision? Explain the optical role of this lens.",
+    answer: "(a) Defect of Vision: **Myopia** (Near-sightedness / Short-sightedness).\n\n(b) Two Anatomical Causes:\n    1. Excessive curvature of the crystalline eye lens (lens is excessively thick and powerful, focal length too short).\n    2. Elongation of the eyeball (antero-posterior diameter of the eyeball is too long, placing the retina farther behind the focal plane).\n\n(c) Corrective Lens & Optical Role:\n    - Prescribed Lens: A **Concave Lens** (Diverging lens) of appropriate focal length/power.\n    - Optical Role: Parallel rays from the distant blackboard are slightly diverged by the concave lens before entering the eye, so that they appear to diverge from the myopic student's near-situated far point. The crystalline lens then converges these diverged rays precisely onto the retina, restoring sharp distant vision.",
+    explanation: "NCERT Section 10.1.2. Myopic eye focuses parallel rays in front of the retina; concave lens diverges them backward onto the retina.",
+    formula: "Defect: Myopia; Causes: Excessive curvature / Eyeball elongation; Correction: Concave lens",
+    examinerNote: "1 mark for Myopia; 1 mark for both anatomical causes; 1 mark for concave lens and virtual far-point mechanism.",
+    source: "NCERT Section 10.1.2 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c10_q32",
+    chapter: 10,
+    chapterName: "The Human Eye and the Colourful World",
+    marks: 5,
+    type: "LA",
+    question: "(a) The near point of a hypermetropic person is 75 cm. Calculate the focal length and optical power of the corrective convex lens required to enable the person to read a book comfortably at the standard near point of 25 cm. [2.5M]\n(b) What is Presbyopia (old-age hypermetropia)? State its two physiological causes. [1.5M]\n(c) Sometimes an elderly individual suffers from both myopia and hypermetropia simultaneously. What type of corrective eyeglasses are prescribed, and how are the two lens segments arranged? [1M]",
+    answer: "(a) Hypermetropia Lens Calculation:\n    - Normal reading distance (object distance): u = -25 cm = -0.25 m\n    - Defective near point (image distance): v = -75 cm = -0.75 m\n    - Using the Lens Formula: 1/f = 1/v - 1/u\n      1/f = 1/(-75) - 1/(-25) = -1/75 + 1/25 = (-1 + 3) / 75 = +2 / 75 cm^(-1)\n      f = +75 / 2 cm = +37.5 cm = +0.375 m\n    - Optical Power Calculation:\n      P = 1 / f(in metres) = 1 / (+0.375) = +1000 / 375 = +8 / 3 D = **+2.67 D**\n    - Corrective Lens: A Convex lens of focal length +37.5 cm and power **+2.67 D**.\n\n(b) Presbyopia (Old-Age Hypermetropia):\n    - Definition: The gradual loss of the eye's power of accommodation with advancing age, causing difficulty in reading or seeing nearby objects distinctly without spectacles.\n    - Two Causes:\n      1. Gradual weakening of the ciliary muscles.\n      2. Diminishing elasticity and hardening of the crystalline eye lens.\n\n(c) Presbyopia with Myopia (Bifocal Lenses):\n    - Prescribed Eyeglasses: **Bifocal Lenses**.\n    - Arrangement: The upper portion of the bifocal lens consists of a Concave lens to facilitate distant vision; the lower portion consists of a Convex lens to facilitate near reading vision.",
+    explanation: "NCERT Section 10.1.2 & 10.1.3. Comprehensive 5-marker integrating hypermetropia numerical derivation, presbyopia physiology, and bifocal lens optics.",
+    formula: "1/f = 1/v - 1/u -> f = +37.5 cm; P = +2.67 D; Bifocals: Upper Concave (Distant), Lower Convex (Near)",
+    examinerNote: "2.5 marks for step-by-step numerical calculation (+2.67 D); 1.5 marks for presbyopia causes; 1 mark for bifocal lens arrangement.",
+    source: "CBSE Class 10 Board 2024 / Exemplar HOTS"
   }
 ];
+

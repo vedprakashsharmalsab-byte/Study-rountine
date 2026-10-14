@@ -434,5 +434,98 @@ export const SCI_CH2_QUESTIONS: VaultQuestion[] = [
     formula: "Acid Rain: pH < 5.6; Nettle Acid: HCOOH; Soil Neutraliser: CaO / Ca(OH)2",
     examinerNote: "1 mark for part (a); 1.5 marks for part (b); 1.5 marks for part (c).",
     source: "CBSE Board 2024 (Set 31/3/1)"
+  },
+  {
+    id: "sci_c2_q27",
+    chapter: 2,
+    chapterName: "Acids, Bases and Salts",
+    marks: 1,
+    type: "MCQ",
+    question: "Which of the following substances behaves as an olfactory indicator?\n(a) Phenolphthalein\n(b) Methyl orange\n(c) Vanilla essence\n(d) Turmeric paper",
+    options: [
+      "Phenolphthalein",
+      "Methyl orange",
+      "Vanilla essence",
+      "Turmeric paper"
+    ],
+    correctOption: 2,
+    answer: "(c) Vanilla essence",
+    explanation: "Olfactory indicators are substances whose characteristic odour changes in acidic or basic media. Vanilla essence retains its pleasant characteristic smell in acidic medium, but its smell is completely destroyed in basic medium. Clove oil and finely chopped onions also act as olfactory indicators.",
+    formula: "Olfactory Indicator: Acid -> Smell Retained; Base -> Smell Destroyed",
+    examinerNote: "NCERT Activity 2.2. Olfactory indicators are useful for visually impaired students.",
+    source: "NCERT Section 2.1.2 / CBSE Board 2023"
+  },
+  {
+    id: "sci_c2_q28",
+    chapter: 2,
+    chapterName: "Acids, Bases and Salts",
+    marks: 1,
+    type: "MCQ",
+    question: "When a drop of gastric juice (pH ~ 1.2 to 2.0) is placed on a universal indicator paper strip, the strip will turn:\n(a) Dark blue\n(b) Red\n(c) Green\n(d) Purple",
+    options: [
+      "Dark blue",
+      "Red",
+      "Green",
+      "Purple"
+    ],
+    correctOption: 1,
+    answer: "(b) Red",
+    explanation: "Universal indicator paper shows distinct colors across the pH spectrum: Red for strongly acidic solutions (pH 1-2), Green for neutral solutions (pH 7), and Violet/Dark Blue for strongly basic solutions (pH 13-14).",
+    formula: "Universal Indicator: pH 1-2 = Red; pH 7 = Green; pH 13-14 = Violet",
+    examinerNote: "Direct NCERT Figure 2.6 pH color chart question.",
+    source: "NCERT Section 2.2 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c2_q29",
+    chapter: 2,
+    chapterName: "Acids, Bases and Salts",
+    marks: 2,
+    type: "VSA",
+    question: "Why does pure distilled water not conduct electricity, whereas rainwater conducts electric current readily?",
+    answer: "Electrolytic Conduction Mechanism:\n1. Distilled Water: Pure distilled water is a covalent liquid that contains negligible concentration of free ions. In the absence of mobile charge carriers (ions), it acts as an electrical insulator.\n2. Rainwater: As rain falls through the atmosphere, it dissolves atmospheric acidic gases such as carbon dioxide (CO2), sulphur dioxide (SO2), and nitrogen oxides (NO2). These gases react with water to form trace quantities of carbonic acid (H2CO3), sulphurous acid (H2SO3), and nitric acid (HNO3). These acids ionize into free hydronium ions (H3O+) and corresponding anions, providing mobile ions that conduct electric current.",
+    explanation: "Electrical conduction in aqueous solutions strictly requires the presence of mobile, solvated ions.",
+    formula: "CO2 + H2O -> H2CO3 -> H(+) + HCO3(-); SO2 + H2O -> H2SO3 -> 2H(+) + SO3(2-)",
+    examinerNote: "1 mark for lack of free ions in distilled water; 1 mark for dissolved atmospheric acid gases ionizing in rainwater.",
+    source: "NCERT Section 2.3 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c2_q30",
+    chapter: 2,
+    chapterName: "Acids, Bases and Salts",
+    marks: 2,
+    type: "VSA",
+    question: "What is an antacid? Name two active chemical compounds commonly used in commercial antacid formulations and explain how they alleviate hyperacidity in the human stomach.",
+    answer: "Antacids:\n- Definition: Mildly basic chemical substances taken orally to neutralize excess hydrochloric acid in the stomach and relieve pain and discomfort caused by hyperacidity.\n- Two Active Compounds:\n  1. Magnesium hydroxide [Mg(OH)2], commonly known as Milk of Magnesia.\n  2. Sodium hydrogen carbonate [NaHCO3], commonly known as Baking Soda.\n- Mechanism: When ingested, these mild bases react with excess HCl in the gastric juice in a neutralisation reaction, raising the stomach pH back to a safe physiological range without irritating gastric mucosal linings:\n  Mg(OH)2(s) + 2HCl(aq) -> MgCl2(aq) + 2H2O(l)\n  NaHCO3(s) + HCl(aq) -> NaCl(aq) + H2O(l) + CO2(g)",
+    explanation: "Antacids provide therapeutic relief by stoichiometric acid-base neutralisation.",
+    formula: "Mg(OH)2 + 2HCl -> MgCl2 + 2H2O; NaHCO3 + HCl -> NaCl + H2O + CO2",
+    examinerNote: "1 mark for definition and two compounds; 1 mark for neutralisation mechanism with balanced equation.",
+    source: "NCERT Section 2.2.1 / CBSE Board 2023"
+  },
+  {
+    id: "sci_c2_q31",
+    chapter: 2,
+    chapterName: "Acids, Bases and Salts",
+    marks: 3,
+    type: "SA",
+    question: "(a) Write the balanced chemical equation when granulated zinc metal is warmed with concentrated sodium hydroxide solution.\n(b) Name the salt formed in this reaction.\n(c) Do all metals react with strong bases to liberate hydrogen gas? Justify your answer with scientific rationale.",
+    answer: "(a) Chemical Equation:\n    Zn(s) + 2NaOH(aq) --Heat--> Na2ZnO2(aq) + H2(g)↑\n\n(b) Name of Salt: Sodium Zincate (Na2ZnO2).\n\n(c) Do All Metals React with Bases?\n    - No, such reactions are NOT possible with all metals.\n    - Only amphoteric metals (such as zinc and aluminium) and their oxides/hydroxides possess the chemical ability to react with strong alkalis to form soluble complex salts and liberate hydrogen gas.\n    - Less reactive metals (like copper, silver) or strictly basic electropositive metals (like iron, sodium, calcium) do not react with sodium hydroxide to liberate hydrogen gas.",
+    explanation: "Amphoteric metals exhibit dual chemical reactivity, reacting with both acids and strong bases.",
+    formula: "Zn + 2NaOH -> Na2ZnO2 + H2; Al + 2NaOH + 2H2O -> 2NaAlO2 + 3H2",
+    examinerNote: "1 mark for balanced equation; 1 mark for sodium zincate; 1 mark for amphoteric restriction (not all metals).",
+    source: "NCERT Section 2.1.2 / CBSE Board 2024"
+  },
+  {
+    id: "sci_c2_q32",
+    chapter: 2,
+    chapterName: "Acids, Bases and Salts",
+    marks: 5,
+    type: "LA",
+    question: "(a) A white chemical compound 'A' on mixing with water forms a paste that hardens into a rigid solid mass 'B' within 15 minutes. Identify A and B, write the balanced chemical equation, and state one medical use of A. [2M]\n(b) A yellowish-white powder 'C' smells strongly of chlorine and is used as a disinfectant for potable water. Identify C, write the equation for its preparation from slaked lime, and explain why it loses its chlorine smell on prolonged exposure to air. [2M]\n(c) Why is tartaric acid added to sodium hydrogen carbonate to make baking powder, rather than using sodium hydrogen carbonate alone for baking cakes? [1M]",
+    answer: "(a) Plaster of Paris and Gypsum:\n    - Compound A: Plaster of Paris (Calcium sulphate hemihydrate, CaSO4.1/2H2O).\n    - Compound B: Gypsum (Calcium sulphate dihydrate, CaSO4.2H2O).\n    - Chemical Equation:\n      CaSO4.1/2H2O + 1(1/2)H2O -> CaSO4.2H2O [Hard solid mass]\n    - Medical Use: Used by doctors as plaster for supporting and immobilising fractured bones in the correct position.\n\n(b) Bleaching Powder Chemistry:\n    - Compound C: Bleaching Powder (Calcium oxychloride, CaOCl2).\n    - Preparation Equation:\n      Ca(OH)2(s) [Dry Slaked Lime] + Cl2(g) -> CaOCl2(s) + H2O(l)\n    - Prolonged Air Exposure: CaOCl2 reacts slowly with atmospheric carbon dioxide (CO2) to liberate chlorine gas, depleting its available chlorine over time:\n      CaOCl2(s) + CO2(g) -> CaCO3(s) + Cl2(g)↑\n\n(c) Why Tartaric Acid is Added to Baking Powder:\n    - When sodium hydrogen carbonate (NaHCO3) is heated during baking, it decomposes to form sodium carbonate (Na2CO3):\n      2NaHCO3 -> Na2CO3 + H2O + CO2\n    - Sodium carbonate is basic and imparts a bitter, unpleasant taste to the cake.\n    - Adding a mild edible acid like tartaric acid neutralises the basic sodium carbonate formed, converting it into harmless sodium tartrate, avoiding bitterness while liberating additional CO2 that makes the cake soft and spongy.",
+    explanation: "NCERT Section 2.4. Comprehensive 5-marker integrating Plaster of Paris, Bleaching Powder, and Baking Powder chemistry.",
+    formula: "POP: CaSO4.1/2H2O; Bleaching: CaOCl2; Baking: NaHCO3 + Tartaric Acid -> Sodium Tartrate + CO2 + H2O",
+    examinerNote: "2 marks for POP equation and medical cast; 2 marks for bleaching powder and air decay; 1 mark for tartaric acid neutralizing bitterness.",
+    source: "CBSE Class 10 Board 2024 / Exemplar HOTS"
   }
 ];
+

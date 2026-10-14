@@ -214,23 +214,25 @@ export const SCI_CH11_QUESTIONS: VaultQuestion[] = [
     examinerNote: "Part (c) calculation must show $9.09\\text{ A} > 5\\text{ A}$ for full marks.",
     source: "Educart Science 2026 / CBSE Case Study"
   },
-  {"id": "sci_c11_q12",
-    "chapter": 11,
-    "chapterName": "Electricity",
-    "marks": 1,
-    "type": "MCQ",
-    "question": "A cylindrical conductor of length l and uniform area of cross-section A has resistance R. Another conductor of length 2l and resistance R of the same material has area of cross-section:\n(a) A / 2\n(b) 3A / 2\n(c) 2A\n(d) 3A",
-    "options": [
-      "A / 2",
-      "3A / 2",
-      "2A",
-      "3A"
+  {
+    id: "sci_c11_q12",
+    chapter: 11,
+    chapterName: "Electricity",
+    marks: 1,
+    type: "MCQ",
+    question: "To accurately measure the electric current flowing through a resistor and the potential difference across its ends, how should the ammeter and voltmeter be connected in the circuit?\n(a) Ammeter in series, Voltmeter in parallel\n(b) Ammeter in parallel, Voltmeter in series\n(c) Both in series\n(d) Both in parallel",
+    options: [
+      "Ammeter in series, Voltmeter in parallel",
+      "Ammeter in parallel, Voltmeter in series",
+      "Both in series",
+      "Both in parallel"
     ],
-    "correctOption": 2,
-    "answer": "Option (c) is correct: 2A.",
-    "explanation": "Resistance $R = \\rho \\frac{l}{A}$. For the second wire: $R_2 = \\rho \\frac{l_2}{A_2} = \\rho \\frac{2l}{A_2} = R$. Equating: $\\rho \\frac{l}{A} = \\rho \\frac{2l}{A_2} \\implies A_2 = 2A$.",
-    "formula": "R = \\rho \\frac{l}{A}",
-    "source": "NCERT Class 10 Exemplar"
+    correctOption: 0,
+    answer: "Option (a) is correct: Ammeter in series, Voltmeter in parallel.",
+    explanation: "An ammeter has very low internal resistance and must be connected in series so that the entire circuit current passes through it without significantly reducing total current. A voltmeter has very high internal resistance and must be connected in parallel across the resistor so that it draws virtually zero current while measuring the potential drop.",
+    formula: "R_{\\text{ammeter}} \\to 0 \\text{ (Series)}, \\quad R_{\\text{voltmeter}} \\to \\infty \\text{ (Parallel)}",
+    examinerNote: "Board trap: Connecting an ammeter in parallel causes a dangerous short circuit. Connecting a voltmeter in series drops the circuit current to near zero.",
+    source: "CBSE Board 2024 / NCERT Chapter 11 In-Text"
   },
   {
     "id": "sci_c11_q13",
