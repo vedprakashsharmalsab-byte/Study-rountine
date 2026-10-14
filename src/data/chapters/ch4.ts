@@ -107,7 +107,7 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
     type: "MCQ",
     question: "[CBSE 2020 Standard] Which of the following is a quadratic equation?",
     options: [
-      "(x + 1)³ = x³ + 2x + 1",
+      "(x + 2)(x - 1) = x² - 2x + 3",
       "(x - 2)² + 1 = 2x - 3",
       "x² + 2x + 1 = (4 - x)² + 3",
       "-2x² = (5 - x)(2x - 2/5)"
@@ -115,13 +115,23 @@ export const CH4_QUESTIONS: VaultQuestion[] = [
     correctOption: 1,
     answer: "(x - 2)² + 1 = 2x - 3",
     steps: [
-      "Step 1: Test Option A: (x+1)³ = x³ + 3x² + 3x + 1. Equation: x³ + 3x² + 3x + 1 = x³ + 2x + 1 ⇒ 3x² + x = 0 (Wait, 3x² + x = 0 is quadratic!).",
-      "Step 2: Let's test Option B: x² - 4x + 4 + 1 = 2x - 3 ⇒ x² - 6x + 8 = 0. Both A and B contain degree 2. In CBSE 2020: (x-2)² + 1 = 2x - 3 was given directly as quadratic (x² - 6x + 8 = 0).",
-      "Step 3: Standard form is ax² + bx + c = 0 where a ≠ 0."
+      "Step 1: Understand what a quadratic equation is — An equation of the form ax² + bx + c = 0 where the highest power (degree) of the variable x is strictly 2, and the leading coefficient a ≠ 0.",
+      "Step 2: Test Option A: (x + 2)(x - 1) = x² - 2x + 3",
+      "Expanding LHS: x² + x - 2 = x² - 2x + 3",
+      "Subtract x² from both sides: x - 2 = -2x + 3 ⟹ 3x - 5 = 0. This is a linear equation (degree 1), NOT quadratic.",
+      "Step 3: Test Option B: (x - 2)² + 1 = 2x - 3",
+      "Expanding LHS: (x² - 4x + 4) + 1 = 2x - 3 ⟹ x² - 4x + 5 = 2x - 3",
+      "Move all terms to LHS: x² - 6x + 8 = 0. Here the highest power is 2 and coefficient of x² is 1 ≠ 0. Hence, it IS a quadratic equation!",
+      "Step 4: Test Option C: x² + 2x + 1 = (4 - x)² + 3",
+      "Expanding RHS: x² + 2x + 1 = (16 - 8x + x²) + 3 ⟹ x² + 2x + 1 = x² - 8x + 19",
+      "x² cancels from both sides: 10x - 18 = 0 (Linear, NOT quadratic).",
+      "Step 5: Test Option D: -2x² = (5 - x)(2x - 2/5)",
+      "Expanding RHS: -2x² = 10x - 2 - 2x² + (2/5)x ⟹ -2x² cancels ⟹ (52/5)x - 2 = 0 (Linear, NOT quadratic).",
+      "Step 6: Conclusion: Only Option B, (x - 2)² + 1 = 2x - 3, simplifies to a valid quadratic equation."
     ],
-    explanation: "Expand both sides and simplify to determine whether the coefficient of x² is non-zero after cancellation.",
-    formula: "Standard Form: ax² + bx + c = 0 (a ≠ 0)",
-    examinerNote: "Always expand both sides completely before judging the degree of the equation.",
+    explanation: "Always expand both sides completely and collect all terms on one side. If the x² terms cancel out, the equation is not quadratic.",
+    formula: "Standard Form: ax² + bx + c = 0 \\quad (a \\neq 0)",
+    examinerNote: "Don't be fooled by appearances! An equation may look quadratic because it has x², but if x² cancels out on both sides, it becomes linear.",
     source: "CBSE Board 2020 Standard"
   },
 

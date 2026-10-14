@@ -32,9 +32,32 @@ function convertPlainMathToLatex(text: string): string {
 
     let result = text;
 
-    // Convert plain text "upon" (e.g. "AD upon DB", "P upon B", "1 upon 2") to LaTeX fractions
+    const NON_MATH_ENGLISH_WORDS = new Set([
+        "based", "relies", "depends", "addition", "subtraction", "multiplication", "division",
+        "arrival", "entering", "inspection", "death", "completion", "which", "whom", "what",
+        "where", "once", "rest", "rests", "gaze", "gazes", "gazed", "fired", "agreed", "built",
+        "hinged", "conferred", "called", "calling", "decided", "placed", "drawn", "fallen", "falls",
+        "acting", "acts", "acted", "incident", "strike", "strikes", "depend", "dependent",
+        "reliance", "consequent", "insisted", "prey", "preying", "feed", "feeding",
+        "the", "a", "an", "this", "that", "these", "those", "it", "its", "them", "their",
+        "is", "was", "are", "were", "be", "been", "being", "have", "has", "had", "do", "does", "did",
+        "and", "or", "but", "if", "then", "else", "when", "as", "at", "by", "for", "from",
+        "in", "into", "of", "off", "on", "onto", "out", "over", "to", "up", "with"
+    ]);
+
+    // Convert plain text "upon" (e.g. "AD upon DB", "P upon B", "1 upon 2") ONLY when mathematically valid
     result = result.replace(/\b([A-Za-z0-9_]+)\s+upon\s+([A-Za-z0-9_]+)\b/gi, (match, num, den) => {
-        return `$\\displaystyle \\frac{${num}}{${den}}$`;
+        const numLower = num.toLowerCase();
+        const denLower = den.toLowerCase();
+        if (NON_MATH_ENGLISH_WORDS.has(numLower) || NON_MATH_ENGLISH_WORDS.has(denLower)) {
+            return match;
+        }
+        const isNumMath = /^\d+$/.test(num) || num.length <= 2 || /^[A-Z]{2,4}$/.test(num);
+        const isDenMath = /^\d+$/.test(den) || den.length <= 2 || /^[A-Z]{2,4}$/.test(den);
+        if (!isNumMath || !isDenMath) {
+            return match;
+        }
+        return ` $\\displaystyle \\frac{${num}}{${den}}$ `;
     });
 
     // Convert degrees

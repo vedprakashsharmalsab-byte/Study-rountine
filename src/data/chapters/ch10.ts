@@ -275,28 +275,30 @@ Step 2: Opposite angles of cyclic quadrilateral sum to 180° → ∠PRQ = 180° 
     "chapterName": "Circles",
     "marks": 2,
     "type": "SA",
-    "question": "In △ABC, a circle is inscribed touching BC at D, CA at E, and AB at F. If AB = 14 cm, BC = 12 cm, CA = 10 cm, find AD.",
-    "answer": `CBSE Topper Answer Sheet
-Section B (2M SA)
-Governing Formula: Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)
-Full Score: 2 / 2 Marks
-
-Step 1: AF = AE = x, BF = BD = y, CD = CE = z. x+y = 14, y+z = 12, z+x = 10 [Given in Problem]
-Step 2: Adding: 2(x+y+z) = 36 → x+y+z = 18. z = 4, y = 8, x = 6 [Algebraic Simplification]
-Step 3: AE = x = 6 cm [Algebraic Simplification]
-Step 4: Since AF = AE = AD... wait, D is on BC: AD is not the tangent length [Trigonometric Definition/Identity]
-Step 5: AE = AF = x = 6 cm. [Final Result with Units]
-`,
+    "question": "In △ABC, a circle is inscribed touching BC at D, CA at E, and AB at F. If AB = 14 cm, BC = 12 cm, CA = 10 cm, find the lengths of AF, BD, and CE.",
+    "answer": "AF = 6 cm, BD = 8 cm, CE = 4 cm",
     "steps": [
-      "Step 1: AF = AE = x, BF = BD = y, CD = CE = z. x+y = 14, y+z = 12, z+x = 10 [Given in Problem]",
-      "Step 2: Adding: 2(x+y+z) = 36 → x+y+z = 18. z = 4, y = 8, x = 6 [Algebraic Simplification]",
-      "Step 3: AE = x = 6 cm [Algebraic Simplification]",
-      "Step 4: Since AF = AE = AD... wait, D is on BC: AD is not the tangent length [Trigonometric Definition/Identity]",
-      "Step 5: AE = AF = x = 6 cm. [Final Result with Units]"
+      "Step 1: Apply Theorem 10.2 (Lengths of tangents drawn from an external point to a circle are equal):",
+      "From vertex A: AF = AE = x",
+      "From vertex B: BD = BF = y",
+      "From vertex C: CD = CE = z",
+      "Step 2: Express the perimeter and side lengths in terms of x, y, and z:",
+      "AB = x + y = 14 cm ... (Equation 1)",
+      "BC = y + z = 12 cm ... (Equation 2)",
+      "CA = z + x = 10 cm ... (Equation 3)",
+      "Step 3: Add all three equations together:",
+      "(x + y) + (y + z) + (z + x) = 14 + 12 + 10",
+      "2(x + y + z) = 36 ⟹ x + y + z = 18 cm ... (Equation 4)",
+      "Step 4: Solve for each segment:",
+      "x = AF = (x + y + z) - (y + z) = 18 - 12 = 6 cm",
+      "y = BD = (x + y + z) - (z + x) = 18 - 10 = 8 cm",
+      "z = CE = (x + y + z) - (x + y) = 18 - 14 = 4 cm",
+      "Step 5: Final Result: AF = 6 cm, BD = 8 cm, and CE = 4 cm."
     ],
-    "examinerNote": "Let the three tangent lengths from each vertex be x, y, z. Set up 3 equations and solve.",
-    "source": "CBSE Board / KVS Support / RD Sharma",
-    "formula": "Theorem 10.1 (OP ⊥ Tangent) & Theorem 10.2 (PA = PB)"
+    "explanation": "Tangents from each external vertex to the inscribed circle are equal in length. Adding the side lengths gives twice the sum of the tangent segments, from which each individual segment is found by subtraction.",
+    "formula": "PA = PB \\quad (\\text{Theorem 10.2}), \\quad x + y + z = \\frac{\\text{Perimeter}}{2}",
+    "examinerNote": "Let the three tangent lengths from each vertex be x, y, z. Summing the three equations avoids tedious substitution.",
+    "source": "CBSE Board / NCERT Exemplar / RD Sharma"
   },
   {
     "id": "vq_10_3m_1",

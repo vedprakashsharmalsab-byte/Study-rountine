@@ -263,19 +263,22 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     chapterName: "Real Numbers",
     marks: 3,
     type: "SA",
-    question: "[CBSE 2007, 2015, 2022] Find the largest number that divides 2053 and 367 leaving remainders 5 and 7 respectively.",
+    question: "[CBSE 2007, 2015, 2022] Find the largest number that divides 2053 and 967 leaving remainders 5 and 7 respectively.",
     answer: "64",
     steps: [
-      "Step 1: If a number divides 2053 leaving remainder 5, it must divide (2053 - 5) = 2048 exactly.",
-      "Step 2: If it divides 367 leaving remainder 7, it must divide (367 - 7) = 360 exactly.",
-      "Step 3: The largest such number is the HCF of 2048 and 360.",
-      "Step 4: Prime factorise 2048 and 360:\n2048 = 2¹¹\n360 = 36 × 10 = (2² × 3²) × (2 × 5) = 2³ × 3² × 5",
-      "Step 5: HCF(2048, 360) = 2³ = 8... Wait: verify 2053 and 367 or standard numbers 2053 - 5 = 2048, 367 - 7 = 360.",
-      "Step 6: Let's check: 2048 = 360 × 5 + 248; 360 = 248 × 1 + 112; 248 = 112 × 2 + 24; 112 = 24 × 4 + 16; 24 = 16 × 1 + 8; 16 = 8 × 2 + 0 ⇒ HCF = 64 for 2053 - 5 = 2048 and standard board problem: 2053 - 5 = 2048, 367 - 7 = 360 gives 8. If numbers are 2053 and 367, HCF is 8. For standard 64: 2053 - 5 = 2048 and 967 - 7 = 960 (960 = 64 × 15). Here HCF(2048, 360) = 8."
+      "Step 1: If the required number divides 2053 leaving a remainder of 5, it must divide (2053 - 5) = 2048 exactly without any remainder.",
+      "Step 2: If the required number divides 967 leaving a remainder of 7, it must divide (967 - 7) = 960 exactly without any remainder.",
+      "Step 3: The largest number dividing both 2048 and 960 exactly is their Highest Common Factor, HCF(2048, 960).",
+      "Step 4: Find the prime factorisation of both numbers:",
+      "2048 = 2¹¹",
+      "960 = 2⁶ × 3¹ × 5¹",
+      "Step 5: The HCF is the product of the smallest power of each common prime factor:",
+      "HCF(2048, 960) = 2⁶ = 64.",
+      "Step 6: Conclusion: The largest number that divides 2053 and 967 leaving remainders 5 and 7 respectively is 64."
     ],
-    explanation: "Subtract respective remainders first: (Number - Remainder) must be divisible. Then find the HCF of the resulting values.",
-    formula: "Required Number = HCF(N1 - R1, N2 - R2)",
-    examinerNote: "Subtract remainders BEFORE finding HCF, never after.",
+    explanation: "Always subtract each remainder from its corresponding dividend first. The required largest divisor is simply the HCF of the resulting numbers.",
+    formula: "\\text{Required Number} = \\text{HCF}(N_1 - R_1, N_2 - R_2)",
+    examinerNote: "Subtract remainders BEFORE finding HCF, never after. Show the complete prime factorisation for full marks.",
     source: "CBSE Board 2015 Delhi"
   },
   {

@@ -42,13 +42,17 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     ],
     "correctOption": 1,
     "answer": "4/5",
-    "explanation": "tan A = 4/3 → P = 4, B = 3, H = √(16+9) = 5. sin A = P/H = 4/5.",
+    "explanation": "tan A is the ratio of Perpendicular to Base (P/B = 4/3). By Pythagoras theorem, the Hypotenuse H = √(P² + B²) = √(16 + 9) = 5. Therefore, sin A = P/H = 4/5.",
     "steps": [
-      "Step 1: tan A = 4/3 → P = 4, B = 3, H = √(16+9) = 5. [Trigonometric Definition/Identity]",
-      "Step 2: sin A = P/H = 4/5. [Trigonometric Definition/Identity]"
+      "Step 1: Understand the definition of tangent — In any right-angled triangle, tan A = (Perpendicular P) / (Base B) = 4/3.",
+      "Step 2: Let the side lengths be P = 4k and B = 3k (where k is a positive constant factor).",
+      "Step 3: Calculate the Hypotenuse (H) using Pythagoras Theorem (H² = P² + B²):",
+      "H = √((4k)² + (3k)²) = √(16k² + 9k²) = √(25k²) = 5k.",
+      "Step 4: Recall the definition of sine: sin A = (Perpendicular P) / (Hypotenuse H).",
+      "Step 5: Substitute the values: sin A = 4k / 5k = 4/5 (Option B)."
     ],
-    "formula": "sin²θ + cos²θ = 1, tan θ = sin θ / cos θ",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "formula": "\\tan A = \\frac{P}{B}, \\quad H = \\sqrt{P^2 + B^2}, \\quad \\sin A = \\frac{P}{H}",
+    "examinerNote": "Always identify which sides represent P, B, and H before calculating any trigonometric ratio."
   },
   {
     "id": "vq_8_1m_3",
@@ -65,13 +69,16 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     ],
     "correctOption": 2,
     "answer": "1",
-    "explanation": "By fundamental identity: sin²θ + cos²θ = 1 for all values of θ. Here sin²45° + cos²45° = (1/√2)² + (1/√2)² = 1/2 + 1/2 = 1.",
+    "explanation": "By the fundamental Pythagorean trigonometric identity, sin²θ + cos²θ = 1 for any angle θ. Substituting θ = 45°: (1/√2)² + (1/√2)² = 1/2 + 1/2 = 1.",
     "steps": [
-      "Step 1: By fundamental identity: sin²θ + cos²θ = 1 for all values of θ. [Trigonometric Definition/Identity]",
-      "Step 2: Here sin²45° + cos²45° = (1/√2)² + (1/√2)² = 1/2 + 1/2 = 1. [Trigonometric Definition/Identity]"
+      "Step 1: Recall the fundamental trigonometric identity: sin²θ + cos²θ = 1 holds true for all values of θ (0° ≤ θ ≤ 90°).",
+      "Step 2: Alternatively, substitute known values for 45°:",
+      "sin 45° = 1/√2 ⟹ sin²45° = (1/√2)² = 1/2",
+      "cos 45° = 1/√2 ⟹ cos²45° = (1/√2)² = 1/2",
+      "Step 3: Add both squared terms: 1/2 + 1/2 = 2/2 = 1 (Option C)."
     ],
-    "formula": "sin²θ + cos²θ = 1, tan θ = sin θ / cos θ",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "formula": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "examinerNote": "This identity holds true for ANY angle without needing to compute individual numerical values."
   },
   {
     "id": "vq_8_1m_4",
@@ -79,7 +86,7 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     "chapterName": "Introduction to Trigonometry",
     "marks": 1,
     "type": "MCQ",
-    "question": "If sin(A − B) = 1/2 and cos(A + B) = 1/2, 0° < A + B ≤ 90° and A > B, then A equals:",
+    "question": "If sin(A − B) = 1/2 and cos(A + B) = 1/2, where 0° < A + B ≤ 90° and A > B, then the angle A equals:",
     "options": [
       "30°",
       "45°",
@@ -88,14 +95,19 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     ],
     "correctOption": 1,
     "answer": "45°",
-    "explanation": "sin(A−B) = 1/2 → A−B = 30°. cos(A+B) = 1/2 → A+B = 60°. Adding: 2A = 90° → A = 45°.",
+    "explanation": "Since sin 30° = 1/2, A − B = 30°. Since cos 60° = 1/2, A + B = 60°. Adding the two equations: 2A = 90° ⟹ A = 45°.",
     "steps": [
-      "Step 1: sin(A−B) = 1/2 → A−B = 30°. [Trigonometric Definition/Identity]",
-      "Step 2: cos(A+B) = 1/2 → A+B = 60°. [Trigonometric Definition/Identity]",
-      "Step 3: Adding: 2A = 90° → A = 45°. [Final Result with Units]"
+      "Step 1: Relate the given numerical values to standard trigonometric angles:",
+      "We know that sin 30° = 1/2. Therefore, from sin(A - B) = 1/2, we have: A - B = 30° ... (Equation 1)",
+      "Step 2: We know that cos 60° = 1/2. Therefore, from cos(A + B) = 1/2, we have: A + B = 60° ... (Equation 2)",
+      "Step 3: Solve this pair of linear equations by adding Equation 1 and Equation 2:",
+      "(A - B) + (A + B) = 30° + 60°",
+      "2A = 90° ⟹ A = 90° / 2 = 45°",
+      "Step 4: (Optional check for B): B = 60° - A = 60° - 45° = 15° (satisfies A > B and 0° < 60° ≤ 90°).",
+      "Step 5: Concluding Answer: A = 45° (Option B)."
     ],
-    "formula": "sin²θ + cos²θ = 1, tan θ = sin θ / cos θ",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "formula": "\\sin 30^\\circ = \\frac{1}{2}, \\quad \\cos 60^\\circ = \\frac{1}{2}, \\quad A = \\frac{(A - B) + (A + B)}{2}",
+    "examinerNote": "Always check that the resulting angles satisfy the condition 0° < A + B ≤ 90° and A > B."
   },
   {
     "id": "vq_8_1m_5",
@@ -112,13 +124,17 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     ],
     "correctOption": 1,
     "answer": "12/5",
-    "explanation": "sec θ = 13/5 → H = 13, B = 5, P = √(169−25) = √144 = 12. tan θ = P/B = 12/5.",
+    "explanation": "sec θ = H/B = 13/5. By Pythagoras theorem, P = √(13² − 5²) = √(169 − 25) = √144 = 12. Therefore, tan θ = P/B = 12/5.",
     "steps": [
-      "Step 1: sec θ = 13/5 → H = 13, B = 5, P = √(169−25) = √144 = 12. [Given in Problem]",
-      "Step 2: tan θ = P/B = 12/5. [Trigonometric Definition/Identity]"
+      "Step 1: Understand the secant ratio definition: sec θ = (Hypotenuse H) / (Base B) = 13/5.",
+      "Step 2: Let Hypotenuse H = 13k and Base B = 5k.",
+      "Step 3: Find the Perpendicular (P) using Pythagoras Theorem: P² + B² = H² ⟹ P = √(H² - B²)",
+      "P = √((13k)² - (5k)²) = √(169k² - 25k²) = √(144k²) = 12k.",
+      "Step 4: Compute tan θ = (Perpendicular P) / (Base B) = 12k / 5k = 12/5 (Option B).",
+      "Step 5: (Alternative Identity Method): tan²θ = sec²θ - 1 = (13/5)² - 1 = 169/25 - 25/25 = 144/25 ⟹ tan θ = 12/5."
     ],
-    "formula": "sin²θ + cos²θ = 1, tan θ = sin θ / cos θ",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "formula": "\\sec^2\\theta - \\tan^2\\theta = 1 \\iff \\tan\\theta = \\sqrt{\\sec^2\\theta - 1} = \\frac{P}{B}",
+    "examinerNote": "Both the right triangle method and the identity method (tan²θ = sec²θ - 1) yield full marks in board exams."
   },
   {
     "id": "vq_8_1m_6",
@@ -135,15 +151,22 @@ export const CH8_QUESTIONS: VaultQuestion[] = [
     ],
     "correctOption": 1,
     "answer": "1",
-    "explanation": "tan(90°−θ) = cot θ. So tan1°×tan89° = tan1°×cot1° = 1; tan2°×tan88° = 1; ... tan45°=1. Product = 1.",
+    "explanation": "Using complementary angles tan(90° − θ) = cot θ, each term from the beginning pairs with a term from the end: tan 1° × tan 89° = tan 1° × cot 1° = 1. The lone central term is tan 45° = 1. The entire product equals 1.",
     "steps": [
-      "Step 1: tan(90°−θ) = cot θ. [Trigonometric Definition/Identity]",
-      "Step 2: So tan1°×tan89° = tan1°×cot1° = 1; tan2°×tan88° = 1; ... [Trigonometric Definition/Identity]",
-      "Step 3: tan45°=1. [Trigonometric Definition/Identity]",
-      "Step 4: Product = 1. [Final Result with Units]"
+      "Step 1: Group terms symmetrically from opposite ends:",
+      "(tan 1° × tan 89°) × (tan 2° × tan 88°) × ... × (tan 44° × tan 46°) × tan 45°",
+      "Step 2: Apply the complementary angle formula tan(90° - θ) = cot θ:",
+      "tan 89° = tan(90° - 1°) = cot 1°",
+      "tan 88° = tan(90° - 2°) = cot 2°, and so on.",
+      "Step 3: Since tan θ × cot θ = 1 (reciprocal ratios):",
+      "tan 1° × cot 1° = 1",
+      "tan 2° × cot 2° = 1",
+      "All 44 pairs multiply to 1.",
+      "Step 4: The middle unmatched term is tan 45° = 1.",
+      "Step 5: Total product = (1 × 1 × ... × 1) × 1 = 1 (Option B)."
     ],
-    "formula": "sin²θ + cos²θ = 1, tan θ = sin θ / cos θ",
-    "examinerNote": "Double-check units and arithmetic calculations. Write the final answer clearly."
+    "formula": "\\tan(90^\\circ - \\theta) = \\cot\\theta, \\quad \\tan\\theta \\cdot \\cot\\theta = 1",
+    "examinerNote": "Complementary angle pairs multiply to 1, leaving only tan 45° = 1."
   },
   {
     "id": "vq_8_1m_7",
