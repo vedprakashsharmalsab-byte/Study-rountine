@@ -22,7 +22,14 @@ import {
   Radio,
   Sliders,
   CheckCircle2,
-  Volume1
+  Volume1,
+  Palette,
+  Wind,
+  Clock,
+  Flame,
+  Trees,
+  Moon,
+  Laptop
 } from "lucide-react";
 import {
   ZEN_SOUNDS,
@@ -54,6 +61,75 @@ const PRESETS = [
   { label: "90m Marathon", minutes: 90, desc: "Full Exam Simulation" }
 ];
 
+const THEMES = [
+  {
+    id: "oled_black",
+    name: "Pure OLED Black",
+    icon: "🌑",
+    bg: "#000000",
+    glowColor: "rgba(245, 158, 11, 0.4)",
+    activeGradient: "radial-gradient(circle at 50% 40%, rgba(245, 158, 11, 0.06) 0%, rgba(0, 0, 0, 1) 75%)",
+    standbyGradient: "radial-gradient(circle at 50% 40%, rgba(16, 185, 129, 0.05) 0%, rgba(0, 0, 0, 1) 75%)",
+    accent: "text-amber-400",
+    ringColor: "#f59e0b"
+  },
+  {
+    id: "cyberpunk",
+    name: "Cyberpunk Neon",
+    icon: "🌌",
+    bg: "#08031a",
+    glowColor: "rgba(168, 85, 247, 0.5)",
+    activeGradient: "radial-gradient(circle at 50% 40%, rgba(168, 85, 247, 0.12) 0%, rgba(8, 3, 26, 1) 75%)",
+    standbyGradient: "radial-gradient(circle at 50% 40%, rgba(6, 182, 212, 0.1) 0%, rgba(8, 3, 26, 1) 75%)",
+    accent: "text-cyan-400",
+    ringColor: "#06b6d4"
+  },
+  {
+    id: "forest_zen",
+    name: "Forest Sanctuary",
+    icon: "🌲",
+    bg: "#031209",
+    glowColor: "rgba(16, 185, 129, 0.45)",
+    activeGradient: "radial-gradient(circle at 50% 40%, rgba(16, 185, 129, 0.12) 0%, rgba(3, 18, 9, 1) 75%)",
+    standbyGradient: "radial-gradient(circle at 50% 40%, rgba(52, 211, 153, 0.08) 0%, rgba(3, 18, 9, 1) 75%)",
+    accent: "text-emerald-400",
+    ringColor: "#10b981"
+  },
+  {
+    id: "amber_hearth",
+    name: "Warm Hearth",
+    icon: "🔥",
+    bg: "#120803",
+    glowColor: "rgba(249, 115, 22, 0.5)",
+    activeGradient: "radial-gradient(circle at 50% 40%, rgba(249, 115, 22, 0.12) 0%, rgba(18, 8, 3, 1) 75%)",
+    standbyGradient: "radial-gradient(circle at 50% 40%, rgba(234, 88, 12, 0.08) 0%, rgba(18, 8, 3, 1) 75%)",
+    accent: "text-orange-400",
+    ringColor: "#f97316"
+  },
+  {
+    id: "deep_nebula",
+    name: "Cosmic Nebula",
+    icon: "🪐",
+    bg: "#050718",
+    glowColor: "rgba(99, 102, 241, 0.5)",
+    activeGradient: "radial-gradient(circle at 50% 40%, rgba(99, 102, 241, 0.12) 0%, rgba(5, 7, 24, 1) 75%)",
+    standbyGradient: "radial-gradient(circle at 50% 40%, rgba(129, 140, 248, 0.08) 0%, rgba(5, 7, 24, 1) 75%)",
+    accent: "text-indigo-400",
+    ringColor: "#818cf8"
+  }
+];
+
+const TOPPER_AFFIRMATIONS = [
+  "NCERT line-by-line is your superpower in CBSE Boards.",
+  "Consistency beats talent. 45 minutes of deep focus today builds a 98% tomorrow.",
+  "Read questions twice, highlight key terms, verify units.",
+  "Every question solved today is 5 marks secured in February.",
+  "Stay calm, breathe deep. Focus is your greatest edge.",
+  "Do not rush; precision and speed come from calm clarity.",
+  "Small daily wins compound into an extraordinary Board result.",
+  "Formulas are tools; concept mastery is the master key."
+];
+
 export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
   isOpen,
   onClose,
@@ -73,6 +149,26 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
   const [daysToBoards, setDaysToBoards] = useState<number>(111);
   const [isDistractionFree, setIsDistractionFree] = useState<boolean>(false);
   const [showAlarmDrawer, setShowAlarmDrawer] = useState<boolean>(false);
+  const [showThemeDrawer, setShowThemeDrawer] = useState<boolean>(false);
+  const [currentThemeId, setCurrentThemeId] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("arete_zen_theme") || "oled_black";
+    }
+    return "oled_black";
+  });
+  const [isNativeFullscreen, setIsNativeFullscreen] = useState<boolean>(false);
+
+  // 4-7-8 Breathing Guide
+  const [isBreathingActive, setIsBreathingActive] = useState<boolean>(false);
+  const [breathingPhase, setBreathingPhase] = useState<"inhale" | "hold" | "exhale">("inhale");
+  const [breathingSecondsLeft, setBreathingSecondsLeft] = useState<number>(4);
+
+  // Live Clock
+  const [currentTimeStr, setCurrentTimeStr] = useState<string>("");
+
+  // Affirmations Ticker
+  const [affirmationIdx, setAffirmationIdx] = useState<number>(0);
+
   const [selectedStopAlarm, setSelectedStopAlarm] = useState<string>(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("arete_study_alarm_sound") || "tibetan_bowl";
@@ -84,6 +180,64 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
   useEffect(() => {
     setActiveSoundId(zenSoundEngine.getCurrentSound());
   }, [isOpen]);
+
+  // Live real-time clock ticker
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTimeStr(
+        now.toLocaleTimeString("en-IN", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true
+        })
+      );
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Affirmations rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAffirmationIdx((prev) => (prev + 1) % TOPPER_AFFIRMATIONS.length);
+    }, 12000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // 4-7-8 Breathing Engine
+  useEffect(() => {
+    if (!isBreathingActive) return;
+    const interval = setInterval(() => {
+      setBreathingSecondsLeft((prev) => {
+        if (prev <= 1) {
+          if (breathingPhase === "inhale") {
+            setBreathingPhase("hold");
+            return 7;
+          } else if (breathingPhase === "hold") {
+            setBreathingPhase("exhale");
+            return 8;
+          } else {
+            setBreathingPhase("inhale");
+            return 4;
+          }
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [isBreathingActive, breathingPhase]);
+
+  // Fullscreen change listener
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsNativeFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
 
   // Calculate days to CBSE Boards (2027-02-01)
   useEffect(() => {
@@ -97,28 +251,55 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
     return () => clearInterval(interval);
   }, []);
 
-  // Keyboard navigation: Esc to close, Space to toggle, R to reset, F for distraction-free
+  // Keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         if (isDistractionFree) {
           setIsDistractionFree(false);
+        } else if (showAlarmDrawer) {
+          setShowAlarmDrawer(false);
+        } else if (showThemeDrawer) {
+          setShowThemeDrawer(false);
         } else {
           onClose();
         }
       } else if (e.code === "Space" && e.target === document.body) {
         e.preventDefault();
         onToggleTimer();
-      } else if ((e.key === "r" || e.key === "R") && !e.ctrlKey && !e.metaKey) {
-        if (e.target === document.body) onResetTimer();
-      } else if ((e.key === "f" || e.key === "F") && !e.ctrlKey && !e.metaKey) {
-        if (e.target === document.body) setIsDistractionFree((prev) => !prev);
+      } else if ((e.key === "r" || e.key === "R") && !e.ctrlKey && !e.metaKey && e.target === document.body) {
+        onResetTimer();
+      } else if ((e.key === "f" || e.key === "F") && !e.ctrlKey && !e.metaKey && e.target === document.body) {
+        setIsDistractionFree((prev) => !prev);
+      } else if ((e.key === "t" || e.key === "T") && !e.ctrlKey && !e.metaKey && e.target === document.body) {
+        // Cycle theme
+        const currentIdx = THEMES.findIndex((t) => t.id === currentThemeId);
+        const nextTheme = THEMES[(currentIdx + 1) % THEMES.length].id;
+        setCurrentThemeId(nextTheme);
+        if (typeof window !== "undefined") localStorage.setItem("arete_zen_theme", nextTheme);
+      } else if ((e.key === "b" || e.key === "B") && !e.ctrlKey && !e.metaKey && e.target === document.body) {
+        setIsBreathingActive((prev) => !prev);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, isDistractionFree, onClose, onToggleTimer, onResetTimer]);
+  }, [isOpen, isDistractionFree, showAlarmDrawer, showThemeDrawer, currentThemeId, onClose, onToggleTimer, onResetTimer]);
+
+  const toggleNativeFullscreen = useCallback(() => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().then(() => setIsNativeFullscreen(true)).catch(() => {});
+    } else {
+      document.exitFullscreen().then(() => setIsNativeFullscreen(false)).catch(() => {});
+    }
+  }, []);
+
+  const handleSelectTheme = useCallback((themeId: string) => {
+    setCurrentThemeId(themeId);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("arete_zen_theme", themeId);
+    }
+  }, []);
 
   const handleSelectSound = useCallback((soundId: string) => {
     if (activeSoundId === soundId) {
@@ -166,9 +347,9 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
 
   if (!isOpen) return null;
 
+  const activeTheme = THEMES.find((t) => t.id === currentThemeId) || THEMES[0];
   const totalSecs = selectedMinutes * 60;
   const progressRatio = totalSecs > 0 ? (totalSecs - secondsRemaining) / totalSecs : 0;
-  const strokeDashoffset = 754 - 754 * progressRatio;
 
   const mins = Math.floor(secondsRemaining / 60);
   const secs = secondsRemaining % 60;
@@ -182,41 +363,88 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[99999] bg-[#000000] text-white flex flex-col justify-between overflow-y-auto no-scrollbar select-none animate-in fade-in duration-300"
+      className="fixed inset-0 z-[99999] text-white flex flex-col justify-between overflow-y-auto no-scrollbar select-none animate-in fade-in duration-300 font-sans"
       style={{
-        backgroundImage: isRunning
-          ? "radial-gradient(circle at 50% 40%, rgba(245, 158, 11, 0.05) 0%, rgba(0, 0, 0, 1) 70%)"
-          : "radial-gradient(circle at 50% 40%, rgba(16, 185, 129, 0.04) 0%, rgba(0, 0, 0, 1) 70%)"
+        backgroundColor: activeTheme.bg,
+        backgroundImage: isRunning ? activeTheme.activeGradient : activeTheme.standbyGradient
       }}
       role="dialog"
       aria-modal="true"
     >
       {/* =========================================================================
-          TOP BAR: ZEN CONTROLS & CBSE MILESTONES (HIDDEN IN DISTRACTION-FREE)
+          TOP BAR: 10X ZEN CONTROLS & LIVE IST CLOCK (HIDDEN IN DISTRACTION-FREE)
           ========================================================================= */}
       {!isDistractionFree && (
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 pt-5 pb-3 flex items-center justify-between gap-3 shrink-0 animate-in fade-in duration-200">
-          {/* LEFT: STATUS & CBSE MILESTONES */}
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-2.5 flex items-center justify-between gap-3 shrink-0 animate-in fade-in duration-200">
+          {/* LEFT: STATUS, LIVE CLOCK & CBSE MILESTONES */}
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md">
+            {/* Live Session Pill */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-md">
               <span className={`w-2 h-2 rounded-full ${isRunning ? "bg-amber-400 animate-ping" : "bg-emerald-400"}`} />
               <span className="text-[11px] font-mono font-black tracking-wider uppercase text-zinc-300">
-                {isRunning ? "Deep Flow Session Active" : "Zen Focus Standby"}
+                {isRunning ? "Deep Flow Session" : "Zen Standby"}
               </span>
             </div>
 
+            {/* Real-time Live Clock */}
+            {currentTimeStr && (
+              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono font-bold text-zinc-300">
+                <Clock className="w-3.5 h-3.5 text-amber-400" />
+                <span>{currentTimeStr}</span>
+                <span className="text-[10px] text-zinc-500 font-normal">IST</span>
+              </div>
+            )}
+
+            {/* CBSE Countdown */}
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold">
               <Award className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-              <span>CBSE Boards (2026–27):</span>
+              <span className="hidden md:inline">CBSE Boards (2026–27):</span>
               <span className="font-black text-cyan-400">{daysToBoards} Days</span>
             </div>
           </div>
 
-          {/* RIGHT: ALARM DRAWER TRIGGER, ZEN TOGGLE & EXIT */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          {/* RIGHT: THEME, BREATHING, FULLSCREEN, ALARM & EXIT */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 flex-wrap justify-end">
+            {/* 4-7-8 Breathing Pacer Toggle */}
+            <button
+              type="button"
+              onClick={() => setIsBreathingActive((v) => !v)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
+                isBreathingActive
+                  ? "bg-teal-500/20 border-teal-400 text-teal-300 ring-1 ring-teal-400"
+                  : "bg-white/[0.05] border-white/10 text-zinc-300 hover:text-teal-300 hover:border-teal-500/40"
+              }`}
+              title="Toggle 4-7-8 Breathing Pacer (Press B)"
+            >
+              <Wind className="w-3.5 h-3.5 text-teal-400" />
+              <span className="hidden sm:inline">4-7-8 Breath (B)</span>
+            </button>
+
+            {/* Deep Focus Theme Selector Button */}
+            <button
+              type="button"
+              onClick={() => {
+                setShowThemeDrawer((v) => !v);
+                setShowAlarmDrawer(false);
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
+                showThemeDrawer
+                  ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-lg"
+                  : "bg-white/[0.05] border-white/10 text-zinc-300 hover:text-amber-300 hover:border-amber-500/40"
+              }`}
+              title="Select OLED / Aesthetic Theme (Press T)"
+            >
+              <Palette className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden sm:inline">{activeTheme.icon} {activeTheme.name.split(" ")[0]}</span>
+            </button>
+
             {/* Stop Sound Selector Pill */}
             <button
-              onClick={() => setShowAlarmDrawer((v) => !v)}
+              type="button"
+              onClick={() => {
+                setShowAlarmDrawer((v) => !v);
+                setShowThemeDrawer(false);
+              }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
                 showAlarmDrawer
                   ? "bg-amber-500 text-slate-950 border-amber-400 font-black shadow-lg"
@@ -225,24 +453,37 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
               title="Select Timer Stop Alarm Chime"
             >
               <Bell className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden sm:inline">Stop Alarm:</span>
-              <span className="text-amber-300 font-black truncate max-w-[110px]">
+              <span className="hidden md:inline">Alarm:</span>
+              <span className="text-amber-300 font-black truncate max-w-[90px]">
                 {STOP_ALARM_OPTIONS.find((a) => a.id === selectedStopAlarm)?.name.split(" ")[0]}
               </span>
             </button>
 
+            {/* Native Browser Fullscreen Toggle */}
+            <button
+              type="button"
+              onClick={toggleNativeFullscreen}
+              className="p-2 sm:px-3 sm:py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-zinc-300 hover:text-white transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono font-bold"
+              title="Toggle Browser Fullscreen (Hides tabs/toolbars)"
+            >
+              {isNativeFullscreen ? <Minimize2 className="w-3.5 h-3.5 text-amber-400" /> : <Maximize2 className="w-3.5 h-3.5 text-amber-400" />}
+              <span className="hidden lg:inline">{isNativeFullscreen ? "Exit Fullscreen" : "Fullscreen"}</span>
+            </button>
+
             {/* Distraction-Free Toggle */}
             <button
+              type="button"
               onClick={() => setIsDistractionFree(true)}
               className="p-2 sm:px-3 sm:py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-zinc-300 hover:text-white transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono font-bold"
               title="Distraction-Free Zen Theater (Press F)"
             >
               <EyeOff className="w-3.5 h-3.5 text-zinc-400" />
-              <span className="hidden md:inline">Zen Only (F)</span>
+              <span className="hidden md:inline">Zen (F)</span>
             </button>
 
             {/* Exit Button */}
             <button
+              type="button"
               onClick={onClose}
               className="p-2 sm:px-3.5 sm:py-1.5 rounded-full bg-white/[0.08] hover:bg-rose-500/20 hover:border-rose-500/40 hover:text-rose-300 border border-white/15 text-zinc-300 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono font-bold"
               title="Exit Fullscreen Zen Mode (Esc)"
@@ -250,6 +491,53 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
               <X className="w-4 h-4" />
               <span className="hidden sm:inline">Exit (Esc)</span>
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* THEME SELECTION DRAWER */}
+      {showThemeDrawer && !isDistractionFree && (
+        <div className="w-full max-w-2xl mx-auto px-4 py-3 animate-in fade-in slide-in-from-top-2 duration-150">
+          <div className="p-4 rounded-2xl bg-zinc-950/95 border border-amber-500/40 shadow-2xl backdrop-blur-2xl space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <Palette className="w-4 h-4 text-amber-400" />
+                <span className="text-xs font-black uppercase tracking-wider text-amber-400">
+                  Select Deep Focus OLED & Ambient Theme
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowThemeDrawer(false)}
+                className="text-zinc-400 hover:text-white text-xs font-mono"
+              >
+                ✕ Close
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {THEMES.map((thm) => {
+                const isSelected = currentThemeId === thm.id;
+                return (
+                  <button
+                    key={thm.id}
+                    type="button"
+                    onClick={() => handleSelectTheme(thm.id)}
+                    className={`p-3 rounded-xl border text-xs font-mono text-left transition-all cursor-pointer flex items-center gap-2.5 ${
+                      isSelected
+                        ? "bg-amber-500/20 border-amber-400 text-amber-300 font-bold ring-1 ring-amber-400 shadow-md"
+                        : "bg-white/[0.03] border-white/10 text-zinc-300 hover:bg-white/[0.06]"
+                    }`}
+                  >
+                    <span className="text-xl">{thm.icon}</span>
+                    <div className="truncate">
+                      <div className="font-bold truncate">{thm.name}</div>
+                      <div className="text-[10px] text-zinc-400">Theme Grade</div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
@@ -266,6 +554,7 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
                 </span>
               </div>
               <button
+                type="button"
                 onClick={() => setShowAlarmDrawer(false)}
                 className="text-zinc-400 hover:text-white text-xs font-mono"
               >
@@ -314,12 +603,13 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
       )}
 
       {/* =========================================================================
-          CENTER STAGE: PURE OLED DEEP BLACK COUNTDOWN THEATER
+          CENTER STAGE: COUNTDOWN THEATER + 4-7-8 BREATHING ORB + TOPPER AFFIRMATIONS
           ========================================================================= */}
       <div className="flex-1 flex flex-col items-center justify-center px-4 py-4 max-w-4xl mx-auto w-full text-center relative">
         {/* Distraction-Free Re-open Control */}
         {isDistractionFree && (
           <button
+            type="button"
             onClick={() => setIsDistractionFree(false)}
             className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-zinc-300 text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-lg"
           >
@@ -328,26 +618,49 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
           </button>
         )}
 
-        {/* Circular Progress Display */}
-        <div className="relative flex items-center justify-center my-4 sm:my-6">
+        {/* 4-7-8 Breathing Guide Banner (Active State) */}
+        {isBreathingActive && (
+          <div className="mb-2 px-4 py-1.5 rounded-full bg-teal-950/60 border border-teal-500/40 text-teal-300 text-xs font-mono font-bold animate-pulse flex items-center gap-2">
+            <Wind className="w-4 h-4 text-teal-400" />
+            <span>
+              {breathingPhase === "inhale" && `🌬️ INHALE DEEPLY (${breathingSecondsLeft}s)`}
+              {breathingPhase === "hold" && `🧘 HOLD BREATH (${breathingSecondsLeft}s)`}
+              {breathingPhase === "exhale" && `💨 SLOW EXHALE (${breathingSecondsLeft}s)`}
+            </span>
+          </div>
+        )}
+
+        {/* Circular Progress Display & Focus Ring */}
+        <div className="relative flex items-center justify-center my-3 sm:my-5">
           <svg className="w-72 h-72 sm:w-96 sm:h-96 transform -rotate-90">
             {/* Background ring */}
             <circle
               cx="50%"
               cy="50%"
               r="130"
-              className="stroke-white/[0.04]"
+              className="stroke-white/[0.05]"
               strokeWidth="6"
               fill="transparent"
             />
-            {/* Progress glow ring */}
+            {/* Breathing pulse ring (if active) */}
+            {isBreathingActive && (
+              <circle
+                cx="50%"
+                cy="50%"
+                r={breathingPhase === "inhale" ? "138" : breathingPhase === "hold" ? "142" : "125"}
+                className="transition-all duration-1000 stroke-teal-400/40"
+                strokeWidth="2"
+                strokeDasharray="10 6"
+                fill="transparent"
+              />
+            )}
+            {/* Main Progress glow ring */}
             <circle
               cx="50%"
               cy="50%"
               r="130"
-              className={`transition-all duration-1000 ${
-                isRunning ? "stroke-amber-400" : "stroke-emerald-400"
-              }`}
+              className="transition-all duration-1000"
+              stroke={isRunning ? activeTheme.ringColor : "#10b981"}
               strokeWidth="8"
               strokeDasharray="816"
               strokeDashoffset={816 - 816 * progressRatio}
@@ -355,7 +668,7 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
               fill="transparent"
               style={{
                 filter: isRunning
-                  ? "drop-shadow(0 0 20px rgba(245, 158, 11, 0.55))"
+                  ? `drop-shadow(0 0 22px ${activeTheme.glowColor})`
                   : "drop-shadow(0 0 20px rgba(16, 185, 129, 0.45))"
               }}
             />
@@ -372,8 +685,9 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
 
             {/* Adjusters (Hidden in Distraction-Free mode) */}
             {!isDistractionFree && (
-              <div className="flex items-center gap-3 mt-4 animate-in fade-in duration-200">
+              <div className="flex items-center gap-3 mt-3 animate-in fade-in duration-200">
                 <button
+                  type="button"
                   onClick={() => onAdjustMinutes(-5)}
                   className="p-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-zinc-300 hover:text-white transition-all active:scale-90"
                   title="Decrease 5 minutes"
@@ -384,6 +698,7 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
                   ±5m Session
                 </span>
                 <button
+                  type="button"
                   onClick={() => onAdjustMinutes(5)}
                   className="p-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-zinc-300 hover:text-white transition-all active:scale-90"
                   title="Increase 5 minutes"
@@ -396,8 +711,9 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
         </div>
 
         {/* PRIMARY CONTROLS (PLAY / PAUSE / RESET) */}
-        <div className="flex items-center gap-4 justify-center mt-2">
+        <div className="flex items-center gap-4 justify-center mt-1">
           <button
+            type="button"
             onClick={onResetTimer}
             className="p-4 rounded-2xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-zinc-400 hover:text-white transition-all active:scale-95 cursor-pointer shadow-lg"
             title="Reset Timer (Press R)"
@@ -406,6 +722,7 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
           </button>
 
           <button
+            type="button"
             onClick={onToggleTimer}
             className={`px-10 sm:px-14 py-4 rounded-2xl text-base sm:text-lg font-black transition-all active:scale-95 cursor-pointer flex items-center gap-3 shadow-2xl ${
               isRunning
@@ -429,12 +746,13 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
 
         {/* PRESET CHIPS (Hidden in distraction-free) */}
         {!isDistractionFree && (
-          <div className="flex items-center justify-center gap-2 flex-wrap mt-5">
+          <div className="flex items-center justify-center gap-2 flex-wrap mt-4">
             {PRESETS.map((p) => {
               const isActive = selectedMinutes === p.minutes;
               return (
                 <button
                   key={p.minutes}
+                  type="button"
                   onClick={() => onSelectPreset(p.minutes)}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer border ${
                     isActive
@@ -448,19 +766,27 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
             })}
           </div>
         )}
+
+        {/* CBSE TOPPER AFFIRMATION TICKER */}
+        <div className="mt-4 px-4 py-2 max-w-xl mx-auto rounded-full bg-white/[0.03] border border-white/10 text-xs font-mono text-zinc-300 flex items-center gap-2 shadow-sm animate-fade-in">
+          <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0 animate-spin" />
+          <span className="truncate italic">
+            &ldquo;{TOPPER_AFFIRMATIONS[affirmationIdx]}&rdquo;
+          </span>
+        </div>
       </div>
 
       {/* =========================================================================
-          BOTTOM DOCK: SCIENCE-BACKED AMBIENT SOUNDS & AUDIO CONTROLS
+          BOTTOM DOCK: 38 SCIENCE-BACKED SOUNDSCAPES & AUDIO CONTROLS
           ========================================================================= */}
       {!isDistractionFree && (
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 py-3.5 border-t border-white/10 bg-[#05060a]/95 backdrop-blur-2xl shrink-0 animate-in fade-in duration-200">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-2.5">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 py-3 border-t border-white/10 bg-[#05060a]/95 backdrop-blur-2xl shrink-0 animate-in fade-in duration-200">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-2">
             {/* Active Sound Indicator */}
             <div className="flex items-center gap-2 flex-wrap">
               <Volume2 className="w-4 h-4 text-cyan-400 shrink-0" />
               <span className="text-xs font-mono font-black tracking-wider uppercase text-zinc-200">
-                Science-Backed Study Soundscapes (30)
+                Science-Backed Soundscapes (38)
               </span>
               {activeSoundObj && (
                 <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold">
@@ -503,6 +829,7 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
 
               {activeSoundId && (
                 <button
+                  type="button"
                   onClick={handleStopAllSounds}
                   className="px-3 py-1 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300 hover:bg-rose-500/30 text-[11px] font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5"
                 >
@@ -516,15 +843,16 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
           {/* Sound Category Filter Tabs */}
           <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 mb-2">
             {[
-              { id: "all", label: "All Sounds (30)" },
-              { id: "binaural", label: "🧠 Brainwaves (40Hz Gamma / 10Hz Alpha)" },
-              { id: "noise", label: "🟤 Noise (ADHD Focus / Pink / White)" },
-              { id: "nature", label: "🌿 Biophilic Nature" },
-              { id: "ambient", label: "☕ Workspaces & 60 BPM Metronome" },
-              { id: "melodic", label: "🎵 Harmonic Resonance" }
+              { id: "all", label: "All Sounds (38)" },
+              { id: "binaural", label: "🧠 Brainwaves (40Hz / 10Hz / 528Hz)" },
+              { id: "noise", label: "🟤 Noise (ADHD Brown / Pink / Fan)" },
+              { id: "nature", label: "🌿 Nature & Rain (Thunder / Forest / Tent)" },
+              { id: "ambient", label: "☕ Workspaces & Hearth Fire" },
+              { id: "melodic", label: "🎵 Solfeggio & Harmonic Bowls" }
             ].map((cat) => (
               <button
                 key={cat.id}
+                type="button"
                 onClick={() => setSoundCategoryFilter(cat.id)}
                 className={`px-3 py-1 rounded-lg text-xs font-mono font-bold shrink-0 border transition-all cursor-pointer ${
                   soundCategoryFilter === cat.id
@@ -544,6 +872,7 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
               return (
                 <button
                   key={s.id}
+                  type="button"
                   onClick={() => handleSelectSound(s.id)}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap flex items-center gap-2 border active:scale-95 ${
                     isPlaying
@@ -567,13 +896,17 @@ export const ZenStudyTimerModal = memo(function ZenStudyTimerModal({
             })}
           </div>
 
-          {/* Active Sound Scientific Rationale Banner */}
-          {activeSoundObj?.scienceBacking && (
-            <div className="mt-2 text-center text-[10px] font-mono text-cyan-300/90 bg-cyan-950/30 border border-cyan-500/20 rounded-lg py-1 px-3 flex items-center justify-center gap-1.5">
-              <Sparkles className="w-3 h-3 text-cyan-400" />
-              <span>{activeSoundObj.scienceBacking}</span>
+          {/* Quick Shortcuts Bar */}
+          <div className="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-zinc-500 flex-wrap gap-2">
+            <div>
+              Shortcuts: <kbd className="px-1 py-0.5 rounded bg-white/10 text-zinc-300">[Space]</kbd> Play/Pause • <kbd className="px-1 py-0.5 rounded bg-white/10 text-zinc-300">[R]</kbd> Reset • <kbd className="px-1 py-0.5 rounded bg-white/10 text-zinc-300">[F]</kbd> Zen • <kbd className="px-1 py-0.5 rounded bg-white/10 text-zinc-300">[T]</kbd> Theme • <kbd className="px-1 py-0.5 rounded bg-white/10 text-zinc-300">[B]</kbd> Breath • <kbd className="px-1 py-0.5 rounded bg-white/10 text-zinc-300">[Esc]</kbd> Exit
             </div>
-          )}
+            {activeSoundObj?.scienceBacking && (
+              <div className="text-cyan-400 truncate max-w-md">
+                💡 {activeSoundObj.scienceBacking}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>,

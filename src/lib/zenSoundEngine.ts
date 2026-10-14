@@ -68,7 +68,17 @@ export const ZEN_SOUNDS: ZenSoundDef[] = [
   { id: "bamboo_rustle", name: "Bamboo Forest Wind", icon: "🌿", category: "nature", desc: "Stalks swaying in mountain wind" },
   { id: "cathedral", name: "Cathedral Drone", icon: "⛪", category: "melodic", desc: "Sacred acoustic hall resonance" },
   { id: "crystal_cave", name: "Crystal Cave Echo", icon: "💎", category: "melodic", desc: "High harmonic crystalline chiming" },
-  { id: "lofi_piano", name: "Lo-Fi Piano Chords", icon: "🎹", category: "melodic", desc: "Slow warm modal chord resonance" }
+  { id: "lofi_piano", name: "Lo-Fi Piano Chords", icon: "🎹", category: "melodic", desc: "Slow warm modal chord resonance" },
+
+  // EXPANDED AMBIENT SOUNDSCAPES (31-38)
+  { id: "thunderstorm_rain", name: "Thunderstorm & Rain", icon: "⛈️", category: "nature", desc: "Low rolling thunder rumble & steady rainfall", scienceBacking: "Low-frequency rumbles mask sudden speech interruptions, reducing startle reflexes", evidenceBadge: "Acoustic Shield" },
+  { id: "hearth_fireplace", name: "Cozy Fireplace Hearth", icon: "🔥", category: "ambient", desc: "Gentle flame roar & soothing wood crackles", scienceBacking: "Warm crackling triggers parasympathetic relaxation, lowering study cortisol", evidenceBadge: "Deep Relaxation" },
+  { id: "forest_birds", name: "Forest Stream & Birds", icon: "🐦", category: "nature", desc: "Peaceful brook with delicate distant birdsong", scienceBacking: "Biophilic sounds restore depleted attentional capacity (Attention Restoration Theory)", evidenceBadge: "Attention Reset" },
+  { id: "deep_binaural_528", name: "528 Hz Solfeggio Focus", icon: "✨", category: "binaural", desc: "Pure 528 Hz transformation frequency with 8 Hz alpha beat", scienceBacking: "Solfeggio 528 Hz creates deep mental clarity and reduces exam anxiety", evidenceBadge: "Anxiety Relief" },
+  { id: "binaural_delta", name: "Deep Delta Calm (2 Hz)", icon: "🌌", category: "binaural", desc: "2 Hz deep restorative calm oscillation", scienceBacking: "Delta entrainment promotes deep restorative mental stillness and stress clearance", evidenceBadge: "Deep Stillness" },
+  { id: "tent_rain", name: "Rain on Canvas Tent", icon: "⛺", category: "nature", desc: "Muffled rhythmic raindrops drumming on tent canvas", scienceBacking: "Rhythmic drumming on canvas creates a protective cocoon effect", evidenceBadge: "Focus Cocoon" },
+  { id: "study_cafe_rain", name: "Rainy Day Coffeehouse", icon: "☕", category: "ambient", desc: "Warm coffee murmur with rain pattering on glass", scienceBacking: "Moderate ambient noise (70 dB) stimulates abstract creative thinking", evidenceBadge: "Creative Flow" },
+  { id: "white_noise_fan", name: "Desk Fan Humming", icon: "💨", category: "noise", desc: "Steady mechanical airflow for intense distraction blocking", scienceBacking: "Constant fan hum masks variable noise in crowded households", evidenceBadge: "Noise Blocker" }
 ];
 
 class ZenSoundEngine {
@@ -230,6 +240,30 @@ class ZenSoundEngine {
         break;
       case "lofi_piano":
         this.createLofiPiano(ctx, master);
+        break;
+      case "thunderstorm_rain":
+        this.createThunderstormRain(ctx, master);
+        break;
+      case "hearth_fireplace":
+        this.createFireplace(ctx, master);
+        break;
+      case "forest_birds":
+        this.createForestBirds(ctx, master);
+        break;
+      case "deep_binaural_528":
+        this.createSolfeggio528(ctx, master);
+        break;
+      case "binaural_delta":
+        this.createBinaural(ctx, master, 120, 2);
+        break;
+      case "tent_rain":
+        this.createTentRain(ctx, master);
+        break;
+      case "study_cafe_rain":
+        this.createCafeRain(ctx, master);
+        break;
+      case "white_noise_fan":
+        this.createFanHum(ctx, master);
         break;
       default:
         this.createBrownNoise(ctx, master);
@@ -1014,6 +1048,157 @@ class ZenSoundEngine {
         o.stop(now + idx * 0.12 + 1.3);
       });
     }
+  }
+
+  private createThunderstormRain(ctx: AudioContext, master: GainNode) {
+    this.createHeavyRain(ctx, master);
+    const bufBrown = this.createBrownNoiseBuffer(ctx);
+    const filter = ctx.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(110, ctx.currentTime);
+    filter.Q.setValueAtTime(2.5, ctx.currentTime);
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.35, ctx.currentTime);
+    filter.connect(gain);
+    gain.connect(master);
+    this.loopBuffer(ctx, bufBrown, filter);
+
+    const lfo = ctx.createOscillator();
+    lfo.type = "sine";
+    lfo.frequency.setValueAtTime(0.12, ctx.currentTime);
+    const lfoGain = ctx.createGain();
+    lfoGain.gain.setValueAtTime(55, ctx.currentTime);
+    lfo.connect(lfoGain);
+    lfoGain.connect(filter.frequency);
+    lfo.start();
+    this.activeNodes.push({
+      stop: () => {
+        try { lfo.stop(); lfo.disconnect(); } catch {}
+      }
+    });
+  }
+
+  private createFireplace(ctx: AudioContext, master: GainNode) {
+    const bufBrown = this.createBrownNoiseBuffer(ctx);
+    const filter = ctx.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(260, ctx.currentTime);
+    const roarGain = ctx.createGain();
+    roarGain.gain.setValueAtTime(0.28, ctx.currentTime);
+    filter.connect(roarGain);
+    roarGain.connect(master);
+    this.loopBuffer(ctx, bufBrown, filter);
+
+    const bufWhite = this.createNoiseBuffer(ctx, 2);
+    const crackleFilter = ctx.createBiquadFilter();
+    crackleFilter.type = "bandpass";
+    crackleFilter.frequency.setValueAtTime(1600, ctx.currentTime);
+    crackleFilter.Q.setValueAtTime(2.0, ctx.currentTime);
+    const crackleGain = ctx.createGain();
+    crackleGain.gain.setValueAtTime(0.12, ctx.currentTime);
+    crackleFilter.connect(crackleGain);
+    crackleGain.connect(master);
+    this.loopBuffer(ctx, bufWhite, crackleFilter);
+  }
+
+  private createForestBirds(ctx: AudioContext, master: GainNode) {
+    this.createStream(ctx, master);
+    let isStopped = false;
+    const interval = setInterval(() => {
+      if (isStopped || ctx.state === "closed") return;
+      try {
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "sine";
+        const baseFreq = 2200 + Math.random() * 800;
+        osc.frequency.setValueAtTime(baseFreq, now);
+        osc.frequency.exponentialRampToValueAtTime(baseFreq + 500, now + 0.08);
+        osc.frequency.exponentialRampToValueAtTime(baseFreq + 150, now + 0.16);
+        g.gain.setValueAtTime(0, now);
+        g.gain.linearRampToValueAtTime(0.08, now + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        osc.connect(g);
+        g.connect(master);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } catch {}
+    }, 4200);
+
+    this.activeNodes.push({
+      stop: () => {
+        isStopped = true;
+        clearInterval(interval);
+      }
+    });
+  }
+
+  private createSolfeggio528(ctx: AudioContext, master: GainNode) {
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    osc1.type = "sine";
+    osc1.frequency.setValueAtTime(528, ctx.currentTime);
+    osc2.type = "sine";
+    osc2.frequency.setValueAtTime(536, ctx.currentTime);
+    gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+    osc1.connect(gainNode);
+    osc2.connect(gainNode);
+    gainNode.connect(master);
+    osc1.start();
+    osc2.start();
+    this.activeNodes.push({
+      stop: () => {
+        try { osc1.stop(); osc1.disconnect(); } catch {}
+        try { osc2.stop(); osc2.disconnect(); } catch {}
+      }
+    });
+  }
+
+  private createTentRain(ctx: AudioContext, master: GainNode) {
+    const buffer = this.createPinkNoiseBuffer(ctx, 4);
+    const filter = ctx.createBiquadFilter();
+    filter.type = "bandpass";
+    filter.frequency.setValueAtTime(420, ctx.currentTime);
+    filter.Q.setValueAtTime(1.8, ctx.currentTime);
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.35, ctx.currentTime);
+    filter.connect(gain);
+    gain.connect(master);
+    this.loopBuffer(ctx, buffer, filter);
+  }
+
+  private createCafeRain(ctx: AudioContext, master: GainNode) {
+    this.createCafe(ctx, master);
+    this.createRain(ctx, master);
+  }
+
+  private createFanHum(ctx: AudioContext, master: GainNode) {
+    const humOsc = ctx.createOscillator();
+    humOsc.type = "triangle";
+    humOsc.frequency.setValueAtTime(65, ctx.currentTime);
+    const humGain = ctx.createGain();
+    humGain.gain.setValueAtTime(0.18, ctx.currentTime);
+    humOsc.connect(humGain);
+    humGain.connect(master);
+    humOsc.start();
+
+    const airBuffer = this.createNoiseBuffer(ctx, 3);
+    const airFilter = ctx.createBiquadFilter();
+    airFilter.type = "lowpass";
+    airFilter.frequency.setValueAtTime(360, ctx.currentTime);
+    const airGain = ctx.createGain();
+    airGain.gain.setValueAtTime(0.22, ctx.currentTime);
+    airFilter.connect(airGain);
+    airGain.connect(master);
+    this.loopBuffer(ctx, airBuffer, airFilter);
+
+    this.activeNodes.push({
+      stop: () => {
+        try { humOsc.stop(); humOsc.disconnect(); } catch {}
+      }
+    });
   }
 }
 
