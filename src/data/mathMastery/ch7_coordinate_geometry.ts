@@ -5,7 +5,7 @@ export const CH7_DATA: ChapterData = {
   chapterName: 'Coordinate Geometry',
   weightageEstimate: '6 Marks (CBSE Board Standard/Basic)',
   overview: {
-    about: 'Coordinate Geometry links algebra with geometry using Cartesian coordinates. In Class 10, the syllabus centers on two powerful algebraic tools: the Distance Formula (measuring straight-line distances and proving polygon properties) and the Section Formula (finding points dividing line segments in given ratios, midpoints, and centroids).',
+    about: 'Coordinate Geometry Cartesian plane par algebra aur geometry ko jodhne wala sabse scoring chapter hai! Is chapter ke do mukhya pahiye hain: Distance Formula (seedhi doori nikalna aur triangles/quadrilaterals ke geometric proofs) aur Section Formula (line segment ko given ratio mein baantna, midpoints, aur centroid). Saath hi Parallelogram ke diagonals ka midpoint rule iska sabse bada 10-second weapon hai!',
     prerequisites: [
       'Cartesian plane, origin (0, 0), axes, and quadrants',
       'Plotting points (x, y)',
@@ -38,7 +38,7 @@ export const CH7_DATA: ChapterData = {
       id: 'ch7_c1',
       title: 'Distance Formula & Applications',
       topic: 'Distance Formula',
-      simpleExplanation: 'Imagine walking along the grid: the straight line distance between any two points is just the hypotenuse of a right-angled triangle formed by the horizontal and vertical differences!',
+      simpleExplanation: 'Grid par do points ke beech ki doori darasal ek right-angled triangle ka hypotenuse hai jo horizontal difference aur vertical difference se banta hai: $d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$!',
       exactMathIdea: 'The distance d between two points P(x1, y1) and Q(x2, y2) in the Cartesian plane is given by d = √((x₂ - x₁)² + (y₂ - y₁)²). Distance of point P(x, y) from origin O(0, 0) is √(x² + y²).',
       formulaOrTheorem: 'd = \\sqrt{(x₂ - x₁)² + (y₂ - y₁)²}, \\quad \\text{Distance from origin } = \\sqrt{x² + y²}',
       whenToUse: 'When finding lengths of sides, testing for right/isosceles/equilateral triangles, proving collinearity, or finding points equidistant from two given points.',
@@ -97,7 +97,7 @@ export const CH7_DATA: ChapterData = {
       id: 'ch7_c2',
       title: 'Section Formula & Midpoint Formula',
       topic: 'Internal Division of Line Segment',
-      simpleExplanation: 'If you stand on a straight rope between two friends at a ratio of 2 steps to 3 steps, the section formula gives your exact GPS coordinate!',
+      simpleExplanation: 'Agar aap do dosto ke beech rassi par $2:3$ ke ratio mein khade ho, toh criss-cross section formula aapka exact coordinate bata deta hai: $P = \\left(\\frac{m_1 x_2 + m_2 x_1}{m_1+m_2}, \\frac{m_1 y_2 + m_2 y_1}{m_1+m_2}\\right)$!',
       exactMathIdea: 'The coordinates of the point P(x, y) which divides the line segment joining A(x1, y1) and B(x2, y2) internally in the ratio m1 : m2 are given by P = ((m₁x₂ + m₂x₁)/(m1 + m2), (m₁y₂ + m₂y₁)/(m1 + m2)). When ratio is unknown, use ratio k : 1.',
       formulaOrTheorem: 'P(x, y) = \\left( \\frac{m₁ x₂ + m₂ x₁}{m₁ + m₂}, \\; \\frac{m₁ y₂ + m₂ y₁}{m₁ + m₂} \\right), \\quad M = \\left( \\frac{x₁ + x₂}{2}, \\; \\frac{y₁ + y₂}{2} \\right)',
       whenToUse: 'When a point divides a segment in a given ratio, finding ratio of division by axes, points of trisection, or centroid of a triangle.',
