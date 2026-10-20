@@ -5,7 +5,7 @@ export const CH10_DATA: ChapterData = {
   chapterName: 'Circles',
   weightageEstimate: '6–8 Marks (CBSE Board Standard/Basic)',
   overview: {
-    about: 'Circles in Class 10 focuses on the geometry of Tangents—straight lines that kiss a circle at exactly one point of contact. The entire chapter rests on two foundational theorems: Theorem 10.1 (Radius is perpendicular to tangent at point of contact) and Theorem 10.2 (Lengths of two tangents from an external point are equal), leading to deep applications in circumscribing polygons, concentric circles, and inradii.',
+    about: 'Circles in Class 10 revolves around one central hero: Tangents (Sparsh Rekha) — ek aisi straight line jo circle ko sirf ek single point of contact par touch karti hai. Poora chapter sirf do core theorems par khada hai: Theorem 10.1 (Radius point of contact par tangent ke saath 90° right angle banata hai: OP ⟂ Tangent) aur Theorem 10.2 (Kisi external point se khinche gaye dono tangents ki lambai ekdum barabar hoti hai: PA = PB). Inhi do rules se concentric circles ke chord, circumscribed quadrilaterals (AB + CD = AD + BC), rhombus proofs, aur inradii solve hote hain!',
     prerequisites: [
       'Basic circle vocabulary: center, radius, chord, diameter, secant, tangent',
       'Pythagorean theorem',
@@ -38,7 +38,7 @@ export const CH10_DATA: ChapterData = {
       id: 'ch10_c1',
       title: 'Theorem 10.1 & Perpendicularity at Point of Contact',
       topic: 'Radius-Tangent Perpendicularity',
-      simpleExplanation: 'At the exact point where a tangent kisses a circle, the spoke (radius) from the center hits it like a hammer at a perfect 90° right angle!',
+      simpleExplanation: 'Bhai, jis point par tangent circle ko touch karti hai, wahan center se aane wala radius ekdum hathode ki tarah seedha 90° right angle banata hai (OP ⟂ Tangent)!',
       exactMathIdea: 'The tangent at any point of a circle is perpendicular to the radius through the point of contact. If XY is tangent to circle with center O at point P, then OP ⟂ XY. This forms right-angled triangles with any line drawn from the center.',
       formulaOrTheorem: 'OP \\perp XY \\implies \\angle OPX = \\angle OPY = 90^\\circ',
       whenToUse: 'When calculating tangent lengths, distances from center using Pythagoras theorem, or angle between radii.',
@@ -80,7 +80,7 @@ export const CH10_DATA: ChapterData = {
       id: 'ch10_c2',
       title: 'Theorem 10.2 & Two Tangents from an External Point',
       topic: 'Equal Tangents & Circumscribed Figures',
-      simpleExplanation: 'If you stand outside a circle and reach out both arms to touch the circle, both arms will be EXACTLY the same length: PA = PB!',
+      simpleExplanation: 'Agar aap circle ke bahar kisi point par khade hokar dono haath circle ki taraf badhao, toh dono haathon ki touch point tak ki doori bilkul barabar hogi: PA = PB!',
       exactMathIdea: 'The lengths of tangents drawn from an external point to a circle are equal. If PA and PB are tangents from external point P to circle with center O at points of contact A and B, then: (i) PA = PB, (ii) ∠APO = ∠BPO, (iii) ∠AOP = ∠BOP, and (iv) ∠APB + ∠AOB = 180°.',
       formulaOrTheorem: 'PA = PB, \\quad \\angle APB + \\angle AOB = 180^\\circ',
       whenToUse: 'Whenever tangents from an external point are given, proving quadrilateral or polygon circumscription properties, or finding perimeter of triangles.',
