@@ -5,7 +5,7 @@ export const CH5_DATA: ChapterData = {
   chapterName: 'Arithmetic Progressions',
   weightageEstimate: '6–8 Marks (CBSE Board Standard/Basic)',
   overview: {
-    about: 'Arithmetic Progressions governs sequences where consecutive terms differ by a constant value. The chapter focuses on calculating the nth term, determining whether numbers belong to a sequence, finding terms from the end, calculating the sum of n terms, and modeling real-life patterns (spiral lengths, ladder rungs, monthly savings, and potato races).',
+    about: 'Arithmetic Progressions Class 10 algebra ka sabse scoring aur real-life based chapter hai! Yeh aisi sequences ko deal karta hai jahan consecutive terms ke bich ka difference hamesha constant ($d$) hota hai. Is chapter mein hum nth term nikalna, sequence mein number check karna, aakhri se term nikalna, Gauss ka sum of n terms pairing formula, aur real-world applications (spiral lengths, ladder rungs, monthly loan installments) ko basic se board mastery tak step-by-step sikhate hain.',
     prerequisites: ['Linear equation solving', 'Patterns and sequences', 'Basic arithmetic summation'],
     coreIdeas: [
       'An AP is a sequence of numbers in which each term is obtained by adding a fixed number d to the preceding term (except the first term a).',
@@ -32,7 +32,7 @@ export const CH5_DATA: ChapterData = {
       id: 'ch5_c1',
       title: 'Common Difference and General nth Term',
       topic: 'nth Term of an AP',
-      simpleExplanation: 'To find the value of any term at position n, take the starting value a and add the jump d exactly (n - 1) times.',
+      simpleExplanation: 'Kisi bhi n-th term tak pahuchne ke liye, first term $a$ par khade ho jao aur step $d$ ko theek $(n - 1)$ baar add kar do: $a_n = a + (n - 1)d$!',
       exactMathIdea: 'The nth term of an AP with first term a and common difference d is given by aₙ = a + (n - 1)d. The nth term from the end of a finite AP of last term l is aₙ\' = l - (n - 1)d.',
       formulaOrTheorem: 'aₙ = a + (n - 1)d, \\quad aₙ\' = l - (n - 1)d',
       whenToUse: 'When asked to find the value of a specific term, find how many terms are in an AP, or determine if a number belongs to the sequence.',
@@ -88,7 +88,7 @@ export const CH5_DATA: ChapterData = {
       id: 'ch5_c2',
       title: 'Sum of First n Terms of an AP',
       topic: 'AP Summation',
-      simpleExplanation: 'Add the first and last terms, multiply by the number of pairs (n/2).',
+      simpleExplanation: 'Pehle aur aakhri term ko jodo, aur pairs ki sankhya ($n/2$) se multiply kar do: $S_n = \\frac{n}{2}(a + l)$!',
       exactMathIdea: 'Sₙ = (n / 2) [2a + (n - 1)d]. When the first term a and last term l are known, Sₙ = (n / 2) [a + l]. Furthermore, the nth term can always be extracted from the sum: aₙ = Sₙ - S_{n-1}.',
       formulaOrTheorem: 'Sₙ = \\frac{n}{2}[2a + (n - 1)d] = \\frac{n}{2}[a + l], \\quad aₙ = Sₙ - S_{n-1}',
       whenToUse: 'When asked to calculate total sum of n terms, find how many terms are needed for a specific sum, or find nth term from a quadratic formula for Sₙ.',
@@ -133,7 +133,7 @@ export const CH5_DATA: ChapterData = {
             'To find the 15th term: a_{15} = 6(15) + 2 = 90 + 2 = 92.'
           ],
           finalAnswer: 'aₙ = 6n + 2, a_{15} = 92',
-          verificationCheck: 'S_{1} = 31² + 5(1) = 8 ⇒ a_{1} = 8. Check formula: a_{1} = 6(1) + 2 = 8. S_{2} = 3(4) + 10 = 22 ⇒ a_{2} = 22 - 8 = 14. Check: a_{2} = 6(2) + 2 = 14. Common difference d = 6. Verified!',
+          verificationCheck: 'S_{1} = 3(1)^2 + 5(1) = 8 ⇒ a_{1} = 8. Check formula: a_{1} = 6(1) + 2 = 8. S_{2} = 3(4) + 10 = 22 ⇒ a_{2} = 22 - 8 = 14. Check: a_{2} = 6(2) + 2 = 14. Common difference d = 6. Verified!',
           commonTrap: 'Expanding S_{n-1} carelessly and making sign errors.'
         }
       ],
