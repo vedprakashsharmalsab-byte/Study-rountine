@@ -5,7 +5,7 @@ export const CH12_DATA: ChapterData = {
   chapterName: 'Surface Areas and Volumes',
   weightageEstimate: '6 Marks (CBSE Board Standard/Basic)',
   overview: {
-    about: 'Surface Areas and Volumes in Class 10 focuses on Combinations of Solids: combining two or more fundamental 3D figures (cubes, cuboids, cylinders, cones, hemispheres, and spheres). Students master the crucial distinction between Surface Area (which depends strictly on exposed exterior surfaces) and Volume (which simply adds up algebraically).',
+    about: 'Surface Areas and Volumes in Class 10 focuses on Combinations of Solids: do ya do se zyada 3D figures (cubes, cuboids, cylinders, cones, hemispheres, spheres) ko aapas mein jodhna ya scoop out karna. Yahan sabse zaroori concept hai: Surface Area sirf bahar wali EXPOSED surfaces par depend karta hai (glued faces disappear!), jabki Volume hamesha seedhe algebraically add/subtract hota hai.',
     prerequisites: [
       'Basic 2D geometry (area of circles, rectangles)',
       'Pythagorean theorem for cone slant height: l = √(r² + h²)',
@@ -39,7 +39,7 @@ export const CH12_DATA: ChapterData = {
       id: 'ch12_c1',
       title: 'Surface Area of Combined Solids',
       topic: 'Combined Surface Area',
-      simpleExplanation: 'Imagine spray-painting the outside of the combined toy. Only the parts that get wet with paint count towards Surface Area! Any glued touching faces inside stay dry and must be excluded.',
+      simpleExplanation: 'Socho aap solid par spray paint kar rahe ho. Sirf wahi parts count honge jinpar paint lagega! Jo faces aapas mein chipak kar andar bandh ho gaye, unhe surface area se bahar nikaal do.',
       exactMathIdea: 'The total surface area of a combination of solids is the sum of the curved surface areas of each individual component that form the exterior boundary. Total Surface Area = CSA(Component 1) + CSA(Component 2).',
       formulaOrTheorem: '\\text{TSA of Toy (Cone + Hemisphere)} = \\pi r l + 2\\pi r² = \\pi r(l + 2r)',
       whenToUse: 'When two solids are glued together, hollowed out, or mounted on top of each other and total surface area is requested.',

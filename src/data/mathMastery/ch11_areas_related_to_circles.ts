@@ -5,7 +5,7 @@ export const CH11_DATA: ChapterData = {
   chapterName: 'Areas Related to Circles',
   weightageEstimate: '4–5 Marks (CBSE Board Standard/Basic)',
   overview: {
-    about: 'Areas Related to Circles covers the geometry of circular regions, sectors, and segments. Students master calculations of arc lengths, minor and major sectors (pizza slices), and minor and major segments (chords slicing off crusts), with high-yield applications to clock hands, car wipers, brooches, and grazing fields.',
+    about: 'Areas Related to Circles covers the geometry of circular regions, sectors, aur segments. Yahan hum circle ke tukdon ko samajhte hain: Sector (radii se kata pizza slice) aur Segment (chord se kata bread crust). Iske sath clock hands (har minute 6° sweep), car wipers, brooches, aur grazing fields ke guaranteed 4–5 marks ke board problems solve karte hain.',
     prerequisites: [
       'Circumference = 2πr and Area = πr²',
       'Fractional proportions of 360°',
@@ -38,7 +38,7 @@ export const CH11_DATA: ChapterData = {
       id: 'ch11_c1',
       title: 'Arc Length & Area of a Sector',
       topic: 'Sectors & Fractional Areas',
-      simpleExplanation: 'A sector is simply a fraction (θ/360°) of the full 360° circular pie. Multiply circumference by (θ/360°) for the arc, and area by (θ/360°) for the sector!',
+      simpleExplanation: 'Bhai, sector poore 360° circle ka ek fractional hissa (θ/360°) hota hai. Arc length ke liye circumference 2πr ko (θ/360°) se multiply karo, aur area ke liye πr² ko (θ/360°) se!',
       exactMathIdea: 'For a circle of radius r and central angle θ: Arc length l = (θ / 360°) × 2πr. Area of sector = (θ / 360°) × πr² = ½ × l × r. Perimeter of sector = l + 2r.',
       formulaOrTheorem: 'l = \\frac{\\theta}{360^\\circ} \\times 2\\pi r, \\quad A = \\frac{\\theta}{360^\\circ} \\times \\pi r² = \\frac{1}{2} l r',
       whenToUse: 'When finding area swept by clock hands, windshield wipers, lighthouse light beams, or circular pizza slices.',
@@ -78,7 +78,7 @@ export const CH11_DATA: ChapterData = {
       id: 'ch11_c2',
       title: 'Area of a Segment (Minor & Major)',
       topic: 'Segments & Triangle Subtraction',
-      simpleExplanation: 'To get the area of the crust (segment), take the whole pizza slice (sector) and subtract the central triangle slice!',
+      simpleExplanation: 'Segment (bread crust) nikalne ke liye poore pizza slice (sector) ke area mein se beech wale triangle ka area subtract kar do: Segment = Sector - Triangle!',
       exactMathIdea: 'Area of Minor Segment = Area of Sector OAB - Area of Triangle OAB. Area of Triangle OAB = ½ × r² sin θ. Area of Major Segment = Total Circle Area (πr²) - Area of Minor Segment.',
       formulaOrTheorem: '\\text{Area of Minor Segment} = \\frac{\\theta}{360^\\circ}\\pi r² - \\frac{1}{2}r²\\sin\\theta',
       whenToUse: 'When a chord subtends an angle of 60°, 90°, or 120° at the center and the area of the bounded segment is required.',
