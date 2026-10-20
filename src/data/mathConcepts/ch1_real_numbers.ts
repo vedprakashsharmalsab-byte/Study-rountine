@@ -3,238 +3,325 @@ import type { MathChapterConcept } from "./types";
 export const CH1_REAL_NUMBERS_CONCEPT: MathChapterConcept = {
   chapterNo: 1,
   title: "Real Numbers",
-  weightage: "6 Marks (Board Mandatory)",
-  oneLiner: "Prime factorisation is the unique DNA of numbers; Contradiction proves irrationality; 2^m · 5^n governs decimal termination.",
-  analogyTitle: "The 'DNA Fingerprint' & Indivisible Atoms of Numbers",
-  analogyContent: "Imagine building houses with Lego blocks. Some blocks can be pulled apart into smaller pieces, but prime blocks (2, 3, 5, 7, 11) are solid indivisible atoms! Just like every living creature has a unique DNA code, every composite number (like $360 = 2^3 \\times 3^2 \\times 5$) has a single, unique prime factorization. No other number in the universe shares this exact combination.",
+  weightage: "6 Marks (Board Mandatory — 1 MCQ + 1 SA/VSA + 1 Proof)",
+  oneLiner: "Real Numbers ka DNA: Prime factorisation se HCF/LCM, Contradiction se Irrationality proof, aur 2^m · 5^n se Decimal termination!",
+  analogyTitle: "Lego Blocks, Finger Counting aur Number Line ka Safar",
+  analogyContent: "Imagine karo ek 5 saal ka bachha jo pehli baar counting seekh raha hai. Pehle wo ungliyon pe ginta hai: 1, 2, 3... Phir usse pata chalta hai ki agar toffees khatam ho jayein toh '0' bhi hota hai! Phir bade hokar jab udhar (debt) ya barf ka minus temperature dekhta hai, toh negative numbers aate hain. Phir jab pizza ya roti ke tukde hote hain, toh fractions (Rational numbers) aate hain. Aur aakhir mein kuch aise ziddi numbers aate hain jo kabhi fraction mein bandh hi nahi sakte (Irrational numbers jaise $\\sqrt{2}, \\sqrt{3}, \\pi$). Jab hum in sabhi numbers ko ek bade bag mein bhar lete hain, toh banti hai hamari **Real Numbers Line** — jismein ek bhi chhed ya gap nahi hota! Ye chapter maths ka foundation stone hai jo tumhe Class 10 mein 6/6 guaranteed marks dilayega.",
   sections: [
     {
       id: "number_family",
-      label: "1. The Number Family Tree from Scratch",
-      heading: "From Counting Apples to the Infinite Real Number Line",
-      subheading: "Building Intuition: Natural → Whole → Integers → Rational → Irrational → Real",
-      explanation: "Imagine a 5-year-old child learning to count:  \n\n1. **Natural Numbers ($\mathbb{N}$)**: The counting numbers when you hold up fingers: $1, 2, 3, 4, \\dots$  \n2. **Whole Numbers ($\mathbb{W}$)**: What if you have zero apples? Add $0$: $0, 1, 2, 3, \\dots$  \n3. **Integers ($\mathbb{Z}$)**: What if you owe someone an apple (debt) or the temperature drops below zero? Add negative numbers: $\\dots, -3, -2, -1, 0, 1, 2, 3, \\dots$  \n4. **Rational Numbers ($\mathbb{Q}$)**: What if you slice an apple into pieces? Any number that can be written as a fraction $\\frac{p}{q}$ (where $p$ and $q$ are integers, and $q \\neq 0$). Examples: $\\frac{1}{2}, \\frac{-3}{4}, 5 = \\frac{5}{1}, 0 = \\frac{0}{1}, 0.333\\dots = \\frac{1}{3}$.  \n5. **Irrational Numbers**: Numbers that **CANNOT** be written as a clean fraction! Their decimals go on forever without ever repeating a loop. Examples: $\\sqrt{2} = 1.41421356\\dots$, $\\sqrt{3}$, $\\pi = 3.14159265\\dots$.  \n6. **Real Numbers ($\mathbb{R}$)**: The grand universe! Put Rationals and Irrationals together into one giant bag, and they fill EVERY SINGLE POINT on the continuous number line without any gaps!",
+      label: "1. The Number Family Tree from Absolute Ground Zero",
+      heading: "Counting Apples se lekar Infinite Real Line tak ka Safar",
+      subheading: "Natural → Whole → Integers → Rational → Irrational → Real Numbers (Zero to Hero)",
+      explanation: "Agar maths mein 100/100 score karna hai, toh sabse pehle numbers ka khandaan (Family Tree) crystal clear hona chahiye. Chalo step-by-step samajhte hain ekdam aasan bhasha mein:\n\n" +
+        "### 1. Natural Numbers ($\\mathbb{N}$) — Counting Numbers\n" +
+        "Jab bhi tum kisi cheez ko count karte ho, hamesha 1 se start karte ho: $1, 2, 3, 4, 5, \\dots$\n" +
+        "- Isme **Zero (0) NAHI hota**.\n" +
+        "- Isme koi negative number ya decimal nahi hota.\n" +
+        "- Smallest natural number = $1$.\n\n" +
+        "### 2. Whole Numbers ($\\mathbb{W}$) — Zero Added!\n" +
+        "Socho tumhare paas 5 chocolates thi, aur tumne paancho kha li. Ab tumhare paas kitni bachi? Zero ($0$)!\n" +
+        "- Natural numbers mein bas $0$ ko shamil kar lo: $0, 1, 2, 3, 4, \\dots$\n" +
+        "- $\\mathbb{W} = \\{0\\} \\cup \\mathbb{N}$.\n" +
+        "- Har natural number ek whole number hai, par har whole number natural nahi hai (kyunki $0$ natural nahi hai).\n\n" +
+        "### 3. Integers ($\\mathbb{Z}$) — Negatives, Zero & Positives (Poore Numbers!)\n" +
+        "Ab socho real life situations:\n" +
+        "- Agar tumhare dost ne tumse ₹10 udhar (debt) liye, toh uske account mein kya likhoge? $-\\text{₹}10$.\n" +
+        "- Kashmir mein sardi mein temperature 0 se bhi neeche chala gaya: $-5^\\circ\\text{C}$.\n" +
+        "- Mall ki lift ground floor se basement mein gayi: Floor $-1, -2$.\n" +
+        "Toh humein negative numbers ki zaroorat padi!  \n" +
+        "**Integers ka matlab hai SARE POORE NUMBERS (No fractions, no decimals!):**  \n" +
+        "$$\\dots, -4, -3, -2, -1, 0, 1, 2, 3, 4, \\dots$$  \n" +
+        "- Positive Integers: $1, 2, 3, 4, \\dots$  \n" +
+        "- Negative Integers: $-1, -2, -3, -4, \\dots$  \n" +
+        "- Zero ($0$): Na positive hai na negative, ye neutral boundary hai!  \n" +
+        "- *Golden Rule*: $2.5$ ya $\\frac{3}{4}$ integer **NAHI** hain! Integers hamesha poore-poore hote hain.\n\n" +
+        "### 4. Rational Numbers ($\\mathbb{Q}$) — Fractions & Terminating/Repeating Decimals\n" +
+        "'Rational' word ka root word hai **'RATIO'**!  \n" +
+        "Jab hum kisi cheez ke tukde karte hain (jaise ek pizza ke 4 slices mein se 1 slice = $\\frac{1}{4}$), toh fractions bante hain.  \n" +
+        "**Definition**: Har wo number jise hum $\\frac{p}{q}$ ki form mein likh sakte hain, jahan:\n" +
+        "1. $p$ aur $q$ dono **Integers** hone chahiye.\n" +
+        "2. Niche wala denominator $q \\neq 0$ hona chahiye!  \n" +
+        "*(Kyunki kisi bhi number ko $0$ se divide karna mathematically impossible ya Not Defined hota hai!).*  \n\n" +
+        "**Examples of Rationals:**\n" +
+        "- Normal fractions: $\\frac{1}{2}, -\\frac{3}{5}, \\frac{7}{4}$\n" +
+        "- Integers as rationals: $5 = \\frac{5}{1}, -8 = \\frac{-8}{1}$\n" +
+        "- Zero as rational: $0 = \\frac{0}{1}$ (Board MCQ: Zero is rational!)\n" +
+        "- Terminating decimals: $0.75 = \\frac{75}{100} = \\frac{3}{4}$\n" +
+        "- Recurring repeating decimals: $0.333\\dots = 0.\\bar{3} = \\frac{1}{3}$\n\n" +
+        "### 5. Irrational Numbers — Jo Kabhi Fraction Na Ban Sakein!\n" +
+        "Ye wo ziddi numbers hain jinhe tum chahe jitna zor laga lo, kabhi clean fraction $\\frac{p}{q}$ mein NAHI likh sakte!  \n" +
+        "Inki pehchan unke decimal expansion se hoti hai:  \n" +
+        "1. **Non-terminating**: Decimal ke baad digits kabhi rukte nahi hain (infinite tak chalte hain).  \n" +
+        "2. **Non-repeating (Non-recurring)**: Digits ka koi fix loop ya pattern repeat nahi hota!  \n\n" +
+        "**Examples:**\n" +
+        "- Non-perfect square roots: $\\sqrt{2} = 1.41421356\\dots$, $\\sqrt{3} = 1.7320508\\dots$, $\\sqrt{5}, \\sqrt{7}$\n" +
+        "- Non-perfect cube roots: $\\sqrt[3]{2}, \\sqrt[3]{5}$\n" +
+        "- Mathematical constant $\\pi = 3.14159265\\dots$ (Board Trap alert: $\\frac{22}{7}$ sirf ek approximate calculation value hai, $\\pi$ khud strictly irrational hai!).\n\n" +
+        "### 6. Real Numbers ($\\mathbb{R}$) — The Grand Universe!\n" +
+        "Duniya ke saare Rational numbers aur saare Irrational numbers ko ek giant bag mein daal do!  \n" +
+        "$$\\mathbf{\\text{Real Numbers } (\\mathbb{R}) = \\text{Rational Numbers } (\\mathbb{Q}) \\cup \\text{Irrational Numbers}}$$  \n" +
+        "Real Number Line ka har ek single point — chahe wo $0$ ho, $2$ ho, $-3.5$ ho, ya $\\sqrt{2} = 1.414...$ ho — ek Real Number hota hai! Number line pe koi bhi gap ya khali jagah nahi bachti.",
       formulasOrKeyPoints: [
         {
-          title: "The Hierarchy of Numbers",
-          content: "$$\\mathbb{N} \\subset \\mathbb{W} \\subset \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{R}$$  \n$$\\text{Real Numbers (}\\mathbb{R}\\text{)} = \\text{Rational (}\\mathbb{Q}\\text{)} \\cup \\text{Irrational}$$",
-          note: "Every integer is a rational number (can be written with denominator 1). Zero is rational because $0 = \\frac{0}{1}$."
+          title: "The Hierarchy Chain (Container Model)",
+          content: "$$\\mathbf{\\mathbb{N} \\subset \\mathbb{W} \\subset \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{R}}$$  \n- Har Natural number Whole number hai.  \n- Har Whole number Integer hai.  \n- Har Integer Rational number hai (denominator 1 rakh kar).  \n- Har Rational aur Irrational number ek Real number hai!",
+          note: "Examiner Assertion-Reason trap: 'Every real number is a rational number' is FALSE! (Because $\\sqrt{2}$ is real but not rational)."
         },
         {
-          title: "Co-Prime Numbers — The Foundation of Proofs",
-          content: "Two positive integers $a$ and $b$ are called **co-prime** if their Highest Common Factor is 1:  \n$$\\text{HCF}(a, b) = 1$$  \nExamples: $(4, 9)$, $(8, 15)$, $(14, 25)$. Neither needs to be a prime number itself!",
-          note: "This definition is the absolute anchor of all Class 10 irrationality proofs. If both $a$ and $b$ share a common factor $p > 1$, the co-prime assumption is destroyed!"
+          title: "Co-Prime Numbers — The Heart of Class 10 Proofs",
+          content: "Do positive integers $a$ aur $b$ ko **Co-Prime** tab bolte hain jab unka Highest Common Factor sirf aur sirf $1$ ho:  \n$$\\mathbf{\\text{HCF}(a, b) = 1}$$  \n- Matlab dono ke beech $1$ ke alawa koi dusra common dost (factor) nahi hai!  \n- **Super Important**: Co-prime hone ke liye numbers ka khud prime hona zaroori nahi hai!  \n  *Example*: $4 = 2^2$ (composite) aur $9 = 3^2$ (composite). Lekin $\\text{HCF}(4, 9) = 1$, isliye $4$ aur $9$ aapas mein **CO-PRIME** hain!",
+          note: "Ye definition ratne ki zaroorat nahi hai, bas yaad rakho: Agar $a$ aur $b$ fraction $\\frac{a}{b}$ ke simplest lowest form mein hain, toh wo co-prime hain!"
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Identify Number Types on the Spot",
-          action: "Ask: Can it be written as a fraction of integers? If yes $\\to$ Rational. If it contains a non-perfect square root (like $\\sqrt{2}, \\sqrt{7}$) $\\to$ Irrational.",
-          proTip: "Beware of deceptive roots like $\\sqrt{9} = 3$ or $\\sqrt{\\frac{16}{25}} = \\frac{4}{5}$; these simplify into rational numbers!"
+          title: "Spot Rational vs Irrational Instantly",
+          action: "Agar root ke andar perfect square hai jaise $\\sqrt{4} = 2$, $\\sqrt{25} = 5$, $\\sqrt{0.09} = 0.3$, toh wo RATIONAL hai! Agar root ke andar non-perfect square hai jaise $\\sqrt{2}, \\sqrt{3}, \\sqrt{5}, \\sqrt{8}$, toh wo strictly IRRATIONAL hai.",
+          proTip: "Dekho ki kya root cancel ho raha hai? Jaise $\\frac{\\sqrt{12}}{\\sqrt{3}} = \\sqrt{\\frac{12}{3}} = \\sqrt{4} = 2$ — ye rational ban gaya!"
         }
       ],
       examinerTraps: [
         {
-          trap: "Thinking $\\pi$ is equal to $\\frac{22}{7}$ and therefore rational.",
-          correction: "$\\pi$ is strictly IRRATIONAL! The fraction $\\frac{22}{7} \\approx 3.142857$ is only an approximate engineering approximation used for calculations. In Board MCQs, $\\pi$ is always classified as irrational."
+          trap: "Sochna ki $\\pi$ rational hai kyunki hum $\\pi = 22/7$ use karte hain.",
+          correction: "Board Exam Golden Fact: $\\pi$ strictly IRRATIONAL hai! $22/7$ sirf calculation aasan karne ke liye ek approximate fraction hai. $\\pi$ ki exact value kabhi repeat nahi hoti."
+        },
+        {
+          trap: "Sochna ki 1 prime number hai.",
+          correction: "1 na toh prime hai aur na hi composite! Prime numbers 2 se start hote hain ($2, 3, 5, 7, 11...$). Smallest prime number is 2, aur 2 hi ekmatra EVEN prime number hai!"
         }
       ]
     },
     {
       id: "fundamental_theorem",
-      label: "2. Fundamental Theorem of Arithmetic & HCF/LCM",
-      heading: "The Unique Prime DNA & The Golden Product Relationship",
-      subheading: "Theorem 1.1 + HCF/LCM Power Rules + The 3-Number Board Trap",
-      explanation: "The **Fundamental Theorem of Arithmetic** states:  \n*Every composite number can be expressed (factorised) as a product of primes, and this factorisation is unique, apart from the order in which the prime factors occur.*  \n\nFor example: $120 = 2^3 \\times 3^1 \\times 5^1$. No matter which method you use (factor tree, repeated division), you will ALWAYS get three 2s, one 3, and one 5.  \n\n**The Universal HCF & LCM Powers Rule:**  \n$\\bullet$ **HCF (Highest Common Factor)**: Product of the **SMALLEST powers** of **COMMON prime factors** only.  \n$\\bullet$ **LCM (Lowest Common Multiple)**: Product of the **GREATEST powers** of **ALL prime factors** involved anywhere!  \n\n**The Golden Relationship for Two Numbers:**  \n$$\\mathbf{\\text{HCF}(a, b) \\times \\text{LCM}(a, b) = a \\times b}$$",
+      label: "2. Fundamental Theorem of Arithmetic & Prime Factorisation",
+      heading: "Numbers ka Unique DNA & $6^n$ Ending with 0 ka Secret",
+      subheading: "Har Composite Number = Unique Primes ka Multiplication (Lego Blocks Model)",
+      explanation: "Jab hum chemistry mein molecules ko todte hain toh atoms milte hain. Theek waise hi, maths mein jab kisi composite number ko todte hain toh **Prime Numbers** milte hain!  \n\n" +
+        "### The Fundamental Theorem of Arithmetic (Theorem 1.1)\n" +
+        "**Kanoon kya kehta hai?**  \n" +
+        "*Har composite number ko hum prime numbers ke product ke roop mein express kar sakte hain, aur ye factorisation UNIQUE (anokha) hota hai, chahe tum primes ko kisi bhi order mein likho!*\n\n" +
+        "**Real Life Example:**  \n" +
+        "Maan lo number hai $60$.  \n" +
+        "- Rahul ne factorise kiya: $60 = 2 \\times 2 \\times 3 \\times 5 = 2^2 \\times 3 \\times 5$.  \n" +
+        "- Priya ne pehle 5 se kiya: $60 = 5 \\times 3 \\times 2 \\times 2 = 2^2 \\times 3 \\times 5$.  \n" +
+        "Dono ka answer exactly same aaya! 2 hamesha do baar aayega, 3 ek baar, aur 5 ek baar. Duniya ka koi bhi mathematician $60$ ke prime factors badal nahi sakta. Ye $60$ ka **Aadhaar Card / DNA code** hai!\n\n" +
+        "### Board Favorite Question 1: Check whether $6^n$ or $4^n$ can end with digit 0\n" +
+        "**Logic ekdam aasan bhasha mein:**  \n" +
+        "Koi bhi number last mein '0' kab deta hai? Jab wo $10$ se divide ho sake!  \n" +
+        "Aur $10$ kis se banta hai? $10 = 2 \\times 5$.  \n" +
+        "Matlab kisi number ke aakhri mein 0 aane ke liye uske prime factors mein **2 aur 5 DONO ka hona compulsory hai**!\n\n" +
+        "- $6^n = (2 \\times 3)^n = 2^n \\times 3^n$. Iske paas 2 toh hai, par **5 missing hai**!\n" +
+        "- Fundamental Theorem bolta hai prime factorisation unique hai, matlab 5 kabhi aa hi nahi sakta.\n" +
+        "- Therefore, $6^n$ can NEVER end with the digit 0 for any natural number $n$!\n\n" +
+        "### Board Favorite Question 2: Prove that $7 \\times 11 \\times 13 + 13$ is Composite\n" +
+        "Kayi students pura multiply karne lag jaate hain — ye galti mat karna!  \n" +
+        "Bas common factor bahar nikaalo:  \n" +
+        "$$7 \\times 11 \\times 13 + 13 = 13 \\times (7 \\times 11 + 1) = 13 \\times (77 + 1) = 13 \\times 78$$  \n" +
+        "Since is number ke paas 1 aur khud ke alawa bhi factors hain (jaise 13 aur 78 = $2 \\times 3 \\times 13$), by definition ye ek **Composite Number** hai! [Full Marks]",
       formulasOrKeyPoints: [
         {
-          title: "Prime Exponent Master Formulas",
-          content: "Let $a = 2^3 \\cdot 3^2 \\cdot 5^1$ and $b = 2^2 \\cdot 3^4 \\cdot 7^1$:  \n$$\\text{HCF}(a, b) = 2^{\\min(3, 2)} \\cdot 3^{\\min(2, 4)} = 2^2 \\cdot 3^2 = 36$$  \n$$\\text{LCM}(a, b) = 2^{\\max(3, 2)} \\cdot 3^{\\max(2, 4)} \\cdot 5^1 \\cdot 7^1 = 2^3 \\cdot 3^4 \\cdot 5 \\cdot 7 = 22,680$$",
-          note: "HCF will ALWAYS divide LCM evenly without remainder! If $\\text{LCM} \\div \\text{HCF}$ has a remainder, you made an arithmetic error."
+          title: "Prime Power Standard Form",
+          content: "$$\\mathbf{N = p_1^{a_1} \\cdot p_2^{a_2} \\cdot p_3^{a_3} \\cdots p_k^{a_k}}$$  \nJahan $p_1 < p_2 < p_3$ ascending order mein distinct primes hain aur exponents $a_i \\ge 1$ hain.",
+          note: "Example: $144 = 2^4 \\times 3^2$. Exponents ka sum = $4 + 2 = 6$ (CBSE 2020 MCQ standard question)."
         },
         {
-          title: "The 3-Number Danger Alert",
-          content: "$$\\mathbf{\\text{HCF}(a, b, c) \\times \\text{LCM}(a, b, c) \\neq a \\times b \\times c}$$  \nThe product formula holds strictly for TWO numbers only! For 3 numbers, always use prime factorisation directly.",
-          note: "Examiners deliberately include 3-number questions to catch students using $\\text{HCF} \\times \\text{LCM} = a \\times b \\times c$."
+          title: "Unit Digit 0 Rule",
+          content: "$$\\mathbf{N \\text{ ends with digit } 0 \\iff 10 \\mid N \\iff 2 \\text{ and } 5 \\text{ both are prime factors of } N}$$",
+          note: "4^n = (2^2)^n = 2^{2n} has only prime factor 2 (no 5). Hence 4^n also never ends with 0."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Construct Prime Factorization Trees",
-          action: "Divide by the smallest prime repeatedly ($2 \\to 3 \\to 5 \\to 7 \\dots$) until reaching 1.",
-          proTip: "Write factors in exponential index form (e.g. $2^4 \\times 3^2$) before doing any comparisons."
-        },
-        {
-          stepNo: 2,
-          title: "Calculate HCF and LCM Using Min/Max Powers",
-          action: "For HCF, take only primes present in BOTH lists with lowest exponent. For LCM, take all primes present in either list with highest exponent.",
-          proTip: "Check your work: $\\text{HCF} \\le \\min(a, b)$ and $\\text{LCM} \\ge \\max(a, b)$."
-        },
-        {
-          stepNo: 3,
-          title: "Verify Using the Product Formula",
-          action: "Compute $\\text{HCF} \\times \\text{LCM}$ and $a \\times b$. Check that they match to the last digit.",
-          proTip: "Writing 'Hence Verified: HCF × LCM = Product of Numbers' secures the final 0.5 presentation mark."
+          title: "Factor Tree Banana",
+          action: "Hamesha sabse chhote prime number (2) se start karo. Jab tak even hai 2 se divide karo, fir 3 check karo (sum of digits rule), fir 5, fir 7, fir 11, fir 13, fir 17.",
+          proTip: "Divisibility checks: Sum of digits multiple of 3 $\\implies$ divisible by 3. Last digit 0 or 5 $\\implies$ divisible by 5."
         }
       ],
       examinerTraps: [
         {
-          trap: "Applying $\\text{HCF} \\times \\text{LCM} = a \\times b \\times c$ for three numbers.",
-          correction: "Never use the product rule for three numbers! Find the HCF and LCM independently using prime factor powers."
-        },
+          trap: "$6^n$ wale question mein $n=1, 2, 3$ rakh kar check karna ($6^1=6, 6^2=36$) aur kehna 0 nahi aaya.",
+          correction: "CBSE marking scheme mein ispar 0 marks milenge! Tumhe theorem quote karni hogi: 'By Fundamental Theorem of Arithmetic, factorisation is unique and 5 is not present'."
+        }
+      ]
+    },
+    {
+      id: "hcf_lcm_mastery",
+      label: "3. HCF & LCM Powers Rule & The Golden Product Relation",
+      heading: "Smallest vs Highest Powers & Kab HCF Nikalein aur Kab LCM?",
+      subheading: "HCF(a, b) × LCM(a, b) = a × b (Only for 2 numbers!) + Real-Life Word Problems",
+      explanation: "Class 10 mein HCF aur LCM nikalne ka Prime Factorisation method sabse powerful aur fast method hai. Aao iska super simple funda samajhte hain:\n\n" +
+        "### 1. HCF (Highest Common Factor) — 'Chhota Bheem Rule'\n" +
+        "- HCF sirf unhi primes ko dekhta hai jo **DONO / SABHI numbers mein COMMON** hon!\n" +
+        "- Aur un common primes ki **SABSE CHHOTI POWER (Minimum Exponent)** uthata hai!\n" +
+        "- Formally: Product of the smallest powers of each common prime factor.\n\n" +
+        "### 2. LCM (Lowest Common Multiple) — 'Lalchi Rule (Sab Kuch Chahiye!)'\n" +
+        "- LCM kisi bhi prime ko nahi chhodta! Jo prime kisi ek mein bhi aaya ho, wo LCM mein aayega.\n" +
+        "- Aur sabhi primes ki **SABSE BADI POWER (Maximum Exponent)** uthata hai!\n" +
+        "- Formally: Product of the greatest powers of all prime factors involved.\n\n" +
+        "**Concrete Example se Dekho:**  \n" +
+        "Maan lo do numbers hain:  \n" +
+        "$$p = a^3 \\cdot b^2 \\cdot c^1 \\quad \\text{aur} \\quad q = a^1 \\cdot b^4 \\cdot d^2$$  \n" +
+        "- **HCF(p, q)**: Common kaun hain? Sirf $a$ aur $b$. Chhoti power kaunsi hai? $a^1$ aur $b^2$.  \n" +
+        "  $$\\mathbf{\\text{HCF} = a^1 b^2}$$\n" +
+        "- **LCM(p, q)**: Saare primes uthao ($a, b, c, d$) badi powers ke saath: $a^3, b^4, c^1, d^2$.  \n" +
+        "  $$\\mathbf{\\text{LCM} = a^3 b^4 c d^2}$$\n\n" +
+        "### 3. The Golden Relationship for TWO Numbers\n" +
+        "Agar do positive integers $a$ aur $b$ hain, toh unke HCF aur LCM ka product hamesha un dono numbers ke product ke barabar hoga:  \n" +
+        "$$\\mathbf{\\text{HCF}(a, b) \\times \\text{LCM}(a, b) = a \\times b}$$  \n" +
+        "- Is relation se agar 4 cheezon mein se koi 3 pata hon, toh chauthi 5 second mein nikal aati hai!  \n" +
+        "- **CAUTION (Board ka Favourite Trap)**: Ye formula sirf aur sirf **DO (2) numbers** ke liye valid hai! Teen numbers ($a, b, c$) ke liye $\\text{HCF} \\times \\text{LCM} \\neq a \\times b \\times c$.\n\n" +
+        "### 4. Word Problems Decoded: HCF Kab Nikalein aur LCM Kab?\n" +
+        "Questions padh kar bacche confuse ho jaate hain. Ye 2 golden rules hamesha yaad rakhna:\n\n" +
+        "| Situation / Clue | Question ki Demand | Kya Nikaalna Hai? |\n" +
+        "| :--- | :--- | :--- |\n" +
+        "| **Chhoti quantity / Division** | Doodh ke do tankers ko barabar naapne wala **sabse bada container** (maximum capacity); Barfi ki stacks banana; Floor par square tiles lagana taaki koi space na bache. | **HCF nikaalo!** (Kyunki container ka size diye gaye numbers se chhota hoga jo dono ko poora divide kare). |\n" +
+        "| **Badi quantity / Synchronization** | 3 Ghantiyan (Bells) alag-alag interval pe bajti hain, **agali baar ek saath kab bajengi**? Runners circular track par dobara starting point pe kab milenge? Traffic lights kab ek saath green hongi? | **LCM nikaalo!** (Kyunki agla milne ka time diye gaye intervals se bada hoga, jo sabhi ka common multiple hoga). |",
+      formulasOrKeyPoints: [
         {
-          trap: "Confusing LCM and HCF in word problems (e.g. circular tracks, bells tolling together, maximum container capacity).",
-          correction: "Rule of thumb: If the answer must be SMALLER than given numbers (e.g. max capacity dividing both containers) $\\to$ HCF. If the answer must be LARGER than given numbers (e.g. next time 3 bells ring together or runners meet) $\\to$ LCM."
+          title: "The Divisibility Invariant",
+          content: "$$\\mathbf{\\text{HCF}(a, b) \\text{ MUST completely divide } \\text{LCM}(a, b)}$$  \nMatlab $\\frac{\\text{LCM}}{\\text{HCF}}$ hamesha ek pure Integer aana chahiye!  \n*Example Question*: Kya do numbers ka HCF 15 aur LCM 175 ho sakta hai?  \n*Answer*: Divide karke dekho: $175 / 15 = 11.66$ (remainder bacha 10). Since 15 does not divide 175, **NO, two numbers cannot have HCF 15 and LCM 175**! (Guaranteed 1-mark board question).",
+          note: "Agar HCF ne LCM ko divide nahi kiya, toh aisa number pair universe mein exist hi nahi kar sakta."
+        }
+      ],
+      stepByStepGuide: [
+        {
+          stepNo: 1,
+          title: "Prime Exponent Table Format",
+          action: "Dono numbers ko exponential form mein likho ek ke neeche ek (powers align karke).",
+          proTip: "Jaise $72 = 2^3 \\times 3^2$ aur $120 = 2^3 \\times 3^1 \\times 5^1$. Ab HCF ke liye $\\min$ power: $2^3 \\times 3^1 = 24$. LCM ke liye $\\max$ power: $2^3 \\times 3^2 \\times 5^1 = 360$."
+        }
+      ],
+      examinerTraps: [
+        {
+          trap: "3 numbers wale question mein $\\text{LCM} = \\frac{a \\times b \\times c}{\\text{HCF}}$ likhna.",
+          correction: "3 numbers ka HCF aur LCM hamesha individual prime factor powers se nikaalo! Product formula 3 numbers ke liye fail ho jata hai."
         }
       ]
     },
     {
       id: "irrationality_proof",
-      label: "3. Proving √2, √3, √5 are Irrational",
-      heading: "The Master 3-Mark Proof by Contradiction",
-      subheading: "Theorem 1.2 ($p|a^2 \\implies p|a$) + Step-by-Step Scoring Blueprint",
-      explanation: "How do you prove that something CANNOT be written as a fraction? In mathematics, when a direct path is blocked, we use **Proof by Contradiction**:  \n1. We pretend the opposite is true (assume $\\sqrt{5}$ CAN be written as a fraction $\\frac{a}{b}$ in simplest co-prime form).  \n2. We follow strict logical rules.  \n3. Our logical steps force an impossible contradiction (both $a$ and $b$ turn out to share a common factor of 5, which violates our co-prime definition!).  \n4. Therefore, our initial assumption was false, and $\\sqrt{5}$ must be irrational!  \n\n**The Engine: Theorem 1.2**  \n*Let $p$ be a prime number. If $p$ divides $a^2$, then $p$ divides $a$ (where $a$ is a positive integer).*  \nWhy? Because if a prime $p$ appears in the factorization of $a^2$, it must already have been present in $a$, because squaring only doubles existing prime powers!",
+      label: "4. Proving √2, √3, √5 are Irrational (Contradiction Method)",
+      heading: "CBSE Board ka Guaranteed 3-Mark Proof — Step-by-Step Template",
+      subheading: "Theorem 1.2 ($p \\mid a^2 \\implies p \\mid a$) + Answer Sheet Ready Presentation",
+      explanation: "CBSE Board exam mein Section C mein ek question 100% har saal aata hai: **'Prove that $\\sqrt{5}$ (or $\\sqrt{3}$ or $\\sqrt{2}$) is irrational'**.  \n\nIska proof direct nahi ho sakta, isliye hum use karte hain **Proof by Contradiction** (Ulta Maankar Galat Saabit Karne Ka Tareeka!).  \n\n### Contradiction Method Ki Kahani:\n1. **Pehle Ulta Maano**: Hum maan lete hain ki $\\sqrt{5}$ ek Rational number hai. Toh isse fraction $\\frac{a}{b}$ mein likha ja sakta hai, jahan $a$ aur $b$ **Co-prime** hain (matlab dono mein 1 ke alawa koi common factor nahi hai).\n2. **Maths ke Rules Follow Karo**: Dono taraf square karo aur dekho kya hota hai.\n3. **Kahani Mein Twist (Contradiction)**: Calculation aisi mod leti hai ki prove ho jata hai ki $5$ divide karta hai $a$ ko bhi, aur $5$ divide karta hai $b$ ko bhi!  \n   *Lekin ruko!* Humne toh shuru mein bola tha ki $a$ aur $b$ co-prime hain, unka koi common factor nahi hai! Yahan toh dono ka common factor 5 nikal aaya!\n4. **Final Punchline**: Ye jhooth / contradiction kyun aayi? Kyunki humne shuru mein galat mana tha ki $\\sqrt{5}$ rational hai. Hence, $\\sqrt{5}$ is IRRATIONAL! [Proved]\n\n### The Engine Behind the Proof: Theorem 1.2\n**Theorem**: *Agar $p$ ek prime number hai aur $p$ divide karta hai $a^2$ ko, toh $p$ divide karega $a$ ko bhi (jahan $a$ ek positive integer hai).*  \n**Kyun?** Kyunki jab tum kisi number $a$ ka square karte ho, toh uske prime factors ki powers bas double hoti hain, koi naya prime factor paida nahi hota! Agar $p$ number $a^2$ mein hai, toh wo original number $a$ mein pehle se hi moojood tha!",
       formulasOrKeyPoints: [
         {
-          title: "Full 4-Step CBSE Model Answer Template: Prove √5 is Irrational",
-          content: "**Step 1: Assumption & Co-prime Definition**\nLet $\\sqrt{5}$ be a rational number. Then we can write:\n$$\\sqrt{5} = \\frac{a}{b} \\quad (a, b \\in \\mathbb{Z}, \\; b \\neq 0, \\; \\mathbf{\\text{HCF}(a, b) = 1})$$\n\n**Step 2: Squaring Both Sides & Divisibility of $a$**\n$$5 = \\frac{a^2}{b^2} \\implies \\mathbf{a^2 = 5b^2}$$\nSince 5 divides $5b^2$, 5 must divide $a^2$.\nBy Theorem 1.2 (if prime $p$ divides $a^2$, then $p$ divides $a$):\n$$\\mathbf{5 \\text{ divides } a} \\quad \\text{--- (Equation 1)}$$\n\n**Step 3: Substitution & Divisibility of $b$**\nSince 5 divides $a$, we can write $a = 5c$ for some integer $c$.\nSubstituting $a = 5c$ into $a^2 = 5b^2$:\n$$(5c)^2 = 5b^2 \\implies 25c^2 = 5b^2 \\implies \\mathbf{b^2 = 5c^2}$$\nThis implies 5 divides $b^2$, so by Theorem 1.2:\n$$\\mathbf{5 \\text{ divides } b} \\quad \\text{--- (Equation 2)}$$\n\n**Step 4: Contradiction & Final Conclusion**\nFrom Equations (1) and (2), 5 is a common factor of both $a$ and $b$.\nThis directly contradicts our fact that $a$ and $b$ are co-prime (having no common factor other than 1).\n$$\\mathbf{\\therefore \\text{Our initial assumption is false; } \\sqrt{5} \\text{ is irrational. [Hence Proved]}}$$",
-          note: "This template is identical for √2 (replace 5 with 2) and √3 (replace 5 with 3). Memorise this exact sequence for guaranteed 3/3 marks."
+          title: "CBSE Topper Answer Sheet Blueprint: Prove that √5 is Irrational",
+          content: "**Step 1: Assumption & Co-prime Condition (0.5 Marks)**  \nLet us assume, to the contrary, that $\\sqrt{5}$ is a rational number.  \nTherefore, we can find coprime integers $a$ and $b$ ($b \\neq 0$) such that:  \n$$\\sqrt{5} = \\frac{a}{b} \\quad \\text{where } \\mathbf{\\text{HCF}(a, b) = 1}$$\n\n**Step 2: Squaring & Showing 5 divides a (1.0 Mark)**  \nSquaring both sides:  \n$$5 = \\frac{a^2}{b^2} \\implies \\mathbf{a^2 = 5b^2} \\quad \\text{--- (Equation 1)}$$  \nThis shows that $5$ divides $a^2$.  \nBy Theorem 1.2, since $5$ is a prime number:  \n$$\\mathbf{5 \\text{ divides } a} \\quad \\text{--- (Statement A)}$$\n\n**Step 3: Substitution & Showing 5 divides b (1.0 Mark)**  \nSince $5$ divides $a$, we can write $\\mathbf{a = 5c}$ for some integer $c$.  \nSubstituting $a = 5c$ into Equation 1:  \n$$(5c)^2 = 5b^2 \\implies 25c^2 = 5b^2 \\implies \\mathbf{b^2 = 5c^2}$$  \nThis shows that $5$ divides $b^2$.  \nTherefore, by Theorem 1.2:  \n$$\\mathbf{5 \\text{ divides } b} \\quad \\text{--- (Statement B)}$$\n\n**Step 4: Contradiction & Conclusion (0.5 Marks)**  \nFrom Statement A and Statement B, $5$ is a common factor of both $a$ and $b$.  \nBut this contradicts the fact that $a$ and $b$ are coprime (having no common factor other than $1$).  \nThis contradiction has arisen because of our incorrect assumption that $\\sqrt{5}$ is rational.  \n$$\\mathbf{\\therefore \\sqrt{5} \\text{ is an irrational number. [Hence Proved]}}$$",
+          note: "Ye exact 4 steps $\\sqrt{2}$ ke liye bhi valid hain (bas 5 ki jagah 2 likh do) aur $\\sqrt{3}$ ke liye bhi (5 ki jagah 3 likh do). Pure 3/3 marks guarantee!"
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "State the Co-Prime Assumption Explicitly",
-          action: "Always write: 'Let $\\sqrt{p} = \\frac{a}{b}$, where $a, b$ are co-prime integers and $b \\neq 0$.'",
-          proTip: "CBSE marking schemes deduct 0.5 marks if 'co-prime' is not explicitly stated."
-        },
-        {
-          stepNo: 2,
-          title: "Show Prime Divides the First Variable",
-          action: "Square both sides: $a^2 = p b^2$. State: '$p$ divides $a^2 \\implies p$ divides $a$'.",
-          proTip: "Always quote 'by Theorem 1.2' or 'if prime divides $a^2$, it divides $a$'."
-        },
-        {
-          stepNo: 3,
-          title: "Substitute $a = pc$ and Show Prime Divides the Second Variable",
-          action: "Substitute $(pc)^2 = pb^2 \\implies b^2 = pc^2$. Conclude: '$p$ also divides $b$'.",
-          proTip: "Ensure algebra shows clean division: $25c^2 = 5b^2 \\implies b^2 = 5c^2$."
-        },
-        {
-          stepNo: 4,
-          title: "Deliver the Contradiction Punchline",
-          action: "Write: 'This contradicts the fact that $a$ and $b$ are co-prime. Hence our assumption is false, and $\\sqrt{p}$ is irrational.'",
-          proTip: "Underline the final conclusion line on your answer sheet."
+          title: "The Magic Word: 'COPRIME'",
+          action: "Shuru mein 'where $a, b$ are coprime integers and $b \\neq 0$' likhna kabhi mat bhoolna. Agar 'coprime' nahi likha toh examiner 1 mark deduct kar lega!",
+          proTip: "Answer sheet mein Statement A aur Statement B ko box ya underline kar do."
         }
       ],
       examinerTraps: [
         {
-          trap: "Leaving out 'where $a$ and $b$ are co-prime integers and $b \\neq 0$'.",
-          correction: "This is the single most penalised omission in Chapter 1. The whole contradiction hinges on the fact that $a$ and $b$ cannot have a common factor!"
+          trap: "Theorem ka justification na likhna.",
+          correction: "Jab tum $a^2 = 5b^2$ ke baad likhte ho ki $5$ divides $a$, toh bracket mein zaroor likho: '(Since 5 is prime and divides a², it divides a by Theorem)'."
         }
       ]
     },
     {
       id: "composite_irrational",
-      label: "4. Proving Composite Forms (3 + 2√5 and 1/√2)",
-      heading: "The 2-Mark Rearrangement Method (Given √p is Irrational)",
-      subheading: "Isolate the Radical on LHS → Show RHS is Rational → Contradiction",
-      explanation: "In Board papers, when asked to prove that $3 + 2\\sqrt{5}$ or $5 - \\sqrt{3}$ or $\\frac{1}{\\sqrt{2}}$ is irrational, you do NOT need to re-prove that $\\sqrt{5}$ is irrational from scratch!  \n\nInstead, use the **Algebraic Rearrangement Weapon**:  \n1. Assume $3 + 2\\sqrt{5} = \\frac{a}{b}$ is rational ($a, b \\in \\mathbb{Z}, b \\neq 0$).  \n2. Shift all rational numbers to one side, isolating the naked root $\\sqrt{5}$ on the left:  \n$$2\\sqrt{5} = \\frac{a}{b} - 3 = \\frac{a - 3b}{b} \\implies \\mathbf{\\sqrt{5} = \\frac{a - 3b}{2b}}$$  \n3. Notice the right-hand side: since $a, b$ are integers, $\\frac{a - 3b}{2b}$ is a fraction of integers, hence **RATIONAL**!  \n4. But the left-hand side is $\\sqrt{5}$, which is **IRRATIONAL**!  \n5. **Rational cannot equal Irrational!** This contradiction proves our assumption was false, so $3 + 2\\sqrt{5}$ is irrational.",
+      label: "5. Composite Forms ($3 + 2√5$ and $5 - √3$)",
+      heading: "The 2-Mark Rearrangement Weapon (No Squaring Needed!)",
+      subheading: "Jab Question bole: 'Given that √5 is irrational, prove that 3 + 2√5 is irrational'",
+      explanation: "Board exam mein do tarah ke irrationality ke questions aate hain:  \n1. **Pure roots** ($\\sqrt{2}, \\sqrt{3}, \\sqrt{5}$) $\\to$ 3 Marks (Contradiction squaring method jo humne upar padha).  \n2. **Composite expressions** ($3 + 2\\sqrt{5}$, $5 - \\sqrt{3}$, $\\frac{1}{\\sqrt{2}}$, $7\\sqrt{5}$) $\\to$ 2 Marks!  \n\n**DHYAAN SE SUNO (Student ki sabse badi galti):**  \nJab question bole: *'Given that $\\sqrt{5}$ is irrational, prove that $3 + 2\\sqrt{5}$ is irrational'* — tumhe $\\sqrt{5}$ ko dobara prove karne ki koi zaroorat nahi hai! Aur na hi dono taraf square karna hai!  \n\n### The Super Fast 4-Line Rearrangement Method:\n1. Maano $3 + 2\\sqrt{5} = \\frac{a}{b}$ rational hai ($a, b$ integers, $b \\neq 0$).  \n2. Saare normal numbers ko right side le jao, akele bechare root $\\sqrt{5}$ ko left mein chhod do:  \n   $$2\\sqrt{5} = \\frac{a}{b} - 3 = \\frac{a - 3b}{b} \\implies \\mathbf{\\sqrt{5} = \\frac{a - 3b}{2b}}$$  \n3. Ab right side ko gaur se dekho: $a$ aur $b$ integers hain, toh $\\frac{a - 3b}{2b}$ ek fraction of integers hai, matlab ye **RATIONAL** hai!  \n4. Lekin left side mein $\\sqrt{5}$ hai jo ki **IRRATIONAL** hai!  \n   $$\\mathbf{\\text{Irrational} \\neq \\text{Rational}}$$  \n5. Ek irrational number kabhi rational number ke barabar nahi ho sakta! Contradiction! Hence, $3 + 2\\sqrt{5}$ is irrational. [2 Marks in 2 Minutes!]",
       formulasOrKeyPoints: [
         {
-          title: "Universal Rearrangement Templates",
-          content: "$\\bullet$ **Form $a + b\\sqrt{p}$**:  \n$$x = a + b\\sqrt{p} = \\frac{r}{s} \\implies \\sqrt{p} = \\frac{r - as}{bs} \\quad (\\text{Rational}) \\implies \\text{Contradiction!}$$  \n$\\bullet$ **Form $\\frac{1}{\\sqrt{p}}$**:  \n$$\\frac{1}{\\sqrt{2}} = \\frac{a}{b} \\implies \\sqrt{2} = \\frac{b}{a} \\quad (\\text{Rational since } a, b \\in \\mathbb{Z}, a \\neq 0) \\implies \\text{Contradiction!}$$",
-          note: "This type takes under 4 lines to write and earns 2 full marks in Section B of the Board exam."
+          title: "Quick Reference Templates",
+          content: "- **Form $a + b\\sqrt{p}$**: $\\sqrt{p} = \\frac{r - as}{bs} \\implies \\text{RHS is Rational} \\neq \\text{LHS (Irrational)}$.  \n- **Form $\\frac{1}{\\sqrt{2}}$**: $\\frac{1}{\\sqrt{2}} = \\frac{a}{b} \\implies \\sqrt{2} = \\frac{b}{a}$. Since $a, b$ are integers, $\\frac{b}{a}$ is rational, contradicting that $\\sqrt{2}$ is irrational.",
+          note: "Rational + Irrational = Irrational; Rational - Irrational = Irrational; Non-zero Rational × Irrational = Irrational."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Equate Expression to $a/b$",
-          action: "Let the composite expression equal $\\frac{a}{b}$ where $a, b$ are integers and $b \\neq 0$.",
-          proTip: "No need to state co-prime for this short 2-mark method."
-        },
-        {
-          stepNo: 2,
-          title: "Isolate the Square Root on LHS",
-          action: "Perform standard algebra to get $\\sqrt{p}$ alone on LHS.",
-          proTip: "Ensure the RHS is simplified into a single clean fraction like $\\frac{a - 3b}{2b}$."
-        },
-        {
-          stepNo: 3,
-          title: "State Rationality vs Irrationality Clash",
-          action: "Write: 'Since $a, b$ are integers, RHS is rational. This implies $\\sqrt{p}$ is rational, which contradicts the known fact that $\\sqrt{p}$ is irrational.'",
-          proTip: "Conclude with: 'Therefore, our assumption is false, and the given number is irrational.'"
+          title: "Isolate the Root on LHS",
+          action: "Root wale term ko bilkul akela karo bina square kiye. RHS ko ek single fraction banao LCM lekar.",
+          proTip: "LHS par koi coefficient nahi hona chahiye (jaise $2\\sqrt{5}$ se 2 ko RHS ke denominator mein bhej do)."
         }
       ],
       examinerTraps: [
         {
-          trap: "Squaring both sides for composite forms like $3 + 2\\sqrt{5}$.",
-          correction: "DO NOT square both sides! Squaring produces cross-terms like $12\\sqrt{5}$ and makes the proof 3 times longer and error-prone. Simple rearrangement is the 100% correct CBSE standard method."
+          trap: "$3 + 2\\sqrt{5}$ mein square kar dena: $(3 + 2\\sqrt{5})^2 = 9 + 20 + 12\\sqrt{5}$.",
+          correction: "Square karne se question 4 guna lamba aur complex ho jata hai. Simple rearrangement karo!"
         }
       ]
     },
     {
       id: "decimal_expansions",
-      label: "5. Terminating vs Non-Terminating Decimals",
-      heading: "The $2^m \\cdot 5^n$ Denominator Prime Test",
-      subheading: "Predicting Decimal Behavior Without Ever Performing Long Division",
-      explanation: "Why do some fractions terminate cleanly (like $\\frac{3}{8} = 0.375$) while others go on looping forever (like $\\frac{1}{3} = 0.333\\dots$ or $\\frac{2}{7}$)?  \n\nOur base-10 number system is built on powers of 10. The only prime factors of 10 are **2 and 5** ($10 = 2 \\times 5$).  \n\nTherefore, a rational fraction $\\frac{p}{q}$ in **simplest form (co-prime $p, q$)** will terminate as a decimal if and only if the denominator $q$ contains **NO prime factors other than 2 and 5**:  \n$$\\mathbf{q = 2^m \\cdot 5^n} \\quad (m, n \\in \\mathbb{W})$$  \n\nIf the denominator contains ANY other prime factor (like 3, 7, 11, 13) that cannot be cancelled by the numerator, the decimal is **Non-Terminating Repeating (Recurring)**!  \n\n**Decimal Places Shortcut**:  \nThe decimal will terminate after exactly **$\\max(m, n)$ decimal places**!  \nExample: In $\\frac{13}{2^4 \\times 5^1}$, $\\max(4, 1) = 4$, so it terminates after exactly **4 decimal places** without doing division!",
+      label: "6. Decimal Expansions & Terminating Condition ($2^m \\cdot 5^n$)",
+      heading: "Bina Division Kiye Decimal Pehchano & Calculate Karo",
+      subheading: "Base-10 Secret + Max(m, n) Decimal Places Shortcut",
+      explanation: "Kyun kuch fractions seedhe terminate ho jaate hain (jaise $\\frac{1}{4} = 0.25$) aur kuch infinite loop mein phas jaate hain (jaise $\\frac{1}{3} = 0.333\\dots$ ya $\\frac{1}{7}$)?  \n\n### The Base-10 Magic Secret:\nHamara counting system base-10 hai ($10, 100, 1000...$).  \nAur $10$ ke prime factors sirf do hi hote hain: **2 aur 5** ($10 = 2 \\times 5$).  \n\nIsliye, agar koi fraction $\\frac{p}{q}$ apne **Simplest Form (lowest terms jahan $p, q$ coprime hain)** mein hai:  \n- Agar denominator $q$ ke prime factors mein **SIRF 2 ya SIRF 5 ya DONO ($2^m \\times 5^n$)** hain, toh wo decimal hamesha **TERMINATE (khatam)** ho jayega!  \n- Agar denominator mein 2 aur 5 ke alawa koi teesra prime number aa gaya (jaise 3, 7, 11, 13) jo numerator se cancel nahi ho raha, toh decimal **NON-TERMINATING REPEATING (Recurring)** hoga!\n\n### Super Shortcut: Kitne Decimal Places Ke Baad Khatam Hoga?\nBina actual division kiye tum bata sakte ho ki decimal kitne digits ke baad rukega:  \n$$\\mathbf{\\text{Number of decimal places} = \\max(m, n)}$$  \n- Agar denominator mein $2^4 \\times 5^1$ hai: $\\max(4, 1) = 4$ $\\implies$ **4 decimal places** ke baad terminate hoga!  \n- Agar denominator mein $2^2 \\times 5^5$ hai: $\\max(2, 5) = 5$ $\\implies$ **5 decimal places** ke baad terminate hoga!\n\n### Without Division Decimal Value Nikalne Ka Trick (Power Balancing):\nMaan lo tumhe $\\frac{7}{80}$ ko decimal mein convert karna hai bina divide kiye:  \n1. Denominator factorise karo: $80 = 2^4 \\times 5^1$.  \n2. 2 ki power 4 hai, par 5 ki power sirf 1 hai. 5 ko bhi 4 power chahiye! Toh upar-niche $5^3$ se multiply kar do:  \n   $$\\frac{7 \\times 5^3}{2^4 \\times 5^1 \\times 5^3} = \\frac{7 \\times 125}{2^4 \\times 5^4} = \\frac{875}{(2 \\times 5)^4} = \\frac{875}{10^4} = \\frac{875}{10000} = \\mathbf{0.0875}$$  \nDekha? Bina lamba division kiye answer aa gaya!",
       formulasOrKeyPoints: [
         {
-          title: "The Power Balancing Trick to Find Decimal Value",
-          content: "To convert $\\frac{7}{80} = \\frac{7}{2^4 \\times 5^1}$ to decimal without division:  \n1. Make powers of 2 and 5 equal: multiply top and bottom by $5^3$:  \n$$\\frac{7 \\times 5^3}{(2^4 \\times 5^1) \\times 5^3} = \\frac{7 \\times 125}{2^4 \\times 5^4} = \\frac{875}{(2 \\times 5)^4} = \\frac{875}{10^4} = \\frac{875}{10000} = \\mathbf{0.0875}$$",
-          note: "This elegant method completely eliminates tedious long division and avoids arithmetic mistakes in board exams."
+          title: "Denominator Condition for Terminating Decimal",
+          content: "$$\\mathbf{q = 2^m \\cdot 5^n \\quad \\text{where } m, n \\in \\mathbb{W} = \\{0, 1, 2, 3...\\}}$$  \nNote: $m=0$ ho sakta hai (sirf 5 ki powers hon) ya $n=0$ ho sakta hai (sirf 2 ki powers hon).",
+          note: "IMPORTANT: Fraction MUST be in lowest terms first! Cancel common factors before checking q."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "ALWAYS Reduce Fraction to Lowest Terms First",
-          action: "Check if numerator and denominator share common factors before checking $q$.",
-          proTip: "Classic trap: In $\\frac{6}{15}$, denominator 15 has factor 3. But $\\frac{6}{15} = \\frac{2}{5}$, which terminates ($0.4$)! Always reduce first!"
-        },
-        {
-          stepNo: 2,
-          title: "Prime Factorise the Denominator $q$",
-          action: "Write $q = 2^m \\cdot 5^n \\cdot p_3^k$.",
-          proTip: "If any prime other than 2 or 5 remains, it is non-terminating repeating."
+          title: "Step 1: Cancel Common Factors First!",
+          action: "Sabse pehle numerator aur denominator ko cancel karo. Jaise $\\frac{6}{15} \\to$ 15 mein 3 dekh kar non-terminating mat bolna! $\\frac{6}{15} = \\frac{2}{5}$, denominator mein sirf 5 hai, toh ye TERMINATING hai ($0.4$)!",
+          proTip: "Pehle simplify karo, fir denominator ka factor check karo."
         }
       ],
       examinerTraps: [
         {
-          trap: "Factorising denominator BEFORE cancelling common factors with numerator.",
-          correction: "In $\\frac{77}{210} = \\frac{7 \\times 11}{7 \\times 30} = \\frac{11}{30} = \\frac{11}{2 \\times 3 \\times 5}$. Always cancel common factors (like 7 here) before applying the $2^m \\cdot 5^n$ test."
+          trap: "$\\frac{77}{210}$ ko bina simplify kiye check karna.",
+          correction: "$210 = 2 \\times 3 \\times 5 \\times 7$. Lekin $\\frac{77}{210} = \\frac{7 \\times 11}{7 \\times 30} = \\frac{11}{30} = \\frac{11}{2 \\times 3 \\times 5}$. Abhi bhi 3 bacha hai, isliye non-terminating repeating hai."
         }
       ]
     },
     {
       id: "board_playbook",
-      label: "6. Real Numbers Board Problem-Solving Playbook",
-      heading: "Master Archetypes for Section A, B, and C",
-      subheading: "HCF/LCM Word Problems, Exponent Traps, and Remainder Conditions",
-      explanation: "Here are the exact question typologies tested in CBSE Board Exams from Chapter 1:  \n\n$\\bullet$ **Type 1 (Exponent of prime in $n!$ or composite products)**: Write out prime factors.  \n$\\bullet$ **Type 2 (Word Problems — HCF vs LCM)**:  \n  - Circular track running / bells tolling together / traffic lights changing $\\implies$ find **LCM**.  \n  - Packaging maximum books per stack / dividing two milk containers without mixing $\\implies$ find **HCF**.  \n$\\bullet$ **Type 3 (Numbers leaving remainders)**:  \n  - Find the largest number which divides $x$ and $y$ leaving remainder $r_1, r_2$: subtract remainders first! Find $\\text{HCF}(x - r_1, y - r_2)$.  \n  - Find the smallest number which when divided by $x$ and $y$ leaves remainder $r$: find $\\text{LCM}(x, y) + r$.",
+      label: "7. CBSE Board Exam Playbook & Remainder Traps",
+      heading: "Remainder Questions & Scoring Strategy (Full 6/6 Marks Blueprint)",
+      subheading: "Largest number dividing (a, b) vs Smallest number divided by (a, b)",
+      explanation: "Class 10 CBSE Board exam mein remainder wale questions aksar 3-marker mein aate hain. Inke do archetypes hote hain, dono ke formulas ekdum simple hain:\n\n" +
+        "### Archetype 1: 'Find the largest number which divides $x$ and $y$ leaving remainder $r_1$ and $r_2$'\n" +
+        "- Word 'Largest which divides' $\\implies$ **HCF** nikaalna hai!  \n" +
+        "- **Funda**: Pehle remainders ko numbers mein se minus karo, fir bache hue numbers ka HCF nikaalo!  \n" +
+        "  $$\\mathbf{\\text{Answer} = \\text{HCF}(x - r_1, \\; y - r_2)}$$  \n" +
+        "- *Example*: Find the largest number dividing 70 and 125 leaving remainders 5 and 8.  \n" +
+        "  $70 - 5 = 65$, $125 - 8 = 117$.  \n" +
+        "  $65 = 5 \\times 13$, $117 = 3^2 \\times 13$.  \n" +
+        "  $\\text{HCF}(65, 117) = \\mathbf{13}$! [Done!]\n\n" +
+        "### Archetype 2: 'Find the smallest number which when divided by $x$ and $y$ leaves remainder $r$'\n" +
+        "- Word 'Smallest divided by' $\\implies$ **LCM** nikaalna hai!  \n" +
+        "- **Funda**: Pehle $x$ aur $y$ ka LCM nikaalo, aur aakhir mein remainder $r$ ko ADD kar do!  \n" +
+        "  $$\\mathbf{\\text{Answer} = \\text{LCM}(x, y) + r}$$",
       formulasOrKeyPoints: [
         {
-          title: "Remainder Rules Summary",
-          content: "$$\\text{Largest number dividing } (a, b) \\text{ leaving remainders } (p, q) = \\mathbf{\\text{HCF}(a - p, b - q)}$$  \n$$\\text{Smallest number divided by } (a, b) \\text{ leaving remainder } r = \\mathbf{\\text{LCM}(a, b) + r}$$",
-          note: "Notice: 'Largest dividing' = HCF (subtract first, then HCF). 'Smallest divided by' = LCM (LCM first, then add remainder)."
+          title: "Quick Memory Matrix",
+          content: "$$\\mathbf{\\text{Largest number dividing } \\to \\text{HCF (Subtract remainder FIRST, then HCF)}}$$  \n$$\\mathbf{\\text{Smallest number divided by } \\to \\text{LCM (Find LCM FIRST, then ADD remainder)}}$$",
+          note: "Ye rule kabhi fail nahi hota. Confuse hone ka koi chance hi nahi hai!"
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Classify Word Problem as HCF or LCM in 5 Seconds",
-          action: "Look at the units: If the answer must be smaller than the given numbers (measuring rod, stack height) $\\to$ HCF. If the answer is a larger future event (traffic lights, laps) $\\to$ LCM.",
-          proTip: "Write out the reason: 'Since the bells toll together at multiples of the intervals, the required time is the LCM of...'."
+          title: "Identify Keywords",
+          action: "Dekho question mein 'divides' likha hai (HCF) ya 'divided by' likha hai (LCM).",
+          proTip: "Units check karo: Time, distance recurrence $\\implies$ LCM. Capacity, partition $\\implies$ HCF."
         }
       ],
       examinerTraps: [
         {
-          trap: "Adding remainder before finding LCM instead of after.",
-          correction: "Always find $\\text{LCM}(a, b)$ FIRST, then add the remainder $r$ at the very end: $\\text{Answer} = \\text{LCM} + r$."
+          trap: "Archetype 1 mein pehle HCF nikaal kar baad mein remainder subtract karna.",
+          correction: "Hamesha numbers se pehle remainders minus karo: $(x - r_1)$ aur $(y - r_2)$, fir unka HCF lo."
         }
       ]
     }
