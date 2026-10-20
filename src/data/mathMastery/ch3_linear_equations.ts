@@ -5,7 +5,7 @@ export const CH3_DATA: ChapterData = {
   chapterName: 'Pair of Linear Equations in Two Variables',
   weightageEstimate: '6–8 Marks (CBSE Board Standard/Basic)',
   overview: {
-    about: 'Linear Equations in Two Variables models simultaneous real-world constraints. The chapter teaches geometric interpretation (intersecting, parallel, or coincident lines), algebraic methods (substitution and elimination), and translates complex real-world situations (upstream/downstream, two-digit numbers, fixed/variable costs) into solvable algebraic systems.',
+    about: 'Linear Equations in Two Variables practical life ki simultaneous conditions ko mathematical equations mein convert karta hai! Is chapter mein hum geometric relationships (intersecting, parallel, aur coincident lines), algebraic methods (elimination aur substitution), aur high-yield word problems (upstream/downstream boats, two-digit numbers, fixed/variable costs) master karte hain.',
     prerequisites: ['Plotting linear graphs ax + by + c = 0', 'Solving single-variable linear equations', 'Coordinate geometry quadrants and intercepts'],
     coreIdeas: [
       'Two linear equations represent two straight lines on the Cartesian plane.',

@@ -5,7 +5,7 @@ export const CH4_DATA: ChapterData = {
   chapterName: 'Quadratic Equations',
   weightageEstimate: '6–9 Marks (CBSE Board Standard/Basic)',
   overview: {
-    about: 'Quadratic Equations is the powerhouse of Class 10 algebra. It covers testing second-degree validity, factoring polynomials with surds/radicals, solving by the quadratic formula, analyzing the discriminant D = b² - 4ac to deduce the nature of roots, and modeling non-linear real-world scenarios (pipe filling, train speed increases, delayed flights).',
+    about: 'Quadratic Equations Class 10 algebra ka heartbeat hai! Jab ek variable ki power 2 hoti hai ($ax^2 + bx + c = 0$), equation quadratic ban jaata hai aur uska graph parabola curve banata hai. Is chapter mein hum surds wale middle-term splitting, Sridharacharya quadratic formula, Discriminant $D = b^2 - 4ac$ se roots ka nature nikalna, aur high-weightage real-world problems (train speed variance, water pipes, flight delay) ko basic to advanced level par master karte hain.',
     prerequisites: ['Basic polynomial factorization', 'Square roots and surd arithmetic', 'Solving linear equations'],
     coreIdeas: [
       'Standard form: ax² + bx + c = 0 where a ≠ 0. If a = 0, the equation degenerates into linear.',
@@ -33,7 +33,7 @@ export const CH4_DATA: ChapterData = {
       id: 'ch4_c1',
       title: 'Standard Form & Factorisation with Radicals (Surds)',
       topic: 'Factorisation Technique',
-      simpleExplanation: 'Break down the middle term so that the product of the two split numbers equals ac, even when square roots are present.',
+      simpleExplanation: 'Middle term ko aise do hisson mein split karo jinka multiply $ac$ bane aur sum $b$ bane — aur agar square root $\sqrt{2}$ ya $\sqrt{3}$ ho toh number ko $(\sqrt{k})^2$ ki tarah visualize karo!',
       exactMathIdea: 'For ax² + bx + c = 0, find two numbers p and q such that p + q = b and pq = ac. Group terms and extract binomial common factors.',
       formulaOrTheorem: 'a x² + (p + q)x + c = 0 \\quad \\text{where } pq = ac',
       whenToUse: 'When solving quadratic equations with integer or surd coefficients efficiently.',
@@ -72,7 +72,7 @@ export const CH4_DATA: ChapterData = {
       id: 'ch4_c2',
       title: 'Discriminant and Nature of Roots',
       topic: 'Discriminant Analysis',
-      simpleExplanation: 'The discriminant D = b² - 4ac acts like an X-ray. It tells you whether roots are real, equal, or imaginary before you do any solving.',
+      simpleExplanation: 'Discriminant $D = b^2 - 4ac$ equation ka X-ray scanner hai! Bina pura equation solve kiye yeh pehle hi bata deta hai ki roots real aur distinct hain ($D > 0$), real aur equal hain ($D = 0$), ya koi real root exist hi nahi karta ($D < 0$).',
       exactMathIdea: 'For ax² + bx + c = 0 with a ≠ 0, D = b² - 4ac. (1) D > 0: Two distinct real roots. (2) D = 0: Two equal real roots (-b/2a, -b/2a). (3) D < 0: No real roots.',
       formulaOrTheorem: 'D = b² - 4ac',
       whenToUse: 'When asked to determine nature of roots, or find unknown k such that roots are real and equal.',
@@ -110,7 +110,7 @@ export const CH4_DATA: ChapterData = {
       id: 'ch4_c3',
       title: 'Word Problems: Time, Speed, and Tap Work Rates',
       topic: 'Non-linear Applications',
-      simpleExplanation: 'When speed increases, time decreases. Set up the difference in time: Time(Slow) - Time(Fast) = Time Saved.',
+      simpleExplanation: 'Jab speed badhti hai, toh time kam lagta hai! Equation hamesha aise formulate karo: Time(Dheemi Speed) - Time(Tez Speed) = Bachaya Hua Samay (Time Saved).',
       exactMathIdea: 'If distance is d, original speed is x km/h, and increased speed is (x + s) km/h: d/x - d/(x + s) = t_diff. Cross multiply and reduce to standard quadratic form.',
       formulaOrTheorem: '\\frac{\\text{Distance}}{\\text{Original Speed}} - \\frac{\\text{Distance}}{\\text{Increased Speed}} = \\Delta t',
       whenToUse: 'For train speed, airplane delay, or pipe/tank rate problems.',
@@ -185,7 +185,7 @@ export const CH4_DATA: ChapterData = {
     {
       id: 'ch4_f1',
       name: 'Quadratic Formula (Sridharacharya Formula)',
-      formula: 'x = \\frac{-b \\pm \\sqrt{b² - 4ac}}{2a}',
+      formula: 'x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}',
       symbolMeanings: [
         { symbol: 'a', meaning: 'Coefficient of x² (a ≠ 0)' },
         { symbol: 'b', meaning: 'Coefficient of x' },

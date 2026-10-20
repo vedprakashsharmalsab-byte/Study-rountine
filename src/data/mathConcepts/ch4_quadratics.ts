@@ -4,63 +4,63 @@ export const CH4_QUADRATICS_CONCEPT: MathChapterConcept = {
   chapterNo: 4,
   title: "Quadratic Equations",
   weightage: "6 Marks (Board Mandatory)",
-  oneLiner: "The Discriminant D = b² - 4ac is the root detector; Sridharacharya formula guarantees solutions when factorising fails.",
-  analogyTitle: "The Ground Radar for Parabolic Rockets",
-  analogyContent: "When an engineer launches a projectile or model rocket, its altitude over time follows a quadratic curve $h(t) = -gt^2 + vt + h_0$. Finding when it touches the ground ($h = 0$) means solving a quadratic equation! The Discriminant $D = b^2 - 4ac$ acts like a radar detector before launch: If $D > 0$, the rocket cuts ground level twice (launch and landing). If $D = 0$, it touches ground gently at a single turning point. If $D < 0$, it hovers up in the air and never touches the real ground!",
+  oneLiner: "Discriminant D = b² - 4ac root ka x-ray radar hai; Sridharacharya formula har quadratic equation ko guaranteed solve karta hai jab middle-term splitting fail ho jaye.",
+  analogyTitle: "Model Rocket ka Launch aur Ground Landing",
+  analogyContent: "Jab koi aerospace engineer ek model rocket ko ground se launch karta hai, toh hawa mein uski unchai (height) samay ke saath ek parabolic curve banati hai: $h(t) = -gt^2 + vt + h_0$. Ab agar engineer ko yeh pata lagana ho ki rocket wapas ground ko kab chhuega ($h = 0$), toh use solve karni padti hai ek **Quadratic Equation**! Launch se pehle hi **Discriminant** ($D = b^2 - 4ac$) ek radar ki tarah bata deta hai ki kya hoga:  \n1. Agar $D > 0$, toh rocket ground ko do baar touch karega (ek baar launch par, ek baar landing par).  \n2. Agar $D = 0$, toh rocket ground ko bas ek touch karke turant uth jayega (repeated real root).  \n3. Agar $D < 0$, toh rocket hawa mein hi rahega aur real ground ko kabhi touch nahi karega (no real roots)!",
   sections: [
     {
       id: "quadratic_basics",
-      label: "1. What is a Quadratic Equation?",
-      heading: "Standard Form $ax^2 + bx + c = 0$ ($a \\neq 0$)",
-      subheading: "Roots vs Zeroes + Verification of Quadratic Status",
-      explanation: "A quadratic equation in variable $x$ is an equation of the form:  \n$$\\mathbf{ax^2 + bx + c = 0} \\qquad (a, b, c \\in \\mathbb{R}, \\; \\mathbf{a \\neq 0})$$  \n\n**Why must $a \\neq 0$?**  \nIf $a = 0$, the $x^2$ term vanishes, leaving $bx + c = 0$, which is a **linear** equation, NOT a quadratic!  \n\n**Roots vs Zeroes:**  \n$\\bullet$ For a polynomial $p(x) = ax^2 + bx + c$, the values of $x$ where $p(x) = 0$ are called **Zeroes**.  \n$\\bullet$ For the equation $ax^2 + bx + c = 0$, those same values of $x$ are called **Roots** or **Solutions**!  \nEvery quadratic equation has **at most 2 real roots**.",
+      label: "1. What is a Quadratic Equation? (Anatomy & Standard Form)",
+      heading: "Standard Form $ax^2 + bx + c = 0$ ($a \\neq 0$) ka Sach",
+      subheading: "Roots vs Zeroes + Quadratic Status ki Pehchan",
+      explanation: "Variable $x$ mein kisi bhi quadratic equation ka universal standard form hota hai:  \n$$\\mathbf{ax^2 + bx + c = 0} \\qquad (a, b, c \\in \\mathbb{R}, \\; \\mathbf{a \\neq 0})$$  \n\n### $a \\neq 0$ hona kyun Zaroori hai?  \nAgar $a = 0$ ho gaya, toh $x^2$ wali term gayab ho jayegi! Bacha kucha equation $bx + c = 0$ ban jayega jo ki **Linear** hai, quadratic nahi! Isliye $x^2$ ka coefficient $a$ kabhi bhi zero nahi ho sakta.  \n\n### Roots vs Zeroes mein kya farq hai?  \n- Jab expression polynomial form mein likha ho: $p(x) = ax^2 + bx + c$, toh jin values par $p(x) = 0$ hota hai, unhe **Zeroes** kehte hain.  \n- Jab wahi expression equation form mein equate ho jaye: $ax^2 + bx + c = 0$, toh unhi values ko **Roots** ya **Solutions** kaha jaata hai!  \nHar quadratic equation ke **zyada se zyada 2 real roots** ho sakte hain.",
       formulasOrKeyPoints: [
         {
-          title: "Standard Form Ordering Rule",
-          content: "$$\\mathbf{ax^2 + bx + c = 0}$$  \nAlways arrange terms in descending powers of $x$: $x^2$ term first, $x^1$ term second, constant term third, and 0 on the RHS.",
-          note: "If an equation is written as $(x - 2)^2 + 1 = 2x - 3$, expand completely before deciding if it is quadratic: $x^2 - 4x + 4 + 1 = 2x - 3 \\implies x^2 - 6x + 8 = 0$ (Yes, quadratic!)."
+          title: "Standard Form Descending Order Rule",
+          content: "$$\\mathbf{ax^2 + bx + c = 0}$$  \nHamesha powers ko ghadte kram (descending order) mein likho: pehle $x^2$ term, phir $x$ term, phir constant number, aur RHS par strictly $0$.",
+          note: "Agar question mein brackets hon jaise $(x - 2)^2 + 1 = 2x - 3$, toh pehle brackets kholo: $x^2 - 4x + 4 + 1 = 2x - 3 \\implies x^2 - 6x + 8 = 0$ (Yes, quadratic hai!)."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Expand and Simplify Completely in Section A MCQs",
-          action: "Do not guess whether an equation is quadratic by looking at unexpanded brackets. Expand $(x+1)^3$ and $(x-2)^2$ to see if $x^3$ or $x^2$ terms cancel out!",
-          proTip: "In $(x+2)^3 = x^3 - 4$, expanding gives $x^3 + 6x^2 + 12x + 8 = x^3 - 4$. The $x^3$ cancels on both sides, leaving $6x^2 + 12x + 12 = 0$, which IS a quadratic equation!"
+          title: "MCQ Alert: Expand Completely Before Answering",
+          action: "Bina brackets khole kabhi mat bolna ki equation quadratic hai ya nahi. Cube $(x+1)^3$ aur squares ko poora expand karo.",
+          proTip: "Dekho: $(x+2)^3 = x^3 - 4$ expand karne par $x^3 + 6x^2 + 12x + 8 = x^3 - 4$ banata hai. Yahan $x^3$ dono taraf se cancel ho jaata hai aur $6x^2 + 12x + 12 = 0$ bachta hai — yeh QUADRATIC HAI!"
         }
       ],
       examinerTraps: [
         {
-          trap: "Assuming $x(x+1) + 8 = (x+2)(x-2)$ is quadratic because you see $x \\times x$.",
-          correction: "Expand both sides: $x^2 + x + 8 = x^2 - 4$. The $x^2$ terms cancel out, leaving $x + 12 = 0$, which is LINEAR, not quadratic!"
+          trap: "Assuming $x(x+1) + 8 = (x+2)(x-2)$ is quadratic because of $x \\times x$.",
+          correction: "Expand karo: $x^2 + x + 8 = x^2 - 4$. Yahan $x^2$ dono taraf se cancel ho gaya! Bacha $x + 12 = 0$, jo ki LINEAR hai, quadratic nahi!"
         }
       ]
     },
     {
       id: "factorisation_method",
       label: "2. Solving by Factorisation (Middle Term Splitting)",
-      heading: "The Product $a \\cdot c$ and Sum $b$ Strategy",
-      subheading: "Splitting Terms with Signs and Square Roots",
-      explanation: "To solve $ax^2 + bx + c = 0$ by factorisation:  \n1. Multiply the leading coefficient $a$ by the constant $c$: compute **$P = a \\cdot c$**.  \n2. Find two numbers $p$ and $q$ such that:  \n   $$\\mathbf{p \\cdot q = a \\cdot c} \\qquad \\text{and} \\qquad \\mathbf{p + q = b}$$  \n3. Split the middle term: $bx = px + qx$.  \n4. Factor by grouping terms in pairs: $ax^2 + px + qx + c = (x - r_1)(x - r_2) = 0$.  \n5. Apply the Zero Product Property: If $A \\cdot B = 0$, then either $A = 0$ or $B = 0$!",
+      heading: "Product $a \\cdot c$ aur Sum $b$ ka Infallible Rule",
+      subheading: "Square Roots wale middle terms ko split karne ki technique",
+      explanation: "$ax^2 + bx + c = 0$ ko factorise karne ke 5 steps:  \n1. Pehle $x^2$ ke coefficient $a$ ko constant $c$ se multiply karo: calculate **$P = a \\cdot c$**.  \n2. Do aise numbers $p$ aur $q$ dhoondo jinka:  \n   $$\\mathbf{p \\cdot q = a \\cdot c} \\qquad \\text{aur} \\qquad \\mathbf{p + q = b}$$  \n3. Middle term ko split karo: $bx = px + qx$.  \n4. Do-do terms ke jode bana kar common nikalo: $(x - r_1)(x - r_2) = 0$.  \n5. **Zero Product Rule**: Agar do cheezon ka multiplication zero hai ($A \\cdot B = 0$), toh ya toh $A = 0$ hoga ya $B = 0$!",
       formulasOrKeyPoints: [
         {
-          title: "Splitting Square Root Middle Terms (CBSE Board Favorite!)",
-          content: "Example: Solve $\\sqrt{2}x^2 + 7x + 5\\sqrt{2} = 0$.  \n1. Product $a \\cdot c = \\sqrt{2} \\times 5\\sqrt{2} = 5 \\times 2 = 10$.  \n2. Sum $b = 7$. Numbers are $5$ and $2$ (since $5 \\times 2 = 10$ and $5 + 2 = 7$).  \n3. Split: $\\sqrt{2}x^2 + 2x + 5x + 5\\sqrt{2} = 0$  \n4. Group (remember $2 = \\sqrt{2} \\cdot \\sqrt{2}$):  \n   $$\\sqrt{2}x(x + \\sqrt{2}) + 5(x + \\sqrt{2}) = 0$$  \n   $$(x + \\sqrt{2})(\\sqrt{2}x + 5) = 0 \\implies \\mathbf{x = -\\sqrt{2}} \\quad \\text{or} \\quad \\mathbf{x = -\\frac{5}{\\sqrt{2}}}$$",
-          note: "This exact square root factorisation question has appeared 4 times in CBSE board papers. Master the trick $2 = \\sqrt{2} \\cdot \\sqrt{2}$."
+          title: "Square Root Middle Terms (Board Exam ka Super-Hit Question)",
+          content: "Example: Solve $\\sqrt{2}x^2 + 7x + 5\\sqrt{2} = 0$.  \n1. Product $a \\cdot c = \\sqrt{2} \\times 5\\sqrt{2} = 5 \\times 2 = 10$.  \n2. Sum $b = 7$. Numbers mile $5$ aur $2$ (kyunki $5 \\times 2 = 10$ aur $5 + 2 = 7$).  \n3. Split karo: $\\sqrt{2}x^2 + 2x + 5x + 5\\sqrt{2} = 0$.  \n4. Common nikalo (Mantra: $2 = \\sqrt{2} \\cdot \\sqrt{2}$):  \n   $$\\sqrt{2}x(x + \\sqrt{2}) + 5(x + \\sqrt{2}) = 0$$  \n   $$(x + \\sqrt{2})(\\sqrt{2}x + 5) = 0 \\implies \\mathbf{x = -\\sqrt{2}} \\quad \\text{or} \\quad \\mathbf{x = -\\frac{5}{\\sqrt{2}}}$$",
+          note: "Yeh question CBSE Board mein 4 baar aa chuka hai! Hamesha yaad rakho ki kisi bhi integer ko do baar root likha ja sakta hai: $2 = \\sqrt{2}\\sqrt{2}, 3 = \\sqrt{3}\\sqrt{3}$."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Check Signs of Product and Sum",
-          action: "If $a \\cdot c > 0$, both numbers have the same sign (both positive if $b>0$, both negative if $b<0$). If $a \\cdot c < 0$, numbers have opposite signs (larger number gets the sign of $b$).",
-          proTip: "This sign rule eliminates 95% of trial-and-error time."
+          title: "Signs ko Pehle Hi Lock Karo",
+          action: "Agar $a \\cdot c > 0$ positive hai, toh dono numbers ka sign SAME hoga. Agar $a \\cdot c < 0$ negative hai, toh ek number positive aur ek negative hoga (bade number ko $b$ wala sign milega).",
+          proTip: "Is sign rule se trial-and-error ka samay 90% kam ho jaata hai."
         }
       ],
       examinerTraps: [
         {
-          trap: "Writing the roots as $p$ and $q$ instead of changing their signs.",
-          correction: "If the factors are $(x - 3)(x + 5) = 0$, the roots are $x = +3$ and $x = -5$. Do not forget to equate each factor to zero!"
+          trap: "Writing the roots as $p$ and $q$ without changing signs.",
+          correction: "Agar factors $(x - 3)(x + 5) = 0$ hain, toh roots $x = +3$ aur $x = -5$ honge. Factors ko zero se equate karke sign change karna mat bhoolna!"
         }
       ]
     },
@@ -68,98 +68,87 @@ export const CH4_QUADRATICS_CONCEPT: MathChapterConcept = {
       id: "quadratic_formula",
       label: "3. Sridharacharya Quadratic Formula",
       heading: "The Universal Weapon: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$",
-      subheading: "Derivation via Completing the Square + Flawless Execution",
-      explanation: "When numbers are large or middle-term splitting is difficult, the **Quadratic Formula** (discovered by ancient Indian mathematician Sridharacharya) guarantees the exact roots in 3 steps:  \n\n$$\\mathbf{x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}}$$  \n\n**Where does it come from? (Completing the Square)**:  \n$$ax^2 + bx + c = 0 \\implies x^2 + \\frac{b}{a}x = -\\frac{c}{a}$$  \nAdd $\\left(\\frac{b}{2a}\\right)^2$ to both sides:  \n$$x^2 + 2\\left(\\frac{b}{2a}\\right)x + \\left(\\frac{b}{2a}\\right)^2 = \\frac{b^2}{4a^2} - \\frac{c}{a} = \\frac{b^2 - 4ac}{4a^2}$$  \nTake the square root of both sides:  \n$$x + \\frac{b}{2a} = \\pm \\frac{\\sqrt{b^2 - 4ac}}{2a} \\implies \\mathbf{x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}}$$",
+      subheading: "Completing the square se derivation aur calculation protocol",
+      explanation: "Jab numbers bohot bade hon ya middle-term splitting aasaani se na soojhe, toh ancient Indian mathematician **Sridharacharya** ka Quadratic Formula bina ruke 100% exact roots deta hai:  \n\n$$\\mathbf{x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}}$$  \n\n### Where does this formula come from? (Completing the Square):  \n$$ax^2 + bx + c = 0 \\implies x^2 + \\frac{b}{a}x = -\\frac{c}{a}$$  \nDono taraf $\\left(\\frac{b}{2a}\\right)^2$ jod do:  \n$$x^2 + 2\\left(\\frac{b}{2a}\\right)x + \\left(\\frac{b}{2a}\\right)^2 = \\frac{b^2}{4a^2} - \\frac{c}{a} = \\frac{b^2 - 4ac}{4a^2}$$  \n$$\\left(x + \\frac{b}{2a}\\right)^2 = \\frac{b^2 - 4ac}{4a^2}$$  \nDono taraf square root lo:  \n$$x + \\frac{b}{2a} = \\pm \\frac{\\sqrt{b^2 - 4ac}}{2a} \\implies \\mathbf{x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}}$$",
       formulasOrKeyPoints: [
         {
-          title: "The 3-Step Quadratic Formula Execution Protocol",
-          content: "**Step 1: Calculate Discriminant Separately**\n$$\\mathbf{D = b^2 - 4ac}$$\n\n**Step 2: Inspect Nature of Roots**\n- If $D < 0$, stop and write: *'No real roots exist ($D < 0$)'*.\n\n**Step 3: Calculate the Real Roots**\n- If $D \\ge 0$, substitute into:\n$$\\mathbf{x = \\frac{-b \\pm \\sqrt{D}}{2a}}$$\n$$x_1 = \\frac{-b + \\sqrt{D}}{2a}, \\qquad x_2 = \\frac{-b - \\sqrt{D}}{2a}$$",
-          note: "Always calculate D separately first! If D is negative, you save 5 minutes of useless calculation."
+          title: "The 3-Step Execution Protocol",
+          content: "**Step 1: Calculate Discriminant $D$ Separately**  \n$$D = b^2 - 4ac$$  \n\n**Step 2: Inspect Nature of Roots**  \n- Agar $D < 0$, yahin ruk jao aur likho: *'No real roots exist ($D < 0$)'*. Tumhare 5 minute bach gaye!  \n\n**Step 3: Calculate the Roots**  \n- Agar $D \\ge 0$, toh formula mein plug karo:  \n$$x_1 = \\frac{-b + \\sqrt{D}}{2a}, \\qquad x_2 = \\frac{-b - \\sqrt{D}}{2a}$$",
+          note: "Hamesha D ko pehle alag line mein calculate karo! Isse formula ke andar complicated roots likhne se bachte ho."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Calculate $D$ in a Dedicated Separate Line",
-          action: "Write $D = b^2 - 4ac = (-5)^2 - 4(2)(-3) = 25 + 24 = 49$.",
-          proTip: "Because 49 is a perfect square ($7^2$), the roots will be clean rational numbers!"
-        },
-        {
-          stepNo: 2,
-          title: "Substitute into Formula with Parentheses",
-          action: "Write $x = \\frac{-(-5) \\pm \\sqrt{49}}{2(2)} = \\frac{5 \\pm 7}{4}$.",
-          proTip: "Split into two cases: $x_1 = \\frac{5+7}{4} = 3$ and $x_2 = \\frac{5-7}{4} = -\\frac{1}{2}$."
+          title: "Brackets around negative b",
+          action: "Agar $b = -6$ hai, toh $-b = -(-6) = +6$ banega. Formula mein $-(-6)$ zaroor likho taaki sign flip na bhoole.",
+          proTip: "Denominator $2a$ poore numerator ke neeche hota hai, sirf root ke neeche nahi!"
         }
       ],
       examinerTraps: [
         {
-          trap: "Writing the fraction line only under $\\sqrt{b^2-4ac}$ instead of under the whole numerator: $-b \\pm \\frac{\\sqrt{b^2-4ac}}{2a}$.",
-          correction: "The denominator $2a$ divides BOTH $-b$ and the square root! The whole numerator $(-b \\pm \\sqrt{D})$ must sit on top of the fraction line."
+          trap: "Writing fraction bar only under $\\sqrt{D}$: $-b \\pm \\frac{\\sqrt{D}}{2a}$.",
+          correction: "Denominator $2a$ divides BOTH $-b$ and $\\sqrt{D}$! Poore numerator ke neeche horizontal line honi chahiye: $\\frac{-b \\pm \\sqrt{D}}{2a}$."
         },
         {
-          trap: "Squaring a negative $b$ and getting a negative number: writing $(-6)^2 = -36$.",
-          correction: "Any real number squared is POSITIVE! $(-6)^2 = +36$. This is the #1 arithmetic error in Chapter 4."
+          trap: "Squaring a negative $b$ and writing a negative number (e.g. $(-5)^2 = -25$).",
+          correction: "Kisi bhi real number ka square hamesha POSITIVE hota hai: $(-5)^2 = +25$."
         }
       ]
     },
     {
-      id: "discriminant_nature",
-      label: "4. The Discriminant Radar & Nature of Roots",
-      heading: "The 3 Fates of Quadratic Roots ($D > 0, D = 0, D < 0$)",
-      subheading: "Real, Distinct, Equal, Rational, and Imaginary Roots Explained",
-      explanation: "The quantity under the square root, **$D = b^2 - 4ac$**, is called the **Discriminant** because it 'discriminates' between the different types of roots:  \n\n1. **Case 1: $D > 0$ (Two Distinct Real Roots)**  \n$\\sqrt{D}$ is a positive real number. There are two completely different solutions:  \n$$x_1 = \\frac{-b + \\sqrt{D}}{2a} \\qquad x_2 = \\frac{-b - \\sqrt{D}}{2a} \\qquad (x_1 \\neq x_2)$$  \n\n2. **Case 2: $D = 0$ (Two Equal Real Roots / Coincident Roots)**  \n$\\sqrt{D} = 0$, so the $\\pm$ disappears! Both roots collapse into one identical value:  \n$$x_1 = x_2 = -\\frac{b}{2a}$$  \n\n3. **Case 3: $D < 0$ (No Real Roots)**  \nYou cannot take the square root of a negative number in real numbers! The equation has **no real roots**.",
+      id: "nature_of_roots",
+      label: "4. Nature of Roots & The Discriminant Radar ($D = b^2 - 4ac$)",
+      heading: "Roots Real hain, Equal hain, ya Gayab hain?",
+      subheading: "The 3 Cases of Discriminant aur Parameter 'k' ke High-Yield Questions",
+      explanation: "Quadratic equation $ax^2 + bx + c = 0$ ke roots ki nature poori tarah **Discriminant** ($D = b^2 - 4ac$) par depend karti hai:  \n\n### 1. Case 1: $D > 0$ (Positive) $\\implies$ Two Distinct Real Roots  \nSquare root $\\sqrt{D}$ ek real number hoga, isliye do alag-alag answers milenge:  \n$$x_1 = \\frac{-b + \\sqrt{D}}{2a} \\quad \\text{and} \\quad x_2 = \\frac{-b - \\sqrt{D}}{2a}$$  \nGeometrically: Parabola X-axis ko do alag-alag points par cut karta hai.  \n\n### 2. Case 2: $D = 0$ (Zero) $\\implies$ Two Real and Equal Roots  \nJab $D = 0$, toh $\\pm \\sqrt{0} = 0$ ho jaata hai, isliye dono roots barabar ho jaate hain:  \n$$\\mathbf{x = -\\frac{b}{2a}, \\quad -\\frac{b}{2a}}$$  \nGeometrically: Parabola X-axis ko sirf ek single vertex point par touch karke nikalta hai.  \n\n### 3. Case 3: $D < 0$ (Negative) $\\implies$ No Real Roots  \nNegative number ka square root real numbers mein exist nahi karta!  \nGeometrically: Parabola X-axis se upar hawa mein udta hai ya neeche latakta hai, X-axis ko kabhi touch nahi karta.",
       formulasOrKeyPoints: [
         {
-          title: "The Nature of Roots Master Chart",
-          content: "$$\\begin{array}{|c|c|c|} \\hline \\textbf{Value of } D = b^2 - 4ac & \\textbf{Nature of Roots} & \\textbf{Graph Behavior} \\\\\\\\ \\hline D > 0 & \\text{Two distinct real roots} & \\text{Cuts X-axis at 2 points} \\\\\\\\ \\hline D = 0 & \\text{Two equal real roots} & \\text{Touches X-axis at 1 point} \\\\\\\\ \\hline D < 0 & \\text{No real roots} & \\text{Floats completely off X-axis} \\\\\\\\ \\hline \\end{array}$$",
-          note: "If question states 'has real roots' (without saying distinct or equal), use condition: D ≥ 0!"
-        },
-        {
-          title: "Rational vs Irrational Roots Rule",
-          content: "If $a, b, c$ are rational:  \n$\\bullet$ If $D$ is a perfect square ($0, 1, 4, 9, 16, 25, \\dots$) $\\implies$ Roots are **Rational**.  \n$\\bullet$ If $D > 0$ is NOT a perfect square $\\implies$ Roots are **Irrational Conjugate Pairs** ($p + \\sqrt{q}$ and $p - \\sqrt{q}$).",
-          note: "Irrational roots always travel in pairs! If one root is $2 + \\sqrt{3}$, the other root MUST be $2 - \\sqrt{3}$."
+          title: "Finding 'k' for Equal Roots (Guaranteed Board Question)",
+          content: "Problem: For what value of $k$ does $kx(x - 2) + 6 = 0$ have equal roots?  \n1. Standard form: $kx^2 - 2kx + 6 = 0 \\implies a = k, \\; b = -2k, \\; c = 6$.  \n2. For equal roots: $D = b^2 - 4ac = 0$.  \n   $$(-2k)^2 - 4(k)(6) = 0 \\implies 4k^2 - 24k = 0$$  \n3. Factorise: $4k(k - 6) = 0 \\implies k = 0 \\text{ or } k = 6$.  \n4. **CRITICAL TRAP CHECK**:  \n   Agar $k = 0$ ho gaya, toh original equation ban jayegi: $0x^2 - 0x + 6 = 0 \\implies 6 = 0$ (which is nonsense and not quadratic!).  \n   Since $a \\neq 0$, we must have $\\mathbf{k \\neq 0}$.  \n$$\\mathbf{\\text{Therefore, } k = 6 \\text{ only!}}$$",
+          note: "CBSE exams mein lagbhag 40% students 'k = 0 or 6' likh kar aate hain aur unka 1 mark kat jaata hai! Always discard k = 0."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Solving the Guaranteed 'Equal Roots' Parameter $k$ Question",
-          action: "Set $D = b^2 - 4ac = 0$. Solve the resulting equation for $k$.",
-          proTip: "Check that your values of $k$ do not make the leading coefficient $a = 0$!"
+          title: "Identify a, b, c from standard form",
+          action: "Agar brackets hon toh pehle expand karo (jaise $kx(x-2)$ ko $kx^2 - 2kx$).",
+          proTip: "Check condition $a \\neq 0$ right at the start."
         }
       ],
       examinerTraps: [
         {
-          trap: "In $(k-1)x^2 + 2(k-1)x + 1 = 0$, writing $k = 1$ as a valid answer.",
-          correction: "If $k = 1$, the leading coefficient $(k-1) = 0$, which destroys the quadratic equation entirely! Always check $a \\neq 0$. Here $k = 1$ must be rejected, leaving only $k = 2$."
+          trap: "Accepting $k = 0$ when $k$ is the coefficient of $x^2$.",
+          correction: "By definition of quadratic equation, leading coefficient $a$ cannot be zero. If $k = 0$ makes $a = 0$, it must be rejected."
         }
       ]
     },
     {
-      id: "word_problems_quadratics",
-      label: "5. Quadratic Word Problems Playbook",
-      heading: "The 3 Board Favorites: Speed, Pipes, and Geometry",
-      subheading: "Forming the Correct Quadratic Equation from Real-World Scenarios",
-      explanation: "Board exam long-answer questions (4 or 5 marks) test your ability to convert a story into a quadratic equation:  \n\n1. **Type 1: Train / Flight Speed Problems**  \nA train travels $360\\text{ km}$ at a uniform speed. If the speed had been $5\\text{ km/h}$ more, it would have taken 48 minutes less for the journey.  \n$$\\text{Old Time} - \\text{New Time} = \\text{Time Difference} \\implies \\mathbf{\\frac{360}{x} - \\frac{360}{x + 5} = \\frac{48}{60} = \\frac{4}{5}}$$  \n\n2. **Type 2: Two Water Taps Filling a Tank**  \nTwo water taps together can fill a tank in $9\\frac{3}{8} = \\frac{75}{8}\\text{ hours}$. The larger tap takes 10 hours less than the smaller tap.  \n$$\\text{Work done by small tap in 1 hr} = \\frac{1}{x} \\qquad \\text{By large tap} = \\frac{1}{x - 10}$$  \n$$\\mathbf{\\frac{1}{x} + \\frac{1}{x - 10} = \\frac{1}{75/8} = \\frac{8}{75}}$$  \n\n3. **Type 3: Right Triangle Geometry (Pythagoras)**  \nHypotenuse is $3\\sqrt{5}\\text{ cm}$. If the smaller side is tripled and larger side doubled, the new hypotenuse is $15\\text{ cm}$. Set up $x^2 + y^2 = 45$ and solve.",
+      id: "word_problems_modeling",
+      label: "5. Quadratic Word Problems (Speed-Time, Water Taps, Areas)",
+      heading: "Real-World Situations ko Quadratic Equation mein Dhalna",
+      subheading: "Physical constraints se negative roots ko reject karne ka rule",
+      explanation: "Quadratic word problems 3 main categories mein aate hain:  \n\n### 1. Speed, Distance, Time (Train Delay / Flight Headwind)  \nFormula: $\\text{Time} = \\frac{\\text{Distance}}{\\text{Speed}}$.  \nJab speed badhti hai, toh samay kam lagta hai!  \n$$\\frac{\\text{Distance}}{\\text{Normal Speed } (s)} - \\frac{\\text{Distance}}{\\text{Increased Speed } (s + 10)} = \\text{Time Difference}$$  \n*Golden Rule*: Hamesha chhota speed (slow) pehle aayega, kyunki slow chalne par time BADA hota hai! Bade time mein se chhota time subtract karne par hi positive time difference aayega!  \n\n### 2. Work & Time (Two Water Taps Filling a Tank)  \nLet smaller tap takes $x$ hours to fill tank alone.  \nLarger tap has larger diameter, takes $10$ hours less: $(x - 10)$ hours.  \nIn 1 hour: Smaller tap fills $\\frac{1}{x}$, Larger tap fills $\\frac{1}{x - 10}$.  \n$$\\frac{1}{x} + \\frac{1}{x - 10} = \\frac{1}{\\text{Total Time Taken Together}}$$  \n\n### 3. Geometric Dimensions & Right Triangles  \nRight triangle problems use Pythagoras theorem:  \n$$\\text{Base}^2 + \\text{Altitude}^2 = \\text{Hypotenuse}^2$$  \n\n### The Physical Discard Rule:  \nQuadratic equations solve hokar hamesha 2 roots deti hain (aksar ek positive aur ek negative).  \nReal world mein **Speed, Time, Age, aur Length kabhi negative nahi ho sakte**!  \nExaminer ke samne explicitly likho: *'Since speed cannot be negative, $x = -40$ is rejected. Therefore, $x = 50\\text{ km/h}$.'*",
       formulasOrKeyPoints: [
         {
-          title: "Speed Equation Simplification Trick",
-          content: "$$\\frac{D}{x} - \\frac{D}{x + s} = T \\implies D \\left( \\frac{x + s - x}{x(x + s)} \\right) = T \\implies \\mathbf{D \\cdot s = T \\cdot x(x + s)}$$",
-          note: "This shortcut immediately converts the fraction equation into a clean quadratic: $T x^2 + T s x - D s = 0$!"
+          title: "Speed-Time Order Rule",
+          content: "$$\\mathbf{\\frac{\\text{Distance}}{\\text{Slow Speed}} - \\frac{\\text{Distance}}{\\text{Fast Speed}} = \\text{Time Difference}}$$",
+          note: "Kabhi bhi fast speed pehle mat likhna, warna time negative aa jayega!"
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Always State: 'Since speed/time cannot be negative, we reject $x < 0$'",
-          action: "A quadratic equation always yields two roots. In real-world problems, physical quantities (speed, time, side length) cannot be negative.",
-          proTip: "CBSE marking schemes deduct 0.5 marks if you don't explicitly write the reason for rejecting the negative root."
+          title: "State units and discard reasons explicitly",
+          action: "Har word problem ke aakhri step mein unit likho (km/h, hours, meters).",
+          proTip: "CBSE marking guidelines mein negative root reject karne ka reason likhne par 0.5 marks allocated hote hain."
         }
       ],
       examinerTraps: [
         {
-          trap: "Forgetting to convert minutes to hours: writing $48$ instead of $\\frac{48}{60} = \\frac{4}{5}$ hours.",
-          correction: "Units must match! If speeds are in km/h, all times MUST be converted into hours."
+          trap: "Writing $\\frac{360}{s+5} - \\frac{360}{s} = 1$.",
+          correction: "$\\frac{360}{s}$ is the LARGER time (slow journey takes more time). The larger quantity must come first: $\\frac{360}{s} - \\frac{360}{s+5} = 1$."
         }
       ]
     }
