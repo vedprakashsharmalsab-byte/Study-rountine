@@ -5,7 +5,7 @@ export const CH2_DATA: ChapterData = {
   chapterName: 'Polynomials',
   weightageEstimate: '4–5 Marks (CBSE Board Standard/Basic)',
   overview: {
-    about: 'Polynomials bridges coordinate geometry with algebra. In Class 10, the core focus is quadratic polynomials: interpreting zeroes graphically (x-intercepts), mastering the relation between zeroes and coefficients, and evaluating symmetric algebraic expressions of roots.',
+    about: 'Polynomials algebra aur geometry ka zabardast sangam hai! Class 10 mein hamara focus quadratic polynomials par hai: zeroes ko geometrically (X-axis intersections) samajhna, Vieta ke formulas (sum = -b/a aur product = c/a) master karna, aur bina individual roots nikale symmetric expressions (jaise α² + β², 1/α + 1/β) evaluate karna.',
     prerequisites: ['Splitting the middle term factorization', 'Basic algebraic identities (a+b)², (a-b)², a³+b³', 'Coordinate system (x-axis, y-axis)'],
     coreIdeas: [
       'The zeroes of a polynomial P(x) are the x-coordinates of the points where the graph y = P(x) intersects the x-axis.',
@@ -30,7 +30,7 @@ export const CH2_DATA: ChapterData = {
       id: 'ch2_c1',
       title: 'Geometrical Meaning of the Zeroes of a Polynomial',
       topic: 'Graphical Interpretation',
-      simpleExplanation: 'Zeroes are simply the spots on the x-axis where the graph touches or crosses. Count the x-intercepts!',
+      simpleExplanation: 'Zeroes ka matlab graph horizontal X-axis ko kahan touch ya cross kar raha hai! Sirf X-axis ke cuts count karo, Y-axis ko bilkul ignore karo.',
       exactMathIdea: 'For any polynomial y = P(x), the real zeroes are the x-coordinates of the points where the curve y = P(x) intersects the x-axis. If the graph does not cut or touch the x-axis, the polynomial has no real zeroes.',
       formulaOrTheorem: '\\text{Number of real zeroes} = \\text{Number of intersection points with the } x\\text{-axis}',
       whenToUse: 'When given a graph of y = P(x) and asked to find the number of zeroes, or analyzing parabolic shapes of bridges/trajectories.',
@@ -64,9 +64,9 @@ export const CH2_DATA: ChapterData = {
       id: 'ch2_c2',
       title: 'Relationship Between Zeroes and Coefficients',
       topic: 'Coefficients and Roots',
-      simpleExplanation: 'You can find the sum and product of the roots directly from the quadratic equation without actually solving for the roots!',
+      simpleExplanation: 'Bina quadratic equation factorise kiye, seedha coefficients dekh kar Sum (-b/a) aur Product (c/a) nikalna!',
       exactMathIdea: 'For a quadratic polynomial P(x) = ax² + bx + c (a ≠ 0) with zeroes α and β: Sum = α + β = -b/a = -(coefficient of x)/(coefficient of x²); Product = αβ = c/a = (constant term)/(coefficient of x²).',
-      formulaOrTheorem: '\\α + \\β = -\\frac{b}{a}, \\quad \\α \\β = \\frac{c}{a}',
+      formulaOrTheorem: '\\alpha + \\beta = -\\frac{b}{a}, \\quad \\alpha \\beta = \\frac{c}{a}',
       whenToUse: 'When asked to verify the relationship between zeroes and coefficients, or find unknown coefficients k given a condition on roots.',
       recognitionClues: ['Find the zeroes and verify the relationship between zeroes and coefficients', 'One zero is reciprocal of the other', 'Sum of zeroes is equal to half their product'],
       workedExamples: [
@@ -122,7 +122,7 @@ export const CH2_DATA: ChapterData = {
       topic: 'Algebraic Identities of Zeroes',
       simpleExplanation: 'Calculate values like α² + β² or 1/α + 1/β without ever finding α and β individually!',
       exactMathIdea: 'Any symmetric function of zeroes can be converted into combinations of S = (α + β) and P = (αβ) using identities: α² + β² = (α+β)² - 2αβ; (α - β)² = (α+β)² - 4αβ; α³ + β³ = (α+β)³ - 3αβ(α+β).',
-      formulaOrTheorem: '\\α² + \\β² = (\\α + \\β)² - 2\\α\\β',
+      formulaOrTheorem: '\\alpha^2 + \\beta^2 = (\\alpha + \\beta)^2 - 2\\alpha\\beta',
       whenToUse: 'When asked to find 1/α + 1/β, α² + β², α/β + β/α, or form a new polynomial whose roots are 2α and 2β.',
       recognitionClues: ['If α and β are zeroes of the polynomial, find the value of α² + β²', 'Find a polynomial whose zeroes are 1/α and 1/β'],
       workedExamples: [
@@ -155,7 +155,7 @@ export const CH2_DATA: ChapterData = {
     {
       id: 'ch2_f1',
       name: 'Sum and Product of Roots of Quadratic Polynomial',
-      formula: '\\α + \\β = -\\frac{b}{a}, \\quad \\α\\β = \\frac{c}{a}',
+      formula: '\\alpha + \\beta = -\\frac{b}{a}, \\quad \\alpha\\beta = \\frac{c}{a}',
       symbolMeanings: [
         { symbol: 'a', meaning: 'Coefficient of x² (a ≠ 0)' },
         { symbol: 'b', meaning: 'Coefficient of x' },
@@ -177,7 +177,7 @@ export const CH2_DATA: ChapterData = {
     {
       id: 'ch2_f2',
       name: 'Formation of Quadratic Polynomial',
-      formula: 'k \\left[ x² - S x + P \\right] = k \\left[ x² - (\\α + \\β)x + \\α\\β \\right], \\quad k \\neq 0',
+      formula: 'k \\left[ x^2 - S x + P \\right] = k \\left[ x^2 - (\\alpha + \\beta)x + \\alpha\\beta \\right], \\quad k \\neq 0',
       symbolMeanings: [
         { symbol: 'S', meaning: 'Sum of zeroes (α + β)' },
         { symbol: 'P', meaning: 'Product of zeroes (αβ)' },
@@ -197,7 +197,7 @@ export const CH2_DATA: ChapterData = {
     {
       id: 'ch2_f3',
       name: 'Essential Symmetric Identities of Roots',
-      formula: '\\α² + \\β² = (\\α+\\β)² - 2\\α\\β, \\quad (\\α - \\β)² = (\\α+\\β)² - 4\\α\\β',
+      formula: '\\alpha^2 + \\beta^2 = (\\alpha+\\beta)^2 - 2\\alpha\\beta, \\quad (\\alpha - \\beta)^2 = (\\alpha+\\beta)^2 - 4\\alpha\\beta',
       symbolMeanings: [
         { symbol: 'α, β', meaning: 'Zeroes of ax² + bx + c' }
       ],

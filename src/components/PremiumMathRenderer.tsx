@@ -189,7 +189,13 @@ function convertPlainMathToLatex(text: string): string {
         return `$\\${func.toLowerCase()}${power || ''} ${ang}$`;
     });
 
-    // Greek letters and operators
+    // Match coefficients with greek letters and optional variable power (e.g. 2\pi r^2, 3\alpha)
+    out = out.replace(/([0-9]+)\s*(?:\\)?\b(pi|theta|alpha|beta|gamma)\b(?:\s*([a-zA-Z](?:\^[0-9]+)?(?=[\s\+\-\=\,\.\)]|$)))?/gi, (match, coeff, sym, variable) => {
+        const varPart = variable ? ` ${variable}` : '';
+        return ` $${coeff}\\${sym.toLowerCase()}${varPart}$ `;
+    });
+
+    // Greek letters and operators (only when not already inside math delimiters)
     const symbolMap: Record<string, string> = {
         'theta': '$\\theta$',
         'pi': '$\\pi$',
@@ -203,22 +209,24 @@ function convertPlainMathToLatex(text: string): string {
     };
     for (const [key, val] of Object.entries(symbolMap)) {
         if (key.match(/^[a-z]+$/i)) {
-            const regex = new RegExp(`(?:\\\\)?\\b${key}\\b`, 'gi');
-            out = out.replace(regex, val);
+            const regex = new RegExp(`(?<!\\$)(?:\\\\)?\\b${key}\\b(?!\\$)`, 'gi');
+            out = out.replace(regex, ` ${val} `);
         } else {
-            out = out.split(key).join(val);
+            out = out.split(key).join(` ${val} `);
         }
     }
     
-    // Merge numbers, variables, and operators directly adjacent to math delimiters,
-    // e.g. 2$\pi$ r^2 -> $2\pi r^2$ and $2\pi r^2$ + $\pi r^2$ -> $2\pi r^2 + \pi r^2$
-    out = out.replace(/([0-9A-Za-z]+)\s*\$([^\$]+)\$/g, '$$$1 $2$$');
-    out = out.replace(/\$([^\$]+)\$\s*([0-9A-Za-z\^\{\}]+)/g, '$$$1 $2$$');
-    out = out.replace(/\$([^\$]+)\$\s*([\+\-\=\<\>\*\/])\s*\$([^\$]+)\$/g, '$$$1 $2 $3$$');
+    // Combine adjacent math tokens separated ONLY by operators (=, +, -, etc.)
+    out = out.replace(/\$([^\$]+)\$\s*([\+\-\=\<\>])\s*\$([^\$]+)\$/g, '$$$1 $2 $3$$');
+    out = out.replace(/\$([^\$]+)\$\s*([\+\-\=\<\>])\s*\$([^\$]+)\$/g, '$$$1 $2 $3$$');
 
-    // Clean up overlapping $ 
-    out = out.replace(/\$([^\$]+)\$\s*\$([^\$]+)\$/g, '$$$1 $2$$');
-    out = out.replace(/\$\s*\$/g, ' ');
+    // Clean spacing: remark-math requires no space immediately inside $...$
+    out = out.replace(/\$\s+([^\$]+?)\$/g, '$$$1$');
+    out = out.replace(/\$([^\$]+?)\s+\$/g, '$$$1$');
+    // Ensure clean gap between English word/letter and opening $
+    out = out.replace(/([a-zA-Z0-9])\$/g, '$1 $');
+    // Ensure clean gap between closing $ and English word/letter
+    out = out.replace(/\$([a-zA-Z0-9])/g, '$ $1');
 
     return out;
 }
@@ -238,10 +246,18 @@ function preprocessMathContent(raw: string): string {
   let text = raw.replace(/\\n(?!(?:eq|abla|u|ot|eg|otin|parallel|Rightarrow)\b)/g, '\n').trim();
   text = text.replace(/\\{2,}([a-zA-Z]+)/g, '\\$1');
 
+  // Handle prefix labels like "Governing Formula:" or "Formula:"
+  let prefix = '';
+  const prefixMatch = text.match(/^(Governing Formula:\s*|Formula:\s*)/i);
+  if (prefixMatch) {
+    prefix = prefixMatch[0];
+    text = text.slice(prefix.length).trim();
+  }
+
   // Standalone formula detection: If the raw text is a standalone mathematical expression
   // containing '=' or LaTeX commands like \pi, \frac, \sqrt, etc., wrap it in $...$
   const isStandaloneFormula = !text.includes('\n') && !text.includes('$') &&
-    (/^[A-Za-z0-9_\{\}\s\+\-\*\/\^\(\)\\,=:\.<>~\|\u0370-\u03FF\\]+$/.test(text)) &&
+    (/^[A-Za-z0-9_\{\}\s\+\-\*\/\^\(\)\\,=:\.<>~\|\u0370-\u03FF\u00B2\u00B3\u2070-\u2079\\]+$/.test(text)) &&
     (/[=<>~]|\\(?:pi|frac|sqrt|text|rho|theta|alpha|beta|gamma|lambda|Delta|Omega|times|implies|pm)\b/.test(text)) &&
     !/\b(the|and|or|is|are|was|were|find|calculate|prove|which|when|where|what|how|show|that|given|let)\b/i.test(text);
 
@@ -253,7 +269,9 @@ function preprocessMathContent(raw: string): string {
       .replace(/\bLSA\b/g, '\\text{LSA}')
       .replace(/\bCSA\b/g, '\\text{CSA}')
       .trim();
-    text = `$${cleanFormula}$`;
+    text = `${prefix}$${cleanFormula}$`;
+  } else if (prefix) {
+    text = `${prefix}${text}`;
   }
 
   if (/^\$\$[\s\S]*\$\$$/.test(text) || (/^\$[^\$]+\$$/.test(text) && !text.slice(1, -1).includes('$'))) {

@@ -126,7 +126,7 @@ export default function NotebookSolutionView({ question, isDark }: NotebookSolut
               <div className={`text-[11px] font-semibold inline-flex items-center gap-1.5 ${isDark ? "text-cyan-400" : "text-blue-800"}`}>
                 <span className="shrink-0 opacity-80">Governing Formula:</span>
                 <span className="font-sans font-medium text-xs">
-                  <PremiumMathRenderer inline content={question.formula} isDark={isDark} />
+                  <PremiumMathRenderer inline content={question.formula.replace(/^(?:Governing\s+Formula|Formula)\s*:\s*/i, "")} isDark={isDark} />
                 </span>
               </div>
             )}
