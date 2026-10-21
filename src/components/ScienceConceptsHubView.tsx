@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import ConceptAudioPlayer from "@/components/ConceptAudioPlayer";
 import { useSpeechNarration } from "@/hooks/useSpeechNarration";
+import { buildTeacherLectureScript } from "@/utils/teacherLectureScript";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import {
   SCIENCE_DIAGRAMS_MASTER,
@@ -342,47 +343,45 @@ export default function ScienceConceptsHubView({
     narration.stop();
   }, [currentChNo]);
 
+  const currentMeta = useMemo(() => CHAPTER_LIST.find((c) => c.no === currentChNo) || CHAPTER_LIST[0], [currentChNo]);
+
   const getChapterFullText = useCallback(() => {
     if (!currentChapter) return "";
-    let full = `Chapter ${currentChNo}: ${currentChapter.title}. ${currentChapter.oneLiner}. `;
-    if (currentChapter.analogyTitle && currentChapter.analogyContent) {
-      full += `Intuition story: ${currentChapter.analogyTitle}. ${currentChapter.analogyContent}. `;
-    }
-    currentChapter.sections.forEach((sec, idx) => {
-      full += `Topic ${idx + 1}: ${sec.heading}. ${sec.subheading ? sec.subheading + ". " : ""}${sec.explanation}. `;
-      if (sec.formulasOrKeyPoints && sec.formulasOrKeyPoints.length > 0) {
-        sec.formulasOrKeyPoints.forEach((f) => {
-          full += `${f.title}: ${f.content}. `;
-        });
-      }
-      if (sec.examinerTraps && sec.examinerTraps.length > 0) {
-        sec.examinerTraps.forEach((trap) => {
-          full += `Important board exam caution: ${trap.trap}. Remember: ${trap.correction}. `;
-        });
-      }
-    });
-    return full;
-  }, [currentChapter, currentChNo]);
+    return buildTeacherLectureScript(
+      {
+        chapterNo: currentChNo,
+        title: currentChapter.title,
+        subject: "Science",
+        discipline: currentMeta.discipline,
+        oneLiner: currentChapter.oneLiner,
+        analogyTitle: currentChapter.analogyTitle,
+        analogyContent: currentChapter.analogyContent,
+        sections: currentChapter.sections,
+      },
+      { mode: narration.lectureMode }
+    );
+  }, [currentChapter, currentChNo, currentMeta.discipline, narration.lectureMode]);
 
   const playSectionNarration = useCallback(
     (sec: typeof currentChapter.sections[0]) => {
-      let secText = `Topic: ${sec.heading}. ${sec.subheading ? sec.subheading + ". " : ""}${sec.explanation}. `;
-      if (sec.formulasOrKeyPoints && sec.formulasOrKeyPoints.length > 0) {
-        sec.formulasOrKeyPoints.forEach((f) => {
-          secText += `${f.title}: ${f.content}. `;
-        });
-      }
-      if (sec.examinerTraps && sec.examinerTraps.length > 0) {
-        sec.examinerTraps.forEach((trap) => {
-          secText += `Important caution: ${trap.trap}. Pro tip: ${trap.correction}. `;
-        });
-      }
-      narration.speak(secText, sec.heading);
+      if (!currentChapter) return;
+      const script = buildTeacherLectureScript(
+        {
+          chapterNo: currentChNo,
+          title: currentChapter.title,
+          subject: "Science",
+          discipline: currentMeta.discipline,
+          oneLiner: currentChapter.oneLiner,
+          analogyTitle: currentChapter.analogyTitle,
+          analogyContent: currentChapter.analogyContent,
+          sections: currentChapter.sections,
+        },
+        { mode: narration.lectureMode, targetSectionId: sec.id }
+      );
+      narration.speak(script, sec.heading);
     },
-    [narration, currentChapter]
+    [narration, currentChapter, currentChNo, currentMeta.discipline]
   );
-
-  const currentMeta = useMemo(() => CHAPTER_LIST.find((c) => c.no === currentChNo) || CHAPTER_LIST[0], [currentChNo]);
 
   // Chapter Topics and Examples from SCIENCE_CONCEPTS_AND_EXAMPLES
   const chapterTopics = useMemo(() => {
@@ -874,6 +873,7 @@ export default function ScienceConceptsHubView({
           isDark={isDark}
           isPlaying={narration.isPlaying}
           isPaused={narration.isPaused}
+          isLoadingAudio={narration.isLoadingAudio}
           currentTitle={narration.currentTitle}
           progressPercent={narration.progressPercent}
           currentChunkIndex={narration.currentChunkIndex}
@@ -883,6 +883,8 @@ export default function ScienceConceptsHubView({
           volume={narration.volume}
           voices={narration.voices}
           selectedVoiceId={narration.selectedVoiceId}
+          lectureMode={narration.lectureMode}
+          onToggleLectureMode={narration.setLectureMode}
           onPlay={() => narration.speak(getChapterFullText(), currentChapter.title)}
           onPause={narration.pause}
           onResume={narration.resume}
@@ -1944,6 +1946,7 @@ export default function ScienceConceptsHubView({
           isDark={isDark}
           isPlaying={narration.isPlaying}
           isPaused={narration.isPaused}
+          isLoadingAudio={narration.isLoadingAudio}
           currentTitle={narration.currentTitle}
           progressPercent={narration.progressPercent}
           currentChunkIndex={narration.currentChunkIndex}
@@ -1953,6 +1956,8 @@ export default function ScienceConceptsHubView({
           volume={narration.volume}
           voices={narration.voices}
           selectedVoiceId={narration.selectedVoiceId}
+          lectureMode={narration.lectureMode}
+          onToggleLectureMode={narration.setLectureMode}
           onPlay={() => narration.speak(getChapterFullText(), currentChapter.title)}
           onPause={narration.pause}
           onResume={narration.resume}

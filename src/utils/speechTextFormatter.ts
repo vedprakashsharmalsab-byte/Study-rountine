@@ -17,14 +17,44 @@ export function cleanTextForSpeech(raw: string): string {
   text = text.replace(/<[^>]*>/g, " ");
 
   // 3. Convert educational emojis into natural spoken cues
-  text = text.replace(/💡|🌟/g, " Important note: ");
-  text = text.replace(/⚠️|🚨/g, " Warning: ");
-  text = text.replace(/🔥/g, " Highly tested: ");
-  text = text.replace(/🎯/g, " Key takeaway: ");
-  text = text.replace(/🚗|📱|🔬/g, " Example: ");
+  text = text.replace(/💡|🌟/g, " ... Important note: ");
+  text = text.replace(/⚠️|🚨/g, " ... Examiner Warning! ");
+  text = text.replace(/🔥/g, " ... Highly tested board question: ");
+  text = text.replace(/🎯/g, " ... Key concept takeaway: ");
+  text = text.replace(/🚗|📱|🔬/g, " ... Everyday example: ");
   text = text.replace(/[\u{1F300}-\u{1F9FF}]/gu, " ");
 
-  // 4. Clean LaTeX Math & Equations
+  // 4. Clean LaTeX Math & Equations & CBSE Symbols
+  // Physics units & constants
+  text = text.replace(/\\Omega|Ω/g, " ohms ");
+  text = text.replace(/\\mu\s*m/g, " micrometres ");
+  text = text.replace(/\\mu/g, " micro ");
+  text = text.replace(/\\rho/g, " rho, resistivity, ");
+  text = text.replace(/\\lambda/g, " lambda, wavelength, ");
+  text = text.replace(/\\theta/g, " theta ");
+  text = text.replace(/\\alpha/g, " alpha ");
+  text = text.replace(/\\beta/g, " beta ");
+  text = text.replace(/\\gamma/g, " gamma ");
+  text = text.replace(/\\Sigma/g, " sigma, sum of ");
+  text = text.replace(/\\bar\{x\}/g, " x bar, the mean value, ");
+
+  // Common formulas spoken expansion
+  text = text.replace(/V\s*=\s*IR/g, " V equals I into R ");
+  text = text.replace(/P\s*=\s*VI/g, " Power equals V into I ");
+  text = text.replace(/H\s*=\s*I\^2Rt/g, " Heat H equals I squared into R into t ");
+  text = text.replace(/f\s*=\s*R\/2/g, " focal length f equals R upon 2 ");
+  text = text.replace(/b\^2\s*-\s*4ac/g, " discriminant: b squared minus 4 a c ");
+
+  // Chemical formulas spoken pronunciation
+  text = text.replace(/\bH2O\b|H_2O/g, " H 2 O ");
+  text = text.replace(/\bCO2\b|CO_2/g, " C O 2, carbon dioxide ");
+  text = text.replace(/\bCaCO3\b|CaCO_3/g, " calcium carbonate ");
+  text = text.replace(/\bHCl\b/g, " hydrochloric acid, H C l ");
+  text = text.replace(/\bNaOH\b/g, " sodium hydroxide, N a O H ");
+  text = text.replace(/\bCuSO4\b|CuSO_4/g, " copper sulphate ");
+  text = text.replace(/\bZnSO4\b|ZnSO_4/g, " zinc sulphate ");
+  text = text.replace(/\bFe2O3\b|Fe_2O_3/g, " ferric oxide ");
+
   // Handle relative refractive index notation like ^{1}n_2 or ^{w}n_g
   text = text.replace(/\^\{1\}n_2/g, " refractive index of medium 2 with respect to 1 ");
   text = text.replace(/\^\{2\}n_1/g, " refractive index of medium 1 with respect to 2 ");
@@ -40,28 +70,29 @@ export function cleanTextForSpeech(raw: string): string {
   text = text.replace(/\\sin\s*([a-zA-Z0-9]+)/g, " sine of $1 ");
   text = text.replace(/\\cos\s*([a-zA-Z0-9]+)/g, " cosine of $1 ");
   text = text.replace(/\\tan\s*([a-zA-Z0-9]+)/g, " tangent of $1 ");
+  text = text.replace(/\\operatorname\{cosec\}|\\csc/g, " cosecant ");
+  text = text.replace(/\\operatorname\{sec\}|\\sec/g, " secant ");
+  text = text.replace(/\\operatorname\{cot\}|\\cot/g, " cotangent ");
 
   // Common physics/math symbols
   text = text.replace(/\\angle\s*([a-zA-Z0-9]+)/g, " angle $1 ");
   text = text.replace(/\\approx/g, " approximately ");
-  text = text.replace(/\\propto/g, " is proportional to ");
+  text = text.replace(/\\propto/g, " is directly proportional to ");
   text = text.replace(/\\times/g, " into ");
   text = text.replace(/\\cdot/g, " into ");
-  text = text.replace(/\\implies/g, ", which means that, ");
+  text = text.replace(/\\implies/g, " ... which means that, ");
   text = text.replace(/\\iff/g, " if and only if ");
   text = text.replace(/\\to/g, " to ");
   text = text.replace(/\\pm/g, " plus or minus ");
   text = text.replace(/\\le/g, " less than or equal to ");
   text = text.replace(/\\ge/g, " greater than or equal to ");
-  text = text.replace(/\\ne/g, " not equal to ");
-  text = text.replace(/\\ll/g, " much less than ");
-  text = text.replace(/\\gg/g, " much greater than ");
-  text = text.replace(/\\parallel/g, " parallel to ");
+  text = text.replace(/\\ne/g, " is not equal to ");
+  text = text.replace(/\\ll/g, " is much smaller than ");
+  text = text.replace(/\\gg/g, " is much larger than ");
+  text = text.replace(/\\parallel/g, " is parallel to ");
+  text = text.replace(/\\perp/g, " is perpendicular to ");
   text = text.replace(/\\infty/g, " infinity ");
-  text = text.replace(/\\Delta/g, " delta ");
-  text = text.replace(/\\lambda/g, " lambda ");
-  text = text.replace(/\\mu/g, " micro ");
-  text = text.replace(/\\theta/g, " theta ");
+  text = text.replace(/\\Delta/g, " delta, change in ");
   text = text.replace(/\\pi/g, " pi ");
   text = text.replace(/\\sqrt\{([^{}]+)\}/g, " square root of $1 ");
 

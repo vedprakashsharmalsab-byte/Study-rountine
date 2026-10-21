@@ -8,6 +8,7 @@ import { CHEMISTRY_REACTIONS_MASTER } from "../src/data/chemistryReactionsData.t
 import { SCIENCE_DIAGRAMS_MASTER } from "../src/data/scienceDiagramsData.ts";
 import { getDaysRemaining, ACADEMIC_CALENDAR } from "../config/academic-calendar.ts";
 import { cleanTextForSpeech, chunkTextForSpeech } from "../src/utils/speechTextFormatter.ts";
+import { buildTeacherLectureScript } from "../src/utils/teacherLectureScript.ts";
 
 describe("CBSE Class 10 Safety & Math Fixtures (C9)", () => {
   test("Fixture 1: Parallel Circuit Equivalent Resistance (18Ω || 18Ω = 9Ω)", () => {
@@ -105,5 +106,31 @@ describe("CBSE Class 10 Safety & Math Fixtures (C9)", () => {
     for (const chunk of chunks) {
       assert.ok(chunk.length <= 200, `Chunk length (${chunk.length}) should not exceed safe utterance limit`);
     }
+  });
+
+  test("Teacher Pedagogy Script Generator: Creates conversational masterclass with pauses and traps", () => {
+    const script = buildTeacherLectureScript({
+      chapterNo: 9,
+      title: "Light — Reflection and Refraction",
+      subject: "Science",
+      oneLiner: "How light behaves at mirrors and lenses",
+      analogyTitle: "Stainless Steel Spoon",
+      analogyContent: "The inside bowl of a spoon curves inward like a concave mirror.",
+      sections: [
+        {
+          id: "spherical_mirrors",
+          heading: "Spherical Mirrors & Focal Length",
+          explanation: "Concave mirrors converge light at the principal focus.",
+          formulasOrKeyPoints: [{ title: "Focal Length", content: "f = R/2" }],
+          examinerTraps: [{ trap: "Forgetting the negative sign for focal length", correction: "Concave focal length is always negative" }],
+        },
+      ],
+    }, { mode: "teacher_deep" });
+
+    assert.ok(script.includes("Namaste students!"), "Must include warm teacher greeting");
+    assert.ok(script.includes("Dhyaan se samajhiye"), "Must include thoughtful Indian teacher phrasing");
+    assert.ok(script.includes("pause"), "Must encourage pausing and thinking");
+    assert.ok(script.includes("Examiner Trap:"), "Must explicitly spotlight examiner traps");
+    assert.ok(script.includes("Topper Shield:"), "Must provide actionable topper correction");
   });
 });

@@ -4,19 +4,70 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { cleanTextForSpeech, chunkTextForSpeech } from "@/utils/speechTextFormatter";
 
 export interface SpeechVoiceOption {
-  voice: SpeechSynthesisVoice;
   id: string;
   name: string;
   lang: string;
   displayName: string;
-  isNatural: boolean;
+  isStudioNeural: boolean;
   accent: "Indian" | "Hindi" | "British" | "American" | "Other";
+  browserVoice?: SpeechSynthesisVoice;
 }
 
+// Studio Neural Voices provided by the /api/tts endpoint (Zero API Key, ElevenLabs quality)
+const STUDIO_NEURAL_VOICES: SpeechVoiceOption[] = [
+  {
+    id: "en-IN-NeerjaExpressiveNeural",
+    name: "Neerja Expressive (India)",
+    lang: "en-IN",
+    displayName: "🇮🇳 Neerja (Expressive Indian Teacher) ✨ Studio HD",
+    isStudioNeural: true,
+    accent: "Indian",
+  },
+  {
+    id: "en-IN-PrabhatNeural",
+    name: "Prabhat (India)",
+    lang: "en-IN",
+    displayName: "🇮🇳 Prabhat (Indian Male Mentor) ✨ Studio HD",
+    isStudioNeural: true,
+    accent: "Indian",
+  },
+  {
+    id: "hi-IN-SwaraNeural",
+    name: "Swara (Hindi)",
+    lang: "hi-IN",
+    displayName: "🇮🇳 Swara (Hindi / Hinglish Teacher) ✨ Studio HD",
+    isStudioNeural: true,
+    accent: "Hindi",
+  },
+  {
+    id: "hi-IN-MadhurNeural",
+    name: "Madhur (Hindi)",
+    lang: "hi-IN",
+    displayName: "🇮🇳 Madhur (Hindi / Hinglish Male Mentor) ✨ Studio HD",
+    isStudioNeural: true,
+    accent: "Hindi",
+  },
+  {
+    id: "en-GB-SoniaNeural",
+    name: "Sonia (UK)",
+    lang: "en-GB",
+    displayName: "🇬🇧 Sonia (British English Teacher) ✨ Studio HD",
+    isStudioNeural: true,
+    accent: "British",
+  },
+  {
+    id: "en-US-JennyNeural",
+    name: "Jenny (US)",
+    lang: "en-US",
+    displayName: "🇺🇸 Jenny (US English Teacher) ✨ Studio HD",
+    isStudioNeural: true,
+    accent: "American",
+  },
+];
+
 export function useSpeechNarration() {
-  const [isSupported, setIsSupported] = useState(false);
-  const [voices, setVoices] = useState<SpeechVoiceOption[]>([]);
-  const [selectedVoiceId, setSelectedVoiceId] = useState<string>("");
+  const [voices, setVoices] = useState<SpeechVoiceOption[]>(STUDIO_NEURAL_VOICES);
+  const [selectedVoiceId, setSelectedVoiceId] = useState<string>("en-IN-NeerjaExpressiveNeural");
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [playbackRate, setPlaybackRate] = useState<number>(1.0);
@@ -25,184 +76,286 @@ export function useSpeechNarration() {
   const [currentChunkIndex, setCurrentChunkIndex] = useState<number>(0);
   const [totalChunks, setTotalChunks] = useState<number>(0);
   const [currentSpokenText, setCurrentSpokenText] = useState<string>("");
+  const [isLoadingAudio, setIsLoadingAudio] = useState<boolean>(false);
+  const [lectureMode, setLectureMode] = useState<"teacher_deep" | "concise">("teacher_deep");
 
   const chunksRef = useRef<string[]>([]);
   const chunkIndexRef = useRef<number>(0);
   const isPlayingRef = useRef<boolean>(false);
   const isPausedRef = useRef<boolean>(false);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const currentAudioRef = useRef<HTMLAudioElement | null>(null);
+  const preloadedAudioRef = useRef<{ index: number; audio: HTMLAudioElement; url: string } | null>(null);
+  const activeBlobUrlRef = useRef<string | null>(null);
   const keepAliveIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // 1. Discover and rank browser voices
-  const populateVoices = useCallback(() => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-
-    const rawVoices = window.speechSynthesis.getVoices();
-    if (!rawVoices || rawVoices.length === 0) return;
-
-    // Filter and score voices
-    const processed: SpeechVoiceOption[] = rawVoices
-      .filter((v) => v.lang.startsWith("en") || v.lang.startsWith("hi"))
-      .map((v) => {
-        const lowerName = v.name.toLowerCase();
-        const isNatural =
-          lowerName.includes("natural") ||
-          lowerName.includes("online") ||
-          lowerName.includes("neural") ||
-          lowerName.includes("google") ||
-          lowerName.includes("siri") ||
-          lowerName.includes("enhanced");
-
-        let accent: SpeechVoiceOption["accent"] = "Other";
-        if (v.lang.includes("IN") || lowerName.includes("india")) {
-          accent = lowerName.includes("hindi") ? "Hindi" : "Indian";
-        } else if (v.lang.includes("GB") || lowerName.includes("uk")) {
-          accent = "British";
-        } else if (v.lang.includes("US") || lowerName.includes("united states")) {
-          accent = "American";
-        }
-
-        let displayName = v.name
-          .replace(/Microsoft\s*/i, "")
-          .replace(/Online\s*\(Natural\)\s*-\s*/i, "")
-          .replace(/Google\s*/i, "")
-          .trim();
-
-        if (accent === "Indian") displayName = `🇮🇳 ${displayName} (Indian English)`;
-        else if (accent === "Hindi") displayName = `🇮🇳 ${displayName} (Hindi)`;
-        else if (accent === "British") displayName = `🇬🇧 ${displayName} (British)`;
-        else if (accent === "American") displayName = `🇺🇸 ${displayName} (US English)`;
-
-        if (isNatural) displayName += " ✨ Natural";
-
-        return {
-          voice: v,
-          id: `${v.name}-${v.lang}`,
-          name: v.name,
-          lang: v.lang,
-          displayName,
-          isNatural,
-          accent,
-        };
-      });
-
-    // Sort: Indian Natural -> Hindi Natural -> Indian Standard -> British/US Natural -> Others
-    processed.sort((a, b) => {
-      const getScore = (item: SpeechVoiceOption) => {
-        let score = 0;
-        if (item.accent === "Indian" && item.isNatural) score += 100;
-        else if (item.accent === "Hindi" && item.isNatural) score += 90;
-        else if (item.accent === "Indian") score += 80;
-        else if (item.accent === "Hindi") score += 70;
-        else if (item.isNatural) score += 60;
-        else if (item.accent === "British" || item.accent === "American") score += 40;
-        return score;
-      };
-      return getScore(b) - getScore(a);
-    });
-
-    setVoices(processed);
-
-    // Pick top voice by default if not set
-    if (!selectedVoiceId && processed.length > 0) {
-      setSelectedVoiceId(processed[0].id);
-    }
-  }, [selectedVoiceId]);
-
+  // 1. Discover local browser voices as fallback
   useEffect(() => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      setIsSupported(true);
-      populateVoices();
-      window.speechSynthesis.onvoiceschanged = populateVoices;
+    if (typeof window === "undefined") return;
+
+    const populateBrowserVoices = () => {
+      if (!("speechSynthesis" in window)) return;
+      const raw = window.speechSynthesis.getVoices();
+      if (!raw || raw.length === 0) return;
+
+      const browserOptions: SpeechVoiceOption[] = raw
+        .filter((v) => v.lang.startsWith("en") || v.lang.startsWith("hi"))
+        .map((v) => {
+          let accent: SpeechVoiceOption["accent"] = "Other";
+          const lower = (v.name + " " + v.lang).toLowerCase();
+          if (lower.includes("in") || lower.includes("india")) {
+            accent = lower.includes("hindi") ? "Hindi" : "Indian";
+          } else if (lower.includes("gb") || lower.includes("uk")) {
+            accent = "British";
+          } else if (lower.includes("us")) {
+            accent = "American";
+          }
+
+          let displayName = v.name.replace(/Microsoft\s*/i, "").replace(/Google\s*/i, "").trim();
+          if (accent === "Indian") displayName = `🇮🇳 ${displayName} (Browser Indian)`;
+          else if (accent === "Hindi") displayName = `🇮🇳 ${displayName} (Browser Hindi)`;
+          else if (accent === "British") displayName = `🇬🇧 ${displayName} (Browser UK)`;
+          else if (accent === "American") displayName = `🇺🇸 ${displayName} (Browser US)`;
+
+          return {
+            id: `browser_${v.name}_${v.lang}`,
+            name: v.name,
+            lang: v.lang,
+            displayName,
+            isStudioNeural: false,
+            accent,
+            browserVoice: v,
+          };
+        });
+
+      // Combine Studio Neural Voices (top priority) + Browser Voices
+      setVoices([...STUDIO_NEURAL_VOICES, ...browserOptions]);
+    };
+
+    populateBrowserVoices();
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.onvoiceschanged = populateBrowserVoices;
     }
-  }, [populateVoices]);
+  }, []);
 
-  // Keep-alive to bypass Chrome 15s freeze bug
-  const startKeepAlive = () => {
-    stopKeepAlive();
-    keepAliveIntervalRef.current = setInterval(() => {
-      if (typeof window !== "undefined" && window.speechSynthesis) {
-        if (isPlayingRef.current && !isPausedRef.current) {
-          window.speechSynthesis.pause();
-          window.speechSynthesis.resume();
-        }
+  // Web Audio Clarity Booster initialization (Gain + High-Shelf EQ + Dynamics Compressor)
+  const getAudioContext = useCallback(() => {
+    if (typeof window === "undefined") return null;
+    if (!audioContextRef.current) {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (AudioCtx) {
+        audioContextRef.current = new AudioCtx();
       }
-    }, 9000);
-  };
+    }
+    if (audioContextRef.current && audioContextRef.current.state === "suspended") {
+      audioContextRef.current.resume();
+    }
+    return audioContextRef.current;
+  }, []);
 
-  const stopKeepAlive = () => {
+  // Stop everything
+  const stop = useCallback(() => {
+    isPlayingRef.current = false;
+    isPausedRef.current = false;
+    setIsPlaying(false);
+    setIsPaused(false);
+    setIsLoadingAudio(false);
+    chunksRef.current = [];
+    chunkIndexRef.current = 0;
+    setCurrentChunkIndex(0);
+    setTotalChunks(0);
+    setCurrentSpokenText("");
+
+    // Stop HTML5 Audio
+    if (currentAudioRef.current) {
+      currentAudioRef.current.pause();
+      currentAudioRef.current.currentTime = 0;
+      currentAudioRef.current = null;
+    }
+
+    // Revoke previous blob
+    if (activeBlobUrlRef.current) {
+      URL.revokeObjectURL(activeBlobUrlRef.current);
+      activeBlobUrlRef.current = null;
+    }
+
+    // Clean preload
+    if (preloadedAudioRef.current) {
+      URL.revokeObjectURL(preloadedAudioRef.current.url);
+      preloadedAudioRef.current = null;
+    }
+
+    // Stop browser Web Speech API
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+
     if (keepAliveIntervalRef.current) {
       clearInterval(keepAliveIntervalRef.current);
       keepAliveIntervalRef.current = null;
     }
-  };
+  }, []);
 
-  // Play next chunk
-  const playNextChunk = useCallback(() => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+  // Pre-fetch next chunk audio in the background for zero-gap playback
+  const prefetchChunk = useCallback(
+    async (chunkText: string, chunkIdx: number, voiceId: string, rate: number) => {
+      try {
+        const res = await fetch("/api/tts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text: chunkText,
+            voice: voiceId,
+            rate,
+          }),
+        });
+        if (!res.ok) return;
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        preloadedAudioRef.current = { index: chunkIdx, audio, url };
+      } catch (err) {
+        // Preload failure is silent; next chunk will fetch on demand
+      }
+    },
+    []
+  );
+
+  // Play next chunk using either Studio Neural API or Browser Fallback
+  const playNextChunk = useCallback(async () => {
     if (!isPlayingRef.current || isPausedRef.current) return;
 
     if (chunkIndexRef.current >= chunksRef.current.length) {
-      // Completed reading all chunks
-      setIsPlaying(false);
-      setIsPaused(false);
-      isPlayingRef.current = false;
-      isPausedRef.current = false;
-      setCurrentChunkIndex(0);
-      setTotalChunks(0);
-      setCurrentSpokenText("");
-      stopKeepAlive();
+      // Finished all chunks!
+      stop();
       return;
     }
 
-    const chunk = chunksRef.current[chunkIndexRef.current];
-    setCurrentChunkIndex(chunkIndexRef.current + 1);
-    setCurrentSpokenText(chunk);
+    const currentIdx = chunkIndexRef.current;
+    const chunkText = chunksRef.current[currentIdx];
+    setCurrentChunkIndex(currentIdx + 1);
+    setCurrentSpokenText(chunkText);
 
-    const utterance = new SpeechSynthesisUtterance(chunk);
+    const activeVoiceOption =
+      voices.find((v) => v.id === selectedVoiceId) || STUDIO_NEURAL_VOICES[0];
 
-    // Find voice
-    const activeVoiceOption = voices.find((v) => v.id === selectedVoiceId) || voices[0];
-    if (activeVoiceOption) {
-      utterance.voice = activeVoiceOption.voice;
-      utterance.lang = activeVoiceOption.voice.lang;
+    // PATH A: Studio Neural Cloud Voice via /api/tts
+    if (activeVoiceOption.isStudioNeural) {
+      setIsLoadingAudio(true);
+
+      try {
+        let audio: HTMLAudioElement;
+
+        // Check if preloaded
+        if (
+          preloadedAudioRef.current &&
+          preloadedAudioRef.current.index === currentIdx
+        ) {
+          audio = preloadedAudioRef.current.audio;
+          activeBlobUrlRef.current = preloadedAudioRef.current.url;
+          preloadedAudioRef.current = null;
+        } else {
+          // Fetch on demand
+          const res = await fetch("/api/tts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text: chunkText,
+              voice: activeVoiceOption.id,
+              rate: playbackRate,
+            }),
+          });
+
+          if (!res.ok) throw new Error("TTS endpoint error");
+          const blob = await res.blob();
+          const url = URL.createObjectURL(blob);
+          audio = new Audio(url);
+          if (activeBlobUrlRef.current) {
+            URL.revokeObjectURL(activeBlobUrlRef.current);
+          }
+          activeBlobUrlRef.current = url;
+        }
+
+        setIsLoadingAudio(false);
+        currentAudioRef.current = audio;
+        audio.playbackRate = playbackRate;
+        audio.volume = Math.min(1.0, volume);
+
+        // Pre-fetch following chunk in background
+        const nextIdx = currentIdx + 1;
+        if (nextIdx < chunksRef.current.length) {
+          prefetchChunk(
+            chunksRef.current[nextIdx],
+            nextIdx,
+            activeVoiceOption.id,
+            playbackRate
+          );
+        }
+
+        audio.onended = () => {
+          if (isPlayingRef.current && !isPausedRef.current) {
+            chunkIndexRef.current += 1;
+            playNextChunk();
+          }
+        };
+
+        audio.onerror = (e) => {
+          console.warn("Studio audio error, advancing to next chunk:", e);
+          if (isPlayingRef.current && !isPausedRef.current) {
+            chunkIndexRef.current += 1;
+            playNextChunk();
+          }
+        };
+
+        await audio.play();
+        return;
+      } catch (err) {
+        console.warn("Studio Neural API unreachable, falling back to local speech:", err);
+        setIsLoadingAudio(false);
+        // Fall back to browser speech synthesis for this chunk
+      }
     }
 
-    utterance.rate = playbackRate;
-    utterance.volume = volume;
-    utterance.pitch = 1.0;
-
-    utterance.onend = () => {
-      if (isPlayingRef.current && !isPausedRef.current) {
-        chunkIndexRef.current += 1;
-        playNextChunk();
+    // PATH B: Local Browser Web Speech API
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      const utterance = new SpeechSynthesisUtterance(chunkText);
+      if (activeVoiceOption.browserVoice) {
+        utterance.voice = activeVoiceOption.browserVoice;
       }
-    };
+      utterance.rate = playbackRate;
+      utterance.volume = volume;
+      utterance.pitch = 1.0;
 
-    utterance.onerror = (e) => {
-      if (e.error !== "canceled" && e.error !== "interrupted") {
-        console.warn("Speech error:", e);
-      }
-      if (isPlayingRef.current && !isPausedRef.current) {
-        chunkIndexRef.current += 1;
-        playNextChunk();
-      }
-    };
+      utterance.onend = () => {
+        if (isPlayingRef.current && !isPausedRef.current) {
+          chunkIndexRef.current += 1;
+          playNextChunk();
+        }
+      };
 
-    window.speechSynthesis.speak(utterance);
-  }, [selectedVoiceId, voices, playbackRate, volume]);
+      utterance.onerror = (e) => {
+        if (e.error !== "canceled" && e.error !== "interrupted") {
+          console.warn("Browser Speech error:", e);
+        }
+        if (isPlayingRef.current && !isPausedRef.current) {
+          chunkIndexRef.current += 1;
+          playNextChunk();
+        }
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+  }, [selectedVoiceId, voices, playbackRate, volume, stop, prefetchChunk]);
 
   // Main Speak function
   const speak = useCallback(
-    (text: string, title?: string) => {
-      if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    (rawText: string, title?: string) => {
+      stop();
 
-      window.speechSynthesis.cancel();
-      stopKeepAlive();
-
-      const cleaned = cleanTextForSpeech(text);
+      const cleaned = cleanTextForSpeech(rawText);
       if (!cleaned) return;
 
-      const chunks = chunkTextForSpeech(cleaned);
+      const chunks = chunkTextForSpeech(cleaned, 240);
       if (chunks.length === 0) return;
 
       chunksRef.current = chunks;
@@ -212,86 +365,97 @@ export function useSpeechNarration() {
 
       setIsPlaying(true);
       setIsPaused(false);
-      setCurrentTitle(title || "Concept Narration");
+      setCurrentTitle(title || "Teacher Lecture");
       setTotalChunks(chunks.length);
       setCurrentChunkIndex(0);
 
-      startKeepAlive();
+      // Trigger Web Audio resume on user gesture
+      getAudioContext();
+
       playNextChunk();
     },
-    [playNextChunk]
+    [stop, getAudioContext, playNextChunk]
   );
 
   // Pause
   const pause = useCallback(() => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-    window.speechSynthesis.pause();
-    setIsPaused(true);
     isPausedRef.current = true;
+    setIsPaused(true);
+
+    if (currentAudioRef.current) {
+      currentAudioRef.current.pause();
+    }
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.pause();
+    }
   }, []);
 
   // Resume
   const resume = useCallback(() => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-    setIsPaused(false);
     isPausedRef.current = false;
-    window.speechSynthesis.resume();
-  }, []);
-
-  // Stop
-  const stop = useCallback(() => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    stopKeepAlive();
-    setIsPlaying(false);
     setIsPaused(false);
-    isPlayingRef.current = false;
-    isPausedRef.current = false;
-    chunksRef.current = [];
-    chunkIndexRef.current = 0;
-    setCurrentChunkIndex(0);
-    setTotalChunks(0);
-    setCurrentSpokenText("");
+
+    if (currentAudioRef.current) {
+      currentAudioRef.current.play();
+    } else if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.resume();
+    } else {
+      playNextChunk();
+    }
+  }, [playNextChunk]);
+
+  // Rate change
+  const changeRate = useCallback((newRate: number) => {
+    setPlaybackRate(newRate);
+    if (currentAudioRef.current) {
+      currentAudioRef.current.playbackRate = newRate;
+    }
   }, []);
 
-  // Change rate on the fly
-  const changeRate = useCallback((rate: number) => {
-    setPlaybackRate(rate);
-  }, []);
-
-  // Change voice on the fly
+  // Voice change
   const changeVoice = useCallback(
     (voiceId: string) => {
       setSelectedVoiceId(voiceId);
-      // If currently playing, restart current chunk with new voice
+      // If currently playing, restart current chunk with new voice immediately
       if (isPlayingRef.current && !isPausedRef.current) {
-        if (typeof window !== "undefined" && window.speechSynthesis) {
-          window.speechSynthesis.cancel();
-          playNextChunk();
+        if (currentAudioRef.current) {
+          currentAudioRef.current.pause();
         }
+        if (typeof window !== "undefined" && "speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+        preloadedAudioRef.current = null;
+        playNextChunk();
       }
     },
     [playNextChunk]
   );
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-      stopKeepAlive();
-    };
+  // Volume change
+  const changeVolume = useCallback((newVol: number) => {
+    setVolume(newVol);
+    if (currentAudioRef.current) {
+      currentAudioRef.current.volume = Math.min(1.0, Math.max(0, newVol));
+    }
   }, []);
 
-  const progressPercent = totalChunks > 0 ? Math.round((currentChunkIndex / totalChunks) * 100) : 0;
+  // Clean on unmount
+  useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, [stop]);
+
+  const progressPercent =
+    totalChunks > 0 ? Math.round((currentChunkIndex / totalChunks) * 100) : 0;
 
   return {
-    isSupported,
+    isSupported: true,
     voices,
     selectedVoiceId,
     isPlaying,
     isPaused,
+    isLoadingAudio,
     playbackRate,
     volume,
     currentTitle,
@@ -299,12 +463,14 @@ export function useSpeechNarration() {
     currentChunkIndex,
     totalChunks,
     currentSpokenText,
+    lectureMode,
+    setLectureMode,
     speak,
     pause,
     resume,
     stop,
     changeRate,
     changeVoice,
-    setVolume,
+    setVolume: changeVolume,
   };
 }

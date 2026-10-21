@@ -55,6 +55,7 @@ import {
 } from "lucide-react";
 import ConceptAudioPlayer from "@/components/ConceptAudioPlayer";
 import { useSpeechNarration } from "@/hooks/useSpeechNarration";
+import { buildTeacherLectureScript } from "@/utils/teacherLectureScript";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import TrigValuesMasterTable from "@/components/TrigValuesMasterTable";
 import { MathDiagramFigure } from "@/components/MathDiagramFigure";
@@ -324,40 +325,36 @@ export default function ConceptsHubView({
 
   const getMathChapterFullText = useCallback(() => {
     if (!activeMathChapter) return "";
-    let full = `Mathematics Chapter ${activeMathChapter.chapterNo}: ${activeMathChapter.title}. ${activeMathChapter.oneLiner}. `;
-    if (activeMathChapter.analogyTitle && activeMathChapter.analogyContent) {
-      full += `Concept story: ${activeMathChapter.analogyTitle}. ${activeMathChapter.analogyContent}. `;
-    }
-    activeMathChapter.sections.forEach((sec, idx) => {
-      full += `Section ${idx + 1}: ${sec.heading}. ${sec.subheading ? sec.subheading + ". " : ""}${sec.explanation}. `;
-      if (sec.formulasOrKeyPoints && sec.formulasOrKeyPoints.length > 0) {
-        sec.formulasOrKeyPoints.forEach((f) => {
-          full += `${f.title}: ${f.content}. `;
-        });
-      }
-      if (sec.examinerTraps && sec.examinerTraps.length > 0) {
-        sec.examinerTraps.forEach((trap) => {
-          full += `CBSE Examiner Caution: ${trap.trap}. Remember: ${trap.correction}. `;
-        });
-      }
-    });
-    return full;
-  }, [activeMathChapter]);
+    return buildTeacherLectureScript(
+      {
+        chapterNo: activeMathChapter.chapterNo,
+        title: activeMathChapter.title,
+        subject: "Mathematics",
+        oneLiner: activeMathChapter.oneLiner,
+        analogyTitle: activeMathChapter.analogyTitle,
+        analogyContent: activeMathChapter.analogyContent,
+        sections: activeMathChapter.sections,
+      },
+      { mode: mathNarration.lectureMode }
+    );
+  }, [activeMathChapter, mathNarration.lectureMode]);
 
   const playMathSectionNarration = useCallback(
     (sec: typeof activeMathChapter.sections[0]) => {
-      let secText = `Section: ${sec.heading}. ${sec.subheading ? sec.subheading + ". " : ""}${sec.explanation}. `;
-      if (sec.formulasOrKeyPoints && sec.formulasOrKeyPoints.length > 0) {
-        sec.formulasOrKeyPoints.forEach((f) => {
-          secText += `${f.title}: ${f.content}. `;
-        });
-      }
-      if (sec.examinerTraps && sec.examinerTraps.length > 0) {
-        sec.examinerTraps.forEach((trap) => {
-          secText += `Important caution: ${trap.trap}. Remember: ${trap.correction}. `;
-        });
-      }
-      mathNarration.speak(secText, sec.heading);
+      if (!activeMathChapter) return;
+      const script = buildTeacherLectureScript(
+        {
+          chapterNo: activeMathChapter.chapterNo,
+          title: activeMathChapter.title,
+          subject: "Mathematics",
+          oneLiner: activeMathChapter.oneLiner,
+          analogyTitle: activeMathChapter.analogyTitle,
+          analogyContent: activeMathChapter.analogyContent,
+          sections: activeMathChapter.sections,
+        },
+        { mode: mathNarration.lectureMode, targetSectionId: sec.id }
+      );
+      mathNarration.speak(script, sec.heading);
     },
     [mathNarration, activeMathChapter]
   );
@@ -1450,6 +1447,7 @@ export default function ConceptsHubView({
               isDark={isDark}
               isPlaying={mathNarration.isPlaying}
               isPaused={mathNarration.isPaused}
+              isLoadingAudio={mathNarration.isLoadingAudio}
               currentTitle={mathNarration.currentTitle}
               progressPercent={mathNarration.progressPercent}
               currentChunkIndex={mathNarration.currentChunkIndex}
@@ -1459,6 +1457,8 @@ export default function ConceptsHubView({
               volume={mathNarration.volume}
               voices={mathNarration.voices}
               selectedVoiceId={mathNarration.selectedVoiceId}
+              lectureMode={mathNarration.lectureMode}
+              onToggleLectureMode={mathNarration.setLectureMode}
               onPlay={() => mathNarration.speak(getMathChapterFullText(), activeMathChapter.title)}
               onPause={mathNarration.pause}
               onResume={mathNarration.resume}
@@ -3660,6 +3660,7 @@ export default function ConceptsHubView({
               isDark={isDark}
               isPlaying={mathNarration.isPlaying}
               isPaused={mathNarration.isPaused}
+              isLoadingAudio={mathNarration.isLoadingAudio}
               currentTitle={mathNarration.currentTitle}
               progressPercent={mathNarration.progressPercent}
               currentChunkIndex={mathNarration.currentChunkIndex}
@@ -3669,6 +3670,8 @@ export default function ConceptsHubView({
               volume={mathNarration.volume}
               voices={mathNarration.voices}
               selectedVoiceId={mathNarration.selectedVoiceId}
+              lectureMode={mathNarration.lectureMode}
+              onToggleLectureMode={mathNarration.setLectureMode}
               onPlay={() => mathNarration.speak(getMathChapterFullText(), activeMathChapter.title)}
               onPause={mathNarration.pause}
               onResume={mathNarration.resume}
