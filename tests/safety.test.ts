@@ -7,6 +7,7 @@ import { COMPETITIVE_HOTS_BANK } from "../src/data/competitiveHotsData.ts";
 import { CHEMISTRY_REACTIONS_MASTER } from "../src/data/chemistryReactionsData.ts";
 import { SCIENCE_DIAGRAMS_MASTER } from "../src/data/scienceDiagramsData.ts";
 import { getDaysRemaining, ACADEMIC_CALENDAR } from "../config/academic-calendar.ts";
+import { cleanTextForSpeech, chunkTextForSpeech } from "../src/utils/speechTextFormatter.ts";
 
 describe("CBSE Class 10 Safety & Math Fixtures (C9)", () => {
   test("Fixture 1: Parallel Circuit Equivalent Resistance (18Ω || 18Ω = 9Ω)", () => {
@@ -84,5 +85,25 @@ describe("CBSE Class 10 Safety & Math Fixtures (C9)", () => {
   test("Smoke Test: Chemistry Reactions & Science Diagrams non-empty", () => {
     assert.ok(CHEMISTRY_REACTIONS_MASTER.length >= 50, "Chemistry reactions must have at least 50 equations");
     assert.ok(SCIENCE_DIAGRAMS_MASTER.length >= 10, "Science diagrams bank must have at least 10 master diagrams");
+  });
+
+  test("Audio Speech Preprocessor: Converts LaTeX to natural spoken English", () => {
+    const raw = "Mirror formula: $\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f}$. Angle $\\angle i = \\angle r$. Power: $P = 1/f$.";
+    const cleaned = cleanTextForSpeech(raw);
+
+    assert.ok(!cleaned.includes("\\frac"), "Raw \\frac must be converted to spoken phrase");
+    assert.ok(cleaned.includes("1 upon v"), "Fractions must convert to natural 'upon' phrase");
+    assert.ok(cleaned.includes("angle i"), "Angles must convert to spoken 'angle i'");
+    assert.ok(!cleaned.includes("$"), "Dollar delimiters must be removed");
+  });
+
+  test("Audio Speech Chunker: Splits long text into safe <200 char chunks without Chrome cutoff", () => {
+    const longText = "Light travels along straight lines in a uniform medium. When light hits an interface between two transparent media, it bends due to difference in optical speed. Convex lenses converge light rays whereas concave lenses diverge light rays. The power of a lens is defined as reciprocal of its focal length in metres.";
+    const chunks = chunkTextForSpeech(longText, 180);
+
+    assert.ok(chunks.length >= 2, "Text should be split into multiple chunks");
+    for (const chunk of chunks) {
+      assert.ok(chunk.length <= 200, `Chunk length (${chunk.length}) should not exceed safe utterance limit`);
+    }
   });
 });

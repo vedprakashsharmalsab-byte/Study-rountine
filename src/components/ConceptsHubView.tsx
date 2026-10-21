@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
   BookOpen,
@@ -49,8 +49,12 @@ import {
   RotateCcw,
   BrainCircuit,
   ShieldCheck,
-  CheckCheck
+  CheckCheck,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
+import ConceptAudioPlayer from "@/components/ConceptAudioPlayer";
+import { useSpeechNarration } from "@/hooks/useSpeechNarration";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import TrigValuesMasterTable from "@/components/TrigValuesMasterTable";
 import { MathDiagramFigure } from "@/components/MathDiagramFigure";
@@ -310,6 +314,53 @@ export default function ConceptsHubView({
       MATH_CHAPTER_CONCEPTS[0] // Default Ch 1 Real Numbers (NEVER hardcoded Triangles)
     );
   }, [activeMathChapterNo]);
+
+  const mathNarration = useSpeechNarration();
+
+  // Stop narration if subject or chapter switches
+  useEffect(() => {
+    mathNarration.stop();
+  }, [activeMathChapterNo, activeSubject]);
+
+  const getMathChapterFullText = useCallback(() => {
+    if (!activeMathChapter) return "";
+    let full = `Mathematics Chapter ${activeMathChapter.chapterNo}: ${activeMathChapter.title}. ${activeMathChapter.oneLiner}. `;
+    if (activeMathChapter.analogyTitle && activeMathChapter.analogyContent) {
+      full += `Concept story: ${activeMathChapter.analogyTitle}. ${activeMathChapter.analogyContent}. `;
+    }
+    activeMathChapter.sections.forEach((sec, idx) => {
+      full += `Section ${idx + 1}: ${sec.heading}. ${sec.subheading ? sec.subheading + ". " : ""}${sec.explanation}. `;
+      if (sec.formulasOrKeyPoints && sec.formulasOrKeyPoints.length > 0) {
+        sec.formulasOrKeyPoints.forEach((f) => {
+          full += `${f.title}: ${f.content}. `;
+        });
+      }
+      if (sec.examinerTraps && sec.examinerTraps.length > 0) {
+        sec.examinerTraps.forEach((trap) => {
+          full += `CBSE Examiner Caution: ${trap.trap}. Remember: ${trap.correction}. `;
+        });
+      }
+    });
+    return full;
+  }, [activeMathChapter]);
+
+  const playMathSectionNarration = useCallback(
+    (sec: typeof activeMathChapter.sections[0]) => {
+      let secText = `Section: ${sec.heading}. ${sec.subheading ? sec.subheading + ". " : ""}${sec.explanation}. `;
+      if (sec.formulasOrKeyPoints && sec.formulasOrKeyPoints.length > 0) {
+        sec.formulasOrKeyPoints.forEach((f) => {
+          secText += `${f.title}: ${f.content}. `;
+        });
+      }
+      if (sec.examinerTraps && sec.examinerTraps.length > 0) {
+        sec.examinerTraps.forEach((trap) => {
+          secText += `Important caution: ${trap.trap}. Remember: ${trap.correction}. `;
+        });
+      }
+      mathNarration.speak(secText, sec.heading);
+    },
+    [mathNarration, activeMathChapter]
+  );
 
   // Active Math Blueprint (Defaults to Ch 1)
   const activeMathBlueprint = useMemo(() => {
@@ -1393,6 +1444,31 @@ export default function ConceptsHubView({
             </div>
           </div>
 
+          {/* Master AI Audio Narration Player for Mathematics */}
+          {mathNarration.isSupported && (
+            <ConceptAudioPlayer
+              isDark={isDark}
+              isPlaying={mathNarration.isPlaying}
+              isPaused={mathNarration.isPaused}
+              currentTitle={mathNarration.currentTitle}
+              progressPercent={mathNarration.progressPercent}
+              currentChunkIndex={mathNarration.currentChunkIndex}
+              totalChunks={mathNarration.totalChunks}
+              currentSpokenText={mathNarration.currentSpokenText}
+              playbackRate={mathNarration.playbackRate}
+              volume={mathNarration.volume}
+              voices={mathNarration.voices}
+              selectedVoiceId={mathNarration.selectedVoiceId}
+              onPlay={() => mathNarration.speak(getMathChapterFullText(), activeMathChapter.title)}
+              onPause={mathNarration.pause}
+              onResume={mathNarration.resume}
+              onStop={mathNarration.stop}
+              onChangeRate={mathNarration.changeRate}
+              onChangeVoice={mathNarration.changeVoice}
+              onVolumeChange={mathNarration.setVolume}
+            />
+          )}
+
           {/* Class 10 Mathematics 100/100 Integrated Learning Journey Navigation */}
           {activeMathMasteryData && (
             <div className="space-y-3.5">
@@ -1680,12 +1756,29 @@ export default function ConceptsHubView({
                     <Lightbulb className="w-7 h-7" />
                   </div>
                   <div className="space-y-3 flex-1">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-between gap-2">
                       <span className={`text-xs font-mono uppercase font-black tracking-wider px-3 py-1 rounded-md border ${
                         isDark ? "text-amber-400 bg-amber-500/20 border-amber-500/30" : "text-amber-950 bg-amber-100 border-amber-300 font-extrabold"
                       }`}>
                         Stage 1: 📖 Concept Story &amp; Everyday Intuition
                       </span>
+                      <button
+                        onClick={() =>
+                          mathNarration.speak(
+                            `Mathematics Intuition Story: ${activeMathChapter.analogyTitle}. ${activeMathChapter.analogyContent}`,
+                            activeMathChapter.analogyTitle
+                          )
+                        }
+                        className={`px-3 py-1 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 shrink-0 ${
+                          isDark
+                            ? "bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border-amber-500/40"
+                            : "bg-white hover:bg-amber-50 text-amber-950 border-amber-300 shadow-2xs"
+                        }`}
+                        title="Listen to Concept Story"
+                      >
+                        <Volume2 className="w-3.5 h-3.5 text-amber-400" />
+                        <span>Listen Story</span>
+                      </button>
                     </div>
                     <h3 className={`text-2xl sm:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
                       {activeMathChapter.analogyTitle}
@@ -1734,17 +1827,39 @@ export default function ConceptsHubView({
                   >
                     {/* Section Header */}
                     <div className={`border-b pb-6 space-y-2.5 ${isDark ? "border-white/10" : "border-slate-200"}`}>
-                      <div className="flex items-center gap-2">
-                        <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${
-                          isDark ? "bg-blue-500/20 text-blue-300 border-blue-500/40" : "bg-blue-100 text-blue-900 border-blue-300 font-bold"
-                        }`}>
-                          SECTION {sIdx + 1}
-                        </span>
-                        <span className={`text-xs sm:text-sm font-mono font-bold uppercase tracking-wider ${
-                          isDark ? "text-slate-300" : "text-slate-700 font-extrabold"
-                        }`}>
-                          {section.label}
-                        </span>
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${
+                            isDark ? "bg-blue-500/20 text-blue-300 border-blue-500/40" : "bg-blue-100 text-blue-900 border-blue-300 font-bold"
+                          }`}>
+                            SECTION {sIdx + 1}
+                          </span>
+                          <span className={`text-xs sm:text-sm font-mono font-bold uppercase tracking-wider ${
+                            isDark ? "text-slate-300" : "text-slate-700 font-extrabold"
+                          }`}>
+                            {section.label}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => {
+                            if (mathNarration.isPlaying && mathNarration.currentTitle === section.heading) {
+                              mathNarration.isPaused ? mathNarration.resume() : mathNarration.pause();
+                            } else {
+                              playMathSectionNarration(section);
+                            }
+                          }}
+                          className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 ${
+                            mathNarration.isPlaying && mathNarration.currentTitle === section.heading
+                              ? "bg-blue-500 text-white border-blue-400 font-black shadow-md shadow-blue-500/30"
+                              : isDark
+                              ? "bg-white/5 hover:bg-blue-500/20 text-blue-300 border-white/10 hover:border-blue-400/40"
+                              : "bg-slate-50 hover:bg-blue-50 text-blue-950 border-slate-200 hover:border-blue-300 shadow-2xs"
+                          }`}
+                          title={`Listen to ${section.heading}`}
+                        >
+                          <Volume2 className={`w-3.5 h-3.5 ${mathNarration.isPlaying && mathNarration.currentTitle === section.heading ? "animate-pulse text-white" : "text-blue-400"}`} />
+                          <span>{mathNarration.isPlaying && mathNarration.currentTitle === section.heading ? (mathNarration.isPaused ? "Paused" : "Playing") : "Listen"}</span>
+                        </button>
                       </div>
                       <h3 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
                         <PremiumMathRenderer content={section.heading} isDark={isDark} inline />
@@ -3538,6 +3653,32 @@ export default function ConceptsHubView({
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
+
+          {/* Floating Mini-Player for continuous Math audio while reading & scrolling */}
+          {mathNarration.isSupported && (
+            <ConceptAudioPlayer
+              isDark={isDark}
+              isPlaying={mathNarration.isPlaying}
+              isPaused={mathNarration.isPaused}
+              currentTitle={mathNarration.currentTitle}
+              progressPercent={mathNarration.progressPercent}
+              currentChunkIndex={mathNarration.currentChunkIndex}
+              totalChunks={mathNarration.totalChunks}
+              currentSpokenText={mathNarration.currentSpokenText}
+              playbackRate={mathNarration.playbackRate}
+              volume={mathNarration.volume}
+              voices={mathNarration.voices}
+              selectedVoiceId={mathNarration.selectedVoiceId}
+              onPlay={() => mathNarration.speak(getMathChapterFullText(), activeMathChapter.title)}
+              onPause={mathNarration.pause}
+              onResume={mathNarration.resume}
+              onStop={mathNarration.stop}
+              onChangeRate={mathNarration.changeRate}
+              onChangeVoice={mathNarration.changeVoice}
+              onVolumeChange={mathNarration.setVolume}
+              isFloating={true}
+            />
+          )}
         </div>
       )}
 

@@ -24,7 +24,11 @@ import {
   Compass,
   Flame,
   Filter,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
+import ConceptAudioPlayer from "@/components/ConceptAudioPlayer";
+import { useSpeechNarration } from "@/hooks/useSpeechNarration";
 import PremiumMathRenderer from "@/components/PremiumMathRenderer";
 import {
   SCIENCE_DIAGRAMS_MASTER,
@@ -329,6 +333,53 @@ export default function ScienceConceptsHubView({
   const currentChapter = useMemo<ScienceChapterConcept>(
     () => getScienceChapter(currentChNo) || SCIENCE_CHAPTER_CONCEPTS[0],
     [currentChNo]
+  );
+
+  const narration = useSpeechNarration();
+
+  // Stop narration if chapter switches
+  useEffect(() => {
+    narration.stop();
+  }, [currentChNo]);
+
+  const getChapterFullText = useCallback(() => {
+    if (!currentChapter) return "";
+    let full = `Chapter ${currentChNo}: ${currentChapter.title}. ${currentChapter.oneLiner}. `;
+    if (currentChapter.analogyTitle && currentChapter.analogyContent) {
+      full += `Intuition story: ${currentChapter.analogyTitle}. ${currentChapter.analogyContent}. `;
+    }
+    currentChapter.sections.forEach((sec, idx) => {
+      full += `Topic ${idx + 1}: ${sec.heading}. ${sec.subheading ? sec.subheading + ". " : ""}${sec.explanation}. `;
+      if (sec.formulasOrKeyPoints && sec.formulasOrKeyPoints.length > 0) {
+        sec.formulasOrKeyPoints.forEach((f) => {
+          full += `${f.title}: ${f.content}. `;
+        });
+      }
+      if (sec.examinerTraps && sec.examinerTraps.length > 0) {
+        sec.examinerTraps.forEach((trap) => {
+          full += `Important board exam caution: ${trap.trap}. Remember: ${trap.correction}. `;
+        });
+      }
+    });
+    return full;
+  }, [currentChapter, currentChNo]);
+
+  const playSectionNarration = useCallback(
+    (sec: typeof currentChapter.sections[0]) => {
+      let secText = `Topic: ${sec.heading}. ${sec.subheading ? sec.subheading + ". " : ""}${sec.explanation}. `;
+      if (sec.formulasOrKeyPoints && sec.formulasOrKeyPoints.length > 0) {
+        sec.formulasOrKeyPoints.forEach((f) => {
+          secText += `${f.title}: ${f.content}. `;
+        });
+      }
+      if (sec.examinerTraps && sec.examinerTraps.length > 0) {
+        sec.examinerTraps.forEach((trap) => {
+          secText += `Important caution: ${trap.trap}. Pro tip: ${trap.correction}. `;
+        });
+      }
+      narration.speak(secText, sec.heading);
+    },
+    [narration, currentChapter]
   );
 
   const currentMeta = useMemo(() => CHAPTER_LIST.find((c) => c.no === currentChNo) || CHAPTER_LIST[0], [currentChNo]);
@@ -817,6 +868,31 @@ export default function ScienceConceptsHubView({
         </div>
       </div>
 
+      {/* ============= MASTER CONCEPT AUDIO PLAYER ============= */}
+      {narration.isSupported && (
+        <ConceptAudioPlayer
+          isDark={isDark}
+          isPlaying={narration.isPlaying}
+          isPaused={narration.isPaused}
+          currentTitle={narration.currentTitle}
+          progressPercent={narration.progressPercent}
+          currentChunkIndex={narration.currentChunkIndex}
+          totalChunks={narration.totalChunks}
+          currentSpokenText={narration.currentSpokenText}
+          playbackRate={narration.playbackRate}
+          volume={narration.volume}
+          voices={narration.voices}
+          selectedVoiceId={narration.selectedVoiceId}
+          onPlay={() => narration.speak(getChapterFullText(), currentChapter.title)}
+          onPause={narration.pause}
+          onResume={narration.resume}
+          onStop={narration.stop}
+          onChangeRate={narration.changeRate}
+          onChangeVoice={narration.changeVoice}
+          onVolumeChange={narration.setVolume}
+        />
+      )}
+
       {/* ============= ANALOGY CARD ============= */}
       <div className={`p-6 sm:p-7 rounded-3xl border ${
         isDark
@@ -828,10 +904,27 @@ export default function ScienceConceptsHubView({
             <Lightbulb className={`w-5 h-5 ${isDark ? "text-violet-400" : "text-violet-700"}`} />
           </div>
           <div className="space-y-2 flex-1">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between gap-2">
               <span className={`text-xs font-mono font-bold uppercase tracking-wider ${isDark ? "text-violet-400" : "text-violet-900 font-extrabold"}`}>
                 Toddler Analogy — Understand Before You Memorise
               </span>
+              <button
+                onClick={() =>
+                  narration.speak(
+                    `Intuition Story: ${currentChapter.analogyTitle}. ${currentChapter.analogyContent}`,
+                    currentChapter.analogyTitle
+                  )
+                }
+                className={`px-3 py-1 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 shrink-0 ${
+                  isDark
+                    ? "bg-violet-500/20 hover:bg-violet-500/30 text-violet-300 border-violet-500/40"
+                    : "bg-white hover:bg-violet-50 text-violet-950 border-violet-300 shadow-2xs"
+                }`}
+                title="Listen to Toddler Analogy story"
+              >
+                <Volume2 className="w-3.5 h-3.5 text-violet-400" />
+                <span>Listen Story</span>
+              </button>
             </div>
             <h3 className={`text-lg sm:text-xl font-black ${isDark ? "text-white" : "text-slate-900"}`}>
               {currentChapter.analogyTitle}
@@ -943,7 +1036,28 @@ export default function ScienceConceptsHubView({
                       </p>
                     )}
                   </div>
-                  <div className="flex items-center gap-3 shrink-0 self-end sm:self-auto">
+                  <div className="flex items-center gap-2 sm:gap-3 shrink-0 self-end sm:self-auto">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (narration.isPlaying && narration.currentTitle === section.heading) {
+                          narration.isPaused ? narration.resume() : narration.pause();
+                        } else {
+                          playSectionNarration(section);
+                        }
+                      }}
+                      className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 ${
+                        narration.isPlaying && narration.currentTitle === section.heading
+                          ? "bg-cyan-500 text-slate-950 border-cyan-400 font-black shadow-md shadow-cyan-500/30"
+                          : isDark
+                          ? "bg-white/5 hover:bg-cyan-500/20 text-cyan-300 border-white/10 hover:border-cyan-400/40"
+                          : "bg-slate-50 hover:bg-cyan-50 text-cyan-950 border-slate-200 hover:border-cyan-300 shadow-2xs"
+                      }`}
+                      title={`Listen to ${section.heading}`}
+                    >
+                      <Volume2 className={`w-3.5 h-3.5 ${narration.isPlaying && narration.currentTitle === section.heading ? "animate-pulse text-slate-950" : "text-cyan-400"}`} />
+                      <span>{narration.isPlaying && narration.currentTitle === section.heading ? (narration.isPaused ? "Paused" : "Playing") : "Listen"}</span>
+                    </button>
                     <span className={`text-xs font-mono font-bold px-3 py-1.5 rounded-xl border ${colors.tag}`}>
                       {section.label}
                     </span>
@@ -1822,6 +1936,32 @@ export default function ScienceConceptsHubView({
             </div>
           </div>
         </div>
+      )}
+
+      {/* Floating Mini-Player for continuous audio while reading & scrolling */}
+      {narration.isSupported && (
+        <ConceptAudioPlayer
+          isDark={isDark}
+          isPlaying={narration.isPlaying}
+          isPaused={narration.isPaused}
+          currentTitle={narration.currentTitle}
+          progressPercent={narration.progressPercent}
+          currentChunkIndex={narration.currentChunkIndex}
+          totalChunks={narration.totalChunks}
+          currentSpokenText={narration.currentSpokenText}
+          playbackRate={narration.playbackRate}
+          volume={narration.volume}
+          voices={narration.voices}
+          selectedVoiceId={narration.selectedVoiceId}
+          onPlay={() => narration.speak(getChapterFullText(), currentChapter.title)}
+          onPause={narration.pause}
+          onResume={narration.resume}
+          onStop={narration.stop}
+          onChangeRate={narration.changeRate}
+          onChangeVoice={narration.changeVoice}
+          onVolumeChange={narration.setVolume}
+          isFloating={true}
+        />
       )}
 
     </div>
