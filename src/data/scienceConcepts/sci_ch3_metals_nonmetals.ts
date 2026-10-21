@@ -5,398 +5,449 @@ export const SCI_CH3_CONCEPT: ScienceChapterConcept = {
   title: "Metals and Non-Metals",
   discipline: "Chemistry",
   weightage: "7–9 Marks (Board High Priority)",
-  oneLiner: "Metals lose electrons to form positive ions and conduct electricity; non-metals gain electrons; the reactivity series determines which metal displaces which.",
-  analogyTitle: "The 'Power Hierarchy' of the Metal Kingdom",
-  analogyContent: `Imagine a school **popularity contest** among metals. At the top of the popularity chart sits **Potassium (K)** — so popular that it violently attacks water just to show off! Then comes **Sodium (Na)**, **Calcium (Ca)**, and so on down the list.
+  oneLiner: "Metals electron daan karke cations banate hain; non-metals electron grahan karke anions banate hain; reactivity series tay karti hai ki kaunsa metal kisse displace karega.",
+  analogyTitle: "The Social Hierarchy & The Electric Exchange of the Elements",
+  analogyContent: `Imagine karo elements ka ek bada school campus! 
+Campus ke ek taraf hain **Metals (The Donors / Daani)** — inke outer shell mein 1, 2, ya 3 extra electrons hote hain jo ye khushi-khushi daan dekar stable noble gas ban-na chahte hain ($M \\to M^{n+} + ne^-$). 
 
-The **Activity Series** is like a school pecking order: a more popular student (more reactive metal) can always **push away** a less popular one from a group (displace it from a salt solution). Iron can kick copper out of copper sulphate solution. Copper cannot kick iron out of iron sulphate. It's all about who's MORE reactive!
+Doosri taraf hain **Non-Metals (The Acceptors / Grahak)** — inke paas 4, 5, 6, ya 7 valence electrons hote hain aur inki sabse badi zaroorat hoti hai electrons cheenna ya accept karna taaki inka octet poora ho sake ($X + me^- \\to X^{m-}$).
 
-Non-metals, on the other hand, are like the **introverts** 🎭 — they prefer to GAIN electrons rather than give them away.`,
+Jab metal aur non-metal aamne-saamne aate hain, toh complete **Electron Transfer** hota hai — jisse banta hai rock-solid **Ionic Bond** (jaise $Na^+$ aur $Cl^-$ milkar banate hain ordinary table salt $NaCl$)!
+
+Aur metals ke aapas mein? Wahan chalta hai **Reactivity Series ka Power Game**: Jo metal jitna aage baitha hai, wo utna aggressive hai — wo kamzor metal ko uske salt solution se laat maarkar displace kar deta hai!`,
   sections: [
     {
-      id: "physical_properties",
-      label: "1. Physical Properties: Metals vs Non-Metals",
-      heading: "Shiny, Malleable & Conductive vs Dull, Brittle & Insulating",
-      subheading: "9 Properties Compared with Real-World Examples, Exceptions & CBSE Exam Tips",
-      explanation: `### Why Physical Properties Matter
+      id: "electronic_nature_physical_properties",
+      label: "1. Metals vs Non-Metals: Electronic Nature & The 6 Famous Board Exceptions",
+      heading: "Why Metals Donate & The Complete Kundli of Physical Properties & Exceptions",
+      subheading: "Lustre + Malleability + Ductility + Thermal/Electrical Conductivity + Sonority",
+      explanation: `### Level 1: Electronic Configuration Se Pehchano Metal vs Non-Metal
 
-Physical properties are the *observable characteristics* of a substance that can be detected without changing its chemical identity. For metals and non-metals, these differences arise from one root cause: **how their atoms are held together**.
+Elements ki physical aur chemical properties unke outer valence electrons se decide hoti hain:
 
-- **Metals:** Atoms are held by the **metallic bond** — a "sea of free electrons" shared across all atoms. These electrons can move → conduct electricity and heat, reflect light (lustre), and allow layers to slide (malleability/ductility).
-- **Non-metals:** Atoms are held by **covalent bonds** within individual molecules. Electrons are locked in bonds → cannot flow → poor conductors, no metallic lustre, and layers fracture rather than slide (brittle).
-
----
-
-### Property 1: Physical State at Room Temperature (25°C)
-
-**Metals:** Almost all metals are **solid** at room temperature. Historically, humans first discovered solid metals — copper (9000 BCE), gold (6000 BCE), iron (1200 BCE) — all hard, dense solids.
-
-> 🔑 **Exception — Mercury (Hg):** The only metal that is **liquid** at room temperature (melting point = −39°C). Used in thermometers. The Romans called it *argentum vivum* — "living silver."
-
-**Non-metals:** Exist in all three states —
-- **Gases:** Oxygen (O₂), Nitrogen (N₂), Chlorine (Cl₂), Noble gases (He, Ne, Ar)
-- **Solids:** Carbon (C), Sulphur (S), Phosphorus (P), Iodine (I₂), Silicon (Si)
-- **Liquid:** Bromine (Br₂) — the only non-metal liquid at room temperature
-
-> ⚠️ **Board Trap:** Students often write "all non-metals are gases." This is WRONG. Most non-metals are solids (carbon forms diamond and graphite!).
+1. **Metals (Electropositive Elements):**
+   - Inke valence shell mein generally **1, 2, ya 3 electrons** hote hain.
+   - *Example:* Sodium ($Na = 2,8,1$), Magnesium ($Mg = 2,8,2$), Aluminium ($Al = 2,8,3$).
+   - Stable banne ke liye ye electrons **loose (daan)** karte hain aur **Positive Ions (Cations)** banate hain:
+     $$Na \\to Na^+ + e^-, \\quad Mg \\to Mg^{2+} + 2e^-, \\quad Al \\to Al^{3+} + 3e^-$$
+2. **Non-Metals (Electronegative Elements):**
+   - Inke valence shell mein **4, 5, 6, ya 7 electrons** hote hain.
+   - *Example:* Nitrogen ($N = 2,5$), Oxygen ($O = 2,6$), Chlorine ($Cl = 2,8,7$).
+   - Octet (8 electrons) poora karne ke liye ye electrons **gain (grahan)** karte hain aur **Negative Ions (Anions)** banate hain:
+     $$Cl + e^- \\to Cl^-, \\quad O + 2e^- \\to O^{2-}, \\quad N + 3e^- \\to N^{3-}$$
 
 ---
 
-### Property 2: Lustre (Shininess)
+### Level 2: Physical Properties & The 6 Famous Board Exceptions
 
-**Metals are lustrous** — they reflect light beautifully. This is because the free electrons in the metallic bond interact with incoming light photons and re-emit them. This is why gold jewellery shines, silver mirrors work, and copper wires are reddish-bright.
+Normal rule sabko pata hota hai, lekin **CBSE Board Examiners hamesha EXCEPTIONS par sawaal puchte hain**! Yahan hai complete list:
 
-**Non-metals are dull** — no free electrons to reflect light. Sulphur is yellow-dull, carbon (graphite) is grey-dull.
+1. **Physical State at Room Temperature ($25^\\circ\\text{C}$):**
+   - *General Rule:* Saare metals solids hote hain. Non-metals solids, liquids ya gases ho sakte hain.
+   - 🔥 **Exception 1 (Liquid Metal):** **Mercury ($Hg$)** akela aisa metal hai jo room temperature par **liquid** hota hai (Melting Point = $-39^\\circ\\text{C}$). Thermometers mein use hota hai.
+   - 🔥 **Exception 2 (Liquid Non-Metal):** **Bromine ($Br_2$)** akela aisa non-metal hai jo room temperature par **reddish-brown liquid** hota hai.
 
-> 🔑 **Exception — Iodine (I₂):** A non-metal that has a **lustrous dark grey/silver appearance**. Students sometimes confuse it with a metal. Remember: iodine is non-metallic in all chemical behaviour (gains electrons, poor conductor) but *looks* shiny due to its crystalline structure.
+2. **Lustre (Chamak / Shininess):**
+   - *General Rule:* Metals lustrous hote hain (free electrons light reflect karte hain). Non-metals dull hote hain.
+   - 🔥 **Exception 3 (Lustrous Non-Metal):** **Iodine ($I_2$)** ek non-metal hai, par iske paas crystal structure ki wajah se **natural shiny metallic lustre** hoti hai!
 
----
+3. **Hardness & Melting Point:**
+   - *General Rule:* Metals bahut hard hote hain aur inka melting point bahut high hota hai (Tungsten $W = 3422^\\circ\\text{C}$).
+   - 🔥 **Exception 4 (Soft Metals Cut with Knife):** Alkali metals — **Lithium ($Li$), Sodium ($Na$), Potassium ($K$)** itne soft hote hain ki unhe ordinary **kitchen butter knife se aasani se kata ja sakta hai**! Inki density itni kam hoti hai ki ye **paani par tairte hain (float on water)**!
+   - 🔥 **Exception 5 (Palm Melting Metals):** **Gallium ($Ga$) aur Caesium ($Cs$)** ka melting point itna low hota hai ($Ga = 29.8^\\circ\\text{C}$) ki agar tum inhe apni hatheli (body temp $37^\\circ\\text{C}$) par rakhoge, toh ye **ice cream ki tarah pighal jaayenge**!
 
-### Property 3: Malleability — Can it be hammered into sheets?
-
-**Metals are malleable** — the layers of metal atoms can **slide over each other** without breaking because the electron sea re-adjusts. 
-
-**Examples (chronological importance):**
-- **Gold (Au):** Used since 3000 BCE in Egypt. One gram of gold can be hammered into a sheet of 1 square metre (gold leaf). Used in food decoration (edible gold), electronic circuit boards, and space helmets (gold coating blocks UV).
-- **Aluminium (Al):** Used since 1827. Aluminium foil (kitchen wrap) is hammered into sheets as thin as 0.006 mm.
-- **Copper (Cu):** Used since 5000 BCE. Hammered into coins, vessels, and utensils.
-
-**Non-metals are brittle** — when struck, the covalent bonds break in one direction and the crystal shatters. Sulphur crystals and iodine crystals crumble when hit with a hammer.
-
-> ⚠️ **Board Trap:** Students write "Sodium is not malleable." Actually sodium IS malleable (and ductile) — it's soft enough to be cut with a knife! The soft metals (Na, K) are exceptions to hardness, not to malleability.
-
----
-
-### Property 4: Ductility — Can it be drawn into wires?
-
-**Metals are ductile.** This means they can be stretched into thin wires without breaking. The metallic bond allows atoms to rearrange under stress.
-
-**Why copper wire everywhere?** Copper has been used in electrical wiring since the 1880s (during the electric revolution of Thomas Edison). It is highly ductile AND an excellent conductor. Gold is even more ductile but too expensive. Tungsten, despite being brittle at room temperature, becomes ductile at high temperatures — so it's used for bulb filaments (which operate at 2500°C).
-
-**Non-metals are non-ductile** — if you try to stretch graphite or sulphur, they snap.
-
----
-
-### Property 5: Electrical Conductivity
-
-**Metals conduct electricity** because of free electrons. When a voltage is applied, electrons flow from the negative terminal to positive terminal — this is electric current.
-
-**Ranking of electrical conductivity (approximate):**
-Silver > Copper > Gold > Aluminium > Iron > Lead > Mercury
-
-> 🔑 **Exception — Graphite (a form of Carbon):** A **non-metal** that **conducts electricity**! In graphite's layered structure, each carbon atom forms only 3 bonds — the 4th electron is free to move between layers. Used in: pencil electrodes in electrolysis experiments, graphite electrodes in steel-making, dry cell batteries.
-
-> ⚠️ **Diamond (also Carbon) does NOT conduct electricity** — all 4 electrons of each carbon atom are locked in covalent bonds. No free electrons!
-
----
-
-### Property 6: Thermal Conductivity (Heat Conduction)
-
-**Metals conduct heat** through free electron movement AND through lattice vibrations (phonons). Touch an iron rod in a fire — the whole rod heats up quickly.
-
-> 🔑 **Exception — Diamond:** The **best thermal conductor** of any known natural substance (thermal conductivity ≈ 2000 W/m·K, 5× better than copper!). Used in cutting tools and heat sinks in electronics. Despite being a non-metal, diamond conducts heat extremely well through its rigid covalent lattice vibrations.
-
-> 🔑 **Exception — Bismuth (Bi) and Mercury (Hg):** Metals with **very low thermal conductivity** compared to other metals.
-
----
-
-### Property 7: Melting and Boiling Points
-
-**Metals generally have high melting points** because of strong metallic bonds.
-
-| Metal | Melting Point | Key Use |
-|-------|--------------|---------|
-| Tungsten (W) | 3422°C (HIGHEST) | Light bulb filaments, rocket nozzles |
-| Iron (Fe) | 1538°C | Construction, tools |
-| Copper (Cu) | 1085°C | Electrical wiring |
-| Aluminium (Al) | 660°C | Foil, aircraft bodies |
-| Gallium (Ga) | 29.8°C | Melts in your palm! |
-| Mercury (Hg) | −39°C | Liquid at room temp |
-
-**Non-metals generally have low melting points** — oxygen boils at −183°C, nitrogen at −196°C. The exception is Carbon (diamond) which melts above 3500°C.
-
----
-
-### Property 8: Density
-
-**Metals are generally dense.** Most metals are denser than water (density > 1 g/cm³). Gold has density 19.3 g/cm³ — 19× denser than water!
-
-> 🔑 **Exceptions — Light Metals:** Lithium (Li) = 0.53 g/cm³, Sodium (Na) = 0.97 g/cm³, Potassium (K) = 0.86 g/cm³ — all float on water! This is why Na and K react violently WITH water (they float and react simultaneously).
-
-**Non-metals are generally less dense** — gases are especially low density. But diamond has density 3.5 g/cm³, which is higher than many metals.
-
----
-
-### Property 9: Sonority (Sound Production)
-
-**Metals are sonorous** — when struck, they produce a ringing, resonant sound (long-lasting vibration). The free electrons transmit sound waves very efficiently through the metal lattice.
-
-**Examples:** Church bells (bronze = Cu + Sn), temple bells (brass = Cu + Zn), tuning forks (steel). School bells. Coins ringing when dropped.
-
-**Non-metals are non-sonorous** — they produce a dull thud when struck. Sulphur, phosphorus, or plastic makes no ring.`,
+4. **Electrical & Thermal Conductivity:**
+   - *General Rule:* Metals good conductors hote hain (Silver best hai, fir Copper). Non-metals insulators hote hain.
+   - 🔥 **Exception 6 (Carbon Allotropes Wonder):**
+     - **Graphite (Conducts Electricity):** Ek non-metal hone ke bawjood electricity conduct karta hai, kyunki iske layered structure mein har carbon sirf 3 bonds banata hai aur 1 electron free hota hai! Isiliye pencils aur dry cell battery electrodes mein use hota hai.
+     - **Diamond (Thermal Conductor & Hardest Substance):** Diamond non-metal hai aur electricity bilkul conduct nahi karta (zero free electrons), LEKIN ye duniya ka **best thermal conductor (heat carrier)** hai (copper se bhi 5 guna tez heat flow karta hai lattice vibrations ke through) aur Earth ka **hardest naturally occurring substance** hai (Melting Point $> 3500^\\circ\\text{C}$)!`,
       formulasOrKeyPoints: [
         {
-          title: "📊 Complete Physical Properties Comparison Table",
-          content: `| Property | Metals | Non-Metals | Real Example | Exception |
-|----------|--------|------------|--------------|-----------|
-| **State at 25°C** | Solid (mostly) | Gas / Solid / Liquid | Fe = solid, O₂ = gas | **Hg** = liquid metal; **Br₂** = liquid non-metal |
-| **Lustre** | Shiny / Lustrous | Dull / Non-lustrous | Gold shines, Sulphur is dull | **Iodine** = lustrous non-metal |
-| **Malleability** | Yes — hammered into sheets | No — shatters (brittle) | Gold leaf (1g → 1 m²) | Na, K are soft but still malleable |
-| **Ductility** | Yes — drawn into wires | No — non-ductile | Copper electrical wires | Tungsten is brittle at RT but ductile at high T |
-| **Electrical Conductivity** | Yes — free electrons flow | No — electrons are fixed | Copper wiring, Silver contacts | **Graphite** (C) conducts electricity! |
-| **Thermal Conductivity** | Yes — good conductors | No — poor conductors | Iron pan, Copper vessel | **Diamond** (C) = best thermal conductor! |
-| **Melting / Boiling Point** | High | Low | W melts at 3422°C | **Ga** melts at 29.8°C; **Hg** melts at −39°C |
-| **Density** | High (generally) | Low (generally) | Gold = 19.3 g/cm³ | **Na, K, Li** are lighter than water! |
-| **Sonority** | Sonorous — ringing sound | Non-sonorous — dull thud | Bell, coin ringing | — |`,
-          note: "Diamond and Graphite are BOTH forms of pure Carbon (allotropes), yet they have OPPOSITE properties: Diamond is the hardest natural substance, best heat conductor, but does NOT conduct electricity. Graphite is soft, good electrical conductor, but poor heat conductor. This contrast is a favourite CBSE board question!"
-        },
+          title: "The Ultimate 6 Exceptions Cheat-Sheet for Board Toppers",
+          content: `| Property | Normal Metal Behaviour | Normal Non-Metal Behaviour | The Board-Tested Exception |
+| :--- | :--- | :--- | :--- |
+| **State at $25^\\circ\\text{C}$** | Solid | Solid / Gas | **Mercury ($Hg$)** is liquid metal; **Bromine ($Br_2$)** is liquid non-metal |
+| **Lustre (Shine)** | Shiny / Lustrous | Dull | **Iodine ($I_2$)** has shiny metallic lustre |
+| **Hardness** | Very hard | Soft / Brittle | **$Na, K, Li$** are so soft they can be cut with a knife |
+| **Melting Point** | Very high | Low | **Gallium ($Ga$) & Caesium ($Cs$)** melt on your palm ($< 30^\\circ\\text{C}$) |
+| **Electrical Conduction** | Excellent | Poor / Zero | **Graphite** conducts electricity smoothly |
+| **Thermal Conduction** | High | Low | **Diamond** is the best natural heat conductor and hardest substance |`,
+          note: "Questions like 'Name a non-metal that is lustrous' or 'Which metal melts on palm?' appear almost every year in 1-mark MCQs."
+        }
+      ],
+      stepByStepGuide: [
         {
-          title: "🧠 Memory Trick — Metal vs Non-Metal Properties",
-          content: `Remember metals with the word **\"MOLDS\"**:
-
-- **M**alleable and **M**elting point is high
-- **O**paque with **O**wn lustre (shiny)
-- **L**uster — shines due to free electron reflection
-- **D**uctile — drawn into wires
-- **S**onorous — rings when struck + **S**olid at room temp (mostly)
-
-Non-metals are the **opposite of all of the above**, with three major exceptions to always write in exams:
-1. **Graphite** conducts electricity (non-metal that conducts)
-2. **Iodine** has lustre (non-metal that is shiny)
-3. **Bromine** is liquid (non-metal that is not a gas/solid)
-4. **Diamond** is the best thermal conductor (non-metal that conducts heat)`,
-          note: "In CBSE board exams, questions like 'Name a non-metal that is lustrous' or 'Which non-metal conducts electricity?' appear almost every year. Iodine and Graphite are the two answers to memorise."
+          stepNo: 1,
+          title: "Distinguish Diamond and Graphite in 3-Mark Questions",
+          action: "1. Diamond: All 4 valence electrons locked in covalent bonds $\\to$ 3D rigid tetrahedral lattice $\\to$ Hardest natural substance, zero electrical conductivity, exceptional thermal conductivity.\n2. Graphite: Only 3 valence electrons bonded, 1 delocalized electron free between hexagonal sheets $\\to$ Soft, slippery, excellent electrical conductor.",
+          proTip: "Examiner traps students by asking which allotrope of carbon conducts electricity -> Answer is Graphite."
         }
       ],
       examinerTraps: [
         {
-          trap: "Writing 'all non-metals are gases' or 'all metals are hard solids'.",
-          correction: "Non-metals exist as solids (C, S, P, I₂, Si), liquids (Br₂), and gases (O₂, N₂, Cl₂). Metals: Mercury (Hg) is a liquid metal. Sodium (Na) and Potassium (K) are soft metals easily cut with a knife. Gallium melts at body temperature (29.8°C)."
+          trap: "Writing that all non-metals are gases.",
+          correction: "Non-metals exist as solids (Carbon, Sulphur, Phosphorus, Iodine), liquid (Bromine), and gases (Oxygen, Nitrogen, Hydrogen, Chlorine)."
         },
         {
-          trap: "Saying 'Diamond does not conduct heat because it's a non-metal.'",
-          correction: "Diamond is the BEST natural thermal conductor (better than copper or silver). It conducts heat through lattice vibrations (phonons), not through free electrons. However, diamond does NOT conduct electricity (no free electrons). Write this distinction clearly in 3-mark questions."
-        },
-        {
-          trap: "Confusing Graphite with Diamond when asked about electrical conduction.",
-          correction: "Graphite conducts electricity (has delocalized π electrons between layers). Diamond does NOT conduct electricity (all 4 electrons of each carbon are in covalent bonds, none are free). Both are allotropes of Carbon, but behave oppositely in electrical conductivity."
+          trap: "Saying Diamond does not conduct heat because it is a non-metal.",
+          correction: "Diamond is the BEST thermal conductor in nature! It conducts heat via phonons (crystal lattice vibrations), even though it does NOT conduct electricity."
         }
       ]
     },
     {
-      id: "chemical_properties",
-      label: "2. Chemical Properties of Metals",
-      heading: "How Metals React with Air, Water, Acids & Salt Solutions",
-      subheading: "4 Key Reaction Types + Ionic Bond Formation + Amphoteric Metals",
-      explanation: `**METALS REACT WITH:**
+      id: "chemical_combat_metals",
+      label: "2. Chemical Combat of Metals: Oxygen, Water & Acids",
+      heading: "Basic & Amphoteric Oxides, Cold/Hot/Steam Water Rules & The Nitric Acid Exception",
+      subheading: "Amphoteric Equations ($Al_2O_3$ & $ZnO$) + Hydrogen Evolution Rules + Aqua Regia (3:1)",
+      explanation: `### Level 1: Metals Ki Reaction Hawa (Oxygen) Ke Saath
 
-**1. Oxygen (Air/Combustion):**
-- Very reactive metals (Na, K): Burn vigorously, react even with cold water
-  $$4\\text{Na(s) + O}_2\\text{(g)} \\to 2\\text{Na}_2\\text{O(s)}$$
-- Moderately reactive (Mg, Al, Zn, Fe): Form oxide layer (surface passivation)
-  $$2\\text{Mg(s) + O}_2\\text{(g)} \\to 2\\text{MgO(s)}$$ (Dazzling white flame)
-- Less reactive (Cu): Forms black CuO layer on heating
-  $$2\\text{Cu(s) + O}_2\\text{(g)} \\to 2\\text{CuO(s)}$$ (Black coating)
-- Unreactive (Ag, Au): Do NOT react with oxygen even on heating — that's why gold stays shiny!
+Jab metals oxygen ke saath react karte hain, toh wo **Metal Oxides** banate hain:
+$$\\text{Metal} + \\text{Oxygen} \\to \\text{Metal Oxide}$$
 
-**2. Water:**
-- Sodium: $2\\text{Na(s) + 2H}_2\\text{O(l)} \\to 2\\text{NaOH(aq) + H}_2\\text{(g)}\\uparrow$ (violent, floats and catches fire!)
-- Potassium: Even more violent than sodium — reacts with cold water, catches fire
-- Iron: Does NOT react with cold/hot water, only with **steam**:
-  $$3\\text{Fe(s) + 4H}_2\\text{O(g)} \\to \\text{Fe}_3\\text{O}_4\\text{(s) + 4H}_2\\text{(g)}\\uparrow$$ (at red heat)
-- Copper, silver, gold: NO reaction with water at all
+- **Nature of Metal Oxides:** Metal oxides generally **Basic** hote hain. Jo paani mein ghul jaate hain unhe **Alkalis** kehte hain:
+  $$Na_2O(s) + H_2O(l) \\to 2NaOH(aq) \\quad [\\text{Turns red litmus blue}]$$
+  $$K_2O(s) + H_2O(l) \\to 2KOH(aq)$$
+- **Reactivity Order with Air:**
+  - $Na$ aur $K$: Itne zyada reactive hote hain ki khule mein rakhte hi aag pakad lete hain! Isiliye inhe **kerosene oil mein doobokar rakha jata hai**.
+  - $Mg, Al, Zn, Pb$: Room temperature par inki surface par ek patli protective oxide layer chadh jaati hai (Passivation) jo andar ke metal ko further oxidation se bachati hai.
+  - $Cu$: Khule mein aag nahi pakadta, lekin prolonged heating par us par **kaali parat (black coating)** of Copper(II) Oxide ($CuO$) chadh jaati hai:
+    $$2Cu(s) + O_2(g) \\xrightarrow{\\Delta} 2CuO(s) [\\text{Black Coating}]$$
+  - $Ag, Au$: High temperature par bhi oxygen se react nahi karte — isiliye gold hamesha chamakta rehta hai!
 
-**3. Dilute Acids:**
-$$\\text{Metal + Dilute Acid} \\to \\text{Salt + H}_2\\text{(g)}\\uparrow$$
-$$\\text{Zn(s) + H}_2\\text{SO}_4\\text{(dil)} \\to \\text{ZnSO}_4\\text{(aq) + H}_2\\text{(g)}\\uparrow$$
-⚠️ Cu, Ag, Au do NOT react with dilute acids (below hydrogen in the series).
+---
 
-**4. Salt Solutions (Displacement):**
-$$\\text{Fe(s) + CuSO}_4\\text{(aq)} \\to \\text{FeSO}_4\\text{(aq) + Cu(s)}$$
-Iron (more reactive) displaces Copper (less reactive). The blue solution fades and reddish copper deposits on iron nail.
+### Level 2: The Amphoteric Oxides (Double Agents of Chemistry!)
 
-**AMPHOTERIC OXIDES (Metal oxides reacting with BOTH acids and bases to form salt and water):**
-- **Aluminium Oxide ($\\text{Al}_2\\text{O}_3$):**
-  - With Acid (acting as basic oxide):
-    $$\\text{Al}_2\\text{O}_3\\text{(s)} + 6\\text{HCl(aq)} \\to 2\\text{AlCl}_3\\text{(aq)} + 3\\text{H}_2\\text{O(l)}$$
-  - With Base (acting as acidic oxide):
-    $$\\text{Al}_2\\text{O}_3\\text{(s)} + 2\\text{NaOH(aq)} \\xrightarrow{\\Delta} 2\\text{NaAlO}_2\\text{(aq)} + \\text{H}_2\\text{O(l)}$$ *(Sodium aluminate)*
-- **Zinc Oxide ($\\text{ZnO}$):**
-  - With Acid:
-    $$\\text{ZnO(s)} + 2\\text{HCl(aq)} \\to \\text{ZnCl}_2\\text{(aq)} + \\text{H}_2\\text{O(l)}$$
-  - With Base:
-    $$\\text{ZnO(s)} + 2\\text{NaOH(aq)} \\xrightarrow{\\Delta} \\text{Na}_2\\text{ZnO}_2\\text{(aq)} + \\text{H}_2\\text{O(l)}$$ *(Sodium zincate)*
+> 🌟 **Definition:** Aise metal oxides jo **Acids aur Bases dono ke saath react karke Salt aur Water banate hain**, unhe **Amphoteric Oxides** kehte hain!
 
-**AMPHOTERIC METALS (react with BOTH acids AND bases to liberate H₂ gas):**
-$$2\\text{Al(s)} + 2\\text{NaOH(aq)} + 2\\text{H}_2\\text{O(l)} \\xrightarrow{\\Delta} 2\\text{NaAlO}_2\\text{(aq)} + 3\\text{H}_2\\text{(g)}\\uparrow$$
-$$\\text{Zn(s)} + 2\\text{NaOH(aq)} \\xrightarrow{\\Delta} \\text{Na}_2\\text{ZnO}_2\\text{(aq)} + \\text{H}_2\\text{(g)}\\uparrow$$`,
+NCERT mein do star examples hain: **Aluminium Oxide ($Al_2O_3$)** aur **Zinc Oxide ($ZnO$)**.
+
+#### 1. Aluminium Oxide ($Al_2O_3$) Reactions (Board Compulsory 3-Mark Question):
+- **Acid ke saath (acting as Base):**
+  $$Al_2O_3(s) + 6HCl(aq) \\to 2AlCl_3(aq) + 3H_2O(l)$$
+- **Base ke saath (acting as Acid):**
+  $$Al_2O_3(s) + 2NaOH(aq) \\to 2NaAlO_2(aq) [\\text{Sodium Aluminate}] + H_2O(l)$$
+
+#### 2. Zinc Oxide ($ZnO$) Reactions:
+- **Acid ke saath:**
+  $$ZnO(s) + 2HCl(aq) \\to ZnCl_2(aq) + H_2O(l)$$
+- **Base ke saath:**
+  $$ZnO(s) + 2NaOH(aq) \\to Na_2ZnO_2(aq) [\\text{Sodium Zincate}] + H_2O(l)$$
+
+---
+
+### Level 3: Metals Ki Reaction Paani (Water) Ke Saath
+
+Paani ke saath reaction metal ki reactivity par depend karti hai:
+$$\\text{Metal} + \\text{Water} \\to \\text{Metal Hydroxide/Oxide} + H_2(g) \\uparrow$$
+
+| Category of Water | Metals Involved | Observations & Reactions |
+| :--- | :--- | :--- |
+| **Cold Water (Thanda Paani)** | Potassium ($K$), Sodium ($Na$) | Reaction itni violent aur exothermic hoti hai ki evolved $H_2$ gas **turant aag pakad leti hai**: <br>$$2Na(s) + 2H_2O(l) \\to 2NaOH(aq) + H_2(g) + \\text{Heat}$$ |
+| **Cold Water (Mild)** | Calcium ($Ca$) | Less violent; aag nahi lagti. **Calcium paani par float karne lagta hai** kyunki $H_2$ gas ke bubbles calcium ki surface par chipak jaate hain: <br>$$Ca(s) + 2H_2O(l) \\to Ca(OH)_2(aq) + H_2(g)$$ |
+| **Hot Water (Garam Paani)** | Magnesium ($Mg$) | Thande paani se react nahi karta, sirf **garam paani** se react karta hai aur ye bhi $H_2$ bubbles chipakne se float karta hai: <br>$$Mg(s) + 2H_2O(l) \\xrightarrow{\\text{Hot}} Mg(OH)_2(aq) + H_2(g)$$ |
+| **Steam Only (Sirf Bhaap)** | Aluminium ($Al$), Zinc ($Zn$), Iron ($Fe$) | Liquid paani (thande ya garam) se BILKUL react nahi karte! Sirf **steam (bhaap)** ke saath react karte hain aur **Oxides** banate hain: <br>$$3Fe(s) + 4H_2O(g) \\to Fe_3O_4(s) [\\text{Magnetic Oxide}] + 4H_2(g)$$ <br>$$2Al(s) + 3H_2O(g) \\to Al_2O_3(s) + 3H_2(g)$$ |
+| **No Reaction At All** | Lead ($Pb$), Copper ($Cu$), Silver ($Ag$), Gold ($Au$) | Thande paani, garam paani, ya steam kisi se bhi react nahi karte! |
+
+---
+
+### Level 4: Metals Ki Reaction Acids Ke Saath & The $HNO_3$ Mystery
+
+General Rule:
+$$\\text{Metal} + \\text{Dilute Acid} \\to \\text{Salt} + H_2(g) \\uparrow$$
+$$Zn(s) + 2HCl(aq) \\to ZnCl_2(aq) + H_2(g) \\uparrow$$
+
+🔥 **The Famous Nitric Acid ($HNO_3$) Board Question:**
+*Question: "Why is Hydrogen gas NOT evolved when metals react with dilute Nitric Acid ($HNO_3$)?"*
+*Answer:* Nitric acid ek **ruthless, powerful Oxidising Agent** hai! Jaise hi reaction mein $H_2$ gas banti hai, $HNO_3$ us $H_2$ ko oxidise karke **paani ($H_2O$)** bana deta hai aur khud reduce hokar Nitrogen ke oxides (**$N_2O, NO, \\text{ ya } NO_2$**) mein convert ho jata hai!
+
+> 🔑 **The ONLY Two Exceptions:**
+> Sirf **Magnesium ($Mg$) aur Manganese ($Mn$)** do aise metals hain jo **extremely dilute (1%) Nitric acid** ke saath react karke $H_2$ gas liberate karte hain:
+> $$Mg(s) + 2HNO_3(\\text{very dilute}) \\to Mg(NO_3)_2(aq) + H_2(g) \\uparrow$$
+> $$Mn(s) + 2HNO_3(\\text{very dilute}) \\to Mn(NO_3)_2(aq) + H_2(g) \\uparrow$$
+
+---
+
+### Level 5: Aqua Regia (Royal Water / Amla-Raaj)
+Gold ($Au$) aur Platinum ($Pt$) itne unreactive hain ki kisi single concentrated acid ($HCl, HNO_3, H_2SO_4$) mein nahi ghulte.
+Unhe gholne ke liye chemists banate hain **Aqua Regia**:
+- **Composition:** Freshly prepared mixture of **Concentrated $HCl$** and **Concentrated $HNO_3$** in the ratio **$3 : 1$ by volume**:
+  $$\\text{Conc. } HCl : \\text{Conc. } HNO_3 = 3 : 1$$
+- Ye fuming, highly corrosive yellow liquid nascient chlorine release karta hai jo gold aur platinum ko bhi dissolve kar leta hai!`,
       formulasOrKeyPoints: [
         {
-          title: "The Activity Series (Reactivity Series) — MUST MEMORISE",
-          content: `From **Most Reactive** to **Least Reactive:**
-
-| Position | Metal | Key Memory Point |
-|----------|-------|-----------------|
-| 1 | **K** (Potassium) | Violently reacts with cold water, self-ignites |
-| 2 | **Na** (Sodium) | Reacts vigorously with cold water, floats |
-| 3 | **Ca** (Calcium) | Reacts moderately with cold water |
-| 4 | **Mg** (Magnesium) | Reacts slowly with cold water, fast with hot |
-| 5 | **Al** (Aluminium) | Reacts with steam and dilute acids |
-| 6 | **Zn** (Zinc) | Reacts with steam and dilute acids; amphoteric |
-| 7 | **Fe** (Iron) | Reacts only with steam (not liquid water) |
-| 8 | **Pb** (Lead) | Reacts with dilute acids |
-| 9 ← | **H** (Hydrogen) | REFERENCE POINT |
-| 10 | **Cu** (Copper) | No reaction with water or dilute acids |
-| 11 | **Ag** (Silver) | Only reacts with concentrated acids |
-| 12 | **Au** (Gold) | Practically inert — reacts with Aqua Regia only |
-
-**MNEMONIC:** Please Stop Calling Me A Zebra For I Like Cats Sleeping Gallantly
-(K, Na, Ca, Mg, Al, Zn, Fe, Pb, H, Cu, Ag, Au...)`,
-          note: "Metals ABOVE hydrogen displace H₂ from dilute acids. Metals BELOW hydrogen (Cu, Ag, Au) do NOT. This is the most important rule from the Activity Series for Board exams."
+          title: "Amphoteric Oxides Balanced Master Formulas",
+          content: "$$\\begin{aligned} Al_2O_3 + 6HCl &\\to 2AlCl_3 + 3H_2O \\\\ Al_2O_3 + 2NaOH &\\to 2NaAlO_2 \\text{ [Sodium Aluminate]} + H_2O \\\\ ZnO + 2HCl &\\to ZnCl_2 + H_2O \\\\ ZnO + 2NaOH &\\to Na_2ZnO_2 \\text{ [Sodium Zincate]} + H_2O \\end{aligned}$$",
+          note: "Formulas of Sodium Aluminate ($NaAlO_2$) and Sodium Zincate ($Na_2ZnO_2$) are examiner favorites."
+        },
+        {
+          title: "Aqua Regia Ratio Formula",
+          content: "$$\\frac{\\text{Volume of Conc. } HCl}{\\text{Volume of Conc. } HNO_3} = \\frac{3}{1}$$",
+          note: "Do not reverse the ratio! $HCl$ has 3 parts; $HNO_3$ has 1 part."
+        }
+      ],
+      stepByStepGuide: [
+        {
+          stepNo: 1,
+          title: "Check Water Reaction Conditions",
+          action: "1. Sodium/Potassium $\\to$ Cold water (fire catches).\n2. Calcium $\\to$ Cold water (floats).\n3. Magnesium $\\to$ Hot water only (floats).\n4. Aluminium/Zinc/Iron $\\to$ Steam only (forms oxide + $H_2$).\n5. Copper/Silver/Gold $\\to$ No reaction.",
+          proTip: "Remember: Iron with steam produces $Fe_3O_4$ (magnetic iron oxide), NOT $Fe_2O_3$ or $FeO$."
         }
       ],
       examinerTraps: [
         {
-          trap: "Writing Fe + H₂O(l) → reaction at room temperature.",
-          correction: "Iron does NOT react with cold water or even hot liquid water. Iron reacts ONLY with STEAM (H₂O as gas) at red-hot temperatures to form Fe₃O₄. Writing liquid water state symbol (l) loses marks."
+          trap: "Writing the ratio of Aqua Regia as 1 : 3 of Conc. HCl : Conc. HNO3.",
+          correction: "Aqua Regia is strictly 3 parts Concentrated Hydrochloric Acid (HCl) and 1 part Concentrated Nitric Acid (HNO3). Ratio = 3 : 1."
+        },
+        {
+          trap: "Writing $Fe + H_2O(l) \\to Fe(OH)_2 + H_2$.",
+          correction: "Iron does NOT react with liquid water. It reacts exclusively with steam: $3Fe(s) + 4H_2O(g) \\to Fe_3O_4(s) + 4H_2(g)$."
         }
       ]
     },
     {
-      id: "ionic_bonding",
-      label: "3. Ionic Bond Formation & Properties",
-      heading: "The Electron Transfer: Creating Salt from Metal + Non-Metal",
-      subheading: "Electron Dot Structures + Electrovalent Bond + Properties of Ionic Compounds",
-      explanation: `**How ionic bonds form:** Metals GIVE electrons → form positive ions (cations). Non-metals TAKE electrons → form negative ions (anions). The opposite charges attract each other — creating an **ionic bond** (electrovalent bond).
+      id: "reactivity_series_displacement",
+      label: "3. The Reactivity Series & Displacement Combat",
+      heading: "The Power Hierarchy of Metals & The Ultimate Desi Memory Mnemonic",
+      subheading: "Displacement Rules + Predicting 'No Reaction' in CBSE Board Papers",
+      explanation: `### Level 1: Reactivity Series Kya Hai?
 
-**Example: Formation of NaCl (Sodium Chloride)**
+Jab metals ko unki chemical reactivity ke hisaab se **decreasing order (upar se neeche)** arrange kiya jata hai, toh us vertical column ko **Reactivity Series (Activity Series)** kehte hain.
 
-*Step 1:* Sodium atom (Na): Electronic configuration 2,8,1 → **gives** 1 electron → Na⁺ (2,8) — now has noble gas configuration of Neon!
+> 👑 **The King at Top:** Potassium ($K$) — sabse violent aur aggressive.
+> 🪨 **The Nobles at Bottom:** Gold ($Au$), Platinum ($Pt$) — shaant aur inert.
 
-*Step 2:* Chlorine atom (Cl): Electronic configuration 2,8,7 → **receives** 1 electron → Cl⁻ (2,8,8) — now has noble gas configuration of Argon!
+---
 
-*Step 3:* Na⁺ and Cl⁻ attract each other → form NaCl crystal lattice
+### Level 2: The Ultimate Desi Mnemonic (Zindagi Bhar Yaad Rahega!)
 
-**Example: Formation of MgO (Magnesium Oxide)**
+$$\\begin{array}{rcll}
+\\mathbf{K} & \\to & \\text{Kashi} & \\text{(Potassium - Most Reactive)} \\\\
+\\mathbf{Na} & \\to & \\text{Nath} & \\text{(Sodium)} \\\\
+\\mathbf{Ca} & \\to & \\text{Ka} & \\text{(Calcium)} \\\\
+\\mathbf{Mg} & \\to & \\text{Maali} & \\text{(Magnesium)} \\\\
+\\mathbf{Al} & \\to & \\text{Aloo} & \\text{(Aluminium)} \\\\
+\\mathbf{Zn} & \\to & \\text{Zara} & \\text{(Zinc)} \\\\
+\\mathbf{Fe} & \\to & \\text{Feeke} & \\text{(Iron)} \\\\
+\\mathbf{Pb} & \\to & \\text{Pakata} & \\text{(Lead)} \\\\
+\\mathbf{[H]} & \\to & \\text{Hai} & \\text{(Hydrogen - Benchmark Non-metal)} \\\\
+\\mathbf{Cu} & \\to & \\text{Con} & \\text{(Copper)} \\\\
+\\mathbf{Hg} & \\to & \\text{Hai} & \\text{(Mercury)} \\\\
+\\mathbf{Ag} & \\to & \\text{Aage} & \\text{(Silver)} \\\\
+\\mathbf{Au} & \\to & \\text{Aao!} & \\text{(Gold - Least Reactive)}
+\\end{array}$$
 
-Mg: 2,8,2 → gives 2 electrons → Mg²⁺ (2,8)
-O: 2,6 → receives 2 electrons → O²⁻ (2,8)
-→ MgO (magnesium oxide)
+*Mnemonic Sentence:* **"Kashi Nath Ka Maali Aloo Zara Feeke Pakata Hai, Con Hai Aage Aao!"**
 
-**Properties of Ionic Compounds:**
-1. **High melting and boiling points** — strong electrostatic forces between ions require lots of energy to break
-2. **Conduct electricity in molten or aqueous state** — ions are free to move; but NOT in solid state (ions are locked in lattice)
-3. **Soluble in water** (mostly), insoluble in organic solvents (petrol, kerosene)
-4. **Crystalline structure** — regular geometric shapes`,
+---
+
+### Level 3: Displacement Reaction Ka Fundamental Rule
+
+> **"A metal placed HIGHER in the reactivity series can displace a metal placed LOWER from its aqueous salt solution."**
+> *(Upar wala metal neeche wale metal ko uske ghar (salt solution) se laat maarkar nikaal sakta hai, lekin neeche wala metal upar wale ko touch bhi nahi kar sakta!)*
+
+#### Case 1: Iron in Copper Sulphate ($Fe + CuSO_4$)
+- Reactivity check: Iron ($Fe$) is ABOVE Copper ($Cu$).
+- Result: **Reaction hoti hai!**
+  $$Fe(s) + CuSO_4(aq) [\\text{Blue}] \\to FeSO_4(aq) [\\text{Pale Green}] + Cu(s) [\\text{Reddish-Brown}]$$
+
+#### Case 2: Copper in Ferrous Sulphate ($Cu + FeSO_4$)
+- Reactivity check: Copper ($Cu$) is BELOW Iron ($Fe$).
+- Result: **NO REACTION!** Copper iron ko displace nahi kar sakta.
+
+#### Case 3: Reaction with Dilute Acids ($HCl / H_2SO_4$)
+- Jo metals **Hydrogen ($H$) se UPAR** hain ($K, Na, Ca, Mg, Al, Zn, Fe, Pb$), wo dilute acids se $H_2$ gas nikaal sakte hain:
+  $$Zn(s) + 2HCl(aq) \\to ZnCl_2(aq) + H_2(g) \\uparrow$$
+- Jo metals **Hydrogen se NEECHE** hain ($Cu, Hg, Ag, Au$), wo dilute acids se react **NAHI** karte:
+  $$Cu(s) + HCl(aq) \\to \\text{NO REACTION!}$$`,
       formulasOrKeyPoints: [
         {
-          title: "Electron Dot Structure of Ionic Bond Formation",
-          content: `**NaCl formation:**
-
-Na (2,8,1) donates 1e⁻ → Na⁺ (2,8) 
-Cl (2,8,7) accepts 1e⁻ → Cl⁻ (2,8,8)
-
-$$\\text{Na} \\cdot + \\cdot \\overset{\\cdot\\cdot}{\\underset{\\cdot\\cdot}{\\text{Cl}}} \\cdot \\to [\\text{Na}]^+ [\\overset{\\cdot\\cdot}{\\underset{\\cdot\\cdot}{\\text{Cl}}}:]^-$$
-
-**MgCl₂ formation:** 
-
-Mg (2,8,2) gives 2 electrons, one to each Cl
-→ Mg²⁺ + 2Cl⁻ → MgCl₂
-
-**Al₂O₃ formation:**
-
-Al (2,8,3) gives 3 electrons → Al³⁺
-O (2,6) takes 2 electrons → O²⁻
-2Al³⁺ + 3O²⁻ → Al₂O₃ (cross-swap valency rule!)`,
-          note: "Cross-multiplication rule: Mg²⁺ + O²⁻ → MgO (2÷2 simplifies to 1:1). But Al³⁺ + O²⁻ → Al₂O₃ (subscripts are 2 and 3 from the valencies 3 and 2)."
+          title: "Reactivity Hierarchy Rule",
+          content: "$$\\mathbf{K > Na > Ca > Mg > Al > Zn > Fe > Pb > [H] > Cu > Hg > Ag > Au}$$",
+          note: "Metals above H displace H₂ from dilute acids; metals below H do NOT."
+        }
+      ],
+      stepByStepGuide: [
+        {
+          stepNo: 1,
+          title: "Predict Displacement Outcome in 2 Steps",
+          action: "1. Locate free metal and bonded cation on the mnemonic: K-Na-Ca-Mg-Al-Zn-Fe-Pb-[H]-Cu-Hg-Ag-Au.\n2. If free metal is ABOVE, write displaced products. If free metal is BELOW, boldly write 'NO REACTION'.",
+          proTip: "Board papers love asking: 'What happens when a copper wire is dipped into silver nitrate solution?' Since Cu is above Ag, Cu displaces Ag: $Cu + 2AgNO_3 \\to Cu(NO_3)_2 + 2Ag$."
         }
       ],
       examinerTraps: [
         {
-          trap: "Saying ionic compounds conduct electricity in solid state.",
-          correction: "Ionic compounds DO NOT conduct electricity in solid state because the ions are fixed in the crystal lattice and cannot move. They conduct electricity only when DISSOLVED in water (aq) or when MELTED (molten) — because only then do the ions become free to move."
+          trap: "Writing $Cu + H_2SO_4(dil) \\to CuSO_4 + H_2$.",
+          correction: "Copper lies below hydrogen. It NEVER displaces hydrogen gas from dilute sulphuric acid!"
         }
       ]
     },
     {
-      id: "extraction_metals",
-      label: "4. Occurrence & Extraction of Metals",
-      heading: "From Ore to Pure Metal — The Metallurgy Journey",
-      subheading: "Minerals, Ores, Gangue + Concentration + Reduction + Refining",
-      explanation: `**Key Terms:**
-- **Mineral:** A naturally occurring substance containing metals (many exist but not all are economically viable)
-- **Ore:** A mineral from which a metal can be profitably extracted
-- **Gangue (Matrix):** The earthly impurities mixed with the ore (sand, clay, rocks)
+      id: "ionic_bonding_properties",
+      label: "4. Ionic Bonding: Electron Dot Structures & Crystal Lattice Properties",
+      heading: "How Salts Are Born Through Electron Transfer & Why They Conduct in Molten State",
+      subheading: "Lewis Dot Diagrams ($NaCl, MgCl_2, CaO$) + 4 Physical Properties of Ionic Compounds",
+      explanation: `### Level 1: Ionic (Electrovalent) Bond Kaise Banta Hai?
 
-**Steps in Extraction of Metals:**
+Metals chahte hain electron loose karna (Cation banna) aur Non-metals chahte hain electron gain karna (Anion banna).
+Jab ek metal atom se ek ya zyada electrons **completely transfer** hokar non-metal atom ke paas chale jaate hain, toh dono par opposite charges ($+$ aur $-$) aa jaate hain. Ye opposite charges ek-doosre ko powerful electrostatic force se attract karte hain — is bond ko **Ionic Bond (Electrovalent Bond)** kehte hain!
 
-**Step 1 — Concentration of Ore (Enrichment):**
-Remove gangue from ore. Methods:
-- **Gravity separation** (dense metal sinks, light gangue floats)
-- **Froth flotation** (ore particles stick to froth, gangue sinks — used for sulphide ores)
-- **Magnetic separation** (for magnetic ores like Fe₃O₄)
-- **Chemical leaching** (dissolve ore in chemical reagent — Bauxite/Al ore leached with NaOH)
+---
 
-**Step 2 — Converting Concentrated Ore into Metal Oxide:**
-It is much easier to reduce a metal oxide to metal than a sulphide or carbonate ore.
-- **Roasting (for Sulphide Ores):** Strongly heating the ore in the **EXCESS** presence of air:
-  $$2\\text{ZnS(s) [Zinc Blende]} + 3\\text{O}_2\\text{(g)} \\xrightarrow{\\Delta} 2\\text{ZnO(s)} + 2\\text{SO}_2\\text{(g)}\\uparrow$$
-  $$2\\text{HgS(s) [Cinnabar]} + 3\\text{O}_2\\text{(g)} \\xrightarrow{\\Delta} 2\\text{HgO(s)} + 2\\text{SO}_2\\text{(g)}\\uparrow$$
-  $$2\\text{HgO(s)} \\xrightarrow{\\Delta} 2\\text{Hg(l)} + \\text{O}_2\\text{(g)}$$
-- **Calcination (for Carbonate Ores):** Strongly heating the ore in the **LIMITED or ABSENCE** of air:
-  $$\\text{ZnCO}_3\\text{(s) [Calamine]} \\xrightarrow{\\Delta} \\text{ZnO(s)} + \\text{CO}_2\\text{(g)}\\uparrow$$
+### Level 2: Top 3 Electron-Dot Structures for Board Exams
 
-**Step 3 — Reduction of Metal Oxide to Metal:**
-- **Reduction with Carbon (Coke):**
-  $$\\text{ZnO(s)} + \\text{C(s)} \\xrightarrow{\\Delta} \\text{Zn(s)} + \\text{CO(g)}\\uparrow$$
-- **Blast Furnace Reduction for Iron:**
-  $$\\text{Fe}_2\\text{O}_3\\text{(s)} + 3\\text{CO(g)} \\xrightarrow{\\Delta} 2\\text{Fe(l)} + 3\\text{CO}_2\\text{(g)}\\uparrow$$
-- **Thermite Reaction (Aluminothermy for welding railway tracks):**
-  $$\\text{Fe}_2\\text{O}_3\\text{(s)} + 2\\text{Al(s)} \\xrightarrow{\\text{Ignition}} 2\\text{Fe(l)} + \\text{Al}_2\\text{O}_3\\text{(s)} + \\text{Heat (3000^\\circ\\text{C})}$$
-  The enormous heat melts the iron metal, which flows into and welds the cracked rails.
-- **Electrolytic Reduction (for high-reactivity metals K, Na, Ca, Mg, Al):**
-  These metals have higher affinity for oxygen than carbon does, so carbon cannot reduce them!
-  $$2\\text{Al}_2\\text{O}_3\\text{(l)} \\xrightarrow{\\text{Electrolysis}} 4\\text{Al(l) [Cathode]} + 3\\text{O}_2\\text{(g) [Anode]}$$
-  (Molten cryolite $\\text{Na}_3\\text{AlF}_6$ is added to lower the melting point of alumina from 2045°C to ~1000°C and increase conductivity).
+#### 1. Formation of Sodium Chloride ($NaCl$):
+- Sodium atom ($Na = 11$): Electronic configuration $= 2, 8, 1$.
+  $$Na \\to Na^+ (2,8) + e^-$$
+- Chlorine atom ($Cl = 17$): Electronic configuration $= 2, 8, 7$.
+  $$Cl + e^- \\to Cl^- (2,8,8)$$
+- Electron transfer representation:
+  $$Na^{\\bullet} + \\quad :\\!\\!\\ddot{Cl}\\!: \\quad \\to [Na]^+ [:!\\!\\ddot{Cl}\\!:]^- \\implies NaCl$$
 
-**Step 4 — Electrolytic Refining (Purification):**
-- **Anode (+):** Impure copper rod: $\\text{Cu(s)} \\to \\text{Cu}^{2+}\\text{(aq)} + 2e^-$
-- **Cathode (−):** Pure copper strip: $\\text{Cu}^{2+}\\text{(aq)} + 2e^- \\to \\text{Cu(s)}$ (pure copper deposits)
-- **Electrolyte:** Acidified copper sulphate ($\\text{CuSO}_4$) solution.
-- **Anode mud:** Insoluble noble impurities (Ag, Au, Pt) settle at the bottom below the anode.`,
+#### 2. Formation of Magnesium Chloride ($MgCl_2$):
+- Magnesium atom ($Mg = 12$): Electronic configuration $= 2, 8, 2$. Iske paas 2 extra electrons hain daan dene ke liye:
+  $$Mg \\to Mg^{2+} (2,8) + 2e^-$$
+- Chlorine atom ($Cl = 17$) sirf 1 electron le sakta hai. Isiliye $Mg$ ke 2 electrons lene ke liye **2 Chlorine atoms** aate hain:
+  $$2Cl + 2e^- \\to 2Cl^- (2,8,8)$$
+- Electron transfer:
+  $$Mg^{\\bullet\\bullet} + 2\\ [:!\\!\\ddot{Cl}\\!:] \\to [Mg]^{2+} 2[:!\\!\\ddot{Cl}\\!:]^- \\implies MgCl_2$$
+
+#### 3. Formation of Calcium Oxide ($CaO$):
+- Calcium ($Ca = 20$): $2,8,8,2 \\to Ca^{2+} + 2e^-$
+- Oxygen ($O = 8$): $2,6 + 2e^- \\to O^{2-}$
+- Transfer:
+  $$Ca^{\\bullet\\bullet} + \\ddot{O}: \\to [Ca]^{2+} [:!\\!\\ddot{O}\\!:]^{2-} \\implies CaO$$
+
+---
+
+### Level 3: Properties of Ionic Compounds (Direct 3-Mark Question)
+
+1. **Physical Nature (Hard & Brittle):**
+   - Opposite ions ($+$ aur $-$) ke beech bahut strong electrostatic forces of attraction hote hain, isiliye ionic compounds **hard crystalline solids** hote hain.
+   - Ye **brittle (bhangur)** hote hain: jab hammer se hit karte hain, toh same-charge ions ek doosre ke saamne aa jaate hain aur repulsion ke karan crystal shatter ho jata hai.
+2. **High Melting and Boiling Points:**
+   - Giant 3D crystal lattice mein strong ionic bonds ko todne ke liye **huge amount of thermal energy** chahiye hoti hai ($NaCl$ melting point = $801^\\circ\\text{C}$ / $1074\\text{ K}$).
+3. **Solubility:**
+   - Generally **water soluble** hote hain (polar solvent paani ions ko alag kar deta hai).
+   - Insoluble in non-polar organic solvents jaise kerosene, petrol, benzene.
+4. **Electrical Conductivity (The Classic CBSE Paradox!):**
+   - **Solid State Mein ZERO Conduction:** Solid crystal mein ions rigid lattice positions par locked hote hain, koi free mobile ion nahi hota $\\implies$ Solid $NaCl$ conducts NO electricity!
+   - **Molten State ya Aqueous Solution Mein EXCELLENT Conduction:** Paani mein gholne par ya pighlane (molten) par electrostatic bonds toot jaate hain aur $Na^+$ aur $Cl^-$ ions **free to move (mobile charge carriers)** ban jaate hain $\\implies$ Current easily flow karta hai!`,
       formulasOrKeyPoints: [
         {
-          title: "Corrosion Prevention Methods",
-          content: `**Corrosion** = slow destruction of metals by reaction with oxygen, moisture, acids.
+          title: "Ionic Bonding Diagnostic Checklist",
+          content: "$$\\begin{aligned} \\text{Bond Type:} &\\quad \\text{Complete transfer of electrons from Metal } (e^- \\text{ donor}) \\text{ to Non-Metal } (e^- \\text{ acceptor}) \\\\ \\text{Electrical Rule:} &\\quad \\text{Solid state} = \\text{Insulator} \\quad | \\quad \\text{Molten / Aqueous} = \\text{Conductor} \\end{aligned}$$",
+          note: "Examiner trap: 'Does solid dry NaCl conduct electricity?' Answer: No, due to absence of free mobile ions."
+        }
+      ],
+      stepByStepGuide: [
+        {
+          stepNo: 1,
+          title: "How to Draw Electron Dot Structures in Board Exam",
+          action: "1. Write electronic configurations: Na (2,8,1), Cl (2,8,7).\n2. Show ionization equations: $Na \\to Na^+ + e^-$ and $Cl + e^- \\to Cl^-$.\n3. Draw valence electrons as dots (•) or crosses (x) around symbols and show arrow transferring electron.\n4. Write final ionic brackets: $[Na]^+ [Cl]^-$.",
+          proTip: "Use dots for metal electrons and crosses (x) for non-metal electrons to make the transfer obvious to the examiner."
+        }
+      ],
+      examinerTraps: [
+        {
+          trap: "Writing that ionic compounds conduct electricity in solid state because they have ions.",
+          correction: "Having ions is not enough! Ions must be FREE TO MOVE. In solid state, ions are locked in fixed positions by strong electrostatic forces. They conduct electricity ONLY in molten state or aqueous solution."
+        }
+      ]
+    },
+    {
+      id: "metallurgy_ores_refining",
+      label: "5. Metallurgy: From Muddy Ore to 99.99% Pure Metal",
+      heading: "Minerals, Ores, Gangue + Roasting vs Calcination + Thermite + Electrolytic Refining",
+      subheading: "Complete Metallurgical Journey Across High, Medium & Low Reactivity Metals",
+      explanation: `### Level 1: Basic Metallurgical Vocabulary
 
-Iron + O₂ + H₂O → Fe₂O₃·xH₂O (Rust, reddish-brown)
+1. **Mineral (Khanij):** Earth's crust mein naturally milne wale compounds jisme metals present hote hain.
+2. **Ore (Ayyask):** Aise minerals jinse metal ko **kam kharche mein aur aasaani se profitably extract** kiya ja sake.
+   > *"All ores are minerals, but all minerals are not ores!"*
+   - E.g. Bauxite ($Al_2O_3 \\cdot 2H_2O$) is an ore of Aluminium; Cinnabar ($HgS$) is an ore of Mercury; Calamine ($ZnCO_3$) is an ore of Zinc.
+3. **Gangue (Matrix):** Ore ke saath khode gaye anchaahe kachra, sand, mitti, clay aur rocky impurities.
 
-**Prevention Methods:**
-| Method | How it works | Example |
-|--------|-------------|---------|
-| Painting | Physical barrier from air+water | Iron gates, ships |
-| Galvanisation | Zinc coat reacts first (sacrificial) | Buckets, pipes |
-| Tinning | Tin coating (food-safe) | Tin cans |
-| Electroplating | Chromium/nickel layer | Bicycle handlebars |
-| Alloying | Mix with non-corroding metals | Stainless steel (Fe+Cr+Ni) |
-| Sacrificial protection | More reactive metal attached (Mg, Zn) | Ship hulls |
+---
 
-**Galvanisation:** Zinc coat on iron works even if scratched — Zn is more reactive and gets oxidised first (sacrificial anode), protecting the iron underneath.`,
-          note: "Galvanisation protects iron even when the zinc layer is scratched. Tin plating does NOT protect if scratched — the exposed iron rusts even faster because tin is less reactive and acts as cathode, making iron the anode!"
+### Level 2: The Metallurgical Roadmap (3 Reactivity Tiers)
+
+Metal extraction uski position in reactivity series par depend karta hai:
+
+#### Tier 1: Low Reactivity Metals (Bottom: $Hg, Cu$)
+Inke oxides itne unstable hote hain ki **sirf simple heat karne se reduce ho jaate hain**!
+- **Extraction of Mercury from Cinnabar ($HgS$):**
+  - *Step 1 (Roasting):*
+    $$2HgS(s) [\\text{Cinnabar}] + 3O_2(g) \\xrightarrow{\\Delta} 2HgO(s) + 2SO_2(g) \\uparrow$$
+  - *Step 2 (Thermal Reduction):*
+    $$2HgO(s) \\xrightarrow{\\Delta} 2Hg(l) + O_2(g) \\uparrow$$
+
+---
+
+#### Tier 2: Medium Reactivity Metals (Middle: $Zn, Fe, Pb$)
+Ye nature mein Sulphide ya Carbonate ores ke roop mein milte hain.
+Metal oxides ko reduce karna zyada aasaan hota hai, isiliye pehle ore ko **Oxide** mein convert karte hain:
+
+> ⚖️ **Roasting vs Calcination (The Ultimate Board Comparison Table):**
+
+| Parameter | Roasting (Bharjan) | Calcination (Nistapan) |
+| :--- | :--- | :--- |
+| **Applicable Ore** | **Sulphide Ores** (e.g. Zinc Blende $ZnS$) | **Carbonate Ores** (e.g. Calamine $ZnCO_3$) |
+| **Air Supply** | **EXCESS presence of air** (Lots of $O_2$) | **LIMITED or ABSENCE of air** (Bandh bhatti) |
+| **Gas Evolved** | Choking **Sulphur dioxide ($SO_2$)** gas | Odorless **Carbon dioxide ($CO_2$)** gas |
+| **Desi Mnemonic** | **R** for Roasting = **R**equires Air + Sulphide | **C** for Calcination = **C**arbonate + **C**losed |
+| **Chemical Equation** | $$2ZnS(s) + 3O_2(g) \\xrightarrow{\\Delta} 2ZnO(s) + 2SO_2(g)$$ | $$ZnCO_3(s) \\xrightarrow{\\Delta} ZnO(s) + CO_2(g)$$ |
+
+#### Reducing Metal Oxide to Free Metal:
+1. **Using Carbon (Coke) as Reducing Agent:**
+   $$ZnO(s) + C(s) \\xrightarrow{\\Delta} Zn(s) + CO(g) \\uparrow$$
+2. **Thermite Reaction (Aluminothermy - Railway Track Welding):**
+   Kuch metal oxides ko carbon se reduce karne ke bajaye highly reactive **Aluminium powder** se reduce karte hain. Ye reaction itni fiercely exothermic hoti hai ki banne wala **loha (Iron) molten liquid state mein nikalta hai**:
+   $$Fe_2O_3(s) + 2Al(s) \\xrightarrow{\\text{Ignition}} 2Fe(l) [\\text{Molten Iron}] + Al_2O_3(s) + \\text{Immense Heat } (3000^\\circ\\text{C})$$
+   Ye molten iron sidhe cracked railway tracks ke gaps mein jakar jam jata hai aur track weld ho jata hai!
+
+---
+
+#### Tier 3: High Reactivity Metals (Top: $K, Na, Ca, Mg, Al$)
+- Ye metals oxygen aur chlorine se itna strong bond banate hain ki **Carbon inke oxygen ko cheen hi nahi sakta**!
+- Isiliye inka extraction sirf **Electrolytic Reduction of Molten Salts** se hota hai:
+  - *Electrolysis of Molten $NaCl$:*
+    - **Cathode ($-ve$):** $Na^+ + e^- \\to Na(l)$ [Metal deposits at Cathode]
+    - **Anode ($+ve$):** $2Cl^- \\to Cl_2(g) + 2e^-$ [Chlorine gas escapes at Anode]
+
+---
+
+### Level 3: Electrolytic Refining of Copper (100% Guaranteed 3-Mark Question)
+
+Impure crude copper ko 99.99% pure banane ke liye electrolytic cell banaya jata hai:
+- **Anode ($+ve$ Electrode):** Mota impure copper ka slab (Thick slab of Impure Copper).
+- **Cathode ($-ve$ Electrode):** Patli pure copper ki strip (Thin strip of Pure Copper).
+- **Electrolyte:** Acidified Copper Sulphate ($CuSO_4$) solution.
+
+#### Cell Reactions:
+1. **At Anode:** Impure copper ghul kar solution mein $Cu^{2+}$ ions banta hai:
+   $$Cu(s) [\\text{Impure Anode}] \\to Cu^{2+}(aq) + 2e^-$$
+2. **At Cathode:** Solution ke $Cu^{2+}$ ions cathode par jakar electrons le lete hain aur pure copper metal bankar deposit ho jaate hain:
+   $$Cu^{2+}(aq) + 2e^- \\to Cu(s) [\\text{Deposited on Cathode}]$$
+3. **Anode Mud (Anode Pank):** Impure copper mein maujood soluble impurities solution mein ghul jaati hain, jabki insoluble valuable noble metals (**Gold $Au$, Silver $Ag$, Platinum $Pt$**) anode ke theek neeche floor par settle ho jaate hain — jise **Anode Mud** kehte hain!`,
+      formulasOrKeyPoints: [
+        {
+          title: "Roasting & Calcination Master Equations",
+          content: "$$\\begin{aligned} \\text{Roasting (Sulphide + Air):} &\\quad 2ZnS + 3O_2 \\xrightarrow{\\Delta} 2ZnO + 2SO_2 \\uparrow \\\\ \\text{Calcination (Carbonate in no air):} &\\quad ZnCO_3 \\xrightarrow{\\Delta} ZnO + CO_2 \\uparrow \\\\ \\text{Thermite Reaction:} &\\quad Fe_2O_3 + 2Al \\to 2Fe(l) + Al_2O_3 + \\text{Heat} \\end{aligned}$$",
+          note: "Remember: Roasting releases SO₂; Calcination releases CO₂."
         },
         {
-          title: "CBSE Board Master Guide: Commercial Alloys",
-          content: `An **alloy** is a homogeneous mixture of two or more metals, or a metal and a non-metal.
-
-| Alloy | Constituent Elements | Key Property | Common Applications |
-|-------|----------------------|--------------|---------------------|
-| **Brass** | Copper + Zinc (Cu + Zn) | Malleable, corrosion resistant | Musical instruments, decorative hardware |
-| **Bronze** | Copper + Tin (Cu + Sn) | Tough, low friction, resonant | Medals, statues, bells, coins |
-| **Solder** | Lead + Tin (Pb + Sn) | Exceptionally low melting point | Welding and joining electrical wires |
-| **Stainless Steel** | Iron + Nickel + Chromium + Carbon (Fe+Ni+Cr+C) | Extremely hard, zero rusting | Surgical instruments, cookware, cutlery |
-| **Amalgam** | Liquid Mercury + Other metal (Hg + Ag/Sn) | Malleable paste that hardens | Dental fillings |
-| **22-Karat Gold** | 22 parts Gold + 2 parts Copper or Silver | Rigid, hard (24K pure gold is too soft) | Making durable jewelry |`,
-          note: "CBSE Board Examiner Mnemonic: 'BroNZ' contains 'Z' in sound, so it does NOT have Zinc — Bronze is Cu + Sn. 'BraSS' has two 'S's and pairs with Zinc (Cu + Zn)."
+          title: "Electrolytic Refining Cell Setup Checklist",
+          content: "$$\\begin{aligned} \\text{Anode (+):} &\\quad \\text{Impure metal slab (gets thinner)} \\\\ \\text{Cathode (-):} &\\quad \\text{Pure metal strip (gets thicker)} \\\\ \\text{Electrolyte:} &\\quad \\text{Acidified } CuSO_4 \\text{ solution} \\\\ \\text{Anode Mud:} &\\quad \\text{Insoluble impurities } (Ag, Au, Pt) \\text{ below anode} \\end{aligned}$$",
+          note: "Electrons flow from anode to cathode; pure copper mass increases on the cathode strip."
+        }
+      ],
+      stepByStepGuide: [
+        {
+          stepNo: 1,
+          title: "Label Electrolytic Refining Diagram Accurately",
+          action: "1. Positive terminal connects to thick impure anode.\n2. Negative terminal connects to thin pure cathode.\n3. Show acidified $CuSO_4$ solution.\n4. Clearly mark 'Anode Mud' directly under the anode.",
+          proTip: "CBSE gives 1 mark just for identifying the anode and cathode materials."
         }
       ],
       examinerTraps: [
@@ -405,102 +456,102 @@ Iron + O₂ + H₂O → Fe₂O₃·xH₂O (Rust, reddish-brown)
           correction: "Mnemonic: Calcination starts with 'C' for Carbonate ores, requiring limited/no air and releasing CO₂. Roasting is for Sulphide ores, requiring excess air (O₂) and releasing SO₂ gas."
         },
         {
-          trap: "Thinking gold and silver are found as ores that need chemical extraction.",
-          correction: "Gold and silver are so unreactive that they occur in FREE STATE (native state) in nature. They don't need chemical reduction — just physical separation (panning, crushing). Only moderately and highly reactive metals need chemical extraction from ores."
+          trap: "Saying reactive metals like Sodium or Aluminium can be reduced using carbon/coke.",
+          correction: "Sodium and Aluminium have far greater affinity for oxygen than carbon does. Carbon CANNOT reduce their oxides. They can only be extracted by electrolytic reduction of molten salts."
         }
       ]
     },
     {
-      id: "corrosion_alloys",
-      label: "5. Corrosion of Metals, Rusting Setup & Industrial Alloys",
-      heading: "Activity 3.14 (3 Test-Tubes Rusting Setup), Galvanisation & Engineered Alloys",
-      subheading: "Conditions for Corrosion + Sacrificial Zinc Protection + Brass, Bronze, Solder, Stainless Steel, Amalgam & 22-Carat Gold",
-      explanation: `### Part A: Conditions for Corrosion & Activity 3.14 (3 Test-Tubes Experiment)
-Corrosion of iron (rusting) requires the **simultaneous presence of both air (oxygen) and water (moisture)**.
-In NCERT **Activity 3.14**, clean iron nails are placed in three separate test tubes:
+      id: "corrosion_alloys_engineered_materials",
+      label: "6. Corrosion Investigation (Activity 3.14) & Commercial Alloys",
+      heading: "The 3 Test-Tubes Rusting Setup & Engineered Intermetallic Alloys",
+      subheading: "Galvanisation Sacrificial Science + Brass, Bronze, Solder, Stainless Steel, Amalgam & 22K Gold",
+      explanation: `### Level 1: Conditions for Rusting — NCERT Activity 3.14
 
-| Test Tube | Contents & Experimental Environment | Observation after Several Days | Scientific Inference |
+Lohe par zang lagne ke liye kya chahiye? NCERT ne 3 test-tubes ka landmark experiment design kiya:
+
+| Test Tube | Contents & Condition | Observation After 1 Week | Scientific Inference |
 | :--- | :--- | :--- | :--- |
-| **Test Tube A** | Clean iron nails half-submerged in tap water with air in the upper space. | Nails **rust heavily**, covered in reddish-brown flaky hydrated iron(III) oxide ($Fe_2O_3 \\cdot xH_2O$). | **Both air and water are present** $\\rightarrow$ Ideal conditions for rusting. |
-| **Test Tube B** | Boiled distilled water (boiling removes dissolved air) + a layer of **oil** poured on top. | Nails **do NOT rust** at all; stay completely shiny. | Oil barrier prevents atmospheric oxygen from dissolving into boiled water. **Water alone without oxygen cannot cause rust.** |
-| **Test Tube C** | Completely dry air + a lump of **anhydrous calcium chloride ($CaCl_2$)** with a tight rubber cork. | Nails **do NOT rust** at all; stay completely shiny. | Anhydrous $CaCl_2$ absorbs all ambient moisture/humidity. **Oxygen alone without water cannot cause rust.** |
+| **Test Tube A** | Clean iron nails half-submerged in tap water + hawa maujood hai | Nails par **heavy reddish-brown rust** lag gaya | **Both Air (Oxygen) and Water (Moisture) are strictly required** for rusting! |
+| **Test Tube B** | **Boiled distilled water** (boiling se dissolved air nikal jaati hai) + upar se **oil ki layer** daal di | Nails bilkul shiny hain, **NO RUST** | Oil ki layer hawa ki oxygen ko paani mein dissolve nahi hone deti. **Sirf paani bina oxygen ke zang nahi laga sakta!** |
+| **Test Tube C** | Sukhi hawa + **Anhydrous Calcium Chloride ($CaCl_2$)** ka tukda + tight cork | Nails bilkul shiny hain, **NO RUST** | Anhydrous $CaCl_2$ test-tube ki saari moisture sokh leta hai (drying agent). **Sirf oxygen bina moisture ke zang nahi laga sakti!** |
 
 ---
 
-### Part B: Prevention of Corrosion
-1. **Barrier Protection:** Coating surface with paint, enamel, oil, or grease to prevent contact with air and moisture.
-2. **Galvanisation:**
-   - The process of coating iron and steel articles with a thin protective layer of **molten Zinc ($Zn$)**.
-   - **Why Galvanised Iron Does Not Rust Even When Scratched:**
-     - Zinc has a higher standard oxidation potential than iron (Zinc is more reactive).
-     - When the surface is scratched or exposed, zinc oxidizes sacrificially to form zinc oxide/carbonate:
-$$Zn \\rightarrow Zn^{2+} + 2e^-$$
-     - These electrons flow to the iron, preventing $Fe$ atoms from losing electrons and oxidizing into $Fe^{2+}$. This is known as **Sacrificial Anodic Protection**.
-3. **Anodising:** Electrolytically forming a thick, dense, corrosion-resistant oxide layer on aluminium ($Al_2O_3$).
-4. **Electroplating / Tinning / Chrome Plating:** Depositing thin layers of non-corrosive metals like tin or chromium onto steel.
+### Level 2: Prevention of Corrosion & Galvanisation Science
+
+1. **Barrier Methods:** Painting, oiling, greasing, enamelling (surface ko hawa aur paani se alag rakhna).
+2. **Galvanisation (CBSE Gold Question):**
+   - Lohe aur steel ke articles par **pighle hue Zinc ($Zn$) ki patli layer** chadhana.
+   - *Question: Agar galvanised surface par gehra scratch lag jaye, tab bhi loha kyun nahi rust karta?*
+   - *Answer:* Zinc reactivity series mein lohe ($Fe$) se upar baitha hai (Zinc is more electropositive than iron). Scratch hone ke bawjood, **Zinc khud pehle oxidise hota hai (sacrificially corrodes)**:
+     $$Zn \\to Zn^{2+} + 2e^-$$
+     Ye electrons lohe ke atoms ko oxidize hone se rokte hain! Isko **Sacrificial Anodic Protection** kehte hain!
+   - *Contrast with Tin plating:* Agar Tin ($Sn$) ki layer scratch ho jaye, toh loha tin se zyada reactive hone ke karan **pehle se bhi 10 guna tez speed se zang pakadta hai**!
+3. **Anodising:** Aluminium articles par electrolysis ke through $Al_2O_3$ ki moti, corrosion-proof aur decorative oxide layer chadhana.
 
 ---
 
-### Part C: The Science of Alloys & Intermetallic Engineering
-An **alloy** is a **homogeneous mixture** of two or more metals, or a metal and a non-metal.
-- **Preparation Method:** The primary metal is melted first, and other constituent elements are dissolved into it in definite stoichiometric proportions, followed by controlled cooling to room temperature.
-- **Why Alloy Metals?** Pure iron is soft and stretches easily when hot. When mixed with a small amount of carbon (about **0.05%**), it becomes immensely hard and strong.
+### Level 3: The World of Alloys (Mishradhaatu)
 
-#### Benchmark CBSE Industrial Alloys:
-1. **Stainless Steel:**
-   - **Composition:** Iron ($Fe$) + Nickel ($Ni$) + Chromium ($Cr$) + Carbon ($C \\sim 0.1\\%–0.5\\%$).
-   - **Properties:** Extremely hard, resilient, and **does NOT rust at all**. Used in surgical instruments, utensils, industrial reaction vessels.
-2. **Brass:**
-   - **Composition:** Copper ($Cu$, ~70%) + Zinc ($Zn$, ~30%).
-   - **Properties:** Malleable, acoustic resonance, low electrical conductivity compared to pure copper. Used in musical instruments, decorative hardware, plumbing fittings.
-3. **Bronze:**
-   - **Composition:** Copper ($Cu$, ~90%) + Tin ($Sn$, ~10%).
-   - **Properties:** Tough, highly resistant to saltwater corrosion, does not conduct electricity as well as pure copper. Used in statues, coins, medals, ship propellers.
-4. **Solder:**
-   - **Composition:** Lead ($Pb$, ~50%) + Tin ($Sn$, ~50%).
-   - **Properties:** Has a **very low melting point** (~183°C).
-   - **Application:** Indispensable in electrical engineering for **welding electrical wires and circuit board components**.
+> **Definition:** Do ya do se zyada metals, ya metal aur non-metal ka **Homogeneous Mixture** jise unki properties (hardness, strength, corrosion resistance) improve karne ke liye banaya jata hai.
+
+- Pure Iron bahut soft hota hai aur garam hone par aasani se khinch jata hai. Lekin jab isme sirf **0.05% Carbon** mila dete hain, toh ye rock-hard aur immensely strong ban jata hai!
+
+#### All 6 CBSE Benchmark Commercial Alloys:
+
+1. **Brass (Peetal):**
+   - **Composition:** Copper ($Cu$, 70%) + Zinc ($Zn$, 30%)
+   - **Property:** Malleable, beautiful golden shine, acoustic resonance.
+   - **Uses:** Musical instruments (trumpets), decorative statues, utensils, nuts & bolts.
+2. **Bronze (Kansa):**
+   - **Composition:** Copper ($Cu$, 90%) + Tin ($Sn$, 10%)
+   - **Property:** Extremely tough, friction-resistant, saltwater corrosion proof.
+   - **Uses:** Medals, statues, temple bells, ship propellers.
+   - 🧠 *Memory Trick:* **BroNZ** has 'Z' in sound, so it does NOT contain Zinc! Bronze pairs with Tin ($Sn$). **BraSS** has two 'S's, pairs with Zinc ($Zn$).
+3. **Solder (Taanka):**
+   - **Composition:** Lead ($Pb$, 50%) + Tin ($Sn$, 50%)
+   - **Property:** **Exceptionally LOW melting point** (~$183^\\circ\\text{C}$).
+   - **Uses:** Electrical circuit boards mein wires ko aapas mein **weld (jodne)** ke liye solder wire use hoti hai.
+4. **Stainless Steel:**
+   - **Composition:** Iron ($Fe$) + Nickel ($Ni$) + Chromium ($Cr$) + Carbon ($C \\sim 0.1\\% - 0.5\\%$)
+   - **Property:** Super hard, scratches nahi padte, aur **life-time rust-proof**!
+   - **Uses:** Surgical knives, kitchen utensils, cookware, industrial tanks.
 5. **Amalgam:**
-   - An alloy in which **one of the constituent metals is Mercury ($Hg$)**.
-   - E.g. Dental amalgam ($Hg + Ag + Sn + Cu$) for tooth fillings; Sodium amalgam ($Na-Hg$) as a reducing agent.
+   - **Definition:** Koi bhi aisa alloy jisme **ek constituent metal Liquid Mercury ($Hg$)** ho.
+   - **Example:** Dental amalgam ($Hg + Ag + Sn$) daanton ki cavity bharne ke liye; Sodium amalgam ($Na-Hg$) lab reducing agent.
 6. **Purity of Gold (24-Carat vs 22-Carat):**
-   - **Pure Gold (24-carat):** Extremely soft, ductile, and easily deforms under slight pressure. Unsuitable for crafting fine jewellery.
+   - **Pure 24-Carat Gold:** Extremely soft and malleable hota hai. Iske gehne banayein toh thoda sa dabane par hi shape kharab ho jaayegi!
    - **22-Carat Gold:** 22 parts by mass of pure gold alloyed with **2 parts of either Copper ($Cu$) or Silver ($Ag$)**.
-   - The addition of copper or silver hardens the crystal lattice by interstitial distortion, preventing deformation and making it ideal for durable ornaments.`,
+   - Ye copper/silver gold ke crystal lattice ko lock kar dete hain, jisse ornaments hard, durable aur long-lasting bante hain!`,
       formulasOrKeyPoints: [
         {
-          title: "CBSE Master Alloy Composition Table",
-          content: "$$\\begin{aligned} \\text{Brass:} &\\quad Cu (\\text{Copper}) + Zn (\\text{Zinc}) \\\\ \\text{Bronze:} &\\quad Cu (\\text{Copper}) + Sn (\\text{Tin}) \\\\ \\text{Solder:} &\\quad Pb (\\text{Lead}) + Sn (\\text{Tin}) \quad [\\text{Low Melting Point}] \\\\ \\text{Stainless Steel:} &\\quad Fe (\\text{Iron}) + Ni (\\text{Nickel}) + Cr (\\text{Chromium}) + C \\\\ \\text{Amalgam:} &\\quad \\text{Any Metal} + Hg (\\text{Mercury}) \\\\ \\text{22-Carat Gold:} &\\quad 22/24 \\text{ Gold} + 2/24 (Cu \\text{ or } Ag) \\end{aligned}$$",
-          note: "Questions frequently ask to state constituents of Brass, Bronze, and Solder, and explain why Solder is used for welding."
+          title: "Master CBSE Commercial Alloy Composition Table",
+          content: "$$\\begin{aligned} \\text{Brass:} &\\quad Cu (\\text{Copper}) + Zn (\\text{Zinc}) \\\\ \\text{Bronze:} &\\quad Cu (\\text{Copper}) + Sn (\\text{Tin}) \\\\ \\text{Solder:} &\\quad Pb (\\text{Lead}) + Sn (\\text{Tin}) \\quad [\\text{Low Melting Point for Electrical Welding}] \\\\ \\text{Stainless Steel:} &\\quad Fe (\\text{Iron}) + Ni (\\text{Nickel}) + Cr (\\text{Chromium}) + C \\\\ \\text{Amalgam:} &\\quad \\text{Any Metal} + Hg (\\text{Mercury}) \\\\ \\text{22-Carat Gold:} &\\quad 22/24 \\text{ Gold} + 2/24 (Cu \\text{ or } Ag) \\end{aligned}$$",
+          note: "Board question: 'Which property of solder makes it suitable for welding electrical wires?' Answer: Its exceptionally low melting point."
         },
         {
-          title: "Rusting Condition Audit Formula",
-          content: "$$4Fe(s) + 3O_2(g) + 2xH_2O(l) \\rightarrow 2Fe_2O_3 \\cdot xH_2O(s) \quad [\\text{Rust}]$$",
-          note: "Rusting is an electrochemical oxidation; absence of either water or oxygen brings reaction rate to zero."
+          title: "Rust Chemical Formula & Conditions",
+          content: "$$4Fe(s) + 3O_2(g) + 2xH_2O(l) \\to 2Fe_2O_3 \\cdot xH_2O(s) \\quad [\\text{Hydrated Ferric Oxide}]$$",
+          note: "Rusting requires SIMULTANEOUS presence of both moisture (H₂O) and oxygen (O₂)."
         }
       ],
       stepByStepGuide: [
         {
           stepNo: 1,
-          title: "Explain Activity 3.14 Observations",
-          action: "Point out Test Tube A (water + air = rusts), Test Tube B (boiled water + oil layer = no rust, oxygen absent), Test Tube C (dry air + anhydrous CaCl2 = no rust, moisture absent).",
-          proTip: "Mention the role of anhydrous $CaCl_2$ as a drying agent that absorbs atmospheric moisture."
-        },
-        {
-          stepNo: 2,
-          title: "Explain Why Galvanised Iron Resists Rust Even After Scratches",
-          action: "State clearly: Zinc is more electropositive than iron. Zinc oxidizes preferentially, providing sacrificial protection to the underlying steel by transferring electrons.",
-          proTip: "Contrast with tin plating: if tin (less reactive than iron) is scratched, iron corrodes even faster."
+          title: "Answer Activity 3.14 Three Test Tubes Experiment",
+          action: "1. Tube A (Water + Air): Nails rust heavily (both conditions fulfilled).\n2. Tube B (Boiled water + Oil seal): No rust (oxygen excluded).\n3. Tube C (Dry air + Anhydrous CaCl2): No rust (moisture excluded).",
+          proTip: "Always mention the role of anhydrous $CaCl_2$ as a drying agent and boiled water + oil layer as an oxygen barrier."
         }
       ],
       examinerTraps: [
         {
-          trap: "Confusing the compositions of Brass and Bronze.",
-          correction: "Remember: **B**rass has **Z**inc ($Cu + Zn$). **B**ronze has **T**in ($Cu + Sn$)."
+          trap: "Writing that Brass is Copper + Tin and Bronze is Copper + Zinc.",
+          correction: "Mnemonic: BroNZ has 'Z' in sound -> contains NO Zinc (Bronze = Cu + Sn). Brass = Cu + Zn."
         },
         {
           trap: "Stating that pure 24-carat gold is used for making fine jewellery.",
-          correction: "24-carat gold is too soft and malleable. It must be alloyed with 2 parts copper or silver (22-carat gold) to impart hardness and structural strength."
+          correction: "24-carat gold is far too soft and deforms easily. It must be alloyed with 2 parts copper or silver (22-carat gold) to impart structural hardness."
         }
       ]
     }
