@@ -50,6 +50,13 @@ export async function POST(req: NextRequest) {
 
     const fullBuffer = Buffer.concat(chunks);
 
+    if (fullBuffer.length === 0) {
+      return NextResponse.json(
+        { error: "Empty audio buffer, fallback to client speech" },
+        { status: 503 }
+      );
+    }
+
     return new NextResponse(fullBuffer, {
       status: 200,
       headers: {
@@ -59,10 +66,10 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (error: any) {
-    console.error("API TTS Error:", error);
+    console.warn("API TTS Fallback:", error?.message);
     return NextResponse.json(
       { error: error?.message || "Failed to generate speech audio" },
-      { status: 500 }
+      { status: 503 }
     );
   }
 }

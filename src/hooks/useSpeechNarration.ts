@@ -65,6 +65,23 @@ const STUDIO_NEURAL_VOICES: SpeechVoiceOption[] = [
   },
 ];
 
+function getTeacherPauseDuration(text: string): number {
+  const t = text.trim();
+  if (t.endsWith("?") || t.includes("think") || t.includes("samajhiye")) {
+    return 700; // Deep reflective pause for student comprehension
+  }
+  if (t.includes("Warning") || t.includes("Examiner Trap") || t.includes("Caution")) {
+    return 750; // Alert pause
+  }
+  if (t.endsWith("...") || t.endsWith("—")) {
+    return 500; // Conversational pause
+  }
+  if (t.endsWith(".") || t.endsWith("!")) {
+    return 350; // Natural sentence breath
+  }
+  return 200; // Phrase beat
+}
+
 export function useSpeechNarration() {
   const [voices, setVoices] = useState<SpeechVoiceOption[]>(STUDIO_NEURAL_VOICES);
   const [selectedVoiceId, setSelectedVoiceId] = useState<string>("en-IN-NeerjaExpressiveNeural");
@@ -88,6 +105,7 @@ export function useSpeechNarration() {
   const preloadedAudioRef = useRef<{ index: number; audio: HTMLAudioElement; url: string } | null>(null);
   const activeBlobUrlRef = useRef<string | null>(null);
   const keepAliveIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // 1. Discover local browser voices as fallback
   useEffect(() => {
@@ -165,6 +183,11 @@ export function useSpeechNarration() {
     setCurrentChunkIndex(0);
     setTotalChunks(0);
     setCurrentSpokenText("");
+
+    if (pauseTimerRef.current) {
+      clearTimeout(pauseTimerRef.current);
+      pauseTimerRef.current = null;
+    }
 
     // Stop HTML5 Audio
     if (currentAudioRef.current) {
@@ -295,7 +318,10 @@ export function useSpeechNarration() {
         audio.onended = () => {
           if (isPlayingRef.current && !isPausedRef.current) {
             chunkIndexRef.current += 1;
-            playNextChunk();
+            const pauseMs = getTeacherPauseDuration(chunkText);
+            pauseTimerRef.current = setTimeout(() => {
+              playNextChunk();
+            }, pauseMs);
           }
         };
 
@@ -319,17 +345,42 @@ export function useSpeechNarration() {
     // PATH B: Local Browser Web Speech API
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(chunkText);
-      if (activeVoiceOption.browserVoice) {
-        utterance.voice = activeVoiceOption.browserVoice;
+
+      // Smart Voice Resolution: If activeVoice is studio or has no direct browserVoice,
+      // pick the best natural Indian/Hindi voice available on device!
+      let voiceToUse = activeVoiceOption.browserVoice;
+      if (!voiceToUse) {
+        const availableBrowserVoices = voices.filter((v) => v.browserVoice);
+        const bestMatch =
+          availableBrowserVoices.find(
+            (v) =>
+              v.browserVoice &&
+              (v.accent === activeVoiceOption.accent ||
+                (activeVoiceOption.accent === "Indian" &&
+                  (v.lang.includes("IN") || v.name.toLowerCase().includes("india"))))
+          ) ||
+          availableBrowserVoices.find((v) => v.accent === "Indian") ||
+          availableBrowserVoices[0];
+
+        voiceToUse = bestMatch?.browserVoice;
       }
-      utterance.rate = playbackRate;
-      utterance.volume = volume;
-      utterance.pitch = 1.0;
+
+      if (voiceToUse) {
+        utterance.voice = voiceToUse;
+      }
+
+      // Slightly elevated pitch & crisp articulation for loud, bright teacher clarity
+      utterance.rate = playbackRate * 0.95;
+      utterance.pitch = 1.05;
+      utterance.volume = Math.min(1.0, volume);
 
       utterance.onend = () => {
         if (isPlayingRef.current && !isPausedRef.current) {
           chunkIndexRef.current += 1;
-          playNextChunk();
+          const pauseMs = getTeacherPauseDuration(chunkText);
+          pauseTimerRef.current = setTimeout(() => {
+            playNextChunk();
+          }, pauseMs);
         }
       };
 
@@ -381,6 +432,11 @@ export function useSpeechNarration() {
   const pause = useCallback(() => {
     isPausedRef.current = true;
     setIsPaused(true);
+
+    if (pauseTimerRef.current) {
+      clearTimeout(pauseTimerRef.current);
+      pauseTimerRef.current = null;
+    }
 
     if (currentAudioRef.current) {
       currentAudioRef.current.pause();
