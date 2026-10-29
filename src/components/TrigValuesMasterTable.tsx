@@ -218,6 +218,12 @@ export default function TrigValuesMasterTable({ isDark = true }: TrigValuesMaste
         </div>
       )}
 
+      {/* Mobile Swipe Hint */}
+      <div className="sm:hidden px-4 py-1.5 text-[11px] font-medium text-slate-400 flex items-center justify-between border-b border-white/5 bg-white/[0.01]">
+        <span>Scroll table horizontally</span>
+        <span className="font-mono text-emerald-400">↔ Swipe</span>
+      </div>
+
       {/* Responsive Matrix Grid */}
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse min-w-[620px]">

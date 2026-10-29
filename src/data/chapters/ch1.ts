@@ -196,6 +196,141 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     examinerNote: "In Assertion-Reason questions, first check if Reason is mathematically true. Then verify Assertion. Finally verify if Reason is the formula used in Assertion.",
     source: "CBSE 2024 Standard Board Examination"
   },
+  {
+    id: "vq_1_mcq_9",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2021 Term-1, 2023 Standard] The ratio of LCM and HCF of the least composite number and the least prime number is:",
+    options: ["1 : 2", "2 : 1", "1 : 1", "1 : 3"],
+    correctOption: 1,
+    answer: "2 : 1",
+    steps: [
+      "Step 1: Identify the least prime number:\nThe least (smallest) prime number is 2.",
+      "Step 2: Identify the least composite number:\n1 is neither prime nor composite, 2 is prime, 3 is prime. The least composite number is 4.",
+      "Step 3: Find LCM(4, 2):\n4 = 2², 2 = 2¹ ⇒ LCM(4, 2) = 2² = 4.",
+      "Step 4: Find HCF(4, 2):\nHCF(4, 2) = 2¹ = 2.",
+      "Step 5: Calculate the required ratio LCM : HCF:\nRatio = LCM / HCF = 4 / 2 = 2 / 1 = 2 : 1."
+    ],
+    explanation: "Reason: The least prime number is 2 and the least composite number is 4. Their LCM is 4 and their HCF is 2. The required ratio of LCM to HCF is 4 : 2 = 2 : 1.\n• Warning: If asked HCF : LCM, the answer would be 1 : 2. Always note which quantity comes first in the ratio!",
+    formula: "\\text{Least Prime} = 2, \\; \\text{Least Composite} = 4 \\implies \\frac{\\text{LCM}(4, 2)}{\\text{HCF}(4, 2)} = \\frac{4}{2} = \\frac{2}{1}",
+    examinerNote: "Classic Board Trap: Students who invert the order choose 1:2 and lose the mark. Check the wording: 'Ratio of LCM and HCF' = LCM / HCF.",
+    source: "CBSE 2021 Term-1 & 2023 Standard (Set 30/3/1)"
+  },
+  {
+    id: "vq_1_mcq_10",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2020 Standard] The decimal representation of 14587 / 1250 will terminate after how many decimal places?",
+    options: ["1", "2", "3", "4"],
+    correctOption: 3,
+    answer: "4",
+    steps: [
+      "Step 1: Check if the fraction is in simplest form (coprime numerator and denominator):\nDenominator 1250 has only prime factors 2 and 5. Numerator 14587 is not divisible by 2 (odd) and does not end in 0 or 5 (not divisible by 5). Thus, HCF(14587, 1250) = 1 (simplest form).",
+      "Step 2: Prime factorise the denominator 1250:\n1250 = 125 × 10 = 5³ × (2 × 5) = 2¹ × 5⁴.",
+      "Step 3: Identify exponents m and n in 2ᵐ × 5ⁿ:\nExponent of 2 is m = 1\nExponent of 5 is n = 4",
+      "Step 4: Apply the termination rule:\nThe decimal expansion of a rational number p / (2ᵐ × 5ⁿ) terminates after max(m, n) decimal places.",
+      "Step 5: Calculate max(1, 4) = 4.\nTherefore, the decimal representation terminates after 4 decimal places."
+    ],
+    explanation: "Reason: By NCERT Theorem 1.6, the decimal expansion of p/q terminates after k places where k = max(m, n) in q = 2ᵐ × 5ⁿ. Here 1250 = 2¹ × 5⁴, so max(1, 4) = 4 places (specifically 14587 / 1250 = 11.6696).",
+    formula: "\\text{Decimal Places} = \\max(m, n) \\quad \\text{for } q = 2^m \\times 5^n",
+    examinerNote: "Do NOT perform long division! Directly express denominator as 2ᵐ × 5ⁿ and pick the larger exponent: max(1, 4) = 4.",
+    source: "CBSE Board 2020 Standard"
+  },
+  {
+    id: "vq_1_mcq_11",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2019, 2023 Standard] If LCM(x, 18) = 36 and HCF(x, 18) = 2, then the value of x is:",
+    options: ["2", "3", "4", "1"],
+    correctOption: 2,
+    answer: "4",
+    steps: [
+      "Step 1: State the product relation for two numbers a and b:\nHCF(a, b) × LCM(a, b) = a × b",
+      "Step 2: Substitute the known values where a = x and b = 18:\n2 × 36 = x × 18",
+      "Step 3: Simplify the left side:\n72 = 18x",
+      "Step 4: Solve for x:\nx = 72 ÷ 18 = 4"
+    ],
+    explanation: "Reason: For two numbers x and 18, HCF(x, 18) × LCM(x, 18) = x × 18. Substituting gives 2 × 36 = 18x ⇒ 72 = 18x ⇒ x = 4. Quick check: HCF(4, 18) = 2 and LCM(4, 18) = 36, which is verified.",
+    formula: "x = \\frac{\\text{HCF}(x, y) \\times \\text{LCM}(x, y)}{y}",
+    examinerNote: "Direct substitution formula gives answer in 10 seconds. Check: LCM(4, 18) = 36 and HCF(4, 18) = 2.",
+    source: "CBSE 2019 Delhi & 2023 All India"
+  },
+  {
+    id: "vq_1_mcq_12",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2024 Standard Set-3] Assertion (A): √p is an irrational number, where p is any prime number.\nReason (R): The square root of any positive integer which is not a perfect square is an irrational number.",
+    options: [
+      "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+      "Both (A) and (R) are true but (R) is not the correct explanation of (A)",
+      "(A) is true but (R) is false",
+      "(A) is false but (R) is true"
+    ],
+    correctOption: 0,
+    answer: "Both (A) and (R) are true and (R) is the correct explanation of (A)",
+    steps: [
+      "Step 1: Evaluate Reason (R):\nBy fundamental definition, if a positive integer n is not a perfect square, then √n cannot be written as a/b (where a, b are integers). Hence √n is an irrational number. Reason (R) is mathematically TRUE.",
+      "Step 2: Evaluate Assertion (A):\nA prime number p has only two factors: 1 and p. Thus, no prime number p can ever be a perfect square. By the theorem in Reason (R), √p must be irrational. Assertion (A) is TRUE.",
+      "Step 3: Evaluate Causality:\nSince every prime number is a positive integer that is not a perfect square, Assertion (A) is a direct consequence of Reason (R). Therefore, (R) is the correct explanation of (A)."
+    ],
+    explanation: "Reason: A prime number cannot be a square of an integer (since primes have no factors other than 1 and itself). Therefore, no prime is a perfect square. Since the square root of any non-perfect square is irrational, √p is always irrational. Both statements are true and Reason explains Assertion.",
+    formula: "p \\in \\text{Primes} \\implies p \\notin \\{k^2 : k \\in \\mathbb{Z}\\} \\implies \\sqrt{p} \\in \\mathbb{R} \\setminus \\mathbb{Q}",
+    examinerNote: "Prime numbers are non-perfect squares by definition. Hence Reason directly explains Assertion.",
+    source: "CBSE Board 2024 (Set 30/3/3)"
+  },
+  {
+    id: "vq_1_mcq_13",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2022 Term-1] If n is any natural number, then 12ⁿ cannot end with the digit:",
+    options: ["2", "4", "0", "6"],
+    correctOption: 2,
+    answer: "0",
+    steps: [
+      "Step 1: Understand the condition for ending with digit 0:\nAny natural number ends with digit 0 if and only if it is divisible by 10 = 2 × 5.",
+      "Step 2: Find the prime factorisation of 12ⁿ:\n12 = 2² × 3\nTherefore, 12ⁿ = (2² × 3)ⁿ = 2²ⁿ × 3ⁿ.",
+      "Step 3: Check for prime factor 5:\nThe only prime factors of 12ⁿ are 2 and 3. Prime factor 5 is completely absent.",
+      "Step 4: By the Fundamental Theorem of Arithmetic, prime factorisation is unique. Hence 5 cannot appear in the factorisation of 12ⁿ.",
+      "Step 5: Conclude:\nSince 12ⁿ is never divisible by 5, it can NEVER end with the digit 0."
+    ],
+    explanation: "Reason: To end in digit 0, a number must have both 2 and 5 in its prime factorisation. Here 12ⁿ = 2²ⁿ × 3ⁿ lacks the prime factor 5. By uniqueness of prime factorisation (Fundamental Theorem of Arithmetic), 12ⁿ can never end with 0.",
+    formula: "\\text{Ends in 0} \\iff 5 \\mid N \\text{ and } 2 \\mid N",
+    examinerNote: "Note: 12¹ = 12 (ends in 2), 12² = 144 (ends in 4), 12⁴ = 20736 (ends in 6). Digits 2, 4, and 6 are possible, but 0 is strictly impossible.",
+    source: "CBSE Board 2022 Term-1"
+  },
+  {
+    id: "vq_1_mcq_14",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 1,
+    type: "MCQ",
+    question: "[CBSE 2023 Standard] If two positive integers a and b are expressible in the form a = p q³ and b = p⁴ q² r, where p, q, r are prime numbers, then HCF(a, b) is:",
+    options: ["p q²", "p⁴ q³ r", "p² q²", "p q³ r"],
+    correctOption: 0,
+    answer: "p q²",
+    steps: [
+      "Step 1: Write down prime factor representations:\na = p¹ × q³ × r⁰\nb = p⁴ × q² × r¹",
+      "Step 2: Recall the definition of HCF:\nHCF is the product of the smallest powers of each COMMON prime factor.",
+      "Step 3: Compare exponents of common prime factor p:\nExponent in a is 1; in b is 4. Smallest power = p¹.",
+      "Step 4: Compare exponents of common prime factor q:\nExponent in a is 3; in b is 2. Smallest power = q².",
+      "Step 5: Notice prime factor r:\nr is present only in b (power 1) but absent in a (power 0). It is NOT common. Smallest power = r⁰ = 1.",
+      "Step 6: Multiply smallest powers:\nHCF(a, b) = p¹ × q² = p q²."
+    ],
+    explanation: "Reason: HCF includes only common prime factors raised to their minimum exponents: min(1, 4) = 1 for prime p, min(3, 2) = 2 for prime q. Since prime r is not present in a, it cannot appear in the HCF. Hence HCF = p q².",
+    formula: "\\text{HCF}(a, b) = p^{\\min(1, 4)} \\times q^{\\min(3, 2)} = p q^2",
+    examinerNote: "Common Error: Including prime 'r' in the HCF. Primes that do not appear in both numbers must NEVER be included in HCF.",
+    source: "CBSE 2023 Standard Set 30/2/1"
+  },
 
   // -----------------------------------------------------------------------
   // SECTION B: 2-MARK VERY SHORT ANSWER (VSA)
@@ -300,6 +435,65 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     examinerNote: "Careful reading: 'Distinct prime factors' means unique primes (count = 3). 'Total prime factors' with multiplicity would be 5 (1 + 1 + 3).",
     source: "CBSE Term-1 Board Exam"
   },
+  {
+    id: "vq_1_vsa_6",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2023 Standard] Given that √2 is an irrational number, prove that (3√2) / 5 is an irrational number.",
+    answer: "3√2 / 5 is irrational by contradiction.",
+    steps: [
+      "Step 1: Assume the contrary:\nLet us assume, to the contrary, that (3√2) / 5 is a rational number.",
+      "Step 2: Express in rational form:\nThen (3√2) / 5 = a / b, where a and b are integers and b ≠ 0.",
+      "Step 3: Isolate √2 on the left-hand side:\nMultiply both sides by 5 and divide by 3:\n√2 = (5a) / (3b)",
+      "Step 4: Analyse rationality of RHS:\nSince a and b are integers, 5a is an integer, and 3b is a non-zero integer. Hence, (5a) / (3b) is a RATIONAL number.",
+      "Step 5: State the contradiction:\nThis implies that √2 is rational. But this directly contradicts the given fact that √2 is irrational.",
+      "Step 6: Conclude:\nTherefore, our assumption was incorrect, and (3√2) / 5 is an IRRATIONAL number. [Hence Proved]"
+    ],
+    explanation: "Reason: Multiplying or dividing a non-zero rational by an irrational yields an irrational number. Isolating √2 gives √2 = 5a / (3b). Since a, b are integers, the RHS is rational, which contradicts the given irrationality of √2.",
+    formula: "\\sqrt{2} = \\frac{5a}{3b} \\implies \\text{Irrational} = \\text{Rational} \\; (\\text{Contradiction})",
+    examinerNote: "Do not square! Simple cross-multiplication isolating √2 earns full 2 marks in 4 lines.",
+    source: "CBSE Board 2023 Standard (Set 30/2/1)"
+  },
+  {
+    id: "vq_1_vsa_7",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2024 Standard] Check whether 12ⁿ can end with the digit 0 for any natural number n ∈ ℕ.",
+    answer: "12ⁿ cannot end with digit 0 for any n ∈ ℕ.",
+    steps: [
+      "Step 1: State the divisibility condition for a number ending with 0:\nIf any number ends with the digit 0, it must be divisible by 10, meaning its prime factorisation must contain both 2 and 5 as prime factors.",
+      "Step 2: Prime factorise 12ⁿ:\n12 = 2² × 3\n12ⁿ = (2² × 3)ⁿ = 2²ⁿ × 3ⁿ",
+      "Step 3: Apply the Fundamental Theorem of Arithmetic:\nThe only prime factors of 12ⁿ are 2 and 3. By the uniqueness of the Fundamental Theorem of Arithmetic, there are no other prime factors in the factorisation of 12ⁿ.",
+      "Step 4: Conclude:\nSince the prime factor 5 does not occur in the prime factorisation of 12ⁿ, 12ⁿ can never be divisible by 10. Therefore, 12ⁿ cannot end with the digit 0 for any natural number n."
+    ],
+    explanation: "Reason: A number ends with 0 if and only if it has both 2 and 5 in its prime factorisation. Here 12ⁿ = 2²ⁿ × 3ⁿ contains only 2 and 3, and lacks 5. By the uniqueness of prime factorisation (Fundamental Theorem of Arithmetic), 12ⁿ can never end with 0.",
+    formula: "12^n = 2^{2n} \\times 3^n, \\quad 5 \\nmid 12^n \\implies 12^n \\text{ cannot end with 0}",
+    examinerNote: "Mentioning 'uniqueness of Fundamental Theorem of Arithmetic' is mandatory to get full 2 marks.",
+    source: "CBSE Board 2024 Standard (Set 30/1/1)"
+  },
+  {
+    id: "vq_1_vsa_8",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 2,
+    type: "VSA",
+    question: "[CBSE 2020 Standard] Find the HCF and LCM of 12, 15, and 21 by applying the prime factorisation method.",
+    answer: "HCF = 3, LCM = 420",
+    steps: [
+      "Step 1: Prime factorise each of the three integers:\n12 = 2² × 3¹\n15 = 3¹ × 5¹\n21 = 3¹ × 7¹",
+      "Step 2: Calculate HCF:\nHCF is the product of the smallest powers of each COMMON prime factor.\nThe only common prime factor in 12, 15, and 21 is 3 with smallest power 3¹.\nHCF(12, 15, 21) = 3.",
+      "Step 3: Calculate LCM:\nLCM is the product of the greatest powers of ALL prime factors involved (2, 3, 5, 7).\nLCM(12, 15, 21) = 2² × 3¹ × 5¹ × 7¹ = 4 × 3 × 5 × 7 = 12 × 35 = 420.",
+      "Step 4: Final statement:\nHCF = 3 and LCM = 420."
+    ],
+    explanation: "Reason: For 3 numbers, HCF is the minimum common power (3¹ = 3), and LCM is the product of maximum powers of all primes involved: 2² × 3¹ × 5¹ × 7¹ = 420. Note that HCF × LCM = 3 × 420 = 1260, which does NOT equal 12 × 15 × 21 = 3780 (product formula holds only for 2 numbers).",
+    formula: "\\text{HCF} = \\prod p_i^{\\min}, \\quad \\text{LCM} = \\prod p_i^{\\max}",
+    examinerNote: "Do NOT use HCF × LCM = a × b × c! For 3 numbers, always calculate HCF and LCM independently using prime factor powers.",
+    source: "CBSE 2020 Standard (Set 30/2/1)"
+  },
 
   // -----------------------------------------------------------------------
   // SECTION C: 3-MARK SHORT ANSWER (SA)
@@ -390,6 +584,29 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     source: "CBSE Board 2018 (Series AJM)"
   },
   {
+    id: "vq_1_sa_5",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 3,
+    type: "Proof",
+    question: "[CBSE 2019, 2021, 2024] Prove that √3 is an irrational number from first principles.",
+    answer: "√3 is irrational (Proof by Contradiction).",
+    steps: [
+      "Step 1 (Assumption): Let us assume, to the contrary, that √3 is a rational number.",
+      "Step 2 (Coprime integers): Then we can find coprime integers a and b (b ≠ 0) such that:\n√3 = a / b, where HCF(a, b) = 1.",
+      "Step 3 (Squaring): Squaring both sides:\n3 = a² / b² ⇒ a² = 3b²  --- (Equation 1).",
+      "Step 4 (Divisibility of a): Equation 1 shows that 3 divides a². By Theorem, since 3 is prime, 3 must also divide a. (Statement A)",
+      "Step 5 (Substitution): Since 3 divides a, we can write a = 3c for some integer c.\nSubstitute a = 3c into Equation 1:\n(3c)² = 3b² ⇒ 9c² = 3b² ⇒ b² = 3c²  --- (Equation 2).",
+      "Step 6 (Divisibility of b): Equation 2 shows that 3 divides b². By Theorem, 3 must also divide b. (Statement B)",
+      "Step 7 (Contradiction): From Statement A and Statement B, 3 is a common factor of both a and b. But this contradicts our assumption that a and b are coprime (HCF(a, b) = 1).",
+      "Step 8 (Conclusion): This contradiction has arisen because of our incorrect assumption that √3 is rational. Therefore, √3 is an irrational number. [Hence Proved]"
+    ],
+    explanation: "Reason: Theorem states that if a prime p divides a², it must divide a. Here, a² = 3b² implies 3 divides a. Substituting a = 3c gives b² = 3c², meaning 3 divides b. Thus 3 is a common factor of both a and b, which contradicts that a and b are coprime. Hence √3 is irrational.",
+    formula: "3 \\mid a^2 \\implies 3 \\mid a \\quad (\\text{Theorem: prime } p \\mid a^2 \\implies p \\mid a)",
+    examinerNote: "CBSE Marking Scheme: 0.5 mark for coprime definition, 1 mark for 3 divides a, 1 mark for 3 divides b, 0.5 mark for contradiction and conclusion.",
+    source: "CBSE Board 2024 Standard (Set 30/1/1)"
+  },
+  {
     id: "vq_1_sa_6",
     chapter: 1,
     chapterName: "Real Numbers",
@@ -429,6 +646,50 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     formula: "\\sqrt{5} = \\frac{2b - a}{3b} \\implies \\text{Irrational} = \\text{Rational} \\; (\\text{Contradiction})",
     examinerNote: "Do not square both sides for linear forms like 2 - 3√5! Simple rearrangement takes 4 lines and guarantees full marks.",
     source: "CBSE Board 2023 Standard (Set 30/2/2)"
+  },
+  {
+    id: "vq_1_sa_8",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 3,
+    type: "SA",
+    question: "[CBSE 2019, 2023 Standard / NCERT Exemplar] Find the smallest number which when increased by 17 is exactly divisible by both 520 and 468.",
+    answer: "4663",
+    steps: [
+      "Step 1: Formulate the mathematical condition:\nLet the required number be N.\nWhen N is increased by 17, the resulting number (N + 17) must be exactly divisible by both 520 and 468.\nTherefore, (N + 17) must be a common multiple of 520 and 468.",
+      "Step 2: Identify the least such number:\nFor N to be the smallest, (N + 17) must be the Lowest Common Multiple: LCM(520, 468).",
+      "Step 3: Prime factorise both numbers:\n520 = 52 × 10 = (4 × 13) × (2 × 5) = 2³ × 5¹ × 13¹\n468 = 2 × 234 = 2 × 2 × 117 = 2² × 9 × 13 = 2² × 3² × 13¹",
+      "Step 4: Calculate LCM using highest powers of each prime (2, 3, 5, 13):\nLCM(520, 468) = 2³ × 3² × 5¹ × 13¹\n= 8 × 9 × 5 × 13\n= 72 × 65 = 4680.",
+      "Step 5: Solve for N:\nN + 17 = 4680\nN = 4680 - 17 = 4663.",
+      "Step 6: Verification:\n4663 + 17 = 4680.\n4680 ÷ 520 = 9 (exact integer).\n4680 ÷ 468 = 10 (exact integer). Thus 4663 is verified."
+    ],
+    explanation: "Reason: If (N + 17) is divisible by both 520 and 468, then (N + 17) is a multiple of their LCM. Since we seek the smallest such positive number, N + 17 = LCM(520, 468) = 4680. Subtracting 17 gives the required number N = 4663.",
+    formula: "N = \\text{LCM}(a, b) - k \\quad (\\text{when increased by } k)",
+    examinerNote: "Careful with wording: 'increased by 17' means (N + 17) is the multiple, so you SUBTRACT 17 from the LCM! If question said 'decreased by 17', you would ADD 17.",
+    source: "CBSE Board Standard & NCERT Exemplar Problem"
+  },
+  {
+    id: "vq_1_sa_9",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 3,
+    type: "Proof",
+    question: "[CBSE 2020, 2024 Standard] Prove that √2 is an irrational number from first principles.",
+    answer: "√2 is irrational (Proof by Contradiction).",
+    steps: [
+      "Step 1 (Assumption): Let us assume, to the contrary, that √2 is a rational number.",
+      "Step 2 (Coprime representation): Then we can find coprime integers a and b (b ≠ 0) such that:\n√2 = a / b, where HCF(a, b) = 1.",
+      "Step 3 (Squaring): Squaring both sides:\n2 = a² / b² ⇒ a² = 2b²  --- (Equation 1).",
+      "Step 4 (Divisibility of a): Equation 1 implies that 2 divides a². Since 2 is a prime number, by theorem 2 must also divide a. (Statement A)",
+      "Step 5 (Substitution): Since 2 divides a, we can write a = 2c for some integer c.\nSubstitute a = 2c into Equation 1:\n(2c)² = 2b² ⇒ 4c² = 2b² ⇒ b² = 2c²  --- (Equation 2).",
+      "Step 6 (Divisibility of b): Equation 2 implies that 2 divides b². Since 2 is prime, 2 must also divide b. (Statement B)",
+      "Step 7 (Contradiction): From Statement A and Statement B, 2 is a common factor of both a and b. But this contradicts our assumption that a and b are coprime (having no common factor other than 1).",
+      "Step 8 (Conclusion): This contradiction arose because of our incorrect assumption that √2 is rational. Hence, √2 is an irrational number. [Hence Proved]"
+    ],
+    explanation: "Reason: Theorem 1.2 states that for any prime p, if p divides a², then p divides a. Squaring √2 = a/b produces a² = 2b², proving 2 divides a. Substituting a = 2c produces b² = 2c², proving 2 divides b. This makes 2 a common factor of both a and b, which destroys the co-prime premise. Hence √2 must be irrational.",
+    formula: "2 \\mid a^2 \\implies 2 \\mid a \\quad (\\text{Prime divisor lemma})",
+    examinerNote: "Do not forget to write 'where a and b are coprime integers and b ≠ 0' in the very first step. Omitting 'coprime' costs 1 mark in official CBSE evaluation.",
+    source: "CBSE Board 2024 Standard (Set 30/2/1)"
   },
 
   // -----------------------------------------------------------------------
@@ -499,6 +760,48 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     examinerNote: "Common Error: Forgetting to convert km/h to m/s by multiplying by 5/18. Always match track units (meters) with speed units (m/s).",
     source: "CBSE Official Sample Paper 2024"
   },
+  {
+    id: "vq_1_la_4",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE 2022, 2024 Standard] A dairy owner has 120 litres of cow milk, 180 litres of buffalo milk, and 240 litres of toned milk. He wishes to pack the milk in cans of equal capacity such that no two varieties of milk are mixed and each can is filled to maximum capacity.\n(i) What is the greatest capacity of such a can? (2 Marks)\n(ii) Find the number of cans required for each variety of milk. (2 Marks)\n(iii) If each empty can costs ₹45, find the total cost of all cans required. (1 Mark)",
+    answer: "(i) 60 litres; (ii) Cow = 2 cans, Buffalo = 3 cans, Toned = 4 cans (Total 9 cans); (iii) Total cost = ₹405",
+    steps: [
+      "Step 1: Formulate the mathematical requirement for Part (i):\nTo pack all three milk types without mixing into cans of equal size, the capacity of each can must be a common factor of 120, 180, and 240.\nTo minimize the number of cans and maximize the can capacity, we must find the Highest Common Factor: HCF(120, 180, 240).",
+      "Step 2: Prime factorise each volume:\n120 = 2³ × 3¹ × 5¹\n180 = 2² × 3² × 5¹\n240 = 2⁴ × 3¹ × 5¹",
+      "Step 3: Compute HCF using smallest common powers:\nCommon primes are 2, 3, 5.\nSmallest power of 2 is 2² = 4\nSmallest power of 3 is 3¹ = 3\nSmallest power of 5 is 5¹ = 5\nHCF(120, 180, 240) = 2² × 3¹ × 5¹ = 4 × 3 × 5 = 60 litres.\nTherefore, the greatest capacity of each can is 60 litres.",
+      "Step 4: Solve Part (ii) — Number of cans for each milk variety:\nCans for Cow milk = 120 ÷ 60 = 2 cans.\nCans for Buffalo milk = 180 ÷ 60 = 3 cans.\nCans for Toned milk = 240 ÷ 60 = 4 cans.\nTotal cans required = 2 + 3 + 4 = 9 cans.",
+      "Step 5: Solve Part (iii) — Total financial expenditure:\nCost per can = ₹45.\nTotal cost = 9 cans × ₹45/can = ₹405."
+    ],
+    explanation: "Reason: Finding the greatest equal unit size dividing multiple quantities requires the Highest Common Factor: HCF(120, 180, 240) = 60 litres. Dividing each quantity by 60 gives the number of cans: 2, 3, and 4 (sum = 9 cans). At ₹45 per can, total cost = 9 × 45 = ₹405.",
+    formula: "\\text{Can Capacity} = \\text{HCF}(120, 180, 240) = 60 \\text{ L}, \\quad \\text{Total Cans} = \\sum \\frac{V_i}{\\text{HCF}} = 9",
+    examinerNote: "Mark Distribution: 2 marks for showing prime factorisation and finding HCF = 60 L; 2 marks for individual and total can counts (2, 3, 4, total 9); 1 mark for multiplying 9 × ₹45 = ₹405.",
+    source: "CBSE Board 2024 Standard (Set 30/1/3)"
+  },
+  {
+    id: "vq_1_la_5",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 5,
+    type: "LA",
+    question: "[CBSE Higher Order Thinking / NCERT Exemplar] Prove that (√p + √q) is an irrational number, where p and q are distinct prime numbers.",
+    answer: "√p + √q is irrational by contradiction.",
+    steps: [
+      "Step 1: Assume the contrary:\nLet us assume, to the contrary, that x = √p + √q is a rational number.",
+      "Step 2: Squaring both sides to simplify the expression:\nx² = (√p + √q)²\nx² = (√p)² + (√q)² + 2(√p)(√q)\nx² = p + q + 2√(pq)",
+      "Step 3: Rearrange algebraically to isolate the radical √(pq):\nx² - (p + q) = 2√(pq)\n√(pq) = [x² - (p + q)] / 2",
+      "Step 4: Analyse the rationality of the right-hand side:\nSince x is assumed rational, x² is rational.\nSince p and q are integers, (p + q) is an integer.\nTherefore, [x² - (p + q)] / 2 is a RATIONAL number.",
+      "Step 5: Analyse the left-hand side √(pq):\nSince p and q are distinct prime numbers, their product pq has no square factor (pq is square-free).\nTherefore, √(pq) is an IRRATIONAL number.",
+      "Step 6: Identify the contradiction:\nStep 4 states that the RHS is rational, while Step 5 proves that the LHS is irrational.\nA rational number can never equal an irrational number: Rational ≠ Irrational.",
+      "Step 7: Conclusion:\nThis contradiction arose because of our incorrect assumption that √p + √q is rational.\nTherefore, (√p + √q) is an IRRATIONAL number. [Hence Proved]"
+    ],
+    explanation: "Reason: Squaring x = √p + √q gives x² = p + q + 2√(pq), which isolates √(pq) = [x² - (p + q)] / 2. Since p and q are distinct primes, pq is square-free and its square root is strictly irrational. A rational RHS cannot equal an irrational LHS. Thus √p + √q is irrational.",
+    formula: "x = \\sqrt{p} + \\sqrt{q} \\implies \\sqrt{pq} = \\frac{x^2 - (p + q)}{2} \\implies \\text{Irrational} = \\text{Rational} \\; (\\text{Contradiction})",
+    examinerNote: "Explicitly justify why √(pq) is irrational: 'Since p and q are distinct primes, pq has no square factor, hence √(pq) is irrational'.",
+    source: "CBSE Class 10 HOTS Question & NCERT Exemplar"
+  },
 
   // -----------------------------------------------------------------------
   // SECTION E: 4-MARK COMPETENCY CASE STUDY (CBSE 2024-2026 PATTERN)
@@ -559,5 +862,43 @@ export const CH1_QUESTIONS: VaultQuestion[] = [
     formula: "\\text{Sync Interval} = \\text{LCM}(48, 72, 108) = 432 \\text{ seconds} = 7 \\text{ min } 12 \\text{ s}",
     examinerNote: "Trap in Part (iii)(b): Don't forget to count the starting change at 8:00:00 AM! 8 intervals + 1 initial = 9 times.",
     source: "CBSE Competency-Focused Practice Questions (CFPQ)"
+  },
+  {
+    id: "vq_1_case_4",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2025 Board Model Case Study] In an inter-school athletic training camp, a circular running track of 720 metres circumference is laid out. Two runners, Sonia and Ravi, start running around the track from the same starting point at the same time (9:00 AM) in the same direction. Sonia takes 18 minutes to complete one round of the track, while Ravi takes 12 minutes for the same round.\n\nBased on this situation, answer the following questions:\n(i) Express 18 and 12 as products of prime factors. (1 Mark)\n(ii) After how many minutes will both runners meet again at the starting point for the first time? (1 Mark)\n(iii) (a) At what exact time on the clock will they meet again at the starting point? Also determine how many rounds Sonia and Ravi will each have completed by that time. (2 Marks)\nOR\n(iii) (b) If both runners continue running at their constant speeds for 2 hours (120 minutes), how many times will they meet at the starting point during this duration (excluding the starting instant)? (2 Marks)",
+    answer: "(i) 18 = 2 × 3², 12 = 2² × 3; (ii) 36 minutes; (iii)(a) 9:36 AM, Sonia = 2 rounds, Ravi = 3 rounds; (iii)(b) 3 times",
+    steps: [
+      "Part (i): Write prime factorisations:\n18 = 2¹ × 3²\n12 = 2² × 3¹",
+      "Part (ii): They will meet again at the starting point at a time that is a common multiple of 18 and 12.\nThe first simultaneous meeting occurs at the Lowest Common Multiple (LCM):\nLCM(18, 12) = 2² × 3² = 4 × 9 = 36 minutes.\nThey will meet again at the starting point after 36 minutes.",
+      "Part (iii)(a): Calculate clock time:\nStarting time = 9:00 AM.\nMeeting time = 9:00 AM + 36 minutes = 9:36 AM.\nRounds completed by Sonia = 36 ÷ 18 = 2 rounds.\nRounds completed by Ravi = 36 ÷ 12 = 3 rounds.",
+      "Part (iii)(b) Alternative: Total running time = 2 hours = 120 minutes.\nSince they meet every 36 minutes:\nNumber of meetings = floor(120 ÷ 36) = floor(3.33) = 3 times (specifically at 36 min, 72 min, and 108 min)."
+    ],
+    explanation: "Reason: Runners moving cyclically on a track synchronize at the starting point at intervals equal to the LCM of their individual lap times: LCM(18, 12) = 36 minutes. Adding to 9:00 AM yields 9:36 AM. Sonia completes 36/18 = 2 rounds and Ravi completes 36/12 = 3 rounds. In 120 minutes, they meet at 36, 72, and 108 minutes, which equals 3 times.",
+    formula: "T_{\\text{meet}} = \\text{LCM}(T_1, T_2) = 36 \\text{ min}, \\quad \\text{Rounds} = \\frac{T_{\\text{meet}}}{T_{\\text{lap}}}",
+    examinerNote: "NCERT Exercise 1.2 Q7 is frequently converted into this exact 4-mark competency question. Note that Part (iii)(b) excludes the starting instant.",
+    source: "CBSE Competency Practice & NCERT Exercise 1.2"
+  },
+  {
+    id: "vq_1_case_5",
+    chapter: 1,
+    chapterName: "Real Numbers",
+    marks: 4,
+    type: "Case Study",
+    question: "[CBSE 2024/2025 Competency Case Study] Under the 'Padhe Bharat, Badhe Bharat' initiative, a school library receives a consignment of 336 books of Hindi, 240 books of English, and 96 books of Science. The librarian wants to arrange these books in stacks such that each stack contains books of only one subject and all stacks have the exact same number of books, so that the height of each stack is equal and the books occupy minimum shelf space.\n\nAnswer the following:\n(i) Express 336, 240, and 96 as products of prime factors. (1 Mark)\n(ii) Find the maximum number of books that can be placed in each stack. (1 Mark)\n(iii) (a) Find the total number of stacks formed in the library. (2 Marks)\nOR\n(iii) (b) If each bookshelf has 4 shelves and each shelf can accommodate at most 4 stacks of books, find the minimum number of bookshelves required to store all the stacks. (2 Marks)",
+    answer: "(i) 336 = 2⁴ × 3 × 7, 240 = 2⁴ × 3 × 5, 96 = 2⁵ × 3; (ii) 48 books per stack; (iii)(a) 14 stacks; (iii)(b) 1 bookshelf",
+    steps: [
+      "Part (i): Express each quantity in prime power form:\n336 ÷ 2 = 168 ÷ 2 = 84 ÷ 2 = 42 ÷ 2 = 21 = 3 × 7 ⇒ 336 = 2⁴ × 3¹ × 7¹\n240 = 24 × 10 = (8 × 3) × (2 × 5) = 2⁴ × 3¹ × 5¹\n96 = 32 × 3 = 2⁵ × 3¹",
+      "Part (ii): To make the height of each stack maximum (taking least shelf space) while keeping them equal and topic-wise, we find the Highest Common Factor: HCF(336, 240, 96).\nCommon prime factors with smallest powers = 2⁴ × 3¹ = 16 × 3 = 48.\nMaximum number of books in each stack = 48 books.",
+      "Part (iii)(a): Calculate stacks for each subject:\nHindi stacks = 336 ÷ 48 = 7 stacks.\nEnglish stacks = 240 ÷ 48 = 5 stacks.\nScience stacks = 96 ÷ 48 = 2 stacks.\nTotal stacks formed = 7 + 5 + 2 = 14 stacks.",
+      "Part (iii)(b) Alternative: Total capacity of one bookshelf = 4 shelves × 4 stacks/shelf = 16 stacks.\nSince total stacks formed = 14 stacks, and 14 ≤ 16, exactly 1 bookshelf is sufficient to hold all 14 stacks."
+    ],
+    explanation: "Reason: Finding maximum stack capacity dividing all book counts requires the HCF: HCF(336, 240, 96) = 48 books per stack. Stacks formed are 336/48 = 7 (Hindi), 240/48 = 5 (English), 96/48 = 2 (Science), giving 7 + 5 + 2 = 14 stacks total. One bookshelf holds 4 × 4 = 16 stacks, so 1 bookshelf easily stores all 14 stacks.",
+    formula: "\\text{Stack Capacity} = \\text{HCF}(336, 240, 96) = 48, \\quad \\text{Total Stacks} = \\frac{336}{48} + \\frac{240}{48} + \\frac{96}{48} = 14",
+    examinerNote: "CBSE Competency Marking: 1 mark for prime powers, 1 mark for HCF = 48 books, 2 marks for stacks calculation (7 + 5 + 2 = 14 stacks).",
+    source: "CBSE Competency-Focused Practice Questions (CFPQ) & Exemplar"
   }
 ];

@@ -3,10 +3,10 @@ import type { MathChapterConcept } from "./types";
 export const CH1_REAL_NUMBERS_CONCEPT: MathChapterConcept = {
   chapterNo: 1,
   title: "Real Numbers",
-  weightage: "6 Marks (Board Mandatory — 1 MCQ + 1 SA/VSA + 1 Proof)",
+  weightage: "6 Marks (Board Mandatory — 1 MCQ + 1 SA/VSA + 1 Proof / Case Study)",
   oneLiner: "Real Numbers ka DNA: Prime factorisation se HCF/LCM, Contradiction se Irrationality proof, aur 2^m · 5^n se Decimal termination!",
   analogyTitle: "Lego Blocks, Finger Counting aur Number Line ka Safar",
-  analogyContent: "Imagine karo ek 5 saal ka bachha jo pehli baar counting seekh raha hai. Pehle wo ungliyon pe ginta hai: 1, 2, 3... Phir usse pata chalta hai ki agar toffees khatam ho jayein toh '0' bhi hota hai! Phir bade hokar jab udhar (debt) ya barf ka minus temperature dekhta hai, toh negative numbers aate hain. Phir jab pizza ya roti ke tukde hote hain, toh fractions (Rational numbers) aate hain. Aur aakhir mein kuch aise ziddi numbers aate hain jo kabhi fraction mein bandh hi nahi sakte (Irrational numbers jaise $\\sqrt{2}, \\sqrt{3}, \\pi$). Jab hum in sabhi numbers ko ek bade bag mein bhar lete hain, toh banti hai hamari **Real Numbers Line** — jismein ek bhi chhed ya gap nahi hota! Ye chapter maths ka foundation stone hai jo tumhe Class 10 mein 6/6 guaranteed marks dilayega.",
+  analogyContent: "Imagine karo ek 5 saal ka bachha jo pehli baar counting seekh raha hai. Pehle wo ungliyon pe ginta hai: 1, 2, 3... Phir usse pata chalta hai ki agar toffees khatam ho jayein toh '0' bhi hota hai! Phir bade hokar jab udhar (debt) ya barf ka minus temperature dekhta hai, toh negative numbers aate hain. Phir jab pizza ya roti ke tukde hote hain, toh fractions (Rational numbers) aate hain. Aur aakhir mein kuch aise ziddi numbers aate hain jo kabhi fraction mein bandh hi nahi sakte (Irrational numbers jaise $\\sqrt{2}, \\sqrt{3}, \\pi$). Jab hum in sabhi numbers ko ek bade bag mein bhar lete hain, toh banti hai hamari **Real Numbers Line** — jismein ek bhi chhed ya gap nahi hota! Ye chapter maths ka foundation stone hai jo tumhe Class 10 board exam mein pure 6/6 guaranteed marks dilayega.",
   sections: [
     {
       id: "number_family",
@@ -46,7 +46,7 @@ export const CH1_REAL_NUMBERS_CONCEPT: MathChapterConcept = {
         "**Examples of Rationals:**\n" +
         "- Normal fractions: $\\frac{1}{2}, -\\frac{3}{5}, \\frac{7}{4}$\n" +
         "- Integers as rationals: $5 = \\frac{5}{1}, -8 = \\frac{-8}{1}$\n" +
-        "- Zero as rational: $0 = \\frac{0}{1}$ (Board MCQ: Zero is rational!)\n" +
+        "- Zero as rational: $0 = \\frac{0}{1}$ (Board MCQ: Zero is a rational number!)\n" +
         "- Terminating decimals: $0.75 = \\frac{75}{100} = \\frac{3}{4}$\n" +
         "- Recurring repeating decimals: $0.333\\dots = 0.\\bar{3} = \\frac{1}{3}$\n\n" +
         "### 5. Irrational Numbers — Jo Kabhi Fraction Na Ban Sakein!\n" +
@@ -96,7 +96,7 @@ export const CH1_REAL_NUMBERS_CONCEPT: MathChapterConcept = {
     {
       id: "fundamental_theorem",
       label: "2. Fundamental Theorem of Arithmetic & Prime Factorisation",
-      heading: "Numbers ka Unique DNA & $6^n$ Ending with 0 ka Secret",
+      heading: "Numbers ka Unique DNA & $6^n, 4^n, 12^n$ Ending with 0 ka Secret",
       subheading: "Har Composite Number = Unique Primes ka Multiplication (Lego Blocks Model)",
       explanation: "Jab hum chemistry mein molecules ko todte hain toh atoms milte hain. Theek waise hi, maths mein jab kisi composite number ko todte hain toh **Prime Numbers** milte hain!  \n\n" +
         "### The Fundamental Theorem of Arithmetic (Theorem 1.1)\n" +
@@ -107,14 +107,16 @@ export const CH1_REAL_NUMBERS_CONCEPT: MathChapterConcept = {
         "- Rahul ne factorise kiya: $60 = 2 \\times 2 \\times 3 \\times 5 = 2^2 \\times 3 \\times 5$.  \n" +
         "- Priya ne pehle 5 se kiya: $60 = 5 \\times 3 \\times 2 \\times 2 = 2^2 \\times 3 \\times 5$.  \n" +
         "Dono ka answer exactly same aaya! 2 hamesha do baar aayega, 3 ek baar, aur 5 ek baar. Duniya ka koi bhi mathematician $60$ ke prime factors badal nahi sakta. Ye $60$ ka **Aadhaar Card / DNA code** hai!\n\n" +
-        "### Board Favorite Question 1: Check whether $6^n$ or $4^n$ can end with digit 0\n" +
+        "### Board Favorite Question 1: Check whether $6^n, 4^n, 12^n$ can end with digit 0\n" +
         "**Logic ekdam aasan bhasha mein:**  \n" +
         "Koi bhi number last mein '0' kab deta hai? Jab wo $10$ se divide ho sake!  \n" +
         "Aur $10$ kis se banta hai? $10 = 2 \\times 5$.  \n" +
         "Matlab kisi number ke aakhri mein 0 aane ke liye uske prime factors mein **2 aur 5 DONO ka hona compulsory hai**!\n\n" +
         "- $6^n = (2 \\times 3)^n = 2^n \\times 3^n$. Iske paas 2 toh hai, par **5 missing hai**!\n" +
+        "- $4^n = (2^2)^n = 2^{2n}$. Iske paas sirf 2 hai, **5 missing hai**!\n" +
+        "- $12^n = (2^2 \\times 3)^n = 2^{2n} \\times 3^n$. Iske paas 2 aur 3 hai, **5 missing hai**!\n" +
         "- Fundamental Theorem bolta hai prime factorisation unique hai, matlab 5 kabhi aa hi nahi sakta.\n" +
-        "- Therefore, $6^n$ can NEVER end with the digit 0 for any natural number $n$!\n\n" +
+        "- Therefore, $6^n, 4^n, 12^n$ can NEVER end with the digit 0 for any natural number $n$!\n\n" +
         "### Board Favorite Question 2: Prove that $7 \\times 11 \\times 13 + 13$ is Composite\n" +
         "Kayi students pura multiply karne lag jaate hain — ye galti mat karna!  \n" +
         "Bas common factor bahar nikaalo:  \n" +
@@ -172,13 +174,14 @@ export const CH1_REAL_NUMBERS_CONCEPT: MathChapterConcept = {
         "Agar do positive integers $a$ aur $b$ hain, toh unke HCF aur LCM ka product hamesha un dono numbers ke product ke barabar hoga:  \n" +
         "$$\\mathbf{\\text{HCF}(a, b) \\times \\text{LCM}(a, b) = a \\times b}$$  \n" +
         "- Is relation se agar 4 cheezon mein se koi 3 pata hon, toh chauthi 5 second mein nikal aati hai!  \n" +
-        "- **CAUTION (Board ka Favourite Trap)**: Ye formula sirf aur sirf **DO (2) numbers** ke liye valid hai! Teen numbers ($a, b, c$) ke liye $\\text{HCF} \\times \\text{LCM} \\neq a \\times b \\times c$.\n\n" +
+        "- **CAUTION (Board ka Favourite Trap)**: Ye formula sirf aur sirf **DO (2) numbers** ke liye valid hai! Teen numbers ($a, b, c$) ke liye $\\text{HCF} \\times \\text{LCM} \\neq a \\times b \\times c$.\n" +
+        "  *Proof by Counter-example*: Take $6, 8, 12$. $\\text{HCF} = 2, \\text{LCM} = 24$. Product of $\\text{HCF} \\times \\text{LCM} = 48$. But product of numbers = $6 \\times 8 \\times 12 = 576 \\neq 48$!\n\n" +
         "### 4. Word Problems Decoded: HCF Kab Nikalein aur LCM Kab?\n" +
         "Questions padh kar bacche confuse ho jaate hain. Ye 2 golden rules hamesha yaad rakhna:\n\n" +
         "| Situation / Clue | Question ki Demand | Kya Nikaalna Hai? |\n" +
         "| :--- | :--- | :--- |\n" +
-        "| **Chhoti quantity / Division** | Doodh ke do tankers ko barabar naapne wala **sabse bada container** (maximum capacity); Barfi ki stacks banana; Floor par square tiles lagana taaki koi space na bache. | **HCF nikaalo!** (Kyunki container ka size diye gaye numbers se chhota hoga jo dono ko poora divide kare). |\n" +
-        "| **Badi quantity / Synchronization** | 3 Ghantiyan (Bells) alag-alag interval pe bajti hain, **agali baar ek saath kab bajengi**? Runners circular track par dobara starting point pe kab milenge? Traffic lights kab ek saath green hongi? | **LCM nikaalo!** (Kyunki agla milne ka time diye gaye intervals se bada hoga, jo sabhi ka common multiple hoga). |",
+        "| **Chhoti quantity / Division** | Doodh ke tin containers ko barabar naapne wala **sabse bada container** (maximum capacity); Barfi ki stacks banana; Floor par square tiles lagana taaki koi space na bache; Marching contingent columns. | **HCF nikaalo!** (Kyunki container ya column size diye gaye numbers se chhota hoga jo dono ko poora divide kare). |\n" +
+        "| **Badi quantity / Synchronization** | 3 Ghantiyan (Bells) alag-alag interval pe bajti hain, **agali baar ek saath kab bajengi**? Runners circular track par dobara starting point pe kab milenge? Traffic lights kab ek saath change hongi? | **LCM nikaalo!** (Kyunki agla milne ka time diye gaye intervals se bada hoga, jo sabhi ka common multiple hoga). |",
       formulasOrKeyPoints: [
         {
           title: "The Divisibility Invariant",
@@ -231,14 +234,14 @@ export const CH1_REAL_NUMBERS_CONCEPT: MathChapterConcept = {
     },
     {
       id: "composite_irrational",
-      label: "5. Composite Forms ($3 + 2√5$ and $5 - √3$)",
-      heading: "The 2-Mark Rearrangement Weapon (No Squaring Needed!)",
+      label: "5. Composite Forms ($3 + 2√5$, $5 - √3$, and $√2 + √3$)",
+      heading: "The 2-Mark Rearrangement Weapon & 3-Mark Sum of Roots",
       subheading: "Jab Question bole: 'Given that √5 is irrational, prove that 3 + 2√5 is irrational'",
-      explanation: "Board exam mein do tarah ke irrationality ke questions aate hain:  \n1. **Pure roots** ($\\sqrt{2}, \\sqrt{3}, \\sqrt{5}$) $\\to$ 3 Marks (Contradiction squaring method jo humne upar padha).  \n2. **Composite expressions** ($3 + 2\\sqrt{5}$, $5 - \\sqrt{3}$, $\\frac{1}{\\sqrt{2}}$, $7\\sqrt{5}$) $\\to$ 2 Marks!  \n\n**DHYAAN SE SUNO (Student ki sabse badi galti):**  \nJab question bole: *'Given that $\\sqrt{5}$ is irrational, prove that $3 + 2\\sqrt{5}$ is irrational'* — tumhe $\\sqrt{5}$ ko dobara prove karne ki koi zaroorat nahi hai! Aur na hi dono taraf square karna hai!  \n\n### The Super Fast 4-Line Rearrangement Method:\n1. Maano $3 + 2\\sqrt{5} = \\frac{a}{b}$ rational hai ($a, b$ integers, $b \\neq 0$).  \n2. Saare normal numbers ko right side le jao, akele bechare root $\\sqrt{5}$ ko left mein chhod do:  \n   $$2\\sqrt{5} = \\frac{a}{b} - 3 = \\frac{a - 3b}{b} \\implies \\mathbf{\\sqrt{5} = \\frac{a - 3b}{2b}}$$  \n3. Ab right side ko gaur se dekho: $a$ aur $b$ integers hain, toh $\\frac{a - 3b}{2b}$ ek fraction of integers hai, matlab ye **RATIONAL** hai!  \n4. Lekin left side mein $\\sqrt{5}$ hai jo ki **IRRATIONAL** hai!  \n   $$\\mathbf{\\text{Irrational} \\neq \\text{Rational}}$$  \n5. Ek irrational number kabhi rational number ke barabar nahi ho sakta! Contradiction! Hence, $3 + 2\\sqrt{5}$ is irrational. [2 Marks in 2 Minutes!]",
+      explanation: "Board exam mein do tarah ke irrationality ke questions aate hain:  \n1. **Pure roots** ($\\sqrt{2}, \\sqrt{3}, \\sqrt{5}$) $\\to$ 3 Marks (Contradiction squaring method jo humne upar padha).  \n2. **Composite expressions** ($3 + 2\\sqrt{5}$, $5 - \\sqrt{3}$, $\\frac{3\\sqrt{2}}{5}$, $7\\sqrt{5}$) $\\to$ 2 Marks!  \n\n**DHYAAN SE SUNO (Student ki sabse badi galti):**  \nJab question bole: *'Given that $\\sqrt{5}$ is irrational, prove that $3 + 2\\sqrt{5}$ is irrational'* — tumhe $\\sqrt{5}$ ko dobara prove karne ki koi zaroorat nahi hai! Aur na hi dono taraf square karna hai!  \n\n### The Super Fast 4-Line Rearrangement Method:\n1. Maano $3 + 2\\sqrt{5} = \\frac{a}{b}$ rational hai ($a, b$ integers, $b \\neq 0$).  \n2. Saare normal numbers ko right side le jao, akele bechare root $\\sqrt{5}$ ko left mein chhod do:  \n   $$2\\sqrt{5} = \\frac{a}{b} - 3 = \\frac{a - 3b}{b} \\implies \\mathbf{\\sqrt{5} = \\frac{a - 3b}{2b}}$$  \n3. Ab right side ko gaur se dekho: $a$ aur $b$ integers hain, toh $\\frac{a - 3b}{2b}$ ek fraction of integers hai, matlab ye **RATIONAL** hai!  \n4. Lekin left side mein $\\sqrt{5}$ hai jo ki **IRRATIONAL** hai!  \n   $$\\mathbf{\\text{Irrational} \\neq \\text{Rational}}$$  \n5. Ek irrational number kabhi rational number ke barabar nahi ho sakta! Contradiction! Hence, $3 + 2\\sqrt{5}$ is irrational. [2 Marks in 2 Minutes!]\n\n### Advanced 3-Mark Archetype: Prove $\\sqrt{2} + \\sqrt{3}$ is Irrational\nJab do alag-alag roots add hote hain, toh dono taraf square kiya jata hai:\n1. Maano $x = \\sqrt{2} + \\sqrt{3}$ rational hai.\n2. Square both sides: $x^2 = (\\sqrt{2} + \\sqrt{3})^2 = 2 + 3 + 2\\sqrt{6} = 5 + 2\\sqrt{6}$.\n3. Isolate $\\sqrt{6}$: $\\sqrt{6} = \\frac{x^2 - 5}{2}$.\n4. Since $x$ is rational, $\\frac{x^2 - 5}{2}$ is rational, which forces $\\sqrt{6}$ to be rational. But 6 is not a perfect square, so $\\sqrt{6}$ is irrational. Contradiction! Hence $\\sqrt{2} + \\sqrt{3}$ is irrational.",
       formulasOrKeyPoints: [
         {
           title: "Quick Reference Templates",
-          content: "- **Form $a + b\\sqrt{p}$**: $\\sqrt{p} = \\frac{r - as}{bs} \\implies \\text{RHS is Rational} \\neq \\text{LHS (Irrational)}$.  \n- **Form $\\frac{1}{\\sqrt{2}}$**: $\\frac{1}{\\sqrt{2}} = \\frac{a}{b} \\implies \\sqrt{2} = \\frac{b}{a}$. Since $a, b$ are integers, $\\frac{b}{a}$ is rational, contradicting that $\\sqrt{2}$ is irrational.",
+          content: "- **Form $a + b\\sqrt{p}$**: $\\sqrt{p} = \\frac{r - as}{bs} \\implies \\text{RHS is Rational} \\neq \\text{LHS (Irrational)}$.  \n- **Form $\\frac{a\\sqrt{p}}{b}$**: $\\sqrt{p} = \\frac{b \\cdot x}{a} \\implies \\text{RHS is Rational} \\neq \\text{LHS (Irrational)}$.  \n- **Form $\\sqrt{a} + \\sqrt{b}$**: Squaring gives $\\sqrt{ab} = \\frac{x^2 - (a + b)}{2} \\implies \\text{Contradiction}$.",
           note: "Rational + Irrational = Irrational; Rational - Irrational = Irrational; Non-zero Rational × Irrational = Irrational."
         }
       ],
@@ -302,11 +305,14 @@ export const CH1_REAL_NUMBERS_CONCEPT: MathChapterConcept = {
         "### Archetype 2: 'Find the smallest number which when divided by $x$ and $y$ leaves remainder $r$'\n" +
         "- Word 'Smallest divided by' $\\implies$ **LCM** nikaalna hai!  \n" +
         "- **Funda**: Pehle $x$ aur $y$ ka LCM nikaalo, aur aakhir mein remainder $r$ ko ADD kar do!  \n" +
-        "  $$\\mathbf{\\text{Answer} = \\text{LCM}(x, y) + r}$$",
+        "  $$\\mathbf{\\text{Answer} = \\text{LCM}(x, y) + r}$$\n\n" +
+        "### Archetype 3: 'Find the smallest number which when increased by $k$ is divisible by $x$ and $y$'\n" +
+        "- Since $(N + k)$ is divisible by $x$ and $y$, $(N + k)$ must be their LCM:  \n" +
+        "  $$\\mathbf{\\text{Answer} = \\text{LCM}(x, y) - k}$$",
       formulasOrKeyPoints: [
         {
           title: "Quick Memory Matrix",
-          content: "$$\\mathbf{\\text{Largest number dividing } \\to \\text{HCF (Subtract remainder FIRST, then HCF)}}$$  \n$$\\mathbf{\\text{Smallest number divided by } \\to \\text{LCM (Find LCM FIRST, then ADD remainder)}}$$",
+          content: "$$\\mathbf{\\text{Largest number dividing } \\to \\text{HCF (Subtract remainder FIRST, then HCF)}}$$  \n$$\\mathbf{\\text{Smallest number divided by } \\to \\text{LCM (Find LCM FIRST, then ADD remainder)}}$$  \n$$\\mathbf{\\text{Smallest number increased by } k \\to \\text{LCM (Find LCM FIRST, then SUBTRACT } k)}$$",
           note: "Ye rule kabhi fail nahi hota. Confuse hone ka koi chance hi nahi hai!"
         }
       ],

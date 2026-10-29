@@ -6,6 +6,9 @@ import { ENRICHED_SST_TIMELINES } from "../src/data/sstTimelinesData.ts";
 import { COMPETITIVE_HOTS_BANK } from "../src/data/competitiveHotsData.ts";
 import { CHEMISTRY_REACTIONS_MASTER } from "../src/data/chemistryReactionsData.ts";
 import { SCIENCE_DIAGRAMS_MASTER } from "../src/data/scienceDiagramsData.ts";
+import { CH1_QUESTIONS } from "../src/data/chapters/ch1.ts";
+import { CH1_REAL_NUMBERS_CONCEPT } from "../src/data/mathConcepts/ch1_real_numbers.ts";
+import { CH1_DATA } from "../src/data/mathMastery/ch1_real_numbers.ts";
 import { getDaysRemaining, ACADEMIC_CALENDAR } from "../config/academic-calendar.ts";
 import { cleanTextForSpeech, chunkTextForSpeech } from "../src/utils/speechTextFormatter.ts";
 import { buildTeacherLectureScript } from "../src/utils/teacherLectureScript.ts";
@@ -132,5 +135,37 @@ describe("CBSE Class 10 Safety & Math Fixtures (C9)", () => {
     assert.ok(script.includes("pause"), "Must encourage pausing and thinking");
     assert.ok(script.includes("Examiner Trap:"), "Must explicitly spotlight examiner traps");
     assert.ok(script.includes("Topper Shield:"), "Must provide actionable topper correction");
+  });
+
+  test("Maths Chapter 1 Real Numbers: Comprehensive Vault & Concept Integrity", () => {
+    // 1. Vault questions check
+    assert.ok(Array.isArray(CH1_QUESTIONS), "CH1_QUESTIONS must be an array");
+    assert.ok(CH1_QUESTIONS.length >= 35, `CH1_QUESTIONS must have at least 35 high-yield questions (currently ${CH1_QUESTIONS.length})`);
+    for (const q of CH1_QUESTIONS) {
+      assert.ok(q.id, "Question must have an id");
+      assert.ok(q.question && q.question.length > 10, `Question ${q.id} must have question text`);
+      assert.ok(q.steps && q.steps.length > 0, `Question ${q.id} must have step-by-step solution steps`);
+      assert.ok(q.explanation && q.explanation.length > 10, `Question ${q.id} must have concrete reason`);
+      assert.ok(q.formula, `Question ${q.id} must have formula or theorem reference`);
+      assert.ok(q.examinerNote, `Question ${q.id} must have examiner note`);
+      assert.ok(q.source, `Question ${q.id} must have source attribution`);
+    }
+
+    // 2. Math concepts check
+    assert.equal(CH1_REAL_NUMBERS_CONCEPT.chapterNo, 1);
+    assert.equal(CH1_REAL_NUMBERS_CONCEPT.sections.length, 7, "Chapter 1 concepts must cover all 7 core sections");
+    for (const sec of CH1_REAL_NUMBERS_CONCEPT.sections) {
+      assert.ok(sec.explanation.length > 50, `Section ${sec.id} explanation must be deep and pedagogical`);
+      assert.ok(sec.formulasOrKeyPoints && sec.formulasOrKeyPoints.length > 0, `Section ${sec.id} must have key formulas`);
+      assert.ok(sec.examinerTraps && sec.examinerTraps.length > 0, `Section ${sec.id} must highlight examiner traps`);
+    }
+
+    // 3. Math mastery check
+    assert.equal(CH1_DATA.chapterNumber, 1);
+    assert.ok(CH1_DATA.tests.length === 4, "Must have Diagnostic, Chapter, Advanced, and Mastery tests");
+    for (const testItem of CH1_DATA.tests) {
+      assert.ok(testItem.questions.length >= 5, `${testItem.testType} must have at least 5 questions`);
+    }
+    assert.ok(CH1_DATA.pyqs.length >= 6, "Must have at least 6 detailed CBSE PYQs");
   });
 });

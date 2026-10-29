@@ -8,22 +8,25 @@ export const CH1_DATA: ChapterData = {
     about: 'Real Numbers Class 10 ka sabse pehla aur foundational chapter hai (6 Marks pakke!). Is chapter mein hum seekhte hain: (1) Har composite number ka unique prime DNA (Fundamental Theorem of Arithmetic), (2) HCF aur LCM ke real-world word problems (kab ghanti bajegi aur kab container naapega), aur (3) Board ka guaranteed 3-marker proof by contradiction (√2, √3, √5 irrational kyu hain). Ekdam zero se start karke full 100/100 board level tak ki mastery yahan se hoti hai.',
     prerequisites: ['Divisibility rules', 'Prime numbers vs composite numbers', 'Rational numbers concept (p/q, q ≠ 0)', 'Basic algebraic manipulation'],
     coreIdeas: [
-      'Every composite number can be uniquely factored into primes regardless of order.',
+      'Every composite number can be uniquely factored into primes regardless of order (Fundamental Theorem of Arithmetic).',
       'HCF represents the product of the smallest powers of each common prime factor.',
       'LCM represents the product of the greatest powers of each prime factor involved.',
       'For two positive integers a and b: HCF(a, b) × LCM(a, b) = a × b (Crucial: DOES NOT HOLD for 3 numbers).',
-      'Proof by contradiction: If p is prime and p divides a², then p divides a. This is the cornerstone of proving √p is irrational.'
+      'Proof by contradiction: If p is prime and p divides a², then p divides a. This is the cornerstone of proving √p is irrational.',
+      'A rational number p/q in simplest form terminates if and only if q = 2^m · 5^n where m, n are non-negative integers.'
     ],
     keyRelationships: [
-      'HCF is always a factor of LCM for any two numbers.',
-      'If HCF(a, b) does not divide LCM(a, b), such two numbers cannot exist.'
+      'HCF is always a factor of LCM for any two numbers: LCM / HCF must be an integer.',
+      'If HCF(a, b) does not divide LCM(a, b), such two numbers cannot exist.',
+      'Rational + Irrational = Irrational; Non-zero Rational × Irrational = Irrational.'
     ],
     frequentMisunderstandings: [
-      'Applying HCF × LCM = a × bc for three integers (which is algebraically false).',
+      'Applying HCF × LCM = a × b × c for three integers (which is algebraically false).',
       'Assuming that because √p is irrational, 3 + 2√5 requires re-proving √5 from scratch when the question explicitly states "given that √5 is irrational".',
-      'Confusing whether a word problem requires HCF (finding the largest equal partition/container) or LCM (finding the next simultaneous recurrence or smallest common multiple).'
+      'Confusing whether a word problem requires HCF (finding the largest equal partition/container) or LCM (finding the next simultaneous recurrence or smallest common multiple).',
+      'Checking denominator factors of a fraction before simplifying to lowest terms (e.g. 6/15 simplifies to 2/5 and terminates).'
     ],
-    examImportanceEvidence: 'Appears every single year without exception. Typically features: 1 MCQ (1 Mark, usually on prime power exponents or decimal termination), 1 Short Answer (2 or 3 Marks, prime factorization or irrationality proof), and frequently combined in Section B/C.'
+    examImportanceEvidence: 'Appears every single year without exception. Typically features: 1 MCQ (1 Mark, usually on prime power exponents or decimal termination), 1 Short Answer (2 or 3 Marks, prime factorization or irrationality proof), and frequently a 4-mark Competency Case Study or 5-mark Long Answer word problem.'
   },
   concepts: [
     {
@@ -34,7 +37,7 @@ export const CH1_DATA: ChapterData = {
       exactMathIdea: 'Every composite number can be expressed (factorised) as a product of primes, and this factorisation is unique, apart from the order in which the prime factors occur.',
       formulaOrTheorem: 'x = p_1^{a_{1}} \\cdot p_2^{a_{2}} \\cdots p_k^{a_k} \\text{ where } p_i \\text{ are distinct primes and } a_i \\ge 1',
       whenToUse: 'When asked to find prime factors, check if a number ends with digit 0, find total number of factors, or calculate HCF/LCM.',
-      recognitionClues: ['Find prime factors of', 'Check whether 4ⁿ or 6ⁿ can end with digit 0', 'Explain why 7 × 11*13 + 13 is composite'],
+      recognitionClues: ['Find prime factors of', 'Check whether 4ⁿ, 6ⁿ, or 12ⁿ can end with digit 0', 'Explain why 7 × 11 × 13 + 13 is composite'],
       workedExamples: [
         {
           level: 'basic',
@@ -134,7 +137,7 @@ export const CH1_DATA: ChapterData = {
       topic: 'Irrational Numbers',
       simpleExplanation: 'Jab maths mein seedha proof na ho sake, toh pehle ulta maano (Assume opposite)! Maano ki √5 rational hai (a/b coprime), fir maths ke logical rules se ek impossible contradiction (jhooth) pakad lo ki a aur b dono 5 se divide hote hain! Iska matlab assumption galat tha, aur √5 irrational hai.',
       exactMathIdea: 'Let p be a prime number. If p divides a², then p divides a, where a is a positive integer. Using this theorem, if √p = a/b (where a, b are coprime integers, b ≠ 0), we deduce that p divides both a and b, contradicting that a and b are coprime.',
-      formulaOrTheorem: 'p \\mid a² \\implies p \\mid a \\quad (p \\text{ is prime})',
+      formulaOrTheorem: 'p \\mid a^2 \\implies p \\mid a \\quad (p \\text{ is prime})',
       whenToUse: 'When asked to prove √2, √3, √5 or composite forms like 2 + 3√5 is irrational.',
       recognitionClues: ['Prove that \\sqrt{5} is irrational', 'Show that 5 - 2\\sqrt{3} is an irrational number'],
       workedExamples: [
@@ -217,7 +220,7 @@ export const CH1_DATA: ChapterData = {
     {
       id: 'ch1_f2',
       name: 'Exponents of 2 and 5 for Terminating Decimals',
-      formula: 'q = 2ᵐ \\times 5ⁿ \\quad (m, n \\in \\mathbb{W})',
+      formula: 'q = 2^m \\times 5^n \\quad (m, n \\in \\mathbb{W})',
       symbolMeanings: [
         { symbol: 'q', meaning: 'Denominator of rational number p/q in simplest form (coprime p, q)' },
         { symbol: 'm, n', meaning: 'Non-negative integers (0, 1, 2...)' }
@@ -403,7 +406,7 @@ export const CH1_DATA: ChapterData = {
       marks: 3,
       topic: 'Irrational Numbers',
       conceptTested: 'Contradiction Proof of Irrationality',
-      question: 'Prove that √3 is an irrational number.',
+      question: 'Prove that √3 is an irrational number from first principles.',
       markingSchemeBreakdown: [
         { step: 'Assumption of rationality and stating a, b are coprime with b ≠ 0', marks: 0.5 },
         { step: 'Squaring to obtain a² = 3b² and deduction that 3 divides a', marks: 1.0 },
@@ -432,6 +435,21 @@ export const CH1_DATA: ChapterData = {
       source: 'CBSE Official Board Paper 2023'
     },
     {
+      id: 'ch1_pyq_2022',
+      year: 'CBSE 2022 Term-1',
+      marks: 1,
+      topic: 'Fundamental Theorem of Arithmetic',
+      conceptTested: 'Ending with digit 0 condition',
+      question: 'The number 12ⁿ cannot end with the digit 0 because its prime factorisation lacks:',
+      markingSchemeBreakdown: [
+        { step: 'Identifying that 12ⁿ = 2²ⁿ × 3ⁿ lacks the prime factor 5', marks: 1.0 }
+      ],
+      fullSolution: 'For any number to end with digit 0, it must be divisible by 10 = 2 × 5. 12 = 2² × 3, so 12ⁿ = 2²ⁿ × 3ⁿ. By the uniqueness of the Fundamental Theorem of Arithmetic, the only prime factors are 2 and 3. Since 5 is missing, 12ⁿ can never end with 0.',
+      commonMistake: 'Assuming that since 12 is divisible by 2, it might end in 0.',
+      frequencyTrend: 'Term-1 2022 & Main 2023.',
+      source: 'CBSE Board 2022 Term-1'
+    },
+    {
       id: 'ch1_pyq_2020',
       year: 'CBSE 2020 Standard',
       marks: 1,
@@ -445,12 +463,45 @@ export const CH1_DATA: ChapterData = {
       commonMistake: 'Calculating LCM (x³ y³) instead of HCF.',
       frequencyTrend: 'Appeared in 2018, 2019, 2020, 2023 sample papers.',
       source: 'CBSE 2020 Standard Set 30/2/1'
+    },
+    {
+      id: 'ch1_pyq_2019',
+      year: 'CBSE 2019 Standard',
+      marks: 3,
+      topic: 'Irrational Numbers',
+      conceptTested: 'Linear combination irrationality',
+      question: 'Given that √5 is irrational, prove that (2 + 3√5) is an irrational number.',
+      markingSchemeBreakdown: [
+        { step: 'Assume 2 + 3√5 = a/b and isolate √5', marks: 1.5 },
+        { step: 'Argue RHS is rational while LHS is irrational', marks: 1.0 },
+        { step: 'Conclude contradiction', marks: 0.5 }
+      ],
+      fullSolution: 'Assume 2 + 3√5 = a/b (a, b integers, b ≠ 0). 3√5 = (a/b) - 2 = (a - 2b)/b ⇒ √5 = (a - 2b)/(3b). Since a, b are integers, RHS is rational, which contradicts that √5 is irrational. Hence 2 + 3√5 is irrational.',
+      commonMistake: 'Squaring the entire expression instead of isolating the root.',
+      frequencyTrend: 'Tested in 2018, 2019, 2021, 2023, 2024.',
+      source: 'CBSE 2019 Delhi (Set 30/1/1)'
+    },
+    {
+      id: 'ch1_pyq_2018',
+      year: 'CBSE 2018 Standard',
+      marks: 2,
+      topic: 'HCF and LCM Properties',
+      conceptTested: 'Divisibility invariant of HCF and LCM',
+      question: 'Can two numbers have 18 as their HCF and 380 as their LCM? Give reasons.',
+      markingSchemeBreakdown: [
+        { step: 'Dividing 380 by 18 and showing remainder is non-zero', marks: 1.0 },
+        { step: 'Stating property that HCF must divide LCM', marks: 1.0 }
+      ],
+      fullSolution: 'For any two numbers, HCF must always be a factor of LCM. 380 ÷ 18 = 21 with a remainder of 2 (380 = 18 × 21 + 2). Since 18 does not divide 380 completely, two numbers cannot have HCF = 18 and LCM = 380.',
+      commonMistake: 'Writing "No" without performing the division or showing the non-zero remainder.',
+      frequencyTrend: 'Repeated in 2015, 2018, 2020, 2022.',
+      source: 'CBSE Board 2018 (Series AJM)'
     }
   ],
   commonMistakes: [
     {
       id: 'ch1_m_err1',
-      title: 'Applying HCF × LCM = a × bc for Three Numbers',
+      title: 'Applying HCF × LCM = a × b × c for Three Numbers',
       mistakeCategory: 'Formula & Substitution',
       flawedWorking: 'Given a=6, b=8, c=12. Student writes: LCM(6, 8, 12) = (6 × 8 × 12) / HCF(6, 8, 12).',
       whyItIsWrong: 'The product formula HCF × LCM = Product of numbers is mathematically valid ONLY for exactly two numbers.',
@@ -475,6 +526,34 @@ export const CH1_DATA: ChapterData = {
         correctAnswer: 'That a and b are coprime (have no common factor other than 1).',
         explanation: 'Showing that 7 divides both a and b directly contradicts the premise that HCF(a, b) = 1.'
       }
+    },
+    {
+      id: 'ch1_m_err3',
+      title: 'Checking Denominator Before Simplifying Fraction',
+      mistakeCategory: 'Incorrect Condition/Constraint',
+      flawedWorking: 'Given fraction 6/15. Student factors 15 = 3 × 5, spots prime 3, and declares it non-terminating.',
+      whyItIsWrong: 'The denominator rule q = 2^m · 5^n applies ONLY when the fraction p/q is in its lowest terms (p and q are coprime).',
+      correctWorking: 'Simplify first: 6/15 = 2/5. Now denominator q = 5 = 2^0 · 5^1. Hence it is TERMINATING (0.4)!',
+      howToAvoid: 'Always divide out all common factors between numerator and denominator before checking the prime factors of q.',
+      retryQuestion: {
+        question: 'Does 77/210 terminate or repeat?',
+        correctAnswer: 'Non-terminating repeating',
+        explanation: '77/210 = 11/30. Denominator 30 = 2 × 3 × 5 contains prime factor 3. Hence non-terminating repeating.'
+      }
+    },
+    {
+      id: 'ch1_m_err4',
+      title: 'Subtracting Remainders AFTER Calculating HCF',
+      mistakeCategory: 'Formula & Substitution',
+      flawedWorking: 'In "Find largest number dividing 70 and 125 leaving remainders 5 and 8", student finds HCF(70, 125) = 5 and subtracts remainders.',
+      whyItIsWrong: 'If the divisor leaves remainders 5 and 8, the numbers (70 - 5 = 65) and (125 - 8 = 117) are exact multiples of the divisor.',
+      correctWorking: 'Subtract remainders FIRST: 70 - 5 = 65 and 125 - 8 = 117. Then calculate HCF(65, 117) = 13.',
+      howToAvoid: 'Remember: In divisor problems, subtract remainders first, then compute HCF.',
+      retryQuestion: {
+        question: 'Find the largest number that divides 245 and 1029 leaving remainder 5 in each case.',
+        correctAnswer: '16',
+        explanation: '245 - 5 = 240, 1029 - 5 = 1024. HCF(240, 1024) = 16.'
+      }
     }
   ],
   revisionSheet: {
@@ -483,19 +562,22 @@ export const CH1_DATA: ChapterData = {
       'HCF(a, b) = product of smallest powers of common primes.',
       'LCM(a, b) = product of greatest powers of all primes involved.',
       'HCF(a, b) × LCM(a, b) = a × b (Only for 2 numbers!).',
-      'HCF is always a divisor of LCM.',
+      'HCF is always a divisor of LCM (LCM / HCF must be an integer).',
       'A prime p dividing a² implies p divides a.',
-      'Rational + Irrational = Irrational; Rational × Irrational = Irrational (for non-zero rational).'
+      'Rational + Irrational = Irrational; Rational × Irrational = Irrational (for non-zero rational).',
+      'q = 2^m · 5^n in simplest form p/q indicates terminating decimal; max(m, n) gives number of decimal places.'
     ],
     speedTips: [
       'To find LCM fast: Take the larger number and check its multiples until all other numbers divide it.',
       'In MCQs asking for HCF of xᵖyᑫ and xʳyˢ: Pick the smaller exponent for each variable.',
-      'When simplifying (ab) / HCF, always cancel HCF with one number before multiplying.'
+      'When simplifying (a · b) / HCF, always cancel HCF with one number before multiplying.',
+      'Power balancing trick: Multiply numerator and denominator to match exponents of 2 and 5 to get powers of 10.'
     ],
     lastDayChecklist: [
-      'Can you write the full 10-line proof of √5 is irrational without peeking?',
-      'Do you remember that 4ⁿ cannot end with 0 because its prime factors are only 2?',
-      'Do you know how to identify whether a word problem needs HCF or LCM in 5 seconds?'
+      'Can you write the full 8-line proof of √5 is irrational without peeking?',
+      'Do you remember that 4ⁿ and 6ⁿ cannot end with 0 because their prime factors lack 5?',
+      'Do you know how to identify whether a word problem needs HCF or LCM in 5 seconds?',
+      'Did you remember that HCF × LCM = a × b does NOT work for three numbers?'
     ]
   },
   tests: [
@@ -537,6 +619,62 @@ export const CH1_DATA: ChapterData = {
           isOriginalPractice: true,
           sourcePdfRef: 'Diagnostic 2',
           conceptId: 'ch1_c1'
+        },
+        {
+          id: 'ch1_diag_3',
+          chapterId: 1,
+          topic: 'Decimal Terminations',
+          level: 2,
+          levelLabel: 'Level 2 — Standard',
+          question: 'The decimal expansion of 23 / (2³ × 5²) will terminate after how many decimal places?',
+          options: ['1', '2', '3', '5'],
+          correctAnswer: '3',
+          marks: 1,
+          hints: ['Number of places = max(m, n) for denominator 2ᵐ × 5ⁿ.'],
+          solutionSteps: ['Exponents are 3 and 2. max(3, 2) = 3 decimal places.'],
+          commonTrap: 'Adding exponents (3 + 2 = 5) instead of taking the maximum.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Diagnostic 3',
+          conceptId: 'ch1_c1'
+        },
+        {
+          id: 'ch1_diag_4',
+          chapterId: 1,
+          topic: 'HCF and LCM Relation',
+          level: 3,
+          levelLabel: 'Level 3 — Application',
+          question: 'The ratio of LCM to HCF of the least composite number and the least prime number is:',
+          options: ['2 : 1', '1 : 2', '4 : 1', '1 : 1'],
+          correctAnswer: '2 : 1',
+          marks: 2,
+          hints: ['Least prime is 2, least composite is 4. LCM(4, 2) = 4, HCF(4, 2) = 2.'],
+          solutionSteps: ['Least prime = 2, least composite = 4.', 'LCM(4, 2) = 4, HCF(4, 2) = 2.', 'Ratio LCM : HCF = 4 / 2 = 2 : 1.'],
+          commonTrap: 'Inverting ratio to 1:2.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Diagnostic 4',
+          conceptId: 'ch1_c2'
+        },
+        {
+          id: 'ch1_diag_5',
+          chapterId: 1,
+          topic: 'Irrational Numbers',
+          level: 4,
+          levelLabel: 'Level 4 — Advanced',
+          question: 'Given that √2 is irrational, prove that (3 + √2) is irrational.',
+          correctAnswer: 'Contradiction showing √2 = (p - 3q)/q is rational.',
+          marks: 5,
+          hints: ['Assume 3 + √2 = p/q and isolate √2.'],
+          solutionSteps: [
+            'Let 3 + √2 = p/q (p, q integers, q ≠ 0).',
+            '√2 = (p - 3q)/q.',
+            'Since p, q are integers, (p - 3q)/q is rational.',
+            'This contradicts that √2 is irrational.',
+            'Hence 3 + √2 is irrational.'
+          ],
+          commonTrap: 'Squaring the expression.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Diagnostic 5',
+          conceptId: 'ch1_c3'
         }
       ]
     },
@@ -565,6 +703,90 @@ export const CH1_DATA: ChapterData = {
           isOriginalPractice: true,
           sourcePdfRef: 'Chapter Test 1',
           conceptId: 'ch1_c3'
+        },
+        {
+          id: 'ch1_ct_2',
+          chapterId: 1,
+          topic: 'HCF and LCM',
+          level: 2,
+          levelLabel: 'Level 2 — Standard',
+          question: 'Find the HCF and LCM of 404 and 96 by prime factorisation method, and verify HCF × LCM = a × b.',
+          correctAnswer: 'HCF = 4, LCM = 9696, Product = 38784',
+          marks: 2,
+          hints: ['404 = 2² × 101, 96 = 2⁵ × 3.'],
+          solutionSteps: [
+            '404 = 2² × 101; 96 = 2⁵ × 3.',
+            'HCF = 2² = 4.',
+            'LCM = 2⁵ × 3 × 101 = 9696.',
+            'HCF × LCM = 4 × 9696 = 38784; 404 × 96 = 38784. Verified.'
+          ],
+          commonTrap: 'Arithmetic calculation mistake in 96 × 101.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Chapter Test 2',
+          conceptId: 'ch1_c2'
+        },
+        {
+          id: 'ch1_ct_3',
+          chapterId: 1,
+          topic: 'Irrationality Proof',
+          level: 4,
+          levelLabel: 'Level 4 — Advanced',
+          question: 'Prove that √5 is an irrational number from first principles.',
+          correctAnswer: 'Full contradiction proof using p divides a² implies p divides a.',
+          marks: 5,
+          hints: ['Let √5 = a/b where a, b are coprime. 5b² = a² ⇒ 5 divides a. Substitute a = 5c.'],
+          solutionSteps: [
+            'Assume √5 = a/b where a, b are coprime integers (b ≠ 0).',
+            'a² = 5b² ⇒ 5 divides a² ⇒ 5 divides a.',
+            'Let a = 5c. 25c² = 5b² ⇒ b² = 5c² ⇒ 5 divides b² ⇒ 5 divides b.',
+            'Hence 5 is a common factor of a and b, contradicting that HCF(a, b) = 1.',
+            'Therefore, √5 is irrational.'
+          ],
+          commonTrap: 'Forgetting to specify that a and b are coprime.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Chapter Test 3',
+          conceptId: 'ch1_c3'
+        },
+        {
+          id: 'ch1_ct_4',
+          chapterId: 1,
+          topic: 'Word Problems',
+          level: 4,
+          levelLabel: 'Level 4 — Advanced',
+          question: 'Three bells toll at intervals of 9, 12, and 15 minutes. If they toll together now, after how many hours will they toll together again?',
+          options: ['1 hour', '2 hours', '3 hours', '6 hours'],
+          correctAnswer: '3 hours',
+          marks: 5,
+          hints: ['Find LCM(9, 12, 15) and convert to hours.'],
+          solutionSteps: [
+            '9 = 3², 12 = 2² × 3, 15 = 3 × 5.',
+            'LCM = 2² × 3² × 5 = 180 minutes.',
+            '180 minutes ÷ 60 = 3 hours.'
+          ],
+          commonTrap: 'Leaving the answer as 180 minutes instead of hours.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Chapter Test 4',
+          conceptId: 'ch1_c2'
+        },
+        {
+          id: 'ch1_ct_5',
+          chapterId: 1,
+          topic: 'Competency Case Study',
+          level: 5,
+          levelLabel: 'Level 5 — Challenge',
+          question: 'A sweet seller has 420 Kaju barfis and 130 Badam barfis. She wants to stack them so each stack has the same number of barfis and takes least tray area. (i) Find barfis per stack. (ii) Total number of stacks.',
+          correctAnswer: '(i) 10 barfis per stack, (ii) 55 stacks',
+          marks: 10,
+          hints: ['HCF(420, 130) gives stack size; divide total by HCF to find stacks.'],
+          solutionSteps: [
+            '420 = 2² × 3 × 5 × 7; 130 = 2 × 5 × 13.',
+            'HCF(420, 130) = 2 × 5 = 10 barfis per stack.',
+            'Total stacks = (420 ÷ 10) + (130 ÷ 10) = 42 + 13 = 55 stacks.'
+          ],
+          commonTrap: 'Finding LCM instead of HCF.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Chapter Test 5',
+          conceptId: 'ch1_c2'
         }
       ]
     },
@@ -592,6 +814,93 @@ export const CH1_DATA: ChapterData = {
           commonTrap: 'Assuming yes because both numbers end in even digits.',
           isOriginalPractice: true,
           sourcePdfRef: 'Advanced Test 1',
+          conceptId: 'ch1_c2'
+        },
+        {
+          id: 'ch1_adv_2',
+          chapterId: 1,
+          topic: 'Irrational Numbers',
+          level: 4,
+          levelLabel: 'Level 4 — Advanced',
+          question: 'Prove that (√2 + √3) is an irrational number.',
+          correctAnswer: 'Squaring yields √6 = (x² - 5)/2 which contradicts irrationality of √6.',
+          marks: 3,
+          hints: ['Let x = √2 + √3. Square both sides to isolate √6.'],
+          solutionSteps: [
+            'Let x = √2 + √3 be rational.',
+            'x² = (√2 + √3)² = 2 + 3 + 2√6 = 5 + 2√6.',
+            '√6 = (x² - 5) / 2.',
+            'Since x is rational, RHS is rational, which implies √6 is rational.',
+            'Contradiction since 6 is not a square. Hence √2 + √3 is irrational.'
+          ],
+          commonTrap: 'Trying to isolate one root before squaring.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Advanced Test 2',
+          conceptId: 'ch1_c3'
+        },
+        {
+          id: 'ch1_adv_3',
+          chapterId: 1,
+          topic: 'Remainders',
+          level: 4,
+          levelLabel: 'Level 4 — Advanced',
+          question: 'Find the largest number that divides 2053 and 967 leaving remainders 5 and 7 respectively.',
+          options: ['64', '32', '128', '16'],
+          correctAnswer: '64',
+          marks: 5,
+          hints: ['Subtract remainders first: 2053 - 5 = 2048, 967 - 7 = 960. Find HCF.'],
+          solutionSteps: [
+            '2053 - 5 = 2048 = 2¹¹.',
+            '967 - 7 = 960 = 2⁶ × 3 × 5.',
+            'HCF(2048, 960) = 2⁶ = 64.',
+            'Largest number is 64.'
+          ],
+          commonTrap: 'Taking HCF of 2053 and 967 first.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Advanced Test 3',
+          conceptId: 'ch1_c2'
+        },
+        {
+          id: 'ch1_adv_4',
+          chapterId: 1,
+          topic: 'Divisibility and LCM',
+          level: 5,
+          levelLabel: 'Level 5 — Challenge',
+          question: 'Find the smallest number which when increased by 17 is exactly divisible by both 520 and 468.',
+          options: ['4663', '4680', '4697', '2340'],
+          correctAnswer: '4663',
+          marks: 5,
+          hints: ['N + 17 = LCM(520, 468) ⇒ N = LCM - 17.'],
+          solutionSteps: [
+            '520 = 2³ × 5 × 13; 468 = 2² × 3² × 13.',
+            'LCM(520, 468) = 2³ × 3² × 5 × 13 = 4680.',
+            'Required number N = 4680 - 17 = 4663.'
+          ],
+          commonTrap: 'Adding 17 to the LCM instead of subtracting.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Advanced Test 4',
+          conceptId: 'ch1_c2'
+        },
+        {
+          id: 'ch1_adv_5',
+          chapterId: 1,
+          topic: 'Multi-Group Word Problem',
+          level: 5,
+          levelLabel: 'Level 5 — Challenge',
+          question: 'An army contingent of 616 members is to march behind an army band of 32 members in the same number of columns. What is the maximum number of columns? Also find total members per column.',
+          correctAnswer: 'Maximum columns = 8, Total members per column = 81',
+          marks: 10,
+          hints: ['HCF(616, 32) gives columns; 32/8 + 616/8 gives members per column.'],
+          solutionSteps: [
+            '616 = 2³ × 7 × 11; 32 = 2⁵.',
+            'HCF(616, 32) = 2³ = 8 columns.',
+            'Band members per column = 32 / 8 = 4.',
+            'Contingent members per column = 616 / 8 = 77.',
+            'Total members per column = 4 + 77 = 81.'
+          ],
+          commonTrap: 'Forgetting to calculate the members per column.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Advanced Test 5',
           conceptId: 'ch1_c2'
         }
       ]
@@ -622,6 +931,91 @@ export const CH1_DATA: ChapterData = {
           commonTrap: 'Finding HCF of 70 and 125 first and then subtracting remainders.',
           isOriginalPractice: true,
           sourcePdfRef: 'Mastery Test 1',
+          conceptId: 'ch1_c2'
+        },
+        {
+          id: 'ch1_mst_2',
+          chapterId: 1,
+          topic: 'Extremum Multiples',
+          level: 5,
+          levelLabel: 'Level 5 — Challenge',
+          question: 'Find the greatest 6-digit number which is exactly divisible by 15, 24, and 36.',
+          options: ['999720', '999999', '999600', '999360'],
+          correctAnswer: '999720',
+          marks: 5,
+          hints: ['LCM(15, 24, 36) = 360. Divide 999999 by 360 and subtract remainder.'],
+          solutionSteps: [
+            '15 = 3 × 5, 24 = 2³ × 3, 36 = 2² × 3².',
+            'LCM = 2³ × 3² × 5 = 360.',
+            '999999 ÷ 360 = 2777 with remainder 279.',
+            'Required number = 999999 - 279 = 999720.'
+          ],
+          commonTrap: 'Adding the remainder or rounding up.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Mastery Test 2',
+          conceptId: 'ch1_c2'
+        },
+        {
+          id: 'ch1_mst_3',
+          chapterId: 1,
+          topic: 'General Irrationality Proof',
+          level: 5,
+          levelLabel: 'Level 5 — Challenge',
+          question: 'Prove that (√p + √q) is irrational where p and q are distinct prime numbers.',
+          correctAnswer: 'Squaring gives √(pq) = (x² - p - q)/2 which contradicts square-free prime product.',
+          marks: 7,
+          hints: ['Let x = √p + √q. Show that √(pq) is rational, which contradicts pq being square-free.'],
+          solutionSteps: [
+            'Let x = √p + √q be rational.',
+            'x² = p + q + 2√(pq) ⇒ √(pq) = [x² - (p + q)] / 2.',
+            'RHS is rational since x, p, q are integers/rationals.',
+            'However, since p and q are distinct primes, pq is square-free and √(pq) is irrational.',
+            'Contradiction. Hence √p + √q is irrational.'
+          ],
+          commonTrap: 'Assuming without stating that √(pq) is irrational.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Mastery Test 3',
+          conceptId: 'ch1_c3'
+        },
+        {
+          id: 'ch1_mst_4',
+          chapterId: 1,
+          topic: 'Multi-Capacity Partition',
+          level: 4,
+          levelLabel: 'Level 4 — Advanced',
+          question: 'A merchant has 120 litres of cow milk, 180 litres of buffalo milk, and 240 litres of toned milk. Find the greatest capacity of a can to pack them separately in equal cans, and the total cans required.',
+          correctAnswer: 'Capacity = 60 litres, Total cans = 9',
+          marks: 10,
+          hints: ['HCF(120, 180, 240) = 60 litres. Divide each volume by 60.'],
+          solutionSteps: [
+            '120 = 2³ × 3 × 5; 180 = 2² × 3² × 5; 240 = 2⁴ × 3 × 5.',
+            'HCF = 2² × 3 × 5 = 60 litres.',
+            'Cow cans = 120/60 = 2, Buffalo cans = 180/60 = 3, Toned cans = 240/60 = 4.',
+            'Total cans = 2 + 3 + 4 = 9 cans.'
+          ],
+          commonTrap: 'Finding the average capacity instead of HCF.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Mastery Test 4',
+          conceptId: 'ch1_c2'
+        },
+        {
+          id: 'ch1_mst_5',
+          chapterId: 1,
+          topic: 'Cyclic Motion Competency',
+          level: 5,
+          levelLabel: 'Level 5 — Challenge',
+          question: 'Two runners Sonia and Ravi take 18 minutes and 12 minutes respectively to complete one round of a circular track. They start at 9:00 AM from the same point in the same direction. (i) When do they first meet again? (ii) In 2 hours, how many times do they meet (excluding start)?',
+          correctAnswer: '(i) 9:36 AM, (ii) 3 times',
+          marks: 10,
+          hints: ['LCM(18, 12) = 36 minutes. 120 ÷ 36 = 3.'],
+          solutionSteps: [
+            'LCM(18, 12) = 36 minutes.',
+            'Next meeting time = 9:00 AM + 36 min = 9:36 AM.',
+            'In 2 hours = 120 minutes: floor(120 / 36) = 3 times (at 36 min, 72 min, 108 min).'
+          ],
+          commonTrap: 'Counting the start time when question asks excluding start.',
+          isOriginalPractice: true,
+          sourcePdfRef: 'Mastery Test 5',
           conceptId: 'ch1_c2'
         }
       ]
